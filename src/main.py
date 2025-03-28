@@ -34,7 +34,7 @@ assertion = Assertion(
     method_name="assertEquals",
     expected="0",
     actual="a.foo().bar()",
-    arguments=["0", "a.foo().bar()"],
+    arguments=["0", "a.foo(foo.a(1)).bar(2).baz(3).qoz(4)"],
     line_number=42,
 )
 
