@@ -7,7 +7,7 @@ class TestClass:
     def __init__(self, parsed_class: ClassDeclaration):
         self.name: str = parsed_class.name
         self.test_methods: List[TestMethod] = [
-            TestMethod(method) for method in self.parsed_class.methods
+            TestMethod(method) for method in parsed_class.methods
         ]
 
     def __repr__(self) -> str:
