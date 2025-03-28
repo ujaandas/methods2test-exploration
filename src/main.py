@@ -1,53 +1,41 @@
-# from javalang.parse import parse
-# from javalang.tree import ClassDeclaration
-# from TestClass import TestClass
-from DatasetExplorer import DatasetExplorer
-# from Assertion import Assertion, SequencedAssertion
+# from DatasetExplorer import DatasetExplorer
+import json
+from TestClass import TestClass
+from pathlib import Path
+from javalang.parse import parse
+from javalang.tree import ClassDeclaration
+from Assertion import SequencedAssertion
 
-# with open("samples/AssertionSeq.java") as f:
-#     sample = f.read()
-
-# parsed_tree = parse(sample)
-# test_classes = []
-# for _, class_node in parsed_tree.filter(ClassDeclaration):
-#     test_classes.append(TestClass(parsed_class=class_node))
-
-
-# print(test_classes)
-
-# from Scraper import Scraper, Repository
-
-# repo = Repository("https://github.com/justinsb/jetcd")
-# pairs_to_find = [("SmokeTest.java", "EtcdClient.java")]
-# Scraper(
-#     token="."
-# ).scrape_with_class_pairs(repo, pairs_to_find)
-
-# for sub_repo in repo.sub_repos:
-#     print(f"\nModule with pom hash {sub_repo.pom_hash}:")
-#     for pair in sub_repo.pairs:
-#         print(f"  Focal: {pair.focal_class}  |  Test: {pair.test_class}")
-
+# Step 1: Step through the dataset, and generate the Repository, Modules and Pairs and save it in results/
 # DatasetExplorer("../dataset/eval").step()
 
-# assertion = Assertion(
-#     method_name="assertEquals",
-#     expected="0",
-#     actual="a.foo().bar()",
-#     arguments=["0", "a.foo().bar().baz()"],
-#     line_number=42,
-# )
+# Step 2: Now, we should have pairs in results/, step through and count whatever is needed
+results_dir = Path("../results")
+pair_files = results_dir.glob("**/pair_*.json")
 
-# print("----- Assertion 1 -----")
-# print(assertion)
-# print("-----------------------\n")
+for pair_file in pair_files:
+    with pair_file.open("r") as pf:
+        pair_data = json.load(pf)
 
-# print("----- Sequenced Assertion 1 -----")
-# seq_assertion = assertion.transform(SequencedAssertion)
-# print(seq_assertion)
-# print(seq_assertion.seq_depth)
-# print("-----------------------\n")
+    test_class_code = pair_data.get("test_class")
+    parsed_tree = parse(test_class_code)
 
+    test_classes = []
+    for _, class_node in parsed_tree.filter(ClassDeclaration):
+        test_classes.append(TestClass(parsed_class=class_node))
 
-# Step 1: Step through the dataset, and generate the Repository, Modules and Pairs
-DatasetExplorer("../dataset/eval").step()
+    for test_class in test_classes:
+        for method in [
+            method for method in test_class.test_methods if method.assertions
+        ]:
+            print(f"Processing TestMethod: {method.name} ({pair_file})")
+            for assertion in method.assertions:
+                print("----- Assertion -----")
+                print(assertion)
+                print("---------------------\n")
+
+                seq_assertion = assertion.transform(SequencedAssertion)
+                print("----- Sequenced Assertion -----")
+                print(seq_assertion)
+                print(f"Sequence Depth: {seq_assertion.seq_depth}")
+                print("-------------------------------\n")

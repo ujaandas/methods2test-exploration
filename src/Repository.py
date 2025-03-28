@@ -133,15 +133,14 @@ class Repository:
             mod_data = {
                 "module_root": mod.module_root,
                 "pom_path": mod.pom_path,
-                "pairs": [],
             }
 
             for idx, pair in enumerate(mod.pairs, start=1):
                 pair_data = {
                     "focal_class": pair.focal_class,
                     "test_class": pair.test_class,
+                    "m2t_loc": pair.m2t_loc,
                 }
-                mod_data["pairs"].append(pair_data)
                 pair_file = mod_folder / f"pair_{idx}.json"
                 with pair_file.open("w") as pf:
                     json.dump(pair_data, pf, indent=2)
@@ -167,9 +166,10 @@ class Module:
 
 
 class Pair:
-    def __init__(self, focal_class_loc: str, test_class_loc: str):
+    def __init__(self, focal_class_loc: str, test_class_loc: str, m2t_loc: str):
         self.focal_class = focal_class_loc
         self.test_class = test_class_loc
+        self.m2t_loc = m2t_loc
 
     def __repr__(self):
         return f"Pair(focal_class={self.focal_class}, test_class={self.test_class})"

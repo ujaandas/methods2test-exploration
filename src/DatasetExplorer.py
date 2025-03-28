@@ -59,7 +59,11 @@ class DatasetExplorer:
                         module.module_root in focal_parts
                         and module.module_root in test_parts
                     ):
-                        pair = Pair(focal_class_loc, test_class_loc)
+                        pair = Pair(
+                            self.build_focal(data),
+                            self.build_test(data),
+                            str(file),
+                        )
                         module.pairs.append(pair)
             # save repo here
             repo.save()

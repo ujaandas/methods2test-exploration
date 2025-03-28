@@ -40,10 +40,19 @@ class SequencedAssertion(Assertion):
     ):
         super().__init__(method_name, expected, actual, arguments, line_number)
         self.method_sequence = self._extract_method_seq(self.arguments)
-        if self.method_sequence is not None:
-            self.method_sequence = self._nest_method_chain(self.method_sequence)
-            self.actual = self._unparse_method_chain(self.method_sequence)
-            self.seq_depth = self._get_method_chain_depth()
+        self.method_sequence = (
+            self._nest_method_chain(self.method_sequence)
+            if self.method_sequence is not None
+            else None
+        )
+        self.actual = (
+            self._unparse_method_chain(self.method_sequence)
+            if self.method_sequence is not None
+            else None
+        )
+        self.seq_depth = (
+            self._get_method_chain_depth() if self.method_sequence is not None else None
+        )
 
     def flatten(self):
         if self.method_sequence:
