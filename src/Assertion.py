@@ -43,6 +43,7 @@ class SequencedAssertion(Assertion):
         if self.method_sequence is not None:
             self.method_sequence = self._nest_method_chain(self.method_sequence)
             self.actual = self._unparse_method_chain(self.method_sequence)
+            self.seq_depth = self._get_method_chain_depth()
 
     def flatten(self):
         if self.method_sequence:
@@ -87,6 +88,25 @@ class SequencedAssertion(Assertion):
         elif isinstance(node, MemberReference):
             return node
         return node
+
+    def _get_method_chain_depth(self):
+        def depth(node):
+            if not node:
+                return 0
+            selectors_depth = (
+                max((depth(sel) for sel in node.selectors), default=0)
+                if hasattr(node, "selectors") and node.selectors
+                else 0
+            )
+            qualifier_depth = (
+                depth(node.qualifier)
+                if node.qualifier
+                and isinstance(node.qualifier, (MethodInvocation, MemberReference))
+                else 0
+            )
+            return 1 + max(selectors_depth, qualifier_depth)
+
+        return depth(self.method_sequence)
 
     def _flatten_node(self, node):
         chain = []

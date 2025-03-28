@@ -34,7 +34,7 @@ assertion = Assertion(
     method_name="assertEquals",
     expected="0",
     actual="a.foo().bar()",
-    arguments=["0", "a.foo(foo.a(1)).bar(2).baz(3).qoz(4)"],
+    arguments=["0", "a.foo().bar().baz()"],
     line_number=42,
 )
 
@@ -45,4 +45,5 @@ print("-----------------------\n")
 print("----- Sequenced Assertion 1 -----")
 seq_assertion = assertion.transform(SequencedAssertion)
 print(seq_assertion)
+print(seq_assertion.seq_depth)
 print("-----------------------\n")
