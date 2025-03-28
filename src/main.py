@@ -13,13 +13,13 @@
 
 # print(test_classes)
 
-# from Scraper import POMScraper
+from Scraper import Scraper, Repository
 
-# with open(
-#     "/Users/ooj/Dev/Research/assertion/spoon-assertion-finder/repos/jetcd/pom.xml",
-#     "r",
-# ) as f:
-#     pom = f.read()
+repo = Repository("https://github.com/justinsb/jetcd")
+pairs_to_find = [("SmokeTest.java", "EtcdClient.java")]
+Scraper(token=".").scrape_with_class_pairs(repo, pairs_to_find)
 
-# pom = POMScraper(pom)
-# print(pom.is_valid())
+for sub_repo in repo.sub_repos:
+    print(f"\nModule with pom hash {sub_repo.pom_hash}:")
+    for pair in sub_repo.pairs:
+        print(f"  Focal: {pair.focal_class}  |  Test: {pair.test_class}")
