@@ -1,11 +1,10 @@
+import os
 import json
 from pathlib import Path
-from TestClass import TestClass
-from javalang.parse import parse
-from javalang.tree import ClassDeclaration
-from Assertion import SequencedAssertion
-# from Repository import Repository, SubRepository, Pair
-# from typing import List
+from dotenv import load_dotenv
+from Repository import Repository, Pair
+
+load_dotenv()
 
 
 class DatasetExplorer:
@@ -15,86 +14,98 @@ class DatasetExplorer:
 
     def _transform_filename(self, num: int, base: str) -> str:
         s = str(num)
-        base_length = len(base)
         if not s.startswith(base):
             raise ValueError(f"The number {num} does not start with the base {base}")
-        suffix = s[base_length:]
+        suffix = s[len(base) :]
         return f"{base}_{suffix}"
 
     def step(self):
         subdir_names = sorted(
             [int(x.stem) for x in self.dataset_dir.iterdir() if x.is_dir()]
         )
-        for sd in subdir_names:
+        for sd in subdir_names[
+            1:
+        ]:  # first one doesnt have pom.xml so for testing, skip!
             base_str = str(sd)
-            this_repo_sd = self.dataset_dir / base_str
-            print(f"Processing directory: {this_repo_sd}")
+            repo_sd = self.dataset_dir / base_str
+            print(f"Processing directory: {repo_sd}")
 
-            this_repo_files = [
-                this_repo_sd / f"{self._transform_filename(x, base_str)}.json"
-                for x in sorted(
-                    [int(path.stem) for path in this_repo_sd.glob("*.json")]
-                )
+            repo_files = [
+                repo_sd / f"{self._transform_filename(x, base_str)}.json"
+                for x in sorted([int(path.stem) for path in repo_sd.glob("*.json")])
             ]
 
-            # with open(this_repo_files[0]) as f:
-            #     first_file = json.loads(f.read())
-            # this_repo_url = first_file.get("repository").get("url")
+            with open(repo_files[0]) as f:
+                first_file = json.loads(f.read())
 
-            for file in this_repo_files:
+            repo_url = first_file.get("repository").get("url")
+            repo = Repository(repo_url, base_str)
+
+            GITHUB_PAT = os.getenv("GITHUB_PAT")
+            repo.fetch_file_tree(GITHUB_PAT)
+            repo.add_all_modules(GITHUB_PAT)
+
+            for file in repo_files:
                 with open(file, "r") as f:
                     data = json.load(f)
 
-                test_class_data = data.get("test_class", {})
-                test_case_data = data.get("test_case", {})
+                focal_class_loc = data.get("focal_class").get("file")
+                test_class_loc = data.get("test_class").get("file")
 
-                class_name = test_class_data.get("identifier", "DummyClass")
-
-                fields_list = test_class_data.get("fields", [])
-                fields_str = "\n    ".join(
-                    field.get("original_string", "") for field in fields_list
-                )
-
-                method_str = test_case_data.get("body", "")
-
-                java_class_code = (
-                    f"public class {class_name} {{\n"
-                    f"    {fields_str}\n\n"
-                    f"    {method_str}\n"
-                    f"}}"
-                )
-
-                print("----- Reconstructed Java Class -----")
-                print(java_class_code)
-                print("--------------------------------------\n")
-
-                try:
-                    parsed_tree = parse(java_class_code)
-
-                    # print("----- Parsed Tree -----")
-                    # print(parsed_tree)
-                    # print("-----------------------\n")
-
-                    test_classes = []
-                    for _, class_node in parsed_tree.filter(ClassDeclaration):
-                        test_classes.append(TestClass(class_node))
-
-                    all_assertions = [
-                        assertion
-                        for tc in test_classes
-                        for tm in tc.test_methods
-                        for assertion in tm.assertions
-                    ]
-
-                    print("----- Assertion 1 -----")
-                    print(all_assertions[0])
-                    print("-----------------------\n")
-
-                    print("----- Sequenced Assertion 1 -----")
-                    print(all_assertions[0].transform(SequencedAssertion))
-                    print("-----------------------\n")
-                except Exception as e:
-                    print(f"Parsing failed for {file}: {e}")
-
-                break
+                for module in repo.modules:
+                    focal_parts = focal_class_loc.split("/")
+                    test_parts = test_class_loc.split("/")
+                    if (
+                        module.module_root in focal_parts
+                        and module.module_root in test_parts
+                    ):
+                        pair = Pair(focal_class_loc, test_class_loc)
+                        module.pairs.append(pair)
+            # save repo here
+            repo.save()
             break
+
+    def build_test(self, data: str):
+        test_class_data = data.get("test_class", {})
+        test_case_data = data.get("test_case", {})
+
+        test_class_name = test_class_data.get("identifier", "DummyTestClass")
+
+        test_fields_list = test_class_data.get("fields", [])
+        test_fields_str = "\n    ".join(
+            field.get("original_string", "") for field in test_fields_list
+        )
+
+        test_method_str = test_case_data.get("body", "")
+
+        return (
+            f"public class {test_class_name} {{\n"
+            f"    {test_fields_str}\n\n"
+            f"    {test_method_str}\n"
+            f"}}"
+        )
+
+    def build_focal(self, data: str):
+        focal_class_data = data.get("focal_class", {})
+        focal_method_data = data.get("focal_method", {})
+
+        focal_class_name = focal_class_data.get("identifier", "DummyClass")
+
+        focal_fields_list = focal_class_data.get("fields", [])
+        focal_fields_str = "\n    ".join(
+            field.get("original_string", "") for field in focal_fields_list
+        )
+
+        # focal_methods_list = focal_class_data.get("methods", [])
+        # focal_methods_list = "\n    ".join(
+        #     field.get("original_string", "") for field in focal_methods_list
+        # ) # no method content / "original string" for focal class methods
+
+        focal_method_str = focal_method_data.get("body", "")
+
+        return (
+            f"public class {focal_class_name} {{\n"
+            f"    {focal_fields_str}\n\n"
+            f"    {focal_method_str}\n"
+            f"}}"
+        )

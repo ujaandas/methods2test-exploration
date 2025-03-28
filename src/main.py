@@ -1,8 +1,8 @@
 # from javalang.parse import parse
 # from javalang.tree import ClassDeclaration
 # from TestClass import TestClass
-# from DatasetExplorer import DatasetExplorer
-from Assertion import Assertion, SequencedAssertion
+from DatasetExplorer import DatasetExplorer
+# from Assertion import Assertion, SequencedAssertion
 
 # with open("samples/AssertionSeq.java") as f:
 #     sample = f.read()
@@ -30,20 +30,24 @@ from Assertion import Assertion, SequencedAssertion
 
 # DatasetExplorer("../dataset/eval").step()
 
-assertion = Assertion(
-    method_name="assertEquals",
-    expected="0",
-    actual="a.foo().bar()",
-    arguments=["0", "a.foo().bar().baz()"],
-    line_number=42,
-)
+# assertion = Assertion(
+#     method_name="assertEquals",
+#     expected="0",
+#     actual="a.foo().bar()",
+#     arguments=["0", "a.foo().bar().baz()"],
+#     line_number=42,
+# )
 
-print("----- Assertion 1 -----")
-print(assertion)
-print("-----------------------\n")
+# print("----- Assertion 1 -----")
+# print(assertion)
+# print("-----------------------\n")
 
-print("----- Sequenced Assertion 1 -----")
-seq_assertion = assertion.transform(SequencedAssertion)
-print(seq_assertion)
-print(seq_assertion.seq_depth)
-print("-----------------------\n")
+# print("----- Sequenced Assertion 1 -----")
+# seq_assertion = assertion.transform(SequencedAssertion)
+# print(seq_assertion)
+# print(seq_assertion.seq_depth)
+# print("-----------------------\n")
+
+
+# Step 1: Step through the dataset, and generate the Repository, Modules and Pairs
+DatasetExplorer("../dataset/eval").step()
