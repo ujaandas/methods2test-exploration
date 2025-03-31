@@ -65,7 +65,7 @@ class Repository:
             "Accept": "application/vnd.github.v3+json",
         }
         if self.tree is None:
-            print("File tree not available. Run fetch_file_tree(token) first.")
+            print("File tree not available!")
             return
         module_info = {}
 
@@ -77,7 +77,7 @@ class Repository:
                 parts = path.split("/")
                 module_root = "/".join(parts[:-1])
                 module_info[module_root] = {"pom_path": path, "files": []}
-                # print(f"Found pom at {path}")
+                print(f"Found pom at {path}")
 
         for item in self.tree:
             if item.get("type") != "blob":
@@ -85,7 +85,7 @@ class Repository:
             path = item.get("path")
             for module_root in module_info:
                 if module_root == "" or path.startswith(module_root + "/"):
-                    module_info[module_root]["files"].append(path)
+                    module_info[module_root]["files"].append(path.split("/")[-1])
 
         for module_root, info in module_info.items():
             pom_node = next(
@@ -108,13 +108,20 @@ class Repository:
 
             mod = Module(module_root, info["pom_path"], info["files"])
             mod.pom_hash = pom_node.get("sha")
+            print(f"Adding module: {mod.module_root.split('/')[-1]}")
             self.modules.append(mod)
 
     def save(self, results_dir="../results"):
         results_dir = Path(results_dir)
 
+        modules_with_pairs = [mod for mod in self.modules if mod.pairs]
+
         repo_folder = results_dir / self.name
         repo_folder.mkdir(parents=True, exist_ok=True)
+
+        if not modules_with_pairs:
+            print("No pairs!")
+            return
 
         repo_data = {
             "id": self.id,
@@ -123,7 +130,7 @@ class Repository:
             "owner": self.owner,
         }
 
-        for mod in self.modules:
+        for mod in modules_with_pairs:
             mod_folder_name = (
                 mod.module_root.replace("/", "_") if mod.module_root else self.name
             )

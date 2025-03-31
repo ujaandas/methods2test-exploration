@@ -14,7 +14,7 @@ class TestMethod:
 
     def _extract_assertions(self, parsed_method: MethodDeclaration) -> None:
         for _, invocation_node in parsed_method.filter(MethodInvocation):
-            if invocation_node.member.startswith("assert"):
+            if invocation_node.member.startswith("assertEquals"):
                 assertion = Assertion(
                     method_name=invocation_node.member,
                     expected=invocation_node.arguments[0]

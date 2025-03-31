@@ -1,6 +1,5 @@
 from typing import Any, List, Optional
-from javalang.parse import parse_expression
-from javalang.tree import MethodInvocation, MemberReference
+from javalang.tree import MethodInvocation
 
 
 class Assertion:
@@ -39,119 +38,81 @@ class SequencedAssertion(Assertion):
         self, method_name, expected=None, actual=None, arguments=None, line_number=None
     ):
         super().__init__(method_name, expected, actual, arguments, line_number)
-        self.method_sequence = self._extract_method_seq(self.arguments)
-        self.method_sequence = (
-            self._nest_method_chain(self.method_sequence)
-            if self.method_sequence is not None
-            else None
-        )
-        self.actual = (
-            self._unparse_method_chain(self.method_sequence)
-            if self.method_sequence is not None
-            else None
-        )
-        self.seq_depth = (
-            self._get_method_chain_depth() if self.method_sequence is not None else None
-        )
+        self.chains = []
+        self.max_depth = 0
 
-    def flatten(self):
-        if self.method_sequence:
-            return self._flatten_node(self.method_sequence)
-        return []
+        if expected:
+            chain, depth = self._extract_chain(expected)
+            if chain and depth > 0 and chain not in self.chains:
+                self.chains.extend(chain)
+                self.max_depth = max(self.max_depth, depth)
+
+        if actual:
+            chain, depth = self._extract_chain(actual)
+            if chain and depth > 0 and chain not in self.chains:
+                self.chains.extend(chain)
+                self.max_depth = max(self.max_depth, depth)
+
+        if arguments:
+            for arg in arguments:
+                chain, depth = self._extract_chain(arg)
+                if chain and depth > 0 and chain not in self.chains:
+                    self.chains.extend(chain)
+                    self.max_depth = max(self.max_depth, depth)
+
+        self.args = self._extract_args()
+
+    def _extract_chain(self, element):
+        if not element:
+            return [], 0
+
+        if isinstance(element, MethodInvocation):
+            chain = []
+            depth = 0
+
+            current = element
+            while isinstance(current, MethodInvocation):
+                chain.append(current)
+                depth += 1
+
+                if hasattr(current, "qualifier") and isinstance(
+                    current.qualifier, MethodInvocation
+                ):
+                    current = current.qualifier
+                else:
+                    break
+
+            if hasattr(element, "selectors") and element.selectors:
+                for selector in element.selectors:
+                    if isinstance(selector, MethodInvocation):
+                        sub_chain, sub_depth = self._extract_chain(selector)
+                        chain.extend(sub_chain)
+                        depth += sub_depth
+
+            return chain, depth
+
+        return [], 0
+
+    def _extract_args(self):
+        chain_args = []
+        for method_invocation in self.chains:
+            if isinstance(method_invocation, MethodInvocation):
+                flat_args = []
+                if method_invocation.arguments:
+                    for arg in method_invocation.arguments:
+                        if hasattr(arg, "value"):
+                            tokens = [
+                                token.strip() for token in str(arg.value).split(",")
+                            ]
+                            flat_args.extend(tokens)
+                        elif hasattr(arg, "member"):
+                            flat_args.append(str(arg.member).strip())
+                        else:
+                            flat_args.append(str(arg).strip())
+                if (flat_args, len(flat_args)) not in chain_args and len(flat_args) > 0:
+                    chain_args.append((flat_args, len(flat_args)))
+        return chain_args
 
     def __repr__(self):
-        flattened = self.flatten()
-        return f"SequencedAssertion(method_name={self.method_name}, expected={self.expected}, actual={self.actual}, method_sequence={flattened}, line_number={self.line_number})"
-
-    def _extract_method_seq(self, args: List[Any]):
-        for arg in args:
-            if isinstance(arg, str):
-                try:
-                    expr = parse_expression(arg)
-                    if isinstance(expr, (MethodInvocation, MemberReference)):
-                        return expr
-                except Exception:
-                    continue
-        return None
-
-    def _nest_method_chain(self, node):
-        if isinstance(node, MethodInvocation):
-            if node.selectors and len(node.selectors) > 1:
-                nested = node.selectors[-1]
-                for sel in reversed(node.selectors[:-1]):
-                    sel = self._nest_method_chain(sel)
-                    nested = MethodInvocation(
-                        member=sel.member,
-                        arguments=sel.arguments,
-                        qualifier=sel.qualifier,
-                        selectors=[nested],
-                    )
-                node.selectors = [nested]
-            elif node.selectors and len(node.selectors) == 1:
-                node.selectors[0] = self._nest_method_chain(node.selectors[0])
-            if node.qualifier and isinstance(
-                node.qualifier, (MethodInvocation, MemberReference)
-            ):
-                node.qualifier = self._nest_method_chain(node.qualifier)
-            return node
-        elif isinstance(node, MemberReference):
-            return node
-        return node
-
-    def _get_method_chain_depth(self):
-        def depth(node):
-            if not node:
-                return 0
-            selectors_depth = (
-                max((depth(sel) for sel in node.selectors), default=0)
-                if hasattr(node, "selectors") and node.selectors
-                else 0
-            )
-            qualifier_depth = (
-                depth(node.qualifier)
-                if node.qualifier
-                and isinstance(node.qualifier, (MethodInvocation, MemberReference))
-                else 0
-            )
-            return 1 + max(selectors_depth, qualifier_depth)
-
-        return depth(self.method_sequence)
-
-    def _flatten_node(self, node):
-        chain = []
-        if isinstance(node, MethodInvocation):
-            if node.qualifier and isinstance(
-                node.qualifier, (MethodInvocation, MemberReference)
-            ):
-                chain.extend(self._flatten_node(node.qualifier))
-            chain.append(node)
-        elif isinstance(node, MemberReference):
-            chain.append(node)
-        return chain
-
-    def _unparse_method_chain(self, node):
-        if isinstance(node, MethodInvocation):
-            qualifier_str = ""
-            if node.qualifier:
-                if isinstance(node.qualifier, (MethodInvocation, MemberReference)):
-                    qualifier_str = self._unparse_method_chain(node.qualifier)
-                else:
-                    qualifier_str = str(node.qualifier)
-            args_str = "(" + ", ".join(str(arg) for arg in node.arguments) + ")"
-            selectors_str = ""
-            if hasattr(node, "selectors") and node.selectors:
-                for sel in node.selectors:
-                    if isinstance(sel, MethodInvocation):
-                        selectors_str += "." + self._unparse_method_chain(sel)
-                    elif isinstance(sel, MemberReference):
-                        selectors_str += "." + sel.member
-                    else:
-                        selectors_str += "." + str(sel)
-            if qualifier_str:
-                return f"{qualifier_str}.{node.member}{args_str}{selectors_str}"
-            else:
-                return f"{node.member}{args_str}{selectors_str}"
-        elif isinstance(node, MemberReference):
-            return node.member
-        else:
-            return str(node)
+        base_repr = super().__repr__()[:-1]
+        return f"{base_repr}, chains={self.chains}, max_depth={self.max_depth})"

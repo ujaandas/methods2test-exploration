@@ -10,3 +10,5 @@
 3. How many method sequenced assertions have input arguments?
 4. Find distribution of assertions appearing in one test
 5. Find distribution of assertion types
+
+<!-- assertEquals(-1,Primitive.toUInt32(c.toJsonObject().getInt(UInt32.FIELD_DATA))); -->

@@ -23,12 +23,9 @@ class DatasetExplorer:
         subdir_names = sorted(
             [int(x.stem) for x in self.dataset_dir.iterdir() if x.is_dir()]
         )
-        for sd in subdir_names[
-            1:
-        ]:  # first one doesnt have pom.xml so for testing, skip!
+        for sd in subdir_names:  # first one doesnt have pom.xml so for testing, skip!
             base_str = str(sd)
             repo_sd = self.dataset_dir / base_str
-            print(f"Processing directory: {repo_sd}")
 
             repo_files = [
                 repo_sd / f"{self._transform_filename(x, base_str)}.json"
@@ -41,6 +38,15 @@ class DatasetExplorer:
             repo_url = first_file.get("repository").get("url")
             repo = Repository(repo_url, base_str)
 
+            # check if processed already
+            if repo.name in [
+                str(x.stem) for x in Path("../results").iterdir() if x.is_dir()
+            ]:
+                print(f"Skipping repo: {repo.name} ({base_str})")
+                continue
+
+            print(f"Processing repo: {repo.name} ({base_str})")
+
             GITHUB_PAT = os.getenv("GITHUB_PAT")
             repo.fetch_file_tree(GITHUB_PAT)
             repo.add_all_modules(GITHUB_PAT)
@@ -49,15 +55,15 @@ class DatasetExplorer:
                 with open(file, "r") as f:
                     data = json.load(f)
 
-                focal_class_loc = data.get("focal_class").get("file")
-                test_class_loc = data.get("test_class").get("file")
+                focal_class = data.get("focal_class").get("file").split("/")[-1]
+                test_class = data.get("test_class").get("file").split("/")[-1]
 
                 for module in repo.modules:
-                    focal_parts = focal_class_loc.split("/")
-                    test_parts = test_class_loc.split("/")
+                    print(f"  Processing module: {module.module_root.split('/')[-1]}")
+                    print(f"  Contains files: {module.file_list}")
                     if (
-                        module.module_root in focal_parts
-                        and module.module_root in test_parts
+                        focal_class in module.file_list
+                        and test_class in module.file_list
                     ):
                         pair = Pair(
                             self.build_focal(data),
@@ -67,7 +73,7 @@ class DatasetExplorer:
                         module.pairs.append(pair)
             # save repo here
             repo.save()
-            break
+            # break
 
     def build_test(self, data: str):
         test_class_data = data.get("test_class", {})
