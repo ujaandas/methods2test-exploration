@@ -17,10 +17,10 @@ class TestMethod:
             if invocation_node.member.startswith("assertEquals"):
                 assertion = Assertion(
                     method_name=invocation_node.member,
-                    expected=invocation_node.arguments[0]
+                    expected=invocation_node.arguments[-2]
                     if len(invocation_node.arguments) > 0
                     else None,
-                    actual=invocation_node.arguments[1]
+                    actual=invocation_node.arguments[-1]
                     if len(invocation_node.arguments) > 1
                     else None,
                     arguments=invocation_node.arguments,

@@ -43,12 +43,23 @@ for i, pair_file in enumerate(pair_files):
         for method in [
             method for method in test_class.test_methods if method.assertions
         ]:
-            print(f"Processing TestMethod: {method.name} ({pair_file})")
+            # print(f"Processing TestMethod: {method.name} ({pair_file})")
             method_assertion_count = 0
 
             for assertion in method.assertions:
                 total_assertions += 1
                 method_assertion_count += 1
+
+                # print("----- Assertion -----")
+                # print(assertion)
+                # print("---------------------\n")
+
+                # seq_assertion = assertion.transform(SequencedAssertion)
+                # print("----- Sequenced Assertion -----")
+                # print(seq_assertion)
+                # print(f"Sequence Depth: {seq_assertion.max_depth}")
+                # print(f"Sequence Args: {seq_assertion.args}")
+                # print("-------------------------------\n")
 
                 seq_assertion = assertion.transform(SequencedAssertion)
 

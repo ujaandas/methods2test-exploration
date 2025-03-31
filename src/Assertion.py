@@ -114,5 +114,4 @@ class SequencedAssertion(Assertion):
         return chain_args
 
     def __repr__(self):
-        base_repr = super().__repr__()[:-1]
-        return f"{base_repr}, chains={self.chains}, max_depth={self.max_depth})"
+        return f"chains={self.chains}, max_depth={self.max_depth})"

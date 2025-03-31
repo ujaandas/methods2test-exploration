@@ -19,7 +19,7 @@
         packages = with pkgs; [
           git-lfs
           python311
-          zulu8
+          zulu11
           maven
         ];
       in
