@@ -14,21 +14,10 @@ class TestMethod:
 
     def _extract_assertions(self, parsed_method: MethodDeclaration) -> None:
         for _, invocation_node in parsed_method.filter(MethodInvocation):
-            if invocation_node.member.startswith("assertEquals"):
-                assertion = Assertion(
-                    method_name=invocation_node.member,
-                    expected=invocation_node.arguments[-2]
-                    if len(invocation_node.arguments) > 0
-                    else None,
-                    actual=invocation_node.arguments[-1]
-                    if len(invocation_node.arguments) > 1
-                    else None,
-                    arguments=invocation_node.arguments,
-                    line_number=invocation_node.position.line
-                    if invocation_node.position
-                    else -1,
-                )
-                self.assertions.append(assertion)
+            if invocation_node.member.startswith("assert"):
+                assertion = Assertion.from_invocation(invocation_node)
+                if assertion:
+                    self.assertions.append(assertion)
 
     def __repr__(self) -> str:
         return f"TestMethod(name={self.name}, line_number={self.line_number}, assertions={self.assertions}"

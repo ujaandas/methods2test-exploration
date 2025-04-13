@@ -11,4 +11,8 @@
 4. Find distribution of assertions appearing in one test
 5. Find distribution of assertion types
 
+<!-- add depth + length -->
+
 <!-- assertEquals(-1,Primitive.toUInt32(c.toJsonObject().getInt(UInt32.FIELD_DATA))); -->
+
+make excel file with all data
