@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 from Repository import Repository, Pair
+from SheetBuilder import SheetBuilder
 
 load_dotenv()
 
@@ -58,6 +59,9 @@ class DatasetExplorer:
                 focal_class = data.get("focal_class").get("file").split("/")[-1]
                 test_class = data.get("test_class").get("file").split("/")[-1]
 
+                pair_assigned = False
+
+                # check if belong to any module
                 for module in repo.modules:
                     print(f"  Processing module: {module.module_root.split('/')[-1]}")
                     print(f"  Contains files: {module.file_list}")
@@ -65,12 +69,45 @@ class DatasetExplorer:
                         focal_class in module.file_list
                         and test_class in module.file_list
                     ):
+                        focal = self.build_focal(data)
+                        test = self.build_test(data)
                         pair = Pair(
-                            self.build_focal(data),
-                            self.build_test(data),
+                            focal,
+                            test,
                             str(file),
                         )
                         module.pairs.append(pair)
+                        with SheetBuilder() as builder:
+                            builder.write_tm(
+                                repo.name, module.module_root, "", focal, "", test
+                            )
+
+                        pair_assigned = True
+                        break
+                try:
+                    repo.root_module
+                except AttributeError as e:
+                    print(f"No valid pom... skipping ({e})")
+                    continue
+
+                # if not belong to any module, is likely root module's
+                if not pair_assigned:
+                    print(
+                        f"  Pair for {focal_class} and {test_class} not assigned to any module. Adding to root."
+                    )
+                    focal = self.build_focal(data)
+                    test = self.build_test(data)
+                    pair = Pair(
+                        focal,
+                        test,
+                        str(file),
+                    )
+                    repo.root_module.pairs.append(pair)
+                    with SheetBuilder() as builder:
+                        builder.write_tm(
+                            repo.name, repo.root_module.module_root, "", focal, "", test
+                        )
+
             # save repo here
             repo.save()
             # break

@@ -60,6 +60,7 @@ class Repository:
         self.tree = tree_resp.json().get("tree", [])
 
     def add_all_modules(self, token):
+        print("Adding modules...")
         headers = {
             "Authorization": f"token {token}",
             "Accept": "application/vnd.github.v3+json",
@@ -87,6 +88,10 @@ class Repository:
                 if module_root == "" or path.startswith(module_root + "/"):
                     module_info[module_root]["files"].append(path.split("/")[-1])
 
+        if len(module_info.values()) <= 0:
+            print("No pom.xml!")
+            return
+
         for module_root, info in module_info.items():
             pom_node = next(
                 (item for item in self.tree if item.get("path") == info["pom_path"]),
@@ -99,6 +104,7 @@ class Repository:
                 continue
             try:
                 pom_scraper = POMScraper(pom_content)
+                print(f"POM at {pom_node}")
             except ValueError as e:
                 print(f"Skipping pom.xml at {info['pom_path']} due to error: {e}")
                 continue
@@ -108,8 +114,12 @@ class Repository:
 
             mod = Module(module_root, info["pom_path"], info["files"])
             mod.pom_hash = pom_node.get("sha")
-            print(f"Adding module: {mod.module_root.split('/')[-1]}")
-            self.modules.append(mod)
+            if module_root == "":
+                print("Setting root module explicitly.")
+                self.root_module = mod  # assign as root
+            else:
+                print(f"Adding module: {mod.module_root.split('/')[-1]}")
+                self.modules.append(mod)
 
     def save(self, results_dir="../results"):
         results_dir = Path(results_dir)
@@ -173,9 +183,9 @@ class Module:
 
 
 class Pair:
-    def __init__(self, focal_class_loc: str, test_class_loc: str, m2t_loc: str):
-        self.focal_class = focal_class_loc
-        self.test_class = test_class_loc
+    def __init__(self, focal_class: str, test_class: str, m2t_loc: str):
+        self.focal_class = focal_class
+        self.test_class = test_class
         self.m2t_loc = m2t_loc
 
     def __repr__(self):

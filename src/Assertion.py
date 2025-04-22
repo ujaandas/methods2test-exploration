@@ -1,5 +1,23 @@
 from typing import Any, Dict, Optional, List
-from javalang.tree import MethodInvocation
+from javalang.tree import MethodInvocation, MemberReference
+
+
+class Dependency:
+    def __init__(
+        self,
+        variable_name: str,
+        type_name: str,
+        qualified_name: str = "",
+        is_imported: bool = False,
+    ):
+        self.variable_name = variable_name
+        self.type_name = type_name
+        self.qualified_name = qualified_name
+        self.is_imported = is_imported
+
+    def __repr__(self):
+        return f"Dependency(variable_name={self.variable_name!r}, type_name={self.type_name!r}, qualified_name={self.qualified_name!r}, is_imported={self.is_imported})"
+
 
 # based on https://junit.org/junit4/javadoc/4.13/org/junit/Assert.html
 
@@ -69,6 +87,9 @@ class Assertion:
 
         for key, value in self.details.items():
             self._extract_arguments(value)
+
+        # self.dependencies: List[Dependency] = []
+        self.std_lib_dependencies: List[Dependency] = []
 
     def __repr__(self):
         details_str = ", ".join(f"{k}={v}" for k, v in self.details.items())
@@ -169,3 +190,57 @@ class Assertion:
             depth = self._calculate_depth(value)
             max_depth = max(max_depth, depth)
         return max_depth
+
+    STD_LIB_TYPES = {
+        "boolean",
+        "byte",
+        "short",
+        "int",
+        "long",
+        "float",
+        "double",
+        "char",
+        "String",
+        "Integer",
+        "Boolean",
+        "Long",
+        "Double",
+        "Float",
+        "Character",
+        "Object",
+        "List",
+        "ArrayList",
+        "Map",
+        "HashMap",
+        "File",
+    }
+
+    def _is_std_lib_type(self, type_name: str) -> bool:
+        return any(type_name.startswith(prefix) for prefix in self.STD_LIB_TYPES)
+
+    def _extract_std_lib_dep(self, expr: Any, symbol_table: dict) -> List[Dependency]:
+        deps = []
+        if isinstance(expr, MemberReference):
+            var_name = expr.member
+            if var_name in symbol_table:
+                type_name = symbol_table[var_name]
+                if self._is_std_lib_type(type_name):
+                    dep = Dependency(
+                        variable_name=var_name,
+                        type_name=type_name,
+                        qualified_name=type_name,
+                    )
+                    deps.append(dep)
+        elif hasattr(expr, "children"):
+            for child in expr.children:
+                if isinstance(child, list):
+                    for sub in child:
+                        deps.extend(self._extract_std_lib_dep(sub, symbol_table))
+                elif child is not None:
+                    deps.extend(self._extract_std_lib_dep(child, symbol_table))
+        return deps
+
+    def collect_std_lib_dep(self, symbol_table: dict):
+        for arg in self.arguments:
+            deps = self._extract_std_lib_dep(arg, symbol_table)
+            self.std_lib_dependencies.extend(deps)

@@ -17,6 +17,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         packages = with pkgs; [
+          ruff
           git-lfs
           python311
           zulu11
