@@ -11,8 +11,17 @@
 4. Find distribution of assertions appearing in one test
 5. Find distribution of assertion types
 
-<!-- add depth + length -->
+---
 
-<!-- assertEquals(-1,Primitive.toUInt32(c.toJsonObject().getInt(UInt32.FIELD_DATA))); -->
+mvn install:install-file \
+ -Dfile=/Users/ooj/Dev/Research/assertion/methods2test-exploration/src/spoon-analyzer/chatunitest-core-2.1.0.jar \
+ -DgroupId=io.github.ZJU-ACES-ISE \
+ -DartifactId=chatunitest-core \
+ -Dversion=2.0.0 \
+ -Dpackaging=jar
 
-make excel file with all data
+todo:
+
+1. get stats on distribution of std lib
+2. get full resolution of std lib names
+3. chatunitester

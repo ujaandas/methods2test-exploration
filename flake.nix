@@ -20,7 +20,7 @@
           ruff
           git-lfs
           python311
-          zulu11
+          zulu17
           maven
         ];
       in
