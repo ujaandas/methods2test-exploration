@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testInvalidURI ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , true ) ; 
+         String nonURI = "STR" ; 
+         URL testSourceUrl = new URL ( nonURI ) ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expectedResult, normalizedUrl);
+assertNotNull(normalizedUrl);
+assertTrue(normalizedUrl instanceof String);
+assertFalse(normalizedUrl.isEmpty());
+assertEquals(nonURI, normalizedUrl);
+assertNotSame(nonURI, normalizedUrl);
+assertTrue(normalizedUrl.length() > 0);
+assertFalse(normalizedUrl.contains(" "));
+assertFalse(normalizedUrl.contains("<"));
+assertFalse(normalizedUrl.contains(">"));
+assertFalse(normalizedUrl.contains("#"));
+assertFalse(normalizedUrl.contains("%"));
+assertFalse(normalizedUrl.contains("{"));
+assertFalse(normalizedUrl.contains("}"));
+assertFalse(normalizedUrl.contains("|"));
+assertFalse(normalizedUrl.contains("\\"));
+assertFalse(normalizedUrl.contains("^"));
+assertFalse(normalizedUrl.contains("~"));
+assertFalse(normalizedUrl.contains("["));
+assertFalse(normalizedUrl.contains("]"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.857 - ```java
+assertEquals(expectedResult, normalizedUrl)
+0.707 - assertEquals(nonURI, normalizedUrl)
+0.605 - assertNotNull(normalizedUrl)
+0.578 - assertNotSame(nonURI, normalizedUrl)
+0.571 - assertFalse(normalizedUrl.isEmpty())
+0.552 - assertFalse(normalizedUrl.contains(" "))
+0.545 - assertFalse(normalizedUrl.contains("<"))
+0.545 - assertFalse(normalizedUrl.contains(">"))
+0.545 - assertFalse(normalizedUrl.contains("#"))
+0.545 - assertFalse(normalizedUrl.contains("%"))
+0.545 - assertFalse(normalizedUrl.contains("{"))
+0.545 - assertFalse(normalizedUrl.contains("}"))
+0.545 - assertFalse(normalizedUrl.contains("|"))
+0.545 - assertFalse(normalizedUrl.contains("^"))
+0.545 - assertFalse(normalizedUrl.contains("~"))
+0.545 - assertFalse(normalizedUrl.contains("["))
+0.545 - assertFalse(normalizedUrl.contains("]"))
+0.539 - assertFalse(normalizedUrl.contains("\\"))
+0.524 - assertTrue(normalizedUrl.length() > 0)
+0.494 - assertTrue(normalizedUrl instanceof String)
+0.000 - ```

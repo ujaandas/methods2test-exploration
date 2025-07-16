@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJava {
+    public KoreanPosJava getPos ( ) { 
+    return pos ; 
+    }
+}
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJavaTest {
+    @Test
+     public void testAddWordsToDictionary ( ) {
+         String text = "STR" ; 
+         Seq < KoreanTokenizer . KoreanToken > tokens = OpenKoreanTextProcessorJava . tokenize ( text ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(tokens);
+assertFalse(tokens.isEmpty());
+assertEquals(expectedTokenCount, tokens.size());
+assertEquals("STR", tokens.get(0).getText());
+assertEquals(KoreanPosJava.NOUN, tokens.get(0).getPos());
+assertTrue(tokens.get(0).isNoun());
+assertFalse(tokens.get(0).isVerb());
+assertTrue(tokens.stream().allMatch(token -> token.getText().length() > 0));
+assertTrue(tokens.stream().noneMatch(token -> token.getText().isEmpty()));
+assertTrue(tokens.stream().anyMatch(token -> token.getText().equals("STR")));
+assertEquals(KoreanTokenizer.KoreanTokenType.WORD, tokens.get(0).getType());
+assertEquals(0, tokens.get(0).getStartIndex());
+assertEquals(3, tokens.get(0).getEndIndex());
+assertTrue(tokens.stream().allMatch(token -> token.getStartIndex() >= 0));
+assertTrue(tokens.stream().allMatch(token -> token.getEndIndex() <= text.length()));
+assertEquals(1, tokens.stream().filter(token -> token.getText().equals("STR")).count());
+assertEquals(KoreanPosJava.UNKNOWN, tokens.get(1).getPos());
+assertTrue(tokens.get(1).isUnknown());
+assertEquals(1, tokens.stream().filter(token -> token.getPos() == KoreanPosJava.NOUN).count());
+assertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.NOUN));
+assertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.VERB));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",OpenKoreanTextProcessorJava.tokensToJavaStringList(tokens).toString()); ===
+0.597 - assertEquals(KoreanPosJava.NOUN, tokens.get(0).getPos())
+0.585 - assertEquals(KoreanPosJava.UNKNOWN, tokens.get(1).getPos())
+0.530 - assertEquals("STR", tokens.get(0).getText())
+0.503 - assertEquals(KoreanTokenizer.KoreanTokenType.WORD, tokens.get(0).getType())
+0.455 - assertEquals(3, tokens.get(0).getEndIndex())
+0.444 - assertEquals(expectedTokenCount, tokens.size())
+0.418 - assertEquals(0, tokens.get(0).getStartIndex())
+0.416 - assertEquals(1, tokens.stream().filter(token -> token.getText().equals("STR")).count())
+0.404 - assertEquals(1, tokens.stream().filter(token -> token.getPos() == KoreanPosJava.NOUN).count())
+0.373 - assertFalse(tokens.isEmpty())
+0.371 - assertFalse(tokens.get(0).isVerb())
+0.358 - assertTrue(tokens.get(0).isNoun())
+0.349 - assertTrue(tokens.get(1).isUnknown())
+0.329 - assertTrue(tokens.stream().allMatch(token -> token.getStartIndex() >= 0))
+0.312 - assertTrue(tokens.stream().allMatch(token -> token.getText().length() > 0))
+0.300 - assertTrue(tokens.stream().noneMatch(token -> token.getText().isEmpty()))
+0.298 - assertTrue(tokens.stream().allMatch(token -> token.getEndIndex() <= text.length()))
+0.298 - assertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.NOUN))
+0.298 - assertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.VERB))
+0.271 - ```java
+assertNotNull(tokens)
+0.233 - assertTrue(tokens.stream().anyMatch(token -> token.getText().equals("STR")))
+0.000 - ```

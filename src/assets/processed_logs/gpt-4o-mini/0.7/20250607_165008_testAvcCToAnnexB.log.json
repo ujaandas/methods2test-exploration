@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class H264Utils {\npublic static byte [ ] toArray ( ByteBuffer buffer ) {\nbyte [ ] result = new byte [ buffer . remaining ( ) ] ;\nbuffer . duplicate ( ) . get ( result ) ;\nreturn result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class H264UtilsTest {\n@Test\npublic void testAvcCToAnnexB ( ) {\nArrayList < ByteBuffer > spsList = new ArrayList < ByteBuffer > ( ) ;\nspsList . add ( ByteBuffer . wrap ( new byte [ ] {\n's' , 't' , 'a' , 'n' } ) ) ;\nspsList . add ( ByteBuffer . wrap ( new byte [ ] {\n't' , 'h' , 'e' } ) ) ;\nArrayList < ByteBuffer > ppsList = new ArrayList < ByteBuffer > ( ) ;\nppsList . add ( ByteBuffer . wrap ( new byte [ ] {\n'm' , 'a' , 'n' } ) ) ;\nppsList . add ( ByteBuffer . wrap ( new byte [ ] {\n'c' , 'o' , 'o' , 'l' } ) ) ;\nAvcCBox avcCBox = AvcCBox . createAvcCBox ( 66 , 0 , 42 , 0 , spsList , ppsList ) ;\nbyte [ ] res = NIOUtils . toArray ( H264Utils . avcCToAnnexB ( avcCBox ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertEquals(12, res.length);\nassertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4));\nassertArrayEquals(new byte[]{'s', 't', 'a', 'n'}, Arrays.copyOfRange(res, 4, 8));\nassertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12));\nassertArrayEquals(new byte[]{'m', 'a', 'n'}, Arrays.copyOfRange(res, 12, 15));\nassertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19));\nassertArrayEquals(new byte[]{'c', 'o', 'o', 'l'}, Arrays.copyOfRange(res, 19, 23));\nassertEquals('s', res[4]);\nassertEquals('t', res[5]);\nassertEquals('a', res[6]);\nassertEquals('n', res[7]);\nassertEquals('m', res[12]);\nassertEquals('a', res[13]);\nassertEquals('n', res[14]);\nassertEquals('c', res[19]);\nassertEquals('o', res[20]);\nassertEquals('o', res[21]);\nassertEquals('l', res[22]);\nassertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4)));\nassertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12)));\nassertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19)));\n```\n====================\n\n",
+    "scores": [
+        0.458,
+        0.454,
+        0.425,
+        0.417,
+        0.396,
+        0.394,
+        0.393,
+        0.372,
+        0.37,
+        0.255,
+        0.255,
+        0.255,
+        0.255,
+        0.253,
+        0.253,
+        0.253,
+        0.253,
+        0.253,
+        0.253,
+        0.253,
+        0.226,
+        0.156,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(newbyte[]{0,0,0,1,0x67,'s','t','a','n',0,0,0,1,0x67,'t','h','e',0,0,0,1,0x68,'m','a','n',0,0,0,1,0x68,'c','o','o','l'},res);"
+}

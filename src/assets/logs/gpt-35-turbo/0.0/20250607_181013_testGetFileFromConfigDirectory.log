@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected File getFileFromConfigDirectory ( String file ) { 
+    File f = new File ( configDirectory , file ) ; 
+    if ( configDirectory != null && f . exists ( ) ) { 
+    return f ; 
+    } return null ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testGetFileFromConfigDirectory ( ) throws Exception {
+         DevUtil util = new DevTestUtil ( null , null , null , this . configDirectory , null , false , false ) ; 
+         File tempTextFile = new File ( configDirectory , "STR" ) ; 
+         Files . write ( tempTextFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File configFile = util . getFileFromConfigDirectory ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(configFile);
+Assert.assertTrue(configFile.exists());
+Assert.assertEquals("STR", configFile.getName());
+Assert.assertTrue(configFile.isFile());
+Assert.assertTrue(configFile.canRead());
+Assert.assertTrue(configFile.canWrite());
+Assert.assertFalse(configFile.isDirectory());
+Assert.assertEquals(tempTextFile.length(), configFile.length());
+Assert.assertTrue(Files.isReadable(configFile.toPath()));
+Assert.assertTrue(Files.isWritable(configFile.toPath()));
+Assert.assertTrue(Files.isRegularFile(configFile.toPath()));
+Assert.assertTrue(Files.exists(configFile.toPath()));
+Assert.assertTrue(Files.isSameFile(tempTextFile.toPath(), configFile.toPath()));
+Assert.assertEquals("STR", Files.readString(configFile.toPath()));
+Assert.assertTrue(Files.isExecutable(configFile.toPath()));
+Assert.assertTrue(Files.isReadable(configFile.toPath()));
+Assert.assertTrue(Files.isWritable(configFile.toPath()));
+Assert.assertTrue(Files.isRegularFile(configFile.toPath()));
+Assert.assertTrue(Files.exists(configFile.toPath()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(configFile.exists()); ===
+1.000 - Assert.assertTrue(configFile.exists())
+0.871 - Assert.assertTrue(configFile.isFile())
+0.825 - Assert.assertTrue(configFile.canRead())
+0.812 - Assert.assertTrue(configFile.canWrite())
+0.735 - Assert.assertFalse(configFile.isDirectory())
+0.684 - Assert.assertTrue(Files.exists(configFile.toPath()))
+0.684 - Assert.assertTrue(Files.exists(configFile.toPath()))
+0.679 - Assert.assertNotNull(configFile)
+0.650 - Assert.assertTrue(Files.isReadable(configFile.toPath()))
+0.650 - Assert.assertTrue(Files.isWritable(configFile.toPath()))
+0.650 - Assert.assertTrue(Files.isReadable(configFile.toPath()))
+0.650 - Assert.assertTrue(Files.isWritable(configFile.toPath()))
+0.648 - Assert.assertEquals("STR", configFile.getName())
+0.634 - Assert.assertTrue(Files.isExecutable(configFile.toPath()))
+0.627 - Assert.assertTrue(Files.isRegularFile(configFile.toPath()))
+0.627 - Assert.assertTrue(Files.isRegularFile(configFile.toPath()))
+0.581 - Assert.assertEquals(tempTextFile.length(), configFile.length())
+0.568 - Assert.assertEquals("STR", Files.readString(configFile.toPath()))
+0.510 - Assert.assertTrue(Files.isSameFile(tempTextFile.toPath(), configFile.toPath()))

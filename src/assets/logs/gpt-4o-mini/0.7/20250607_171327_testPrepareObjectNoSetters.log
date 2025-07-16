@@ -1,0 +1,94 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparer {
+    public ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException { 
+    ObjectQueryInfo result ; 
+    String onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ; 
+    if ( onamePattern != null ) { 
+    Map < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ; 
+    if ( attributeSetters . size ( ) > 0 ) { 
+    String onameString ; 
+    if ( obj instanceof MBeanLocationParameterSource ) { 
+    onameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ; 
+    } else { 
+    onameString = onamePattern ; 
+    } ObjectName oname = new ObjectName ( onameString ) ; 
+    result = new ObjectQueryInfo ( obj , oname , attributeSetters ) ; 
+    } else { 
+    this . logNoAttributeThrottle . warn ( log , "STR" , onamePattern ) ; 
+    result = null ; 
+    } } else { 
+    log . warn ( "STR" ) ; 
+    result = null ; 
+    } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparerTest {
+    @Test
+     public void testPrepareObjectNoSetters ( ) throws Exception {
+         this . initPreparer ( ) ; 
+         ObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertNull(result.getObject());
+assertNull(result.getObjectName());
+assertTrue(result.getAttributeSetters().isEmpty());
+assertEquals(0, result.getAttributeSetters().size());
+assertEquals(this.testTarget003, result.getSourceObject());
+assertNotNull(result.getSourceObject());
+assertFalse(result.getAttributeSetters().containsKey("someAttribute"));
+assertFalse(result.getAttributeSetters().containsKey("anotherAttribute"));
+assertTrue(result.getAttributeSetters().keySet().isEmpty());
+assertTrue(result.toString().contains("ObjectQueryInfo"));
+assertTrue(result.toString().contains("testTarget003"));
+assertEquals(ObjectQueryInfo.class, result.getClass());
+assertEquals("Expected empty attribute setters", 0, result.getAttributeSetters().size());
+assertNull(result.getObject());
+assertThrows(NullPointerException.class, () -> result.getObjectName().getCanonicalName());
+assertFalse(result.getAttributeSetters().keySet().iterator().hasNext());
+assertDoesNotThrow(() -> result.toString());
+assertNotNull(result);
+assertTrue(result.getAttributeSetters().isEmpty());
+assertNotEquals(this.testTarget003, new Object());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+0.923 - assertNotNull(result)
+0.766 - ```java
+assertNotNull(result)
+0.750 - assertNull(result.getObject())
+0.750 - assertNull(result.getObject())
+0.692 - assertNull(result.getObjectName())
+0.632 - assertNotNull(result.getSourceObject())
+0.508 - assertDoesNotThrow(() -> result.toString())
+0.464 - assertEquals(0, result.getAttributeSetters().size())
+0.451 - assertEquals(ObjectQueryInfo.class, result.getClass())
+0.441 - assertTrue(result.getAttributeSetters().isEmpty())
+0.441 - assertTrue(result.getAttributeSetters().isEmpty())
+0.431 - assertNotEquals(this.testTarget003, new Object())
+0.427 - assertEquals(this.testTarget003, result.getSourceObject())
+0.411 - assertTrue(result.toString().contains("testTarget003"))
+0.400 - assertTrue(result.toString().contains("ObjectQueryInfo"))
+0.390 - assertTrue(result.getAttributeSetters().keySet().isEmpty())
+0.346 - assertThrows(NullPointerException.class, () -> result.getObjectName().getCanonicalName())
+0.341 - assertFalse(result.getAttributeSetters().containsKey("someAttribute"))
+0.337 - assertFalse(result.getAttributeSetters().keySet().iterator().hasNext())
+0.330 - assertFalse(result.getAttributeSetters().containsKey("anotherAttribute"))
+0.317 - assertEquals("Expected empty attribute setters", 0, result.getAttributeSetters().size())
+0.000 - ```

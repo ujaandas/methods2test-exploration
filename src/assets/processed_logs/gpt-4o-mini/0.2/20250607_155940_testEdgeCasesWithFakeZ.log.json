@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactory {\nint estimateSize ( ) {\nint s = SeekHead . id . length + 1 ;\ns += estimeteSeekSize ( a . get ( 0 ) . id . length , 1 ) ;\nfor ( int i = 1 ;\ni < a . size ( ) ;\ni ++ ) {\ns += estimeteSeekSize ( a . get ( i ) . id . length , a . get ( i ) . seekPointerSize ) ;\n} return s ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactoryTest {\n@Test\npublic void testEdgeCasesWithFakeZ ( ) throws Exception {\nSeekHeadFactory a = new SeekHeadFactory ( - 1 ) ;\na . a . add ( createFakeZ ( Info . id , 0xFF ) ) ;\na . a . add ( createFakeZ ( Tracks . id , 0xFF05 ) ) ;\na . a . add ( createFakeZ ( Tags . id , 0xFEFFC0 ) ) ;\na . a . add ( createFakeZ ( Cues . id , 0xFF ) ) ;\nint computeSize = a . computeSeekHeadSize ( ) ;\nSystem . out . println ( \"STR\" + computeSize ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(estimatedSize1, computeSize);\nassertTrue(computeSize > 0);\nassertNotNull(a.a);\nassertEquals(4, a.a.size());\nassertTrue(computeSize < 1000);\nassertTrue(computeSize >= 50);\nassertFalse(computeSize == Integer.MAX_VALUE);\nassertTrue(computeSize % 2 == 0);\nassertTrue(computeSize != -1);\nassertEquals(expectedSizeForId1, a.a.get(0).id.length);\nassertEquals(expectedSizeForId2, a.a.get(1).id.length);\nassertEquals(expectedSizeForId3, a.a.get(2).id.length);\nassertEquals(expectedSizeForId4, a.a.get(3).id.length);\nassertTrue(computeSize <= estimatedMaxSize);\nassertFalse(computeSize < estimatedMinSize);\nassertTrue(computeSize > estimatedSizeForId1);\nassertTrue(computeSize > estimatedSizeForId2);\nassertTrue(computeSize > estimatedSizeForId3);\nassertTrue(computeSize > estimatedSizeForId4);\nassertEquals(expectedSeekPointerSize1, a.a.get(0).seekPointerSize);\nassertEquals(expectedSeekPointerSize2, a.a.get(1).seekPointerSize);\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.647,
+        0.627,
+        0.609,
+        0.609,
+        0.6,
+        0.6,
+        0.561,
+        0.561,
+        0.554,
+        0.541,
+        0.506,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.494,
+        0.494,
+        0.494,
+        0.494,
+        0.433,
+        0.0
+    ],
+    "ground_truth": "assertEquals(a.estimateSize(),computeSize);"
+}

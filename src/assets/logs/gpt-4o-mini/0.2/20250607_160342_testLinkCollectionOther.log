@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public boolean isSame ( ODirtyManager other ) { 
+    return this . getReal ( ) == other . getReal ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLinkCollectionOther ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         List < ODocument > lst = new ArrayList < ODocument > ( ) ; 
+         ODocument doc1 = new ODocument ( ) ; 
+         lst . add ( doc1 ) ; 
+         doc . field ( "STR" , lst ) ; 
+         Set < ODocument > set = new HashSet < ODocument > ( ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         set . add ( doc2 ) ; 
+         doc . field ( "STR" , set ) ; 
+         ODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ; 
+         ODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(manager);
+assertNotNull(manager2);
+assertFalse(manager.isSame(manager2));
+assertTrue(manager.isSame(manager));
+assertTrue(manager2.isSame(manager2));
+assertNotSame(manager, manager2);
+assertEquals(manager.getReal(), manager.getReal());
+assertEquals(manager2.getReal(), manager2.getReal());
+assertNotEquals(manager.getReal(), manager2.getReal());
+assertTrue(manager instanceof ODirtyManager);
+assertTrue(manager2 instanceof ODirtyManager);
+assertNotNull(doc1);
+assertNotNull(doc2);
+assertTrue(lst.contains(doc1));
+assertTrue(set.contains(doc2));
+assertFalse(lst.contains(doc2));
+assertFalse(set.contains(doc1));
+assertEquals(1, lst.size());
+assertEquals(1, set.size());
+assertTrue(doc.field("STR") instanceof Set);
+assertTrue(doc.field("STR") instanceof List);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(manager2.isSame(manager)); ===
+0.986 - assertTrue(manager2.isSame(manager2))
+0.986 - assertTrue(manager.isSame(manager))
+0.877 - assertFalse(manager.isSame(manager2))
+0.759 - assertTrue(manager2 instanceof ODirtyManager)
+0.744 - assertTrue(manager instanceof ODirtyManager)
+0.644 - assertEquals(manager2.getReal(), manager2.getReal())
+0.635 - assertEquals(manager.getReal(), manager.getReal())
+0.576 - assertNotNull(manager2)
+0.567 - assertNotSame(manager, manager2)
+0.515 - assertTrue(lst.contains(doc1))
+0.494 - assertNotEquals(manager.getReal(), manager2.getReal())
+0.485 - ```java
+assertNotNull(manager)
+0.485 - assertTrue(set.contains(doc2))
+0.442 - assertTrue(doc.field("STR") instanceof Set)
+0.436 - assertTrue(doc.field("STR") instanceof List)
+0.418 - assertFalse(set.contains(doc1))
+0.388 - assertFalse(lst.contains(doc2))
+0.364 - assertNotNull(doc2)
+0.355 - assertEquals(1, lst.size())
+0.355 - assertEquals(1, set.size())
+0.327 - assertNotNull(doc1)
+0.000 - ```

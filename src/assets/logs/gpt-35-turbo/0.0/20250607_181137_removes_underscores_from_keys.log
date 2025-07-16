@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void removes_underscores_from_keys ( ) {
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( "STR" + "STR" + "STR" ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STRSTRSTR", config.getString("key"));
+assertNotEquals("STR_STR_STR", config.getString("key"));
+assertTrue(config.getString("key").contains("STR"));
+assertFalse(config.getString("key").isEmpty());
+assertNotNull(config.getString("key"));
+assertNull(config.getString("key"));
+assertSame("STRSTRSTR", config.getString("key"));
+assertNotSame("STR_STR_STR", config.getString("key"));
+assertTrue(config.getString("key").startsWith("STR"));
+assertFalse(config.getString("key").endsWith("STR"));
+assertEqualsIgnoringCase("strstrstr", config.getString("key"));
+assertArrayEquals(new String[]{"STR", "STR", "STR"}, config.getString("key").split(""));
+assertTrue(config.getString("key").matches("[A-Z]+"));
+assertFalse(config.getString("key").matches("[0-9]+"));
+assertEquals(9, config.getString("key").length());
+assertNotEquals(10, config.getString("key").length());
+assertTrue(config.getString("key").equals("STRSTRSTR"));
+assertFalse(config.getString("key").equals("STR_STR_STR"));
+assertTrue(config.getString("key").equalsIgnoreCase("strstrstr"));
+assertFalse(config.getString("key").equalsIgnoreCase("str_str_str"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+0.870 - assertEquals("STRSTRSTR", config.getString("key"))
+0.825 - assertNotEquals("STR_STR_STR", config.getString("key"))
+0.778 - assertSame("STRSTRSTR", config.getString("key"))
+0.769 - assertNull(config.getString("key"))
+0.769 - assertEquals(9, config.getString("key").length())
+0.741 - assertNotNull(config.getString("key"))
+0.737 - assertNotSame("STR_STR_STR", config.getString("key"))
+0.737 - assertNotEquals(10, config.getString("key").length())
+0.716 - assertFalse(config.getString("key").endsWith("STR"))
+0.712 - assertEqualsIgnoringCase("strstrstr", config.getString("key"))
+0.697 - assertFalse(config.getString("key").isEmpty())
+0.681 - assertTrue(config.getString("key").contains("STR"))
+0.673 - assertFalse(config.getString("key").equals("STR_STR_STR"))
+0.667 - assertTrue(config.getString("key").startsWith("STR"))
+0.653 - assertTrue(config.getString("key").equals("STRSTRSTR"))
+0.639 - assertFalse(config.getString("key").matches("[0-9]+"))
+0.635 - assertArrayEquals(new String[]{"STR", "STR", "STR"}, config.getString("key").split(""))
+0.604 - assertTrue(config.getString("key").matches("[A-Z]+"))
+0.559 - assertFalse(config.getString("key").equalsIgnoreCase("str_str_str"))
+0.537 - assertTrue(config.getString("key").equalsIgnoreCase("strstrstr"))

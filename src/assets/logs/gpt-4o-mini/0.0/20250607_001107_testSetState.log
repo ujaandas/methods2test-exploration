@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class ActivityState {
+    public JsonObject getState ( ) { 
+    return this . state ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ActivityStateTest {
+    @Test
+     public void testSetState ( ) {
+         JsonObject expected = new JsonObject ( ) ; 
+         expected . addProperty ( "STR" , "STR" ) ; 
+         activityState . setState ( expected ) ; 
+         JsonObject actual = activityState . getState ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString());
+assertTrue(actual.has("STR"));
+assertFalse(actual.has("NON_EXISTENT_PROPERTY"));
+assertEquals(expected.size(), actual.size());
+assertEquals(expected, actual);
+assertNotSame(expected, actual);
+assertTrue(actual.entrySet().containsAll(expected.entrySet()));
+assertEquals("STR", actual.get("STR").getAsString());
+assertTrue(actual.get("STR").isJsonPrimitive());
+assertTrue(actual.get("STR").getAsJsonPrimitive().isString());
+assertEquals(expected.toString(), actual.toString());
+assertNotEquals(new JsonObject(), actual);
+assertTrue(actual.equals(expected));
+assertFalse(actual.equals(new JsonObject()));
+assertTrue(actual.get("STR").isJsonPrimitive());
+assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString());
+assertTrue(actual.get("STR").getAsString().length() > 0);
+assertTrue(actual.get("STR").getAsString().contains("STR"));
+assertEquals(expected.get("STR"), actual.get("STR"));
+assertSame(expected.get("STR"), actual.get("STR"));
+assertNotNull(actual.get("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.792 - assertNotNull(actual.get("STR"))
+0.667 - assertNotSame(expected, actual)
+0.633 - assertNotEquals(new JsonObject(), actual)
+0.600 - assertTrue(actual.has("STR"))
+0.560 - assertEquals(expected, actual)
+0.536 - assertTrue(actual.equals(expected))
+0.469 - assertEquals(expected.size(), actual.size())
+0.469 - assertFalse(actual.equals(new JsonObject()))
+0.444 - assertEquals("STR", actual.get("STR").getAsString())
+0.444 - assertEquals(expected.toString(), actual.toString())
+0.441 - assertTrue(actual.get("STR").isJsonPrimitive())
+0.441 - assertTrue(actual.get("STR").isJsonPrimitive())
+0.435 - assertFalse(actual.has("NON_EXISTENT_PROPERTY"))
+0.429 - assertSame(expected.get("STR"), actual.get("STR"))
+0.417 - assertEquals(expected.get("STR"), actual.get("STR"))
+0.400 - assertTrue(actual.get("STR").getAsString().length() > 0)
+0.375 - assertTrue(actual.get("STR").getAsString().contains("STR"))
+0.366 - assertTrue(actual.get("STR").getAsJsonPrimitive().isString())
+0.361 - assertTrue(actual.entrySet().containsAll(expected.entrySet()))
+0.300 - assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString())
+0.300 - assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString())
+0.000 - ```

@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPush {
+    @Override
+     public OBinaryPushResponse execute ( ORemotePushHandler remote ) { 
+     remote . executeLiveQueryPush ( this ) ; 
+     return null ; 
+     }
+}
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPushTest {
+    @Test
+     public void testLiveEvents ( ) {
+         MockLiveListener mock = new MockLiveListener ( ) ; 
+         storage . registerLiveListener ( 10 , new OLiveQueryClientListener ( database , mock ) ) ; 
+         List < OLiveQueryResult > events = new ArrayList < > ( ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         OLiveQueryPushRequest request = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ; 
+         request . execute ( storage ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, mock.getReceivedEvents().size());
+assertTrue(mock.getReceivedEvents().get(0).getType().equals(OLiveQueryResult.CREATE_EVENT));
+assertTrue(mock.getReceivedEvents().get(1).getType().equals(OLiveQueryResult.UPDATE_EVENT));
+assertTrue(mock.getReceivedEvents().get(2).getType().equals(OLiveQueryResult.DELETE_EVENT));
+assertNotNull(mock.getReceivedEvents().get(0).getResult());
+assertNotNull(mock.getReceivedEvents().get(1).getResult());
+assertNull(mock.getReceivedEvents().get(2).getResult());
+assertEquals(new OResultInternal(), mock.getReceivedEvents().get(1).getPreviousResult());
+assertNull(mock.getReceivedEvents().get(0).getPreviousResult());
+assertNull(mock.getReceivedEvents().get(2).getPreviousResult());
+assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.CREATE_EVENT));
+assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.UPDATE_EVENT));
+assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.DELETE_EVENT));
+assertEquals(OLiveQueryPushRequest.END, request.getStatus());
+assertEquals(10, request.getId());
+assertEquals(3, request.getEvents().size());
+assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(0)));
+assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(1)));
+assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(2)));
+assertNotNull(storage.getLiveListeners());
+assertEquals(1, storage.getLiveListeners().size());
+assertTrue(storage.getLiveListeners().containsKey(10));
+assertTrue(storage.getLiveListeners().get(10) instanceof OLiveQueryClientListener);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(mock.countCreate,1); ===
+0.562 - assertEquals(10, request.getId())
+0.529 - ```java
+assertEquals(3, mock.getReceivedEvents().size())
+0.494 - assertEquals(1, storage.getLiveListeners().size())
+0.486 - assertEquals(3, request.getEvents().size())
+0.483 - assertNull(mock.getReceivedEvents().get(2).getResult())
+0.467 - assertNotNull(mock.getReceivedEvents().get(0).getResult())
+0.467 - assertNotNull(mock.getReceivedEvents().get(1).getResult())
+0.438 - assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(1)))
+0.419 - assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(0)))
+0.419 - assertTrue(request.getEvents().contains(mock.getReceivedEvents().get(2)))
+0.419 - assertTrue(storage.getLiveListeners().containsKey(10))
+0.418 - assertEquals(OLiveQueryPushRequest.END, request.getStatus())
+0.400 - assertNull(mock.getReceivedEvents().get(0).getPreviousResult())
+0.400 - assertNull(mock.getReceivedEvents().get(2).getPreviousResult())
+0.390 - assertEquals(new OResultInternal(), mock.getReceivedEvents().get(1).getPreviousResult())
+0.312 - assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.CREATE_EVENT))
+0.312 - assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.UPDATE_EVENT))
+0.312 - assertTrue(mock.getReceivedEvents().stream().anyMatch(event -> event.getType() == OLiveQueryResult.DELETE_EVENT))
+0.304 - assertTrue(storage.getLiveListeners().get(10) instanceof OLiveQueryClientListener)
+0.301 - assertNotNull(storage.getLiveListeners())
+0.260 - assertTrue(mock.getReceivedEvents().get(0).getType().equals(OLiveQueryResult.CREATE_EVENT))
+0.244 - assertTrue(mock.getReceivedEvents().get(1).getType().equals(OLiveQueryResult.UPDATE_EVENT))
+0.244 - assertTrue(mock.getReceivedEvents().get(2).getType().equals(OLiveQueryResult.DELETE_EVENT))
+0.000 - ```

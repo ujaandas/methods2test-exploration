@@ -1,0 +1,101 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MkvBlock {
+    public static int readXiphLaceSizes ( ByteBuffer bb , int [ ] sizes , int size , int preLacingHeaderSize ) { 
+    int startPos = bb . position ( ) ; 
+    int lastIndex = sizes . length - 1 ; 
+    sizes [ lastIndex ] = size ; 
+    for ( int l = 0 ; 
+    l < lastIndex ; 
+    l ++ ) { 
+    int laceSize = 255 ; 
+    while ( laceSize == 255 ) { 
+    laceSize = bb . get ( ) & 0xFF ; 
+    sizes [ l ] += laceSize ; 
+    } sizes [ lastIndex ] -= sizes [ l ] ; 
+    } int headerSize = ( bb . position ( ) - startPos ) + preLacingHeaderSize ; 
+    sizes [ lastIndex ] -= headerSize ; 
+    return headerSize ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MkvBlockTest {
+    @Test
+     public void testReadingXiphV2 ( ) throws Exception {
+         ByteBuffer bb = ByteBuffer . wrap ( new byte [ ] { 
+     ( byte ) 0x82 , 0x00 , ( byte ) 0xAE , 0x02 , 0x04 , ( byte ) 187 , ( byte ) 255 , ( byte ) 255 , 120 , ( byte ) 255 , 0 , 60 } ) ; 
+         int startPosition = 5 ; 
+         bb . position ( startPosition ) ; 
+         MkvBlock be = new MkvBlock ( Block . id ) ; 
+         be . offset = 0x149B0 ; 
+         be . dataOffset = 0x149B3 ; 
+         be . dataLen = 0x353 ; 
+         int [ ] sizes = new int [ bb . get ( 4 ) + 1 ] ; 
+         be . headerSize = MkvBlock . readXiphLaceSizes ( bb , sizes , ( int ) be . dataLen , startPosition ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(8, sizes.length);
+assertEquals(0x353, sizes[7]);
+assertEquals(0xAE, sizes[0]);
+assertEquals(0x00, sizes[1]);
+assertEquals(0x04, sizes[2]);
+assertEquals(0xBB, sizes[3]);
+assertEquals(0xFF, sizes[4]);
+assertEquals(0x78, sizes[5]);
+assertEquals(0xFF, sizes[6]);
+assertEquals(0x00, sizes[7]);
+assertEquals(5, bb.position());
+assertEquals(0x149B0, be.offset);
+assertEquals(0x149B3, be.dataOffset);
+assertEquals(0x353, be.dataLen);
+assertEquals(3, be.headerSize);
+assertTrue(sizes[0] > 0);
+assertTrue(sizes[1] >= 0);
+assertTrue(sizes[2] >= 0);
+assertTrue(sizes[3] >= 0);
+assertTrue(sizes[4] >= 0);
+assertTrue(sizes[5] >= 0);
+assertTrue(sizes[6] >= 0);
+assertTrue(sizes[7] >= 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(12,be.headerSize); ===
+0.949 - assertEquals(3, be.headerSize)
+0.656 - assertEquals(0x149B0, be.offset)
+0.633 - assertEquals(0x353, be.dataLen)
+0.632 - assertEquals(0xAE, sizes[0])
+0.632 - assertEquals(0x00, sizes[1])
+0.632 - assertEquals(0x04, sizes[2])
+0.632 - assertEquals(0xBB, sizes[3])
+0.632 - assertEquals(0xFF, sizes[4])
+0.632 - assertEquals(0x78, sizes[5])
+0.632 - assertEquals(0xFF, sizes[6])
+0.632 - assertEquals(0x00, sizes[7])
+0.621 - assertEquals(0x353, sizes[7])
+0.615 - assertEquals(0x149B3, be.dataOffset)
+0.610 - assertEquals(5, bb.position())
+0.545 - ```java
+assertEquals(8, sizes.length)
+0.462 - assertTrue(sizes[0] > 0)
+0.453 - assertTrue(sizes[1] >= 0)
+0.453 - assertTrue(sizes[2] >= 0)
+0.453 - assertTrue(sizes[3] >= 0)
+0.453 - assertTrue(sizes[4] >= 0)
+0.453 - assertTrue(sizes[5] >= 0)
+0.453 - assertTrue(sizes[6] >= 0)
+0.453 - assertTrue(sizes[7] >= 0)
+0.000 - ```

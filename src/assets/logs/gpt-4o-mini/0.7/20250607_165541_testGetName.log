@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Circle {
+    @Override
+     public String getName ( ) { 
+     return CIRCLE_NAME ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class CircleTest {
+    @Test
+     public void testGetName ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Circle circle = new Circle();
+assertEquals("Expected name does not match", "CIRCLE_NAME", circle.getName());
+assertNotNull("Circle name should not be null", circle.getName());
+assertTrue("Circle name should be a non-empty string", !circle.getName().isEmpty());
+assertEquals("Circle name should be exactly 'CIRCLE_NAME'", "CIRCLE_NAME", circle.getName());
+assertFalse("Circle name should not be an empty string", circle.getName().isEmpty());
+assertNotEquals("Circle name should not be 'SQUARE_NAME'", "SQUARE_NAME", circle.getName());
+assertTrue("Circle name should be of type String", circle.getName() instanceof String);
+assertSame("Circle name reference should be the same", "CIRCLE_NAME", circle.getName());
+assertThat("Circle name should match the regex", circle.getName(), matchesPattern("CIRCLE_NAME"));
+assertEquals("Circle name length should be 12", 12, circle.getName().length());
+assertThat("Circle name should contain 'CIRCLE'", circle.getName(), containsString("CIRCLE"));
+assertThat("Circle name should start with 'CIR'", circle.getName(), startsWith("CIR"));
+assertThat("Circle name should end with 'NAME'", circle.getName(), endsWith("NAME"));
+assertTrue("Circle name should be uppercase", circle.getName().equals(circle.getName().toUpperCase()));
+assertFalse("Circle name should not contain spaces", circle.getName().contains(" "));
+assertNotSame("Circle name should not be the same as a new String instance", new String("CIRCLE_NAME"), circle.getName());
+assertThat("Circle name should not be blank", circle.getName(), not(isEmptyOrNullString()));
+assertEquals("Circle name should not change after multiple calls", circle.getName(), circle.getName());
+assertThat("Circle name should not contain special characters", circle.getName(), matches("^[A-Z_]+$"));
+assertEquals("Circle name should remain consistent", "CIRCLE_NAME", circle.getName());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",newCircle(env()).getName()); ===
+0.564 - assertEquals("Expected name does not match", "CIRCLE_NAME", circle.getName())
+0.564 - assertEquals("Circle name length should be 12", 12, circle.getName().length())
+0.552 - assertNotNull("Circle name should not be null", circle.getName())
+0.528 - assertEquals("Circle name should remain consistent", "CIRCLE_NAME", circle.getName())
+0.508 - assertNotEquals("Circle name should not be 'SQUARE_NAME'", "SQUARE_NAME", circle.getName())
+0.504 - assertEquals("Circle name should not change after multiple calls", circle.getName(), circle.getName())
+0.492 - assertFalse("Circle name should not be an empty string", circle.getName().isEmpty())
+0.489 - assertEquals("Circle name should be exactly 'CIRCLE_NAME'", "CIRCLE_NAME", circle.getName())
+0.488 - assertFalse("Circle name should not contain spaces", circle.getName().contains(" "))
+0.459 - assertTrue("Circle name should be a non-empty string", !circle.getName().isEmpty())
+0.455 - assertTrue("Circle name should be of type String", circle.getName() instanceof String)
+0.455 - assertThat("Circle name should end with 'NAME'", circle.getName(), endsWith("NAME"))
+0.448 - assertSame("Circle name reference should be the same", "CIRCLE_NAME", circle.getName())
+0.432 - assertThat("Circle name should start with 'CIR'", circle.getName(), startsWith("CIR"))
+0.431 - assertThat("Circle name should not be blank", circle.getName(), not(isEmptyOrNullString()))
+0.421 - assertThat("Circle name should contain 'CIRCLE'", circle.getName(), containsString("CIRCLE"))
+0.397 - assertThat("Circle name should not contain special characters", circle.getName(), matches("^[A-Z_]+$"))
+0.397 - assertThat("Circle name should match the regex", circle.getName(), matchesPattern("CIRCLE_NAME"))
+0.385 - ```java
+Circle circle = new Circle()
+0.378 - assertTrue("Circle name should be uppercase", circle.getName().equals(circle.getName().toUpperCase()))
+0.366 - assertNotSame("Circle name should not be the same as a new String instance", new String("CIRCLE_NAME"), circle.getName())
+0.000 - ```

@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtils {\npublic static URI toUri ( final URL url ) {\ntry {\nreturn url . toURI ( ) ;\n} catch ( URISyntaxException ex ) {\nthrow new IllegalArgumentException ( ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtilsTest {\n@Test\npublic void testValidUrlToUri ( ) throws Exception {\nURI uri = UrlUtils . toUri ( new URL ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(uri);\nAssert.assertEquals(new URI(\"STR\"), uri);\nAssert.assertTrue(uri.isAbsolute());\nAssert.assertFalse(uri.isOpaque());\nAssert.assertEquals(\"http\", uri.getScheme());\nAssert.assertEquals(\"\", uri.getSchemeSpecificPart());\nAssert.assertEquals(-1, uri.getPort());\nAssert.assertEquals(-1, uri.getFragment());\nAssert.assertEquals(\"STR\", uri.getPath());\nAssert.assertNull(uri.getQuery());\nAssert.assertNull(uri.getUserInfo());\nAssert.assertEquals(\"localhost\", uri.getHost());\nAssert.assertEquals(\"http://localhost/STR\", uri.toString());\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.resolve(\"\"));\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.normalize());\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.normalize().normalize());\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.normalize().resolve(\"\"));\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.resolve(\"\").normalize());\nAssert.assertEquals(new URI(\"http://localhost/STR\"), uri.resolve(\"\").normalize().normalize());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.719,
+        0.681,
+        0.681,
+        0.602,
+        0.602,
+        0.602,
+        0.597,
+        0.59,
+        0.571,
+        0.561,
+        0.554,
+        0.539,
+        0.533,
+        0.531,
+        0.483,
+        0.456,
+        0.433,
+        0.407
+    ],
+    "ground_truth": "assertEquals(newURI(\"STR\"),uri);"
+}

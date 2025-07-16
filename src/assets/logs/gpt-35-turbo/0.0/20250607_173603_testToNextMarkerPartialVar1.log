@@ -1,0 +1,63 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class SegmentReader {
+    public ByteBuffer readToNextMarkerNewBuffer ( ) throws IOException { 
+    if ( done ) return null ; 
+    List < ByteBuffer > buffers = new ArrayList < ByteBuffer > ( ) ; 
+    readToNextMarkerBuffers ( buffers ) ; 
+    return NIOUtils . combineBuffers ( buffers ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class SegmentReaderTest {
+    @Test
+     public void testToNextMarkerPartialVar1 ( ) throws IOException {
+         byte [ ] bytes = new byte [ ] { 
+     0 , 0 , 1 , 42 , 43 , 44 , 45 , 46 , 0 , 0 , 1 , 43 } ; 
+         ReadableByteChannel ch = Channels . newChannel ( new ByteArrayInputStream ( bytes ) ) ; 
+         SegmentReader reader = new SegmentReader ( ch , 1 ) ; 
+         reader . setBufferIncrement ( 1 ) ; 
+         ByteBuffer buf1 = reader . readToNextMarkerNewBuffer ( ) ; 
+         ByteBuffer buf2 = reader . readToNextMarkerNewBuffer ( ) ; 
+         ByteBuffer buf3 = reader . readToNextMarkerNewBuffer ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(buf1);
+Assert.assertEquals(5, buf1.remaining());
+Assert.assertEquals(42, buf1.get());
+Assert.assertEquals(43, buf1.get());
+Assert.assertEquals(44, buf1.get());
+Assert.assertEquals(45, buf1.get());
+Assert.assertEquals(46, buf1.get());
+
+Assert.assertNotNull(buf2);
+Assert.assertEquals(1, buf2.remaining());
+Assert.assertEquals(43, buf2.get());
+
+Assert.assertNull(buf3);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(ByteBuffer.wrap(bytes,0,8),buf1); ===
+0.528 - Assert.assertEquals(42, buf1.get())
+0.528 - Assert.assertEquals(43, buf1.get())
+0.528 - Assert.assertEquals(44, buf1.get())
+0.528 - Assert.assertEquals(45, buf1.get())
+0.528 - Assert.assertEquals(46, buf1.get())
+0.500 - Assert.assertEquals(43, buf2.get())
+0.494 - Assert.assertEquals(5, buf1.remaining())
+0.468 - Assert.assertEquals(1, buf2.remaining())
+0.438 - Assert.assertNotNull(buf1)
+0.426 - Assert.assertNull(buf3)
+0.406 - Assert.assertNotNull(buf2)

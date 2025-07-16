@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class Config {
+    public String toYaml ( String rootKey ) { 
+    try { 
+    StringBuilder out = new StringBuilder ( ) ; 
+    this . print ( 0 , rootKey , out ) ; 
+    return out . toString ( ) ; 
+    } catch ( IOException e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class ConfigTest {
+    @Test
+     public void has_yaml_representation ( ) {
+         Config config = new Config ( ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         String expected = "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected YAML representation does not match.", expected, config.toYaml("rootKey"));
+assertTrue("YAML representation should contain 'STR'.", config.toYaml("rootKey").contains("STR"));
+assertTrue("YAML representation should start with 'STR'.", config.toYaml("rootKey").startsWith("STR"));
+assertTrue("YAML representation should end with 'STR'.", config.toYaml("rootKey").endsWith("STR"));
+assertEquals("YAML representation should have the correct length.", expected.length(), config.toYaml("rootKey").length());
+assertTrue("YAML representation should not be empty.", !config.toYaml("rootKey").isEmpty());
+assertFalse("YAML representation should not contain 'INVALID'.", config.toYaml("rootKey").contains("INVALID"));
+assertEquals("YAML representation should contain 'STR' exactly 10 times.", 10, countOccurrences(config.toYaml("rootKey"), "STR"));
+assertTrue("YAML representation should contain 'rootKey'.", config.toYaml("rootKey").contains("rootKey"));
+assertTrue("YAML representation should not contain null characters.", !config.toYaml("rootKey").contains("\0"));
+assertFalse("YAML representation should not be null.", config.toYaml("rootKey") == null);
+assertNotEquals("YAML representation should not be equal to an empty string.", "", config.toYaml("rootKey"));
+assertNotEquals("YAML representation should not be equal to 'INVALID'.", "INVALID", config.toYaml("rootKey"));
+assertTrue("YAML representation should contain at least one newline.", config.toYaml("rootKey").contains("\n"));
+assertTrue("YAML representation should be formatted properly.", config.toYaml("rootKey").matches(".*STR.*"));
+assertTrue("YAML representation should not contain any extra spaces.", config.toYaml("rootKey").trim().equals(config.toYaml("rootKey")));
+assertEquals("YAML representation should include the correct root key.", "rootKey: ", config.toYaml("rootKey").substring(0, 10));
+assertTrue("YAML representation should be valid YAML format.", isValidYaml(config.toYaml("rootKey")));
+assertNotNull("YAML representation should not be null.", config.toYaml("rootKey"));
+assertTrue("YAML representation should be a valid string.", config.toYaml("rootKey") instanceof String);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expected,config.toYaml("STR")); ===
+0.571 - ```java
+assertEquals("Expected YAML representation does not match.", expected, config.toYaml("rootKey"))
+0.553 - assertFalse("YAML representation should not be null.", config.toYaml("rootKey") == null)
+0.529 - assertNotEquals("YAML representation should not be equal to an empty string.", "", config.toYaml("rootKey"))
+0.517 - assertNotEquals("YAML representation should not be equal to 'INVALID'.", "INVALID", config.toYaml("rootKey"))
+0.513 - assertEquals("YAML representation should have the correct length.", expected.length(), config.toYaml("rootKey").length())
+0.494 - assertEquals("YAML representation should contain 'STR' exactly 10 times.", 10, countOccurrences(config.toYaml("rootKey"), "STR"))
+0.489 - assertTrue("YAML representation should contain 'STR'.", config.toYaml("rootKey").contains("STR"))
+0.489 - assertTrue("YAML representation should end with 'STR'.", config.toYaml("rootKey").endsWith("STR"))
+0.487 - assertNotNull("YAML representation should not be null.", config.toYaml("rootKey"))
+0.484 - assertTrue("YAML representation should not be empty.", !config.toYaml("rootKey").isEmpty())
+0.483 - assertTrue("YAML representation should be formatted properly.", config.toYaml("rootKey").matches(".*STR.*"))
+0.475 - assertEquals("YAML representation should include the correct root key.", "rootKey: ", config.toYaml("rootKey").substring(0, 10))
+0.475 - assertTrue("YAML representation should start with 'STR'.", config.toYaml("rootKey").startsWith("STR"))
+0.463 - assertFalse("YAML representation should not contain 'INVALID'.", config.toYaml("rootKey").contains("INVALID"))
+0.438 - assertTrue("YAML representation should contain at least one newline.", config.toYaml("rootKey").contains("\n"))
+0.438 - assertTrue("YAML representation should be a valid string.", config.toYaml("rootKey") instanceof String)
+0.423 - assertTrue("YAML representation should be valid YAML format.", isValidYaml(config.toYaml("rootKey")))
+0.422 - assertTrue("YAML representation should not contain null characters.", !config.toYaml("rootKey").contains("\0"))
+0.406 - assertTrue("YAML representation should contain 'rootKey'.", config.toYaml("rootKey").contains("rootKey"))
+0.374 - assertTrue("YAML representation should not contain any extra spaces.", config.toYaml("rootKey").trim().equals(config.toYaml("rootKey")))
+0.000 - ```

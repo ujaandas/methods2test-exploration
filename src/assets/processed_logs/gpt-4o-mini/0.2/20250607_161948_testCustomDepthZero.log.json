@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilter {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilterTest {\n@Test\npublic void testCustomDepthZero ( ) throws MalformedURLException {\nURLFilter filter = createFilter ( \"STR\" , 3 ) ;\nURL url = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( MetadataTransfer . maxDepthKeyName , \"STR\" ) ;\nString filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(filterResult);\nassertEquals(\"Expected result for depth 0\", filterResult);\nassertTrue(filterResult.contains(\"expectedSubstring\"));\nassertFalse(filterResult.isEmpty());\nassertEquals(\"Expected URL format\", new URL(filterResult).toExternalForm(), filterResult);\nassertTrue(filterResult.startsWith(\"http\"));\nassertTrue(filterResult.endsWith(\".com\"));\nassertFalse(filterResult.contains(\"forbiddenSubstring\"));\nassertTrue(filterResult.matches(\".*[0-9].*\"));\nassertNotEquals(\"Unexpected result\", \"unexpectedValue\", filterResult);\nassertTrue(filterResult.length() > 10);\nassertFalse(filterResult.equals(\"invalidUrl\"));\nassertTrue(filterResult.contains(\"expectedPath\"));\nassertEquals(\"Expected protocol\", \"http\", new URL(filterResult).getProtocol());\nassertNotEquals(\"Different URL expected\", \"http://example.com\", filterResult);\nassertTrue(filterResult.contains(\"expectedQueryParam=value\"));\nassertFalse(filterResult.contains(\"error\"));\nassertTrue(filterResult.matches(\"https?://.*\"));\nassertEquals(\"Expected depth value\", 0, getDepth(filterResult));\nassertTrue(filterResult.startsWith(\"http://\"));\nassertFalse(filterResult.contains(\"disallowedPath\"));\n```\n====================\n\n",
+    "scores": [
+        0.699,
+        0.697,
+        0.667,
+        0.639,
+        0.627,
+        0.622,
+        0.622,
+        0.597,
+        0.583,
+        0.568,
+        0.558,
+        0.554,
+        0.553,
+        0.545,
+        0.539,
+        0.538,
+        0.529,
+        0.525,
+        0.514,
+        0.494,
+        0.457,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(null,filterResult);"
+}

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MkvBlock {\npublic static byte [ ] muxXiphLacing ( int [ ] laceSizes ) {\nByteArrayList bytes = ByteArrayList . createByteArrayList ( ) ;\nfor ( int i = 0 ;\ni < laceSizes . length - 1 ;\ni ++ ) {\nlong laceSize = laceSizes [ i ] ;\nwhile ( laceSize >= 255 ) {\nbytes . add ( ( byte ) 255 ) ;\nlaceSize -= 255 ;\n} bytes . add ( ( byte ) laceSize ) ;\n} return bytes . toArray ( ) ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MkvBlockTest {\n@Test\npublic void testXiph ( ) {\nint [ ] _in = new int [ ] {\n187 , 630 , 255 , 60 , 0xFFFFFF } ;\nbyte [ ] expecteds = new byte [ ] {\n( byte ) 187 , ( byte ) 255 , ( byte ) 255 , 120 , ( byte ) 255 , 0 , 60 } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertArrayEquals(expecteds, MkvBlock.muxXiphLacing(_in));\nAssert.assertEquals(7, MkvBlock.muxXiphLacing(_in).length);\nAssert.assertNotEquals(null, MkvBlock.muxXiphLacing(_in));\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[0] == (byte) 187);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[1] == (byte) 255);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[2] == (byte) 255);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[3] == 120);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[4] == (byte) 255);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[5] == 0);\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in)[6] == 60);\nAssert.assertArrayEquals(expecteds, MkvBlock.muxXiphLacing(_in));\nAssert.assertTrue(MkvBlock.muxXiphLacing(_in).length == 7);\nAssert.assertNotNull(MkvBlock.muxXiphLacing(_in));\nAssert.assertEquals((byte) 187, MkvBlock.muxXiphLacing(_in)[0]);\nAssert.assertEquals((byte) 255, MkvBlock.muxXiphLacing(_in)[1]);\nAssert.assertEquals((byte) 255, MkvBlock.muxXiphLacing(_in)[2]);\nAssert.assertEquals(120, MkvBlock.muxXiphLacing(_in)[3]);\nAssert.assertEquals((byte) 255, MkvBlock.muxXiphLacing(_in)[4]);\nAssert.assertEquals(0, MkvBlock.muxXiphLacing(_in)[5]);\nAssert.assertEquals(60, MkvBlock.muxXiphLacing(_in)[6]);\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.824,
+        0.816,
+        0.808,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.792,
+        0.755,
+        0.733,
+        0.725,
+        0.718,
+        0.705,
+        0.679,
+        0.679,
+        0.679,
+        0.679
+    ],
+    "ground_truth": "assertArrayEquals(expecteds,MkvBlock.muxXiphLacing(_in));"
+}

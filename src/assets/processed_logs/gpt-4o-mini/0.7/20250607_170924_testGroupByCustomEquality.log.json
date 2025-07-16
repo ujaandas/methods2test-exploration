@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > Map < AEqualsWrapper < X > , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f , AEquality keyEquality ) throws E {\nfinal Map < AEqualsWrapper < X > , List < T > > result = new HashMap < > ( ) ;\nfor ( T o : coll ) {\nfinal AEqualsWrapper < X > key = new AEqualsWrapper < > ( keyEquality , f . apply ( o ) ) ;\nList < T > perKey = result . get ( key ) ;\nif ( perKey == null ) {\nperKey = createEmptyListOfType ( coll , false ) ;\nresult . put ( key , perKey ) ;\n} perKey . add ( o ) ;\n} return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testGroupByCustomEquality ( ) {\nfinal AEquality equality = new AEquality ( ) {\n@Override\npublic boolean equals ( Object o1 , Object o2 ) {\nreturn ( ( Integer ) o1 ) % 2 == ( ( Integer ) o2 ) % 2 ;\n} @Override\npublic int hashCode ( Object o ) {\nreturn 0 ;\n} } ;\nfinal AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) {\n@Override\npublic Integer apply ( String param ) {\nreturn param . length ( ) ;\n} } ;\nfinal Map < AEqualsWrapper < Integer > , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) , len , equality ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, grouped.size());\nassertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 3)));\nassertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 0)));\n\nList<String> oddLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 3));\nList<String> evenLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 0));\n\nassertNotNull(oddLengthStrings);\nassertNotNull(evenLengthStrings);\n\nassertEquals(6, oddLengthStrings.size());\nassertEquals(0, evenLengthStrings.size());\n\nfor (String str : oddLengthStrings) {\nassertEquals(3, str.length());\n}\n\nfor (String str : evenLengthStrings) {\nassertEquals(0, str.length());\n}\n\nassertEquals(Arrays.asList(\"STR\", \"STR\", \"STR\", \"STR\", \"STR\", \"STR\"), oddLengthStrings);\nassertTrue(evenLengthStrings.isEmpty());\n\nassertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 3))));\nassertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 0))));\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 1)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 2)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 4)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size());\n```\n====================\n\n",
+    "scores": [
+        0.853,
+        0.696,
+        0.686,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.426,
+        0.426,
+        0.396,
+        0.379,
+        0.328,
+        0.323,
+        0.319,
+        0.317,
+        0.317,
+        0.316,
+        0.272,
+        0.269,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,grouped.size());"
+}

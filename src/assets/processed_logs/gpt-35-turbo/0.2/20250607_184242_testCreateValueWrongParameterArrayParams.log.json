@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyListIndexDefinition {\n@Override\npublic Object createValue ( final Object ... params ) {\nObject param = params [ 0 ] ;\nif ( ! ( param instanceof Collection ) ) {\ntry {\nreturn OType . convert ( param , keyType . getDefaultJavaType ( ) ) ;\n} catch ( Exception e ) {\nreturn null ;\n} } final Collection < ? > multiValueCollection = ( Collection < ? > ) param ;\nfinal List < Object > values = new ArrayList < > ( multiValueCollection . size ( ) ) ;\nfor ( final Object item : multiValueCollection ) {\nvalues . add ( createSingleValue ( item ) ) ;\n} return values ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyListIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameterArrayParams ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNull(new OPropertyListIndexDefinition().createValue());\nassertNull(new OPropertyListIndexDefinition().createValue(null));\nassertNull(new OPropertyListIndexDefinition().createValue(\"\"));\nassertNull(new OPropertyListIndexDefinition().createValue(123));\nassertNull(new OPropertyListIndexDefinition().createValue(true));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object()));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{null}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{\"\"}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{123}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{true}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new Object()}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>()}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(null))}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(\"\"))}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(123))}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(true))}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(new Object()))}));\nassertNull(new OPropertyListIndexDefinition().createValue(new Object[]{new ArrayList<>(Arrays.asList(new Object[]{null}))}));\n====================\n\n",
+    "scores": [
+        0.762,
+        0.738,
+        0.717,
+        0.71,
+        0.71,
+        0.678,
+        0.667,
+        0.655,
+        0.639,
+        0.633,
+        0.633,
+        0.598,
+        0.576,
+        0.537,
+        0.507,
+        0.503,
+        0.503,
+        0.481,
+        0.463
+    ],
+    "ground_truth": "Assert.assertNull(propertyIndex.createValue(\"STR\"));"
+}

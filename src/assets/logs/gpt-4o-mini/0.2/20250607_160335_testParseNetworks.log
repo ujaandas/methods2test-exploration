@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected static String [ ] parseNetworks ( String dockerResult ) { 
+    if ( ! dockerResult . matches ( "STR" ) ) { 
+    return null ; 
+    } String networkMap = dockerResult . substring ( dockerResult . indexOf ( "STR" ) + 1 , dockerResult . indexOf ( "STR" ) ) ; 
+    String [ ] networkHex = networkMap . split ( "STR" ) ; 
+    String [ ] networks = new String [ networkHex . length ] ; 
+    for ( int i = 0 ; 
+    i < networkHex . length ; 
+    i ++ ) { 
+    networks [ i ] = networkHex [ i ] . split ( "STR" ) [ 0 ] ; 
+    } return networks ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testParseNetworks ( ) {
+         String [ ] networkArray = new String [ ] { 
+     "STR" } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(networkArray);
+assertEquals(1, networkArray.length);
+assertEquals("ExpectedNetwork1", networkArray[0]);
+assertTrue(networkArray[0].startsWith("ExpectedPrefix"));
+assertFalse(networkArray[0].isEmpty());
+assertEquals("ExpectedNetwork2", networkArray[1]);
+assertTrue(networkArray[1].contains("ExpectedSubstring"));
+assertFalse(networkArray[1].equals("UnexpectedValue"));
+assertNotEquals("AnotherUnexpectedValue", networkArray[0]);
+assertArrayEquals(new String[] {"ExpectedNetwork1", "ExpectedNetwork2"}, networkArray);
+assertTrue(Arrays.asList(networkArray).contains("ExpectedNetwork1"));
+assertTrue(Arrays.asList(networkArray).contains("ExpectedNetwork2"));
+assertEquals("ExpectedNetwork1", networkArray[0]);
+assertNotSame("DifferentObject", networkArray[0]);
+assertSame("ExpectedNetwork1", networkArray[0]);
+assertArrayEquals(new String[] {"ExpectedNetwork1"}, Arrays.copyOfRange(networkArray, 0, 1));
+assertTrue(networkArray.length > 0);
+assertFalse(Arrays.asList(networkArray).isEmpty());
+assertTrue(networkArray.length <= 2);
+assertNotNull(networkArray[0]);
+assertTrue(networkArray[0].length() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(networkArray,DevUtil.parseNetworks("STR")); ===
+0.609 - assertTrue(Arrays.asList(networkArray).contains("ExpectedNetwork1"))
+0.609 - assertTrue(Arrays.asList(networkArray).contains("ExpectedNetwork2"))
+0.589 - assertEquals(1, networkArray.length)
+0.545 - assertFalse(Arrays.asList(networkArray).isEmpty())
+0.534 - assertTrue(networkArray[0].startsWith("ExpectedPrefix"))
+0.531 - assertFalse(networkArray[0].isEmpty())
+0.531 - assertTrue(networkArray[0].length() > 0)
+0.526 - assertFalse(networkArray[1].equals("UnexpectedValue"))
+0.516 - assertTrue(networkArray.length > 0)
+0.513 - assertTrue(networkArray[1].contains("ExpectedSubstring"))
+0.511 - assertTrue(networkArray.length <= 2)
+0.489 - assertNotNull(networkArray[0])
+0.481 - assertEquals("ExpectedNetwork1", networkArray[0])
+0.481 - assertEquals("ExpectedNetwork2", networkArray[1])
+0.481 - assertEquals("ExpectedNetwork1", networkArray[0])
+0.463 - ```java
+assertNotNull(networkArray)
+0.449 - assertArrayEquals(new String[] {"ExpectedNetwork1"}, Arrays.copyOfRange(networkArray, 0, 1))
+0.444 - assertNotEquals("AnotherUnexpectedValue", networkArray[0])
+0.437 - assertArrayEquals(new String[] {"ExpectedNetwork1", "ExpectedNetwork2"}, networkArray)
+0.377 - assertSame("ExpectedNetwork1", networkArray[0])
+0.370 - assertNotSame("DifferentObject", networkArray[0])
+0.000 - ```

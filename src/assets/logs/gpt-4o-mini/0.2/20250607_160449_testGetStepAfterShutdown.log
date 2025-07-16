@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePoller {
+    @Override
+     public Step getNextStep ( ) { 
+     if ( done || shutdownInd ) { 
+     return null ; 
+     } Step result = new Step ( ) { 
+     @Override
+     public void execute ( ) { 
+     try { 
+     pollOneObject ( target ) ; 
+     } catch ( Exception exc ) { 
+     failureException = exc ; 
+     } finally { 
+     done = true ; 
+     } } @Override
+     public boolean isBlocking ( ) { 
+     return true ; 
+     } } ; 
+     return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePollerTest {
+    @Test
+     public void testGetStepAfterShutdown ( ) throws Exception {
+         this . poller . shutdown ( ) ; 
+         JmxAttributePoller . PollOneObjectSchedulerProcess process = this . poller . new PollOneObjectSchedulerProcess ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(process);
+assertTrue(process instanceof JmxAttributePoller.PollOneObjectSchedulerProcess);
+assertEquals("STR", process.getTarget());
+assertTrue(poller.isShutdown());
+assertNull(poller.getNextStep());
+assertTrue(poller.isDone());
+assertFalse(poller.isRunning());
+assertEquals(0, poller.getPendingTasks());
+assertTrue(poller.getFailureException() instanceof Exception);
+assertFalse(poller.isBlocking());
+assertTrue(poller.getCurrentStep() == null);
+assertFalse(poller.hasMoreSteps());
+assertEquals("Expected message", poller.getShutdownMessage());
+assertTrue(poller.getExecutionCount() == 0);
+assertFalse(poller.isActive());
+assertNotEquals("Unexpected value", poller.getSomeOtherState());
+assertTrue(poller.getLastExecutionTime() < System.currentTimeMillis());
+assertFalse(poller.hasFailures());
+assertTrue(poller.getProcessedCount() == 0);
+assertTrue(poller.getTarget() == null);
+assertFalse(poller.isShutdown() && poller.isRunning());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(process.getNextStep()); ===
+0.862 - assertNull(poller.getNextStep())
+0.694 - assertEquals("STR", process.getTarget())
+0.622 - assertTrue(poller.getCurrentStep() == null)
+0.603 - ```java
+assertNotNull(process)
+0.551 - assertTrue(poller.getTarget() == null)
+0.541 - assertTrue(poller.getExecutionCount() == 0)
+0.541 - assertTrue(poller.getProcessedCount() == 0)
+0.537 - assertFalse(poller.hasMoreSteps())
+0.500 - assertTrue(poller.isDone())
+0.500 - assertEquals("Expected message", poller.getShutdownMessage())
+0.493 - assertEquals(0, poller.getPendingTasks())
+0.489 - assertNotEquals("Unexpected value", poller.getSomeOtherState())
+0.462 - assertFalse(poller.isBlocking())
+0.457 - assertTrue(poller.getFailureException() instanceof Exception)
+0.444 - assertFalse(poller.isActive())
+0.438 - assertTrue(poller.isShutdown())
+0.438 - assertFalse(poller.isRunning())
+0.436 - assertTrue(poller.getLastExecutionTime() < System.currentTimeMillis())
+0.424 - assertFalse(poller.hasFailures())
+0.400 - assertTrue(process instanceof JmxAttributePoller.PollOneObjectSchedulerProcess)
+0.376 - assertFalse(poller.isShutdown() && poller.isRunning())
+0.000 - ```

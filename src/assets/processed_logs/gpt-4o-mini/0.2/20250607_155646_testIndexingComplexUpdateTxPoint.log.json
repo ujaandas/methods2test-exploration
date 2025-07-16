@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPoint {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPointTest {\n@Test\npublic void testIndexingComplexUpdateTxPoint ( ) {\nODocument rome = newCity ( \"STR\" , 12.5 , 41.9 ) ;\nODocument london = newCity ( \"STR\" , - 0.1275 , 51.507222 ) ;\nrome = db . save ( rome ) ;\nlondon = db . save ( london ) ;\ndb . begin ( ) ;\nrome . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\ndb . save ( rome ) ;\ndb . save ( london ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(index);\nAssert.assertEquals(2, index.getSize());\nAssert.assertTrue(index.contains(rome.getIdentity()));\nAssert.assertTrue(index.contains(london.getIdentity()));\nAssert.assertEquals(newPoint(12.5, 41.9), rome.field(\"STR\"));\nAssert.assertEquals(newPoint(-0.1275, 51.507222), london.field(\"STR\"));\nAssert.assertEquals(1, index.get(\"STR\", newPoint(12.5, 41.9)).size());\nAssert.assertEquals(1, index.get(\"STR\", newPoint(-0.1275, 51.507222)).size());\nAssert.assertEquals(2, index.get(\"STR\", newPoint(12.5, 41.9)).get(0).size());\nAssert.assertEquals(2, index.get(\"STR\", newPoint(-0.1275, 51.507222)).get(0).size());\nAssert.assertTrue(index.get(\"STR\", newPoint(12.5, 41.9)).contains(rome.getIdentity()));\nAssert.assertTrue(index.get(\"STR\", newPoint(-0.1275, 51.507222)).contains(london.getIdentity()));\nAssert.assertFalse(index.get(\"STR\", newPoint(0, 0)).contains(rome.getIdentity()));\nAssert.assertFalse(index.get(\"STR\", newPoint(0, 0)).contains(london.getIdentity()));\nAssert.assertEquals(2, index.getSize());\nAssert.assertNotEquals(0, index.getSize());\nAssert.assertTrue(index.get(\"STR\", newPoint(12.5, 41.9)).isEmpty());\nAssert.assertTrue(index.get(\"STR\", newPoint(-0.1275, 51.507222)).isEmpty());\nAssert.assertFalse(index.get(\"STR\", newPoint(12.5, 41.9)).isEmpty());\nAssert.assertFalse(index.get(\"STR\", newPoint(-0.1275, 51.507222)).isEmpty());\nAssert.assertEquals(2, index.getSize());\n```\n====================\n\n",
+    "scores": [
+        0.968,
+        0.968,
+        0.968,
+        0.923,
+        0.667,
+        0.619,
+        0.612,
+        0.571,
+        0.545,
+        0.533,
+        0.532,
+        0.508,
+        0.494,
+        0.49,
+        0.485,
+        0.476,
+        0.463,
+        0.454,
+        0.435,
+        0.426,
+        0.39,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(3,index.getSize());"
+}

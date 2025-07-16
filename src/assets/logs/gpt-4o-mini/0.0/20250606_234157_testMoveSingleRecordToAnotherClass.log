@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLMoveVertexCommand {
+    @Override
+     public int getDefaultClusterId ( ) { 
+     return delegate . getDefaultClusterId ( ) ; 
+     }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLMoveVertexCommandTest {
+    @Test
+     public void testMoveSingleRecordToAnotherClass ( ) {
+         ODocument doc = new ODocument ( "STR" ) . field ( "STR" , "STR" ) . field ( "STR" , "STR" ) . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(doc);
+Assert.assertEquals("STR", doc.getClassName());
+Assert.assertEquals("STR", doc.field("STR"));
+Assert.assertEquals("STR", doc.field("STR"));
+Assert.assertTrue(doc.getIdentity().isValid());
+Assert.assertTrue(doc.getVersion() >= 0);
+Assert.assertTrue(doc.getSchemaClass() != null);
+Assert.assertEquals(1, doc.getFieldNames().size());
+Assert.assertTrue(doc.containsField("STR"));
+Assert.assertFalse(doc.containsField("NON_EXISTENT_FIELD"));
+Assert.assertEquals("STR", doc.field("STR"));
+Assert.assertNotEquals("DIFFERENT_VALUE", doc.field("STR"));
+Assert.assertTrue(doc.getDatabase().isOpen());
+Assert.assertEquals("STR", doc.getProperty("STR"));
+Assert.assertTrue(doc.getIdentity().toString().startsWith("#"));
+Assert.assertNotNull(doc.getDatabase().getClusterById(doc.getDefaultClusterId()));
+Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getName().equals("STR"));
+Assert.assertEquals(1, doc.getDatabase().countClusterElements(doc.getDefaultClusterId()));
+Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc));
+Assert.assertEquals(doc.getVersion(), doc.getDatabase().load(doc.getIdentity()).getVersion());
+Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().size() > 0);
+Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(doc.getIdentity().getClusterId(),customer.getDefaultClusterId()); ===
+0.755 - Assert.assertNotNull(doc.getDatabase().getClusterById(doc.getDefaultClusterId()))
+0.722 - Assert.assertEquals(1, doc.getDatabase().countClusterElements(doc.getDefaultClusterId()))
+0.659 - Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().size() > 0)
+0.651 - Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getName().equals("STR"))
+0.640 - Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc))
+0.640 - Assert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc))
+0.534 - Assert.assertTrue(doc.getIdentity().isValid())
+0.506 - Assert.assertEquals(doc.getVersion(), doc.getDatabase().load(doc.getIdentity()).getVersion())
+0.504 - Assert.assertEquals("STR", doc.getClassName())
+0.496 - Assert.assertTrue(doc.getIdentity().toString().startsWith("#"))
+0.487 - Assert.assertEquals(1, doc.getFieldNames().size())
+0.437 - Assert.assertEquals("STR", doc.getProperty("STR"))
+0.407 - Assert.assertEquals("STR", doc.field("STR"))
+0.407 - Assert.assertEquals("STR", doc.field("STR"))
+0.407 - Assert.assertEquals("STR", doc.field("STR"))
+0.400 - Assert.assertTrue(doc.getDatabase().isOpen())
+0.383 - Assert.assertTrue(doc.getSchemaClass() != null)
+0.372 - Assert.assertFalse(doc.containsField("NON_EXISTENT_FIELD"))
+0.372 - Assert.assertTrue(doc.containsField("STR"))
+0.370 - Assert.assertTrue(doc.getVersion() >= 0)
+0.359 - Assert.assertNotEquals("DIFFERENT_VALUE", doc.field("STR"))
+0.252 - ```java
+Assert.assertNotNull(doc)
+0.000 - ```

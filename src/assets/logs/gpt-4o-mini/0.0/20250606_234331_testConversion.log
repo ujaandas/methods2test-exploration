@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class GoTimeUtil {
+    public static Integer durationSeconds ( String duration ) { 
+    BigDecimal ns = durationNs ( duration ) ; 
+    if ( ns == null ) { 
+    return null ; 
+    } BigDecimal sec = ns . divide ( new BigDecimal ( 1_000_000_000 ) ) ; 
+    if ( sec . compareTo ( new BigDecimal ( Integer . MAX_VALUE ) ) > 0 ) { 
+    throw new IllegalArgumentException ( "STR" ) ; 
+    } return sec . intValue ( ) ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class GoTimeUtilTest {
+    @Test
+     public void testConversion ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds("1s"));
+assertEquals(Integer.valueOf(2), GoTimeUtil.durationSeconds("2s"));
+assertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds("0s"));
+assertEquals(Integer.valueOf(60), GoTimeUtil.durationSeconds("60s"));
+assertEquals(Integer.valueOf(120), GoTimeUtil.durationSeconds("120s"));
+assertEquals(Integer.valueOf(3600), GoTimeUtil.durationSeconds("3600s"));
+assertEquals(Integer.valueOf(86400), GoTimeUtil.durationSeconds("86400s"));
+assertEquals(Integer.valueOf(30), GoTimeUtil.durationSeconds("30s"));
+assertEquals(Integer.valueOf(10), GoTimeUtil.durationSeconds("10s"));
+assertEquals(Integer.valueOf(5), GoTimeUtil.durationSeconds("5s"));
+assertEquals(Integer.valueOf(15), GoTimeUtil.durationSeconds("15s"));
+assertEquals(Integer.valueOf(300), GoTimeUtil.durationSeconds("300s"));
+assertEquals(Integer.valueOf(1800), GoTimeUtil.durationSeconds("1800s"));
+assertEquals(Integer.valueOf(7200), GoTimeUtil.durationSeconds("7200s"));
+assertEquals(Integer.valueOf(43200), GoTimeUtil.durationSeconds("43200s"));
+assertEquals(null, GoTimeUtil.durationSeconds("invalid"));
+assertThrows(IllegalArgumentException.class, () -> GoTimeUtil.durationSeconds("10000000000ns"));
+assertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds("1000000000ns"));
+assertEquals(Integer.valueOf(2), GoTimeUtil.durationSeconds("2000000000ns"));
+assertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds("0ns"));
+assertEquals(null, GoTimeUtil.durationSeconds(null));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newInteger(23),durationSeconds("STR")); ===
+0.759 - assertEquals(Integer.valueOf(2), GoTimeUtil.durationSeconds("2s"))
+0.746 - assertEquals(Integer.valueOf(30), GoTimeUtil.durationSeconds("30s"))
+0.741 - assertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds("0s"))
+0.741 - assertEquals(Integer.valueOf(5), GoTimeUtil.durationSeconds("5s"))
+0.735 - assertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds("0ns"))
+0.733 - assertEquals(Integer.valueOf(120), GoTimeUtil.durationSeconds("120s"))
+0.733 - assertEquals(Integer.valueOf(300), GoTimeUtil.durationSeconds("300s"))
+0.729 - assertEquals(Integer.valueOf(60), GoTimeUtil.durationSeconds("60s"))
+0.729 - assertEquals(Integer.valueOf(10), GoTimeUtil.durationSeconds("10s"))
+0.729 - assertEquals(Integer.valueOf(15), GoTimeUtil.durationSeconds("15s"))
+0.721 - assertEquals(Integer.valueOf(3600), GoTimeUtil.durationSeconds("3600s"))
+0.721 - assertEquals(Integer.valueOf(7200), GoTimeUtil.durationSeconds("7200s"))
+0.710 - assertEquals(Integer.valueOf(43200), GoTimeUtil.durationSeconds("43200s"))
+0.705 - assertEquals(Integer.valueOf(1800), GoTimeUtil.durationSeconds("1800s"))
+0.698 - assertEquals(Integer.valueOf(2), GoTimeUtil.durationSeconds("2000000000ns"))
+0.694 - ```java
+assertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds("1s"))
+0.694 - assertEquals(Integer.valueOf(86400), GoTimeUtil.durationSeconds("86400s"))
+0.683 - assertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds("1000000000ns"))
+0.673 - assertEquals(null, GoTimeUtil.durationSeconds("invalid"))
+0.667 - assertEquals(null, GoTimeUtil.durationSeconds(null))
+0.462 - assertThrows(IllegalArgumentException.class, () -> GoTimeUtil.durationSeconds("10000000000ns"))
+0.000 - ```

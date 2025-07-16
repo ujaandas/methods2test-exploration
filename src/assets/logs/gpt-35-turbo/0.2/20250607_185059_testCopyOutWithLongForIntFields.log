@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjector {
+    public void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) { 
+    this . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , "STR" , objectName ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjectorTest {
+    @Test
+     public void testCopyOutWithLongForIntFields ( ) throws Exception {
+         this . attributeList . clear ( ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 17L ) ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 22L ) ) ; 
+         this . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(17L, target.getStr());
+assertEquals(22L, target.getStr());
+verify(attributeSetters.get("STR")).invoke(target, 17L);
+verify(attributeSetters.get("STR")).invoke(target, 22L);
+assertEquals(2, attributeList.size());
+verify(objectName).getCanonicalName();
+verifyNoMoreInteractions(target, attributeSetters, objectName);
+assertNotNull(target.getStr());
+assertNotNull(attributeSetters.get("STR"));
+assertNotNull(objectName);
+assertTrue(attributeList.contains(new Attribute("STR", 17L)));
+assertTrue(attributeList.contains(new Attribute("STR", 22L)));
+assertFalse(attributeList.isEmpty());
+assertNotEquals(0, attributeList.size());
+assertSame(target, attributeSetters.get("STR"));
+assertSame(target, objectName);
+assertNotSame(attributeList, attributeSetters);
+assertNotSame(attributeList, objectName);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(17,this.target.intValue); ===
+0.714 - assertEquals(17L, target.getStr())
+0.657 - assertEquals(22L, target.getStr())
+0.603 - assertEquals(2, attributeList.size())
+0.579 - assertNotEquals(0, attributeList.size())
+0.545 - assertSame(target, objectName)
+0.537 - assertNotNull(target.getStr())
+0.493 - assertFalse(attributeList.isEmpty())
+0.439 - assertNotSame(attributeList, attributeSetters)
+0.410 - assertSame(target, attributeSetters.get("STR"))
+0.405 - assertNotNull(attributeSetters.get("STR"))
+0.368 - assertNotSame(attributeList, objectName)
+0.351 - verify(objectName).getCanonicalName()
+0.351 - verifyNoMoreInteractions(target, attributeSetters, objectName)
+0.323 - assertNotNull(objectName)
+0.308 - verify(attributeSetters.get("STR")).invoke(target, 17L)
+0.308 - verify(attributeSetters.get("STR")).invoke(target, 22L)
+0.271 - assertTrue(attributeList.contains(new Attribute("STR", 17L)))
+0.250 - assertTrue(attributeList.contains(new Attribute("STR", 22L)))

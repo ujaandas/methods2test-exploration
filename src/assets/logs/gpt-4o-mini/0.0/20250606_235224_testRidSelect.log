@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(listener);
+assertTrue(listener.isTriggered());
+assertEquals("STR", item.getProperty("STR"));
+assertEquals(item.getIdentity(), listener.getLastIdentity());
+assertEquals("STR", listener.getLastPropertyValue());
+assertTrue(item.exists());
+assertEquals(1, listener.getUpdateCount());
+assertTrue(listener.getLatch().getCount() == 0);
+assertNotNull(database.getVertex(item.getIdentity()));
+assertEquals(item, database.getVertex(item.getIdentity()));
+assertTrue(item.getProperty("STR").equals("STR"));
+assertTrue(listener.getLastEventType() == OLiveQueryEventType.UPDATE);
+assertTrue(listener.getLastEventSource() instanceof OVertex);
+assertTrue(listener.getLastEventSource().getIdentity().equals(item.getIdentity()));
+assertNotNull(listener.getLastEventTime());
+assertTrue(listener.getLastEventTime() > 0);
+assertTrue(listener.getLastEventSource().getProperty("STR").equals("STR"));
+assertTrue(listener.getLatch().await(1, TimeUnit.SECONDS));
+assertTrue(listener.getUpdateCount() > 0);
+assertFalse(listener.getLatch().await(0, TimeUnit.SECONDS));
+assertTrue(listener.getLastEventSource().isDirty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.927 - assertTrue(listener.getLatch().await(1, TimeUnit.SECONDS))
+0.865 - assertFalse(listener.getLatch().await(0, TimeUnit.SECONDS))
+0.617 - assertTrue(listener.getLastEventTime() > 0)
+0.592 - assertTrue(listener.getLatch().getCount() == 0)
+0.565 - assertTrue(listener.getUpdateCount() > 0)
+0.558 - assertTrue(listener.getLastEventSource().isDirty())
+0.552 - assertTrue(listener.isTriggered())
+0.547 - assertNotNull(listener.getLastEventTime())
+0.489 - assertEquals(1, listener.getUpdateCount())
+0.489 - assertTrue(listener.getLastEventSource().getIdentity().equals(item.getIdentity()))
+0.486 - assertTrue(listener.getLastEventSource() instanceof OVertex)
+0.446 - assertEquals(item.getIdentity(), listener.getLastIdentity())
+0.436 - assertTrue(item.exists())
+0.433 - assertTrue(listener.getLastEventType() == OLiveQueryEventType.UPDATE)
+0.431 - assertTrue(item.getProperty("STR").equals("STR"))
+0.418 - assertEquals(item, database.getVertex(item.getIdentity()))
+0.405 - ```java
+assertNotNull(listener)
+0.394 - assertTrue(listener.getLastEventSource().getProperty("STR").equals("STR"))
+0.385 - assertEquals("STR", listener.getLastPropertyValue())
+0.354 - assertEquals("STR", item.getProperty("STR"))
+0.340 - assertNotNull(database.getVertex(item.getIdentity()))
+0.000 - ```

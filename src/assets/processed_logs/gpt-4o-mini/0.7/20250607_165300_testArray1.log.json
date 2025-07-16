@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void endArray ( ) throws IOException {\ncheckInArray ( ) ;\nstate . pop ( ) ;\nout . write ( \"STR\" ) ;\nafterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testArray1 ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . startArray ( ) ;\nser . writeBooleanLiteral ( true ) ;\nser . endArray ( ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(result);\nAssert.assertFalse(result.isEmpty());\nAssert.assertTrue(result.contains(\"STR\"));\nAssert.assertTrue(result.startsWith(\"[\"));\nAssert.assertTrue(result.endsWith(\"]\"));\nAssert.assertEquals(3, result.length()); // Considering the output is [\"STR\"]\nAssert.assertEquals(\"[STR]\", result);\nAssert.assertFalse(result.contains(\"false\"));\nAssert.assertFalse(result.contains(\"null\"));\nAssert.assertTrue(result.indexOf('[') < result.indexOf('S'));\nAssert.assertTrue(result.indexOf('S') < result.indexOf(']'));\nAssert.assertEquals(1, result.chars().filter(ch -> ch == '[').count());\nAssert.assertEquals(1, result.chars().filter(ch -> ch == ']').count());\nAssert.assertEquals(1, result.chars().filter(ch -> ch == 'S').count());\nAssert.assertEquals(1, result.chars().filter(ch -> ch == 'T').count());\nAssert.assertEquals(1, result.chars().filter(ch -> ch == 'R').count());\nAssert.assertTrue(result.indexOf('T') > result.indexOf('S'));\nAssert.assertTrue(result.indexOf('R') > result.indexOf('T'));\nAssert.assertTrue(result.indexOf('S') < result.indexOf('T') && result.indexOf('T') < result.indexOf('R'));\nAssert.assertTrue(result.contains(\"[\"));\nAssert.assertTrue(result.contains(\"]\"));\n```\n====================\n\n",
+    "scores": [
+        0.737,
+        0.618,
+        0.605,
+        0.582,
+        0.548,
+        0.54,
+        0.533,
+        0.517,
+        0.517,
+        0.517,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.39,
+        0.39,
+        0.39,
+        0.39,
+        0.254,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

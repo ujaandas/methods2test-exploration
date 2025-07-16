@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManager {
+    @Override
+     public Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     url . setConnectTimeout ( connectTimeout ) ; 
+     return this . connectionManager . getAndCreateIfAbsent ( url ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManagerTest {
+    @Test
+     public void testCancelReConnection ( ) throws InterruptedException , RemotingException {
+         doInit ( false , true ) ; 
+         client . enableReconnectSwitch ( ) ; 
+         String addr = "STR" ; 
+         Url url = addressParser . parse ( addr ) ; 
+         client . getConnection ( url , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(client.getConnection(url, 1000));
+Assert.assertEquals(1000, url.getConnectTimeout());
+Assert.assertTrue(client.isReconnectSwitchEnabled());
+Assert.assertTrue(client.connectionManager.hasConnection(url));
+Assert.assertFalse(client.connectionManager.isConnectionClosed(url));
+Assert.assertEquals("ExpectedConnection", client.connectionManager.getConnection(url).getName());
+Assert.assertTrue(client.connectionManager.getConnection(url).isActive());
+Assert.assertFalse(client.connectionManager.getConnection(url).isError());
+Assert.assertNotEquals("UnexpectedConnection", client.connectionManager.getConnection(url).getName());
+Assert.assertTrue(client.connectionManager.getConnection(url).isEstablished());
+Assert.assertEquals("STR", url.getAddress());
+Assert.assertNotNull(client.connectionManager.getAndCreateIfAbsent(url));
+Assert.assertTrue(client.connectionManager.getAndCreateIfAbsent(url).isValid());
+Assert.assertEquals(1, client.connectionManager.getConnectionCount());
+Assert.assertTrue(client.connectionManager.isConnectionAvailable(url));
+Assert.assertFalse(client.connectionManager.isConnectionPending(url));
+Assert.assertTrue(client.connectionManager.getConnection(url).isReconnectable());
+Assert.assertNotNull(client.connectionManager.getConnection(url).getLastUsedTime());
+Assert.assertTrue(client.connectionManager.getConnection(url).isSecure());
+Assert.assertEquals("ExpectedProtocol", client.connectionManager.getConnection(url).getProtocol());
+Assert.assertTrue(client.connectionManager.getConnection(url).isConfigured());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes()); ===
+0.654 - Assert.assertEquals(1000, url.getConnectTimeout())
+0.585 - Assert.assertEquals(1, client.connectionManager.getConnectionCount())
+0.536 - Assert.assertNotNull(client.connectionManager.getConnection(url).getLastUsedTime())
+0.535 - Assert.assertNotNull(client.connectionManager.getAndCreateIfAbsent(url))
+0.533 - Assert.assertTrue(client.connectionManager.getConnection(url).isReconnectable())
+0.532 - Assert.assertFalse(client.connectionManager.isConnectionPending(url))
+0.520 - Assert.assertFalse(client.connectionManager.isConnectionClosed(url))
+0.516 - Assert.assertTrue(client.connectionManager.getConnection(url).isActive())
+0.507 - Assert.assertEquals("ExpectedConnection", client.connectionManager.getConnection(url).getName())
+0.505 - Assert.assertTrue(client.isReconnectSwitchEnabled())
+0.500 - Assert.assertTrue(client.connectionManager.getConnection(url).isSecure())
+0.500 - Assert.assertEquals("ExpectedProtocol", client.connectionManager.getConnection(url).getProtocol())
+0.500 - Assert.assertTrue(client.connectionManager.getConnection(url).isConfigured())
+0.496 - Assert.assertTrue(client.connectionManager.hasConnection(url))
+0.493 - Assert.assertTrue(client.connectionManager.getAndCreateIfAbsent(url).isValid())
+0.490 - Assert.assertNotEquals("UnexpectedConnection", client.connectionManager.getConnection(url).getName())
+0.490 - Assert.assertEquals("STR", url.getAddress())
+0.487 - ```java
+Assert.assertNotNull(client.getConnection(url, 1000))
+0.480 - Assert.assertTrue(client.connectionManager.isConnectionAvailable(url))
+0.469 - Assert.assertFalse(client.connectionManager.getConnection(url).isError())
+0.451 - Assert.assertTrue(client.connectionManager.getConnection(url).isEstablished())
+0.000 - ```

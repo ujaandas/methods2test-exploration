@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilder {\n@Override\npublic String toString ( ) ;\n}\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilderTest {\n@Test\npublic void testPaging ( ) {\nsql . select ( ) . from ( \"STR\" ) . limit ( 10 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"SELECT * FROM STR LIMIT 10\", sql.toString());\nassertTrue(sql.toString().contains(\"SELECT\"));\nassertTrue(sql.toString().contains(\"FROM\"));\nassertTrue(sql.toString().contains(\"STR\"));\nassertTrue(sql.toString().contains(\"LIMIT 10\"));\nassertFalse(sql.toString().contains(\"OFFSET\"));\nassertEquals(1, sql.getSelectCount());\nassertEquals(\"STR\", sql.getFromTable());\nassertEquals(10, sql.getLimit());\nassertTrue(sql.getOrderByFields().isEmpty());\nassertFalse(sql.hasWhereClause());\nassertTrue(sql.toString().startsWith(\"SELECT\"));\nassertTrue(sql.toString().endsWith(\"LIMIT 10\"));\nassertEquals(0, sql.getOffset());\nassertTrue(sql.getJoins().isEmpty());\nassertNotNull(sql.getSelectFields());\nassertEquals(1, sql.getFromTables().size());\nassertEquals(\"STR\", sql.getFromTables().get(0));\nassertTrue(sql.toString().matches(\"SELECT \\\\* FROM [\\\\w]+ LIMIT \\\\d+\"));\nassertEquals(0, sql.getGroupByFields().size());\nassertTrue(sql.toString().contains(\"SELECT *\"));\n```\n====================\n\n",
+    "scores": [
+        0.778,
+        0.723,
+        0.708,
+        0.708,
+        0.7,
+        0.686,
+        0.632,
+        0.625,
+        0.608,
+        0.605,
+        0.597,
+        0.582,
+        0.575,
+        0.575,
+        0.575,
+        0.571,
+        0.568,
+        0.543,
+        0.537,
+        0.46,
+        0.436,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",sql.toString());"
+}

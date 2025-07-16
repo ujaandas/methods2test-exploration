@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawner {\npublic void awaitCompletion ( ) {\nfor ( Thread thread : threads ) {\ntry {\nthread . join ( ) ;\n} catch ( InterruptedException e ) {\nthrow rethrow ( e ) ;\n} } if ( caughtException != null ) {\nthrow rethrow ( caughtException ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawnerTest {\n@Test\npublic void testThreadSpawnerException_reportException ( ) {\nFile exceptionFile = new File ( getUserDir ( ) , \"STR\" ) ;\nThreadSpawner spawner = new ThreadSpawner ( \"STR\" ) ;\nspawner . spawn ( new Runnable ( ) {\n@Override\npublic void run ( ) {\nthrow new CommandLineExitException ( \"STR\" ) ;\n} } ) ;\nspawner . awaitCompletion ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(spawner);\nassertEquals(1, spawner.getThreadCount());\nassertTrue(spawner.hasCaughtException());\nassertTrue(spawner.getCaughtException() instanceof CommandLineExitException);\nassertEquals(\"STR\", spawner.getCaughtException().getMessage());\nassertTrue(spawner.isCompleted());\nassertFalse(spawner.isRunning());\nassertTrue(spawner.getThreads().isEmpty());\nassertEquals(\"STR\", spawner.getExceptionFile().getName());\nassertTrue(spawner.getExceptionFile().exists());\nassertTrue(spawner.getExceptionFile().canRead());\nassertFalse(spawner.getExceptionFile().canWrite());\nassertFalse(spawner.getExceptionFile().isDirectory());\nassertTrue(spawner.getExceptionFile().length() > 0);\nassertNotNull(spawner.getThreadNames());\nassertEquals(1, spawner.getThreadNames().size());\nassertTrue(spawner.getThreadNames().contains(\"STR\"));\nassertNotNull(spawner.getCompletionTime());\nassertTrue(spawner.getCompletionTime().isAfter(spawner.getStartTime()));\nassertTrue(spawner.getExecutionDuration() > 0);\nassertFalse(spawner.isInterrupted());\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.707,
+        0.651,
+        0.644,
+        0.622,
+        0.619,
+        0.6,
+        0.567,
+        0.564,
+        0.533,
+        0.505,
+        0.5,
+        0.5,
+        0.474,
+        0.465,
+        0.455,
+        0.4,
+        0.384,
+        0.351,
+        0.346,
+        0.25,
+        0.0
+    ],
+    "ground_truth": "assertTrue(exceptionFile.exists());"
+}

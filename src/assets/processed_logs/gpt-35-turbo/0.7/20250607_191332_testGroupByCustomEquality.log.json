@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > Map < AEqualsWrapper < X > , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f , AEquality keyEquality ) throws E {\nfinal Map < AEqualsWrapper < X > , List < T > > result = new HashMap < > ( ) ;\nfor ( T o : coll ) {\nfinal AEqualsWrapper < X > key = new AEqualsWrapper < > ( keyEquality , f . apply ( o ) ) ;\nList < T > perKey = result . get ( key ) ;\nif ( perKey == null ) {\nperKey = createEmptyListOfType ( coll , false ) ;\nresult . put ( key , perKey ) ;\n} perKey . add ( o ) ;\n} return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testGroupByCustomEquality ( ) {\nfinal AEquality equality = new AEquality ( ) {\n@Override\npublic boolean equals ( Object o1 , Object o2 ) {\nreturn ( ( Integer ) o1 ) % 2 == ( ( Integer ) o2 ) % 2 ;\n} @Override\npublic int hashCode ( Object o ) {\nreturn 0 ;\n} } ;\nfinal AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) {\n@Override\npublic Integer apply ( String param ) {\nreturn param . length ( ) ;\n} } ;\nfinal Map < AEqualsWrapper < Integer > , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) , len , equality ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(2, grouped.size());\nassertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 3)).size());\nassertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 4)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 6)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 7)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 8)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 9)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 10)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 11)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 12)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 13)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 14)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 15)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 16)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 17)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 18)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 19)).size());\nassertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 20)).size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592,
+        0.592
+    ],
+    "ground_truth": "assertEquals(2,grouped.size());"
+}

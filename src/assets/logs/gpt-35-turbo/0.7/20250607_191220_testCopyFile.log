@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException { 
+    File targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ; 
+    try { 
+    FileUtils . copyFile ( fileChanged , targetResource ) ; 
+    info ( "STR" + fileChanged . getCanonicalPath ( ) + "STR" + targetResource . getCanonicalPath ( ) ) ; 
+    } catch ( FileNotFoundException ex ) { 
+    debug ( "STR" + fileChanged . getCanonicalPath ( ) ) ; 
+    } catch ( Exception ex ) { 
+    debug ( ex ) ; 
+    } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testCopyFile ( ) throws Exception {
+         File configFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( configFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         util . copyFile ( configFile , srcDir , targetDir , "STR" ) ; 
+         File targetFile = new File ( targetDir , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions for DevUtilTest.testCopyFile():
+
+1. assertTrue(targetFile.exists());
+2. assertTrue(targetFile.isFile());
+3. assertEquals(configFile.length(), targetFile.length());
+4. assertTrue(targetFile.canRead());
+5. assertTrue(targetFile.canWrite());
+6. assertFalse(targetFile.isHidden());
+7. assertEquals(targetFile.getName(), "STR");
+8. assertEquals(targetFile.getParentFile(), targetDir);
+9. assertEquals(targetFile.lastModified(), System.currentTimeMillis(), 1000);
+10. assertFalse(targetFile.isDirectory());
+11. assertTrue(targetFile.canExecute());
+12. assertEquals(configFile.getParentFile(), srcDir);
+13. assertNotEquals(configFile.getAbsolutePath(), targetFile.getAbsolutePath());
+14. assertTrue(targetFile.exists() && targetFile.length() > 0);
+15. assertTrue(targetFile.getPath().contains(targetDir.getPath()));
+16. assertEquals(targetFile.toPath(), Paths.get(targetDir.getPath(), "STR"));
+17. assertTrue(targetFile.toURI().toString().contains(targetDir.toURI().toString()));
+18. assertEquals(FileUtils.readFileToString(targetFile), "STR");
+19. assertTrue(FileUtils.contentEquals(configFile, targetFile));
+20. assertNotNull(targetFile);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(targetFile.exists()); ===
+0.844 - 2. assertTrue(targetFile.isFile())
+0.800 - 4. assertTrue(targetFile.canRead())
+0.788 - 5. assertTrue(targetFile.canWrite())
+0.783 - 11. assertTrue(targetFile.canExecute())
+0.716 - 6. assertFalse(targetFile.isHidden())
+0.705 - 14. assertTrue(targetFile.exists() && targetFile.length() > 0)
+0.704 - 10. assertFalse(targetFile.isDirectory())
+0.658 - 7. assertEquals(targetFile.getName(), "STR")
+0.644 - 20. assertNotNull(targetFile)
+0.604 - 15. assertTrue(targetFile.getPath().contains(targetDir.getPath()))
+0.585 - Assertions for DevUtilTest.testCopyFile():
+
+1. assertTrue(targetFile.exists())
+0.581 - 3. assertEquals(configFile.length(), targetFile.length())
+0.578 - 8. assertEquals(targetFile.getParentFile(), targetDir)
+0.500 - 19. assertTrue(FileUtils.contentEquals(configFile, targetFile))
+0.494 - 12. assertEquals(configFile.getParentFile(), srcDir)
+0.491 - 17. assertTrue(targetFile.toURI().toString().contains(targetDir.toURI().toString()))
+0.481 - 13. assertNotEquals(configFile.getAbsolutePath(), targetFile.getAbsolutePath())
+0.481 - 9. assertEquals(targetFile.lastModified(), System.currentTimeMillis(), 1000)
+0.457 - 18. assertEquals(FileUtils.readFileToString(targetFile), "STR")
+0.442 - 16. assertEquals(targetFile.toPath(), Paths.get(targetDir.getPath(), "STR"))

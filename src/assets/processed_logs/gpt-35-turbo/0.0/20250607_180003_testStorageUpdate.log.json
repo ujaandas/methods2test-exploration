@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", database.getCommand());\nassertEquals(Locale.GERMANY.getLanguage(), database.getLanguage());\nassertNotNull(database);\nassertTrue(database.isConnected());\nassertFalse(database.isClosed());\nassertEquals(0, database.getErrors());\nassertEquals(0, database.getWarnings());\nassertTrue(database.getAttributes().isEmpty());\nassertEquals(0, database.getMetadata().size());\nassertNull(database.getSchema());\nassertNotNull(database.getIndexes());\nassertTrue(database.getIndexes().isEmpty());\nassertEquals(0, database.getClusters().size());\nassertNull(database.getStorage());\nassertNotNull(database.getUsers());\nassertTrue(database.getUsers().isEmpty());\nassertEquals(0, database.getSessions().size());\nassertNull(database.getRoles());\nassertNotNull(database.getFunctions());\nassertTrue(database.getFunctions().isEmpty());\n====================\n\n",
+    "scores": [
+        0.535,
+        0.482,
+        0.481,
+        0.477,
+        0.464,
+        0.455,
+        0.453,
+        0.453,
+        0.453,
+        0.421,
+        0.413,
+        0.403,
+        0.4,
+        0.391,
+        0.387,
+        0.37,
+        0.365,
+        0.365,
+        0.362,
+        0.313
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

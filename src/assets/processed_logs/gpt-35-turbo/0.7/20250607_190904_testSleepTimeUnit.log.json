@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class CommonUtils_Sleep {\npublic static void sleepTimeUnit ( TimeUnit timeUnit , long timeout ) {\ntry {\ntimeUnit . sleep ( timeout ) ;\n} catch ( InterruptedException e ) {\nignore ( e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class CommonUtils_SleepTest {\n@Test\npublic void testSleepTimeUnit ( ) {\nlong started = System . nanoTime ( ) ;\nsleepTimeUnit ( MILLISECONDS , 1 ) ;\nlong duration = NANOSECONDS . toMillis ( System . nanoTime ( ) - started ) ;\nlong durationLimit = SECONDS . toMillis ( 3 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(duration >= 1);\nAssert.assertTrue(duration <= 2);\nAssert.assertTrue(duration <= durationLimit);\nAssert.assertFalse(duration > durationLimit);\nAssert.assertNotEquals(duration, 0);\nAssert.assertNotEquals(duration, durationLimit);\nAssert.assertNotEquals(duration, 100);\nAssert.assertNotEquals(durationLimit, 0);\nAssert.assertNotEquals(durationLimit, 100);\nAssert.assertTrue(duration > 0);\nAssert.assertTrue(durationLimit > 0);\nAssert.assertTrue(durationLimit < 100);\nAssert.assertNotEquals(durationLimit, 500);\nAssert.assertNotEquals(duration, 500);\nAssert.assertNotEquals(duration, 1000);\nAssert.assertNotEquals(durationLimit, 1000);\nAssert.assertTrue(durationLimit < 10000);\nAssert.assertTrue(duration < 10000);\nAssert.assertTrue(durationLimit > 999);\nAssert.assertTrue(duration > 999);\n====================\n\n",
+    "scores": [
+        0.7,
+        0.657,
+        0.639,
+        0.618,
+        0.609,
+        0.595,
+        0.592,
+        0.588,
+        0.579,
+        0.541,
+        0.528,
+        0.514,
+        0.514,
+        0.507,
+        0.494,
+        0.481,
+        0.481,
+        0.475,
+        0.452,
+        0.45
+    ],
+    "ground_truth": "assertTrue(format(\"STR\",duration),duration>0);"
+}

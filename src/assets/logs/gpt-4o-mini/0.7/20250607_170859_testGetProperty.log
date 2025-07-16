@@ -1,0 +1,111 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name);
+    }
+};
+
+assertEquals("STR", serviceSetup.getProperty("STR"));
+assertNull(serviceSetup.getProperty("NON_EXISTENT_KEY"));
+env.put("KEY1", "VALUE1");
+assertEquals("VALUE1", serviceSetup.getProperty("KEY1"));
+env.put("KEY2", "VALUE2");
+assertEquals("VALUE2", serviceSetup.getProperty("KEY2"));
+assertNull(serviceSetup.getProperty("ANOTHER_NON_EXISTENT_KEY"));
+env.put("KEY3", "VALUE3");
+assertEquals("VALUE3", serviceSetup.getProperty("KEY3"));
+env.put("EMPTY_KEY", "");
+assertEquals("", serviceSetup.getProperty("EMPTY_KEY"));
+env.put("NULL_KEY", null);
+assertNull(serviceSetup.getProperty("NULL_KEY"));
+env.put("KEY_WITH_SPACES", "VALUE WITH SPACES");
+assertEquals("VALUE WITH SPACES", serviceSetup.getProperty("KEY_WITH_SPACES"));
+env.put("KEY_WITH_SPECIAL_CHARS", "!@#$%^&*()");
+assertEquals("!@#$%^&*()", serviceSetup.getProperty("KEY_WITH_SPECIAL_CHARS"));
+assertNull(serviceSetup.getProperty("MISSING_KEY"));
+env.put("NUMERIC_KEY", "12345");
+assertEquals("12345", serviceSetup.getProperty("NUMERIC_KEY"));
+env.put("KEY_WITH_NEWLINE", "VALUE\nWITH\nNEWLINE");
+assertEquals("VALUE\nWITH\nNEWLINE", serviceSetup.getProperty("KEY_WITH_NEWLINE"));
+env.put("LONG_KEY", "LONG_VALUE");
+assertEquals("LONG_VALUE", serviceSetup.getProperty("LONG_KEY"));
+env.put("KEY_WITH_TAB", "VALUE\tWITH\tTAB");
+assertEquals("VALUE\tWITH\tTAB", serviceSetup.getProperty("KEY_WITH_TAB"));
+env.put("REPEATED_KEY", "VALUE");
+assertEquals("VALUE", serviceSetup.getProperty("REPEATED_KEY"));
+env.put("CASE_SENSITIVE_KEY", "CaseSensitiveValue");
+assertEquals("CaseSensitiveValue", serviceSetup.getProperty("CASE_SENSITIVE_KEY"));
+env.put("KEY1", "NEW_VALUE1");
+assertEquals("NEW_VALUE1", serviceSetup.getProperty("KEY1"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.832 - assertEquals("STR", serviceSetup.getProperty("STR"))
+0.712 - assertEquals("", serviceSetup.getProperty("EMPTY_KEY"))
+0.686 - assertEquals("VALUE1", serviceSetup.getProperty("KEY1"))
+0.686 - assertEquals("VALUE2", serviceSetup.getProperty("KEY2"))
+0.686 - assertEquals("VALUE3", serviceSetup.getProperty("KEY3"))
+0.667 - assertEquals("12345", serviceSetup.getProperty("NUMERIC_KEY"))
+0.661 - assertEquals("VALUE", serviceSetup.getProperty("REPEATED_KEY"))
+0.661 - assertEquals("NEW_VALUE1", serviceSetup.getProperty("KEY1"))
+0.637 - assertEquals("LONG_VALUE", serviceSetup.getProperty("LONG_KEY"))
+0.618 - assertEquals("VALUE\tWITH\tTAB", serviceSetup.getProperty("KEY_WITH_TAB"))
+0.608 - assertEquals("VALUE WITH SPACES", serviceSetup.getProperty("KEY_WITH_SPACES"))
+0.598 - assertEquals("!@#$%^&*()", serviceSetup.getProperty("KEY_WITH_SPECIAL_CHARS"))
+0.595 - assertEquals("CaseSensitiveValue", serviceSetup.getProperty("CASE_SENSITIVE_KEY"))
+0.594 - assertNull(serviceSetup.getProperty("MISSING_KEY"))
+0.592 - assertNull(serviceSetup.getProperty("NULL_KEY"))
+0.585 - assertNull(serviceSetup.getProperty("NON_EXISTENT_KEY"))
+0.580 - assertEquals("VALUE\nWITH\nNEWLINE", serviceSetup.getProperty("KEY_WITH_NEWLINE"))
+0.544 - assertNull(serviceSetup.getProperty("ANOTHER_NON_EXISTENT_KEY"))
+0.321 - ```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name)
+0.274 - env.put("EMPTY_KEY", "")
+0.250 - env.put("NUMERIC_KEY", "12345")
+0.247 - env.put("REPEATED_KEY", "VALUE")
+0.243 - env.put("KEY1", "VALUE1")
+0.243 - env.put("KEY2", "VALUE2")
+0.243 - env.put("KEY3", "VALUE3")
+0.243 - env.put("NULL_KEY", null)
+0.234 - env.put("KEY_WITH_SPACES", "VALUE WITH SPACES")
+0.231 - env.put("KEY1", "NEW_VALUE1")
+0.229 - env.put("KEY_WITH_SPECIAL_CHARS", "!@#$%^&*()")
+0.220 - env.put("CASE_SENSITIVE_KEY", "CaseSensitiveValue")
+0.220 - env.put("LONG_KEY", "LONG_VALUE")
+0.217 - env.put("KEY_WITH_TAB", "VALUE\tWITH\tTAB")
+0.200 - env.put("KEY_WITH_NEWLINE", "VALUE\nWITH\nNEWLINE")
+0.000 - }
+}
+0.000 - ```

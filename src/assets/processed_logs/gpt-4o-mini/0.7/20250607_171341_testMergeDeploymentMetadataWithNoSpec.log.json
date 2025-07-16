@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MergeResource {\npublic static HasMetadata mergeResources ( HasMetadata item1 , HasMetadata item2 , Logger log , boolean switchOnLocalCustomisation ) {\nif ( item1 instanceof Deployment && item2 instanceof Deployment ) {\nreturn mergeDeployments ( ( Deployment ) item1 , ( Deployment ) item2 , log , switchOnLocalCustomisation ) ;\n} if ( item1 instanceof ConfigMap && item2 instanceof ConfigMap ) {\nConfigMap cm1 = ( ConfigMap ) item1 ;\nConfigMap cm2 = ( ConfigMap ) item2 ;\nreturn mergeConfigMaps ( cm1 , cm2 , log , switchOnLocalCustomisation ) ;\n} mergeMetadata ( item1 , item2 ) ;\nreturn item1 ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MergeResourceTest {\n@Test\npublic void testMergeDeploymentMetadataWithNoSpec ( ) throws Exception {\nDeployment resource = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . endMetadata ( ) . withNewSpec ( ) . withNewTemplate ( ) . withNewSpec ( ) . addNewContainer ( ) . withImage ( \"STR\" ) . endContainer ( ) . endSpec ( ) . endTemplate ( ) . endSpec ( ) . build ( ) ;\nDeployment override = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . endMetadata ( ) . build ( ) ;\nHasMetadata answer = KubernetesResourceUtil . mergeResources ( resource , override , log , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(answer);\nassertTrue(answer instanceof Deployment);\nDeployment mergedDeployment = (Deployment) answer;\nassertEquals(\"STR\", mergedDeployment.getMetadata().getName());\nassertEquals(4, mergedDeployment.getMetadata().getAnnotations().size());\nassertTrue(mergedDeployment.getMetadata().getAnnotations().containsKey(\"STR\"));\nassertEquals(\"STR\", mergedDeployment.getMetadata().getAnnotations().get(\"STR\"));\nassertNotNull(mergedDeployment.getSpec());\nassertNotNull(mergedDeployment.getSpec().getTemplate());\nassertNotNull(mergedDeployment.getSpec().getTemplate().getSpec());\nassertEquals(1, mergedDeployment.getSpec().getTemplate().getSpec().getContainers().size());\nassertEquals(\"STR\", mergedDeployment.getSpec().getTemplate().getSpec().getContainers().get(0).getImage());\nassertNotNull(mergedDeployment.getSpec().getTemplate().getMetadata());\nassertEquals(4, mergedDeployment.getMetadata().getAnnotations().size());\nassertTrue(mergedDeployment.getMetadata().getAnnotations().containsKey(\"STR\"));\nassertEquals(\"STR\", mergedDeployment.getMetadata().getAnnotations().get(\"STR\"));\nassertNotNull(mergedDeployment.getSpec().getRevisionHistoryLimit());\nassertEquals(Integer.valueOf(10), mergedDeployment.getSpec().getRevisionHistoryLimit());\nassertNull(mergedDeployment.getSpec().getMinReadySeconds());\nassertNotNull(mergedDeployment.getMetadata().getCreationTimestamp());\nassertNull(mergedDeployment.getMetadata().getDeletionTimestamp());\nassertFalse(mergedDeployment.getSpec().getProgressDeadlineSeconds().isPresent());\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.548,
+        0.508,
+        0.447,
+        0.395,
+        0.386,
+        0.382,
+        0.378,
+        0.35,
+        0.333,
+        0.326,
+        0.286,
+        0.286,
+        0.272,
+        0.263,
+        0.263,
+        0.263,
+        0.263,
+        0.218,
+        0.218,
+        0.192,
+        0.187,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(answer);"
+}

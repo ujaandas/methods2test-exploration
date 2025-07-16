@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > Map < AEqualsWrapper < X > , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f , AEquality keyEquality ) throws E { 
+    final Map < AEqualsWrapper < X > , List < T > > result = new HashMap < > ( ) ; 
+    for ( T o : coll ) { 
+    final AEqualsWrapper < X > key = new AEqualsWrapper < > ( keyEquality , f . apply ( o ) ) ; 
+    List < T > perKey = result . get ( key ) ; 
+    if ( perKey == null ) { 
+    perKey = createEmptyListOfType ( coll , false ) ; 
+    result . put ( key , perKey ) ; 
+    } perKey . add ( o ) ; 
+    } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testGroupByCustomEquality ( ) {
+         final AEquality equality = new AEquality ( ) { 
+     @Override
+     public boolean equals ( Object o1 , Object o2 ) { 
+     return ( ( Integer ) o1 ) % 2 == ( ( Integer ) o2 ) % 2 ; 
+     } @Override
+     public int hashCode ( Object o ) { 
+     return 0 ; 
+     } } ; 
+         final AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) { 
+     @Override
+     public Integer apply ( String param ) { 
+     return param . length ( ) ; 
+     } } ; 
+         final Map < AEqualsWrapper < Integer > , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) , len , equality ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(3, grouped.size());
+assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 3)));
+assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 4)));
+assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 5)));
+assertEquals(2, grouped.get(new AEqualsWrapper<>(equality, 3)).size());
+assertEquals(4, grouped.get(new AEqualsWrapper<>(equality, 4)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size());
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 3)).contains("STR"));
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 3)).contains("STR"));
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"));
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"));
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"));
+assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"));
+assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"));
+assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"));
+assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"));
+assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,grouped.size()); ===
+0.967 - assertEquals(3, grouped.size())
+0.619 - assertEquals(2, grouped.get(new AEqualsWrapper<>(equality, 3)).size())
+0.598 - assertEquals(4, grouped.get(new AEqualsWrapper<>(equality, 4)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size())
+0.427 - assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"))
+0.427 - assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"))
+0.427 - assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"))
+0.427 - assertFalse(grouped.get(new AEqualsWrapper<>(equality, 5)).contains("STR"))
+0.426 - assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 3)))
+0.426 - assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 4)))
+0.426 - assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 5)))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 3)).contains("STR"))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 3)).contains("STR"))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"))
+0.392 - assertTrue(grouped.get(new AEqualsWrapper<>(equality, 4)).contains("STR"))

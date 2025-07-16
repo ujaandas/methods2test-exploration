@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormat {\npublic static String getDigestSha1 ( byte [ ] bytes ) {\nreturn \"STR\" + base32 . encodeAsString ( DigestUtils . sha1 ( bytes ) ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormatTest {\n@Test\npublic void testGetDigestSha1RobotsTxt ( ) {\nString robotsTxt = \"STR\" ;\nbyte [ ] content = robotsTxt . getBytes ( StandardCharsets . UTF_8 ) ;\nString sha1str = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nString expectedDigest = WARCRecordFormat.getDigestSha1(content);\nassertNotNull(expectedDigest);\nassertFalse(expectedDigest.isEmpty());\nassertTrue(expectedDigest.startsWith(\"STR\"));\nassertEquals(32, expectedDigest.length());\nassertEquals(\"STR\", expectedDigest.substring(0, 3));\nassertTrue(expectedDigest.matches(\"STR[0-9A-Z]*\"));\nassertEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content));\nassertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(\"Different content\".getBytes(StandardCharsets.UTF_8)));\nassertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(\"Another different content\".getBytes(StandardCharsets.UTF_8)));\nassertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(\"Yet another content\".getBytes(StandardCharsets.UTF_8)));\nassertTrue(expectedDigest.contains(\"A\") || expectedDigest.contains(\"B\") || expectedDigest.contains(\"C\"));\nassertTrue(expectedDigest.contains(\"1\") || expectedDigest.contains(\"2\") || expectedDigest.contains(\"3\"));\nassertTrue(expectedDigest.contains(\"9\") || expectedDigest.contains(\"0\"));\nassertTrue(expectedDigest.length() > 0);\nassertTrue(expectedDigest.length() <= 32);\nassertTrue(expectedDigest.equals(WARCRecordFormat.getDigestSha1(content)));\nassertTrue(expectedDigest.equals(WARCRecordFormat.getDigestSha1(content)));\nassertFalse(expectedDigest.equals(\"INVALID_DIGEST\"));\nassertTrue(expectedDigest.equals(WARCRecordFormat.getDigestSha1(content)));\nassertTrue(expectedDigest.equals(WARCRecordFormat.getDigestSha1(content)));\n```\n====================\n\n",
+    "scores": [
+        0.83,
+        0.738,
+        0.738,
+        0.738,
+        0.738,
+        0.652,
+        0.615,
+        0.612,
+        0.593,
+        0.534,
+        0.523,
+        0.423,
+        0.423,
+        0.415,
+        0.396,
+        0.38,
+        0.311,
+        0.311,
+        0.306,
+        0.303,
+        0.291,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",sha1str,WARCRecordFormat.getDigestSha1(content));"
+}

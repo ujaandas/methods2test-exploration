@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(20, result.getTotalRecords());
+assertTrue(result.stream().allMatch(r -> r.getProperty("className").equals(childClass.getName())));
+assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("isSubclass") == true));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("isSubclass") == false));
+assertEquals(childClass.getName(), result.stream().findFirst().get().getProperty("className"));
+assertEquals(parentClass.getName(), result.stream().findFirst().get().getProperty("parentClassName"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("valid") == true));
+assertEquals(0, result.stream().filter(r -> r.getProperty("valid") == false).count());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("createdAt") != null));
+assertTrue(result.stream().allMatch(r -> r.getProperty("updatedAt") != null));
+assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")));
+assertTrue(result.stream().allMatch(r -> r.getProperty("visibility").equals("public")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("description") != null));
+assertTrue(result.stream().allMatch(r -> r.getProperty("ownerId") != null));
+assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("read")));
+assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("write")));
+assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("execute")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.725 - assertEquals(20, result.getTotalRecords())
+0.655 - assertEquals(0, result.stream().filter(r -> r.getProperty("valid") == false).count())
+0.627 - assertTrue(result.hasNext())
+0.539 - assertFalse(result.stream().anyMatch(r -> r.getProperty("isSubclass") == false))
+0.537 - assertTrue(result.stream().allMatch(r -> r.getProperty("valid") == true))
+0.536 - assertTrue(result.stream().allMatch(r -> r.getProperty("updatedAt") != null))
+0.531 - assertTrue(result.stream().anyMatch(r -> r.getProperty("isSubclass") == true))
+0.530 - assertEquals(childClass.getName(), result.stream().findFirst().get().getProperty("className"))
+0.527 - assertTrue(result.stream().allMatch(r -> r.getProperty("ownerId") != null))
+0.518 - assertTrue(result.stream().anyMatch(r -> r.getProperty("createdAt") != null))
+0.509 - assertTrue(result.stream().anyMatch(r -> r.getProperty("description") != null))
+0.504 - assertEquals(parentClass.getName(), result.stream().findFirst().get().getProperty("parentClassName"))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")))
+0.496 - assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("read")))
+0.492 - assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("write")))
+0.484 - assertTrue(result.stream().allMatch(r -> r.getProperty("permissions").contains("execute")))
+0.484 - assertTrue(result.stream().allMatch(r -> r.getProperty("visibility").equals("public")))
+0.471 - ```java
+assertNotNull(result)
+0.459 - assertTrue(result.stream().allMatch(r -> r.getProperty("className").equals(childClass.getName())))
+0.437 - assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())))
+0.000 - ```

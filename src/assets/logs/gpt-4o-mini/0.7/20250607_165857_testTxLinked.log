@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSave {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSaveTest {
+    @Test
+     public void testTxLinked ( ) {
+         db . getMetadata ( ) . getSchema ( ) . createClass ( "STR" ) ; 
+         db . begin ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         ODocument doc1 = new ODocument ( "STR" ) ; 
+         doc . field ( "STR" , doc1 ) ; 
+         ODocument doc2 = new ODocument ( "STR" ) ; 
+         doc1 . field ( "STR" , doc2 ) ; 
+         doc2 . field ( "STR" , doc ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(db.getMetadata().getSchema().getClass("STR"));
+Assert.assertEquals(3, countDocumentsInClass("STR"));
+Assert.assertNotNull(db.load(doc.getIdentity()));
+Assert.assertNotNull(db.load(doc1.getIdentity()));
+Assert.assertNotNull(db.load(doc2.getIdentity()));
+Assert.assertEquals(doc.getIdentity(), doc1.field("STR").getIdentity());
+Assert.assertEquals(doc1.getIdentity(), doc2.field("STR").getIdentity());
+Assert.assertEquals(doc2.getIdentity(), doc.field("STR").getIdentity());
+Assert.assertTrue(doc.field("STR") instanceof ODocument);
+Assert.assertTrue(doc1.field("STR") instanceof ODocument);
+Assert.assertTrue(doc2.field("STR") instanceof ODocument);
+Assert.assertEquals("STR", doc.getClassName());
+Assert.assertEquals("STR", doc1.getClassName());
+Assert.assertEquals("STR", doc2.getClassName());
+Assert.assertNotSame(doc, doc1);
+Assert.assertNotSame(doc1, doc2);
+Assert.assertNotSame(doc, doc2);
+Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperties().containsKey("STR"));
+Assert.assertTrue(doc.field("STR").equals(doc1));
+Assert.assertTrue(doc1.field("STR").equals(doc2));
+Assert.assertTrue(doc2.field("STR").equals(doc));
+Assert.assertEquals(1, db.getMetadata().getSchema().getClass("STR").getProperties().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,db.countClass("STR")); ===
+0.825 - Assert.assertEquals(3, countDocumentsInClass("STR"))
+0.676 - Assert.assertEquals("STR", doc.getClassName())
+0.667 - Assert.assertEquals("STR", doc1.getClassName())
+0.667 - Assert.assertEquals("STR", doc2.getClassName())
+0.538 - Assert.assertEquals(1, db.getMetadata().getSchema().getClass("STR").getProperties().size())
+0.524 - ```java
+Assert.assertNotNull(db.getMetadata().getSchema().getClass("STR"))
+0.505 - Assert.assertEquals(doc.getIdentity(), doc1.field("STR").getIdentity())
+0.505 - Assert.assertEquals(doc2.getIdentity(), doc.field("STR").getIdentity())
+0.500 - Assert.assertEquals(doc1.getIdentity(), doc2.field("STR").getIdentity())
+0.468 - Assert.assertNotNull(db.load(doc.getIdentity()))
+0.462 - Assert.assertNotNull(db.load(doc1.getIdentity()))
+0.462 - Assert.assertNotNull(db.load(doc2.getIdentity()))
+0.442 - Assert.assertTrue(doc.field("STR").equals(doc1))
+0.442 - Assert.assertTrue(doc2.field("STR").equals(doc))
+0.436 - Assert.assertTrue(doc1.field("STR").equals(doc2))
+0.410 - Assert.assertTrue(doc.field("STR") instanceof ODocument)
+0.409 - Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperties().containsKey("STR"))
+0.407 - Assert.assertNotSame(doc, doc1)
+0.407 - Assert.assertNotSame(doc, doc2)
+0.405 - Assert.assertTrue(doc1.field("STR") instanceof ODocument)
+0.405 - Assert.assertTrue(doc2.field("STR") instanceof ODocument)
+0.400 - Assert.assertNotSame(doc1, doc2)
+0.000 - ```

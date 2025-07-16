@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         final List vector = new ArrayList ( ) ; 
+         vector . add ( "STR" ) ; 
+         vector . add ( "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadata2fieldParamName , vector ) ; 
+         prepareIndexerBolt ( config ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertEquals(3, fields.size());
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertTrue(fields.containsKey("anotherKey"));
+assertEquals("expectedValue", fields.get("anotherKey"));
+assertTrue(fields.containsKey("yetAnotherKey"));
+assertEquals("expectedValue2", fields.get("yetAnotherKey"));
+assertFalse(fields.containsKey("nonExistentKey"));
+assertEquals("STR", fields.get("STR"));
+assertNotEquals("differentValue", fields.get("STR"));
+assertTrue(fields.containsValue("STR"));
+assertFalse(fields.isEmpty());
+assertTrue(fields.keySet().contains("STR"));
+assertTrue(fields.values().contains("expectedValue"));
+assertTrue(fields.values().contains("expectedValue2"));
+assertEquals("STR", fields.get("STR"));
+assertNotEquals("wrongValue", fields.get("STR"));
+assertTrue(fields.entrySet().size() > 0);
+assertTrue(fields.keySet().size() >= 1);
+assertFalse(fields.containsKey("invalidKey"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals("STR",newString[]{"STR","STR","STR"},newTreeSet<>(fields.keySet()).toArray()); ===
+0.470 - assertEquals("STR", fields.get("STR"))
+0.470 - assertEquals("STR", fields.get("STR"))
+0.470 - assertEquals("STR", fields.get("STR"))
+0.449 - assertTrue(fields.keySet().contains("STR"))
+0.439 - assertTrue(fields.keySet().size() >= 1)
+0.421 - assertTrue(fields.entrySet().size() > 0)
+0.403 - assertEquals(3, fields.size())
+0.394 - assertNotEquals("wrongValue", fields.get("STR"))
+0.384 - assertNotEquals("differentValue", fields.get("STR"))
+0.376 - assertEquals("expectedValue", fields.get("anotherKey"))
+0.371 - assertFalse(fields.isEmpty())
+0.366 - assertEquals("expectedValue2", fields.get("yetAnotherKey"))
+0.351 - assertTrue(fields.values().contains("expectedValue"))
+0.349 - assertTrue(fields.values().contains("expectedValue2"))
+0.333 - assertTrue(fields.containsKey("STR"))
+0.333 - assertFalse(fields.containsKey("nonExistentKey"))
+0.329 - assertFalse(fields.containsKey("invalidKey"))
+0.324 - assertTrue(fields.containsKey("yetAnotherKey"))
+0.317 - assertTrue(fields.containsKey("anotherKey"))
+0.313 - assertTrue(fields.containsValue("STR"))
+0.258 - ```java
+assertNotNull(fields)
+0.000 - ```

@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamService {\npublic TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) {\nDate tag1Date = extractDate ( tag1 ) ;\nDate tag2Date = extractDate ( tag2 ) ;\nif ( tag1Date == null ) {\nreturn tag2 ;\n} if ( tag2Date == null ) {\nreturn tag1 ;\n} return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamServiceTest {\n@Test\npublic void should_return_newer_tag ( ) throws Exception {\nImageStreamService service = new ImageStreamService ( client , log ) ;\nTagEvent oldTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent latestTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(latestTag, resultedTag);\nAssert.assertNotEquals(oldTag, resultedTag);\nAssert.assertTrue(resultedTag.equals(latestTag));\nAssert.assertFalse(resultedTag.equals(oldTag));\nAssert.assertNotNull(resultedTag);\nAssert.assertNull(resultedTag.getTimestamp());\nAssert.assertNull(resultedTag.getAuthor());\nAssert.assertNull(resultedTag.getCommit());\nAssert.assertNull(resultedTag.getMessage());\nAssert.assertEquals(\"STR\", resultedTag.getName());\nAssert.assertEquals(latestTag, service.newerTag(latestTag, oldTag));\nAssert.assertEquals(latestTag, service.newerTag(latestTag, latestTag));\nAssert.assertEquals(latestTag, service.newerTag(oldTag, latestTag));\nAssert.assertEquals(latestTag, service.newerTag(latestTag, null));\nAssert.assertEquals(oldTag, service.newerTag(null, oldTag));\nAssert.assertNull(service.newerTag(null, null));\nAssert.assertEquals(latestTag, service.newerTag(latestTag, latestTag));\nAssert.assertEquals(latestTag, service.newerTag(latestTag, oldTag));\nAssert.assertEquals(latestTag, service.newerTag(oldTag, latestTag));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.857,
+        0.711,
+        0.689,
+        0.688,
+        0.688,
+        0.688,
+        0.688,
+        0.667,
+        0.667,
+        0.659,
+        0.635,
+        0.6,
+        0.6,
+        0.595,
+        0.592,
+        0.579,
+        0.575,
+        0.432
+    ],
+    "ground_truth": "Assert.assertEquals(latestTag,resultedTag);"
+}

@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testSkipOrdered ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(0, results.size());
+Assert.assertTrue(results.isEmpty());
+Assert.assertNotNull(results);
+Assert.assertNotEquals(10, results.size());
+Assert.assertTrue(results.contains(document));
+Assert.assertFalse(results.isEmpty());
+Assert.assertEquals(1, results.size());
+Assert.assertSame(document, results.get(0));
+Assert.assertNotSame(document, results.get(1));
+Assert.assertEquals(expectedSize, results.size());
+Assert.assertTrue(results.containsAll(expectedResults));
+Assert.assertFalse(results.contains(unexpectedResult));
+Assert.assertTrue(results.stream().allMatch(predicate));
+Assert.assertTrue(results.stream().anyMatch(predicate));
+Assert.assertTrue(results.stream().noneMatch(predicate));
+Assert.assertTrue(results.stream().filter(predicate).count() > 0);
+Assert.assertEquals(expectedResult, results.stream().findFirst().get());
+Assert.assertTrue(results.stream().allMatch(doc -> doc.field("name").equals("John")));
+Assert.assertTrue(results.stream().map(ODocument::field).allMatch(field -> field instanceof String));
+Assert.assertTrue(results.stream().anyMatch(doc -> doc.field("age") instanceof Integer));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(19,results.size()); ===
+0.984 - Assert.assertEquals(1, results.size())
+0.951 - Assert.assertEquals(0, results.size())
+0.923 - Assert.assertNotEquals(10, results.size())
+0.806 - Assert.assertEquals(expectedSize, results.size())
+0.721 - Assert.assertFalse(results.isEmpty())
+0.667 - Assert.assertTrue(results.isEmpty())
+0.642 - Assert.assertNotNull(results)
+0.606 - Assert.assertSame(document, results.get(0))
+0.596 - Assert.assertEquals(expectedResult, results.stream().findFirst().get())
+0.580 - Assert.assertTrue(results.contains(document))
+0.580 - Assert.assertNotSame(document, results.get(1))
+0.564 - Assert.assertFalse(results.contains(unexpectedResult))
+0.532 - Assert.assertTrue(results.stream().allMatch(predicate))
+0.532 - Assert.assertTrue(results.stream().anyMatch(predicate))
+0.525 - Assert.assertTrue(results.stream().noneMatch(predicate))
+0.506 - Assert.assertTrue(results.containsAll(expectedResults))
+0.483 - Assert.assertTrue(results.stream().filter(predicate).count() > 0)
+0.393 - Assert.assertTrue(results.stream().allMatch(doc -> doc.field("name").equals("John")))
+0.389 - Assert.assertTrue(results.stream().anyMatch(doc -> doc.field("age") instanceof Integer))
+0.350 - Assert.assertTrue(results.stream().map(ODocument::field).allMatch(field -> field instanceof String))

@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStep {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStepTest {\n@Test\npublic void shouldCheckSubclasses ( ) {\nOBasicCommandContext context = new OBasicCommandContext ( ) ;\ncontext . setDatabase ( database ) ;\nOClass parentClass = createClassInstance ( ) ;\nOClass childClass = createChildClassInstance ( parentClass ) ;\nCheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ;\nOResultSet result = step . syncPull ( context , 20 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(20, result.stream().count());\nassertEquals(childClass.getName(), result.getRecord().getProperty(\"@class\"));\nassertEquals(parentClass.getName(), result.getRecord().getProperty(\"@superClass\"));\nassertTrue(result.getExecutionPlan().contains(\"CheckClassTypeStep\"));\nassertFalse(result.getExecutionPlan().contains(\"FilterStep\"));\nassertEquals(0, result.getExecutionStats().getRecordsFetched());\nassertEquals(0, result.getExecutionStats().getRecordsFiltered());\nassertEquals(20, result.getExecutionStats().getRecordsProcessed());\nassertEquals(0, result.getExecutionStats().getRecordsReturned());\nassertEquals(0, result.getExecutionStats().getRecordsChanged());\nassertEquals(0, result.getExecutionStats().getRecordsScanned());\nassertTrue(result.getExecutionStats().getExecutionTimeMs() > 0);\nassertEquals(0, result.getExecutionStats().getTotalTime());\nassertEquals(20, result.getExecutionStats().getTotalRecords());\nassertEquals(0, result.getExecutionStats().getTotalResultRecords());\n====================\n\n",
+    "scores": [
+        0.987,
+        0.647,
+        0.646,
+        0.634,
+        0.634,
+        0.634,
+        0.627,
+        0.627,
+        0.62,
+        0.6,
+        0.596,
+        0.59,
+        0.533,
+        0.523,
+        0.509,
+        0.5,
+        0.5
+    ],
+    "ground_truth": "Assert.assertEquals(0,result.stream().count());"
+}

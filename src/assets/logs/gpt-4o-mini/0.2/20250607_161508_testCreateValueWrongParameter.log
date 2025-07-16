@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( List < ? > params ) { 
+     if ( ! ( params . get ( 0 ) instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ; 
+     final List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     result . add ( createSingleValue ( mapParam ) ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueWrongParameter ( ) {
+         final Object result = propertyIndexByKey . createValue ( Collections . singletonList ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+assertTrue(result instanceof List);
+assertEquals(0, ((List<?>) result).size());
+assertNotNull(result);
+assertFalse(((List<?>) result).isEmpty());
+assertEquals(Collections.emptyList(), result);
+assertSame(Collections.emptyList(), result);
+assertTrue(result instanceof Collection);
+assertTrue(((Collection<?>) result).isEmpty());
+assertEquals(0, ((Collection<?>) result).size());
+assertFalse(result instanceof Map);
+assertFalse(result instanceof String);
+assertFalse(result instanceof Integer);
+assertFalse(result instanceof Object[]);
+assertFalse(result instanceof Set);
+assertFalse(result instanceof Queue);
+assertFalse(result instanceof Stack);
+assertFalse(result instanceof LinkedList);
+assertFalse(result instanceof ArrayList);
+assertFalse(result instanceof Vector);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(result); ===
+0.923 - assertNotNull(result)
+0.818 - ```java
+assertNull(result)
+0.600 - assertTrue(result instanceof List)
+0.600 - assertFalse(result instanceof Map)
+0.600 - assertFalse(result instanceof Set)
+0.577 - assertFalse(result instanceof Queue)
+0.577 - assertFalse(result instanceof Stack)
+0.566 - assertFalse(result instanceof String)
+0.566 - assertFalse(result instanceof Vector)
+0.556 - assertFalse(result instanceof Integer)
+0.552 - assertEquals(0, ((List<?>) result).size())
+0.548 - assertEquals(Collections.emptyList(), result)
+0.545 - assertFalse(result instanceof Object[])
+0.536 - assertTrue(result instanceof Collection)
+0.536 - assertFalse(result instanceof ArrayList)
+0.533 - assertSame(Collections.emptyList(), result)
+0.526 - assertFalse(result instanceof LinkedList)
+0.517 - assertFalse(((List<?>) result).isEmpty())
+0.508 - assertTrue(((Collection<?>) result).isEmpty())
+0.500 - assertEquals(0, ((Collection<?>) result).size())
+0.000 - ```

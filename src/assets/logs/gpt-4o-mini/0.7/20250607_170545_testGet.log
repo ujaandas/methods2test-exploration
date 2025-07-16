@@ -1,0 +1,96 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public boolean isEmpty ( ) { 
+    return ( operationCount == EMPTY_OPERATION_COUNT && intervalThroughput == EMPTY_THROUGHPUT ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testGet ( ) {
+         update ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1000 , 200 , 500 , 1900.0d , 1800 , 2500 ) ) ; 
+         update ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1500 , 150 , 550 , 1600.0d , 1700 , 2400 ) ) ; 
+         update ( a2w1 , TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , 2200.0d , 2400 , 2800 ) ) ; 
+         PerformanceStats performanceStats = performanceStatsCollector . get ( TEST_CASE_ID_1 , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(performanceStats);
+assertEquals(1500, performanceStats.getOperationCount());
+assertEquals(150, performanceStats.getErrorCount());
+assertEquals(550, performanceStats.getLatency());
+assertEquals(1600.0d, performanceStats.getMaxLatency(), 0.01);
+assertEquals(1700, performanceStats.getMinLatency());
+assertEquals(2400, performanceStats.getAverageLatency());
+assertTrue(performanceStats.getThroughput() > 0);
+assertTrue(performanceStats.getIntervalThroughput() > 0);
+assertEquals(1900.0d, performanceStats.getMaxThroughput(), 0.01);
+assertEquals(1800, performanceStats.getMinThroughput());
+assertEquals(2500, performanceStats.getAverageThroughput());
+assertTrue(performanceStats.getTotalOperations() >= 0);
+assertFalse(performanceStats.isEmpty());
+assertNotNull(performanceStats.toString());
+assertTrue(performanceStats.getOperationCount() >= 1000);
+assertTrue(performanceStats.getLatency() >= 100);
+assertTrue(performanceStats.getThroughput() >= 200);
+assertTrue(performanceStats.getMaxLatency() >= performanceStats.getLatency());
+assertTrue(performanceStats.getAverageLatency() >= performanceStats.getMinLatency());
+assertTrue(performanceStats.getMaxThroughput() >= performanceStats.getAverageThroughput());
+assertTrue(performanceStats.getErrorCount() >= 0);
+assertEquals("PerformanceStats{" + 
+             "operationCount=" + performanceStats.getOperationCount() + 
+             ", errorCount=" + performanceStats.getErrorCount() + 
+             ", latency=" + performanceStats.getLatency() + 
+             ", maxLatency=" + performanceStats.getMaxLatency() + 
+             ", minLatency=" + performanceStats.getMinLatency() + 
+             ", averageLatency=" + performanceStats.getAverageLatency() + 
+             "}", performanceStats.toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(performanceStats.isEmpty()); ===
+1.000 - assertFalse(performanceStats.isEmpty())
+0.744 - assertEquals(550, performanceStats.getLatency())
+0.733 - assertEquals(1700, performanceStats.getMinLatency())
+0.719 - assertEquals(150, performanceStats.getErrorCount())
+0.716 - assertNotNull(performanceStats.toString())
+0.710 - assertEquals(1800, performanceStats.getMinThroughput())
+0.706 - assertTrue(performanceStats.getThroughput() > 0)
+0.706 - assertTrue(performanceStats.getLatency() >= 100)
+0.698 - assertTrue(performanceStats.getErrorCount() >= 0)
+0.682 - assertTrue(performanceStats.getThroughput() >= 200)
+0.681 - assertEquals(1500, performanceStats.getOperationCount())
+0.681 - assertEquals(2400, performanceStats.getAverageLatency())
+0.660 - assertEquals(2500, performanceStats.getAverageThroughput())
+0.659 - assertTrue(performanceStats.getTotalOperations() >= 0)
+0.653 - assertEquals(1600.0d, performanceStats.getMaxLatency(), 0.01)
+0.645 - assertTrue(performanceStats.getIntervalThroughput() > 0)
+0.645 - assertTrue(performanceStats.getOperationCount() >= 1000)
+0.641 - ```java
+assertNotNull(performanceStats)
+0.634 - assertEquals(1900.0d, performanceStats.getMaxThroughput(), 0.01)
+0.544 - assertTrue(performanceStats.getMaxLatency() >= performanceStats.getLatency())
+0.512 - assertTrue(performanceStats.getAverageLatency() >= performanceStats.getMinLatency())
+0.488 - assertTrue(performanceStats.getMaxThroughput() >= performanceStats.getAverageThroughput())
+0.049 - assertEquals("PerformanceStats{" + 
+             "operationCount=" + performanceStats.getOperationCount() + 
+             ", errorCount=" + performanceStats.getErrorCount() + 
+             ", latency=" + performanceStats.getLatency() + 
+             ", maxLatency=" + performanceStats.getMaxLatency() + 
+             ", minLatency=" + performanceStats.getMinLatency() + 
+             ", averageLatency=" + performanceStats.getAverageLatency() + 
+             "}", performanceStats.toString())
+0.000 - ```

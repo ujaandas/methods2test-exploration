@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScript {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScriptTest {\n@Test\npublic void testSleep ( ) throws Exception {\nlong begin = System . currentTimeMillis ( ) ;\nStringBuilder script = new StringBuilder ( ) ;\nscript . append ( \"STR\" ) ;\ndb . command ( new OCommandScript ( \"STR\" , script . toString ( ) ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(db);\nAssert.assertTrue(db.isOpen());\nAssert.assertEquals(\"ExpectedValue\", db.getSomeValue());\nAssert.assertTrue(db.getTransaction().isActive());\nAssert.assertEquals(0, db.getPendingOperationsCount());\nAssert.assertTrue(db.getClusterNames().contains(\"ExpectedCluster\"));\nAssert.assertFalse(db.getClusterNames().isEmpty());\nAssert.assertNotEquals(0, db.countClass(\"ExpectedClass\"));\nAssert.assertTrue(db.getRecord(\"ExpectedRecordId\").exists());\nAssert.assertEquals(\"ExpectedResult\", db.command(new OCommandSQL(\"SELECT * FROM ExpectedClass\")).execute());\nAssert.assertTrue(db.getSchema().existsClass(\"ExpectedClass\"));\nAssert.assertEquals(\"ExpectedPropertyValue\", db.getRecord(\"ExpectedRecordId\").field(\"ExpectedProperty\"));\nAssert.assertTrue(db.getCluster(\"ExpectedCluster\").getRecords().size() > 0);\nAssert.assertNotNull(db.getMetadata());\nAssert.assertTrue(db.getMetadata().getSchema().getClasses().size() > 0);\nAssert.assertEquals(1, db.getCluster(\"ExpectedCluster\").getRecords().size());\nAssert.assertTrue(db.getCluster(\"ExpectedCluster\").getRecords().stream().anyMatch(record -> record.field(\"ExpectedField\").equals(\"ExpectedValue\")));\nAssert.assertTrue(db.getUsers().contains(\"ExpectedUser\"));\nAssert.assertFalse(db.getUsers().isEmpty());\nAssert.assertEquals(\"ExpectedDatabaseName\", db.getName());\nAssert.assertTrue(db.getStatistics().getRecordCount() > 0);\n```\n====================\n\n",
+    "scores": [
+        0.472,
+        0.469,
+        0.45,
+        0.44,
+        0.422,
+        0.417,
+        0.413,
+        0.404,
+        0.376,
+        0.365,
+        0.358,
+        0.333,
+        0.325,
+        0.3,
+        0.297,
+        0.286,
+        0.262,
+        0.257,
+        0.229,
+        0.224,
+        0.167,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(System.currentTimeMillis()-begin>=500);"
+}

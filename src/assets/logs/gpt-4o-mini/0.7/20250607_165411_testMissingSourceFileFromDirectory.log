@@ -1,0 +1,125 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoader {
+    @Override
+     public Source load ( final String sourceFile ) throws IOException { 
+     InputStream stream = locate ( sourceFile ) ; 
+     if ( stream != null ) { 
+     try ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ; 
+     InputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) { 
+     String source = IOUtil . toString ( reader ) ; 
+     return new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ; 
+     } catch ( NoSuchAlgorithmException ex ) { 
+     throw new IOException ( "STR" , ex ) ; 
+     } } else { 
+     return null ; 
+     } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoaderTest {
+    @Test
+     public void testMissingSourceFileFromDirectory ( ) throws Exception {
+         DirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+File missingFile = new File(folder.getRoot(), "missingFile.txt");
+Source result = sourceLoader.load(missingFile.getAbsolutePath());
+assertNull(result);
+
+File existingFile = new File(folder.getRoot(), "existingFile.txt");
+FileUtils.writeStringToFile(existingFile, "Sample content", StandardCharsets.UTF_8);
+Source resultExisting = sourceLoader.load(existingFile.getAbsolutePath());
+assertNotNull(resultExisting);
+
+assertEquals(existingFile.getName(), resultExisting.getFileName());
+assertEquals("Sample content", resultExisting.getSource());
+assertNotNull(resultExisting.getDigestHex());
+assertTrue(resultExisting.getDigestHex().length() > 0);
+
+assertThrows(IOException.class, () -> {
+    sourceLoader.load(null);
+});
+
+assertThrows(IOException.class, () -> {
+    sourceLoader.load("");
+});
+
+File nonReadableFile = new File(folder.getRoot(), "nonReadableFile.txt");
+nonReadableFile.setReadable(false);
+Source resultNonReadable = sourceLoader.load(nonReadableFile.getAbsolutePath());
+assertNull(resultNonReadable);
+
+File emptyFile = new File(folder.getRoot(), "emptyFile.txt");
+FileUtils.writeStringToFile(emptyFile, "", StandardCharsets.UTF_8);
+Source resultEmpty = sourceLoader.load(emptyFile.getAbsolutePath());
+assertNotNull(resultEmpty);
+assertEquals("", resultEmpty.getSource());
+
+assertNotNull(resultExisting.getDigestHex());
+
+File specialCharFile = new File(folder.getRoot(), "special@file.txt");
+FileUtils.writeStringToFile(specialCharFile, "Content with special characters !@#$%^&*()", StandardCharsets.UTF_8);
+Source resultSpecialChar = sourceLoader.load(specialCharFile.getAbsolutePath());
+assertEquals("Content with special characters !@#$%^&*()", resultSpecialChar.getSource());
+
+assertThrows(IOException.class, () -> {
+    sourceLoader.load("invalidPath/file.txt");
+});
+
+assertEquals("Sample content", resultExisting.getSource());
+assertTrue(resultExisting.getDigestHex().length() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(sourceLoader.load("STR")); ===
+0.617 - assertThrows(IOException.class, () -> {
+    sourceLoader.load("")
+0.562 - assertThrows(IOException.class, () -> {
+    sourceLoader.load(null)
+0.556 - assertNull(result)
+0.554 - assertNull(resultNonReadable)
+0.509 - assertThrows(IOException.class, () -> {
+    sourceLoader.load("invalidPath/file.txt")
+0.495 - Source result = sourceLoader.load(missingFile.getAbsolutePath())
+0.484 - assertNotNull(resultEmpty)
+0.480 - Source resultEmpty = sourceLoader.load(emptyFile.getAbsolutePath())
+0.464 - Source resultNonReadable = sourceLoader.load(nonReadableFile.getAbsolutePath())
+0.462 - assertNotNull(resultExisting)
+0.453 - Source resultExisting = sourceLoader.load(existingFile.getAbsolutePath())
+0.450 - assertNotNull(resultExisting.getDigestHex())
+0.450 - assertNotNull(resultExisting.getDigestHex())
+0.446 - Source resultSpecialChar = sourceLoader.load(specialCharFile.getAbsolutePath())
+0.421 - assertEquals("", resultEmpty.getSource())
+0.370 - assertEquals("Sample content", resultExisting.getSource())
+0.370 - assertEquals("Sample content", resultExisting.getSource())
+0.318 - assertTrue(resultExisting.getDigestHex().length() > 0)
+0.318 - assertTrue(resultExisting.getDigestHex().length() > 0)
+0.291 - File nonReadableFile = new File(folder.getRoot(), "nonReadableFile.txt")
+0.286 - nonReadableFile.setReadable(false)
+0.286 - File emptyFile = new File(folder.getRoot(), "emptyFile.txt")
+0.283 - assertEquals("Content with special characters !@#$%^&*()", resultSpecialChar.getSource())
+0.257 - assertEquals(existingFile.getName(), resultExisting.getFileName())
+0.252 - ```java
+File missingFile = new File(folder.getRoot(), "missingFile.txt")
+0.227 - File existingFile = new File(folder.getRoot(), "existingFile.txt")
+0.220 - File specialCharFile = new File(folder.getRoot(), "special@file.txt")
+0.160 - FileUtils.writeStringToFile(emptyFile, "", StandardCharsets.UTF_8)
+0.138 - FileUtils.writeStringToFile(existingFile, "Sample content", StandardCharsets.UTF_8)
+0.125 - FileUtils.writeStringToFile(specialCharFile, "Content with special characters !@#$%^&*()", StandardCharsets.UTF_8)
+0.053 - })
+0.053 - })
+0.053 - })
+0.000 - ```

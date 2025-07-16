@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecutionTest {\n@Test\npublic void testBlob ( ) {\nString clusterName = \"STR\" ;\nOResultSet result = db . command ( \"STR\" + clusterName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(1, result.stream().count());\nassertEquals(clusterName, result.next().getProperty(\"name\"));\nassertEquals(0, result.next().getProperty(\"id\")); // Assuming the ID is 0 for the first cluster\nassertEquals(\"Cluster creation successful\", result.next().getProperty(\"message\"));\nassertTrue(result.next().getProperty(\"status\"));\nassertNotEquals(\"\", result.next().getProperty(\"creationTime\"));\nassertTrue(result.next().getProperty(\"isPersistent\"));\nassertEquals(\"STR\", result.next().getProperty(\"type\"));\nassertEquals(\"Test cluster for STR\", result.next().getProperty(\"description\"));\nassertNotNull(result.next().getProperty(\"metadata\"));\nassertEquals(0, result.next().getProperty(\"recordCount\"));\nassertEquals(clusterName, result.next().getProperty(\"name\"));\nassertFalse(result.next().getProperty(\"isDeleted\"));\nassertTrue(result.next().getProperty(\"isShared\"));\nassertEquals(\"default\", result.next().getProperty(\"defaultRole\"));\nassertNotNull(result.next().getProperty(\"permissions\"));\nassertTrue(result.next().getProperty(\"isReplicationEnabled\"));\nassertEquals(\"cluster\", result.next().getProperty(\"entityType\"));\nassertEquals(\"STR\", result.next().getProperty(\"clusterType\"));\nassertEquals(\"active\", result.next().getProperty(\"status\"));\n```\n====================\n\n",
+    "scores": [
+        0.537,
+        0.46,
+        0.46,
+        0.447,
+        0.447,
+        0.43,
+        0.43,
+        0.416,
+        0.416,
+        0.412,
+        0.404,
+        0.404,
+        0.4,
+        0.4,
+        0.375,
+        0.367,
+        0.364,
+        0.34,
+        0.328,
+        0.324,
+        0.27,
+        0.26,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(clusterName)>0);"
+}

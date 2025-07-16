@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\npublic void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException {\nFile targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ;\ntry {\nFileUtils . copyFile ( fileChanged , targetResource ) ;\ninfo ( \"STR\" + fileChanged . getCanonicalPath ( ) + \"STR\" + targetResource . getCanonicalPath ( ) ) ;\n} catch ( FileNotFoundException ex ) {\ndebug ( \"STR\" + fileChanged . getCanonicalPath ( ) ) ;\n} catch ( Exception ex ) {\ndebug ( ex ) ;\n} }\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testCopyFile ( ) throws Exception {\nFile configFile = new File ( srcDir , \"STR\" ) ;\nFiles . write ( configFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nutil . copyFile ( configFile , srcDir , targetDir , \"STR\" ) ;\nFile targetFile = new File ( targetDir , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(targetFile.exists());\nAssert.assertTrue(targetFile.isFile());\nAssert.assertTrue(targetFile.canRead());\nAssert.assertTrue(targetFile.canWrite());\nAssert.assertEquals(\"STR\", Files.readAllLines(targetFile.toPath()).get(0));\nAssert.assertEquals(configFile.length(), targetFile.length());\nAssert.assertEquals(configFile.lastModified(), targetFile.lastModified());\nAssert.assertNotEquals(configFile.getAbsolutePath(), targetFile.getAbsolutePath());\nAssert.assertNotEquals(configFile.getName(), targetFile.getName());\nAssert.assertNotEquals(configFile.getParent(), targetFile.getParent());\nAssert.assertNotEquals(configFile.getParentFile(), targetFile.getParentFile());\nAssert.assertNotEquals(configFile.toURI(), targetFile.toURI());\nAssert.assertNotEquals(configFile.toURL(), targetFile.toURL());\nAssert.assertNotEquals(configFile.toPath(), targetFile.toPath());\nAssert.assertNotEquals(configFile.getCanonicalPath(), targetFile.getCanonicalPath());\nAssert.assertNotEquals(configFile.getCanonicalFile(), targetFile.getCanonicalFile());\nAssert.assertNotEquals(configFile.getAbsoluteFile(), targetFile.getAbsoluteFile());\nAssert.assertNotEquals(configFile.getAbsoluteFile().getParent(), targetFile.getAbsoluteFile().getParent());\nAssert.assertNotEquals(configFile.getAbsoluteFile().getParentFile(), targetFile.getAbsoluteFile().getParentFile());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.871,
+        0.825,
+        0.812,
+        0.595,
+        0.565,
+        0.565,
+        0.562,
+        0.552,
+        0.538,
+        0.521,
+        0.515,
+        0.495,
+        0.495,
+        0.486,
+        0.476,
+        0.467,
+        0.403,
+        0.38
+    ],
+    "ground_truth": "assertTrue(targetFile.exists());"
+}

@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactory {
+    public Extractor getNewInstance ( ) { 
+    Extractor extractor = new BasicExtractor ( config ) ; 
+    if ( config . shouldCachedDownload ( ) ) { 
+    extractor = new CachedExtractor ( extractor , config ) ; 
+    } return extractor ; 
+    }
+}
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactoryTest {
+    @Test
+     public void withCaching ( ) throws Exception {
+         builder . useCachedDownload ( true ) ; 
+         Extractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(true, extractor instanceof CachedExtractor);
+assertEquals(builder.build().shouldCachedDownload(), true);
+assertNotNull(extractor);
+assertNotEquals(extractor, null);
+assertNotNull(extractor.getConfig());
+assertEquals(extractor.getConfig().shouldCachedDownload(), true);
+assertEquals(extractor.getClass(), Extractor.class);
+assertEquals(extractor.getClass(), CachedExtractor.class);
+assertNotEquals(extractor.getClass(), BasicExtractor.class);
+assertTrue(extractor instanceof Extractor);
+assertTrue(extractor instanceof CachedExtractor);
+assertTrue(extractor.getConfig().shouldCachedDownload());
+assertFalse(extractor instanceof BasicExtractor);
+assertNotNull(extractor.getConfig());
+assertNotNull(extractor.getConfig().getDownloadUrl());
+assertEquals(extractor.getConfig().getDownloadUrl(), "https://example.com");
+assertNotNull(extractor.getConfig().getUsername());
+assertEquals(extractor.getConfig().getUsername(), "username");
+assertNotNull(extractor.getConfig().getPassword());
+assertEquals(extractor.getConfig().getPassword(), "password");
+assertTrue(extractor.getConfig().isSecure());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(extractor.getClass().equals(CachedExtractor.class)); ===
+0.847 - assertEquals(extractor.getClass(), CachedExtractor.class)
+0.786 - assertEquals(extractor.getClass(), Extractor.class)
+0.783 - assertNotEquals(extractor.getClass(), BasicExtractor.class)
+0.685 - assertTrue(extractor instanceof CachedExtractor)
+0.661 - assertTrue(extractor.getConfig().shouldCachedDownload())
+0.623 - assertTrue(extractor.getConfig().isSecure())
+0.609 - assertEquals(true, extractor instanceof CachedExtractor)
+0.608 - assertTrue(extractor instanceof Extractor)
+0.576 - assertEquals(extractor.getConfig().shouldCachedDownload(), true)
+0.574 - assertFalse(extractor instanceof BasicExtractor)
+0.539 - assertNotNull(extractor.getConfig().getDownloadUrl())
+0.536 - assertNotNull(extractor.getConfig().getUsername())
+0.510 - assertNotNull(extractor.getConfig())
+0.510 - assertNotNull(extractor.getConfig())
+0.508 - assertEquals(extractor.getConfig().getPassword(), "password")
+0.500 - assertEquals(extractor.getConfig().getDownloadUrl(), "https://example.com")
+0.500 - assertNotNull(extractor.getConfig().getPassword())
+0.492 - assertEquals(extractor.getConfig().getUsername(), "username")
+0.419 - assertNotNull(extractor)
+0.409 - assertNotEquals(extractor, null)
+0.353 - assertEquals(builder.build().shouldCachedDownload(), true)

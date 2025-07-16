@@ -1,0 +1,109 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > Map < AEqualsWrapper < X > , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f , AEquality keyEquality ) throws E { 
+    final Map < AEqualsWrapper < X > , List < T > > result = new HashMap < > ( ) ; 
+    for ( T o : coll ) { 
+    final AEqualsWrapper < X > key = new AEqualsWrapper < > ( keyEquality , f . apply ( o ) ) ; 
+    List < T > perKey = result . get ( key ) ; 
+    if ( perKey == null ) { 
+    perKey = createEmptyListOfType ( coll , false ) ; 
+    result . put ( key , perKey ) ; 
+    } perKey . add ( o ) ; 
+    } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testGroupByCustomEquality ( ) {
+         final AEquality equality = new AEquality ( ) { 
+     @Override
+     public boolean equals ( Object o1 , Object o2 ) { 
+     return ( ( Integer ) o1 ) % 2 == ( ( Integer ) o2 ) % 2 ; 
+     } @Override
+     public int hashCode ( Object o ) { 
+     return 0 ; 
+     } } ; 
+         final AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) { 
+     @Override
+     public Integer apply ( String param ) { 
+     return param . length ( ) ; 
+     } } ; 
+         final Map < AEqualsWrapper < Integer > , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) , len , equality ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, grouped.size());
+assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 3)));
+assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 0)));
+
+List<String> oddLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 3));
+List<String> evenLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 0));
+
+assertNotNull(oddLengthStrings);
+assertNotNull(evenLengthStrings);
+
+assertEquals(6, oddLengthStrings.size());
+assertEquals(0, evenLengthStrings.size());
+
+for (String str : oddLengthStrings) {
+    assertEquals(3, str.length());
+}
+
+for (String str : evenLengthStrings) {
+    assertEquals(0, str.length());
+}
+
+assertEquals(Arrays.asList("STR", "STR", "STR", "STR", "STR", "STR"), oddLengthStrings);
+assertTrue(evenLengthStrings.isEmpty());
+
+assertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 3))));
+assertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 0))));
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 1)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 2)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 4)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,grouped.size()); ===
+0.853 - ```java
+assertEquals(1, grouped.size())
+0.696 - assertEquals(6, oddLengthStrings.size())
+0.686 - assertEquals(0, evenLengthStrings.size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 1)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 2)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 4)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size())
+0.426 - assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 3)))
+0.426 - assertTrue(grouped.containsKey(new AEqualsWrapper<>(equality, 0)))
+0.396 - for (String str : oddLengthStrings) {
+    assertEquals(3, str.length())
+0.379 - }
+
+for (String str : evenLengthStrings) {
+    assertEquals(0, str.length())
+0.328 - assertNotNull(oddLengthStrings)
+0.323 - assertNotNull(evenLengthStrings)
+0.319 - assertTrue(evenLengthStrings.isEmpty())
+0.317 - assertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 3))))
+0.317 - assertTrue(grouped.keySet().stream().anyMatch(key -> key.equals(new AEqualsWrapper<>(equality, 0))))
+0.316 - }
+
+assertEquals(Arrays.asList("STR", "STR", "STR", "STR", "STR", "STR"), oddLengthStrings)
+0.272 - List<String> oddLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 3))
+0.269 - List<String> evenLengthStrings = grouped.get(new AEqualsWrapper<>(equality, 0))
+0.000 - ```

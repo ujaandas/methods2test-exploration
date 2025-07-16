@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testAnchorFilterFalse ( ) throws MalformedURLException {
+         URLFilter allAllowed = createFilter ( false , false ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("Expected URL after filtering", "expectedUrl", filterResult);
+assertTrue("Filter result should not be empty", !filterResult.isEmpty());
+assertFalse("Filter result should not contain unwanted characters", filterResult.contains("unwantedCharacter"));
+assertTrue("Filter result should start with expected prefix", filterResult.startsWith("expectedPrefix"));
+assertTrue("Filter result should end with expected suffix", filterResult.endsWith("expectedSuffix"));
+assertEquals("Filter result should match expected pattern", "expectedPattern", filterResult);
+assertNotEquals("Filter result should not match disallowed pattern", "disallowedPattern", filterResult);
+assertTrue("Filter result should contain expected substring", filterResult.contains("expectedSubstring"));
+assertFalse("Filter result should not contain disallowed substring", filterResult.contains("disallowedSubstring"));
+assertTrue("Filter result should have a length greater than 5", filterResult.length() > 5);
+assertTrue("Filter result should have a length less than 100", filterResult.length() < 100);
+assertTrue("Filter result should be a valid URL", isValidURL(filterResult));
+assertFalse("Filter result should not be equal to the original URL", filterResult.equals(url.toExternalForm()));
+assertTrue("Filter result should be normalized", isNormalized(filterResult));
+assertTrue("Filter result should not contain duplicate segments", !hasDuplicateSegments(filterResult));
+assertTrue("Filter result should be in lowercase", filterResult.equals(filterResult.toLowerCase()));
+assertTrue("Filter result should not contain spaces", !filterResult.contains(" "));
+assertTrue("Filter result should not be a local file path", !filterResult.startsWith("file://"));
+assertTrue("Filter result should not be a mailto link", !filterResult.startsWith("mailto:"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.591 - assertEquals("Expected URL after filtering", "expectedUrl", filterResult)
+0.576 - assertEquals("Filter result should match expected pattern", "expectedPattern", filterResult)
+0.549 - assertNotEquals("Filter result should not match disallowed pattern", "disallowedPattern", filterResult)
+0.537 - ```java
+assertNotNull(filterResult)
+0.496 - assertTrue("Filter result should not be empty", !filterResult.isEmpty())
+0.492 - assertTrue("Filter result should be normalized", isNormalized(filterResult))
+0.470 - assertTrue("Filter result should be a valid URL", isValidURL(filterResult))
+0.446 - assertFalse("Filter result should not be equal to the original URL", filterResult.equals(url.toExternalForm()))
+0.444 - assertTrue("Filter result should have a length greater than 5", filterResult.length() > 5)
+0.443 - assertTrue("Filter result should not be a mailto link", !filterResult.startsWith("mailto:"))
+0.443 - assertTrue("Filter result should not contain spaces", !filterResult.contains(" "))
+0.433 - assertTrue("Filter result should not be a local file path", !filterResult.startsWith("file://"))
+0.429 - assertFalse("Filter result should not contain disallowed substring", filterResult.contains("disallowedSubstring"))
+0.425 - assertTrue("Filter result should have a length less than 100", filterResult.length() < 100)
+0.411 - assertFalse("Filter result should not contain unwanted characters", filterResult.contains("unwantedCharacter"))
+0.408 - assertTrue("Filter result should not contain duplicate segments", !hasDuplicateSegments(filterResult))
+0.386 - assertTrue("Filter result should be in lowercase", filterResult.equals(filterResult.toLowerCase()))
+0.384 - assertTrue("Filter result should contain expected substring", filterResult.contains("expectedSubstring"))
+0.375 - assertTrue("Filter result should start with expected prefix", filterResult.startsWith("expectedPrefix"))
+0.371 - assertTrue("Filter result should end with expected suffix", filterResult.endsWith("expectedSuffix"))
+0.000 - ```

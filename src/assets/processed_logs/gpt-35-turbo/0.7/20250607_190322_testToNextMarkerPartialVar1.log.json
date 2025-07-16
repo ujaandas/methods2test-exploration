@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SegmentReader {\npublic ByteBuffer readToNextMarkerNewBuffer ( ) throws IOException {\nif ( done ) return null ;\nList < ByteBuffer > buffers = new ArrayList < ByteBuffer > ( ) ;\nreadToNextMarkerBuffers ( buffers ) ;\nreturn NIOUtils . combineBuffers ( buffers ) ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SegmentReaderTest {\n@Test\npublic void testToNextMarkerPartialVar1 ( ) throws IOException {\nbyte [ ] bytes = new byte [ ] {\n0 , 0 , 1 , 42 , 43 , 44 , 45 , 46 , 0 , 0 , 1 , 43 } ;\nReadableByteChannel ch = Channels . newChannel ( new ByteArrayInputStream ( bytes ) ) ;\nSegmentReader reader = new SegmentReader ( ch , 1 ) ;\nreader . setBufferIncrement ( 1 ) ;\nByteBuffer buf1 = reader . readToNextMarkerNewBuffer ( ) ;\nByteBuffer buf2 = reader . readToNextMarkerNewBuffer ( ) ;\nByteBuffer buf3 = reader . readToNextMarkerNewBuffer ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(4, buf1.remaining());\nassertEquals(4, buf2.remaining());\nassertNull(buf3);\nassertEquals(42, buf1.get());\nassertEquals(43, buf1.get());\nassertEquals(44, buf1.get());\nassertEquals(45, buf1.get());\nassertEquals(1, buf2.remaining());\nassertEquals(46, buf2.get());\nassertEquals(0, buf2.remaining());\nassertEquals(1, buf3.remaining());\nassertEquals(43, buf3.get());\nassertEquals(0, buf3.remaining());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\nassertEquals(0, reader.readToNextMarkerNewBuffer());\n====================\n\n",
+    "scores": [
+        0.528,
+        0.528,
+        0.528,
+        0.528,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.505,
+        0.5,
+        0.5,
+        0.494,
+        0.494,
+        0.494,
+        0.468,
+        0.468,
+        0.468,
+        0.426
+    ],
+    "ground_truth": "Assert.assertEquals(ByteBuffer.wrap(bytes,0,8),buf1);"
+}

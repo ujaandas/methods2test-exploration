@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testOrderByDesc ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nString query = \"STR\" ;\nOResultSet result = db . query ( query ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(5, result.stream().count());\nresult.forEach(r -> assertNotNull(r.getProperty(\"someProperty\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"someProperty\") instanceof String));\nresult.close();\nassertTrue(result.isClosed());\nassertEquals(\"expectedValue\", result.next().getProperty(\"someProperty\"));\nassertEquals(\"expectedValue\", result.next().getProperty(\"someProperty\"));\nassertEquals(\"expectedValue\", result.next().getProperty(\"someProperty\"));\nassertEquals(\"expectedValue\", result.next().getProperty(\"someProperty\"));\nassertEquals(\"expectedValue\", result.next().getProperty(\"someProperty\"));\nassertFalse(result.hasNext());\nassertThrows(NoSuchElementException.class, () -> result.next());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"anotherProperty\").equals(\"expectedAnotherValue\")));\nassertEquals(5, result.stream().filter(r -> r.getProperty(\"someProperty\").equals(\"expectedValue\")).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"anotherProperty\") != null));\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"someProperty\").isEmpty()));\nassertTrue(result.stream().map(r -> r.getProperty(\"numericProperty\")).allMatch(num -> (Integer)num > 0));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.877,
+        0.807,
+        0.597,
+        0.545,
+        0.526,
+        0.524,
+        0.459,
+        0.424,
+        0.424,
+        0.424,
+        0.424,
+        0.424,
+        0.411,
+        0.394,
+        0.386,
+        0.352,
+        0.349,
+        0.348,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

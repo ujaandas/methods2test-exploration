@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testSkipOrdered ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));
+assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")));
+assertEquals(expectedValue, results.get(0).field("fieldName"));
+assertEquals(expectedValue, results.get(1).field("fieldName"));
+assertNotEquals(unexpectedValue, results.get(2).field("fieldName"));
+assertTrue(results.get(0).field("numericField") > 0);
+assertTrue(results.get(1).field("dateField") instanceof Date);
+assertTrue(results.get(2).field("booleanField") instanceof Boolean);
+assertEquals("expectedString", results.get(3).field("stringField"));
+assertTrue(results.stream().anyMatch(doc -> doc.field("status").equals("active")));
+assertFalse(results.stream().anyMatch(doc -> doc.field("status").equals("inactive")));
+assertEquals(expectedId, results.get(4).getIdentity());
+assertTrue(results.stream().map(doc -> doc.field("fieldName")).distinct().count() > 1);
+assertEquals(expectedFieldCount, results.get(5).fieldNames().size());
+assertTrue(results.stream().allMatch(doc -> doc.field("numericField") < maxValue));
+assertTrue(results.stream().anyMatch(doc -> doc.field("category").equals("category1")));
+assertFalse(results.stream().noneMatch(doc -> doc.field("category").equals("category2")));
+assertEquals(expectedFieldValue, results.get(6).field("anotherField"));
+assertNotNull(results.get(7).field("nestedField"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(19,results.size()); ===
+0.806 - assertEquals(expectedSize, results.size())
+0.721 - assertFalse(results.isEmpty())
+0.619 - assertEquals(expectedId, results.get(4).getIdentity())
+0.592 - assertEquals(expectedFieldCount, results.get(5).fieldNames().size())
+0.587 - assertEquals(expectedValue, results.get(0).field("fieldName"))
+0.587 - assertEquals(expectedValue, results.get(1).field("fieldName"))
+0.557 - ```java
+assertNotNull(results)
+0.557 - assertNotEquals(unexpectedValue, results.get(2).field("fieldName"))
+0.557 - assertEquals("expectedString", results.get(3).field("stringField"))
+0.543 - assertNotNull(results.get(7).field("nestedField"))
+0.540 - assertEquals(expectedFieldValue, results.get(6).field("anotherField"))
+0.519 - assertTrue(results.get(0).field("numericField") > 0)
+0.433 - assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument))
+0.422 - assertTrue(results.get(1).field("dateField") instanceof Date)
+0.404 - assertFalse(results.stream().anyMatch(doc -> doc.field("status").equals("inactive")))
+0.400 - assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")))
+0.396 - assertTrue(results.get(2).field("booleanField") instanceof Boolean)
+0.390 - assertFalse(results.stream().noneMatch(doc -> doc.field("category").equals("category2")))
+0.385 - assertTrue(results.stream().allMatch(doc -> doc.field("numericField") < maxValue))
+0.378 - assertTrue(results.stream().anyMatch(doc -> doc.field("status").equals("active")))
+0.372 - assertTrue(results.stream().map(doc -> doc.field("fieldName")).distinct().count() > 1)
+0.362 - assertTrue(results.stream().anyMatch(doc -> doc.field("category").equals("category1")))
+0.000 - ```

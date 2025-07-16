@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class RecursiveLinkedSave {\nlong countClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class RecursiveLinkedSaveTest {\n@Test\npublic void testTxLinked ( ) {\ndb . getMetadata ( ) . getSchema ( ) . createClass ( \"STR\" ) ;\ndb . begin ( ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\nODocument doc1 = new ODocument ( \"STR\" ) ;\ndoc . field ( \"STR\" , doc1 ) ;\nODocument doc2 = new ODocument ( \"STR\" ) ;\ndoc1 . field ( \"STR\" , doc2 ) ;\ndoc2 . field ( \"STR\" , doc ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(doc);\nAssert.assertNotNull(doc1);\nAssert.assertNotNull(doc2);\nAssert.assertEquals(\"STR\", doc.getClassName());\nAssert.assertEquals(\"STR\", doc1.getClassName());\nAssert.assertEquals(\"STR\", doc2.getClassName());\nAssert.assertEquals(doc1, doc.field(\"STR\"));\nAssert.assertEquals(doc2, doc1.field(\"STR\"));\nAssert.assertEquals(doc, doc2.field(\"STR\"));\nAssert.assertTrue(doc.getIdentity().isValid());\nAssert.assertTrue(doc1.getIdentity().isValid());\nAssert.assertTrue(doc2.getIdentity().isValid());\nAssert.assertNotNull(db.load(doc.getIdentity()));\nAssert.assertNotNull(db.load(doc1.getIdentity()));\nAssert.assertNotNull(db.load(doc2.getIdentity()));\nAssert.assertEquals(doc1, doc.field(\"STR\"));\nAssert.assertEquals(doc2, doc1.field(\"STR\"));\nAssert.assertEquals(doc, doc2.field(\"STR\"));\nAssert.assertEquals(3, db.countClass(\"STR\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.704,
+        0.704,
+        0.704,
+        0.704,
+        0.694,
+        0.694,
+        0.676,
+        0.667,
+        0.667,
+        0.468,
+        0.462,
+        0.462,
+        0.444,
+        0.436,
+        0.436,
+        0.32,
+        0.316,
+        0.316
+    ],
+    "ground_truth": "assertEquals(3,db.countClass(\"STR\"));"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testNonStandardPercentEncoding ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( false , false ) ;\nURL testSourceUrl = new URL ( \"STR\" ) ;\nString inputURL = \"STR\" ;\nString expectedURL = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , inputURL ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(normalizedUrl);\nassertEquals(expectedURL, normalizedUrl);\nassertTrue(normalizedUrl.startsWith(\"http\"));\nassertFalse(normalizedUrl.contains(\" \"));\nassertFalse(normalizedUrl.contains(\"%20\"));\nassertTrue(normalizedUrl.endsWith(\".com\") || normalizedUrl.endsWith(\".org\") || normalizedUrl.endsWith(\".net\"));\nassertEquals(expectedURL.length(), normalizedUrl.length());\nassertTrue(normalizedUrl.matches(\"^[a-zA-Z0-9._~:/?#[\\\\]@!$&'()*+,;=%-]+$\"));\nassertFalse(normalizedUrl.contains(\"..\"));\nassertFalse(normalizedUrl.contains(\"//\"));\nassertTrue(normalizedUrl.indexOf(\"http\") == 0 || normalizedUrl.indexOf(\"https\") == 0);\nassertNotEquals(inputURL, normalizedUrl);\nassertTrue(normalizedUrl.equalsIgnoreCase(expectedURL));\nassertTrue(normalizedUrl.contains(\"://\"));\nassertFalse(normalizedUrl.contains(\"ftp\"));\nassertTrue(normalizedUrl.matches(\"^(http|https)://.*\"));\nassertTrue(normalizedUrl.length() <= 2048);\nassertFalse(normalizedUrl.contains(\"mailto:\"));\nassertTrue(normalizedUrl.indexOf(\"?\") == -1 || normalizedUrl.indexOf(\"#\") > normalizedUrl.indexOf(\"?\"));\nassertFalse(normalizedUrl.contains(\"javascript:\"));\nassertTrue(normalizedUrl.split(\"/\").length >= 3);\n```\n====================\n\n",
+    "scores": [
+        0.929,
+        0.786,
+        0.765,
+        0.571,
+        0.568,
+        0.558,
+        0.558,
+        0.552,
+        0.552,
+        0.527,
+        0.518,
+        0.512,
+        0.505,
+        0.494,
+        0.484,
+        0.44,
+        0.44,
+        0.396,
+        0.355,
+        0.31,
+        0.291,
+        0.074,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedURL,normalizedUrl);"
+}

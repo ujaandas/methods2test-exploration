@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class CommonUtils_Sleep {\npublic static void sleepTimeUnit ( TimeUnit timeUnit , long timeout ) {\ntry {\ntimeUnit . sleep ( timeout ) ;\n} catch ( InterruptedException e ) {\nignore ( e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class CommonUtils_SleepTest {\n@Test\npublic void testSleepTimeUnit ( ) {\nlong started = System . nanoTime ( ) ;\nsleepTimeUnit ( MILLISECONDS , 1 ) ;\nlong duration = NANOSECONDS . toMillis ( System . nanoTime ( ) - started ) ;\nlong durationLimit = SECONDS . toMillis ( 3 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(duration >= 1, \"Sleep duration should be at least 1 millisecond\");\nassertTrue(duration < durationLimit, \"Sleep duration should be less than 3 seconds\");\nassertTrue(duration <= 2, \"Sleep duration should not exceed 2 milliseconds\");\nassertTrue(duration >= 0, \"Sleep duration should not be negative\");\nassertTrue(duration <= 1, \"Sleep duration should not exceed 1 millisecond\");\nassertTrue(duration > 0, \"Sleep duration should be greater than 0 milliseconds\");\nassertTrue(duration % 1 == 0, \"Sleep duration should be a whole number of milliseconds\");\nassertTrue(duration >= 1 && duration <= 2, \"Sleep duration should be between 1 and 2 milliseconds\");\nassertEquals(1, duration, \"Sleep duration should be exactly 1 millisecond\");\nassertTrue(duration <= 1, \"Sleep duration should not exceed 1 millisecond\");\nassertTrue(duration != 0, \"Sleep duration should not be zero\");\nassertTrue(duration < 2, \"Sleep duration should be less than 2 milliseconds\");\nassertTrue(duration >= 1 && duration < durationLimit, \"Sleep duration should be at least 1 millisecond and less than 3 seconds\");\nassertTrue(duration <= durationLimit, \"Sleep duration should not exceed 3 seconds\");\nassertTrue(duration % 2 == 0 || duration % 2 == 1, \"Sleep duration should be an integer\");\nassertTrue(duration >= 1 && duration <= 1, \"Sleep duration should be equal to 1 millisecond\");\nassertTrue(duration < durationLimit - 1, \"Sleep duration should be less than 2 seconds\");\nassertTrue(duration >= 1 && duration <= durationLimit, \"Sleep duration should be between 1 millisecond and 3 seconds\");\nassertTrue(duration <= 3, \"Sleep duration should not exceed 3 milliseconds\");\nassertTrue(duration > 0 && duration < durationLimit, \"Sleep duration should be greater than 0 and less than 3 seconds\");\n```\n====================\n\n",
+    "scores": [
+        0.586,
+        0.523,
+        0.523,
+        0.518,
+        0.518,
+        0.518,
+        0.483,
+        0.482,
+        0.475,
+        0.471,
+        0.471,
+        0.463,
+        0.427,
+        0.383,
+        0.353,
+        0.339,
+        0.326,
+        0.301,
+        0.286,
+        0.273,
+        0.0
+    ],
+    "ground_truth": "assertTrue(format(\"STR\",duration),duration>0);"
+}

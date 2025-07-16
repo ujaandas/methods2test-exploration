@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilder {\n@Override\npublic String toString ( ) ;\n}\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilderTest {\n@Test\npublic void testSort ( ) {\nsql . select ( ) . from ( \"STR\" ) . orderBy ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertEquals(\"SELECT * FROM STR ORDER BY STR\", sql.toString());\nAssert.assertTrue(sql.hasSelect());\nAssert.assertTrue(sql.hasFrom());\nAssert.assertTrue(sql.hasOrderBy());\nAssert.assertEquals(1, sql.getSelectCount());\nAssert.assertEquals(\"STR\", sql.getFromTable());\nAssert.assertEquals(\"STR\", sql.getOrderByColumn());\nAssert.assertFalse(sql.hasWhere());\nAssert.assertFalse(sql.hasGroupBy());\nAssert.assertTrue(sql.isValid());\nAssert.assertNotNull(sql.getQuery());\nAssert.assertTrue(sql.getQuery().contains(\"SELECT\"));\nAssert.assertTrue(sql.getQuery().contains(\"FROM\"));\nAssert.assertTrue(sql.getQuery().contains(\"ORDER BY\"));\nAssert.assertEquals(\"STR\", sql.getOrderBy().get(0));\nAssert.assertEquals(0, sql.getGroupByCount());\nAssert.assertEquals(0, sql.getWhereCount());\nAssert.assertTrue(sql.isOrdered());\nAssert.assertFalse(sql.isGrouped());\nAssert.assertFalse(sql.isFiltered());\nAssert.assertEquals(\"STR\", sql.getSelectColumns().get(0));\nAssert.assertEquals(1, sql.getOrderByCount());\n```\n====================\n\n",
+    "scores": [
+        0.778,
+        0.763,
+        0.727,
+        0.701,
+        0.699,
+        0.696,
+        0.686,
+        0.676,
+        0.676,
+        0.603,
+        0.59,
+        0.581,
+        0.571,
+        0.571,
+        0.542,
+        0.542,
+        0.525,
+        0.525,
+        0.519,
+        0.516,
+        0.5,
+        0.43,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",sql.toString());"
+}

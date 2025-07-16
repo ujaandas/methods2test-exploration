@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rockagen.commons-lib;\n\npublic class OPLog {\npublic static Method getDeclaredMethod ( Class < ? > clazz , boolean recursively , String methodName , Class < ? > ... parameterTypes ) {\ntry {\nreturn clazz . getDeclaredMethod ( methodName , parameterTypes ) ;\n} catch ( NoSuchMethodException e ) {\nClass < ? > superClass = clazz . getSuperclass ( ) ;\nif ( superClass != null && recursively ) {\nreturn getDeclaredMethod ( superClass , true , methodName , parameterTypes ) ;\n} } catch ( SecurityException e ) {\nlog . error ( \"STR\" , e . getMessage ( ) , e ) ;\n} return null ;\n}\n}\n\npackage rockagen.commons-lib;\n\npublic class OPLogTest {\n@Test\npublic void testDescription ( ) throws SecurityException , NoSuchMethodException {\nPlog annotation = ( Plog ) ClassUtil . getDeclaredMethod ( getClass ( ) , false , \"STR\" ) . getAnnotation ( Plog . class ) ;\nString value = annotation . value ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(annotation);\nassertEquals(\"ExpectedValue\", value);\nassertTrue(value.length() > 0);\nassertFalse(value.isEmpty());\nassertEquals(\"ExpectedValue\", annotation.value());\nassertNotEquals(\"UnexpectedValue\", value);\nassertTrue(value.contains(\"ExpectedSubstring\"));\nassertFalse(value.contains(\"UnexpectedSubstring\"));\nassertEquals(10, value.length());\nassertTrue(value.startsWith(\"ExpectedPrefix\"));\nassertTrue(value.endsWith(\"ExpectedSuffix\"));\nassertNotSame(\"DifferentValue\", value);\nassertTrue(value.matches(\"ExpectedRegexPattern\"));\nassertEquals(\"ExpectedValue\", annotation.toString());\nassertSame(annotation, ClassUtil.getDeclaredMethod(getClass(), false, \"STR\").getAnnotation(Plog.class));\nassertArrayEquals(new String[]{\"ExpectedValue1\", \"ExpectedValue2\"}, new String[]{value, \"ExpectedValue2\"});\nassertTrue(value.equalsIgnoreCase(\"expectedvalue\"));\nassertTrue(value.chars().allMatch(Character::isLetter));\nassertFalse(value.chars().anyMatch(Character::isDigit));\nassertTrue(value.contains(\"ExpectedPart\"));\nassertEquals(\"ExpectedValue\", value.trim());\n```\n====================\n\n",
+    "scores": [
+        0.733,
+        0.714,
+        0.677,
+        0.657,
+        0.604,
+        0.603,
+        0.528,
+        0.516,
+        0.5,
+        0.5,
+        0.427,
+        0.418,
+        0.406,
+        0.4,
+        0.394,
+        0.389,
+        0.378,
+        0.35,
+        0.349,
+        0.345,
+        0.272,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",value);"
+}

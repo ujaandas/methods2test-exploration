@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteTransactionSupport {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteTransactionSupportTest {
+    @Test
+     public void testRefFlushedInTransaction ( ) {
+         database . begin ( ) ; 
+         OElement someTx = database . newElement ( "STR" ) ; 
+         someTx . setProperty ( "STR" , "STR" ) ; 
+         database . save ( someTx ) ; 
+         OElement oneMore = database . newElement ( "STR" ) ; 
+         oneMore . setProperty ( "STR" , "STR" ) ; 
+         oneMore . setProperty ( "STR" , someTx ) ; 
+         OResultSet result = database . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(1, result.stream().count());
+OResult firstResult = result.next();
+assertEquals("STR", firstResult.getProperty("STR"));
+assertTrue(firstResult.getProperty("STR") instanceof OElement);
+assertEquals("STR", ((OElement) firstResult.getProperty("STR")).getProperty("STR"));
+assertEquals(someTx.getIdentity(), firstResult.getProperty("STR").getIdentity());
+assertEquals(1, database.countElements("STR"));
+assertEquals(2, database.countElements());
+assertTrue(database.getElements().stream().anyMatch(e -> e.getProperty("STR").equals("STR")));
+assertTrue(database.getElements().stream().anyMatch(e -> e.getIdentity().equals(someTx.getIdentity())));
+assertTrue(database.getElements().stream().anyMatch(e -> e.getProperty("STR").equals(oneMore.getProperty("STR"))));
+assertFalse(result.isClosed());
+result.close();
+assertTrue(result.isClosed());
+assertThrows(IllegalStateException.class, () -> result.next());
+assertThrows(IllegalStateException.class, () -> result.stream().count());
+assertEquals(0, database.getPendingTransactions().size());
+assertTrue(database.isTransactionActive());
+database.commit();
+assertFalse(database.isTransactionActive());
+assertEquals(0, database.getPendingTransactions().size());
+assertEquals(2, database.countElements("STR"));
+assertEquals(2, database.getElements().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,result.stream().count()); ===
+1.000 - assertEquals(1, result.stream().count())
+0.638 - assertFalse(result.isClosed())
+0.630 - assertThrows(IllegalStateException.class, () -> result.stream().count())
+0.627 - assertTrue(result.hasNext())
+0.608 - assertEquals(2, database.countElements())
+0.607 - assertEquals("STR", firstResult.getProperty("STR"))
+0.595 - assertEquals(1, database.countElements("STR"))
+0.588 - assertTrue(result.isClosed())
+0.571 - assertEquals(2, database.countElements("STR"))
+0.542 - assertEquals(someTx.getIdentity(), firstResult.getProperty("STR").getIdentity())
+0.533 - assertEquals("STR", ((OElement) firstResult.getProperty("STR")).getProperty("STR"))
+0.524 - assertEquals(2, database.getElements().size())
+0.505 - assertEquals(0, database.getPendingTransactions().size())
+0.505 - assertEquals(0, database.getPendingTransactions().size())
+0.471 - ```java
+assertNotNull(result)
+0.449 - assertThrows(IllegalStateException.class, () -> result.next())
+0.424 - assertTrue(firstResult.getProperty("STR") instanceof OElement)
+0.423 - OResult firstResult = result.next()
+0.415 - result.close()
+0.400 - assertTrue(database.getElements().stream().anyMatch(e -> e.getProperty("STR").equals("STR")))
+0.371 - assertTrue(database.getElements().stream().anyMatch(e -> e.getIdentity().equals(someTx.getIdentity())))
+0.371 - assertTrue(database.getElements().stream().anyMatch(e -> e.getProperty("STR").equals(oneMore.getProperty("STR"))))
+0.366 - assertFalse(database.isTransactionActive())
+0.346 - assertTrue(database.isTransactionActive())
+0.321 - database.commit()
+0.000 - ```

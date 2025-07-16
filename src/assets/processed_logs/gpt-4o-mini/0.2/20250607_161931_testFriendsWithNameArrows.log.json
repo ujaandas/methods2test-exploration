@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsWithNameArrows ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"name\") != null));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friends\") != null));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"age\") instanceof Integer));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Alice\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Bob\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friends\").contains(\"Charlie\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friends\").contains(\"David\")));\nassertEquals(\"Alice\", qResult.get(0).field(\"name\"));\nassertEquals(\"Bob\", qResult.get(1).field(\"name\"));\nassertEquals(30, qResult.get(0).field(\"age\"));\nassertEquals(25, qResult.get(1).field(\"age\"));\nassertTrue(qResult.get(0).field(\"friends\").size() > 0);\nassertTrue(qResult.get(1).field(\"friends\").size() > 0);\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friends\").size() <= 5));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friends\").contains(\"Eve\")));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"friends\").contains(\"Unknown\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"age\") >= 18));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").startsWith(\"A\")));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.73,
+        0.73,
+        0.692,
+        0.675,
+        0.567,
+        0.561,
+        0.561,
+        0.447,
+        0.442,
+        0.433,
+        0.42,
+        0.4,
+        0.393,
+        0.393,
+        0.393,
+        0.382,
+        0.375,
+        0.368,
+        0.365,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

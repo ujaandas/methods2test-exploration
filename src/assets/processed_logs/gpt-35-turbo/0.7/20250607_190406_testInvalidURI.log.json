@@ -1,0 +1,22 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testInvalidURI ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , true ) ;\nString nonURI = \"STR\" ;\nURL testSourceUrl = new URL ( nonURI ) ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(expectedResult, normalizedUrl);\nassertEquals(\"http://www.example.com\", urlFilter.filter(new URL(\"http://www.example.com\"), new Metadata(), \"http://www.example.com\"));\nassertEquals(\"https://www.example.com\", urlFilter.filter(new URL(\"https://www.example.com\"), new Metadata(), \"https://www.example.com\"));\nassertEquals(\"ftp://www.example.com\", urlFilter.filter(new URL(\"ftp://www.example.com\"), new Metadata(), \"ftp://www.example.com\"));\nassertEquals(\"http://www.example.com:8080\", urlFilter.filter(new URL(\"http://www.example.com:8080\"), new Metadata(), \"http://www.example.com:8080\"));\nassertEquals(\"http://www.example.com/path\", urlFilter.filter(new URL(\"http://www.example.com/path\"), new Metadata(), \"http://www.example.com/path\"));\nassertEquals(\"http://www.example.com/path?query=1\", urlFilter.filter(new URL(\"http://www.example.com/path?query=1\"), new Metadata(), \"http://www.example.com/path?query=1\"));\nassertEquals(\"http://www.example.com/path#fragment\", urlFilter.filter(new URL(\"http://www.example.com/path#fragment\"), new Metadata(), \"http://www.example.com/path#fragment\"));\nassertEquals(\"https://www.example.com/path\", urlFilter.filter(new URL(\"https://www.example.com/path\"), new Metadata(), \"https://www.example.com/path\"));\nassertEquals(\"http://www.example.com/path/\", urlFilter.filter(new URL(\"http://www.example.com/path/\"), new Metadata(), \"http://www.example.com/path/\"));\nassertEquals(\"http://www.example.com/path/index.html\", urlFilter.filter(new URL(\"http://www.example.com/path/index.html\"), new Metadata(), \"http://www.example.com/path/index.html\"));\nassertEquals(\"http://www.example.com/path/index.html?query=1\", urlFilter.filter(new URL(\"http://www.example.com/path/index.html?query=1\"), new Metadata(), \"http://www.example.com/path/index.html?query=1\"));\nassertEquals(\"http://www.example.com/path/index.html#fragment\", urlFilter.filter(new URL(\"http://www.example.com/path/index.html#fragment\"), new Metadata(), \"http://www.example.com/path/index.html#fragment\"));\nassertEquals(\"http://www.example.com:8080/path\", urlFilter.filter(new URL(\"http://www.example.com:8080/path\"), new Metadata(), \"http://www.example.com:8080/path\"));\nassertEquals(\"\n====================\n\n",
+    "scores": [
+        0.933,
+        0.452,
+        0.301,
+        0.295,
+        0.293,
+        0.291,
+        0.289,
+        0.289,
+        0.284,
+        0.277,
+        0.272,
+        0.272,
+        0.26,
+        0.145,
+        0.143
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

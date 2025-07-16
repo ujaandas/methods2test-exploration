@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Picture {\npublic int [ ] getPlaneData ( int plane ) {\nreturn data [ plane ] ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class PictureTest {\n@Test\npublic void testToAndFrom ( ) throws Exception {\nint [ ] Y = randomIntArray ( 4096 , 4 , 1019 ) ;\nint [ ] U = randomIntArray ( 2048 , 4 , 1019 ) ;\nint [ ] V = randomIntArray ( 2048 , 4 , 1019 ) ;\nPictureHiBD pictureHbd = PictureHiBD . createPictureWithDepth ( 64 , 64 , new int [ ] [ ] {\nY , U , V } , ColorSpace . YUV422 , 10 ) ;\nPicture picture = Picture . fromPictureHiBD ( pictureHbd ) ;\nPictureHiBD resultHbd = picture . toPictureHiBD ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertArrayEquals(Y, resultHbd.getPlaneData(0));\nassertArrayEquals(U, resultHbd.getPlaneData(1));\nassertArrayEquals(V, resultHbd.getPlaneData(2));\nassertEquals(64, resultHbd.getWidth());\nassertEquals(64, resultHbd.getHeight());\nassertEquals(10, resultHbd.getBitDepth());\nassertEquals(ColorSpace.YUV422, resultHbd.getColorSpace());\nassertNotNull(resultHbd);\nassertNotSame(pictureHbd, resultHbd);\nassertTrue(resultHbd.getPlaneData(0).length > 0);\nassertTrue(resultHbd.getPlaneData(1).length > 0);\nassertTrue(resultHbd.getPlaneData(2).length > 0);\nassertEquals(4096, resultHbd.getPlaneData(0).length);\nassertEquals(2048, resultHbd.getPlaneData(1).length);\nassertEquals(2048, resultHbd.getPlaneData(2).length);\nassertTrue(Arrays.equals(Y, picture.getPlaneData(0)));\nassertTrue(Arrays.equals(U, picture.getPlaneData(1)));\nassertTrue(Arrays.equals(V, picture.getPlaneData(2)));\nassertNotNull(picture.getPlaneData(0));\nassertNotNull(picture.getPlaneData(1));\nassertNotNull(picture.getPlaneData(2));\nassertEquals(3, resultHbd.getNumPlanes());\nassertTrue(resultHbd.isValid());\n```\n====================\n\n",
+    "scores": [
+        0.957,
+        0.957,
+        0.92,
+        0.825,
+        0.814,
+        0.804,
+        0.804,
+        0.776,
+        0.762,
+        0.761,
+        0.747,
+        0.744,
+        0.739,
+        0.739,
+        0.735,
+        0.735,
+        0.667,
+        0.66,
+        0.643,
+        0.643,
+        0.597,
+        0.543,
+        0.444,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(Y,resultHbd.getPlaneData(0));"
+}

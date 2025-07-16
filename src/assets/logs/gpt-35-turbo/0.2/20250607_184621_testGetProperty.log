@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions generated:
+
+1. assertNotNull(getProperty("STR"));
+2. assertEquals("STR", getProperty("STR"));
+3. assertNull(getProperty("NULL"));
+4. assertNotEquals("DIFFERENT", getProperty("STR"));
+5. assertTrue(env.containsKey("STR"));
+6. assertFalse(env.containsKey("OTHER"));
+7. assertEquals("DEFAULT", getPropertyOrDefault("NON_EXISTENT", "DEFAULT"));
+8. assertThrows(NullPointerException.class, () -> getProperty(null));
+9. assertNotSame(env, new HashMap<String, String>());
+10. assertArrayEquals(new String[]{"STR"}, getPropertyArray("STR"));
+11. assertNotEquals("STR", getProperty("DIFFERENT"));
+12. assertTrue(env.containsValue("STR"));
+13. assertFalse(env.isEmpty());
+14. assertSame(env, getEnvironment());
+15. assertEquals(1, env.size());
+16. assertTrue(env.keySet().contains("STR"));
+17. assertFalse(env.values().contains("OTHER"));
+18. assertNotSame(env, new HashMap<String, String>());
+19. assertEquals("STR", getProperty("STR"));
+20. assertNotNull(getProperty("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.844 - 2. assertEquals("STR", getProperty("STR"))
+0.835 - 19. assertEquals("STR", getProperty("STR"))
+0.727 - 4. assertNotEquals("DIFFERENT", getProperty("STR"))
+0.720 - 11. assertNotEquals("STR", getProperty("DIFFERENT"))
+0.667 - 10. assertArrayEquals(new String[]{"STR"}, getPropertyArray("STR"))
+0.651 - 20. assertNotNull(getProperty("STR"))
+0.602 - 3. assertNull(getProperty("NULL"))
+0.574 - 7. assertEquals("DEFAULT", getPropertyOrDefault("NON_EXISTENT", "DEFAULT"))
+0.557 - 15. assertEquals(1, env.size())
+0.539 - 6. assertFalse(env.containsKey("OTHER"))
+0.535 - 5. assertTrue(env.containsKey("STR"))
+0.532 - 13. assertFalse(env.isEmpty())
+0.523 - Assertions generated:
+
+1. assertNotNull(getProperty("STR"))
+0.518 - 14. assertSame(env, getEnvironment())
+0.500 - 17. assertFalse(env.values().contains("OTHER"))
+0.495 - 16. assertTrue(env.keySet().contains("STR"))
+0.494 - 12. assertTrue(env.containsValue("STR"))
+0.456 - 8. assertThrows(NullPointerException.class, () -> getProperty(null))
+0.367 - 9. assertNotSame(env, new HashMap<String, String>())
+0.364 - 18. assertNotSame(env, new HashMap<String, String>())

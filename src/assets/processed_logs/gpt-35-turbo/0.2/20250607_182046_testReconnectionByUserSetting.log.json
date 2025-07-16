@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManager {\n@Override\npublic Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nurl . setConnectTimeout ( connectTimeout ) ;\nreturn this . connectionManager . getAndCreateIfAbsent ( url ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManagerTest {\n@Test\npublic void testReconnectionByUserSetting ( ) throws InterruptedException , RemotingException {\ndoInit ( false , true ) ;\nclient . enableReconnectSwitch ( ) ;\nString addr = \"STR\" ;\nUrl url = addressParser . parse ( addr ) ;\nConnection connection = client . getConnection ( url , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(connection);\nAssert.assertEquals(1000, url.getConnectTimeout());\nAssert.assertTrue(client.isReconnectSwitchEnabled());\nAssert.assertEquals(addr, url.getAddress());\nAssert.assertTrue(connection.isConnected());\nAssert.assertNotNull(connection.getChannel());\nAssert.assertEquals(0, connection.getReconnectCount());\nAssert.assertFalse(connection.isClosed());\nAssert.assertTrue(connection.getLastAccessTime() > 0);\nAssert.assertTrue(connection.getLastReadTime() > 0);\nAssert.assertTrue(connection.getLastWriteTime() > 0);\nAssert.assertTrue(connection.getRemoteAddress().contains(addr));\nAssert.assertTrue(connection.getLocalAddress().contains(addr));\nAssert.assertTrue(connection.getAttributes().isEmpty());\nAssert.assertTrue(connection.getAttributes().size() == 0);\nAssert.assertTrue(connection.getAttributes().containsKey(\"key\"));\nAssert.assertTrue(connection.getAttributes().containsValue(\"value\"));\nAssert.assertTrue(connection.getAttributes().get(\"key\").equals(\"value\"));\nAssert.assertTrue(connection.getAttributes().remove(\"key\").equals(\"value\"));\nAssert.assertTrue(connection.getAttributes().isEmpty());\n====================\n\n",
+    "scores": [
+        0.667,
+        0.654,
+        0.562,
+        0.56,
+        0.558,
+        0.552,
+        0.509,
+        0.505,
+        0.495,
+        0.491,
+        0.491,
+        0.491,
+        0.49,
+        0.46,
+        0.454,
+        0.439,
+        0.427,
+        0.424,
+        0.252,
+        0.246
+    ],
+    "ground_truth": "Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes());"
+}

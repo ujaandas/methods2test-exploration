@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLMoveVertexCommand {
+    @Override
+     public int getDefaultClusterId ( ) { 
+     return delegate . getDefaultClusterId ( ) ; 
+     }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLMoveVertexCommandTest {
+    @Test
+     public void testMoveSingleRecordToAnotherClass ( ) {
+         ODocument doc = new ODocument ( "STR" ) . field ( "STR" , "STR" ) . field ( "STR" , "STR" ) . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(doc);
+assertEquals("STR", doc.getClassName());
+assertEquals("STR", doc.field("STR"));
+assertTrue(doc.field("STR").equals("STR"));
+assertFalse(doc.field("STR").equals("DifferentValue"));
+assertEquals(1, doc.getIdentity().getClusterId());
+assertNotNull(doc.getIdentity());
+assertTrue(doc.exists());
+assertTrue(doc.isDirty());
+assertFalse(doc.isNew());
+assertEquals("STR", doc.field("STR"));
+assertThrows(SomeException.class, () -> {
+    // some operation that should throw an exception for this doc
+});
+assertTrue(doc.getSchemaType().isAbstract());
+assertEquals("ExpectedValue", doc.field("SomeOtherField"));
+assertNotEquals("UnexpectedValue", doc.field("SomeOtherField"));
+assertTrue(doc.getRecordType().isVertex());
+assertEquals("ExpectedCluster", doc.getDefaultClusterId());
+assertNotEquals(doc.getIdentity(), new ORecordId(-1, -1));
+assertFalse(doc.isEmbedded());
+assertTrue(doc.getVersion() >= 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(doc.getIdentity().getClusterId(),customer.getDefaultClusterId()); ===
+0.736 - assertEquals(1, doc.getIdentity().getClusterId())
+0.687 - assertEquals("ExpectedCluster", doc.getDefaultClusterId())
+0.595 - assertNotEquals(doc.getIdentity(), new ORecordId(-1, -1))
+0.504 - assertEquals("STR", doc.getClassName())
+0.495 - assertNotNull(doc.getIdentity())
+0.463 - assertTrue(doc.getSchemaType().isAbstract())
+0.448 - assertEquals("ExpectedValue", doc.field("SomeOtherField"))
+0.437 - assertTrue(doc.getRecordType().isVertex())
+0.432 - assertNotEquals("UnexpectedValue", doc.field("SomeOtherField"))
+0.407 - assertEquals("STR", doc.field("STR"))
+0.407 - assertEquals("STR", doc.field("STR"))
+0.396 - assertFalse(doc.isEmbedded())
+0.396 - assertTrue(doc.exists())
+0.370 - assertTrue(doc.getVersion() >= 0)
+0.356 - assertFalse(doc.isNew())
+0.353 - assertTrue(doc.isDirty())
+0.321 - assertFalse(doc.field("STR").equals("DifferentValue"))
+0.252 - ```java
+assertNotNull(doc)
+0.235 - assertTrue(doc.field("STR").equals("STR"))
+0.141 - assertThrows(SomeException.class, () -> {
+    // some operation that should throw an exception for this doc
+})
+0.000 - ```

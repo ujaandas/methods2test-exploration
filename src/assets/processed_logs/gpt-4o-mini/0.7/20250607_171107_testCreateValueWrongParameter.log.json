@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( List < ? > params ) {\nif ( ! ( params . get ( 0 ) instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ;\nfinal List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nresult . add ( createSingleValue ( mapParam ) ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameter ( ) {\nfinal Object result = propertyIndexByKey . createValue ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(result);\nassertTrue(result instanceof List);\nassertEquals(0, ((List<?>) result).size());\nassertNotSame(Collections.singletonList(\"STR\"), result);\nassertFalse(((List<?>) result).contains(\"STR\"));\nassertEquals(\"Expected a null return for invalid parameter\", null, result);\nassertTrue(\"Result should be an instance of List\", result instanceof List);\nassertEquals(\"List should be empty for invalid input\", 0, ((List<?>) result).size());\nassertFalse(\"Result should not contain any elements\", ((List<?>) result).iterator().hasNext());\nassertNotNull(result, \"Result should not be null but should be an empty list\");\nassertSame(\"The result list should be a new instance\", result, Collections.emptyList());\nassertEquals(\"Result's class should match List\", ArrayList.class, result.getClass());\nassertTrue(\"Result should be a list type\", result instanceof List);\nassertTrue(\"Result should not contain any elements\", ((List<?>) result).isEmpty());\nassertThat(\"Result should not contain 'STR'\", not(contains(\"STR\")));\nassertTrue(\"Result should be of type List\", result instanceof List<?>);\nassertEquals(\"Result should be empty\", 0, ((List<?>) result).size());\nassertFalse(\"The result should not be a Map\", result instanceof Map);\nassertNotEquals(\"Result should not be equal to the input\", \"STR\", result);\nassertTrue(\"Result should not have any side effects\", ((List<?>) result).isEmpty());\nassertThat(\"Result should be an empty list\", result, is(empty()));\n```\n====================\n\n",
+    "scores": [
+        0.818,
+        0.6,
+        0.552,
+        0.472,
+        0.469,
+        0.425,
+        0.424,
+        0.421,
+        0.421,
+        0.415,
+        0.4,
+        0.39,
+        0.386,
+        0.381,
+        0.366,
+        0.366,
+        0.366,
+        0.333,
+        0.325,
+        0.324,
+        0.292,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNull(result);"
+}

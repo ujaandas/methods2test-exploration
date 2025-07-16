@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\npublic void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) {\nfinal boolean result ;\nif ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nelse result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nif ( ! result ) throw new IllegalArgumentException ( \"STR\" + changeEvent . getChangeType ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testProcessChangeEventAddKeyWithConversion ( ) {\nfinal Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ;\nfinal Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ;\nfinal OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . ADD , \"STR\" , \"STR\" ) ;\npropertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ;\nfinal Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ;\naddedKeys . put ( 12 , 1 ) ;\nfinal Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, keysToAdd.size());\nassertTrue(keysToAdd.containsKey(12));\nassertEquals(Integer.valueOf(1), keysToAdd.get(12));\n\nassertEquals(0, keysToRemove.size());\n\nassertEquals(OMultiValueChangeEvent.OChangeType.ADD, multiValueChangeEvent.getChangeType());\nassertEquals(\"STR\", multiValueChangeEvent.getOldValue());\nassertEquals(\"STR\", multiValueChangeEvent.getNewValue());\n\nassertNotNull(propertyIndexByIntegerKey);\nassertNotNull(multiValueChangeEvent);\n\nassertTrue(propertyIndexByIntegerKey instanceof OPropertyMapIndexDefinition);\n\nassertNotNull(keysToAdd);\nassertNotNull(keysToRemove);\n\nassertTrue(keysToAdd.isEmpty());\nassertTrue(keysToRemove.isEmpty());\n\nassertFalse(keysToAdd.containsKey(15));\nassertFalse(keysToRemove.containsKey(12));\n\nassertEquals(12, (int) keysToAdd.keySet().iterator().next());\nassertEquals(1, (int) keysToAdd.values().iterator().next());\n\nassertTrue(keysToAdd.containsValue(1));\nassertTrue(keysToAdd.containsKey(12));\n\nassertFalse(keysToRemove.containsKey(11));\nassertTrue(keysToRemove.isEmpty());\n\nassertEquals(1, keysToAdd.get(12).intValue());\nassertNotSame(0, keysToAdd.size());\n```\n====================\n\n",
+    "scores": [
+        0.676,
+        0.676,
+        0.667,
+        0.658,
+        0.649,
+        0.629,
+        0.629,
+        0.6,
+        0.594,
+        0.578,
+        0.578,
+        0.576,
+        0.568,
+        0.568,
+        0.563,
+        0.549,
+        0.537,
+        0.537,
+        0.466,
+        0.409,
+        0.409,
+        0.406,
+        0.318,
+        0.293,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(keysToAdd,addedKeys);"
+}

@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testSimpleLimit ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(qResult);
+Assert.assertEquals(0, qResult.size());
+Assert.assertTrue(qResult.isEmpty());
+Assert.assertNotEquals(5, qResult.size());
+Assert.assertTrue(qResult.contains(document));
+Assert.assertFalse(qResult.contains(document));
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.containsField("field")));
+Assert.assertEquals(1, qResult.stream().filter(doc -> doc.containsField("field")).count());
+Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.containsField("field")));
+Assert.assertFalse(qResult.stream().noneMatch(doc -> doc.containsField("field")));
+Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.containsField("nonExistentField")));
+Assert.assertEquals(1, qResult.stream().filter(doc -> doc.containsField("field")).count());
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("field").equals("value")));
+Assert.assertFalse(qResult.stream().anyMatch(doc -> doc.field("field").equals("value")));
+Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("field").equals("nonExistentValue")));
+Assert.assertEquals(1, qResult.stream().filter(doc -> doc.field("field").equals("value")).count());
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("field").toString().contains("substring")));
+Assert.assertFalse(qResult.stream().anyMatch(doc -> doc.field("field").toString().contains("substring")));
+Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("field").toString().contains("nonExistentSubstring")));
+Assert.assertEquals(1, qResult.stream().filter(doc -> doc.field("field").toString().contains("substring")).count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.967 - Assert.assertEquals(0, qResult.size())
+0.921 - Assert.assertNotEquals(5, qResult.size())
+0.678 - Assert.assertTrue(qResult.isEmpty())
+0.654 - Assert.assertNotNull(qResult)
+0.638 - Assert.assertFalse(qResult.contains(document))
+0.588 - Assert.assertTrue(qResult.contains(document))
+0.527 - Assert.assertEquals(1, qResult.stream().filter(doc -> doc.containsField("field")).count())
+0.527 - Assert.assertEquals(1, qResult.stream().filter(doc -> doc.containsField("field")).count())
+0.492 - Assert.assertEquals(1, qResult.stream().filter(doc -> doc.field("field").equals("value")).count())
+0.451 - Assert.assertFalse(qResult.stream().noneMatch(doc -> doc.containsField("field")))
+0.430 - Assert.assertEquals(1, qResult.stream().filter(doc -> doc.field("field").toString().contains("substring")).count())
+0.422 - Assert.assertFalse(qResult.stream().anyMatch(doc -> doc.field("field").equals("value")))
+0.420 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.containsField("field")))
+0.420 - Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.containsField("field")))
+0.389 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("field").equals("value")))
+0.375 - Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.containsField("nonExistentField")))
+0.365 - Assert.assertFalse(qResult.stream().anyMatch(doc -> doc.field("field").toString().contains("substring")))
+0.350 - Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("field").equals("nonExistentValue")))
+0.336 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("field").toString().contains("substring")))
+0.307 - Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("field").toString().contains("nonExistentSubstring")))

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformer {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformerTest {
+    @Test
+     public void testDynamicEdgeClassMultipleValues ( ) {
+         configure ( "STR" + "STR" + "STR" + name . getMethodName ( ) + "STR" ) ; 
+         OETLLoader loader = proc . getLoader ( ) ; 
+         ODatabasePool pool = loader . getPool ( ) ; 
+         ODatabaseDocument db = pool . acquire ( ) ; 
+         createClasses ( db ) ; 
+         OVertex vertex = db . newVertex ( "STR" ) ; 
+         vertex . setProperty ( "STR" , "STR" ) ; 
+         db . save ( vertex ) ; 
+         db . commit ( ) ; 
+         db . close ( ) ; 
+         proc . execute ( ) ; 
+         db = pool . acquire ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(vertex);
+Assert.assertEquals("STR", vertex.getProperty("STR"));
+Assert.assertEquals(1, db.countClass("STR"));
+Assert.assertTrue(db.getClass("STR").exists());
+Assert.assertEquals("ExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(0).getProperty("property"));
+Assert.assertTrue(db.countClass("AnotherClass") > 0);
+Assert.assertFalse(db.getClass("NonExistentClass").exists());
+Assert.assertEquals(5, db.countClass("SomeClass"));
+Assert.assertNotEquals(0, db.countClass("STR"));
+Assert.assertTrue(db.query("SELECT FROM STR WHERE property = 'value'").size() > 0);
+Assert.assertEquals("ExpectedResult", db.query("SELECT property FROM STR WHERE condition").get(0).getProperty("property"));
+Assert.assertTrue(db.getClass("STR").getProperties().contains("STR"));
+Assert.assertEquals("AnotherExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(1).getProperty("property"));
+Assert.assertNotNull(db.query("SELECT FROM STR").get(0));
+Assert.assertEquals(3, db.countClass("ClassWithMultipleInstances"));
+Assert.assertTrue(db.query("SELECT FROM STR WHERE property = 'value'").isEmpty());
+Assert.assertEquals("FinalExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(2).getProperty("property"));
+Assert.assertTrue(db.getClass("STR").getSuperClass() != null);
+Assert.assertEquals(10, db.countClass("ClassWithTenInstances"));
+Assert.assertFalse(db.query("SELECT FROM STR WHERE property = 'nonexistent'").contains(null));
+Assert.assertNotNull(db.query("SELECT FROM STR").get(0).getProperty("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,db.countClass("STR")); ===
+1.000 - Assert.assertEquals(1, db.countClass("STR"))
+0.933 - Assert.assertNotEquals(0, db.countClass("STR"))
+0.846 - Assert.assertEquals(5, db.countClass("SomeClass"))
+0.747 - Assert.assertEquals(10, db.countClass("ClassWithTenInstances"))
+0.674 - Assert.assertEquals(3, db.countClass("ClassWithMultipleInstances"))
+0.667 - Assert.assertTrue(db.getClass("STR").exists())
+0.658 - Assert.assertTrue(db.countClass("AnotherClass") > 0)
+0.617 - Assert.assertEquals("STR", vertex.getProperty("STR"))
+0.568 - Assert.assertTrue(db.getClass("STR").getSuperClass() != null)
+0.539 - Assert.assertFalse(db.getClass("NonExistentClass").exists())
+0.510 - Assert.assertTrue(db.getClass("STR").getProperties().contains("STR"))
+0.506 - Assert.assertNotNull(db.query("SELECT FROM STR").get(0))
+0.431 - Assert.assertNotNull(db.query("SELECT FROM STR").get(0).getProperty("STR"))
+0.388 - Assert.assertTrue(db.query("SELECT FROM STR WHERE property = 'value'").size() > 0)
+0.385 - Assert.assertTrue(db.query("SELECT FROM STR WHERE property = 'value'").isEmpty())
+0.379 - Assert.assertFalse(db.query("SELECT FROM STR WHERE property = 'nonexistent'").contains(null))
+0.361 - Assert.assertEquals("ExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(0).getProperty("property"))
+0.359 - Assert.assertEquals("ExpectedResult", db.query("SELECT property FROM STR WHERE condition").get(0).getProperty("property"))
+0.349 - Assert.assertEquals("FinalExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(2).getProperty("property"))
+0.344 - Assert.assertEquals("AnotherExpectedValue", db.query("SELECT property FROM STR WHERE condition").get(1).getProperty("property"))
+0.338 - ```java
+Assert.assertNotNull(vertex)
+0.000 - ```

@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class SimpleParentChild {
+    < RET extends T > RET load ( ORID recordId ) ;
+}
+
+package orientechnologies.orientdb.object;
+
+public class SimpleParentChildTest {
+    @Test
+     public void testWithSets ( ) {
+         ObjectWithSet parent = new ObjectWithSet ( ) ; 
+         ObjectWithSet child = new ObjectWithSet ( ) ; 
+         parent . addFriend ( child ) ; 
+         child . setName ( "STR" ) ; 
+         ObjectWithSet savedParent = database . save ( parent ) ; 
+         String parentId = savedParent . getId ( ) ; 
+         this . database . close ( ) ; 
+         this . database = new OObjectDatabaseTx ( url ) ; 
+         this . database . open ( "STR" , "STR" ) ; 
+         ObjectWithSet retrievedParent = this . database . load ( new ORecordId ( parentId ) ) ; 
+         ObjectWithSet retrievedChild = retrievedParent . getFriends ( ) . iterator ( ) . next ( ) ; 
+         retrievedChild . setName ( "STR" ) ; 
+         this . database . save ( retrievedParent ) ; 
+         this . database . close ( ) ; 
+         this . database = new OObjectDatabaseTx ( url ) ; 
+         this . database . open ( "STR" , "STR" ) ; 
+         retrievedParent = this . database . load ( new ORecordId ( parentId ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(retrievedParent);
+assertEquals(parentId, retrievedParent.getId());
+assertNotNull(retrievedParent.getFriends());
+assertEquals(1, retrievedParent.getFriends().size());
+assertTrue(retrievedParent.getFriends().contains(retrievedChild));
+assertEquals("STR", retrievedChild.getName());
+assertNotNull(retrievedChild.getId());
+assertNotEquals(parentId, retrievedChild.getId());
+assertTrue(retrievedChild instanceof ObjectWithSet);
+assertEquals(retrievedParent, retrievedChild.getParent());
+assertTrue(retrievedParent.getFriends().iterator().hasNext());
+assertSame(retrievedChild, retrievedParent.getFriends().iterator().next());
+assertTrue(retrievedParent.getFriends().stream().anyMatch(friend -> friend.getName().equals("STR")));
+assertFalse(retrievedParent.getFriends().isEmpty());
+assertNotSame(parent, retrievedParent);
+assertNotSame(child, retrievedChild);
+assertEquals(retrievedParent.getClass(), ObjectWithSet.class);
+assertEquals(retrievedChild.getClass(), ObjectWithSet.class);
+assertNotNull(retrievedParent.getId());
+assertNotNull(retrievedChild.getId());
+assertNotEquals(retrievedParent.getId(), retrievedChild.getId());
+assertTrue(retrievedParent.getFriends().contains(retrievedChild));
+assertEquals(1, retrievedParent.getFriends().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",retrievedParent.getFriends().iterator().next().getName()); ===
+0.788 - assertTrue(retrievedParent.getFriends().iterator().hasNext())
+0.756 - assertEquals(1, retrievedParent.getFriends().size())
+0.756 - assertEquals(1, retrievedParent.getFriends().size())
+0.752 - assertSame(retrievedChild, retrievedParent.getFriends().iterator().next())
+0.693 - assertFalse(retrievedParent.getFriends().isEmpty())
+0.683 - assertEquals("STR", retrievedChild.getName())
+0.644 - assertTrue(retrievedParent.getFriends().stream().anyMatch(friend -> friend.getName().equals("STR")))
+0.639 - assertNotNull(retrievedParent.getFriends())
+0.633 - assertNotEquals(retrievedParent.getId(), retrievedChild.getId())
+0.624 - assertTrue(retrievedParent.getFriends().contains(retrievedChild))
+0.624 - assertTrue(retrievedParent.getFriends().contains(retrievedChild))
+0.607 - assertEquals(parentId, retrievedParent.getId())
+0.603 - assertEquals(retrievedParent.getClass(), ObjectWithSet.class)
+0.591 - assertEquals(retrievedParent, retrievedChild.getParent())
+0.561 - assertNotNull(retrievedParent.getId())
+0.519 - assertEquals(retrievedChild.getClass(), ObjectWithSet.class)
+0.500 - assertNotEquals(parentId, retrievedChild.getId())
+0.460 - assertNotNull(retrievedChild.getId())
+0.460 - assertNotNull(retrievedChild.getId())
+0.442 - assertNotSame(parent, retrievedParent)
+0.439 - ```java
+assertNotNull(retrievedParent)
+0.378 - assertNotSame(child, retrievedChild)
+0.368 - assertTrue(retrievedChild instanceof ObjectWithSet)
+0.000 - ```

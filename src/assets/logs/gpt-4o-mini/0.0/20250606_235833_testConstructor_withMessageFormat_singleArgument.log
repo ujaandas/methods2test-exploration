@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( String message , Object ... args ) { 
+    super ( format ( message , args ) ) ; 
+    Object lastArg = args [ args . length - 1 ] ; 
+    if ( lastArg instanceof Throwable ) { 
+    initCause ( ( Throwable ) lastArg ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withMessageFormat_singleArgument ( ) {
+         TestException exception = new TestException ( "STR" , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(exception);
+assertEquals("STR", exception.getMessage());
+assertEquals("STR", exception.getCause().getMessage());
+assertTrue(exception.getCause() instanceof NullPointerException);
+assertEquals(1, exception.getArgs()[0]);
+assertEquals(1, exception.getArgs().length);
+assertTrue(exception.getArgs()[0] instanceof Integer);
+assertEquals("STR", exception.toString());
+assertTrue(exception.getStackTrace().length > 0);
+assertNotNull(exception.getCause());
+assertNull(exception.getCause().getCause());
+assertEquals("STR", exception.getLocalizedMessage());
+assertTrue(exception.getMessage().contains("STR"));
+assertFalse(exception.getMessage().isEmpty());
+assertEquals("STR", exception.getMessage());
+assertNotEquals("Different message", exception.getMessage());
+assertTrue(exception instanceof TestException);
+assertFalse(exception instanceof RuntimeException);
+assertEquals(1, exception.getArgs()[0]);
+assertTrue(exception.getArgs()[0] instanceof Integer);
+assertEquals(1, (Integer) exception.getArgs()[0]);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",exception.getMessage()); ===
+1.000 - assertEquals("STR", exception.getMessage())
+1.000 - assertEquals("STR", exception.getMessage())
+0.903 - assertEquals("STR", exception.getLocalizedMessage())
+0.884 - assertEquals("STR", exception.getCause().getMessage())
+0.805 - assertEquals("STR", exception.toString())
+0.780 - assertNotEquals("Different message", exception.getMessage())
+0.775 - assertEquals(1, exception.getArgs()[0])
+0.775 - assertEquals(1, exception.getArgs()[0])
+0.759 - assertFalse(exception.getMessage().isEmpty())
+0.738 - assertEquals(1, exception.getArgs().length)
+0.701 - assertNotNull(exception.getCause())
+0.697 - assertEquals(1, (Integer) exception.getArgs()[0])
+0.674 - assertTrue(exception.getMessage().contains("STR"))
+0.659 - assertNull(exception.getCause().getCause())
+0.591 - assertTrue(exception.getStackTrace().length > 0)
+0.538 - assertTrue(exception.getArgs()[0] instanceof Integer)
+0.538 - assertTrue(exception.getArgs()[0] instanceof Integer)
+0.533 - assertFalse(exception instanceof RuntimeException)
+0.514 - ```java
+assertNotNull(exception)
+0.512 - assertTrue(exception instanceof TestException)
+0.500 - assertTrue(exception.getCause() instanceof NullPointerException)
+0.000 - ```

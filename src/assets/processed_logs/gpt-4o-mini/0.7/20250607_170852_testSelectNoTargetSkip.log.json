@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testSelectNoTargetSkip ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(5, result.size()); // Assuming we expect 5 results\nassertTrue(result instanceof OResultSet);\nassertFalse(result.isEmpty());\nassertEquals(\"ExpectedFirstValue\", result.next().get(\"fieldName\")); // Replace with actual field name\nassertEquals(\"ExpectedSecondValue\", result.next().get(\"fieldName\")); // Replace with actual field name\nassertEquals(\"ExpectedThirdValue\", result.next().get(\"fieldName\")); // Replace with actual field name\nassertEquals(\"ExpectedFourthValue\", result.next().get(\"fieldName\")); // Replace with actual field name\nassertEquals(\"ExpectedFifthValue\", result.next().get(\"fieldName\")); // Replace with actual field name\nassertFalse(result.hasNext()); // After consuming all results\nassertEquals(0, result.skip(10).size()); // Testing skip beyond results\nassertEquals(2, result.skip(3).size()); // Testing skip with some results left\nresult.reset();\nassertTrue(result.hasNext()); // Ensure we can iterate again after reset\nassertEquals(\"ExpectedFirstValue\", result.next().get(\"fieldName\")); // Check first value again after reset\nassertEquals(\"ExpectedSecondValue\", result.next().get(\"fieldName\")); // Check second value again after reset\nresult.close();\nassertTrue(result.isClosed()); // Ensure the result set is closed\nassertThrows(NoSuchElementException.class, () -> result.next()); // Check for exception after results are consumed\nassertNotEquals(\"UnexpectedValue\", result.next().get(\"fieldName\")); // Replace with actual field name and value\n```\n====================\n\n",
+    "scores": [
+        0.877,
+        0.877,
+        0.828,
+        0.759,
+        0.69,
+        0.667,
+        0.517,
+        0.5,
+        0.489,
+        0.473,
+        0.468,
+        0.442,
+        0.404,
+        0.374,
+        0.374,
+        0.373,
+        0.371,
+        0.371,
+        0.359,
+        0.354,
+        0.336,
+        0.261
+    ],
+    "ground_truth": "Assert.assertFalse(result.hasNext());"
+}

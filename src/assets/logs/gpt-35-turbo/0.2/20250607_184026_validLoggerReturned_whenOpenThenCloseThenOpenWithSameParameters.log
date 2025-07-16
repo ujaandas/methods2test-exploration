@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluent.fluent-logger-java;
+
+public class Bugfixes {
+    public void close ( ) { 
+    if ( sender != null ) { 
+    sender . flush ( ) ; 
+    sender . close ( ) ; 
+    sender = null ; 
+    } factory . purgeLogger ( this ) ; 
+    }
+}
+
+package fluent.fluent-logger-java;
+
+public class TestBugfixes {
+    @Test
+     public void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {
+         System . setProperty ( Config . FLUENT_SENDER_CLASS , "STR" ) ; 
+         FluentLogger logger = FluentLogger . getLogger ( "STR" ) ; 
+         logger . log ( "STR" , Collections . < String , Object > emptyMap ( ) ) ; 
+         logger . close ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(logger);
+Assert.assertEquals("STR", logger.getSender().getSenderName());
+Assert.assertTrue(logger.getSender().isClosed());
+Assert.assertNull(logger.getSender());
+Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS));
+Assert.assertNull(logger.getSender());
+Assert.assertFalse(logger.getSender().isClosed());
+Assert.assertNotNull(logger.getSender());
+Assert.assertEquals("STR", logger.getSender().getSenderName());
+Assert.assertTrue(logger.getSender().isClosed());
+Assert.assertNull(logger.getSender());
+Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS));
+Assert.assertNull(logger.getSender());
+Assert.assertFalse(logger.getSender().isClosed());
+Assert.assertNotNull(logger.getSender());
+Assert.assertEquals("STR", logger.getSender().getSenderName());
+Assert.assertTrue(logger.getSender().isClosed());
+Assert.assertNull(logger.getSender());
+Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS));
+Assert.assertNull(logger.getSender());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(null,logger.sender); ===
+0.710 - Assert.assertNull(logger.getSender())
+0.710 - Assert.assertNull(logger.getSender())
+0.710 - Assert.assertNull(logger.getSender())
+0.710 - Assert.assertNull(logger.getSender())
+0.710 - Assert.assertNull(logger.getSender())
+0.710 - Assert.assertNull(logger.getSender())
+0.677 - Assert.assertNotNull(logger.getSender())
+0.677 - Assert.assertNotNull(logger.getSender())
+0.628 - Assert.assertEquals("STR", logger.getSender().getSenderName())
+0.628 - Assert.assertEquals("STR", logger.getSender().getSenderName())
+0.628 - Assert.assertEquals("STR", logger.getSender().getSenderName())
+0.622 - Assert.assertFalse(logger.getSender().isClosed())
+0.622 - Assert.assertFalse(logger.getSender().isClosed())
+0.604 - Assert.assertNotNull(logger)
+0.575 - Assert.assertTrue(logger.getSender().isClosed())
+0.575 - Assert.assertTrue(logger.getSender().isClosed())
+0.575 - Assert.assertTrue(logger.getSender().isClosed())
+0.333 - Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS))
+0.333 - Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS))
+0.333 - Assert.assertNull(System.getProperty(Config.FLUENT_SENDER_CLASS))

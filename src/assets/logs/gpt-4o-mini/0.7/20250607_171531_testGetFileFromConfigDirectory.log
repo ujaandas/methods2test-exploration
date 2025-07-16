@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected File getFileFromConfigDirectory ( String file ) { 
+    File f = new File ( configDirectory , file ) ; 
+    if ( configDirectory != null && f . exists ( ) ) { 
+    return f ; 
+    } return null ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testGetFileFromConfigDirectory ( ) throws Exception {
+         DevUtil util = new DevTestUtil ( null , null , null , this . configDirectory , null , false , false ) ; 
+         File tempTextFile = new File ( configDirectory , "STR" ) ; 
+         Files . write ( tempTextFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File configFile = util . getFileFromConfigDirectory ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(configFile);
+assertTrue(configFile.exists());
+assertEquals(tempTextFile.getName(), configFile.getName());
+assertEquals(tempTextFile.length(), configFile.length());
+assertArrayEquals(Files.readAllBytes(tempTextFile.toPath()), Files.readAllBytes(configFile.toPath()));
+assertEquals(tempTextFile.getAbsolutePath(), configFile.getAbsolutePath());
+assertTrue(configFile.isFile());
+assertFalse(configFile.isDirectory());
+assertTrue(configFile.canRead());
+assertFalse(configFile.canWrite());
+assertFalse(configFile.canExecute());
+assertEquals("STR", new String(Files.readAllBytes(configFile.toPath())));
+assertNotEquals(tempTextFile.getAbsolutePath(), new File(configDirectory, "OTHER").getAbsolutePath());
+assertSame(configFile, util.getFileFromConfigDirectory("STR"));
+assertNotNull(util.getFileFromConfigDirectory("NON_EXISTENT"));
+assertNull(util.getFileFromConfigDirectory("NON_EXISTENT"));
+assertTrue(configFile.getParentFile().equals(new File(configDirectory)));
+assertEquals(tempTextFile.lastModified(), configFile.lastModified());
+assertTrue(Files.isRegularFile(tempTextFile.toPath()));
+assertTrue(Files.isRegularFile(configFile.toPath()));
+assertFalse(configFile.isHidden());
+assertTrue(configFile.canRead());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(configFile.exists()); ===
+1.000 - assertTrue(configFile.exists())
+0.871 - assertTrue(configFile.isFile())
+0.825 - assertTrue(configFile.canRead())
+0.825 - assertTrue(configFile.canRead())
+0.738 - assertFalse(configFile.isHidden())
+0.735 - assertFalse(configFile.isDirectory())
+0.716 - assertFalse(configFile.canExecute())
+0.708 - assertFalse(configFile.canWrite())
+0.627 - assertTrue(Files.isRegularFile(configFile.toPath()))
+0.594 - ```java
+assertNotNull(configFile)
+0.581 - assertEquals(tempTextFile.length(), configFile.length())
+0.568 - assertEquals(tempTextFile.getName(), configFile.getName())
+0.549 - assertTrue(configFile.getParentFile().equals(new File(configDirectory)))
+0.543 - assertSame(configFile, util.getFileFromConfigDirectory("STR"))
+0.519 - assertEquals(tempTextFile.getAbsolutePath(), configFile.getAbsolutePath())
+0.518 - assertTrue(Files.isRegularFile(tempTextFile.toPath()))
+0.510 - assertEquals(tempTextFile.lastModified(), configFile.lastModified())
+0.495 - assertEquals("STR", new String(Files.readAllBytes(configFile.toPath())))
+0.400 - assertNull(util.getFileFromConfigDirectory("NON_EXISTENT"))
+0.387 - assertNotNull(util.getFileFromConfigDirectory("NON_EXISTENT"))
+0.382 - assertArrayEquals(Files.readAllBytes(tempTextFile.toPath()), Files.readAllBytes(configFile.toPath()))
+0.357 - assertNotEquals(tempTextFile.getAbsolutePath(), new File(configDirectory, "OTHER").getAbsolutePath())
+0.000 - ```

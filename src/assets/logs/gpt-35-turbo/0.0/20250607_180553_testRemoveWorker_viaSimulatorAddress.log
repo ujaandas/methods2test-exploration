@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @Test
+     public void testRemoveWorker_viaSimulatorAddress ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         List < WorkerParameters > parametersList = newWorkerParametersList ( agentAddress , 5 ) ; 
+         registry . addWorkers ( parametersList ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(5, registry.workerCount());
+Assert.assertTrue(registry.getWorkers().containsAll(parametersList));
+Assert.assertEquals(5, registry.getWorkers().size());
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerIndex() >= 0 && worker.getWorkerIndex() < 5));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerType() != null));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress() != null));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentIndex() == agentAddress.getAgentIndex()));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerIndex() >= 0 && worker.getWorkerAddress().getWorkerIndex() < 5));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerType() != null));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerType().equals(worker.getWorkerType())));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().equals(agentAddress)));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() == agentAddress.getAgentIndex()));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentType().equals(agentAddress.getAgentType())));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentType().equals(AgentType.MEMBER)));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() >= 0));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() < registry.getAgents().size()));
+Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() == agentAddress.getAgentIndex()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(5,registry.workerCount()); ===
+1.000 - Assert.assertEquals(5, registry.workerCount())
+0.780 - Assert.assertEquals(5, registry.getWorkers().size())
+0.566 - Assert.assertTrue(registry.getWorkers().containsAll(parametersList))
+0.441 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerType() != null))
+0.431 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress() != null))
+0.403 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)))
+0.384 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerType() != null))
+0.368 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerIndex() >= 0 && worker.getWorkerIndex() < 5))
+0.360 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() >= 0))
+0.356 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().equals(agentAddress)))
+0.341 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentIndex() == agentAddress.getAgentIndex()))
+0.339 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerType().equals(worker.getWorkerType())))
+0.319 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentType().equals(AgentType.MEMBER)))
+0.312 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() < registry.getAgents().size()))
+0.309 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() == agentAddress.getAgentIndex()))
+0.309 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentIndex() == agentAddress.getAgentIndex()))
+0.301 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getAgentAddress().getAgentType().equals(agentAddress.getAgentType())))
+0.295 - Assert.assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getWorkerAddress().getWorkerIndex() >= 0 && worker.getWorkerAddress().getWorkerIndex() < 5))

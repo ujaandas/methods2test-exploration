@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeys {
+    @Override
+     public Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) { 
+     if ( ioResult instanceof Map ) { 
+     return ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ; 
+     } if ( ioResult instanceof ODocument ) { 
+     return Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ; 
+     } if ( ioResult instanceof OResult ) { 
+     OResult res = ( OResult ) ioResult ; 
+     return res . getPropertyNames ( ) ; 
+     } if ( ioResult instanceof Collection ) { 
+     List result = new ArrayList ( ) ; 
+     for ( Object o : ( Collection ) ioResult ) { 
+     result . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ; 
+     } return result ; 
+     } return null ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeysTest {
+    @Test
+     public void testWithOResult ( ) {
+         OResultInternal resultInternal = new OResultInternal ( ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         Object result = function . execute ( null , null , null , resultInternal , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(result);
+assertTrue(result instanceof List);
+List<String> keyList = (List<String>) result;
+assertEquals(2, keyList.size());
+assertTrue(keyList.contains("STR"));
+assertFalse(keyList.contains("INT"));
+assertFalse(keyList.contains("BOOL"));
+assertFalse(keyList.contains("DECIMAL"));
+assertFalse(keyList.contains("DATE"));
+assertFalse(keyList.contains("LIST"));
+assertFalse(keyList.contains("SET"));
+assertFalse(keyList.contains("MAP"));
+assertFalse(keyList.contains("LINK"));
+assertFalse(keyList.contains("LINKSET"));
+assertFalse(keyList.contains("LINKLIST"));
+assertFalse(keyList.contains("LINKMAP"));
+assertFalse(keyList.contains("BYTE"));
+assertFalse(keyList.contains("SHORT"));
+assertFalse(keyList.contains("LONG"));
+assertFalse(keyList.contains("FLOAT"));
+assertFalse(keyList.contains("DOUBLE"));
+assertFalse(keyList.contains("BINARY"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newLinkedHashSet(Arrays.asList("STR","STR")),result); ===
+0.484 - assertEquals(2, keyList.size())
+0.475 - assertFalse(keyList.contains("SET"))
+0.471 - assertFalse(keyList.contains("LIST"))
+0.466 - assertFalse(keyList.contains("SHORT"))
+0.460 - assertTrue(keyList.contains("STR"))
+0.457 - assertFalse(keyList.contains("LINKSET"))
+0.455 - assertFalse(keyList.contains("INT"))
+0.453 - assertFalse(keyList.contains("LINKLIST"))
+0.451 - assertFalse(keyList.contains("DATE"))
+0.451 - assertFalse(keyList.contains("BYTE"))
+0.447 - assertFalse(keyList.contains("FLOAT"))
+0.442 - assertFalse(keyList.contains("BINARY"))
+0.436 - assertFalse(keyList.contains("MAP"))
+0.431 - assertFalse(keyList.contains("BOOL"))
+0.431 - assertFalse(keyList.contains("LINK"))
+0.431 - assertFalse(keyList.contains("LONG"))
+0.423 - assertFalse(keyList.contains("DOUBLE"))
+0.419 - assertFalse(keyList.contains("DECIMAL"))
+0.419 - assertFalse(keyList.contains("LINKMAP"))
+0.372 - assertNotNull(result)
+0.309 - assertTrue(result instanceof List)
+0.248 - List<String> keyList = (List<String>) result

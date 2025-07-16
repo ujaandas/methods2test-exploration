@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testArrayRange2 ( ) {\nStringBuilder query = new StringBuilder ( ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nOResultSet result = db . query ( query . toString ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(3, result.size());\nassertTrue(result.get(0).getProperty(\"fieldName\").equals(\"expectedValue1\"));\nassertTrue(result.get(1).getProperty(\"fieldName\").equals(\"expectedValue2\"));\nassertTrue(result.get(2).getProperty(\"fieldName\").equals(\"expectedValue3\"));\nassertFalse(result.isEmpty());\nassertTrue(result.get(0).getProperty(\"anotherField\").contains(\"expectedSubstring\"));\nassertEquals(\"expectedType\", result.get(0).getProperty(\"@type\"));\nassertNotEquals(result.get(0).getProperty(\"fieldName\"), result.get(1).getProperty(\"fieldName\"));\nassertTrue(result.get(0).getProperty(\"numericField\") > 0);\nassertTrue(result.get(1).getProperty(\"booleanField\"));\nassertFalse(result.get(2).getProperty(\"booleanField\"));\nassertEquals(\"expectedValue1\", result.next().getProperty(\"fieldName\"));\nassertEquals(\"expectedValue2\", result.next().getProperty(\"fieldName\"));\nassertEquals(\"expectedValue3\", result.next().getProperty(\"fieldName\"));\nassertThrows(NoSuchElementException.class, () -> result.next());\nassertEquals(3, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"fieldName\").startsWith(\"STR\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"fieldName\").equals(\"expectedValue1\")));\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"fieldName\").equals(\"unexpectedValue\")));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.702,
+        0.702,
+        0.597,
+        0.568,
+        0.554,
+        0.545,
+        0.526,
+        0.488,
+        0.485,
+        0.485,
+        0.485,
+        0.468,
+        0.44,
+        0.433,
+        0.433,
+        0.433,
+        0.433,
+        0.426,
+        0.389,
+        0.328,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

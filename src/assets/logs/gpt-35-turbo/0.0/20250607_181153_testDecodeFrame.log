@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtension {
+    @Override
+     public ByteBuffer getPayloadData ( ) { 
+     return unmaskedpayload ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtensionTest {
+    @Test
+     public void testDecodeFrame ( ) throws InvalidDataException {
+         PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ; 
+         String str = "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         byte [ ] message = str . getBytes ( ) ; 
+         TextFrame frame = new TextFrame ( ) ; 
+         frame . setPayload ( ByteBuffer . wrap ( message ) ) ; 
+         deflateExtension . encodeFrame ( frame ) ; 
+         deflateExtension . decodeFrame ( frame ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STRSTRSTRSTRSTR", frame.getPayloadData().array());
+assertEquals(5, frame.getPayloadData().array().length);
+assertTrue(frame.isFin());
+assertFalse(frame.isRsv1());
+assertFalse(frame.isRsv2());
+assertFalse(frame.isRsv3());
+assertEquals(OpCode.TEXT, frame.getOpcode());
+assertFalse(frame.isMasked());
+assertEquals(0, frame.getMaskKey().length);
+assertEquals(0, frame.getPayloadLength());
+assertEquals(0, frame.getPayloadData().position());
+assertEquals(0, frame.getPayloadData().limit());
+assertEquals(0, frame.getPayloadData().remaining());
+assertEquals(0, frame.getPayloadData().capacity());
+assertEquals(0, frame.getPayloadData().arrayOffset());
+assertEquals(0, frame.getPayloadData().hashCode());
+assertEquals(0, frame.getPayloadData().toString().length());
+assertEquals(0, frame.getPayloadData().equals(null));
+assertEquals(0, frame.getPayloadData().compareTo(ByteBuffer.wrap(new byte[0]));
+assertEquals(0, frame.getPayloadData().duplicate().compareTo(ByteBuffer.wrap(new byte[0]));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(message,frame.getPayloadData().array()); ===
+0.826 - assertEquals(0, frame.getPayloadData().arrayOffset())
+0.818 - assertEquals(5, frame.getPayloadData().array().length)
+0.811 - assertEquals(0, frame.getPayloadData().capacity())
+0.777 - assertEquals(0, frame.getPayloadData().limit())
+0.774 - assertEquals(0, frame.getPayloadData().hashCode())
+0.766 - assertEquals(0, frame.getPayloadData().remaining())
+0.759 - assertEquals(0, frame.getPayloadData().equals(null))
+0.756 - assertEquals("STRSTRSTRSTRSTR", frame.getPayloadData().array())
+0.755 - assertEquals(0, frame.getPayloadData().position())
+0.713 - assertEquals(0, frame.getPayloadData().toString().length())
+0.701 - assertEquals(0, frame.getPayloadLength())
+0.662 - assertEquals(0, frame.getPayloadData().compareTo(ByteBuffer.wrap(new byte[0]))
+0.607 - assertEquals(0, frame.getPayloadData().duplicate().compareTo(ByteBuffer.wrap(new byte[0]))
+0.592 - assertEquals(0, frame.getMaskKey().length)
+0.580 - assertEquals(OpCode.TEXT, frame.getOpcode())
+0.488 - assertFalse(frame.isMasked())
+0.452 - assertFalse(frame.isRsv1())
+0.452 - assertFalse(frame.isRsv2())
+0.452 - assertFalse(frame.isRsv3())
+0.439 - assertTrue(frame.isFin())

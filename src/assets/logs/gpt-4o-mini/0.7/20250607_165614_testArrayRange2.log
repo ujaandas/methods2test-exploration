@@ -1,0 +1,94 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testArrayRange2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedSize, result.size());
+assertTrue(result.stream().allMatch(res -> res instanceof OResult));
+assertTrue(result.stream().anyMatch(res -> res.getProperty("key").equals(expectedValue)));
+assertFalse(result.isEmpty());
+assertEquals(expectedValue, result.next().getProperty("key"));
+assertEquals(expectedType, result.next().getType());
+assertEquals(expectedCount, result.count());
+assertTrue(result.stream().map(res -> res.getProperty("anotherKey")).distinct().count() > 1);
+assertTrue(result.stream().filter(res -> res.getProperty("conditionKey").equals(conditionValue)).count() > 0);
+assertNotEquals(unexpectedValue, result.next().getProperty("key"));
+assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next();
+    }
+});
+assertTrue(result.stream().allMatch(res -> validateResult(res)));
+assertEquals(expectedProperty, result.stream().findFirst().get().getProperty("propertyName"));
+assertTrue(result.stream().anyMatch(res -> res.getProperty("numericKey") > threshold));
+assertEquals(expectedString, result.stream().map(res -> res.getProperty("stringKey")).collect(Collectors.joining(",")));
+assertTrue(result.stream().allMatch(res -> res.getProperty("dateKey").isBefore(LocalDate.now())));
+assertFalse(result.stream().anyMatch(res -> res.getProperty("invalidKey") == null));
+assertDoesNotThrow(() -> {
+    while (result.hasNext()) {
+        result.next();
+    }
+});
+assertNotSame(result, otherResult);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.702 - assertFalse(result.isEmpty())
+0.593 - assertDoesNotThrow(() -> {
+    while (result.hasNext()) {
+        result.next()
+0.590 - assertNotSame(result, otherResult)
+0.588 - assertEquals(expectedSize, result.size())
+0.556 - assertTrue(result.stream().allMatch(res -> validateResult(res)))
+0.543 - assertEquals(expectedCount, result.count())
+0.538 - assertEquals(expectedType, result.next().getType())
+0.526 - ```java
+assertNotNull(result)
+0.484 - assertTrue(result.stream().allMatch(res -> res instanceof OResult))
+0.477 - assertEquals(expectedValue, result.next().getProperty("key"))
+0.452 - assertTrue(result.stream().anyMatch(res -> res.getProperty("key").equals(expectedValue)))
+0.452 - assertNotEquals(unexpectedValue, result.next().getProperty("key"))
+0.431 - assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next()
+0.423 - assertTrue(result.stream().allMatch(res -> res.getProperty("dateKey").isBefore(LocalDate.now())))
+0.414 - assertTrue(result.stream().map(res -> res.getProperty("anotherKey")).distinct().count() > 1)
+0.400 - assertTrue(result.stream().anyMatch(res -> res.getProperty("numericKey") > threshold))
+0.376 - assertTrue(result.stream().filter(res -> res.getProperty("conditionKey").equals(conditionValue)).count() > 0)
+0.355 - assertFalse(result.stream().anyMatch(res -> res.getProperty("invalidKey") == null))
+0.350 - assertEquals(expectedProperty, result.stream().findFirst().get().getProperty("propertyName"))
+0.292 - assertEquals(expectedString, result.stream().map(res -> res.getProperty("stringKey")).collect(Collectors.joining(",")))
+0.062 - }
+})
+0.062 - }
+})
+0.000 - ```

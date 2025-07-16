@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testAddWconnithPoolKey_multiPoolKey ( ) throws InterruptedException {
+         Connection conn = getAConn ( ) ; 
+         cm . add ( conn , poolKey ) ; 
+         cm . add ( conn , "STR" ) ; 
+         cm . add ( conn , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, cm.count(poolKey));
+assertEquals(1, cm.count("STR"));
+assertEquals(1, cm.count("STR"));
+assertEquals(0, cm.count("INVALID_KEY"));
+assertEquals(0, cm.count(""));
+assertEquals(0, cm.count(null));
+assertEquals(0, cm.count("ANOTHER_INVALID_KEY"));
+assertEquals(1, cm.count(poolKey));
+assertEquals(2, cm.count("STR"));
+assertEquals(0, cm.count("ANOTHER_INVALID_KEY"));
+assertEquals(1, cm.count(poolKey));
+assertEquals(2, cm.count("STR"));
+assertEquals(0, cm.count("ANOTHER_INVALID_KEY"));
+assertEquals(1, cm.count(poolKey));
+assertEquals(2, cm.count("STR"));
+assertEquals(0, cm.count("ANOTHER_INVALID_KEY"));
+assertEquals(1, cm.count(poolKey));
+assertEquals(2, cm.count("STR"));
+assertEquals(0, cm.count("ANOTHER_INVALID_KEY"));
+assertEquals(1, cm.count(poolKey));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,cm.count(poolKey)); ===
+1.000 - assertEquals(1, cm.count(poolKey))
+1.000 - assertEquals(1, cm.count(poolKey))
+1.000 - assertEquals(1, cm.count(poolKey))
+1.000 - assertEquals(1, cm.count(poolKey))
+1.000 - assertEquals(1, cm.count(poolKey))
+1.000 - assertEquals(1, cm.count(poolKey))
+0.825 - assertEquals(0, cm.count(null))
+0.820 - assertEquals(0, cm.count(""))
+0.812 - assertEquals(1, cm.count("STR"))
+0.812 - assertEquals(1, cm.count("STR"))
+0.781 - assertEquals(2, cm.count("STR"))
+0.781 - assertEquals(2, cm.count("STR"))
+0.781 - assertEquals(2, cm.count("STR"))
+0.781 - assertEquals(2, cm.count("STR"))
+0.722 - assertEquals(0, cm.count("INVALID_KEY"))
+0.650 - assertEquals(0, cm.count("ANOTHER_INVALID_KEY"))
+0.650 - assertEquals(0, cm.count("ANOTHER_INVALID_KEY"))
+0.650 - assertEquals(0, cm.count("ANOTHER_INVALID_KEY"))
+0.650 - assertEquals(0, cm.count("ANOTHER_INVALID_KEY"))
+0.650 - assertEquals(0, cm.count("ANOTHER_INVALID_KEY"))

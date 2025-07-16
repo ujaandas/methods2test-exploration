@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void jaundzimušākais ( ) {
+         Word w = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(w);
+Assert.assertTrue(w.isRecognized());
+Assert.assertFalse(w.getWordforms().isEmpty());
+Assert.assertEquals("ExpectedForm1", w.getWordforms().get(0));
+Assert.assertEquals("ExpectedForm2", w.getWordforms().get(1));
+Assert.assertTrue(w.getWordforms().contains("ExpectedForm1"));
+Assert.assertTrue(w.getWordforms().contains("ExpectedForm2"));
+Assert.assertEquals(2, w.getWordforms().size());
+Assert.assertTrue(w.hasPrefix("ExpectedPrefix"));
+Assert.assertTrue(w.hasSuffix("ExpectedSuffix"));
+Assert.assertFalse(w.hasPrefix("UnexpectedPrefix"));
+Assert.assertFalse(w.hasSuffix("UnexpectedSuffix"));
+Assert.assertTrue(w.isDerived());
+Assert.assertEquals("ExpectedRoot", w.getRoot());
+Assert.assertNotEquals("UnexpectedRoot", w.getRoot());
+Assert.assertTrue(w.isInflected());
+Assert.assertFalse(w.isIrregular());
+Assert.assertNotNull(w.getMorphologicalFeatures());
+Assert.assertTrue(w.getMorphologicalFeatures().contains("Feature1"));
+Assert.assertTrue(w.getMorphologicalFeatures().contains("Feature2"));
+Assert.assertFalse(w.getMorphologicalFeatures().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(w.isRecognized()); ===
+1.000 - Assert.assertTrue(w.isRecognized())
+0.830 - Assert.assertTrue(w.isDerived())
+0.800 - Assert.assertTrue(w.isInflected())
+0.607 - Assert.assertFalse(w.isIrregular())
+0.580 - Assert.assertTrue(w.hasPrefix("ExpectedPrefix"))
+0.580 - Assert.assertTrue(w.hasSuffix("ExpectedSuffix"))
+0.512 - Assert.assertTrue(w.getWordforms().contains("ExpectedForm1"))
+0.512 - Assert.assertTrue(w.getWordforms().contains("ExpectedForm2"))
+0.507 - Assert.assertEquals(2, w.getWordforms().size())
+0.507 - Assert.assertNotNull(w.getMorphologicalFeatures())
+0.494 - Assert.assertTrue(w.getMorphologicalFeatures().contains("Feature1"))
+0.494 - Assert.assertTrue(w.getMorphologicalFeatures().contains("Feature2"))
+0.472 - Assert.assertFalse(w.hasPrefix("UnexpectedPrefix"))
+0.472 - Assert.assertFalse(w.hasSuffix("UnexpectedSuffix"))
+0.448 - Assert.assertFalse(w.getWordforms().isEmpty())
+0.441 - Assert.assertEquals("ExpectedRoot", w.getRoot())
+0.411 - Assert.assertNotEquals("UnexpectedRoot", w.getRoot())
+0.385 - ```java
+Assert.assertNotNull(w)
+0.380 - Assert.assertFalse(w.getMorphologicalFeatures().isEmpty())
+0.321 - Assert.assertEquals("ExpectedForm1", w.getWordforms().get(0))
+0.321 - Assert.assertEquals("ExpectedForm2", w.getWordforms().get(1))
+0.000 - ```

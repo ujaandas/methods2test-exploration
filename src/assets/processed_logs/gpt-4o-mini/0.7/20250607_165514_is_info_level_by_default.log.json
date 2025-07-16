@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic static Config createConfig ( ) {\nConfig config = new Config ( ) ;\nconfig . set ( CUCUMBERPRO_CONNECTION_TIMEOUT , 5000 ) ;\nconfig . set ( CUCUMBERPRO_ENVMASK , \"STR\" ) ;\nconfig . setNull ( CUCUMBERPRO_LOGFILE ) ;\nconfig . set ( CUCUMBERPRO_LOGGING , \"STR\" ) ;\nconfig . setNull ( CUCUMBERPRO_PROFILE ) ;\nconfig . setNull ( CUCUMBERPRO_PROJECTNAME ) ;\nconfig . setNull ( CUCUMBERPRO_TOKEN ) ;\nconfig . set ( CUCUMBERPRO_URL , \"STR\" ) ;\nreturn config ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void is_info_level_by_default ( ) {\nConfig config = createConfig ( ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(5000, config.get(CUCUMBERPRO_CONNECTION_TIMEOUT));\nassertEquals(\"STR\", config.get(CUCUMBERPRO_ENVMASK));\nassertNull(config.get(CUCUMBERPRO_LOGFILE));\nassertEquals(\"STR\", config.get(CUCUMBERPRO_LOGGING));\nassertNull(config.get(CUCUMBERPRO_PROFILE));\nassertNull(config.get(CUCUMBERPRO_PROJECTNAME));\nassertNull(config.get(CUCUMBERPRO_TOKEN));\nassertEquals(\"STR\", config.get(CUCUMBERPRO_URL));\nassertTrue(logger.isInfoLevel());\nassertFalse(logger.isDebugLevel());\nassertFalse(logger.isErrorLevel());\nassertFalse(logger.isWarnLevel());\nassertNotNull(logger.getConfig());\nassertEquals(\"CucumberPro\", logger.getLoggerName());\nassertTrue(logger.isLoggingEnabled());\nassertEquals(\"Default\", logger.getProfile());\nassertEquals(0, logger.getLogCount());\nassertTrue(logger.hasLogFile());\nassertEquals(\"STR\", logger.getEnvMask());\nassertEquals(\"STR\", logger.getLoggingLevel());\nassertEquals(\"CucumberPro\", logger.getProjectName());\n```\n====================\n\n",
+    "scores": [
+        0.598,
+        0.591,
+        0.578,
+        0.575,
+        0.571,
+        0.564,
+        0.564,
+        0.553,
+        0.547,
+        0.526,
+        0.48,
+        0.468,
+        0.444,
+        0.442,
+        0.418,
+        0.4,
+        0.372,
+        0.368,
+        0.353,
+        0.345,
+        0.33,
+        0.0
+    ],
+    "ground_truth": "assertEquals(Logger.Level.INFO,logger.level);"
+}

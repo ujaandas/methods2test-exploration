@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsOfFriends ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(qResult);\nassertEquals(10, qResult.size());\nassertTrue(qResult.get(0).containsField(\"name\"));\nassertFalse(qResult.isEmpty());\nassertNotNull(qResult.get(0).field(\"age\"));\nassertTrue(qResult.get(0).field(\"age\") instanceof Integer);\nassertEquals(\"John\", qResult.get(0).field(\"name\"));\nassertFalse(qResult.get(0).containsField(\"address\"));\nassertTrue(qResult.get(0).field(\"friends\") instanceof List);\nassertNotNull(qResult.get(0).field(\"friends\"));\nassertTrue(qResult.get(0).<List>field(\"friends\").size() > 0);\nassertEquals(\"Mary\", qResult.get(0).<List>field(\"friends\").get(0).field(\"name\"));\nassertNotNull(qResult.get(0).field(\"friendsOfFriends\"));\nassertTrue(qResult.get(0).<List>field(\"friendsOfFriends\").size() > 0);\nassertFalse(qResult.get(0).<List>field(\"friendsOfFriends\").isEmpty());\nassertTrue(qResult.get(0).<List>field(\"friendsOfFriends\").get(0).field(\"name\") instanceof String);\nassertEquals(\"Alice\", qResult.get(0).<List>field(\"friendsOfFriends\").get(0).field(\"name\"));\nassertNotNull(qResult.get(0).field(\"friendsOfFriends\").get(0).field(\"age\"));\nassertTrue(qResult.get(0).<List>field(\"friendsOfFriends\").get(0).field(\"age\") instanceof Integer);\nassertEquals(25, qResult.get(0).<List>field(\"friendsOfFriends\").get(0).field(\"age\"));\n====================\n\n",
+    "scores": [
+        0.984,
+        0.733,
+        0.684,
+        0.654,
+        0.611,
+        0.585,
+        0.564,
+        0.526,
+        0.523,
+        0.518,
+        0.514,
+        0.496,
+        0.485,
+        0.474,
+        0.471,
+        0.46,
+        0.442,
+        0.438,
+        0.352,
+        0.352
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

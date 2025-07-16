@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name);
+    }
+};
+
+assertEquals("STR", serviceSetup.getProperty("STR"));
+assertNull(serviceSetup.getProperty("NON_EXISTENT"));
+assertEquals("VALUE1", serviceSetup.getProperty("KEY1"));
+assertEquals("VALUE2", serviceSetup.getProperty("KEY2"));
+assertNull(serviceSetup.getProperty("EMPTY_KEY"));
+assertEquals("TEST_VALUE", serviceSetup.getProperty("TEST_KEY"));
+assertEquals("123", serviceSetup.getProperty("NUMERIC_KEY"));
+assertEquals("true", serviceSetup.getProperty("BOOLEAN_KEY"));
+assertEquals("false", serviceSetup.getProperty("ANOTHER_BOOLEAN_KEY"));
+assertEquals("DEFAULT", serviceSetup.getProperty("DEFAULT_KEY"));
+assertEquals("SOME_VALUE", serviceSetup.getProperty("SOME_KEY"));
+assertEquals("ANOTHER_VALUE", serviceSetup.getProperty("ANOTHER_KEY"));
+assertNull(serviceSetup.getProperty("UNDEFINED_KEY"));
+assertEquals("STRING_VALUE", serviceSetup.getProperty("STRING_KEY"));
+assertEquals("CONFIG_VALUE", serviceSetup.getProperty("CONFIG_KEY"));
+assertEquals("ENV_VALUE", serviceSetup.getProperty("ENV_KEY"));
+assertEquals("PATH_VALUE", serviceSetup.getProperty("PATH_KEY"));
+assertEquals("USER_VALUE", serviceSetup.getProperty("USER_KEY"));
+assertEquals("HOST_VALUE", serviceSetup.getProperty("HOST_KEY"));
+assertEquals("PORT_VALUE", serviceSetup.getProperty("PORT_KEY"));
+assertEquals("API_KEY_VALUE", serviceSetup.getProperty("API_KEY"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.832 - assertEquals("STR", serviceSetup.getProperty("STR"))
+0.718 - assertEquals("STRING_VALUE", serviceSetup.getProperty("STRING_KEY"))
+0.708 - assertEquals("TEST_VALUE", serviceSetup.getProperty("TEST_KEY"))
+0.708 - assertEquals("USER_VALUE", serviceSetup.getProperty("USER_KEY"))
+0.708 - assertEquals("HOST_VALUE", serviceSetup.getProperty("HOST_KEY"))
+0.686 - assertEquals("VALUE1", serviceSetup.getProperty("KEY1"))
+0.686 - assertEquals("VALUE2", serviceSetup.getProperty("KEY2"))
+0.679 - assertEquals("123", serviceSetup.getProperty("NUMERIC_KEY"))
+0.673 - assertEquals("DEFAULT", serviceSetup.getProperty("DEFAULT_KEY"))
+0.673 - assertEquals("SOME_VALUE", serviceSetup.getProperty("SOME_KEY"))
+0.673 - assertEquals("PATH_VALUE", serviceSetup.getProperty("PATH_KEY"))
+0.673 - assertEquals("PORT_VALUE", serviceSetup.getProperty("PORT_KEY"))
+0.672 - assertEquals("ANOTHER_VALUE", serviceSetup.getProperty("ANOTHER_KEY"))
+0.655 - assertEquals("true", serviceSetup.getProperty("BOOLEAN_KEY"))
+0.649 - assertEquals("ENV_VALUE", serviceSetup.getProperty("ENV_KEY"))
+0.639 - assertEquals("false", serviceSetup.getProperty("ANOTHER_BOOLEAN_KEY"))
+0.626 - assertEquals("API_KEY_VALUE", serviceSetup.getProperty("API_KEY"))
+0.615 - assertEquals("CONFIG_VALUE", serviceSetup.getProperty("CONFIG_KEY"))
+0.608 - assertNull(serviceSetup.getProperty("NON_EXISTENT"))
+0.606 - assertNull(serviceSetup.getProperty("EMPTY_KEY"))
+0.563 - assertNull(serviceSetup.getProperty("UNDEFINED_KEY"))
+0.321 - ```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name)
+0.000 - }
+}
+0.000 - ```

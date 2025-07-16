@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue23 ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertFalse(schemas.isEmpty());\nassertEquals(3, schemas.size());\nassertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));\nassertEquals(\"ExpectedSchemaName1\", schemas.get(0).getName());\nassertEquals(\"ExpectedSchemaName2\", schemas.get(1).getName());\nassertEquals(\"ExpectedSchemaName3\", schemas.get(2).getName());\nassertNotNull(schemas.get(0).getTargetNamespace());\nassertNotNull(schemas.get(1).getTargetNamespace());\nassertNotNull(schemas.get(2).getTargetNamespace());\nassertTrue(schemas.get(0).getElements().size() > 0);\nassertTrue(schemas.get(1).getElements().size() > 0);\nassertTrue(schemas.get(2).getElements().size() > 0);\nassertEquals(\"ExpectedElementType1\", schemas.get(0).getElements().get(0).getType());\nassertEquals(\"ExpectedElementType2\", schemas.get(1).getElements().get(0).getType());\nassertEquals(\"ExpectedElementType3\", schemas.get(2).getElements().get(0).getType());\nassertTrue(schemas.get(0).getDocumentation().isPresent());\nassertTrue(schemas.get(1).getDocumentation().isPresent());\nassertTrue(schemas.get(2).getDocumentation().isPresent());\nassertEquals(\"ExpectedDocumentation1\", schemas.get(0).getDocumentation().get());\nassertEquals(\"ExpectedDocumentation2\", schemas.get(1).getDocumentation().get());\nassertEquals(\"ExpectedDocumentation3\", schemas.get(2).getDocumentation().get());\nassertEquals(\"ExpectedVersion\", schemas.get(0).getVersion());\n```\n====================\n\n",
+    "scores": [
+        0.435,
+        0.431,
+        0.431,
+        0.431,
+        0.411,
+        0.411,
+        0.411,
+        0.37,
+        0.341,
+        0.333,
+        0.333,
+        0.333,
+        0.32,
+        0.277,
+        0.277,
+        0.277,
+        0.263,
+        0.263,
+        0.263,
+        0.204,
+        0.204,
+        0.204,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(true);"
+}

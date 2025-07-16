@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic Method find ( ) {\nList < Method > methods = findAll ( ) ;\nswitch ( methods . size ( ) ) {\ncase 0 : return null ;\ncase 1 : return methods . iterator ( ) . next ( ) ;\ndefault : throw new ReflectionException ( format ( \"STR\" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testGetAtMostOneVoidMethodWithoutArgs ( ) {\nMethod method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Prepare . class ) . withVoidReturnType ( ) . withoutArgs ( ) . find ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(method);\nassertEquals(\"expectedMethodName\", method.getName());\nassertEquals(void.class, method.getReturnType());\nassertEquals(0, method.getParameterCount());\nassertTrue(Modifier.isPublic(method.getModifiers()));\nassertFalse(Modifier.isStatic(method.getModifiers()));\nassertFalse(Modifier.isAbstract(method.getModifiers()));\nassertFalse(Modifier.isNative(method.getModifiers()));\nassertFalse(Modifier.isFinal(method.getModifiers()));\nassertTrue(method.isAnnotationPresent(ExpectedAnnotation.class));\nassertEquals(\"expectedMethodDescription\", method.getAnnotation(ExpectedAnnotation.class).description());\nassertEquals(\"expectedMethodValue\", method.getAnnotation(ExpectedAnnotation.class).value());\nassertEquals(\"expectedMethodCategory\", method.getAnnotation(ExpectedAnnotation.class).category());\nassertTrue(method.getDeclaringClass().isAssignableFrom(AnnotationTestClass.class));\nassertNotNull(method.getDeclaredAnnotations());\nassertEquals(0, method.getDeclaredAnnotations().length);\nassertDoesNotThrow(() -> method.invoke(new AnnotationTestClass()));\nassertTrue(method.getName().startsWith(\"expectedPrefix\"));\nassertFalse(method.getName().endsWith(\"unexpectedSuffix\"));\nassertNotEquals(\"notExpectedMethodName\", method.getName());\nassertTrue(method.getAnnotations().length > 0);\nassertEquals(0, method.getGenericParameterTypes().length);\n```\n====================\n\n",
+    "scores": [
+        0.769,
+        0.759,
+        0.71,
+        0.675,
+        0.652,
+        0.644,
+        0.585,
+        0.574,
+        0.562,
+        0.55,
+        0.545,
+        0.539,
+        0.538,
+        0.527,
+        0.523,
+        0.492,
+        0.492,
+        0.47,
+        0.449,
+        0.444,
+        0.4,
+        0.373,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",method.getName());"
+}

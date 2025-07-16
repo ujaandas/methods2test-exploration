@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testArrayRange2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedSize, result.size());
+assertTrue(result.getProperty("propertyName") instanceof ExpectedType);
+assertEquals(expectedValue, result.next().getProperty("propertyName"));
+assertFalse(result.isEmpty());
+assertTrue(result.stream().count() > 0);
+assertEquals(expectedValue, result.next().getProperty("anotherProperty"));
+assertNotEquals(unexpectedValue, result.next().getProperty("differentProperty"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("propertyName") != null));
+assertEquals(expectedList, result.stream().map(r -> r.getProperty("propertyName")).collect(Collectors.toList()));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("propertyName").equals(specificValue)));
+assertEquals(expectedMap, result.stream().collect(Collectors.toMap(r -> r.getProperty("key"), r -> r.getProperty("value"))));
+assertTrue(result.stream().noneMatch(r -> r.getProperty("propertyName").equals(unwantedValue)));
+assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("propertyName").equals(filterValue)).count());
+assertTrue(result.stream().map(r -> r.getProperty("propertyName")).distinct().count() > 1);
+assertNotNull(result.next().getProperty("nestedProperty"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0));
+assertEquals(expectedString, result.next().getProperty("stringProperty"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("booleanProperty")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.708 - assertTrue(result.stream().count() > 0)
+0.702 - assertFalse(result.isEmpty())
+0.588 - assertEquals(expectedSize, result.size())
+0.526 - ```java
+assertNotNull(result)
+0.500 - assertTrue(result.getProperty("propertyName") instanceof ExpectedType)
+0.488 - assertNotNull(result.next().getProperty("nestedProperty"))
+0.436 - assertTrue(result.stream().anyMatch(r -> r.getProperty("booleanProperty")))
+0.433 - assertEquals(expectedValue, result.next().getProperty("propertyName"))
+0.427 - assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0))
+0.423 - assertTrue(result.stream().allMatch(r -> r.getProperty("propertyName") != null))
+0.421 - assertTrue(result.stream().map(r -> r.getProperty("propertyName")).distinct().count() > 1)
+0.420 - assertEquals(expectedValue, result.next().getProperty("anotherProperty"))
+0.400 - assertEquals(expectedString, result.next().getProperty("stringProperty"))
+0.393 - assertNotEquals(unexpectedValue, result.next().getProperty("differentProperty"))
+0.367 - assertTrue(result.stream().anyMatch(r -> r.getProperty("propertyName").equals(specificValue)))
+0.364 - assertTrue(result.stream().noneMatch(r -> r.getProperty("propertyName").equals(unwantedValue)))
+0.314 - assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("propertyName").equals(filterValue)).count())
+0.307 - assertEquals(expectedList, result.stream().map(r -> r.getProperty("propertyName")).collect(Collectors.toList()))
+0.288 - assertEquals(expectedMap, result.stream().collect(Collectors.toMap(r -> r.getProperty("key"), r -> r.getProperty("value"))))
+0.000 - ```

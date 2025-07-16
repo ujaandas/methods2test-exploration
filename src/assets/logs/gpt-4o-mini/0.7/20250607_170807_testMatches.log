@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatches ( ) {
+         List < ? > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertEquals(expectedSize, result.size());
+assertTrue(result.get(0) instanceof ExpectedType);
+assertEquals(expectedValue, result.get(0).getField("fieldName"));
+assertEquals(expectedValue2, result.get(1).getField("fieldName2"));
+assertTrue(result.contains(expectedObject));
+assertFalse(result.contains(unexpectedObject));
+assertEquals(expectedString, result.get(0).getStringField("stringField"));
+assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType));
+assertEquals(expectedInteger, result.get(2).getIntField("integerField"));
+assertTrue(result.stream().anyMatch(item -> item.equals(expectedItem)));
+assertNotEquals(unexpectedValue, result.get(3).getField("fieldName"));
+assertTrue(result.size() <= maxSize);
+assertFalse(result.isEmpty() || result.size() == expectedSize);
+assertNull(result.get(4).getField("nullableField"));
+assertNotNull(result.get(5).getField("nonNullableField"));
+assertEquals(expectedList, result.subList(0, 3));
+assertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet));
+assertSame(expectedObject, result.get(6));
+assertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getId, Function.identity())));
+assertThrows(ExpectedException.class, () -> { /* invoke method that causes exception */ });
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(result.size(),1); ===
+0.783 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.698 - assertTrue(result.size() <= maxSize)
+0.667 - assertEquals(expectedList, result.subList(0, 3))
+0.560 - assertFalse(result.contains(unexpectedObject))
+0.552 - ```java
+assertNotNull(result)
+0.552 - assertFalse(result.isEmpty() || result.size() == expectedSize)
+0.551 - assertSame(expectedObject, result.get(6))
+0.543 - assertEquals(expectedValue, result.get(0).getField("fieldName"))
+0.528 - assertTrue(result.contains(expectedObject))
+0.525 - assertNull(result.get(4).getField("nullableField"))
+0.515 - assertNotEquals(unexpectedValue, result.get(3).getField("fieldName"))
+0.511 - assertEquals(expectedValue2, result.get(1).getField("fieldName2"))
+0.500 - assertEquals(expectedInteger, result.get(2).getIntField("integerField"))
+0.495 - assertEquals(expectedString, result.get(0).getStringField("stringField"))
+0.488 - assertNotNull(result.get(5).getField("nonNullableField"))
+0.474 - assertTrue(result.get(0) instanceof ExpectedType)
+0.408 - assertTrue(result.stream().anyMatch(item -> item.equals(expectedItem)))
+0.404 - assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType))
+0.397 - assertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getId, Function.identity())))
+0.292 - assertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet))
+0.241 - assertThrows(ExpectedException.class, () -> { /* invoke method that causes exception */ })
+0.000 - ```

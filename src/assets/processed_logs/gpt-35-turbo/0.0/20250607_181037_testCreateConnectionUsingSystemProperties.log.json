@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactory {\n@Override\npublic MBeanAccessConnection createConnection ( ) throws IOException {\nJMXMBeanConnection result = null ;\ntry {\nVirtualMachine vm = this . attacher . attach ( jvmId ) ;\nString url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\nif ( url == null ) {\nString javaHome = vm . getSystemProperties ( ) . getProperty ( \"STR\" ) ;\nString agent = javaHome + File . separator + \"STR\" + File . separator + \"STR\" ;\nvm . loadAgent ( agent ) ;\nurl = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\n} if ( url != null ) {\nJMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ;\nJMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ;\nresult = this . jmxmBeanConnectionFactory . create ( connector ) ;\n} else {\nlog . warn ( \"STR\" , this . jvmId ) ;\n} } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) {\nlog . warn ( \"STR\" , this . jvmId , exc ) ;\n} return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactoryTest {\n@Test\npublic void testCreateConnectionUsingSystemProperties ( ) throws Exception {\nthis . initFactory ( ) ;\nMockito . when ( this . mockAttacher . attach ( \"STR\" ) ) . thenReturn ( this . mockVirtualMachine ) ;\nMockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ;\nMockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ;\nMockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSystemProperties . getProperty ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMBeanAccessConnection result = this . factory . createConnection ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(result);\nAssert.assertTrue(result instanceof JMXMBeanConnection);\nAssert.assertEquals(\"expectedValue\", result.getSomeValue());\nAssert.assertNotEquals(\"unexpectedValue\", result.getSomeOtherValue());\nAssert.assertTrue(result.isConnected());\nAssert.assertFalse(result.isClosed());\nAssert.assertEquals(5, result.getList().size());\nAssert.assertTrue(result.getMap().containsKey(\"key\"));\nAssert.assertFalse(result.getMap().isEmpty());\nAssert.assertTrue(result.getSet().contains(\"element\"));\nAssert.assertEquals(100, result.getIntValue());\nAssert.assertNotEquals(0, result.getLongValue());\nAssert.assertTrue(result.getBooleanValue());\nAssert.assertEquals(\"string\", result.getStringValue());\nAssert.assertTrue(result.getDoubleValue() > 0);\nAssert.assertNotNull(result.getDate());\nAssert.assertTrue(result.getDate().before(new Date()));\nAssert.assertTrue(result.getDate().after(new Date(System.currentTimeMillis() - 1000)));\nAssert.assertTrue(result.getDate().getTime() > 0);\n====================\n\n",
+    "scores": [
+        0.696,
+        0.615,
+        0.526,
+        0.512,
+        0.506,
+        0.5,
+        0.5,
+        0.495,
+        0.478,
+        0.471,
+        0.442,
+        0.442,
+        0.418,
+        0.416,
+        0.412,
+        0.405,
+        0.391,
+        0.374,
+        0.295
+    ],
+    "ground_truth": "assertSame(result,this.mockJmxMbeanConnection);"
+}

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @Test
+     public void testRemoveWorker_viaSimulatorAddress ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         List < WorkerParameters > parametersList = newWorkerParametersList ( agentAddress , 5 ) ; 
+         registry . addWorkers ( parametersList ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(5, registry.workerCount());
+assertTrue(registry.getWorkers().contains(agentAddress));
+assertFalse(registry.getWorkers().isEmpty());
+assertNotNull(registry.getWorkers());
+assertTrue(registry.getWorkers().size() > 0);
+assertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count());
+assertTrue(parametersList.stream().allMatch(p -> registry.getWorkers().contains(p)));
+assertEquals(parametersList.size(), registry.getWorkers().size());
+assertTrue(registry.getWorkers().stream().anyMatch(w -> w.getParameters().equals(parametersList.get(0))));
+assertFalse(registry.getWorkers().contains(null));
+assertNotEquals(0, registry.workerCount());
+assertTrue(registry.getWorkers().stream().allMatch(w -> w instanceof Worker));
+assertEquals(parametersList, registry.getWorkers());
+assertSame(parametersList.get(0), registry.getWorkers().get(0));
+assertNotSame(parametersList.get(1), registry.getWorkers().get(2));
+assertTrue(registry.getWorkers().stream().map(Worker::getAddress).collect(Collectors.toList()).contains(agentAddress));
+assertEquals(agentAddress, registry.getWorkers().get(0).getAddress());
+assertTrue(registry.getWorkers().stream().anyMatch(w -> w.getParameters().equals(parametersList.get(4))));
+assertFalse(registry.getWorkers().stream().noneMatch(w -> w.getAddress().equals(agentAddress)));
+assertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count());
+assertTrue(registry.getWorkers().stream().allMatch(w -> parametersList.contains(w.getParameters())));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(5,registry.workerCount()); ===
+0.937 - assertNotEquals(0, registry.workerCount())
+0.905 - ```java
+assertEquals(5, registry.workerCount())
+0.705 - assertEquals(parametersList, registry.getWorkers())
+0.703 - assertNotNull(registry.getWorkers())
+0.690 - assertFalse(registry.getWorkers().contains(null))
+0.683 - assertFalse(registry.getWorkers().isEmpty())
+0.625 - assertTrue(registry.getWorkers().size() > 0)
+0.608 - assertEquals(parametersList.size(), registry.getWorkers().size())
+0.604 - assertEquals(agentAddress, registry.getWorkers().get(0).getAddress())
+0.596 - assertTrue(registry.getWorkers().contains(agentAddress))
+0.560 - assertSame(parametersList.get(0), registry.getWorkers().get(0))
+0.544 - assertNotSame(parametersList.get(1), registry.getWorkers().get(2))
+0.518 - assertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count())
+0.518 - assertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count())
+0.500 - assertTrue(parametersList.stream().allMatch(p -> registry.getWorkers().contains(p)))
+0.458 - assertFalse(registry.getWorkers().stream().noneMatch(w -> w.getAddress().equals(agentAddress)))
+0.450 - assertTrue(registry.getWorkers().stream().allMatch(w -> w instanceof Worker))
+0.412 - assertTrue(registry.getWorkers().stream().allMatch(w -> parametersList.contains(w.getParameters())))
+0.383 - assertTrue(registry.getWorkers().stream().anyMatch(w -> w.getParameters().equals(parametersList.get(0))))
+0.383 - assertTrue(registry.getWorkers().stream().anyMatch(w -> w.getParameters().equals(parametersList.get(4))))
+0.359 - assertTrue(registry.getWorkers().stream().map(Worker::getAddress).collect(Collectors.toList()).contains(agentAddress))
+0.000 - ```

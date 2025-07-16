@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactory {
+    public Extractor getNewInstance ( ) { 
+    Extractor extractor = new BasicExtractor ( config ) ; 
+    if ( config . shouldCachedDownload ( ) ) { 
+    extractor = new CachedExtractor ( extractor , config ) ; 
+    } return extractor ; 
+    }
+}
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactoryTest {
+    @Test
+     public void withCaching ( ) throws Exception {
+         builder . useCachedDownload ( true ) ; 
+         Extractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(extractor);
+assertTrue(extractor instanceof CachedExtractor);
+assertEquals(extractor.getConfig(), builder.build());
+assertEquals(((CachedExtractor) extractor).getWrappedExtractor().getClass(), BasicExtractor.class);
+assertTrue(((CachedExtractor) extractor).isCachingEnabled());
+assertTrue(((CachedExtractor) extractor).getCache().isEmpty());
+assertTrue(extractor.getDataSource() instanceof CachedDataSource);
+assertEquals(extractor.getDataFormat(), "expectedFormat");
+assertNotNull(extractor.getCache());
+assertTrue(extractor.getCache().size() == 0);
+assertEquals(extractor.getExtractionStrategy(), "expectedStrategy");
+assertTrue(extractor.isInitialized());
+assertTrue(extractor.supportsStreaming());
+assertEquals(extractor.getCacheExpiration(), 3600);
+assertEquals(extractor.getMaxCacheSize(), 1024);
+assertTrue(extractor.getDownloadPolicy().isCached());
+assertNotNull(extractor.getMetrics());
+assertEquals(extractor.getMetrics().getCacheHits(), 0);
+assertEquals(extractor.getMetrics().getCacheMisses(), 0);
+assertTrue(extractor.getLogger() instanceof Logger);
+assertTrue(extractor.getExecutorService().isShutdown());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(extractor.getClass().equals(CachedExtractor.class)); ===
+0.685 - assertTrue(extractor instanceof CachedExtractor)
+0.667 - assertTrue(extractor.getDownloadPolicy().isCached())
+0.635 - assertTrue(extractor.getCache().size() == 0)
+0.613 - assertEquals(extractor.getCacheExpiration(), 3600)
+0.609 - assertEquals(extractor.getMetrics().getCacheHits(), 0)
+0.608 - assertTrue(extractor.getDataSource() instanceof CachedDataSource)
+0.598 - assertEquals(extractor.getMetrics().getCacheMisses(), 0)
+0.577 - assertNotNull(extractor.getCache())
+0.545 - assertTrue(((CachedExtractor) extractor).isCachingEnabled())
+0.542 - assertEquals(extractor.getDataFormat(), "expectedFormat")
+0.541 - assertTrue(extractor.getLogger() instanceof Logger)
+0.537 - assertEquals(extractor.getMaxCacheSize(), 1024)
+0.537 - assertTrue(((CachedExtractor) extractor).getCache().isEmpty())
+0.531 - assertEquals(extractor.getConfig(), builder.build())
+0.530 - assertTrue(extractor.getExecutorService().isShutdown())
+0.516 - assertEquals(extractor.getExtractionStrategy(), "expectedStrategy")
+0.505 - assertTrue(extractor.isInitialized())
+0.505 - assertNotNull(extractor.getMetrics())
+0.485 - assertTrue(extractor.supportsStreaming())
+0.430 - assertEquals(((CachedExtractor) extractor).getWrappedExtractor().getClass(), BasicExtractor.class)
+0.383 - ```java
+assertNotNull(extractor)
+0.000 - ```

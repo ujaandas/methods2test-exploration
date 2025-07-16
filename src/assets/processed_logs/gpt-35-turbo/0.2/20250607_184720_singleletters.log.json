@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage PeterisP.morphology;\n\npublic class Tokenize {\npublic static LinkedList < Word > tokenize ( Analyzer morphoAnalyzer , String chunk , boolean bruteSplit ) {\nif ( bruteSplit ) {\nLinkedList < Word > tokens = new LinkedList < Word > ( ) ;\nif ( chunk == null ) return tokens ;\nString [ ] parts_of_string = chunk . trim ( ) . split ( \"STR\" ) ;\nfor ( String part : parts_of_string ) {\nif ( part . length ( ) > 0 ) tokens . add ( ( morphoAnalyzer == null ) ? new Word ( part ) : morphoAnalyzer . analyze ( part ) ) ;\n} return tokens ;\n} else {\nreturn tokenize ( morphoAnalyzer , chunk ) ;\n} }\n}\n\npackage PeterisP.morphology;\n\npublic class TokenizeTest {\n@Test\npublic void singleletters ( ) {\nLinkedList < Word > tokens ;\ntokens = Splitting . tokenize ( loc\u012bt\u0101js , \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, tokens.size());\nassertTrue(tokens.isEmpty());\nassertEquals(1, tokens.size());\nassertEquals(\"a\", tokens.get(0).getWord());\nassertEquals(2, tokens.size());\nassertEquals(\"ab\", tokens.get(0).getWord());\nassertEquals(\"cd\", tokens.get(1).getWord());\nassertEquals(3, tokens.size());\nassertEquals(\"abc\", tokens.get(0).getWord());\nassertEquals(\"def\", tokens.get(1).getWord());\nassertEquals(\"ghi\", tokens.get(2).getWord());\nassertEquals(4, tokens.size());\nassertEquals(\"abcd\", tokens.get(0).getWord());\nassertEquals(\"efgh\", tokens.get(1).getWord());\nassertEquals(\"ijkl\", tokens.get(2).getWord());\nassertEquals(\"mnop\", tokens.get(3).getWord());\nassertEquals(5, tokens.size());\nassertEquals(\"abcde\", tokens.get(0).getWord());\nassertEquals(\"fghij\", tokens.get(1).getWord());\nassertEquals(\"klmno\", tokens.get(2).getWord());\nassertEquals(\"pqrst\", tokens.get(3).getWord());\nassertEquals(\"uvwxy\", tokens.get(4).getWord());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.966,
+        0.966,
+        0.966,
+        0.966,
+        0.966,
+        0.714,
+        0.704,
+        0.704,
+        0.694,
+        0.694,
+        0.694,
+        0.685,
+        0.685,
+        0.685,
+        0.685,
+        0.676,
+        0.676,
+        0.676,
+        0.676,
+        0.676,
+        0.667
+    ],
+    "ground_truth": "assertEquals(3,tokens.size());"
+}

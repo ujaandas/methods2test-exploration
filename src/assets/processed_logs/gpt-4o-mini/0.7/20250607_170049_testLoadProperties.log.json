@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class GitInfo {\nstatic Properties loadGitProperties ( String fileName ) {\nProperties properties = new Properties ( ) ;\nInputStream inputStream = GitInfo . class . getClassLoader ( ) . getResourceAsStream ( fileName ) ;\ntry {\nproperties . load ( inputStream ) ;\nreturn properties ;\n} catch ( NullPointerException e ) {\nLOGGER . trace ( \"STR\" + fileName , e ) ;\n} catch ( Exception e ) {\nLOGGER . warn ( \"STR\" + fileName , e ) ;\n} finally {\ncloseQuietly ( inputStream ) ;\n} return new UnknownGitProperties ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class GitInfoTest {\n@Test\npublic void testLoadProperties ( ) {\nProperties properties = GitInfo . loadGitProperties ( GitInfo . GIT_INFO_FILE ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(properties);\nassertTrue(properties.size() > 0);\nassertTrue(properties.containsKey(\"git.commit.id\"));\nassertTrue(properties.containsKey(\"git.build.time\"));\nassertTrue(properties.containsKey(\"git.branch\"));\nassertEquals(\"expected_commit_id\", properties.getProperty(\"git.commit.id\"));\nassertEquals(\"expected_build_time\", properties.getProperty(\"git.build.time\"));\nassertEquals(\"expected_branch_name\", properties.getProperty(\"git.branch\"));\nassertTrue(properties.containsKey(\"git.tags\"));\nassertNotNull(properties.getProperty(\"git.tags\"));\nassertTrue(properties.getProperty(\"git.tags\").length() > 0);\nassertTrue(properties.containsKey(\"git.remote.origin.url\"));\nassertNotNull(properties.getProperty(\"git.remote.origin.url\"));\nassertEquals(\"expected_remote_url\", properties.getProperty(\"git.remote.origin.url\"));\nassertFalse(properties.getProperty(\"git.commit.id\").isEmpty());\nassertFalse(properties.getProperty(\"git.build.time\").isEmpty());\nassertFalse(properties.getProperty(\"git.branch\").isEmpty());\nassertFalse(properties.getProperty(\"git.tags\").isEmpty());\nassertTrue(properties.containsKey(\"git.commit.user.name\"));\nassertTrue(properties.containsKey(\"git.commit.user.email\"));\nassertEquals(\"expected_user_name\", properties.getProperty(\"git.commit.user.name\"));\nassertEquals(\"expected_user_email\", properties.getProperty(\"git.commit.user.email\"));\n```\n====================\n\n",
+    "scores": [
+        0.862,
+        0.679,
+        0.676,
+        0.575,
+        0.535,
+        0.521,
+        0.5,
+        0.494,
+        0.463,
+        0.463,
+        0.458,
+        0.452,
+        0.452,
+        0.452,
+        0.437,
+        0.432,
+        0.396,
+        0.389,
+        0.384,
+        0.37,
+        0.367,
+        0.358,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(properties);"
+}

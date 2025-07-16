@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class AttachmentResult {\npublic AttachmentResult ( String inputMessage , StatementResult inputStatements , Map < String , AttachmentAndType > inputAttachments ) {\nresponseMessage = inputMessage ;\nstatements = inputStatements ;\nattachments = inputAttachments ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class AttachmentResultTest {\n@Test\npublic void testSetXapiStatements ( ) {\nAttachmentResult a = new AttachmentResult ( RESPONSE_MESSAGE , statements , attachments ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(RESPONSE_MESSAGE, a.responseMessage);\nassertNotNull(a.statements);\nassertNotNull(a.attachments);\nassertTrue(a.attachments instanceof Map);\nassertEquals(attachments.size(), a.attachments.size());\nassertTrue(a.statements instanceof StatementResult);\nassertTrue(a.responseMessage instanceof String);\nassertFalse(a.responseMessage.isEmpty());\nassertTrue(a.attachments.containsKey(\"someKey\"));\nassertTrue(a.attachments.containsValue(new AttachmentAndType(\"someType\")));\nassertEquals(\"expectedValue\", a.attachments.get(\"expectedKey\").getType());\nassertNotSame(a.statements, new StatementResult());\nassertNull(a.attachments.get(\"nonExistentKey\"));\nassertTrue(a.statements.getStatements().isEmpty());\nassertEquals(statements.getStatements().size(), a.statements.getStatements().size());\nassertEquals(\"expectedMessage\", a.responseMessage);\nassertNotEquals(\"unexpectedMessage\", a.responseMessage);\nassertTrue(a.attachments.keySet().contains(\"anotherKey\"));\nassertFalse(a.attachments.isEmpty());\nassertSame(a.attachments, attachments);\nassertEquals(a.statements, statements);\n```\n====================\n\n",
+    "scores": [
+        0.744,
+        0.727,
+        0.415,
+        0.413,
+        0.406,
+        0.4,
+        0.385,
+        0.37,
+        0.357,
+        0.34,
+        0.338,
+        0.328,
+        0.319,
+        0.312,
+        0.303,
+        0.278,
+        0.277,
+        0.247,
+        0.227,
+        0.225,
+        0.202,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(a);"
+}

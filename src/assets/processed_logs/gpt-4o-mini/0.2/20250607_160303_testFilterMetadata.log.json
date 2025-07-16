@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nfinal List vector = new ArrayList ( ) ;\nvector . add ( \"STR\" ) ;\nvector . add ( \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadata2fieldParamName , vector ) ;\nprepareIndexerBolt ( config ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertEquals(3, fields.size());\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertFalse(fields.containsKey(\"NON_EXISTENT_KEY\"));\nassertTrue(fields.keySet().stream().allMatch(key -> key.equals(\"STR\")));\nassertTrue(fields.values().stream().allMatch(value -> value.equals(\"STR\")));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"DIFFERENT_VALUE\", fields.get(\"STR\"));\nassertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getKey().equals(\"STR\") && entry.getValue().equals(\"STR\")));\nassertEquals(1, fields.entrySet().stream().filter(entry -> entry.getKey().equals(\"STR\")).count());\nassertTrue(fields.values().stream().anyMatch(value -> value.equals(\"STR\")));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertFalse(fields.isEmpty());\nassertTrue(fields.containsValue(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"ANOTHER_VALUE\", fields.get(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.47,
+        0.47,
+        0.47,
+        0.47,
+        0.47,
+        0.47,
+        0.414,
+        0.403,
+        0.395,
+        0.39,
+        0.371,
+        0.333,
+        0.333,
+        0.333,
+        0.315,
+        0.313,
+        0.313,
+        0.286,
+        0.275,
+        0.274,
+        0.258,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(\"STR\",newString[]{\"STR\",\"STR\",\"STR\"},newTreeSet<>(fields.keySet()).toArray());"
+}

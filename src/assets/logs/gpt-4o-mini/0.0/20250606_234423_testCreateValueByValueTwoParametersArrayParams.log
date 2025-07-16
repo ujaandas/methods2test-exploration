@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( Object ... params ) { 
+     if ( ! ( params [ 0 ] instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ; 
+     final List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     Object val = createSingleValue ( mapParam ) ; 
+     result . add ( val ) ; 
+     } if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) { 
+     return result . get ( 0 ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueByValueTwoParametersArrayParams ( ) {
+         final Object result = propertyIndexByValue . createValue ( mapToTest , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertEquals(1, ((List<?>) result).size());
+assertTrue(((List<?>) result).get(0) instanceof ExpectedType); // Replace ExpectedType with the actual expected type
+assertEquals(expectedValue, ((List<?>) result).get(0)); // Replace expectedValue with the actual expected value
+assertEquals(expectedSize, ((List<?>) result).size()); // Replace expectedSize with the actual expected size
+assertTrue(propertyIndexByValue.createValue(mapToTest) instanceof List);
+assertNull(propertyIndexByValue.createValue("InvalidParam"));
+assertEquals(0, propertyIndexByValue.createValue(new HashMap<>()).size());
+assertTrue(propertyIndexByValue.createValue(new HashMap<>()).isEmpty());
+assertNotEquals(result, propertyIndexByValue.createValue(new HashMap<>()));
+assertTrue(result.equals(propertyIndexByValue.createValue(mapToTest, "STR")));
+assertFalse(result.equals(propertyIndexByValue.createValue(null)));
+assertTrue(result.contains(expectedValue)); // Replace expectedValue with the actual expected value
+assertFalse(result.contains(unexpectedValue)); // Replace unexpectedValue with a value that should not be present
+assertEquals(expectedType, result.getClass()); // Replace expectedType with the actual expected type
+assertTrue(result instanceof List<?>);
+assertNotSame(result, propertyIndexByValue.createValue(mapToTest, "DifferentParam"));
+assertEquals(expectedHashCode, result.hashCode()); // Replace expectedHashCode with the actual expected hash code
+assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType)); // Replace ExpectedType with the actual expected type
+assertEquals(expectedStringRepresentation, result.toString()); // Replace expectedStringRepresentation with the actual expected string representation
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofCollection); ===
+0.829 - assertTrue(result instanceof List)
+0.646 - assertTrue(((List<?>) result).get(0) instanceof ExpectedType)
+0.625 - assertTrue(result.contains(expectedValue))
+0.483 - // Replace expectedType with the actual expected type
+assertTrue(result instanceof List<?>)
+0.448 - ```java
+assertNotNull(result)
+0.442 - assertEquals(expectedHashCode, result.hashCode())
+0.436 - assertEquals(1, ((List<?>) result).size())
+0.404 - assertFalse(result.equals(propertyIndexByValue.createValue(null)))
+0.380 - // Replace expectedHashCode with the actual expected hash code
+assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType))
+0.368 - assertTrue(result.equals(propertyIndexByValue.createValue(mapToTest, "STR")))
+0.351 - // Replace expectedSize with the actual expected size
+assertTrue(propertyIndexByValue.createValue(mapToTest) instanceof List)
+0.348 - // Replace expectedValue with the actual expected value
+assertFalse(result.contains(unexpectedValue))
+0.327 - assertNotEquals(result, propertyIndexByValue.createValue(new HashMap<>()))
+0.317 - assertNotSame(result, propertyIndexByValue.createValue(mapToTest, "DifferentParam"))
+0.296 - assertTrue(propertyIndexByValue.createValue(new HashMap<>()).isEmpty())
+0.275 - assertEquals(0, propertyIndexByValue.createValue(new HashMap<>()).size())
+0.265 - assertNull(propertyIndexByValue.createValue("InvalidParam"))
+0.261 - // Replace expectedValue with the actual expected value
+assertEquals(expectedSize, ((List<?>) result).size())
+0.248 - // Replace ExpectedType with the actual expected type
+assertEquals(expectedValue, ((List<?>) result).get(0))
+0.234 - // Replace ExpectedType with the actual expected type
+assertEquals(expectedStringRepresentation, result.toString())
+0.233 - // Replace expectedStringRepresentation with the actual expected string representation
+```
+0.230 - // Replace unexpectedValue with a value that should not be present
+assertEquals(expectedType, result.getClass())

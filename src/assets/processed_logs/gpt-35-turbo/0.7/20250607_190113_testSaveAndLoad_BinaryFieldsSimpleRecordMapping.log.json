@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.object;\n\npublic class OObjectBinaryDataStorage {\npublic < RET > RET load ( final ORID recordId ) {\nreturn ( RET ) load ( recordId , null ) ;\n}\n}\n\npackage orientechnologies.orientdb.object;\n\npublic class OObjectBinaryDataStorageTest {\n@Test\npublic void testSaveAndLoad_BinaryFieldsSimpleRecordMapping ( ) throws IOException {\nthis . createDb ( ODocumentFieldHandlingStrategyFactory . SIMPLE ) ;\nDriver hunt = new Driver ( ) ;\nhunt . setName ( \"STR\" ) ;\nbyte [ ] huntUglyPicture = randomBytes ( 1024 * 32 ) ;\nhunt . setImageData ( huntUglyPicture ) ;\nDriver savedHunt = this . databaseTx . save ( hunt ) ;\nDriver loadedHunt = this . databaseTx . load ( new ORecordId ( savedHunt . getId ( ) ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", loadedHunt.getName());\nAssert.assertArrayEquals(huntUglyPicture, loadedHunt.getImageData());\nAssert.assertEquals(1024 * 32, loadedHunt.getImageData().length);\nAssert.assertNotNull(loadedHunt.getId());\nAssert.assertEquals(savedHunt.getId(), loadedHunt.getId());\nAssert.assertTrue(loadedHunt instanceof Driver);\nAssert.assertEquals(0, loadedHunt.getVersion());\nAssert.assertEquals(hunt.getName(), loadedHunt.getName());\nAssert.assertEquals(huntUglyPicture.length, loadedHunt.getImageData().length);\nAssert.assertEquals(savedHunt.getImageData(), loadedHunt.getImageData());\nAssert.assertNotNull(savedHunt.getId());\nAssert.assertNotNull(hunt.getId());\nAssert.assertNotEquals(0, savedHunt.getVersion());\nAssert.assertNotEquals(0, loadedHunt.getVersion());\nAssert.assertNotEquals(savedHunt.getName(), loadedHunt.getName());\nAssert.assertNotEquals(savedHunt.getImageData(), loadedHunt.getImageData());\nAssert.assertNotEquals(hunt.getId(), savedHunt.getId());\nAssert.assertNotEquals(hunt.getName(), savedHunt.getName());\nAssert.assertNotEquals(hunt.getImageData(), savedHunt.getImageData());\n====================\n\n",
+    "scores": [
+        0.857,
+        0.772,
+        0.706,
+        0.677,
+        0.62,
+        0.606,
+        0.56,
+        0.543,
+        0.518,
+        0.514,
+        0.484,
+        0.484,
+        0.476,
+        0.469,
+        0.466,
+        0.432,
+        0.385,
+        0.357,
+        0.323
+    ],
+    "ground_truth": "Assert.assertNotNull(savedHunt);"
+}

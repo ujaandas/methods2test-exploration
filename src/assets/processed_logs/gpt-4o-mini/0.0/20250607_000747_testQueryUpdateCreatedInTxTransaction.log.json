@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testQueryUpdateCreatedInTxTransaction ( ) throws InterruptedException {\ndatabase . begin ( ) ;\nODocument doc1 = new ODocument ( \"STR\" ) ;\ndoc1 . setProperty ( \"STR\" , \"STR\" ) ;\nOIdentifiable id = database . save ( doc1 ) ;\nODocument docx = new ODocument ( \"STR\" ) ;\ndocx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( docx ) ;\nOResultSet result = database . command ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(2, result.stream().count());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"STR\").equals(\"STR\")));\nassertTrue(result.stream().anyMatch(r -> r.getIdentity().equals(id)));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"STR\").equals(\"STR\")));\nassertFalse(result.isClosed());\nassertTrue(result.getProperty(\"STR\") instanceof String);\nassertEquals(\"STR\", result.next().getProperty(\"STR\"));\nassertEquals(\"STR\", result.next().getProperty(\"STR\"));\nassertTrue(result.stream().allMatch(r -> r.getClass().equals(ODocument.class)));\nassertNotEquals(0, result.stream().filter(r -> r.getProperty(\"STR\").equals(\"STR\")).count());\nassertTrue(result.stream().anyMatch(r -> r.getIdentity().equals(docx.getIdentity())));\nassertFalse(result.isEmpty());\nassertEquals(2, result.size());\nassertTrue(result.stream().map(r -> r.getProperty(\"STR\")).distinct().count() > 0);\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"STR\") != null));\nassertTrue(result.stream().anyMatch(r -> r.getIdentity() != null));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"STR\").equals(\"STR\")));\nassertTrue(result.stream().anyMatch(r -> r.getIdentity().equals(doc1.getIdentity())));\nassertTrue(result.stream().anyMatch(r -> r.getIdentity().equals(docx.getIdentity())));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.702,
+        0.702,
+        0.69,
+        0.597,
+        0.543,
+        0.526,
+        0.5,
+        0.5,
+        0.489,
+        0.468,
+        0.468,
+        0.468,
+        0.463,
+        0.463,
+        0.457,
+        0.457,
+        0.427,
+        0.427,
+        0.427,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "assertTrue(result.hasNext());"
+}

@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public Object getDocumentValueToIndex ( final ODocument iDocument ) { 
+    final List < OCompositeKey > compositeKeys = new ArrayList < OCompositeKey > ( 10 ) ; 
+    final OCompositeKey firstKey = new OCompositeKey ( ) ; 
+    boolean containsCollection = false ; 
+    compositeKeys . add ( firstKey ) ; 
+    for ( final OIndexDefinition indexDefinition : indexDefinitions ) { 
+    final Object result = indexDefinition . getDocumentValueToIndex ( iDocument ) ; 
+    if ( result == null && isNullValuesIgnored ( ) ) return null ; 
+    if ( result instanceof Collection && ( ( Collection ) result ) . isEmpty ( ) && isNullValuesIgnored ( ) ) return null ; 
+    containsCollection = addKey ( firstKey , compositeKeys , containsCollection , result ) ; 
+    } if ( ! containsCollection ) return firstKey ; 
+    return compositeKeys ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexMapValueSuccessful ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         final Map < String , String > stringMap = new HashMap < String , String > ( ) ; 
+         stringMap . put ( "STR" , "STR" ) ; 
+         stringMap . put ( "STR" , "STR" ) ; 
+         document . field ( "STR" , 12 ) ; 
+         document . field ( "STR" , stringMap ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyMapIndexDefinition ( "STR" , "STR" , OType . STRING , OPropertyMapIndexDefinition . INDEX_BY . KEY ) ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         final Collection < OCompositeKey > collectionResult = ( Collection < OCompositeKey > ) result ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof Collection);
+assertEquals(1, ((Collection<?>) result).size());
+assertTrue(((Collection<?>) result).iterator().next() instanceof OCompositeKey);
+OCompositeKey compositeKey = (OCompositeKey) ((Collection<?>) result).iterator().next();
+assertNotNull(compositeKey);
+assertEquals(2, compositeKey.size());
+assertTrue(compositeKey.containsKey("STR"));
+assertEquals(12, compositeKey.get("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertTrue(((Map<?, ?>) compositeKey.get("STR")).containsKey("STR"));
+assertEquals("STR", ((Map<?, ?>) compositeKey.get("STR")).get("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertEquals(2, compositeKey.get("STR").size());
+assertTrue(((Map<?, ?>) compositeKey.get("STR")).containsKey("STR"));
+assertEquals("STR", ((Map<?, ?>) compositeKey.get("STR")).get("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertEquals(12, compositeKey.get("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+assertTrue(compositeKey.containsKey("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(collectionResult.size(),2); ===
+0.824 - assertEquals(1, ((Collection<?>) result).size())
+0.676 - assertEquals(2, compositeKey.size())
+0.612 - assertEquals(2, compositeKey.get("STR").size())
+0.557 - assertEquals(12, compositeKey.get("STR"))
+0.557 - assertEquals(12, compositeKey.get("STR"))
+0.494 - assertTrue(result instanceof Collection)
+0.485 - assertNotNull(compositeKey)
+0.470 - assertTrue(((Collection<?>) result).iterator().next() instanceof OCompositeKey)
+0.441 - ```java
+assertNotNull(result)
+0.419 - assertEquals("STR", ((Map<?, ?>) compositeKey.get("STR")).get("STR"))
+0.419 - assertEquals("STR", ((Map<?, ?>) compositeKey.get("STR")).get("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.415 - assertTrue(compositeKey.containsKey("STR"))
+0.413 - OCompositeKey compositeKey = (OCompositeKey) ((Collection<?>) result).iterator().next()
+0.324 - assertTrue(((Map<?, ?>) compositeKey.get("STR")).containsKey("STR"))
+0.324 - assertTrue(((Map<?, ?>) compositeKey.get("STR")).containsKey("STR"))
+0.000 - ```

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( double value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    out . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testDoubleWithFrac0 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 1.23 , 0 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("1", result);
+assertNotNull(result);
+assertTrue(result.length() > 0);
+assertFalse(result.isEmpty());
+assertEquals(1, result.split(",").length);
+assertTrue(result.matches("\\d+"));
+assertFalse(result.matches("\\d+\\.\\d+"));
+assertFalse(result.contains("."));
+assertTrue(result.startsWith("1"));
+assertTrue(result.endsWith(""));
+assertEquals(1, result.charAt(0) - '0');
+assertTrue(result.indexOf('2') == -1);
+assertTrue(result.indexOf('3') == -1);
+assertFalse(result.contains("0"));
+assertFalse(result.contains("4"));
+assertFalse(result.contains("5"));
+assertFalse(result.contains("6"));
+assertFalse(result.contains("7"));
+assertFalse(result.contains("8"));
+assertFalse(result.contains("9"));
+assertEquals("1", result.substring(0, 1));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.793 - ```java
+assertEquals("1", result)
+0.708 - assertEquals("1", result.substring(0, 1))
+0.681 - assertNotNull(result)
+0.677 - assertEquals(1, result.charAt(0) - '0')
+0.636 - assertEquals(1, result.split(",").length)
+0.618 - assertFalse(result.isEmpty())
+0.576 - assertFalse(result.contains("."))
+0.576 - assertFalse(result.contains("0"))
+0.576 - assertFalse(result.contains("4"))
+0.576 - assertFalse(result.contains("5"))
+0.576 - assertFalse(result.contains("6"))
+0.576 - assertFalse(result.contains("7"))
+0.576 - assertFalse(result.contains("8"))
+0.576 - assertFalse(result.contains("9"))
+0.545 - assertTrue(result.length() > 0)
+0.526 - assertTrue(result.endsWith(""))
+0.500 - assertTrue(result.matches("\\d+"))
+0.500 - assertFalse(result.matches("\\d+\\.\\d+"))
+0.500 - assertTrue(result.startsWith("1"))
+0.492 - assertTrue(result.indexOf('2') == -1)
+0.492 - assertTrue(result.indexOf('3') == -1)
+0.000 - ```

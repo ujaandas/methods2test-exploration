@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\nResponseStatus getStatus ( ) ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testTwoQueries ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(ResponseStatus.OK, response.getStatus());\nassertNotNull(response);\nassertTrue(response.isValid());\nassertFalse(response.isReplayed());\nassertEquals(otp, response.getOtp());\nassertEquals(1, response.getTimestamp());\nassertTrue(response.getNonce().isEmpty());\nassertEquals(0, response.getCounter());\nassertTrue(response.getPublicId().isEmpty());\nassertNull(response.getSignature());\nassertTrue(response.isSignatureVerified());\nassertFalse(response.isBadSignature());\nassertFalse(response.isReplayed());\nassertFalse(response.isMissingParameter());\nassertFalse(response.isInvalidParameter());\nassertFalse(response.isReplayed());\nassertFalse(response.isReplayed());\nassertFalse(response.isReplayed());\nassertFalse(response.isReplayed());\n====================\n\n",
+    "scores": [
+        0.895,
+        0.639,
+        0.614,
+        0.606,
+        0.577,
+        0.52,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.481,
+        0.466,
+        0.462,
+        0.462,
+        0.457,
+        0.453,
+        0.424
+    ],
+    "ground_truth": "assertEquals(ResponseStatus.REPLAYED_OTP,response.getStatus());"
+}

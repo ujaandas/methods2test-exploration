@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public OCompositeKey ( final Object ... keys ) { 
+    this . keys = new ArrayList < Object > ( keys . length ) ; 
+    this . comparator = ODefaultComparator . INSTANCE ; 
+    for ( final Object key : keys ) addKey ( key ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         document . field ( "STR" , Collections . emptyList ( ) ) ; 
+         document . field ( "STR" , 12 ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . setNullValuesIgnored ( false ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(2, ((List) result).size());
+Assert.assertTrue(((List) result).contains(null));
+Assert.assertTrue(((List) result).contains(12));
+Assert.assertTrue(result instanceof List);
+Assert.assertTrue(result instanceof Collection);
+Assert.assertTrue(result instanceof Iterable);
+Assert.assertTrue(result instanceof Serializable);
+Assert.assertFalse(result instanceof Map);
+Assert.assertFalse(result instanceof String);
+Assert.assertFalse(result instanceof Integer);
+Assert.assertFalse(result instanceof Float);
+Assert.assertFalse(result instanceof Double);
+Assert.assertFalse(result instanceof Long);
+Assert.assertFalse(result instanceof Short);
+Assert.assertFalse(result instanceof Byte);
+Assert.assertFalse(result instanceof Character);
+Assert.assertFalse(result instanceof Boolean);
+Assert.assertFalse(result instanceof Date);
+Assert.assertFalse(result instanceof Calendar);
+Assert.assertFalse(result instanceof OCompositeIndexDefinition);
+Assert.assertFalse(result instanceof OCompositeKey);
+Assert.assertFalse(result instanceof ODefaultComparator);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12))); ===
+0.680 - Assert.assertFalse(result instanceof OCompositeKey)
+0.591 - Assert.assertFalse(result instanceof OCompositeIndexDefinition)
+0.536 - Assert.assertFalse(result instanceof Integer)
+0.536 - Assert.assertFalse(result instanceof Boolean)
+0.532 - Assert.assertFalse(result instanceof Long)
+0.532 - Assert.assertFalse(result instanceof Byte)
+0.532 - Assert.assertFalse(result instanceof Date)
+0.531 - Assert.assertEquals(2, ((List) result).size())
+0.526 - Assert.assertFalse(result instanceof Float)
+0.526 - Assert.assertFalse(result instanceof Short)
+0.521 - Assert.assertFalse(result instanceof String)
+0.521 - Assert.assertFalse(result instanceof Double)
+0.519 - Assert.assertFalse(result instanceof ODefaultComparator)
+0.516 - Assert.assertFalse(result instanceof Map)
+0.510 - Assert.assertFalse(result instanceof Calendar)
+0.485 - Assert.assertTrue(result instanceof Collection)
+0.455 - Assert.assertTrue(result instanceof Serializable)
+0.451 - Assert.assertTrue(((List) result).contains(null))
+0.430 - Assert.assertTrue(result instanceof List)
+0.424 - Assert.assertFalse(result instanceof Character)
+0.420 - Assert.assertTrue(((List) result).contains(12))
+0.371 - Assert.assertTrue(result instanceof Iterable)

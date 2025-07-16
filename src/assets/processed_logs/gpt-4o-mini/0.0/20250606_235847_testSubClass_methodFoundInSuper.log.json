@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic List < Method > findAll ( ) {\nList < Method > methods = findAllDeclaredMethods ( clazz ) ;\nfor ( Method method : methods ) {\nverifyPublic ( method ) ;\nverifyNotStatic ( method ) ;\nverifyReturnType ( method ) ;\nverifyArgs ( method ) ;\nmethod . setAccessible ( true ) ;\n} return methods ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testSubClass_methodFoundInSuper ( ) {\nList < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(methodList);\nassertFalse(methodList.isEmpty());\nassertEquals(1, methodList.size());\nassertEquals(\"expectedMethodName\", methodList.get(0).getName());\nassertTrue(methodList.get(0).getReturnType().equals(void.class));\nassertTrue(methodList.get(0).getParameterCount() == 0);\nassertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));\nassertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));\nassertTrue(methodList.get(0).isAccessible());\nassertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));\nassertEquals(Subclass.class, methodList.get(0).getDeclaringClass());\nassertNotNull(methodList.get(0).getAnnotation(Teardown.class));\nassertTrue(methodList.get(0).getAnnotations().length > 0);\nassertTrue(methodList.get(0).getAnnotations()[0] instanceof Teardown);\nassertNotNull(methodList.get(0).getGenericReturnType());\nassertTrue(methodList.get(0).getGenericParameterTypes().length == 0);\nassertTrue(methodList.get(0).getExceptionTypes().length == 0);\nassertTrue(methodList.get(0).getDeclaringClass().getSuperclass() != null);\nassertTrue(methodList.get(0).getDeclaringClass().getSuperclass().isAnnotationPresent(Teardown.class));\nassertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.758,
+        0.649,
+        0.611,
+        0.606,
+        0.586,
+        0.568,
+        0.541,
+        0.523,
+        0.515,
+        0.51,
+        0.5,
+        0.5,
+        0.484,
+        0.479,
+        0.474,
+        0.465,
+        0.46,
+        0.442,
+        0.343,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,methodList.size());"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoader {\npublic String getString ( String key ) {\nreturn getIn ( normalize ( key ) , false ) . getString ( ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoaderTest {\n@Test\npublic void removes_underscores_from_keys ( ) {\nConfig config = new Config ( ) ;\nConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( \"STR\" + \"STR\" + \"STR\" ) ) ;\nconfigLoader . load ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\"));\nassertEquals(\"Expected value for key STR2\", config.getString(\"STR2\"));\nassertEquals(\"Expected value for key STR3\", config.getString(\"STR3\"));\nassertNull(config.getString(\"STR4\"));\nassertTrue(config.getString(\"STR1\").contains(\"Expected substring\"));\nassertFalse(config.getString(\"STR2\").isEmpty());\nassertEquals(\"Expected value for key STR1\", config.getString(\"str1\"));\nassertEquals(\"Expected value for key STR2\", config.getString(\"str2\"));\nassertEquals(\"Expected value for key STR3\", config.getString(\"str3\"));\nassertNotEquals(\"Unexpected value for key STR1\", config.getString(\"STR1\"), \"Unexpected value\");\nassertNotNull(config.getString(\"STR1\"));\nassertTrue(config.getString(\"STR1\").length() > 0);\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\").trim());\nassertEquals(\"Expected value for key STR2\", config.getString(\"STR2\").toLowerCase());\nassertEquals(\"Expected value for key STR3\", config.getString(\"STR3\").toUpperCase());\nassertThrows(IllegalArgumentException.class, () -> config.getString(\"INVALID_KEY\"));\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\").replace(\" \", \"\"));\nassertTrue(config.getString(\"STR1\").matches(\"Expected regex pattern\"));\nassertEquals(\"Expected value for key STR2\", config.getString(\"STR2\").substring(0, 5));\nassertFalse(config.getString(\"STR3\").contains(\"Unexpected substring\"));\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\").concat(\" additional text\"));\n```\n====================\n\n",
+    "scores": [
+        0.835,
+        0.805,
+        0.804,
+        0.804,
+        0.756,
+        0.754,
+        0.748,
+        0.748,
+        0.748,
+        0.748,
+        0.711,
+        0.711,
+        0.711,
+        0.705,
+        0.705,
+        0.662,
+        0.652,
+        0.607,
+        0.587,
+        0.577,
+        0.504,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",config.getString(\"STR\"));"
+}

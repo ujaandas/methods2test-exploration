@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValue {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValueTest {\n@Test\npublic void testDefaultValueFromJson ( ) {\nOSchema schema = database . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . DATE ) ;\nprop . setDefaultValue ( ODateHelper . getDateTimeFormatInstance ( ) . format ( new Date ( ) ) ) ;\nODocument doc = new ODocument ( ) . fromJSON ( \"STR\" ) ;\nODocument saved = database . save ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(saved);\nassertEquals(\"STR\", saved.getClassName());\nassertTrue(saved.containsField(\"STR\"));\nassertNotNull(saved.field(\"STR\"));\nassertTrue(saved.field(\"STR\") instanceof Date);\nassertEquals(ODateHelper.getDateTimeFormatInstance().format(new Date()), ODateHelper.getDateTimeFormatInstance().format((Date) saved.field(\"STR\")));\nassertTrue(saved.getIdentity().isPersistent());\nassertTrue(saved.getVersion() > 0);\nassertFalse(saved.isDirty());\nassertTrue(database.getMetadata().getSchema().existsClass(\"STR\"));\nassertEquals(1, database.countClass(\"STR\"));\nassertNotNull(database.load(saved.getIdentity()));\nassertEquals(saved.getIdentity(), database.load(saved.getIdentity()).getIdentity());\nassertTrue(saved.getRecordType().isRecord());\nassertFalse(saved.isNew());\nassertTrue(saved.getProperty(\"STR\").isDirty());\nassertTrue(saved.getProperty(\"STR\").isLoaded());\nassertNotNull(saved.getProperty(\"STR\").getValue());\nassertEquals(saved.getProperty(\"STR\").getValue(), saved.field(\"STR\"));\nassertTrue(saved.getProperty(\"STR\").getOwner().equals(saved));\nassertFalse(saved.isEmbedded());\nassertTrue(saved.getProperty(\"STR\").isEmbedded());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.732,
+        0.701,
+        0.699,
+        0.656,
+        0.644,
+        0.625,
+        0.59,
+        0.585,
+        0.582,
+        0.575,
+        0.574,
+        0.561,
+        0.554,
+        0.548,
+        0.519,
+        0.489,
+        0.481,
+        0.48,
+        0.383,
+        0.347,
+        0.328,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(saved.field(\"STR\"));"
+}

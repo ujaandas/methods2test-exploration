@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic abstract VerificationResponse verify ( String otp ) throws YubicoVerificationException , YubicoValidationFailure ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testReplayedOTP ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(response.getStatus(), \"REPLAYED_OTP\");\nassertEquals(response.getTimestamp(), \"2022-01-01 12:00:00\");\nassertEquals(response.getNonce(), \"1234567890\");\nassertEquals(response.getTtl(), 30);\nassertEquals(response.getSessioncounter(), 5);\nassertEquals(response.getSl(), 25);\nassertEquals(response.getOtp(), \"STR\");\nassertEquals(response.getSignature(), \"abcdef123456\");\nassertEquals(response.getPublicId(), \"1234567890\");\nassertEquals(response.getPrivateId(), \"0987654321\");\nassertEquals(response.getCounter(), 10);\nassertEquals(response.getUseCounter(), 5);\nassertEquals(response.getSyncCounter(), 3);\nassertEquals(response.getDevice(), \"YubiKey\");\nassertEquals(response.getSerial(), \"1234567890\");\nassertEquals(response.getOtp(), \"STR\");\nassertEquals(response.getNonce(), \"0987654321\");\nassertEquals(response.getTtl(), 30);\nassertEquals(response.getTimestamp(), \"2022-01-01 12:00:00\");\n====================\n\n",
+    "scores": [
+        0.643,
+        0.632,
+        0.632,
+        0.6,
+        0.6,
+        0.59,
+        0.571,
+        0.562,
+        0.537,
+        0.537,
+        0.522,
+        0.522,
+        0.514,
+        0.5,
+        0.5,
+        0.493,
+        0.48,
+        0.444,
+        0.444
+    ],
+    "ground_truth": "assertNotNull(response);"
+}

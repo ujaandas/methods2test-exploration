@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollections {
+    public List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) { 
+    return Collections . unmodifiableList ( multiValueChangeEvents ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollectionsTest {
+    @Test
+     public void testChangesValuesNestedTrackingSet ( ) {
+         ODocument document = new ODocument ( ) ; 
+         Set objects = new HashSet ( ) ; 
+         document . field ( "STR" , objects ) ; 
+         Set subObjects = new HashSet ( ) ; 
+         objects . add ( subObjects ) ; 
+         ODocument nestedDoc = new ODocument ( ) ; 
+         subObjects . add ( nestedDoc ) ; 
+         document . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         objects = document . field ( "STR" ) ; 
+         subObjects = ( Set ) objects . iterator ( ) . next ( ) ; 
+         subObjects . add ( "STR" ) ; 
+         OMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, timeLine.size());
+assertTrue(timeLine.getFirst().isAdded());
+assertFalse(timeLine.getFirst().isRemoved());
+assertFalse(timeLine.getFirst().isUpdated());
+assertEquals(1, timeLine.getFirst().getChanges().size());
+assertEquals("STR", timeLine.getFirst().getChanges().get(0).getValue());
+assertEquals(0, timeLine.getSecond().getChanges().size());
+assertTrue(timeLine.getSecond().isAdded());
+assertFalse(timeLine.getSecond().isRemoved());
+assertFalse(timeLine.getSecond().isUpdated());
+assertTrue(timeLine.getThird().isAdded());
+assertFalse(timeLine.getThird().isRemoved());
+assertFalse(timeLine.getThird().isUpdated());
+assertEquals(1, timeLine.getThird().getChanges().size());
+assertEquals("STR", timeLine.getThird().getChanges().get(0).getValue());
+assertNotNull(timeLine.getFourth());
+assertFalse(timeLine.getFourth().isAdded());
+assertTrue(timeLine.getFourth().isRemoved());
+assertFalse(timeLine.getFourth().isUpdated());
+assertEquals(1, timeLine.getFourth().getChanges().size());
+assertEquals("STR", timeLine.getFourth().getChanges().get(0).getValue());
+assertTrue(timeLine.getFifth().isAdded());
+assertFalse(timeLine.getFifth().isRemoved());
+assertFalse(timeLine.getFifth().isUpdated());
+assertEquals(1, timeLine.getFifth().getChanges().size());
+assertEquals("STR", timeLine.getFifth().getChanges().get(0).getValue());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,timeLine.getMultiValueChangeEvents().size()); ===
+0.817 - assertEquals(1, timeLine.getFourth().getChanges().size())
+0.807 - assertEquals(1, timeLine.getFirst().getChanges().size())
+0.807 - assertEquals(1, timeLine.getFifth().getChanges().size())
+0.789 - assertEquals(1, timeLine.getThird().getChanges().size())
+0.765 - assertEquals(0, timeLine.getSecond().getChanges().size())
+0.689 - assertEquals(1, timeLine.size())
+0.662 - assertEquals("STR", timeLine.getFourth().getChanges().get(0).getValue())
+0.651 - assertEquals("STR", timeLine.getFirst().getChanges().get(0).getValue())
+0.651 - assertEquals("STR", timeLine.getFifth().getChanges().get(0).getValue())
+0.647 - assertFalse(timeLine.getFourth().isAdded())
+0.636 - assertEquals("STR", timeLine.getThird().getChanges().get(0).getValue())
+0.635 - assertFalse(timeLine.getFourth().isUpdated())
+0.621 - assertFalse(timeLine.getFifth().isRemoved())
+0.621 - assertFalse(timeLine.getFifth().isUpdated())
+0.615 - assertFalse(timeLine.getSecond().isRemoved())
+0.615 - assertFalse(timeLine.getSecond().isUpdated())
+0.602 - assertFalse(timeLine.getFirst().isRemoved())
+0.602 - assertFalse(timeLine.getFirst().isUpdated())
+0.602 - assertFalse(timeLine.getThird().isRemoved())
+0.602 - assertFalse(timeLine.getThird().isUpdated())
+0.602 - assertTrue(timeLine.getFourth().isRemoved())
+0.600 - assertTrue(timeLine.getFifth().isAdded())
+0.594 - assertTrue(timeLine.getSecond().isAdded())
+0.580 - assertTrue(timeLine.getFirst().isAdded())
+0.580 - assertTrue(timeLine.getThird().isAdded())
+0.574 - assertNotNull(timeLine.getFourth())

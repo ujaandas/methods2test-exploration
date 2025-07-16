@@ -1,0 +1,95 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class BatchPollProcessor {
+    public Logger getLog ( ) { 
+    return log ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class BatchPollProcessorTest {
+    @Test
+     public void testGetSetLog ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Logger logger = LoggerFactory.getLogger(BatchPollProcessor.class);
+BatchPollProcessor processor = new BatchPollProcessor();
+processor.setLog(logger);
+
+assertNotNull(processor.getLog());
+assertEquals(logger, processor.getLog());
+
+Logger anotherLogger = LoggerFactory.getLogger("AnotherLogger");
+processor.setLog(anotherLogger);
+
+assertNotNull(processor.getLog());
+assertEquals(anotherLogger, processor.getLog());
+assertNotEquals(logger, processor.getLog());
+
+processor.setLog(null);
+assertNull(processor.getLog());
+
+processor.setLog(logger);
+assertNotNull(processor.getLog());
+assertSame(logger, processor.getLog());
+
+processor.setLog(anotherLogger);
+assertNotEquals(logger, processor.getLog());
+
+processor.setLog(logger);
+assertTrue(processor.getLog() instanceof Logger);
+assertFalse(processor.getLog() instanceof String);
+
+processor.setLog(anotherLogger);
+assertTrue(processor.getLog() instanceof Logger);
+assertEquals("AnotherLogger", processor.getLog().getName());
+
+processor.setLog(null);
+assertNull(processor.getLog());
+assertNotSame(logger, processor.getLog());
+assertNotSame(anotherLogger, processor.getLog());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(this.processor.getLog()); ===
+0.930 - assertNotNull(processor.getLog())
+0.930 - assertNotNull(processor.getLog())
+0.930 - assertNotNull(processor.getLog())
+0.882 - assertNull(processor.getLog())
+0.882 - assertNull(processor.getLog())
+0.775 - assertNotEquals(logger, processor.getLog())
+0.775 - assertNotEquals(logger, processor.getLog())
+0.744 - assertNotSame(logger, processor.getLog())
+0.729 - assertNotSame(anotherLogger, processor.getLog())
+0.693 - assertSame(logger, processor.getLog())
+0.675 - assertEquals(logger, processor.getLog())
+0.667 - assertEquals(anotherLogger, processor.getLog())
+0.643 - assertTrue(processor.getLog() instanceof Logger)
+0.643 - assertTrue(processor.getLog() instanceof Logger)
+0.635 - assertFalse(processor.getLog() instanceof String)
+0.583 - assertEquals("AnotherLogger", processor.getLog().getName())
+0.567 - processor.setLog(null)
+0.567 - processor.setLog(null)
+0.548 - processor.setLog(logger)
+0.548 - processor.setLog(logger)
+0.548 - processor.setLog(logger)
+0.493 - processor.setLog(anotherLogger)
+0.493 - processor.setLog(anotherLogger)
+0.493 - processor.setLog(anotherLogger)
+0.404 - BatchPollProcessor processor = new BatchPollProcessor()
+0.333 - ```java
+Logger logger = LoggerFactory.getLogger(BatchPollProcessor.class)
+0.327 - Logger anotherLogger = LoggerFactory.getLogger("AnotherLogger")
+0.000 - ```

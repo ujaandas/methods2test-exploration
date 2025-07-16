@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(registry);\nassertEquals(4, registry.workerCount());\nassertThrows(IllegalStateException.class, () -> {\nregistry.getWorkers();\n});\nassertTrue(registry.getWorkers().isEmpty());\nassertTrue(registry.getWorkers().size() <= 4);\nassertFalse(registry.getWorkers().contains(null));\nassertTrue(registry.getWorkers().stream().allMatch(worker -> worker instanceof Worker));\nassertFalse(registry.getWorkers().stream().anyMatch(worker -> worker.getStatus() == WorkerStatus.FAILED));\nassertNotEquals(0, registry.workerCount());\nassertEquals(2, registry.getWorkers().stream().filter(worker -> worker.getType().equals(\"STR\")).count());\nassertThrows(IllegalStateException.class, () -> {\nregistry.removeWorkers();\n});\nassertDoesNotThrow(() -> {\nregistry.addWorkers(newWorkerParametersList(agentAddress, 1, \"STR\"));\n});\nassertEquals(5, registry.workerCount());\nassertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)));\nassertFalse(registry.getWorkers().contains(new Worker(\"nonexistent\")));\nassertNotEquals(3, registry.workerCount());\nassertThrows(IllegalArgumentException.class, () -> {\nregistry.addWorkers(null);\n});\nassertFalse(registry.getWorkers().isEmpty());\nassertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getType().equals(\"STR\")));\nassertEquals(4, registry.getWorkers().size());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.974,
+        0.937,
+        0.937,
+        0.78,
+        0.69,
+        0.683,
+        0.642,
+        0.617,
+        0.561,
+        0.522,
+        0.518,
+        0.491,
+        0.477,
+        0.463,
+        0.46,
+        0.434,
+        0.432,
+        0.419,
+        0.403,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.0
+    ],
+    "ground_truth": "assertEquals(4,registry.workerCount());"
+}

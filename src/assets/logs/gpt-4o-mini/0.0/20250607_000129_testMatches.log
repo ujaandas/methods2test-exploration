@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatches ( ) {
+         List < ? > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertTrue(result instanceof List);
+assertEquals(expectedSize, result.size());
+assertTrue(result.contains(expectedElement));
+assertFalse(result.contains(unexpectedElement));
+assertEquals(expectedFirstElement, result.get(0));
+assertEquals(expectedLastElement, result.get(result.size() - 1));
+assertTrue(result.stream().allMatch(element -> element instanceof ExpectedType));
+assertEquals(expectedValue, result.get(index));
+assertNotSame(originalList, result);
+assertTrue(result.equals(expectedList));
+assertTrue(result.containsAll(expectedSubList));
+assertFalse(result.containsAll(unexpectedSubList));
+assertTrue(result.stream().anyMatch(element -> element.equals(specificValue)));
+assertEquals(expectedSubListSize, result.subList(startIndex, endIndex).size());
+assertThrows(ExpectedException.class, () -> {
+    db.query(new OSQLSynchQuery<Object>("INVALID QUERY"));
+});
+assertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet));
+assertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getKey, Object::getValue)));
+assertTrue(result.stream().filter(element -> condition).count() > 0);
+assertNotNull(result.get(someIndex));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(result.size(),1); ===
+0.783 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.649 - assertEquals(expectedValue, result.get(index))
+0.623 - assertEquals(expectedFirstElement, result.get(0))
+0.622 - assertEquals(expectedLastElement, result.get(result.size() - 1))
+0.615 - assertNotNull(result.get(someIndex))
+0.559 - assertTrue(result.equals(expectedList))
+0.557 - assertTrue(result instanceof List)
+0.553 - assertFalse(result.contains(unexpectedElement))
+0.552 - ```java
+assertNotNull(result)
+0.532 - assertFalse(result.containsAll(unexpectedSubList))
+0.521 - assertTrue(result.contains(expectedElement))
+0.514 - assertEquals(expectedSubListSize, result.subList(startIndex, endIndex).size())
+0.508 - assertNotSame(originalList, result)
+0.500 - assertTrue(result.containsAll(expectedSubList))
+0.430 - assertTrue(result.stream().filter(element -> condition).count() > 0)
+0.403 - assertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getKey, Object::getValue)))
+0.381 - assertTrue(result.stream().allMatch(element -> element instanceof ExpectedType))
+0.381 - assertTrue(result.stream().anyMatch(element -> element.equals(specificValue)))
+0.292 - assertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet))
+0.260 - assertThrows(ExpectedException.class, () -> {
+    db.query(new OSQLSynchQuery<Object>("INVALID QUERY"))
+0.065 - })
+0.000 - ```

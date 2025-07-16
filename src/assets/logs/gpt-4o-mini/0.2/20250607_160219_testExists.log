@@ -1,0 +1,112 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , E extends Throwable > boolean exists ( Iterable < T > coll , APredicate < ? super T , E > pred ) throws E { 
+    for ( T o : coll ) { 
+    if ( pred . apply ( o ) ) { 
+    return true ; 
+    } } return false ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testExists ( ) {
+         final APredicateNoThrow < String > len1 = new APredicateNoThrow < String > ( ) { 
+     @Override
+     public boolean apply ( String o ) { 
+     return o . length ( ) == 1 ; 
+     } } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        List<String> emptyList = new ArrayList<>();
+        assertFalse(ACollectionHelper.exists(emptyList, len1));
+
+        List<String> singleElementList = Collections.singletonList("a");
+        assertTrue(ACollectionHelper.exists(singleElementList, len1));
+
+        List<String> multipleElementsList = Arrays.asList("a", "bb", "c");
+        assertTrue(ACollectionHelper.exists(multipleElementsList, len1));
+
+        List<String> noMatchList = Arrays.asList("bb", "cc", "ddd");
+        assertFalse(ACollectionHelper.exists(noMatchList, len1));
+
+        List<String> mixedList = Arrays.asList("a", "bb", "c", "ddd");
+        assertTrue(ACollectionHelper.exists(mixedList, len1));
+
+        List<String> allMatchList = Arrays.asList("x", "y", "z");
+        assertTrue(ACollectionHelper.exists(allMatchList, len1));
+
+        List<String> allNonMatchList = Arrays.asList("xx", "yy", "zz");
+        assertFalse(ACollectionHelper.exists(allNonMatchList, len1));
+
+        List<String> nullElementList = Arrays.asList("a", null, "c");
+        assertTrue(ACollectionHelper.exists(nullElementList, len1));
+
+        List<String> listWithSpaces = Arrays.asList(" ", "  ", "a");
+        assertTrue(ACollectionHelper.exists(listWithSpaces, len1));
+
+        List<String> listWithSpecialChars = Arrays.asList("!", "@", "#", "a");
+        assertTrue(ACollectionHelper.exists(listWithSpecialChars, len1));
+
+        List<String> listWithNumbers = Arrays.asList("1", "22", "3");
+        assertTrue(ACollectionHelper.exists(listWithNumbers, len1));
+
+        List<String> listWithMixedTypes = Arrays.asList("abc", "def", "g");
+        assertTrue(ACollectionHelper.exists(listWithMixedTypes, len1));
+
+        List<String> listWithLongStrings = Arrays.asList("longstring", "anotherlongstring", "s");
+        assertTrue(ACollectionHelper.exists(listWithLongStrings, len1));
+
+        List<String> listWithEmptyStrings = Arrays.asList("", "a", "b");
+        assertTrue(ACollectionHelper.exists(listWithEmptyStrings, len1));
+
+        List<String> listWithOnlyEmptyStrings = Arrays.asList("", "", "");
+        assertFalse(ACollectionHelper.exists(listWith
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(false,ACollectionHelper.exists(Arrays.<String>asList(),len1)); ===
+0.744 - assertFalse(ACollectionHelper.exists(noMatchList, len1))
+0.740 - assertFalse(ACollectionHelper.exists(emptyList, len1))
+0.722 - assertFalse(ACollectionHelper.exists(allNonMatchList, len1))
+0.716 - assertTrue(ACollectionHelper.exists(singleElementList, len1))
+0.714 - assertTrue(ACollectionHelper.exists(mixedList, len1))
+0.713 - assertTrue(ACollectionHelper.exists(allMatchList, len1))
+0.706 - assertTrue(ACollectionHelper.exists(listWithLongStrings, len1))
+0.701 - assertTrue(ACollectionHelper.exists(multipleElementsList, len1))
+0.701 - assertTrue(ACollectionHelper.exists(listWithEmptyStrings, len1))
+0.682 - assertTrue(ACollectionHelper.exists(nullElementList, len1))
+0.656 - assertTrue(ACollectionHelper.exists(listWithSpaces, len1))
+0.652 - assertTrue(ACollectionHelper.exists(listWithNumbers, len1))
+0.639 - assertFalse(ACollectionHelper.exists(listWith
+0.637 - assertTrue(ACollectionHelper.exists(listWithMixedTypes, len1))
+0.628 - assertTrue(ACollectionHelper.exists(listWithSpecialChars, len1))
+0.388 - List<String> singleElementList = Collections.singletonList("a")
+0.317 - ```java
+        List<String> emptyList = new ArrayList<>()
+0.304 - List<String> allMatchList = Arrays.asList("x", "y", "z")
+0.304 - List<String> listWithSpaces = Arrays.asList(" ", "  ", "a")
+0.297 - List<String> noMatchList = Arrays.asList("bb", "cc", "ddd")
+0.295 - List<String> mixedList = Arrays.asList("a", "bb", "c", "ddd")
+0.295 - List<String> nullElementList = Arrays.asList("a", null, "c")
+0.295 - List<String> listWithNumbers = Arrays.asList("1", "22", "3")
+0.290 - List<String> allNonMatchList = Arrays.asList("xx", "yy", "zz")
+0.288 - List<String> listWithEmptyStrings = Arrays.asList("", "a", "b")
+0.284 - List<String> multipleElementsList = Arrays.asList("a", "bb", "c")
+0.284 - List<String> listWithOnlyEmptyStrings = Arrays.asList("", "", "")
+0.281 - List<String> listWithMixedTypes = Arrays.asList("abc", "def", "g")
+0.277 - List<String> listWithSpecialChars = Arrays.asList("!", "@", "#", "a")
+0.242 - List<String> listWithLongStrings = Arrays.asList("longstring", "anotherlongstring", "s")

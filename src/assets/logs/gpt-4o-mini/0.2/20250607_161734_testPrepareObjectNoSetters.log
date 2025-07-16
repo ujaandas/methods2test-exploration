@@ -1,0 +1,94 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparer {
+    public ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException { 
+    ObjectQueryInfo result ; 
+    String onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ; 
+    if ( onamePattern != null ) { 
+    Map < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ; 
+    if ( attributeSetters . size ( ) > 0 ) { 
+    String onameString ; 
+    if ( obj instanceof MBeanLocationParameterSource ) { 
+    onameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ; 
+    } else { 
+    onameString = onamePattern ; 
+    } ObjectName oname = new ObjectName ( onameString ) ; 
+    result = new ObjectQueryInfo ( obj , oname , attributeSetters ) ; 
+    } else { 
+    this . logNoAttributeThrottle . warn ( log , "STR" , onamePattern ) ; 
+    result = null ; 
+    } } else { 
+    log . warn ( "STR" ) ; 
+    result = null ; 
+    } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparerTest {
+    @Test
+     public void testPrepareObjectNoSetters ( ) throws Exception {
+         this . initPreparer ( ) ; 
+         ObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+assertEquals(null, result);
+assertTrue(result == null);
+assertFalse(result != null);
+assertNotSame(new ObjectQueryInfo(), result);
+assertNotNull(result);
+assertEquals(0, result.getAttributeSetters().size());
+assertTrue(result.getAttributeSetters().isEmpty());
+assertEquals(this.testTarget003, result.getObject());
+assertEquals("Expected ObjectName", result.getObjectName().toString());
+assertNotEquals("Unexpected ObjectName", result.getObjectName().toString());
+assertTrue(result.getObjectName() instanceof ObjectName);
+assertFalse(result.getObjectName().isPattern());
+assertNull(result.getObjectName().getKeyPropertyListString());
+assertTrue(result.getObjectName().getCanonicalName().isEmpty());
+assertEquals("Expected MBeanLocationParameterSource", result.getMBeanLocationParameterSource());
+assertFalse(result.getMBeanLocationParameterSource() instanceof MBeanLocationParameterSource);
+assertTrue(result.getObject() instanceof Object);
+assertSame(this.testTarget003, result.getObject());
+assertNotNull(result.getObjectName());
+assertTrue(result.getAttributeSetters().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+0.923 - assertNotNull(result)
+0.818 - ```java
+assertNull(result)
+0.744 - assertEquals(null, result)
+0.714 - assertTrue(result == null)
+0.698 - assertFalse(result != null)
+0.655 - assertNotNull(result.getObjectName())
+0.533 - assertNotSame(new ObjectQueryInfo(), result)
+0.469 - assertTrue(result.getObject() instanceof Object)
+0.464 - assertEquals(0, result.getAttributeSetters().size())
+0.464 - assertEquals(this.testTarget003, result.getObject())
+0.462 - assertFalse(result.getObjectName().isPattern())
+0.456 - assertNull(result.getObjectName().getKeyPropertyListString())
+0.441 - assertTrue(result.getAttributeSetters().isEmpty())
+0.441 - assertTrue(result.getAttributeSetters().isEmpty())
+0.418 - assertSame(this.testTarget003, result.getObject())
+0.417 - assertTrue(result.getObjectName() instanceof ObjectName)
+0.374 - assertNotEquals("Unexpected ObjectName", result.getObjectName().toString())
+0.370 - assertTrue(result.getObjectName().getCanonicalName().isEmpty())
+0.326 - assertEquals("Expected ObjectName", result.getObjectName().toString())
+0.288 - assertEquals("Expected MBeanLocationParameterSource", result.getMBeanLocationParameterSource())
+0.275 - assertFalse(result.getMBeanLocationParameterSource() instanceof MBeanLocationParameterSource)
+0.000 - ```

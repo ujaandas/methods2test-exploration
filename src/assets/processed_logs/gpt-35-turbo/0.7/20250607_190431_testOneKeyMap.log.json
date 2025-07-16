@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKey {\npublic OMultiKey ( final Collection < ? > keys ) {\nthis . keys = new ArrayList < Object > ( keys ) ;\nhash = generateHashCode ( keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKeyTest {\n@Test\npublic void testOneKeyMap ( ) {\nfinal Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ;\nfinal OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nmultiKeyMap . put ( multiKey , new Object ( ) ) ;\nfinal OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nfinal Object mapResult = multiKeyMap . get ( anotherMultiKey ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(mapResult, new Object());\nAssert.assertTrue(multiKey.equals(anotherMultiKey));\nAssert.assertEquals(multiKey.hashCode(), anotherMultiKey.hashCode());\nAssert.assertTrue(multiKeyMap.containsKey(anotherMultiKey));\nAssert.assertTrue(multiKeyMap.containsValue(new Object()));\nAssert.assertEquals(multiKeyMap.size(), 1);\nAssert.assertFalse(multiKeyMap.isEmpty());\nAssert.assertNotNull(multiKeyMap.get(anotherMultiKey));\nAssert.assertTrue(multiKeyMap.entrySet().contains(new AbstractMap.SimpleEntry<>(anotherMultiKey, new Object())));\nAssert.assertTrue(multiKeyMap.keySet().contains(anotherMultiKey));\nAssert.assertTrue(multiKeyMap.values().contains(new Object()));\nAssert.assertTrue(multiKeyMap.entrySet().stream().anyMatch(entry -> entry.getKey().equals(anotherMultiKey) && entry.getValue().equals(new Object())));\nAssert.assertTrue(multiKeyMap.keySet().stream().anyMatch(key -> key.equals(anotherMultiKey)));\nAssert.assertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(new Object())));\nAssert.assertEquals(multiKeyMap.get(anotherMultiKey), multiKeyMap.entrySet().iterator().next().getValue());\nAssert.assertTrue(multiKeyMap.keySet().iterator().hasNext());\nAssert.assertTrue(multiKeyMap.values().iterator().hasNext());\nAssert.assertEquals(1, multiKeyMap.entrySet().size());\nAssert.assertEquals(1, multiKeyMap.keySet().size());\nAssert.assertEquals(1, multiKeyMap.values().size());\n====================\n\n",
+    "scores": [
+        0.644,
+        0.535,
+        0.483,
+        0.448,
+        0.418,
+        0.418,
+        0.406,
+        0.382,
+        0.351,
+        0.342,
+        0.338,
+        0.338,
+        0.333,
+        0.333,
+        0.317,
+        0.241,
+        0.241,
+        0.23,
+        0.206,
+        0.161
+    ],
+    "ground_truth": "assertNotNull(mapResult);"
+}

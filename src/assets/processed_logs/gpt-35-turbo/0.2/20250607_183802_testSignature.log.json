@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic abstract VerificationResponse verify ( String otp ) throws YubicoVerificationException , YubicoValidationFailure ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testSignature ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nclient . setKey ( this . apiKey ) ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(response);\nassertEquals(\"SUCCESS\", response.getStatus());\nassertEquals(\"YUBICO\", response.getIssuer());\nassertTrue(response.getTimestamp() > 0);\nassertTrue(response.getUseCounter() >= 0);\nassertTrue(response.getNonce().length() > 0);\nassertTrue(response.getPublicId().length() > 0);\nassertTrue(response.getSignature().length() > 0);\nassertTrue(response.getOtp().equals(otp));\nassertTrue(response.getSl() >= 0);\nassertTrue(response.getTtl() >= 0);\nassertTrue(response.getT() >= 0);\nassertTrue(response.getR() >= 0);\nassertTrue(response.getUid().length() > 0);\nassertTrue(response.getCounter() >= 0);\nassertTrue(response.getH().length() > 0);\nassertTrue(response.getOtp().equals(otp));\nassertTrue(response.getNonce().length() > 0);\nassertTrue(response.getUseCounter() >= 0);\nassertTrue(response.getSignature().length() > 0);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.642,
+        0.642,
+        0.63,
+        0.618,
+        0.576,
+        0.567,
+        0.557,
+        0.548,
+        0.548,
+        0.545,
+        0.54,
+        0.537,
+        0.531,
+        0.531,
+        0.523,
+        0.523,
+        0.5,
+        0.493,
+        0.493
+    ],
+    "ground_truth": "assertNotNull(response);"
+}

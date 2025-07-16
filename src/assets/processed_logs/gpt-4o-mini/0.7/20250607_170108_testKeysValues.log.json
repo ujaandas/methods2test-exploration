@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AListMap {\nint size ( ) ;\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AListMapTest {\n@Test\npublic void testKeysValues ( ) {\nfinal AListMap < String , Integer > map = AListMap . < String , Integer > empty ( ) . updated ( \"STR\" , 1 ) . updated ( \"STR\" , 2 ) . updated ( \"STR\" , 3 ) . updated ( \"STR\" , 4 ) ;\nfinal ASet < String > keys = map . keys ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(4, map.size());\nassertTrue(keys.contains(\"STR\"));\nassertEquals(1, map.get(\"STR\", 1));\nassertEquals(2, map.get(\"STR\", 2));\nassertEquals(3, map.get(\"STR\", 3));\nassertEquals(4, map.get(\"STR\", 4));\nassertFalse(keys.contains(\"NOT_EXISTING_KEY\"));\nassertEquals(1, map.updated(\"STR\", 1).size());\nassertEquals(1, map.updated(\"STR\", 2).size());\nassertEquals(1, map.updated(\"STR\", 3).size());\nassertEquals(1, map.updated(\"STR\", 4).size());\nassertEquals(4, keys.size());\nassertTrue(keys.equals(new ASet<String>(Arrays.asList(\"STR\"))));\nassertEquals(map.updated(\"STR\", 5).get(\"STR\", 5), 5);\nassertEquals(map.updated(\"STR\", 6).size(), 5);\nassertNotNull(map.keys());\nassertNotNull(map.get(\"STR\", 2));\nassertTrue(map.updated(\"STR\", 3).keys().contains(\"STR\"));\nassertThrows(UnsupportedOperationException.class, () -> map.updated(\"STR\", 7).remove(\"STR\"));\nassertTrue(map.updated(\"STR\", 8).keys().contains(\"STR\"));\nassertEquals(4, map.updated(\"STR\", 9).size());\nassertEquals(1, map.updated(\"STR\", 1).size());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.754,
+        0.686,
+        0.657,
+        0.657,
+        0.657,
+        0.657,
+        0.644,
+        0.629,
+        0.629,
+        0.61,
+        0.61,
+        0.61,
+        0.577,
+        0.576,
+        0.521,
+        0.474,
+        0.472,
+        0.415,
+        0.415,
+        0.414,
+        0.261,
+        0.0
+    ],
+    "ground_truth": "assertEquals(4,keys.size());"
+}

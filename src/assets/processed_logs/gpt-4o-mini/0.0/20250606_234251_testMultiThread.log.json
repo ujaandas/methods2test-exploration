@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ThreadLocalArriveTimeHolder {\npublic static long getAndClear ( Channel channel , Integer key ) {\nMap < Integer , Long > map = getArriveTimeMap ( channel ) ;\nLong result = map . remove ( key ) ;\nif ( result == null ) {\nreturn - 1 ;\n} return result ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ThreadLocalArriveTimeHolderTest {\n@Test\npublic void testMultiThread ( ) throws InterruptedException {\nfinal EmbeddedChannel channel = new EmbeddedChannel ( ) ;\nfinal CountDownLatch countDownLatch = new CountDownLatch ( 1 ) ;\nlong start = System . nanoTime ( ) ;\nThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ;\nlong end = System . nanoTime ( ) ;\nThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ;\nlong time = ThreadLocalArriveTimeHolder . getAndClear ( channel , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(time >= 0);\nassertEquals(time, end - start);\nassertEquals(time, ThreadLocalArriveTimeHolder.getAndClear(channel, 1));\nassertNotEquals(time, -1);\nassertEquals(ThreadLocalArriveTimeHolder.getAndClear(channel, 1), -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 2) == -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 3) == -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) >= 0);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) < (end - start));\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != time);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) >= 0);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) < (end - start));\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != time);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) >= 0);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) < (end - start));\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != time);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) != -1);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) >= 0);\nassertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) < (end - start));\n```\n====================\n\n",
+    "scores": [
+        0.72,
+        0.706,
+        0.553,
+        0.412,
+        0.412,
+        0.412,
+        0.412,
+        0.404,
+        0.404,
+        0.404,
+        0.404,
+        0.404,
+        0.386,
+        0.386,
+        0.386,
+        0.386,
+        0.356,
+        0.352,
+        0.352,
+        0.352,
+        0.348,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(time>=start);"
+}

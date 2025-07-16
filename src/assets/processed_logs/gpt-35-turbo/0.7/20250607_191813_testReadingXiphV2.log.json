@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MkvBlock {\npublic static int readXiphLaceSizes ( ByteBuffer bb , int [ ] sizes , int size , int preLacingHeaderSize ) {\nint startPos = bb . position ( ) ;\nint lastIndex = sizes . length - 1 ;\nsizes [ lastIndex ] = size ;\nfor ( int l = 0 ;\nl < lastIndex ;\nl ++ ) {\nint laceSize = 255 ;\nwhile ( laceSize == 255 ) {\nlaceSize = bb . get ( ) & 0xFF ;\nsizes [ l ] += laceSize ;\n} sizes [ lastIndex ] -= sizes [ l ] ;\n} int headerSize = ( bb . position ( ) - startPos ) + preLacingHeaderSize ;\nsizes [ lastIndex ] -= headerSize ;\nreturn headerSize ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MkvBlockTest {\n@Test\npublic void testReadingXiphV2 ( ) throws Exception {\nByteBuffer bb = ByteBuffer . wrap ( new byte [ ] {\n( byte ) 0x82 , 0x00 , ( byte ) 0xAE , 0x02 , 0x04 , ( byte ) 187 , ( byte ) 255 , ( byte ) 255 , 120 , ( byte ) 255 , 0 , 60 } ) ;\nint startPosition = 5 ;\nbb . position ( startPosition ) ;\nMkvBlock be = new MkvBlock ( Block . id ) ;\nbe . offset = 0x149B0 ;\nbe . dataOffset = 0x149B3 ;\nbe . dataLen = 0x353 ;\nint [ ] sizes = new int [ bb . get ( 4 ) + 1 ] ;\nbe . headerSize = MkvBlock . readXiphLaceSizes ( bb , sizes , ( int ) be . dataLen , startPosition ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(5, sizes[0]);\nassertEquals(168, sizes[1]);\nassertEquals(120, sizes[2]);\nassertEquals(60, sizes[3]);\nassertEquals(0, sizes[4]);\nassertEquals(4, be.headerSize);\nassertEquals(0x149B0, be.offset);\nassertEquals(0x149B3, be.dataOffset);\nassertEquals(0x353, be.dataLen);\nassertEquals(5, bb.position());\nassertEquals(0x149B3, bb.position());\nassertEquals(0x353 - 4, sizes[4]);\nassertEquals(0x353 - 4 - 168, sizes[3]);\nassertEquals(60, sizes[2]);\nassertEquals(120, sizes[1]);\nassertEquals(168, sizes[0]);\nassertEquals(4, sizes.length);\nassertEquals(4, bb.get(4));\nassertEquals(5, bb.get(5));\nassertEquals(0x82, bb.get(0));\n====================\n\n",
+    "scores": [
+        0.949,
+        0.714,
+        0.714,
+        0.679,
+        0.679,
+        0.667,
+        0.667,
+        0.656,
+        0.655,
+        0.655,
+        0.633,
+        0.621,
+        0.621,
+        0.618,
+        0.618,
+        0.615,
+        0.61,
+        0.6,
+        0.594,
+        0.585
+    ],
+    "ground_truth": "Assert.assertEquals(12,be.headerSize);"
+}

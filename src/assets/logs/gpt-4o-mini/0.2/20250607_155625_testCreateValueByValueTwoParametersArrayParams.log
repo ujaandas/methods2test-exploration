@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( Object ... params ) { 
+     if ( ! ( params [ 0 ] instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ; 
+     final List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     Object val = createSingleValue ( mapParam ) ; 
+     result . add ( val ) ; 
+     } if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) { 
+     return result . get ( 0 ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueByValueTwoParametersArrayParams ( ) {
+         final Object result = propertyIndexByValue . createValue ( mapToTest , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertEquals(1, ((List<?>) result).size());
+assertTrue(((List<?>) result).get(0) instanceof ExpectedType);
+assertEquals(expectedValue, ((List<?>) result).get(0));
+assertEquals(expectedSize, ((List<?>) result).size());
+assertTrue(result.contains(expectedValue));
+assertFalse(result.isEmpty());
+assertTrue(result.equals(Collections.singletonList(expectedValue)));
+assertNotEquals(Collections.emptyList(), result);
+assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType));
+assertEquals(expectedValue, result.get(0));
+assertSame(expectedReference, result.get(0));
+assertNotSame(unexpectedReference, result.get(0));
+assertThrows(ExpectedException.class, () -> propertyIndexByValue.createValue(invalidMap));
+assertDoesNotThrow(() -> propertyIndexByValue.createValue(validMap));
+assertTrue(result instanceof List<?>);
+assertFalse(result instanceof Map<?>);
+assertEquals(expectedType, result.getClass());
+assertEquals(expectedHashCode, result.hashCode());
+assertTrue(result.toString().contains(expectedValue.toString()));
+assertEquals(expectedList, result);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofCollection); ===
+0.829 - assertTrue(result instanceof List)
+0.795 - assertTrue(result instanceof List<?>)
+0.685 - assertFalse(result instanceof Map<?>)
+0.646 - assertTrue(((List<?>) result).get(0) instanceof ExpectedType)
+0.625 - assertTrue(result.contains(expectedValue))
+0.574 - assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType))
+0.552 - assertTrue(result.equals(Collections.singletonList(expectedValue)))
+0.537 - assertFalse(result.isEmpty())
+0.529 - assertTrue(result.toString().contains(expectedValue.toString()))
+0.448 - ```java
+assertNotNull(result)
+0.447 - assertNotEquals(Collections.emptyList(), result)
+0.442 - assertEquals(expectedHashCode, result.hashCode())
+0.436 - assertEquals(1, ((List<?>) result).size())
+0.423 - assertEquals(expectedList, result)
+0.405 - assertEquals(expectedValue, result.get(0))
+0.404 - assertEquals(expectedSize, ((List<?>) result).size())
+0.395 - assertSame(expectedReference, result.get(0))
+0.390 - assertEquals(expectedType, result.getClass())
+0.378 - assertEquals(expectedValue, ((List<?>) result).get(0))
+0.372 - assertNotSame(unexpectedReference, result.get(0))
+0.288 - assertDoesNotThrow(() -> propertyIndexByValue.createValue(validMap))
+0.274 - assertThrows(ExpectedException.class, () -> propertyIndexByValue.createValue(invalidMap))
+0.000 - ```

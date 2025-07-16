@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package rockagen.commons-lib;
+
+public class CommUtil {
+    public static String hexdump ( final byte [ ] bytes ) { 
+    if ( bytes == null || bytes . length < 1 ) return "STR" ; 
+    int length = bytes . length ; 
+    int temp ; 
+    char [ ] hex = new char [ length * 2 ] ; 
+    for ( int i = 0 ; 
+    i < length ; 
+    i ++ ) { 
+    temp = bytes [ i ] & 0xFF ; 
+    hex [ i * 2 ] = HEXARRAY [ temp > > > 4 ] ; 
+    hex [ i * 2 + 1 ] = HEXARRAY [ temp & 0x0F ] ; 
+    } return new String ( hex ) ; 
+    }
+}
+
+package rockagen.commons-lib;
+
+public class CommUtilTest {
+    @Test
+     public void testBitValue ( ) {
+         String bs = "STR" ; 
+         BitSet b = CommUtil . bitSet ( bs . getBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(8, b.length());
+assertTrue(b.get(0));
+assertFalse(b.get(1));
+assertFalse(b.get(2));
+assertFalse(b.get(3));
+assertFalse(b.get(4));
+assertFalse(b.get(5));
+assertFalse(b.get(6));
+assertFalse(b.get(7));
+assertEquals("01010011", b.toString());
+assertTrue(b.get(0) == b.get(7));
+assertFalse(b.get(1) == b.get(6));
+assertFalse(b.get(2) == b.get(5));
+assertFalse(b.get(3) == b.get(4));
+assertTrue(b.get(0) != b.get(1));
+assertTrue(b.get(2) != b.get(3));
+assertFalse(b.get(4) != b.get(5));
+assertFalse(b.get(6) != b.get(7));
+assertEquals(0x53, b.toByteArray()[0]);
+assertEquals(0, b.toByteArray()[1]);
+assertEquals(0, b.toByteArray()[2]);
+assertEquals(0, b.toByteArray()[3]);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",CommUtil.hexdump(CommUtil.bitValue(b))); ===
+0.463 - assertEquals("01010011", b.toString())
+0.452 - assertEquals(8, b.length())
+0.435 - assertEquals(0, b.toByteArray()[1])
+0.435 - assertEquals(0, b.toByteArray()[2])
+0.435 - assertEquals(0, b.toByteArray()[3])
+0.421 - assertEquals(0x53, b.toByteArray()[0])
+0.354 - assertFalse(b.get(1))
+0.354 - assertFalse(b.get(2))
+0.354 - assertFalse(b.get(3))
+0.354 - assertFalse(b.get(4))
+0.354 - assertFalse(b.get(5))
+0.354 - assertFalse(b.get(6))
+0.354 - assertFalse(b.get(7))
+0.333 - assertTrue(b.get(0))
+0.315 - assertFalse(b.get(1) == b.get(6))
+0.315 - assertFalse(b.get(2) == b.get(5))
+0.315 - assertFalse(b.get(3) == b.get(4))
+0.315 - assertFalse(b.get(4) != b.get(5))
+0.315 - assertFalse(b.get(6) != b.get(7))
+0.295 - assertTrue(b.get(0) == b.get(7))
+0.295 - assertTrue(b.get(0) != b.get(1))
+0.295 - assertTrue(b.get(2) != b.get(3))

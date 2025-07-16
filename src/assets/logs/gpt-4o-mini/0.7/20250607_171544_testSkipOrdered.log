@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testSkipOrdered ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.get(0) instanceof ODocument);
+assertTrue(results.get(1) instanceof ODocument);
+assertEquals(expectedValue1, results.get(0).field("fieldName1"));
+assertEquals(expectedValue2, results.get(1).field("fieldName2"));
+assertEquals("Expected Document ID", results.get(0).getIdentity().toString());
+assertEquals("Expected Document Class", results.get(0).getClassName());
+assertTrue(results.stream().allMatch(doc -> doc.field("fieldName3") != null));
+assertTrue(results.stream().noneMatch(doc -> doc.field("fieldName4") == null));
+assertEquals("Expected Field Value", results.get(2).field("fieldName5"));
+assertEquals("Expected Field Value", results.get(3).field("fieldName6"));
+assertNotEquals("Unexpected Value", results.get(4).field("fieldName7"));
+assertTrue(results.size() > 5);
+assertTrue(results.contains(expectedDocument));
+assertEquals(expectedFieldValue, results.get(5).field("fieldName8"));
+assertNotSame(results.get(0), results.get(1));
+assertTrue(results.get(0).field("fieldName9").toString().startsWith("Prefix"));
+assertTrue(results.get(1).field("fieldName10").toString().endsWith("Suffix"));
+assertFalse(results.stream().anyMatch(doc -> doc.field("fieldName11").equals("InvalidValue")));
+assertEquals("Expected Value", results.stream().filter(doc -> doc.field("fieldName12").equals("ValueToMatch")).findFirst().orElse(null).field("fieldName12"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(19,results.size()); ===
+0.806 - assertEquals(expectedSize, results.size())
+0.780 - assertTrue(results.size() > 5)
+0.721 - assertFalse(results.isEmpty())
+0.613 - assertNotSame(results.get(0), results.get(1))
+0.596 - assertEquals(expectedValue1, results.get(0).field("fieldName1"))
+0.574 - assertEquals(expectedValue2, results.get(1).field("fieldName2"))
+0.557 - ```java
+assertNotNull(results)
+0.551 - assertEquals("Expected Document Class", results.get(0).getClassName())
+0.551 - assertEquals(expectedFieldValue, results.get(5).field("fieldName8"))
+0.540 - assertEquals("Expected Field Value", results.get(2).field("fieldName5"))
+0.540 - assertEquals("Expected Field Value", results.get(3).field("fieldName6"))
+0.540 - assertNotEquals("Unexpected Value", results.get(4).field("fieldName7"))
+0.519 - assertTrue(results.contains(expectedDocument))
+0.500 - assertTrue(results.get(0) instanceof ODocument)
+0.500 - assertTrue(results.get(1) instanceof ODocument)
+0.495 - assertEquals("Expected Document ID", results.get(0).getIdentity().toString())
+0.404 - assertTrue(results.stream().allMatch(doc -> doc.field("fieldName3") != null))
+0.400 - assertTrue(results.stream().noneMatch(doc -> doc.field("fieldName4") == null))
+0.389 - assertTrue(results.get(1).field("fieldName10").toString().endsWith("Suffix"))
+0.385 - assertTrue(results.get(0).field("fieldName9").toString().startsWith("Prefix"))
+0.374 - assertFalse(results.stream().anyMatch(doc -> doc.field("fieldName11").equals("InvalidValue")))
+0.304 - assertEquals("Expected Value", results.stream().filter(doc -> doc.field("fieldName12").equals("ValueToMatch")).findFirst().orElse(null).field("fieldName12"))
+0.000 - ```

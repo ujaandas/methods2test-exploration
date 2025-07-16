@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithin {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithinTest {\n@Test\npublic void testWithinNoIndex ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" + \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(next);\nassertTrue(next instanceof ODocument);\nassertEquals(\"ExpectedFieldName\", next.field(\"FieldName\"));\nassertEquals(\"ExpectedValue\", next.field(\"FieldName\"));\nassertTrue(next.containsField(\"FieldName\"));\nassertFalse(next.containsField(\"NonExistentField\"));\nassertEquals(2, next.field(\"SomeCollection\").size());\nassertTrue(next.field(\"SomeCollection\").contains(\"ExpectedItem\"));\nassertFalse(next.field(\"SomeCollection\").contains(\"UnexpectedItem\"));\nassertNotNull(next.field(\"NestedDocument\"));\nassertEquals(\"NestedValue\", next.field(\"NestedDocument\").field(\"NestedField\"));\nassertTrue(next.field(\"BooleanField\"));\nassertFalse(next.field(\"AnotherBooleanField\"));\nassertEquals(123, next.field(\"IntegerField\"));\nassertEquals(45.67, next.field(\"DoubleField\"), 0.01);\nassertEquals(\"ExpectedString\", next.field(\"StringField\"));\nassertNotNull(next.field(\"DateField\"));\nassertTrue(next.field(\"DateField\") instanceof Date);\nassertEquals(\"ExpectedGeoPoint\", next.field(\"GeoPointField\"));\nassertEquals(3, next.field(\"AnotherCollection\").size());\nassertTrue(next.field(\"AnotherCollection\").contains(\"AnotherExpectedItem\"));\nassertFalse(next.field(\"AnotherCollection\").contains(\"AnotherUnexpectedItem\"));\n```\n====================\n\n",
+    "scores": [
+        0.7,
+        0.69,
+        0.674,
+        0.649,
+        0.644,
+        0.63,
+        0.629,
+        0.622,
+        0.61,
+        0.608,
+        0.602,
+        0.588,
+        0.583,
+        0.557,
+        0.552,
+        0.538,
+        0.531,
+        0.515,
+        0.491,
+        0.468,
+        0.444,
+        0.423,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(next.field(\"STR\"),true);"
+}

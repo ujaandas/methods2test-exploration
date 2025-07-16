@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemote {\n< RET extends ORecord > RET save ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemoteTest {\n@Test\npublic void testRidSelect ( ) throws InterruptedException {\nMyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ;\nOVertex item = database . newVertex ( ) ;\nitem . save ( ) ;\nOLiveQueryMonitor live = database . live ( \"STR\" + item . getIdentity ( ) , listener ) ;\nitem . setProperty ( \"STR\" , \"STR\" ) ;\nitem . save ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", item.getProperty(\"STR\"));\nAssert.assertEquals(\"STR\" + item.getIdentity(), live.getName());\nAssert.assertTrue(listener.waitForUpdates(1));\nAssert.assertEquals(1, listener.getUpdates().size());\nAssert.assertEquals(item, listener.getUpdates().get(0));\nAssert.assertEquals(\"STR\", listener.getUpdates().get(0).getProperty(\"STR\"));\nAssert.assertEquals(\"STR\", item.getProperty(\"STR\"));\nAssert.assertEquals(\"STR\" + item.getIdentity(), live.getName());\nAssert.assertTrue(listener.waitForUpdates(1));\nAssert.assertEquals(1, listener.getUpdates().size());\nAssert.assertEquals(item, listener.getUpdates().get(0));\nAssert.assertEquals(\"STR\", listener.getUpdates().get(0).getProperty(\"STR\"));\nAssert.assertEquals(\"STR\", item.getProperty(\"STR\"));\nAssert.assertEquals(\"STR\" + item.getIdentity(), live.getName());\nAssert.assertTrue(listener.waitForUpdates(1));\nAssert.assertEquals(1, listener.getUpdates().size());\nAssert.assertEquals(item, listener.getUpdates().get(0));\nAssert.assertEquals(\"STR\", listener.getUpdates().get(0).getProperty(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.615,
+        0.615,
+        0.615,
+        0.5,
+        0.5,
+        0.5,
+        0.495,
+        0.495,
+        0.495,
+        0.417,
+        0.417,
+        0.417,
+        0.354,
+        0.354,
+        0.354,
+        0.208,
+        0.208,
+        0.208
+    ],
+    "ground_truth": "Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS));"
+}

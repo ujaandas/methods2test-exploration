@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ORecordBytes {\nint fromInputStream ( final InputStream in , final int maxSize ) throws IOException ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ORecordBytesTest {\n@Test\npublic void testReadFromInputStreamWithWaitSizeTooBigLimit ( ) throws Exception {\nfinal byte [ ] data = new byte [ ] {\n0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 } ;\nfinal InputStream is = new NotFullyAvailableAtTheTimeInputStream ( data , 5 ) ;\nfinal int result = testedInstance . fromInputStream ( is , 15 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(10, result);\nassertTrue(is.available() <= 5);\nassertArrayEquals(new byte[] {0, 1, 2, 3, 4}, Arrays.copyOf(data, 5));\nassertNotNull(is);\nassertTrue(result >= 0);\nassertTrue(result <= 15);\nassertEquals(5, is.read(new byte[5]));\nassertEquals(-1, is.read());\nassertEquals(5, is.read(new byte[10]));\nassertTrue(is.markSupported());\nis.mark(10);\nassertEquals(5, is.read(new byte[5]));\nis.reset();\nassertEquals(5, is.read(new byte[5]));\nassertEquals(5, is.read(new byte[5]));\nassertEquals(0, is.read(new byte[5]));\nassertEquals(10, result);\nassertTrue(result <= maxSize);\nassertFalse(is.available() > 10);\nassertTrue(Arrays.equals(new byte[] {0, 1, 2, 3, 4}, Arrays.copyOf(data, 5)));\nassertNotEquals(0, result);\nassertNotEquals(15, result);\nassertTrue(result < 15);\n```\n====================\n\n",
+    "scores": [
+        0.727,
+        0.702,
+        0.69,
+        0.635,
+        0.586,
+        0.576,
+        0.566,
+        0.566,
+        0.556,
+        0.537,
+        0.537,
+        0.537,
+        0.537,
+        0.537,
+        0.529,
+        0.516,
+        0.43,
+        0.426,
+        0.408,
+        0.376,
+        0.323,
+        0.286,
+        0.186,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(result,data.length);"
+}

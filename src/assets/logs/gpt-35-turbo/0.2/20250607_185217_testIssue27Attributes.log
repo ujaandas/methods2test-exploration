@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue27Attributes ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(1, schemas.size());
+assertTrue(schemas.get(0).getTargetNamespace().equals("http://www.w3.org/2001/XMLSchema"));
+assertTrue(schemas.get(0).getElements().size() > 0);
+assertTrue(schemas.get(0).getAttributes().size() > 0);
+assertTrue(schemas.get(0).getComplexTypes().size() > 0);
+assertTrue(schemas.get(0).getSimpleTypes().size() > 0);
+assertTrue(schemas.get(0).getGroups().size() > 0);
+assertTrue(schemas.get(0).getNotations().size() == 0);
+assertTrue(schemas.get(0).getImports().size() == 0);
+assertTrue(schemas.get(0).getIncludes().size() == 0);
+assertTrue(schemas.get(0).getRedefines().size() == 0);
+assertTrue(schemas.get(0).getAnnotations().size() == 0);
+assertTrue(schemas.get(0).getElements().get(0).getName().equals("element1"));
+assertTrue(schemas.get(0).getAttributes().get(0).getName().equals("attribute1"));
+assertTrue(schemas.get(0).getComplexTypes().get(0).getName().equals("complexType1"));
+assertTrue(schemas.get(0).getSimpleTypes().get(0).getName().equals("simpleType1"));
+assertTrue(schemas.get(0).getGroups().get(0).getName().equals("group1"));
+assertTrue(schemas.get(0).getElements().get(0).getType().equals("type1"));
+assertTrue(schemas.get(0).getAttributes().get(0).getType().equals("type2"));
+assertTrue(schemas.get(0).getComplexTypes().get(0).getAttributes().size() > 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,schemas.size()); ===
+0.822 - Assertions:
+
+assertEquals(1, schemas.size())
+0.597 - assertTrue(schemas.get(0).getGroups().size() > 0)
+0.582 - assertTrue(schemas.get(0).getElements().size() > 0)
+0.582 - assertTrue(schemas.get(0).getImports().size() == 0)
+0.575 - assertTrue(schemas.get(0).getIncludes().size() == 0)
+0.568 - assertTrue(schemas.get(0).getAttributes().size() > 0)
+0.568 - assertTrue(schemas.get(0).getNotations().size() == 0)
+0.568 - assertTrue(schemas.get(0).getRedefines().size() == 0)
+0.561 - assertTrue(schemas.get(0).getSimpleTypes().size() > 0)
+0.554 - assertTrue(schemas.get(0).getComplexTypes().size() > 0)
+0.554 - assertTrue(schemas.get(0).getAnnotations().size() == 0)
+0.434 - assertTrue(schemas.get(0).getComplexTypes().get(0).getAttributes().size() > 0)
+0.412 - assertTrue(schemas.get(0).getGroups().get(0).getName().equals("group1"))
+0.408 - assertTrue(schemas.get(0).getElements().get(0).getType().equals("type1"))
+0.400 - assertTrue(schemas.get(0).getAttributes().get(0).getType().equals("type2"))
+0.396 - assertTrue(schemas.get(0).getElements().get(0).getName().equals("element1"))
+0.382 - assertTrue(schemas.get(0).getAttributes().get(0).getName().equals("attribute1"))
+0.375 - assertTrue(schemas.get(0).getSimpleTypes().get(0).getName().equals("simpleType1"))
+0.368 - assertTrue(schemas.get(0).getComplexTypes().get(0).getName().equals("complexType1"))
+0.350 - assertTrue(schemas.get(0).getTargetNamespace().equals("http://www.w3.org/2001/XMLSchema"))

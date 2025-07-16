@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class OBatchOperations {
+    public List < ORecordOperationRequest > getOperations ( ) { 
+    return operations ; 
+    }
+}
+
+package orientechnologies.orientdb.client;
+
+public class OBatchOperationsTest {
+    @Test
+     public void testBatchOperationsNoTx ( ) throws IOException {
+         List < ORecordOperation > operations = new ArrayList < > ( ) ; 
+         operations . add ( new ORecordOperation ( new ODocument ( ) , ORecordOperation . CREATED ) ) ; 
+         MockChannel channel = new MockChannel ( ) ; 
+         OBatchOperationsRequest request = new OBatchOperationsRequest ( - 1 , operations ) ; 
+         request . write ( channel , null ) ; 
+         channel . close ( ) ; 
+         request = new OBatchOperationsRequest ( ) ; 
+         request . read ( channel , 0 , ORecordSerializerNetworkFactory . INSTANCE . current ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(request);
+Assert.assertEquals(-1, request.getTransactionId());
+Assert.assertEquals(1, request.getOperations().size());
+Assert.assertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType());
+Assert.assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument);
+Assert.assertNotNull(channel.getOut());
+Assert.assertTrue(channel.isClosed());
+Assert.assertTrue(request.isIdempotent());
+Assert.assertFalse(request.isIdempotent());
+Assert.assertNotNull(request.toString());
+Assert.assertEquals(0, request.getMode());
+Assert.assertEquals(channel.getIn().available(), channel.getOut().size());
+Assert.assertTrue(request.getOperations().get(0).isValid());
+Assert.assertEquals(ORecordSerializerNetworkFactory.INSTANCE.current(), request.getSerializer());
+Assert.assertTrue(request.getOperations().get(0).isContentChanged());
+Assert.assertTrue(request.getOperations().get(0).isChanged());
+Assert.assertTrue(request.getOperations().get(0).isCreated());
+Assert.assertFalse(request.getOperations().get(0).isUpdated());
+Assert.assertFalse(request.getOperations().get(0).isDeleted());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(request.getOperations().size(),1); ===
+0.957 - Assert.assertEquals(1, request.getOperations().size())
+0.772 - Assert.assertFalse(request.getOperations().get(0).isUpdated())
+0.772 - Assert.assertFalse(request.getOperations().get(0).isDeleted())
+0.755 - Assert.assertTrue(request.getOperations().get(0).isValid())
+0.742 - Assert.assertEquals(-1, request.getTransactionId())
+0.740 - Assert.assertTrue(request.getOperations().get(0).isChanged())
+0.740 - Assert.assertTrue(request.getOperations().get(0).isCreated())
+0.734 - Assert.assertEquals(0, request.getMode())
+0.692 - Assert.assertTrue(request.getOperations().get(0).isContentChanged())
+0.656 - Assert.assertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType())
+0.617 - Assert.assertFalse(request.isIdempotent())
+0.605 - Assert.assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument)
+0.577 - Assert.assertEquals(channel.getIn().available(), channel.getOut().size())
+0.575 - Assert.assertTrue(request.isIdempotent())
+0.532 - Assert.assertNotNull(request.toString())
+0.500 - Assert.assertNotNull(request)
+0.493 - Assert.assertEquals(ORecordSerializerNetworkFactory.INSTANCE.current(), request.getSerializer())
+0.468 - Assert.assertNotNull(channel.getOut())
+0.368 - Assert.assertTrue(channel.isClosed())

@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class ObjectWithDeletedLink {
+    < RET extends T > RET reload ( final T iObject , String iFetchPlan , boolean iIgnoreCache ) ;
+}
+
+package orientechnologies.orientdb.object;
+
+public class TestObjectWithDeletedLink {
+    @Test
+     public void testDeletedLink ( ) {
+         db . activateOnCurrentThread ( ) ; 
+         SimpleSelfRef ob1 = new SimpleSelfRef ( ) ; 
+         ob1 . setName ( "STR" ) ; 
+         SimpleSelfRef ob2 = new SimpleSelfRef ( ) ; 
+         ob2 . setName ( "STR" ) ; 
+         ob1 . setFriend ( ob2 ) ; 
+         ob1 = db . save ( ob1 ) ; 
+         ob1 = db . reload ( ob1 , "STR" , true ) ; 
+         ob2 = ob1 . getFriend ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", ob1.getName());
+assertEquals("STR", ob2.getName());
+assertNotNull(ob1.getFriend());
+assertEquals("STR", ob1.getFriend().getName());
+assertEquals(ob1, ob1.getFriend().getFriend());
+assertNotSame(ob1, ob2);
+assertNotSame(ob1.getFriend(), ob2);
+assertEquals(ob1.getFriend(), ob2);
+assertEquals(ob1.getFriend().getFriend(), ob2);
+assertEquals(ob2.getFriend(), ob1);
+assertNull(ob2.getFriend().getFriend());
+assertNotSame(ob1.getFriend().getFriend(), ob2);
+assertNotSame(ob2.getFriend(), ob1);
+assertNotSame(ob2.getFriend().getFriend(), ob1);
+assertNotSame(ob1.getFriend().getFriend(), ob1);
+assertNotSame(ob2.getFriend().getFriend(), ob2);
+assertEquals("STR", ob2.getFriend().getName());
+assertEquals("STR", ob2.getFriend().getFriend().getName());
+assertNotSame(ob1.getFriend().getFriend(), ob1.getFriend());
+assertNotSame(ob2.getFriend().getFriend(), ob2.getFriend());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(ob1.getFriend()); ===
+1.000 - assertNotNull(ob1.getFriend())
+0.812 - assertNotSame(ob1.getFriend(), ob2)
+0.794 - assertEquals(ob1.getFriend(), ob2)
+0.781 - assertNotSame(ob2.getFriend(), ob1)
+0.762 - assertEquals(ob2.getFriend(), ob1)
+0.754 - assertNull(ob2.getFriend().getFriend())
+0.684 - assertNotSame(ob1.getFriend().getFriend(), ob2)
+0.684 - assertNotSame(ob1.getFriend().getFriend(), ob1)
+0.667 - assertEquals("STR", ob1.getFriend().getName())
+0.667 - assertEquals(ob1.getFriend().getFriend(), ob2)
+0.658 - assertNotSame(ob2.getFriend().getFriend(), ob1)
+0.658 - assertNotSame(ob2.getFriend().getFriend(), ob2)
+0.640 - assertEquals("STR", ob2.getFriend().getName())
+0.635 - assertEquals("STR", ob1.getName())
+0.613 - assertEquals(ob1, ob1.getFriend().getFriend())
+0.603 - assertEquals("STR", ob2.getName())
+0.591 - assertNotSame(ob1.getFriend().getFriend(), ob1.getFriend())
+0.568 - assertNotSame(ob2.getFriend().getFriend(), ob2.getFriend())
+0.552 - assertEquals("STR", ob2.getFriend().getFriend().getName())
+0.538 - assertNotSame(ob1, ob2)

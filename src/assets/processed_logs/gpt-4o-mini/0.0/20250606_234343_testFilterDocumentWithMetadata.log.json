@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterDocumentWithMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadataFilterParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertEquals(1, fields.size());\nassertTrue(fields.containsKey(\"url\"));\nassertEquals(\"http://example.com\", fields.get(\"url\"));\nassertTrue(fields.containsKey(\"metadata\"));\nassertEquals(\"STR\", fields.get(\"metadata\"));\nassertFalse(fields.containsKey(\"nonexistentKey\"));\nassertTrue(fields.get(\"STR\").length() > 0);\nassertEquals(\"ExpectedValue\", fields.get(\"expectedField\"));\nassertNotEquals(\"UnexpectedValue\", fields.get(\"unexpectedField\"));\nassertTrue(fields.keySet().containsAll(Arrays.asList(\"STR\", \"url\", \"metadata\")));\nassertFalse(fields.isEmpty());\nassertEquals(\"application/json\", fields.get(\"contentType\"));\nassertTrue(fields.get(\"timestamp\") instanceof Long);\nassertNotNull(fields.get(\"documentId\"));\nassertTrue(fields.get(\"documentId\").toString().matches(\"^[a-f0-9]{24}$\"));\nassertEquals(\"http://example.com\", fields.get(\"url\"));\nassertTrue(fields.get(\"status\").equals(\"success\"));\nassertEquals(\"text/html\", fields.get(\"mimeType\"));\n```\n====================\n\n",
+    "scores": [
+        0.925,
+        0.8,
+        0.703,
+        0.694,
+        0.653,
+        0.653,
+        0.634,
+        0.627,
+        0.62,
+        0.6,
+        0.585,
+        0.583,
+        0.579,
+        0.525,
+        0.5,
+        0.5,
+        0.495,
+        0.471,
+        0.444,
+        0.414,
+        0.413,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

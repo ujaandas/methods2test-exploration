@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class f {\n@Deprecated\n< RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class f {\n@Test\npublic void testMixCompositeQuery ( ) {\nList < ODocument > docs = db . query ( new OSQLSynchQuery < ODocument > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(docs);\nassertFalse(docs.isEmpty());\nassertEquals(expectedSize, docs.size());\nfor (ODocument doc : docs) {\nassertNotNull(doc.getField(\"fieldName1\"));\nassertNotNull(doc.getField(\"fieldName2\"));\nassertTrue(doc.getField(\"fieldName1\") instanceof String);\nassertTrue(doc.getField(\"fieldName2\") instanceof Integer);\n}\nODocument firstDoc = docs.get(0);\nassertEquals(expectedValue1, firstDoc.getField(\"fieldName1\"));\nassertEquals(expectedValue2, firstDoc.getField(\"fieldName2\"));\nassertTrue(firstDoc.containsField(\"fieldName3\"));\nassertEquals(expectedListSize, firstDoc.getField(\"fieldName3\").size());\nfor (ODocument doc : docs) {\nassertTrue(doc.getField(\"fieldName2\") >= 0);\n}\nassertTrue(docs.stream().allMatch(doc -> doc.getField(\"fieldName1\").toString().contains(\"expectedSubstring\")));\nassertEquals(expectedDocId, docs.get(0).getIdentity());\nassertNotSame(docs.get(0), docs.get(1));\nassertTrue(docs.stream().anyMatch(doc -> doc.getField(\"fieldName4\").equals(expectedValue4)));\nassertFalse(docs.stream().noneMatch(doc -> doc.getField(\"fieldName5\").equals(expectedValue5)));\n```\n====================\n\n",
+    "scores": [
+        0.8,
+        0.704,
+        0.585,
+        0.575,
+        0.529,
+        0.529,
+        0.519,
+        0.506,
+        0.5,
+        0.427,
+        0.391,
+        0.37,
+        0.346,
+        0.345,
+        0.341,
+        0.274,
+        0.269,
+        0.263,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,docs.size());"
+}

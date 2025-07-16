@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutor {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutorTest {\n@Test\npublic void testMultipleCreateEdgeOnTheSameLet ( ) {\nOrientDB factory = new OrientDB ( \"STR\" , \"STR\" , \"STR\" , OrientDBConfig . defaultConfig ( ) ) ;\nString dbName = getClass ( ) . getSimpleName ( ) + \"STR\" ;\nfactory . create ( dbName , ODatabaseType . MEMORY ) ;\nODatabaseDocument db = factory . open ( dbName , \"STR\" , \"STR\" ) ;\nString script = \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nOResultSet result = db . execute ( \"STR\" , script ) ;\nresult . close ( ) ;\nresult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(0, result.size());\nassertFalse(result.hasNext());\nassertNull(result.next());\nassertTrue(result.getExecutionPlan().contains(\"CREATE EDGE\"));\nassertNotNull(result.getProperty(\"property1\"));\nassertEquals(\"value1\", result.getProperty(\"property1\"));\nassertTrue(result.getProperty(\"property2\") instanceof Integer);\nassertEquals(100, result.getProperty(\"property2\"));\nassertFalse(result.getProperty(\"property3\"));\nassertTrue(result.getProperty(\"property4\") instanceof List);\nassertEquals(3, ((List) result.getProperty(\"property4\")).size());\nassertTrue(result.getProperty(\"property5\") instanceof Map);\nassertEquals(\"data\", ((Map) result.getProperty(\"property5\")).get(\"key\"));\nassertEquals(0, ((Map) result.getProperty(\"property5\")).get(\"count\"));\nassertNotEquals(\"error\", result.getErrorMessage());\nassertEquals(200, result.getStatusCode());\nassertTrue(result.getExecutionTime() <= 1000);\nassertTrue(result.getExecutionTime() >= 500);\nassertTrue(result.getExecutionTimeInMilliseconds() >= 500);\nassertTrue(result.getExecutionTimeInNanoseconds() <= 1000000000);\n====================\n\n",
+    "scores": [
+        0.684,
+        0.676,
+        0.659,
+        0.656,
+        0.642,
+        0.642,
+        0.624,
+        0.602,
+        0.594,
+        0.591,
+        0.569,
+        0.566,
+        0.565,
+        0.519,
+        0.512,
+        0.444,
+        0.421,
+        0.421,
+        0.396,
+        0.396
+    ],
+    "ground_truth": "Assert.assertEquals(2,result.stream().count());"
+}

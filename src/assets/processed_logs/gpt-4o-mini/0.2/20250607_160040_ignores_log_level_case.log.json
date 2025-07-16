@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic void set ( String key , String value ) {\nsetIn ( normalize ( key ) , RealValue . fromString ( value ) ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void ignores_log_level_case ( ) {\nConfig config = createConfig ( ) ;\nconfig . set ( Keys . CUCUMBERPRO_LOGGING , \"STR\" ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(logger);\nassertEquals(\"Expected log level to be STR\", \"STR\", logger.getLogLevel());\nassertTrue(logger.isLogLevelIgnored());\nassertFalse(logger.isLogLevelEnabled(\"DEBUG\"));\nassertFalse(logger.isLogLevelEnabled(\"INFO\"));\nassertTrue(logger.isLogLevelEnabled(\"STR\"));\nassertEquals(\"Expected normalized key\", \"cucumberpro_logging\", logger.getNormalizedKey(Keys.CUCUMBERPRO_LOGGING));\nassertTrue(logger.isLoggingEnabled());\nassertFalse(logger.isLoggingDisabled());\nassertEquals(\"Expected value from RealValue\", RealValue.fromString(\"STR\"), logger.getValue(Keys.CUCUMBERPRO_LOGGING));\nassertNotEquals(\"Expected log level to not be empty\", \"\", logger.getLogLevel());\nassertTrue(logger.isLogLevelValid(\"STR\"));\nassertFalse(logger.isLogLevelValid(\"INVALID\"));\nassertEquals(\"Expected log level to be case insensitive\", \"STR\", logger.getLogLevel().toUpperCase());\nassertTrue(logger.isLogLevelCaseIgnored());\nassertEquals(\"Expected default log level\", \"INFO\", logger.getDefaultLogLevel());\nassertTrue(logger.isLogLevelConfigured());\nassertFalse(logger.isLogLevelReset());\nassertEquals(\"Expected configuration size\", 1, config.size());\nassertTrue(config.containsKey(Keys.CUCUMBERPRO_LOGGING));\nassertFalse(config.containsKey(\"INVALID_KEY\"));\nassertEquals(\"Expected logger instance type\", SystemLogger.class, logger.getClass());\n```\n====================\n\n",
+    "scores": [
+        0.577,
+        0.555,
+        0.552,
+        0.537,
+        0.5,
+        0.489,
+        0.484,
+        0.484,
+        0.482,
+        0.476,
+        0.467,
+        0.465,
+        0.465,
+        0.46,
+        0.455,
+        0.439,
+        0.432,
+        0.364,
+        0.353,
+        0.344,
+        0.308,
+        0.198,
+        0.0
+    ],
+    "ground_truth": "assertEquals(Logger.Level.DEBUG,logger.level);"
+}

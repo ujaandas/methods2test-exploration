@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    default OClass createEdgeClass ( String className ) { 
+    return createClass ( className , "STR" ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testCreateEdgeClass ( ) {
+         OClass clazz = db . createEdgeClass ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(clazz);
+assertEquals("STR", clazz.getName());
+assertTrue(clazz instanceof OClass);
+assertTrue(clazz.isEdgeClass());
+assertEquals(1, db.getClasses().size());
+assertTrue(db.getClasses().contains(clazz));
+assertEquals("STR", db.getClass("STR").getName());
+assertEquals("STR", clazz.getShortName());
+assertTrue(clazz.getSuperClass() == null);
+assertEquals(0, clazz.getProperties().size());
+assertFalse(clazz.isAbstract());
+assertFalse(clazz.isSubClass());
+assertEquals(0, clazz.getClusterIds().size());
+assertEquals(0, clazz.getMethods().size());
+assertEquals(0, clazz.getIndexes().size());
+assertEquals(0, clazz.getPolymorphicTypes().size());
+assertTrue(clazz.getSchema() != null);
+assertTrue(clazz.getSchema().getClasses().contains(clazz));
+assertEquals(0, clazz.getTriggers().size());
+assertFalse(clazz.isHidden());
+assertEquals(0, clazz.getDefaultClusterId());
+assertNotNull(clazz.getDocumentType());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(clazz); ===
+0.833 - ```java
+assertNotNull(clazz)
+0.690 - assertNotNull(clazz.getDocumentType())
+0.571 - assertFalse(clazz.isHidden())
+0.549 - assertTrue(clazz.isEdgeClass())
+0.549 - assertFalse(clazz.isAbstract())
+0.549 - assertFalse(clazz.isSubClass())
+0.545 - assertEquals("STR", clazz.getName())
+0.528 - assertTrue(clazz instanceof OClass)
+0.509 - assertTrue(clazz.getSchema() != null)
+0.500 - assertEquals("STR", clazz.getShortName())
+0.492 - assertEquals(0, clazz.getMethods().size())
+0.492 - assertEquals(0, clazz.getIndexes().size())
+0.484 - assertEquals(0, clazz.getTriggers().size())
+0.476 - assertTrue(db.getClasses().contains(clazz))
+0.476 - assertEquals(0, clazz.getDefaultClusterId())
+0.475 - assertTrue(clazz.getSuperClass() == null)
+0.469 - assertEquals(0, clazz.getProperties().size())
+0.469 - assertEquals(0, clazz.getClusterIds().size())
+0.429 - assertEquals(0, clazz.getPolymorphicTypes().size())
+0.385 - assertTrue(clazz.getSchema().getClasses().contains(clazz))
+0.379 - assertEquals(1, db.getClasses().size())
+0.294 - assertEquals("STR", db.getClass("STR").getName())
+0.000 - ```

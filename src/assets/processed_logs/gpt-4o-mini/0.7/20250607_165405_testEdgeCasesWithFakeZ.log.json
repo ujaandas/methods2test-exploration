@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactory {\nint estimateSize ( ) {\nint s = SeekHead . id . length + 1 ;\ns += estimeteSeekSize ( a . get ( 0 ) . id . length , 1 ) ;\nfor ( int i = 1 ;\ni < a . size ( ) ;\ni ++ ) {\ns += estimeteSeekSize ( a . get ( i ) . id . length , a . get ( i ) . seekPointerSize ) ;\n} return s ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactoryTest {\n@Test\npublic void testEdgeCasesWithFakeZ ( ) throws Exception {\nSeekHeadFactory a = new SeekHeadFactory ( - 1 ) ;\na . a . add ( createFakeZ ( Info . id , 0xFF ) ) ;\na . a . add ( createFakeZ ( Tracks . id , 0xFF05 ) ) ;\na . a . add ( createFakeZ ( Tags . id , 0xFEFFC0 ) ) ;\na . a . add ( createFakeZ ( Cues . id , 0xFF ) ) ;\nint computeSize = a . computeSeekHeadSize ( ) ;\nSystem . out . println ( \"STR\" + computeSize ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertTrue(computeSize > 0);\nAssert.assertEquals(estimateSize(a), computeSize);\nAssert.assertNotNull(a.a);\nAssert.assertEquals(4, a.a.size());\nAssert.assertTrue(a.a.get(0).id.length > 0);\nAssert.assertTrue(a.a.get(1).id.length > 0);\nAssert.assertTrue(a.a.get(2).id.length > 0);\nAssert.assertTrue(a.a.get(3).id.length > 0);\nAssert.assertEquals(0xFF, a.a.get(0).seekPointerSize);\nAssert.assertEquals(0xFF05, a.a.get(1).seekPointerSize);\nAssert.assertEquals(0xFEFFC0, a.a.get(2).seekPointerSize);\nAssert.assertEquals(0xFF, a.a.get(3).seekPointerSize);\nAssert.assertTrue(computeSize < 1000);\nAssert.assertFalse(computeSize == Integer.MAX_VALUE);\nAssert.assertFalse(computeSize < 0);\nAssert.assertTrue(computeSize % 2 == 0 || computeSize % 2 == 1);\nAssert.assertTrue(a.a.get(0).id.length + a.a.get(1).id.length + a.a.get(2).id.length + a.a.get(3).id.length > 0);\nAssert.assertNotEquals(0, a.estimateSize());\nAssert.assertNotNull(a.a.get(1).id);\nAssert.assertNotNull(a.a.get(2).id);\nAssert.assertNotNull(a.a.get(3).id);\n```\n====================\n\n",
+    "scores": [
+        0.964,
+        0.779,
+        0.676,
+        0.647,
+        0.6,
+        0.575,
+        0.575,
+        0.562,
+        0.56,
+        0.549,
+        0.541,
+        0.477,
+        0.433,
+        0.429,
+        0.429,
+        0.429,
+        0.395,
+        0.395,
+        0.395,
+        0.395,
+        0.317,
+        0.0
+    ],
+    "ground_truth": "assertEquals(a.estimateSize(),computeSize);"
+}

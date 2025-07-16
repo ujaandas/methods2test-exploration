@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcServer {
+    @Override
+     public int port ( ) { 
+     return port ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcServerTest {
+    @Test
+     public void doTestRandomPortConstructor ( ) {
+         RpcServer rpcServer = new RpcServer ( ) ; 
+         rpcServer . startup ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(rpcServer);
+assertEquals(0, rpcServer.port()); // Assuming default port is 0
+rpcServer.startup();
+assertTrue(rpcServer.isRunning());
+assertTrue(rpcServer.getPort() > 0); // Assuming a valid port is assigned
+assertEquals("Expected server state", "RUNNING", rpcServer.getState());
+assertNotNull(rpcServer.getConfiguration());
+assertTrue(rpcServer.getClients().isEmpty());
+assertTrue(rpcServer.getHandlers().isEmpty());
+assertEquals("Expected default timeout", 30000, rpcServer.getTimeout());
+assertTrue(rpcServer.getServiceRegistry().isEmpty());
+assertNotNull(rpcServer.getLogger());
+assertTrue(rpcServer.getRequestQueue().isEmpty());
+assertTrue(rpcServer.getResponseQueue().isEmpty());
+assertEquals("Expected default max connections", 100, rpcServer.getMaxConnections());
+assertFalse(rpcServer.isShutdown());
+rpcServer.shutdown();
+assertTrue(rpcServer.isShutdown());
+assertThrows(IllegalStateException.class, () -> rpcServer.startup());
+assertNotNull(rpcServer.getMetrics());
+assertEquals("Expected default protocol", "SOFA", rpcServer.getProtocol());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotEquals(0,rpcServer.port()); ===
+0.955 - assertEquals(0, rpcServer.port())
+0.761 - assertNotNull(rpcServer.getLogger())
+0.722 - assertNotNull(rpcServer.getMetrics())
+0.718 - assertNotNull(rpcServer.getConfiguration())
+0.706 - assertTrue(rpcServer.getPort() > 0)
+0.686 - assertFalse(rpcServer.isShutdown())
+0.657 - ```java
+assertNotNull(rpcServer)
+0.638 - assertTrue(rpcServer.isShutdown())
+0.618 - assertTrue(rpcServer.isRunning())
+0.588 - assertEquals("Expected default timeout", 30000, rpcServer.getTimeout())
+0.582 - assertTrue(rpcServer.getClients().isEmpty())
+0.575 - assertTrue(rpcServer.getHandlers().isEmpty())
+0.565 - assertTrue(rpcServer.getResponseQueue().isEmpty())
+0.552 - assertEquals("Expected default protocol", "SOFA", rpcServer.getProtocol())
+0.548 - assertTrue(rpcServer.getRequestQueue().isEmpty())
+0.532 - // Assuming default port is 0
+rpcServer.startup()
+0.529 - assertTrue(rpcServer.getServiceRegistry().isEmpty())
+0.526 - assertEquals("Expected default max connections", 100, rpcServer.getMaxConnections())
+0.520 - assertThrows(IllegalStateException.class, () -> rpcServer.startup())
+0.473 - rpcServer.shutdown()
+0.424 - // Assuming a valid port is assigned
+assertEquals("Expected server state", "RUNNING", rpcServer.getState())
+0.000 - ```

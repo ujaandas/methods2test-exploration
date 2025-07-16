@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilder {\n@Override\npublic String toString ( ) ;\n}\n\npackage redraiment.jactiverecord;\n\npublic class TSqlBuilderTest {\n@Test\npublic void testSelectSomeFrom ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(sqlBuilder);\nassertEquals(\"SELECT * FROM table\", sqlBuilder.toString());\nassertNotEquals(\"SELECT * FROM table WHERE id = 1\", sqlBuilder.toString());\nassertTrue(sqlBuilder.toString().startsWith(\"SELECT\"));\nassertFalse(sqlBuilder.toString().endsWith(\"table\"));\nassertEquals(0, sqlBuilder.toString().indexOf(\"SELECT\"));\nassertTrue(sqlBuilder.toString().contains(\"FROM\"));\nassertFalse(sqlBuilder.toString().isEmpty());\nassertTrue(sqlBuilder.toString().matches(\"SELECT [\\\\w,\\\\s]+ FROM [\\\\w]+\"));\nassertNotNull(sqlBuilder.toString().trim());\nassertTrue(sqlBuilder.toString().equalsIgnoreCase(\"select * from table\"));\nassertEquals(19, sqlBuilder.toString().length());\nassertTrue(sqlBuilder.toString().matches(\"SELECT .* FROM table\"));\nassertFalse(sqlBuilder.toString().equals(\"select * from table\"));\nassertTrue(sqlBuilder.toString().contains(\"SELECT * FROM table\"));\nassertNotSame(\"SELECT * FROM table\", sqlBuilder.toString());\nassertTrue(sqlBuilder.toString().endsWith(\"table\"));\nassertEquals(\"SELECT * FROM table\".hashCode(), sqlBuilder.toString().hashCode());\nassertNull(nullSqlBuilder);\nassertThrows(Exception.class, () -> sqlBuilder.execute());\n====================\n\n",
+    "scores": [
+        0.6,
+        0.549,
+        0.545,
+        0.512,
+        0.512,
+        0.507,
+        0.491,
+        0.477,
+        0.458,
+        0.431,
+        0.427,
+        0.425,
+        0.417,
+        0.391,
+        0.391,
+        0.368,
+        0.365,
+        0.333,
+        0.308,
+        0.304
+    ],
+    "ground_truth": "assertEquals(\"STR\",sql.select(\"STR\",\"STR\").from(\"STR\").toString());"
+}

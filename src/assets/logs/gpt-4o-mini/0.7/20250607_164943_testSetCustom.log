@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OAlterPropertyStatementExecution {
+    public String getCustom ( final String iName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OAlterPropertyStatementExecutionTest {
+    @Test
+     public void testSetCustom ( ) {
+         String className = "STR" ; 
+         OClass clazz = db . getMetadata ( ) . getSchema ( ) . createClass ( className ) ; 
+         OProperty prop = clazz . createProperty ( "STR" , OType . STRING ) ; 
+         prop . setCustom ( "STR" , "STR" ) ; 
+         OResultSet result = db . command ( "STR" + className + "STR" ) ; 
+         printExecutionPlan ( null , result ) ; 
+         Object currentValue = prop . getCustom ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(currentValue);
+assertEquals("STR", currentValue);
+assertTrue(currentValue instanceof String);
+assertEquals("STR", prop.getCustom("STR"));
+assertFalse(currentValue.equals("DifferentValue"));
+assertNotEquals(null, prop.getCustom("STR"));
+assertSame("STR", currentValue);
+assertNotSame("DifferentValue", currentValue);
+assertTrue(currentValue.equals("STR"));
+assertFalse(currentValue.equals("AnotherValue"));
+assertEquals(3, currentValue.length());
+assertTrue(currentValue.contains("S"));
+assertFalse(currentValue.contains("X"));
+assertThrows(IllegalArgumentException.class, () -> prop.getCustom(null));
+assertThrows(IllegalArgumentException.class, () -> prop.getCustom(""));
+assertTrue(currentValue instanceof String);
+assertFalse(currentValue.isEmpty());
+assertEquals("STR", prop.getCustom("STR"));
+assertNotEquals("DifferentValue", prop.getCustom("STR"));
+assertTrue(prop.getCustom("STR").equals("STR"));
+assertSame(currentValue, prop.getCustom("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(result); ===
+0.643 - ```java
+assertNotNull(currentValue)
+0.517 - assertEquals(3, currentValue.length())
+0.491 - assertEquals("STR", currentValue)
+0.462 - assertNotSame("DifferentValue", currentValue)
+0.447 - assertNotEquals("DifferentValue", prop.getCustom("STR"))
+0.438 - assertNotEquals(null, prop.getCustom("STR"))
+0.431 - assertSame("STR", currentValue)
+0.429 - assertFalse(currentValue.isEmpty())
+0.426 - assertTrue(currentValue instanceof String)
+0.426 - assertTrue(currentValue instanceof String)
+0.407 - assertTrue(currentValue.equals("STR"))
+0.407 - assertTrue(currentValue.contains("S"))
+0.367 - assertFalse(currentValue.contains("X"))
+0.358 - assertSame(currentValue, prop.getCustom("STR"))
+0.355 - assertEquals("STR", prop.getCustom("STR"))
+0.355 - assertEquals("STR", prop.getCustom("STR"))
+0.353 - assertTrue(prop.getCustom("STR").equals("STR"))
+0.341 - assertThrows(IllegalArgumentException.class, () -> prop.getCustom(""))
+0.338 - assertFalse(currentValue.equals("DifferentValue"))
+0.319 - assertFalse(currentValue.equals("AnotherValue"))
+0.267 - assertThrows(IllegalArgumentException.class, () -> prop.getCustom(null))
+0.000 - ```

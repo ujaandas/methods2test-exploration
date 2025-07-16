@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\nprotected static String [ ] parseNetworks ( String dockerResult ) {\nif ( ! dockerResult . matches ( \"STR\" ) ) {\nreturn null ;\n} String networkMap = dockerResult . substring ( dockerResult . indexOf ( \"STR\" ) + 1 , dockerResult . indexOf ( \"STR\" ) ) ;\nString [ ] networkHex = networkMap . split ( \"STR\" ) ;\nString [ ] networks = new String [ networkHex . length ] ;\nfor ( int i = 0 ;\ni < networkHex . length ;\ni ++ ) {\nnetworks [ i ] = networkHex [ i ] . split ( \"STR\" ) [ 0 ] ;\n} return networks ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testParseNetworks ( ) {\nString [ ] networkArray = new String [ ] {\n\"STR\" } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(networkArray);\nassertEquals(1, networkArray.length);\nassertEquals(\"ExpectedNetwork1\", networkArray[0]);\nassertTrue(networkArray[0].startsWith(\"ExpectedPrefix\"));\nassertFalse(networkArray[0].isEmpty());\nassertEquals(\"ExpectedNetwork2\", networkArray[1]);\nassertTrue(networkArray[1].contains(\"ExpectedSubstring\"));\nassertFalse(networkArray[1].equals(\"UnexpectedValue\"));\nassertNotEquals(\"AnotherUnexpectedValue\", networkArray[0]);\nassertArrayEquals(new String[] {\"ExpectedNetwork1\", \"ExpectedNetwork2\"}, networkArray);\nassertTrue(Arrays.asList(networkArray).contains(\"ExpectedNetwork1\"));\nassertTrue(Arrays.asList(networkArray).contains(\"ExpectedNetwork2\"));\nassertEquals(\"ExpectedNetwork1\", networkArray[0]);\nassertNotSame(\"DifferentObject\", networkArray[0]);\nassertSame(\"ExpectedNetwork1\", networkArray[0]);\nassertArrayEquals(new String[] {\"ExpectedNetwork1\"}, Arrays.copyOfRange(networkArray, 0, 1));\nassertTrue(networkArray.length > 0);\nassertFalse(Arrays.asList(networkArray).isEmpty());\nassertTrue(networkArray.length <= 2);\nassertNotNull(networkArray[0]);\nassertTrue(networkArray[0].length() > 0);\n```\n====================\n\n",
+    "scores": [
+        0.609,
+        0.609,
+        0.589,
+        0.545,
+        0.534,
+        0.531,
+        0.531,
+        0.526,
+        0.516,
+        0.513,
+        0.511,
+        0.489,
+        0.481,
+        0.481,
+        0.481,
+        0.463,
+        0.449,
+        0.444,
+        0.437,
+        0.377,
+        0.37,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(networkArray,DevUtil.parseNetworks(\"STR\"));"
+}

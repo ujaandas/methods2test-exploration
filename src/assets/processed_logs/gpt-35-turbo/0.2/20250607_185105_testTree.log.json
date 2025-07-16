@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraph {\npublic boolean hasCycles ( ) {\nreturn ! minimalCycles ( ) . isEmpty ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraphTest {\n@Test\npublic void testTree ( ) {\nfinal ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( \"STR\" , \"STR\" ) , edge ( \"STR\" , \"STR\" ) ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(2, graph.getVertices().size());\nassertTrue(graph.hasCycles());\nassertFalse(graph.addEdge(edge(\"STR\", \"STR\")));\nassertTrue(graph.removeEdge(edge(\"STR\", \"STR\")));\nassertEquals(1, graph.getEdges().size());\nassertTrue(graph.addEdge(edge(\"STR\", \"NEW\")));\nassertEquals(2, graph.getVertices().size());\nassertTrue(graph.hasVertex(\"NEW\"));\nassertFalse(graph.hasVertex(\"NON_EXISTING\"));\nassertTrue(graph.hasEdge(edge(\"STR\", \"NEW\")));\nassertFalse(graph.hasEdge(edge(\"NEW\", \"STR\")));\nassertTrue(graph.removeVertex(\"NEW\"));\nassertEquals(1, graph.getVertices().size());\nassertFalse(graph.hasVertex(\"NEW\"));\nassertFalse(graph.hasCycles());\nassertTrue(graph.addEdge(edge(\"STR\", \"STR\")));\nassertEquals(2, graph.getEdges().size());\nassertTrue(graph.hasCycles());\nassertFalse(graph.addEdge(edge(\"STR\", \"STR\")));\nassertEquals(2, graph.getEdges().size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.881,
+        0.881,
+        0.769,
+        0.676,
+        0.667,
+        0.656,
+        0.613,
+        0.613,
+        0.611,
+        0.611,
+        0.609,
+        0.609,
+        0.609,
+        0.568,
+        0.537,
+        0.518,
+        0.514,
+        0.514,
+        0.468
+    ],
+    "ground_truth": "assertFalse(graph.hasCycles());"
+}

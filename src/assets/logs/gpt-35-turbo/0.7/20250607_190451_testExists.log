@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , E extends Throwable > boolean exists ( Iterable < T > coll , APredicate < ? super T , E > pred ) throws E { 
+    for ( T o : coll ) { 
+    if ( pred . apply ( o ) ) { 
+    return true ; 
+    } } return false ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testExists ( ) {
+         final APredicateNoThrow < String > len1 = new APredicateNoThrow < String > ( ) { 
+     @Override
+     public boolean apply ( String o ) { 
+     return o . length ( ) == 1 ; 
+     } } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "bb", "ccc"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "bb", "ccc", "dddd"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bbb", "cccc"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bbb", "cccc", "ddddd"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Collections.emptyList(), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList(""), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "b", "c"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bb", "cc"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "aa", "aaa"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("ab", "bc", "cd"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "b", "c", "d", "e"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "22", "333"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("1", "22", "333", "4444"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "2", "3"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("11", "22", "33"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "11", "111"), len1));
+Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("12", "23", "34"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "2", "3", "4", "5"), len1));
+Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("0", "00", "000"), len1));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(false,ACollectionHelper.exists(Arrays.<String>asList(),len1)); ===
+0.844 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList(""), len1))
+0.776 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bb", "cc"), len1))
+0.776 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("ab", "bc", "cd"), len1))
+0.776 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("11", "22", "33"), len1))
+0.776 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("12", "23", "34"), len1))
+0.769 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "b", "c"), len1))
+0.769 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "2", "3"), len1))
+0.760 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bbb", "cccc"), len1))
+0.753 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "bb", "ccc"), len1))
+0.753 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "aa", "aaa"), len1))
+0.753 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "22", "333"), len1))
+0.753 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "11", "111"), len1))
+0.753 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("0", "00", "000"), len1))
+0.740 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("1", "22", "333", "4444"), len1))
+0.728 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "b", "c", "d", "e"), len1))
+0.728 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("1", "2", "3", "4", "5"), len1))
+0.722 - Assert.assertFalse(ACollectionHelper.exists(Arrays.asList("aa", "bbb", "cccc", "ddddd"), len1))
+0.719 - Assert.assertTrue(ACollectionHelper.exists(Arrays.asList("a", "bb", "ccc", "dddd"), len1))
+0.700 - Assert.assertTrue(ACollectionHelper.exists(Collections.emptyList(), len1))

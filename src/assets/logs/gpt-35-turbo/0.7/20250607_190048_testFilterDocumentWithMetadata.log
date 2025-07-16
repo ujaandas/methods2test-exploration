@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterDocumentWithMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadataFilterParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", fields.get("STR"));
+assertEquals(1, fields.size());
+assertTrue(fields.containsKey("STR"));
+assertFalse(fields.containsKey("OTHER_KEY"));
+assertNotNull(fields.get("STR"));
+assertNull(fields.get("OTHER_KEY"));
+assertEquals("STR", md.get("STR")[0]);
+assertArrayEquals(new String[]{"STR"}, md.get("STR"));
+assertTrue(md.containsKey("STR"));
+assertFalse(md.containsKey("OTHER_KEY"));
+assertNotNull(md.get("STR"));
+assertNull(md.get("OTHER_KEY"));
+assertEquals("STR", metadata.getValue("STR"));
+assertTrue(metadata.containsKey("STR"));
+assertFalse(metadata.containsKey("OTHER_KEY"));
+assertNotNull(metadata.getValue("STR"));
+assertNull(metadata.getValue("OTHER_KEY"));
+assertEquals(1, metadata.size());
+assertTrue(metadata.containsValue("STR"));
+assertFalse(metadata.containsValue("OTHER_VALUE"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.810 - assertEquals("STR", md.get("STR")[0])
+0.759 - assertEquals("STR", metadata.getValue("STR"))
+0.720 - assertNotNull(fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.681 - assertArrayEquals(new String[]{"STR"}, md.get("STR"))
+0.667 - assertNull(fields.get("OTHER_KEY"))
+0.620 - assertNotNull(md.get("STR"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.575 - assertFalse(fields.containsKey("OTHER_KEY"))
+0.568 - assertNull(md.get("OTHER_KEY"))
+0.514 - assertEquals(1, metadata.size())
+0.512 - assertNotNull(metadata.getValue("STR"))
+0.474 - assertTrue(md.containsKey("STR"))
+0.471 - assertNull(metadata.getValue("OTHER_KEY"))
+0.439 - assertTrue(metadata.containsKey("STR"))
+0.429 - assertTrue(metadata.containsValue("STR"))
+0.386 - assertFalse(md.containsKey("OTHER_KEY"))
+0.360 - assertFalse(metadata.containsKey("OTHER_KEY"))
+0.344 - assertFalse(metadata.containsValue("OTHER_VALUE"))

@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtil {
+    public static < K , V > Map < K , V > mergeMaps ( Map < K , V > map1 , Map < K , V > map2 ) { 
+    Map < K , V > answer = new HashMap < > ( ) ; 
+    if ( map2 != null ) { 
+    answer . putAll ( map2 ) ; 
+    } if ( map1 != null ) { 
+    answer . putAll ( map1 ) ; 
+    } return answer ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtilTest {
+    @Test
+     public void testMergeMaps ( ) {
+         Map < String , String > mapA = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > mapB = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > expectedA = createMap ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > expectedB = createMap ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB));
+assertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA));
+assertEquals(6, MapUtil.mergeMaps(mapA, mapB).size());
+assertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey("STR"));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue("STR"));
+assertFalse(MapUtil.mergeMaps(mapA, mapB).isEmpty());
+assertTrue(MapUtil.mergeMaps(mapA, mapB).equals(MapUtil.mergeMaps(mapB, mapA)));
+assertNotNull(MapUtil.mergeMaps(mapA, mapB));
+assertNotNull(MapUtil.mergeMaps(mapB, mapA));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(expectedA.keySet()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).values().containsAll(expectedA.values()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).entrySet().containsAll(expectedA.entrySet()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(expectedB.keySet()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).values().containsAll(expectedB.values()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).entrySet().containsAll(expectedB.entrySet()));
+assertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB));
+assertNotSame(mapB, MapUtil.mergeMaps(mapA, mapB));
+assertEquals(expectedA.hashCode(), MapUtil.mergeMaps(mapA, mapB).hashCode());
+assertEquals(expectedB.hashCode(), MapUtil.mergeMaps(mapA, mapB).hashCode());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedA,MapUtil.mergeMaps(mapA,mapB)); ===
+1.000 - assertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB))
+0.942 - assertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA))
+0.835 - assertEquals(6, MapUtil.mergeMaps(mapA, mapB).size())
+0.825 - assertEquals(expectedA.hashCode(), MapUtil.mergeMaps(mapA, mapB).hashCode())
+0.810 - assertEquals(expectedB.hashCode(), MapUtil.mergeMaps(mapA, mapB).hashCode())
+0.800 - assertNotNull(MapUtil.mergeMaps(mapA, mapB))
+0.800 - assertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB))
+0.780 - assertNotSame(mapB, MapUtil.mergeMaps(mapA, mapB))
+0.758 - assertNotNull(MapUtil.mergeMaps(mapB, mapA))
+0.757 - assertFalse(MapUtil.mergeMaps(mapA, mapB).isEmpty())
+0.667 - assertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey("STR"))
+0.655 - assertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue("STR"))
+0.574 - assertTrue(MapUtil.mergeMaps(mapA, mapB).equals(MapUtil.mergeMaps(mapB, mapA)))
+0.556 - assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(expectedA.keySet()))
+0.556 - assertTrue(MapUtil.mergeMaps(mapA, mapB).values().containsAll(expectedA.values()))
+0.556 - assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(expectedB.keySet()))
+0.556 - assertTrue(MapUtil.mergeMaps(mapA, mapB).values().containsAll(expectedB.values()))
+0.540 - assertTrue(MapUtil.mergeMaps(mapA, mapB).entrySet().containsAll(expectedA.entrySet()))
+0.540 - assertTrue(MapUtil.mergeMaps(mapA, mapB).entrySet().containsAll(expectedB.entrySet()))

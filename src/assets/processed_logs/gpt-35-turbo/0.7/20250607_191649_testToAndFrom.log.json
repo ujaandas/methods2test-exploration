@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Picture {\npublic int [ ] getPlaneData ( int plane ) {\nreturn data [ plane ] ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class PictureTest {\n@Test\npublic void testToAndFrom ( ) throws Exception {\nint [ ] Y = randomIntArray ( 4096 , 4 , 1019 ) ;\nint [ ] U = randomIntArray ( 2048 , 4 , 1019 ) ;\nint [ ] V = randomIntArray ( 2048 , 4 , 1019 ) ;\nPictureHiBD pictureHbd = PictureHiBD . createPictureWithDepth ( 64 , 64 , new int [ ] [ ] {\nY , U , V } , ColorSpace . YUV422 , 10 ) ;\nPicture picture = Picture . fromPictureHiBD ( pictureHbd ) ;\nPictureHiBD resultHbd = picture . toPictureHiBD ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertArrayEquals(Y, resultHbd.getPlaneData(0));\nAssert.assertArrayEquals(U, resultHbd.getPlaneData(1));\nAssert.assertArrayEquals(V, resultHbd.getPlaneData(2));\nAssert.assertEquals(64, resultHbd.getWidth());\nAssert.assertEquals(64, resultHbd.getHeight());\nAssert.assertEquals(ColorSpace.YUV422, resultHbd.getColorSpace());\nAssert.assertEquals(10, resultHbd.getBitDepth());\nAssert.assertEquals(4096, resultHbd.getPlaneData(0).length);\nAssert.assertEquals(2048, resultHbd.getPlaneData(1).length);\nAssert.assertEquals(2048, resultHbd.getPlaneData(2).length);\nAssert.assertNotNull(resultHbd.getPlaneData(0));\nAssert.assertNotNull(resultHbd.getPlaneData(1));\nAssert.assertNotNull(resultHbd.getPlaneData(2));\nAssert.assertNotSame(Y, resultHbd.getPlaneData(0));\nAssert.assertNotSame(U, resultHbd.getPlaneData(1));\nAssert.assertNotSame(V, resultHbd.getPlaneData(2));\nAssert.assertArrayEquals(pictureHbd.getFlatData(), resultHbd.getFlatData());\nAssert.assertEquals(pictureHbd.getPictureType(), resultHbd.getPictureType());\nAssert.assertEquals(pictureHbd.getMatrix(), resultHbd.getMatrix());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.957,
+        0.957,
+        0.825,
+        0.818,
+        0.814,
+        0.804,
+        0.804,
+        0.791,
+        0.791,
+        0.773,
+        0.773,
+        0.762,
+        0.747,
+        0.744,
+        0.726,
+        0.66,
+        0.615,
+        0.561
+    ],
+    "ground_truth": "Assert.assertArrayEquals(Y,resultHbd.getPlaneData(0));"
+}

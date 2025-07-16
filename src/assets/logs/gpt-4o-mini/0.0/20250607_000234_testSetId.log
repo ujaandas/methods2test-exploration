@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class StatementReference {
+    public String getId ( ) { 
+    return id ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class StatementReferenceTest {
+    @Test
+     public void testSetId ( ) {
+         String expected = UUID . randomUUID ( ) . toString ( ) ; 
+         statementRef . setId ( expected ) ; 
+         String actual = statementRef . getId ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected, actual);
+assertTrue(actual instanceof String);
+assertFalse(actual.isEmpty());
+assertEquals(expected.length(), actual.length());
+assertEquals(expected.hashCode(), actual.hashCode());
+assertNotSame(expected, actual);
+assertTrue(actual.matches("^[\\w-]{36}$")); // Assuming UUID format
+assertEquals(expected.substring(0, 8), actual.substring(0, 8));
+assertEquals(expected.substring(9, 13), actual.substring(9, 13));
+assertEquals(expected.substring(14, 18), actual.substring(14, 18));
+assertEquals(expected.substring(19, 23), actual.substring(19, 23));
+assertEquals(expected.substring(24), actual.substring(24));
+assertTrue(actual.contains("-"));
+assertFalse(actual.contains(" "));
+assertEquals(expected.toUpperCase(), actual.toUpperCase());
+assertNotEquals("invalid-id", actual);
+assertTrue(actual.equalsIgnoreCase(expected));
+assertEquals(expected.charAt(0), actual.charAt(0));
+assertEquals(expected.charAt(expected.length() - 1), actual.charAt(actual.length() - 1));
+assertTrue(actual.startsWith(expected.substring(0, 4)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.667 - assertNotEquals("invalid-id", actual)
+0.600 - assertFalse(actual.isEmpty())
+0.566 - assertTrue(actual.contains("-"))
+0.566 - assertFalse(actual.contains(" "))
+0.560 - assertEquals(expected, actual)
+0.545 - assertTrue(actual instanceof String)
+0.476 - assertTrue(actual.matches("^[\\w-]{36}$"))
+0.471 - assertEquals(expected.length(), actual.length())
+0.455 - assertTrue(actual.equalsIgnoreCase(expected))
+0.429 - assertEquals(expected.charAt(0), actual.charAt(0))
+0.417 - assertEquals(expected.hashCode(), actual.hashCode())
+0.410 - assertEquals(expected.substring(24), actual.substring(24))
+0.400 - assertTrue(actual.startsWith(expected.substring(0, 4)))
+0.390 - assertEquals(expected.substring(9, 13), actual.substring(9, 13))
+0.385 - assertEquals(expected.toUpperCase(), actual.toUpperCase())
+0.381 - assertEquals(expected.substring(14, 18), actual.substring(14, 18))
+0.381 - assertEquals(expected.substring(19, 23), actual.substring(19, 23))
+0.327 - assertEquals(expected.charAt(expected.length() - 1), actual.charAt(actual.length() - 1))
+0.317 - // Assuming UUID format
+assertEquals(expected.substring(0, 8), actual.substring(0, 8))
+0.000 - ```

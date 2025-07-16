@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtil {
+    protected static Properties getPropertiesFromYamlResource ( URL resource ) { 
+    return getPropertiesFromYamlResource ( null , resource ) ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtilTest {
+    @Test
+     public void testNonExistentYamlToPropertiesParsing ( ) {
+         Properties props = YamlUtil . getPropertiesFromYamlResource ( SpringBootUtilTest . class . getResource ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNull(props);
+Assert.assertFalse(props.containsKey("key1"));
+Assert.assertTrue(props.isEmpty());
+Assert.assertEquals(0, props.size());
+Assert.assertNotEquals("value", props.getProperty("key"));
+Assert.assertNull(props.getProperty("key"));
+Assert.assertTrue(props.entrySet().isEmpty());
+Assert.assertTrue(props.keySet().isEmpty());
+Assert.assertTrue(props.values().isEmpty());
+Assert.assertFalse(props.containsKey(null));
+Assert.assertNull(props.get("key"));
+Assert.assertFalse(props.containsValue("value"));
+Assert.assertNull(props.getProperty(null));
+Assert.assertTrue(props.stringPropertyNames().isEmpty());
+Assert.assertNull(props.remove("key"));
+Assert.assertFalse(props.containsKey("key2"));
+Assert.assertNull(props.put("key", "value"));
+Assert.assertFalse(props.equals(null));
+Assert.assertNotEquals(props, new Properties());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(props); ===
+0.919 - Assert.assertNull(props)
+0.708 - Assert.assertNull(props.get("key"))
+0.667 - Assert.assertNull(props.remove("key"))
+0.625 - Assert.assertEquals(0, props.size())
+0.621 - Assert.assertNotEquals(props, new Properties())
+0.618 - Assert.assertNull(props.getProperty(null))
+0.607 - Assert.assertNull(props.getProperty("key"))
+0.607 - Assert.assertNull(props.put("key", "value"))
+0.596 - Assert.assertTrue(props.isEmpty())
+0.549 - Assert.assertFalse(props.equals(null))
+0.522 - Assert.assertNotEquals("value", props.getProperty("key"))
+0.500 - Assert.assertTrue(props.keySet().isEmpty())
+0.500 - Assert.assertTrue(props.values().isEmpty())
+0.500 - Assert.assertFalse(props.containsKey(null))
+0.483 - Assert.assertFalse(props.containsKey("key1"))
+0.483 - Assert.assertTrue(props.entrySet().isEmpty())
+0.483 - Assert.assertFalse(props.containsKey("key2"))
+0.459 - Assert.assertFalse(props.containsValue("value"))
+0.406 - Assert.assertTrue(props.stringPropertyNames().isEmpty())

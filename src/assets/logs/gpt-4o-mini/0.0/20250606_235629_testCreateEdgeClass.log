@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    default OClass createEdgeClass ( String className ) { 
+    return createClass ( className , "STR" ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testCreateEdgeClass ( ) {
+         OClass clazz = db . createEdgeClass ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(clazz);
+assertEquals("STR", clazz.getName());
+assertTrue(clazz.isEdgeClass());
+assertEquals(1, db.getClasses().size());
+assertTrue(db.getClasses().contains(clazz));
+assertEquals("STR", clazz.getSuperClassName());
+assertNotNull(clazz.getProperties());
+assertTrue(clazz.getProperties().isEmpty());
+assertEquals(0, clazz.getPropertyCount());
+assertTrue(clazz.getClusterIds().isEmpty());
+assertEquals(0, clazz.getClusterIds().size());
+assertFalse(clazz.isAbstract());
+assertFalse(clazz.isSubClass());
+assertEquals("STR", clazz.getDefaultClusterId());
+assertNotNull(clazz.getSchema());
+assertEquals(db, clazz.getDatabase());
+assertTrue(clazz.getIndexes().isEmpty());
+assertEquals(0, clazz.getIndexCount());
+assertNotNull(clazz.getMetadata());
+assertTrue(clazz.getMetadata().isEmpty());
+assertEquals(0, clazz.getMetadata().size());
+assertFalse(clazz.isPolymorphic());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(clazz); ===
+0.833 - ```java
+assertNotNull(clazz)
+0.769 - assertNotNull(clazz.getSchema())
+0.741 - assertNotNull(clazz.getMetadata())
+0.714 - assertNotNull(clazz.getProperties())
+0.549 - assertTrue(clazz.isEdgeClass())
+0.549 - assertFalse(clazz.isAbstract())
+0.549 - assertFalse(clazz.isSubClass())
+0.545 - assertEquals("STR", clazz.getName())
+0.536 - assertEquals(db, clazz.getDatabase())
+0.526 - assertEquals(0, clazz.getIndexCount())
+0.519 - assertFalse(clazz.isPolymorphic())
+0.500 - assertEquals(0, clazz.getPropertyCount())
+0.484 - assertEquals(0, clazz.getMetadata().size())
+0.476 - assertTrue(db.getClasses().contains(clazz))
+0.469 - assertEquals(0, clazz.getClusterIds().size())
+0.467 - assertTrue(clazz.getIndexes().isEmpty())
+0.462 - assertEquals("STR", clazz.getSuperClassName())
+0.459 - assertTrue(clazz.getMetadata().isEmpty())
+0.448 - assertEquals("STR", clazz.getDefaultClusterId())
+0.444 - assertTrue(clazz.getProperties().isEmpty())
+0.444 - assertTrue(clazz.getClusterIds().isEmpty())
+0.379 - assertEquals(1, db.getClasses().size())
+0.000 - ```

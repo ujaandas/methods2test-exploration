@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Circle {
+    @Override
+     public Properties getEnvironment ( ) { 
+     Properties environment = new Properties ( ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BUILD_NUMBER ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BRANCH ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_COMMIT ) ) ; 
+     return environment ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class CircleTest {
+    @Test
+     public void testGetEnvironment ( ) {
+         Properties properties = new Circle ( env ( ) ) . getEnvironment ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("value1", properties.getProperty("STR"));
+assertNotNull(properties.getProperty("STR"));
+assertTrue(properties.containsKey("STR"));
+assertFalse(properties.isEmpty());
+assertEquals("value2", properties.getProperty("STR"));
+assertNotEquals("value3", properties.getProperty("STR"));
+assertTrue(properties.size() > 0);
+assertNotNull(properties.get("STR"));
+assertTrue(properties.containsValue("value1"));
+assertFalse(properties.containsKey("INVALID_KEY"));
+assertNull(properties.getProperty("INVALID_KEY"));
+assertTrue(properties.containsKey("STR"));
+assertEquals("value1", properties.get("STR"));
+assertTrue(properties.containsValue("value2"));
+assertFalse(properties.containsKey("INVALID_KEY"));
+assertNull(properties.getProperty("INVALID_KEY"));
+assertTrue(properties.containsKey("STR"));
+assertEquals("value3", properties.getProperty("STR"));
+assertTrue(properties.containsValue("value3"));
+assertFalse(properties.containsKey("INVALID_KEY"));
+assertNull(properties.getProperty("INVALID_KEY"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,properties.size()); ===
+0.812 - assertTrue(properties.size() > 0)
+0.758 - assertFalse(properties.isEmpty())
+0.753 - assertEquals("value1", properties.get("STR"))
+0.706 - assertEquals("value3", properties.getProperty("STR"))
+0.696 - assertNotNull(properties.get("STR"))
+0.682 - assertEquals("value1", properties.getProperty("STR"))
+0.682 - assertEquals("value2", properties.getProperty("STR"))
+0.682 - assertNotEquals("value3", properties.getProperty("STR"))
+0.649 - assertTrue(properties.containsKey("STR"))
+0.649 - assertTrue(properties.containsKey("STR"))
+0.649 - assertTrue(properties.containsKey("STR"))
+0.627 - assertFalse(properties.containsKey("INVALID_KEY"))
+0.627 - assertFalse(properties.containsKey("INVALID_KEY"))
+0.627 - assertFalse(properties.containsKey("INVALID_KEY"))
+0.623 - assertNotNull(properties.getProperty("STR"))
+0.608 - assertTrue(properties.containsValue("value1"))
+0.608 - assertTrue(properties.containsValue("value2"))
+0.608 - assertTrue(properties.containsValue("value3"))
+0.585 - assertNull(properties.getProperty("INVALID_KEY"))
+0.585 - assertNull(properties.getProperty("INVALID_KEY"))
+0.585 - assertNull(properties.getProperty("INVALID_KEY"))

@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamService {
+    public TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) { 
+    Date tag1Date = extractDate ( tag1 ) ; 
+    Date tag2Date = extractDate ( tag2 ) ; 
+    if ( tag1Date == null ) { 
+    return tag2 ; 
+    } if ( tag2Date == null ) { 
+    return tag1 ; 
+    } return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamServiceTest {
+    @Test
+     public void should_return_newer_tag ( ) throws Exception {
+         ImageStreamService service = new ImageStreamService ( client , log ) ; 
+         TagEvent oldTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent latestTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(latestTag, resultedTag);
+Assert.assertNotEquals(oldTag, resultedTag);
+Assert.assertTrue(resultedTag.getDate() != null);
+Assert.assertTrue(resultedTag.getAuthor() == null);
+Assert.assertTrue(resultedTag.getMessage() == null);
+Assert.assertTrue(resultedTag.getCommitId() == null);
+Assert.assertTrue(resultedTag.getBuildId() == null);
+Assert.assertTrue(resultedTag.getBuildUrl() == null);
+Assert.assertTrue(resultedTag.getBuildStatus() == null);
+Assert.assertTrue(resultedTag.getBuildTimestamp() == null);
+Assert.assertTrue(resultedTag.getBuildDuration() == null);
+Assert.assertTrue(resultedTag.getBuildLog() == null);
+Assert.assertTrue(resultedTag.getBuildConfig() == null);
+Assert.assertTrue(resultedTag.getBuildVersion() == null);
+Assert.assertTrue(resultedTag.getBuildLabels() == null);
+Assert.assertTrue(resultedTag.getBuildAnnotations() == null);
+Assert.assertTrue(resultedTag.getBuildPodName() == null);
+Assert.assertTrue(resultedTag.getBuildPodNamespace() == null);
+Assert.assertTrue(resultedTag.getBuildPodIP() == null);
+Assert.assertTrue(resultedTag.getBuildPodHost() == null);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(latestTag,resultedTag); ===
+1.000 - Assert.assertEquals(latestTag, resultedTag)
+0.857 - Assert.assertNotEquals(oldTag, resultedTag)
+0.541 - Assert.assertTrue(resultedTag.getDate() != null)
+0.526 - Assert.assertTrue(resultedTag.getAuthor() == null)
+0.519 - Assert.assertTrue(resultedTag.getMessage() == null)
+0.519 - Assert.assertTrue(resultedTag.getBuildId() == null)
+0.513 - Assert.assertTrue(resultedTag.getCommitId() == null)
+0.513 - Assert.assertTrue(resultedTag.getBuildUrl() == null)
+0.513 - Assert.assertTrue(resultedTag.getBuildLog() == null)
+0.500 - Assert.assertTrue(resultedTag.getBuildPodIP() == null)
+0.494 - Assert.assertTrue(resultedTag.getBuildStatus() == null)
+0.494 - Assert.assertTrue(resultedTag.getBuildConfig() == null)
+0.494 - Assert.assertTrue(resultedTag.getBuildLabels() == null)
+0.488 - Assert.assertTrue(resultedTag.getBuildVersion() == null)
+0.488 - Assert.assertTrue(resultedTag.getBuildPodName() == null)
+0.488 - Assert.assertTrue(resultedTag.getBuildPodHost() == null)
+0.482 - Assert.assertTrue(resultedTag.getBuildDuration() == null)
+0.476 - Assert.assertTrue(resultedTag.getBuildTimestamp() == null)
+0.465 - Assert.assertTrue(resultedTag.getBuildAnnotations() == null)
+0.460 - Assert.assertTrue(resultedTag.getBuildPodNamespace() == null)

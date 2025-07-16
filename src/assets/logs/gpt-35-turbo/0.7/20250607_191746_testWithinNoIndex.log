@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithin {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithinTest {
+    @Test
+     public void testWithinNoIndex ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" + "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("value1", next.field("fieldName1"));
+Assert.assertTrue(next.field("fieldName2") instanceof ORID);
+Assert.assertEquals("value3", next.field("fieldName3"));
+Assert.assertNotNull(next.field("fieldName4"));
+Assert.assertNull(next.field("fieldName5"));
+Assert.assertNotEquals("value6", next.field("fieldName6"));
+Assert.assertFalse(next.field("fieldName7") instanceof ODocument);
+Assert.assertTrue(next.field("fieldName8") instanceof String);
+Assert.assertEquals("value9", next.field("fieldName9"));
+Assert.assertNotEquals("value10", next.field("fieldName10"));
+Assert.assertTrue(next.field("fieldName11") instanceof Integer);
+Assert.assertEquals("value12", next.field("fieldName12"));
+Assert.assertNull(next.field("fieldName13"));
+Assert.assertFalse(next.field("fieldName14") instanceof ORID);
+Assert.assertTrue(next.field("fieldName15") instanceof Float);
+Assert.assertNotEquals("value16", next.field("fieldName16"));
+Assert.assertTrue(next.field("fieldName17") instanceof Boolean);
+Assert.assertNotNull(next.field("fieldName18"));
+Assert.assertEquals("value19", next.field("fieldName19"));
+Assert.assertNotEquals("value20", next.field("fieldName20"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.675 - Assert.assertEquals("value1", next.field("fieldName1"))
+0.675 - Assert.assertEquals("value3", next.field("fieldName3"))
+0.675 - Assert.assertEquals("value9", next.field("fieldName9"))
+0.667 - Assert.assertNull(next.field("fieldName5"))
+0.659 - Assert.assertEquals("value12", next.field("fieldName12"))
+0.659 - Assert.assertEquals("value19", next.field("fieldName19"))
+0.658 - Assert.assertNull(next.field("fieldName13"))
+0.651 - Assert.assertNotEquals("value6", next.field("fieldName6"))
+0.640 - Assert.assertNotNull(next.field("fieldName4"))
+0.636 - Assert.assertNotEquals("value10", next.field("fieldName10"))
+0.636 - Assert.assertNotEquals("value16", next.field("fieldName16"))
+0.636 - Assert.assertNotEquals("value20", next.field("fieldName20"))
+0.632 - Assert.assertNotNull(next.field("fieldName18"))
+0.614 - Assert.assertFalse(next.field("fieldName14") instanceof ORID)
+0.609 - Assert.assertFalse(next.field("fieldName7") instanceof ODocument)
+0.581 - Assert.assertTrue(next.field("fieldName2") instanceof ORID)
+0.568 - Assert.assertTrue(next.field("fieldName8") instanceof String)
+0.568 - Assert.assertTrue(next.field("fieldName15") instanceof Float)
+0.556 - Assert.assertTrue(next.field("fieldName11") instanceof Integer)
+0.556 - Assert.assertTrue(next.field("fieldName17") instanceof Boolean)

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public boolean hasCycles ( ) { 
+    return ! minimalCycles ( ) . isEmpty ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testTree ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( "STR" , "STR" ) , edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(graph);
+assertTrue(graph.hasCycles() == false);
+assertEquals(0, graph.getNumberOfEdges());
+assertEquals(1, graph.getNumberOfVertices());
+assertTrue(graph.containsVertex("STR"));
+assertFalse(graph.containsVertex("NON_EXISTENT"));
+assertTrue(graph.getAdjacentVertices("STR").isEmpty());
+assertTrue(graph.getEdges().isEmpty());
+assertEquals("STR", graph.getVertex("STR"));
+assertTrue(graph.getInDegree("STR") == 0);
+assertTrue(graph.getOutDegree("STR") == 2);
+assertTrue(graph.getEdgesFrom("STR").size() == 2);
+assertTrue(graph.getEdgesTo("STR").isEmpty());
+assertTrue(graph.getVertices().contains("STR"));
+assertFalse(graph.getVertices().contains("NON_EXISTENT"));
+assertTrue(graph.isEmpty() == false);
+assertTrue(graph.hasEdge("STR", "STR"));
+assertFalse(graph.hasEdge("NON_EXISTENT", "STR"));
+assertTrue(graph.getEdge("STR", "STR") != null);
+assertTrue(graph.getEdge("STR", "NON_EXISTENT") == null);
+assertEquals(2, graph.getSelfLoops("STR").size());
+assertTrue(graph.getMinimalCycles().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(graph.hasCycles()); ===
+0.788 - assertTrue(graph.hasCycles() == false)
+0.641 - assertFalse(graph.hasEdge("NON_EXISTENT", "STR"))
+0.632 - assertTrue(graph.getMinimalCycles().isEmpty())
+0.618 - assertTrue(graph.hasEdge("STR", "STR"))
+0.608 - assertFalse(graph.containsVertex("NON_EXISTENT"))
+0.603 - assertEquals(1, graph.getNumberOfVertices())
+0.600 - assertEquals(0, graph.getNumberOfEdges())
+0.594 - assertTrue(graph.isEmpty() == false)
+0.580 - assertTrue(graph.containsVertex("STR"))
+0.559 - assertTrue(graph.getEdges().isEmpty())
+0.556 - assertEquals("STR", graph.getVertex("STR"))
+0.552 - assertFalse(graph.getVertices().contains("NON_EXISTENT"))
+0.538 - assertEquals(2, graph.getSelfLoops("STR").size())
+0.522 - assertTrue(graph.getInDegree("STR") == 0)
+0.519 - assertTrue(graph.getVertices().contains("STR"))
+0.514 - assertTrue(graph.getOutDegree("STR") == 2)
+0.507 - assertTrue(graph.getEdgesTo("STR").isEmpty())
+0.500 - assertTrue(graph.getAdjacentVertices("STR").isEmpty())
+0.494 - assertTrue(graph.getEdgesFrom("STR").size() == 2)
+0.483 - ```java
+assertNotNull(graph)
+0.432 - assertTrue(graph.getEdge("STR", "STR") != null)
+0.386 - assertTrue(graph.getEdge("STR", "NON_EXISTENT") == null)
+0.000 - ```

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecutionTest {
+    @Test
+     public void testBlob ( ) {
+         String clusterName = "STR" ; 
+         OResultSet result = db . command ( "STR" + clusterName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(result);
+Assert.assertTrue(result.hasNext());
+Assert.assertEquals(clusterName, result.next().getProperty("name"));
+Assert.assertEquals(1, result.next().getProperty("id"));
+Assert.assertTrue(result.next().getProperty("isAbstract"));
+Assert.assertFalse(result.next().getProperty("isSystem"));
+Assert.assertEquals("STR", result.next().getProperty("prefix"));
+Assert.assertNotEquals(0, result.next().getProperty("recordCount"));
+Assert.assertTrue(result.next().getProperty("isClustered"));
+Assert.assertEquals("default", result.next().getProperty("defaultCluster"));
+Assert.assertTrue(result.next().getProperty("isShared"));
+Assert.assertFalse(result.next().getProperty("isTemporary"));
+Assert.assertEquals("STR", result.next().getProperty("type"));
+Assert.assertNotNull(result.next().getProperty("createdAt"));
+Assert.assertNotNull(result.next().getProperty("updatedAt"));
+Assert.assertTrue(result.next().getProperty("isActive"));
+Assert.assertEquals("user", result.next().getProperty("owner"));
+Assert.assertTrue(result.next().getProperty("isIndexed"));
+Assert.assertEquals(5, result.next().getProperty("maxSize"));
+Assert.assertNotEquals("", result.next().getProperty("description"));
+Assert.assertTrue(result.next().getProperty("isVisible"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(clusterName)>0); ===
+0.500 - Assert.assertTrue(result.next().getProperty("isClustered"))
+0.469 - Assert.assertTrue(result.next().getProperty("isIndexed"))
+0.465 - Assert.assertTrue(result.next().getProperty("isAbstract"))
+0.447 - Assert.assertTrue(result.hasNext())
+0.433 - Assert.assertTrue(result.next().getProperty("isActive"))
+0.430 - Assert.assertEquals(clusterName, result.next().getProperty("name"))
+0.429 - Assert.assertTrue(result.next().getProperty("isVisible"))
+0.427 - Assert.assertEquals("user", result.next().getProperty("owner"))
+0.420 - Assert.assertEquals(5, result.next().getProperty("maxSize"))
+0.416 - Assert.assertEquals("STR", result.next().getProperty("type"))
+0.416 - Assert.assertNotNull(result.next().getProperty("updatedAt"))
+0.412 - Assert.assertTrue(result.next().getProperty("isShared"))
+0.408 - Assert.assertEquals("STR", result.next().getProperty("prefix"))
+0.407 - Assert.assertNotEquals("", result.next().getProperty("description"))
+0.400 - Assert.assertEquals(1, result.next().getProperty("id"))
+0.400 - Assert.assertEquals("default", result.next().getProperty("defaultCluster"))
+0.396 - Assert.assertNotNull(result.next().getProperty("createdAt"))
+0.393 - Assert.assertNotEquals(0, result.next().getProperty("recordCount"))
+0.376 - Assert.assertFalse(result.next().getProperty("isTemporary"))
+0.367 - Assert.assertFalse(result.next().getProperty("isSystem"))
+0.260 - ```java
+Assert.assertNotNull(result)
+0.000 - ```

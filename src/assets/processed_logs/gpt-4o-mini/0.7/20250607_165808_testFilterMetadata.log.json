@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nfinal List vector = new ArrayList ( ) ;\nvector . add ( \"STR\" ) ;\nvector . add ( \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadata2fieldParamName , vector ) ;\nprepareIndexerBolt ( config ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertEquals(3, fields.size());\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertTrue(fields.containsKey(\"anotherKey\"));\nassertEquals(\"expectedValue\", fields.get(\"anotherKey\"));\nassertTrue(fields.containsKey(\"yetAnotherKey\"));\nassertEquals(\"expectedValue2\", fields.get(\"yetAnotherKey\"));\nassertFalse(fields.containsKey(\"nonExistentKey\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"differentValue\", fields.get(\"STR\"));\nassertTrue(fields.containsValue(\"STR\"));\nassertFalse(fields.isEmpty());\nassertTrue(fields.keySet().contains(\"STR\"));\nassertTrue(fields.values().contains(\"expectedValue\"));\nassertTrue(fields.values().contains(\"expectedValue2\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"wrongValue\", fields.get(\"STR\"));\nassertTrue(fields.entrySet().size() > 0);\nassertTrue(fields.keySet().size() >= 1);\nassertFalse(fields.containsKey(\"invalidKey\"));\n```\n====================\n\n",
+    "scores": [
+        0.47,
+        0.47,
+        0.47,
+        0.449,
+        0.439,
+        0.421,
+        0.403,
+        0.394,
+        0.384,
+        0.376,
+        0.371,
+        0.366,
+        0.351,
+        0.349,
+        0.333,
+        0.333,
+        0.329,
+        0.324,
+        0.317,
+        0.313,
+        0.258,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(\"STR\",newString[]{\"STR\",\"STR\",\"STR\"},newTreeSet<>(fields.keySet()).toArray());"
+}

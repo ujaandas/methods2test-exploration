@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class Config {\npublic String getString ( String key ) {\nreturn getIn ( normalize ( key ) , false ) . getString ( ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class ConfigTest {\n@Test\npublic void gets_and_sets_value ( ) {\nConfig config = new Config ( ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", config.getString(\"STR\"));\nassertNotEquals(\"STR\", config.getString(\"OTHER\"));\nassertNull(config.getString(\"NULL\"));\nassertNotNull(config.getString(\"STR\"));\nassertTrue(config.getString(\"BOOL\").equals(\"true\") || config.getString(\"BOOL\").equals(\"false\"));\nassertFalse(config.getString(\"BOOL\").equals(\"other\"));\nassertSame(config.getString(\"STR\"), config.getString(\"STR\"));\nassertNotSame(config.getString(\"STR\"), config.getString(\"OTHER\"));\nassertTrue(config.getString(\"INT\").matches(\"\\\\d+\"));\nassertFalse(config.getString(\"INT\").matches(\"\\\\D+\"));\nassertTrue(config.getString(\"FLOAT\").matches(\"\\\\d+\\\\.\\\\d+\"));\nassertFalse(config.getString(\"FLOAT\").matches(\"\\\\D+\"));\nassertTrue(config.getString(\"LIST\").startsWith(\"[\") && config.getString(\"LIST\").endsWith(\"]\"));\nassertTrue(config.getString(\"MAP\").startsWith(\"{\") && config.getString(\"MAP\").endsWith(\"}\"));\nassertTrue(config.getString(\"EMPTY\").isEmpty());\nassertFalse(config.getString(\"NOT_EMPTY\").isEmpty());\nassertTrue(config.getString(\"UPPERCASE\").equals(config.getString(\"UPPERCASE\").toUpperCase()));\nassertTrue(config.getString(\"LOWERCASE\").equals(config.getString(\"LOWERCASE\").toLowerCase()));\nassertTrue(config.getString(\"TRIM\").equals(config.getString(\"TRIM\").trim()));\nassertFalse(config.getString(\"WHITESPACE\").contains(\" \"));\nassertTrue(config.getString(\"LENGTH\").length() > 0);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.923,
+        0.815,
+        0.759,
+        0.745,
+        0.674,
+        0.674,
+        0.667,
+        0.66,
+        0.652,
+        0.646,
+        0.646,
+        0.638,
+        0.598,
+        0.583,
+        0.521,
+        0.459,
+        0.451,
+        0.441,
+        0.441,
+        0.441
+    ],
+    "ground_truth": "assertEquals(\"STR\",config.getString(\"STR\"));"
+}

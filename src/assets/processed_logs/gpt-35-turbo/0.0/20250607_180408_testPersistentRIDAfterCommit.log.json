@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class Blueprints {\nboolean isPersistent ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class BlueprintsTest {\n@Test\npublic void testPersistentRIDAfterCommit ( ) {\nVertex v = graph . addVertex ( null ) ;\nv . setProperty ( \"STR\" , \"STR\" ) ;\ngraph . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(v);\nassertTrue(v.getId() instanceof ORID);\nassertTrue(v.getProperty(\"STR\").equals(\"STR\"));\nassertTrue(v.getPropertyKeys().contains(\"STR\"));\nassertTrue(graph.getVertices().contains(v));\nassertTrue(graph.getVertices().size() == 1);\nassertTrue(graph.getEdges().isEmpty());\nassertTrue(graph.getVertex(v.getId()).equals(v));\nassertTrue(graph.getVertex(v.getId()).getProperty(\"STR\").equals(\"STR\"));\nassertTrue(graph.getVertex(v.getId()).getPropertyKeys().contains(\"STR\"));\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT).isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN).isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH).isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, \"EDGE_LABEL\").isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, \"EDGE_LABEL\").isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, \"EDGE_LABEL\").isEmpty());\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, \"EDGE_LABEL\").size() == 0);\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, \"EDGE_LABEL\").size() == 0);\nassertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, \"EDGE_LABEL\").size() == 0);\n====================\n\n",
+    "scores": [
+        0.633,
+        0.61,
+        0.587,
+        0.565,
+        0.552,
+        0.529,
+        0.527,
+        0.522,
+        0.504,
+        0.5,
+        0.496,
+        0.484,
+        0.481,
+        0.477,
+        0.453,
+        0.45,
+        0.446,
+        0.422,
+        0.3
+    ],
+    "ground_truth": "Assert.assertTrue(((ORID)v.getId()).isPersistent());"
+}

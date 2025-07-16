@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilter {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilterTest {
+    @Test
+     public void testCustomDepth ( ) throws MalformedURLException {
+         URLFilter filter = createFilter ( "STR" , 1 ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( MetadataTransfer . maxDepthKeyName , "STR" ) ; 
+         metadata . setValue ( MetadataTransfer . depthKeyName , "STR" ) ; 
+         String filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertTrue(filterResult instanceof String);
+assertEquals("Expected Filter Result", filterResult);
+assertFalse(filterResult.isEmpty());
+assertFalse(filterResult.contains("Invalid URL"));
+assertTrue(filterResult.startsWith("http"));
+assertTrue(filterResult.endsWith(".com"));
+assertEquals("Filtered URL should match expected format", "http://expected.com", filterResult);
+assertTrue(filterResult.contains("depth"));
+assertFalse(filterResult.contains("maxDepth"));
+assertEquals("Depth should be 1", 1, Integer.parseInt(metadata.getValue(MetadataTransfer.depthKeyName)));
+assertNotEquals("URL should not be the same", url.toExternalForm(), filterResult);
+assertTrue("Filter result should not be null", filterResult != null);
+assertFalse("Filter result should not equal original URL", filterResult.equals(url.toExternalForm()));
+assertTrue("Filtered result should be a valid URL", isValidURL(filterResult));
+assertTrue("Filter result should contain 'depth'", filterResult.contains("depth"));
+assertFalse("Filter result should not contain 'error'", filterResult.contains("error"));
+assertTrue("Filter result should have length greater than 10", filterResult.length() > 10);
+assertTrue("Filtered URL should be accessible", isAccessible(filterResult));
+assertEquals("Filter should not exceed max depth", 1, getDepth(filterResult));
+assertNotSame("Filter result should be a new instance", filterResult, url.toExternalForm());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.777 - assertNotEquals("URL should not be the same", url.toExternalForm(), filterResult)
+0.688 - assertEquals("Expected Filter Result", filterResult)
+0.564 - assertEquals("Filter should not exceed max depth", 1, getDepth(filterResult))
+0.561 - assertFalse(filterResult.isEmpty())
+0.537 - ```java
+assertNotNull(filterResult)
+0.522 - assertEquals("Filtered URL should match expected format", "http://expected.com", filterResult)
+0.505 - assertTrue("Filter result should not be null", filterResult != null)
+0.500 - assertFalse("Filter result should not contain 'error'", filterResult.contains("error"))
+0.495 - assertFalse(filterResult.contains("maxDepth"))
+0.484 - assertFalse(filterResult.contains("Invalid URL"))
+0.483 - assertTrue(filterResult instanceof String)
+0.477 - assertTrue(filterResult.endsWith(".com"))
+0.477 - assertNotSame("Filter result should be a new instance", filterResult, url.toExternalForm())
+0.472 - assertTrue(filterResult.contains("depth"))
+0.468 - assertFalse("Filter result should not equal original URL", filterResult.equals(url.toExternalForm()))
+0.467 - assertTrue(filterResult.startsWith("http"))
+0.462 - assertTrue("Filtered result should be a valid URL", isValidURL(filterResult))
+0.462 - assertTrue("Filtered URL should be accessible", isAccessible(filterResult))
+0.441 - assertTrue("Filter result should have length greater than 10", filterResult.length() > 10)
+0.435 - assertTrue("Filter result should contain 'depth'", filterResult.contains("depth"))
+0.384 - assertEquals("Depth should be 1", 1, Integer.parseInt(metadata.getValue(MetadataTransfer.depthKeyName)))
+0.000 - ```

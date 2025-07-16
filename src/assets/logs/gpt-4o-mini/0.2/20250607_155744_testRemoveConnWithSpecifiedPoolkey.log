@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testRemoveConnWithSpecifiedPoolkey ( ) {
+         Connection conn1 = getAConn ( ) ; 
+         conn1 . addPoolKey ( "STR" ) ; 
+         Connection conn2 = getAConn ( ) ; 
+         conn2 . addPoolKey ( "STR" ) ; 
+         cm . add ( conn1 ) ; 
+         cm . add ( conn2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(2, cm.count("STR"));
+assertEquals(0, cm.count("INVALID_KEY"));
+assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).contains(conn1));
+assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).contains(conn2));
+assertFalse(cm.getConnectionPool(cm.connTasks.get("STR")).isEmpty());
+assertEquals(2, cm.getConnectionPool(cm.connTasks.get("STR")).size());
+assertNotNull(cm.getConnectionPool(cm.connTasks.get("STR")));
+assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).stream().anyMatch(c -> c.equals(conn1)));
+assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).stream().anyMatch(c -> c.equals(conn2)));
+assertEquals(0, cm.count(null));
+assertEquals(0, cm.count(""));
+assertEquals(0, cm.count(" "));
+assertEquals(0, cm.count("NON_EXISTENT_POOL"));
+assertNotNull(cm.connTasks.get("STR"));
+assertTrue(cm.connTasks.containsKey("STR"));
+assertEquals(2, cm.connTasks.get("STR").size());
+assertTrue(cm.connTasks.get("STR").contains(conn1));
+assertTrue(cm.connTasks.get("STR").contains(conn2));
+assertEquals(2, cm.getConnectionPool(cm.connTasks.get("STR")).size());
+assertFalse(cm.getConnectionPool(cm.connTasks.get("STR")).isEmpty());
+assertEquals(2, cm.count("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,cm.count(poolKey)); ===
+0.825 - assertEquals(0, cm.count(null))
+0.820 - assertEquals(0, cm.count(""))
+0.820 - assertEquals(0, cm.count(" "))
+0.812 - assertEquals(2, cm.count("STR"))
+0.722 - ```java
+assertEquals(2, cm.count("STR"))
+0.722 - assertEquals(0, cm.count("INVALID_KEY"))
+0.658 - assertEquals(2, cm.connTasks.get("STR").size())
+0.641 - assertEquals(0, cm.count("NON_EXISTENT_POOL"))
+0.535 - assertNotNull(cm.connTasks.get("STR"))
+0.535 - assertEquals(2, cm.getConnectionPool(cm.connTasks.get("STR")).size())
+0.535 - assertEquals(2, cm.getConnectionPool(cm.connTasks.get("STR")).size())
+0.526 - assertTrue(cm.connTasks.containsKey("STR"))
+0.452 - assertTrue(cm.connTasks.get("STR").contains(conn1))
+0.452 - assertTrue(cm.connTasks.get("STR").contains(conn2))
+0.409 - assertNotNull(cm.getConnectionPool(cm.connTasks.get("STR")))
+0.396 - assertFalse(cm.getConnectionPool(cm.connTasks.get("STR")).isEmpty())
+0.396 - assertFalse(cm.getConnectionPool(cm.connTasks.get("STR")).isEmpty())
+0.377 - assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).contains(conn1))
+0.377 - assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).contains(conn2))
+0.266 - assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).stream().anyMatch(c -> c.equals(conn1)))
+0.266 - assertTrue(cm.getConnectionPool(cm.connTasks.get("STR")).stream().anyMatch(c -> c.equals(conn2)))
+0.000 - ```

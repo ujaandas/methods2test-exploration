@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializer {
+    @Override
+     public Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     return this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializerTest {
+    @Test
+     public void testNormalCustomSerializer ( ) throws Exception {
+         NormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ; 
+         NormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ; 
+         CustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ; 
+         CustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ; 
+         RequestBody body = new RequestBody ( 1 , "STR" ) ; 
+         String ret = ( String ) client . invokeSync ( addr , body , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, body.getId());
+assertEquals("STR", body.getContent());
+assertNotNull(ret);
+assertTrue(ret instanceof String);
+assertEquals("Response", ret);
+assertNotNull(s1);
+assertNotNull(s2);
+assertNotNull(CustomSerializerManager.getCustomSerializer(RequestBody.class.getName()));
+assertNotNull(CustomSerializerManager.getCustomSerializer(String.class.getName()));
+assertEquals(s1, CustomSerializerManager.getCustomSerializer(RequestBody.class.getName()));
+assertEquals(s2, CustomSerializerManager.getCustomSerializer(String.class.getName()));
+assertEquals(1000, timeoutMillis);
+assertEquals(address, addr);
+assertNotNull(client);
+assertTrue(client instanceof ClassCustomSerializer);
+assertNotNull(client.invokeSync(addr, body, 1000));
+assertEquals(ret, client.invokeSync(addr, body, 1000));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+"STR",ret); ===
+0.494 - assertEquals("Response", ret)
+0.449 - assertEquals(1, body.getId())
+0.449 - assertEquals("STR", body.getContent())
+0.414 - assertEquals(address, addr)
+0.375 - assertEquals(ret, client.invokeSync(addr, body, 1000))
+0.373 - assertEquals(s1, CustomSerializerManager.getCustomSerializer(RequestBody.class.getName()))
+0.366 - assertEquals(1000, timeoutMillis)
+0.351 - assertNotNull(CustomSerializerManager.getCustomSerializer(RequestBody.class.getName()))
+0.329 - assertNotNull(ret)
+0.293 - assertNotNull(client)
+0.290 - assertEquals(s2, CustomSerializerManager.getCustomSerializer(String.class.getName()))
+0.261 - assertTrue(ret instanceof String)
+0.256 - assertNotNull(s1)
+0.256 - assertNotNull(s2)
+0.252 - assertNotNull(CustomSerializerManager.getCustomSerializer(String.class.getName()))
+0.239 - assertNotNull(client.invokeSync(addr, body, 1000))
+0.218 - assertTrue(client instanceof ClassCustomSerializer)

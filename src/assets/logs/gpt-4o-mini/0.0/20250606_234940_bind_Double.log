@@ -1,0 +1,127 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_Numerical {
+    static boolean bind0 ( Object object , String property , String value ) { 
+    value = value . trim ( ) ; 
+    String [ ] path = property . split ( "STR" ) ; 
+    object = findTargetObject ( object , property , path ) ; 
+    if ( object == null ) { 
+    return false ; 
+    } Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ; 
+    if ( field == null || isProbeField ( field ) ) { 
+    return false ; 
+    } try { 
+    setField ( field , object , value ) ; 
+    return true ; 
+    } catch ( Exception e ) { 
+    throw new BindException ( format ( "STR" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_NumericalTest {
+    @Test
+     public void bind_Double ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Object testObject = new TestClass();
+String property = "testProperty";
+String value = "123.45";
+
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(123.45, testObject.getTestProperty(), 0.001);
+
+value = "  67.89  ";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(67.89, testObject.getTestProperty(), 0.001);
+
+value = "0.0";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(0.0, testObject.getTestProperty(), 0.001);
+
+value = "-45.67";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(-45.67, testObject.getTestProperty(), 0.001);
+
+value = "NaN";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertTrue(Double.isNaN(testObject.getTestProperty()));
+
+value = "Infinity";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(Double.POSITIVE_INFINITY, testObject.getTestProperty(), 0.001);
+
+value = "-Infinity";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(Double.NEGATIVE_INFINITY, testObject.getTestProperty(), 0.001);
+
+value = "abc";
+assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+
+value = "";
+assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+
+value = "  ";
+assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+
+value = "123.456e2";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(12345.6, testObject.getTestProperty(), 0.001);
+
+value = "1.23456789E-10";
+assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value));
+assertEquals(1.23456789E-10, testObject.getTestProperty(), 0.001);
+
+value = "1.797693134862
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(bind0(testObject,"STR","STR")); ===
+0.568 - assertTrue(Double.isNaN(testObject.getTestProperty()))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.500 - assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.452 - assertEquals(0.0, testObject.getTestProperty(), 0.001)
+0.448 - assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.448 - assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.448 - assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(testObject, property, value))
+0.421 - assertEquals(67.89, testObject.getTestProperty(), 0.001)
+0.417 - assertEquals(123.45, testObject.getTestProperty(), 0.001)
+0.417 - assertEquals(-45.67, testObject.getTestProperty(), 0.001)
+0.412 - assertEquals(12345.6, testObject.getTestProperty(), 0.001)
+0.404 - assertEquals(1.23456789E-10, testObject.getTestProperty(), 0.001)
+0.375 - ```java
+Object testObject = new TestClass()
+0.333 - assertEquals(Double.POSITIVE_INFINITY, testObject.getTestProperty(), 0.001)
+0.333 - assertEquals(Double.NEGATIVE_INFINITY, testObject.getTestProperty(), 0.001)
+0.286 - String property = "testProperty"
+0.246 - value = "Infinity"
+0.241 - value = "-Infinity"
+0.231 - value = "abc"
+0.204 - value = ""
+0.204 - value = "  "
+0.192 - value = "0.0"
+0.192 - value = "NaN"
+0.185 - value = "  67.89  "
+0.182 - value = "-45.67"
+0.172 - value = "123.456e2"
+0.164 - String value = "123.45"
+0.159 - value = "1.23456789E-10"
+0.129 - value = "1.797693134862

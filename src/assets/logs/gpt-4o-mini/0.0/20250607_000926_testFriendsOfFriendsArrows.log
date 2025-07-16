@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testFriendsOfFriendsArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+OResult firstResult = qResult.next();
+assertNotNull(firstResult);
+assertTrue(firstResult.getProperty("friend") instanceof String);
+assertEquals("expectedFriendName", firstResult.getProperty("friend"));
+assertTrue(qResult.hasNext());
+OResult secondResult = qResult.next();
+assertNotNull(secondResult);
+assertTrue(secondResult.getProperty("friend") instanceof String);
+assertEquals("expectedFriendName2", secondResult.getProperty("friend"));
+assertFalse(qResult.hasNext());
+assertEquals(2, qResult.getTotalRecords());
+assertTrue(qResult.getProperty("relationshipType").equals("friend"));
+assertTrue(qResult.getProperty("depth") instanceof Integer);
+assertTrue((Integer) qResult.getProperty("depth") > 1);
+assertTrue(qResult.getProperty("timestamp") instanceof Long);
+assertTrue((Long) qResult.getProperty("timestamp") <= System.currentTimeMillis());
+assertTrue(qResult.getProperty("status").equals("active"));
+assertNotNull(qResult.getProperty("location"));
+assertTrue(qResult.getProperty("location") instanceof String);
+assertTrue(qResult.getProperty("location").length() > 0);
+assertTrue(qResult.getProperty("mutualFriendsCount") instanceof Integer);
+assertTrue((Integer) qResult.getProperty("mutualFriendsCount") >= 0);
+assertTrue(qResult.getProperty("isDirectFriend") instanceof Boolean);
+assertTrue((Boolean) qResult.getProperty("isDirectFriend"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(qResult.hasNext()); ===
+1.000 - assertTrue(qResult.hasNext())
+1.000 - assertTrue(qResult.hasNext())
+0.881 - assertFalse(qResult.hasNext())
+0.600 - assertEquals(2, qResult.getTotalRecords())
+0.575 - assertTrue(qResult.getProperty("status").equals("active"))
+0.558 - assertTrue(qResult.getProperty("depth") instanceof Integer)
+0.554 - assertTrue(qResult.getProperty("location").length() > 0)
+0.552 - assertTrue((Boolean) qResult.getProperty("isDirectFriend"))
+0.550 - assertTrue((Integer) qResult.getProperty("depth") > 1)
+0.548 - OResult firstResult = qResult.next()
+0.545 - assertTrue(qResult.getProperty("location") instanceof String)
+0.542 - ```java
+assertNotNull(qResult)
+0.540 - OResult secondResult = qResult.next()
+0.536 - assertNotNull(secondResult)
+0.533 - assertNotNull(qResult.getProperty("location"))
+0.529 - assertTrue(qResult.getProperty("timestamp") instanceof Long)
+0.515 - assertTrue(qResult.getProperty("relationshipType").equals("friend"))
+0.511 - assertTrue((Integer) qResult.getProperty("mutualFriendsCount") >= 0)
+0.509 - assertNotNull(firstResult)
+0.489 - assertTrue(firstResult.getProperty("friend") instanceof String)
+0.486 - assertTrue((Long) qResult.getProperty("timestamp") <= System.currentTimeMillis())
+0.485 - assertTrue(qResult.getProperty("mutualFriendsCount") instanceof Integer)
+0.484 - assertTrue(secondResult.getProperty("friend") instanceof String)
+0.463 - assertTrue(qResult.getProperty("isDirectFriend") instanceof Boolean)
+0.412 - assertEquals("expectedFriendName", firstResult.getProperty("friend"))
+0.404 - assertEquals("expectedFriendName2", secondResult.getProperty("friend"))
+0.000 - ```

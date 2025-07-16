@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupport {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupportTest {
+    @Test
+     public void testQueryEmbedded ( ) {
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . setProperty ( "STR" , "STR" ) ; 
+         ODocument emb = new ODocument ( ) ; 
+         emb . setProperty ( "STR" , "STR" ) ; 
+         doc . setProperty ( "STR" , emb , OType . EMBEDDED ) ; 
+         session . save ( doc ) ; 
+         OResultSet res = session . query ( "STR" ) ; 
+         OResult item = res . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(item);
+assertEquals("STR", item.getProperty("STR"));
+assertTrue(item instanceof ODocument);
+assertEquals("STR", item.getProperty("STR"));
+assertTrue(item.containsKey("STR"));
+assertEquals(1, item.size());
+assertTrue(item.getProperty("STR") instanceof ODocument);
+ODocument embeddedDoc = (ODocument) item.getProperty("STR");
+assertNotNull(embeddedDoc);
+assertEquals("STR", embeddedDoc.getProperty("STR"));
+assertTrue(embeddedDoc.containsKey("STR"));
+assertEquals(1, embeddedDoc.size());
+assertEquals("STR", embeddedDoc.getProperty("STR"));
+assertTrue(embeddedDoc instanceof ODocument);
+assertNotNull(item.getProperty("STR"));
+assertEquals("STR", item.getProperty("STR"));
+assertNotNull(item.getProperty("STR"));
+assertEquals(embeddedDoc, item.getProperty("STR"));
+assertTrue(item.getProperty("STR") instanceof ODocument);
+assertEquals("STR", embeddedDoc.getProperty("STR"));
+assertEquals("STR", item.getProperty("STR"));
+assertTrue(item.containsKey("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(item.getProperty("STR")); ===
+1.000 - assertNotNull(item.getProperty("STR"))
+1.000 - assertNotNull(item.getProperty("STR"))
+0.815 - assertEquals("STR", item.getProperty("STR"))
+0.815 - assertEquals("STR", item.getProperty("STR"))
+0.815 - assertEquals("STR", item.getProperty("STR"))
+0.815 - assertEquals("STR", item.getProperty("STR"))
+0.713 - assertEquals(embeddedDoc, item.getProperty("STR"))
+0.705 - assertEquals("STR", embeddedDoc.getProperty("STR"))
+0.705 - assertEquals("STR", embeddedDoc.getProperty("STR"))
+0.705 - assertEquals("STR", embeddedDoc.getProperty("STR"))
+0.696 - assertTrue(item.getProperty("STR") instanceof ODocument)
+0.696 - assertTrue(item.getProperty("STR") instanceof ODocument)
+0.630 - assertTrue(item.containsKey("STR"))
+0.630 - assertTrue(item.containsKey("STR"))
+0.594 - assertNotNull(embeddedDoc)
+0.585 - ```java
+assertNotNull(item)
+0.581 - ODocument embeddedDoc = (ODocument) item.getProperty("STR")
+0.554 - assertEquals(1, item.size())
+0.525 - assertTrue(embeddedDoc.containsKey("STR"))
+0.444 - assertEquals(1, embeddedDoc.size())
+0.411 - assertTrue(item instanceof ODocument)
+0.400 - assertTrue(embeddedDoc instanceof ODocument)
+0.000 - ```

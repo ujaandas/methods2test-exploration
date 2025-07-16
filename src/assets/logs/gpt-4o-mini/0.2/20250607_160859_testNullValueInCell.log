@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testNullValueInCell ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(expectedSize, res.size());
+assertTrue(res.stream().allMatch(doc -> doc.containsField("expectedField")));
+assertTrue(res.stream().anyMatch(doc -> doc.field("expectedField").equals(expectedValue)));
+assertTrue(res.stream().noneMatch(doc -> doc.field("expectedField") == null));
+assertEquals(expectedValue1, res.get(0).field("field1"));
+assertEquals(expectedValue2, res.get(1).field("field2"));
+assertTrue(res.get(2).field("field3") instanceof String);
+assertEquals(expectedDate, res.get(3).field("dateField"));
+assertTrue(res.get(4).field("numericField") instanceof Number);
+assertEquals(expectedBoolean, res.get(5).field("booleanField"));
+assertTrue(res.stream().allMatch(doc -> doc.field("listField") instanceof List));
+assertEquals(expectedListSize, res.get(6).field("listField").size());
+assertTrue(res.stream().allMatch(doc -> doc.field("mapField") instanceof Map));
+assertEquals(expectedMapSize, res.get(7).field("mapField").size());
+assertTrue(res.stream().anyMatch(doc -> doc.field("optionalField") != null));
+assertFalse(res.stream().anyMatch(doc -> doc.field("optionalField").isEmpty()));
+assertEquals(expectedString, res.get(8).field("stringField"));
+assertTrue(res.stream().allMatch(doc -> doc.field("integerField") instanceof Integer));
+assertEquals(expectedInteger, res.get(9).field("integerField"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.571 - assertEquals(expectedSize, res.size())
+0.505 - assertFalse(res.stream().anyMatch(doc -> doc.field("optionalField").isEmpty()))
+0.462 - ```java
+assertNotNull(res)
+0.444 - assertEquals(expectedValue1, res.get(0).field("field1"))
+0.444 - assertEquals(expectedValue2, res.get(1).field("field2"))
+0.442 - assertEquals(expectedString, res.get(8).field("stringField"))
+0.439 - assertEquals(expectedDate, res.get(3).field("dateField"))
+0.430 - assertEquals(expectedListSize, res.get(6).field("listField").size())
+0.418 - assertEquals(expectedMapSize, res.get(7).field("mapField").size())
+0.409 - assertEquals(expectedBoolean, res.get(5).field("booleanField"))
+0.409 - assertEquals(expectedInteger, res.get(9).field("integerField"))
+0.400 - assertTrue(res.get(2).field("field3") instanceof String)
+0.372 - assertTrue(res.get(4).field("numericField") instanceof Number)
+0.347 - assertTrue(res.stream().anyMatch(doc -> doc.field("optionalField") != null))
+0.343 - assertTrue(res.stream().noneMatch(doc -> doc.field("expectedField") == null))
+0.340 - assertTrue(res.stream().allMatch(doc -> doc.containsField("expectedField")))
+0.340 - assertTrue(res.stream().allMatch(doc -> doc.field("mapField") instanceof Map))
+0.333 - assertTrue(res.stream().allMatch(doc -> doc.field("listField") instanceof List))
+0.315 - assertTrue(res.stream().allMatch(doc -> doc.field("integerField") instanceof Integer))
+0.298 - assertTrue(res.stream().anyMatch(doc -> doc.field("expectedField").equals(expectedValue)))
+0.000 - ```

@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OClassImpl {
+    public Integer getId ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OClassImplTest {
+    @Test
+     public void testCreatePropertyIdKeep ( ) {
+         final OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass oClass = oSchema . createClass ( "STR" ) ; 
+         OProperty prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         Integer id = prop . getId ( ) ; 
+         oClass . dropProperty ( "STR" ) ; 
+         prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(prop);
+assertEquals("STR", prop.getName());
+assertEquals(OType.STRING, prop.getType());
+assertNotEquals(id, prop.getId());
+assertTrue(prop.getId() > 0);
+assertTrue(id instanceof Integer);
+assertNotEquals(0, id.intValue());
+assertFalse(id.equals(prop.getId()));
+assertTrue(oClass.existsProperty("STR"));
+assertEquals(oClass.getProperty("STR"), prop);
+assertTrue(oClass.getProperties().contains(prop));
+assertEquals(2, oClass.properties().size());
+assertNotSame(oClass.getProperty("STR"), prop);
+assertTrue(prop.getId() > id);
+assertTrue(oClass.getProperty("STR").getId() > id);
+assertNotEquals("Different Ids", id, prop.getId());
+assertTrue(prop.getId() != id);
+assertTrue(prop.getId() < 1000); // assuming a limit for testing
+assertFalse(oClass.existsProperty("NON_EXISTING_PROPERTY"));
+assertNotNull(oClass.getProperty("STR").getId());
+assertEquals(prop.getId(), oClass.getProperty("STR").getId());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(id,prop.getId()); ===
+0.951 - assertNotEquals(id, prop.getId())
+0.794 - assertEquals("STR", prop.getName())
+0.769 - assertFalse(id.equals(prop.getId()))
+0.764 - assertTrue(prop.getId() > 0)
+0.763 - assertNotEquals("Different Ids", id, prop.getId())
+0.750 - assertTrue(prop.getId() > id)
+0.737 - assertTrue(prop.getId() != id)
+0.724 - assertTrue(prop.getId() < 1000)
+0.714 - assertEquals(OType.STRING, prop.getType())
+0.656 - assertNotEquals(0, id.intValue())
+0.648 - assertEquals(2, oClass.properties().size())
+0.584 - assertEquals(prop.getId(), oClass.getProperty("STR").getId())
+0.545 - assertTrue(oClass.getProperty("STR").getId() > id)
+0.545 - assertNotNull(oClass.getProperty("STR").getId())
+0.522 - assertTrue(oClass.existsProperty("STR"))
+0.521 - assertEquals(oClass.getProperty("STR"), prop)
+0.500 - ```java
+assertNotNull(prop)
+0.467 - assertTrue(id instanceof Integer)
+0.436 - assertTrue(oClass.getProperties().contains(prop))
+0.432 - assertNotSame(oClass.getProperty("STR"), prop)
+0.330 - // assuming a limit for testing
+assertFalse(oClass.existsProperty("NON_EXISTING_PROPERTY"))
+0.000 - ```

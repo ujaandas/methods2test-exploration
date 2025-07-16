@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testMatches ( ) {\nList < ? > result = db . query ( new OSQLSynchQuery < Object > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertTrue(result instanceof List);\nassertEquals(expectedSize, result.size());\nassertTrue(result.contains(expectedElement));\nassertFalse(result.contains(unexpectedElement));\nassertEquals(expectedFirstElement, result.get(0));\nassertEquals(expectedLastElement, result.get(result.size() - 1));\nassertTrue(result.stream().allMatch(element -> element instanceof ExpectedType));\nassertEquals(expectedValue, result.get(index));\nassertNotSame(originalList, result);\nassertTrue(result.equals(expectedList));\nassertTrue(result.containsAll(expectedSubList));\nassertFalse(result.containsAll(unexpectedSubList));\nassertTrue(result.stream().anyMatch(element -> element.equals(specificValue)));\nassertEquals(expectedSubListSize, result.subList(startIndex, endIndex).size());\nassertThrows(ExpectedException.class, () -> {\ndb.query(new OSQLSynchQuery<Object>(\"INVALID QUERY\"));\n});\nassertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet));\nassertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getKey, Object::getValue)));\nassertTrue(result.stream().filter(element -> condition).count() > 0);\nassertNotNull(result.get(someIndex));\n```\n====================\n\n",
+    "scores": [
+        0.783,
+        0.724,
+        0.649,
+        0.623,
+        0.622,
+        0.615,
+        0.559,
+        0.557,
+        0.553,
+        0.552,
+        0.532,
+        0.521,
+        0.514,
+        0.508,
+        0.5,
+        0.43,
+        0.403,
+        0.381,
+        0.381,
+        0.292,
+        0.26,
+        0.065,
+        0.0
+    ],
+    "ground_truth": "assertEquals(result.size(),1);"
+}

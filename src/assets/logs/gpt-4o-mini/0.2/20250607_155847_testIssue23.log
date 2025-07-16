@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue23 ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(schemas);
+assertFalse(schemas.isEmpty());
+assertEquals(expectedSchemaCount, schemas.size());
+assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));
+assertEquals(expectedNamespace, schemas.get(0).getNamespace());
+assertEquals(expectedTargetNamespace, schemas.get(0).getTargetNamespace());
+assertEquals(expectedElementCount, schemas.get(0).getElements().size());
+assertTrue(schemas.get(0).getElements().stream().anyMatch(element -> element.getName().equals(expectedElementName)));
+assertEquals(expectedAttributeCount, schemas.get(0).getAttributes().size());
+assertTrue(schemas.get(0).getAttributes().stream().anyMatch(attribute -> attribute.getName().equals(expectedAttributeName)));
+assertNotNull(schemas.get(0).getDocumentation());
+assertEquals(expectedDocumentation, schemas.get(0).getDocumentation().getContent());
+assertTrue(schemas.get(0).isValid());
+assertFalse(schemas.get(0).hasErrors());
+assertEquals(expectedComplexTypeCount, schemas.get(0).getComplexTypes().size());
+assertEquals(expectedSimpleTypeCount, schemas.get(0).getSimpleTypes().size());
+assertTrue(schemas.get(0).getImports().isEmpty());
+assertTrue(schemas.get(0).getIncludes().isEmpty());
+assertEquals(expectedAnnotationCount, schemas.get(0).getAnnotations().size());
+assertTrue(schemas.get(0).getAnnotations().stream().anyMatch(annotation -> annotation.getContent().equals(expectedAnnotationContent)));
+assertEquals(expectedVersion, schemas.get(0).getVersion());
+assertNotNull(schemas.get(0).getSchemaLocation());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(true); ===
+0.500 - assertTrue(schemas.get(0).isValid())
+0.455 - assertTrue(schemas.get(0).getIncludes().isEmpty())
+0.435 - assertFalse(schemas.isEmpty())
+0.431 - assertTrue(schemas.get(0).getImports().isEmpty())
+0.406 - assertNotNull(schemas.get(0).getDocumentation())
+0.400 - assertFalse(schemas.get(0).hasErrors())
+0.391 - ```java
+assertNotNull(schemas)
+0.369 - assertNotNull(schemas.get(0).getSchemaLocation())
+0.341 - assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema))
+0.329 - assertEquals(expectedVersion, schemas.get(0).getVersion())
+0.312 - assertEquals(expectedSchemaCount, schemas.size())
+0.265 - assertEquals(expectedDocumentation, schemas.get(0).getDocumentation().getContent())
+0.260 - assertEquals(expectedNamespace, schemas.get(0).getNamespace())
+0.247 - assertEquals(expectedTargetNamespace, schemas.get(0).getTargetNamespace())
+0.246 - assertTrue(schemas.get(0).getElements().stream().anyMatch(element -> element.getName().equals(expectedElementName)))
+0.244 - assertEquals(expectedAttributeCount, schemas.get(0).getAttributes().size())
+0.239 - assertEquals(expectedSimpleTypeCount, schemas.get(0).getSimpleTypes().size())
+0.234 - assertEquals(expectedComplexTypeCount, schemas.get(0).getComplexTypes().size())
+0.233 - assertEquals(expectedElementCount, schemas.get(0).getElements().size())
+0.232 - assertTrue(schemas.get(0).getAttributes().stream().anyMatch(attribute -> attribute.getName().equals(expectedAttributeName)))
+0.217 - assertEquals(expectedAnnotationCount, schemas.get(0).getAnnotations().size())
+0.216 - assertTrue(schemas.get(0).getAnnotations().stream().anyMatch(annotation -> annotation.getContent().equals(expectedAnnotationContent)))
+0.000 - ```

@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsOfFriends ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friend")));
+assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friendOfFriend")));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend") instanceof ODocument));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend") instanceof ODocument));
+assertEquals(expectedFriendName, qResult.get(0).field("friend").field("name"));
+assertEquals(expectedFriendOfFriendName, qResult.get(0).field("friendOfFriend").field("name"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").field("name").equals("Alice")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").field("name").equals("Bob")));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("friend").field("name").equals("Charlie")));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("friendOfFriend").field("name").equals("David")));
+assertEquals(expectedFriendCount, qResult.stream().filter(doc -> doc.field("friend").field("name").equals("Alice")).count());
+assertEquals(expectedFriendOfFriendCount, qResult.stream().filter(doc -> doc.field("friendOfFriend").field("name").equals("Bob")).count());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").field("age") > 18));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").field("age") > 18));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").field("status").equals("active")));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").field("status").equals("active")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").field("location").equals("New York")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").field("location").equals("Los Angeles")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.567 - ```java
+assertNotNull(qResult)
+0.505 - assertEquals(expectedFriendName, qResult.get(0).field("friend").field("name"))
+0.439 - assertEquals(expectedFriendOfFriendName, qResult.get(0).field("friendOfFriend").field("name"))
+0.416 - assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friend")))
+0.385 - assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friendOfFriend")))
+0.385 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").field("age") > 18))
+0.375 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend") instanceof ODocument))
+0.371 - assertEquals(expectedFriendCount, qResult.stream().filter(doc -> doc.field("friend").field("name").equals("Alice")).count())
+0.359 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").field("age") > 18))
+0.350 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend") instanceof ODocument))
+0.341 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").field("name").equals("Alice")))
+0.339 - assertEquals(expectedFriendOfFriendCount, qResult.stream().filter(doc -> doc.field("friendOfFriend").field("name").equals("Bob")).count())
+0.333 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("friend").field("name").equals("Charlie")))
+0.333 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").field("status").equals("active")))
+0.326 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").field("name").equals("Bob")))
+0.326 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").field("location").equals("New York")))
+0.318 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("friendOfFriend").field("name").equals("David")))
+0.313 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").field("status").equals("active")))
+0.300 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").field("location").equals("Los Angeles")))
+0.000 - ```

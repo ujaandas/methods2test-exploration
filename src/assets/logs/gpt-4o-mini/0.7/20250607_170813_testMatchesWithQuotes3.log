@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatchesWithQuotes3 ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc.containsField("someField")));
+assertTrue(results.stream().anyMatch(doc -> "expectedValue".equals(doc.field("someField"))));
+assertTrue(results.stream().anyMatch(doc -> doc.field("anotherField") instanceof String));
+assertTrue(results.stream().allMatch(doc -> doc.field("numericField") instanceof Number));
+assertTrue(results.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean));
+assertEquals("expectedString", results.get(0).field("someField"));
+assertNotEquals("unexpectedString", results.get(1).field("someField"));
+assertEquals(100, results.get(2).field("numericField"));
+assertTrue(results.get(3).field("booleanField"));
+assertFalse(results.get(4).field("booleanField"));
+assertTrue(results.stream().noneMatch(doc -> doc.field("nonExistentField") != null));
+assertEquals(expectedDocumentId, results.get(5).getIdentity().toString());
+assertTrue(results.stream().allMatch(doc -> !doc.field("ignoredField").equals("ignoredValue")));
+assertNotEquals("unexpectedValue", results.get(6).field("anotherField"));
+assertTrue(results.stream().allMatch(doc -> doc.field("dateField") instanceof Date));
+assertTrue(results.stream().anyMatch(doc -> doc.field("listField") instanceof List));
+assertTrue(results.stream().allMatch(doc -> ((List<?>) doc.field("listField")).size() > 0));
+assertEquals("expectedOutput", results.stream().map(doc -> doc.field("outputField")).collect(Collectors.joining(",")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.789 - assertEquals(expectedSize, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.619 - assertEquals(100, results.get(2).field("numericField"))
+0.582 - assertFalse(results.get(4).field("booleanField"))
+0.567 - ```java
+assertNotNull(results)
+0.553 - assertEquals("expectedString", results.get(0).field("someField"))
+0.538 - assertTrue(results.get(3).field("booleanField"))
+0.515 - assertNotEquals("unexpectedValue", results.get(6).field("anotherField"))
+0.505 - assertNotEquals("unexpectedString", results.get(1).field("someField"))
+0.490 - assertEquals(expectedDocumentId, results.get(5).getIdentity().toString())
+0.404 - assertTrue(results.stream().allMatch(doc -> doc.containsField("someField")))
+0.397 - assertTrue(results.stream().allMatch(doc -> ((List<?>) doc.field("listField")).size() > 0))
+0.382 - assertTrue(results.stream().noneMatch(doc -> doc.field("nonExistentField") != null))
+0.382 - assertTrue(results.stream().allMatch(doc -> doc.field("dateField") instanceof Date))
+0.382 - assertTrue(results.stream().anyMatch(doc -> doc.field("listField") instanceof List))
+0.372 - assertEquals("expectedOutput", results.stream().map(doc -> doc.field("outputField")).collect(Collectors.joining(",")))
+0.365 - assertTrue(results.stream().anyMatch(doc -> doc.field("anotherField") instanceof String))
+0.365 - assertTrue(results.stream().allMatch(doc -> doc.field("numericField") instanceof Number))
+0.362 - assertTrue(results.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean))
+0.350 - assertTrue(results.stream().anyMatch(doc -> "expectedValue".equals(doc.field("someField"))))
+0.341 - assertTrue(results.stream().allMatch(doc -> !doc.field("ignoredField").equals("ignoredValue")))
+0.000 - ```

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public boolean isEmpty ( ) { 
+    return ( operationCount == EMPTY_OPERATION_COUNT && intervalThroughput == EMPTY_THROUGHPUT ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testGet ( ) {
+         update ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1000 , 200 , 500 , 1900.0d , 1800 , 2500 ) ) ; 
+         update ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1500 , 150 , 550 , 1600.0d , 1700 , 2400 ) ) ; 
+         update ( a2w1 , TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , 2200.0d , 2400 , 2800 ) ) ; 
+         PerformanceStats performanceStats = performanceStatsCollector . get ( TEST_CASE_ID_1 , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(performanceStats);
+assertEquals(1500, performanceStats.getOperationCount());
+assertEquals(150, performanceStats.getErrorCount());
+assertEquals(550, performanceStats.getSuccessCount());
+assertEquals(1600.0d, performanceStats.getAverageLatency(), 0.01);
+assertEquals(1700, performanceStats.getMinLatency());
+assertEquals(2400, performanceStats.getMaxLatency());
+assertEquals(1000, performanceStats.getTotalOperations());
+assertEquals(200, performanceStats.getTotalErrors());
+assertEquals(500, performanceStats.getTotalSuccesses());
+assertTrue(performanceStats.getThroughput() > 0);
+assertTrue(performanceStats.getAverageLatency() < 2000.0d);
+assertFalse(performanceStats.isEmpty());
+assertEquals(3, performanceStats.getUpdateCount());
+assertEquals(TEST_CASE_ID_1, performanceStats.getTestCaseId());
+assertTrue(performanceStats.getTotalOperations() >= 1000);
+assertTrue(performanceStats.getTotalSuccesses() <= performanceStats.getTotalOperations());
+assertTrue(performanceStats.getTotalErrors() >= 0);
+assertEquals(1, performanceStats.getWorkerId());
+assertNotEquals(0, performanceStats.getIntervalThroughput());
+assertTrue(performanceStats.getMaxLatency() >= performanceStats.getMinLatency());
+assertEquals(3, performanceStats.getWorkerCount());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(performanceStats.isEmpty()); ===
+1.000 - assertFalse(performanceStats.isEmpty())
+0.733 - assertEquals(1700, performanceStats.getMinLatency())
+0.729 - assertEquals(1, performanceStats.getWorkerId())
+0.727 - assertEquals(3, performanceStats.getUpdateCount())
+0.719 - assertEquals(150, performanceStats.getErrorCount())
+0.711 - assertEquals(2400, performanceStats.getMaxLatency())
+0.706 - assertTrue(performanceStats.getThroughput() > 0)
+0.705 - assertEquals(3, performanceStats.getWorkerCount())
+0.703 - assertEquals(550, performanceStats.getSuccessCount())
+0.689 - assertEquals(200, performanceStats.getTotalErrors())
+0.681 - assertEquals(1500, performanceStats.getOperationCount())
+0.674 - assertEquals(1000, performanceStats.getTotalOperations())
+0.667 - assertEquals(500, performanceStats.getTotalSuccesses())
+0.667 - assertTrue(performanceStats.getTotalErrors() >= 0)
+0.653 - assertNotEquals(0, performanceStats.getIntervalThroughput())
+0.641 - ```java
+assertNotNull(performanceStats)
+0.640 - assertEquals(TEST_CASE_ID_1, performanceStats.getTestCaseId())
+0.638 - assertTrue(performanceStats.getTotalOperations() >= 1000)
+0.632 - assertTrue(performanceStats.getAverageLatency() < 2000.0d)
+0.627 - assertEquals(1600.0d, performanceStats.getAverageLatency(), 0.01)
+0.530 - assertTrue(performanceStats.getMaxLatency() >= performanceStats.getMinLatency())
+0.476 - assertTrue(performanceStats.getTotalSuccesses() <= performanceStats.getTotalOperations())
+0.000 - ```

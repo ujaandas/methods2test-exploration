@@ -1,0 +1,94 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfile {
+    protected void disableOpenJ9SCC ( List < String > dockerfileLines ) { 
+    final String RUN_CONFIGURE_COMMAND_LOWERCASE = "STR" ; 
+    for ( int i = 0 ; 
+    i < dockerfileLines . size ( ) ; 
+    i ++ ) { 
+    String line = dockerfileLines . get ( i ) ; 
+    if ( line . toLowerCase ( ) . equals ( RUN_CONFIGURE_COMMAND_LOWERCASE ) ) { 
+    debug ( "STR" ) ; 
+    dockerfileLines . add ( i , "STR" ) ; 
+    return ; 
+    } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfileTest {
+    @Test
+     public void testDisableOpenJ9SCC_mixedcase ( ) throws Exception {
+         List < String > dockerfileLines = new ArrayList < String > ( ) ; 
+         List < String > expectedDockerfileLines = new ArrayList < String > ( ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         util . disableOpenJ9SCC ( dockerfileLines ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, dockerfileLines.size());
+assertEquals("STR", dockerfileLines.get(0));
+assertEquals("STR", dockerfileLines.get(1));
+assertEquals("STR", dockerfileLines.get(2));
+assertNotNull(dockerfileLines);
+assertTrue(dockerfileLines.contains("STR"));
+assertFalse(dockerfileLines.contains("STRING"));
+assertTrue(dockerfileLines.get(0).equals("STR"));
+assertTrue(dockerfileLines.get(1).equals("STR"));
+assertTrue(dockerfileLines.get(2).equals("STR"));
+assertTrue(dockerfileLines.indexOf("STR") == 0);
+assertTrue(dockerfileLines.indexOf("STR", 1) == 1);
+assertTrue(dockerfileLines.lastIndexOf("STR") == 2);
+assertNotEquals(2, dockerfileLines.size());
+assertNotEquals("STRING", dockerfileLines.get(0));
+assertNotEquals("STRING", dockerfileLines.get(1));
+assertNotEquals("STRING", dockerfileLines.get(2));
+assertFalse(dockerfileLines.isEmpty());
+assertTrue(dockerfileLines.equals(expectedDockerfileLines));
+assertEquals(expectedDockerfileLines.size(), dockerfileLines.size());
+assertSame(expectedDockerfileLines, dockerfileLines);
+assertNotSame(new ArrayList<String>(), dockerfileLines);
+assertArrayEquals(new String[]{"STR", "STR", "STR"}, dockerfileLines.toArray());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedDockerfileLines,dockerfileLines); ===
+0.923 - assertSame(expectedDockerfileLines, dockerfileLines)
+0.883 - assertEquals(expectedDockerfileLines.size(), dockerfileLines.size())
+0.643 - assertTrue(dockerfileLines.equals(expectedDockerfileLines))
+0.638 - assertNotEquals(2, dockerfileLines.size())
+0.632 - assertEquals("STR", dockerfileLines.get(0))
+0.632 - assertEquals("STR", dockerfileLines.get(1))
+0.632 - assertEquals("STR", dockerfileLines.get(2))
+0.606 - ```java
+assertEquals(3, dockerfileLines.size())
+0.602 - assertNotNull(dockerfileLines)
+0.594 - assertNotEquals("STRING", dockerfileLines.get(0))
+0.594 - assertNotEquals("STRING", dockerfileLines.get(1))
+0.594 - assertNotEquals("STRING", dockerfileLines.get(2))
+0.571 - assertFalse(dockerfileLines.isEmpty())
+0.566 - assertNotSame(new ArrayList<String>(), dockerfileLines)
+0.547 - assertArrayEquals(new String[]{"STR", "STR", "STR"}, dockerfileLines.toArray())
+0.520 - assertFalse(dockerfileLines.contains("STRING"))
+0.500 - assertTrue(dockerfileLines.contains("STR"))
+0.490 - assertTrue(dockerfileLines.indexOf("STR") == 0)
+0.480 - assertTrue(dockerfileLines.indexOf("STR", 1) == 1)
+0.475 - assertTrue(dockerfileLines.get(0).equals("STR"))
+0.475 - assertTrue(dockerfileLines.get(1).equals("STR"))
+0.475 - assertTrue(dockerfileLines.get(2).equals("STR"))
+0.471 - assertTrue(dockerfileLines.lastIndexOf("STR") == 2)
+0.000 - ```

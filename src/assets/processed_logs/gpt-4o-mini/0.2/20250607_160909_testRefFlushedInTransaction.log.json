@@ -1,0 +1,33 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testRefFlushedInTransaction ( ) {\ndatabase . begin ( ) ;\nOElement someTx = database . newElement ( \"STR\" ) ;\nsomeTx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( someTx ) ;\nOElement oneMore = database . newElement ( \"STR\" ) ;\noneMore . setProperty ( \"STR\" , \"STR\" ) ;\noneMore . setProperty ( \"STR\" , someTx ) ;\nOResultSet result = database . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(1, result.stream().count());\nOResult firstResult = result.next();\nassertEquals(\"STR\", firstResult.getProperty(\"STR\"));\nassertTrue(firstResult.getProperty(\"STR\") instanceof OElement);\nassertEquals(\"STR\", ((OElement) firstResult.getProperty(\"STR\")).getProperty(\"STR\"));\nassertEquals(someTx.getIdentity(), firstResult.getProperty(\"STR\").getIdentity());\nassertEquals(1, database.countElements(\"STR\"));\nassertEquals(2, database.countElements());\nassertTrue(database.getElements().stream().anyMatch(e -> e.getProperty(\"STR\").equals(\"STR\")));\nassertTrue(database.getElements().stream().anyMatch(e -> e.getIdentity().equals(someTx.getIdentity())));\nassertTrue(database.getElements().stream().anyMatch(e -> e.getProperty(\"STR\").equals(oneMore.getProperty(\"STR\"))));\nassertFalse(result.isClosed());\nresult.close();\nassertTrue(result.isClosed());\nassertThrows(IllegalStateException.class, () -> result.next());\nassertThrows(IllegalStateException.class, () -> result.stream().count());\nassertEquals(0, database.getPendingTransactions().size());\nassertTrue(database.isTransactionActive());\ndatabase.commit();\nassertFalse(database.isTransactionActive());\nassertEquals(0, database.getPendingTransactions().size());\nassertEquals(2, database.countElements(\"STR\"));\nassertEquals(2, database.getElements().size());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.638,
+        0.63,
+        0.627,
+        0.608,
+        0.607,
+        0.595,
+        0.588,
+        0.571,
+        0.542,
+        0.533,
+        0.524,
+        0.505,
+        0.505,
+        0.471,
+        0.449,
+        0.424,
+        0.423,
+        0.415,
+        0.4,
+        0.371,
+        0.371,
+        0.366,
+        0.346,
+        0.321,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,result.stream().count());"
+}

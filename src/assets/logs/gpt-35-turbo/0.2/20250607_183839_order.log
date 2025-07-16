@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ProcessorConfig {
+    public < T extends Named > List < T > prepareProcessors ( List < T > namedList , String type ) { 
+    List < T > ret = new ArrayList < > ( ) ; 
+    Map < String , T > lookup = new HashMap < > ( ) ; 
+    for ( T named : namedList ) { 
+    lookup . put ( named . getName ( ) , named ) ; 
+    } for ( String inc : includes ) { 
+    if ( use ( inc ) ) { 
+    T named = lookup . get ( inc ) ; 
+    if ( named == null ) { 
+    List < String > keys = new ArrayList < > ( lookup . keySet ( ) ) ; 
+    Collections . sort ( keys ) ; 
+    throw new IllegalArgumentException ( "STR" + type + "STR" + inc + "STR" + "STR" + type + "STR" + StringUtils . join ( keys , "STR" ) ) ; 
+    } ret . add ( named ) ; 
+    } } return ret ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ProcessorConfigTest {
+    @Test
+     public void order ( ) {
+         List < TestNamed > data = Arrays . asList ( new TestNamed ( "STR" ) , new TestNamed ( "STR" ) , new TestNamed ( "STR" ) , new TestNamed ( "STR" ) ) ; 
+         List < String > inc = Arrays . asList ( "STR" , "STR" ) ; 
+         ProcessorConfig pConfig = new ProcessorConfig ( inc , null , null ) ; 
+         List < TestNamed > result = pConfig . prepareProcessors ( data , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(4, result.size());
+Assert.assertEquals("STR", result.get(0).getName());
+Assert.assertEquals("STR", result.get(1).getName());
+Assert.assertEquals("STR", result.get(2).getName());
+Assert.assertEquals("STR", result.get(3).getName());
+Assert.assertEquals("STR", result.get(0).getType());
+Assert.assertEquals("STR", result.get(1).getType());
+Assert.assertEquals("STR", result.get(2).getType());
+Assert.assertEquals("STR", result.get(3).getType());
+Assert.assertEquals("STR", result.get(0).getDescription());
+Assert.assertEquals("STR", result.get(1).getDescription());
+Assert.assertEquals("STR", result.get(2).getDescription());
+Assert.assertEquals("STR", result.get(3).getDescription());
+Assert.assertEquals("STR", result.get(0).getVersion());
+Assert.assertEquals("STR", result.get(1).getVersion());
+Assert.assertEquals("STR", result.get(2).getVersion());
+Assert.assertEquals("STR", result.get(3).getVersion());
+Assert.assertEquals("STR", result.get(0).getCategory());
+Assert.assertEquals("STR", result.get(1).getCategory());
+Assert.assertEquals("STR", result.get(2).getCategory());
+Assert.assertEquals("STR", result.get(3).getCategory());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,result.size()); ===
+0.966 - Assert.assertEquals(4, result.size())
+0.694 - Assert.assertEquals("STR", result.get(0).getName())
+0.694 - Assert.assertEquals("STR", result.get(1).getName())
+0.694 - Assert.assertEquals("STR", result.get(2).getName())
+0.694 - Assert.assertEquals("STR", result.get(3).getName())
+0.694 - Assert.assertEquals("STR", result.get(0).getType())
+0.694 - Assert.assertEquals("STR", result.get(1).getType())
+0.694 - Assert.assertEquals("STR", result.get(2).getType())
+0.694 - Assert.assertEquals("STR", result.get(3).getType())
+0.693 - Assert.assertEquals("STR", result.get(0).getVersion())
+0.693 - Assert.assertEquals("STR", result.get(1).getVersion())
+0.693 - Assert.assertEquals("STR", result.get(2).getVersion())
+0.693 - Assert.assertEquals("STR", result.get(3).getVersion())
+0.658 - Assert.assertEquals("STR", result.get(0).getDescription())
+0.658 - Assert.assertEquals("STR", result.get(1).getDescription())
+0.658 - Assert.assertEquals("STR", result.get(2).getDescription())
+0.658 - Assert.assertEquals("STR", result.get(3).getDescription())
+0.658 - Assert.assertEquals("STR", result.get(0).getCategory())
+0.658 - Assert.assertEquals("STR", result.get(1).getCategory())
+0.658 - Assert.assertEquals("STR", result.get(2).getCategory())
+0.658 - Assert.assertEquals("STR", result.get(3).getCategory())

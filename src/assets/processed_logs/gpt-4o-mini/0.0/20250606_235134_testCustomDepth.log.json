@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilter {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilterTest {\n@Test\npublic void testCustomDepth ( ) throws MalformedURLException {\nURLFilter filter = createFilter ( \"STR\" , 1 ) ;\nURL url = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( MetadataTransfer . maxDepthKeyName , \"STR\" ) ;\nmetadata . setValue ( MetadataTransfer . depthKeyName , \"STR\" ) ;\nString filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(filterResult);\nassertEquals(\"Expected result for depth 1\", filterResult);\nassertTrue(filterResult.contains(\"expectedSubstring\"));\nassertFalse(filterResult.isEmpty());\nassertEquals(\"Expected URL format\", new URL(filterResult).toExternalForm(), filterResult);\nassertTrue(filterResult.startsWith(\"http\"));\nassertTrue(filterResult.endsWith(\".com\"));\nassertFalse(filterResult.contains(\"forbiddenSubstring\"));\nassertTrue(filterResult.matches(\".*[0-9].*\"));\nassertNotEquals(\"Unexpected result\", \"unwantedResult\", filterResult);\nassertTrue(filterResult.length() > 10);\nassertFalse(filterResult.equals(\"invalidURL\"));\nassertTrue(filterResult.indexOf(\"expectedPart\") >= 0);\nassertEquals(\"Expected depth value\", \"1\", metadata.getValue(MetadataTransfer.depthKeyName));\nassertTrue(Integer.parseInt(metadata.getValue(MetadataTransfer.maxDepthKeyName)) > 0);\nassertNotSame(\"Should not be the same object\", filterResult, \"anotherString\");\nassertTrue(filterResult.contains(\"validDomain\"));\nassertFalse(filterResult.contains(\"maliciousDomain\"));\nassertEquals(\"Expected metadata value\", \"STR\", metadata.getValue(MetadataTransfer.maxDepthKeyName));\nassertTrue(filterResult.matches(\"http[s]?://.*\"));\nassertNotNull(metadata);\n```\n====================\n\n",
+    "scores": [
+        0.707,
+        0.702,
+        0.607,
+        0.561,
+        0.537,
+        0.506,
+        0.495,
+        0.477,
+        0.467,
+        0.46,
+        0.457,
+        0.447,
+        0.442,
+        0.438,
+        0.429,
+        0.416,
+        0.393,
+        0.388,
+        0.366,
+        0.314,
+        0.246,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(url.toExternalForm(),filterResult);"
+}

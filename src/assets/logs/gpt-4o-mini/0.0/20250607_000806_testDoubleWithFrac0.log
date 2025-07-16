@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( double value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    out . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testDoubleWithFrac0 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 1.23 , 0 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("1", result);
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertTrue(result.length() > 0);
+assertTrue(result.contains("1"));
+assertFalse(result.contains("2"));
+assertFalse(result.contains("3"));
+assertEquals(1, result.length());
+assertTrue(result.matches("\\d+"));
+assertFalse(result.matches("\\d+\\.\\d+"));
+assertTrue(result.equals("1"));
+assertFalse(result.equals("1.0"));
+assertFalse(result.equals("1.23"));
+assertTrue(result.startsWith("1"));
+assertTrue(result.endsWith("1"));
+assertEquals(1, result.charAt(0) - '0');
+assertTrue(result.indexOf('1') == 0);
+assertTrue(result.indexOf('2') == -1);
+assertTrue(result.indexOf('3') == -1);
+assertTrue(result.indexOf('.') == -1);
+assertTrue(result.matches("[0-9]+"));
+assertEquals("1", result.trim());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.807 - assertEquals("1", result.trim())
+0.793 - ```java
+assertEquals("1", result)
+0.737 - assertEquals(1, result.length())
+0.681 - assertNotNull(result)
+0.677 - assertEquals(1, result.charAt(0) - '0')
+0.618 - assertFalse(result.isEmpty())
+0.576 - assertFalse(result.contains("2"))
+0.576 - assertFalse(result.contains("3"))
+0.545 - assertTrue(result.length() > 0)
+0.536 - assertTrue(result.equals("1"))
+0.517 - assertTrue(result.contains("1"))
+0.517 - assertTrue(result.endsWith("1"))
+0.508 - assertFalse(result.equals("1.0"))
+0.500 - assertTrue(result.matches("\\d+"))
+0.500 - assertFalse(result.matches("\\d+\\.\\d+"))
+0.500 - assertFalse(result.equals("1.23"))
+0.500 - assertTrue(result.startsWith("1"))
+0.500 - assertTrue(result.indexOf('1') == 0)
+0.492 - assertTrue(result.indexOf('2') == -1)
+0.492 - assertTrue(result.indexOf('3') == -1)
+0.492 - assertTrue(result.indexOf('.') == -1)
+0.484 - assertTrue(result.matches("[0-9]+"))
+0.000 - ```

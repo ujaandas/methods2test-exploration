@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Tokenize {
+    public static LinkedList < LinkedList < Word > > tokenizeSentences ( Analyzer morphoAnalyzer , String paragraph ) { 
+    return tokenizeSentences ( morphoAnalyzer , paragraph , DEFAULT_SENTENCE_LENGTH_CAP ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class TokenizeTest {
+    @Test
+     public void pēdiņas ( ) {
+         LinkedList < LinkedList < Word > > sentences ; 
+         sentences = Splitting . tokenizeSentences ( locītājs , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(sentences);
+assertFalse(sentences.isEmpty());
+assertEquals(1, sentences.size());
+assertEquals(1, sentences.get(0).size());
+assertTrue(sentences.get(0).get(0) instanceof Word);
+assertEquals("expectedWord", sentences.get(0).get(0).getText());
+assertEquals("expectedLemma", sentences.get(0).get(0).getLemma());
+assertEquals("expectedPosTag", sentences.get(0).get(0).getPosTag());
+assertEquals("expectedMorphologicalFeatures", sentences.get(0).get(0).getMorphologicalFeatures());
+assertTrue(sentences.get(0).get(0).isTokenized());
+assertEquals("expectedSentenceBoundary", sentences.get(0).get(0).getBoundary());
+assertTrue(sentences.get(0).get(0).isEndOfSentence());
+assertEquals(0, sentences.get(0).get(0).getStartIndex());
+assertEquals(3, sentences.get(0).get(0).getEndIndex());
+assertNotNull(sentences.get(0).get(0).getSynonyms());
+assertFalse(sentences.get(0).get(0).getSynonyms().isEmpty());
+assertEquals("expectedSynonym", sentences.get(0).get(0).getSynonyms().get(0));
+assertNotNull(sentences.get(0).get(0).getAntonyms());
+assertTrue(sentences.get(0).get(0).getAntonyms().isEmpty());
+assertEquals("expectedSentenceStructure", sentences.get(0).get(0).getSentenceStructure());
+assertEquals("expectedLanguage", sentences.get(0).get(0).getLanguage());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,sentences.size()); ===
+1.000 - assertEquals(1, sentences.size())
+0.901 - assertEquals(1, sentences.get(0).size())
+0.750 - assertFalse(sentences.isEmpty())
+0.659 - assertEquals(3, sentences.get(0).get(0).getEndIndex())
+0.644 - assertEquals(0, sentences.get(0).get(0).getStartIndex())
+0.617 - assertTrue(sentences.get(0).get(0).isTokenized())
+0.596 - assertEquals("expectedWord", sentences.get(0).get(0).getText())
+0.594 - ```java
+assertNotNull(sentences)
+0.583 - assertEquals("expectedLemma", sentences.get(0).get(0).getLemma())
+0.571 - assertEquals("expectedPosTag", sentences.get(0).get(0).getPosTag())
+0.549 - assertEquals("expectedLanguage", sentences.get(0).get(0).getLanguage())
+0.548 - assertNotNull(sentences.get(0).get(0).getSynonyms())
+0.548 - assertNotNull(sentences.get(0).get(0).getAntonyms())
+0.543 - assertFalse(sentences.get(0).get(0).getSynonyms().isEmpty())
+0.541 - assertTrue(sentences.get(0).get(0).isEndOfSentence())
+0.519 - assertTrue(sentences.get(0).get(0) instanceof Word)
+0.519 - assertEquals("expectedSynonym", sentences.get(0).get(0).getSynonyms().get(0))
+0.509 - assertEquals("expectedSentenceBoundary", sentences.get(0).get(0).getBoundary())
+0.505 - assertTrue(sentences.get(0).get(0).getAntonyms().isEmpty())
+0.467 - assertEquals("expectedSentenceStructure", sentences.get(0).get(0).getSentenceStructure())
+0.438 - assertEquals("expectedMorphologicalFeatures", sentences.get(0).get(0).getMorphologicalFeatures())
+0.000 - ```

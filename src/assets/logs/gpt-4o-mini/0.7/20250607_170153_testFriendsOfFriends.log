@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsOfFriends ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend") != null));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").equals("expectedFriend")));
+assertEquals("expectedValue", qResult.get(0).field("propertyKey"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("userId").equals(expectedUserId)));
+assertEquals("expectedType", qResult.get(0).field("type"));
+assertNotEquals("unexpectedValue", qResult.get(1).field("propertyKey"));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")));
+assertEquals(expectedDocId, qResult.get(0).getIdentity().toString());
+assertFalse(qResult.stream().anyMatch(doc -> doc.field("error") != null));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("relation").equals("friendOf")));
+assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("relation").equals("friendOf")).count());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("timestamp") instanceof Date));
+assertEquals(expectedDate, qResult.get(0).field("timestamp"));
+assertFalse(qResult.stream().anyMatch(doc -> doc.field("isDeleted") == true));
+assertEquals("expectedString", qResult.get(2).field("description"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("location").equals("expectedLocation")));
+assertEquals(expectedRole, qResult.get(0).field("role"));
+assertNotNull(qResult.get(0).field("createdAt"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.635 - assertEquals(expectedRole, qResult.get(0).field("role"))
+0.621 - assertEquals("expectedType", qResult.get(0).field("type"))
+0.568 - assertEquals("expectedValue", qResult.get(0).field("propertyKey"))
+0.567 - ```java
+assertNotNull(qResult)
+0.564 - assertNotNull(qResult.get(0).field("createdAt"))
+0.556 - assertEquals(expectedDate, qResult.get(0).field("timestamp"))
+0.542 - assertEquals("expectedString", qResult.get(2).field("description"))
+0.540 - assertNotEquals("unexpectedValue", qResult.get(1).field("propertyKey"))
+0.536 - assertEquals(expectedDocId, qResult.get(0).getIdentity().toString())
+0.465 - assertFalse(qResult.stream().anyMatch(doc -> doc.field("error") != null))
+0.447 - assertFalse(qResult.stream().anyMatch(doc -> doc.field("isDeleted") == true))
+0.424 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend") != null))
+0.412 - assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("relation").equals("friendOf")).count())
+0.382 - assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")))
+0.382 - assertTrue(qResult.stream().allMatch(doc -> doc.field("timestamp") instanceof Date))
+0.368 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("relation").equals("friendOf")))
+0.362 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("userId").equals(expectedUserId)))
+0.356 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").equals("expectedFriend")))
+0.344 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("location").equals("expectedLocation")))
+0.000 - ```

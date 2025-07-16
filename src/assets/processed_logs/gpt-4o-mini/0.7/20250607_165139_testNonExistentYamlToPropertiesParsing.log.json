@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtil {\nprotected static Properties getPropertiesFromYamlResource ( URL resource ) {\nreturn getPropertiesFromYamlResource ( null , resource ) ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtilTest {\n@Test\npublic void testNonExistentYamlToPropertiesParsing ( ) {\nProperties props = YamlUtil . getPropertiesFromYamlResource ( SpringBootUtilTest . class . getResource ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(props);\nassertTrue(props.isEmpty());\nassertFalse(props.containsKey(\"someKey\"));\nassertEquals(0, props.size());\nassertFalse(props.containsValue(\"someValue\"));\nassertFalse(props.keySet().iterator().hasNext());\nassertFalse(props.values().iterator().hasNext());\nassertNotNull(props);\nassertTrue(props.stringPropertyNames().isEmpty());\nassertThrows(IllegalArgumentException.class, () -> props.getProperty(\"nonExistentKey\"));\nassertDoesNotThrow(() -> props.load(new StringReader(\"key: value\")));\nassertFalse(props.containsKey(\"key\"));\nassertNull(props.getProperty(\"key\"));\nassertFalse(props.stringPropertyNames().contains(\"key\"));\nassertNotEquals(\"value\", props.getProperty(\"key\"));\nassertNotEquals(1, props.size());\nassertTrue(props.getProperty(\"anotherKey\") == null);\nassertThrows(NullPointerException.class, () -> props.getProperty(null));\nassertTrue(props.equals(new Properties()));\nassertFalse(props.equals(new Object()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.756,
+        0.706,
+        0.625,
+        0.607,
+        0.596,
+        0.522,
+        0.491,
+        0.483,
+        0.459,
+        0.459,
+        0.431,
+        0.412,
+        0.412,
+        0.409,
+        0.406,
+        0.406,
+        0.381,
+        0.368,
+        0.308,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(props);"
+}

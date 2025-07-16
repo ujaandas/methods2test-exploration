@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStep {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStepTest {\n@Test\npublic void shouldCheckSubclasses ( ) {\nOBasicCommandContext context = new OBasicCommandContext ( ) ;\ncontext . setDatabase ( database ) ;\nOClass parentClass = createClassInstance ( ) ;\nOClass childClass = createChildClassInstance ( parentClass ) ;\nCheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ;\nOResultSet result = step . syncPull ( context , 20 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(20, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"parentClass\").equals(parentClass.getName())));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"childClass\").equals(childClass.getName())));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"context\").equals(context)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isChild\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isParent\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSubclass\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSuperclass\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSameClass\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isAssignableFrom\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isInstance\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSubclassOf\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSuperclassOf\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSameClassAs\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isAssignableFromTo\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isInstanceOf\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSubclassOfTo\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSuperclassOfTo\").equals(true)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSameClassAsTo\").equals(false)));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isAssignableFromToTo\").equals(true)));\n====================\n\n",
+    "scores": [
+        0.848,
+        0.525,
+        0.517,
+        0.508,
+        0.5,
+        0.5,
+        0.492,
+        0.492,
+        0.488,
+        0.488,
+        0.484,
+        0.484,
+        0.48,
+        0.476,
+        0.476,
+        0.476,
+        0.469,
+        0.462,
+        0.456,
+        0.449
+    ],
+    "ground_truth": "Assert.assertEquals(0,result.stream().count());"
+}

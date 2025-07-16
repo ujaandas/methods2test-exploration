@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompiler {
+    public Class < ? > compile ( String className , String sourceCode ) throws Exception { 
+    return addSource ( className , sourceCode ) . compileAll ( ) . get ( className ) ; 
+    }
+}
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompilerTest {
+    @Test
+     public void compile_WhenIgnoreWarnings ( ) throws Exception {
+         StringBuffer sourceCode = new StringBuffer ( ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         Class < ? > helloClass = InMemoryJavaCompiler . newInstance ( ) . ignoreWarnings ( ) . compile ( "STR" , sourceCode . toString ( ) ) ; 
+         List < ? > res = ( List < ? > ) helloClass . getMethod ( "STR" ) . invoke ( helloClass . newInstance ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(res);
+Assert.assertEquals(4, res.size());
+Assert.assertTrue(res.contains("STR"));
+Assert.assertTrue(res.contains("STR"));
+Assert.assertTrue(res.contains("STR"));
+Assert.assertTrue(res.contains("STR"));
+Assert.assertFalse(res.contains("STRR"));
+Assert.assertFalse(res.contains("STRRR"));
+Assert.assertFalse(res.contains("STRRRR"));
+Assert.assertFalse(res.contains("STRRRRR"));
+Assert.assertNotEquals("STR", res.get(0));
+Assert.assertNotEquals("STR", res.get(1));
+Assert.assertNotEquals("STR", res.get(2));
+Assert.assertNotEquals("STR", res.get(3));
+Assert.assertNotEquals("STRR", res.get(0));
+Assert.assertNotEquals("STRRR", res.get(1));
+Assert.assertNotEquals("STRRRR", res.get(2));
+Assert.assertNotEquals("STRRRRR", res.get(3));
+Assert.assertNotEquals("STR", res.get(0));
+Assert.assertNotEquals("STR", res.get(1));
+Assert.assertNotEquals("STR", res.get(2));
+Assert.assertNotEquals("STR", res.get(3));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,res.size()); ===
+0.962 - Assert.assertEquals(4, res.size())
+0.746 - Assert.assertNotEquals("STR", res.get(0))
+0.746 - Assert.assertNotEquals("STR", res.get(1))
+0.746 - Assert.assertNotEquals("STR", res.get(2))
+0.746 - Assert.assertNotEquals("STR", res.get(3))
+0.746 - Assert.assertNotEquals("STR", res.get(0))
+0.746 - Assert.assertNotEquals("STR", res.get(1))
+0.746 - Assert.assertNotEquals("STR", res.get(2))
+0.746 - Assert.assertNotEquals("STR", res.get(3))
+0.733 - Assert.assertNotEquals("STRR", res.get(0))
+0.721 - Assert.assertNotEquals("STRRR", res.get(1))
+0.710 - Assert.assertNotEquals("STRRRR", res.get(2))
+0.698 - Assert.assertNotEquals("STRRRRR", res.get(3))
+0.610 - Assert.assertFalse(res.contains("STRR"))
+0.600 - Assert.assertFalse(res.contains("STRRR"))
+0.591 - Assert.assertNotNull(res)
+0.590 - Assert.assertFalse(res.contains("STRRRR"))
+0.581 - Assert.assertFalse(res.contains("STRRRRR"))
+0.561 - Assert.assertTrue(res.contains("STR"))
+0.561 - Assert.assertTrue(res.contains("STR"))
+0.561 - Assert.assertTrue(res.contains("STR"))
+0.561 - Assert.assertTrue(res.contains("STR"))

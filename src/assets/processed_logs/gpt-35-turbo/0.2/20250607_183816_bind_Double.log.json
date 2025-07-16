@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_Numerical {\nstatic boolean bind0 ( Object object , String property , String value ) {\nvalue = value . trim ( ) ;\nString [ ] path = property . split ( \"STR\" ) ;\nobject = findTargetObject ( object , property , path ) ;\nif ( object == null ) {\nreturn false ;\n} Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ;\nif ( field == null || isProbeField ( field ) ) {\nreturn false ;\n} try {\nsetField ( field , object , value ) ;\nreturn true ;\n} catch ( Exception e ) {\nthrow new BindException ( format ( \"STR\" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_NumericalTest {\n@Test\npublic void bind_Double ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"10.5\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(null, \"testProperty\", \"10.5\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"probeField\", \"10.5\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"notANumber\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"100\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"10.5 \"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"0\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-10.5\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"abc\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"3.14159\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"10.5.5\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"0.0\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"10,5\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-100\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1,000\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"2.71828\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"10,5.5\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"0.0001\"));\n====================\n\n",
+    "scores": [
+        0.496,
+        0.489,
+        0.489,
+        0.485,
+        0.485,
+        0.481,
+        0.478,
+        0.474,
+        0.474,
+        0.45,
+        0.443,
+        0.439,
+        0.436,
+        0.436,
+        0.433,
+        0.43,
+        0.43,
+        0.417,
+        0.413
+    ],
+    "ground_truth": "assertTrue(bind0(testObject,\"STR\",\"STR\"));"
+}

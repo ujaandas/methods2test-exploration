@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public String readFile ( File file ) throws IOException { 
+    return FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testReadFileToString ( ) throws Exception {
+         File tempFile = new File ( serverDirectory , "STR" ) ; 
+         Files . write ( tempFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         String fileString = util . readFile ( tempFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(fileString);
+2. assertEquals("STR", fileString);
+3. assertTrue(fileString.contains("S"));
+4. assertFalse(fileString.isEmpty());
+5. assertTrue(fileString.length() > 0);
+6. assertTrue(fileString.startsWith("S"));
+7. assertTrue(fileString.endsWith("R"));
+8. assertFalse(fileString.equals("str"));
+9. assertTrue(fileString.matches("[A-Z]+"));
+10. assertFalse(fileString.matches("[0-9]+"));
+11. assertTrue(fileString.contains("T"));
+12. assertFalse(fileString.contains("X"));
+13. assertTrue(fileString.equalsIgnoreCase("str"));
+14. assertEquals(3, fileString.length());
+15. assertTrue(fileString.contains("S") && fileString.contains("T") && fileString.contains("R"));
+16. assertFalse(fileString.contains("X") || fileString.contains("Y"));
+17. assertTrue(fileString.toUpperCase().equals("STR"));
+18. assertFalse(fileString.toLowerCase().equals("str"));
+19. assertTrue(fileString.trim().equals("STR"));
+20. assertFalse(fileString.trim().isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(fileString.equals("STR")); ===
+0.878 - 19. assertTrue(fileString.trim().equals("STR"))
+0.811 - 3. assertTrue(fileString.contains("S"))
+0.811 - 7. assertTrue(fileString.endsWith("R"))
+0.809 - 17. assertTrue(fileString.toUpperCase().equals("STR"))
+0.800 - 8. assertFalse(fileString.equals("str"))
+0.800 - 11. assertTrue(fileString.contains("T"))
+0.789 - 6. assertTrue(fileString.startsWith("S"))
+0.776 - 13. assertTrue(fileString.equalsIgnoreCase("str"))
+0.744 - 9. assertTrue(fileString.matches("[A-Z]+"))
+0.732 - 5. assertTrue(fileString.length() > 0)
+0.684 - 12. assertFalse(fileString.contains("X"))
+0.667 - 18. assertFalse(fileString.toLowerCase().equals("str"))
+0.650 - 10. assertFalse(fileString.matches("[0-9]+"))
+0.648 - 4. assertFalse(fileString.isEmpty())
+0.622 - 14. assertEquals(3, fileString.length())
+0.582 - 20. assertFalse(fileString.trim().isEmpty())
+0.529 - 2. assertEquals("STR", fileString)
+0.529 - 16. assertFalse(fileString.contains("X") || fileString.contains("Y"))
+0.504 - 15. assertTrue(fileString.contains("S") && fileString.contains("T") && fileString.contains("R"))
+0.500 - Assertions:
+
+1. assertNotNull(fileString)

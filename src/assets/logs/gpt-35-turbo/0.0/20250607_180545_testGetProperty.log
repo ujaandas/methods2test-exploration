@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions generated:
+
+1. assertEquals("STR", getProperty("STR"));
+2. assertNotNull(getProperty("STR"));
+3. assertTrue(env.containsKey("STR"));
+4. assertFalse(env.isEmpty());
+5. assertEquals("STR", env.get("STR"));
+6. assertEquals("STR", getProperty("STR"));
+7. assertNotEquals("ABC", getProperty("STR"));
+8. assertTrue(env.containsValue("STR"));
+9. assertFalse(env.containsKey("ABC"));
+10. assertNull(getProperty("ABC"));
+11. assertEquals(1, env.size());
+12. assertTrue(env.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "STR")));
+13. assertFalse(env.entrySet().contains(new AbstractMap.SimpleEntry<>("ABC", "ABC")));
+14. assertTrue(env.keySet().contains("STR"));
+15. assertFalse(env.keySet().contains("ABC"));
+16. assertTrue(env.values().contains("STR"));
+17. assertFalse(env.values().contains("ABC"));
+18. assertEquals("DEFAULT", getPropertyOrDefault("ABC", "DEFAULT"));
+19. assertThrows(NullPointerException.class, () -> getProperty(null));
+20. assertNotSame(env, new HashMap<>(env));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.844 - 6. assertEquals("STR", getProperty("STR"))
+0.791 - 5. assertEquals("STR", env.get("STR"))
+0.753 - 7. assertNotEquals("ABC", getProperty("STR"))
+0.679 - Assertions generated:
+
+1. assertEquals("STR", getProperty("STR"))
+0.659 - 2. assertNotNull(getProperty("STR"))
+0.602 - 10. assertNull(getProperty("ABC"))
+0.596 - 18. assertEquals("DEFAULT", getPropertyOrDefault("ABC", "DEFAULT"))
+0.557 - 11. assertEquals(1, env.size())
+0.538 - 4. assertFalse(env.isEmpty())
+0.535 - 3. assertTrue(env.containsKey("STR"))
+0.506 - 9. assertFalse(env.containsKey("ABC"))
+0.500 - 8. assertTrue(env.containsValue("STR"))
+0.495 - 14. assertTrue(env.keySet().contains("STR"))
+0.495 - 16. assertTrue(env.values().contains("STR"))
+0.468 - 15. assertFalse(env.keySet().contains("ABC"))
+0.468 - 17. assertFalse(env.values().contains("ABC"))
+0.452 - 19. assertThrows(NullPointerException.class, () -> getProperty(null))
+0.424 - 13. assertFalse(env.entrySet().contains(new AbstractMap.SimpleEntry<>("ABC", "ABC")))
+0.382 - 20. assertNotSame(env, new HashMap<>(env))
+0.321 - 12. assertTrue(env.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "STR")))

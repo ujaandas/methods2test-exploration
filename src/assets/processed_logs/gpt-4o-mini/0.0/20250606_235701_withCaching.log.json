@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage AlejandroRivera.embedded-rabbitmq;\n\npublic class ExtractorFactory {\npublic Extractor getNewInstance ( ) {\nExtractor extractor = new BasicExtractor ( config ) ;\nif ( config . shouldCachedDownload ( ) ) {\nextractor = new CachedExtractor ( extractor , config ) ;\n} return extractor ;\n}\n}\n\npackage AlejandroRivera.embedded-rabbitmq;\n\npublic class ExtractorFactoryTest {\n@Test\npublic void withCaching ( ) throws Exception {\nbuilder . useCachedDownload ( true ) ;\nExtractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(extractor);\nassertTrue(extractor instanceof CachedExtractor);\nassertTrue(((CachedExtractor) extractor).getWrappedExtractor() instanceof BasicExtractor);\nassertEquals(config, ((CachedExtractor) extractor).getConfig());\nassertTrue(config.shouldCachedDownload());\nassertEquals(0, ((CachedExtractor) extractor).getCacheSize());\nassertTrue(((CachedExtractor) extractor).isCacheEnabled());\nassertFalse(((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).isCacheEnabled());\nassertEquals(\"Expected value\", ((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).getSomeProperty());\nassertNotNull(((CachedExtractor) extractor).getCache());\nassertTrue(((CachedExtractor) extractor).getCache() instanceof SomeCacheImplementation);\nassertEquals(\"Expected cache key\", ((CachedExtractor) extractor).getCache().getCacheKey());\nassertTrue(((CachedExtractor) extractor).getCache().isEmpty());\nassertEquals(\"Expected configuration value\", config.getSomeConfigValue());\nassertTrue(extractor.isReady());\nassertFalse(extractor.hasErrors());\nassertEquals(\"Expected extractor type\", extractor.getType());\nassertNotNull(extractor.getData());\nassertTrue(extractor.getData().isEmpty());\nassertEquals(\"Expected initialization state\", extractor.getInitializationState());\nassertTrue(extractor.isConfigured());\n```\n====================\n\n",
+    "scores": [
+        0.685,
+        0.621,
+        0.559,
+        0.555,
+        0.537,
+        0.531,
+        0.521,
+        0.512,
+        0.5,
+        0.5,
+        0.488,
+        0.466,
+        0.463,
+        0.452,
+        0.446,
+        0.432,
+        0.427,
+        0.403,
+        0.383,
+        0.371,
+        0.348,
+        0.0
+    ],
+    "ground_truth": "assertTrue(extractor.getClass().equals(CachedExtractor.class));"
+}

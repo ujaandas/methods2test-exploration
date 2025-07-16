@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptions {\npublic List < String > getOptions ( ) {\nList < String > options = new ArrayList < String > ( ) ;\nif ( ! showWarnings ) {\noptions . add ( \"STR\" ) ;\n} addStringOption ( options , \"STR\" , source ) ;\naddStringOption ( options , \"STR\" , target ) ;\naddStringOption ( options , \"STR\" , release ) ;\nreturn options ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptionsTest {\n@Test\npublic void testRelease ( ) throws Exception {\nJavaCompilerOptions jco = new JavaCompilerOptions ( ) ;\njco . setRelease ( \"STR\" ) ;\nList < String > result = jco . getOptions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", result.get(0));\nassertTrue(result.contains(\"source=STR\"));\nassertTrue(result.contains(\"target=STR\"));\nassertTrue(result.contains(\"release=STR\"));\nassertFalse(result.contains(\"showWarnings\"));\nassertNotNull(result);\nassertNotEquals(0, result.size());\nassertNotNull(jco);\nassertNotNull(result);\nassertEquals(4, result.size());\nassertFalse(result.isEmpty());\nassertEquals(\"STR\", jco.getRelease());\nassertTrue(result.get(0).equals(\"STR\"));\nassertTrue(result.get(1).equals(\"source=STR\"));\nassertTrue(result.get(2).equals(\"target=STR\"));\nassertTrue(result.get(3).equals(\"release=STR\"));\nassertTrue(result.size() > 0);\nassertTrue(jco.getOptions().contains(\"release=STR\"));\nassertTrue(jco.getOptions().size() > 0);\nassertTrue(result.size() == 4);\n====================\n\n",
+    "scores": [
+        0.966,
+        0.918,
+        0.806,
+        0.786,
+        0.772,
+        0.724,
+        0.64,
+        0.64,
+        0.615,
+        0.575,
+        0.559,
+        0.543,
+        0.543,
+        0.535,
+        0.515,
+        0.507,
+        0.507,
+        0.5,
+        0.426,
+        0.37
+    ],
+    "ground_truth": "assertEquals(3,result.size());"
+}

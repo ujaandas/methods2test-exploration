@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public Object getDocumentValueToIndex ( final ODocument iDocument ) { 
+    final List < OCompositeKey > compositeKeys = new ArrayList < OCompositeKey > ( 10 ) ; 
+    final OCompositeKey firstKey = new OCompositeKey ( ) ; 
+    boolean containsCollection = false ; 
+    compositeKeys . add ( firstKey ) ; 
+    for ( final OIndexDefinition indexDefinition : indexDefinitions ) { 
+    final Object result = indexDefinition . getDocumentValueToIndex ( iDocument ) ; 
+    if ( result == null && isNullValuesIgnored ( ) ) return null ; 
+    if ( result instanceof Collection && ( ( Collection ) result ) . isEmpty ( ) && isNullValuesIgnored ( ) ) return null ; 
+    containsCollection = addKey ( firstKey , compositeKeys , containsCollection , result ) ; 
+    } if ( ! containsCollection ) return firstKey ; 
+    return compositeKeys ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexMapValueSuccessful ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         final Map < String , String > stringMap = new HashMap < String , String > ( ) ; 
+         stringMap . put ( "STR" , "STR" ) ; 
+         stringMap . put ( "STR" , "STR" ) ; 
+         document . field ( "STR" , 12 ) ; 
+         document . field ( "STR" , stringMap ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyMapIndexDefinition ( "STR" , "STR" , OType . STRING , OPropertyMapIndexDefinition . INDEX_BY . KEY ) ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         final Collection < OCompositeKey > collectionResult = ( Collection < OCompositeKey > ) result ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(result);
+assertNotNull(collectionResult);
+assertEquals(2, collectionResult.size());
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("12")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(collectionResult.size(),2); ===
+0.949 - assertEquals(2, collectionResult.size())
+0.743 - assertNotNull(collectionResult)
+0.517 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("12")))
+0.500 - assertNotNull(result)
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))
+0.496 - assertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains("STR")))

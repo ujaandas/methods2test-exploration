@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic void set ( String key , String value ) {\nsetIn ( normalize ( key ) , RealValue . fromString ( value ) ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void ignores_log_level_case ( ) {\nConfig config = createConfig ( ) ;\nconfig . set ( Keys . CUCUMBERPRO_LOGGING , \"STR\" ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(logger);\nassertEquals(\"Expected logger to have a non-null configuration\", config, logger.getConfig());\nassertEquals(\"Expected logger's log level to be the normalized value\", \"str\", logger.getLogLevel());\nassertTrue(\"Expected logger to ignore case for log level\", logger.getLogLevel().equalsIgnoreCase(\"STR\"));\nassertFalse(\"Expected logger to reject invalid log levels\", logger.isLogLevelValid(\"INVALID\"));\nassertTrue(\"Expected logger to accept valid log levels\", logger.isLogLevelValid(\"info\"));\nassertTrue(\"Expected logger to accept valid log levels\", logger.isLogLevelValid(\"warn\"));\nassertTrue(\"Expected logger to accept valid log levels\", logger.isLogLevelValid(\"error\"));\nassertEquals(\"Expected logger's default log level to be 'info'\", \"info\", logger.getDefaultLogLevel());\nassertEquals(\"Expected logger's log level to be 'str'\", \"str\", logger.getLogLevel());\nassertNotEquals(\"Expected logger's log level to not be 'debug'\", \"debug\", logger.getLogLevel());\nassertTrue(\"Expected logger to handle empty log level gracefully\", logger.setLogLevel(\"\"));\nassertEquals(\"Expected logger's log level to revert to default after setting empty\", \"info\", logger.getLogLevel());\nassertThrows(IllegalArgumentException.class, () -> logger.setLogLevel(\"INVALID\"));\nassertDoesNotThrow(() -> logger.setLogLevel(\"warn\"));\nassertEquals(\"Expected logger's log level to be 'warn'\", \"warn\", logger.getLogLevel());\nassertTrue(\"Expected logger to properly log messages at set log level\", logger.log(\"This is a test message\"));\nassertFalse(\"Expected logger to not log messages below the set log level\", logger.log(\"This should not log\"));\nassertTrue(\"Expected logger to log at 'str' level\", logger.logAtLevel(\"str\", \"Logging at str level\"));\nassertFalse(\"Expected logger to not log at 'debug' when set to 'str'\", logger.logAtLevel(\"debug\", \"This should not log\"));\n```\n====================\n\n",
+    "scores": [
+        0.579,
+        0.569,
+        0.534,
+        0.526,
+        0.522,
+        0.485,
+        0.481,
+        0.476,
+        0.476,
+        0.476,
+        0.472,
+        0.472,
+        0.459,
+        0.432,
+        0.429,
+        0.426,
+        0.421,
+        0.414,
+        0.411,
+        0.358,
+        0.0
+    ],
+    "ground_truth": "assertEquals(Logger.Level.DEBUG,logger.level);"
+}

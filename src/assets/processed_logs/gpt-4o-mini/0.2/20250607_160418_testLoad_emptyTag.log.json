@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFile {\npublic int agentCount ( ) {\nreturn agents . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFileTest {\n@Test\npublic void testLoad_emptyTag ( ) {\nwriteText ( \"STR\" , agentsFile ) ;\nregistry = load ( agentsFile ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(registry);\nassertTrue(registry instanceof List);\nassertEquals(0, registry.size());\nassertEquals(0, agentsFile.agentCount());\nassertTrue(agentsFile.agents.isEmpty());\nassertFalse(agentsFile.agents.contains(\"STR\"));\nassertNotEquals(1, agentsFile.agentCount());\nassertTrue(agentsFile.agentCount() >= 0);\nassertEquals(\"Expected agent count to be zero\", 0, agentsFile.agentCount());\nassertSame(agentsFile.agents, registry);\nassertTrue(agentsFile.agents.isEmpty());\nassertFalse(agentsFile.agents.contains(\"NonExistentAgent\"));\nassertNull(agentsFile.agents.get(0));\nassertThrows(IndexOutOfBoundsException.class, () -> agentsFile.agents.get(0));\nassertDoesNotThrow(() -> agentsFile.agentCount());\nassertEquals(\"Agent count should be zero after loading empty tag\", 0, agentsFile.agentCount());\nassertTrue(agentsFile.agents.isEmpty());\nassertFalse(agentsFile.agents.contains(\"AnotherNonExistentAgent\"));\nassertNotEquals(2, agentsFile.agentCount());\nassertTrue(registry.isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.794,
+        0.789,
+        0.785,
+        0.759,
+        0.64,
+        0.627,
+        0.578,
+        0.571,
+        0.563,
+        0.548,
+        0.548,
+        0.529,
+        0.526,
+        0.526,
+        0.526,
+        0.507,
+        0.5,
+        0.496,
+        0.466,
+        0.378,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,registry.agentCount());"
+}

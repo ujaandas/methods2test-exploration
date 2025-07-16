@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class Seq {
+    public static String join ( Collection < ? > list , String delimiter ) { 
+    if ( list == null || list . isEmpty ( ) ) { 
+    return "STR" ; 
+    } if ( delimiter == null ) { 
+    delimiter = "STR" ; 
+    } StringBuilder s = new StringBuilder ( ) ; 
+    boolean first = true ; 
+    for ( Object e : list ) { 
+    if ( first ) { 
+    first = false ; 
+    } else { 
+    s . append ( delimiter ) ; 
+    } s . append ( e ) ; 
+    } return s . toString ( ) ; 
+    }
+}
+
+package redraiment.jactiverecord;
+
+public class SeqTest {
+    @Test
+     public void testCommaList ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.assertEquals;
+import java.util.Arrays;
+import java.util.Collections;
+
+@Test
+public void testCommaList() {
+    assertEquals("STR", Seq.join(null, ","));
+    assertEquals("STR", Seq.join(Collections.emptyList(), ","));
+    assertEquals("a", Seq.join(Collections.singletonList("a"), ","));
+    assertEquals("a", Seq.join(Collections.singletonList("a"), null));
+    assertEquals("aSTRb", Seq.join(Arrays.asList("a", "b"), "STR"));
+    assertEquals("a,b", Seq.join(Arrays.asList("a", "b"), ","));
+    assertEquals("aSTRbSTRc", Seq.join(Arrays.asList("a", "b", "c"), "STR"));
+    assertEquals("1STR2STR3", Seq.join(Arrays.asList(1, 2, 3), "STR"));
+    assertEquals("trueSTRfalse", Seq.join(Arrays.asList(true, false), "STR"));
+    assertEquals("nullSTRvalue", Seq.join(Arrays.asList(null, "value"), "STR"));
+    assertEquals("aSTRbSTRcSTRd", Seq.join(Arrays.asList("a", "b", "c", "d"), "STR"));
+    assertEquals("1,2,3", Seq.join(Arrays.asList(1, 2, 3), ","));
+    assertEquals("aSTRbSTRcSTRdSTRe", Seq.join(Arrays.asList("a", "b", "c", "d", "e"), "STR"));
+    assertEquals("apple,banana,cherry", Seq.join(Arrays.asList("apple", "banana", "cherry"), ","));
+    assertEquals("1.1,2.2,3.3", Seq.join(Arrays.asList(1.1, 2.2, 3.3), ","));
+    assertEquals("xSTRySTRz", Seq.join(Arrays.asList("x", "y", "z"), "STR"));
+    assertEquals("ASTRBSTRC", Seq.join(Arrays.asList("A", "B", "C"), "STR"));
+    assertEquals("1STR2STR3STR4", Seq.join(Arrays.asList(1, 2, 3, 4), "STR"));
+    assertEquals("single", Seq.join(Collections.singletonList("single"), ","));
+    assertEquals("STR", Seq.join(Collections.singletonList(null),
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",Seq.join(Arrays.asList("STR","STR","STR"),"STR")); ===
+0.875 - assertEquals("aSTRb", Seq.join(Arrays.asList("a", "b"), "STR"))
+0.868 - assertEquals("aSTRbSTRc", Seq.join(Arrays.asList("a", "b", "c"), "STR"))
+0.868 - assertEquals("xSTRySTRz", Seq.join(Arrays.asList("x", "y", "z"), "STR"))
+0.868 - assertEquals("ASTRBSTRC", Seq.join(Arrays.asList("A", "B", "C"), "STR"))
+0.819 - assertEquals("aSTRbSTRcSTRd", Seq.join(Arrays.asList("a", "b", "c", "d"), "STR"))
+0.815 - assertEquals("1STR2STR3", Seq.join(Arrays.asList(1, 2, 3), "STR"))
+0.806 - assertEquals("a,b", Seq.join(Arrays.asList("a", "b"), ","))
+0.779 - assertEquals("1STR2STR3STR4", Seq.join(Arrays.asList(1, 2, 3, 4), "STR"))
+0.776 - assertEquals("aSTRbSTRcSTRdSTRe", Seq.join(Arrays.asList("a", "b", "c", "d", "e"), "STR"))
+0.771 - assertEquals("nullSTRvalue", Seq.join(Arrays.asList(null, "value"), "STR"))
+0.754 - assertEquals("trueSTRfalse", Seq.join(Arrays.asList(true, false), "STR"))
+0.710 - assertEquals("1,2,3", Seq.join(Arrays.asList(1, 2, 3), ","))
+0.671 - assertEquals("apple,banana,cherry", Seq.join(Arrays.asList("apple", "banana", "cherry"), ","))
+0.647 - assertEquals("1.1,2.2,3.3", Seq.join(Arrays.asList(1.1, 2.2, 3.3), ","))
+0.640 - assertEquals("STR", Seq.join(Collections.emptyList(), ","))
+0.631 - assertEquals("a", Seq.join(Collections.singletonList("a"), ","))
+0.595 - assertEquals("a", Seq.join(Collections.singletonList("a"), null))
+0.594 - assertEquals("STR", Seq.join(Collections.singletonList(null),
+0.586 - assertEquals("single", Seq.join(Collections.singletonList("single"), ","))
+0.475 - @Test
+public void testCommaList() {
+    assertEquals("STR", Seq.join(null, ","))
+0.244 - import java.util.Arrays
+0.218 - ```java
+import static org.junit.Assert.assertEquals
+0.105 - import java.util.Collections

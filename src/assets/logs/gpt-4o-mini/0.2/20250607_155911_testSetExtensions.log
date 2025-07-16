@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class About {
+    public JsonObject getExtensions ( ) { 
+    return extensions ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class AboutTest {
+    @Test
+     public void testSetExtensions ( ) {
+         JsonObject expected = new JsonObject ( ) ; 
+         expected . addProperty ( "STR" , UUID . randomUUID ( ) . toString ( ) ) ; 
+         about . setExtensions ( expected ) ; 
+         JsonObject actual = about . getExtensions ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.has("STR"));
+assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString());
+assertNotSame(expected, actual);
+assertTrue(actual.entrySet().containsAll(expected.entrySet()));
+assertEquals(expected.getAsJsonPrimitive("STR").getAsString(), actual.getAsJsonPrimitive("STR").getAsString());
+assertFalse(actual.has("NON_EXISTENT_PROPERTY"));
+assertTrue(actual.equals(expected));
+assertNotEquals(expected.hashCode(), actual.hashCode());
+assertTrue(actual.toString().contains("STR"));
+assertTrue(actual.get("STR").isJsonPrimitive());
+assertTrue(actual.get("STR").getAsString().length() > 0);
+assertEquals(expected.get("STR").getAsString().length(), actual.get("STR").getAsString().length());
+assertTrue(actual.get("STR").getAsString().matches(".*-.*-.*-.*-.*")); // UUID format
+assertNotNull(actual.get("STR").getAsString());
+assertTrue(actual.get("STR").getAsString().matches("[a-f0-9-]+")); // Valid UUID characters
+assertEquals(expected.get("STR").getAsString().toUpperCase(), actual.get("STR").getAsString().toUpperCase());
+assertTrue(actual.get("STR").getAsString().contains("-"));
+assertFalse(actual.get("STR").getAsString().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.600 - assertTrue(actual.has("STR"))
+0.536 - assertTrue(actual.equals(expected))
+0.525 - // UUID format
+assertNotNull(actual.get("STR").getAsString())
+0.507 - assertNotEquals(expected.hashCode(), actual.hashCode())
+0.469 - assertEquals(expected.size(), actual.size())
+0.455 - assertTrue(actual.toString().contains("STR"))
+0.441 - assertTrue(actual.get("STR").isJsonPrimitive())
+0.435 - assertFalse(actual.has("NON_EXISTENT_PROPERTY"))
+0.400 - assertTrue(actual.get("STR").getAsString().length() > 0)
+0.400 - assertFalse(actual.get("STR").getAsString().isEmpty())
+0.385 - assertTrue(actual.get("STR").getAsString().contains("-"))
+0.361 - assertTrue(actual.entrySet().containsAll(expected.entrySet()))
+0.349 - assertTrue(actual.get("STR").getAsString().matches("[a-f0-9-]+"))
+0.333 - assertTrue(actual.get("STR").getAsString().matches(".*-.*-.*-.*-.*"))
+0.300 - assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString())
+0.271 - assertEquals(expected.get("STR").getAsString().length(), actual.get("STR").getAsString().length())
+0.246 - assertEquals(expected.getAsJsonPrimitive("STR").getAsString(), actual.getAsJsonPrimitive("STR").getAsString())
+0.200 - // Valid UUID characters
+assertEquals(expected.get("STR").getAsString().toUpperCase(), actual.get("STR").getAsString().toUpperCase())
+0.000 - ```

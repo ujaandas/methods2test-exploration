@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class MetronomeSupplier {\n@Override\npublic Metronome get ( ) {\nif ( metronomeClass == EmptyMetronome . class ) {\nreturn EmptyMetronome . INSTANCE ;\n} try {\nConstructor < ? extends Metronome > constructor = metronomeClass . getConstructor ( Metronome . class ) ;\nreturn constructor . newInstance ( masterMetronome ) ;\n} catch ( Exception e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class MetronomeSupplierTest {\n@Test\npublic void testThreadCount ( ) {\nPropertyBinding propertyBinding = new PropertyBinding ( new TestCase ( \"STR\" ) . setProperty ( \"STR\" , \"STR\" ) ) ;\nMetronomeSupplier supplier = new MetronomeSupplier ( \"STR\" , propertyBinding , 10 ) ;\nMetronome m = supplier . get ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(m);\nAssert.assertTrue(m instanceof Metronome);\nAssert.assertEquals(10, m.getCount());\nAssert.assertNotEquals(0, m.getTimeUnit());\nAssert.assertTrue(m.isActive());\nAssert.assertFalse(m.isStopped());\nAssert.assertTrue(m.toString().contains(\"Metronome\"));\nAssert.assertSame(EmptyMetronome.INSTANCE, supplier.get());\nAssert.assertNotSame(supplier.get(), supplier.get());\nAssert.assertTrue(m.hashCode() > 0);\nAssert.assertTrue(m.equals(m));\nAssert.assertFalse(m.equals(null));\nAssert.assertFalse(m.equals(new Object()));\nAssert.assertEquals(0, m.compareTo(EmptyMetronome.INSTANCE));\nAssert.assertNotEquals(0, m.compareTo(supplier.get()));\nAssert.assertTrue(m.equals(m) == m.equals(m));\nAssert.assertTrue(m.equals(EmptyMetronome.INSTANCE) != EmptyMetronome.INSTANCE.equals(m));\nAssert.assertTrue(m.hashCode() == m.hashCode());\nAssert.assertTrue(supplier.get().isActive() == m.isActive());\nAssert.assertFalse(m.isStopped() == supplier.get().isStopped());\n====================\n\n",
+    "scores": [
+        0.582,
+        0.549,
+        0.524,
+        0.52,
+        0.5,
+        0.492,
+        0.488,
+        0.488,
+        0.479,
+        0.432,
+        0.429,
+        0.423,
+        0.421,
+        0.421,
+        0.416,
+        0.411,
+        0.383,
+        0.378,
+        0.376,
+        0.333
+    ],
+    "ground_truth": "assertEquals(SleepingMetronome.class,m.getClass());"
+}

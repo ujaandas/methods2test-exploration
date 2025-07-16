@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testOptional3 ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedValue1, qResult.get(0).field(\"fieldName1\"));\nassertEquals(expectedValue2, qResult.get(1).field(\"fieldName2\"));\nassertEquals(expectedValue3, qResult.get(2).field(\"fieldName3\"));\nassertNotEquals(unexpectedValue, qResult.get(3).field(\"fieldName4\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"fieldName5\") != null));\nassertEquals(expectedFieldCount, qResult.get(0).fields().size());\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"fieldName6\").equals(expectedValue6)));\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"fieldName7\").equals(unexpectedValue7)));\nassertEquals(expectedType, qResult.get(0).getClass());\nassertNotNull(qResult.get(0).getIdentity());\nassertTrue(qResult.get(0).getIdentity().isValid());\nassertEquals(expectedString, qResult.get(0).field(\"fieldName8\").toString());\nassertTrue(qResult.get(0).field(\"fieldName9\") instanceof List);\nassertEquals(expectedListSize, ((List<?>) qResult.get(0).field(\"fieldName9\")).size());\nassertTrue(qResult.get(0).field(\"fieldName10\").toString().contains(expectedSubstring));\nassertEquals(expectedDate, qResult.get(0).field(\"fieldName11\"));\nassertNotNull(qResult.get(0).field(\"fieldName12\"));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.634,
+        0.624,
+        0.602,
+        0.587,
+        0.581,
+        0.581,
+        0.575,
+        0.567,
+        0.557,
+        0.55,
+        0.525,
+        0.519,
+        0.513,
+        0.507,
+        0.422,
+        0.408,
+        0.374,
+        0.362,
+        0.35,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

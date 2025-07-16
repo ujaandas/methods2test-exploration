@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testAggregations ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));
+assertTrue(results.stream().anyMatch(doc -> doc.containsField("fieldName1")));
+assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName1").equals(expectedValue1)));
+assertEquals(expectedValue2, results.get(0).getProperty("fieldName2"));
+assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName3") instanceof String));
+assertTrue(results.stream().allMatch(doc -> (Integer) doc.getProperty("fieldName4") > 0));
+assertTrue(results.stream().noneMatch(doc -> doc.getProperty("fieldName5") == null));
+assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName6").equals(expectedValue3)));
+assertEquals(expectedCount, results.stream().filter(doc -> doc.getProperty("fieldName7").equals(targetValue)).count());
+assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName8") instanceof Date));
+assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName9").toString().contains("substring")));
+assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName10") instanceof List));
+assertTrue(results.stream().allMatch(doc -> ((List) doc.getProperty("fieldName10")).size() > 0));
+assertFalse(results.stream().anyMatch(doc -> doc.getProperty("fieldName11").equals("disallowedValue")));
+assertEquals(expectedSum, results.stream().mapToInt(doc -> (Integer) doc.getProperty("fieldName12")).sum());
+assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName13").equals(expectedValue4)));
+assertEquals(expectedAverage, results.stream().mapToDouble(doc -> (Double) doc.getProperty("fieldName14")).average().orElse(0.0), delta);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,results.size()); ===
+0.817 - assertEquals(expectedSize, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.567 - ```java
+assertNotNull(results)
+0.525 - assertEquals(expectedValue2, results.get(0).getProperty("fieldName2"))
+0.438 - assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument))
+0.421 - assertEquals(expectedSum, results.stream().mapToInt(doc -> (Integer) doc.getProperty("fieldName12")).sum())
+0.400 - assertTrue(results.stream().anyMatch(doc -> doc.containsField("fieldName1")))
+0.386 - assertEquals(expectedCount, results.stream().filter(doc -> doc.getProperty("fieldName7").equals(targetValue)).count())
+0.382 - assertTrue(results.stream().noneMatch(doc -> doc.getProperty("fieldName5") == null))
+0.380 - assertTrue(results.stream().allMatch(doc -> ((List) doc.getProperty("fieldName10")).size() > 0))
+0.368 - assertTrue(results.stream().allMatch(doc -> (Integer) doc.getProperty("fieldName4") > 0))
+0.359 - assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName8") instanceof Date))
+0.356 - assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName10") instanceof List))
+0.353 - assertTrue(results.stream().allMatch(doc -> doc.getProperty("fieldName3") instanceof String))
+0.351 - assertFalse(results.stream().anyMatch(doc -> doc.getProperty("fieldName11").equals("disallowedValue")))
+0.348 - assertEquals(expectedAverage, results.stream().mapToDouble(doc -> (Double) doc.getProperty("fieldName14")).average().orElse(0.0), delta)
+0.333 - assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName1").equals(expectedValue1)))
+0.333 - assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName6").equals(expectedValue3)))
+0.331 - assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName13").equals(expectedValue4)))
+0.309 - assertTrue(results.stream().anyMatch(doc -> doc.getProperty("fieldName9").toString().contains("substring")))
+0.000 - ```

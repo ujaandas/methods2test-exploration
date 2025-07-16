@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgb {
+    public byte [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgbTest {
+    @Test
+     public void testYuv420pToRgbH2H ( ) {
+         Yuv420pToRgb transform = new Yuv420pToRgb ( ) ; 
+         Picture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] { 
+     yH , uH , vH } , new byte [ ] [ ] { 
+     yL , uL , vL } , ColorSpace . YUV420 , 2 ) ; 
+         Picture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ; 
+         transform . transform ( _in , out ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(out);
+assertEquals(4, out.getWidth());
+assertEquals(4, out.getHeight());
+assertArrayEquals(expectedRgbData[0], out.getPlaneData(0));
+assertArrayEquals(expectedRgbData[1], out.getPlaneData(1));
+assertArrayEquals(expectedRgbData[2], out.getPlaneData(2));
+assertEquals(ColorSpace.RGB, out.getColorSpace());
+assertEquals(2, out.getBitDepth());
+assertTrue(out.getPlaneData(0).length > 0);
+assertTrue(out.getPlaneData(1).length > 0);
+assertTrue(out.getPlaneData(2).length > 0);
+assertEquals(expectedRgbData[0][0], out.getPlaneData(0)[0]);
+assertEquals(expectedRgbData[1][0], out.getPlaneData(1)[0]);
+assertEquals(expectedRgbData[2][0], out.getPlaneData(2)[0]);
+assertNotEquals(expectedRgbData[0][1], out.getPlaneData(0)[1]);
+assertNotEquals(expectedRgbData[1][1], out.getPlaneData(1)[1]);
+assertNotEquals(expectedRgbData[2][1], out.getPlaneData(2)[1]);
+assertEquals(expectedRgbData[0][3], out.getPlaneData(0)[3]);
+assertEquals(expectedRgbData[1][3], out.getPlaneData(1)[3]);
+assertEquals(expectedRgbData[2][3], out.getPlaneData(2)[3]);
+assertTrue(Arrays.equals(expectedRgbData[0], out.getPlaneData(0)));
+assertTrue(Arrays.equals(expectedRgbData[1], out.getPlaneData(1)));
+assertTrue(Arrays.equals(expectedRgbData[2], out.getPlaneData(2)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(rgbH,out.getPlaneData(0)); ===
+0.820 - assertArrayEquals(expectedRgbData[0], out.getPlaneData(0))
+0.800 - assertArrayEquals(expectedRgbData[1], out.getPlaneData(1))
+0.800 - assertArrayEquals(expectedRgbData[2], out.getPlaneData(2))
+0.741 - assertTrue(Arrays.equals(expectedRgbData[0], out.getPlaneData(0)))
+0.722 - assertTrue(Arrays.equals(expectedRgbData[1], out.getPlaneData(1)))
+0.722 - assertTrue(Arrays.equals(expectedRgbData[2], out.getPlaneData(2)))
+0.713 - assertEquals(expectedRgbData[0][0], out.getPlaneData(0)[0])
+0.713 - assertEquals(expectedRgbData[0][3], out.getPlaneData(0)[3])
+0.703 - assertEquals(4, out.getHeight())
+0.699 - assertTrue(out.getPlaneData(0).length > 0)
+0.693 - assertEquals(expectedRgbData[1][0], out.getPlaneData(1)[0])
+0.693 - assertEquals(expectedRgbData[2][0], out.getPlaneData(2)[0])
+0.693 - assertEquals(expectedRgbData[1][3], out.getPlaneData(1)[3])
+0.693 - assertEquals(expectedRgbData[2][3], out.getPlaneData(2)[3])
+0.692 - assertNotEquals(expectedRgbData[0][1], out.getPlaneData(0)[1])
+0.685 - assertEquals(4, out.getWidth())
+0.684 - assertEquals(2, out.getBitDepth())
+0.675 - assertTrue(out.getPlaneData(1).length > 0)
+0.675 - assertTrue(out.getPlaneData(2).length > 0)
+0.673 - assertNotEquals(expectedRgbData[1][1], out.getPlaneData(1)[1])
+0.673 - assertNotEquals(expectedRgbData[2][1], out.getPlaneData(2)[1])
+0.615 - assertEquals(ColorSpace.RGB, out.getColorSpace())
+0.377 - ```java
+assertNotNull(out)
+0.000 - ```

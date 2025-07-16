@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class CEFParser {
+    public CommonEvent parse ( String cefString , final boolean validate ) { 
+    return this . parse ( cefString , validate , Locale . ENGLISH ) ; 
+    }
+}
+
+package fluenda.ParCEFone;
+
+public class CEFParserTest {
+    @Test
+     public void validMessageValidationAllExtenstionsTest ( ) throws Exception {
+         String sample1 = "STR" ; 
+         CEFParser parser = new CEFParser ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+CommonEvent event = parser.parse(sample1, true);
+Assert.assertNotNull(event);
+Assert.assertEquals("ExpectedField1", event.getField1());
+Assert.assertEquals("ExpectedField2", event.getField2());
+Assert.assertTrue(event.isValid());
+Assert.assertEquals("ExpectedSource", event.getSource());
+Assert.assertEquals("ExpectedDestination", event.getDestination());
+Assert.assertNotNull(event.getTimestamp());
+Assert.assertTrue(event.getSeverity() >= 0);
+Assert.assertEquals("ExpectedCategory", event.getCategory());
+Assert.assertEquals("ExpectedAction", event.getAction());
+Assert.assertTrue(event.getExtensions().size() > 0);
+Assert.assertTrue(event.getExtensions().containsKey("ExpectedExtensionKey"));
+Assert.assertEquals("ExpectedExtensionValue", event.getExtensions().get("ExpectedExtensionKey"));
+Assert.assertNotNull(event.getRawData());
+Assert.assertTrue(event.getRawData().length() > 0);
+Assert.assertEquals("ExpectedProtocol", event.getProtocol());
+Assert.assertEquals("ExpectedDevice", event.getDevice());
+Assert.assertTrue(event.getEventId() > 0);
+Assert.assertNotNull(event.getLocation());
+Assert.assertEquals("ExpectedUser", event.getUser());
+Assert.assertEquals("ExpectedVendor", event.getVendor());
+Assert.assertTrue(event.getTags().contains("ExpectedTag"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(parser.parse(sample1,true)); ===
+0.652 - ```java
+CommonEvent event = parser.parse(sample1, true)
+0.590 - Assert.assertNotNull(event)
+0.526 - Assert.assertNotNull(event.getTimestamp())
+0.514 - Assert.assertNotNull(event.getRawData())
+0.480 - Assert.assertNotNull(event.getLocation())
+0.376 - Assert.assertEquals("ExpectedUser", event.getUser())
+0.324 - Assert.assertTrue(event.isValid())
+0.315 - Assert.assertEquals("ExpectedSource", event.getSource())
+0.301 - Assert.assertTrue(event.getEventId() > 0)
+0.293 - Assert.assertTrue(event.getSeverity() >= 0)
+0.292 - Assert.assertEquals("ExpectedDevice", event.getDevice())
+0.280 - Assert.assertEquals("ExpectedProtocol", event.getProtocol())
+0.270 - Assert.assertEquals("ExpectedField1", event.getField1())
+0.270 - Assert.assertEquals("ExpectedField2", event.getField2())
+0.268 - Assert.assertTrue(event.getRawData().length() > 0)
+0.265 - Assert.assertTrue(event.getExtensions().size() > 0)
+0.247 - Assert.assertEquals("ExpectedAction", event.getAction())
+0.247 - Assert.assertEquals("ExpectedVendor", event.getVendor())
+0.239 - Assert.assertTrue(event.getTags().contains("ExpectedTag"))
+0.237 - Assert.assertEquals("ExpectedCategory", event.getCategory())
+0.222 - Assert.assertEquals("ExpectedDestination", event.getDestination())
+0.200 - Assert.assertTrue(event.getExtensions().containsKey("ExpectedExtensionKey"))
+0.186 - Assert.assertEquals("ExpectedExtensionValue", event.getExtensions().get("ExpectedExtensionKey"))
+0.000 - ```

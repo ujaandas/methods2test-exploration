@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactory {
+    public Extractor getNewInstance ( ) { 
+    Extractor extractor = new BasicExtractor ( config ) ; 
+    if ( config . shouldCachedDownload ( ) ) { 
+    extractor = new CachedExtractor ( extractor , config ) ; 
+    } return extractor ; 
+    }
+}
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactoryTest {
+    @Test
+     public void withCaching ( ) throws Exception {
+         builder . useCachedDownload ( true ) ; 
+         Extractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(extractor);
+assertTrue(extractor instanceof CachedExtractor);
+assertTrue(((CachedExtractor) extractor).getWrappedExtractor() instanceof BasicExtractor);
+assertEquals(config, ((CachedExtractor) extractor).getConfig());
+assertTrue(config.shouldCachedDownload());
+assertEquals(0, ((CachedExtractor) extractor).getCacheSize());
+assertTrue(((CachedExtractor) extractor).isCacheEnabled());
+assertFalse(((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).isCacheEnabled());
+assertEquals("Expected value", ((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).getSomeProperty());
+assertNotNull(((CachedExtractor) extractor).getCache());
+assertTrue(((CachedExtractor) extractor).getCache() instanceof SomeCacheImplementation);
+assertEquals("Expected cache key", ((CachedExtractor) extractor).getCache().getCacheKey());
+assertTrue(((CachedExtractor) extractor).getCache().isEmpty());
+assertEquals("Expected configuration value", config.getSomeConfigValue());
+assertTrue(extractor.isReady());
+assertFalse(extractor.hasErrors());
+assertEquals("Expected extractor type", extractor.getType());
+assertNotNull(extractor.getData());
+assertTrue(extractor.getData().isEmpty());
+assertEquals("Expected initialization state", extractor.getInitializationState());
+assertTrue(extractor.isConfigured());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(extractor.getClass().equals(CachedExtractor.class)); ===
+0.685 - assertTrue(extractor instanceof CachedExtractor)
+0.621 - assertTrue(extractor.getData().isEmpty())
+0.559 - assertTrue(extractor.isReady())
+0.555 - assertTrue(((CachedExtractor) extractor).isCacheEnabled())
+0.537 - assertTrue(((CachedExtractor) extractor).getCache().isEmpty())
+0.531 - assertTrue(extractor.isConfigured())
+0.521 - assertNotNull(extractor.getData())
+0.512 - assertEquals(0, ((CachedExtractor) extractor).getCacheSize())
+0.500 - assertNotNull(((CachedExtractor) extractor).getCache())
+0.500 - assertFalse(extractor.hasErrors())
+0.488 - assertEquals(config, ((CachedExtractor) extractor).getConfig())
+0.466 - assertTrue(config.shouldCachedDownload())
+0.463 - assertFalse(((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).isCacheEnabled())
+0.452 - assertTrue(((CachedExtractor) extractor).getCache() instanceof SomeCacheImplementation)
+0.446 - assertTrue(((CachedExtractor) extractor).getWrappedExtractor() instanceof BasicExtractor)
+0.432 - assertEquals("Expected cache key", ((CachedExtractor) extractor).getCache().getCacheKey())
+0.427 - assertEquals("Expected value", ((BasicExtractor) ((CachedExtractor) extractor).getWrappedExtractor()).getSomeProperty())
+0.403 - assertEquals("Expected extractor type", extractor.getType())
+0.383 - ```java
+assertNotNull(extractor)
+0.371 - assertEquals("Expected initialization state", extractor.getInitializationState())
+0.348 - assertEquals("Expected configuration value", config.getSomeConfigValue())
+0.000 - ```

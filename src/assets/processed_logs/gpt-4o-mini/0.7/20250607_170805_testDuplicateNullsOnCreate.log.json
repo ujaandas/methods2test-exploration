@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class DuplicateDictionaryIndexChangesTx {\nT get ( Object iKey ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class DuplicateDictionaryIndexChangesTxTest {\n@Test\npublic void testDuplicateNullsOnCreate ( ) {\ndb . begin ( ) ;\nfinal ODocument person1 = db . newInstance ( \"STR\" ) . save ( ) ;\nfinal ODocument person2 = db . newInstance ( \"STR\" ) . save ( ) ;\nfinal ODocument person3 = db . newInstance ( \"STR\" ) . save ( ) ;\nperson1 . field ( \"STR\" , \"STR\" ) . save ( ) ;\nperson2 . field ( \"STR\" , \"STR\" ) . save ( ) ;\ndb . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(person1);\nAssert.assertNotNull(person2);\nAssert.assertNotNull(person3);\nAssert.assertEquals(\"STR\", person1.field(\"STR\"));\nAssert.assertEquals(\"STR\", person2.field(\"STR\"));\nAssert.assertEquals(\"STR\", person3.field(\"STR\"));\nAssert.assertNotEquals(person1.getIdentity(), person2.getIdentity());\nAssert.assertNotEquals(person1.getIdentity(), person3.getIdentity());\nAssert.assertNotEquals(person2.getIdentity(), person3.getIdentity());\nAssert.assertTrue(db.getRecord(person1.getIdentity()).exists());\nAssert.assertTrue(db.getRecord(person2.getIdentity()).exists());\nAssert.assertTrue(db.getRecord(person3.getIdentity()).exists());\nAssert.assertEquals(3, db.countClass(\"STR\"));\nAssert.assertTrue(db.query(\"SELECT FROM STR WHERE STR = 'STR'\").size() >= 2);\nAssert.assertTrue(db.query(\"SELECT FROM STR WHERE STR IS NOT NULL\").size() >= 3);\nAssert.assertTrue(db.query(\"SELECT FROM STR WHERE STR IS NULL\").isEmpty());\nAssert.assertTrue(db.query(\"SELECT FROM STR\").size() == 3);\nAssert.assertNotNull(db.getRecord(person1.getIdentity()));\nAssert.assertNotNull(db.getRecord(person2.getIdentity()));\nAssert.assertNotNull(db.getRecord(person3.getIdentity()));\nAssert.assertTrue(db.getRecord(person1.getIdentity()).field(\"STR\").equals(\"STR\"));\nAssert.assertTrue(db.getRecord(person2.getIdentity()).field(\"STR\").equals(\"STR\"));\nAssert.assertTrue(db.getRecord(person3.getIdentity()).field(\"STR\").equals(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.769,
+        0.744,
+        0.744,
+        0.595,
+        0.567,
+        0.551,
+        0.533,
+        0.531,
+        0.531,
+        0.523,
+        0.5,
+        0.5,
+        0.482,
+        0.471,
+        0.468,
+        0.464,
+        0.464,
+        0.447,
+        0.447,
+        0.424,
+        0.364,
+        0.364,
+        0.353,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(person2,index.get(\"STR\"));"
+}

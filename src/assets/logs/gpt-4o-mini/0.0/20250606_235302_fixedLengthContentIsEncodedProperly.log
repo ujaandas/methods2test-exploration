@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegration {
+    public static Response newFixedLengthResponse ( String msg ) { 
+    return newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegrationTest {
+    @Test
+     public void fixedLengthContentIsEncodedProperly ( ) throws IOException {
+         testServer . response = Response . newFixedLengthResponse ( "STR" ) ; 
+         HttpGet request = new HttpGet ( "STR" ) ; 
+         request . addHeader ( "STR" , "STR" ) ; 
+         HttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(response);
+assertEquals(200, response.getStatusLine().getStatusCode());
+assertEquals("text/html", EntityUtils.getContentType(response.getEntity()).getValue());
+assertEquals("STR", EntityUtils.toString(response.getEntity()));
+assertTrue(EntityUtils.toString(response.getEntity()).contains("STR"));
+assertFalse(EntityUtils.toString(response.getEntity()).isEmpty());
+assertTrue(response.getHeaders("STR").length > 0);
+assertEquals("STR", response.getFirstHeader("STR").getValue());
+assertNotNull(response.getEntity());
+assertTrue(response.getEntity().isRepeatable());
+assertTrue(response.getEntity().getContentLength() > 0);
+assertEquals("gzip", response.getFirstHeader("Content-Encoding").getValue());
+assertTrue(response.getFirstHeader("Content-Type").getValue().contains("text/html"));
+assertTrue(response.getFirstHeader("Content-Length").getValue().matches("\\d+"));
+assertNotNull(response.getFirstHeader("Date"));
+assertNotNull(response.getFirstHeader("Server"));
+assertTrue(response.getFirstHeader("Connection").getValue().equalsIgnoreCase("keep-alive"));
+assertEquals("STR", response.getFirstHeader("STR").getValue());
+assertTrue(EntityUtils.toString(response.getEntity()).length() > 0);
+assertNotNull(response.getEntity().getContent());
+assertTrue(response.getEntity().getContent().available() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",EntityUtils.toString(response.getEntity())); ===
+1.000 - assertEquals("STR", EntityUtils.toString(response.getEntity()))
+0.835 - assertFalse(EntityUtils.toString(response.getEntity()).isEmpty())
+0.803 - assertTrue(EntityUtils.toString(response.getEntity()).length() > 0)
+0.773 - assertTrue(EntityUtils.toString(response.getEntity()).contains("STR"))
+0.748 - assertEquals("text/html", EntityUtils.getContentType(response.getEntity()).getValue())
+0.639 - assertNotNull(response.getEntity())
+0.585 - assertEquals("STR", response.getFirstHeader("STR").getValue())
+0.585 - assertEquals("STR", response.getFirstHeader("STR").getValue())
+0.582 - assertNotNull(response.getEntity().getContent())
+0.550 - assertTrue(response.getEntity().isRepeatable())
+0.533 - assertEquals(200, response.getStatusLine().getStatusCode())
+0.522 - assertTrue(response.getEntity().getContentLength() > 0)
+0.496 - assertEquals("gzip", response.getFirstHeader("Content-Encoding").getValue())
+0.496 - assertTrue(response.getEntity().getContent().available() > 0)
+0.481 - assertNotNull(response.getFirstHeader("Date"))
+0.473 - assertNotNull(response.getFirstHeader("Server"))
+0.422 - assertTrue(response.getHeaders("STR").length > 0)
+0.409 - ```java
+assertNotNull(response)
+0.384 - assertTrue(response.getFirstHeader("Content-Type").getValue().contains("text/html"))
+0.380 - assertTrue(response.getFirstHeader("Content-Length").getValue().matches("\\d+"))
+0.366 - assertTrue(response.getFirstHeader("Connection").getValue().equalsIgnoreCase("keep-alive"))
+0.000 - ```

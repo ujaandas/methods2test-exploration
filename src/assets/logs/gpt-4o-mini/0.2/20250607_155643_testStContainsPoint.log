@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctions {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctionsTest {
+    @Test
+     public void testStContainsPoint ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(next);
+assertTrue(next.containsField("fieldName1"));
+assertEquals("expectedValue1", next.field("fieldName1"));
+assertTrue(next.field("fieldName2") instanceof OIdentifiable);
+assertFalse(next.field("fieldName3").isNew());
+assertTrue(next.field("fieldName4").isPersistent());
+assertEquals(5, next.field("fieldName5").size());
+assertTrue(next.field("fieldName6").contains("expectedElement"));
+assertNotEquals("unexpectedValue", next.field("fieldName7"));
+assertNull(next.field("fieldName8"));
+assertTrue(next.field("fieldName9").toString().contains("expectedSubstring"));
+assertEquals(10, next.field("fieldName10").get("subField").intValue());
+assertTrue(next.field("fieldName11").isDirty());
+assertFalse(next.field("fieldName12").isDirty());
+assertEquals("expectedValue", next.field("fieldName13"));
+assertNotSame(next.field("fieldName14"), next.field("fieldName15"));
+assertTrue(next.field("fieldName16").isModified());
+assertFalse(next.field("fieldName17").isModified());
+assertTrue(next.field("fieldName18").isEmbedded());
+assertEquals("expectedType", next.field("fieldName19").getType());
+assertNotNull(next.field("fieldName20"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(true,next.field("STR")); ===
+0.703 - assertEquals("expectedValue1", next.field("fieldName1"))
+0.703 - assertEquals("expectedValue", next.field("fieldName13"))
+0.699 - assertEquals(5, next.field("fieldName5").size())
+0.674 - assertNotEquals("unexpectedValue", next.field("fieldName7"))
+0.667 - assertNull(next.field("fieldName8"))
+0.632 - assertNotNull(next.field("fieldName20"))
+0.620 - assertEquals("expectedType", next.field("fieldName19").getType())
+0.617 - assertFalse(next.field("fieldName3").isNew())
+0.595 - assertFalse(next.field("fieldName12").isDirty())
+0.578 - assertTrue(next.field("fieldName11").isDirty())
+0.575 - assertTrue(next.containsField("fieldName1"))
+0.575 - assertFalse(next.field("fieldName17").isModified())
+0.558 - assertTrue(next.field("fieldName16").isModified())
+0.558 - assertTrue(next.field("fieldName18").isEmbedded())
+0.552 - assertEquals(10, next.field("fieldName10").get("subField").intValue())
+0.552 - assertTrue(next.field("fieldName4").isPersistent())
+0.510 - assertNotSame(next.field("fieldName14"), next.field("fieldName15"))
+0.505 - assertTrue(next.field("fieldName2") instanceof OIdentifiable)
+0.480 - assertTrue(next.field("fieldName6").contains("expectedElement"))
+0.444 - ```java
+assertNotNull(next)
+0.442 - assertTrue(next.field("fieldName9").toString().contains("expectedSubstring"))
+0.000 - ```

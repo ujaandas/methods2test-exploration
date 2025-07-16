@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMap {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMapTest {
+    @Test
+     public void testKeysValues ( ) {
+         final AListMap < String , Integer > map = AListMap . < String , Integer > empty ( ) . updated ( "STR" , 1 ) . updated ( "STR" , 2 ) . updated ( "STR" , 3 ) . updated ( "STR" , 4 ) ; 
+         final ASet < String > keys = map . keys ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, map.size());
+assertTrue(keys.contains("STR"));
+assertFalse(keys.contains("ABC"));
+assertEquals(1, map.get("STR"));
+assertNull(map.get("ABC"));
+assertTrue(map.containsKey("STR"));
+assertFalse(map.containsKey("ABC"));
+assertTrue(map.containsValue(4));
+assertFalse(map.containsValue(3));
+assertEquals(1, map.remove("STR"));
+assertEquals(3, map.size());
+assertTrue(map.isEmpty());
+assertEquals(0, keys.size());
+assertFalse(keys.isEmpty());
+assertEquals(4, keys.toArray().length);
+assertTrue(keys.toArray().length > 0);
+assertTrue(map.equals(map));
+assertFalse(keys.equals(map));
+assertNotNull(map.toString());
+assertTrue(keys.hashCode() == keys.hashCode());
+assertFalse(map.hashCode() == keys.hashCode());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,keys.size()); ===
+0.963 - assertEquals(0, keys.size())
+0.868 - assertEquals(4, map.size())
+0.830 - assertEquals(3, map.size())
+0.719 - assertEquals(4, keys.toArray().length)
+0.704 - assertFalse(keys.isEmpty())
+0.633 - assertFalse(keys.contains("ABC"))
+0.633 - assertEquals(1, map.remove("STR"))
+0.632 - assertEquals(1, map.get("STR"))
+0.576 - assertTrue(keys.contains("STR"))
+0.563 - assertFalse(map.hashCode() == keys.hashCode())
+0.519 - assertTrue(map.equals(map))
+0.516 - assertTrue(keys.toArray().length > 0)
+0.507 - assertTrue(keys.hashCode() == keys.hashCode())
+0.500 - assertFalse(keys.equals(map))
+0.484 - assertFalse(map.containsKey("ABC"))
+0.464 - assertNotNull(map.toString())
+0.459 - assertTrue(map.containsKey("STR"))
+0.441 - assertTrue(map.containsValue(4))
+0.433 - assertFalse(map.containsValue(3))
+0.423 - assertTrue(map.isEmpty())
+0.415 - assertNull(map.get("ABC"))

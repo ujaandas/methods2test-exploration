@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class CEFParser {
+    public CommonEvent parse ( String cefString , final boolean validate ) { 
+    return this . parse ( cefString , validate , Locale . ENGLISH ) ; 
+    }
+}
+
+package fluenda.ParCEFone;
+
+public class CEFParserTest {
+    @Test
+     public void invalidMessageTypesTest ( ) throws Exception {
+         String sample1 = "STR" ; 
+         CEFParser parser = new CEFParser ( ) ; 
+         CommonEvent event = parser . parse ( sample1 , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(event);
+assertEquals("Invalid CEF format", event.getErrorMessage());
+assertFalse(event.isValid());
+assertEquals(0, event.getEventId());
+assertEquals("Unknown", event.getEventType());
+assertEquals("Invalid", event.getSeverity());
+assertTrue(event.getTimestamp().isBefore(Instant.now()));
+assertEquals("STR", event.getRawMessage());
+assertTrue(event.getParsedFields().isEmpty());
+assertEquals(0, event.getSourceCount());
+assertEquals(0, event.getDestinationCount());
+assertEquals(0, event.getCustomFields().size());
+assertEquals("Parsing failed", event.getStatus());
+assertNotNull(event.getErrorDetails());
+assertTrue(event.getErrorDetails().contains("Malformed CEF string"));
+assertEquals("N/A", event.getDeviceVendor());
+assertEquals("N/A", event.getDeviceProduct());
+assertEquals("N/A", event.getDeviceVersion());
+assertEquals("N/A", event.getDeviceEventClassId());
+assertEquals("N/A", event.getName());
+assertEquals("N/A", event.getCategory());
+assertEquals("N/A", event.getSubCategory());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(event); ===
+0.810 - ```java
+assertNull(event)
+0.622 - assertFalse(event.isValid())
+0.618 - assertNotNull(event.getErrorDetails())
+0.588 - assertEquals(0, event.getEventId())
+0.545 - assertEquals(0, event.getSourceCount())
+0.517 - assertEquals("STR", event.getRawMessage())
+0.500 - assertEquals("Invalid", event.getSeverity())
+0.500 - assertEquals(0, event.getDestinationCount())
+0.500 - assertEquals("N/A", event.getName())
+0.492 - assertEquals("Unknown", event.getEventType())
+0.476 - assertEquals(0, event.getCustomFields().size())
+0.469 - assertEquals("Parsing failed", event.getStatus())
+0.464 - assertEquals("N/A", event.getCategory())
+0.452 - assertTrue(event.getParsedFields().isEmpty())
+0.441 - assertEquals("N/A", event.getSubCategory())
+0.433 - assertEquals("N/A", event.getDeviceVendor())
+0.426 - assertEquals("N/A", event.getDeviceProduct())
+0.426 - assertEquals("N/A", event.getDeviceVersion())
+0.411 - assertEquals("Invalid CEF format", event.getErrorMessage())
+0.394 - assertEquals("N/A", event.getDeviceEventClassId())
+0.384 - assertTrue(event.getTimestamp().isBefore(Instant.now()))
+0.337 - assertTrue(event.getErrorDetails().contains("Malformed CEF string"))
+0.000 - ```

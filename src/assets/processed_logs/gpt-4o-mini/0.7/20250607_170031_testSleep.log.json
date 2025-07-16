@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScript {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScriptTest {\n@Test\npublic void testSleep ( ) throws Exception {\nlong begin = System . currentTimeMillis ( ) ;\nStringBuilder script = new StringBuilder ( ) ;\nscript . append ( \"STR\" ) ;\ndb . command ( new OCommandScript ( \"STR\" , script . toString ( ) ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(db);\nAssert.assertTrue(db.isActive());\nAssert.assertEquals(\"ExpectedValue\", db.getValue(\"Key\"));\nAssert.assertTrue(db.getCommandCount() > 0);\nAssert.assertTrue(db.getExecutionTime() < 1000);\nAssert.assertEquals(\"ExpectedResult\", db.getLastResult());\nAssert.assertFalse(db.hasErrors());\nAssert.assertTrue(db.getErrorCount() == 0);\nAssert.assertNotNull(db.getCurrentTransaction());\nAssert.assertTrue(db.getCurrentTransaction().isActive());\nAssert.assertEquals(\"ExpectedTransactionState\", db.getCurrentTransaction().getState());\nAssert.assertTrue(db.getUserCount() > 0);\nAssert.assertFalse(db.isReadOnly());\nAssert.assertEquals(\"ExpectedScriptOutput\", db.getLastScriptOutput());\nAssert.assertTrue(db.getScriptExecutionCount() > 0);\nAssert.assertNotNull(db.getLastExecutedCommand());\nAssert.assertNull(db.getLastError());\nAssert.assertTrue(db.getCommandHistory().size() > 0);\nAssert.assertEquals(\"ExpectedConfigValue\", db.getConfig(\"ConfigKey\"));\nAssert.assertTrue(db.getActiveConnections() > 0);\nAssert.assertNotEquals(\"UnexpectedValue\", db.getSomeValue(\"AnotherKey\"));\n```\n====================\n\n",
+    "scores": [
+        0.575,
+        0.525,
+        0.512,
+        0.51,
+        0.506,
+        0.505,
+        0.477,
+        0.459,
+        0.444,
+        0.435,
+        0.396,
+        0.395,
+        0.385,
+        0.378,
+        0.364,
+        0.327,
+        0.309,
+        0.297,
+        0.247,
+        0.218,
+        0.212,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(System.currentTimeMillis()-begin>=500);"
+}

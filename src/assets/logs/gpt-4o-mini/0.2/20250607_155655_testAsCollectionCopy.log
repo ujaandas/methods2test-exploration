@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopy {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopyTest {
+    @Test
+     public void testAsCollectionCopy ( ) {
+         final List < String > list = new ArrayList < > ( Arrays . asList ( "STR" , "STR" ) ) ; 
+         final ACollection < String > copied = ACollectionHelper . asACollectionCopy ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(copied);
+assertEquals(2, copied.size());
+assertTrue(copied.contains("STR"));
+assertFalse(copied.isEmpty());
+assertEquals("STR", copied.get(0));
+assertEquals("STR", copied.get(1));
+assertEquals(2, copied.stream().count());
+assertTrue(copied.stream().allMatch(s -> s.equals("STR")));
+assertFalse(copied.contains("OTHER"));
+assertEquals(2, copied.toArray().length);
+assertArrayEquals(new String[]{"STR", "STR"}, copied.toArray(new String[0]));
+assertTrue(copied.equals(new ACollection<>(Arrays.asList("STR", "STR"))));
+assertFalse(copied.equals(new ACollection<>(Arrays.asList("STR"))));
+assertTrue(copied.iterator().hasNext());
+assertEquals("STR", copied.iterator().next());
+assertTrue(copied.stream().distinct().count() == 1);
+assertEquals(copied.size(), copied.stream().filter(s -> s.equals("STR")).count());
+assertThrows(IndexOutOfBoundsException.class, () -> copied.get(2));
+assertThrows(IndexOutOfBoundsException.class, () -> copied.get(-1));
+assertTrue(copied instanceof Collection);
+assertTrue(copied instanceof List);
+assertEquals(2, copied.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,copied.size()); ===
+1.000 - assertEquals(2, copied.size())
+1.000 - assertEquals(2, copied.size())
+0.806 - assertEquals("STR", copied.get(0))
+0.806 - assertEquals("STR", copied.get(1))
+0.794 - assertEquals(2, copied.stream().count())
+0.735 - assertEquals(2, copied.toArray().length)
+0.724 - assertFalse(copied.isEmpty())
+0.712 - assertEquals("STR", copied.iterator().next())
+0.636 - assertFalse(copied.contains("OTHER"))
+0.603 - assertTrue(copied.contains("STR"))
+0.588 - assertTrue(copied.iterator().hasNext())
+0.557 - assertTrue(copied instanceof List)
+0.552 - ```java
+assertNotNull(copied)
+0.513 - assertTrue(copied.stream().distinct().count() == 1)
+0.507 - assertTrue(copied instanceof Collection)
+0.505 - assertEquals(copied.size(), copied.stream().filter(s -> s.equals("STR")).count())
+0.475 - assertArrayEquals(new String[]{"STR", "STR"}, copied.toArray(new String[0]))
+0.471 - assertTrue(copied.stream().allMatch(s -> s.equals("STR")))
+0.463 - assertFalse(copied.equals(new ACollection<>(Arrays.asList("STR"))))
+0.435 - assertThrows(IndexOutOfBoundsException.class, () -> copied.get(2))
+0.430 - assertThrows(IndexOutOfBoundsException.class, () -> copied.get(-1))
+0.400 - assertTrue(copied.equals(new ACollection<>(Arrays.asList("STR", "STR"))))
+0.000 - ```

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValue {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValueTest {\n@Test\npublic void testDefaultValueFromJson ( ) {\nOSchema schema = database . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . DATE ) ;\nprop . setDefaultValue ( ODateHelper . getDateTimeFormatInstance ( ) . format ( new Date ( ) ) ) ;\nODocument doc = new ODocument ( ) . fromJSON ( \"STR\" ) ;\nODocument saved = database . save ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(saved);\nAssert.assertEquals(\"STR\", saved.getClassName());\nAssert.assertTrue(saved.containsField(\"STR\"));\nAssert.assertTrue(saved.field(\"STR\") instanceof Date);\nAssert.assertEquals(prop.getType(), OType.DATE);\nAssert.assertEquals(prop.getDefaultValue(), ODateHelper.getDateTimeFormatInstance().format(new Date()));\nAssert.assertEquals(saved.field(\"STR\"), ODateHelper.getDateTimeFormatInstance().format(new Date()));\nAssert.assertTrue(saved.getIdentity().isPersistent());\nAssert.assertTrue(saved.getVersion() >= 0);\nAssert.assertNotNull(saved.getRecordType());\nAssert.assertTrue(saved.getProperty(\"STR\") instanceof Date);\nAssert.assertEquals(saved.getProperty(\"STR\"), ODateHelper.getDateTimeFormatInstance().format(new Date()));\nAssert.assertTrue(saved.getSchemaType().isDocument());\nAssert.assertTrue(saved.getSchemaType().isEmbedded());\nAssert.assertFalse(saved.isNew());\nAssert.assertTrue(saved.isDirty());\nAssert.assertEquals(saved.getProperty(\"STR\"), saved.field(\"STR\"));\nAssert.assertNotNull(saved.getDatabase());\nAssert.assertTrue(saved.getDatabase().isOpen());\nAssert.assertEquals(saved.getDatabase().getName(), database.getName());\nAssert.assertTrue(saved.getFieldNames().contains(\"STR\"));\nAssert.assertEquals(saved.getField(\"STR\"), saved.field(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.732,
+        0.725,
+        0.716,
+        0.701,
+        0.656,
+        0.644,
+        0.644,
+        0.634,
+        0.622,
+        0.6,
+        0.554,
+        0.548,
+        0.545,
+        0.521,
+        0.506,
+        0.481,
+        0.481,
+        0.455,
+        0.421,
+        0.372,
+        0.361,
+        0.331,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(saved.field(\"STR\"));"
+}

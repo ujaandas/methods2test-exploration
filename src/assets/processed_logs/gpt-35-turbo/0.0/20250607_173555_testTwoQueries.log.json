@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\nResponseStatus getStatus ( ) ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testTwoQueries ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(ResponseStatus.OK, response.getStatus());\nassertNotNull(response.getTimestamp());\nassertTrue(response.getTimestamp() > 0);\nassertEquals(otp, response.getOtp());\nassertTrue(response.getNonce().length() > 0);\nassertTrue(response.getNonce().matches(\"[a-zA-Z0-9]+\"));\nassertTrue(response.getNonce().length() <= 64);\nassertTrue(response.getNonce().equals(client.getLastNonce()));\nassertTrue(response.getSignature().length() > 0);\nassertTrue(response.getSignature().matches(\"[a-zA-Z0-9]+\"));\nassertTrue(response.getSignature().length() <= 44);\nassertTrue(response.getSignature().equals(client.getLastSignature()));\nassertTrue(response.getSl() >= 0);\nassertTrue(response.getSl() <= 100);\nassertTrue(response.getT() >= 0);\nassertTrue(response.getT() <= 60);\nassertTrue(response.getR() >= 0);\nassertTrue(response.getR() <= 60);\nassertTrue(response.getH().length() > 0);\nassertTrue(response.getH().matches(\"[a-zA-Z0-9]+\"));\nassertTrue(response.getH().length() <= 44);\n====================\n\n",
+    "scores": [
+        0.895,
+        0.639,
+        0.52,
+        0.516,
+        0.505,
+        0.505,
+        0.5,
+        0.5,
+        0.5,
+        0.495,
+        0.495,
+        0.491,
+        0.463,
+        0.46,
+        0.46,
+        0.451,
+        0.444,
+        0.442,
+        0.434,
+        0.427,
+        0.423
+    ],
+    "ground_truth": "assertEquals(ResponseStatus.REPLAYED_OTP,response.getStatus());"
+}

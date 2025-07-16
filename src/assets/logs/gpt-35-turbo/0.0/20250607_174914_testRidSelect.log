@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertNotNull(item.getIdentity());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isPresent());
+Assert.assertEquals(1, listener.getResults().size());
+Assert.assertEquals("STR" + item.getIdentity(), live.getName());
+Assert.assertTrue(live.isSubscribed(listener));
+Assert.assertTrue(live.unsubscribe(listener));
+Assert.assertTrue(live.subscribe(listener));
+Assert.assertTrue(live.isActive());
+Assert.assertTrue(live.pause());
+Assert.assertTrue(live.resume());
+Assert.assertTrue(live.shutdown());
+Assert.assertTrue(database.getVertex(item.getIdentity()).get().remove());
+Assert.assertNull(database.getVertex(item.getIdentity()).orElse(null));
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.495 - Assert.assertEquals(1, listener.getResults().size())
+0.475 - Assert.assertTrue(live.isActive())
+0.475 - Assert.assertTrue(live.shutdown())
+0.472 - Assert.assertTrue(live.subscribe(listener))
+0.468 - Assert.assertTrue(live.pause())
+0.462 - Assert.assertTrue(live.unsubscribe(listener))
+0.462 - Assert.assertTrue(live.resume())
+0.457 - Assert.assertTrue(live.isSubscribed(listener))
+0.419 - Assert.assertNotNull(item.getIdentity())
+0.390 - Assert.assertTrue(database.getVertex(item.getIdentity()).get().remove())
+0.354 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.330 - Assert.assertTrue(database.getVertex(item.getIdentity()).isPresent())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.301 - Assert.assertTrue(database.getVertex(item.getIdentity()).isEmpty())
+0.224 - Assert.assertNull(database.getVertex(item.getIdentity()).orElse(null))
+0.208 - Assert.assertEquals("STR" + item.getIdentity(), live.getName())

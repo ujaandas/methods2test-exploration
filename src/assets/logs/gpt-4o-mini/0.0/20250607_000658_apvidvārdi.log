@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void apvidvārdi ( ) {
+         Word w = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(w);
+assertTrue(w.isRecognized());
+assertEquals("ExpectedWordForm1", w.getWordForm(0));
+assertEquals("ExpectedWordForm2", w.getWordForm(1));
+assertEquals("ExpectedWordForm3", w.getWordForm(2));
+assertFalse(w.getWordForms().isEmpty());
+assertTrue(w.getWordForms().contains("ExpectedWordForm1"));
+assertTrue(w.getWordForms().contains("ExpectedWordForm2"));
+assertTrue(w.getWordForms().contains("ExpectedWordForm3"));
+assertEquals(3, w.getWordForms().size());
+assertNotEquals("UnexpectedWordForm", w.getWordForm(0));
+assertTrue(w.getWordForms().stream().allMatch(form -> form.length() > 0));
+assertTrue(w.getWordForms().stream().anyMatch(form -> form.startsWith("ExpectedPrefix")));
+assertFalse(w.getWordForms().stream().anyMatch(form -> form.equals("InvalidWordForm")));
+assertEquals("ExpectedAnalysisResult", w.analyze("STR"));
+assertNotNull(w.getAnalysisDetails());
+assertTrue(w.getAnalysisDetails().containsKey("SomeKey"));
+assertEquals("ExpectedDetailValue", w.getAnalysisDetails().get("SomeKey"));
+assertTrue(w.getWordForms().stream().map(String::toLowerCase).collect(Collectors.toSet()).contains("expectedwordform1"));
+assertFalse(w.getWordForms().stream().map(String::toLowerCase).collect(Collectors.toSet()).contains("unexpectedwordform"));
+assertEquals("ExpectedFinalForm", w.getFinalForm());
+assertTrue(w.isRecognized());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(w.isRecognized()); ===
+0.877 - assertTrue(w.isRecognized())
+0.877 - assertTrue(w.isRecognized())
+0.559 - assertFalse(w.getWordForms().isEmpty())
+0.559 - assertEquals(3, w.getWordForms().size())
+0.515 - assertNotNull(w.getAnalysisDetails())
+0.488 - assertTrue(w.getAnalysisDetails().containsKey("SomeKey"))
+0.476 - assertEquals("ExpectedAnalysisResult", w.analyze("STR"))
+0.456 - assertEquals("ExpectedWordForm1", w.getWordForm(0))
+0.456 - assertEquals("ExpectedWordForm2", w.getWordForm(1))
+0.456 - assertEquals("ExpectedWordForm3", w.getWordForm(2))
+0.434 - assertNotEquals("UnexpectedWordForm", w.getWordForm(0))
+0.430 - assertEquals("ExpectedFinalForm", w.getFinalForm())
+0.414 - assertTrue(w.getWordForms().contains("ExpectedWordForm1"))
+0.414 - assertTrue(w.getWordForms().contains("ExpectedWordForm2"))
+0.414 - assertTrue(w.getWordForms().contains("ExpectedWordForm3"))
+0.377 - ```java
+assertNotNull(w)
+0.373 - assertEquals("ExpectedDetailValue", w.getAnalysisDetails().get("SomeKey"))
+0.316 - assertFalse(w.getWordForms().stream().anyMatch(form -> form.equals("InvalidWordForm")))
+0.305 - assertFalse(w.getWordForms().stream().map(String::toLowerCase).collect(Collectors.toSet()).contains("unexpectedwordform"))
+0.293 - assertTrue(w.getWordForms().stream().anyMatch(form -> form.startsWith("ExpectedPrefix")))
+0.286 - assertTrue(w.getWordForms().stream().allMatch(form -> form.length() > 0))
+0.255 - assertTrue(w.getWordForms().stream().map(String::toLowerCase).collect(Collectors.toSet()).contains("expectedwordform1"))
+0.000 - ```

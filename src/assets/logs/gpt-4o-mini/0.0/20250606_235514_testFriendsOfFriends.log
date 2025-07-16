@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsOfFriends ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friend")));
+assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friendOfFriend")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").equals(expectedFriend)));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").equals(expectedFriendOfFriend)));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").getClass() == ODocument.class));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").getClass() == ODocument.class));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").equals(anotherExpectedFriend)));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").equals(anotherExpectedFriendOfFriend)));
+assertEquals(expectedValue, qResult.get(0).field("someField"));
+assertNotEquals(unexpectedValue, qResult.get(1).field("someField"));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("friend").equals(unrelatedFriend)));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("friendOfFriend").equals(unrelatedFriendOfFriend)));
+assertEquals(expectedDocumentId, qResult.get(0).getIdentity().toString());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("relationship").equals("friend")));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("relationship").equals("friendOfFriend")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("createdAt").after(expectedDate)));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("updatedAt").before(currentDate)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.593 - assertEquals(expectedValue, qResult.get(0).field("someField"))
+0.567 - ```java
+assertNotNull(qResult)
+0.562 - assertNotEquals(unexpectedValue, qResult.get(1).field("someField"))
+0.510 - assertEquals(expectedDocumentId, qResult.get(0).getIdentity().toString())
+0.416 - assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friend")))
+0.385 - assertTrue(qResult.stream().allMatch(doc -> doc.containsField("friendOfFriend")))
+0.382 - assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")))
+0.379 - assertTrue(qResult.stream().allMatch(doc -> doc.field("updatedAt").before(currentDate)))
+0.362 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").equals(expectedFriend)))
+0.362 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("relationship").equals("friend")))
+0.362 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("createdAt").after(expectedDate)))
+0.356 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("friend").equals(unrelatedFriend)))
+0.347 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friend").getClass() == ODocument.class))
+0.341 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friend").equals(anotherExpectedFriend)))
+0.339 - assertTrue(qResult.stream().allMatch(doc -> doc.field("relationship").equals("friendOfFriend")))
+0.326 - assertTrue(qResult.stream().allMatch(doc -> doc.field("friendOfFriend").getClass() == ODocument.class))
+0.318 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").equals(expectedFriendOfFriend)))
+0.313 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("friendOfFriend").equals(unrelatedFriendOfFriend)))
+0.302 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("friendOfFriend").equals(anotherExpectedFriendOfFriend)))
+0.000 - ```

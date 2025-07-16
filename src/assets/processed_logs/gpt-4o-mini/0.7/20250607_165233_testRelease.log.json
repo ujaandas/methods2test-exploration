@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptions {\npublic List < String > getOptions ( ) {\nList < String > options = new ArrayList < String > ( ) ;\nif ( ! showWarnings ) {\noptions . add ( \"STR\" ) ;\n} addStringOption ( options , \"STR\" , source ) ;\naddStringOption ( options , \"STR\" , target ) ;\naddStringOption ( options , \"STR\" , release ) ;\nreturn options ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptionsTest {\n@Test\npublic void testRelease ( ) throws Exception {\nJavaCompilerOptions jco = new JavaCompilerOptions ( ) ;\njco . setRelease ( \"STR\" ) ;\nList < String > result = jco . getOptions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(3, result.size());\nassertTrue(result.contains(\"STR\")); // for showWarnings\nassertTrue(result.contains(\"STR\")); // for source\nassertTrue(result.contains(\"STR\")); // for target\nassertTrue(result.contains(\"STR\")); // for release\nassertFalse(result.contains(\"INVALID_OPTION\"));\nassertTrue(result.get(0).equals(\"STR\") || result.get(1).equals(\"STR\") || result.get(2).equals(\"STR\"));\nassertTrue(result.stream().allMatch(option -> option.equals(\"STR\") || option.equals(\"STR\") || option.equals(\"STR\")));\nassertTrue(result.stream().anyMatch(option -> option.equals(\"STR\")));\nassertFalse(result.isEmpty());\nassertEquals(\"STR\", result.get(0)); // Check the first option\nassertEquals(\"STR\", result.get(1)); // Check the second option\nassertEquals(\"STR\", result.get(2)); // Check the third option\nassertTrue(result.indexOf(\"STR\") >= 0); // Check if \"STR\" exists\nassertFalse(result.contains(null)); // Ensure no null values\nassertFalse(result.contains(\"\")); // Ensure no empty strings\nassertEquals(\"STR\", result.get(result.size() - 1)); // Check the last option\nassertTrue(result.stream().distinct().count() == result.size()); // Check for duplicates\nassertTrue(result.stream().allMatch(option -> option.startsWith(\"STR\"))); // Check prefix\nassertTrue(result.stream().anyMatch(option -> option.startsWith(\"STR\"))); // Check for any starting with \"STR\"\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.806,
+        0.724,
+        0.603,
+        0.595,
+        0.588,
+        0.566,
+        0.552,
+        0.512,
+        0.507,
+        0.507,
+        0.5,
+        0.477,
+        0.469,
+        0.46,
+        0.432,
+        0.421,
+        0.354,
+        0.333,
+        0.317,
+        0.288,
+        0.159
+    ],
+    "ground_truth": "assertEquals(3,result.size());"
+}

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testInvalidURI ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , true ) ;\nString nonURI = \"STR\" ;\nURL testSourceUrl = new URL ( nonURI ) ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(expectedResult, normalizedUrl);\nassertNotNull(normalizedUrl);\nassertTrue(normalizedUrl.startsWith(\"http://\"));\nassertFalse(normalizedUrl.endsWith(\"/\"));\nassertTrue(normalizedUrl.contains(\"www.\"));\nassertEquals(3, normalizedUrl.length());\nassertNotEquals(\"test\", normalizedUrl);\nassertNotSame(expectedResult, normalizedUrl);\nassertTrue(normalizedUrl.matches(\"[A-Z]+\"));\nassertFalse(normalizedUrl.isEmpty());\nassertTrue(normalizedUrl.equals(\"STR\"));\nassertNull(null);\nassertTrue(normalizedUrl.contains(\"S\"));\nassertTrue(normalizedUrl.contains(\"T\"));\nassertTrue(normalizedUrl.contains(\"R\"));\nassertTrue(normalizedUrl.equalsIgnoreCase(\"str\"));\nassertTrue(normalizedUrl.matches(\"[A-Z]{3}\"));\nassertTrue(normalizedUrl.startsWith(\"S\"));\nassertTrue(normalizedUrl.endsWith(\"R\"));\nassertTrue(normalizedUrl.contains(\"T\"));\nassertFalse(normalizedUrl.contains(\"X\"));\n====================\n\n",
+    "scores": [
+        0.933,
+        0.813,
+        0.776,
+        0.651,
+        0.605,
+        0.571,
+        0.545,
+        0.545,
+        0.506,
+        0.506,
+        0.506,
+        0.506,
+        0.506,
+        0.506,
+        0.494,
+        0.489,
+        0.484,
+        0.473,
+        0.463,
+        0.454,
+        0.375
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

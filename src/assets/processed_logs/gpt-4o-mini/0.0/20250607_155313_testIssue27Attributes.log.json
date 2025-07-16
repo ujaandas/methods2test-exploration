@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue27Attributes ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(schemas);\nassertFalse(schemas.isEmpty());\nassertEquals(3, schemas.size()); // Assuming there are 3 schemas expected\nassertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));\nassertEquals(\"ExpectedSchemaName1\", schemas.get(0).getName());\nassertEquals(\"ExpectedSchemaName2\", schemas.get(1).getName());\nassertEquals(\"ExpectedSchemaName3\", schemas.get(2).getName());\nassertTrue(schemas.get(0).getElements().size() > 0);\nassertTrue(schemas.get(1).getElements().size() > 0);\nassertTrue(schemas.get(2).getElements().size() > 0);\nassertNotNull(schemas.get(0).getTargetNamespace());\nassertNotNull(schemas.get(1).getTargetNamespace());\nassertNotNull(schemas.get(2).getTargetNamespace());\nassertEquals(\"http://example.com/schema1\", schemas.get(0).getTargetNamespace());\nassertEquals(\"http://example.com/schema2\", schemas.get(1).getTargetNamespace());\nassertEquals(\"http://example.com/schema3\", schemas.get(2).getTargetNamespace());\nassertTrue(schemas.get(0).getAttributes().isEmpty());\nassertTrue(schemas.get(1).getAttributes().size() > 0);\nassertTrue(schemas.get(2).getAttributes().size() > 0);\nassertEquals(\"ExpectedAttributeName\", schemas.get(1).getAttributes().get(0).getName());\nassertEquals(\"ExpectedAttributeType\", schemas.get(1).getAttributes().get(0).getType());\nassertTrue(schemas.get(2).getElements().stream().anyMatch(element -> \"ExpectedElementName\".equals(element.getName())));\n```\n====================\n\n",
+    "scores": [
+        0.967,
+        0.733,
+        0.6,
+        0.582,
+        0.582,
+        0.582,
+        0.578,
+        0.578,
+        0.568,
+        0.568,
+        0.567,
+        0.55,
+        0.55,
+        0.55,
+        0.519,
+        0.512,
+        0.5,
+        0.5,
+        0.47,
+        0.47,
+        0.307,
+        0.288,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,schemas.size());"
+}

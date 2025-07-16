@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPoint {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPointTest {\n@Test\npublic void testIndexingComplexUpdateTxPoint ( ) {\nODocument rome = newCity ( \"STR\" , 12.5 , 41.9 ) ;\nODocument london = newCity ( \"STR\" , - 0.1275 , 51.507222 ) ;\nrome = db . save ( rome ) ;\nlondon = db . save ( london ) ;\ndb . begin ( ) ;\nrome . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\ndb . save ( rome ) ;\ndb . save ( london ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(2, index.getSize());\nAssert.assertTrue(index.contains(rome));\nAssert.assertTrue(index.contains(london));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(london.field(\"STR\"), newPoint(-0.1275, 51.507222));\nAssert.assertEquals(london.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(london.field(\"STR\"), newPoint(-0.1275, 51.507222));\nAssert.assertEquals(london.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(london.field(\"STR\"), newPoint(-0.1275, 51.507222));\nAssert.assertEquals(london.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(london.field(\"STR\"), newPoint(-0.1275, 51.507222));\nAssert.assertEquals(london.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\nAssert.assertEquals(rome.field(\"STR\"), newPoint(12.5, 41.9));\n====================\n\n",
+    "scores": [
+        0.968,
+        0.585,
+        0.54,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.452,
+        0.452,
+        0.452,
+        0.452,
+        0.413,
+        0.413,
+        0.413,
+        0.413
+    ],
+    "ground_truth": "Assert.assertEquals(3,index.getSize());"
+}

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPush {
+    @Override
+     public OBinaryPushResponse execute ( ORemotePushHandler remote ) { 
+     remote . executeLiveQueryPush ( this ) ; 
+     return null ; 
+     }
+}
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPushTest {
+    @Test
+     public void testLiveEvents ( ) {
+         MockLiveListener mock = new MockLiveListener ( ) ; 
+         storage . registerLiveListener ( 10 , new OLiveQueryClientListener ( database , mock ) ) ; 
+         List < OLiveQueryResult > events = new ArrayList < > ( ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         OLiveQueryPushRequest request = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ; 
+         request . execute ( storage ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(3, mock.getEvents().size());
+Assert.assertEquals(OLiveQueryResult.CREATE_EVENT, mock.getEvents().get(0).getEventType());
+Assert.assertEquals(OLiveQueryResult.UPDATE_EVENT, mock.getEvents().get(1).getEventType());
+Assert.assertEquals(OLiveQueryResult.DELETE_EVENT, mock.getEvents().get(2).getEventType());
+Assert.assertEquals(OResultInternal.class, mock.getEvents().get(0).getBefore().getClass());
+Assert.assertEquals(null, mock.getEvents().get(0).getAfter());
+Assert.assertEquals(OResultInternal.class, mock.getEvents().get(1).getBefore().getClass());
+Assert.assertEquals(OResultInternal.class, mock.getEvents().get(1).getAfter().getClass());
+Assert.assertEquals(OResultInternal.class, mock.getEvents().get(2).getBefore().getClass());
+Assert.assertEquals(null, mock.getEvents().get(2).getAfter());
+Assert.assertEquals(10, mock.getEvents().get(0).getClusterId());
+Assert.assertEquals(10, mock.getEvents().get(1).getClusterId());
+Assert.assertEquals(10, mock.getEvents().get(2).getClusterId());
+Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(0).getChangeType());
+Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(1).getChangeType());
+Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(2).getChangeType());
+Assert.assertEquals(database, mock.getEvents().get(0).getDatabase());
+Assert.assertEquals(database, mock.getEvents().get(1).getDatabase());
+Assert.assertEquals(database, mock.getEvents().get(2).getDatabase());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(mock.countCreate,1); ===
+0.620 - Assert.assertEquals(3, mock.getEvents().size())
+0.565 - Assert.assertEquals(null, mock.getEvents().get(0).getAfter())
+0.565 - Assert.assertEquals(null, mock.getEvents().get(2).getAfter())
+0.552 - Assert.assertEquals(10, mock.getEvents().get(0).getClusterId())
+0.552 - Assert.assertEquals(10, mock.getEvents().get(1).getClusterId())
+0.552 - Assert.assertEquals(10, mock.getEvents().get(2).getClusterId())
+0.543 - Assert.assertEquals(database, mock.getEvents().get(0).getDatabase())
+0.543 - Assert.assertEquals(database, mock.getEvents().get(1).getDatabase())
+0.543 - Assert.assertEquals(database, mock.getEvents().get(2).getDatabase())
+0.432 - Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(0).getChangeType())
+0.432 - Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(1).getChangeType())
+0.432 - Assert.assertEquals(OLiveQueryPushRequest.END, mock.getEvents().get(2).getChangeType())
+0.425 - Assert.assertEquals(OResultInternal.class, mock.getEvents().get(1).getAfter().getClass())
+0.421 - Assert.assertEquals(OLiveQueryResult.CREATE_EVENT, mock.getEvents().get(0).getEventType())
+0.421 - Assert.assertEquals(OLiveQueryResult.UPDATE_EVENT, mock.getEvents().get(1).getEventType())
+0.421 - Assert.assertEquals(OLiveQueryResult.DELETE_EVENT, mock.getEvents().get(2).getEventType())
+0.421 - Assert.assertEquals(OResultInternal.class, mock.getEvents().get(0).getBefore().getClass())
+0.421 - Assert.assertEquals(OResultInternal.class, mock.getEvents().get(1).getBefore().getClass())
+0.421 - Assert.assertEquals(OResultInternal.class, mock.getEvents().get(2).getBefore().getClass())

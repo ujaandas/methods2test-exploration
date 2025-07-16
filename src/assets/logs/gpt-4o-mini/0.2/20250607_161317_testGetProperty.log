@@ -1,0 +1,109 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name);
+    }
+};
+
+assertEquals("STR", serviceSetup.getProperty("STR"));
+assertNull(serviceSetup.getProperty("NON_EXISTENT"));
+assertEquals("", serviceSetup.getProperty("EMPTY_STRING"));
+env.put("EMPTY_STRING", "");
+assertEquals("VALUE", serviceSetup.getProperty("VALUE"));
+env.put("VALUE", "VALUE");
+assertEquals("VALUE", serviceSetup.getProperty("VALUE"));
+env.put("NULL_VALUE", null);
+assertNull(serviceSetup.getProperty("NULL_VALUE"));
+env.put("NUMERIC_STRING", "123");
+assertEquals("123", serviceSetup.getProperty("NUMERIC_STRING"));
+env.put("SPECIAL_CHAR", "!@#$%^&*()");
+assertEquals("!@#$%^&*()", serviceSetup.getProperty("SPECIAL_CHAR"));
+env.put("LONG_STRING", "This is a very long string for testing purposes.");
+assertEquals("This is a very long string for testing purposes.", serviceSetup.getProperty("LONG_STRING"));
+env.put("WHITESPACE", "   ");
+assertEquals("   ", serviceSetup.getProperty("WHITESPACE"));
+env.put("MIXED_CASE", "MixedCaseValue");
+assertEquals("MixedCaseValue", serviceSetup.getProperty("MIXED_CASE"));
+env.put("NUMERIC_KEY", "456");
+assertEquals("456", serviceSetup.getProperty("NUMERIC_KEY"));
+env.put("BOOLEAN_TRUE", "true");
+assertEquals("true", serviceSetup.getProperty("BOOLEAN_TRUE"));
+env.put("BOOLEAN_FALSE", "false");
+assertEquals("false", serviceSetup.getProperty("BOOLEAN_FALSE"));
+env.put("JSON_STRING", "{\"key\":\"value\"}");
+assertEquals("{\"key\":\"value\"}", serviceSetup.getProperty("JSON_STRING"));
+env.put("XML_STRING", "<key>value</key>");
+assertEquals("<key>value</key>", serviceSetup.getProperty("XML_STRING"));
+env.put("ESCAPED_CHAR", "Line1\nLine2");
+assertEquals("Line1\nLine2", serviceSetup.getProperty("ESCAPED_CHAR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.832 - assertEquals("STR", serviceSetup.getProperty("STR"))
+0.729 - assertEquals("", serviceSetup.getProperty("EMPTY_STRING"))
+0.705 - assertEquals("   ", serviceSetup.getProperty("WHITESPACE"))
+0.696 - assertEquals("123", serviceSetup.getProperty("NUMERIC_STRING"))
+0.686 - assertEquals("VALUE", serviceSetup.getProperty("VALUE"))
+0.686 - assertEquals("VALUE", serviceSetup.getProperty("VALUE"))
+0.685 - assertEquals("true", serviceSetup.getProperty("BOOLEAN_TRUE"))
+0.679 - assertEquals("456", serviceSetup.getProperty("NUMERIC_KEY"))
+0.655 - assertEquals("false", serviceSetup.getProperty("BOOLEAN_FALSE"))
+0.650 - assertEquals("!@#$%^&*()", serviceSetup.getProperty("SPECIAL_CHAR"))
+0.645 - assertEquals("<key>value</key>", serviceSetup.getProperty("XML_STRING"))
+0.639 - assertEquals("Line1\nLine2", serviceSetup.getProperty("ESCAPED_CHAR"))
+0.624 - assertEquals("{\"key\":\"value\"}", serviceSetup.getProperty("JSON_STRING"))
+0.622 - assertEquals("MixedCaseValue", serviceSetup.getProperty("MIXED_CASE"))
+0.608 - assertNull(serviceSetup.getProperty("NON_EXISTENT"))
+0.580 - assertNull(serviceSetup.getProperty("NULL_VALUE"))
+0.548 - assertEquals("This is a very long string for testing purposes.", serviceSetup.getProperty("LONG_STRING"))
+0.356 - env.put("XML_STRING", "<key>value</key>")
+0.321 - ```java
+AbstractServiceSetup serviceSetup = new AbstractServiceSetup() {
+    @Override
+    protected String getProperty(String name) {
+        return env.get(name)
+0.319 - env.put("JSON_STRING", "{\"key\":\"value\"}")
+0.316 - env.put("EMPTY_STRING", "")
+0.296 - env.put("NUMERIC_STRING", "123")
+0.279 - env.put("SPECIAL_CHAR", "!@#$%^&*()")
+0.278 - env.put("LONG_STRING", "This is a very long string for testing purposes.")
+0.275 - env.put("BOOLEAN_TRUE", "true")
+0.273 - env.put("ESCAPED_CHAR", "Line1\nLine2")
+0.270 - env.put("WHITESPACE", "   ")
+0.256 - env.put("NUMERIC_KEY", "456")
+0.243 - env.put("VALUE", "VALUE")
+0.237 - env.put("NULL_VALUE", null)
+0.227 - env.put("MIXED_CASE", "MixedCaseValue")
+0.220 - env.put("BOOLEAN_FALSE", "false")
+0.000 - }
+}
+0.000 - ```

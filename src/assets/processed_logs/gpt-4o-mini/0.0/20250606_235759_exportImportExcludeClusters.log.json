@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseImport {\nboolean existsClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseImportTest {\n@Test\npublic void exportImportExcludeClusters ( ) throws IOException {\nODatabaseDocument db = new ODatabaseDocumentTx ( \"STR\" + ODatabaseImportTest . class . getSimpleName ( ) + \"STR\" ) ;\ndb . create ( ) ;\ndb . getMetadata ( ) . getSchema ( ) . createClass ( \"STR\" ) ;\nByteArrayOutputStream output = new ByteArrayOutputStream ( ) ;\nODatabaseExport export = new ODatabaseExport ( ( ODatabaseDocumentInternal ) db , output , new OCommandOutputListener ( ) {\n@Override\npublic void onMessage ( String iText ) {\n} } ) ;\nexport . setOptions ( \"STR\" ) ;\nexport . exportDatabase ( ) ;\ndb . drop ( ) ;\nODatabaseDocument dbImp = new ODatabaseDocumentTx ( \"STR\" + ODatabaseImportTest . class . getSimpleName ( ) ) ;\ndbImp . create ( ) ;\nODatabaseImport importer = new ODatabaseImport ( ( ODatabaseDocumentInternal ) dbImp , new ByteArrayInputStream ( output . toByteArray ( ) ) , new OCommandOutputListener ( ) {\n@Override\npublic void onMessage ( String iText ) {\n} } ) ;\nimporter . importDatabase ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertTrue(dbImp.getMetadata().getSchema().existsClass(\"STR\"));\nAssert.assertEquals(1, dbImp.getMetadata().getSchema().getClasses().size());\nAssert.assertNotNull(dbImp.getMetadata().getSchema().getClass(\"STR\"));\nAssert.assertFalse(dbImp.getMetadata().getSchema().existsClass(\"NON_EXISTENT_CLASS\"));\nAssert.assertEquals(\"STR\", dbImp.getMetadata().getSchema().getClass(\"STR\").getName());\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").isAbstract());\nAssert.assertEquals(0, dbImp.getMetadata().getSchema().getClass(\"STR\").getProperties().size());\nAssert.assertNotNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getClusterIds());\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").getClusterIds().length > 0);\nAssert.assertEquals(\"STR\", dbImp.getMetadata().getSchema().getClass(\"STR\").getShortName());\nAssert.assertNotNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getSuperClass());\nAssert.assertNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getSuperClass().getName());\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").getClusterIds().length > 0);\nAssert.assertEquals(0, dbImp.getMetadata().getSchema().getClass(\"STR\").getProperties().size());\nAssert.assertFalse(dbImp.getMetadata().getSchema().getClass(\"STR\").isAbstract());\nAssert.assertNotNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getClusterIds());\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").getClusterIds().length > 0);\nAssert.assertEquals(\"STR\", dbImp.getMetadata().getSchema().getClass(\"STR\").getShortName());\nAssert.assertNotNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getSuperClass());\nAssert.assertNull(dbImp.getMetadata().getSchema().getClass(\"STR\").getSuperClass().getName());\n```\n====================\n\n",
+    "scores": [
+        0.939,
+        0.887,
+        0.866,
+        0.829,
+        0.815,
+        0.795,
+        0.795,
+        0.795,
+        0.786,
+        0.786,
+        0.786,
+        0.786,
+        0.777,
+        0.775,
+        0.75,
+        0.75,
+        0.748,
+        0.748,
+        0.743,
+        0.743,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass(\"STR\"));"
+}

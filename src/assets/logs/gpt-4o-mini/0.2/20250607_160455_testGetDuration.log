@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Result {
+    public String getDuration ( ) { 
+    return duration ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ResultTest {
+    @Test
+     public void testGetDuration ( ) {
+         String expected = DURATION ; 
+         String actual = result . getDuration ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expected, actual);
+assertNotNull(actual);
+assertTrue(actual instanceof String);
+assertFalse(actual.isEmpty());
+assertEquals("Expected duration format", expected, actual);
+assertEquals(expected.length(), actual.length());
+assertTrue(actual.contains("min") || actual.contains("sec"));
+assertNotSame(expected, actual);
+assertTrue(actual.matches("\\d+\\s*(min|sec)"));
+assertEquals(expected.trim(), actual.trim());
+assertFalse(actual.equals("Invalid Duration"));
+assertTrue(actual.startsWith("Duration:"));
+assertTrue(actual.endsWith("seconds") || actual.endsWith("minutes"));
+assertEquals(expected.toLowerCase(), actual.toLowerCase());
+assertTrue(actual.length() > 0);
+assertFalse(actual.equals("0 seconds"));
+assertTrue(actual.matches("\\d+\\s*seconds|\\d+\\s*minutes"));
+assertNotEquals("0 min", actual);
+assertTrue(actual.contains("duration"));
+assertTrue(actual.matches("\\d+\\s*min|\\d+\\s*sec"));
+assertTrue(actual.length() <= 20);
+assertTrue(actual.contains(" "));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+1.000 - assertNotNull(actual)
+0.745 - assertNotEquals("0 min", actual)
+0.667 - assertNotSame(expected, actual)
+0.600 - assertFalse(actual.isEmpty())
+0.600 - assertTrue(actual.length() > 0)
+0.577 - assertTrue(actual.length() <= 20)
+0.577 - assertTrue(actual.contains(" "))
+0.545 - assertTrue(actual instanceof String)
+0.508 - assertFalse(actual.equals("0 seconds"))
+0.500 - assertTrue(actual.contains("duration"))
+0.483 - ```java
+assertEquals(expected, actual)
+0.476 - assertTrue(actual.startsWith("Duration:"))
+0.471 - assertEquals(expected.length(), actual.length())
+0.469 - assertEquals(expected.trim(), actual.trim())
+0.455 - assertFalse(actual.equals("Invalid Duration"))
+0.441 - assertTrue(actual.matches("\\d+\\s*(min|sec)"))
+0.405 - assertTrue(actual.matches("\\d+\\s*min|\\d+\\s*sec"))
+0.400 - assertEquals("Expected duration format", expected, actual)
+0.385 - assertEquals(expected.toLowerCase(), actual.toLowerCase())
+0.380 - assertTrue(actual.contains("min") || actual.contains("sec"))
+0.366 - assertTrue(actual.matches("\\d+\\s*seconds|\\d+\\s*minutes"))
+0.345 - assertTrue(actual.endsWith("seconds") || actual.endsWith("minutes"))
+0.000 - ```

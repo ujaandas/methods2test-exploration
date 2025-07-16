@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManager {\n@Override\npublic Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nurl . setConnectTimeout ( connectTimeout ) ;\nreturn this . connectionManager . getAndCreateIfAbsent ( url ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManagerTest {\n@Test\npublic void testReconnectionByUserSetting ( ) throws InterruptedException , RemotingException {\ndoInit ( false , true ) ;\nclient . enableReconnectSwitch ( ) ;\nString addr = \"STR\" ;\nUrl url = addressParser . parse ( addr ) ;\nConnection connection = client . getConnection ( url , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(connection);\nAssert.assertEquals(url, connection.getUrl());\nAssert.assertTrue(connection.isConnected());\nAssert.assertEquals(1000, url.getConnectTimeout());\nAssert.assertTrue(client.isReconnectSwitchEnabled());\nAssert.assertNotNull(client.getConnection(url));\nAssert.assertTrue(client.getConnection(url).isConnected());\nAssert.assertEquals(addr, url.getAddress());\nAssert.assertEquals(1000, url.getConnectTimeout());\nAssert.assertNotNull(client.getConnection(url));\nAssert.assertTrue(client.getConnection(url).isConnected());\nAssert.assertNotNull(client.getConnection(url).getChannel());\nAssert.assertTrue(client.getConnection(url).getChannel().isActive());\nAssert.assertNotNull(client.getConnection(url).getChannel().remoteAddress());\nAssert.assertEquals(1000, client.getConnection(url).getUrl().getConnectTimeout());\nAssert.assertTrue(client.getConnection(url).getUrl().getAddress().equals(addr));\nAssert.assertTrue(client.getConnection(url).getUrl().getProtocol().equals(url.getProtocol()));\nAssert.assertEquals(addr, client.getConnection(url).getUrl().getAddress());\nAssert.assertTrue(client.getConnection(url).getUrl().getAddress().equals(addr));\nAssert.assertTrue(client.getConnection(url).getUrl().getProtocol().equals(url.getProtocol()));\n====================\n\n",
+    "scores": [
+        0.696,
+        0.654,
+        0.654,
+        0.602,
+        0.591,
+        0.586,
+        0.578,
+        0.565,
+        0.549,
+        0.549,
+        0.505,
+        0.495,
+        0.49,
+        0.478,
+        0.478,
+        0.463,
+        0.463,
+        0.46,
+        0.432,
+        0.432
+    ],
+    "ground_truth": "Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes());"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class TextExtractor {\npublic String text ( Element element ) {\nif ( noText ) return \"STR\" ;\nif ( inclusionPatterns . size ( ) == 0 && excludedTags . size ( ) == 0 ) {\nreturn _text ( element ) ;\n} Elements matches = new Elements ( ) ;\nfor ( String pattern : inclusionPatterns ) {\nmatches = element . select ( pattern ) ;\nif ( ! matches . isEmpty ( ) ) break ;\n} if ( matches . isEmpty ( ) ) {\nmatches . add ( element ) ;\n} final StringBuilder accum = new StringBuilder ( ) ;\nfor ( Element node : matches ) {\naccum . append ( _text ( node ) ) . append ( \"STR\" ) ;\n} return accum . toString ( ) . trim ( ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class TextExtractorTest {\n@Test\npublic void testExclusionCase ( ) throws IOException {\nConfig conf = new Config ( ) ;\nconf . put ( TextExtractor . EXCLUDE_PARAM_NAME , \"STR\" ) ;\nTextExtractor extractor = new TextExtractor ( conf ) ;\nString content = \"STR\" ;\nDocument jsoupDoc = Parser . htmlParser ( ) . parseInput ( content , \"STR\" ) ;\nString text = extractor . text ( jsoupDoc . body ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", text);\nassertNotEquals(\"\", text);\nassertTrue(text.contains(\"STR\"));\nassertFalse(text.isEmpty());\nassertNotNull(text);\nassertSame(\"STR\", text);\nassertArrayEquals(new String[]{\"STR\"}, text.split(\" \"));\nassertEquals(\"STR\", text.trim());\nassertTrue(text.startsWith(\"STR\"));\nassertFalse(text.endsWith(\"STR\"));\nassertTrue(text.length() > 0);\nassertFalse(text.equals(\"test\"));\nassertEquals(3, text.split(\"STR\").length);\nassertTrue(text.matches(\".*STR.*\"));\nassertFalse(text.equalsIgnoreCase(\"str\"));\nassertTrue(text.indexOf(\"STR\") >= 0);\nassertFalse(text.contains(\"abc\"));\nassertTrue(text.contains(\"STR\"));\nassertEquals(1, text.split(\"STR\").length);\nassertTrue(text.contains(\"STR\"));\nassertFalse(text.equals(\" \"));\nassertTrue(text.endsWith(\"STR\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.875,
+        0.873,
+        0.826,
+        0.651,
+        0.632,
+        0.625,
+        0.625,
+        0.607,
+        0.588,
+        0.577,
+        0.571,
+        0.571,
+        0.571,
+        0.561,
+        0.552,
+        0.536,
+        0.526,
+        0.51,
+        0.483,
+        0.462,
+        0.441
+    ],
+    "ground_truth": "assertEquals(\"STR\",text);"
+}

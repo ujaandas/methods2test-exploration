@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455 {
+    @Override
+     public List < Framedata > createFrames ( String text , boolean mask ) { 
+     TextFrame curframe = new TextFrame ( ) ; 
+     curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ; 
+     curframe . setTransferemasked ( mask ) ; 
+     try { 
+     curframe . isValid ( ) ; 
+     } catch ( InvalidDataException e ) { 
+     throw new NotSendableException ( e ) ; 
+     } return Collections . singletonList ( ( Framedata ) curframe ) ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455Test {
+    @Test
+     public void createFramesText ( ) throws Exception {
+         Draft_6455 draft_6455 = new Draft_6455 ( ) ; 
+         TextFrame curframe = new TextFrame ( ) ; 
+         curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( "STR" ) ) ) ; 
+         curframe . setTransferemasked ( false ) ; 
+         List < Framedata > createdFrame = draft_6455 . createFrames ( "STR" , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(createdFrame);
+assertEquals(1, createdFrame.size());
+assertTrue(createdFrame.get(0) instanceof TextFrame);
+TextFrame createdTextFrame = (TextFrame) createdFrame.get(0);
+assertArrayEquals(ByteBuffer.wrap(Charsetfunctions.utf8Bytes("STR")).array(), createdTextFrame.getPayload().array());
+assertFalse(createdTextFrame.getTransferemasked());
+assertTrue(createdTextFrame.isValid());
+assertEquals("STR", Charsetfunctions.utf8String(createdTextFrame.getPayload().array()));
+assertNotSame(curframe, createdTextFrame);
+assertEquals(curframe.getPayload().capacity(), createdTextFrame.getPayload().capacity());
+assertEquals(curframe.getTransferemasked(), createdTextFrame.getTransferemasked());
+assertNotNull(createdTextFrame.getPayload());
+assertTrue(createdTextFrame.getPayload().hasRemaining());
+assertEquals(3, createdTextFrame.getPayload().remaining());
+assertEquals(0, createdTextFrame.getPayload().position());
+assertEquals(3, createdTextFrame.getPayload().limit());
+assertEquals(3, createdTextFrame.getPayload().capacity());
+assertTrue(createdFrame.get(0).isFin());
+assertFalse(createdFrame.get(0).isRSV1());
+assertFalse(createdFrame.get(0).isRSV2());
+assertFalse(createdFrame.get(0).isRSV3());
+assertEquals(0, createdFrame.get(0).getOpcode());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,createdFrame.size()); ===
+1.000 - assertEquals(1, createdFrame.size())
+0.756 - assertEquals(0, createdFrame.get(0).getOpcode())
+0.712 - assertTrue(createdTextFrame.isValid())
+0.711 - assertFalse(createdFrame.get(0).isRSV1())
+0.711 - assertFalse(createdFrame.get(0).isRSV2())
+0.711 - assertFalse(createdFrame.get(0).isRSV3())
+0.705 - assertEquals(3, createdTextFrame.getPayload().limit())
+0.703 - assertEquals(0, createdTextFrame.getPayload().position())
+0.703 - assertTrue(createdFrame.get(0).isFin())
+0.681 - assertEquals(3, createdTextFrame.getPayload().capacity())
+0.674 - assertEquals(3, createdTextFrame.getPayload().remaining())
+0.659 - assertFalse(createdTextFrame.getTransferemasked())
+0.658 - assertNotNull(createdTextFrame.getPayload())
+0.629 - ```java
+assertNotNull(createdFrame)
+0.587 - assertNotSame(curframe, createdTextFrame)
+0.571 - assertTrue(createdTextFrame.getPayload().hasRemaining())
+0.565 - assertTrue(createdFrame.get(0) instanceof TextFrame)
+0.552 - assertEquals(curframe.getTransferemasked(), createdTextFrame.getTransferemasked())
+0.512 - assertEquals("STR", Charsetfunctions.utf8String(createdTextFrame.getPayload().array()))
+0.508 - assertEquals(curframe.getPayload().capacity(), createdTextFrame.getPayload().capacity())
+0.484 - TextFrame createdTextFrame = (TextFrame) createdFrame.get(0)
+0.413 - assertArrayEquals(ByteBuffer.wrap(Charsetfunctions.utf8Bytes("STR")).array(), createdTextFrame.getPayload().array())
+0.000 - ```

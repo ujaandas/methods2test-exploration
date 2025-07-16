@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MkvBlock {
+    public static byte [ ] muxXiphLacing ( int [ ] laceSizes ) { 
+    ByteArrayList bytes = ByteArrayList . createByteArrayList ( ) ; 
+    for ( int i = 0 ; 
+    i < laceSizes . length - 1 ; 
+    i ++ ) { 
+    long laceSize = laceSizes [ i ] ; 
+    while ( laceSize >= 255 ) { 
+    bytes . add ( ( byte ) 255 ) ; 
+    laceSize -= 255 ; 
+    } bytes . add ( ( byte ) laceSize ) ; 
+    } return bytes . toArray ( ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MkvBlockTest {
+    @Test
+     public void testXiph ( ) {
+         int [ ] _in = new int [ ] { 
+     187 , 630 , 255 , 60 , 0xFFFFFF } ; 
+         byte [ ] expecteds = new byte [ ] { 
+     ( byte ) 187 , ( byte ) 255 , ( byte ) 255 , 120 , ( byte ) 255 , 0 , 60 } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+byte[] result = MkvBlock.muxXiphLacing(_in);
+assertArrayEquals(expecteds, result);
+assertEquals(expecteds.length, result.length);
+assertEquals(expecteds[0], result[0]);
+assertEquals(expecteds[1], result[1]);
+assertEquals(expecteds[2], result[2]);
+assertEquals(expecteds[3], result[3]);
+assertEquals(expecteds[4], result[4]);
+assertEquals(expecteds[5], result[5]);
+assertEquals(expecteds[6], result[6]);
+assertTrue(result[0] >= 0);
+assertTrue(result[1] >= 0);
+assertTrue(result[2] >= 0);
+assertTrue(result[3] >= 0);
+assertTrue(result[4] >= 0);
+assertTrue(result[5] >= 0);
+assertTrue(result[6] >= 0);
+assertTrue(result.length <= 7);
+assertTrue(result[1] == (byte) 255 || result[1] == (byte) 0);
+assertTrue(result[2] == (byte) 255 || result[2] == (byte) 0);
+assertTrue(result[3] == (byte) 60 || result[3] == (byte) 0);
+assertTrue(result[4] == (byte) 0 || result[4] == (byte) 255);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(expecteds,MkvBlock.muxXiphLacing(_in)); ===
+0.659 - assertArrayEquals(expecteds, result)
+0.635 - ```java
+byte[] result = MkvBlock.muxXiphLacing(_in)
+0.543 - assertEquals(expecteds[0], result[0])
+0.543 - assertEquals(expecteds[1], result[1])
+0.543 - assertEquals(expecteds[2], result[2])
+0.543 - assertEquals(expecteds[3], result[3])
+0.543 - assertEquals(expecteds[4], result[4])
+0.543 - assertEquals(expecteds[5], result[5])
+0.543 - assertEquals(expecteds[6], result[6])
+0.540 - assertEquals(expecteds.length, result.length)
+0.333 - assertTrue(result.length <= 7)
+0.300 - assertTrue(result[0] >= 0)
+0.300 - assertTrue(result[1] >= 0)
+0.300 - assertTrue(result[2] >= 0)
+0.300 - assertTrue(result[3] >= 0)
+0.300 - assertTrue(result[4] >= 0)
+0.300 - assertTrue(result[5] >= 0)
+0.300 - assertTrue(result[6] >= 0)
+0.299 - assertTrue(result[3] == (byte) 60 || result[3] == (byte) 0)
+0.296 - assertTrue(result[1] == (byte) 255 || result[1] == (byte) 0)
+0.296 - assertTrue(result[2] == (byte) 255 || result[2] == (byte) 0)
+0.296 - assertTrue(result[4] == (byte) 0 || result[4] == (byte) 255)
+0.000 - ```

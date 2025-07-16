@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testQuotedEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(expectedSize, res.size());\nassertTrue(res.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedValue, res.get(0).field(\"fieldName\"));\nassertEquals(expectedValue, res.get(1).field(\"fieldName\"));\nassertTrue(res.get(0).field(\"fieldName\").isEmpty());\nassertTrue(res.get(1).field(\"fieldName\").isEmpty());\nassertEquals(\"expectedType\", res.get(0).field(\"fieldName\").getClass().getSimpleName());\nassertEquals(\"expectedType\", res.get(1).field(\"fieldName\").getClass().getSimpleName());\nassertNotEquals(unexpectedValue, res.get(0).field(\"fieldName\"));\nassertNotEquals(unexpectedValue, res.get(1).field(\"fieldName\"));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"anotherField\").equals(expectedAnotherValue)));\nassertFalse(res.stream().anyMatch(doc -> doc.field(\"anotherField\").equals(unexpectedAnotherValue)));\nassertEquals(expectedFieldCount, res.get(0).fieldNames().size());\nassertEquals(expectedFieldCount, res.get(1).fieldNames().size());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"fieldName\") instanceof String));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"anotherField\") instanceof Integer));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"fieldName\") == null));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"anotherField\") == null));\nassertEquals(expectedDocumentId, res.get(0).getIdentity().toString());\nassertEquals(expectedDocumentId, res.get(1).getIdentity().toString());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.571,
+        0.571,
+        0.462,
+        0.434,
+        0.434,
+        0.427,
+        0.427,
+        0.426,
+        0.426,
+        0.409,
+        0.409,
+        0.378,
+        0.378,
+        0.358,
+        0.354,
+        0.347,
+        0.341,
+        0.327,
+        0.315,
+        0.283,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ProcessorConfig {
+    public < T extends Named > List < T > prepareProcessors ( List < T > namedList , String type ) { 
+    List < T > ret = new ArrayList < > ( ) ; 
+    Map < String , T > lookup = new HashMap < > ( ) ; 
+    for ( T named : namedList ) { 
+    lookup . put ( named . getName ( ) , named ) ; 
+    } for ( String inc : includes ) { 
+    if ( use ( inc ) ) { 
+    T named = lookup . get ( inc ) ; 
+    if ( named == null ) { 
+    List < String > keys = new ArrayList < > ( lookup . keySet ( ) ) ; 
+    Collections . sort ( keys ) ; 
+    throw new IllegalArgumentException ( "STR" + type + "STR" + inc + "STR" + "STR" + type + "STR" + StringUtils . join ( keys , "STR" ) ) ; 
+    } ret . add ( named ) ; 
+    } } return ret ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ProcessorConfigTest {
+    @Test
+     public void order ( ) {
+         List < TestNamed > data = Arrays . asList ( new TestNamed ( "STR" ) , new TestNamed ( "STR" ) , new TestNamed ( "STR" ) , new TestNamed ( "STR" ) ) ; 
+         List < String > inc = Arrays . asList ( "STR" , "STR" ) ; 
+         ProcessorConfig pConfig = new ProcessorConfig ( inc , null , null ) ; 
+         List < TestNamed > result = pConfig . prepareProcessors ( data , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", result.get(0).getName());
+Assert.assertEquals("STR", result.get(1).getName());
+Assert.assertEquals("STR", result.get(2).getName());
+Assert.assertEquals("STR", result.get(3).getName());
+Assert.assertEquals(4, result.size());
+Assert.assertTrue(result.contains(data.get(0)));
+Assert.assertTrue(result.contains(data.get(1)));
+Assert.assertFalse(result.contains(data.get(2)));
+Assert.assertFalse(result.contains(data.get(3)));
+Assert.assertNotNull(result.get(0));
+Assert.assertNotNull(result.get(1));
+Assert.assertNull(result.get(2));
+Assert.assertNull(result.get(3));
+Assert.assertTrue(result.get(0) instanceof TestNamed);
+Assert.assertTrue(result.get(1) instanceof TestNamed);
+Assert.assertFalse(result.get(2) instanceof TestNamed);
+Assert.assertFalse(result.get(3) instanceof TestNamed);
+Assert.assertNotSame(data, result);
+Assert.assertNotSame(data.get(0), result.get(0));
+Assert.assertNotSame(data.get(1), result.get(1));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,result.size()); ===
+0.966 - Assert.assertEquals(4, result.size())
+0.741 - Assert.assertNull(result.get(2))
+0.741 - Assert.assertNull(result.get(3))
+0.702 - Assert.assertNotNull(result.get(0))
+0.702 - Assert.assertNotNull(result.get(1))
+0.694 - Assert.assertEquals("STR", result.get(0).getName())
+0.694 - Assert.assertEquals("STR", result.get(1).getName())
+0.694 - Assert.assertEquals("STR", result.get(2).getName())
+0.694 - Assert.assertEquals("STR", result.get(3).getName())
+0.629 - Assert.assertFalse(result.contains(data.get(2)))
+0.629 - Assert.assertFalse(result.contains(data.get(3)))
+0.582 - Assert.assertNotSame(data, result)
+0.580 - Assert.assertTrue(result.contains(data.get(0)))
+0.580 - Assert.assertTrue(result.contains(data.get(1)))
+0.580 - Assert.assertNotSame(data.get(0), result.get(0))
+0.580 - Assert.assertNotSame(data.get(1), result.get(1))
+0.541 - Assert.assertFalse(result.get(2) instanceof TestNamed)
+0.541 - Assert.assertFalse(result.get(3) instanceof TestNamed)
+0.493 - Assert.assertTrue(result.get(0) instanceof TestNamed)
+0.493 - Assert.assertTrue(result.get(1) instanceof TestNamed)

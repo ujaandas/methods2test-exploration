@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilder {
+    @Override
+     public String toString ( ) ;
+}
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilderTest {
+    @Test
+     public void testSort ( ) {
+         sql . select ( ) . from ( "STR" ) . orderBy ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertEquals("SELECT * FROM STR ORDER BY STR", sql.toString());
+Assert.assertTrue(sql.hasSelect());
+Assert.assertTrue(sql.hasFrom());
+Assert.assertTrue(sql.hasOrderBy());
+Assert.assertEquals(1, sql.getSelectCount());
+Assert.assertEquals("STR", sql.getFromTable());
+Assert.assertEquals("STR", sql.getOrderByColumn());
+Assert.assertFalse(sql.hasWhere());
+Assert.assertFalse(sql.hasGroupBy());
+Assert.assertTrue(sql.isValid());
+Assert.assertNotNull(sql.getQuery());
+Assert.assertTrue(sql.getQuery().contains("SELECT"));
+Assert.assertTrue(sql.getQuery().contains("FROM"));
+Assert.assertTrue(sql.getQuery().contains("ORDER BY"));
+Assert.assertEquals("STR", sql.getOrderBy().get(0));
+Assert.assertEquals(0, sql.getGroupByCount());
+Assert.assertEquals(0, sql.getWhereCount());
+Assert.assertTrue(sql.isOrdered());
+Assert.assertFalse(sql.isGrouped());
+Assert.assertFalse(sql.isFiltered());
+Assert.assertEquals("STR", sql.getSelectColumns().get(0));
+Assert.assertEquals(1, sql.getOrderByCount());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sql.toString()); ===
+0.778 - Assert.assertEquals("STR", sql.getFromTable())
+0.763 - Assert.assertEquals("STR", sql.getOrderByColumn())
+0.727 - Assert.assertEquals("STR", sql.getOrderBy().get(0))
+0.701 - ```java
+Assert.assertEquals("SELECT * FROM STR ORDER BY STR", sql.toString())
+0.699 - Assert.assertEquals("STR", sql.getSelectColumns().get(0))
+0.696 - Assert.assertEquals(0, sql.getWhereCount())
+0.686 - Assert.assertEquals(1, sql.getSelectCount())
+0.676 - Assert.assertEquals(0, sql.getGroupByCount())
+0.676 - Assert.assertEquals(1, sql.getOrderByCount())
+0.603 - Assert.assertFalse(sql.isFiltered())
+0.590 - Assert.assertFalse(sql.hasWhere())
+0.581 - Assert.assertFalse(sql.isGrouped())
+0.571 - Assert.assertFalse(sql.hasGroupBy())
+0.571 - Assert.assertNotNull(sql.getQuery())
+0.542 - Assert.assertTrue(sql.hasFrom())
+0.542 - Assert.assertTrue(sql.isValid())
+0.525 - Assert.assertTrue(sql.hasSelect())
+0.525 - Assert.assertTrue(sql.isOrdered())
+0.519 - Assert.assertTrue(sql.getQuery().contains("FROM"))
+0.516 - Assert.assertTrue(sql.hasOrderBy())
+0.500 - Assert.assertTrue(sql.getQuery().contains("ORDER BY"))
+0.430 - Assert.assertTrue(sql.getQuery().contains("SELECT"))
+0.000 - ```

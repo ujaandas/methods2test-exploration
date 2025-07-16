@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testRelativeCanonicalURL ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . canonicalMetadataParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertEquals(1, fields.size());\nassertTrue(fields.containsKey(AbstractIndexerBolt.urlFieldParamName));\nassertTrue(fields.containsKey(AbstractIndexerBolt.canonicalMetadataParamName));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.urlFieldParamName));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));\nassertFalse(fields.isEmpty());\nassertNotEquals(\"DifferentValue\", fields.get(\"STR\"));\nassertTrue(fields.keySet().containsAll(Arrays.asList(\"STR\", AbstractIndexerBolt.urlFieldParamName, AbstractIndexerBolt.canonicalMetadataParamName)));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"AnotherValue\", fields.get(AbstractIndexerBolt.urlFieldParamName));\nassertNotNull(fields.get(AbstractIndexerBolt.canonicalMetadataParamName));\nassertTrue(fields.get(AbstractIndexerBolt.canonicalMetadataParamName).startsWith(\"S\"));\nassertTrue(fields.get(\"STR\").length() > 0);\nassertTrue(fields.get(AbstractIndexerBolt.urlFieldParamName).length() > 0);\nassertTrue(fields.get(AbstractIndexerBolt.canonicalMetadataParamName).length() > 0);\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));\nassertTrue(fields.containsValue(\"STR\"));\nassertFalse(fields.containsValue(\"NonExistentValue\"));\n```\n====================\n\n",
+    "scores": [
+        0.925,
+        0.925,
+        0.723,
+        0.694,
+        0.627,
+        0.6,
+        0.585,
+        0.583,
+        0.571,
+        0.529,
+        0.529,
+        0.479,
+        0.468,
+        0.444,
+        0.379,
+        0.372,
+        0.365,
+        0.339,
+        0.339,
+        0.314,
+        0.286,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

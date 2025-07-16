@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollections {\npublic List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) {\nreturn Collections . unmodifiableList ( multiValueChangeEvents ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollectionsTest {\n@Test\npublic void testChangesValuesNestedTrackingSet ( ) {\nODocument document = new ODocument ( ) ;\nSet objects = new HashSet ( ) ;\ndocument . field ( \"STR\" , objects ) ;\nSet subObjects = new HashSet ( ) ;\nobjects . add ( subObjects ) ;\nODocument nestedDoc = new ODocument ( ) ;\nsubObjects . add ( nestedDoc ) ;\ndocument . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ;\nobjects = document . field ( \"STR\" ) ;\nsubObjects = ( Set ) objects . iterator ( ) . next ( ) ;\nsubObjects . add ( \"STR\" ) ;\nOMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(subObjects.contains(\"STR\"));\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().size());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().size());\nAssert.assertEquals(\"STR\", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getValue());\nAssert.assertEquals(OMultiValueChangeEvent.OPERATION.ADD, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getOperation());\nAssert.assertEquals(subObjects, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getMultiValue());\nAssert.assertEquals(\"STR\", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getKey());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeTime());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeIndex());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeType());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeSequence());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeCounter());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeId());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());\nAssert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.825,
+        0.73,
+        0.726,
+        0.718,
+        0.717,
+        0.713,
+        0.709,
+        0.704,
+        0.704,
+        0.704,
+        0.704,
+        0.704,
+        0.699,
+        0.679,
+        0.58,
+        0.247
+    ],
+    "ground_truth": "assertEquals(1,timeLine.getMultiValueChangeEvents().size());"
+}

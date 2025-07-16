@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CollectionOfLinkInNestedDocument {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CollectionOfLinkInNestedDocumentTest {
+    @Test
+     public void nestedLinkSet ( ) {
+         ODocument doc1 = new ODocument ( ) ; 
+         doc1 . field ( "STR" , "STR" ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         doc2 . field ( "STR" , "STR" ) ; 
+         ODocument nested = new ODocument ( ) ; 
+         ORecordLazySet set = new ORecordLazySet ( nested ) ; 
+         set . add ( doc1 ) ; 
+         set . add ( doc2 ) ; 
+         nested . field ( "STR" , set ) ; 
+         ODocument base = new ODocument ( ) ; 
+         base . field ( "STR" , nested , OType . EMBEDDED ) ; 
+         OIdentifiable id = db . save ( base , db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         db . getLocalCache ( ) . clear ( ) ; 
+         ODocument base1 = db . load ( id . getIdentity ( ) ) ; 
+         ODocument nest1 = base1 . field ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(nest1);
+assertEquals(1, nest1.field("STR").size());
+assertTrue(nest1.field("STR") instanceof ORecordLazySet);
+assertTrue(nest1.field("STR").contains(doc1));
+assertTrue(nest1.field("STR").contains(doc2));
+assertEquals(doc1, ((ORecordLazySet) nest1.field("STR")).iterator().next());
+assertTrue(doc1.getIdentity().isValid());
+assertTrue(doc2.getIdentity().isValid());
+assertTrue(base1.field("STR") instanceof ODocument);
+assertEquals(nested, base1.field("STR"));
+assertTrue(base1.getIdentity().isValid());
+assertTrue(nested.getIdentity().isValid());
+assertTrue(set instanceof ORecordLazySet);
+assertEquals(2, set.size());
+assertTrue(set.contains(doc1));
+assertTrue(set.contains(doc2));
+assertTrue(set.iterator().hasNext());
+assertEquals(doc1, set.iterator().next());
+assertTrue(doc1.getIdentity().isValid());
+assertTrue(doc2.getIdentity().isValid());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(nest1); ===
+1.000 - assertNotNull(nest1)
+0.508 - assertEquals(nested, base1.field("STR"))
+0.492 - assertEquals(1, nest1.field("STR").size())
+0.440 - assertTrue(set.contains(doc1))
+0.433 - assertEquals(doc1, set.iterator().next())
+0.431 - assertTrue(nest1.field("STR").contains(doc1))
+0.431 - assertTrue(nest1.field("STR").contains(doc2))
+0.419 - assertTrue(nested.getIdentity().isValid())
+0.400 - assertTrue(set.contains(doc2))
+0.391 - assertEquals(2, set.size())
+0.378 - assertTrue(nest1.field("STR") instanceof ORecordLazySet)
+0.377 - assertTrue(base1.field("STR") instanceof ODocument)
+0.373 - assertTrue(set instanceof ORecordLazySet)
+0.367 - assertTrue(doc1.getIdentity().isValid())
+0.367 - assertTrue(doc2.getIdentity().isValid())
+0.367 - assertTrue(doc1.getIdentity().isValid())
+0.367 - assertTrue(doc2.getIdentity().isValid())
+0.357 - assertTrue(set.iterator().hasNext())
+0.328 - assertTrue(base1.getIdentity().isValid())
+0.301 - assertEquals(doc1, ((ORecordLazySet) nest1.field("STR")).iterator().next())

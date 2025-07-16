@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfo {\npublic Object getTarget ( ) {\nreturn target ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfoTest {\n@Test\npublic void testImmutableQueryInfo ( ) throws Exception {\nMap < String , Method > setters = new HashMap < > ( ) ;\nsetters . put ( \"STR\" , null ) ;\nsetters . put ( \"STR\" , null ) ;\nObject target = new Object ( ) ;\nObjectName oname = new ObjectName ( \"STR\" ) ;\nObjectQueryInfo objectQueryInfo = new ObjectQueryInfo ( target , oname , setters ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(objectQueryInfo);\nassertEquals(target, objectQueryInfo.getTarget());\nassertEquals(oname, objectQueryInfo.getObjectName());\nassertEquals(setters.size(), objectQueryInfo.getSetters().size());\nassertTrue(objectQueryInfo.getSetters().containsKey(\"STR\"));\nassertNull(objectQueryInfo.getSetters().get(\"STR\"));\nassertFalse(objectQueryInfo.getSetters().containsKey(\"NON_EXISTENT_KEY\"));\nassertEquals(0, objectQueryInfo.getOtherProperties().size());\nassertTrue(objectQueryInfo.isImmutable());\nassertNotEquals(new Object(), objectQueryInfo);\nassertNotSame(objectQueryInfo, new ObjectQueryInfo(target, oname, setters));\nassertTrue(objectQueryInfo.toString().contains(\"ObjectQueryInfo\"));\nassertEquals(objectQueryInfo.hashCode(), objectQueryInfo.hashCode());\nassertNotEquals(objectQueryInfo.hashCode(), new ObjectQueryInfo(new Object(), oname, setters).hashCode());\nassertSame(objectQueryInfo.getClass(), ObjectQueryInfo.class);\nassertTrue(objectQueryInfo.getTarget() instanceof Object);\nassertEquals(objectQueryInfo.getObjectName().getName(), \"STR\");\nassertThrows(UnsupportedOperationException.class, () -> objectQueryInfo.getSetters().put(\"NEW_KEY\", null));\nassertFalse(objectQueryInfo.getSetters().isEmpty());\nassertTrue(objectQueryInfo.getSetters().keySet().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.915,
+        0.713,
+        0.701,
+        0.68,
+        0.68,
+        0.648,
+        0.644,
+        0.642,
+        0.636,
+        0.618,
+        0.61,
+        0.598,
+        0.595,
+        0.578,
+        0.555,
+        0.548,
+        0.531,
+        0.5,
+        0.446,
+        0.438,
+        0.0
+    ],
+    "ground_truth": "assertSame(target,objectQueryInfo.getTarget());"
+}

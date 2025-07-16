@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQuery {
+    public List < WorkerData > execute ( List < WorkerData > input ) { 
+    switch ( targetType ) { 
+    case ALL : return select ( input , null ) ; 
+    case MEMBER : return select ( input , true ) ; 
+    case CLIENT : return select ( input , false ) ; 
+    case PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ; 
+    return ! result . isEmpty ( ) ? result : select ( input , true ) ; 
+    default : throw new IllegalStateException ( "STR" + targetType ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQueryTest {
+    @Test
+     public void targetType_whenMember ( ) {
+         list . add ( new WorkerData ( newParameters ( agent1 , 1 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 2 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 3 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 4 , "STR" , "STR" ) ) ) ; 
+         List < WorkerData > result = new WorkerQuery ( ) . setTargetType ( TargetType . MEMBER ) . execute ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, result.size());
+assertEquals(agent1, result.get(0).getAgent());
+assertEquals(1, result.get(0).getId());
+assertEquals(agent1, result.get(1).getAgent());
+assertEquals(2, result.get(1).getId());
+assertEquals(agent1, result.get(2).getAgent());
+assertEquals(3, result.get(2).getId());
+assertEquals(agent1, result.get(3).getAgent());
+assertEquals(4, result.get(3).getId());
+assertEquals("STR", result.get(0).getParam1());
+assertEquals("STR", result.get(1).getParam1());
+assertEquals("STR", result.get(2).getParam1());
+assertEquals("STR", result.get(3).getParam1());
+assertEquals("STR", result.get(0).getParam2());
+assertEquals("STR", result.get(1).getParam2());
+assertEquals("STR", result.get(2).getParam2());
+assertEquals("STR", result.get(3).getParam2());
+assertEquals(TargetType.MEMBER, result.get(0).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(1).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(2).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(3).getTargetType());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(asList(list.get(1),list.get(3)),result); ===
+0.674 - assertEquals(2, result.get(1).getId())
+0.639 - assertEquals(agent1, result.get(1).getAgent())
+0.619 - assertEquals(agent1, result.get(3).getAgent())
+0.619 - assertEquals("STR", result.get(1).getParam1())
+0.619 - assertEquals("STR", result.get(1).getParam2())
+0.562 - assertEquals(4, result.get(3).getId())
+0.549 - assertEquals(TargetType.MEMBER, result.get(1).getTargetType())
+0.536 - assertEquals(agent1, result.get(0).getAgent())
+0.536 - assertEquals(agent1, result.get(2).getAgent())
+0.519 - assertEquals(4, result.size())
+0.515 - assertEquals("STR", result.get(3).getParam1())
+0.515 - assertEquals("STR", result.get(3).getParam2())
+0.513 - assertEquals(TargetType.MEMBER, result.get(3).getTargetType())
+0.494 - assertEquals(1, result.get(0).getId())
+0.494 - assertEquals(3, result.get(2).getId())
+0.460 - assertEquals(TargetType.MEMBER, result.get(0).getTargetType())
+0.460 - assertEquals(TargetType.MEMBER, result.get(2).getTargetType())
+0.433 - assertEquals("STR", result.get(0).getParam1())
+0.433 - assertEquals("STR", result.get(2).getParam1())
+0.433 - assertEquals("STR", result.get(0).getParam2())
+0.433 - assertEquals("STR", result.get(2).getParam2())

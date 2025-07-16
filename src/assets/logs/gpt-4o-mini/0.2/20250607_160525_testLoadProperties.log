@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfo {
+    static Properties loadGitProperties ( String fileName ) { 
+    Properties properties = new Properties ( ) ; 
+    InputStream inputStream = GitInfo . class . getClassLoader ( ) . getResourceAsStream ( fileName ) ; 
+    try { 
+    properties . load ( inputStream ) ; 
+    return properties ; 
+    } catch ( NullPointerException e ) { 
+    LOGGER . trace ( "STR" + fileName , e ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + fileName , e ) ; 
+    } finally { 
+    closeQuietly ( inputStream ) ; 
+    } return new UnknownGitProperties ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfoTest {
+    @Test
+     public void testLoadProperties ( ) {
+         Properties properties = GitInfo . loadGitProperties ( GitInfo . GIT_INFO_FILE ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(properties);
+assertTrue(properties.size() > 0);
+assertTrue(properties.containsKey("git.branch"));
+assertTrue(properties.containsKey("git.commit.id"));
+assertTrue(properties.containsKey("git.commit.time"));
+assertTrue(properties.containsKey("git.build.version"));
+assertEquals("main", properties.getProperty("git.branch"));
+assertEquals("1234567", properties.getProperty("git.commit.id"));
+assertNotNull(properties.getProperty("git.commit.time"));
+assertNotNull(properties.getProperty("git.build.version"));
+assertTrue(properties.getProperty("git.build.version").matches("\\d+\\.\\d+\\.\\d+"));
+assertTrue(properties.getProperty("git.commit.time").matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"));
+assertFalse(properties.containsKey("non.existent.key"));
+assertEquals("unknown", properties.getProperty("git.tag", "unknown"));
+assertTrue(properties.getProperty("git.build.user").length() > 0);
+assertTrue(properties.getProperty("git.build.host").length() > 0);
+assertTrue(properties.getProperty("git.build.time").length() > 0);
+assertTrue(properties.getProperty("git.remote.origin.url").length() > 0);
+assertTrue(properties.getProperty("git.commit.message.short").length() > 0);
+assertTrue(properties.getProperty("git.commit.user.name").length() > 0);
+assertTrue(properties.getProperty("git.commit.user.email").length() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(properties); ===
+0.862 - ```java
+assertNotNull(properties)
+0.679 - assertTrue(properties.size() > 0)
+0.617 - assertNotNull(properties.getProperty("git.commit.time"))
+0.602 - assertNotNull(properties.getProperty("git.build.version"))
+0.521 - assertTrue(properties.containsKey("git.branch"))
+0.500 - assertTrue(properties.containsKey("git.commit.id"))
+0.488 - assertEquals("main", properties.getProperty("git.branch"))
+0.487 - assertTrue(properties.containsKey("git.commit.time"))
+0.475 - assertTrue(properties.containsKey("git.build.version"))
+0.475 - assertFalse(properties.containsKey("non.existent.key"))
+0.455 - assertEquals("1234567", properties.getProperty("git.commit.id"))
+0.432 - assertTrue(properties.getProperty("git.build.user").length() > 0)
+0.432 - assertTrue(properties.getProperty("git.build.host").length() > 0)
+0.432 - assertTrue(properties.getProperty("git.build.time").length() > 0)
+0.404 - assertTrue(properties.getProperty("git.commit.user.name").length() > 0)
+0.400 - assertTrue(properties.getProperty("git.remote.origin.url").length() > 0)
+0.400 - assertTrue(properties.getProperty("git.commit.user.email").length() > 0)
+0.391 - assertEquals("unknown", properties.getProperty("git.tag", "unknown"))
+0.388 - assertTrue(properties.getProperty("git.commit.message.short").length() > 0)
+0.345 - assertTrue(properties.getProperty("git.build.version").matches("\\d+\\.\\d+\\.\\d+"))
+0.288 - assertTrue(properties.getProperty("git.commit.time").matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z"))
+0.000 - ```

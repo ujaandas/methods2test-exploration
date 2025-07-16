@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\n@Override\npublic void fromDocument ( ODocument document ) {\ndocument . setLazyLoad ( false ) ;\nfinal String [ ] fieldNames = document . fieldNames ( ) ;\nfinal SortedMap < Integer , Object > keyMap = new TreeMap < Integer , Object > ( ) ;\nfor ( String fieldName : fieldNames ) {\nif ( fieldName . startsWith ( \"STR\" ) ) {\nfinal String keyIndex = fieldName . substring ( 3 ) ;\nkeyMap . put ( Integer . valueOf ( keyIndex ) , document . field ( fieldName ) ) ;\n} } keys . clear ( ) ;\nfor ( Object value : keyMap . values ( ) ) keys . add ( value ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testDocumentSerializationCompositeKeyNull ( ) {\nfinal OCompositeKey compositeKeyOne = new OCompositeKey ( ) ;\ncompositeKeyOne . addKey ( 1 ) ;\ncompositeKeyOne . addKey ( null ) ;\ncompositeKeyOne . addKey ( 2 ) ;\nODocument document = compositeKeyOne . toDocument ( ) ;\nfinal OCompositeKey compositeKeyTwo = new OCompositeKey ( ) ;\ncompositeKeyTwo . fromDocument ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(compositeKeyTwo);\nassertEquals(3, compositeKeyTwo.size());\nassertTrue(compositeKeyTwo.containsKey(1));\nassertTrue(compositeKeyTwo.containsKey(null));\nassertTrue(compositeKeyTwo.containsKey(2));\nassertFalse(compositeKeyTwo.containsKey(3));\nassertNull(compositeKeyTwo.getKey(1));\nassertNull(compositeKeyTwo.getKey(null));\nassertEquals(2, compositeKeyTwo.getKey(2));\nassertEquals(1, compositeKeyTwo.getKey(1));\nassertEquals(null, compositeKeyTwo.getKey(null));\nassertEquals(compositeKeyOne, compositeKeyTwo);\nassertNotSame(compositeKeyOne, compositeKeyTwo);\nassertTrue(compositeKeyTwo.keys().contains(1));\nassertTrue(compositeKeyTwo.keys().contains(null));\nassertTrue(compositeKeyTwo.keys().contains(2));\nassertFalse(compositeKeyTwo.keys().contains(3));\nassertEquals(compositeKeyOne.hashCode(), compositeKeyTwo.hashCode());\nassertEquals(compositeKeyOne.toString(), compositeKeyTwo.toString());\nassertTrue(compositeKeyTwo.equals(compositeKeyOne));\nassertFalse(compositeKeyTwo.equals(new OCompositeKey()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.879,
+        0.804,
+        0.804,
+        0.723,
+        0.698,
+        0.698,
+        0.674,
+        0.61,
+        0.602,
+        0.591,
+        0.588,
+        0.583,
+        0.565,
+        0.552,
+        0.552,
+        0.533,
+        0.527,
+        0.527,
+        0.52,
+        0.511,
+        0.0
+    ],
+    "ground_truth": "assertEquals(compositeKeyOne,compositeKeyTwo);"
+}

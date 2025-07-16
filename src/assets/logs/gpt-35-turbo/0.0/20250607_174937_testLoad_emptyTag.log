@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AgentsFile {
+    public int agentCount ( ) { 
+    return agents . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AgentsFileTest {
+    @Test
+     public void testLoad_emptyTag ( ) {
+         writeText ( "STR" , agentsFile ) ; 
+         registry = load ( agentsFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, registry.agentCount());
+assertNotNull(registry.getAgent("STR"));
+assertNull(registry.getAgent("ABC"));
+assertTrue(registry.getAgents().isEmpty());
+assertFalse(registry.getAgents().contains("XYZ"));
+assertEquals(1, registry.getAgents().size());
+assertTrue(registry.getAgents().contains("STR"));
+assertFalse(registry.getAgents().contains("ABC"));
+assertEquals("STR", registry.getAgent("STR"));
+assertNotEquals("ABC", registry.getAgent("STR"));
+assertTrue(registry.getAgent("STR").isActive());
+assertFalse(registry.getAgent("STR").isInactive());
+assertTrue(registry.getAgent("STR").isAvailable());
+assertFalse(registry.getAgent("STR").isBusy());
+assertEquals(0, registry.getAgent("STR").getTasks());
+assertNotNull(registry.getAgent("STR").getDetails());
+assertNull(registry.getAgent("STR").getTasksList());
+assertTrue(registry.getAgent("STR").getDetails().containsKey("key"));
+assertFalse(registry.getAgent("STR").getDetails().containsKey("invalidKey"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,registry.agentCount()); ===
+0.973 - assertEquals(0, registry.agentCount())
+0.775 - assertEquals(1, registry.getAgents().size())
+0.741 - assertEquals("STR", registry.getAgent("STR"))
+0.714 - assertNotEquals("ABC", registry.getAgent("STR"))
+0.705 - assertEquals(0, registry.getAgent("STR").getTasks())
+0.685 - assertNull(registry.getAgent("ABC"))
+0.674 - assertFalse(registry.getAgents().contains("XYZ"))
+0.674 - assertFalse(registry.getAgents().contains("ABC"))
+0.658 - assertNotNull(registry.getAgent("STR"))
+0.651 - assertFalse(registry.getAgent("STR").isBusy())
+0.644 - assertFalse(registry.getAgent("STR").isInactive())
+0.635 - assertTrue(registry.getAgents().contains("STR"))
+0.633 - assertTrue(registry.getAgents().isEmpty())
+0.595 - assertTrue(registry.getAgent("STR").isActive())
+0.591 - assertNull(registry.getAgent("STR").getTasksList())
+0.584 - assertNotNull(registry.getAgent("STR").getDetails())
+0.552 - assertTrue(registry.getAgent("STR").isAvailable())
+0.514 - assertTrue(registry.getAgent("STR").getDetails().containsKey("key"))
+0.513 - assertFalse(registry.getAgent("STR").getDetails().containsKey("invalidKey"))

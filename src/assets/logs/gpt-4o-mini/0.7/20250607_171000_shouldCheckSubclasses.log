@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(result);
+Assert.assertTrue(result.hasNext());
+Assert.assertEquals(20, result.getTotalRecords());
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("className").equals(childClass.getName())));
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("className").equals(parentClass.getName())));
+Assert.assertFalse(result.stream().anyMatch(r -> r.getProperty("className").equals("NonExistentClass")));
+Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())));
+Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)));
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("someProperty") != null));
+Assert.assertEquals("ExpectedValue", result.stream().findFirst().get().getProperty("someProperty"));
+Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("recordStatus").equals("active")));
+Assert.assertTrue(result.stream().noneMatch(r -> r.getProperty("recordStatus").equals("inactive")));
+Assert.assertEquals(5, result.stream().filter(r -> r.getProperty("level") == 5).count());
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("timestamp") != null));
+Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("createdBy").equals("testUser")));
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("description").contains("expected description")));
+Assert.assertEquals(10, result.stream().filter(r -> r.getProperty("type").equals("exampleType")).count());
+Assert.assertTrue(result.stream().noneMatch(r -> r.getProperty("deprecated").equals(true)));
+Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("active") == true));
+Assert.assertNotNull(result.stream().findFirst().get().getProperty("id"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.725 - Assert.assertEquals(20, result.getTotalRecords())
+0.661 - Assert.assertEquals(5, result.stream().filter(r -> r.getProperty("level") == 5).count())
+0.627 - Assert.assertTrue(result.hasNext())
+0.582 - Assert.assertEquals(10, result.stream().filter(r -> r.getProperty("type").equals("exampleType")).count())
+0.571 - Assert.assertNotNull(result.stream().findFirst().get().getProperty("id"))
+0.538 - Assert.assertEquals("ExpectedValue", result.stream().findFirst().get().getProperty("someProperty"))
+0.532 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("active") == true))
+0.518 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("timestamp") != null))
+0.504 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("someProperty") != null))
+0.500 - Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)))
+0.496 - Assert.assertTrue(result.stream().noneMatch(r -> r.getProperty("deprecated").equals(true)))
+0.493 - Assert.assertFalse(result.stream().anyMatch(r -> r.getProperty("className").equals("NonExistentClass")))
+0.481 - Assert.assertTrue(result.stream().noneMatch(r -> r.getProperty("recordStatus").equals("inactive")))
+0.480 - Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("createdBy").equals("testUser")))
+0.476 - Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("recordStatus").equals("active")))
+0.471 - ```java
+Assert.assertNotNull(result)
+0.471 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("className").equals(parentClass.getName())))
+0.459 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("className").equals(childClass.getName())))
+0.443 - Assert.assertTrue(result.stream().anyMatch(r -> r.getProperty("description").contains("expected description")))
+0.437 - Assert.assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())))
+0.000 - ```

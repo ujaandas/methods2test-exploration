@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoader {\npublic String toYaml ( String rootKey ) {\ntry {\nStringBuilder out = new StringBuilder ( ) ;\nthis . print ( 0 , rootKey , out ) ;\nreturn out . toString ( ) ;\n} catch ( IOException e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoaderTest {\n@Test\npublic void roundtrips ( ) {\nString yaml = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\nConfig config = new Config ( ) ;\nConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( yaml ) ) ;\nconfigLoader . load ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(config);\nassertEquals(\"expectedValue1\", config.getValue(\"key1\"));\nassertEquals(\"expectedValue2\", config.getValue(\"key2\"));\nassertTrue(config.hasKey(\"key3\"));\nassertFalse(config.hasKey(\"key4\"));\nassertEquals(10, config.getIntValue(\"key5\"));\nassertEquals(3.14, config.getDoubleValue(\"key6\"), 0.01);\nassertEquals(Arrays.asList(\"item1\", \"item2\"), config.getList(\"key7\"));\nassertEquals(\"expectedValue8\", config.getValue(\"key8\"));\nassertNotEquals(\"unexpectedValue\", config.getValue(\"key9\"));\nassertTrue(config.getBooleanValue(\"key10\"));\nassertFalse(config.getBooleanValue(\"key11\"));\nassertEquals(\"nestedValue\", config.getValue(\"nested.key12\"));\nassertEquals(5, config.getIntValue(\"key13\"));\nassertTrue(config.getList(\"key14\").contains(\"item3\"));\nassertEquals(\"expectedValue15\", config.getValue(\"key15\"));\nassertEquals(\"defaultValue\", config.getValueOrDefault(\"key16\", \"defaultValue\"));\nassertThrows(IllegalArgumentException.class, () -> config.getValue(\"nonExistentKey\"));\nassertNotNull(config.getMap(\"key17\"));\nassertEquals(\"valueFromMap\", config.getMap(\"key17\").get(\"subKey\"));\nassertEquals(100, config.getIntValue(\"key18\"));\nassertTrue(config.getList(\"key19\").isEmpty());\nassertEquals(\"finalExpectedValue\", config.getValue(\"key20\"));\n```\n====================\n\n",
+    "scores": [
+        0.707,
+        0.707,
+        0.69,
+        0.667,
+        0.667,
+        0.667,
+        0.653,
+        0.652,
+        0.639,
+        0.633,
+        0.633,
+        0.63,
+        0.627,
+        0.605,
+        0.585,
+        0.583,
+        0.577,
+        0.566,
+        0.534,
+        0.5,
+        0.471,
+        0.457,
+        0.413,
+        0.0
+    ],
+    "ground_truth": "assertEquals(yaml,config.toYaml(\"STR\"));"
+}

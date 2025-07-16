@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic Map < String , List < Connection > > getAll ( ) {\nMap < String , List < Connection > > allConnections = new HashMap < String , List < Connection > > ( ) ;\nfor ( Map . Entry < String , RunStateRecordedFutureTask < ConnectionPool > > entry : this . getConnPools ( ) . entrySet ( ) ) {\nConnectionPool pool = FutureTaskUtil . getFutureTaskResult ( entry . getValue ( ) , logger ) ;\nif ( null != pool ) {\nallConnections . put ( entry . getKey ( ) , pool . getAll ( ) ) ;\n} } return allConnections ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testGetAll ( ) {\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\nMap < String , List < Connection > > conns = cm . getAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(conns);\nassertFalse(conns.isEmpty());\nassertTrue(conns.containsKey(\"expectedKey1\"));\nassertTrue(conns.containsKey(\"expectedKey2\"));\nassertEquals(4, conns.get(\"expectedKey1\").size());\nassertEquals(4, conns.get(\"expectedKey2\").size());\nassertTrue(conns.get(\"expectedKey1\").get(0) instanceof Connection);\nassertTrue(conns.get(\"expectedKey1\").get(1) instanceof Connection);\nassertTrue(conns.get(\"expectedKey2\").get(0) instanceof Connection);\nassertTrue(conns.get(\"expectedKey2\").get(1) instanceof Connection);\nassertEquals(\"expectedValue1\", conns.get(\"expectedKey1\").get(0).getValue());\nassertEquals(\"expectedValue2\", conns.get(\"expectedKey2\").get(0).getValue());\nassertNotSame(conns.get(\"expectedKey1\").get(0), conns.get(\"expectedKey1\").get(1));\nassertNotSame(conns.get(\"expectedKey2\").get(0), conns.get(\"expectedKey2\").get(1));\nassertTrue(conns.get(\"expectedKey1\").contains(getAConn()));\nassertTrue(conns.get(\"expectedKey2\").contains(getAConn()));\nassertEquals(2, conns.get(\"expectedKey1\").stream().filter(conn -> conn.equals(getAConn())).count());\nassertEquals(2, conns.get(\"expectedKey2\").stream().filter(conn -> conn.equals(getAConn())).count());\nassertTrue(conns.get(\"expectedKey1\").stream().allMatch(conn -> conn.isActive()));\nassertTrue(conns.get(\"expectedKey2\").stream().allMatch(conn -> conn.isActive()));\n```\n====================\n\n",
+    "scores": [
+        0.714,
+        0.711,
+        0.711,
+        0.536,
+        0.521,
+        0.521,
+        0.49,
+        0.471,
+        0.442,
+        0.442,
+        0.419,
+        0.419,
+        0.389,
+        0.377,
+        0.377,
+        0.37,
+        0.37,
+        0.37,
+        0.37,
+        0.37,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,conns.size());"
+}

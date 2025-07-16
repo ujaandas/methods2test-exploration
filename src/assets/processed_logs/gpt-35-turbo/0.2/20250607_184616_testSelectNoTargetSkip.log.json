@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testSelectNoTargetSkip ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, result.size());\nassertTrue(result.isEmpty());\nassertNotNull(result);\nassertFalse(result.hasNext());\nassertTrue(result instanceof OResultSet);\nassertEquals(\"STR\", result.getQuery());\nassertNotEquals(5, result.size());\nassertTrue(result.getExecutionTime() < 100);\nassertEquals(0, result.getWarnings().size());\nassertTrue(result.getExecutionPlan().isEmpty());\nassertEquals(0, result.getErrors().size());\nassertTrue(result.getExecutionTime() > 0);\nassertNotNull(result.getExecutionPlan());\nassertFalse(result.getWarnings().isEmpty());\nassertTrue(result.getErrors().isEmpty());\nassertEquals(0, result.getExecutionPlan().size());\nassertTrue(result.getExecutionTime() >= 0);\nassertNotNull(result.getWarnings());\nassertFalse(result.getErrors().contains(\"error\"));\nassertTrue(result.getExecutionPlan().containsKey(\"plan\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.759,
+        0.721,
+        0.702,
+        0.694,
+        0.667,
+        0.639,
+        0.629,
+        0.625,
+        0.618,
+        0.609,
+        0.6,
+        0.6,
+        0.597,
+        0.59,
+        0.58,
+        0.567,
+        0.553,
+        0.551,
+        0.442
+    ],
+    "ground_truth": "Assert.assertFalse(result.hasNext());"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcServer {\n@Override\npublic int port ( ) {\nreturn port ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcServerTest {\n@Test\npublic void doTestRandomPortConstructor ( ) {\nRpcServer rpcServer = new RpcServer ( ) ;\nrpcServer . startup ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(rpcServer);\nassertEquals(0, rpcServer.port()); // Assuming default port is 0\nrpcServer.startup();\nassertTrue(rpcServer.isRunning());\nassertTrue(rpcServer.getPort() >= 0); // Assuming port should be non-negative\nassertNotEquals(rpcServer.getPort(), -1);\nassertTrue(rpcServer.getPort() < 65536); // Valid port range check\nassertTrue(rpcServer.getHost().isEmpty()); // Assuming default host is empty\nassertFalse(rpcServer.isShutdown());\nrpcServer.shutdown();\nassertTrue(rpcServer.isShutdown());\nassertEquals(0, rpcServer.getActiveConnections());\nrpcServer.startup();\nassertTrue(rpcServer.getActiveConnections() >= 0);\nassertNotNull(rpcServer.getConfiguration());\nassertFalse(rpcServer.getConfiguration().isEmpty());\nassertTrue(rpcServer.getProtocol().equals(\"SOFA\")); // Assuming default protocol is SOFA\nassertNotNull(rpcServer.getServiceRegistry());\nassertTrue(rpcServer.getServiceRegistry().isEmpty());\nrpcServer.addService(new TestService());\nassertEquals(1, rpcServer.getServiceCount());\nassertTrue(rpcServer.getService(\"TestService\") instanceof TestService);\n```\n====================\n\n",
+    "scores": [
+        0.955,
+        0.744,
+        0.723,
+        0.718,
+        0.696,
+        0.667,
+        0.657,
+        0.638,
+        0.618,
+        0.587,
+        0.581,
+        0.561,
+        0.541,
+        0.532,
+        0.529,
+        0.519,
+        0.485,
+        0.482,
+        0.473,
+        0.469,
+        0.411,
+        0.408,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotEquals(0,rpcServer.port());"
+}

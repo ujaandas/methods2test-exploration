@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OClassImpl {
+    public Integer getId ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OClassImplTest {
+    @Test
+     public void testCreatePropertyIdKeep ( ) {
+         final OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass oClass = oSchema . createClass ( "STR" ) ; 
+         OProperty prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         Integer id = prop . getId ( ) ; 
+         oClass . dropProperty ( "STR" ) ; 
+         prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.STRING, prop.getType());
+Assert.assertEquals(id, prop.getId());
+Assert.assertTrue(oClass.properties().contains(prop));
+Assert.assertTrue(oClass.existsProperty("STR"));
+Assert.assertEquals(1, oClass.properties().size());
+Assert.assertEquals(1, oClass.properties("STR").size());
+Assert.assertEquals(1, oClass.properties(OType.STRING).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, false).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, false).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, true, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, true, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, false, true).size());
+Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, false, true).size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(id,prop.getId()); ===
+1.000 - Assert.assertEquals(id, prop.getId())
+0.794 - Assert.assertEquals("STR", prop.getName())
+0.714 - Assert.assertEquals(OType.STRING, prop.getType())
+0.648 - Assert.assertEquals(1, oClass.properties().size())
+0.605 - Assert.assertEquals(1, oClass.properties("STR").size())
+0.583 - Assert.assertNotNull(prop)
+0.554 - Assert.assertEquals(1, oClass.properties(OType.STRING).size())
+0.522 - Assert.assertTrue(oClass.existsProperty("STR"))
+0.517 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING).size())
+0.489 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true).size())
+0.485 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, true).size())
+0.484 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false).size())
+0.480 - Assert.assertTrue(oClass.properties().contains(prop))
+0.480 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, true).size())
+0.462 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, true, true).size())
+0.460 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, false).size())
+0.457 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, true, true).size())
+0.457 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, true, false, true).size())
+0.455 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, false).size())
+0.453 - Assert.assertEquals(1, oClass.properties("STR", OType.STRING, false, false, true).size())

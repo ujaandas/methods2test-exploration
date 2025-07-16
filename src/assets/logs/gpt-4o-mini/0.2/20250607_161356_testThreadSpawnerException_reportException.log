@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ThreadSpawner {
+    public void awaitCompletion ( ) { 
+    for ( Thread thread : threads ) { 
+    try { 
+    thread . join ( ) ; 
+    } catch ( InterruptedException e ) { 
+    throw rethrow ( e ) ; 
+    } } if ( caughtException != null ) { 
+    throw rethrow ( caughtException ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ThreadSpawnerTest {
+    @Test
+     public void testThreadSpawnerException_reportException ( ) {
+         File exceptionFile = new File ( getUserDir ( ) , "STR" ) ; 
+         ThreadSpawner spawner = new ThreadSpawner ( "STR" ) ; 
+         spawner . spawn ( new Runnable ( ) { 
+     @Override
+     public void run ( ) { 
+     throw new CommandLineExitException ( "STR" ) ; 
+     } } ) ; 
+         spawner . awaitCompletion ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(spawner);
+assertEquals(1, spawner.getThreadCount());
+assertTrue(spawner.hasCaughtException());
+assertTrue(spawner.getCaughtException() instanceof CommandLineExitException);
+assertEquals("STR", spawner.getCaughtException().getMessage());
+assertTrue(spawner.isCompleted());
+assertFalse(spawner.isRunning());
+assertTrue(spawner.getThreads().isEmpty());
+assertEquals("STR", spawner.getExceptionFile().getName());
+assertTrue(spawner.getExceptionFile().exists());
+assertTrue(spawner.getExceptionFile().canRead());
+assertFalse(spawner.getExceptionFile().canWrite());
+assertFalse(spawner.getExceptionFile().isDirectory());
+assertTrue(spawner.getExceptionFile().length() > 0);
+assertNotNull(spawner.getThreadNames());
+assertEquals(1, spawner.getThreadNames().size());
+assertTrue(spawner.getThreadNames().contains("STR"));
+assertNotNull(spawner.getCompletionTime());
+assertTrue(spawner.getCompletionTime().isAfter(spawner.getStartTime()));
+assertTrue(spawner.getExecutionDuration() > 0);
+assertFalse(spawner.isInterrupted());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(exceptionFile.exists()); ===
+0.840 - assertTrue(spawner.getExceptionFile().exists())
+0.707 - assertTrue(spawner.getExceptionFile().canRead())
+0.651 - assertTrue(spawner.getExceptionFile().length() > 0)
+0.644 - assertFalse(spawner.getExceptionFile().isDirectory())
+0.622 - assertTrue(spawner.hasCaughtException())
+0.619 - assertFalse(spawner.getExceptionFile().canWrite())
+0.600 - assertEquals("STR", spawner.getExceptionFile().getName())
+0.567 - assertTrue(spawner.isCompleted())
+0.564 - assertTrue(spawner.getExecutionDuration() > 0)
+0.533 - assertTrue(spawner.getCompletionTime().isAfter(spawner.getStartTime()))
+0.505 - assertEquals("STR", spawner.getCaughtException().getMessage())
+0.500 - assertTrue(spawner.getCaughtException() instanceof CommandLineExitException)
+0.500 - assertTrue(spawner.getThreads().isEmpty())
+0.474 - assertNotNull(spawner.getCompletionTime())
+0.465 - assertTrue(spawner.getThreadNames().contains("STR"))
+0.455 - assertFalse(spawner.isRunning())
+0.400 - assertFalse(spawner.isInterrupted())
+0.384 - assertNotNull(spawner.getThreadNames())
+0.351 - assertEquals(1, spawner.getThreadCount())
+0.346 - assertEquals(1, spawner.getThreadNames().size())
+0.250 - ```java
+assertNotNull(spawner)
+0.000 - ```

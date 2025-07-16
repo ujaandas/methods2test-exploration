@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class OLiveQueryMessagess {
+    public int getMonitorId ( ) { 
+    return monitorId ; 
+    }
+}
+
+package orientechnologies.orientdb.client;
+
+public class OLiveQueryMessagesTests {
+    @Test
+     public void testLiveQueryPushRequest ( ) throws IOException {
+         List < OLiveQueryResult > events = new ArrayList < > ( ) ; 
+         OResultInternal res = new OResultInternal ( ) ; 
+         res . setProperty ( "STR" , "STR" ) ; 
+         res . setProperty ( "STR" , 10 ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , res , null ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         OLiveQueryPushRequest pushRequest = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ; 
+         MockChannel channel = new MockChannel ( ) ; 
+         pushRequest . write ( channel ) ; 
+         channel . close ( ) ; 
+         OLiveQueryPushRequest pushRequestRead = new OLiveQueryPushRequest ( ) ; 
+         pushRequestRead . read ( channel ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(10, pushRequestRead.getMonitorId());
+Assert.assertEquals(OLiveQueryPushRequest.END, pushRequestRead.getOperationType());
+Assert.assertEquals(3, pushRequestRead.getEvents().size());
+Assert.assertEquals(OLiveQueryResult.CREATE_EVENT, pushRequestRead.getEvents().get(0).getEventType());
+Assert.assertEquals("STR", pushRequestRead.getEvents().get(0).getBefore().getProperty("STR"));
+Assert.assertEquals(10, pushRequestRead.getEvents().get(0).getBefore().getProperty("STR"));
+Assert.assertNull(pushRequestRead.getEvents().get(0).getAfter());
+Assert.assertEquals(OLiveQueryResult.UPDATE_EVENT, pushRequestRead.getEvents().get(1).getEventType());
+Assert.assertNotNull(pushRequestRead.getEvents().get(1).getBefore());
+Assert.assertNotNull(pushRequestRead.getEvents().get(1).getAfter());
+Assert.assertEquals(OLiveQueryResult.DELETE_EVENT, pushRequestRead.getEvents().get(2).getEventType());
+Assert.assertNotNull(pushRequestRead.getEvents().get(2).getBefore());
+Assert.assertNull(pushRequestRead.getEvents().get(2).getAfter());
+Assert.assertTrue(channel.isClosed());
+Assert.assertTrue(channel.isWritten());
+Assert.assertEquals(pushRequest.getSerializedSize(), pushRequestRead.getSerializedSize());
+Assert.assertEquals(pushRequest.getEvents().size(), pushRequestRead.getEvents().size());
+Assert.assertEquals(pushRequest.getOperationType(), pushRequestRead.getOperationType());
+Assert.assertEquals(pushRequest.getMonitorId(), pushRequestRead.getMonitorId());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(pushRequestRead.getMonitorId(),10); ===
+0.936 - Assert.assertEquals(10, pushRequestRead.getMonitorId())
+0.763 - Assert.assertEquals(3, pushRequestRead.getEvents().size())
+0.746 - Assert.assertEquals(pushRequest.getMonitorId(), pushRequestRead.getMonitorId())
+0.654 - Assert.assertNull(pushRequestRead.getEvents().get(0).getAfter())
+0.648 - Assert.assertNotNull(pushRequestRead.getEvents().get(1).getBefore())
+0.648 - Assert.assertNotNull(pushRequestRead.getEvents().get(2).getBefore())
+0.636 - Assert.assertNotNull(pushRequestRead.getEvents().get(1).getAfter())
+0.635 - Assert.assertNull(pushRequestRead.getEvents().get(2).getAfter())
+0.612 - Assert.assertEquals(OLiveQueryPushRequest.END, pushRequestRead.getOperationType())
+0.605 - Assert.assertEquals(10, pushRequestRead.getEvents().get(0).getBefore().getProperty("STR"))
+0.591 - Assert.assertEquals("STR", pushRequestRead.getEvents().get(0).getBefore().getProperty("STR"))
+0.587 - Assert.assertEquals(pushRequest.getEvents().size(), pushRequestRead.getEvents().size())
+0.587 - Assert.assertEquals(pushRequest.getOperationType(), pushRequestRead.getOperationType())
+0.578 - Assert.assertEquals(pushRequest.getSerializedSize(), pushRequestRead.getSerializedSize())
+0.543 - Assert.assertEquals(OLiveQueryResult.CREATE_EVENT, pushRequestRead.getEvents().get(0).getEventType())
+0.543 - Assert.assertEquals(OLiveQueryResult.UPDATE_EVENT, pushRequestRead.getEvents().get(1).getEventType())
+0.529 - Assert.assertEquals(OLiveQueryResult.DELETE_EVENT, pushRequestRead.getEvents().get(2).getEventType())
+0.364 - Assert.assertTrue(channel.isClosed())
+0.359 - Assert.assertTrue(channel.isWritten())

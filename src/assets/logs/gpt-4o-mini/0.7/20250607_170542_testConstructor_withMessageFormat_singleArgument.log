@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( String message , Object ... args ) { 
+    super ( format ( message , args ) ) ; 
+    Object lastArg = args [ args . length - 1 ] ; 
+    if ( lastArg instanceof Throwable ) { 
+    initCause ( ( Throwable ) lastArg ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withMessageFormat_singleArgument ( ) {
+         TestException exception = new TestException ( "STR" , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(exception);
+assertEquals("STR", exception.getMessage());
+assertTrue(exception.getMessage().contains("1"));
+assertEquals(1, Integer.parseInt(exception.getMessage().substring(exception.getMessage().indexOf("1"))));
+assertTrue(exception.getMessage().startsWith("STR"));
+assertFalse(exception.getMessage().isEmpty());
+assertEquals(exception.getCause(), null);
+assertEquals(exception.getClass(), TestException.class);
+assertTrue(exception instanceof TestException);
+assertFalse(exception instanceof Throwable);
+assertEquals(exception.toString(), "hazelcast.hazelcast-simulator.simulator.TestException: STR");
+assertNotEquals(exception.hashCode(), 0);
+assertNotEquals(exception.getMessage(), "Different Message");
+assertThrows(IllegalArgumentException.class, () -> {
+    new TestException(null);
+});
+assertDoesNotThrow(() -> {
+    new TestException("Test message with arg: %s", "arg1");
+});
+assertEquals("Test message with arg: arg1", new TestException("Test message with arg: %s", "arg1").getMessage());
+assertTrue(exception.getLocalizedMessage().contains("STR"));
+assertNotNull(exception.getStackTrace());
+assertTrue(exception.getStackTrace().length > 0);
+assertNotNull(exception.getClass().getDeclaredConstructors());
+assertEquals(TestException.class.getDeclaredConstructors().length, 1);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",exception.getMessage()); ===
+1.000 - assertEquals("STR", exception.getMessage())
+0.765 - assertEquals(exception.getCause(), null)
+0.759 - assertFalse(exception.getMessage().isEmpty())
+0.720 - assertNotEquals(exception.getMessage(), "Different Message")
+0.691 - assertNotEquals(exception.hashCode(), 0)
+0.689 - assertTrue(exception.getMessage().contains("1"))
+0.660 - assertTrue(exception.getMessage().startsWith("STR"))
+0.659 - assertNotNull(exception.getStackTrace())
+0.625 - assertEquals(exception.getClass(), TestException.class)
+0.614 - assertTrue(exception.getLocalizedMessage().contains("STR"))
+0.600 - assertEquals(TestException.class.getDeclaredConstructors().length, 1)
+0.591 - assertTrue(exception.getStackTrace().length > 0)
+0.563 - assertNotNull(exception.getClass().getDeclaredConstructors())
+0.559 - assertEquals("Test message with arg: arg1", new TestException("Test message with arg: %s", "arg1").getMessage())
+0.530 - assertFalse(exception instanceof Throwable)
+0.514 - ```java
+assertNotNull(exception)
+0.512 - assertTrue(exception instanceof TestException)
+0.510 - assertEquals(1, Integer.parseInt(exception.getMessage().substring(exception.getMessage().indexOf("1"))))
+0.441 - assertEquals(exception.toString(), "hazelcast.hazelcast-simulator.simulator.TestException: STR")
+0.421 - assertThrows(IllegalArgumentException.class, () -> {
+    new TestException(null)
+0.417 - assertDoesNotThrow(() -> {
+    new TestException("Test message with arg: %s", "arg1")
+0.045 - })
+0.045 - })
+0.000 - ```

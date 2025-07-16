@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public boolean hasCycles ( ) { 
+    return ! minimalCycles ( ) . isEmpty ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testTree ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( "STR" , "STR" ) , edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(2, graph.getVertices().size());
+assertTrue(graph.hasCycles());
+assertFalse(graph.addEdge(edge("STR", "STR")));
+assertTrue(graph.removeEdge(edge("STR", "STR")));
+assertEquals(1, graph.getEdges().size());
+assertTrue(graph.addEdge(edge("STR", "NEW")));
+assertEquals(2, graph.getVertices().size());
+assertTrue(graph.hasVertex("NEW"));
+assertFalse(graph.hasVertex("NON_EXISTING"));
+assertTrue(graph.hasEdge(edge("STR", "NEW")));
+assertFalse(graph.hasEdge(edge("NEW", "STR")));
+assertTrue(graph.removeVertex("NEW"));
+assertEquals(1, graph.getVertices().size());
+assertFalse(graph.hasVertex("NEW"));
+assertFalse(graph.hasCycles());
+assertTrue(graph.addEdge(edge("STR", "STR")));
+assertEquals(2, graph.getEdges().size());
+assertTrue(graph.hasCycles());
+assertFalse(graph.addEdge(edge("STR", "STR")));
+assertEquals(2, graph.getEdges().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(graph.hasCycles()); ===
+1.000 - assertFalse(graph.hasCycles())
+0.881 - assertTrue(graph.hasCycles())
+0.881 - assertTrue(graph.hasCycles())
+0.769 - assertFalse(graph.hasVertex("NEW"))
+0.676 - assertFalse(graph.hasVertex("NON_EXISTING"))
+0.667 - assertFalse(graph.hasEdge(edge("NEW", "STR")))
+0.656 - assertTrue(graph.hasVertex("NEW"))
+0.613 - assertFalse(graph.addEdge(edge("STR", "STR")))
+0.613 - assertFalse(graph.addEdge(edge("STR", "STR")))
+0.611 - assertEquals(2, graph.getVertices().size())
+0.611 - assertEquals(1, graph.getVertices().size())
+0.609 - assertEquals(1, graph.getEdges().size())
+0.609 - assertEquals(2, graph.getEdges().size())
+0.609 - assertEquals(2, graph.getEdges().size())
+0.568 - assertTrue(graph.hasEdge(edge("STR", "NEW")))
+0.537 - assertTrue(graph.removeVertex("NEW"))
+0.518 - Assertions:
+
+assertEquals(2, graph.getVertices().size())
+0.514 - assertTrue(graph.addEdge(edge("STR", "NEW")))
+0.514 - assertTrue(graph.addEdge(edge("STR", "STR")))
+0.468 - assertTrue(graph.removeEdge(edge("STR", "STR")))

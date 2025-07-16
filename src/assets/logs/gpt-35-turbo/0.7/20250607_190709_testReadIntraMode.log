@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class ModeInfo {
+    public int readKfIntraMode ( int miCol , int miRow , int blSz , VPXBooleanDecoder decoder , DecodingContext c ) { 
+    boolean availAbove = miRow > 0 ; 
+    boolean availLeft = miCol > c . getMiTileStartCol ( ) ; 
+    int [ ] aboveIntraModes = c . getAboveModes ( ) ; 
+    int [ ] leftIntraModes = c . getLeftModes ( ) ; 
+    int aboveMode ; 
+    int leftMode ; 
+    aboveMode = availAbove ? aboveIntraModes [ miCol ] : DC_PRED ; 
+    leftMode = availLeft ? leftIntraModes [ miRow % 8 ] : DC_PRED ; 
+    short [ ] [ ] [ ] probs = c . getKfYModeProbs ( ) ; 
+    int intraMode = decoder . readTree ( TREE_INTRA_MODE , probs [ aboveMode ] [ leftMode ] ) ; 
+    aboveIntraModes [ miCol ] = intraMode ; 
+    leftIntraModes [ miRow % 8 ] = intraMode ; 
+    return intraMode ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ModeInfoTest {
+    @Test
+     public void testReadIntraMode ( ) {
+         MockVPXBooleanDecoder decoder = new MockVPXBooleanDecoder ( new int [ ] { 
+     91 , 30 , 32 , 116 , 93 } , new int [ ] { 
+     1 , 1 , 1 , 1 , 0 } ) ; 
+         DecodingContext c = new DecodingContext ( ) ; 
+         int miCol = 2 ; 
+         int miRow = 0 ; 
+         int blSz = 3 ; 
+         c . miTileStartCol = 0 ; 
+         c . aboveModes = new int [ 16 ] ; 
+         c . leftModes = new int [ 16 ] ; 
+         c . leftModes [ 0 ] = 3 ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(3, c.leftModes[0]);
+Assert.assertEquals(0, c.aboveModes[2]);
+Assert.assertEquals(0, c.leftModes[2]);
+Assert.assertEquals(116, decoder.readTree(1, c.getKfYModeProbs()[3][3]));
+Assert.assertEquals(91, decoder.readTree(1, c.getKfYModeProbs()[3][3]));
+Assert.assertEquals(1, c.aboveModes[2]);
+Assert.assertEquals(1, c.leftModes[2]);
+Assert.assertEquals(30, decoder.readTree(1, c.getKfYModeProbs()[1][3]));
+Assert.assertEquals(1, c.aboveModes[2]);
+Assert.assertEquals(1, c.leftModes[2]);
+Assert.assertEquals(32, decoder.readTree(1, c.getKfYModeProbs()[1][1]));
+Assert.assertEquals(1, c.aboveModes[2]);
+Assert.assertEquals(1, c.leftModes[2]);
+Assert.assertEquals(93, decoder.readTree(1, c.getKfYModeProbs()[1][3]));
+Assert.assertEquals(1, c.aboveModes[2]);
+Assert.assertEquals(1, c.leftModes[2]);
+Assert.assertEquals(0, c.aboveModes[2]);
+Assert.assertEquals(0, c.leftModes[2]);
+Assert.assertEquals(0, c.aboveModes[2]);
+Assert.assertEquals(0, c.leftModes[2]);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,newModeInfo().readKfIntraMode(miCol,miRow,blSz,decoder,c)); ===
+0.408 - Assert.assertEquals(3, c.leftModes[0])
+0.388 - Assert.assertEquals(0, c.leftModes[2])
+0.388 - Assert.assertEquals(1, c.leftModes[2])
+0.388 - Assert.assertEquals(1, c.leftModes[2])
+0.388 - Assert.assertEquals(1, c.leftModes[2])
+0.388 - Assert.assertEquals(1, c.leftModes[2])
+0.388 - Assert.assertEquals(0, c.leftModes[2])
+0.388 - Assert.assertEquals(0, c.leftModes[2])
+0.385 - Assert.assertEquals(30, decoder.readTree(1, c.getKfYModeProbs()[1][3]))
+0.385 - Assert.assertEquals(32, decoder.readTree(1, c.getKfYModeProbs()[1][1]))
+0.385 - Assert.assertEquals(93, decoder.readTree(1, c.getKfYModeProbs()[1][3]))
+0.385 - Assert.assertEquals(0, c.aboveModes[2])
+0.385 - Assert.assertEquals(1, c.aboveModes[2])
+0.385 - Assert.assertEquals(1, c.aboveModes[2])
+0.385 - Assert.assertEquals(1, c.aboveModes[2])
+0.385 - Assert.assertEquals(1, c.aboveModes[2])
+0.385 - Assert.assertEquals(0, c.aboveModes[2])
+0.385 - Assert.assertEquals(0, c.aboveModes[2])
+0.370 - Assert.assertEquals(91, decoder.readTree(1, c.getKfYModeProbs()[3][3]))
+0.368 - Assert.assertEquals(116, decoder.readTree(1, c.getKfYModeProbs()[3][3]))

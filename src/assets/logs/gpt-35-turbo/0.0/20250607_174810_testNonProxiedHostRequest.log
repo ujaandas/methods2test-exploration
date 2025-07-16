@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactory {
+    public HttpClient create ( ) { 
+    return hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactoryTest {
+    @Test
+     public void testNonProxiedHostRequest ( ) throws Exception {
+         targetServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         proxyServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         Proxy proxy = new Proxy ( ) ; 
+         proxy . setHost ( "STR" ) ; 
+         proxy . setPort ( PROXY_PORT ) ; 
+         proxy . setProtocol ( "STR" ) ; 
+         proxy . setNonProxyHosts ( "STR" ) ; 
+         HttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ; 
+         String body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(body, "expectedBody");
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertFalse(body.isEmpty());
+Assert.assertNotNull(body);
+Assert.assertNotEquals(body.length(), 0);
+Assert.assertTrue(body.length() > 0);
+Assert.assertTrue(body.startsWith("expectedStart"));
+Assert.assertTrue(body.endsWith("expectedEnd"));
+Assert.assertTrue(body.matches("regexPattern"));
+Assert.assertTrue(body.equalsIgnoreCase("expectedbody"));
+Assert.assertTrue(body.containsIgnoreCase("expectedsubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+Assert.assertTrue(body.contains("expectedSubstring"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",body); ===
+0.651 - Assert.assertNotNull(body)
+0.643 - Assert.assertNotEquals(body.length(), 0)
+0.632 - Assert.assertEquals(body, "expectedBody")
+0.588 - Assert.assertFalse(body.isEmpty())
+0.510 - Assert.assertTrue(body.length() > 0)
+0.493 - Assert.assertTrue(body.equalsIgnoreCase("expectedbody"))
+0.406 - Assert.assertTrue(body.endsWith("expectedEnd"))
+0.406 - Assert.assertTrue(body.matches("regexPattern"))
+0.382 - Assert.assertTrue(body.startsWith("expectedStart"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.371 - Assert.assertTrue(body.contains("expectedSubstring"))
+0.325 - Assert.assertTrue(body.containsIgnoreCase("expectedsubstring"))

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testAnchorFilterFalse ( ) throws MalformedURLException {\nURLFilter allAllowed = createFilter ( false , false ) ;\nURL url = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nString filterResult = allAllowed . filter ( url , metadata , url . toExternalForm ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(filterResult);\nassertTrue(filterResult.contains(\"http\"));\nassertFalse(filterResult.contains(\"invalid\"));\nassertEquals(url.toExternalForm(), filterResult);\nassertTrue(filterResult.startsWith(\"http\"));\nassertFalse(filterResult.endsWith(\"#\"));\nassertFalse(filterResult.contains(\" \"));\nassertFalse(filterResult.contains(\"<\"));\nassertFalse(filterResult.contains(\">\"));\nassertFalse(filterResult.contains(\"%\"));\nassertFalse(filterResult.contains(\"!\"));\nassertFalse(filterResult.contains(\"@\"));\nassertFalse(filterResult.contains(\"#\"));\nassertFalse(filterResult.contains(\"$\"));\nassertFalse(filterResult.contains(\"^\"));\nassertFalse(filterResult.contains(\"&\"));\nassertFalse(filterResult.contains(\"*\"));\nassertFalse(filterResult.contains(\"(\"));\nassertFalse(filterResult.contains(\")\"));\nassertFalse(filterResult.contains(\"+\"));\nassertFalse(filterResult.contains(\"=\"));\nassertTrue(filterResult.length() > 0);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.541,
+        0.537,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.535,
+        0.512,
+        0.5,
+        0.477,
+        0.467,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(url.toExternalForm(),filterResult);"
+}

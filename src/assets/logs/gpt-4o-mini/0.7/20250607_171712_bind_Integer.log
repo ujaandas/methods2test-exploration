@@ -1,0 +1,128 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_Numerical {
+    static boolean bind0 ( Object object , String property , String value ) { 
+    value = value . trim ( ) ; 
+    String [ ] path = property . split ( "STR" ) ; 
+    object = findTargetObject ( object , property , path ) ; 
+    if ( object == null ) { 
+    return false ; 
+    } Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ; 
+    if ( field == null || isProbeField ( field ) ) { 
+    return false ; 
+    } try { 
+    setField ( field , object , value ) ; 
+    return true ; 
+    } catch ( Exception e ) { 
+    throw new BindException ( format ( "STR" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_NumericalTest {
+    @Test
+     public void bind_Integer ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        PropertyBindingSupport_bind0_Numerical binder = new PropertyBindingSupport_bind0_Numerical();
+        MyObject obj = new MyObject();
+        
+        // Test binding to an Integer property
+        assertTrue(binder.bind0(obj, "integerProperty", "10"));
+        assertEquals(10, obj.getIntegerProperty().intValue());
+        
+        assertTrue(binder.bind0(obj, "integerProperty", "-5"));
+        assertEquals(-5, obj.getIntegerProperty().intValue());
+        
+        assertTrue(binder.bind0(obj, "integerProperty", "0"));
+        assertEquals(0, obj.getIntegerProperty().intValue());
+        
+        assertFalse(binder.bind0(obj, "integerProperty", "abc")); // Invalid binding
+        assertEquals(0, obj.getIntegerProperty().intValue()); // Should remain unchanged
+        
+        assertTrue(binder.bind0(obj, "integerProperty", "  25  ")); // Test with whitespace
+        assertEquals(25, obj.getIntegerProperty().intValue());
+        
+        // Test binding to a non-existent property
+        assertFalse(binder.bind0(obj, "nonExistentProperty", "30"));
+        
+        // Test binding to a field that is a probe field
+        assertFalse(binder.bind0(obj, "probeField", "50")); 
+        
+        // Test binding with null value
+        assertFalse(binder.bind0(obj, "integerProperty", null));
+        
+        // Test binding with empty string
+        assertFalse(binder.bind0(obj, "integerProperty", ""));
+        assertEquals(25, obj.getIntegerProperty().intValue()); // Should remain unchanged
+        
+        // Test binding with a large number
+        assertTrue(binder.bind0(obj, "integerProperty", "100000"));
+        assertEquals(100000, obj.getIntegerProperty().intValue());
+        
+        // Test binding to a property with a trailing space
+        assertTrue(binder.bind0(obj, "integerProperty", "  75  "));
+        assertEquals(75, obj.getIntegerProperty().intValue());
+        
+        // Test binding to a negative large number
+        assertTrue(binder.bind0(obj, "integerProperty", "-99999"));
+        assertEquals(-99999, obj.getIntegerProperty().intValue());
+        
+        // Test binding to a decimal number (will fail)
+        assertFalse(binder.bind0(obj, "integerProperty", "10.5"));
+
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(bind0(testObject,"STR","STR")); ===
+0.565 - assertTrue(binder.bind0(obj, "integerProperty", "0"))
+0.559 - assertTrue(binder.bind0(obj, "integerProperty", "-5"))
+0.484 - assertFalse(binder.bind0(obj, "integerProperty", "abc"))
+0.441 - // Should remain unchanged
+        
+        assertTrue(binder.bind0(obj, "integerProperty", "  25  "))
+0.413 - // Test binding to an Integer property
+        assertTrue(binder.bind0(obj, "integerProperty", "10"))
+0.391 - // Test binding to a negative large number
+        assertTrue(binder.bind0(obj, "integerProperty", "-99999"))
+0.382 - // Test binding to a property with a trailing space
+        assertTrue(binder.bind0(obj, "integerProperty", "  75  "))
+0.380 - // Test binding with empty string
+        assertFalse(binder.bind0(obj, "integerProperty", ""))
+0.375 - // Test binding to a field that is a probe field
+        assertFalse(binder.bind0(obj, "probeField", "50"))
+0.370 - // Test binding to a non-existent property
+        assertFalse(binder.bind0(obj, "nonExistentProperty", "30"))
+0.347 - // Test binding with null value
+        assertFalse(binder.bind0(obj, "integerProperty", null))
+0.342 - // Should remain unchanged
+        
+        // Test binding with a large number
+        assertTrue(binder.bind0(obj, "integerProperty", "100000"))
+0.338 - // Test binding to a decimal number (will fail)
+        assertFalse(binder.bind0(obj, "integerProperty", "10.5"))
+0.261 - assertEquals(0, obj.getIntegerProperty().intValue())
+0.258 - assertEquals(10, obj.getIntegerProperty().intValue())
+0.258 - assertEquals(-5, obj.getIntegerProperty().intValue())
+0.258 - assertEquals(25, obj.getIntegerProperty().intValue())
+0.258 - assertEquals(75, obj.getIntegerProperty().intValue())
+0.247 - assertEquals(100000, obj.getIntegerProperty().intValue())
+0.247 - assertEquals(-99999, obj.getIntegerProperty().intValue())
+0.220 - // Invalid binding
+        assertEquals(0, obj.getIntegerProperty().intValue())
+0.212 - MyObject obj = new MyObject()
+0.211 - // Test with whitespace
+        assertEquals(25, obj.getIntegerProperty().intValue())
+0.175 - ```java
+        PropertyBindingSupport_bind0_Numerical binder = new PropertyBindingSupport_bind0_Numerical()

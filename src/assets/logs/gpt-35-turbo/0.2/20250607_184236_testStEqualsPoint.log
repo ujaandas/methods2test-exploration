@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctions {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctionsTest {
+    @Test
+     public void testStEqualsPoint ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("value1", next.field("field1"));
+Assert.assertEquals("value2", next.field("field2"));
+Assert.assertEquals("value3", next.field("field3"));
+Assert.assertEquals("value4", next.field("field4"));
+Assert.assertEquals("value5", next.field("field5"));
+Assert.assertEquals("value6", next.field("field6"));
+Assert.assertEquals("value7", next.field("field7"));
+Assert.assertEquals("value8", next.field("field8"));
+Assert.assertEquals("value9", next.field("field9"));
+Assert.assertEquals("value10", next.field("field10"));
+Assert.assertEquals("value11", next.field("field11"));
+Assert.assertEquals("value12", next.field("field12"));
+Assert.assertEquals("value13", next.field("field13"));
+Assert.assertEquals("value14", next.field("field14"));
+Assert.assertEquals("value15", next.field("field15"));
+Assert.assertEquals("value16", next.field("field16"));
+Assert.assertEquals("value17", next.field("field17"));
+Assert.assertEquals("value18", next.field("field18"));
+Assert.assertEquals("value19", next.field("field19"));
+Assert.assertEquals("value20", next.field("field20"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.709 - Assert.assertEquals("value1", next.field("field1"))
+0.709 - Assert.assertEquals("value2", next.field("field2"))
+0.709 - Assert.assertEquals("value3", next.field("field3"))
+0.709 - Assert.assertEquals("value4", next.field("field4"))
+0.709 - Assert.assertEquals("value5", next.field("field5"))
+0.709 - Assert.assertEquals("value6", next.field("field6"))
+0.709 - Assert.assertEquals("value7", next.field("field7"))
+0.709 - Assert.assertEquals("value8", next.field("field8"))
+0.709 - Assert.assertEquals("value9", next.field("field9"))
+0.691 - Assert.assertEquals("value10", next.field("field10"))
+0.691 - Assert.assertEquals("value11", next.field("field11"))
+0.691 - Assert.assertEquals("value12", next.field("field12"))
+0.691 - Assert.assertEquals("value13", next.field("field13"))
+0.691 - Assert.assertEquals("value14", next.field("field14"))
+0.691 - Assert.assertEquals("value15", next.field("field15"))
+0.691 - Assert.assertEquals("value16", next.field("field16"))
+0.691 - Assert.assertEquals("value17", next.field("field17"))
+0.691 - Assert.assertEquals("value18", next.field("field18"))
+0.691 - Assert.assertEquals("value19", next.field("field19"))
+0.691 - Assert.assertEquals("value20", next.field("field20"))

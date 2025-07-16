@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class ORemoteLiveQueryPush {\n@Override\npublic OBinaryPushResponse execute ( ORemotePushHandler remote ) {\nremote . executeLiveQueryPush ( this ) ;\nreturn null ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class ORemoteLiveQueryPushTest {\n@Test\npublic void testLiveEvents ( ) {\nMockLiveListener mock = new MockLiveListener ( ) ;\nstorage . registerLiveListener ( 10 , new OLiveQueryClientListener ( database , mock ) ) ;\nList < OLiveQueryResult > events = new ArrayList < > ( ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , new OResultInternal ( ) , null ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ;\nOLiveQueryPushRequest request = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ;\nrequest . execute ( storage ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(3, mock.getReceivedEvents().size());\nassertTrue(mock.getReceivedEvents().get(0).getType() == OLiveQueryResult.CREATE_EVENT);\nassertTrue(mock.getReceivedEvents().get(1).getType() == OLiveQueryResult.UPDATE_EVENT);\nassertTrue(mock.getReceivedEvents().get(2).getType() == OLiveQueryResult.DELETE_EVENT);\nassertNotNull(mock.getReceivedEvents().get(0).getResult());\nassertNotNull(mock.getReceivedEvents().get(1).getResult());\nassertNull(mock.getReceivedEvents().get(2).getResult());\nassertNull(mock.getReceivedEvents().get(0).getPreviousResult());\nassertNotNull(mock.getReceivedEvents().get(1).getPreviousResult());\nassertNull(mock.getReceivedEvents().get(2).getPreviousResult());\nassertEquals(OLiveQueryResult.CREATE_EVENT, events.get(0).getType());\nassertEquals(OLiveQueryResult.UPDATE_EVENT, events.get(1).getType());\nassertEquals(OLiveQueryResult.DELETE_EVENT, events.get(2).getType());\nassertTrue(mock.getReceivedEvents().get(1).getPreviousResult() instanceof OResultInternal);\nassertTrue(mock.getReceivedEvents().get(1).getResult() instanceof OResultInternal);\nassertEquals(10, request.getId());\nassertEquals(OLiveQueryPushRequest.END, request.getAction());\nassertEquals(3, request.getEvents().size());\nassertTrue(request.getEvents().contains(events.get(0)));\nassertTrue(request.getEvents().contains(events.get(1)));\nassertTrue(request.getEvents().contains(events.get(2)));\nassertTrue(mock.isListenerCalled());\nassertEquals(database, mock.getDatabase());\n```\n====================\n\n",
+    "scores": [
+        0.63,
+        0.562,
+        0.529,
+        0.486,
+        0.483,
+        0.478,
+        0.467,
+        0.467,
+        0.46,
+        0.437,
+        0.437,
+        0.418,
+        0.404,
+        0.404,
+        0.404,
+        0.4,
+        0.4,
+        0.388,
+        0.375,
+        0.35,
+        0.345,
+        0.345,
+        0.31,
+        0.0
+    ],
+    "ground_truth": "assertEquals(mock.countCreate,1);"
+}

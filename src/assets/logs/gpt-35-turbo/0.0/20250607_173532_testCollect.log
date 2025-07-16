@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > List < X > collect ( List < T > coll , APartialFunction < ? super T , ? extends X , E > pf ) throws E { 
+    final List < X > result = createEmptyListOfType ( coll , true ) ; 
+    for ( T o : coll ) { 
+    if ( pf . isDefinedAt ( o ) ) { 
+    result . add ( pf . apply ( o ) ) ; 
+    } } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testCollect ( ) throws Exception {
+         APartialFunctionNoThrow < Integer , Double > squareRoot = new APartialFunctionNoThrow < Integer , Double > ( ) { 
+     @Override
+     public boolean isDefinedAt ( Integer param ) { 
+     return param != 0 ; 
+     } @Override
+     public Double apply ( Integer param ) { 
+     return Math . sqrt ( param ) ; 
+     } } ; 
+         final List < Double > result = ACollectionHelper . collect ( Arrays . asList ( 0 , 1 , 2 , 3 , 4 ) , squareRoot ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(0.0, result.get(0), 0.001);
+Assert.assertEquals(1.0, result.get(1), 0.001);
+Assert.assertEquals(1.414, result.get(2), 0.001);
+Assert.assertEquals(1.732, result.get(3), 0.001);
+Assert.assertEquals(2.0, result.get(4), 0.001);
+Assert.assertEquals(5, result.size());
+Assert.assertTrue(result.contains(0.0));
+Assert.assertTrue(result.contains(1.0));
+Assert.assertTrue(result.contains(1.414));
+Assert.assertTrue(result.contains(1.732));
+Assert.assertTrue(result.contains(2.0));
+Assert.assertFalse(result.contains(3.0));
+Assert.assertFalse(result.contains(4.0));
+Assert.assertFalse(result.contains(5.0));
+Assert.assertFalse(result.contains(6.0));
+Assert.assertFalse(result.contains(7.0));
+Assert.assertFalse(result.contains(8.0));
+Assert.assertFalse(result.contains(9.0));
+Assert.assertFalse(result.contains(10.0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,result.size()); ===
+0.966 - Assert.assertEquals(5, result.size())
+0.765 - Assert.assertEquals(1.414, result.get(2), 0.001)
+0.758 - Assert.assertEquals(0.0, result.get(0), 0.001)
+0.758 - Assert.assertEquals(1.0, result.get(1), 0.001)
+0.758 - Assert.assertEquals(2.0, result.get(4), 0.001)
+0.735 - Assert.assertEquals(1.732, result.get(3), 0.001)
+0.677 - Assert.assertFalse(result.contains(3.0))
+0.677 - Assert.assertFalse(result.contains(4.0))
+0.677 - Assert.assertFalse(result.contains(5.0))
+0.677 - Assert.assertFalse(result.contains(6.0))
+0.677 - Assert.assertFalse(result.contains(7.0))
+0.677 - Assert.assertFalse(result.contains(8.0))
+0.677 - Assert.assertFalse(result.contains(9.0))
+0.667 - Assert.assertFalse(result.contains(10.0))
+0.623 - Assert.assertTrue(result.contains(0.0))
+0.623 - Assert.assertTrue(result.contains(1.0))
+0.623 - Assert.assertTrue(result.contains(2.0))
+0.603 - Assert.assertTrue(result.contains(1.414))
+0.603 - Assert.assertTrue(result.contains(1.732))

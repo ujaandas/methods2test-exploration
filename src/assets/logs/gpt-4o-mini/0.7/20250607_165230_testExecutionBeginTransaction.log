@@ -1,0 +1,105 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransaction {
+    boolean isActive ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransactionTest {
+    @Test
+     public void testExecutionBeginTransaction ( ) {
+         OConnectionBinaryExecutor executor = new OConnectionBinaryExecutor ( connection , server ) ; 
+         List < ORecordOperation > operations = new ArrayList < > ( ) ; 
+         ODocument rec = new ODocument ( ) ; 
+         ORecordInternal . setIdentity ( rec , new ORecordId ( 3 , - 2 ) ) ; 
+         operations . add ( new ORecordOperation ( rec , ORecordOperation . CREATED ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(executor);
+assertTrue(executor.isActive());
+assertEquals(0, operations.size());
+
+executor.beginTransaction();
+assertTrue(executor.isActive());
+assertEquals(1, operations.size());
+
+executor.commitTransaction();
+assertFalse(executor.isActive());
+assertEquals(0, operations.size());
+
+executor.beginTransaction();
+operations.add(new ORecordOperation(rec, ORecordOperation.CREATED));
+assertEquals(1, operations.size());
+assertTrue(executor.isActive());
+
+ORecordOperation operation = operations.get(0);
+assertNotNull(operation);
+assertEquals(ORecordOperation.CREATED, operation.getType());
+assertEquals(rec.getIdentity(), operation.getRecord().getIdentity());
+
+executor.rollbackTransaction();
+assertFalse(executor.isActive());
+assertEquals(0, operations.size());
+
+executor.beginTransaction();
+operations.add(new ORecordOperation(rec, ORecordOperation.UPDATED));
+assertEquals(1, operations.size());
+executor.commitTransaction();
+
+executor.beginTransaction();
+operations.add(new ORecordOperation(rec, ORecordOperation.DELETED));
+assertEquals(2, operations.size());
+executor.commitTransaction();
+
+assertTrue(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.UPDATED));
+assertTrue(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.DELETED));
+assertFalse(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.CREATED));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(database.getTransaction().isActive()); ===
+0.642 - assertFalse(executor.isActive())
+0.642 - assertFalse(executor.isActive())
+0.550 - assertTrue(executor.isActive())
+0.550 - assertTrue(executor.isActive())
+0.550 - assertTrue(executor.isActive())
+0.537 - assertEquals(0, operations.size())
+0.537 - assertEquals(1, operations.size())
+0.537 - assertEquals(0, operations.size())
+0.537 - assertEquals(1, operations.size())
+0.537 - assertEquals(0, operations.size())
+0.537 - assertEquals(1, operations.size())
+0.537 - assertEquals(2, operations.size())
+0.483 - assertEquals(rec.getIdentity(), operation.getRecord().getIdentity())
+0.463 - assertFalse(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.CREATED))
+0.456 - executor.rollbackTransaction()
+0.447 - executor.beginTransaction()
+0.447 - executor.beginTransaction()
+0.447 - executor.beginTransaction()
+0.447 - executor.beginTransaction()
+0.442 - executor.commitTransaction()
+0.442 - executor.commitTransaction()
+0.442 - executor.commitTransaction()
+0.430 - assertEquals(ORecordOperation.CREATED, operation.getType())
+0.411 - assertNotNull(operation)
+0.406 - assertTrue(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.UPDATED))
+0.391 - assertTrue(operations.stream().anyMatch(op -> op.getType() == ORecordOperation.DELETED))
+0.333 - operations.add(new ORecordOperation(rec, ORecordOperation.CREATED))
+0.333 - operations.add(new ORecordOperation(rec, ORecordOperation.UPDATED))
+0.333 - operations.add(new ORecordOperation(rec, ORecordOperation.DELETED))
+0.283 - ORecordOperation operation = operations.get(0)
+0.275 - ```java
+assertNotNull(executor)
+0.000 - ```

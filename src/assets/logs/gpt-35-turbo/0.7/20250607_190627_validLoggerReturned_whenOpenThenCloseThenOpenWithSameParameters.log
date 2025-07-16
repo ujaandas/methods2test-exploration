@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluent.fluent-logger-java;
+
+public class Bugfixes {
+    public void close ( ) { 
+    if ( sender != null ) { 
+    sender . flush ( ) ; 
+    sender . close ( ) ; 
+    sender = null ; 
+    } factory . purgeLogger ( this ) ; 
+    }
+}
+
+package fluent.fluent-logger-java;
+
+public class TestBugfixes {
+    @Test
+     public void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {
+         System . setProperty ( Config . FLUENT_SENDER_CLASS , "STR" ) ; 
+         FluentLogger logger = FluentLogger . getLogger ( "STR" ) ; 
+         logger . log ( "STR" , Collections . < String , Object > emptyMap ( ) ) ; 
+         logger . close ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(logger.isOpen());
+Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getHost());
+Assert.assertEquals(24224, logger.getSender().getFluentSender().getSenderConfig().getPort());
+Assert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getTimeout());
+Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getTagPrefix());
+Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getLabel());
+Assert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getBufferCapacity());
+Assert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getAckResponseMode());
+Assert.assertEquals(100, logger.getSender().getFluentSender().getSenderConfig().getAckTimeout());
+Assert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getMaxBufferSize());
+Assert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getRetryWait());
+Assert.assertEquals(3, logger.getSender().getFluentSender().getSenderConfig().getMaxRetry());
+Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getSenderType());
+Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getEncoding());
+Assert.assertFalse(logger.isOpen());
+Assert.assertTrue(logger.getSender().getFluentSender().isTerminated());
+Assert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getHost());
+Assert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getPort());
+Assert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getTagPrefix());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(null,logger.sender); ===
+0.700 - Assert.assertFalse(logger.isOpen())
+0.644 - Assert.assertTrue(logger.isOpen())
+0.482 - Assert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getPort())
+0.466 - Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getHost())
+0.466 - Assert.assertEquals(24224, logger.getSender().getFluentSender().getSenderConfig().getPort())
+0.466 - Assert.assertEquals(3, logger.getSender().getFluentSender().getSenderConfig().getMaxRetry())
+0.462 - Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getLabel())
+0.458 - Assert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getTimeout())
+0.450 - Assert.assertEquals(100, logger.getSender().getFluentSender().getSenderConfig().getAckTimeout())
+0.450 - Assert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getRetryWait())
+0.450 - Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getEncoding())
+0.446 - Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getTagPrefix())
+0.443 - Assert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getBufferCapacity())
+0.443 - Assert.assertEquals("STR", logger.getSender().getFluentSender().getSenderConfig().getSenderType())
+0.442 - Assert.assertTrue(logger.getSender().getFluentSender().isTerminated())
+0.435 - Assert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getMaxBufferSize())
+0.429 - Assert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getAckResponseMode())
+0.407 - Assert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getHost())
+0.389 - Assert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getTagPrefix())

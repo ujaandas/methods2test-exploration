@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecution {\nOSequence getSequence ( String iName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecutionTest {\n@Test\npublic void testPlain ( ) {\nString name = \"STR\" ;\ndb . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));\nassertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName());\nassertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceId() > 0);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement() == 1);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getStart() == 0);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize() > 0);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMaxValue() == Long.MAX_VALUE);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMinValue() == Long.MIN_VALUE);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getOrderType() == OSequence.OrderType.ORDER_POSITIVE);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isRecyclable());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCyclic());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getDatabase() == db);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary() == db.getMetadata().getSequenceLibrary());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name) == db.getMetadata().getSequenceLibrary().getSequence(name));\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).equals(db.getMetadata().getSequenceLibrary().getSequence(name)));\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).hashCode() == db.getMetadata().getSequenceLibrary().getSequence(name).hashCode());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).toString().equals(db.getMetadata().getSequenceLibrary().getSequence(name).toString()));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.865,
+        0.848,
+        0.844,
+        0.842,
+        0.831,
+        0.826,
+        0.826,
+        0.826,
+        0.766,
+        0.766,
+        0.7,
+        0.681,
+        0.65,
+        0.55,
+        0.549,
+        0.502,
+        0.489
+    ],
+    "ground_truth": "Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));"
+}

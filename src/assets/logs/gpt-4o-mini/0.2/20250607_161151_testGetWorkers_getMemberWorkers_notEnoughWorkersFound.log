@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(4, registry.workerCount());
+assertTrue(registry.getWorkers().size() >= 4);
+assertFalse(registry.getWorkers().isEmpty());
+assertNotNull(registry.getWorkers());
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")));
+assertTrue(registry.getWorkers().stream().map(Worker::getAddress).distinct().count() <= 2);
+assertThrows(IllegalStateException.class, () -> registry.getWorkers().get(4));
+assertEquals("Expected worker type", "STR", registry.getWorkers().get(0).getType());
+assertEquals("Expected worker count", 4, registry.getWorkers().size());
+assertTrue("Worker list should contain at least one worker", registry.getWorkers().size() > 0);
+assertNotEquals("Worker list should not be equal to empty list", 0, registry.getWorkers().size());
+assertTrue("All workers should be of type STR", registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")));
+assertFalse("Worker list should not contain null values", registry.getWorkers().contains(null));
+assertEquals("Worker count should match expected", 4, registry.workerCount());
+assertTrue("Worker addresses should be unique", registry.getWorkers().stream().map(Worker::getAddress).distinct().count() == registry.getWorkers().size());
+assertDoesNotThrow(() -> registry.getWorkers().forEach(worker -> assertNotNull(worker.getAddress())));
+assertTrue("There should be at least two distinct agent addresses", registry.getWorkers().stream().map(Worker::getAddress).distinct().count() >= 2);
+assertTrue("Worker list should contain STR workers", registry.getWorkers().stream().anyMatch(worker -> worker.getType().equals("STR")));
+assertEquals("Worker list should contain exactly 4 workers", 4, registry.getWorkers().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,registry.workerCount()); ===
+0.905 - ```java
+assertEquals(4, registry.workerCount())
+0.703 - assertNotNull(registry.getWorkers())
+0.697 - assertEquals("Worker count should match expected", 4, registry.workerCount())
+0.683 - assertFalse(registry.getWorkers().isEmpty())
+0.617 - assertTrue(registry.getWorkers().size() >= 4)
+0.615 - assertEquals("Expected worker count", 4, registry.getWorkers().size())
+0.547 - assertEquals("Expected worker type", "STR", registry.getWorkers().get(0).getType())
+0.520 - assertEquals("Worker list should contain exactly 4 workers", 4, registry.getWorkers().size())
+0.500 - assertThrows(IllegalStateException.class, () -> registry.getWorkers().get(4))
+0.496 - assertNotEquals("Worker list should not be equal to empty list", 0, registry.getWorkers().size())
+0.492 - assertFalse("Worker list should not contain null values", registry.getWorkers().contains(null))
+0.460 - assertTrue(registry.getWorkers().stream().map(Worker::getAddress).distinct().count() <= 2)
+0.459 - assertTrue("Worker list should contain at least one worker", registry.getWorkers().size() > 0)
+0.434 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")))
+0.430 - assertDoesNotThrow(() -> registry.getWorkers().forEach(worker -> assertNotNull(worker.getAddress())))
+0.377 - assertTrue("All workers should be of type STR", registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")))
+0.368 - assertTrue("There should be at least two distinct agent addresses", registry.getWorkers().stream().map(Worker::getAddress).distinct().count() >= 2)
+0.364 - assertTrue("Worker list should contain STR workers", registry.getWorkers().stream().anyMatch(worker -> worker.getType().equals("STR")))
+0.324 - assertTrue("Worker addresses should be unique", registry.getWorkers().stream().map(Worker::getAddress).distinct().count() == registry.getWorkers().size())
+0.000 - ```

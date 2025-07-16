@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class StatementResult {
+    public ArrayList < Statement > getStatements ( ) { 
+    return statements ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class StatementResultTest {
+    @Test
+     public void testSetStatements ( ) {
+         ArrayList < Statement > expected = statements ; 
+         Statement s = new Statement ( ) ; 
+         expected . add ( s ) ; 
+         statementResult . setStatements ( expected ) ; 
+         ArrayList < Statement > actual = statementResult . getStatements ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.containsAll(expected));
+assertTrue(expected.containsAll(actual));
+assertEquals(expected.get(0), actual.get(0));
+assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1));
+assertSame(expected.get(0), actual.get(0));
+assertSame(expected.get(expected.size() - 1), actual.get(actual.size() - 1));
+assertEquals(expected, actual);
+assertNotSame(expected, actual);
+assertTrue(actual.isEmpty() == false);
+assertFalse(actual.isEmpty());
+assertEquals(expected.size(), actual.size());
+assertTrue(actual instanceof ArrayList);
+assertFalse(actual instanceof LinkedList);
+assertTrue(actual.getClass() == ArrayList.class);
+assertNotEquals(expected, new ArrayList<Statement>());
+assertTrue(actual.equals(expected));
+assertTrue(actual.stream().allMatch(expected::contains));
+assertTrue(expected.stream().allMatch(actual::contains));
+assertEquals(expected.hashCode(), actual.hashCode());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.600 - assertFalse(actual.isEmpty())
+0.590 - assertTrue(expected.containsAll(actual))
+0.560 - assertEquals(expected, actual)
+0.536 - assertTrue(actual.isEmpty() == false)
+0.536 - assertTrue(actual.equals(expected))
+0.517 - assertTrue(actual instanceof ArrayList)
+0.500 - assertFalse(actual instanceof LinkedList)
+0.492 - assertTrue(actual.containsAll(expected))
+0.484 - assertSame(expected.get(0), actual.get(0))
+0.469 - assertEquals(expected.size(), actual.size())
+0.469 - assertEquals(expected.get(0), actual.get(0))
+0.469 - assertEquals(expected.size(), actual.size())
+0.448 - assertTrue(actual.getClass() == ArrayList.class)
+0.442 - assertTrue(expected.stream().allMatch(actual::contains))
+0.417 - assertEquals(expected.hashCode(), actual.hashCode())
+0.390 - assertTrue(actual.stream().allMatch(expected::contains))
+0.370 - assertSame(expected.get(expected.size() - 1), actual.get(actual.size() - 1))
+0.362 - assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1))
+0.361 - assertNotEquals(expected, new ArrayList<Statement>())
+0.000 - ```

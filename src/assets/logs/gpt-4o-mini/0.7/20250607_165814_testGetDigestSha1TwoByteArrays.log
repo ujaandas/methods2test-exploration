@@ -1,0 +1,102 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormat {
+    public static String getDigestSha1 ( byte [ ] bytes1 , byte [ ] bytes2 ) { 
+    MessageDigest sha1 = DigestUtils . getSha1Digest ( ) ; 
+    sha1 . update ( bytes1 ) ; 
+    return "STR" + base32 . encodeAsString ( sha1 . digest ( bytes2 ) ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormatTest {
+    @Test
+     public void testGetDigestSha1TwoByteArrays ( ) {
+         byte [ ] content1 = { 
+     'a' , 'b' , 'c' } ; 
+         byte [ ] content2 = { 
+     'd' , 'e' , 'f' } ; 
+         String sha1str = "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+String expectedDigest = "STR" + base32.encodeAsString(/* expected digest value here */);
+assertEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, content2));
+
+byte[] content3 = { 'g', 'h', 'i' };
+assertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, content3));
+
+byte[] content4 = { 'a', 'b', 'c' };
+assertEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content4, content2));
+
+byte[] content5 = { 'd', 'e', 'f', 'g' };
+String expectedDigest5 = "STR" + base32.encodeAsString(/* expected digest for content5 */);
+assertEquals(expectedDigest5, WARCRecordFormat.getDigestSha1(content1, content5));
+
+byte[] emptyContent = {};
+String expectedDigestEmpty = "STR" + base32.encodeAsString(/* expected digest for empty content */);
+assertEquals(expectedDigestEmpty, WARCRecordFormat.getDigestSha1(emptyContent, content2));
+
+byte[] content6 = { 'x', 'y', 'z' };
+String expectedDigest6 = "STR" + base32.encodeAsString(/* expected digest for content6 */);
+assertNotEquals(expectedDigest6, WARCRecordFormat.getDigestSha1(content1, content6));
+
+byte[] content7 = { '1', '2', '3' };
+String expectedDigest7 = "STR" + base32.encodeAsString(/* expected digest for content7 */);
+assertEquals(expectedDigest7, WARCRecordFormat.getDigestSha1(content7, content2));
+
+assertNotEquals("STR", WARCRecordFormat.getDigestSha1(content1, content1));
+
+byte[] content8 = { '!', '@', '#' };
+String expectedDigest8 = "STR" + base32.encodeAsString(/* expected digest for content8 */);
+assertEquals(expectedDigest8, WARCRecordFormat.getDigestSha1(content8, content2));
+
+assertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, new byte[] { 'x' }));
+
+byte[] content9 = { 'A', 'B', 'C' };
+String expectedDigest9 = "STR" + base32.encodeAsString(/* expected digest for content9 */);
+assertEquals(expectedDigest9, WARCRecordFormat.getDigestSha1(content9, content2));
+
+assertNotEquals(W
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sha1str,WARCRecordFormat.getDigestSha1(content1,content2)); ===
+0.913 - assertNotEquals("STR", WARCRecordFormat.getDigestSha1(content1, content1))
+0.852 - assertEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, content2))
+0.839 - assertEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content4, content2))
+0.833 - assertEquals(expectedDigest5, WARCRecordFormat.getDigestSha1(content1, content5))
+0.833 - assertEquals(expectedDigest7, WARCRecordFormat.getDigestSha1(content7, content2))
+0.833 - assertEquals(expectedDigest8, WARCRecordFormat.getDigestSha1(content8, content2))
+0.833 - assertEquals(expectedDigest9, WARCRecordFormat.getDigestSha1(content9, content2))
+0.823 - assertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, content3))
+0.818 - assertNotEquals(expectedDigest6, WARCRecordFormat.getDigestSha1(content1, content6))
+0.780 - assertEquals(expectedDigestEmpty, WARCRecordFormat.getDigestSha1(emptyContent, content2))
+0.744 - assertNotEquals(expectedDigest, WARCRecordFormat.getDigestSha1(content1, new byte[] { 'x' }))
+0.298 - assertNotEquals(W
+0.296 - ```java
+String expectedDigest = "STR" + base32.encodeAsString(/* expected digest value here */)
+0.293 - String expectedDigest5 = "STR" + base32.encodeAsString(/* expected digest for content5 */)
+0.293 - String expectedDigest6 = "STR" + base32.encodeAsString(/* expected digest for content6 */)
+0.293 - String expectedDigest7 = "STR" + base32.encodeAsString(/* expected digest for content7 */)
+0.293 - String expectedDigest8 = "STR" + base32.encodeAsString(/* expected digest for content8 */)
+0.293 - String expectedDigest9 = "STR" + base32.encodeAsString(/* expected digest for content9 */)
+0.279 - String expectedDigestEmpty = "STR" + base32.encodeAsString(/* expected digest for empty content */)
+0.210 - byte[] content7 = { '1', '2', '3' }
+0.190 - byte[] content4 = { 'a', 'b', 'c' }
+0.184 - byte[] emptyContent = {}
+0.183 - byte[] content5 = { 'd', 'e', 'f', 'g' }
+0.171 - byte[] content3 = { 'g', 'h', 'i' }
+0.171 - byte[] content6 = { 'x', 'y', 'z' }
+0.171 - byte[] content8 = { '!', '@', '#' }
+0.171 - byte[] content9 = { 'A', 'B', 'C' }

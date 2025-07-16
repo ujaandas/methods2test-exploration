@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MPEGES {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MPEGESTest {
+    @Test
+     public void testES ( ) throws IOException {
+         byte [ ] mpeg = MPEGTestConst . mpeg ( ) ; 
+         byte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ; 
+         byte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegFrame } ) ; 
+         MPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ; 
+         ByteBuffer buf = ByteBuffer . allocate ( 1024 ) ; 
+         Packet f1 = mpeges . frame ( buf ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(f1);
+assertEquals(frame1.length, f1.size());
+assertArrayEquals(frame1, MPEGES.toArray(f1.getBuffer()));
+assertTrue(f1.hasData());
+assertFalse(f1.isEndOfStream());
+assertEquals(0, f1.getTimestamp());
+assertEquals(1, f1.getFrameNumber());
+assertTrue(f1.getBuffer().remaining() > 0);
+assertEquals(32, f1.getDataSize());
+assertNotEquals(frame2.length, f1.size());
+assertArrayEquals(frame2, MPEGES.toArray(f1.getBuffer()));
+assertTrue(f1.getBuffer().position() > 0);
+assertFalse(f1.getBuffer().hasRemaining());
+assertEquals("Expected frame type", "video", f1.getFrameType());
+assertNotNull(f1.getMetadata());
+assertTrue(f1.getMetadata().containsKey("duration"));
+assertEquals(0.033, f1.getMetadata().get("duration"), 0.001);
+assertTrue(f1.getBuffer().isReadOnly());
+assertEquals(0, f1.getErrorCount());
+assertTrue(f1.getBuffer().capacity() <= 1024);
+assertFalse(f1.isCorrupted());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(frame1,NIOUtils.toArray(f1.getData())); ===
+0.786 - assertArrayEquals(frame1, MPEGES.toArray(f1.getBuffer()))
+0.768 - assertArrayEquals(frame2, MPEGES.toArray(f1.getBuffer()))
+0.607 - assertEquals(32, f1.getDataSize())
+0.581 - assertEquals(frame1.length, f1.size())
+0.562 - assertEquals(0, f1.getTimestamp())
+0.549 - assertEquals(1, f1.getFrameNumber())
+0.542 - assertNotEquals(frame2.length, f1.size())
+0.539 - assertEquals("Expected frame type", "video", f1.getFrameType())
+0.533 - assertEquals(0, f1.getErrorCount())
+0.506 - assertNotNull(f1.getMetadata())
+0.500 - assertTrue(f1.hasData())
+0.474 - assertEquals(0.033, f1.getMetadata().get("duration"), 0.001)
+0.449 - assertFalse(f1.getBuffer().hasRemaining())
+0.437 - assertFalse(f1.isEndOfStream())
+0.426 - assertTrue(f1.getMetadata().containsKey("duration"))
+0.424 - assertFalse(f1.isCorrupted())
+0.421 - assertTrue(f1.getBuffer().position() > 0)
+0.421 - assertTrue(f1.getBuffer().isReadOnly())
+0.417 - assertTrue(f1.getBuffer().remaining() > 0)
+0.404 - assertTrue(f1.getBuffer().capacity() <= 1024)
+0.321 - ```java
+assertNotNull(f1)
+0.000 - ```

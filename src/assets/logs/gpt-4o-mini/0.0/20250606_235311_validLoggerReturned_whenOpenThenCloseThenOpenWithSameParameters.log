@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluent.fluent-logger-java;
+
+public class Bugfixes {
+    public void close ( ) { 
+    if ( sender != null ) { 
+    sender . flush ( ) ; 
+    sender . close ( ) ; 
+    sender = null ; 
+    } factory . purgeLogger ( this ) ; 
+    }
+}
+
+package fluent.fluent-logger-java;
+
+public class TestBugfixes {
+    @Test
+     public void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {
+         System . setProperty ( Config . FLUENT_SENDER_CLASS , "STR" ) ; 
+         FluentLogger logger = FluentLogger . getLogger ( "STR" ) ; 
+         logger . log ( "STR" , Collections . < String , Object > emptyMap ( ) ) ; 
+         logger . close ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(logger);
+Assert.assertTrue(logger.isClosed());
+Assert.assertEquals("STR", logger.getName());
+Assert.assertEquals(0, logger.getLogCount());
+Assert.assertTrue(logger.getSender() == null);
+Assert.assertTrue(factory.getLoggerCount() == 0);
+Assert.assertTrue(factory.isLoggerPurged(logger));
+Assert.assertFalse(logger.isOpen());
+Assert.assertTrue(logger.getFlushCount() == 1);
+Assert.assertTrue(sender.isFlushed());
+Assert.assertTrue(sender.isClosed());
+Assert.assertTrue(sender.getLogCount() == 0);
+Assert.assertTrue(sender.getLastLog() == null);
+Assert.assertTrue(factory.getActiveLoggers().isEmpty());
+Assert.assertTrue(factory.getPurgedLoggers().contains(logger));
+Assert.assertTrue(factory.getLoggerNames().isEmpty());
+Assert.assertTrue(logger.getParameters().isEmpty());
+Assert.assertTrue(logger.getLastLogTime() == 0);
+Assert.assertTrue(logger.getErrorCount() == 0);
+Assert.assertTrue(logger.getWarningCount() == 0);
+Assert.assertTrue(logger.getInfoCount() == 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(null,logger.sender); ===
+0.706 - Assert.assertEquals("STR", logger.getName())
+0.706 - Assert.assertEquals(0, logger.getLogCount())
+0.700 - Assert.assertFalse(logger.isOpen())
+0.623 - Assert.assertTrue(logger.isClosed())
+0.618 - Assert.assertTrue(logger.getSender() == null)
+0.529 - Assert.assertTrue(logger.getInfoCount() == 0)
+0.525 - ```java
+Assert.assertNotNull(logger)
+0.522 - Assert.assertTrue(logger.getFlushCount() == 1)
+0.522 - Assert.assertTrue(logger.getErrorCount() == 0)
+0.514 - Assert.assertTrue(logger.getLastLogTime() == 0)
+0.507 - Assert.assertTrue(logger.getWarningCount() == 0)
+0.500 - Assert.assertTrue(logger.getParameters().isEmpty())
+0.492 - Assert.assertTrue(sender.isClosed())
+0.484 - Assert.assertTrue(sender.isFlushed())
+0.459 - Assert.assertTrue(factory.isLoggerPurged(logger))
+0.448 - Assert.assertTrue(sender.getLogCount() == 0)
+0.435 - Assert.assertTrue(sender.getLastLog() == null)
+0.423 - Assert.assertTrue(factory.getLoggerCount() == 0)
+0.414 - Assert.assertTrue(factory.getPurgedLoggers().contains(logger))
+0.410 - Assert.assertTrue(factory.getLoggerNames().isEmpty())
+0.400 - Assert.assertTrue(factory.getActiveLoggers().isEmpty())
+0.000 - ```

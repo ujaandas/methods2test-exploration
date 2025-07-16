@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecutionTest {\n@Test\npublic void testDropClusterIfExists ( ) {\nString cluster = \"STR\" ;\n( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(db.getStorage().getClusterNames().contains(cluster));\nAssert.assertEquals(1, db.getStorage().getClusterNames().size());\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null);\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster));\nAssert.assertTrue(db.getStorage().removeCluster(cluster));\nAssert.assertEquals(0, db.getStorage().getClusterNames().size());\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null);\nAssert.assertFalse(db.getStorage().getClusterNames().contains(cluster));\nAssert.assertFalse(db.getStorage().removeCluster(cluster));\nAssert.assertTrue(db.getStorage().addCluster(cluster));\nAssert.assertEquals(1, db.getStorage().getClusterNames().size());\nAssert.assertTrue(db.getStorage().getClusterNames().contains(cluster));\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null);\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster));\nAssert.assertTrue(db.getStorage().removeCluster(cluster));\nAssert.assertEquals(0, db.getStorage().getClusterNames().size());\nAssert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null);\nAssert.assertFalse(db.getStorage().getClusterNames().contains(cluster));\n====================\n\n",
+    "scores": [
+        0.747,
+        0.723,
+        0.723,
+        0.71,
+        0.71,
+        0.653,
+        0.648,
+        0.648,
+        0.613,
+        0.613,
+        0.613,
+        0.613,
+        0.58,
+        0.58,
+        0.58,
+        0.58,
+        0.535,
+        0.535
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(cluster)>0);"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\n@Override\npublic boolean equals ( final Object o ) {\nif ( this == o ) return true ;\nif ( o == null || getClass ( ) != o . getClass ( ) ) return false ;\nfinal OCompositeKey that = ( OCompositeKey ) o ;\nreturn keys . equals ( that . keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testEqualNull ( ) {\nfinal OCompositeKey compositeKey = new OCompositeKey ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertFalse(compositeKey.equals(null));\nassertFalse(compositeKey.equals(new Object()));\nassertTrue(compositeKey.equals(compositeKey));\nassertTrue(compositeKey.equals(new OCompositeKey()));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key2\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key2\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key1\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key2\", \"key2\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key2\", \"key3\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key2\", \"key1\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key2\", \"key1\", \"key2\" })));\nassertTrue(compositeKey.equals(new OCompositeKey(new Object[] {})));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", null })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null, \"key1\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null, null })));\nassertTrue(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key2\" })));\nassertTrue(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\" })));\nassertTrue(compositeKey.equals(new OCompositeKey(new Object[] { \"key2\" })));\nassertFalse(compositeKey.equals(new OCompositeKey(new Object[] { \"key1\", \"key2\", \"key3\" })));\n```\n====================\n\n",
+    "scores": [
+        0.905,
+        0.843,
+        0.723,
+        0.71,
+        0.697,
+        0.679,
+        0.667,
+        0.667,
+        0.642,
+        0.642,
+        0.608,
+        0.603,
+        0.603,
+        0.603,
+        0.574,
+        0.574,
+        0.569,
+        0.569,
+        0.569,
+        0.569,
+        0.539,
+        0.0
+    ],
+    "ground_truth": "assertFalse(compositeKey.equals(null));"
+}

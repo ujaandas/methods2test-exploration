@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePoller {
+    @Override
+     public Step getNextStep ( ) { 
+     if ( done || shutdownInd ) { 
+     return null ; 
+     } Step result = new Step ( ) { 
+     @Override
+     public void execute ( ) { 
+     try { 
+     pollOneObject ( target ) ; 
+     } catch ( Exception exc ) { 
+     failureException = exc ; 
+     } finally { 
+     done = true ; 
+     } } @Override
+     public boolean isBlocking ( ) { 
+     return true ; 
+     } } ; 
+     return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePollerTest {
+    @Test
+     public void testGetStepAfterShutdown ( ) throws Exception {
+         this . poller . shutdown ( ) ; 
+         JmxAttributePoller . PollOneObjectSchedulerProcess process = this . poller . new PollOneObjectSchedulerProcess ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(poller.isShutdown());
+Assert.assertNull(process.getNextStep());
+Assert.assertNull(process.failureException);
+Assert.assertTrue(process.done);
+Assert.assertTrue(process.isBlocking());
+Assert.assertNotNull(process);
+Assert.assertNotNull(poller);
+Assert.assertNotNull(poller.new PollOneObjectSchedulerProcess("STR"));
+Assert.assertNotNull(poller.getNextStep());
+Assert.assertFalse(poller.isShutdown());
+Assert.assertFalse(process.isBlocking());
+Assert.assertNotEquals(process, poller.getNextStep());
+Assert.assertNotEquals(process, poller);
+Assert.assertNotEquals(poller, process);
+Assert.assertNotEquals(poller.getNextStep(), process.getNextStep());
+Assert.assertNotEquals(poller.isShutdown(), process.done);
+Assert.assertNotEquals(process.failureException, poller.getNextStep());
+Assert.assertNotEquals(process.isBlocking(), poller.isShutdown());
+Assert.assertNotEquals(poller.new PollOneObjectSchedulerProcess("STR"), process.failureException);
+Assert.assertNotEquals(poller.getNextStep(), process.isBlocking());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(process.getNextStep()); ===
+1.000 - Assert.assertNull(process.getNextStep())
+0.824 - Assert.assertNotNull(poller.getNextStep())
+0.821 - Assert.assertNotEquals(process, poller.getNextStep())
+0.717 - Assert.assertNotEquals(poller.getNextStep(), process.getNextStep())
+0.696 - Assert.assertNull(process.failureException)
+0.691 - Assert.assertNotNull(process)
+0.674 - Assert.assertNotEquals(process.failureException, poller.getNextStep())
+0.632 - Assert.assertTrue(process.done)
+0.615 - Assert.assertTrue(process.isBlocking())
+0.606 - Assert.assertFalse(process.isBlocking())
+0.594 - Assert.assertNotEquals(process, poller)
+0.571 - Assert.assertNotEquals(poller.getNextStep(), process.isBlocking())
+0.562 - Assert.assertNotEquals(poller, process)
+0.533 - Assert.assertNotEquals(process.isBlocking(), poller.isShutdown())
+0.519 - Assert.assertNotNull(poller)
+0.512 - Assert.assertNotEquals(poller.isShutdown(), process.done)
+0.447 - Assert.assertNotNull(poller.new PollOneObjectSchedulerProcess("STR"))
+0.438 - Assert.assertTrue(poller.isShutdown())
+0.400 - Assert.assertFalse(poller.isShutdown())
+0.380 - Assert.assertNotEquals(poller.new PollOneObjectSchedulerProcess("STR"), process.failureException)

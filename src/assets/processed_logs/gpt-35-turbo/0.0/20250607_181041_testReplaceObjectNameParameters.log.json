@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ParameterReplacer {\npublic String replaceObjectNameParameters ( String pattern , MBeanLocationParameterSource parameterSource ) {\nMatcher matcher = replaceParamPattern . matcher ( pattern ) ;\nStringBuffer result = new StringBuffer ( ) ;\nwhile ( matcher . find ( ) ) {\nString name = matcher . group ( \"STR\" ) ;\nString value = parameterSource . getParameter ( name ) ;\nif ( value != null ) {\nmatcher . appendReplacement ( result , value ) ;\n} else {\nmatcher . appendReplacement ( result , Matcher . quoteReplacement ( matcher . group ( ) ) ) ;\n} } matcher . appendTail ( result ) ;\nreturn result . toString ( ) ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ParameterReplacerTest {\n@Test\npublic void testReplaceObjectNameParameters ( ) throws Exception {\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nString result ;\nresult = this . replacer . replaceObjectNameParameters ( \"STR\" , mockSource ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", result);\nAssert.assertNotEquals(\"STR123\", result);\nAssert.assertTrue(result.contains(\"STR\"));\nAssert.assertFalse(result.isEmpty());\nAssert.assertNotNull(result);\nAssert.assertNull(null);\nAssert.assertSame(\"STR\", result);\nAssert.assertNotSame(\"STR123\", result);\nAssert.assertTrue(result.startsWith(\"STR\"));\nAssert.assertFalse(result.endsWith(\"123\"));\nAssert.assertEqualsIgnoringCase(\"str\", result);\nAssert.assertTrue(result.matches(\"[A-Z]+\"));\nAssert.assertFalse(result.matches(\"[0-9]+\"));\nAssert.assertTrue(result.length() > 0);\nAssert.assertTrue(result.equals(\"STR\"));\nAssert.assertFalse(result.equalsIgnoreCase(\"str\"));\nAssert.assertTrue(result.contains(\"S\"));\nAssert.assertFalse(result.contains(\"123\"));\nAssert.assertTrue(result.trim().equals(\"STR\"));\nAssert.assertFalse(result.trim().isEmpty());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.897,
+        0.84,
+        0.75,
+        0.719,
+        0.681,
+        0.621,
+        0.618,
+        0.557,
+        0.557,
+        0.554,
+        0.548,
+        0.545,
+        0.54,
+        0.533,
+        0.517,
+        0.516,
+        0.493,
+        0.484,
+        0.429
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

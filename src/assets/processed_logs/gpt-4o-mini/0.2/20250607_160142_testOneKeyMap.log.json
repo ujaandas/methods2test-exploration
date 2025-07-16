@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKey {\npublic OMultiKey ( final Collection < ? > keys ) {\nthis . keys = new ArrayList < Object > ( keys ) ;\nhash = generateHashCode ( keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKeyTest {\n@Test\npublic void testOneKeyMap ( ) {\nfinal Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ;\nfinal OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nmultiKeyMap . put ( multiKey , new Object ( ) ) ;\nfinal OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nfinal Object mapResult = multiKeyMap . get ( anotherMultiKey ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(mapResult);\nassertTrue(mapResult instanceof Object);\nassertEquals(1, multiKeyMap.size());\nassertSame(multiKeyMap.get(multiKey), mapResult);\nassertNotSame(new Object(), mapResult);\nassertEquals(multiKey, anotherMultiKey);\nassertNotEquals(new OMultiKey(Collections.singletonList(\"DIFF\")), anotherMultiKey);\nassertTrue(multiKeyMap.containsKey(multiKey));\nassertTrue(multiKeyMap.containsKey(anotherMultiKey));\nassertFalse(multiKeyMap.isEmpty());\nassertEquals(multiKeyMap.get(multiKey), multiKeyMap.get(anotherMultiKey));\nassertNotEquals(multiKeyMap.get(new OMultiKey(Collections.singletonList(\"DIFF\"))), mapResult);\nassertTrue(multiKeyMap.keySet().contains(multiKey));\nassertTrue(multiKeyMap.keySet().contains(anotherMultiKey));\nassertFalse(multiKeyMap.containsKey(new OMultiKey(Collections.singletonList(\"NOT_PRESENT\"))));\nassertEquals(multiKeyMap.values().size(), 1);\nassertTrue(multiKeyMap.values().contains(mapResult));\nassertFalse(multiKeyMap.values().contains(new Object()));\nassertEquals(multiKeyMap.get(multiKey), multiKeyMap.get(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertNotNull(multiKeyMap.entrySet());\nassertEquals(multiKeyMap.entrySet().size(), 1);\n```\n====================\n\n",
+    "scores": [
+        0.857,
+        0.667,
+        0.623,
+        0.59,
+        0.535,
+        0.526,
+        0.483,
+        0.452,
+        0.448,
+        0.418,
+        0.406,
+        0.4,
+        0.377,
+        0.347,
+        0.342,
+        0.329,
+        0.327,
+        0.317,
+        0.292,
+        0.224,
+        0.22,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(mapResult);"
+}

@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testTriangle2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         List < ODocument > result = db . command ( new OCommandSQL ( query . toString ( ) ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertEquals(expectedSize, result.size());
+assertTrue(result.stream().allMatch(doc -> doc.containsField("field1")));
+assertTrue(result.stream().allMatch(doc -> doc.containsField("field2")));
+assertTrue(result.stream().allMatch(doc -> doc.field("field1") instanceof String));
+assertTrue(result.stream().allMatch(doc -> doc.field("field2") instanceof Integer));
+assertEquals(expectedValue1, result.get(0).field("field1"));
+assertEquals(expectedValue2, result.get(0).field("field2"));
+assertEquals(expectedValue3, result.get(1).field("field1"));
+assertEquals(expectedValue4, result.get(1).field("field2"));
+assertTrue(result.stream().anyMatch(doc -> doc.field("field3").equals(expectedField3Value)));
+assertFalse(result.stream().anyMatch(doc -> doc.field("field4").equals(unexpectedField4Value)));
+assertEquals(expectedDocumentId, result.get(0).getIdentity().toString());
+assertNotEquals(unexpectedDocumentId, result.get(1).getIdentity().toString());
+assertTrue(result.stream().map(doc -> doc.field("field5")).distinct().count() > 1);
+assertTrue(result.stream().allMatch(doc -> doc.field("field6") != null));
+assertTrue(result.stream().allMatch(doc -> doc.field("field7").toString().length() > 0));
+assertTrue(result.stream().anyMatch(doc -> doc.field("field8").equals(expectedField8Value)));
+assertEquals(expectedField9Value, result.get(result.size() - 1).field("field9"));
+assertTrue(result.stream().allMatch(doc -> doc.field("field10") instanceof List<?>));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,result.size()); ===
+0.812 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.621 - assertEquals(expectedValue1, result.get(0).field("field1"))
+0.598 - assertEquals(expectedValue2, result.get(0).field("field2"))
+0.598 - assertEquals(expectedValue3, result.get(1).field("field1"))
+0.598 - assertEquals(expectedValue4, result.get(1).field("field2"))
+0.552 - ```java
+assertNotNull(result)
+0.528 - assertEquals(expectedField9Value, result.get(result.size() - 1).field("field9"))
+0.500 - assertEquals(expectedDocumentId, result.get(0).getIdentity().toString())
+0.476 - assertNotEquals(unexpectedDocumentId, result.get(1).getIdentity().toString())
+0.412 - assertTrue(result.stream().allMatch(doc -> doc.field("field6") != null))
+0.404 - assertTrue(result.stream().allMatch(doc -> doc.containsField("field1")))
+0.404 - assertTrue(result.stream().allMatch(doc -> doc.containsField("field2")))
+0.374 - assertTrue(result.stream().allMatch(doc -> doc.field("field1") instanceof String))
+0.374 - assertTrue(result.stream().map(doc -> doc.field("field5")).distinct().count() > 1)
+0.370 - assertTrue(result.stream().allMatch(doc -> doc.field("field2") instanceof Integer))
+0.367 - assertTrue(result.stream().allMatch(doc -> doc.field("field10") instanceof List<?>))
+0.361 - assertFalse(result.stream().anyMatch(doc -> doc.field("field4").equals(unexpectedField4Value)))
+0.354 - assertTrue(result.stream().allMatch(doc -> doc.field("field7").toString().length() > 0))
+0.336 - assertTrue(result.stream().anyMatch(doc -> doc.field("field3").equals(expectedField3Value)))
+0.336 - assertTrue(result.stream().anyMatch(doc -> doc.field("field8").equals(expectedField8Value)))
+0.000 - ```

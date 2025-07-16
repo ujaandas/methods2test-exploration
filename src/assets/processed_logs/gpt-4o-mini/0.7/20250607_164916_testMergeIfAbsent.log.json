@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtil {\npublic static void mergeIfAbsent ( Map < String , String > map , Map < String , String > toMerge ) {\nfor ( Map . Entry < String , String > entry : toMerge . entrySet ( ) ) {\nputIfAbsent ( map , entry . getKey ( ) , entry . getValue ( ) ) ;\n;\n} }\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtilTest {\n@Test\npublic void testMergeIfAbsent ( ) {\nMap < String , String > origMap = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > toMergeMap = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > expected = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMapUtil . mergeIfAbsent ( origMap , toMergeMap ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(expected.size(), origMap.size());\nassertTrue(origMap.containsKey(\"STR\"));\nassertEquals(\"STR\", origMap.get(\"STR\"));\nassertFalse(origMap.containsKey(\"NEW_KEY\"));\norigMap.put(\"NEW_KEY\", \"NEW_VALUE\");\nassertEquals(\"NEW_VALUE\", origMap.get(\"NEW_KEY\"));\nassertTrue(origMap.containsKey(\"STR\"));\nassertEquals(\"STR\", origMap.get(\"STR\"));\nassertEquals(expected.get(\"STR\"), origMap.get(\"STR\"));\nassertFalse(origMap.containsKey(\"ANOTHER_NEW_KEY\"));\norigMap.put(\"ANOTHER_NEW_KEY\", \"ANOTHER_NEW_VALUE\");\nassertEquals(\"ANOTHER_NEW_VALUE\", origMap.get(\"ANOTHER_NEW_KEY\"));\nassertEquals(expected.size(), origMap.size());\nassertTrue(origMap.containsKey(\"STR\"));\nassertTrue(origMap.containsKey(\"NEW_KEY\"));\nassertTrue(origMap.containsKey(\"ANOTHER_NEW_KEY\"));\nassertEquals(expected.get(\"STR\"), origMap.get(\"STR\"));\nassertEquals(expected.get(\"NEW_KEY\"), origMap.get(\"NEW_KEY\"));\nassertEquals(expected.get(\"ANOTHER_NEW_KEY\"), origMap.get(\"ANOTHER_NEW_KEY\"));\nassertNotNull(origMap);\nassertNotSame(origMap, toMergeMap);\nassertNotEquals(origMap, toMergeMap);\n```\n====================\n\n",
+    "scores": [
+        0.811,
+        0.732,
+        0.732,
+        0.732,
+        0.667,
+        0.654,
+        0.647,
+        0.647,
+        0.646,
+        0.566,
+        0.564,
+        0.508,
+        0.493,
+        0.471,
+        0.471,
+        0.471,
+        0.468,
+        0.444,
+        0.444,
+        0.4,
+        0.25,
+        0.2,
+        0.0
+    ],
+    "ground_truth": "assertEquals(expected,origMap);"
+}

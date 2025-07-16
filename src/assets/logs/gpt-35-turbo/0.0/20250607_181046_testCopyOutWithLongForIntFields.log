@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjector {
+    public void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) { 
+    this . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , "STR" , objectName ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjectorTest {
+    @Test
+     public void testCopyOutWithLongForIntFields ( ) throws Exception {
+         this . attributeList . clear ( ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 17L ) ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 22L ) ) ; 
+         this . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(17L, target.getStr());
+assertEquals(22L, target.getStr());
+assertEquals(0L, target.getIntField());
+assertEquals(0L, target.getLongField());
+assertEquals(0.0, target.getDoubleField(), 0.001);
+assertEquals(false, target.isBooleanField());
+assertEquals(null, target.getStringField());
+assertEquals(0, target.getListField().size());
+assertEquals(0, target.getMapField().size());
+assertEquals(0, target.getSetField().size());
+assertEquals(0, target.getObjectField().size());
+assertEquals(0, target.getArrayField().length);
+assertEquals(0, target.getPrimitiveArrayField().length);
+assertEquals(0, target.getNestedObject().getIntField());
+assertEquals(0, target.getNestedObject().getLongField());
+assertEquals(0.0, target.getNestedObject().getDoubleField(), 0.001);
+assertEquals(false, target.getNestedObject().isBooleanField());
+assertEquals(null, target.getNestedObject().getStringField());
+assertEquals(0, target.getNestedObject().getListField().size());
+assertEquals(0, target.getNestedObject().getMapField().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(17,this.target.intValue); ===
+0.714 - assertEquals(17L, target.getStr())
+0.676 - assertEquals(0L, target.getIntField())
+0.657 - assertEquals(22L, target.getStr())
+0.642 - assertEquals(0, target.getListField().size())
+0.640 - assertEquals(0L, target.getLongField())
+0.633 - assertEquals(null, target.getStringField())
+0.625 - assertEquals(false, target.isBooleanField())
+0.625 - assertEquals(0, target.getMapField().size())
+0.625 - assertEquals(0, target.getSetField().size())
+0.610 - assertEquals(0, target.getArrayField().length)
+0.602 - assertEquals(0, target.getObjectField().size())
+0.571 - assertEquals(0.0, target.getDoubleField(), 0.001)
+0.549 - assertEquals(0, target.getPrimitiveArrayField().length)
+0.549 - assertEquals(0, target.getNestedObject().getIntField())
+0.525 - assertEquals(0, target.getNestedObject().getListField().size())
+0.522 - assertEquals(0, target.getNestedObject().getLongField())
+0.515 - assertEquals(null, target.getNestedObject().getStringField())
+0.510 - assertEquals(false, target.getNestedObject().isBooleanField())
+0.510 - assertEquals(0, target.getNestedObject().getMapField().size())
+0.471 - assertEquals(0.0, target.getNestedObject().getDoubleField(), 0.001)

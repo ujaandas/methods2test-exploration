@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTx {
+    T get ( Object iKey ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTxTest {
+    @Test
+     public void testDuplicateNullsOnCreate ( ) {
+         db . begin ( ) ; 
+         final ODocument person1 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person2 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person3 = db . newInstance ( "STR" ) . save ( ) ; 
+         person1 . field ( "STR" , "STR" ) . save ( ) ; 
+         person2 . field ( "STR" , "STR" ) . save ( ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(person1);
+Assert.assertNotNull(person2);
+Assert.assertNotNull(person3);
+Assert.assertEquals("STR", person1.field("STR"));
+Assert.assertEquals("STR", person2.field("STR"));
+Assert.assertEquals("STR", person3.field("STR"));
+Assert.assertNotEquals(person1.getIdentity(), person2.getIdentity());
+Assert.assertNotEquals(person1.getIdentity(), person3.getIdentity());
+Assert.assertNotEquals(person2.getIdentity(), person3.getIdentity());
+Assert.assertTrue(db.countClass("STR") >= 3);
+Assert.assertTrue(db.getClusterNameById(person1.getIdentity().getClusterId()).equals("STR"));
+Assert.assertTrue(db.getClusterNameById(person2.getIdentity().getClusterId()).equals("STR"));
+Assert.assertTrue(db.getClusterNameById(person3.getIdentity().getClusterId()).equals("STR"));
+Assert.assertTrue(db.getRecord(person1.getIdentity()) instanceof ODocument);
+Assert.assertTrue(db.getRecord(person2.getIdentity()) instanceof ODocument);
+Assert.assertTrue(db.getRecord(person3.getIdentity()) instanceof ODocument);
+Assert.assertTrue(db.getRecord(person1.getIdentity()).field("STR").equals("STR"));
+Assert.assertTrue(db.getRecord(person2.getIdentity()).field("STR").equals("STR"));
+Assert.assertTrue(db.getRecord(person3.getIdentity()).field("STR").equals("STR"));
+Assert.assertEquals(3, db.countClass("STR"));
+Assert.assertTrue(db.getRecord(person1.getIdentity()).isDirty());
+Assert.assertTrue(db.getRecord(person2.getIdentity()).isDirty());
+Assert.assertTrue(db.getRecord(person3.getIdentity()).isDirty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(person2,index.get("STR")); ===
+0.769 - Assert.assertEquals("STR", person2.field("STR"))
+0.744 - Assert.assertEquals("STR", person1.field("STR"))
+0.744 - Assert.assertEquals("STR", person3.field("STR"))
+0.595 - Assert.assertEquals(3, db.countClass("STR"))
+0.567 - Assert.assertNotNull(person2)
+0.551 - Assert.assertNotEquals(person2.getIdentity(), person3.getIdentity())
+0.533 - Assert.assertNotNull(person3)
+0.531 - Assert.assertNotEquals(person1.getIdentity(), person2.getIdentity())
+0.531 - Assert.assertNotEquals(person1.getIdentity(), person3.getIdentity())
+0.493 - Assert.assertTrue(db.countClass("STR") >= 3)
+0.482 - Assert.assertTrue(db.getRecord(person2.getIdentity()).field("STR").equals("STR"))
+0.471 - ```java
+Assert.assertNotNull(person1)
+0.464 - Assert.assertTrue(db.getRecord(person1.getIdentity()).field("STR").equals("STR"))
+0.464 - Assert.assertTrue(db.getRecord(person3.getIdentity()).field("STR").equals("STR"))
+0.463 - Assert.assertTrue(db.getRecord(person2.getIdentity()).isDirty())
+0.455 - Assert.assertTrue(db.getClusterNameById(person2.getIdentity().getClusterId()).equals("STR"))
+0.442 - Assert.assertTrue(db.getRecord(person1.getIdentity()).isDirty())
+0.442 - Assert.assertTrue(db.getRecord(person3.getIdentity()).isDirty())
+0.439 - Assert.assertTrue(db.getClusterNameById(person1.getIdentity().getClusterId()).equals("STR"))
+0.439 - Assert.assertTrue(db.getClusterNameById(person3.getIdentity().getClusterId()).equals("STR"))
+0.423 - Assert.assertTrue(db.getRecord(person2.getIdentity()) instanceof ODocument)
+0.404 - Assert.assertTrue(db.getRecord(person1.getIdentity()) instanceof ODocument)
+0.404 - Assert.assertTrue(db.getRecord(person3.getIdentity()) instanceof ODocument)
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsOfFriends ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\") != null));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\").equals(\"expectedFriend\")));\nassertEquals(\"expectedValue\", qResult.get(0).field(\"propertyKey\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"userId\").equals(expectedUserId)));\nassertEquals(\"expectedType\", qResult.get(0).field(\"type\"));\nassertNotEquals(\"unexpectedValue\", qResult.get(1).field(\"propertyKey\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertEquals(expectedDocId, qResult.get(0).getIdentity().toString());\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"error\") != null));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"relation\").equals(\"friendOf\")));\nassertEquals(expectedCount, qResult.stream().filter(doc -> doc.field(\"relation\").equals(\"friendOf\")).count());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"timestamp\") instanceof Date));\nassertEquals(expectedDate, qResult.get(0).field(\"timestamp\"));\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"isDeleted\") == true));\nassertEquals(\"expectedString\", qResult.get(2).field(\"description\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"location\").equals(\"expectedLocation\")));\nassertEquals(expectedRole, qResult.get(0).field(\"role\"));\nassertNotNull(qResult.get(0).field(\"createdAt\"));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.635,
+        0.621,
+        0.568,
+        0.567,
+        0.564,
+        0.556,
+        0.542,
+        0.54,
+        0.536,
+        0.465,
+        0.447,
+        0.424,
+        0.412,
+        0.382,
+        0.382,
+        0.368,
+        0.362,
+        0.356,
+        0.344,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

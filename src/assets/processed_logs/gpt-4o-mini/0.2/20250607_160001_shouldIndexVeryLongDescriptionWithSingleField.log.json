@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSort {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSortTest {\n@Test\npublic void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {\ndb . save ( new ODocument ( \"STR\" ) . field ( \"STR\" , DESCRIPTION ) ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nlong count = db . query ( \"STR\" ) . stream ( ) . count ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(count > 0);\nassertEquals(expectedCount, count);\nassertNotNull(db.query(\"STR\"));\nassertFalse(db.query(\"STR\").isEmpty());\nassertTrue(db.query(\"STR\").stream().allMatch(result -> result.getProperty(\"STR\").contains(DESCRIPTION)));\nassertEquals(expectedDescription, db.query(\"STR\").stream().findFirst().get().getProperty(\"STR\"));\nassertThrows(NoSuchElementException.class, () -> db.query(\"STR\").stream().skip(count).findFirst());\nassertTrue(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").length() > 100));\nassertEquals(\"Expected Value\", db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).findFirst().orElse(\"Default Value\"));\nassertNotEquals(\"Unexpected Value\", db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).findFirst().orElse(\"Unexpected Value\"));\nassertEquals(1, db.query(\"STR\").stream().filter(result -> result.getProperty(\"STR\").equals(DESCRIPTION)).count());\nassertTrue(db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).distinct().count() > 1);\nassertFalse(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").isEmpty()));\nassertEquals(expectedCount, db.query(\"STR\").stream().filter(result -> result.getProperty(\"STR\").length() > 0).count());\nassertTrue(db.query(\"STR\").stream().allMatch(result -> result.getProperty(\"STR\").length() <= 255));\nassertNotNull(db.query(\"STR\").stream().findAny().orElse(null));\nassertEquals(\"First Description\", db.query(\"STR\").stream().findFirst().get().getProperty(\"STR\"));\nassertTrue(db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).collect(Collectors.toSet()).size() > 1);\nassertFalse(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").equals(\"Invalid Description\")));\nassertEquals(expectedCount, db.query(\"STR\").stream().filter(result -> result.getProperty(\"STR\").contains(\"keyword\")).count());\nassertTrue(count >= 0);\n```\n====================\n\n",
+    "scores": [
+        0.741,
+        0.683,
+        0.583,
+        0.441,
+        0.392,
+        0.337,
+        0.321,
+        0.31,
+        0.308,
+        0.299,
+        0.296,
+        0.293,
+        0.28,
+        0.261,
+        0.25,
+        0.246,
+        0.244,
+        0.242,
+        0.241,
+        0.217,
+        0.211,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,count);"
+}

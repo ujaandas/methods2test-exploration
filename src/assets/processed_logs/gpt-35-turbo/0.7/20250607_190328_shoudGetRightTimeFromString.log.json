@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtils {\npublic static Date getTodayWithTime ( final String iTime ) throws ParseException {\nfinal SimpleDateFormat df = new SimpleDateFormat ( \"STR\" ) ;\nCalendar calParsed = Calendar . getInstance ( ) ;\ncalParsed . setTime ( df . parse ( iTime ) ) ;\nCalendar cal = Calendar . getInstance ( ) ;\ncal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ;\ncal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ;\ncal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ;\ncal . set ( Calendar . MILLISECOND , 0 ) ;\nreturn cal . getTime ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtilsTest {\n@Test\npublic void shoudGetRightTimeFromString ( ) throws ParseException {\nCalendar calendar = Calendar . getInstance ( ) ;\ncalendar . set ( Calendar . HOUR_OF_DAY , 5 ) ;\ncalendar . set ( Calendar . MINUTE , 10 ) ;\ncalendar . set ( Calendar . SECOND , 0 ) ;\ncalendar . set ( Calendar . MILLISECOND , 0 ) ;\nDate d = OIOUtils . getTodayWithTime ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());\nassertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());\nassertEquals(calendar.get(Calendar.SECOND), d.getSeconds());\nassertEquals(calendar.get(Calendar.MILLISECOND), d.getMilliseconds());\nassertTrue(d.after(calendar.getTime()));\nassertTrue(d.before(calendar.getTime()));\nassertNotNull(d);\nassertNotNull(calendar);\nassertSame(calendar.getTime(), d);\nassertNotSame(calendar, d);\nassertTrue(d.getTime() > calendar.getTime().getTime());\nassertTrue(d.getTime() < calendar.getTime().getTime());\nassertTrue(d.toString().contains(\"5:10:00\"));\nassertEquals(0, d.compareTo(calendar.getTime()));\nassertTrue(d.getTime() == calendar.getTime().getTime());\nassertFalse(d.equals(calendar.getTime()));\nassertTrue(d.toString().equals(calendar.getTime().toString()));\nassertTrue(d.hashCode() != calendar.getTime().hashCode());\nassertTrue(d.getTime() - calendar.getTime().getTime() >= 0);\nassertTrue(d.getTime() - calendar.getTime().getTime() <= 1000);\n====================\n\n",
+    "scores": [
+        0.879,
+        0.827,
+        0.79,
+        0.767,
+        0.73,
+        0.674,
+        0.652,
+        0.652,
+        0.646,
+        0.644,
+        0.632,
+        0.632,
+        0.628,
+        0.628,
+        0.621,
+        0.607,
+        0.588,
+        0.587,
+        0.44,
+        0.308
+    ],
+    "ground_truth": "assertEquals(calendar.getTime(),d);"
+}

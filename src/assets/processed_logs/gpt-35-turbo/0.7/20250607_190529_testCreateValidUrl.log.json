@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtils {\npublic static URL create ( final String url ) {\ntry {\nreturn new URL ( url ) ;\n} catch ( MalformedURLException ex ) {\nthrow new IllegalArgumentException ( ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtilsTest {\n@Test\npublic void testCreateValidUrl ( ) throws Exception {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(UrlUtils.create(\"http://www.example.com\"));\nassertEquals(new URL(\"http://www.example.com\"), UrlUtils.create(\"http://www.example.com\"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\"invalidurl\"));\nassertThrows(MalformedURLException.class, () -> UrlUtils.create(\"invalidurl\"));\nassertEquals(new URL(\"https://www.google.com\"), UrlUtils.create(\"https://www.google.com\"));\nassertNotEquals(new URL(\"http://www.example.com\"), UrlUtils.create(\"https://www.example.com\"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(null));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\"\"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\" \"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\"htp://www.example.com\"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\"www.example.com\"));\nassertEquals(new URL(\"http://www.example.com:8080\"), UrlUtils.create(\"http://www.example.com:8080\"));\nassertEquals(new URL(\"http://www.example.com/path\"), UrlUtils.create(\"http://www.example.com/path\"));\nassertEquals(new URL(\"http://www.example.com/path?param=value\"), UrlUtils.create(\"http://www.example.com/path?param=value\"));\nassertEquals(new URL(\"http://www.example.com#fragment\"), UrlUtils.create(\"http://www.example.com#fragment\"));\nassertThrows(IllegalArgumentException.class, () -> UrlUtils.create(\"ftp://www.example.com\"));\nassertEquals(new URL(\"http://www.example.com/?query=123#fragment\"), UrlUtils.create(\"http://www.example.com/?query=123#fragment\"));\nassertThrows(MalformedURLException.class, () -> UrlUtils.create(\"http://www.example.com:8080/path#fragment\"));\n====================\n\n",
+    "scores": [
+        0.475,
+        0.468,
+        0.468,
+        0.456,
+        0.448,
+        0.448,
+        0.439,
+        0.439,
+        0.426,
+        0.426,
+        0.419,
+        0.417,
+        0.403,
+        0.387,
+        0.387,
+        0.383,
+        0.371,
+        0.349
+    ],
+    "ground_truth": "assertEquals(\"STR\",UrlUtils.create(\"STR\").toURI().toASCIIString());"
+}

@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( long value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    if ( value < 0 ) { 
+    out . write ( '-' ) ; 
+    value = - value ; 
+    } if ( numFracDigits == 0 ) { 
+    out . write ( String . valueOf ( value ) ) ; 
+    } else { 
+    final long intPart = value / TEN_POW [ numFracDigits ] ; 
+    final String fracPart = String . valueOf ( 1_000_000_000 + value % TEN_POW [ numFracDigits ] ) . substring ( 10 - numFracDigits , 10 ) ; 
+    out . write ( String . valueOf ( intPart ) ) ; 
+    out . write ( "STR" ) ; 
+    out . write ( fracPart ) ; 
+    } afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testNumber ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 12345 , 0 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("12345", result);
+assertFalse(result.contains("."));
+assertTrue(result.length() <= 5);
+assertTrue(result.startsWith("123"));
+assertTrue(result.endsWith("45"));
+assertTrue(result.matches("\\d+"));
+assertTrue(result.matches("[0-9]+"));
+assertTrue(result.matches("\\d{5}"));
+assertTrue(result.matches("[0-9]{5}"));
+assertTrue(result.matches("\\d{3}45"));
+assertTrue(result.matches("[0-9]{3}45"));
+assertTrue(result.matches("12345"));
+assertTrue(result.matches("\\d{5}"));
+assertTrue(result.matches("[0-9]{5}"));
+assertTrue(result.matches("\\d{3}45"));
+assertTrue(result.matches("[0-9]{3}45"));
+assertTrue(result.matches("12345"));
+assertTrue(result.matches("\\d{5}"));
+assertTrue(result.matches("[0-9]{5}"));
+assertTrue(result.matches("\\d{3}45"));
+assertTrue(result.matches("[0-9]{3}45"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.852 - assertEquals("12345", result)
+0.576 - assertFalse(result.contains("."))
+0.536 - assertTrue(result.length() <= 5)
+0.508 - assertTrue(result.endsWith("45"))
+0.500 - assertTrue(result.matches("\\d+"))
+0.492 - assertTrue(result.matches("12345"))
+0.492 - assertTrue(result.matches("12345"))
+0.484 - assertTrue(result.startsWith("123"))
+0.484 - assertTrue(result.matches("[0-9]+"))
+0.484 - assertTrue(result.matches("\\d{5}"))
+0.484 - assertTrue(result.matches("\\d{5}"))
+0.484 - assertTrue(result.matches("\\d{5}"))
+0.469 - assertTrue(result.matches("[0-9]{5}"))
+0.469 - assertTrue(result.matches("\\d{3}45"))
+0.469 - assertTrue(result.matches("[0-9]{5}"))
+0.469 - assertTrue(result.matches("\\d{3}45"))
+0.469 - assertTrue(result.matches("[0-9]{5}"))
+0.469 - assertTrue(result.matches("\\d{3}45"))
+0.455 - assertTrue(result.matches("[0-9]{3}45"))
+0.455 - assertTrue(result.matches("[0-9]{3}45"))
+0.455 - assertTrue(result.matches("[0-9]{3}45"))

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcServer {
+    @Override
+     public int port ( ) { 
+     return port ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcServerTest {
+    @Test
+     public void doTestRandomPortConstructor ( ) {
+         RpcServer rpcServer = new RpcServer ( ) ; 
+         rpcServer . startup ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(rpcServer);
+assertEquals(0, rpcServer.port()); // Assuming default port is 0
+rpcServer.startup();
+assertTrue(rpcServer.isRunning());
+assertTrue(rpcServer.getPort() >= 0); // Assuming port should be non-negative
+assertNotEquals(rpcServer.getPort(), -1);
+assertTrue(rpcServer.getPort() < 65536); // Valid port range check
+assertTrue(rpcServer.getHost().isEmpty()); // Assuming default host is empty
+assertFalse(rpcServer.isShutdown());
+rpcServer.shutdown();
+assertTrue(rpcServer.isShutdown());
+assertEquals(0, rpcServer.getActiveConnections());
+rpcServer.startup();
+assertTrue(rpcServer.getActiveConnections() >= 0);
+assertNotNull(rpcServer.getConfiguration());
+assertFalse(rpcServer.getConfiguration().isEmpty());
+assertTrue(rpcServer.getProtocol().equals("SOFA")); // Assuming default protocol is SOFA
+assertNotNull(rpcServer.getServiceRegistry());
+assertTrue(rpcServer.getServiceRegistry().isEmpty());
+rpcServer.addService(new TestService());
+assertEquals(1, rpcServer.getServiceCount());
+assertTrue(rpcServer.getService("TestService") instanceof TestService);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotEquals(0,rpcServer.port()); ===
+0.955 - assertEquals(0, rpcServer.port())
+0.744 - assertEquals(1, rpcServer.getServiceCount())
+0.723 - assertEquals(0, rpcServer.getActiveConnections())
+0.718 - assertNotNull(rpcServer.getConfiguration())
+0.696 - assertTrue(rpcServer.getPort() >= 0)
+0.667 - assertTrue(rpcServer.getPort() < 65536)
+0.657 - ```java
+assertNotNull(rpcServer)
+0.638 - assertTrue(rpcServer.isShutdown())
+0.618 - assertTrue(rpcServer.isRunning())
+0.587 - // Assuming port should be non-negative
+assertNotEquals(rpcServer.getPort(), -1)
+0.581 - assertFalse(rpcServer.getConfiguration().isEmpty())
+0.561 - assertTrue(rpcServer.getActiveConnections() >= 0)
+0.541 - assertTrue(rpcServer.getProtocol().equals("SOFA"))
+0.532 - // Assuming default port is 0
+rpcServer.startup()
+0.529 - assertTrue(rpcServer.getServiceRegistry().isEmpty())
+0.519 - rpcServer.startup()
+0.485 - // Assuming default host is empty
+assertFalse(rpcServer.isShutdown())
+0.482 - // Assuming default protocol is SOFA
+assertNotNull(rpcServer.getServiceRegistry())
+0.473 - rpcServer.shutdown()
+0.469 - // Valid port range check
+assertTrue(rpcServer.getHost().isEmpty())
+0.411 - rpcServer.addService(new TestService())
+0.408 - assertTrue(rpcServer.getService("TestService") instanceof TestService)
+0.000 - ```

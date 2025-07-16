@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class CEFParser {
+    public CommonEvent parse ( String cefString , final boolean validate ) { 
+    return this . parse ( cefString , validate , Locale . ENGLISH ) ; 
+    }
+}
+
+package fluenda.ParCEFone;
+
+public class CEFParserTest {
+    @Test
+     public void invalidMessageTypesTest ( ) throws Exception {
+         String sample1 = "STR" ; 
+         CEFParser parser = new CEFParser ( ) ; 
+         CommonEvent event = parser . parse ( sample1 , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(event);
+Assert.assertEquals("STR", event.getMessageType());
+Assert.assertEquals(Locale.ENGLISH, event.getLocale());
+Assert.assertTrue(event.isValid());
+Assert.assertTrue(event.getMessage().isEmpty());
+Assert.assertTrue(event.getTimestamp() != null);
+Assert.assertTrue(event.getFields().isEmpty());
+Assert.assertTrue(event.getExtensions().isEmpty());
+Assert.assertTrue(event.getCustomFields().isEmpty());
+Assert.assertTrue(event.getSeverity() == Severity.UNKNOWN);
+Assert.assertTrue(event.getVendor() == Vendor.UNKNOWN);
+Assert.assertTrue(event.getProduct() == Product.UNKNOWN);
+Assert.assertTrue(event.getVersion() == Version.UNKNOWN);
+Assert.assertTrue(event.getDeviceEventClassId() == DeviceEventClassId.UNKNOWN);
+Assert.assertTrue(event.getDeviceEventClassId() == DeviceEventClassId.UNKNOWN);
+Assert.assertTrue(event.getName().isEmpty());
+Assert.assertTrue(event.getSeverityOverride() == Severity.UNKNOWN);
+Assert.assertTrue(event.getSignatureId() == SignatureId.UNKNOWN);
+Assert.assertTrue(event.getSignature().isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(event); ===
+0.919 - Assert.assertNotNull(event)
+0.636 - Assert.assertTrue(event.isValid())
+0.519 - Assert.assertTrue(event.getName().isEmpty())
+0.509 - Assert.assertTrue(event.getTimestamp() != null)
+0.508 - Assert.assertEquals("STR", event.getMessageType())
+0.500 - Assert.assertTrue(event.getFields().isEmpty())
+0.491 - Assert.assertTrue(event.getMessage().isEmpty())
+0.475 - Assert.assertTrue(event.getSignature().isEmpty())
+0.467 - Assert.assertTrue(event.getExtensions().isEmpty())
+0.452 - Assert.assertTrue(event.getCustomFields().isEmpty())
+0.452 - Assert.assertTrue(event.getVendor() == Vendor.UNKNOWN)
+0.438 - Assert.assertTrue(event.getProduct() == Product.UNKNOWN)
+0.438 - Assert.assertTrue(event.getVersion() == Version.UNKNOWN)
+0.424 - Assert.assertTrue(event.getSeverity() == Severity.UNKNOWN)
+0.413 - Assert.assertEquals(Locale.ENGLISH, event.getLocale())
+0.389 - Assert.assertTrue(event.getSignatureId() == SignatureId.UNKNOWN)
+0.378 - Assert.assertTrue(event.getSeverityOverride() == Severity.UNKNOWN)
+0.326 - Assert.assertTrue(event.getDeviceEventClassId() == DeviceEventClassId.UNKNOWN)
+0.326 - Assert.assertTrue(event.getDeviceEventClassId() == DeviceEventClassId.UNKNOWN)

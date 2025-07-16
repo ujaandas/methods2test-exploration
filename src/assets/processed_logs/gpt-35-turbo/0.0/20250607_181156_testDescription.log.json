@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rockagen.commons-lib;\n\npublic class OPLog {\npublic static Method getDeclaredMethod ( Class < ? > clazz , boolean recursively , String methodName , Class < ? > ... parameterTypes ) {\ntry {\nreturn clazz . getDeclaredMethod ( methodName , parameterTypes ) ;\n} catch ( NoSuchMethodException e ) {\nClass < ? > superClass = clazz . getSuperclass ( ) ;\nif ( superClass != null && recursively ) {\nreturn getDeclaredMethod ( superClass , true , methodName , parameterTypes ) ;\n} } catch ( SecurityException e ) {\nlog . error ( \"STR\" , e . getMessage ( ) , e ) ;\n} return null ;\n}\n}\n\npackage rockagen.commons-lib;\n\npublic class OPLogTest {\n@Test\npublic void testDescription ( ) throws SecurityException , NoSuchMethodException {\nPlog annotation = ( Plog ) ClassUtil . getDeclaredMethod ( getClass ( ) , false , \"STR\" ) . getAnnotation ( Plog . class ) ;\nString value = annotation . value ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"Expected value\", \"Actual value\");\nassertTrue(condition);\nassertFalse(!condition);\nassertNotNull(object);\nassertNull(object);\nassertSame(expected, actual);\nassertNotSame(expected, actual);\nassertArrayEquals(expectedArray, actualArray);\nassertThrows(Exception.class, () -> methodToTest());\nassertTimeout(Duration.ofSeconds(5), () -> methodToTest());\nassertEquals(5, list.size());\nassertTrue(list.contains(element));\nassertFalse(list.isEmpty());\nassertThat(result, is(equalTo(expected)));\nassertThat(result, is(not(equalTo(expected))));\nassertThat(result, is(notNullValue()));\nassertThat(result, is(instanceOf(ExpectedClass.class)));\nassertThat(result, is(not(instanceOf(UnexpectedClass.class)));\nassertThat(result, is(equalToIgnoringCase(expected)));\nassertThat(result, is(not(equalToIgnoringCase(unexpected)));\n====================\n\n",
+    "scores": [
+        0.654,
+        0.588,
+        0.512,
+        0.493,
+        0.484,
+        0.478,
+        0.462,
+        0.458,
+        0.441,
+        0.435,
+        0.4,
+        0.385,
+        0.371,
+        0.364,
+        0.364,
+        0.361,
+        0.329,
+        0.325,
+        0.306,
+        0.301
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",value);"
+}

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class StatementReference {
+    public String getId ( ) { 
+    return id ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class StatementReferenceTest {
+    @Test
+     public void testSetId ( ) {
+         String expected = UUID . randomUUID ( ) . toString ( ) ; 
+         statementRef . setId ( expected ) ; 
+         String actual = statementRef . getId ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected, actual);
+assertTrue(actual instanceof String);
+assertFalse(actual.isEmpty());
+assertEquals(expected.length(), actual.length());
+assertEquals(expected.hashCode(), actual.hashCode());
+assertNotSame(expected, actual);
+assertTrue(actual.matches("^[a-f0-9\\-]{36}$"));
+assertFalse(actual.contains(" "));
+assertTrue(actual.startsWith("urn:uuid:") || actual.length() == 36);
+assertEquals(expected.substring(0, 8), actual.substring(0, 8));
+assertEquals(expected.substring(9, 13), actual.substring(9, 13));
+assertEquals(expected.substring(14, 18), actual.substring(14, 18));
+assertEquals(expected.substring(19, 23), actual.substring(19, 23));
+assertEquals(expected.substring(24), actual.substring(24));
+assertNotEquals("invalid-id", actual);
+assertTrue(actual.equalsIgnoreCase(expected));
+assertSame(expected, actual);
+assertTrue(actual.equals(expected));
+assertFalse(actual.equals("different-id"));
+assertNotEquals(null, actual);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.776 - assertNotEquals(null, actual)
+0.667 - assertNotSame(expected, actual)
+0.667 - assertNotEquals("invalid-id", actual)
+0.600 - assertFalse(actual.isEmpty())
+0.583 - assertSame(expected, actual)
+0.566 - assertFalse(actual.contains(" "))
+0.560 - assertEquals(expected, actual)
+0.545 - assertTrue(actual instanceof String)
+0.536 - assertTrue(actual.equals(expected))
+0.476 - assertFalse(actual.equals("different-id"))
+0.471 - assertEquals(expected.length(), actual.length())
+0.455 - assertTrue(actual.equalsIgnoreCase(expected))
+0.441 - assertTrue(actual.matches("^[a-f0-9\\-]{36}$"))
+0.417 - assertEquals(expected.hashCode(), actual.hashCode())
+0.410 - assertEquals(expected.substring(24), actual.substring(24))
+0.400 - assertEquals(expected.substring(0, 8), actual.substring(0, 8))
+0.390 - assertEquals(expected.substring(9, 13), actual.substring(9, 13))
+0.381 - assertEquals(expected.substring(14, 18), actual.substring(14, 18))
+0.381 - assertEquals(expected.substring(19, 23), actual.substring(19, 23))
+0.357 - assertTrue(actual.startsWith("urn:uuid:") || actual.length() == 36)
+0.000 - ```

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testSkipOrdered ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(expectedSize, results.size());\nassertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));\nassertTrue(results.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedValue, results.get(0).field(\"fieldName\"));\nassertEquals(expectedValue, results.get(1).field(\"fieldName\"));\nassertNotEquals(unexpectedValue, results.get(2).field(\"fieldName\"));\nassertTrue(results.get(0).field(\"numericField\") > 0);\nassertTrue(results.get(1).field(\"dateField\") instanceof Date);\nassertTrue(results.get(2).field(\"booleanField\") instanceof Boolean);\nassertEquals(\"expectedString\", results.get(3).field(\"stringField\"));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertFalse(results.stream().anyMatch(doc -> doc.field(\"status\").equals(\"inactive\")));\nassertEquals(expectedId, results.get(4).getIdentity());\nassertTrue(results.stream().map(doc -> doc.field(\"fieldName\")).distinct().count() > 1);\nassertEquals(expectedFieldCount, results.get(5).fieldNames().size());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"numericField\") < maxValue));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"category\").equals(\"category1\")));\nassertFalse(results.stream().noneMatch(doc -> doc.field(\"category\").equals(\"category2\")));\nassertEquals(expectedFieldValue, results.get(6).field(\"anotherField\"));\nassertNotNull(results.get(7).field(\"nestedField\"));\n```\n====================\n\n",
+    "scores": [
+        0.806,
+        0.721,
+        0.619,
+        0.592,
+        0.587,
+        0.587,
+        0.557,
+        0.557,
+        0.557,
+        0.543,
+        0.54,
+        0.519,
+        0.433,
+        0.422,
+        0.404,
+        0.4,
+        0.396,
+        0.39,
+        0.385,
+        0.378,
+        0.372,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "assertEquals(19,results.size());"
+}

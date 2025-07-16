@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OAlterPropertyStatementExecution {\npublic String getCustom ( final String iName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OAlterPropertyStatementExecutionTest {\n@Test\npublic void testSetCustom ( ) {\nString className = \"STR\" ;\nOClass clazz = db . getMetadata ( ) . getSchema ( ) . createClass ( className ) ;\nOProperty prop = clazz . createProperty ( \"STR\" , OType . STRING ) ;\nprop . setCustom ( \"STR\" , \"STR\" ) ;\nOResultSet result = db . command ( \"STR\" + className + \"STR\" ) ;\nprintExecutionPlan ( null , result ) ;\nObject currentValue = prop . getCustom ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(currentValue);\nassertEquals(\"STR\", currentValue);\nassertTrue(currentValue instanceof String);\nassertEquals(\"STR\", prop.getCustom(\"STR\"));\nassertFalse(currentValue.equals(\"DifferentValue\"));\nassertNotEquals(null, prop.getCustom(\"STR\"));\nassertSame(\"STR\", currentValue);\nassertNotSame(\"DifferentValue\", currentValue);\nassertTrue(currentValue.equals(\"STR\"));\nassertFalse(currentValue.equals(\"AnotherValue\"));\nassertEquals(3, currentValue.length());\nassertTrue(currentValue.contains(\"S\"));\nassertFalse(currentValue.contains(\"X\"));\nassertThrows(IllegalArgumentException.class, () -> prop.getCustom(null));\nassertThrows(IllegalArgumentException.class, () -> prop.getCustom(\"\"));\nassertTrue(currentValue instanceof String);\nassertFalse(currentValue.isEmpty());\nassertEquals(\"STR\", prop.getCustom(\"STR\"));\nassertNotEquals(\"DifferentValue\", prop.getCustom(\"STR\"));\nassertTrue(prop.getCustom(\"STR\").equals(\"STR\"));\nassertSame(currentValue, prop.getCustom(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.643,
+        0.517,
+        0.491,
+        0.462,
+        0.447,
+        0.438,
+        0.431,
+        0.429,
+        0.426,
+        0.426,
+        0.407,
+        0.407,
+        0.367,
+        0.358,
+        0.355,
+        0.355,
+        0.353,
+        0.341,
+        0.338,
+        0.319,
+        0.267,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(result);"
+}

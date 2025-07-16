@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalProperty {
+    String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalPropertyTest {
+    @Test
+     public void testGlobalPropertyCreate ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         schema . createGlobalProperty ( "STR" , OType . SHORT , 100 ) ; 
+         OGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(prop);
+assertEquals("STR", prop.getName());
+assertEquals(OType.SHORT, prop.getType());
+assertEquals(100, prop.getId());
+assertTrue(schema.getGlobalProperties().contains(prop));
+assertEquals(1, schema.getGlobalProperties().size());
+assertTrue(prop instanceof OGlobalProperty);
+assertFalse(prop.isDeleted());
+assertEquals("Expected description", prop.getDescription());
+assertNotNull(prop.getCreationDate());
+assertNotNull(prop.getLastModifiedDate());
+assertEquals("Expected owner", prop.getOwner());
+assertTrue(prop.isVisible());
+assertFalse(prop.isImmutable());
+assertEquals("Expected default value", prop.getDefaultValue());
+assertEquals("Expected validation rules", prop.getValidationRules());
+assertEquals("Expected index type", prop.getIndexType());
+assertEquals("Expected storage type", prop.getStorageType());
+assertEquals("Expected access level", prop.getAccessLevel());
+assertEquals("Expected custom attributes", prop.getCustomAttributes());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(prop.getName(),"STR"); ===
+0.824 - assertEquals("STR", prop.getName())
+0.750 - assertEquals(100, prop.getId())
+0.676 - assertEquals(OType.SHORT, prop.getType())
+0.667 - assertFalse(prop.isDeleted())
+0.646 - assertFalse(prop.isImmutable())
+0.633 - assertEquals("Expected owner", prop.getOwner())
+0.620 - assertNotNull(prop.getCreationDate())
+0.587 - assertNotNull(prop.getLastModifiedDate())
+0.575 - assertEquals("Expected index type", prop.getIndexType())
+0.571 - assertEquals("Expected storage type", prop.getStorageType())
+0.559 - assertEquals("Expected default value", prop.getDefaultValue())
+0.549 - assertEquals("Expected description", prop.getDescription())
+0.549 - assertEquals("Expected access level", prop.getAccessLevel())
+0.548 - assertTrue(prop.isVisible())
+0.525 - assertEquals("Expected validation rules", prop.getValidationRules())
+0.518 - assertEquals(1, schema.getGlobalProperties().size())
+0.515 - assertEquals("Expected custom attributes", prop.getCustomAttributes())
+0.459 - ```java
+assertNotNull(prop)
+0.400 - assertTrue(prop instanceof OGlobalProperty)
+0.382 - assertTrue(schema.getGlobalProperties().contains(prop))
+0.000 - ```

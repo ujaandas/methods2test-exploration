@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void ticket37 ( ) {
+         locītājs . enablePrefixes = true ; 
+         Word panest = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(panest);
+assertTrue(panest.isRecognized());
+assertEquals("ExpectedWordForm1", panest.getWordForm(0));
+assertEquals("ExpectedWordForm2", panest.getWordForm(1));
+assertEquals(2, panest.getWordFormsCount());
+assertTrue(panest.hasPrefix());
+assertFalse(panest.hasSuffix());
+assertTrue(panest.getPrefixes().contains("ExpectedPrefix"));
+assertFalse(panest.getSuffixes().contains("UnexpectedSuffix"));
+assertEquals("ExpectedAnalysis", panest.getAnalysis());
+assertTrue(panest.getMorphologicalFeatures().contains("Feature1"));
+assertTrue(panest.getMorphologicalFeatures().contains("Feature2"));
+assertFalse(panest.getMorphologicalFeatures().contains("UnexpectedFeature"));
+assertEquals("ExpectedRoot", panest.getRoot());
+assertTrue(panest.isPlural());
+assertFalse(panest.isSingular());
+assertTrue(panest.isPastTense());
+assertFalse(panest.isPresentTense());
+assertTrue(panest.isThirdPerson());
+assertFalse(panest.isFirstPerson());
+assertEquals("ExpectedLanguage", panest.getLanguage());
+assertNotEquals("UnexpectedLanguage", panest.getLanguage());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(panest.isRecognized()); ===
+1.000 - assertTrue(panest.isRecognized())
+0.800 - assertTrue(panest.isPastTense())
+0.776 - assertTrue(panest.isThirdPerson())
+0.742 - assertTrue(panest.isPlural())
+0.698 - assertTrue(panest.hasPrefix())
+0.676 - assertFalse(panest.isFirstPerson())
+0.667 - assertFalse(panest.isPresentTense())
+0.646 - assertFalse(panest.isSingular())
+0.594 - assertFalse(panest.hasSuffix())
+0.565 - assertTrue(panest.getPrefixes().contains("ExpectedPrefix"))
+0.560 - assertEquals(2, panest.getWordFormsCount())
+0.545 - assertTrue(panest.getMorphologicalFeatures().contains("Feature1"))
+0.545 - assertTrue(panest.getMorphologicalFeatures().contains("Feature2"))
+0.513 - assertEquals("ExpectedRoot", panest.getRoot())
+0.488 - assertEquals("ExpectedLanguage", panest.getLanguage())
+0.484 - assertFalse(panest.getSuffixes().contains("UnexpectedSuffix"))
+0.484 - ```java
+assertNotNull(panest)
+0.465 - assertEquals("ExpectedAnalysis", panest.getAnalysis())
+0.462 - assertNotEquals("UnexpectedLanguage", panest.getLanguage())
+0.455 - assertEquals("ExpectedWordForm1", panest.getWordForm(0))
+0.455 - assertEquals("ExpectedWordForm2", panest.getWordForm(1))
+0.422 - assertFalse(panest.getMorphologicalFeatures().contains("UnexpectedFeature"))
+0.000 - ```

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluent.fluent-logger-java;
+
+public class Bugfixes {
+    public void close ( ) { 
+    if ( sender != null ) { 
+    sender . flush ( ) ; 
+    sender . close ( ) ; 
+    sender = null ; 
+    } factory . purgeLogger ( this ) ; 
+    }
+}
+
+package fluent.fluent-logger-java;
+
+public class TestBugfixes {
+    @Test
+     public void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {
+         System . setProperty ( Config . FLUENT_SENDER_CLASS , "STR" ) ; 
+         FluentLogger logger = FluentLogger . getLogger ( "STR" ) ; 
+         logger . log ( "STR" , Collections . < String , Object > emptyMap ( ) ) ; 
+         logger . close ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(logger);
+Assert.assertTrue(logger.isClosed());
+Assert.assertEquals(0, logger.getPendingLogsCount());
+Assert.assertNull(logger.getSender());
+Assert.assertTrue(factory.isLoggerPurged(logger));
+Assert.assertFalse(factory.containsLogger(logger));
+Assert.assertTrue(factory.getClosedLoggers().contains(logger));
+Assert.assertTrue(factory.getPurgedLoggers().contains(logger));
+Assert.assertThrows(IllegalStateException.class, () -> logger.log("STR", Collections.emptyMap()));
+Assert.assertEquals("Expected sender class", "STR", System.getProperty(Config.FLUENT_SENDER_CLASS));
+Assert.assertNotEquals("Unexpected sender instance", originalSender, logger.getSender());
+Assert.assertEquals("Expected log count to be zero", 0, logger.getLogCount());
+Assert.assertFalse(logger.hasPendingLogs());
+Assert.assertTrue(factory.getActiveLoggers().isEmpty());
+Assert.assertFalse(logger.isOpen());
+Assert.assertTrue(logger.isClosed());
+Assert.assertTrue(factory.getLoggerStatus(logger) == LoggerStatus.CLOSED);
+Assert.assertFalse(factory.isLoggerActive(logger));
+Assert.assertTrue(factory.getClosedLoggers().contains(logger));
+Assert.assertEquals("Expected logger name", "STR", logger.getName());
+Assert.assertTrue(logger.getFlushCount() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(null,logger.sender); ===
+0.710 - Assert.assertNull(logger.getSender())
+0.700 - Assert.assertFalse(logger.isOpen())
+0.658 - Assert.assertEquals(0, logger.getPendingLogsCount())
+0.647 - Assert.assertFalse(logger.hasPendingLogs())
+0.623 - Assert.assertTrue(logger.isClosed())
+0.623 - Assert.assertTrue(logger.isClosed())
+0.562 - Assert.assertEquals("Expected logger name", "STR", logger.getName())
+0.532 - Assert.assertNotEquals("Unexpected sender instance", originalSender, logger.getSender())
+0.529 - Assert.assertTrue(logger.getFlushCount() > 0)
+0.526 - Assert.assertEquals("Expected log count to be zero", 0, logger.getLogCount())
+0.525 - ```java
+Assert.assertNotNull(logger)
+0.480 - Assert.assertFalse(factory.containsLogger(logger))
+0.459 - Assert.assertTrue(factory.isLoggerPurged(logger))
+0.453 - Assert.assertFalse(factory.isLoggerActive(logger))
+0.437 - Assert.assertTrue(factory.getClosedLoggers().contains(logger))
+0.437 - Assert.assertTrue(factory.getClosedLoggers().contains(logger))
+0.414 - Assert.assertTrue(factory.getPurgedLoggers().contains(logger))
+0.400 - Assert.assertTrue(factory.getActiveLoggers().isEmpty())
+0.396 - Assert.assertTrue(factory.getLoggerStatus(logger) == LoggerStatus.CLOSED)
+0.350 - Assert.assertEquals("Expected sender class", "STR", System.getProperty(Config.FLUENT_SENDER_CLASS))
+0.339 - Assert.assertThrows(IllegalStateException.class, () -> logger.log("STR", Collections.emptyMap()))
+0.000 - ```

@@ -91,6 +91,10 @@ class Assertion:
         # self.dependencies: List[Dependency] = []
         self.std_lib_dependencies: List[Dependency] = []
 
+        self.variable_count = sum(
+            1 for arg in self.arguments if isinstance(arg, MemberReference)
+        )
+
     def __repr__(self):
         details_str = ", ".join(f"{k}={v}" for k, v in self.details.items())
         return f"Assertion(method_name={self.method_name}, line_number={self.line_number}, {details_str})"
@@ -190,57 +194,3 @@ class Assertion:
             depth = self._calculate_depth(value)
             max_depth = max(max_depth, depth)
         return max_depth
-
-    STD_LIB_TYPES = {
-        "boolean",
-        "byte",
-        "short",
-        "int",
-        "long",
-        "float",
-        "double",
-        "char",
-        "String",
-        "Integer",
-        "Boolean",
-        "Long",
-        "Double",
-        "Float",
-        "Character",
-        "Object",
-        "List",
-        "ArrayList",
-        "Map",
-        "HashMap",
-        "File",
-    }
-
-    def _is_std_lib_type(self, type_name: str) -> bool:
-        return any(type_name.startswith(prefix) for prefix in self.STD_LIB_TYPES)
-
-    def _extract_std_lib_dep(self, expr: Any, symbol_table: dict) -> List[Dependency]:
-        deps = []
-        if isinstance(expr, MemberReference):
-            var_name = expr.member
-            if var_name in symbol_table:
-                type_name = symbol_table[var_name]
-                if self._is_std_lib_type(type_name):
-                    dep = Dependency(
-                        variable_name=var_name,
-                        type_name=type_name,
-                        qualified_name=type_name,
-                    )
-                    deps.append(dep)
-        elif hasattr(expr, "children"):
-            for child in expr.children:
-                if isinstance(child, list):
-                    for sub in child:
-                        deps.extend(self._extract_std_lib_dep(sub, symbol_table))
-                elif child is not None:
-                    deps.extend(self._extract_std_lib_dep(child, symbol_table))
-        return deps
-
-    def collect_std_lib_dep(self, symbol_table: dict):
-        for arg in self.arguments:
-            deps = self._extract_std_lib_dep(arg, symbol_table)
-            self.std_lib_dependencies.extend(deps)

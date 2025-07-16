@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAny {\n@Deprecated\n< RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAnyTest {\n@Test\npublic void testAlterRemoveLinkedType ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . EMBEDDEDLIST , OType . ANY ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nList < ODocument > result = db . query ( new OSQLSynchQuery < ODocument > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(result);\nAssert.assertEquals(2, result.size());\nAssert.assertTrue(result.get(0) instanceof ODocument);\nAssert.assertTrue(result.get(1) instanceof ODocument);\nAssert.assertEquals(\"STR\", result.get(0).field(\"STR\"));\nAssert.assertEquals(\"STR\", result.get(1).field(\"STR\"));\nAssert.assertEquals(OType.EMBEDDEDLIST, classA.getProperty(\"STR\").getType());\nAssert.assertEquals(OType.ANY, classA.getProperty(\"STR\").getLinkedType());\nAssert.assertTrue(classA.getProperty(\"STR\").isEmbedded());\nAssert.assertTrue(classA.getProperty(\"STR\").isMultiValue());\nAssert.assertTrue(classA.getProperty(\"STR\").isNotNull());\nAssert.assertTrue(classA.getProperty(\"STR\").isMandatory());\nAssert.assertTrue(classA.getProperty(\"STR\").isIndexed());\nAssert.assertTrue(classA.getProperty(\"STR\").isOrdered());\nAssert.assertTrue(classA.getProperty(\"STR\").isReadonly());\nAssert.assertEquals(1, classA.properties().size());\nAssert.assertTrue(schema.existsClass(\"STR\"));\nAssert.assertNotNull(schema.getClass(\"STR\"));\nAssert.assertTrue(schema.getClass(\"STR\").existsProperty(\"STR\"));\nAssert.assertEquals(1, schema.getClass(\"STR\").properties().size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.64,
+        0.586,
+        0.478,
+        0.478,
+        0.462,
+        0.462,
+        0.429,
+        0.384,
+        0.349,
+        0.345,
+        0.343,
+        0.314,
+        0.31,
+        0.31,
+        0.306,
+        0.302,
+        0.278,
+        0.27,
+        0.26
+    ],
+    "ground_truth": "Assert.assertNotNull(result);"
+}

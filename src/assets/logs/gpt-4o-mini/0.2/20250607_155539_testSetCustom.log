@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OAlterPropertyStatementExecution {
+    public String getCustom ( final String iName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OAlterPropertyStatementExecutionTest {
+    @Test
+     public void testSetCustom ( ) {
+         String className = "STR" ; 
+         OClass clazz = db . getMetadata ( ) . getSchema ( ) . createClass ( className ) ; 
+         OProperty prop = clazz . createProperty ( "STR" , OType . STRING ) ; 
+         prop . setCustom ( "STR" , "STR" ) ; 
+         OResultSet result = db . command ( "STR" + className + "STR" ) ; 
+         printExecutionPlan ( null , result ) ; 
+         Object currentValue = prop . getCustom ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(currentValue);
+assertEquals("STR", currentValue);
+assertTrue(currentValue instanceof String);
+assertEquals(3, currentValue.length());
+assertFalse(currentValue.isEmpty());
+assertTrue(currentValue.equals("STR"));
+assertTrue(currentValue.equalsIgnoreCase("str"));
+assertNotEquals("DifferentValue", currentValue);
+assertTrue(currentValue.startsWith("S"));
+assertTrue(currentValue.endsWith("R"));
+assertTrue(currentValue.contains("T"));
+assertFalse(currentValue.contains("X"));
+assertTrue(currentValue.matches("[A-Z]+"));
+assertFalse(currentValue.matches("[0-9]+"));
+assertTrue(currentValue.toUpperCase().equals("STR"));
+assertTrue(currentValue.toLowerCase().equals("str"));
+assertEquals("STR", prop.getCustom("STR"));
+assertNotSame("DifferentValue", prop.getCustom("STR"));
+assertTrue(currentValue.hashCode() == "STR".hashCode());
+assertEquals(currentValue, prop.getCustom("STR"));
+assertTrue(currentValue instanceof Object);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(result); ===
+0.643 - ```java
+assertNotNull(currentValue)
+0.517 - assertEquals(3, currentValue.length())
+0.507 - assertNotEquals("DifferentValue", currentValue)
+0.491 - assertEquals("STR", currentValue)
+0.441 - assertTrue(currentValue.endsWith("R"))
+0.429 - assertFalse(currentValue.isEmpty())
+0.426 - assertTrue(currentValue instanceof String)
+0.426 - assertTrue(currentValue.startsWith("S"))
+0.426 - assertTrue(currentValue instanceof Object)
+0.411 - assertTrue(currentValue.toLowerCase().equals("str"))
+0.407 - assertTrue(currentValue.equals("STR"))
+0.407 - assertTrue(currentValue.contains("T"))
+0.406 - assertEquals(currentValue, prop.getCustom("STR"))
+0.405 - assertNotSame("DifferentValue", prop.getCustom("STR"))
+0.384 - assertTrue(currentValue.toUpperCase().equals("STR"))
+0.381 - assertTrue(currentValue.matches("[A-Z]+"))
+0.377 - assertTrue(currentValue.equalsIgnoreCase("str"))
+0.367 - assertFalse(currentValue.contains("X"))
+0.355 - assertEquals("STR", prop.getCustom("STR"))
+0.344 - assertFalse(currentValue.matches("[0-9]+"))
+0.324 - assertTrue(currentValue.hashCode() == "STR".hashCode())
+0.000 - ```

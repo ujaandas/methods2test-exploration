@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStep {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStepTest {\n@Test\npublic void shouldCheckSubclasses ( ) {\nOBasicCommandContext context = new OBasicCommandContext ( ) ;\ncontext . setDatabase ( database ) ;\nOClass parentClass = createClassInstance ( ) ;\nOClass childClass = createChildClassInstance ( parentClass ) ;\nCheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ;\nOResultSet result = step . syncPull ( context , 20 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(20, result.getTotalRecords());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"className\").equals(childClass.getName())));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"parentClassName\").equals(parentClass.getName())));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isSubclass\").equals(true)));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"someProperty\") != null));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"someProperty\").equals(\"invalidValue\")));\nassertEquals(\"ExpectedValue\", result.stream().findFirst().get().getProperty(\"expectedProperty\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"anotherProperty\").equals(\"expectedAnotherValue\")));\nassertEquals(1, result.stream().filter(r -> r.getProperty(\"specificProperty\").equals(\"specificValue\")).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"numericProperty\") > 0));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"dateProperty\") instanceof Date));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"booleanProperty\") instanceof Boolean));\nassertEquals(5, result.stream().filter(r -> r.getProperty(\"category\").equals(\"category1\")).count());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"uniqueIdentifier\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"status\").equals(\"active\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"relatedClass\").equals(\"relatedClassName\")));\nassertEquals(10, result.stream().filter(r -> r.getProperty(\"type\").equals(\"typeA\")).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"level\") >= 1 && r.getProperty(\"level\") <= 5));\n```\n====================\n\n",
+    "scores": [
+        0.725,
+        0.627,
+        0.609,
+        0.563,
+        0.526,
+        0.522,
+        0.521,
+        0.517,
+        0.504,
+        0.5,
+        0.5,
+        0.488,
+        0.481,
+        0.471,
+        0.465,
+        0.459,
+        0.455,
+        0.441,
+        0.437,
+        0.434,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,result.stream().count());"
+}

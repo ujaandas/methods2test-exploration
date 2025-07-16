@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class JmxAttributePoller {\n@Override\npublic Step getNextStep ( ) {\nif ( done || shutdownInd ) {\nreturn null ;\n} Step result = new Step ( ) {\n@Override\npublic void execute ( ) {\ntry {\npollOneObject ( target ) ;\n} catch ( Exception exc ) {\nfailureException = exc ;\n} finally {\ndone = true ;\n} } @Override\npublic boolean isBlocking ( ) {\nreturn true ;\n} } ;\nreturn result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class JmxAttributePollerTest {\n@Test\npublic void testGetStepAfterShutdown ( ) throws Exception {\nthis . poller . shutdown ( ) ;\nJmxAttributePoller . PollOneObjectSchedulerProcess process = this . poller . new PollOneObjectSchedulerProcess ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(process);\nassertFalse(process.isBlocking());\nassertNotNull(process.getTarget());\nassertEquals(\"STR\", process.getTarget());\nassertTrue(process.isDone());\nassertNotNull(process.getFailureException());\nassertFalse(poller.isShutdown());\nassertTrue(poller.isDone());\nassertNull(poller.getNextStep());\nassertNotNull(poller.getFailureException());\nassertTrue(poller.isBlocking());\nassertNotNull(poller.getNextStep());\nassertFalse(poller.isDone());\nassertNotNull(poller.getFailureException());\nassertTrue(poller.isBlocking());\nassertNotNull(poller.getNextStep());\nassertFalse(poller.isDone());\nassertNotNull(poller.getFailureException());\nassertTrue(poller.isBlocking());\nassertNotNull(poller.getNextStep());\nassertFalse(poller.isDone());\nassertNotNull(poller.getFailureException());\nassertTrue(poller.isBlocking());\n====================\n\n",
+    "scores": [
+        0.862,
+        0.824,
+        0.824,
+        0.824,
+        0.806,
+        0.753,
+        0.694,
+        0.691,
+        0.656,
+        0.632,
+        0.632,
+        0.632,
+        0.632,
+        0.606,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.459,
+        0.459,
+        0.459,
+        0.4
+    ],
+    "ground_truth": "assertNull(process.getNextStep());"
+}

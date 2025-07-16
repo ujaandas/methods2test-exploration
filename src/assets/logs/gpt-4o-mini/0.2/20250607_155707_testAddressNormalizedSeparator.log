@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class MacAddress {
+    @Override
+     public String toString ( ) { 
+     final StringBuilder builder = new StringBuilder ( ) ; 
+     for ( int i = 0 ; 
+     i < address . length ; 
+     i ++ ) { 
+     if ( i != 0 ) { 
+     builder . append ( STANDARD_SEPARATOR ) ; 
+     } builder . append ( String . format ( "STR" , address [ i ] ) ) ; 
+     } return builder . toString ( ) ; 
+     }
+}
+
+package fluenda.ParCEFone;
+
+public class MacAddressTest {
+    @Test
+     public void testAddressNormalizedSeparator ( ) {
+         final MacAddress macAddress = new MacAddress ( NORMALIZED_ADDRESS ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("STR1:STR2:STR3:STR4:STR5:STR6", macAddress.toString());
+assertTrue(macAddress.toString().contains("STR"));
+assertFalse(macAddress.toString().isEmpty());
+assertEquals(17, macAddress.toString().length());
+assertTrue(macAddress.toString().startsWith("STR"));
+assertTrue(macAddress.toString().endsWith("STR6"));
+assertTrue(macAddress.toString().indexOf("STR") > -1);
+assertEquals("STR1", macAddress.toString().substring(0, 4));
+assertEquals("STR6", macAddress.toString().substring(15, 19));
+assertNotEquals("STR1:STR2:STR3:STR4:STR5:STR7", macAddress.toString());
+assertNotEquals("STR1:STR2:STR3:STR4:STR5", macAddress.toString());
+assertTrue(macAddress.toString().matches("STR[0-9A-F]{2}(:STR[0-9A-F]{2}){5}"));
+assertEquals(6, macAddress.toString().split(":").length);
+assertTrue(macAddress.toString().contains(":"));
+assertFalse(macAddress.toString().contains(" "));
+assertTrue(macAddress.toString().matches("STR[0-9A-F]{2}(:STR[0-9A-F]{2}){5}"));
+assertNotNull(macAddress.toString());
+assertTrue(macAddress.toString().length() > 0);
+assertEquals("STR1:STR2:STR3:STR4:STR5:STR6", macAddress.toString());
+assertTrue(macAddress.toString().equalsIgnoreCase(macAddress.toString()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(NORMALIZED_ADDRESS,macAddress.toString()); ===
+0.713 - assertEquals(17, macAddress.toString().length())
+0.689 - assertNotNull(macAddress.toString())
+0.672 - assertNotEquals("STR1:STR2:STR3:STR4:STR5", macAddress.toString())
+0.667 - assertEquals("STR1", macAddress.toString().substring(0, 4))
+0.661 - assertEquals("STR1:STR2:STR3:STR4:STR5:STR6", macAddress.toString())
+0.661 - assertEquals(6, macAddress.toString().split(":").length)
+0.655 - assertEquals("STR6", macAddress.toString().substring(15, 19))
+0.653 - assertFalse(macAddress.toString().isEmpty())
+0.645 - assertNotEquals("STR1:STR2:STR3:STR4:STR5:STR7", macAddress.toString())
+0.634 - assertFalse(macAddress.toString().contains(" "))
+0.620 - ```java
+assertEquals("STR1:STR2:STR3:STR4:STR5:STR6", macAddress.toString())
+0.612 - assertTrue(macAddress.toString().length() > 0)
+0.594 - assertTrue(macAddress.toString().contains(":"))
+0.583 - assertTrue(macAddress.toString().contains("STR"))
+0.577 - assertTrue(macAddress.toString().endsWith("STR6"))
+0.571 - assertTrue(macAddress.toString().startsWith("STR"))
+0.571 - assertTrue(macAddress.toString().indexOf("STR") > -1)
+0.535 - assertTrue(macAddress.toString().equalsIgnoreCase(macAddress.toString()))
+0.451 - assertTrue(macAddress.toString().matches("STR[0-9A-F]{2}(:STR[0-9A-F]{2}){5}"))
+0.451 - assertTrue(macAddress.toString().matches("STR[0-9A-F]{2}(:STR[0-9A-F]{2}){5}"))
+0.000 - ```

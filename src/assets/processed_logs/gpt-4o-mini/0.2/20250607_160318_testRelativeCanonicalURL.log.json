@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testRelativeCanonicalURL ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . canonicalMetadataParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertTrue(fields.size() > 0);\nassertFalse(fields.isEmpty());\nassertEquals(1, fields.size());\nassertTrue(fields.containsValue(\"STR\"));\nassertFalse(fields.containsValue(\"INVALID\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"DIFFERENT\", fields.get(\"STR\"));\nassertTrue(fields.keySet().contains(\"STR\"));\nassertFalse(fields.keySet().contains(\"INVALID_KEY\"));\nassertTrue(fields.values().stream().anyMatch(value -> value.equals(\"STR\")));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotSame(\"DIFFERENT\", fields.get(\"STR\"));\nassertTrue(fields.toString().contains(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertTrue(fields.containsKey(\"STR\"));\nassertFalse(fields.containsKey(\"NON_EXISTENT_KEY\"));\nassertEquals(1, fields.size());\nassertTrue(fields.values().stream().allMatch(value -> value.equals(\"STR\")));\n```\n====================\n\n",
+    "scores": [
+        0.925,
+        0.925,
+        0.925,
+        0.925,
+        0.787,
+        0.694,
+        0.694,
+        0.69,
+        0.6,
+        0.6,
+        0.585,
+        0.583,
+        0.581,
+        0.568,
+        0.543,
+        0.532,
+        0.529,
+        0.505,
+        0.444,
+        0.328,
+        0.328,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

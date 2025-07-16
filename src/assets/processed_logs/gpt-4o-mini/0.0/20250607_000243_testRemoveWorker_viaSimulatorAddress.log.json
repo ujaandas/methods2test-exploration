@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@Test\npublic void testRemoveWorker_viaSimulatorAddress ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nList < WorkerParameters > parametersList = newWorkerParametersList ( agentAddress , 5 ) ;\nregistry . addWorkers ( parametersList ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(5, registry.workerCount());\nassertTrue(registry.getWorkers().contains(agentAddress));\nassertFalse(registry.getWorkers().isEmpty());\nassertNotNull(registry.getWorkers());\nassertTrue(registry.getWorkers().size() > 0);\nassertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count());\nassertTrue(parametersList.stream().allMatch(p -> registry.getWorkers().contains(p)));\nassertFalse(parametersList.isEmpty());\nassertEquals(parametersList.size(), registry.getWorkers().size());\nassertTrue(registry.getWorkers().stream().anyMatch(w -> w.getAddress().equals(agentAddress)));\nassertNotEquals(0, registry.workerCount());\nassertTrue(registry.getWorkers().stream().allMatch(w -> w instanceof WorkerParameters));\nassertEquals(parametersList, registry.getWorkers());\nassertSame(parametersList.get(0), registry.getWorkers().get(0));\nassertNotSame(parametersList.get(0), new WorkerParameters(agentAddress));\nassertTrue(registry.getWorkers().stream().map(WorkerParameters::getAddress).collect(Collectors.toSet()).contains(agentAddress));\nassertEquals(parametersList.size(), registry.getWorkers().size());\nassertTrue(registry.getWorkers().stream().allMatch(w -> w.getParameters().equals(parametersList.get(0).getParameters())));\nassertFalse(registry.getWorkers().stream().noneMatch(w -> w.getAddress().equals(agentAddress)));\nassertEquals(5, registry.getWorkers().stream().filter(w -> w.getAddress().equals(agentAddress)).count());\nassertTrue(registry.getWorkers().stream().anyMatch(w -> w.getParameters().equals(parametersList.get(0))));\nassertNotNull(registry.getWorkers().get(0).getParameters());\n```\n====================\n\n",
+    "scores": [
+        0.937,
+        0.905,
+        0.705,
+        0.703,
+        0.683,
+        0.625,
+        0.608,
+        0.608,
+        0.596,
+        0.56,
+        0.557,
+        0.518,
+        0.518,
+        0.507,
+        0.5,
+        0.458,
+        0.419,
+        0.413,
+        0.407,
+        0.383,
+        0.344,
+        0.339,
+        0.0
+    ],
+    "ground_truth": "assertEquals(5,registry.workerCount());"
+}

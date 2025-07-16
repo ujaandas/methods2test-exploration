@@ -1,0 +1,96 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparer {
+    public ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException { 
+    ObjectQueryInfo result ; 
+    String onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ; 
+    if ( onamePattern != null ) { 
+    Map < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ; 
+    if ( attributeSetters . size ( ) > 0 ) { 
+    String onameString ; 
+    if ( obj instanceof MBeanLocationParameterSource ) { 
+    onameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ; 
+    } else { 
+    onameString = onamePattern ; 
+    } ObjectName oname = new ObjectName ( onameString ) ; 
+    result = new ObjectQueryInfo ( obj , oname , attributeSetters ) ; 
+    } else { 
+    this . logNoAttributeThrottle . warn ( log , "STR" , onamePattern ) ; 
+    result = null ; 
+    } } else { 
+    log . warn ( "STR" ) ; 
+    result = null ; 
+    } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparerTest {
+    @Test
+     public void testPrepareObjectNoSetters ( ) throws Exception {
+         this . initPreparer ( ) ; 
+         ObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+assertEquals(null, result);
+assertNotNull(result);
+assertTrue(result instanceof ObjectQueryInfo);
+assertEquals(this.testTarget003, result.getObject());
+assertEquals(0, result.getAttributeSetters().size());
+assertNotNull(result.getObjectName());
+assertEquals("expectedObjectNamePattern", result.getObjectName().getCanonicalName());
+assertTrue(result.getAttributeSetters().isEmpty());
+assertFalse(result.getAttributeSetters().containsKey("someAttribute"));
+assertEquals("expectedObjectNamePattern", MBeanAnnotationUtil.getLocationONamePattern(this.testTarget003));
+assertTrue(this.logNoAttributeThrottle.isWarnEnabled());
+assertTrue(log.isWarnEnabled());
+assertEquals("STR", log.getLastWarnMessage());
+assertEquals("STR", this.logNoAttributeThrottle.getLastWarnMessage());
+assertNotNull(this.preparer);
+assertNotNull(this.testTarget003);
+assertTrue(this.preparer instanceof ObjectQueryPreparer);
+assertTrue(this.testTarget003 instanceof MBeanLocationParameterSource);
+assertEquals(0, this.preparer.getAttributes(this.testTarget003).size());
+assertTrue(this.preparer.prepareObjectQuery(this.testTarget003) instanceof ObjectQueryInfo);
+assertNotSame(result, new ObjectQueryInfo(this.testTarget003, new ObjectName("differentObjectName"), new HashMap<>()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+0.923 - assertNotNull(result)
+0.818 - ```java
+assertNull(result)
+0.744 - assertEquals(null, result)
+0.655 - assertNotNull(result.getObjectName())
+0.609 - assertNotNull(this.preparer)
+0.588 - assertNotNull(this.testTarget003)
+0.492 - assertTrue(result instanceof ObjectQueryInfo)
+0.464 - assertEquals(this.testTarget003, result.getObject())
+0.464 - assertEquals(0, result.getAttributeSetters().size())
+0.449 - assertTrue(log.isWarnEnabled())
+0.441 - assertTrue(result.getAttributeSetters().isEmpty())
+0.419 - assertEquals("STR", log.getLastWarnMessage())
+0.361 - assertTrue(this.preparer instanceof ObjectQueryPreparer)
+0.341 - assertFalse(result.getAttributeSetters().containsKey("someAttribute"))
+0.329 - assertTrue(this.logNoAttributeThrottle.isWarnEnabled())
+0.318 - assertEquals(0, this.preparer.getAttributes(this.testTarget003).size())
+0.302 - assertEquals("STR", this.logNoAttributeThrottle.getLastWarnMessage())
+0.279 - assertTrue(this.testTarget003 instanceof MBeanLocationParameterSource)
+0.277 - assertEquals("expectedObjectNamePattern", result.getObjectName().getCanonicalName())
+0.243 - assertTrue(this.preparer.prepareObjectQuery(this.testTarget003) instanceof ObjectQueryInfo)
+0.231 - assertNotSame(result, new ObjectQueryInfo(this.testTarget003, new ObjectName("differentObjectName"), new HashMap<>()))
+0.211 - assertEquals("expectedObjectNamePattern", MBeanAnnotationUtil.getLocationONamePattern(this.testTarget003))
+0.000 - ```

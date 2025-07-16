@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\npublic < T extends UriResponder > void setNotImplementedHandler ( Class < T > handler ) {\nrouter . setNotImplemented ( handler ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testHandlerSetters ( ) throws Exception {\nfinal UriResponder notFoundHandler = new GeneralHandler ( ) {\n} ;\nfinal UriResponder notImplementedHandler = new GeneralHandler ( ) {\n} ;\nTestRouter router = new TestRouter ( ) ;\nRouterNanoHTTPD routerNanoHttpd = new RouterNanoHTTPD ( 9999 ) ;\nField routerField = RouterNanoHTTPD . class . getDeclaredField ( \"STR\" ) ;\nrouterField . setAccessible ( true ) ;\nrouterField . set ( routerNanoHttpd , router ) ;\nrouterNanoHttpd . setNotFoundHandler ( notFoundHandler . getClass ( ) ) ;\nrouterNanoHttpd . setNotImplementedHandler ( notImplementedHandler . getClass ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(routerNanoHttpd.getNotFoundHandler());\nassertNotNull(routerNanoHttpd.getNotImplementedHandler());\nassertEquals(notFoundHandler.getClass(), routerNanoHttpd.getNotFoundHandler());\nassertEquals(notImplementedHandler.getClass(), routerNanoHttpd.getNotImplementedHandler());\nassertTrue(routerNanoHttpd.getNotFoundHandler() instanceof GeneralHandler);\nassertTrue(routerNanoHttpd.getNotImplementedHandler() instanceof GeneralHandler);\nassertSame(notFoundHandler.getClass(), routerNanoHttpd.getNotFoundHandler());\nassertSame(notImplementedHandler.getClass(), routerNanoHttpd.getNotImplementedHandler());\nassertNotEquals(notFoundHandler.getClass(), notImplementedHandler.getClass());\nassertTrue(routerNanoHttpd.getNotFoundHandler().getClass().isAssignableFrom(GeneralHandler.class));\nassertTrue(routerNanoHttpd.getNotImplementedHandler().getClass().isAssignableFrom(GeneralHandler.class));\nassertFalse(routerNanoHttpd.getNotFoundHandler().getClass().isAssignableFrom(SomeOtherHandler.class));\nassertFalse(routerNanoHttpd.getNotImplementedHandler().getClass().isAssignableFrom(SomeOtherHandler.class));\nassertEquals(\"Expected handler class for not found\", notFoundHandler.getClass(), routerNanoHttpd.getNotFoundHandler());\nassertEquals(\"Expected handler class for not implemented\", notImplementedHandler.getClass(), routerNanoHttpd.getNotImplementedHandler());\nassertNotSame(notFoundHandler, routerNanoHttpd.getNotFoundHandler());\nassertNotSame(notImplementedHandler, routerNanoHttpd.getNotImplementedHandler());\nassertTrue(routerNanoHttpd.getNotFoundHandler() instanceof UriResponder);\nassertTrue(routerNanoHttpd.getNotImplementedHandler() instanceof UriResponder);\nassertNotNull(routerNanoHttpd.getRouter());\nassertTrue(routerNanoHttpd.getRouter() instanceof TestRouter);\n```\n====================\n\n",
+    "scores": [
+        0.855,
+        0.806,
+        0.797,
+        0.726,
+        0.693,
+        0.681,
+        0.671,
+        0.627,
+        0.602,
+        0.589,
+        0.583,
+        0.558,
+        0.558,
+        0.514,
+        0.473,
+        0.466,
+        0.435,
+        0.409,
+        0.394,
+        0.389,
+        0.384,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(notFoundHandler.getClass(),router.notFoundHandlerClass);"
+}

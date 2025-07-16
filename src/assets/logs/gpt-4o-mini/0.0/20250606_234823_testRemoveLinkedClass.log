@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class AlterProperty {
+    public OClass getLinkedClass ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class AlterPropertyTest {
+    @Test
+     public void testRemoveLinkedClass ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OClass classLinked = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . LINK , classLinked ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.LINK, prop.getType());
+Assert.assertEquals(classLinked, prop.getLinkedClass());
+Assert.assertTrue(classA.getProperties().contains(prop));
+Assert.assertEquals(1, classA.getProperties().size());
+Assert.assertEquals(0, classLinked.getProperties().size());
+Assert.assertTrue(schema.getClasses().contains(classA));
+Assert.assertTrue(schema.getClasses().contains(classLinked));
+Assert.assertEquals("STR", classA.getName());
+Assert.assertEquals("STR", classLinked.getName());
+Assert.assertNotNull(schema.getClass("STR"));
+Assert.assertNotNull(schema.getClass("STR"));
+Assert.assertTrue(schema.getClass("STR").isSubClassOf(classA));
+Assert.assertFalse(schema.getClass("STR").isSubClassOf(classLinked));
+Assert.assertEquals(1, schema.getClasses().size());
+Assert.assertTrue(schema.getClasses().stream().anyMatch(c -> c.getName().equals("STR")));
+Assert.assertEquals(0, classA.getSuperClasses().size());
+Assert.assertEquals(0, classLinked.getSuperClasses().size());
+Assert.assertTrue(classA.getProperties().stream().anyMatch(p -> p.getName().equals("STR")));
+Assert.assertEquals(classLinked, prop.getLinkedClass());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(prop.getLinkedClass()); ===
+0.747 - Assert.assertEquals(classLinked, prop.getLinkedClass())
+0.747 - Assert.assertEquals(classLinked, prop.getLinkedClass())
+0.712 - Assert.assertNotNull(schema.getClass("STR"))
+0.712 - Assert.assertNotNull(schema.getClass("STR"))
+0.603 - ```java
+Assert.assertNotNull(prop)
+0.600 - Assert.assertEquals("STR", prop.getName())
+0.538 - Assert.assertEquals(1, schema.getClasses().size())
+0.530 - Assert.assertEquals(0, classA.getSuperClasses().size())
+0.523 - Assert.assertEquals(0, classLinked.getSuperClasses().size())
+0.507 - Assert.assertEquals(OType.LINK, prop.getType())
+0.494 - Assert.assertEquals("STR", classLinked.getName())
+0.476 - Assert.assertTrue(schema.getClasses().contains(classA))
+0.472 - Assert.assertEquals("STR", classA.getName())
+0.469 - Assert.assertEquals(1, classA.getProperties().size())
+0.449 - Assert.assertTrue(schema.getClasses().contains(classLinked))
+0.442 - Assert.assertEquals(0, classLinked.getProperties().size())
+0.440 - Assert.assertTrue(schema.getClass("STR").isSubClassOf(classA))
+0.412 - Assert.assertFalse(schema.getClass("STR").isSubClassOf(classLinked))
+0.356 - Assert.assertTrue(classA.getProperties().stream().anyMatch(p -> p.getName().equals("STR")))
+0.353 - Assert.assertTrue(classA.getProperties().contains(prop))
+0.348 - Assert.assertTrue(schema.getClasses().stream().anyMatch(c -> c.getName().equals("STR")))
+0.000 - ```

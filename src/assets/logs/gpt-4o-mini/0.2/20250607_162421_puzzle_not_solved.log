@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class Puzzle {
+    public boolean isSolved ( ) { 
+    return getDistanceToGoal ( ) == 0 ; 
+    }
+}
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class PuzzleTest {
+    @Test
+     public void puzzle_not_solved ( ) {
+         int [ ] cells = getSolution ( ) ; 
+         cells = swap ( cells , 3 , 4 ) ; 
+         Puzzle p = new Puzzle ( cells ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(p.isSolved());
+assertEquals(1, p.getDistanceToGoal());
+assertTrue(p.getAvailableMoves().length > 0);
+assertNotNull(p.getCurrentState());
+assertEquals(5, p.getCurrentCellValue(3));
+assertEquals(2, p.getCurrentCellValue(4));
+assertTrue(p.isMoveValid(3, 4));
+assertFalse(p.isMoveValid(3, 5));
+assertEquals(4, p.getNumberOfCells());
+assertArrayEquals(new int[]{1, 2, 3, 4, 5}, p.getCells());
+assertTrue(p.hasSolution());
+assertFalse(p.isFinalState());
+assertEquals(2, p.getDistanceToGoal());
+assertNotEquals(p.getCurrentState(), p.getGoalState());
+assertTrue(p.isMovePossible(3));
+assertFalse(p.isMovePossible(5));
+assertEquals(3, p.getCellIndex(5));
+assertTrue(p.isCellEmpty(2));
+assertFalse(p.isCellEmpty(3));
+assertEquals(0, p.getEmptyCellIndex());
+assertTrue(p.isPuzzleInProgress());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(p.isSolved()); ===
+0.862 - ```java
+assertFalse(p.isSolved())
+0.821 - assertFalse(p.isMoveValid(3, 5))
+0.778 - assertFalse(p.isFinalState())
+0.772 - assertFalse(p.isMovePossible(5))
+0.741 - assertFalse(p.isCellEmpty(3))
+0.691 - assertTrue(p.isMoveValid(3, 4))
+0.654 - assertTrue(p.hasSolution())
+0.643 - assertTrue(p.isMovePossible(3))
+0.613 - assertEquals(1, p.getDistanceToGoal())
+0.613 - assertEquals(2, p.getDistanceToGoal())
+0.604 - assertTrue(p.isCellEmpty(2))
+0.586 - assertEquals(3, p.getCellIndex(5))
+0.576 - assertTrue(p.isPuzzleInProgress())
+0.548 - assertEquals(0, p.getEmptyCellIndex())
+0.525 - assertEquals(4, p.getNumberOfCells())
+0.508 - assertNotNull(p.getCurrentState())
+0.507 - assertTrue(p.getAvailableMoves().length > 0)
+0.487 - assertNotEquals(p.getCurrentState(), p.getGoalState())
+0.421 - assertArrayEquals(new int[]{1, 2, 3, 4, 5}, p.getCells())
+0.400 - assertEquals(5, p.getCurrentCellValue(3))
+0.400 - assertEquals(2, p.getCurrentCellValue(4))
+0.000 - ```

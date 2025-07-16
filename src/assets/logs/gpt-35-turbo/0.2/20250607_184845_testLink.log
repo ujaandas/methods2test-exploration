@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public Set < ORecord > getNewRecords ( ) { 
+    return getReal ( ) . newRecords ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLink ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         doc . field ( "STR" , doc2 ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(manager);
+2. assertNotNull(manager.getNewRecords());
+3. assertTrue(manager.getNewRecords().isEmpty());
+4. doc2.field("INT", 123);
+5. manager.getNewRecords().add(doc2);
+6. assertFalse(manager.getNewRecords().isEmpty());
+7. assertTrue(manager.getNewRecords().contains(doc2));
+8. assertEquals(1, manager.getNewRecords().size());
+9. doc2.field("BOOL", true);
+10. assertTrue(manager.getNewRecords().contains(doc2));
+11. assertFalse(manager.getNewRecords().isEmpty());
+12. doc2.removeField("STR");
+13. assertFalse(manager.getNewRecords().contains(doc2));
+14. assertEquals(0, manager.getNewRecords().size());
+15. doc2.field("FLOAT", 3.14f);
+16. assertTrue(manager.getNewRecords().contains(doc2));
+17. assertEquals(1, manager.getNewRecords().size());
+18. doc2.removeField("FLOAT");
+19. assertFalse(manager.getNewRecords().contains(doc2));
+20. assertTrue(manager.getNewRecords().isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,manager.getNewRecords().size()); ===
+0.957 - 8. assertEquals(1, manager.getNewRecords().size())
+0.947 - 14. assertEquals(0, manager.getNewRecords().size())
+0.947 - 17. assertEquals(1, manager.getNewRecords().size())
+0.809 - 6. assertFalse(manager.getNewRecords().isEmpty())
+0.800 - 11. assertFalse(manager.getNewRecords().isEmpty())
+0.774 - 3. assertTrue(manager.getNewRecords().isEmpty())
+0.767 - 2. assertNotNull(manager.getNewRecords())
+0.766 - 20. assertTrue(manager.getNewRecords().isEmpty())
+0.760 - 13. assertFalse(manager.getNewRecords().contains(doc2))
+0.760 - 19. assertFalse(manager.getNewRecords().contains(doc2))
+0.735 - 7. assertTrue(manager.getNewRecords().contains(doc2))
+0.727 - 10. assertTrue(manager.getNewRecords().contains(doc2))
+0.727 - 16. assertTrue(manager.getNewRecords().contains(doc2))
+0.642 - 5. manager.getNewRecords().add(doc2)
+0.410 - Assertions:
+
+1. assertNotNull(manager)
+0.162 - 15. doc2.field("FLOAT", 3.14f)
+0.145 - 4. doc2.field("INT", 123)
+0.141 - 9. doc2.field("BOOL", true)
+0.139 - 12. doc2.removeField("STR")
+0.108 - 18. doc2.removeField("FLOAT")

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, registry.workerCount());
+assertNotNull(registry.getWorker("worker1"));
+assertNotNull(registry.getWorker("worker2"));
+assertNotNull(registry.getWorker("worker3"));
+assertNotNull(registry.getWorker("worker4"));
+assertEquals(4, registry.getWorkers("STR").size());
+assertEquals(0, registry.getWorkers("UNKNOWN").size());
+assertTrue(registry.containsWorker("worker1"));
+assertTrue(registry.containsWorker("worker2"));
+assertTrue(registry.containsWorker("worker3"));
+assertTrue(registry.containsWorker("worker4"));
+assertFalse(registry.containsWorker("worker5"));
+assertEquals(2, registry.getAgents().size());
+assertEquals(4, registry.getAllWorkers().size());
+registry.removeWorker("worker1");
+assertEquals(3, registry.workerCount());
+assertFalse(registry.containsWorker("worker1"));
+assertThrows(IllegalArgumentException.class, () -> registry.addWorker(null));
+assertThrows(IllegalArgumentException.class, () -> registry.addWorkers(null));
+assertThrows(IllegalArgumentException.class, () -> registry.removeWorker(null));
+registry.clear();
+assertEquals(0, registry.workerCount());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,registry.workerCount()); ===
+1.000 - assertEquals(4, registry.workerCount())
+0.974 - assertEquals(3, registry.workerCount())
+0.974 - assertEquals(0, registry.workerCount())
+0.753 - assertEquals(4, registry.getAllWorkers().size())
+0.736 - assertEquals(4, registry.getWorkers("STR").size())
+0.716 - assertEquals(2, registry.getAgents().size())
+0.681 - assertEquals(0, registry.getWorkers("UNKNOWN").size())
+0.635 - assertFalse(registry.containsWorker("worker5"))
+0.635 - assertFalse(registry.containsWorker("worker1"))
+0.634 - assertNotNull(registry.getWorker("worker1"))
+0.634 - assertNotNull(registry.getWorker("worker2"))
+0.634 - assertNotNull(registry.getWorker("worker3"))
+0.634 - assertNotNull(registry.getWorker("worker4"))
+0.595 - assertTrue(registry.containsWorker("worker1"))
+0.595 - assertTrue(registry.containsWorker("worker2"))
+0.595 - assertTrue(registry.containsWorker("worker3"))
+0.595 - assertTrue(registry.containsWorker("worker4"))
+0.486 - assertThrows(IllegalArgumentException.class, () -> registry.addWorker(null))
+0.482 - assertThrows(IllegalArgumentException.class, () -> registry.addWorkers(null))
+0.474 - assertThrows(IllegalArgumentException.class, () -> registry.removeWorker(null))
+0.457 - registry.removeWorker("worker1")
+0.444 - registry.clear()

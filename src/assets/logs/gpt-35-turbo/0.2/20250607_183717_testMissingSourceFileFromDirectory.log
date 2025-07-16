@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoader {
+    @Override
+     public Source load ( final String sourceFile ) throws IOException { 
+     InputStream stream = locate ( sourceFile ) ; 
+     if ( stream != null ) { 
+     try ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ; 
+     InputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) { 
+     String source = IOUtil . toString ( reader ) ; 
+     return new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ; 
+     } catch ( NoSuchAlgorithmException ex ) { 
+     throw new IOException ( "STR" , ex ) ; 
+     } } else { 
+     return null ; 
+     } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoaderTest {
+    @Test
+     public void testMissingSourceFileFromDirectory ( ) throws Exception {
+         DirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNull(sourceLoader.load("missingFile.java"));
+assertNull(sourceLoader.load("nonexistentFile.java"));
+assertNull(sourceLoader.load("invalidFile.txt"));
+assertNull(sourceLoader.load("emptyFile.java"));
+assertNull(sourceLoader.load("fileWithoutExtension"));
+assertNull(sourceLoader.load("fileWithInvalidExtension.pdf"));
+assertNull(sourceLoader.load("fileWithNoContent.java"));
+assertNull(sourceLoader.load("fileWithSpecialCharacters.java"));
+assertNull(sourceLoader.load("fileWithSpaces in name.java"));
+assertNull(sourceLoader.load("fileWithTabs\tin name.java"));
+assertNull(sourceLoader.load("fileWithNewLines\nin name.java"));
+assertNull(sourceLoader.load("fileWithLeadingWhitespace.java"));
+assertNull(sourceLoader.load("fileWithTrailingWhitespace.java"));
+assertNull(sourceLoader.load("fileWithUnicodeCharacters_漢字.java"));
+assertNull(sourceLoader.load("fileWithLongNameThatExceedsLimit.java"));
+assertNull(sourceLoader.load("fileWithRestrictedCharacters$&*.java"));
+assertNull(sourceLoader.load("fileWithRestrictedPath/characters.java"));
+assertNull(sourceLoader.load("fileWithRestrictedPath\\characters.java"));
+assertNull(sourceLoader.load("fileWithRestrictedPath:characters.java"));
+assertNull(sourceLoader.load("fileWithRestrictedPath/characters:and:more.java"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(sourceLoader.load("STR")); ===
+0.795 - assertNull(sourceLoader.load("emptyFile.java"))
+0.786 - assertNull(sourceLoader.load("invalidFile.txt"))
+0.776 - assertNull(sourceLoader.load("missingFile.java"))
+0.742 - assertNull(sourceLoader.load("nonexistentFile.java"))
+0.742 - assertNull(sourceLoader.load("fileWithoutExtension"))
+0.725 - assertNull(sourceLoader.load("fileWithNoContent.java"))
+0.723 - assertNull(sourceLoader.load("fileWithSpaces in name.java"))
+0.723 - assertNull(sourceLoader.load("fileWithTabs\tin name.java"))
+0.687 - assertNull(sourceLoader.load("fileWithSpecialCharacters.java"))
+0.680 - assertNull(sourceLoader.load("fileWithInvalidExtension.pdf"))
+0.680 - assertNull(sourceLoader.load("fileWithTrailingWhitespace.java"))
+0.673 - assertNull(sourceLoader.load("fileWithNewLines\nin name.java"))
+0.667 - assertNull(sourceLoader.load("fileWithLeadingWhitespace.java"))
+0.648 - assertNull(sourceLoader.load("fileWithRestrictedCharacters$&*.java"))
+0.647 - assertNull(sourceLoader.load("fileWithUnicodeCharacters_漢字.java"))
+0.642 - assertNull(sourceLoader.load("fileWithLongNameThatExceedsLimit.java"))
+0.636 - assertNull(sourceLoader.load("fileWithRestrictedPath/characters.java"))
+0.636 - assertNull(sourceLoader.load("fileWithRestrictedPath:characters.java"))
+0.630 - assertNull(sourceLoader.load("fileWithRestrictedPath\\characters.java"))
+0.586 - assertNull(sourceLoader.load("fileWithRestrictedPath/characters:and:more.java"))

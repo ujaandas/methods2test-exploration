@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected static String [ ] parseNetworks ( String dockerResult ) { 
+    if ( ! dockerResult . matches ( "STR" ) ) { 
+    return null ; 
+    } String networkMap = dockerResult . substring ( dockerResult . indexOf ( "STR" ) + 1 , dockerResult . indexOf ( "STR" ) ) ; 
+    String [ ] networkHex = networkMap . split ( "STR" ) ; 
+    String [ ] networks = new String [ networkHex . length ] ; 
+    for ( int i = 0 ; 
+    i < networkHex . length ; 
+    i ++ ) { 
+    networks [ i ] = networkHex [ i ] . split ( "STR" ) [ 0 ] ; 
+    } return networks ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testParseNetworks ( ) {
+         String [ ] networkArray = new String [ ] { 
+     "STR" } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNull(DevUtil.parseNetworks(null));
+Assert.assertNull(DevUtil.parseNetworks(""));
+Assert.assertNull(DevUtil.parseNetworks("ABC"));
+Assert.assertNull(DevUtil.parseNetworks("STR123STR"));
+Assert.assertArrayEquals(new String[]{}, DevUtil.parseNetworks("STR"));
+Assert.assertArrayEquals(new String[]{"123"}, DevUtil.parseNetworks("STR123STR"));
+Assert.assertArrayEquals(new String[]{"123", "456"}, DevUtil.parseNetworks("STR123STR456STR"));
+Assert.assertArrayEquals(new String[]{"abc", "def", "ghi"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"));
+Assert.assertEquals(1, DevUtil.parseNetworks("STR").length);
+Assert.assertEquals(2, DevUtil.parseNetworks("STR123STR456STR").length);
+Assert.assertEquals(3, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR").length);
+Assert.assertNotEquals(null, DevUtil.parseNetworks("STR"));
+Assert.assertNotEquals(new String[]{}, DevUtil.parseNetworks("STR123STR"));
+Assert.assertNotEquals(new String[]{"123"}, DevUtil.parseNetworks("STR123STR456STR"));
+Assert.assertNotEquals(new String[]{"abc", "def"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"));
+Assert.assertNotEquals(0, DevUtil.parseNetworks("STR").length);
+Assert.assertNotEquals(1, DevUtil.parseNetworks("STR123STR456STR").length);
+Assert.assertNotEquals(2, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR").length);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(networkArray,DevUtil.parseNetworks("STR")); ===
+0.860 - Assert.assertArrayEquals(new String[]{}, DevUtil.parseNetworks("STR"))
+0.800 - Assert.assertNotEquals(null, DevUtil.parseNetworks("STR"))
+0.788 - Assert.assertArrayEquals(new String[]{"123"}, DevUtil.parseNetworks("STR123STR"))
+0.775 - Assert.assertEquals(1, DevUtil.parseNetworks("STR").length)
+0.754 - Assert.assertNotEquals(0, DevUtil.parseNetworks("STR").length)
+0.752 - Assert.assertNotEquals(new String[]{}, DevUtil.parseNetworks("STR123STR"))
+0.722 - Assert.assertArrayEquals(new String[]{"123", "456"}, DevUtil.parseNetworks("STR123STR456STR"))
+0.722 - Assert.assertNull(DevUtil.parseNetworks(""))
+0.717 - Assert.assertNull(DevUtil.parseNetworks("STR123STR"))
+0.700 - Assert.assertNull(DevUtil.parseNetworks("ABC"))
+0.699 - Assert.assertEquals(2, DevUtil.parseNetworks("STR123STR456STR").length)
+0.691 - Assert.assertNotEquals(new String[]{"123"}, DevUtil.parseNetworks("STR123STR456STR"))
+0.683 - Assert.assertNotEquals(1, DevUtil.parseNetworks("STR123STR456STR").length)
+0.679 - Assert.assertArrayEquals(new String[]{"abc", "def", "ghi"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"))
+0.667 - Assert.assertNull(DevUtil.parseNetworks(null))
+0.667 - Assert.assertEquals(3, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR").length)
+0.652 - Assert.assertNotEquals(2, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR").length)
+0.649 - Assert.assertNotEquals(new String[]{"abc", "def"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"))

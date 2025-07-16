@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilter {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class MaxDepthFilterTest {\n@Test\npublic void testCustomDepth ( ) throws MalformedURLException {\nURLFilter filter = createFilter ( \"STR\" , 1 ) ;\nURL url = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( MetadataTransfer . maxDepthKeyName , \"STR\" ) ;\nmetadata . setValue ( MetadataTransfer . depthKeyName , \"STR\" ) ;\nString filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(filterResult);\nassertEquals(\"Expected result for depth 1\", filterResult);\nassertTrue(filterResult.contains(\"expectedSubstring\"));\nassertFalse(filterResult.isEmpty());\nassertEquals(\"Expected URL format\", new URL(filterResult).toExternalForm(), filterResult);\nassertTrue(filterResult.startsWith(\"http://\"));\nassertTrue(filterResult.endsWith(\".com\"));\nassertNotEquals(\"Unexpected result\", \"unwantedResult\", filterResult);\nassertTrue(filterResult.length() > 0);\nassertFalse(filterResult.equals(\"invalidResult\"));\nassertTrue(filterResult.matches(\"http[s]?://.*\"));\nassertNull(filterResult, \"Expected null for exceeded depth\");\nassertTrue(filterResult.contains(\"validPath\"));\nassertFalse(filterResult.contains(\"invalidPath\"));\nassertEquals(\"Expected depth value\", \"1\", metadata.getValue(MetadataTransfer.depthKeyName));\nassertTrue(filterResult.equals(\"expectedResultForDepth1\"));\nassertFalse(filterResult.equals(\"anotherUnexpectedResult\"));\nassertNotSame(\"Should not be the same instance\", filterResult, \"differentString\");\nassertTrue(filterResult.indexOf(\"specificKeyword\") != -1);\nassertEquals(\"Expected metadata value\", \"STR\", metadata.getValue(MetadataTransfer.maxDepthKeyName));\nassertTrue(filterResult.endsWith(\"/expectedEnding\"));\n```\n====================\n\n",
+    "scores": [
+        0.707,
+        0.702,
+        0.607,
+        0.561,
+        0.537,
+        0.512,
+        0.479,
+        0.479,
+        0.477,
+        0.452,
+        0.452,
+        0.438,
+        0.434,
+        0.431,
+        0.424,
+        0.416,
+        0.413,
+        0.412,
+        0.4,
+        0.388,
+        0.366,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(url.toExternalForm(),filterResult);"
+}

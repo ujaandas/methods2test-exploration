@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testBooleanParams ( ) {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( \"STR\" , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(1, qResult.size());\nassertTrue(qResult.get(0).field(\"someField\").equals(\"expectedValue\"));\nassertTrue(qResult.get(0).field(\"booleanField\") instanceof Boolean);\nassertTrue((Boolean) qResult.get(0).field(\"booleanField\"));\nassertFalse((Boolean) qResult.get(0).field(\"anotherBooleanField\"));\nassertEquals(\"someString\", qResult.get(0).field(\"stringField\"));\nassertEquals(123, qResult.get(0).field(\"integerField\"));\nassertNotEquals(0, qResult.get(0).field(\"floatField\"));\nassertTrue(qResult.get(0).field(\"listField\") instanceof List);\nassertEquals(3, ((List) qResult.get(0).field(\"listField\")).size());\nassertTrue(qResult.get(0).field(\"mapField\") instanceof Map);\nassertEquals(\"value\", qResult.get(0).field(\"mapField\").get(\"key\"));\nassertNotNull(qResult.get(0).field(\"dateField\"));\nassertTrue(qResult.get(0).field(\"dateField\") instanceof Date);\nassertNotEquals(\"\", qResult.get(0).field(\"nonEmptyField\"));\nassertFalse(qResult.get(0).field(\"emptyField\").isEmpty());\nassertTrue(qResult.get(0).field(\"nullField\") == null);\nassertEquals(\"expectedType\", qResult.get(0).field(\"typeField\"));\nassertTrue(qResult.get(0).field(\"booleanField\").equals(true));\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.733,
+        0.627,
+        0.619,
+        0.598,
+        0.596,
+        0.567,
+        0.565,
+        0.565,
+        0.564,
+        0.547,
+        0.519,
+        0.506,
+        0.484,
+        0.483,
+        0.472,
+        0.444,
+        0.44,
+        0.437,
+        0.427,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

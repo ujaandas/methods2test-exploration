@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455 {
+    @Override
+     public List < Framedata > createFrames ( String text , boolean mask ) { 
+     TextFrame curframe = new TextFrame ( ) ; 
+     curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ; 
+     curframe . setTransferemasked ( mask ) ; 
+     try { 
+     curframe . isValid ( ) ; 
+     } catch ( InvalidDataException e ) { 
+     throw new NotSendableException ( e ) ; 
+     } return Collections . singletonList ( ( Framedata ) curframe ) ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455Test {
+    @Test
+     public void createFramesText ( ) throws Exception {
+         Draft_6455 draft_6455 = new Draft_6455 ( ) ; 
+         TextFrame curframe = new TextFrame ( ) ; 
+         curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( "STR" ) ) ) ; 
+         curframe . setTransferemasked ( false ) ; 
+         List < Framedata > createdFrame = draft_6455 . createFrames ( "STR" , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(1, createdFrame.size());
+Assert.assertTrue(createdFrame.get(0) instanceof TextFrame);
+Assert.assertEquals("STR", Charsetfunctions.stringUtf8(createdFrame.get(0).getPayloadData()));
+Assert.assertFalse(createdFrame.get(0).getTransfereMasked());
+Assert.assertTrue(createdFrame.get(0).isValid());
+Assert.assertThrows(NotSendableException.class, () -> draft_6455.createFrames("INVALID", false));
+Assert.assertEquals(1, draft_6455.createFrames("", false).size());
+Assert.assertTrue(draft_6455.createFrames("", false).get(0) instanceof TextFrame);
+Assert.assertEquals("", Charsetfunctions.stringUtf8(draft_6455.createFrames("", false).get(0).getPayloadData()));
+Assert.assertFalse(draft_6455.createFrames("", false).get(0).getTransfereMasked());
+Assert.assertTrue(draft_6455.createFrames("", false).get(0).isValid());
+Assert.assertEquals(1, draft_6455.createFrames("LONGSTRING", false).size());
+Assert.assertTrue(draft_6455.createFrames("LONGSTRING", false).get(0) instanceof TextFrame);
+Assert.assertEquals("LONGSTRING", Charsetfunctions.stringUtf8(draft_6455.createFrames("LONGSTRING", false).get(0).getPayloadData()));
+Assert.assertFalse(draft_6455.createFrames("LONGSTRING", false).get(0).getTransfereMasked());
+Assert.assertTrue(draft_6455.createFrames("LONGSTRING", false).get(0).isValid());
+Assert.assertEquals(1, draft_6455.createFrames("SPECIALCHARS!@#$%", false).size());
+Assert.assertTrue(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0) instanceof TextFrame);
+Assert.assertEquals("SPECIALCHARS!@#$%", Charsetfunctions.stringUtf8(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).getPayloadData()));
+Assert.assertFalse(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).getTransfereMasked());
+Assert.assertTrue(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).isValid());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,createdFrame.size()); ===
+1.000 - Assert.assertEquals(1, createdFrame.size())
+0.747 - Assert.assertEquals(1, draft_6455.createFrames("", false).size())
+0.684 - Assert.assertTrue(createdFrame.get(0).isValid())
+0.673 - Assert.assertEquals(1, draft_6455.createFrames("LONGSTRING", false).size())
+0.636 - Assert.assertFalse(createdFrame.get(0).getTransfereMasked())
+0.630 - Assert.assertEquals(1, draft_6455.createFrames("SPECIALCHARS!@#$%", false).size())
+0.565 - Assert.assertTrue(createdFrame.get(0) instanceof TextFrame)
+0.517 - Assert.assertEquals("STR", Charsetfunctions.stringUtf8(createdFrame.get(0).getPayloadData()))
+0.515 - Assert.assertTrue(draft_6455.createFrames("", false).get(0).isValid())
+0.495 - Assert.assertFalse(draft_6455.createFrames("", false).get(0).getTransfereMasked())
+0.467 - Assert.assertTrue(draft_6455.createFrames("LONGSTRING", false).get(0).isValid())
+0.454 - Assert.assertFalse(draft_6455.createFrames("LONGSTRING", false).get(0).getTransfereMasked())
+0.439 - Assert.assertTrue(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).isValid())
+0.435 - Assert.assertEquals("", Charsetfunctions.stringUtf8(draft_6455.createFrames("", false).get(0).getPayloadData()))
+0.434 - Assert.assertTrue(draft_6455.createFrames("", false).get(0) instanceof TextFrame)
+0.429 - Assert.assertFalse(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).getTransfereMasked())
+0.400 - Assert.assertThrows(NotSendableException.class, () -> draft_6455.createFrames("INVALID", false))
+0.397 - Assert.assertTrue(draft_6455.createFrames("LONGSTRING", false).get(0) instanceof TextFrame)
+0.380 - Assert.assertEquals("LONGSTRING", Charsetfunctions.stringUtf8(draft_6455.createFrames("LONGSTRING", false).get(0).getPayloadData()))
+0.374 - Assert.assertTrue(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0) instanceof TextFrame)
+0.349 - Assert.assertEquals("SPECIALCHARS!@#$%", Charsetfunctions.stringUtf8(draft_6455.createFrames("SPECIALCHARS!@#$%", false).get(0).getPayloadData()))

@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MkvBlock {\npublic static byte [ ] muxXiphLacing ( int [ ] laceSizes ) {\nByteArrayList bytes = ByteArrayList . createByteArrayList ( ) ;\nfor ( int i = 0 ;\ni < laceSizes . length - 1 ;\ni ++ ) {\nlong laceSize = laceSizes [ i ] ;\nwhile ( laceSize >= 255 ) {\nbytes . add ( ( byte ) 255 ) ;\nlaceSize -= 255 ;\n} bytes . add ( ( byte ) laceSize ) ;\n} return bytes . toArray ( ) ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MkvBlockTest {\n@Test\npublic void testXiph ( ) {\nint [ ] _in = new int [ ] {\n187 , 630 , 255 , 60 , 0xFFFFFF } ;\nbyte [ ] expecteds = new byte [ ] {\n( byte ) 187 , ( byte ) 255 , ( byte ) 255 , 120 , ( byte ) 255 , 0 , 60 } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nbyte[] result = MkvBlock.muxXiphLacing(_in);\nassertArrayEquals(expecteds, result);\nassertEquals(expecteds.length, result.length);\nassertEquals(expecteds[0], result[0]);\nassertEquals(expecteds[1], result[1]);\nassertEquals(expecteds[2], result[2]);\nassertEquals(expecteds[3], result[3]);\nassertEquals(expecteds[4], result[4]);\nassertEquals(expecteds[5], result[5]);\nassertEquals(expecteds[6], result[6]);\nassertTrue(result[0] >= 0);\nassertTrue(result[1] >= 0);\nassertTrue(result[2] >= 0);\nassertTrue(result[3] >= 0);\nassertTrue(result[4] >= 0);\nassertTrue(result[5] >= 0);\nassertTrue(result[6] >= 0);\nassertTrue(result.length <= 7);\nassertTrue(result[0] <= 255);\nassertTrue(result[1] <= 255);\nassertTrue(result[2] <= 255);\nassertTrue(result[3] <= 255);\nassertTrue(result[4] <= 255);\n```\n====================\n\n",
+    "scores": [
+        0.659,
+        0.635,
+        0.543,
+        0.543,
+        0.543,
+        0.543,
+        0.543,
+        0.543,
+        0.543,
+        0.54,
+        0.333,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.293,
+        0.293,
+        0.293,
+        0.293,
+        0.293,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(expecteds,MkvBlock.muxXiphLacing(_in));"
+}

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testNullValueInCellEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, res.size());\nassertNotNull(res);\nassertTrue(res.isEmpty());\nassertEquals(0, res.stream().filter(Objects::isNull).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().isEmpty()).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName) == null)).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"null\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"NULL\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"nil\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"NIL\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"none\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"NONE\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"undefined\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"UNDEFINED\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"na\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"NA\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"n/a\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(\"N/A\"))).count());\nassertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName\n====================\n\n",
+    "scores": [
+        0.863,
+        0.692,
+        0.545,
+        0.471,
+        0.465,
+        0.345,
+        0.282,
+        0.273,
+        0.269,
+        0.269,
+        0.268,
+        0.268,
+        0.268,
+        0.268,
+        0.266,
+        0.266,
+        0.266,
+        0.266,
+        0.258,
+        0.258
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

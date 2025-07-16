@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeys {
+    @Override
+     public Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) { 
+     if ( ioResult instanceof Map ) { 
+     return ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ; 
+     } if ( ioResult instanceof ODocument ) { 
+     return Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ; 
+     } if ( ioResult instanceof OResult ) { 
+     OResult res = ( OResult ) ioResult ; 
+     return res . getPropertyNames ( ) ; 
+     } if ( ioResult instanceof Collection ) { 
+     List result = new ArrayList ( ) ; 
+     for ( Object o : ( Collection ) ioResult ) { 
+     result . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ; 
+     } return result ; 
+     } return null ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeysTest {
+    @Test
+     public void testWithOResult ( ) {
+         OResultInternal resultInternal = new OResultInternal ( ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         Object result = function . execute ( null , null , null , resultInternal , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertEquals(1, ((List<?>) result).size());
+assertTrue(((List<?>) result).contains("STR"));
+assertFalse(((List<?>) result).contains("NON_EXISTENT"));
+assertEquals("STR", ((List<?>) result).get(0));
+assertEquals(1, ((List<?>) result).stream().distinct().count());
+assertTrue(((List<?>) result).stream().allMatch(s -> s instanceof String));
+assertEquals("STR", ((List<?>) result).get(0));
+assertNotEquals("NON_EXISTENT", ((List<?>) result).get(0));
+assertTrue(((List<?>) result).toString().contains("STR"));
+assertFalse(((List<?>) result).isEmpty());
+assertEquals(1, ((List<?>) result).size());
+assertTrue(((List<?>) result).indexOf("STR") >= 0);
+assertTrue(((List<?>) result).containsAll(Arrays.asList("STR")));
+assertFalse(((List<?>) result).containsAll(Arrays.asList("STR", "NON_EXISTENT")));
+assertEquals(1, ((List<?>) result).stream().filter(s -> s.equals("STR")).count());
+assertTrue(((List<?>) result).stream().anyMatch(s -> s.equals("STR")));
+assertFalse(((List<?>) result).stream().anyMatch(s -> s.equals("NON_EXISTENT")));
+assertEquals("STR", ((List<?>) result).get(0));
+assertTrue(((List<?>) result).toArray().length > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newLinkedHashSet(Arrays.asList("STR","STR")),result); ===
+0.597 - assertFalse(((List<?>) result).containsAll(Arrays.asList("STR", "NON_EXISTENT")))
+0.562 - assertTrue(((List<?>) result).containsAll(Arrays.asList("STR")))
+0.495 - assertEquals("STR", ((List<?>) result).get(0))
+0.495 - assertEquals("STR", ((List<?>) result).get(0))
+0.495 - assertEquals("STR", ((List<?>) result).get(0))
+0.495 - assertEquals(1, ((List<?>) result).size())
+0.495 - assertEquals(1, ((List<?>) result).size())
+0.446 - assertNotEquals("NON_EXISTENT", ((List<?>) result).get(0))
+0.438 - assertFalse(((List<?>) result).isEmpty())
+0.413 - assertEquals(1, ((List<?>) result).stream().distinct().count())
+0.408 - assertEquals(1, ((List<?>) result).stream().filter(s -> s.equals("STR")).count())
+0.383 - assertFalse(((List<?>) result).contains("NON_EXISTENT"))
+0.382 - assertTrue(((List<?>) result).contains("STR"))
+0.375 - assertTrue(((List<?>) result).indexOf("STR") >= 0)
+0.372 - assertTrue(((List<?>) result).toArray().length > 0)
+0.347 - assertTrue(((List<?>) result).toString().contains("STR"))
+0.340 - ```java
+assertNotNull(result)
+0.324 - assertFalse(((List<?>) result).stream().anyMatch(s -> s.equals("NON_EXISTENT")))
+0.313 - assertTrue(((List<?>) result).stream().allMatch(s -> s instanceof String))
+0.309 - assertTrue(result instanceof List)
+0.303 - assertTrue(((List<?>) result).stream().anyMatch(s -> s.equals("STR")))
+0.000 - ```

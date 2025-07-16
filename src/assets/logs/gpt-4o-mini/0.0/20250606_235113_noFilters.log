@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQuery {
+    public List < WorkerData > execute ( List < WorkerData > input ) { 
+    switch ( targetType ) { 
+    case ALL : return select ( input , null ) ; 
+    case MEMBER : return select ( input , true ) ; 
+    case CLIENT : return select ( input , false ) ; 
+    case PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ; 
+    return ! result . isEmpty ( ) ? result : select ( input , true ) ; 
+    default : throw new IllegalStateException ( "STR" + targetType ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQueryTest {
+    @Test
+     public void noFilters ( ) {
+         list . add ( new WorkerData ( newParameters ( agent1 , 1 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 2 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 3 , "STR" , "STR" ) ) ) ; 
+         List < WorkerData > result = new WorkerQuery ( ) . execute ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertEquals(3, result.size());
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 1, "STR", "STR"))));
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 2, "STR", "STR"))));
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 3, "STR", "STR"))));
+assertFalse(result.isEmpty());
+assertEquals("Expected first element", new WorkerData(newParameters(agent1, 1, "STR", "STR")), result.get(0));
+assertEquals("Expected second element", new WorkerData(newParameters(agent1, 2, "STR", "STR")), result.get(1));
+assertEquals("Expected third element", new WorkerData(newParameters(agent1, 3, "STR", "STR")), result.get(2));
+assertTrue(result.stream().allMatch(data -> data.getAgent().equals(agent1)));
+assertTrue(result.stream().allMatch(data -> data.getType().equals("STR")));
+assertTrue(result.stream().allMatch(data -> data.getStatus().equals("STR")));
+assertFalse(result.stream().anyMatch(data -> data.getId() < 1));
+assertFalse(result.stream().anyMatch(data -> data.getId() > 3));
+assertEquals(result.get(0).getId(), 1);
+assertEquals(result.get(1).getId(), 2);
+assertEquals(result.get(2).getId(), 3);
+assertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).containsAll(Arrays.asList(1, 2, 3)));
+assertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).size() == 3);
+assertTrue(result.stream().allMatch(data -> data.getParameters().equals(newParameters(agent1, data.getId(), "STR", "STR"))));
+assertEquals(result.get(0).getParameters(), newParameters(agent1, 1, "STR", "STR"));
+assertEquals(result.get(1).getParameters(), newParameters(agent1, 2, "STR", "STR"));
+assertEquals(result.get(2).getParameters(), newParameters(agent1, 3, "STR", "STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(list,result); ===
+0.778 - assertEquals(3, result.size())
+0.645 - assertEquals(result.get(0).getId(), 1)
+0.645 - assertEquals(result.get(1).getId(), 2)
+0.645 - assertEquals(result.get(2).getId(), 3)
+0.630 - assertFalse(result.isEmpty())
+0.593 - ```java
+assertNotNull(result)
+0.405 - assertFalse(result.stream().anyMatch(data -> data.getId() < 1))
+0.405 - assertFalse(result.stream().anyMatch(data -> data.getId() > 3))
+0.385 - assertEquals(result.get(0).getParameters(), newParameters(agent1, 1, "STR", "STR"))
+0.385 - assertEquals(result.get(1).getParameters(), newParameters(agent1, 2, "STR", "STR"))
+0.385 - assertEquals(result.get(2).getParameters(), newParameters(agent1, 3, "STR", "STR"))
+0.381 - assertEquals("Expected first element", new WorkerData(newParameters(agent1, 1, "STR", "STR")), result.get(0))
+0.381 - assertEquals("Expected third element", new WorkerData(newParameters(agent1, 3, "STR", "STR")), result.get(2))
+0.378 - assertEquals("Expected second element", new WorkerData(newParameters(agent1, 2, "STR", "STR")), result.get(1))
+0.288 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 1, "STR", "STR"))))
+0.288 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 2, "STR", "STR"))))
+0.288 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 3, "STR", "STR"))))
+0.283 - assertTrue(result.stream().allMatch(data -> data.getAgent().equals(agent1)))
+0.268 - assertTrue(result.stream().allMatch(data -> data.getType().equals("STR")))
+0.265 - assertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).size() == 3)
+0.263 - assertTrue(result.stream().allMatch(data -> data.getStatus().equals("STR")))
+0.250 - assertTrue(result.stream().allMatch(data -> data.getParameters().equals(newParameters(agent1, data.getId(), "STR", "STR"))))
+0.219 - assertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).containsAll(Arrays.asList(1, 2, 3)))
+0.000 - ```

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParser {\npublic Date parse ( final String timestamp ) throws ProcessingException {\nif ( StringUtils . isBlank ( timestamp ) ) {\nreturn null ;\n} try {\nreturn parser . parse ( timestamp ) ;\n} catch ( Exception ex ) {\nthrow new ProcessingException ( \"STR\" + timestamp + \"STR\" , ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParserTest {\n@Test\npublic void testParseEpochMillis ( ) throws Exception {\nString format = TimestampParser . EPOCH_MILLIS ;\nlong time = System . currentTimeMillis ( ) ;\nDate parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(new Date(time), parsed);\nassertNotNull(parsed);\nassertTrue(parsed.getTime() > 0);\nassertEquals(\"Invalid timestamp format\", new TimestampParser(format).parse(\"abc\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(null));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"\"));\nassertEquals(new Date(0), new TimestampParser(format).parse(\"0\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"abc\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"123abc\"));\nassertEquals(new Date(123456789), new TimestampParser(format).parse(\"123456789\"));\nassertEquals(new Date(0), new TimestampParser(format).parse(\"0\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"abc\"));\nassertEquals(new Date(946684800000L), new TimestampParser(format).parse(\"2000-01-01T00:00:00.000Z\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"2000-01-01T00:00:00.000\"));\nassertEquals(new Date(946684800000L), new TimestampParser(format).parse(\"2000-01-01T00:00:00.000Z\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"2000-01-01T00:00:00.000\"));\nassertEquals(new Date(946684800000L), new TimestampParser(format).parse(\"2000-01-01T00:00:00.000Z\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"2000-01-01T00:00:00.000\"));\nassertEquals(new Date(946684800000L), new TimestampParser(format).parse(\"2000-01-01T00:00:00.000Z\"));\nassertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(\"2000-01-01T00:00:00.000\"));\n====================\n\n",
+    "scores": [
+        0.769,
+        0.725,
+        0.571,
+        0.515,
+        0.515,
+        0.46,
+        0.442,
+        0.379,
+        0.379,
+        0.379,
+        0.379,
+        0.348,
+        0.342,
+        0.339,
+        0.339,
+        0.331,
+        0.29,
+        0.29,
+        0.29,
+        0.29
+    ],
+    "ground_truth": "assertEquals(time,parsed.getTime());"
+}

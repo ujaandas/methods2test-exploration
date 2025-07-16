@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutor {
+    public void execute ( final ExecuteScriptOperation operation , final Promise promise ) { 
+    if ( operation . isFireAndForget ( ) ) { 
+    promise . answer ( "STR" ) ; 
+    } String fullCommand = operation . getCommand ( ) ; 
+    int indexColon = fullCommand . indexOf ( "STR" ) ; 
+    String extension = fullCommand . substring ( 0 , indexColon ) ; 
+    final String command = fullCommand . substring ( indexColon + 1 ) ; 
+    final Callable < String > task ; 
+    if ( extension . equals ( "STR" ) ) { 
+    task = newBashScriptCallable ( command ) ; 
+    } else { 
+    task = newGenericScriptCallable ( extension , command ) ; 
+    } new Thread ( ( ) -> { 
+    try { 
+    String result = task . call ( ) ; 
+    promise . answer ( result ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + command , e ) ; 
+    promise . answer ( e ) ; 
+    } } ) . start ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutorTest {
+    @Test
+     public void javascript ( ) {
+         ExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( "STR" , false ) ; 
+         StubPromise promise = new StubPromise ( ) ; 
+         scriptExecutor . execute ( scriptOperation , promise ) ; 
+         promise . assertCompletesEventually ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected result from the script", promise.getResult());
+assertNotNull("Promise result should not be null", promise.getResult());
+assertTrue("Promise should be completed", promise.isCompleted());
+assertFalse("Promise should not have failed", promise.hasFailed());
+assertEquals("Expected return value", promise.getResult(), "Expected result from the script");
+assertTrue("Result should be of type String", promise.getResult() instanceof String);
+assertFalse("Promise should not have been completed before execution", promise.isCompletedBeforeExecution());
+assertTrue("Promise should complete successfully with correct result", promise.getResult().contains("Expected"));
+assertEquals("Check if the command executed correctly", "Expected command output", promise.getResult());
+assertNotEquals("Promise result should not be an error message", "Error occurred", promise.getResult());
+assertSame("Promise result should be the same object", promise.getResult(), "Expected result from the script");
+assertThat("Promise result should match the pattern", promise.getResult(), matchesPattern("Expected.*"));
+assertDoesNotThrow("Execution should not throw an exception", promise::getResult);
+assertTimeout(Duration.ofSeconds(5), () -> {
+    promise.assertCompletesEventually();
+});
+assertTrue("Promise should have been called", promise.isCalled());
+assertFalse("Promise should not have been cancelled", promise.isCancelled());
+assertEquals("Check the exact output", "Expected result from the script", promise.getResult());
+assertTrue("Result should contain specific string", promise.getResult().contains("specific string"));
+assertNotSame("Result should not be an empty string", "", promise.getResult());
+assertTrue("Result should start with expected prefix", promise.getResult().startsWith("Expected"));
+assertTrue("Promise should provide the correct type", promise.getResult() instanceof String);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(promise.getAnswer()instanceofString); ===
+0.683 - assertTrue("Result should be of type String", promise.getResult() instanceof String)
+0.641 - assertTrue("Promise should provide the correct type", promise.getResult() instanceof String)
+0.511 - assertTrue("Result should contain specific string", promise.getResult().contains("specific string"))
+0.467 - assertTrue("Promise should be completed", promise.isCompleted())
+0.446 - assertTrue("Result should start with expected prefix", promise.getResult().startsWith("Expected"))
+0.439 - assertEquals("Expected return value", promise.getResult(), "Expected result from the script")
+0.430 - assertTrue("Promise should have been called", promise.isCalled())
+0.429 - assertNotNull("Promise result should not be null", promise.getResult())
+0.408 - assertTrue("Promise should complete successfully with correct result", promise.getResult().contains("Expected"))
+0.407 - ```java
+assertEquals("Expected result from the script", promise.getResult())
+0.393 - assertNotSame("Result should not be an empty string", "", promise.getResult())
+0.386 - assertSame("Promise result should be the same object", promise.getResult(), "Expected result from the script")
+0.376 - assertFalse("Promise should not have been cancelled", promise.isCancelled())
+0.375 - assertThat("Promise result should match the pattern", promise.getResult(), matchesPattern("Expected.*"))
+0.371 - assertTimeout(Duration.ofSeconds(5), () -> {
+    promise.assertCompletesEventually()
+0.370 - assertFalse("Promise should not have failed", promise.hasFailed())
+0.364 - assertEquals("Check the exact output", "Expected result from the script", promise.getResult())
+0.361 - assertDoesNotThrow("Execution should not throw an exception", promise::getResult)
+0.343 - assertNotEquals("Promise result should not be an error message", "Error occurred", promise.getResult())
+0.326 - assertEquals("Check if the command executed correctly", "Expected command output", promise.getResult())
+0.299 - assertFalse("Promise should not have been completed before execution", promise.isCompletedBeforeExecution())
+0.041 - })
+0.000 - ```

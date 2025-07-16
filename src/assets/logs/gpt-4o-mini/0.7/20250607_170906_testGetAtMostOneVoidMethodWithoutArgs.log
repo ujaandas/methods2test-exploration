@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public Method find ( ) { 
+    List < Method > methods = findAll ( ) ; 
+    switch ( methods . size ( ) ) { 
+    case 0 : return null ; 
+    case 1 : return methods . iterator ( ) . next ( ) ; 
+    default : throw new ReflectionException ( format ( "STR" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testGetAtMostOneVoidMethodWithoutArgs ( ) {
+         Method method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Prepare . class ) . withVoidReturnType ( ) . withoutArgs ( ) . find ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(method);
+assertEquals("expectedMethodName", method.getName());
+assertEquals(void.class, method.getReturnType());
+assertEquals(0, method.getParameterCount());
+assertTrue(Modifier.isPublic(method.getModifiers()));
+assertFalse(Modifier.isStatic(method.getModifiers()));
+assertFalse(Modifier.isAbstract(method.getModifiers()));
+assertFalse(Modifier.isNative(method.getModifiers()));
+assertFalse(Modifier.isFinal(method.getModifiers()));
+assertTrue(method.isAnnotationPresent(ExpectedAnnotation.class));
+assertEquals("expectedMethodDescription", method.getAnnotation(ExpectedAnnotation.class).description());
+assertEquals("expectedMethodValue", method.getAnnotation(ExpectedAnnotation.class).value());
+assertEquals("expectedMethodCategory", method.getAnnotation(ExpectedAnnotation.class).category());
+assertTrue(method.getDeclaringClass().isAssignableFrom(AnnotationTestClass.class));
+assertNotNull(method.getDeclaredAnnotations());
+assertEquals(0, method.getDeclaredAnnotations().length);
+assertDoesNotThrow(() -> method.invoke(new AnnotationTestClass()));
+assertTrue(method.getName().startsWith("expectedPrefix"));
+assertFalse(method.getName().endsWith("unexpectedSuffix"));
+assertNotEquals("notExpectedMethodName", method.getName());
+assertTrue(method.getAnnotations().length > 0);
+assertEquals(0, method.getGenericParameterTypes().length);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",method.getName()); ===
+0.769 - assertEquals(0, method.getParameterCount())
+0.759 - assertEquals("expectedMethodName", method.getName())
+0.710 - assertNotEquals("notExpectedMethodName", method.getName())
+0.675 - assertEquals(void.class, method.getReturnType())
+0.652 - assertEquals(0, method.getGenericParameterTypes().length)
+0.644 - assertEquals(0, method.getDeclaredAnnotations().length)
+0.585 - assertNotNull(method.getDeclaredAnnotations())
+0.574 - assertFalse(method.getName().endsWith("unexpectedSuffix"))
+0.562 - assertFalse(Modifier.isStatic(method.getModifiers()))
+0.550 - assertTrue(method.getAnnotations().length > 0)
+0.545 - assertFalse(Modifier.isFinal(method.getModifiers()))
+0.539 - assertFalse(Modifier.isNative(method.getModifiers()))
+0.538 - assertTrue(method.getName().startsWith("expectedPrefix"))
+0.527 - assertFalse(Modifier.isAbstract(method.getModifiers()))
+0.523 - assertTrue(Modifier.isPublic(method.getModifiers()))
+0.492 - ```java
+assertNotNull(method)
+0.492 - assertEquals("expectedMethodValue", method.getAnnotation(ExpectedAnnotation.class).value())
+0.470 - assertEquals("expectedMethodCategory", method.getAnnotation(ExpectedAnnotation.class).category())
+0.449 - assertEquals("expectedMethodDescription", method.getAnnotation(ExpectedAnnotation.class).description())
+0.444 - assertDoesNotThrow(() -> method.invoke(new AnnotationTestClass()))
+0.400 - assertTrue(method.isAnnotationPresent(ExpectedAnnotation.class))
+0.373 - assertTrue(method.getDeclaringClass().isAssignableFrom(AnnotationTestClass.class))
+0.000 - ```

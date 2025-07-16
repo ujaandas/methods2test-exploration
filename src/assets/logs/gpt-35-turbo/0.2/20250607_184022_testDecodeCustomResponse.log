@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jribble.Java-Websockify;
+
+public class FlashPolicyHandler {
+    public FlashPolicyHandler ( ChannelBuffer policyResponse ) { 
+    super ( ) ; 
+    this . policyResponse = policyResponse ; 
+    }
+}
+
+package jribble.Java-Websockify;
+
+public class FlashPolicyHandlerTest {
+    @Test
+     public void testDecodeCustomResponse ( ) {
+         String XML = "STR" ; 
+         ChannelBuffer policyResponse = ChannelBuffers . copiedBuffer ( XML , CharsetUtil . UTF_8 ) ; 
+         embedder = new DecoderEmbedder < FlashPolicyRequest > ( new FlashPolicyHandler ( policyResponse ) ) ; 
+         String request = "STR" ; 
+         byte [ ] b = request . getBytes ( ) ; 
+         ChannelBuffer buf = wrappedBuffer ( b ) ; 
+         embedder . offer ( buf ) ; 
+         Object first = embedder . poll ( ) ; 
+         ChannelBuffer response = ( ChannelBuffer ) first ; 
+         String resp = new String ( response . array ( ) , 0 , response . readableBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", resp);
+assertTrue(response.readableBytes() > 0);
+assertTrue(resp.contains("STR"));
+assertFalse(resp.isEmpty());
+assertEquals(3, response.readableBytes());
+assertTrue(resp.startsWith("S"));
+assertFalse(resp.endsWith("G"));
+assertTrue(resp.length() == 3);
+assertTrue(response.capacity() > 0);
+assertEquals("STR", new String(response.array()));
+assertTrue(response.hasArray());
+assertTrue(response.hasArrayOffset());
+assertTrue(response.hasMemoryAddress());
+assertTrue(response.hasNioBuffer());
+assertTrue(response.hasReadableBytes());
+assertTrue(response.hasReadableBytes(3));
+assertTrue(response.hasWritableBytes());
+assertTrue(response.hasWritableBytes(3));
+assertTrue(response.isDirect());
+assertTrue(response.isReadable());
+assertTrue(response.isWritable());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(XML.equals(resp)); ===
+0.654 - assertEquals("STR", resp)
+0.607 - assertTrue(resp.length() == 3)
+0.582 - assertFalse(resp.isEmpty())
+0.576 - assertTrue(response.hasArray())
+0.576 - assertTrue(response.isDirect())
+0.567 - assertTrue(resp.contains("STR"))
+0.567 - assertTrue(resp.startsWith("S"))
+0.557 - assertTrue(response.capacity() > 0)
+0.557 - assertTrue(response.isReadable())
+0.557 - assertTrue(response.isWritable())
+0.542 - assertFalse(resp.endsWith("G"))
+0.540 - assertTrue(response.hasNioBuffer())
+0.529 - assertEquals(3, response.readableBytes())
+0.523 - assertTrue(response.hasArrayOffset())
+0.515 - assertTrue(response.readableBytes() > 0)
+0.507 - assertTrue(response.hasMemoryAddress())
+0.507 - assertTrue(response.hasReadableBytes())
+0.507 - assertTrue(response.hasWritableBytes())
+0.500 - assertTrue(response.hasReadableBytes(3))
+0.500 - assertTrue(response.hasWritableBytes(3))
+0.480 - assertEquals("STR", new String(response.array()))

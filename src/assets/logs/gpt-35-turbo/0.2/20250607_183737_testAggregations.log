@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testAggregations ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, results.size());
+assertNotNull(results);
+assertTrue(results.isEmpty());
+assertFalse(results.contains(null));
+assertTrue(results.stream().allMatch(doc -> doc.field("name") != null));
+assertEquals(0, results.stream().filter(doc -> doc.field("age") < 18).count());
+assertTrue(results.stream().anyMatch(doc -> doc.field("gender").equals("Male")));
+assertFalse(results.stream().allMatch(doc -> doc.field("city").equals("New York")));
+assertEquals(1, results.stream().filter(doc -> doc.field("status").equals("active")).count());
+assertTrue(results.stream().noneMatch(doc -> doc.field("salary") == null));
+assertEquals(2, results.size());
+assertTrue(results.stream().allMatch(doc -> doc.field("country").equals("USA")));
+assertFalse(results.stream().anyMatch(doc -> doc.field("role").equals("admin")));
+assertEquals(0, results.stream().filter(doc -> doc.field("department").equals("HR")).count());
+assertTrue(results.stream().noneMatch(doc -> doc.field("email").isEmpty());
+assertFalse(results.stream().allMatch(doc -> doc.field("phone").startsWith("1-")));
+assertEquals(3, results.size());
+assertTrue(results.stream().anyMatch(doc -> doc.field("position").equals("Manager")));
+assertFalse(results.stream().allMatch(doc -> doc.field("team").equals("Marketing")));
+assertEquals(0, results.stream().filter(doc -> doc.field("location").equals("London")).count());
+assertTrue(results.stream().noneMatch(doc -> doc.field("project").equals("Alpha")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,results.size()); ===
+0.967 - assertEquals(0, results.size())
+0.967 - assertEquals(2, results.size())
+0.967 - assertEquals(3, results.size())
+0.678 - assertTrue(results.isEmpty())
+0.677 - assertFalse(results.contains(null))
+0.654 - assertNotNull(results)
+0.544 - assertEquals(0, results.stream().filter(doc -> doc.field("age") < 18).count())
+0.483 - assertEquals(1, results.stream().filter(doc -> doc.field("status").equals("active")).count())
+0.467 - assertEquals(0, results.stream().filter(doc -> doc.field("department").equals("HR")).count())
+0.459 - assertEquals(0, results.stream().filter(doc -> doc.field("location").equals("London")).count())
+0.433 - assertTrue(results.stream().allMatch(doc -> doc.field("name") != null))
+0.431 - assertTrue(results.stream().noneMatch(doc -> doc.field("email").isEmpty())
+0.426 - assertFalse(results.stream().anyMatch(doc -> doc.field("role").equals("admin")))
+0.420 - assertTrue(results.stream().noneMatch(doc -> doc.field("salary") == null))
+0.418 - assertFalse(results.stream().allMatch(doc -> doc.field("city").equals("New York")))
+0.418 - assertFalse(results.stream().allMatch(doc -> doc.field("phone").startsWith("1-")))
+0.411 - assertFalse(results.stream().allMatch(doc -> doc.field("team").equals("Marketing")))
+0.389 - assertTrue(results.stream().anyMatch(doc -> doc.field("gender").equals("Male")))
+0.389 - assertTrue(results.stream().allMatch(doc -> doc.field("country").equals("USA")))
+0.378 - assertTrue(results.stream().noneMatch(doc -> doc.field("project").equals("Alpha")))
+0.372 - assertTrue(results.stream().anyMatch(doc -> doc.field("position").equals("Manager")))

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class MetadataFilter {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class MetadataFilterTest {
+    @Test
+     public void testFilterNoMD ( ) throws MalformedURLException {
+         URLFilter filter = createFilter ( "STR" , "STR" ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("Expected filtered URL", "expectedValue", filterResult);
+assertTrue("Result should contain expected substring", filterResult.contains("expectedSubstring"));
+assertFalse("Result should not contain unexpected substring", filterResult.contains("unexpectedSubstring"));
+assertEquals("Result length should be as expected", expectedLength, filterResult.length());
+assertTrue("Result should start with expected prefix", filterResult.startsWith("expectedPrefix"));
+assertTrue("Result should end with expected suffix", filterResult.endsWith("expectedSuffix"));
+assertFalse("Result should be empty", filterResult.isEmpty());
+assertNotSame("Result should not be the same as input URL", url.toExternalForm(), filterResult);
+assertTrue("Result should match expected regex", filterResult.matches("expectedRegexPattern"));
+assertNotEquals("Result should not be equal to another value", "anotherValue", filterResult);
+assertEquals("Result should be of expected type", "expectedType", filterResult.getClass().getSimpleName());
+assertTrue("Result should contain at least one expected word", filterResult.matches(".*expectedWord.*"));
+assertFalse("Result should not be a certain value", filterResult.equals("certainValue"));
+assertNotNull("Filter should not return null", filterResult);
+assertEquals("Result should match a specific condition", "specificCondition", filterResult);
+assertTrue("Filtered result should be in a valid format", isValidFormat(filterResult));
+assertFalse("Filtered result should not contain any null characters", filterResult.contains("\0"));
+assertTrue("Result should have been transformed correctly", transformCondition(filterResult));
+assertTrue("Result's hash code should be consistent", filterResult.hashCode() == expectedHashCode);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.652 - assertNotSame("Result should not be the same as input URL", url.toExternalForm(), filterResult)
+0.613 - assertEquals("Expected filtered URL", "expectedValue", filterResult)
+0.585 - assertNotEquals("Result should not be equal to another value", "anotherValue", filterResult)
+0.569 - assertNotNull("Filter should not return null", filterResult)
+0.558 - assertFalse("Result should be empty", filterResult.isEmpty())
+0.538 - assertEquals("Result length should be as expected", expectedLength, filterResult.length())
+0.537 - ```java
+assertNotNull(filterResult)
+0.534 - assertEquals("Result should match a specific condition", "specificCondition", filterResult)
+0.531 - assertFalse("Result should not be a certain value", filterResult.equals("certainValue"))
+0.512 - assertTrue("Filtered result should be in a valid format", isValidFormat(filterResult))
+0.467 - assertFalse("Filtered result should not contain any null characters", filterResult.contains("\0"))
+0.466 - assertEquals("Result should be of expected type", "expectedType", filterResult.getClass().getSimpleName())
+0.446 - assertFalse("Result should not contain unexpected substring", filterResult.contains("unexpectedSubstring"))
+0.434 - assertTrue("Result should contain at least one expected word", filterResult.matches(".*expectedWord.*"))
+0.433 - assertTrue("Result should end with expected suffix", filterResult.endsWith("expectedSuffix"))
+0.406 - assertTrue("Result should start with expected prefix", filterResult.startsWith("expectedPrefix"))
+0.397 - assertTrue("Result should match expected regex", filterResult.matches("expectedRegexPattern"))
+0.394 - assertTrue("Result's hash code should be consistent", filterResult.hashCode() == expectedHashCode)
+0.388 - assertTrue("Result should have been transformed correctly", transformCondition(filterResult))
+0.386 - assertTrue("Result should contain expected substring", filterResult.contains("expectedSubstring"))
+0.000 - ```

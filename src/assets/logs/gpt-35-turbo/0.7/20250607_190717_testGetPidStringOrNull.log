@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtils {
+    static Integer getPidFromBeanString ( String name ) { 
+    int indexOf = name . indexOf ( '@' ) ; 
+    if ( indexOf == - 1 ) { 
+    return null ; 
+    } String pidString = name . substring ( 0 , indexOf ) ; 
+    try { 
+    return Integer . parseInt ( pidString ) ; 
+    } catch ( NumberFormatException e ) { 
+    LOGGER . warn ( e ) ; 
+    return null ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtilsTest {
+    @Test
+     public void testGetPidStringOrNull ( ) {
+         Integer pid = getPidFromBeanString ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(null, pid);
+assertEquals(12345, pid);
+assertEquals(0, pid);
+assertNotEquals(999, pid);
+assertNotNull(pid);
+assertTrue(pid > 0);
+assertFalse(pid < 0);
+assertEquals(Integer.valueOf(12345), pid);
+assertNotEquals("STR", pid);
+assertTrue(pid != null);
+assertFalse(pid == null);
+assertEquals(0, pid.intValue());
+assertNotNull(pid.intValue());
+assertTrue(pid.intValue() > 0);
+assertFalse(pid.intValue() < 0);
+assertEquals(12345, pid.intValue());
+assertNotEquals("STR", pid.intValue());
+assertTrue(pid instanceof Integer);
+assertFalse(pid instanceof String);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(pid); ===
+1.000 - assertNotNull(pid)
+0.766 - assertNotNull(pid.intValue())
+0.762 - assertNotEquals(999, pid)
+0.727 - assertNotEquals("STR", pid)
+0.703 - assertEquals(0, pid)
+0.686 - assertTrue(pid > 0)
+0.667 - assertFalse(pid < 0)
+0.650 - assertEquals(null, pid)
+0.634 - assertEquals(12345, pid)
+0.615 - assertTrue(pid != null)
+0.600 - assertFalse(pid == null)
+0.582 - assertNotEquals("STR", pid.intValue())
+0.542 - assertEquals(0, pid.intValue())
+0.522 - assertTrue(pid.intValue() > 0)
+0.511 - assertFalse(pid.intValue() < 0)
+0.500 - assertEquals(12345, pid.intValue())
+0.480 - assertTrue(pid instanceof Integer)
+0.480 - assertFalse(pid instanceof String)
+0.448 - assertEquals(Integer.valueOf(12345), pid)

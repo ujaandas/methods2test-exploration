@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\npublic < T extends UriResponder > void setNotImplementedHandler ( Class < T > handler ) {\nrouter . setNotImplemented ( handler ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testHandlerSetters ( ) throws Exception {\nfinal UriResponder notFoundHandler = new GeneralHandler ( ) {\n} ;\nfinal UriResponder notImplementedHandler = new GeneralHandler ( ) {\n} ;\nTestRouter router = new TestRouter ( ) ;\nRouterNanoHTTPD routerNanoHttpd = new RouterNanoHTTPD ( 9999 ) ;\nField routerField = RouterNanoHTTPD . class . getDeclaredField ( \"STR\" ) ;\nrouterField . setAccessible ( true ) ;\nrouterField . set ( routerNanoHttpd , router ) ;\nrouterNanoHttpd . setNotFoundHandler ( notFoundHandler . getClass ( ) ) ;\nrouterNanoHttpd . setNotImplementedHandler ( notImplementedHandler . getClass ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(notFoundHandler.getClass(), router.getNotFoundHandler());\nAssert.assertEquals(notImplementedHandler.getClass(), router.getNotImplementedHandler());\nAssert.assertNotNull(router.getNotFoundHandler());\nAssert.assertNotNull(router.getNotImplementedHandler());\nAssert.assertTrue(router.getNotFoundHandler() instanceof UriResponder);\nAssert.assertTrue(router.getNotImplementedHandler() instanceof UriResponder);\nAssert.assertNotEquals(notFoundHandler, notImplementedHandler);\nAssert.assertNotEquals(router.getNotFoundHandler(), router.getNotImplementedHandler());\nAssert.assertNotEquals(notFoundHandler.getClass(), notImplementedHandler.getClass());\nAssert.assertNotEquals(router.getNotFoundHandler().getClass(), router.getNotImplementedHandler().getClass());\nAssert.assertNotSame(notFoundHandler, router.getNotFoundHandler());\nAssert.assertNotSame(notImplementedHandler, router.getNotImplementedHandler());\nAssert.assertSame(notFoundHandler.getClass(), router.getNotFoundHandler().getClass());\nAssert.assertSame(notImplementedHandler.getClass(), router.getNotImplementedHandler().getClass());\nAssert.assertArrayEquals(new UriResponder[]{notFoundHandler}, new UriResponder[]{router.getNotFoundHandler()});\nAssert.assertArrayEquals(new UriResponder[]{notImplementedHandler}, new UriResponder[]{router.getNotImplementedHandler()});\nAssert.assertNotEquals(notFoundHandler.hashCode(), notImplementedHandler.hashCode());\nAssert.assertNotEquals(router.getNotFoundHandler().hashCode(), router.getNotImplementedHandler().hashCode());\nAssert.assertTrue(router.getNotFoundHandler().equals(router.getNotFoundHandler()));\nAssert.assertTrue(router.getNotImplementedHandler().equals(router.getNotImplementedHandler());\n====================\n\n",
+    "scores": [
+        0.912,
+        0.855,
+        0.806,
+        0.757,
+        0.75,
+        0.73,
+        0.713,
+        0.689,
+        0.685,
+        0.681,
+        0.671,
+        0.643,
+        0.619,
+        0.58,
+        0.558,
+        0.511,
+        0.473,
+        0.45,
+        0.385,
+        0.379
+    ],
+    "ground_truth": "Assert.assertEquals(notFoundHandler.getClass(),router.notFoundHandlerClass);"
+}

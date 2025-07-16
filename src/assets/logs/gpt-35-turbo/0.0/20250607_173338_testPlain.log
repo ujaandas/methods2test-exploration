@@ -1,0 +1,64 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecution {
+    OSequence getSequence ( String iName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecutionTest {
+    @Test
+     public void testPlain ( ) {
+         String name = "STR" ; 
+         db . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));
+assertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName());
+assertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceId() > 0);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement() == 1);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getStart() == 0);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize() > 0);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMaxValue() == Long.MAX_VALUE);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMinValue() == Long.MIN_VALUE);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getOrderType() == OSequence.OrderType.ORDER_POSITIVE);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isRecyclable());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCyclic());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getDatabase() == db);
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary() == db.getMetadata().getSequenceLibrary());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name) == db.getMetadata().getSequenceLibrary().getSequence(name));
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).equals(db.getMetadata().getSequenceLibrary().getSequence(name)));
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).hashCode() == db.getMetadata().getSequenceLibrary().getSequence(name).hashCode());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).toString().equals(db.getMetadata().getSequenceLibrary().getSequence(name).toString()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name)); ===
+1.000 - assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name))
+0.865 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCyclic())
+0.848 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getStart() == 0)
+0.844 - assertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName())
+0.842 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isRecyclable())
+0.831 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize() > 0)
+0.826 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceId() > 0)
+0.826 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement() == 1)
+0.826 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getDatabase() == db)
+0.766 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMaxValue() == Long.MAX_VALUE)
+0.766 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMinValue() == Long.MIN_VALUE)
+0.700 - assertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType())
+0.681 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getOrderType() == OSequence.OrderType.ORDER_POSITIVE)
+0.650 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary() == db.getMetadata().getSequenceLibrary())
+0.550 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).equals(db.getMetadata().getSequenceLibrary().getSequence(name)))
+0.549 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name) == db.getMetadata().getSequenceLibrary().getSequence(name))
+0.502 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).hashCode() == db.getMetadata().getSequenceLibrary().getSequence(name).hashCode())
+0.489 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceLibrary().getSequence(name).toString().equals(db.getMetadata().getSequenceLibrary().getSequence(name).toString()))

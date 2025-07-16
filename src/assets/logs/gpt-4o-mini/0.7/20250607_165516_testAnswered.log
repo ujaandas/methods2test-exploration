@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb answered ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testAnswered ( ) {
+         Verb actual = Verbs . answered ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(actual);
+Assert.assertEquals("STR", actual.getId());
+Assert.assertEquals("answered", actual.getDisplayName());
+Assert.assertTrue(actual.isVerb());
+Assert.assertEquals("http://adlnet.gov/expapi/verbs/answered", actual.getUrl());
+Assert.assertEquals("en-US", actual.getLanguage());
+Assert.assertNotEquals("", actual.getId());
+Assert.assertTrue(actual.getDisplayName().contains("answered"));
+Assert.assertFalse(actual.getDescription().isEmpty());
+Assert.assertEquals(1, actual.getDisplayName().length());
+Assert.assertTrue(actual.getId().startsWith("STR"));
+Assert.assertNull(actual.getObjectType());
+Assert.assertTrue(actual.getId().matches("^[A-Z]{3}$"));
+Assert.assertNotSame(new Verb(), actual);
+Assert.assertThrows(NullPointerException.class, () -> {
+    actual.getSomeNonExistentMethod();
+});
+Assert.assertEquals(actual.hashCode(), actual.hashCode());
+Assert.assertTrue(actual.equals(actual));
+Assert.assertFalse(actual.equals(null));
+Assert.assertEquals(actual.toString(), "Verb[id=STR, displayName=answered]");
+Assert.assertTrue(actual.getDisplayName().equalsIgnoreCase("answered"));
+Assert.assertFalse(actual.getId().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+Assert.assertNotNull(actual)
+0.691 - Assert.assertNotEquals("", actual.getId())
+0.667 - Assert.assertTrue(actual.equals(actual))
+0.655 - Assert.assertNull(actual.getObjectType())
+0.654 - Assert.assertNotSame(new Verb(), actual)
+0.625 - Assert.assertTrue(actual.isVerb())
+0.582 - Assert.assertEquals("STR", actual.getId())
+0.566 - Assert.assertFalse(actual.equals(null))
+0.517 - Assert.assertFalse(actual.getId().isEmpty())
+0.508 - Assert.assertEquals("en-US", actual.getLanguage())
+0.464 - Assert.assertEquals("answered", actual.getDisplayName())
+0.464 - Assert.assertEquals(1, actual.getDisplayName().length())
+0.462 - Assert.assertTrue(actual.getId().startsWith("STR"))
+0.457 - Assert.assertEquals(actual.hashCode(), actual.hashCode())
+0.448 - Assert.assertFalse(actual.getDescription().isEmpty())
+0.435 - Assert.assertTrue(actual.getId().matches("^[A-Z]{3}$"))
+0.390 - Assert.assertTrue(actual.getDisplayName().contains("answered"))
+0.380 - Assert.assertThrows(NullPointerException.class, () -> {
+    actual.getSomeNonExistentMethod()
+0.364 - Assert.assertEquals(actual.toString(), "Verb[id=STR, displayName=answered]")
+0.353 - Assert.assertTrue(actual.getDisplayName().equalsIgnoreCase("answered"))
+0.304 - Assert.assertEquals("http://adlnet.gov/expapi/verbs/answered", actual.getUrl())
+0.087 - })
+0.000 - ```

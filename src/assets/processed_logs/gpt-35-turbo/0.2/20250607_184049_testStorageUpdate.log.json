@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", database.getCommand());\nassertEquals(Locale.GERMANY.getLanguage(), database.getLanguage());\nassertNotNull(database);\nassertTrue(database.isConnected());\nassertFalse(database.isClosed());\nassertEquals(0, database.getErrors().size());\nassertTrue(database.getCommands().isEmpty());\nassertEquals(0, database.getWarnings().size());\nassertNotEquals(0, database.getCommandsExecuted());\nassertTrue(database.getCommandsExecuted() > 0);\nassertEquals(0, database.getQueries().size());\nassertTrue(database.getQueriesExecuted() >= 0);\nassertNotNull(database.getMetadata());\nassertTrue(database.getMetadata().containsKey(\"STR\"));\nassertEquals(Locale.GERMANY.getLanguage(), database.getMetadata().get(\"STR\"));\nassertTrue(database.getMetadata().containsValue(Locale.GERMANY.getLanguage()));\nassertEquals(0, database.getMetadata().size());\nassertTrue(database.getMetadata().isEmpty());\nassertNotNull(database.getAttributes());\nassertTrue(database.getAttributes().contains(ATTRIBUTES.ATTRIBUTE1));\nassertFalse(database.getAttributes().contains(ATTRIBUTES.ATTRIBUTE2));\nassertEquals(1, database.getAttributes().size());\nassertTrue(database.getAttributes().isEmpty());\nassertNotNull(database.get(ATTRIBUTES.ATTRIBUTE1));\nassertNull(database.get(ATTRIBUTES.ATTRIBUTE2));\n====================\n\n",
+    "scores": [
+        0.647,
+        0.535,
+        0.532,
+        0.521,
+        0.509,
+        0.5,
+        0.487,
+        0.482,
+        0.482,
+        0.481,
+        0.467,
+        0.459,
+        0.456,
+        0.446,
+        0.426,
+        0.426,
+        0.419,
+        0.414,
+        0.412,
+        0.397,
+        0.387,
+        0.368,
+        0.365,
+        0.362,
+        0.313
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

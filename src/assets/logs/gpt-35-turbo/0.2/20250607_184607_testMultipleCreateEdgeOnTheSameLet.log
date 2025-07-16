@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutor {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutorTest {
+    @Test
+     public void testMultipleCreateEdgeOnTheSameLet ( ) {
+         OrientDB factory = new OrientDB ( "STR" , "STR" , "STR" , OrientDBConfig . defaultConfig ( ) ) ; 
+         String dbName = getClass ( ) . getSimpleName ( ) + "STR" ; 
+         factory . create ( dbName , ODatabaseType . MEMORY ) ; 
+         ODatabaseDocument db = factory . open ( dbName , "STR" , "STR" ) ; 
+         String script = "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         OResultSet result = db . execute ( "STR" , script ) ; 
+         result . close ( ) ; 
+         result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(0, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("name").equals("John")));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("age") < 18));
+assertEquals(5, result.stream().filter(r -> r.getProperty("status").equals("active")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("admin")));
+assertEquals(10, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("score"))).sum());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("email").contains("@")));
+assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("inactive")));
+assertEquals(3, result.stream().filter(r -> r.getProperty("type").equals("A")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("guest")));
+assertEquals(15, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("quantity"))).sum());
+assertTrue(result.stream().allMatch(r -> r.getProperty("category").equals("books")));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("price") < 0));
+assertEquals(2, result.stream().filter(r -> r.getProperty("type").equals("B")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("user")));
+assertEquals(20, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("amount"))).sum());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("name").contains("Doe")));
+assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("pending")));
+assertEquals(4, result.stream().filter(r -> r.getProperty("type").equals("C")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("manager")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,result.stream().count()); ===
+0.835 - Assertions:
+
+assertEquals(0, result.stream().count())
+0.634 - assertEquals(2, result.stream().filter(r -> r.getProperty("type").equals("B")).count())
+0.618 - assertEquals(3, result.stream().filter(r -> r.getProperty("type").equals("A")).count())
+0.618 - assertEquals(4, result.stream().filter(r -> r.getProperty("type").equals("C")).count())
+0.615 - assertFalse(result.stream().anyMatch(r -> r.getProperty("age") < 18))
+0.610 - assertFalse(result.stream().anyMatch(r -> r.getProperty("price") < 0))
+0.585 - assertEquals(5, result.stream().filter(r -> r.getProperty("status").equals("active")).count())
+0.576 - assertEquals(20, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("amount"))).sum())
+0.550 - assertEquals(10, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("score"))).sum())
+0.537 - assertEquals(15, result.stream().mapToInt(r -> Integer.parseInt(r.getProperty("quantity"))).sum())
+0.537 - assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("inactive")))
+0.534 - assertTrue(result.stream().anyMatch(r -> r.getProperty("email").contains("@")))
+0.530 - assertTrue(result.stream().anyMatch(r -> r.getProperty("name").contains("Doe")))
+0.525 - assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("pending")))
+0.517 - assertTrue(result.stream().allMatch(r -> r.getProperty("name").equals("John")))
+0.513 - assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("user")))
+0.508 - assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("admin")))
+0.508 - assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("guest")))
+0.500 - assertTrue(result.stream().noneMatch(r -> r.getProperty("role").equals("manager")))
+0.496 - assertTrue(result.stream().allMatch(r -> r.getProperty("category").equals("books")))

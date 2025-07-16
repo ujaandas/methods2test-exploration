@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcAddressParser {
+    public String getIp ( ) { 
+    return ip ; 
+    }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcAddressParserTest {
+    @Test
+     public void testParserWithProtocol ( ) throws RemotingException {
+         String url = "STR" ; 
+         RpcAddressParser parser = new RpcAddressParser ( ) ; 
+         Url btUrl = parser . parse ( url ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(btUrl);
+assertEquals("expectedHost", btUrl.getHost());
+assertEquals(8080, btUrl.getPort());
+assertEquals("http", btUrl.getProtocol());
+assertTrue(btUrl.isSecure());
+assertFalse(btUrl.isEmpty());
+assertEquals("expectedPath", btUrl.getPath());
+assertEquals("expectedQuery", btUrl.getQuery());
+assertEquals("expectedFragment", btUrl.getFragment());
+assertEquals("expectedUserInfo", btUrl.getUserInfo());
+assertEquals("expectedAuthority", btUrl.getAuthority());
+assertTrue(btUrl.hasParameter("paramName"));
+assertEquals("paramValue", btUrl.getParameter("paramName"));
+assertEquals(3, btUrl.getParameterCount());
+assertTrue(btUrl.getParameters().containsKey("paramName"));
+assertFalse(btUrl.getParameters().isEmpty());
+assertEquals("expectedCharset", btUrl.getCharset());
+assertNotEquals("unexpectedValue", btUrl.getParameter("anotherParam"));
+assertTrue(btUrl.isValid());
+assertEquals("expectedStringRepresentation", btUrl.toString());
+assertEquals("expectedHost:8080", btUrl.getHostAndPort());
+assertNotEquals("invalidHost", btUrl.getHost());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",btUrl.getIp()); ===
+0.776 - assertEquals(8080, btUrl.getPort())
+0.767 - assertEquals("http", btUrl.getProtocol())
+0.727 - assertEquals("expectedHost", btUrl.getHost())
+0.727 - assertEquals("expectedPath", btUrl.getPath())
+0.709 - assertEquals("expectedQuery", btUrl.getQuery())
+0.709 - assertNotEquals("invalidHost", btUrl.getHost())
+0.703 - assertEquals(3, btUrl.getParameterCount())
+0.682 - assertEquals("expectedUserInfo", btUrl.getUserInfo())
+0.675 - assertEquals("expectedCharset", btUrl.getCharset())
+0.659 - assertEquals("expectedFragment", btUrl.getFragment())
+0.656 - assertFalse(btUrl.isEmpty())
+0.644 - assertEquals("expectedAuthority", btUrl.getAuthority())
+0.629 - assertEquals("expectedHost:8080", btUrl.getHostAndPort())
+0.615 - assertEquals("paramValue", btUrl.getParameter("paramName"))
+0.597 - assertFalse(btUrl.getParameters().isEmpty())
+0.596 - assertEquals("expectedStringRepresentation", btUrl.toString())
+0.590 - assertTrue(btUrl.isSecure())
+0.567 - assertTrue(btUrl.isValid())
+0.549 - assertNotEquals("unexpectedValue", btUrl.getParameter("anotherParam"))
+0.500 - assertTrue(btUrl.hasParameter("paramName"))
+0.492 - ```java
+assertNotNull(btUrl)
+0.440 - assertTrue(btUrl.getParameters().containsKey("paramName"))
+0.000 - ```

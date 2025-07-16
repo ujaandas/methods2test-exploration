@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Wildcards {
+    public static boolean matches ( final String text , final String wildcard ) { 
+    String pattern = wildcard . replace ( "STR" , "STR" ) . replace ( "STR" , "STR" ) ; 
+    return ( text != null && text . matches ( pattern ) ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class WildcardsTest {
+    @Test
+     public void testMatchesAgainstText ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(Wildcards.matches("testString", "testSTR"));
+assertTrue(Wildcards.matches("exampleString", "exampleSTR"));
+assertFalse(Wildcards.matches("anotherString", "differentSTR"));
+assertTrue(Wildcards.matches("wildcardString", "wildcardSTR"));
+assertFalse(Wildcards.matches("stringTest", "testSTR"));
+assertTrue(Wildcards.matches("stringExample", "stringSTR"));
+assertFalse(Wildcards.matches("testString", "STR"));
+assertTrue(Wildcards.matches("testString", "test*"));
+assertTrue(Wildcards.matches("testString", "*String"));
+assertFalse(Wildcards.matches("testString", "wrong*"));
+assertTrue(Wildcards.matches("testString", "*test*"));
+assertFalse(Wildcards.matches("testString", "test?"));
+assertTrue(Wildcards.matches("testString", "te*t*"));
+assertFalse(Wildcards.matches("testString", "t?stString"));
+assertTrue(Wildcards.matches("testString", "t*String"));
+assertFalse(Wildcards.matches("testString", "testStr"));
+assertTrue(Wildcards.matches("testString", "test*String"));
+assertFalse(Wildcards.matches("testString", "test*wrong"));
+assertTrue(Wildcards.matches("testString", "t*st*"));
+assertFalse(Wildcards.matches("testString", "wrong*String"));
+assertTrue(Wildcards.matches("testString", "*"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(Wildcards.matches("STR","STR")); ===
+0.831 - assertTrue(Wildcards.matches("testString", "*"))
+0.804 - assertFalse(Wildcards.matches("testString", "STR"))
+0.800 - assertTrue(Wildcards.matches("testString", "*String"))
+0.796 - assertTrue(Wildcards.matches("testString", "test*"))
+0.796 - assertTrue(Wildcards.matches("testString", "te*t*"))
+0.796 - assertTrue(Wildcards.matches("testString", "t*st*"))
+0.792 - assertTrue(Wildcards.matches("exampleString", "exampleSTR"))
+0.792 - assertTrue(Wildcards.matches("testString", "t*String"))
+0.787 - assertTrue(Wildcards.matches("testString", "*test*"))
+0.780 - assertTrue(Wildcards.matches("stringExample", "stringSTR"))
+0.777 - ```java
+assertTrue(Wildcards.matches("testString", "testSTR"))
+0.777 - assertTrue(Wildcards.matches("wildcardString", "wildcardSTR"))
+0.771 - assertFalse(Wildcards.matches("stringTest", "testSTR"))
+0.768 - assertTrue(Wildcards.matches("testString", "test*String"))
+0.729 - assertFalse(Wildcards.matches("testString", "testStr"))
+0.723 - assertFalse(Wildcards.matches("testString", "test?"))
+0.716 - assertFalse(Wildcards.matches("testString", "wrong*"))
+0.712 - assertFalse(Wildcards.matches("anotherString", "differentSTR"))
+0.707 - assertFalse(Wildcards.matches("testString", "t?stString"))
+0.693 - assertFalse(Wildcards.matches("testString", "wrong*String"))
+0.687 - assertFalse(Wildcards.matches("testString", "test*wrong"))
+0.000 - ```

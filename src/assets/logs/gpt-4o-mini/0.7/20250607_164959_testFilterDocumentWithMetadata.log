@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterDocumentWithMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadataFilterParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertEquals(1, fields.size());
+assertFalse(fields.isEmpty());
+assertTrue(fields.containsValue("STR"));
+assertNull(fields.get("non_existent_key"));
+assertNotEquals("different_value", fields.get("STR"));
+assertTrue(fields.keySet().stream().anyMatch(key -> key.equals("STR")));
+assertEquals("STR", fields.get("STR").trim());
+assertTrue(fields.values().stream().anyMatch(value -> value.equals("STR")));
+assertSame(fields.get("STR"), fields.get("STR"));
+assertEquals(fields.get("STR").length(), 3);
+assertTrue(fields.keySet().iterator().hasNext());
+assertFalse(fields.containsKey("another_key"));
+assertNotEquals(fields.size(), 0);
+assertTrue(fields.values().stream().allMatch(value -> value instanceof String));
+assertThrows(NullPointerException.class, () -> fields.get(null));
+assertEquals("STR", fields.get("STR").toUpperCase());
+assertTrue(fields.containsKey("STR") && fields.get("STR").length() > 0);
+assertEquals("STR", fields.get("STR").toLowerCase());
+assertNotEquals(fields.get("STR"), "different_string");
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.851 - assertEquals("STR", fields.get("STR").trim())
+0.787 - assertEquals("STR", fields.get("STR").toUpperCase())
+0.787 - assertEquals("STR", fields.get("STR").toLowerCase())
+0.756 - assertSame(fields.get("STR"), fields.get("STR"))
+0.729 - assertEquals(fields.get("STR").length(), 3)
+0.716 - assertNotEquals("different_value", fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.646 - assertNotEquals(fields.get("STR"), "different_string")
+0.640 - assertNotEquals(fields.size(), 0)
+0.600 - assertTrue(fields.containsKey("STR"))
+0.600 - assertTrue(fields.containsKey("STR") && fields.get("STR").length() > 0)
+0.585 - assertTrue(fields.containsValue("STR"))
+0.583 - assertFalse(fields.isEmpty())
+0.565 - assertNull(fields.get("non_existent_key"))
+0.517 - assertFalse(fields.containsKey("another_key"))
+0.444 - ```java
+assertNotNull(fields)
+0.440 - assertTrue(fields.keySet().iterator().hasNext())
+0.423 - assertThrows(NullPointerException.class, () -> fields.get(null))
+0.339 - assertTrue(fields.keySet().stream().anyMatch(key -> key.equals("STR")))
+0.328 - assertTrue(fields.values().stream().anyMatch(value -> value.equals("STR")))
+0.305 - assertTrue(fields.values().stream().allMatch(value -> value instanceof String))
+0.000 - ```

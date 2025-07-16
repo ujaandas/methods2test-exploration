@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class UL {
+    public static UL newUL ( String ul ) { 
+    checkNotNull ( ul ) ; 
+    String [ ] split = StringUtils . splitS ( ul , "STR" ) ; 
+    byte b [ ] = new byte [ split . length ] ; 
+    for ( int i = 0 ; 
+    i < split . length ; 
+    i ++ ) { 
+    int parseInt = Integer . parseInt ( split [ i ] , 16 ) ; 
+    b [ i ] = ( byte ) parseInt ; 
+    } return new UL ( b ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ULTest {
+    @Test
+     public void testULFromString ( ) {
+         UL expected = new UL ( new byte [ ] { 
+     ( byte ) 0xff , 0xb , 1 , 2 , ( byte ) 0xff , 0xb , 1 , 2 } ) ; 
+         UL fromString = UL . newUL ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertArrayEquals(expected.getBytes(), fromString.getBytes());
+Assert.assertEquals(expected.toString(), fromString.toString());
+Assert.assertEquals(expected.hashCode(), fromString.hashCode());
+Assert.assertTrue(expected.equals(fromString));
+Assert.assertEquals(expected.getClass(), fromString.getClass());
+Assert.assertTrue(expected == fromString);
+Assert.assertNotEquals(expected, fromString);
+Assert.assertTrue(expected.compareTo(fromString) == 0);
+Assert.assertTrue(expected.compareTo(fromString) != 1);
+Assert.assertTrue(expected.compareTo(fromString) != -1);
+Assert.assertTrue(expected.compareTo(fromString) >= 0);
+Assert.assertTrue(expected.compareTo(fromString) <= 0);
+Assert.assertTrue(expected.compareTo(fromString) > -1);
+Assert.assertTrue(expected.compareTo(fromString) < 1);
+Assert.assertTrue(expected.equals(expected));
+Assert.assertTrue(expected.hashCode() == expected.hashCode());
+Assert.assertTrue(expected.toString().equals(expected.toString()));
+Assert.assertTrue(expected.getBytes().length == fromString.getBytes().length);
+Assert.assertTrue(expected.getBytes().length == 8);
+Assert.assertTrue(fromString.getBytes().length == 8);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(expected,fromString); ===
+0.957 - Assert.assertNotEquals(expected, fromString)
+0.831 - Assert.assertTrue(expected == fromString)
+0.750 - Assert.assertEquals(expected.toString(), fromString.toString())
+0.750 - Assert.assertEquals(expected.hashCode(), fromString.hashCode())
+0.750 - Assert.assertTrue(expected.equals(fromString))
+0.750 - Assert.assertEquals(expected.getClass(), fromString.getClass())
+0.710 - Assert.assertArrayEquals(expected.getBytes(), fromString.getBytes())
+0.701 - Assert.assertTrue(expected.compareTo(fromString) < 1)
+0.692 - Assert.assertTrue(expected.compareTo(fromString) == 0)
+0.692 - Assert.assertTrue(expected.compareTo(fromString) != 1)
+0.692 - Assert.assertTrue(expected.compareTo(fromString) >= 0)
+0.692 - Assert.assertTrue(expected.compareTo(fromString) <= 0)
+0.692 - Assert.assertTrue(expected.compareTo(fromString) > -1)
+0.684 - Assert.assertTrue(expected.compareTo(fromString) != -1)
+0.609 - Assert.assertTrue(expected.toString().equals(expected.toString()))
+0.600 - Assert.assertTrue(expected.equals(expected))
+0.541 - Assert.assertTrue(expected.getBytes().length == 8)
+0.535 - Assert.assertTrue(expected.getBytes().length == fromString.getBytes().length)
+0.500 - Assert.assertTrue(fromString.getBytes().length == 8)
+0.447 - Assert.assertTrue(expected.hashCode() == expected.hashCode())

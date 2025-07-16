@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocument {\npublic boolean isDirty ( ) {\nreturn _dirty ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTest {\n@Test\npublic void testNoDirtySameBytes ( ) {\nODocument doc = new ODocument ( ) ;\nbyte [ ] bytes = new byte [ ] {\n0 , 1 , 2 , 3 , 4 , 5 } ;\ndoc . field ( \"STR\" , bytes ) ;\nODocumentInternal . clearTrackData ( doc ) ;\nORecordInternal . unsetDirty ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\n1. assertFalse(doc.isDirty());\n2. assertEquals(6, doc.toStream().length);\n3. assertArrayEquals(bytes, doc.field(\"STR\"));\n4. assertNull(doc.field(\"NEW_FIELD\"));\n5. assertTrue(doc.isTrackingChanges());\n6. assertFalse(doc.isTrackingChanges());\n7. assertTrue(doc.isDirty());\n8. assertFalse(doc.isDirty());\n9. assertNotNull(doc.field(\"STR\"));\n10. assertNull(doc.field(\"NON_EXISTING_FIELD\"));\n11. assertTrue(doc.isDirty());\n12. assertFalse(doc.isDirty());\n13. assertEquals(6, doc.toStream().length);\n14. assertArrayEquals(bytes, doc.field(\"STR\"));\n15. assertNull(doc.field(\"NEW_FIELD\"));\n16. assertTrue(doc.isTrackingChanges());\n17. assertFalse(doc.isTrackingChanges());\n18. assertTrue(doc.isDirty());\n19. assertFalse(doc.isDirty());\n20. assertNotNull(doc.field(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.963,
+        0.945,
+        0.945,
+        0.83,
+        0.815,
+        0.815,
+        0.776,
+        0.688,
+        0.677,
+        0.571,
+        0.562,
+        0.554,
+        0.545,
+        0.542,
+        0.533,
+        0.522,
+        0.516,
+        0.514,
+        0.508,
+        0.444
+    ],
+    "ground_truth": "assertFalse(doc.isDirty());"
+}

@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testAnchorFilterFalse ( ) throws MalformedURLException {
+         URLFilter allAllowed = createFilter ( false , false ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        assertNotNull(filterResult);
+        assertTrue(filterResult.contains("http"));
+        assertFalse(filterResult.contains("invalid"));
+        assertEquals(url.toExternalForm(), filterResult);
+        assertTrue(filterResult.startsWith("http"));
+        assertFalse(filterResult.endsWith("#"));
+        assertFalse(filterResult.contains(" ")); 
+        assertFalse(filterResult.contains("<")); 
+        assertFalse(filterResult.contains(">")); 
+        assertFalse(filterResult.contains("%")); 
+        assertFalse(filterResult.contains("!")); 
+        assertFalse(filterResult.contains("@")); 
+        assertFalse(filterResult.contains("#")); 
+        assertFalse(filterResult.contains("$")); 
+        assertFalse(filterResult.contains("^")); 
+        assertFalse(filterResult.contains("&")); 
+        assertFalse(filterResult.contains("*")); 
+        assertFalse(filterResult.contains("(")); 
+        assertFalse(filterResult.contains(")")); 
+        assertFalse(filterResult.contains("+")); 
+        assertFalse(filterResult.contains("=")); 
+        assertTrue(filterResult.length() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+1.000 - assertEquals(url.toExternalForm(), filterResult)
+0.541 - assertFalse(filterResult.contains(" "))
+0.537 - ```java
+        assertNotNull(filterResult)
+0.535 - assertFalse(filterResult.endsWith("#"))
+0.535 - assertFalse(filterResult.contains("<"))
+0.535 - assertFalse(filterResult.contains(">"))
+0.535 - assertFalse(filterResult.contains("%"))
+0.535 - assertFalse(filterResult.contains("!"))
+0.535 - assertFalse(filterResult.contains("@"))
+0.535 - assertFalse(filterResult.contains("#"))
+0.535 - assertFalse(filterResult.contains("$"))
+0.535 - assertFalse(filterResult.contains("^"))
+0.535 - assertFalse(filterResult.contains("&"))
+0.535 - assertFalse(filterResult.contains("*"))
+0.535 - assertFalse(filterResult.contains("("))
+0.535 - assertFalse(filterResult.contains(")"))
+0.535 - assertFalse(filterResult.contains("+"))
+0.535 - assertFalse(filterResult.contains("="))
+0.512 - assertTrue(filterResult.length() > 0)
+0.500 - assertFalse(filterResult.contains("invalid"))
+0.477 - assertTrue(filterResult.contains("http"))
+0.467 - assertTrue(filterResult.startsWith("http"))
+0.000 - ```

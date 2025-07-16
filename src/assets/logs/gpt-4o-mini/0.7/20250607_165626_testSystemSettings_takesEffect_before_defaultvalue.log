@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class GlobalSwitch {
+    @Override
+    @Deprecated
+     public boolean isConnectionMonitorSwitchOn ( ) { 
+     return option ( BoltClientOption . CONN_MONITOR_SWITCH ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class GlobalSwitchTest {
+    @Test
+     public void testSystemSettings_takesEffect_before_defaultvalue ( ) {
+         System . setProperty ( Configs . CONN_RECONNECT_SWITCH , "STR" ) ; 
+         System . setProperty ( Configs . CONN_MONITOR_SWITCH , "STR" ) ; 
+         client1 = new RpcClient ( ) ; 
+         client2 = new RpcClient ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertTrue(client1.isConnectionMonitorSwitchOn());
+Assert.assertTrue(client2.isConnectionMonitorSwitchOn());
+Assert.assertEquals(client1.getReconnectSwitch(), "STR");
+Assert.assertEquals(client2.getReconnectSwitch(), "STR");
+Assert.assertFalse(client1.isConnectionMonitorSwitchOn());
+Assert.assertFalse(client2.isConnectionMonitorSwitchOn());
+Assert.assertNotNull(client1);
+Assert.assertNotNull(client2);
+Assert.assertNotEquals(client1, client2);
+Assert.assertTrue(client1 instanceof RpcClient);
+Assert.assertTrue(client2 instanceof RpcClient);
+Assert.assertThrows(Deprecated.class, () -> client1.isConnectionMonitorSwitchOn());
+Assert.assertThrows(Deprecated.class, () -> client2.isConnectionMonitorSwitchOn());
+Assert.assertTrue(client1.getConfig(Configs.CONN_RECONNECT_SWITCH).equals("STR"));
+Assert.assertTrue(client2.getConfig(Configs.CONN_MONITOR_SWITCH).equals("STR"));
+Assert.assertTrue(client1.isConnectionMonitorSwitchOn() || client2.isConnectionMonitorSwitchOn());
+Assert.assertFalse(client1.isConnectionMonitorSwitchOn() && client2.isConnectionMonitorSwitchOn());
+Assert.assertEquals(client1.getOption(BoltClientOption.CONN_MONITOR_SWITCH), "STR");
+Assert.assertEquals(client2.getOption(BoltClientOption.CONN_MONITOR_SWITCH), "STR");
+Assert.assertTrue(client1.getOption(BoltClientOption.CONN_RECONNECT_SWITCH).equals("STR"));
+Assert.assertTrue(client2.getOption(BoltClientOption.CONN_RECONNECT_SWITCH).equals("STR"));
+Assert.assertNotEquals(client1.getOption(BoltClientOption.CONN_MONITOR_SWITCH), client2.getOption(BoltClientOption.CONN_MONITOR_SWITCH));
+Assert.assertNotEquals(client1.getOption(BoltClientOption.CONN_RECONNECT_SWITCH), client2.getOption(BoltClientOption.CONN_RECONNECT_SWITCH));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(client1.isConnectionMonitorSwitchOn()); ===
+0.980 - Assert.assertTrue(client2.isConnectionMonitorSwitchOn())
+0.929 - Assert.assertFalse(client1.isConnectionMonitorSwitchOn())
+0.925 - ```java
+Assert.assertTrue(client1.isConnectionMonitorSwitchOn())
+0.909 - Assert.assertFalse(client2.isConnectionMonitorSwitchOn())
+0.793 - Assert.assertThrows(Deprecated.class, () -> client1.isConnectionMonitorSwitchOn())
+0.777 - Assert.assertThrows(Deprecated.class, () -> client2.isConnectionMonitorSwitchOn())
+0.715 - Assert.assertTrue(client1.isConnectionMonitorSwitchOn() || client2.isConnectionMonitorSwitchOn())
+0.667 - Assert.assertFalse(client1.isConnectionMonitorSwitchOn() && client2.isConnectionMonitorSwitchOn())
+0.639 - Assert.assertEquals(client1.getReconnectSwitch(), "STR")
+0.619 - Assert.assertEquals(client2.getReconnectSwitch(), "STR")
+0.552 - Assert.assertTrue(client1 instanceof RpcClient)
+0.529 - Assert.assertTrue(client2 instanceof RpcClient)
+0.488 - Assert.assertTrue(client1.getConfig(Configs.CONN_RECONNECT_SWITCH).equals("STR"))
+0.479 - Assert.assertTrue(client2.getConfig(Configs.CONN_MONITOR_SWITCH).equals("STR"))
+0.469 - Assert.assertNotEquals(client1, client2)
+0.455 - Assert.assertTrue(client1.getOption(BoltClientOption.CONN_RECONNECT_SWITCH).equals("STR"))
+0.451 - Assert.assertNotNull(client1)
+0.439 - Assert.assertTrue(client2.getOption(BoltClientOption.CONN_RECONNECT_SWITCH).equals("STR"))
+0.423 - Assert.assertNotNull(client2)
+0.419 - Assert.assertEquals(client1.getOption(BoltClientOption.CONN_MONITOR_SWITCH), "STR")
+0.403 - Assert.assertEquals(client2.getOption(BoltClientOption.CONN_MONITOR_SWITCH), "STR")
+0.339 - Assert.assertNotEquals(client1.getOption(BoltClientOption.CONN_MONITOR_SWITCH), client2.getOption(BoltClientOption.CONN_MONITOR_SWITCH))
+0.331 - Assert.assertNotEquals(client1.getOption(BoltClientOption.CONN_RECONNECT_SWITCH), client2.getOption(BoltClientOption.CONN_RECONNECT_SWITCH))
+0.000 - ```

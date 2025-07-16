@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void reziduāļi ( ) {
+         locītājs . enableDiminutive = true ; 
+         locītājs . enablePrefixes = true ; 
+         locītājs . enableGuessing = true ; 
+         locītājs . enableAllGuesses = true ; 
+         locītājs . meklētsalikteņus = true ; 
+         Word m = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(m);
+assertTrue(m.isRecognized());
+assertEquals("ExpectedWordForm1", m.getWordForm(0));
+assertEquals("ExpectedWordForm2", m.getWordForm(1));
+assertTrue(m.hasDiminutive());
+assertTrue(m.hasPrefixes());
+assertTrue(m.canGuess());
+assertTrue(m.hasAllGuesses());
+assertTrue(m.hasSyllables());
+assertEquals(3, m.getSyllableCount());
+assertTrue(m.containsSuffix("suffix"));
+assertFalse(m.containsPrefix("prefixNotPresent"));
+assertTrue(m.isValid());
+assertTrue(m.isPlural());
+assertFalse(m.isPastTense());
+assertEquals("ExpectedRoot", m.getRoot());
+assertNotEquals("UnexpectedRoot", m.getRoot());
+assertTrue(m.getDerivedWords().size() > 0);
+assertEquals(2, m.getDerivedWords().size());
+assertTrue(m.getAlternativeForms().contains("AlternativeForm1"));
+assertFalse(m.getAlternativeForms().isEmpty());
+assertEquals("ExpectedAnalysis", m.analyze("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(m.isRecognized()); ===
+1.000 - assertTrue(m.isRecognized())
+0.784 - assertTrue(m.isValid())
+0.692 - assertTrue(m.isPlural())
+0.667 - assertTrue(m.hasAllGuesses())
+0.655 - assertTrue(m.hasPrefixes())
+0.654 - assertTrue(m.canGuess())
+0.643 - assertTrue(m.hasSyllables())
+0.643 - assertFalse(m.isPastTense())
+0.632 - assertTrue(m.hasDiminutive())
+0.618 - assertTrue(m.getDerivedWords().size() > 0)
+0.606 - assertTrue(m.containsSuffix("suffix"))
+0.514 - assertEquals(2, m.getDerivedWords().size())
+0.500 - assertEquals(3, m.getSyllableCount())
+0.478 - assertTrue(m.getAlternativeForms().contains("AlternativeForm1"))
+0.468 - assertFalse(m.containsPrefix("prefixNotPresent"))
+0.441 - assertEquals("ExpectedRoot", m.getRoot())
+0.411 - assertNotEquals("UnexpectedRoot", m.getRoot())
+0.405 - assertFalse(m.getAlternativeForms().isEmpty())
+0.385 - ```java
+assertNotNull(m)
+0.385 - assertEquals("ExpectedWordForm1", m.getWordForm(0))
+0.385 - assertEquals("ExpectedWordForm2", m.getWordForm(1))
+0.312 - assertEquals("ExpectedAnalysis", m.analyze("STR"))
+0.000 - ```

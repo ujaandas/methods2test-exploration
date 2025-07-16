@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseImport {
+    boolean existsClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseImportTest {
+    @Test
+     public void exportImportExcludeClusters ( ) throws IOException {
+         ODatabaseDocument db = new ODatabaseDocumentTx ( "STR" + ODatabaseImportTest . class . getSimpleName ( ) + "STR" ) ; 
+         db . create ( ) ; 
+         db . getMetadata ( ) . getSchema ( ) . createClass ( "STR" ) ; 
+         ByteArrayOutputStream output = new ByteArrayOutputStream ( ) ; 
+         ODatabaseExport export = new ODatabaseExport ( ( ODatabaseDocumentInternal ) db , output , new OCommandOutputListener ( ) { 
+     @Override
+     public void onMessage ( String iText ) { 
+     } } ) ; 
+         export . setOptions ( "STR" ) ; 
+         export . exportDatabase ( ) ; 
+         db . drop ( ) ; 
+         ODatabaseDocument dbImp = new ODatabaseDocumentTx ( "STR" + ODatabaseImportTest . class . getSimpleName ( ) ) ; 
+         dbImp . create ( ) ; 
+         ODatabaseImport importer = new ODatabaseImport ( ( ODatabaseDocumentInternal ) dbImp , new ByteArrayInputStream ( output . toByteArray ( ) ) , new OCommandOutputListener ( ) { 
+     @Override
+     public void onMessage ( String iText ) { 
+     } } ) ; 
+         importer . importDatabase ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR"));
+Assert.assertEquals(1, dbImp.getMetadata().getSchema().getClasses().size());
+Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR"));
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperties().isEmpty());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0);
+Assert.assertEquals("STR", dbImp.getMetadata().getSchema().getClass("STR").getName());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").isAbstract());
+Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isSubClassOf("AnotherClass"));
+Assert.assertEquals(0, dbImp.countClass("STR"));
+Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0);
+Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isEmbedded());
+Assert.assertEquals(0, dbImp.getMetadata().getSchema().getClass("STR").getSuperClassId());
+Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isPolymorphic());
+Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getProperties());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperties().isEmpty());
+Assert.assertEquals(0, dbImp.getMetadata().getSchema().getClass("STR").getPropertyNames().size());
+Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isAbstract());
+Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR")); ===
+0.939 - ```java
+Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR"))
+0.887 - Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR"))
+0.866 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").isAbstract())
+0.815 - Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isEmbedded())
+0.815 - Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isAbstract())
+0.797 - Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isPolymorphic())
+0.795 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0)
+0.795 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0)
+0.795 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds().length > 0)
+0.789 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperties().isEmpty())
+0.789 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperties().isEmpty())
+0.786 - Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds())
+0.786 - Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getProperties())
+0.786 - Assert.assertNotNull(dbImp.getMetadata().getSchema().getClass("STR").getClusterIds())
+0.777 - Assert.assertEquals("STR", dbImp.getMetadata().getSchema().getClass("STR").getName())
+0.775 - Assert.assertEquals(1, dbImp.getMetadata().getSchema().getClasses().size())
+0.769 - Assert.assertEquals(0, dbImp.getMetadata().getSchema().getClass("STR").getSuperClassId())
+0.728 - Assert.assertFalse(dbImp.getMetadata().getSchema().getClass("STR").isSubClassOf("AnotherClass"))
+0.728 - Assert.assertEquals(0, dbImp.getMetadata().getSchema().getClass("STR").getPropertyNames().size())
+0.554 - Assert.assertEquals(0, dbImp.countClass("STR"))
+0.000 - ```

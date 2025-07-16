@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class DefaultValue {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class DefaultValueTest {
+    @Test
+     public void testDefaultValueFromJson ( ) {
+         OSchema schema = database . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . DATE ) ; 
+         prop . setDefaultValue ( ODateHelper . getDateTimeFormatInstance ( ) . format ( new Date ( ) ) ) ; 
+         ODocument doc = new ODocument ( ) . fromJSON ( "STR" ) ; 
+         ODocument saved = database . save ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(OType.DATE, saved.fieldType("STR"));
+assertEquals(ODateHelper.getDateTimeFormatInstance().format(new Date()), saved.field("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+assertEquals(true, saved.containsField("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(saved.field("STR")); ===
+0.700 - assertEquals(OType.DATE, saved.fieldType("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.667 - assertEquals(true, saved.containsField("STR"))
+0.455 - assertEquals(ODateHelper.getDateTimeFormatInstance().format(new Date()), saved.field("STR"))

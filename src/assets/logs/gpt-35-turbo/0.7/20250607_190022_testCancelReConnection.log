@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManager {
+    @Override
+     public Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     url . setConnectTimeout ( connectTimeout ) ; 
+     return this . connectionManager . getAndCreateIfAbsent ( url ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManagerTest {
+    @Test
+     public void testCancelReConnection ( ) throws InterruptedException , RemotingException {
+         doInit ( false , true ) ; 
+         client . enableReconnectSwitch ( ) ; 
+         String addr = "STR" ; 
+         Url url = addressParser . parse ( addr ) ; 
+         client . getConnection ( url , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1000, url.getConnectTimeout());
+assertFalse(client.isReconnecting());
+assertNotNull(client.getConnection(url, 1000));
+assertTrue(client.isReconnectSwitchEnabled());
+assertEquals(addr, url.getAddress());
+assertTrue(client.getConnection(url, 1000) instanceof Connection);
+assertNotNull(client.getConnection(url, 1000));
+assertEquals(1000, url.getConnectTimeout());
+assertTrue(client.isReconnectSwitchEnabled());
+assertEquals(addr, url.getAddress());
+assertFalse(client.isReconnecting());
+assertNotNull(client.getConnection(url, 1000));
+assertTrue(client.isReconnectSwitchEnabled());
+assertEquals(1000, url.getConnectTimeout());
+assertEquals(addr, url.getAddress());
+assertFalse(client.isReconnecting());
+assertNotNull(client.getConnection(url, 1000));
+assertTrue(client.isReconnectSwitchEnabled());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes()); ===
+0.654 - assertEquals(1000, url.getConnectTimeout())
+0.654 - assertEquals(1000, url.getConnectTimeout())
+0.654 - assertEquals(1000, url.getConnectTimeout())
+0.571 - assertFalse(client.isReconnecting())
+0.571 - assertFalse(client.isReconnecting())
+0.571 - assertFalse(client.isReconnecting())
+0.548 - assertTrue(client.getConnection(url, 1000) instanceof Connection)
+0.523 - assertNotNull(client.getConnection(url, 1000))
+0.523 - assertNotNull(client.getConnection(url, 1000))
+0.523 - assertNotNull(client.getConnection(url, 1000))
+0.523 - assertNotNull(client.getConnection(url, 1000))
+0.505 - assertTrue(client.isReconnectSwitchEnabled())
+0.505 - assertTrue(client.isReconnectSwitchEnabled())
+0.505 - assertTrue(client.isReconnectSwitchEnabled())
+0.505 - assertTrue(client.isReconnectSwitchEnabled())
+0.495 - assertEquals(addr, url.getAddress())
+0.495 - assertEquals(addr, url.getAddress())
+0.495 - assertEquals(addr, url.getAddress())

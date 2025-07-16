@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic Method find ( ) {\nList < Method > methods = findAll ( ) ;\nswitch ( methods . size ( ) ) {\ncase 0 : return null ;\ncase 1 : return methods . iterator ( ) . next ( ) ;\ndefault : throw new ReflectionException ( format ( \"STR\" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testGetAtMostOneVoidMethodWithoutArgs ( ) {\nMethod method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Prepare . class ) . withVoidReturnType ( ) . withoutArgs ( ) . find ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(method);\nAssert.assertEquals(\"methodName\", method.getName());\nAssert.assertEquals(void.class, method.getReturnType());\nAssert.assertEquals(0, method.getParameterCount());\nAssert.assertTrue(method.getModifiers() == Modifier.PUBLIC || method.getModifiers() == (Modifier.PUBLIC | Modifier.FINAL));\nAssert.assertTrue(Modifier.isStatic(method.getModifiers()));\nAssert.assertTrue(Modifier.isFinal(method.getModifiers()));\nAssert.assertTrue(Modifier.isPublic(method.getModifiers()));\nAssert.assertFalse(Modifier.isPrivate(method.getModifiers()));\nAssert.assertFalse(Modifier.isProtected(method.getModifiers()));\nAssert.assertFalse(Modifier.isAbstract(method.getModifiers()));\nAssert.assertFalse(Modifier.isSynchronized(method.getModifiers()));\nAssert.assertFalse(Modifier.isNative(method.getModifiers()));\nAssert.assertFalse(Modifier.isStrict(method.getModifiers()));\nAssert.assertFalse(Modifier.isTransient(method.getModifiers()));\nAssert.assertFalse(Modifier.isVolatile(method.getModifiers()));\nAssert.assertFalse(Modifier.isInterface(method.getModifiers()));\nAssert.assertFalse(Modifier.isStrict(method.getModifiers()));\nAssert.assertFalse(Modifier.isBridge(method.getModifiers()));\nAssert.assertFalse(Modifier.isSynthetic(method.getModifiers()));\n====================\n\n",
+    "scores": [
+        0.835,
+        0.769,
+        0.675,
+        0.562,
+        0.562,
+        0.561,
+        0.552,
+        0.543,
+        0.543,
+        0.539,
+        0.539,
+        0.533,
+        0.527,
+        0.527,
+        0.526,
+        0.523,
+        0.523,
+        0.522,
+        0.522,
+        0.322
+    ],
+    "ground_truth": "assertEquals(\"STR\",method.getName());"
+}

@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testFriendsOfFriendsArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+assertEquals(expectedSize, qResult.size());
+
+OResult firstResult = qResult.next();
+assertNotNull(firstResult);
+assertTrue(firstResult.getProperty("name") instanceof String);
+assertTrue(firstResult.getProperty("friendCount") instanceof Integer);
+
+while (qResult.hasNext()) {
+    OResult result = qResult.next();
+    assertNotNull(result);
+    assertTrue(result.getProperty("name") instanceof String);
+    assertTrue(result.getProperty("friendCount") >= 0);
+}
+
+qResult.close();
+
+OResultSet qResult2 = db.query("ANOTHER_STR");
+assertNotNull(qResult2);
+assertNotEquals(qResult.size(), qResult2.size());
+
+OResult resultAtIndex = qResult.get(0);
+assertEquals(expectedName, resultAtIndex.getProperty("name"));
+
+assertThrows(NoSuchElementException.class, () -> {
+    qResult.next();
+});
+
+assertTrue(qResult.isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(qResult.hasNext()); ===
+1.000 - assertTrue(qResult.hasNext())
+0.828 - assertTrue(qResult.isEmpty())
+0.615 - assertNotNull(qResult2)
+0.600 - assertEquals(expectedSize, qResult.size())
+0.579 - assertNotEquals(qResult.size(), qResult2.size())
+0.571 - assertTrue(result.getProperty("friendCount") >= 0)
+0.548 - OResult firstResult = qResult.next()
+0.542 - ```java
+assertNotNull(qResult)
+0.530 - assertTrue(result.getProperty("name") instanceof String)
+0.527 - assertThrows(NoSuchElementException.class, () -> {
+    qResult.next()
+0.523 - assertTrue(firstResult.getProperty("name") instanceof String)
+0.520 - assertNotNull(result)
+0.511 - }
+
+qResult.close()
+0.509 - assertNotNull(firstResult)
+0.482 - while (qResult.hasNext()) {
+    OResult result = qResult.next()
+0.469 - OResult resultAtIndex = qResult.get(0)
+0.458 - assertTrue(firstResult.getProperty("friendCount") instanceof Integer)
+0.404 - assertEquals(expectedName, resultAtIndex.getProperty("name"))
+0.366 - OResultSet qResult2 = db.query("ANOTHER_STR")
+0.065 - })
+0.000 - ```

@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractor {
+    public String text ( Element element ) { 
+    if ( noText ) return "STR" ; 
+    if ( inclusionPatterns . size ( ) == 0 && excludedTags . size ( ) == 0 ) { 
+    return _text ( element ) ; 
+    } Elements matches = new Elements ( ) ; 
+    for ( String pattern : inclusionPatterns ) { 
+    matches = element . select ( pattern ) ; 
+    if ( ! matches . isEmpty ( ) ) break ; 
+    } if ( matches . isEmpty ( ) ) { 
+    matches . add ( element ) ; 
+    } final StringBuilder accum = new StringBuilder ( ) ; 
+    for ( Element node : matches ) { 
+    accum . append ( _text ( node ) ) . append ( "STR" ) ; 
+    } return accum . toString ( ) . trim ( ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractorTest {
+    @Test
+     public void testExclusionCase ( ) throws IOException {
+         Config conf = new Config ( ) ; 
+         conf . put ( TextExtractor . EXCLUDE_PARAM_NAME , "STR" ) ; 
+         TextExtractor extractor = new TextExtractor ( conf ) ; 
+         String content = "STR" ; 
+         Document jsoupDoc = Parser . htmlParser ( ) . parseInput ( content , "STR" ) ; 
+         String text = extractor . text ( jsoupDoc . body ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", text);
+assertNotEquals("test", text);
+assertTrue(text.contains("example"));
+assertFalse(text.isEmpty());
+assertNotNull(text);
+assertNull(nullText);
+assertSame(expectedText, text);
+assertNotSame(unexpectedText, text);
+assertEqualsIgnoringCase("STR", text);
+assertArrayEquals(expectedArray, actualArray);
+assertIterableEquals(expectedList, actualList);
+assertLinesMatch(expectedLines, actualLines);
+assertTimeout(Duration.ofSeconds(1), () -> {
+    // code that may take longer than 1 second to execute
+});
+assertThrows(Exception.class, () -> {
+    // code that should throw an exception
+});
+assertAll(
+    () -> assertTrue(text.contains("first")),
+    () -> assertFalse(text.contains("second"))
+);
+assertThat(text, containsString("substring"));
+assertThat(text, startsWith("prefix"));
+assertThat(text, endsWith("suffix"));
+assertThat(text, matchesPattern("regexPattern"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",text); ===
+1.000 - assertEquals("STR", text)
+0.808 - assertNotEquals("test", text)
+0.800 - assertEqualsIgnoringCase("STR", text)
+0.651 - assertNotNull(text)
+0.636 - assertNull(nullText)
+0.588 - assertFalse(text.isEmpty())
+0.566 - assertSame(expectedText, text)
+0.500 - assertArrayEquals(expectedArray, actualArray)
+0.493 - assertIterableEquals(expectedList, actualList)
+0.483 - assertNotSame(unexpectedText, text)
+0.441 - assertThat(text, endsWith("suffix"))
+0.433 - assertTrue(text.contains("example"))
+0.426 - assertThat(text, startsWith("prefix"))
+0.382 - assertThat(text, containsString("substring"))
+0.366 - assertThat(text, matchesPattern("regexPattern"))
+0.328 - assertLinesMatch(expectedLines, actualLines)
+0.298 - assertThrows(Exception.class, () -> {
+    // code that should throw an exception
+})
+0.250 - assertTimeout(Duration.ofSeconds(1), () -> {
+    // code that may take longer than 1 second to execute
+})
+0.222 - assertAll(
+    () -> assertTrue(text.contains("first")),
+    () -> assertFalse(text.contains("second"))
+)

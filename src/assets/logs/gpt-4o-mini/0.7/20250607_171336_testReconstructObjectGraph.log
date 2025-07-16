@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedProperties {
+    public static Set < String > bindAll ( Object instance , TestCase testCase ) { 
+    Set < String > usedProperties = new HashSet < > ( ) ; 
+    for ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) { 
+    String fullPropertyPath = entry . getKey ( ) . trim ( ) ; 
+    String value = entry . getValue ( ) . trim ( ) ; 
+    if ( bind0 ( instance , fullPropertyPath , value ) ) { 
+    usedProperties . add ( fullPropertyPath ) ; 
+    } } return usedProperties ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedPropertiesTest {
+    @Test
+     public void testReconstructObjectGraph ( ) {
+         TestCase testCase = new TestCase ( "STR" ) . setProperty ( "STR" , 10 ) ; 
+         Person person = new Person ( ) ; 
+         Set < String > usedProperties = bindAll ( person , testCase ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, usedProperties.size());
+assertTrue(usedProperties.contains("STR"));
+assertEquals(10, person.getSTR());
+assertNotNull(person);
+assertTrue(person instanceof Person);
+assertEquals("STR", testCase.getProperties().keySet().iterator().next());
+assertEquals("10", testCase.getProperties().get("STR"));
+assertTrue(usedProperties.isEmpty() == false);
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("NON_EXISTENT_PROPERTY"));
+assertNotEquals(5, person.getSTR());
+assertNotEquals(0, usedProperties.size());
+assertEquals(10, person.getSTR());
+assertNotNull(testCase.getProperties());
+assertTrue(testCase.getProperties().size() > 0);
+assertEquals(1, testCase.getProperties().size());
+assertTrue(testCase.getProperties().containsKey("STR"));
+assertEquals(10, (int) testCase.getProperties().get("STR"));
+assertTrue(testCase.getProperties().get("STR") instanceof String);
+assertFalse(usedProperties.contains("INVALID_PROPERTY"));
+assertEquals(10, person.getSTR());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(person.nullArm); ===
+0.840 - assertNotNull(person)
+0.635 - assertNotEquals(5, person.getSTR())
+0.559 - assertNotNull(testCase.getProperties())
+0.557 - assertEquals(10, person.getSTR())
+0.557 - assertEquals(10, person.getSTR())
+0.557 - assertEquals(10, person.getSTR())
+0.540 - assertTrue(person instanceof Person)
+0.522 - assertNotEquals(0, usedProperties.size())
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.389 - assertTrue(usedProperties.isEmpty() == false)
+0.376 - assertFalse(usedProperties.contains("INVALID_PROPERTY"))
+0.357 - assertTrue(testCase.getProperties().containsKey("STR"))
+0.351 - ```java
+assertEquals(1, usedProperties.size())
+0.351 - assertTrue(testCase.getProperties().size() > 0)
+0.342 - assertEquals(1, testCase.getProperties().size())
+0.333 - assertFalse(usedProperties.contains("NON_EXISTENT_PROPERTY"))
+0.313 - assertEquals("10", testCase.getProperties().get("STR"))
+0.304 - assertTrue(testCase.getProperties().get("STR") instanceof String)
+0.302 - assertEquals(10, (int) testCase.getProperties().get("STR"))
+0.300 - assertEquals("STR", testCase.getProperties().keySet().iterator().next())
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctions {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctionsTest {\n@Test\npublic void testStContainsPoint ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(next);\nassertTrue(next.containsField(\"fieldName1\"));\nassertEquals(\"expectedValue1\", next.field(\"fieldName1\"));\nassertTrue(next.field(\"fieldName2\") instanceof OIdentifiable);\nassertFalse(next.field(\"fieldName3\").isNew());\nassertTrue(next.field(\"fieldName4\").isPersistent());\nassertEquals(5, next.field(\"fieldName5\").size());\nassertTrue(next.field(\"fieldName6\").contains(\"expectedElement\"));\nassertNotEquals(\"unexpectedValue\", next.field(\"fieldName7\"));\nassertNull(next.field(\"fieldName8\"));\nassertTrue(next.field(\"fieldName9\").toString().contains(\"expectedSubstring\"));\nassertEquals(10, next.field(\"fieldName10\").get(\"subField\").intValue());\nassertTrue(next.field(\"fieldName11\").isDirty());\nassertFalse(next.field(\"fieldName12\").isDirty());\nassertEquals(\"expectedValue\", next.field(\"fieldName13\"));\nassertNotSame(next.field(\"fieldName14\"), next.field(\"fieldName15\"));\nassertTrue(next.field(\"fieldName16\").isModified());\nassertFalse(next.field(\"fieldName17\").isModified());\nassertTrue(next.field(\"fieldName18\").isEmbedded());\nassertEquals(\"expectedType\", next.field(\"fieldName19\").getType());\nassertNotNull(next.field(\"fieldName20\"));\n```\n====================\n\n",
+    "scores": [
+        0.703,
+        0.703,
+        0.699,
+        0.674,
+        0.667,
+        0.632,
+        0.62,
+        0.617,
+        0.595,
+        0.578,
+        0.575,
+        0.575,
+        0.558,
+        0.558,
+        0.552,
+        0.552,
+        0.51,
+        0.505,
+        0.48,
+        0.444,
+        0.442,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(true,next.field(\"STR\"));"
+}

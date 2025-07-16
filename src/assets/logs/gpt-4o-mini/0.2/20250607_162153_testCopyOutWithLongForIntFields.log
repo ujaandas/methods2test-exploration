@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjector {
+    public void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) { 
+    this . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , "STR" , objectName ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjectorTest {
+    @Test
+     public void testCopyOutWithLongForIntFields ( ) throws Exception {
+         this . attributeList . clear ( ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 17L ) ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 22L ) ) ; 
+         this . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(17, this.target.getFieldValue("STR"));
+assertEquals(22, this.target.getFieldValue("STR"));
+assertNotNull(this.target);
+assertTrue(this.target instanceof ExpectedClassType);
+assertEquals(2, this.attributeList.size());
+assertTrue(this.attributeSetters.containsKey("STR"));
+assertNotNull(this.attributeSetters.get("STR"));
+assertEquals(Long.class, this.attributeList.get(0).getValue().getClass());
+assertEquals(Long.class, this.attributeList.get(1).getValue().getClass());
+assertTrue(this.target.hasAttribute("STR"));
+assertEquals("STR", this.target.getAttributeName("STR"));
+assertTrue(this.target.isAttributeSet("STR"));
+assertFalse(this.target.isAttributeSet("NON_EXISTENT"));
+assertEquals(0, this.target.getErrorCount());
+assertTrue(this.target.getLogMessages().isEmpty());
+assertEquals("ExpectedValue", this.target.getExpectedFieldValue("STR"));
+assertNotEquals(0, this.target.getAttributeCount());
+assertTrue(this.target.getAttributeValues().contains(17L));
+assertTrue(this.target.getAttributeValues().contains(22L));
+assertTrue(this.target.getAttributeValues().size() > 0);
+assertEquals("ExpectedString", this.target.getStringRepresentation());
+assertNotNull(this.target.getObjectName());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(17,this.target.intValue); ===
+0.767 - assertEquals(22, this.target.getFieldValue("STR"))
+0.745 - ```java
+assertEquals(17, this.target.getFieldValue("STR"))
+0.725 - assertEquals(0, this.target.getErrorCount())
+0.692 - assertEquals(2, this.attributeList.size())
+0.690 - assertNotEquals(0, this.target.getAttributeCount())
+0.674 - assertEquals("STR", this.target.getAttributeName("STR"))
+0.667 - assertNotNull(this.target)
+0.633 - assertNotNull(this.target.getObjectName())
+0.622 - assertTrue(this.target.getAttributeValues().size() > 0)
+0.617 - assertEquals("ExpectedValue", this.target.getExpectedFieldValue("STR"))
+0.610 - assertTrue(this.target.isAttributeSet("STR"))
+0.600 - assertTrue(this.target.hasAttribute("STR"))
+0.598 - assertTrue(this.target instanceof ExpectedClassType)
+0.590 - assertEquals("ExpectedString", this.target.getStringRepresentation())
+0.589 - assertTrue(this.target.getAttributeValues().contains(17L))
+0.589 - assertTrue(this.target.getAttributeValues().contains(22L))
+0.587 - assertEquals(Long.class, this.attributeList.get(0).getValue().getClass())
+0.587 - assertEquals(Long.class, this.attributeList.get(1).getValue().getClass())
+0.587 - assertFalse(this.target.isAttributeSet("NON_EXISTENT"))
+0.529 - assertTrue(this.target.getLogMessages().isEmpty())
+0.476 - assertNotNull(this.attributeSetters.get("STR"))
+0.427 - assertTrue(this.attributeSetters.containsKey("STR"))
+0.000 - ```

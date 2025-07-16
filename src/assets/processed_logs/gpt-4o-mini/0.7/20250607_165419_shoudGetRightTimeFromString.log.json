@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtils {\npublic static Date getTodayWithTime ( final String iTime ) throws ParseException {\nfinal SimpleDateFormat df = new SimpleDateFormat ( \"STR\" ) ;\nCalendar calParsed = Calendar . getInstance ( ) ;\ncalParsed . setTime ( df . parse ( iTime ) ) ;\nCalendar cal = Calendar . getInstance ( ) ;\ncal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ;\ncal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ;\ncal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ;\ncal . set ( Calendar . MILLISECOND , 0 ) ;\nreturn cal . getTime ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtilsTest {\n@Test\npublic void shoudGetRightTimeFromString ( ) throws ParseException {\nCalendar calendar = Calendar . getInstance ( ) ;\ncalendar . set ( Calendar . HOUR_OF_DAY , 5 ) ;\ncalendar . set ( Calendar . MINUTE , 10 ) ;\ncalendar . set ( Calendar . SECOND , 0 ) ;\ncalendar . set ( Calendar . MILLISECOND , 0 ) ;\nDate d = OIOUtils . getTodayWithTime ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(d);\nassertEquals(5, calendar.get(Calendar.HOUR_OF_DAY));\nassertEquals(10, calendar.get(Calendar.MINUTE));\nassertEquals(0, calendar.get(Calendar.SECOND));\nassertEquals(0, calendar.get(Calendar.MILLISECOND));\nassertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR));\nassertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH));\nassertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));\nassertTrue(d instanceof Date);\nassertEquals(d.getTime(), calendar.getTimeInMillis());\nassertTrue(d.after(new Date(0))); // Check if date is after epoch\nassertTrue(d.before(new Date(Long.MAX_VALUE))); // Check if date is before max date\nassertEquals(0, d.getTime() % 1000); // Ensure milliseconds are zero\nassertEquals(10, calendar.get(Calendar.MINUTE));\nassertNotEquals(calendar.getTimeInMillis(), d.getTime() + 1000); // Check they are not 1 second apart\nassertNotEquals(calendar.getTimeInMillis(), d.getTime() - 1000); // Check they are not 1 second apart\nassertEquals(0, calendar.get(Calendar.MILLISECOND)); // Verify milliseconds\nassertTrue(d.equals(calendar.getTime())); // Check equality\nassertTrue(d.before(Calendar.getInstance().getTime())); // Ensure date is in the past\nassertTrue(d.after(new Date(System.currentTimeMillis() - 100000))); // Ensure date is recent\nassertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)); // Check day\nassertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH)); // Check month\n```\n====================\n\n",
+    "scores": [
+        0.744,
+        0.723,
+        0.709,
+        0.7,
+        0.667,
+        0.667,
+        0.653,
+        0.548,
+        0.526,
+        0.521,
+        0.519,
+        0.513,
+        0.5,
+        0.491,
+        0.477,
+        0.466,
+        0.403,
+        0.379,
+        0.338,
+        0.331,
+        0.328,
+        0.21,
+        0.08
+    ],
+    "ground_truth": "assertEquals(calendar.getTime(),d);"
+}

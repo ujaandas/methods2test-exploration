@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecution {\nOSequence getSequence ( String iName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecutionTest {\n@Test\npublic void testPlain ( ) {\nString name = \"STR\" ;\ndb . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));\nassertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName());\nassertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCached());\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart());\nassertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement());\nassertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue());\ndb.getMetadata().getSequenceLibrary().dropSequence(name);\nassertNull(db.getMetadata().getSequenceLibrary().getSequence(name));\ndb.getMetadata().getSequenceLibrary().createSequence(name, OSequence.SEQUENCE_TYPE.ORDERED, new OSequence.CreateParams());\nassertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));\nassertEquals(OSequence.SEQUENCE_TYPE.ORDERED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered());\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isCached());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart());\nassertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue());\ndb.getMetadata().getSequenceLibrary().dropSequence(name);\nassertNull(db.getMetadata().getSequenceLibrary().getSequence(name));\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.978,
+        0.978,
+        0.865,
+        0.859,
+        0.859,
+        0.855,
+        0.855,
+        0.853,
+        0.844,
+        0.833,
+        0.833,
+        0.833,
+        0.833,
+        0.825,
+        0.825,
+        0.818,
+        0.818,
+        0.7,
+        0.696,
+        0.585
+    ],
+    "ground_truth": "Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));"
+}

@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutor {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutorTest {
+    @Test
+     public void testMultipleCreateEdgeOnTheSameLet ( ) {
+         OrientDB factory = new OrientDB ( "STR" , "STR" , "STR" , OrientDBConfig . defaultConfig ( ) ) ; 
+         String dbName = getClass ( ) . getSimpleName ( ) + "STR" ; 
+         factory . create ( dbName , ODatabaseType . MEMORY ) ; 
+         ODatabaseDocument db = factory . open ( dbName , "STR" , "STR" ) ; 
+         String script = "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         OResultSet result = db . execute ( "STR" , script ) ; 
+         result . close ( ) ; 
+         result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedSize, result.stream().count());
+assertEquals(expectedValue1, result.next().getProperty("property1"));
+assertEquals(expectedValue2, result.next().getProperty("property2"));
+assertEquals(expectedValue3, result.next().getProperty("property3"));
+assertEquals(expectedValue4, result.next().getProperty("property4"));
+assertFalse(result.isEmpty());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("property5").equals(expectedValue5)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("property6").equals(expectedValue6)));
+assertNotEquals(unexpectedValue, result.next().getProperty("property7"));
+assertEquals(expectedValue8, result.stream().filter(r -> r.getProperty("property8").equals(expectedValue8)).count());
+assertThrows(SomeExpectedException.class, () -> {
+    db.execute("STR", "INVALID SCRIPT");
+});
+assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("property9").equals(expectedValue9)).count());
+assertTrue(result.stream().map(r -> r.getProperty("property10")).distinct().count() > 1);
+assertEquals(expectedValue11, result.findFirst().get().getProperty("property11"));
+assertFalse(result.stream().noneMatch(r -> r.getProperty("property12").equals(expectedValue12)));
+assertEquals(expectedValue13, result.limit(1).findFirst().get().getProperty("property13"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("property14").equals(expectedValue14)));
+assertEquals(expectedValue15, result.filter(r -> r.getProperty("property15").equals(expectedValue15)).findFirst().get().getProperty("property15"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,result.stream().count()); ===
+0.854 - assertEquals(expectedSize, result.stream().count())
+0.647 - assertFalse(result.isEmpty())
+0.627 - assertTrue(result.hasNext())
+0.585 - assertEquals(expectedValue2, result.next().getProperty("property2"))
+0.566 - assertEquals(expectedValue1, result.next().getProperty("property1"))
+0.566 - assertEquals(expectedValue3, result.next().getProperty("property3"))
+0.566 - assertEquals(expectedValue4, result.next().getProperty("property4"))
+0.545 - assertNotEquals(unexpectedValue, result.next().getProperty("property7"))
+0.520 - assertTrue(result.stream().map(r -> r.getProperty("property10")).distinct().count() > 1)
+0.504 - assertEquals(expectedValue11, result.findFirst().get().getProperty("property11"))
+0.503 - assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("property9").equals(expectedValue9)).count())
+0.500 - assertEquals(expectedValue8, result.stream().filter(r -> r.getProperty("property8").equals(expectedValue8)).count())
+0.481 - assertFalse(result.stream().noneMatch(r -> r.getProperty("property12").equals(expectedValue12)))
+0.471 - ```java
+assertNotNull(result)
+0.469 - assertEquals(expectedValue13, result.limit(1).findFirst().get().getProperty("property13"))
+0.465 - assertTrue(result.stream().anyMatch(r -> r.getProperty("property5").equals(expectedValue5)))
+0.465 - assertTrue(result.stream().allMatch(r -> r.getProperty("property6").equals(expectedValue6)))
+0.458 - assertTrue(result.stream().anyMatch(r -> r.getProperty("property14").equals(expectedValue14)))
+0.330 - assertEquals(expectedValue15, result.filter(r -> r.getProperty("property15").equals(expectedValue15)).findFirst().get().getProperty("property15"))
+0.286 - assertThrows(SomeExpectedException.class, () -> {
+    db.execute("STR", "INVALID SCRIPT")
+0.049 - })
+0.000 - ```

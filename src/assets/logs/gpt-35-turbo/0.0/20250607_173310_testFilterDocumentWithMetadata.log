@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterDocumentWithMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadataFilterParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", fields.get("STR"));
+assertNotNull(fields.get("STR"));
+assertTrue(fields.containsKey("STR"));
+assertFalse(fields.isEmpty());
+assertEquals(1, fields.size());
+assertNull(fields.get("OTHER_KEY"));
+assertNotEquals("DIFFERENT_VALUE", fields.get("STR"));
+assertTrue(fields.containsValue("STR"));
+assertTrue(fields.keySet().contains("STR"));
+assertTrue(fields.values().contains("STR"));
+assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "STR")));
+assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "DIFFERENT_VALUE")));
+assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "STR")));
+assertFalse(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "DIFFERENT_VALUE")));
+assertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getKey().equals("STR")));
+assertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getValue().equals("STR")));
+assertTrue(fields.entrySet().stream().allMatch(entry -> entry.getKey().equals("STR")));
+assertTrue(fields.entrySet().stream().allMatch(entry -> entry.getValue().equals("STR")));
+assertEquals("STR", fields.entrySet().stream().filter(entry -> entry.getKey().equals("STR")).findFirst().get().getValue());
+assertEquals("STR", fields.entrySet().stream().filter(entry -> entry.getValue().equals("STR")).findFirst().get().getKey());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.737 - assertNotEquals("DIFFERENT_VALUE", fields.get("STR"))
+0.720 - assertNotNull(fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.667 - assertNull(fields.get("OTHER_KEY"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.585 - assertTrue(fields.containsValue("STR"))
+0.583 - assertFalse(fields.isEmpty())
+0.581 - assertTrue(fields.keySet().contains("STR"))
+0.581 - assertTrue(fields.values().contains("STR"))
+0.457 - assertEquals("STR", fields.entrySet().stream().filter(entry -> entry.getKey().equals("STR")).findFirst().get().getValue())
+0.457 - assertEquals("STR", fields.entrySet().stream().filter(entry -> entry.getValue().equals("STR")).findFirst().get().getKey())
+0.364 - assertFalse(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "DIFFERENT_VALUE")))
+0.339 - assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "STR")))
+0.338 - assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "STR")))
+0.299 - assertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getKey().equals("STR")))
+0.299 - assertTrue(fields.entrySet().stream().allMatch(entry -> entry.getKey().equals("STR")))
+0.295 - assertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getValue().equals("STR")))
+0.295 - assertTrue(fields.entrySet().stream().allMatch(entry -> entry.getValue().equals("STR")))
+0.279 - assertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>("STR", "DIFFERENT_VALUE")))

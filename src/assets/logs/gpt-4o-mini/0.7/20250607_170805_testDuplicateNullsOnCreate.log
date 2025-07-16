@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTx {
+    T get ( Object iKey ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTxTest {
+    @Test
+     public void testDuplicateNullsOnCreate ( ) {
+         db . begin ( ) ; 
+         final ODocument person1 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person2 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person3 = db . newInstance ( "STR" ) . save ( ) ; 
+         person1 . field ( "STR" , "STR" ) . save ( ) ; 
+         person2 . field ( "STR" , "STR" ) . save ( ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(person1);
+Assert.assertNotNull(person2);
+Assert.assertNotNull(person3);
+Assert.assertEquals("STR", person1.field("STR"));
+Assert.assertEquals("STR", person2.field("STR"));
+Assert.assertEquals("STR", person3.field("STR"));
+Assert.assertNotEquals(person1.getIdentity(), person2.getIdentity());
+Assert.assertNotEquals(person1.getIdentity(), person3.getIdentity());
+Assert.assertNotEquals(person2.getIdentity(), person3.getIdentity());
+Assert.assertTrue(db.getRecord(person1.getIdentity()).exists());
+Assert.assertTrue(db.getRecord(person2.getIdentity()).exists());
+Assert.assertTrue(db.getRecord(person3.getIdentity()).exists());
+Assert.assertEquals(3, db.countClass("STR"));
+Assert.assertTrue(db.query("SELECT FROM STR WHERE STR = 'STR'").size() >= 2);
+Assert.assertTrue(db.query("SELECT FROM STR WHERE STR IS NOT NULL").size() >= 3);
+Assert.assertTrue(db.query("SELECT FROM STR WHERE STR IS NULL").isEmpty());
+Assert.assertTrue(db.query("SELECT FROM STR").size() == 3);
+Assert.assertNotNull(db.getRecord(person1.getIdentity()));
+Assert.assertNotNull(db.getRecord(person2.getIdentity()));
+Assert.assertNotNull(db.getRecord(person3.getIdentity()));
+Assert.assertTrue(db.getRecord(person1.getIdentity()).field("STR").equals("STR"));
+Assert.assertTrue(db.getRecord(person2.getIdentity()).field("STR").equals("STR"));
+Assert.assertTrue(db.getRecord(person3.getIdentity()).field("STR").equals("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(person2,index.get("STR")); ===
+0.769 - Assert.assertEquals("STR", person2.field("STR"))
+0.744 - Assert.assertEquals("STR", person1.field("STR"))
+0.744 - Assert.assertEquals("STR", person3.field("STR"))
+0.595 - Assert.assertEquals(3, db.countClass("STR"))
+0.567 - Assert.assertNotNull(person2)
+0.551 - Assert.assertNotEquals(person2.getIdentity(), person3.getIdentity())
+0.533 - Assert.assertNotNull(person3)
+0.531 - Assert.assertNotEquals(person1.getIdentity(), person2.getIdentity())
+0.531 - Assert.assertNotEquals(person1.getIdentity(), person3.getIdentity())
+0.523 - Assert.assertNotNull(db.getRecord(person2.getIdentity()))
+0.500 - Assert.assertNotNull(db.getRecord(person1.getIdentity()))
+0.500 - Assert.assertNotNull(db.getRecord(person3.getIdentity()))
+0.482 - Assert.assertTrue(db.getRecord(person2.getIdentity()).field("STR").equals("STR"))
+0.471 - ```java
+Assert.assertNotNull(person1)
+0.468 - Assert.assertTrue(db.getRecord(person2.getIdentity()).exists())
+0.464 - Assert.assertTrue(db.getRecord(person1.getIdentity()).field("STR").equals("STR"))
+0.464 - Assert.assertTrue(db.getRecord(person3.getIdentity()).field("STR").equals("STR"))
+0.447 - Assert.assertTrue(db.getRecord(person1.getIdentity()).exists())
+0.447 - Assert.assertTrue(db.getRecord(person3.getIdentity()).exists())
+0.424 - Assert.assertTrue(db.query("SELECT FROM STR").size() == 3)
+0.364 - Assert.assertTrue(db.query("SELECT FROM STR WHERE STR = 'STR'").size() >= 2)
+0.364 - Assert.assertTrue(db.query("SELECT FROM STR WHERE STR IS NULL").isEmpty())
+0.353 - Assert.assertTrue(db.query("SELECT FROM STR WHERE STR IS NOT NULL").size() >= 3)
+0.000 - ```

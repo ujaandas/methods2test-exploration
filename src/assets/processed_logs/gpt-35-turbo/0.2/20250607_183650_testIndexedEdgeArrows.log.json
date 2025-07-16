@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testIndexedEdgeArrows ( ) {\nStringBuilder query = new StringBuilder ( ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nOResultSet result = db . query ( query . toString ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(4, result.size());\nassertTrue(result.hasNext());\nassertEquals(\"value1\", result.getProperty(\"key1\"));\nassertEquals(\"value2\", result.getProperty(\"key2\"));\nassertEquals(\"value3\", result.getProperty(\"key3\"));\nassertEquals(\"value4\", result.getProperty(\"key4\"));\nassertFalse(result.isEmpty());\nassertNotNull(result);\nassertEquals(0, result.getWarnings().size());\nassertEquals(1, result.getErrors().size());\nassertTrue(result.getPropertyNames().contains(\"key1\"));\nassertFalse(result.getPropertyNames().contains(\"key5\"));\nassertEquals(2, result.getColumnNames().size());\nassertTrue(result.getColumnNames().contains(\"col1\"));\nassertFalse(result.getColumnNames().contains(\"col3\"));\nassertEquals(3, result.getExecutionPlan().size());\nassertTrue(result.getExecutionPlan().contains(\"step1\"));\nassertFalse(result.getExecutionPlan().contains(\"step4\"));\nassertEquals(5, result.getExecutionTime());\nassertTrue(result.getExecutionTime() > 0);\nassertFalse(result.isExhausted());\nassertTrue(result.isExhausted() == false);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.746,
+        0.721,
+        0.716,
+        0.702,
+        0.702,
+        0.612,
+        0.609,
+        0.592,
+        0.58,
+        0.575,
+        0.568,
+        0.561,
+        0.553,
+        0.53,
+        0.519,
+        0.519,
+        0.519,
+        0.519,
+        0.494,
+        0.482,
+        0.452
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

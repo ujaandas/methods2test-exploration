@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class Activity {\npublic JsonElement serialize ( ) {\nJsonObject obj = new JsonObject ( ) ;\nif ( this . id != null ) {\nobj . addProperty ( \"STR\" , this . id ) ;\n} if ( this . definition != null ) {\nobj . add ( \"STR\" , this . definition . serialize ( ) ) ;\n} return obj ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class ActivityTest {\n@Test\npublic void testSerialize ( ) {\nString expected = \"STR\" ;\nJsonElement actual = activity . serialize ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(actual);\nassertTrue(actual.isJsonObject());\nassertTrue(actual.getAsJsonObject().has(\"STR\"));\nassertEquals(expected, actual.getAsJsonObject().get(\"STR\").getAsString());\nassertTrue(actual.getAsJsonObject().entrySet().size() >= 1);\nassertTrue(actual.getAsJsonObject().get(\"STR\").isJsonPrimitive());\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsJsonPrimitive().isString());\nassertEquals(expected, actual.getAsJsonObject().get(\"STR\").getAsString());\nassertFalse(actual.getAsJsonObject().has(\"definition\"));\nassertTrue(actual.getAsJsonObject().entrySet().contains(new AbstractMap.SimpleEntry<>(\"STR\", new JsonPrimitive(expected))));\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsJsonPrimitive().isString());\nassertNotEquals(\"\", actual.getAsJsonObject().get(\"STR\").getAsString());\nassertNotNull(actual.getAsJsonObject().get(\"STR\"));\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsString().length() > 0);\nassertFalse(actual.getAsJsonObject().has(\"undefinedProperty\"));\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsJsonPrimitive().isString());\nassertEquals(expected.length(), actual.getAsJsonObject().get(\"STR\").getAsString().length());\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsString().contains(\"S\"));\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsString().startsWith(\"S\"));\nassertTrue(actual.getAsJsonObject().get(\"STR\").getAsString().endsWith(\"R\"));\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.592,
+        0.556,
+        0.441,
+        0.422,
+        0.395,
+        0.385,
+        0.361,
+        0.349,
+        0.323,
+        0.312,
+        0.312,
+        0.306,
+        0.301,
+        0.301,
+        0.3,
+        0.3,
+        0.3,
+        0.288,
+        0.213,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(actual);"
+}

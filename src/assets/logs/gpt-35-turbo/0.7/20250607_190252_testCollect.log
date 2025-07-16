@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > List < X > collect ( List < T > coll , APartialFunction < ? super T , ? extends X , E > pf ) throws E { 
+    final List < X > result = createEmptyListOfType ( coll , true ) ; 
+    for ( T o : coll ) { 
+    if ( pf . isDefinedAt ( o ) ) { 
+    result . add ( pf . apply ( o ) ) ; 
+    } } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testCollect ( ) throws Exception {
+         APartialFunctionNoThrow < Integer , Double > squareRoot = new APartialFunctionNoThrow < Integer , Double > ( ) { 
+     @Override
+     public boolean isDefinedAt ( Integer param ) { 
+     return param != 0 ; 
+     } @Override
+     public Double apply ( Integer param ) { 
+     return Math . sqrt ( param ) ; 
+     } } ; 
+         final List < Double > result = ACollectionHelper . collect ( Arrays . asList ( 0 , 1 , 2 , 3 , 4 ) , squareRoot ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions.assertEquals(0.0, result.get(0));
+Assertions.assertEquals(1.0, result.get(1));
+Assertions.assertEquals(1.4142135623730951, result.get(2));
+Assertions.assertEquals(1.7320508075688772, result.get(3));
+Assertions.assertEquals(2.0, result.get(4));
+Assertions.assertEquals(5, result.size());
+Assertions.assertTrue(result.contains(0.0));
+Assertions.assertTrue(result.contains(1.0));
+Assertions.assertTrue(result.contains(1.4142135623730951));
+Assertions.assertTrue(result.contains(1.7320508075688772));
+Assertions.assertTrue(result.contains(2.0));
+Assertions.assertFalse(result.contains(3.0));
+Assertions.assertFalse(result.contains(4.0));
+Assertions.assertFalse(result.contains(5.0));
+Assertions.assertFalse(result.contains(6.0));
+Assertions.assertFalse(result.contains(7.0));
+Assertions.assertFalse(result.contains(8.0));
+Assertions.assertFalse(result.contains(9.0));
+Assertions.assertFalse(result.contains(10.0));
+Assertions.assertTrue(result.stream().allMatch(d -> d >= 0.0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,result.size()); ===
+0.812 - Assertions.assertEquals(5, result.size())
+0.704 - Assertions.assertEquals(0.0, result.get(0))
+0.704 - Assertions.assertEquals(1.0, result.get(1))
+0.704 - Assertions.assertEquals(2.0, result.get(4))
+0.605 - Assertions.assertEquals(1.4142135623730951, result.get(2))
+0.581 - Assertions.assertEquals(1.7320508075688772, result.get(3))
+0.575 - Assertions.assertFalse(result.contains(3.0))
+0.575 - Assertions.assertFalse(result.contains(4.0))
+0.575 - Assertions.assertFalse(result.contains(5.0))
+0.575 - Assertions.assertFalse(result.contains(6.0))
+0.575 - Assertions.assertFalse(result.contains(7.0))
+0.575 - Assertions.assertFalse(result.contains(8.0))
+0.575 - Assertions.assertFalse(result.contains(9.0))
+0.568 - Assertions.assertFalse(result.contains(10.0))
+0.528 - Assertions.assertTrue(result.contains(0.0))
+0.528 - Assertions.assertTrue(result.contains(1.0))
+0.528 - Assertions.assertTrue(result.contains(2.0))
+0.460 - Assertions.assertTrue(result.stream().allMatch(d -> d >= 0.0))
+0.437 - Assertions.assertTrue(result.contains(1.4142135623730951))
+0.437 - Assertions.assertTrue(result.contains(1.7320508075688772))

@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupport {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupportTest {\n@Test\npublic void testQueryEmbedded ( ) {\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . setProperty ( \"STR\" , \"STR\" ) ;\nODocument emb = new ODocument ( ) ;\nemb . setProperty ( \"STR\" , \"STR\" ) ;\ndoc . setProperty ( \"STR\" , emb , OType . EMBEDDED ) ;\nsession . save ( doc ) ;\nOResultSet res = session . query ( \"STR\" ) ;\nOResult item = res . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(item);\nassertTrue(item instanceof ODocument);\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item.getProperty(\"STR\") instanceof ODocument);\nODocument embeddedDoc = (ODocument) item.getProperty(\"STR\");\nassertNotNull(embeddedDoc);\nassertEquals(\"STR\", embeddedDoc.getProperty(\"STR\"));\nassertEquals(1, res.getTotalRecords());\nassertEquals(\"STR\", embeddedDoc.field(\"STR\"));\nassertTrue(embeddedDoc.containsField(\"STR\"));\nassertFalse(item.containsField(\"NonExistentField\"));\nassertEquals(OType.EMBEDDED, item.getPropertyType(\"STR\"));\nassertNotNull(item.getProperty(\"STR\"));\nassertEquals(embeddedDoc.getIdentity(), item.getProperty(\"STR\").getIdentity());\nassertSame(item, res.next());\nassertTrue(res.hasNext());\nres.close();\nassertFalse(res.hasNext());\nassertEquals(1, session.count(\"STR\"));\nassertEquals(\"STR\", session.query(\"SELECT FROM STR\").next().getProperty(\"STR\"));\nassertNotNull(session.query(\"SELECT FROM STR WHERE STR = 'STR'\").next());\nassertEquals(1, session.query(\"SELECT FROM STR WHERE STR = 'STR'\").getTotalRecords());\nassertTrue(session.query(\"SELECT FROM STR\").hasNext());\nassertFalse(session.query(\"SELECT FROM STR WHERE STR = 'NonExistent'\").hasNext());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.815,
+        0.705,
+        0.702,
+        0.696,
+        0.594,
+        0.585,
+        0.581,
+        0.574,
+        0.523,
+        0.519,
+        0.512,
+        0.509,
+        0.488,
+        0.48,
+        0.432,
+        0.427,
+        0.422,
+        0.411,
+        0.349,
+        0.344,
+        0.336,
+        0.293,
+        0.204,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(item.getProperty(\"STR\"));"
+}

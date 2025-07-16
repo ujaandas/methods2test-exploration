@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Suite {
+    public TestCase getTestCase ( String testCaseId ) { 
+    if ( testCaseId == null ) { 
+    return null ; 
+    } for ( TestCase testCase : testCaseList ) { 
+    if ( testCaseId . equals ( testCase . getId ( ) ) ) { 
+    return testCase ; 
+    } } return null ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestSuiteTest {
+    @Test
+     public void getTestCase_null ( ) throws Exception {
+         TestSuite testSuite = new TestSuite ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(testSuite.getTestCase(null));
+assertEquals(testSuite.getTestCase("NON_EXISTENT_ID"), null);
+assertNotNull(testSuite.getTestCase("EXISTENT_ID"));
+assertEquals(testSuite.getTestCase("EXISTENT_ID").getId(), "EXISTENT_ID");
+assertNotEquals(testSuite.getTestCase("EXISTENT_ID"), testSuite.getTestCase("ANOTHER_EXISTENT_ID"));
+assertTrue(testSuite.getTestCase("EXISTENT_ID") instanceof TestCase);
+assertNull(testSuite.getTestCase("INVALID_ID"));
+assertEquals(testSuite.getTestCase("EXISTENT_ID").getName(), "Expected Test Case Name");
+assertNotEquals(testSuite.getTestCase("EXISTENT_ID").getDescription(), "Unexpected Description");
+assertTrue(testSuite.getTestCase("EXISTENT_ID").isActive());
+assertFalse(testSuite.getTestCase("EXISTENT_ID").isCompleted());
+assertThrows(IllegalArgumentException.class, () -> testSuite.getTestCase("INVALID_ARGUMENT"));
+assertNotNull(testSuite.getTestCase("EXISTENT_ID").getParameters());
+assertEquals(testSuite.getTestCase("EXISTENT_ID").getParameters().size(), expectedSize);
+assertTrue(testSuite.getTestCase("EXISTENT_ID").getExecutionTime() >= 0);
+assertEquals(testSuite.getTestCase("EXISTENT_ID").getPriority(), expectedPriority);
+assertNotNull(testSuite.getTestCase("EXISTENT_ID").getResults());
+assertTrue(testSuite.getTestCase("EXISTENT_ID").getResults().isEmpty());
+assertEquals(testSuite.getTestCase("EXISTENT_ID").getStatus(), TestCase.Status.PENDING);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(testSuite.getTestCase(null)); ===
+0.907 - ```java
+assertNull(testSuite.getTestCase(null))
+0.814 - assertNull(testSuite.getTestCase("INVALID_ID"))
+0.778 - assertNotNull(testSuite.getTestCase("EXISTENT_ID"))
+0.735 - assertEquals(testSuite.getTestCase("NON_EXISTENT_ID"), null)
+0.718 - assertNotNull(testSuite.getTestCase("EXISTENT_ID").getResults())
+0.660 - assertNotNull(testSuite.getTestCase("EXISTENT_ID").getParameters())
+0.653 - assertTrue(testSuite.getTestCase("EXISTENT_ID").isActive())
+0.647 - assertFalse(testSuite.getTestCase("EXISTENT_ID").isCompleted())
+0.618 - assertTrue(testSuite.getTestCase("EXISTENT_ID").getResults().isEmpty())
+0.610 - assertTrue(testSuite.getTestCase("EXISTENT_ID") instanceof TestCase)
+0.606 - assertTrue(testSuite.getTestCase("EXISTENT_ID").getExecutionTime() >= 0)
+0.595 - assertEquals(testSuite.getTestCase("EXISTENT_ID").getId(), "EXISTENT_ID")
+0.550 - assertEquals(testSuite.getTestCase("EXISTENT_ID").getPriority(), expectedPriority)
+0.544 - assertEquals(testSuite.getTestCase("EXISTENT_ID").getStatus(), TestCase.Status.PENDING)
+0.541 - assertEquals(testSuite.getTestCase("EXISTENT_ID").getName(), "Expected Test Case Name")
+0.528 - assertEquals(testSuite.getTestCase("EXISTENT_ID").getParameters().size(), expectedSize)
+0.526 - assertNotEquals(testSuite.getTestCase("EXISTENT_ID").getDescription(), "Unexpected Description")
+0.512 - assertThrows(IllegalArgumentException.class, () -> testSuite.getTestCase("INVALID_ARGUMENT"))
+0.511 - assertNotEquals(testSuite.getTestCase("EXISTENT_ID"), testSuite.getTestCase("ANOTHER_EXISTENT_ID"))
+0.000 - ```

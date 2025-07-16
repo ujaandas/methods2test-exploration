@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class H264Utils {\npublic static byte [ ] toArray ( ByteBuffer buffer ) {\nbyte [ ] result = new byte [ buffer . remaining ( ) ] ;\nbuffer . duplicate ( ) . get ( result ) ;\nreturn result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class H264UtilsTest {\n@Test\npublic void testAvcCToAnnexB ( ) {\nArrayList < ByteBuffer > spsList = new ArrayList < ByteBuffer > ( ) ;\nspsList . add ( ByteBuffer . wrap ( new byte [ ] {\n's' , 't' , 'a' , 'n' } ) ) ;\nspsList . add ( ByteBuffer . wrap ( new byte [ ] {\n't' , 'h' , 'e' } ) ) ;\nArrayList < ByteBuffer > ppsList = new ArrayList < ByteBuffer > ( ) ;\nppsList . add ( ByteBuffer . wrap ( new byte [ ] {\n'm' , 'a' , 'n' } ) ) ;\nppsList . add ( ByteBuffer . wrap ( new byte [ ] {\n'c' , 'o' , 'o' , 'l' } ) ) ;\nAvcCBox avcCBox = AvcCBox . createAvcCBox ( 66 , 0 , 42 , 0 , spsList , ppsList ) ;\nbyte [ ] res = NIOUtils . toArray ( H264Utils . avcCToAnnexB ( avcCBox ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(6, res.length);\nAssert.assertEquals('s', res[0]);\nAssert.assertEquals('t', res[1]);\nAssert.assertEquals('a', res[2]);\nAssert.assertEquals('n', res[3]);\nAssert.assertEquals(0, res[4]);\nAssert.assertEquals(0, res[5]);\nAssert.assertEquals('t', res[6]);\nAssert.assertEquals('h', res[7]);\nAssert.assertEquals('e', res[8]);\nAssert.assertEquals(0, res[9]);\nAssert.assertEquals(0, res[10]);\nAssert.assertEquals(1, res[11]);\nAssert.assertEquals(0, res[12]);\nAssert.assertEquals(0, res[13]);\nAssert.assertEquals(0, res[14]);\nAssert.assertEquals(1, res[15]);\nAssert.assertEquals('m', res[16]);\nAssert.assertEquals('a', res[17]);\nAssert.assertEquals('n', res[18]);\nAssert.assertEquals('c', res[19]);\n====================\n\n",
+    "scores": [
+        0.255,
+        0.255,
+        0.255,
+        0.255,
+        0.255,
+        0.255,
+        0.255,
+        0.253,
+        0.253,
+        0.253,
+        0.253,
+        0.233,
+        0.233,
+        0.233,
+        0.232,
+        0.232,
+        0.232,
+        0.232,
+        0.232,
+        0.232,
+        0.228
+    ],
+    "ground_truth": "Assert.assertArrayEquals(newbyte[]{0,0,0,1,0x67,'s','t','a','n',0,0,0,1,0x67,'t','h','e',0,0,0,1,0x68,'m','a','n',0,0,0,1,0x68,'c','o','o','l'},res);"
+}

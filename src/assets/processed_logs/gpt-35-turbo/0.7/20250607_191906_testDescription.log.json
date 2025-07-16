@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rockagen.commons-lib;\n\npublic class OPLog {\npublic static Method getDeclaredMethod ( Class < ? > clazz , boolean recursively , String methodName , Class < ? > ... parameterTypes ) {\ntry {\nreturn clazz . getDeclaredMethod ( methodName , parameterTypes ) ;\n} catch ( NoSuchMethodException e ) {\nClass < ? > superClass = clazz . getSuperclass ( ) ;\nif ( superClass != null && recursively ) {\nreturn getDeclaredMethod ( superClass , true , methodName , parameterTypes ) ;\n} } catch ( SecurityException e ) {\nlog . error ( \"STR\" , e . getMessage ( ) , e ) ;\n} return null ;\n}\n}\n\npackage rockagen.commons-lib;\n\npublic class OPLogTest {\n@Test\npublic void testDescription ( ) throws SecurityException , NoSuchMethodException {\nPlog annotation = ( Plog ) ClassUtil . getDeclaredMethod ( getClass ( ) , false , \"STR\" ) . getAnnotation ( Plog . class ) ;\nString value = annotation . value ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"testValue1\", value);\nassertNotNull(value);\nassertTrue(value.isEmpty());\nassertFalse(value.isBlank());\nassertSame(\"expectedValue\", value);\nassertNotSame(\"unexpectedValue\", value);\nassertEquals(5, value.length());\nassertNotEquals(\"oldValue\", value);\nassertTrue(value.contains(\"substring\"));\nassertFalse(value.startsWith(\"prefix\"));\nassertTrue(value.endsWith(\"suffix\"));\nassertTrue(value.matches(\"[a-z]+\"));\nassertFalse(value.matches(\"[0-9]+\"));\nassertTrue(value.equalsIgnoreCase(\"TESTVALUE\"));\nassertFalse(value.equals(\"otherValue\"));\nassertTrue(value.compareTo(\"compareValue\") > 0);\nassertFalse(value.equalsIgnoreCase(\"DIFFERENTVALUE\"));\nassertTrue(value.toUpperCase().equals(\"UPPERCASE\"));\nassertFalse(value.toLowerCase().equals(\"lowercase\"));\nassertTrue(value.trim().equals(\"trimmedValue\"));\nassertFalse(value.replace(\"old\", \"new\").equals(\"replacedValue\"));\n====================\n\n",
+    "scores": [
+        0.772,
+        0.759,
+        0.727,
+        0.667,
+        0.604,
+        0.562,
+        0.552,
+        0.54,
+        0.538,
+        0.525,
+        0.5,
+        0.5,
+        0.472,
+        0.467,
+        0.459,
+        0.438,
+        0.421,
+        0.41,
+        0.409,
+        0.4,
+        0.39
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",value);"
+}

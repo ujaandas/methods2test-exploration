@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\npublic void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException {\nFile targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ;\ntry {\nFileUtils . copyFile ( fileChanged , targetResource ) ;\ninfo ( \"STR\" + fileChanged . getCanonicalPath ( ) + \"STR\" + targetResource . getCanonicalPath ( ) ) ;\n} catch ( FileNotFoundException ex ) {\ndebug ( \"STR\" + fileChanged . getCanonicalPath ( ) ) ;\n} catch ( Exception ex ) {\ndebug ( ex ) ;\n} }\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testCopyFile ( ) throws Exception {\nFile configFile = new File ( srcDir , \"STR\" ) ;\nFiles . write ( configFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nutil . copyFile ( configFile , srcDir , targetDir , \"STR\" ) ;\nFile targetFile = new File ( targetDir , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(targetFile.exists());\nassertEquals(\"STR\", new String(Files.readAllBytes(targetFile.toPath())));\nassertTrue(targetFile.length() > 0);\nassertTrue(Files.isRegularFile(targetFile.toPath()));\nassertTrue(Files.isReadable(targetFile.toPath()));\nassertFalse(Files.isDirectory(targetFile.toPath()));\nassertTrue(Files.size(targetFile.toPath()) > 0);\nassertTrue(Files.getLastModifiedTime(targetFile.toPath()).toMillis() > 0);\nassertNotNull(Files.readAttributes(targetFile.toPath(), \"*\"));\nassertTrue(Files.probeContentType(targetFile.toPath()).equals(\"text/plain\"));\nassertEquals(targetFile.getName(), \"STR\");\nassertTrue(Files.isWritable(targetFile.toPath()));\nassertTrue(Files.isExecutable(targetFile.toPath()) == false);\nassertTrue(Files.getOwner(targetFile.toPath()).getName().length() > 0);\nassertTrue(Files.readAllLines(targetFile.toPath()).size() > 0);\nassertTrue(Files.readAllLines(targetFile.toPath()).get(0).equals(\"STR\"));\nassertTrue(Files.getAttribute(targetFile.toPath(), \"size\").equals(Files.size(targetFile.toPath())));\nassertTrue(Files.getAttribute(targetFile.toPath(), \"creationTime\") != null);\nassertTrue(Files.getAttribute(targetFile.toPath(), \"lastModifiedTime\") != null);\nassertTrue(Files.getAttribute(targetFile.toPath(), \"lastAccessTime\") != null);\nassertTrue(Files.getAttribute(targetFile.toPath(), \"basic:lastModifiedTime\") != null);\n```\n====================\n\n",
+    "scores": [
+        0.886,
+        0.844,
+        0.684,
+        0.676,
+        0.65,
+        0.65,
+        0.627,
+        0.585,
+        0.584,
+        0.571,
+        0.549,
+        0.529,
+        0.525,
+        0.514,
+        0.505,
+        0.505,
+        0.495,
+        0.486,
+        0.486,
+        0.478,
+        0.45,
+        0.0
+    ],
+    "ground_truth": "assertTrue(targetFile.exists());"
+}

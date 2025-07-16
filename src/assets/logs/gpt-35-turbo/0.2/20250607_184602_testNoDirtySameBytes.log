@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testNoDirtySameBytes ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         byte [ ] bytes = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 } ; 
+         doc . field ( "STR" , bytes ) ; 
+         ODocumentInternal . clearTrackData ( doc ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(false, doc.isDirty());
+assertArrayEquals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"));
+assertNull(ODocumentInternal.getTrackData(doc));
+assertFalse(ORecordInternal.isDirty(doc));
+assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")));
+assertNotNull(doc.field("STR"));
+assertFalse(ODocumentInternal.isTrackDataClear(doc));
+assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")));
+assertNotEquals(0, doc.field("STR").length);
+assertTrue(ODocumentInternal.isTrackDataClear(doc));
+assertNotEquals(0, ((byte[]) doc.field("STR")).length);
+assertNotNull(ODocumentInternal.getTrackData(doc));
+assertEquals(6, ((byte[]) doc.field("STR")).length);
+assertArrayEquals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"));
+assertFalse(ORecordInternal.isTrackDataDirty(doc));
+assertNull(ODocumentInternal.getTrackData(doc));
+assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")));
+assertNotNull(doc.field("STR"));
+assertFalse(ODocumentInternal.isTrackDataDirty(doc));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(doc.isDirty()); ===
+0.716 - assertFalse(ORecordInternal.isDirty(doc))
+0.667 - Assertions:
+
+assertEquals(false, doc.isDirty())
+0.641 - assertFalse(ODocumentInternal.isTrackDataDirty(doc))
+0.632 - assertFalse(ORecordInternal.isTrackDataDirty(doc))
+0.561 - assertNotNull(doc.field("STR"))
+0.561 - assertNotNull(doc.field("STR"))
+0.500 - assertNotEquals(0, doc.field("STR").length)
+0.480 - assertEquals(6, ((byte[]) doc.field("STR")).length)
+0.462 - assertNotEquals(0, ((byte[]) doc.field("STR")).length)
+0.436 - assertFalse(ODocumentInternal.isTrackDataClear(doc))
+0.416 - assertTrue(ODocumentInternal.isTrackDataClear(doc))
+0.413 - assertArrayEquals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"))
+0.413 - assertArrayEquals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"))
+0.411 - assertNull(ODocumentInternal.getTrackData(doc))
+0.411 - assertNull(ODocumentInternal.getTrackData(doc))
+0.395 - assertNotNull(ODocumentInternal.getTrackData(doc))
+0.380 - assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")))
+0.380 - assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")))
+0.380 - assertTrue(Arrays.equals(new byte[]{0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR")))

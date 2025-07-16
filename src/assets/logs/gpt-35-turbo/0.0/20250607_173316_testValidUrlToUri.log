@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class UrlUtils {
+    public static URI toUri ( final URL url ) { 
+    try { 
+    return url . toURI ( ) ; 
+    } catch ( URISyntaxException ex ) { 
+    throw new IllegalArgumentException ( ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class UrlUtilsTest {
+    @Test
+     public void testValidUrlToUri ( ) throws Exception {
+         URI uri = UrlUtils . toUri ( new URL ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(uri);
+Assert.assertEquals(new URI("STR"), uri);
+Assert.assertTrue(uri.isAbsolute());
+Assert.assertFalse(uri.isOpaque());
+Assert.assertEquals("http", uri.getScheme());
+Assert.assertEquals("", uri.getSchemeSpecificPart());
+Assert.assertEquals(-1, uri.getPort());
+Assert.assertEquals(-1, uri.getFragment());
+Assert.assertEquals("STR", uri.getPath());
+Assert.assertNull(uri.getQuery());
+Assert.assertNull(uri.getUserInfo());
+Assert.assertEquals("localhost", uri.getHost());
+Assert.assertEquals("http://localhost/STR", uri.toString());
+Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve(""));
+Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize());
+Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize().normalize());
+Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize().resolve(""));
+Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve("").normalize());
+Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve("").normalize().normalize());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newURI("STR"),uri); ===
+1.000 - Assert.assertEquals(new URI("STR"), uri)
+0.719 - Assert.assertEquals("STR", uri.getPath())
+0.681 - Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve(""))
+0.681 - Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize())
+0.602 - Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize().normalize())
+0.602 - Assert.assertEquals(new URI("http://localhost/STR"), uri.normalize().resolve(""))
+0.602 - Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve("").normalize())
+0.597 - Assert.assertEquals("http", uri.getScheme())
+0.590 - Assert.assertEquals(-1, uri.getPort())
+0.571 - Assert.assertEquals("localhost", uri.getHost())
+0.561 - Assert.assertEquals("http://localhost/STR", uri.toString())
+0.554 - Assert.assertEquals(-1, uri.getFragment())
+0.539 - Assert.assertEquals(new URI("http://localhost/STR"), uri.resolve("").normalize().normalize())
+0.533 - Assert.assertEquals("", uri.getSchemeSpecificPart())
+0.531 - Assert.assertNotNull(uri)
+0.483 - Assert.assertFalse(uri.isOpaque())
+0.456 - Assert.assertNull(uri.getQuery())
+0.433 - Assert.assertNull(uri.getUserInfo())
+0.407 - Assert.assertTrue(uri.isAbsolute())

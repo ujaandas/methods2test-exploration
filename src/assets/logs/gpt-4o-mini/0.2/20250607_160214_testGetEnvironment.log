@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Circle {
+    @Override
+     public Properties getEnvironment ( ) { 
+     Properties environment = new Properties ( ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BUILD_NUMBER ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BRANCH ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_COMMIT ) ) ; 
+     return environment ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class CircleTest {
+    @Test
+     public void testGetEnvironment ( ) {
+         Properties properties = new Circle ( env ( ) ) . getEnvironment ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(properties);
+assertTrue(properties.containsKey("STR"));
+assertEquals("expected_build_number", properties.getProperty("STR", CIRCLE_BUILD_NUMBER));
+assertEquals("expected_branch_name", properties.getProperty("STR", CIRCLE_BRANCH));
+assertEquals("expected_commit_hash", properties.getProperty("STR", CIRCLE_COMMIT));
+assertEquals(3, properties.size());
+assertTrue(properties.getProperty("STR").contains("expected_build_number"));
+assertTrue(properties.getProperty("STR").contains("expected_branch_name"));
+assertTrue(properties.getProperty("STR").contains("expected_commit_hash"));
+assertFalse(properties.isEmpty());
+assertNotEquals("unexpected_value", properties.getProperty("STR"));
+assertTrue(properties.getProperty("STR").matches(".*expected_build_number.*"));
+assertTrue(properties.getProperty("STR").matches(".*expected_branch_name.*"));
+assertTrue(properties.getProperty("STR").matches(".*expected_commit_hash.*"));
+assertNull(properties.getProperty("NON_EXISTENT_KEY"));
+assertEquals("expected_value", properties.getProperty("EXISTENT_KEY", "expected_value"));
+assertTrue(properties.keySet().contains("STR"));
+assertFalse(properties.keySet().contains("NON_EXISTENT_KEY"));
+assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_build_number")));
+assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_branch_name")));
+assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_commit_hash")));
+assertEquals("expected_value", properties.getProperty("EXISTENT_KEY"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,properties.size()); ===
+1.000 - assertEquals(3, properties.size())
+0.758 - assertFalse(properties.isEmpty())
+0.649 - assertTrue(properties.containsKey("STR"))
+0.606 - ```java
+assertNotNull(properties)
+0.592 - assertNotEquals("unexpected_value", properties.getProperty("STR"))
+0.575 - assertTrue(properties.keySet().contains("STR"))
+0.569 - assertEquals("expected_value", properties.getProperty("EXISTENT_KEY"))
+0.552 - assertNull(properties.getProperty("NON_EXISTENT_KEY"))
+0.532 - assertFalse(properties.keySet().contains("NON_EXISTENT_KEY"))
+0.513 - assertEquals("expected_branch_name", properties.getProperty("STR", CIRCLE_BRANCH))
+0.513 - assertEquals("expected_commit_hash", properties.getProperty("STR", CIRCLE_COMMIT))
+0.487 - assertEquals("expected_value", properties.getProperty("EXISTENT_KEY", "expected_value"))
+0.483 - assertEquals("expected_build_number", properties.getProperty("STR", CIRCLE_BUILD_NUMBER))
+0.444 - assertTrue(properties.getProperty("STR").contains("expected_build_number"))
+0.432 - assertTrue(properties.getProperty("STR").matches(".*expected_build_number.*"))
+0.430 - assertTrue(properties.getProperty("STR").contains("expected_branch_name"))
+0.430 - assertTrue(properties.getProperty("STR").contains("expected_commit_hash"))
+0.418 - assertTrue(properties.getProperty("STR").matches(".*expected_branch_name.*"))
+0.418 - assertTrue(properties.getProperty("STR").matches(".*expected_commit_hash.*"))
+0.362 - assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_branch_name")))
+0.362 - assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_commit_hash")))
+0.359 - assertTrue(properties.values().stream().anyMatch(value -> value.equals("expected_build_number")))
+0.000 - ```

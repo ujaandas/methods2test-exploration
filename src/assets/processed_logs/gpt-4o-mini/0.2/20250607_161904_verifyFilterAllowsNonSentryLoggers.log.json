@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilter {\n@Override\npublic FilterReply decide ( ILoggingEvent event ) {\nif ( event . getLoggerName ( ) . startsWith ( \"STR\" ) ) {\nreturn FilterReply . DENY ;\n} else {\nreturn FilterReply . NEUTRAL ;\n} }\n}\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilterTest {\n@Test\npublic void verifyFilterAllowsNonSentryLoggers ( ) {\nfinal DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ;\nfilter . start ( ) ;\nfinal LoggingEvent evt = new LoggingEvent ( ) ;\nevt . setLoggerName ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(FilterReply.DENY, filter.decide(evt));\nassertNotNull(filter);\nassertTrue(filter instanceof DroppingRavenLoggingFilter);\nassertEquals(\"STR\", evt.getLoggerName());\nassertTrue(evt.getLoggerName().startsWith(\"S\"));\nassertFalse(evt.getLoggerName().startsWith(\"A\"));\nassertFalse(evt.getLoggerName().startsWith(\"B\"));\nassertFalse(evt.getLoggerName().startsWith(\"C\"));\nassertFalse(evt.getLoggerName().startsWith(\"D\"));\nassertFalse(evt.getLoggerName().startsWith(\"E\"));\nassertFalse(evt.getLoggerName().startsWith(\"F\"));\nassertFalse(evt.getLoggerName().startsWith(\"G\"));\nassertFalse(evt.getLoggerName().startsWith(\"H\"));\nassertFalse(evt.getLoggerName().startsWith(\"I\"));\nassertFalse(evt.getLoggerName().startsWith(\"J\"));\nassertFalse(evt.getLoggerName().startsWith(\"K\"));\nassertFalse(evt.getLoggerName().startsWith(\"L\"));\nassertFalse(evt.getLoggerName().startsWith(\"M\"));\nassertFalse(evt.getLoggerName().startsWith(\"N\"));\nassertFalse(evt.getLoggerName().startsWith(\"O\"));\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.462,
+        0.438,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.283,
+        0.283,
+        0.0
+    ],
+    "ground_truth": "assertEquals(FilterReply.NEUTRAL,filter.decide(evt));"
+}

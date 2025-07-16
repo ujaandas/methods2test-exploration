@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutor {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutorTest {\n@Test\npublic void testMultipleCreateEdgeOnTheSameLet ( ) {\nOrientDB factory = new OrientDB ( \"STR\" , \"STR\" , \"STR\" , OrientDBConfig . defaultConfig ( ) ) ;\nString dbName = getClass ( ) . getSimpleName ( ) + \"STR\" ;\nfactory . create ( dbName , ODatabaseType . MEMORY ) ;\nODatabaseDocument db = factory . open ( dbName , \"STR\" , \"STR\" ) ;\nString script = \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nOResultSet result = db . execute ( \"STR\" , script ) ;\nresult . close ( ) ;\nresult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedCount, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"propertyName\") != null));\nassertEquals(expectedValue, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"anotherProperty\").equals(expectedAnotherValue)));\nassertFalse(result.isClosed());\nassertEquals(expectedType, result.stream().findFirst().get().getType());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"status\").equals(\"active\")));\nassertEquals(expectedId, result.stream().findFirst().get().getIdentity());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"createdAt\").isAfter(expectedDate)));\nassertEquals(expectedSize, result.stream().collect(Collectors.toList()).size());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"category\").equals(expectedCategory)));\nassertNotEquals(unexpectedValue, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"isValid\") == true));\nassertEquals(expectedString, result.stream().findFirst().get().getProperty(\"description\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"count\") > 0));\nassertFalse(result.stream().noneMatch(r -> r.getProperty(\"isActive\") == true));\nassertEquals(expectedDate, result.stream().findFirst().get().getProperty(\"createdAt\").toLocalDate());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"type\").equals(\"exampleType\")));\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.642,
+        0.638,
+        0.631,
+        0.627,
+        0.615,
+        0.596,
+        0.549,
+        0.547,
+        0.547,
+        0.527,
+        0.526,
+        0.507,
+        0.504,
+        0.5,
+        0.488,
+        0.471,
+        0.469,
+        0.462,
+        0.44,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(2,result.stream().count());"
+}

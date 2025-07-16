@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testOptional3 ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" + "STR" + "STR" + "STR" + "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(qResult);
+Assert.assertFalse(qResult.isEmpty());
+Assert.assertEquals(expectedSize, qResult.size());
+Assert.assertTrue(qResult.get(0).field("fieldName") instanceof ExpectedType);
+Assert.assertEquals(expectedValue, qResult.get(0).field("fieldName"));
+Assert.assertNotEquals(unexpectedValue, qResult.get(0).field("fieldName"));
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("anotherField") != null));
+Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.field("fieldName").equals(specificValue)));
+Assert.assertEquals(expectedDocumentId, qResult.get(0).getIdentity());
+Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("fieldName").equals(negativeValue)));
+Assert.assertEquals(expectedFieldCount, qResult.get(0).fields().size());
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("fieldName").toString().contains("expectedSubstring")));
+Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.field("numericField") > thresholdValue));
+Assert.assertEquals(expectedFieldValue, qResult.get(1).field("anotherField"));
+Assert.assertNotNull(qResult.get(0).field("nestedField"));
+Assert.assertTrue(qResult.get(0).field("nestedField") instanceof ODocument);
+Assert.assertEquals(expectedNestedFieldValue, qResult.get(0).field("nestedField").field("subField"));
+Assert.assertEquals(expectedString, qResult.get(0).field("stringField").toString());
+Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("booleanField") == true));
+Assert.assertThrows(ExpectedException.class, () -> { 
+    // Code that should throw an exception
+});
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - Assert.assertEquals(expectedSize, qResult.size())
+0.733 - Assert.assertFalse(qResult.isEmpty())
+0.624 - Assert.assertEquals(expectedFieldCount, qResult.get(0).fields().size())
+0.593 - Assert.assertEquals(expectedValue, qResult.get(0).field("fieldName"))
+0.571 - Assert.assertEquals(expectedDocumentId, qResult.get(0).getIdentity())
+0.567 - ```java
+Assert.assertNotNull(qResult)
+0.562 - Assert.assertNotEquals(unexpectedValue, qResult.get(0).field("fieldName"))
+0.550 - Assert.assertNotNull(qResult.get(0).field("nestedField"))
+0.545 - Assert.assertEquals(expectedFieldValue, qResult.get(1).field("anotherField"))
+0.533 - Assert.assertEquals(expectedString, qResult.get(0).field("stringField").toString())
+0.459 - Assert.assertEquals(expectedNestedFieldValue, qResult.get(0).field("nestedField").field("subField"))
+0.438 - Assert.assertTrue(qResult.get(0).field("nestedField") instanceof ODocument)
+0.400 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("anotherField") != null))
+0.400 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("booleanField") == true))
+0.392 - Assert.assertTrue(qResult.get(0).field("fieldName") instanceof ExpectedType)
+0.368 - Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.field("numericField") > thresholdValue))
+0.356 - Assert.assertTrue(qResult.stream().anyMatch(doc -> doc.field("fieldName").equals(specificValue)))
+0.353 - Assert.assertTrue(qResult.stream().noneMatch(doc -> doc.field("fieldName").equals(negativeValue)))
+0.307 - Assert.assertTrue(qResult.stream().allMatch(doc -> doc.field("fieldName").toString().contains("expectedSubstring")))
+0.296 - Assert.assertThrows(ExpectedException.class, () -> { 
+    // Code that should throw an exception
+})
+0.000 - ```

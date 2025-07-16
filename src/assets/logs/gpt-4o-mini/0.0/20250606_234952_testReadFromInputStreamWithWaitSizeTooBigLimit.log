@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytes {
+    int fromInputStream ( final InputStream in , final int maxSize ) throws IOException ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytesTest {
+    @Test
+     public void testReadFromInputStreamWithWaitSizeTooBigLimit ( ) throws Exception {
+         final byte [ ] data = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 } ; 
+         final InputStream is = new NotFullyAvailableAtTheTimeInputStream ( data , 5 ) ; 
+         final int result = testedInstance . fromInputStream ( is , 15 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(10, result);
+assertTrue(result >= 0);
+assertTrue(result <= 15);
+assertNotNull(is);
+assertArrayEquals(new byte[] {0, 1, 2, 3, 4}, Arrays.copyOf(data, 5));
+assertTrue(is.available() < 5);
+assertFalse(is.markSupported());
+assertTrue(is.read() >= 0);
+assertEquals(5, is.read(new byte[5]));
+assertEquals(5, is.read(new byte[5], 0, 5));
+assertThrows(IOException.class, () -> is.read(new byte[10], 0, 15));
+assertTrue(is.read() < 10);
+assertEquals(0, is.read(new byte[0]));
+assertEquals(-1, is.read(new byte[5], 0, 0));
+assertEquals(5, is.read(new byte[5]));
+assertEquals(5, is.read(new byte[5], 0, 5));
+assertEquals(0, is.read(new byte[5], 0, 0));
+assertTrue(is.read() >= 0);
+assertEquals(5, is.read(new byte[5]));
+assertEquals(5, is.read(new byte[5], 0, 5));
+assertEquals(-1, is.read(new byte[5], 0, 5));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,data.length); ===
+0.635 - ```java
+assertEquals(10, result)
+0.566 - assertTrue(result >= 0)
+0.556 - assertTrue(result <= 15)
+0.537 - assertEquals(5, is.read(new byte[5]))
+0.537 - assertEquals(0, is.read(new byte[0]))
+0.537 - assertEquals(5, is.read(new byte[5]))
+0.537 - assertEquals(5, is.read(new byte[5]))
+0.507 - assertEquals(5, is.read(new byte[5], 0, 5))
+0.507 - assertEquals(5, is.read(new byte[5], 0, 5))
+0.507 - assertEquals(0, is.read(new byte[5], 0, 0))
+0.507 - assertEquals(5, is.read(new byte[5], 0, 5))
+0.500 - assertEquals(-1, is.read(new byte[5], 0, 0))
+0.500 - assertEquals(-1, is.read(new byte[5], 0, 5))
+0.444 - assertFalse(is.markSupported())
+0.433 - assertTrue(is.available() < 5)
+0.430 - assertArrayEquals(new byte[] {0, 1, 2, 3, 4}, Arrays.copyOf(data, 5))
+0.429 - assertTrue(is.read() >= 0)
+0.429 - assertTrue(is.read() < 10)
+0.429 - assertTrue(is.read() >= 0)
+0.408 - assertNotNull(is)
+0.280 - assertThrows(IOException.class, () -> is.read(new byte[10], 0, 15))
+0.000 - ```

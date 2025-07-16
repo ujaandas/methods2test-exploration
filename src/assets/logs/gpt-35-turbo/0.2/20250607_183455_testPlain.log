@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecution {
+    OSequence getSequence ( String iName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecutionTest {
+    @Test
+     public void testPlain ( ) {
+         String name = "STR" ; 
+         db . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));
+assertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName());
+assertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCached());
+assertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered());
+assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart());
+assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement());
+assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize());
+assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue());
+db.getMetadata().getSequenceLibrary().dropSequence(name);
+assertNull(db.getMetadata().getSequenceLibrary().getSequence(name));
+db.getMetadata().getSequenceLibrary().createSequence(name, OSequence.SEQUENCE_TYPE.ORDERED, new OSequence.CreateParams());
+assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));
+assertEquals(OSequence.SEQUENCE_TYPE.ORDERED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());
+assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered());
+assertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isCached());
+assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart());
+assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement());
+assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize());
+assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue());
+db.getMetadata().getSequenceLibrary().dropSequence(name);
+assertNull(db.getMetadata().getSequenceLibrary().getSequence(name));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name)); ===
+1.000 - assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name))
+1.000 - assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name))
+0.978 - assertNull(db.getMetadata().getSequenceLibrary().getSequence(name))
+0.978 - assertNull(db.getMetadata().getSequenceLibrary().getSequence(name))
+0.865 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isCached())
+0.859 - assertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered())
+0.859 - assertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isCached())
+0.855 - assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart())
+0.855 - assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getStart())
+0.853 - assertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered())
+0.844 - assertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName())
+0.833 - assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement())
+0.833 - assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize())
+0.833 - assertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement())
+0.833 - assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize())
+0.825 - db.getMetadata().getSequenceLibrary().dropSequence(name)
+0.825 - db.getMetadata().getSequenceLibrary().dropSequence(name)
+0.818 - assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue())
+0.818 - assertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue())
+0.700 - assertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType())
+0.696 - assertEquals(OSequence.SEQUENCE_TYPE.ORDERED, db.getMetadata().getSequenceLibrary().getSequence(name).getType())
+0.585 - db.getMetadata().getSequenceLibrary().createSequence(name, OSequence.SEQUENCE_TYPE.ORDERED, new OSequence.CreateParams())

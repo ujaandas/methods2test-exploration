@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Tokenize {
+    public static LinkedList < LinkedList < Word > > tokenizeSentences ( Analyzer morphoAnalyzer , String paragraph ) { 
+    return tokenizeSentences ( morphoAnalyzer , paragraph , DEFAULT_SENTENCE_LENGTH_CAP ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class TokenizeTest {
+    @Test
+     public void pēdiņas ( ) {
+         LinkedList < LinkedList < Word > > sentences ; 
+         sentences = Splitting . tokenizeSentences ( locītājs , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(sentences);
+assertFalse(sentences.isEmpty());
+assertEquals(1, sentences.size());
+assertEquals(1, sentences.get(0).size());
+assertTrue(sentences.get(0).get(0) instanceof Word);
+assertEquals("expectedWord", sentences.get(0).get(0).getText());
+assertEquals("expectedLemma", sentences.get(0).get(0).getLemma());
+assertEquals("expectedPosTag", sentences.get(0).get(0).getPosTag());
+assertEquals("expectedMorphology", sentences.get(0).get(0).getMorphology());
+assertEquals("expectedSentenceLength", sentences.get(0).size());
+assertEquals("expectedFirstWord", sentences.get(0).getFirst().getText());
+assertEquals("expectedLastWord", sentences.get(0).getLast().getText());
+assertTrue(sentences.get(0).contains(new Word("expectedWord")));
+assertFalse(sentences.get(0).contains(new Word("nonExistentWord")));
+assertEquals("expectedSentenceStructure", sentences.get(0).toString());
+assertEquals("expectedWordCount", sentences.get(0).size());
+assertNotEquals("unexpectedWord", sentences.get(0).get(0).getText());
+assertTrue(sentences.get(0).stream().allMatch(word -> word instanceof Word));
+assertEquals("expectedMorphologicalAnalysis", sentences.get(0).get(0).getMorphologicalAnalysis());
+assertTrue(sentences.get(0).stream().anyMatch(word -> word.getPosTag().equals("expectedPosTag")));
+assertEquals("expectedSentence", sentences.get(0).toString());
+assertEquals("expectedParagraphStructure", sentences.toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,sentences.size()); ===
+1.000 - assertEquals(1, sentences.size())
+0.901 - assertEquals(1, sentences.get(0).size())
+0.750 - assertFalse(sentences.isEmpty())
+0.697 - assertEquals("expectedWordCount", sentences.get(0).size())
+0.660 - assertEquals("expectedSentenceLength", sentences.get(0).size())
+0.609 - assertEquals("expectedSentence", sentences.get(0).toString())
+0.596 - assertEquals("expectedWord", sentences.get(0).get(0).getText())
+0.594 - ```java
+assertNotNull(sentences)
+0.589 - assertEquals("expectedParagraphStructure", sentences.toString())
+0.583 - assertEquals("expectedLemma", sentences.get(0).get(0).getLemma())
+0.574 - assertEquals("expectedLastWord", sentences.get(0).getLast().getText())
+0.571 - assertEquals("expectedPosTag", sentences.get(0).get(0).getPosTag())
+0.566 - assertNotEquals("unexpectedWord", sentences.get(0).get(0).getText())
+0.563 - assertEquals("expectedFirstWord", sentences.get(0).getFirst().getText())
+0.554 - assertEquals("expectedSentenceStructure", sentences.get(0).toString())
+0.528 - assertEquals("expectedMorphology", sentences.get(0).get(0).getMorphology())
+0.519 - assertTrue(sentences.get(0).get(0) instanceof Word)
+0.510 - assertFalse(sentences.get(0).contains(new Word("nonExistentWord")))
+0.489 - assertTrue(sentences.get(0).contains(new Word("expectedWord")))
+0.453 - assertEquals("expectedMorphologicalAnalysis", sentences.get(0).get(0).getMorphologicalAnalysis())
+0.442 - assertTrue(sentences.get(0).stream().allMatch(word -> word instanceof Word))
+0.362 - assertTrue(sentences.get(0).stream().anyMatch(word -> word.getPosTag().equals("expectedPosTag")))
+0.000 - ```

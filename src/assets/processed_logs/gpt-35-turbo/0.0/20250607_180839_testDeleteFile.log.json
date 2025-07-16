@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\nprotected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException {\nFile targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ;\nif ( targetFile . exists ( ) ) {\nif ( targetFile . isDirectory ( ) ) {\ntry {\nFileUtils . deleteDirectory ( targetFile ) ;\ninfo ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} catch ( IllegalArgumentException e ) {\ndebug ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" + e . getMessage ( ) ) ;\n} catch ( IOException e ) {\nerror ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" + e . getMessage ( ) ) ;\n} } else {\nif ( targetFile . delete ( ) ) {\ninfo ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} else {\nerror ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} } } }\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testDeleteFile ( ) throws Exception {\nFile tempSrcFile = new File ( srcDir , \"STR\" ) ;\nFiles . write ( tempSrcFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nFile tempTargetFile = new File ( targetDir , \"STR\" ) ;\nFiles . write ( tempTargetFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(tempSrcFile.exists());\nAssert.assertTrue(tempTargetFile.exists());\nAssert.assertTrue(tempSrcFile.isFile());\nAssert.assertTrue(tempTargetFile.isFile());\nAssert.assertEquals(\"STR\", Files.readAllLines(tempSrcFile.toPath()).get(0));\nAssert.assertEquals(\"STR\", Files.readAllLines(tempTargetFile.toPath()).get(0));\nAssert.assertTrue(tempSrcFile.delete());\nAssert.assertFalse(tempSrcFile.exists());\nAssert.assertTrue(tempTargetFile.exists());\nAssert.assertTrue(tempTargetFile.delete());\nAssert.assertFalse(tempTargetFile.exists());\nAssert.assertTrue(tempSrcFile.createNewFile());\nAssert.assertTrue(tempSrcFile.exists());\nAssert.assertTrue(tempTargetFile.createNewFile());\nAssert.assertTrue(tempTargetFile.exists());\nAssert.assertTrue(tempSrcFile.renameTo(new File(srcDir, \"newFile\")));\nAssert.assertFalse(tempSrcFile.exists());\nAssert.assertTrue(new File(srcDir, \"newFile\").exists());\nAssert.assertTrue(tempTargetFile.renameTo(new File(targetDir, \"newFile\")));\nAssert.assertFalse(tempTargetFile.exists());\nAssert.assertTrue(new File(targetDir, \"newFile\").exists());\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.896,
+        0.896,
+        0.896,
+        0.892,
+        0.892,
+        0.875,
+        0.875,
+        0.794,
+        0.794,
+        0.789,
+        0.776,
+        0.776,
+        0.703,
+        0.667,
+        0.642,
+        0.615,
+        0.536,
+        0.525,
+        0.471
+    ],
+    "ground_truth": "assertTrue(tempSrcFile.exists());"
+}

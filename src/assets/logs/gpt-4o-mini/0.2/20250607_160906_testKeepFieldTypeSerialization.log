@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public OType fieldType ( final String iFieldName ) { 
+    checkForLoading ( ) ; 
+    checkForFields ( iFieldName ) ; 
+    ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+    if ( entry != null ) return entry . type ; 
+    return null ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testKeepFieldTypeSerialization ( ) throws Exception {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , 10 , OType . INTEGER ) ; 
+         doc . field ( "STR" , new ORecordId ( 1 , 2 ) , OType . LINK ) ; 
+         doc . field ( "STR" , 20 , OType . STRING ) ; 
+         doc . field ( "STR" , new byte [ ] { 
+     30 } , OType . BINARY ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"));
+Assert.assertEquals(OType.LINK, doc.fieldType("STR"));
+Assert.assertEquals(OType.STRING, doc.fieldType("STR"));
+Assert.assertEquals(OType.BINARY, doc.fieldType("STR"));
+Assert.assertNotNull(doc.fieldType("STR"));
+Assert.assertTrue(doc.fieldType("STR") instanceof OType);
+Assert.assertNotEquals(OType.FLOAT, doc.fieldType("STR"));
+Assert.assertNotEquals(OType.DOUBLE, doc.fieldType("STR"));
+Assert.assertNotEquals(OType.DATE, doc.fieldType("STR"));
+Assert.assertNotEquals(OType.BOOLEAN, doc.fieldType("STR"));
+Assert.assertNull(doc.fieldType("NON_EXISTENT_FIELD"));
+Assert.assertEquals(4, doc._fields.size());
+Assert.assertTrue(doc._fields.containsKey("STR"));
+Assert.assertTrue(doc._fields.get("STR").type == OType.BINARY);
+Assert.assertTrue(doc._fields.get("STR").type == OType.STRING);
+Assert.assertTrue(doc._fields.get("STR").type == OType.INTEGER);
+Assert.assertTrue(doc._fields.get("STR").type == OType.LINK);
+Assert.assertEquals(OType.BINARY, doc.fieldType("STR"));
+Assert.assertEquals(OType.STRING, doc.fieldType("STR"));
+Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"));
+Assert.assertEquals(OType.LINK, doc.fieldType("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(doc.fieldType("STR"),OType.INTEGER); ===
+0.765 - Assert.assertTrue(doc._fields.get("STR").type == OType.INTEGER)
+0.731 - Assert.assertEquals(OType.LINK, doc.fieldType("STR"))
+0.731 - Assert.assertEquals(OType.LINK, doc.fieldType("STR"))
+0.723 - Assert.assertNotNull(doc.fieldType("STR"))
+0.716 - Assert.assertEquals(OType.STRING, doc.fieldType("STR"))
+0.716 - Assert.assertEquals(OType.BINARY, doc.fieldType("STR"))
+0.716 - Assert.assertTrue(doc.fieldType("STR") instanceof OType)
+0.716 - Assert.assertEquals(OType.BINARY, doc.fieldType("STR"))
+0.716 - Assert.assertEquals(OType.STRING, doc.fieldType("STR"))
+0.708 - Assert.assertNotEquals(OType.DATE, doc.fieldType("STR"))
+0.708 - Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"))
+0.701 - Assert.assertNotEquals(OType.FLOAT, doc.fieldType("STR"))
+0.694 - Assert.assertNotEquals(OType.DOUBLE, doc.fieldType("STR"))
+0.693 - Assert.assertTrue(doc._fields.get("STR").type == OType.BINARY)
+0.693 - Assert.assertTrue(doc._fields.get("STR").type == OType.STRING)
+0.687 - Assert.assertNotEquals(OType.BOOLEAN, doc.fieldType("STR"))
+0.687 - Assert.assertTrue(doc._fields.get("STR").type == OType.LINK)
+0.654 - ```java
+Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"))
+0.634 - Assert.assertEquals(4, doc._fields.size())
+0.611 - Assert.assertNull(doc.fieldType("NON_EXISTENT_FIELD"))
+0.578 - Assert.assertTrue(doc._fields.containsKey("STR"))
+0.000 - ```

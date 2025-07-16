@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testDontFixMangledQueryString ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ; 
+         URL testSourceUrl = new URL ( "STR" ) ; 
+         String testUrl = "STR" ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(normalizedUrl);
+assertEquals(expectedResult, normalizedUrl);
+assertTrue(normalizedUrl.startsWith("http"));
+assertFalse(normalizedUrl.contains(" ")); 
+assertFalse(normalizedUrl.contains("%20"));
+assertTrue(normalizedUrl.contains("queryParam1=value1"));
+assertTrue(normalizedUrl.contains("queryParam2=value2"));
+assertFalse(normalizedUrl.contains("mangledParam"));
+assertEquals(expectedResult.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.endsWith(".com"));
+assertFalse(normalizedUrl.endsWith(".exe"));
+assertTrue(normalizedUrl.matches("https?://.*"));
+assertNotEquals(testUrl, normalizedUrl);
+assertTrue(normalizedUrl.contains("filterParam"));
+assertFalse(normalizedUrl.contains("unwantedParam"));
+assertTrue(normalizedUrl.contains("anotherParam=value"));
+assertEquals("http://expected.domain.com", normalizedUrl);
+assertTrue(normalizedUrl.contains("validPath"));
+assertFalse(normalizedUrl.contains("invalidPath"));
+assertTrue(normalizedUrl.matches(".*[?&]queryParam1=.*"));
+assertTrue(normalizedUrl.matches(".*[?&]queryParam2=.*"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - assertEquals(expectedResult, normalizedUrl)
+0.778 - assertEquals(expectedResult.length(), normalizedUrl.length())
+0.744 - assertNotEquals(testUrl, normalizedUrl)
+0.712 - assertEquals("http://expected.domain.com", normalizedUrl)
+0.552 - assertFalse(normalizedUrl.contains(" "))
+0.548 - ```java
+assertNotNull(normalizedUrl)
+0.533 - assertFalse(normalizedUrl.contains("%20"))
+0.527 - assertFalse(normalizedUrl.endsWith(".exe"))
+0.490 - assertFalse(normalizedUrl.contains("invalidPath"))
+0.489 - assertTrue(normalizedUrl.endsWith(".com"))
+0.485 - assertFalse(normalizedUrl.contains("mangledParam"))
+0.480 - assertFalse(normalizedUrl.contains("unwantedParam"))
+0.478 - assertTrue(normalizedUrl.startsWith("http"))
+0.463 - assertTrue(normalizedUrl.contains("validPath"))
+0.458 - assertTrue(normalizedUrl.matches("https?://.*"))
+0.454 - assertTrue(normalizedUrl.contains("filterParam"))
+0.423 - assertTrue(normalizedUrl.contains("queryParam1=value1"))
+0.423 - assertTrue(normalizedUrl.contains("queryParam2=value2"))
+0.423 - assertTrue(normalizedUrl.contains("anotherParam=value"))
+0.419 - assertTrue(normalizedUrl.matches(".*[?&]queryParam1=.*"))
+0.419 - assertTrue(normalizedUrl.matches(".*[?&]queryParam2=.*"))
+0.000 - ```

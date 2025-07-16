@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testFloatWithinQuotesAndCommaAsDecimalSeparator ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(3, res.size());
+assertEquals("expectedValue1", res.get(0).field("fieldName1"));
+assertEquals("expectedValue2", res.get(1).field("fieldName2"));
+assertEquals("expectedValue3", res.get(2).field("fieldName3"));
+assertEquals(1.23f, res.get(0).field("floatField"), 0.01);
+assertEquals(4.56f, res.get(1).field("floatField"), 0.01);
+assertEquals(7.89f, res.get(2).field("floatField"), 0.01);
+assertEquals("stringValue", res.get(0).field("stringField"));
+assertTrue(res.get(1).field("booleanField"));
+assertFalse(res.get(2).field("booleanField"));
+assertEquals(123, res.get(0).field("intField"));
+assertEquals(456, res.get(1).field("intField"));
+assertEquals(789, res.get(2).field("intField"));
+assertNotEquals("unexpectedValue", res.get(0).field("fieldName1"));
+assertTrue(res.get(0).field("dateField") instanceof Date);
+assertEquals("2023-10-01", new SimpleDateFormat("yyyy-MM-dd").format(res.get(0).field("dateField")));
+assertEquals("2023-10-02", new SimpleDateFormat("yyyy-MM-dd").format(res.get(1).field("dateField")));
+assertEquals("2023-10-03", new SimpleDateFormat("yyyy-MM-dd").format(res.get(2).field("dateField")));
+assertNotNull(res.get(0).field("nestedField"));
+assertEquals("nestedValue", res.get(0).field("nestedField").field("nestedFieldName"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.692 - assertEquals(3, res.size())
+0.563 - assertFalse(res.get(2).field("booleanField"))
+0.500 - assertEquals(123, res.get(0).field("intField"))
+0.500 - assertEquals(456, res.get(1).field("intField"))
+0.500 - assertEquals(789, res.get(2).field("intField"))
+0.472 - assertNotNull(res.get(0).field("nestedField"))
+0.462 - ```java
+assertNotNull(res)
+0.457 - assertTrue(res.get(1).field("booleanField"))
+0.447 - assertEquals("stringValue", res.get(0).field("stringField"))
+0.444 - assertEquals(1.23f, res.get(0).field("floatField"), 0.01)
+0.444 - assertEquals(4.56f, res.get(1).field("floatField"), 0.01)
+0.444 - assertEquals(7.89f, res.get(2).field("floatField"), 0.01)
+0.414 - assertEquals("expectedValue1", res.get(0).field("fieldName1"))
+0.414 - assertEquals("expectedValue2", res.get(1).field("fieldName2"))
+0.414 - assertEquals("expectedValue3", res.get(2).field("fieldName3"))
+0.396 - assertNotEquals("unexpectedValue", res.get(0).field("fieldName1"))
+0.395 - assertTrue(res.get(0).field("dateField") instanceof Date)
+0.345 - assertEquals("nestedValue", res.get(0).field("nestedField").field("nestedFieldName"))
+0.306 - assertEquals("2023-10-01", new SimpleDateFormat("yyyy-MM-dd").format(res.get(0).field("dateField")))
+0.306 - assertEquals("2023-10-02", new SimpleDateFormat("yyyy-MM-dd").format(res.get(1).field("dateField")))
+0.306 - assertEquals("2023-10-03", new SimpleDateFormat("yyyy-MM-dd").format(res.get(2).field("dateField")))
+0.000 - ```

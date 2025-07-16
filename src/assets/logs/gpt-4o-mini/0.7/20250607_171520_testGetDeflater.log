@@ -1,0 +1,103 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtension {
+    public Deflater getDeflater ( ) { 
+    return deflater ; 
+    }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtensionTest {
+    @Test
+     public void testGetDeflater ( ) {
+         PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+@Test
+public void testGetDeflater() {
+    PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension();
+    
+    // Assertions
+    Deflater deflater = deflateExtension.getDeflater();
+    assertNotNull(deflater);
+    assertTrue(deflater instanceof Deflater);
+    assertTrue(deflater.getAdler() >= 0);
+    assertTrue(deflater.getTotalIn() >= 0);
+    assertTrue(deflater.getTotalOut() >= 0);
+    
+    // Additional assertions
+    deflater.setInput(new byte[]{1, 2, 3});
+    assertTrue(deflater.getTotalIn() > 0);
+    
+    deflater.finish();
+    assertTrue(deflater.isFinished());
+    
+    deflater.reset();
+    assertTrue(deflater.getTotalIn() == 0);
+    
+    deflater.setLevel(Deflater.BEST_COMPRESSION);
+    assertTrue(deflater.getLevel() == Deflater.BEST_COMPRESSION);
+    
+    deflater.setStrategy(Deflater.DEFAULT_STRATEGY);
+    assertTrue(deflater.getStrategy() == Deflater.DEFAULT_STRATEGY);
+    
+    deflater.setInput(new byte[]{1, 2, 3, 4, 5});
+    assertTrue(deflater.getTotalIn() > 0);
+    
+    deflater.finish();
+    assertTrue(deflater.getTotalOut() > 0);
+    
+    deflater.end();
+    assertTrue(deflater.isFinished());
+}
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(deflateExtension.getDeflater().finished(),newDeflater(Deflater.DEFAULT_COMPRESSION,true).finished()); ===
+0.550 - assertTrue(deflater.getLevel() == Deflater.BEST_COMPRESSION)
+0.506 - assertTrue(deflater.getStrategy() == Deflater.DEFAULT_STRATEGY)
+0.471 - deflater.setLevel(Deflater.BEST_COMPRESSION)
+0.428 - // Assertions
+    Deflater deflater = deflateExtension.getDeflater()
+0.425 - deflater.setStrategy(Deflater.DEFAULT_STRATEGY)
+0.397 - assertTrue(deflater.isFinished())
+0.397 - assertTrue(deflater.isFinished())
+0.358 - assertTrue(deflater instanceof Deflater)
+0.340 - assertTrue(deflater.getAdler() >= 0)
+0.322 - assertTrue(deflater.getTotalOut() > 0)
+0.320 - assertTrue(deflater.getTotalOut() >= 0)
+0.311 - assertTrue(deflater.getTotalIn() > 0)
+0.311 - assertTrue(deflater.getTotalIn() > 0)
+0.309 - assertTrue(deflater.getTotalIn() >= 0)
+0.309 - assertTrue(deflater.getTotalIn() == 0)
+0.306 - @Test
+public void testGetDeflater() {
+    PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension()
+0.265 - assertNotNull(deflater)
+0.262 - deflater.finish()
+0.262 - deflater.finish()
+0.257 - // Additional assertions
+    deflater.setInput(new byte[]{1, 2, 3})
+0.220 - deflater.end()
+0.186 - deflater.reset()
+0.158 - deflater.setInput(new byte[]{1, 2, 3, 4, 5})
+0.138 - import static org.junit.Assert.assertTrue
+0.115 - ```java
+import static org.junit.Assert.assertNotNull
+0.000 - }
+```

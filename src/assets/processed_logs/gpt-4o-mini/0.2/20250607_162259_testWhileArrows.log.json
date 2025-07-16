@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\npublic OResultSet query ( String query , Object ... args ) {\ncheckOpenness ( ) ;\nreturn internal . query ( query , args ) ;\n}\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testWhileArrows ( ) throws Exception {\nOResultSet qResult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertTrue(qResult.hasNext());\nassertEquals(1, qResult.getProperty(\"someProperty\"));\nassertEquals(\"expectedValue\", qResult.getProperty(\"anotherProperty\"));\nassertFalse(qResult.isEmpty());\nassertEquals(5, qResult.size());\nassertTrue(qResult.stream().allMatch(result -> result.getProperty(\"status\").equals(\"active\")));\nassertTrue(qResult.stream().anyMatch(result -> result.getProperty(\"id\").equals(\"specificId\")));\nassertEquals(\"expectedType\", qResult.getProperty(\"type\"));\nassertNotEquals(\"unexpectedValue\", qResult.getProperty(\"differentProperty\"));\nassertTrue(qResult.stream().noneMatch(result -> result.getProperty(\"error\") != null));\nassertEquals(\"expectedString\", qResult.getProperty(\"stringField\"));\nassertTrue(qResult.stream().map(result -> result.getProperty(\"numericField\")).allMatch(num -> num instanceof Number));\nassertEquals(3.14, qResult.getProperty(\"floatField\"), 0.01);\nassertTrue(qResult.stream().map(result -> result.getProperty(\"listField\")).allMatch(list -> list instanceof List));\nassertEquals(\"expectedJson\", qResult.getProperty(\"jsonField\"));\nassertTrue(qResult.stream().allMatch(result -> result.getProperty(\"dateField\") instanceof Date));\nassertTrue(qResult.stream().anyMatch(result -> result.getProperty(\"booleanField\") == true));\nassertEquals(\"expectedValue\", qResult.getProperty(\"nestedField.nestedProperty\"));\nassertNotNull(qResult.getProperty(\"optionalField\"));\nassertTrue(qResult.stream().allMatch(result -> result.getProperty(\"enumField\").equals(\"EXPECTED_ENUM\")));\n```\n====================\n\n",
+    "scores": [
+        0.78,
+        0.678,
+        0.621,
+        0.576,
+        0.575,
+        0.558,
+        0.541,
+        0.511,
+        0.489,
+        0.474,
+        0.45,
+        0.442,
+        0.426,
+        0.327,
+        0.31,
+        0.298,
+        0.298,
+        0.298,
+        0.275,
+        0.263,
+        0.257,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(3,size(qResult));"
+}

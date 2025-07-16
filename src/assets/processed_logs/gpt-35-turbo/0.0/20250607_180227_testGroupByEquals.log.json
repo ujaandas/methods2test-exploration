@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > Map < X , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f ) throws E {\nfinal Map < X , List < T > > result = new HashMap < > ( ) ;\nfor ( T o : coll ) {\nfinal X key = f . apply ( o ) ;\nList < T > perKey = result . get ( key ) ;\nif ( perKey == null ) {\nperKey = createEmptyListOfType ( coll , false ) ;\nresult . put ( key , perKey ) ;\n} perKey . add ( o ) ;\n} return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testGroupByEquals ( ) {\nfinal AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) {\n@Override\npublic Integer apply ( String param ) {\nreturn param . length ( ) ;\n} } ;\nfinal Map < Integer , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) , len ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, grouped.size());\nassertTrue(grouped.containsKey(3));\nassertEquals(6, grouped.get(3).size());\nassertFalse(grouped.containsKey(4));\nassertTrue(grouped.get(3).contains(\"STR\"));\nassertFalse(grouped.get(3).contains(\"STRR\"));\nassertFalse(grouped.get(3).contains(\"ST\"));\nassertFalse(grouped.get(3).contains(\"STRING\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRI\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\nassertFalse(grouped.get(3).contains(\"STRIN\"));\n====================\n\n",
+    "scores": [
+        0.967,
+        0.866,
+        0.708,
+        0.656,
+        0.611,
+        0.595,
+        0.595,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.587,
+        0.579,
+        0.556
+    ],
+    "ground_truth": "assertEquals(3,grouped.size());"
+}

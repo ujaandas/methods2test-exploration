@@ -1,0 +1,108 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Travis {
+    @Override
+     public String getPullRequest ( ) { 
+     return getProperty ( TRAVIS_PULL_REQUEST ) ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TravisTest {
+    @Test
+     public void testGetPullRequest ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Travis travis = new Travis();
+
+// Test case 1: When TRAVIS_PULL_REQUEST is not set
+System.setProperty("TRAVIS_PULL_REQUEST", null);
+assertNull(travis.getPullRequest());
+
+// Test case 2: When TRAVIS_PULL_REQUEST is set to an empty string
+System.setProperty("TRAVIS_PULL_REQUEST", "");
+assertEquals("", travis.getPullRequest());
+
+// Test case 3: When TRAVIS_PULL_REQUEST is set to a valid pull request number
+System.setProperty("TRAVIS_PULL_REQUEST", "123");
+assertEquals("123", travis.getPullRequest());
+
+// Test case 4: When TRAVIS_PULL_REQUEST is set to a valid pull request number with leading spaces
+System.setProperty("TRAVIS_PULL_REQUEST", "  456");
+assertEquals("  456", travis.getPullRequest());
+
+// Test case 5: When TRAVIS_PULL_REQUEST is set to a valid pull request number with trailing spaces
+System.setProperty("TRAVIS_PULL_REQUEST", "789  ");
+assertEquals("789  ", travis.getPullRequest());
+
+// Test case 6: When TRAVIS_PULL_REQUEST is set to a valid pull request number with special characters
+System.setProperty("TRAVIS_PULL_REQUEST", "PR-101");
+assertEquals("PR-101", travis.getPullRequest());
+
+// Test case 7: When TRAVIS_PULL_REQUEST is set to a valid pull request number with mixed case
+System.setProperty("TRAVIS_PULL_REQUEST", "AbC123");
+assertEquals("AbC123", travis.getPullRequest());
+
+// Test case 8: When TRAVIS_PULL_REQUEST is set to a very large number
+System.setProperty("TRAVIS_PULL_REQUEST", "9999999999");
+assertEquals("9999999999", travis.getPullRequest());
+
+// Test case 9: When TRAVIS_PULL_REQUEST is set to a negative number
+System.setProperty("TRAVIS_PULL_REQUEST", "-1");
+assertEquals("-1", travis.getPullRequest());
+
+// Test case 10: When TRAVIS_PULL_REQUEST is set to a decimal number
+System.setProperty("TRAVIS_PULL_REQUEST", "123.456");
+assertEquals("123.456", travis.getPullRequest());
+
+// Test case 11: When TRAVIS_PULL_REQUEST is set to a number with a leading zero
+System.setProperty("TRAVIS_PULL_REQUEST", "012
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",newTravis(env()).getPullRequest()); ===
+0.839 - assertEquals("", travis.getPullRequest())
+0.821 - assertEquals("-1", travis.getPullRequest())
+0.812 - assertEquals("123", travis.getPullRequest())
+0.812 - assertEquals("  456", travis.getPullRequest())
+0.812 - assertEquals("789  ", travis.getPullRequest())
+0.808 - assertEquals("PR-101", travis.getPullRequest())
+0.788 - assertEquals("AbC123", travis.getPullRequest())
+0.780 - assertEquals("123.456", travis.getPullRequest())
+0.757 - assertEquals("9999999999", travis.getPullRequest())
+0.727 - assertNull(travis.getPullRequest())
+0.329 - ```java
+Travis travis = new Travis()
+0.238 - // Test case 1: When TRAVIS_PULL_REQUEST is not set
+System.setProperty("TRAVIS_PULL_REQUEST", null)
+0.235 - // Test case 2: When TRAVIS_PULL_REQUEST is set to an empty string
+System.setProperty("TRAVIS_PULL_REQUEST", "")
+0.229 - // Test case 9: When TRAVIS_PULL_REQUEST is set to a negative number
+System.setProperty("TRAVIS_PULL_REQUEST", "-1")
+0.229 - // Test case 3: When TRAVIS_PULL_REQUEST is set to a valid pull request number
+System.setProperty("TRAVIS_PULL_REQUEST", "123")
+0.209 - // Test case 7: When TRAVIS_PULL_REQUEST is set to a valid pull request number with mixed case
+System.setProperty("TRAVIS_PULL_REQUEST", "AbC123")
+0.208 - // Test case 4: When TRAVIS_PULL_REQUEST is set to a valid pull request number with leading spaces
+System.setProperty("TRAVIS_PULL_REQUEST", "  456")
+0.207 - // Test case 5: When TRAVIS_PULL_REQUEST is set to a valid pull request number with trailing spaces
+System.setProperty("TRAVIS_PULL_REQUEST", "789  ")
+0.200 - // Test case 6: When TRAVIS_PULL_REQUEST is set to a valid pull request number with special characters
+System.setProperty("TRAVIS_PULL_REQUEST", "PR-101")
+0.185 - // Test case 10: When TRAVIS_PULL_REQUEST is set to a decimal number
+System.setProperty("TRAVIS_PULL_REQUEST", "123.456")
+0.182 - // Test case 11: When TRAVIS_PULL_REQUEST is set to a number with a leading zero
+System.setProperty("TRAVIS_PULL_REQUEST", "012
+0.181 - // Test case 8: When TRAVIS_PULL_REQUEST is set to a very large number
+System.setProperty("TRAVIS_PULL_REQUEST", "9999999999")

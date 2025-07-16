@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalProperty {\nString getName ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalPropertyTest {\n@Test\npublic void testGlobalPropertyCreate ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nschema . createGlobalProperty ( \"STR\" , OType . SHORT , 100 ) ;\nOGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(prop);\nassertEquals(\"STR\", prop.getName());\nassertEquals(OType.SHORT, prop.getType());\nassertEquals(100, prop.getId());\nassertTrue(schema.getGlobalProperties().contains(prop));\nassertEquals(1, schema.getGlobalProperties().size());\nassertNull(schema.getGlobalPropertyById(200));\nassertThrows(IllegalArgumentException.class, () -> schema.createGlobalProperty(null, OType.SHORT, 101));\nassertThrows(IllegalArgumentException.class, () -> schema.createGlobalProperty(\"NEW_PROP\", null, 102));\nassertThrows(IllegalArgumentException.class, () -> schema.createGlobalProperty(\"NEW_PROP\", OType.SHORT, -1));\nassertEquals(0, schema.getGlobalProperties().stream().filter(p -> p.getName().equals(\"STR\")).count());\nassertNotEquals(prop, schema.getGlobalPropertyById(101));\nassertTrue(schema.getGlobalProperties().stream().anyMatch(p -> p.getId() == 100));\nassertTrue(schema.getGlobalProperties().stream().anyMatch(p -> \"STR\".equals(p.getName())));\nassertFalse(schema.getGlobalProperties().stream().anyMatch(p -> p.getId() == 200));\nassertDoesNotThrow(() -> schema.createGlobalProperty(\"ANOTHER_PROP\", OType.SHORT, 103));\nassertNotNull(schema.getGlobalPropertyById(103));\nassertEquals(\"ANOTHER_PROP\", schema.getGlobalPropertyById(103).getName());\nassertEquals(2, schema.getGlobalProperties().size());\nassertEquals(OType.SHORT, schema.getGlobalPropertyById(103).getType());\n```\n====================\n\n",
+    "scores": [
+        0.824,
+        0.75,
+        0.676,
+        0.584,
+        0.518,
+        0.518,
+        0.509,
+        0.485,
+        0.459,
+        0.447,
+        0.43,
+        0.415,
+        0.393,
+        0.382,
+        0.36,
+        0.339,
+        0.275,
+        0.242,
+        0.239,
+        0.234,
+        0.0
+    ],
+    "ground_truth": "assertEquals(prop.getName(),\"STR\");"
+}

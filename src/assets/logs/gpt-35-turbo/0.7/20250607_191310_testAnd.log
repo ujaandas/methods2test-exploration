@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMathExpression {
+    public Object execute ( OResult iCurrentRecord , OCommandContext ctx ) { 
+    if ( childExpressions . size ( ) == 0 ) { 
+    return null ; 
+    } if ( childExpressions . size ( ) == 1 ) { 
+    return childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ; 
+    } if ( childExpressions . size ( ) == 2 ) { 
+    Object leftValue = childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ; 
+    Object rightValue = childExpressions . get ( 1 ) . execute ( iCurrentRecord , ctx ) ; 
+    return operators . get ( 0 ) . apply ( leftValue , rightValue ) ; 
+    } return calculateWithOpPriority ( iCurrentRecord , ctx ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMathExpressionTest {
+    @Test
+     public void testAnd ( ) {
+         OMathExpression exp = new OMathExpression ( - 1 ) ; 
+         exp . childExpressions . add ( integer ( 5 ) ) ; 
+         exp . operators . add ( OMathExpression . Operator . BIT_AND ) ; 
+         exp . childExpressions . add ( integer ( 1 ) ) ; 
+         Object result = exp . execute ( ( OResult ) null , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, result);
+assertEquals(-10, result);
+assertEquals(0, result);
+assertEquals(5, result);
+assertEquals(1, result);
+assertEquals(7, result);
+assertEquals(3, result);
+assertEquals(15, result);
+assertEquals(9, result);
+assertEquals(6, result);
+assertEquals(11, result);
+assertEquals(13, result);
+assertEquals(20, result);
+assertEquals(17, result);
+assertEquals(14, result);
+assertEquals(19, result);
+assertEquals(21, result);
+assertEquals(25, result);
+assertEquals(18, result);
+assertEquals(23, result);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofInteger); ===
+0.526 - assertEquals(4, result)
+0.526 - assertEquals(0, result)
+0.526 - assertEquals(5, result)
+0.526 - assertEquals(1, result)
+0.526 - assertEquals(7, result)
+0.526 - assertEquals(3, result)
+0.526 - assertEquals(9, result)
+0.526 - assertEquals(6, result)
+0.517 - assertEquals(15, result)
+0.517 - assertEquals(11, result)
+0.517 - assertEquals(13, result)
+0.517 - assertEquals(20, result)
+0.517 - assertEquals(17, result)
+0.517 - assertEquals(14, result)
+0.517 - assertEquals(19, result)
+0.517 - assertEquals(21, result)
+0.517 - assertEquals(25, result)
+0.517 - assertEquals(18, result)
+0.517 - assertEquals(23, result)
+0.508 - assertEquals(-10, result)

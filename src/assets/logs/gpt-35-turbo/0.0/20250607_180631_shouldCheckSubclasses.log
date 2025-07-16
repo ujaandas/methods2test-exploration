@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(20, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getPropertyNames().contains("property1")));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("property2") == null));
+assertEquals(10, result.stream().filter(r -> r.getProperty("property3").equals("value")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("property4").equals("invalid")));
+assertEquals(5, result.stream().filter(r -> r.getProperty("property5") instanceof Integer).count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("property6") != null));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("property7").equals("")));
+assertEquals(15, result.stream().filter(r -> r.getProperty("property8").equals(true)).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("property9").equals(false)));
+assertEquals(8, result.stream().filter(r -> r.getProperty("property10").toString().contains("substring")).count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("property11") instanceof List));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("property12").equals(0)));
+assertEquals(3, result.stream().filter(r -> r.getProperty("property13").equals("value")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("property14").equals("invalid")));
+assertEquals(7, result.stream().filter(r -> r.getProperty("property15") instanceof Double).count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("property16") != null));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("property17").equals("")));
+assertEquals(12, result.stream().filter(r -> r.getProperty("property18").equals(true)).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("property19").equals(false)));
+assertEquals(6, result.stream().filter(r -> r.getProperty("property20").toString().contains("substring")).count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.848 - Assertions:
+
+assertEquals(20, result.stream().count())
+0.586 - assertEquals(10, result.stream().filter(r -> r.getProperty("property3").equals("value")).count())
+0.585 - assertEquals(15, result.stream().filter(r -> r.getProperty("property8").equals(true)).count())
+0.580 - assertEquals(12, result.stream().filter(r -> r.getProperty("property18").equals(true)).count())
+0.571 - assertEquals(5, result.stream().filter(r -> r.getProperty("property5") instanceof Integer).count())
+0.571 - assertEquals(3, result.stream().filter(r -> r.getProperty("property13").equals("value")).count())
+0.571 - assertEquals(7, result.stream().filter(r -> r.getProperty("property15") instanceof Double).count())
+0.549 - assertFalse(result.stream().anyMatch(r -> r.getProperty("property2") == null))
+0.542 - assertFalse(result.stream().anyMatch(r -> r.getProperty("property7").equals("")))
+0.542 - assertFalse(result.stream().anyMatch(r -> r.getProperty("property12").equals(0)))
+0.538 - assertFalse(result.stream().anyMatch(r -> r.getProperty("property17").equals("")))
+0.518 - assertTrue(result.stream().allMatch(r -> r.getProperty("property6") != null))
+0.513 - assertTrue(result.stream().allMatch(r -> r.getProperty("property16") != null))
+0.508 - assertTrue(result.stream().allMatch(r -> r.getPropertyNames().contains("property1")))
+0.507 - assertEquals(8, result.stream().filter(r -> r.getProperty("property10").toString().contains("substring")).count())
+0.507 - assertEquals(6, result.stream().filter(r -> r.getProperty("property20").toString().contains("substring")).count())
+0.496 - assertTrue(result.stream().noneMatch(r -> r.getProperty("property9").equals(false)))
+0.496 - assertTrue(result.stream().allMatch(r -> r.getProperty("property11") instanceof List))
+0.492 - assertTrue(result.stream().noneMatch(r -> r.getProperty("property19").equals(false)))
+0.480 - assertTrue(result.stream().noneMatch(r -> r.getProperty("property4").equals("invalid")))
+0.476 - assertTrue(result.stream().noneMatch(r -> r.getProperty("property14").equals("invalid")))

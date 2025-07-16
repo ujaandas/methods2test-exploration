@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testDontFixMangledQueryString ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ;\nURL testSourceUrl = new URL ( \"STR\" ) ;\nString testUrl = \"STR\" ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(normalizedUrl);\nassertEquals(expectedResult, normalizedUrl);\nassertTrue(normalizedUrl.startsWith(\"http\"));\nassertFalse(normalizedUrl.contains(\" \"));\nassertFalse(normalizedUrl.contains(\"%20\"));\nassertTrue(normalizedUrl.contains(\"queryParam1=value1\"));\nassertTrue(normalizedUrl.contains(\"queryParam2=value2\"));\nassertFalse(normalizedUrl.contains(\"mangledParam\"));\nassertEquals(expectedResult.length(), normalizedUrl.length());\nassertTrue(normalizedUrl.endsWith(\".com\"));\nassertFalse(normalizedUrl.endsWith(\".exe\"));\nassertTrue(normalizedUrl.matches(\"https?://.*\"));\nassertNotEquals(testUrl, normalizedUrl);\nassertTrue(normalizedUrl.contains(\"filterParam\"));\nassertFalse(normalizedUrl.contains(\"unwantedParam\"));\nassertTrue(normalizedUrl.contains(\"anotherParam=value\"));\nassertEquals(\"http://expected.domain.com\", normalizedUrl);\nassertTrue(normalizedUrl.contains(\"validPath\"));\nassertFalse(normalizedUrl.contains(\"invalidPath\"));\nassertTrue(normalizedUrl.matches(\".*[?&]queryParam1=.*\"));\nassertTrue(normalizedUrl.matches(\".*[?&]queryParam2=.*\"));\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.778,
+        0.744,
+        0.712,
+        0.552,
+        0.548,
+        0.533,
+        0.527,
+        0.49,
+        0.489,
+        0.485,
+        0.48,
+        0.478,
+        0.463,
+        0.458,
+        0.454,
+        0.423,
+        0.423,
+        0.423,
+        0.419,
+        0.419,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

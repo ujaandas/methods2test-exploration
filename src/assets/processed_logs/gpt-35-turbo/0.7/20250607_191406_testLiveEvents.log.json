@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class ORemoteLiveQueryPush {\n@Override\npublic OBinaryPushResponse execute ( ORemotePushHandler remote ) {\nremote . executeLiveQueryPush ( this ) ;\nreturn null ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class ORemoteLiveQueryPushTest {\n@Test\npublic void testLiveEvents ( ) {\nMockLiveListener mock = new MockLiveListener ( ) ;\nstorage . registerLiveListener ( 10 , new OLiveQueryClientListener ( database , mock ) ) ;\nList < OLiveQueryResult > events = new ArrayList < > ( ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , new OResultInternal ( ) , null ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ;\nOLiveQueryPushRequest request = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ;\nrequest . execute ( storage ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(10, mock.getCreateEvents().size());\nAssert.assertEquals(10, mock.getUpdateEvents().size());\nAssert.assertEquals(10, mock.getDeleteEvents().size());\nAssert.assertEquals(OLiveQueryResult.CREATE_EVENT, mock.getCreateEvents().get(0).getEventType());\nAssert.assertEquals(OLiveQueryResult.UPDATE_EVENT, mock.getUpdateEvents().get(0).getEventType());\nAssert.assertEquals(OLiveQueryResult.DELETE_EVENT, mock.getDeleteEvents().get(0).getEventType());\nAssert.assertEquals(OResultInternal.class, mock.getCreateEvents().get(0).getResult().getClass());\nAssert.assertEquals(OResultInternal.class, mock.getUpdateEvents().get(0).getResult().getClass());\nAssert.assertEquals(OResultInternal.class, mock.getDeleteEvents().get(0).getResult().getClass());\nAssert.assertNull(mock.getCreateEvents().get(0).getOldValue());\nAssert.assertNotNull(mock.getUpdateEvents().get(0).getOldValue());\nAssert.assertNull(mock.getDeleteEvents().get(0).getOldValue());\nAssert.assertEquals(10, mock.getCreateEvents().get(0).getRID().getClusterId());\nAssert.assertEquals(10, mock.getUpdateEvents().get(0).getRID().getClusterId());\nAssert.assertEquals(10, mock.getDeleteEvents().get(0).getRID().getClusterId());\nAssert.assertEquals(OLiveQueryPushRequest.END, mock.getPushRequest().getPushCommand());\nAssert.assertEquals(10, mock.getPushRequest().getHandle());\nAssert.assertEquals(3, mock.getPushRequest().getEvents().size());\nAssert.assertEquals(OLiveQueryResult.class, mock.getPushRequest().getEvents().get(0).getClass());\nAssert.assertEquals(OResultInternal.class, mock.getPushRequest().getEvents().get(0).getResult().getClass());\n====================\n\n",
+    "scores": [
+        0.667,
+        0.59,
+        0.564,
+        0.537,
+        0.523,
+        0.51,
+        0.506,
+        0.471,
+        0.46,
+        0.451,
+        0.433,
+        0.433,
+        0.422,
+        0.4,
+        0.4,
+        0.383,
+        0.383,
+        0.383,
+        0.382,
+        0.366
+    ],
+    "ground_truth": "assertEquals(mock.countCreate,1);"
+}

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializer {
+    @Override
+     public Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     return this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializerTest {
+    @Test
+     public void testNormalCustomSerializer ( ) throws Exception {
+         NormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ; 
+         NormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ; 
+         CustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ; 
+         CustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ; 
+         RequestBody body = new RequestBody ( 1 , "STR" ) ; 
+         String ret = ( String ) client . invokeSync ( addr , body , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(ret);
+assertEquals("ExpectedResponse", ret);
+assertTrue(ret instanceof String);
+assertFalse(ret.isEmpty());
+assertEquals("ExpectedResponse", ret.trim());
+assertEquals(12, ret.length());
+assertTrue(ret.contains("ExpectedSubstring"));
+assertFalse(ret.contains("UnexpectedSubstring"));
+assertEquals("ExpectedResponse", new String(ret.getBytes(), StandardCharsets.UTF_8));
+assertNotSame("DifferentResponse", ret);
+assertTrue(ret.matches("ExpectedRegexPattern"));
+assertEquals("ExpectedResponse", ret.toString());
+assertArrayEquals(new byte[]{1, 2, 3}, ret.getBytes());
+assertTrue(ret.startsWith("ExpectedStart"));
+assertTrue(ret.endsWith("ExpectedEnd"));
+assertNotEquals("AnotherResponse", ret);
+assertSame("ExpectedResponse", ret);
+assertTrue(ret.equalsIgnoreCase("expectedresponse"));
+assertNull(client.invokeSync(addr, null, 1000));
+assertThrows(RemotingException.class, () -> client.invokeSync(addr, body, -1));
+assertDoesNotThrow(() -> client.invokeSync(addr, body, 1000));
+assertEquals("ExpectedResponse", ret.replace(" ", ""));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+"STR",ret); ===
+0.454 - assertEquals("ExpectedResponse", ret)
+0.444 - assertNotEquals("AnotherResponse", ret)
+0.423 - assertEquals("ExpectedResponse", ret.trim())
+0.407 - assertEquals("ExpectedResponse", ret.toString())
+0.400 - assertEquals(12, ret.length())
+0.393 - assertEquals("ExpectedResponse", ret.replace(" ", ""))
+0.360 - assertArrayEquals(new byte[]{1, 2, 3}, ret.getBytes())
+0.343 - assertNotSame("DifferentResponse", ret)
+0.337 - assertSame("ExpectedResponse", ret)
+0.322 - assertFalse(ret.isEmpty())
+0.319 - assertTrue(ret.equalsIgnoreCase("expectedresponse"))
+0.310 - assertEquals("ExpectedResponse", new String(ret.getBytes(), StandardCharsets.UTF_8))
+0.299 - ```java
+assertNotNull(ret)
+0.269 - assertThrows(RemotingException.class, () -> client.invokeSync(addr, body, -1))
+0.261 - assertTrue(ret instanceof String)
+0.257 - assertFalse(ret.contains("UnexpectedSubstring"))
+0.240 - assertTrue(ret.endsWith("ExpectedEnd"))
+0.237 - assertDoesNotThrow(() -> client.invokeSync(addr, body, 1000))
+0.231 - assertTrue(ret.startsWith("ExpectedStart"))
+0.226 - assertTrue(ret.contains("ExpectedSubstring"))
+0.222 - assertTrue(ret.matches("ExpectedRegexPattern"))
+0.208 - assertNull(client.invokeSync(addr, null, 1000))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class AttachmentResult {\npublic AttachmentResult ( String inputMessage , StatementResult inputStatements , Map < String , AttachmentAndType > inputAttachments ) {\nresponseMessage = inputMessage ;\nstatements = inputStatements ;\nattachments = inputAttachments ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class AttachmentResultTest {\n@Test\npublic void testGetXapiStatement ( ) {\nAttachmentResult a = new AttachmentResult ( RESPONSE_MESSAGE , statements , attachments ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(a);\nassertEquals(RESPONSE_MESSAGE, a.responseMessage);\nassertEquals(statements, a.statements);\nassertEquals(attachments, a.attachments);\nassertTrue(a.attachments instanceof Map);\nassertFalse(a.attachments.isEmpty());\nassertTrue(a.statements instanceof StatementResult);\nassertNotNull(a.statements);\nassertEquals(\"Expected statement count\", expectedStatementCount, a.statements.size());\nassertTrue(a.responseMessage.length() > 0);\nassertTrue(a.attachments.containsKey(\"expectedKey\"));\nassertEquals(\"Expected attachment type\", expectedAttachmentType, a.attachments.get(\"expectedKey\").getType());\nassertNotNull(a.attachments.get(\"expectedKey\").getAttachment());\nassertTrue(a.attachments.get(\"expectedKey\").getAttachment() instanceof Attachment);\nassertEquals(\"Expected attachment count\", expectedAttachmentCount, a.attachments.size());\nassertTrue(a.responseMessage.contains(\"success\"));\nassertFalse(a.responseMessage.contains(\"error\"));\nassertEquals(\"Expected specific response\", \"Success\", a.responseMessage);\nassertNotEquals(\"Unexpected response\", \"Failure\", a.responseMessage);\nassertTrue(a.statements.isValid());\nassertEquals(\"Expected specific attachment\", expectedAttachment, a.attachments.get(\"expectedKey\"));\n```\n====================\n\n",
+    "scores": [
+        0.8,
+        0.744,
+        0.405,
+        0.4,
+        0.4,
+        0.385,
+        0.37,
+        0.357,
+        0.346,
+        0.34,
+        0.338,
+        0.312,
+        0.312,
+        0.308,
+        0.294,
+        0.238,
+        0.227,
+        0.22,
+        0.208,
+        0.164,
+        0.15,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(a);"
+}

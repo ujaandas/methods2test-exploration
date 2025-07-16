@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testAnchorFilterFalse ( ) throws MalformedURLException {\nURLFilter allAllowed = createFilter ( false , false ) ;\nURL url = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nString filterResult = allAllowed . filter ( url , metadata , url . toExternalForm ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(filterResult);\nassertEquals(\"Expected URL after filtering\", \"expectedUrl\", filterResult);\nassertTrue(\"Filter result should not be empty\", !filterResult.isEmpty());\nassertFalse(\"Filter result should not contain unwanted characters\", filterResult.contains(\"unwantedCharacter\"));\nassertTrue(\"Filter result should start with expected prefix\", filterResult.startsWith(\"expectedPrefix\"));\nassertTrue(\"Filter result should end with expected suffix\", filterResult.endsWith(\"expectedSuffix\"));\nassertEquals(\"Filter result should match expected pattern\", \"expectedPattern\", filterResult);\nassertNotEquals(\"Filter result should not match disallowed pattern\", \"disallowedPattern\", filterResult);\nassertTrue(\"Filter result should contain expected substring\", filterResult.contains(\"expectedSubstring\"));\nassertFalse(\"Filter result should not contain disallowed substring\", filterResult.contains(\"disallowedSubstring\"));\nassertTrue(\"Filter result should have a length greater than 5\", filterResult.length() > 5);\nassertTrue(\"Filter result should have a length less than 100\", filterResult.length() < 100);\nassertTrue(\"Filter result should be a valid URL\", isValidURL(filterResult));\nassertFalse(\"Filter result should not be equal to the original URL\", filterResult.equals(url.toExternalForm()));\nassertTrue(\"Filter result should be normalized\", isNormalized(filterResult));\nassertTrue(\"Filter result should not contain duplicate segments\", !hasDuplicateSegments(filterResult));\nassertTrue(\"Filter result should be in lowercase\", filterResult.equals(filterResult.toLowerCase()));\nassertTrue(\"Filter result should not contain spaces\", !filterResult.contains(\" \"));\nassertTrue(\"Filter result should not be a local file path\", !filterResult.startsWith(\"file://\"));\nassertTrue(\"Filter result should not be a mailto link\", !filterResult.startsWith(\"mailto:\"));\n```\n====================\n\n",
+    "scores": [
+        0.591,
+        0.576,
+        0.549,
+        0.537,
+        0.496,
+        0.492,
+        0.47,
+        0.446,
+        0.444,
+        0.443,
+        0.443,
+        0.433,
+        0.429,
+        0.425,
+        0.411,
+        0.408,
+        0.386,
+        0.384,
+        0.375,
+        0.371,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(url.toExternalForm(),filterResult);"
+}

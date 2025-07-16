@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testAdd ( ) {
+         Connection conn = getAConn ( ) ; 
+         cm . add ( conn ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(cm);
+assertNotNull(conn);
+assertTrue(cm.getConnectionPool().contains(conn));
+assertEquals(1, cm.count(conn.getPoolKey()));
+assertTrue(cm.getConnectionPool().size() > 0);
+assertTrue(cm.getConnectionPool().isEmpty() == false);
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn));
+assertEquals(conn, cm.getConnectionPool().get(conn.getPoolKey()).get(0));
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1);
+assertFalse(cm.getConnectionPool().get(conn.getPoolKey()).isEmpty());
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).indexOf(conn) >= 0);
+assertEquals("Expected pool size after adding connection", 1, cm.count(conn.getPoolKey()));
+assertNotEquals("Pool should not be empty after adding connection", 0, cm.count(conn.getPoolKey()));
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn));
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1);
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isActive());
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isValid());
+assertEquals("Pool size should be 1 after adding one connection", 1, cm.count(conn.getPoolKey()));
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().allMatch(Connection::isActive));
+assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().anyMatch(c -> c.equals(conn));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,cm.count(poolKey)); ===
+0.842 - assertEquals(1, cm.count(conn.getPoolKey()))
+0.558 - assertEquals(conn, cm.getConnectionPool().get(conn.getPoolKey()).get(0))
+0.552 - assertEquals("Expected pool size after adding connection", 1, cm.count(conn.getPoolKey()))
+0.533 - assertEquals("Pool size should be 1 after adding one connection", 1, cm.count(conn.getPoolKey()))
+0.526 - assertTrue(cm.getConnectionPool().size() > 0)
+0.504 - assertNotEquals("Pool should not be empty after adding connection", 0, cm.count(conn.getPoolKey()))
+0.500 - assertNotNull(conn)
+0.495 - assertFalse(cm.getConnectionPool().get(conn.getPoolKey()).isEmpty())
+0.463 - assertTrue(cm.getConnectionPool().contains(conn))
+0.460 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1)
+0.460 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1)
+0.438 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn))
+0.438 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn))
+0.430 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).indexOf(conn) >= 0)
+0.430 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isValid())
+0.426 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isActive())
+0.414 - ```java
+assertNotNull(cm)
+0.354 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().allMatch(Connection::isActive))
+0.286 - assertTrue(cm.getConnectionPool().isEmpty() == false)
+0.270 - assertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().anyMatch(c -> c.equals(conn))
+0.000 - ```

@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String toYaml ( String rootKey ) { 
+    try { 
+    StringBuilder out = new StringBuilder ( ) ; 
+    this . print ( 0 , rootKey , out ) ; 
+    return out . toString ( ) ; 
+    } catch ( IOException e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void roundtrips ( ) {
+         String yaml = "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( yaml ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(config);
+assertEquals("expectedValue1", config.getValue1());
+assertEquals("expectedValue2", config.getValue2());
+assertTrue(config.isFeatureEnabled());
+assertFalse(config.isFeatureDisabled());
+assertEquals(10, config.getIntegerValue());
+assertEquals(3.14, config.getDoubleValue(), 0.01);
+assertEquals("expectedString", config.getStringValue());
+assertArrayEquals(new String[]{"value1", "value2"}, config.getStringArray());
+assertEquals("nestedValue", config.getNestedConfig().getValue());
+assertNotNull(config.getList());
+assertEquals(5, config.getList().size());
+assertTrue(config.getList().contains("item1"));
+assertFalse(config.getList().contains("itemNotInList"));
+assertEquals("default", config.getDefaultValue());
+assertEquals("anotherValue", config.getAnotherValue());
+assertNotEquals("unexpectedValue", config.getValue1());
+assertTrue(config.isValid());
+assertFalse(config.hasErrors());
+assertEquals("configName", config.getName());
+assertEquals("configDescription", config.getDescription());
+assertNotNull(config.getMap());
+assertEquals(2, config.getMap().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(yaml,config.toYaml("STR")); ===
+0.707 - assertEquals("configName", config.getName())
+0.675 - assertEquals(2, config.getMap().size())
+0.675 - assertEquals(10, config.getIntegerValue())
+0.667 - assertEquals("default", config.getDefaultValue())
+0.659 - assertEquals("expectedValue1", config.getValue1())
+0.659 - assertEquals("expectedValue2", config.getValue2())
+0.652 - assertEquals("anotherValue", config.getAnotherValue())
+0.651 - assertEquals(3.14, config.getDoubleValue(), 0.01)
+0.641 - assertEquals(5, config.getList().size())
+0.630 - assertNotEquals("unexpectedValue", config.getValue1())
+0.609 - assertNotNull(config.getMap())
+0.600 - assertFalse(config.hasErrors())
+0.597 - assertTrue(config.isValid())
+0.590 - assertFalse(config.isFeatureDisabled())
+0.588 - assertEquals("nestedValue", config.getNestedConfig().getValue())
+0.581 - assertEquals("expectedString", config.getStringValue())
+0.571 - assertNotNull(config.getList())
+0.553 - assertTrue(config.isFeatureEnabled())
+0.542 - assertEquals("configDescription", config.getDescription())
+0.541 - assertTrue(config.getList().contains("item1"))
+0.532 - assertFalse(config.getList().contains("itemNotInList"))
+0.500 - assertArrayEquals(new String[]{"value1", "value2"}, config.getStringArray())
+0.471 - ```java
+assertNotNull(config)
+0.000 - ```

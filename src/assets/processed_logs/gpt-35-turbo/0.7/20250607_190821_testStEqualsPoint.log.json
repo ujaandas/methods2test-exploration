@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctions {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctionsTest {\n@Test\npublic void testStEqualsPoint ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(next.field(\"STR1\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR2\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR3\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR4\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR5\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR6\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR7\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR8\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR9\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR10\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR11\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR12\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR13\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR14\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR15\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR16\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR17\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR18\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR19\") instanceof ORID);\nAssert.assertTrue(next.field(\"STR20\") instanceof ORID);\n====================\n\n",
+    "scores": [
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.7,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691,
+        0.691
+    ],
+    "ground_truth": "Assert.assertEquals(next.field(\"STR\"),true);"
+}

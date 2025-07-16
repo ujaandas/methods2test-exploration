@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CollectionOfLinkInNestedDocument {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CollectionOfLinkInNestedDocumentTest {\n@Test\npublic void nestedLinkSet ( ) {\nODocument doc1 = new ODocument ( ) ;\ndoc1 . field ( \"STR\" , \"STR\" ) ;\nODocument doc2 = new ODocument ( ) ;\ndoc2 . field ( \"STR\" , \"STR\" ) ;\nODocument nested = new ODocument ( ) ;\nORecordLazySet set = new ORecordLazySet ( nested ) ;\nset . add ( doc1 ) ;\nset . add ( doc2 ) ;\nnested . field ( \"STR\" , set ) ;\nODocument base = new ODocument ( ) ;\nbase . field ( \"STR\" , nested , OType . EMBEDDED ) ;\nOIdentifiable id = db . save ( base , db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ;\ndb . getLocalCache ( ) . clear ( ) ;\nODocument base1 = db . load ( id . getIdentity ( ) ) ;\nODocument nest1 = base1 . field ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(nest1.field(\"STR\") instanceof ORecordLazySet);\nAssert.assertEquals(2, ((ORecordLazySet) nest1.field(\"STR\")).size());\nAssert.assertTrue(((ORecordLazySet) nest1.field(\"STR\")).contains(doc1));\nAssert.assertTrue(((ORecordLazySet) nest1.field(\"STR\")).contains(doc2));\nAssert.assertTrue(doc1.field(\"STR\") instanceof String);\nAssert.assertTrue(doc2.field(\"STR\") instanceof String);\nAssert.assertTrue(nested.field(\"STR\") instanceof ORecordLazySet);\nAssert.assertTrue(base.field(\"STR\") instanceof ODocument);\nAssert.assertTrue(base1.field(\"STR\") instanceof ODocument);\nAssert.assertTrue(nest1.field(\"STR\") instanceof ORecordLazySet);\nAssert.assertTrue(((ODocument) base1.field(\"STR\")).field(\"STR\") instanceof ORecordLazySet);\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).contains(doc1));\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).contains(doc2));\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).size() == 2);\nAssert.assertTrue(((ODocument) base1.field(\"STR\")).field(\"STR\") instanceof ORecordLazySet);\nAssert.assertTrue(((ODocument) base1.field(\"STR\")).field(\"STR\") instanceof ORecordLazySet);\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).size() == 2);\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).contains(doc1));\nAssert.assertTrue(((ORecordLazySet) ((ODocument) base1.field(\"STR\")).field(\"STR\")).contains(doc2));\n====================\n\n",
+    "scores": [
+        0.4,
+        0.4,
+        0.382,
+        0.378,
+        0.378,
+        0.377,
+        0.354,
+        0.347,
+        0.337,
+        0.337,
+        0.3,
+        0.3,
+        0.3,
+        0.294,
+        0.294,
+        0.275,
+        0.275,
+        0.269,
+        0.269
+    ],
+    "ground_truth": "assertNotNull(nest1);"
+}

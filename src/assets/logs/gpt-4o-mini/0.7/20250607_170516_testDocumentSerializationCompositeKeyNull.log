@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    @Override
+     public void fromDocument ( ODocument document ) { 
+     document . setLazyLoad ( false ) ; 
+     final String [ ] fieldNames = document . fieldNames ( ) ; 
+     final SortedMap < Integer , Object > keyMap = new TreeMap < Integer , Object > ( ) ; 
+     for ( String fieldName : fieldNames ) { 
+     if ( fieldName . startsWith ( "STR" ) ) { 
+     final String keyIndex = fieldName . substring ( 3 ) ; 
+     keyMap . put ( Integer . valueOf ( keyIndex ) , document . field ( fieldName ) ) ; 
+     } } keys . clear ( ) ; 
+     for ( Object value : keyMap . values ( ) ) keys . add ( value ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testDocumentSerializationCompositeKeyNull ( ) {
+         final OCompositeKey compositeKeyOne = new OCompositeKey ( ) ; 
+         compositeKeyOne . addKey ( 1 ) ; 
+         compositeKeyOne . addKey ( null ) ; 
+         compositeKeyOne . addKey ( 2 ) ; 
+         ODocument document = compositeKeyOne . toDocument ( ) ; 
+         final OCompositeKey compositeKeyTwo = new OCompositeKey ( ) ; 
+         compositeKeyTwo . fromDocument ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(compositeKeyTwo);
+Assert.assertEquals(3, compositeKeyTwo.size());
+Assert.assertTrue(compositeKeyTwo.containsKey(1));
+Assert.assertTrue(compositeKeyTwo.containsKey(null));
+Assert.assertTrue(compositeKeyTwo.containsKey(2));
+Assert.assertNull(compositeKeyTwo.getKey(1));
+Assert.assertNull(compositeKeyTwo.getKey(null));
+Assert.assertNull(compositeKeyTwo.getKey(2));
+Assert.assertEquals(1, compositeKeyTwo.getKey(1));
+Assert.assertNull(compositeKeyTwo.getKey(null));
+Assert.assertEquals(2, compositeKeyTwo.getKey(2));
+Assert.assertFalse(compositeKeyTwo.isEmpty());
+Assert.assertTrue(compositeKeyTwo.keySet().contains(1));
+Assert.assertTrue(compositeKeyTwo.keySet().contains(null));
+Assert.assertTrue(compositeKeyTwo.keySet().contains(2));
+Assert.assertEquals(3, compositeKeyTwo.keySet().size());
+Assert.assertEquals("[1, null, 2]", compositeKeyTwo.toString());
+Assert.assertNotSame(compositeKeyOne, compositeKeyTwo);
+Assert.assertTrue(compositeKeyTwo.equals(compositeKeyOne));
+Assert.assertNotEquals(compositeKeyTwo.hashCode(), compositeKeyOne.hashCode());
+Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(compositeKeyOne.getKeys()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(compositeKeyOne,compositeKeyTwo); ===
+0.879 - Assert.assertNotSame(compositeKeyOne, compositeKeyTwo)
+0.723 - Assert.assertEquals(3, compositeKeyTwo.size())
+0.713 - Assert.assertNotEquals(compositeKeyTwo.hashCode(), compositeKeyOne.hashCode())
+0.698 - Assert.assertEquals(1, compositeKeyTwo.getKey(1))
+0.698 - Assert.assertEquals(2, compositeKeyTwo.getKey(2))
+0.652 - Assert.assertEquals(3, compositeKeyTwo.keySet().size())
+0.633 - Assert.assertEquals("[1, null, 2]", compositeKeyTwo.toString())
+0.627 - Assert.assertFalse(compositeKeyTwo.isEmpty())
+0.610 - Assert.assertNull(compositeKeyTwo.getKey(1))
+0.610 - Assert.assertNull(compositeKeyTwo.getKey(2))
+0.602 - ```java
+Assert.assertNotNull(compositeKeyTwo)
+0.588 - Assert.assertNull(compositeKeyTwo.getKey(null))
+0.588 - Assert.assertNull(compositeKeyTwo.getKey(null))
+0.583 - Assert.assertTrue(compositeKeyTwo.equals(compositeKeyOne))
+0.552 - Assert.assertTrue(compositeKeyTwo.containsKey(1))
+0.552 - Assert.assertTrue(compositeKeyTwo.containsKey(2))
+0.533 - Assert.assertTrue(compositeKeyTwo.containsKey(null))
+0.516 - Assert.assertTrue(compositeKeyTwo.keySet().contains(1))
+0.516 - Assert.assertTrue(compositeKeyTwo.keySet().contains(2))
+0.500 - Assert.assertTrue(compositeKeyTwo.keySet().contains(null))
+0.496 - Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(compositeKeyOne.getKeys()))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\nprotected boolean isGeneratedConfigFile ( File fileChanged , File srcDir , File targetDir ) throws IOException {\nreturn ( fileChanged . getName ( ) . equals ( \"STR\" ) || fileChanged . getName ( ) . equals ( \"STR\" ) ) && isGeneratedTargetFile ( fileChanged , srcDir , targetDir ) ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testGeneratedConfigFiles ( ) throws Exception {\nFile sourceFile = new File ( configDirectory , \"STR\" ) ;\ncreateTargetFile ( sourceFile . getName ( ) , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nFile targetFile = new File(targetDir, \"STR\");\nassertTrue(devUtil.isGeneratedConfigFile(sourceFile, srcDir, targetDir));\nassertTrue(targetFile.exists());\nassertTrue(targetFile.isFile());\nassertEquals(\"STR\", sourceFile.getName());\nassertTrue(sourceFile.exists());\nassertTrue(sourceFile.isFile());\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, targetDir));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"NOT_STR\"), srcDir, targetDir));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, new File(\"invalidTargetDir\")));\nassertFalse(devUtil.isGeneratedConfigFile(new File(\"invalidFile\"), srcDir, targetDir));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), new File(\"validSrcDir\"), targetDir));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, new File(\"validTargetDir\")));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, new File(\"anotherInvalidTargetDir\")));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, targetDir));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, targetDir));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"randomFile\"), srcDir, targetDir));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, new File(\"nonExistentTargetDir\")));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, targetDir));\nassertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), srcDir, targetDir));\nassertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, \"STR\"), new File(\"invalidSrcDir\"), targetDir));\n```\n====================\n\n",
+    "scores": [
+        0.842,
+        0.802,
+        0.802,
+        0.802,
+        0.802,
+        0.802,
+        0.746,
+        0.734,
+        0.733,
+        0.723,
+        0.691,
+        0.681,
+        0.679,
+        0.677,
+        0.667,
+        0.475,
+        0.46,
+        0.442,
+        0.354,
+        0.354,
+        0.341,
+        0.0
+    ],
+    "ground_truth": "assertTrue(\"STR\",util.isGeneratedConfigFile(sourceFile,configDirectory,targetDir));"
+}

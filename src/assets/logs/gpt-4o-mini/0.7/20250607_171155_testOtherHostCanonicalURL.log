@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testOtherHostCanonicalURL ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . canonicalMetadataParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertFalse(fields.isEmpty());
+assertEquals(1, fields.size());
+assertTrue(fields.keySet().contains("STR"));
+assertFalse(fields.containsKey("INVALID_KEY"));
+assertEquals("STR", fields.get("STR"));
+assertNotEquals("DIFFERENT_VALUE", fields.get("STR"));
+assertSame("STR", fields.get("STR"));
+assertNull(fields.get("NON_EXISTENT_KEY"));
+assertTrue(fields.values().contains("STR"));
+assertEquals("STR", fields.get("STR"));
+assertTrue(fields instanceof Map);
+assertFalse(fields.isEmpty());
+assertNotEquals("ANOTHER_VALUE", fields.get("STR"));
+assertTrue(fields.keySet().size() > 0);
+assertTrue(fields.containsValue("STR"));
+assertTrue(fields instanceof HashMap);
+assertEquals(1, fields.values().size());
+assertNotNull(fields.get("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.925 - assertEquals("STR", fields.get("STR"))
+0.925 - assertEquals("STR", fields.get("STR"))
+0.821 - assertSame("STR", fields.get("STR"))
+0.774 - assertNotEquals("ANOTHER_VALUE", fields.get("STR"))
+0.737 - assertNotEquals("DIFFERENT_VALUE", fields.get("STR"))
+0.720 - assertNotNull(fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.617 - assertEquals(1, fields.values().size())
+0.612 - assertNull(fields.get("NON_EXISTENT_KEY"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.585 - assertTrue(fields.containsValue("STR"))
+0.583 - assertFalse(fields.isEmpty())
+0.583 - assertFalse(fields.isEmpty())
+0.581 - assertTrue(fields.keySet().contains("STR"))
+0.581 - assertTrue(fields.values().contains("STR"))
+0.517 - assertFalse(fields.containsKey("INVALID_KEY"))
+0.506 - assertTrue(fields.keySet().size() > 0)
+0.444 - ```java
+assertNotNull(fields)
+0.432 - assertTrue(fields instanceof Map)
+0.410 - assertTrue(fields instanceof HashMap)
+0.000 - ```

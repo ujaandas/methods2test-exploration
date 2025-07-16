@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    @Override
+     public MBeanAccessConnection createConnection ( ) throws IOException { 
+     JMXMBeanConnection result = null ; 
+     try { 
+     VirtualMachine vm = this . attacher . attach ( jvmId ) ; 
+     String url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     if ( url == null ) { 
+     String javaHome = vm . getSystemProperties ( ) . getProperty ( "STR" ) ; 
+     String agent = javaHome + File . separator + "STR" + File . separator + "STR" ; 
+     vm . loadAgent ( agent ) ; 
+     url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     } if ( url != null ) { 
+     JMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ; 
+     JMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ; 
+     result = this . jmxmBeanConnectionFactory . create ( connector ) ; 
+     } else { 
+     log . warn ( "STR" , this . jvmId ) ; 
+     } } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) { 
+     log . warn ( "STR" , this . jvmId , exc ) ; 
+     } return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testCreateConnectionUsingSystemProperties ( ) throws Exception {
+         this . initFactory ( ) ; 
+         Mockito . when ( this . mockAttacher . attach ( "STR" ) ) . thenReturn ( this . mockVirtualMachine ) ; 
+         Mockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ; 
+         Mockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ; 
+         Mockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) . thenReturn ( "STR" ) ; 
+         Mockito . when ( this . mockSystemProperties . getProperty ( "STR" ) ) . thenReturn ( "STR" ) ; 
+         MBeanAccessConnection result = this . factory . createConnection ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof MBeanAccessConnection);
+assertEquals("Expected value", result.getSomeProperty());
+assertNotNull(result.getConnector());
+assertTrue(result.getConnector().isConnected());
+assertEquals("Expected JMX URL", result.getJmxUrl().toString());
+assertNotNull(result.getMBeanServerConnection());
+assertTrue(result.getMBeanServerConnection().isValid());
+assertEquals("Expected attribute", result.getMBeanServerConnection().getAttribute("SomeMBean", "SomeAttribute"));
+assertNotNull(result.getMBeanServerConnection().getMBeanCount());
+assertTrue(result.getMBeanServerConnection().getMBeanCount() > 0);
+assertEquals("Expected domain", result.getMBeanServerConnection().getDefaultDomain());
+assertNotNull(result.getMBeanServerConnection().getObjectName("SomeObjectName"));
+assertTrue(result.getMBeanServerConnection().isRegistered(new ObjectName("SomeObjectName")));
+assertEquals("Expected value from MBean", result.getMBeanServerConnection().getAttribute(new ObjectName("SomeObjectName"), "SomeAttribute"));
+assertNotNull(result.getMBeanServerConnection().queryNames(null, null));
+assertFalse(result.getMBeanServerConnection().queryNames(null, null).isEmpty());
+assertTrue(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")).getAttributes().length > 0);
+assertNotNull(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")));
+assertTrue(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")).getOperations().length > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertSame(result,this.mockJmxMbeanConnection); ===
+0.653 - assertTrue(result instanceof MBeanAccessConnection)
+0.617 - assertNotNull(result.getMBeanServerConnection())
+0.594 - assertTrue(result.getMBeanServerConnection().isValid())
+0.561 - assertNotNull(result.getConnector())
+0.559 - assertTrue(result.getConnector().isConnected())
+0.550 - assertTrue(result.getMBeanServerConnection().getMBeanCount() > 0)
+0.527 - assertNotNull(result.getMBeanServerConnection().getMBeanCount())
+0.500 - assertNotNull(result.getMBeanServerConnection().queryNames(null, null))
+0.500 - assertFalse(result.getMBeanServerConnection().queryNames(null, null).isEmpty())
+0.465 - assertEquals("Expected domain", result.getMBeanServerConnection().getDefaultDomain())
+0.460 - assertNotNull(result.getMBeanServerConnection().getObjectName("SomeObjectName"))
+0.438 - assertTrue(result.getMBeanServerConnection().isRegistered(new ObjectName("SomeObjectName")))
+0.414 - assertNotNull(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")))
+0.400 - assertEquals("Expected value", result.getSomeProperty())
+0.387 - assertEquals("Expected attribute", result.getMBeanServerConnection().getAttribute("SomeMBean", "SomeAttribute"))
+0.377 - assertEquals("Expected JMX URL", result.getJmxUrl().toString())
+0.373 - ```java
+assertNotNull(result)
+0.370 - assertTrue(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")).getAttributes().length > 0)
+0.370 - assertTrue(result.getMBeanServerConnection().getMBeanInfo(new ObjectName("SomeObjectName")).getOperations().length > 0)
+0.344 - assertEquals("Expected value from MBean", result.getMBeanServerConnection().getAttribute(new ObjectName("SomeObjectName"), "SomeAttribute"))
+0.000 - ```

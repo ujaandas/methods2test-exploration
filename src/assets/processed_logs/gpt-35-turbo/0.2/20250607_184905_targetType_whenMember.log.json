@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQuery {\npublic List < WorkerData > execute ( List < WorkerData > input ) {\nswitch ( targetType ) {\ncase ALL : return select ( input , null ) ;\ncase MEMBER : return select ( input , true ) ;\ncase CLIENT : return select ( input , false ) ;\ncase PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ;\nreturn ! result . isEmpty ( ) ? result : select ( input , true ) ;\ndefault : throw new IllegalStateException ( \"STR\" + targetType ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQueryTest {\n@Test\npublic void targetType_whenMember ( ) {\nlist . add ( new WorkerData ( newParameters ( agent1 , 1 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 2 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 3 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 4 , \"STR\" , \"STR\" ) ) ) ;\nList < WorkerData > result = new WorkerQuery ( ) . setTargetType ( TargetType . MEMBER ) . execute ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(4, result.size());\nassertEquals(agent1, result.get(0).getAgent());\nassertEquals(1, result.get(0).getId());\nassertEquals(\"STR\", result.get(0).getName());\nassertEquals(\"STR\", result.get(0).getType());\nassertEquals(agent1, result.get(1).getAgent());\nassertEquals(2, result.get(1).getId());\nassertEquals(\"STR\", result.get(1).getName());\nassertEquals(\"STR\", result.get(1).getType());\nassertEquals(agent1, result.get(2).getAgent());\nassertEquals(3, result.get(2).getId());\nassertEquals(\"STR\", result.get(2).getName());\nassertEquals(\"STR\", result.get(2).getType());\nassertEquals(agent1, result.get(3).getAgent());\nassertEquals(4, result.get(3).getId());\nassertEquals(\"STR\", result.get(3).getName());\nassertEquals(\"STR\", result.get(3).getType());\n====================\n\n",
+    "scores": [
+        0.674,
+        0.639,
+        0.632,
+        0.632,
+        0.619,
+        0.562,
+        0.536,
+        0.536,
+        0.526,
+        0.526,
+        0.519,
+        0.494,
+        0.494,
+        0.442,
+        0.442,
+        0.442,
+        0.442
+    ],
+    "ground_truth": "assertEquals(asList(list.get(1),list.get(3)),result);"
+}

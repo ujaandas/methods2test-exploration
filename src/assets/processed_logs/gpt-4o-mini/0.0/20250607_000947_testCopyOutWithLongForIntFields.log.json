@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjector {\npublic void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) {\nthis . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , \"STR\" , objectName ) ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjectorTest {\n@Test\npublic void testCopyOutWithLongForIntFields ( ) throws Exception {\nthis . attributeList . clear ( ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 17L ) ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 22L ) ) ;\nthis . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(17, this.target.getFieldValue(\"STR1\"));\nassertEquals(22, this.target.getFieldValue(\"STR2\"));\nassertTrue(this.target.hasField(\"STR1\"));\nassertTrue(this.target.hasField(\"STR2\"));\nassertFalse(this.target.hasField(\"STR3\"));\nassertNotNull(this.target.getField(\"STR1\"));\nassertNotNull(this.target.getField(\"STR2\"));\nassertEquals(\"Expected value for STR1\", 17, this.target.getField(\"STR1\"));\nassertEquals(\"Expected value for STR2\", 22, this.target.getField(\"STR2\"));\nassertTrue(this.target.getField(\"STR1\") instanceof Integer);\nassertTrue(this.target.getField(\"STR2\") instanceof Integer);\nassertEquals(2, this.target.getFieldCount());\nassertTrue(this.target.isFieldSet(\"STR1\"));\nassertTrue(this.target.isFieldSet(\"STR2\"));\nassertFalse(this.target.isFieldSet(\"STR3\"));\nassertEquals(\"STR1 should be set to 17\", 17, this.target.getFieldValue(\"STR1\"));\nassertEquals(\"STR2 should be set to 22\", 22, this.target.getFieldValue(\"STR2\"));\nassertNotEquals(0, this.target.getFieldValue(\"STR1\"));\nassertNotEquals(0, this.target.getFieldValue(\"STR2\"));\nassertEquals(\"STR1 should not be null\", 17, this.target.getField(\"STR1\"));\nassertEquals(\"STR2 should not be null\", 22, this.target.getField(\"STR2\"));\nassertTrue(this.target.getField(\"STR1\") instanceof Long);\n```\n====================\n\n",
+    "scores": [
+        0.759,
+        0.75,
+        0.742,
+        0.742,
+        0.737,
+        0.642,
+        0.641,
+        0.625,
+        0.606,
+        0.6,
+        0.6,
+        0.597,
+        0.597,
+        0.596,
+        0.59,
+        0.582,
+        0.582,
+        0.571,
+        0.558,
+        0.553,
+        0.553,
+        0.552,
+        0.0
+    ],
+    "ground_truth": "assertEquals(17,this.target.intValue);"
+}

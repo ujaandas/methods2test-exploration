@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage PeterisP.morphology;\n\npublic class Tokenize {\npublic static LinkedList < Word > tokenize ( Analyzer morphoAnalyzer , String chunk , boolean bruteSplit ) {\nif ( bruteSplit ) {\nLinkedList < Word > tokens = new LinkedList < Word > ( ) ;\nif ( chunk == null ) return tokens ;\nString [ ] parts_of_string = chunk . trim ( ) . split ( \"STR\" ) ;\nfor ( String part : parts_of_string ) {\nif ( part . length ( ) > 0 ) tokens . add ( ( morphoAnalyzer == null ) ? new Word ( part ) : morphoAnalyzer . analyze ( part ) ) ;\n} return tokens ;\n} else {\nreturn tokenize ( morphoAnalyzer , chunk ) ;\n} }\n}\n\npackage PeterisP.morphology;\n\npublic class TokenizeTest {\n@Test\npublic void singleletters ( ) {\nLinkedList < Word > tokens ;\ntokens = Splitting . tokenize ( loc\u012bt\u0101js , \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(tokens);\nassertEquals(1, tokens.size());\nassertEquals(\"l\", tokens.get(0).getValue());\nassertTrue(tokens.get(0) instanceof Word);\nassertEquals(\"l\", tokens.get(0).getValue());\nassertEquals(1, tokens.get(0).getLength());\nassertTrue(tokens.get(0).isValid());\nassertFalse(tokens.get(0).isEmpty());\nassertEquals(\"l\", tokens.get(0).toString());\nassertNotEquals(\"m\", tokens.get(0).getValue());\nassertEquals(\"l\", tokens.get(0).getLemma());\nassertEquals(\"NOUN\", tokens.get(0).getPartOfSpeech());\nassertTrue(tokens.contains(new Word(\"l\")));\nassertTrue(tokens.stream().anyMatch(w -> w.getValue().equals(\"l\")));\nassertEquals(\"l\", tokens.stream().findFirst().get().getValue());\nassertFalse(tokens.contains(new Word(\"x\")));\nassertEquals(1, tokens.stream().filter(w -> w.isValid()).count());\nassertTrue(tokens.stream().allMatch(w -> w.getLength() <= 1));\nassertEquals(0, tokens.stream().filter(w -> w.getValue().isEmpty()).count());\nassertNotNull(tokens.stream().findFirst().orElse(null));\nassertEquals(1, tokens.stream().distinct().count());\n```\n====================\n\n",
+    "scores": [
+        0.966,
+        0.714,
+        0.704,
+        0.704,
+        0.704,
+        0.704,
+        0.676,
+        0.658,
+        0.646,
+        0.625,
+        0.62,
+        0.617,
+        0.593,
+        0.593,
+        0.571,
+        0.552,
+        0.529,
+        0.529,
+        0.524,
+        0.465,
+        0.426,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,tokens.size());"
+}

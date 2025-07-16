@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class Environment {\npublic void setup ( ) {\nsetupService ( ) ;\nverify ( ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class EnvironmentTest {\n@Test\npublic void testSetupWithIncompleteJob ( ) {\nwhen ( serviceMock . getJobId ( ) ) . thenReturn ( \"STR\" ) ;\nwhen ( serviceMock . getBuildUrl ( ) ) . thenReturn ( \"STR\" ) ;\ncreate ( Arrays . asList ( serviceMock ) ) . setup ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(serviceMock);\nassertEquals(\"STR\", serviceMock.getJobId());\nassertEquals(\"STR\", serviceMock.getBuildUrl());\nverify(serviceMock, times(1)).getJobId();\nverify(serviceMock, times(1)).getBuildUrl();\nverify(serviceMock, times(1)).setupService();\nverify(serviceMock, times(1)).verify();\nassertTrue(serviceMock.isSetupCalled());\nassertTrue(serviceMock.isVerifyCalled());\nassertFalse(serviceMock.isJobCompleted());\nassertTrue(serviceMock.getSetupTime() > 0);\nassertEquals(\"expectedValue\", serviceMock.getSomeProperty());\nassertFalse(serviceMock.isErrorState());\nassertNotNull(serviceMock.getSomeServiceResponse());\nassertEquals(\"expectedResponse\", serviceMock.getSomeServiceResponse().getValue());\nassertTrue(serviceMock.getConfigurations().isEmpty());\nassertNotNull(serviceMock.getEnvironmentDetails());\nassertTrue(serviceMock.isServiceRunning());\nassertEquals(\"Default\", serviceMock.getEnvironmentName());\nassertTrue(serviceMock.getServiceList().contains(\"expectedService\"));\nassertEquals(0, serviceMock.getErrorCount());\nassertNotNull(serviceMock.getLastSetupTimestamp());\n```\n====================\n\n",
+    "scores": [
+        0.718,
+        0.691,
+        0.609,
+        0.582,
+        0.547,
+        0.533,
+        0.519,
+        0.486,
+        0.48,
+        0.474,
+        0.474,
+        0.466,
+        0.442,
+        0.442,
+        0.437,
+        0.436,
+        0.404,
+        0.356,
+        0.347,
+        0.346,
+        0.333,
+        0.329,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",mojo.serviceName);"
+}

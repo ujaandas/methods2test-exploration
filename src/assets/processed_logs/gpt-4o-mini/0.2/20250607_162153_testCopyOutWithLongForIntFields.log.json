@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjector {\npublic void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) {\nthis . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , \"STR\" , objectName ) ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjectorTest {\n@Test\npublic void testCopyOutWithLongForIntFields ( ) throws Exception {\nthis . attributeList . clear ( ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 17L ) ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 22L ) ) ;\nthis . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(17, this.target.getFieldValue(\"STR\"));\nassertEquals(22, this.target.getFieldValue(\"STR\"));\nassertNotNull(this.target);\nassertTrue(this.target instanceof ExpectedClassType);\nassertEquals(2, this.attributeList.size());\nassertTrue(this.attributeSetters.containsKey(\"STR\"));\nassertNotNull(this.attributeSetters.get(\"STR\"));\nassertEquals(Long.class, this.attributeList.get(0).getValue().getClass());\nassertEquals(Long.class, this.attributeList.get(1).getValue().getClass());\nassertTrue(this.target.hasAttribute(\"STR\"));\nassertEquals(\"STR\", this.target.getAttributeName(\"STR\"));\nassertTrue(this.target.isAttributeSet(\"STR\"));\nassertFalse(this.target.isAttributeSet(\"NON_EXISTENT\"));\nassertEquals(0, this.target.getErrorCount());\nassertTrue(this.target.getLogMessages().isEmpty());\nassertEquals(\"ExpectedValue\", this.target.getExpectedFieldValue(\"STR\"));\nassertNotEquals(0, this.target.getAttributeCount());\nassertTrue(this.target.getAttributeValues().contains(17L));\nassertTrue(this.target.getAttributeValues().contains(22L));\nassertTrue(this.target.getAttributeValues().size() > 0);\nassertEquals(\"ExpectedString\", this.target.getStringRepresentation());\nassertNotNull(this.target.getObjectName());\n```\n====================\n\n",
+    "scores": [
+        0.767,
+        0.745,
+        0.725,
+        0.692,
+        0.69,
+        0.674,
+        0.667,
+        0.633,
+        0.622,
+        0.617,
+        0.61,
+        0.6,
+        0.598,
+        0.59,
+        0.589,
+        0.589,
+        0.587,
+        0.587,
+        0.587,
+        0.529,
+        0.476,
+        0.427,
+        0.0
+    ],
+    "ground_truth": "assertEquals(17,this.target.intValue);"
+}

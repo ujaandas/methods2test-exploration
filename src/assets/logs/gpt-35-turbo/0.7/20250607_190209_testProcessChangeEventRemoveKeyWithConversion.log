@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    public void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) { 
+    final boolean result ; 
+    if ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    else result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    if ( ! result ) throw new IllegalArgumentException ( "STR" + changeEvent . getChangeType ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testProcessChangeEventRemoveKeyWithConversion ( ) {
+         final Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ; 
+         final OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . REMOVE , "STR" , "STR" ) ; 
+         propertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ; 
+         final Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ; 
+         removedKeys . put ( 12 , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(0, keysToAdd.size());
+Assert.assertEquals(1, keysToRemove.size());
+Assert.assertTrue(keysToRemove.containsKey(12));
+Assert.assertEquals(1, keysToRemove.get(12).intValue());
+Assert.assertTrue(addedKeys.isEmpty());
+Assert.assertFalse(removedKeys.isEmpty());
+Assert.assertEquals(1, removedKeys.size());
+Assert.assertTrue(removedKeys.containsKey(12));
+Assert.assertEquals(1, removedKeys.get(12).intValue());
+Assert.assertNotEquals(keysToAdd, addedKeys);
+Assert.assertNotEquals(keysToRemove, removedKeys);
+Assert.assertNotSame(keysToAdd, addedKeys);
+Assert.assertNotSame(keysToRemove, removedKeys);
+Assert.assertSame(keysToRemove.get(12), removedKeys.get(12));
+Assert.assertEquals(keysToRemove.get(12), removedKeys.get(12));
+Assert.assertNotNull(keysToRemove.get(12));
+Assert.assertNotNull(removedKeys.get(12));
+Assert.assertNotEquals(keysToRemove.get(12), 0);
+Assert.assertNotEquals(removedKeys.get(12), 0);
+Assert.assertTrue(keysToRemove.get(12) != null);
+Assert.assertTrue(removedKeys.get(12) != null);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(keysToAdd,addedKeys); ===
+0.957 - Assert.assertNotEquals(keysToAdd, addedKeys)
+0.836 - Assert.assertNotSame(keysToAdd, addedKeys)
+0.738 - Assert.assertEquals(0, keysToAdd.size())
+0.730 - Assert.assertNotEquals(keysToRemove, removedKeys)
+0.676 - Assert.assertEquals(1, keysToRemove.size())
+0.657 - Assert.assertEquals(1, removedKeys.size())
+0.621 - Assert.assertEquals(keysToRemove.get(12), removedKeys.get(12))
+0.620 - Assert.assertNotEquals(removedKeys.get(12), 0)
+0.611 - Assert.assertNotSame(keysToRemove, removedKeys)
+0.583 - Assert.assertNotEquals(keysToRemove.get(12), 0)
+0.567 - Assert.assertFalse(removedKeys.isEmpty())
+0.562 - Assert.assertTrue(addedKeys.isEmpty())
+0.557 - Assert.assertEquals(1, removedKeys.get(12).intValue())
+0.550 - Assert.assertEquals(1, keysToRemove.get(12).intValue())
+0.537 - Assert.assertNotNull(removedKeys.get(12))
+0.529 - Assert.assertNotNull(keysToRemove.get(12))
+0.521 - Assert.assertTrue(keysToRemove.containsKey(12))
+0.518 - Assert.assertSame(keysToRemove.get(12), removedKeys.get(12))
+0.486 - Assert.assertTrue(removedKeys.get(12) != null)
+0.479 - Assert.assertTrue(keysToRemove.get(12) != null)
+0.472 - Assert.assertTrue(removedKeys.containsKey(12))

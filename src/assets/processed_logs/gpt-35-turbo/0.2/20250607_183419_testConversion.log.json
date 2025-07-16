@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class GoTimeUtil {\npublic static Integer durationSeconds ( String duration ) {\nBigDecimal ns = durationNs ( duration ) ;\nif ( ns == null ) {\nreturn null ;\n} BigDecimal sec = ns . divide ( new BigDecimal ( 1_000_000_000 ) ) ;\nif ( sec . compareTo ( new BigDecimal ( Integer . MAX_VALUE ) ) > 0 ) {\nthrow new IllegalArgumentException ( \"STR\" ) ;\n} return sec . intValue ( ) ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class GoTimeUtilTest {\n@Test\npublic void testConversion ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, GoTimeUtil.durationSeconds(\"0s\"));\nassertEquals(1, GoTimeUtil.durationSeconds(\"1s\"));\nassertEquals(60, GoTimeUtil.durationSeconds(\"1m\"));\nassertEquals(3600, GoTimeUtil.durationSeconds(\"1h\"));\nassertEquals(86400, GoTimeUtil.durationSeconds(\"1d\"));\nassertEquals(2592000, GoTimeUtil.durationSeconds(\"1M\"));\nassertEquals(31536000, GoTimeUtil.durationSeconds(\"1y\"));\nassertEquals(123456, GoTimeUtil.durationSeconds(\"2h3m56s\"));\nassertEquals(3600, GoTimeUtil.durationSeconds(\"1h0m0s\"));\nassertEquals(3600, GoTimeUtil.durationSeconds(\"1h0s\"));\nassertEquals(3600, GoTimeUtil.durationSeconds(\"1h0\"));\nassertEquals(3600, GoTimeUtil.durationSeconds(\"1h\"));\nassertEquals(60, GoTimeUtil.durationSeconds(\"1m0s\"));\nassertEquals(60, GoTimeUtil.durationSeconds(\"1m0\"));\nassertEquals(60, GoTimeUtil.durationSeconds(\"1m\"));\nassertEquals(1, GoTimeUtil.durationSeconds(\"1\"));\nassertEquals(null, GoTimeUtil.durationSeconds(\"\"));\nassertEquals(null, GoTimeUtil.durationSeconds(null));\nassertEquals(null, GoTimeUtil.durationSeconds(\"abc\"));\nassertEquals(null, GoTimeUtil.durationSeconds(\"1abc\"));\n====================\n\n",
+    "scores": [
+        0.72,
+        0.714,
+        0.707,
+        0.707,
+        0.7,
+        0.7,
+        0.699,
+        0.693,
+        0.692,
+        0.686,
+        0.686,
+        0.686,
+        0.68,
+        0.68,
+        0.673,
+        0.667,
+        0.667,
+        0.661,
+        0.66,
+        0.66
+    ],
+    "ground_truth": "assertEquals(newInteger(23),durationSeconds(\"STR\"));"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(4, registry.workerCount());\nassertTrue(registry.getWorkers().size() >= 4);\nassertFalse(registry.getWorkers().isEmpty());\nassertNotNull(registry.getWorkers());\nassertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)));\nassertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getType().equals(\"STR\")));\nassertEquals(\"STR\", registry.getWorkers().get(0).getType());\nassertEquals(\"STR\", registry.getWorkers().get(1).getType());\nassertEquals(\"STR\", registry.getWorkers().get(2).getType());\nassertEquals(\"STR\", registry.getWorkers().get(3).getType());\nassertNotSame(registry.getWorkers().get(0), registry.getWorkers().get(1));\nassertNotSame(registry.getWorkers().get(1), registry.getWorkers().get(2));\nassertNotSame(registry.getWorkers().get(2), registry.getWorkers().get(3));\nassertTrue(registry.getWorkers().stream().map(Worker::getId).distinct().count() == 4);\nassertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getStatus().equals(\"ACTIVE\")));\nassertThrows(IllegalStateException.class, () -> registry.addWorkers(newWorkerParametersList(agentAddress, 1, \"STR\")));\nassertEquals(4, registry.workerCount());\nassertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 1));\nassertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 2));\nassertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 3));\nassertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 4));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.905,
+        0.703,
+        0.683,
+        0.667,
+        0.667,
+        0.667,
+        0.667,
+        0.617,
+        0.509,
+        0.509,
+        0.509,
+        0.483,
+        0.483,
+        0.483,
+        0.483,
+        0.479,
+        0.434,
+        0.418,
+        0.403,
+        0.387,
+        0.0
+    ],
+    "ground_truth": "assertEquals(4,registry.workerCount());"
+}

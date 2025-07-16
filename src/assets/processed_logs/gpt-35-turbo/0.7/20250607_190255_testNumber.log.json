@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void writeNumberLiteral ( long value , int numFracDigits ) throws IOException {\ncheckAcceptsValueAndPrefixComma ( ) ;\nif ( value < 0 ) {\nout . write ( '-' ) ;\nvalue = - value ;\n} if ( numFracDigits == 0 ) {\nout . write ( String . valueOf ( value ) ) ;\n} else {\nfinal long intPart = value / TEN_POW [ numFracDigits ] ;\nfinal String fracPart = String . valueOf ( 1_000_000_000 + value % TEN_POW [ numFracDigits ] ) . substring ( 10 - numFracDigits , 10 ) ;\nout . write ( String . valueOf ( intPart ) ) ;\nout . write ( \"STR\" ) ;\nout . write ( fracPart ) ;\n} afterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testNumber ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . writeNumberLiteral ( 12345 , 0 ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"12345\", result);\nassertFalse(result.contains(\".\"));\nassertTrue(result.length() == 5);\nassertTrue(result.startsWith(\"123\"));\nassertTrue(result.endsWith(\"45\"));\nassertTrue(result.matches(\"\\\\d+\"));\nassertTrue(result.matches(\"[0-9]+\"));\nassertTrue(result.charAt(0) == '1');\nassertTrue(result.contains(\"23\"));\nassertTrue(result.contains(\"45\"));\nassertTrue(result.equals(\"12345\"));\nassertTrue(result.equalsIgnoreCase(\"12345\"));\nassertTrue(result.compareTo(\"12345\") == 0);\nassertTrue(result.contains(\"1\"));\nassertTrue(result.contains(\"5\"));\nassertTrue(result.contains(\"3\"));\nassertTrue(result.contains(\"4\"));\nassertTrue(result.indexOf(\"2\") == 1);\nassertTrue(result.lastIndexOf(\"5\") == 4);\nassertTrue(result.substring(1, 4).equals(\"234\"));\n====================\n\n",
+    "scores": [
+        0.852,
+        0.576,
+        0.536,
+        0.517,
+        0.517,
+        0.517,
+        0.517,
+        0.508,
+        0.508,
+        0.508,
+        0.508,
+        0.5,
+        0.5,
+        0.5,
+        0.484,
+        0.484,
+        0.469,
+        0.455,
+        0.429,
+        0.411
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

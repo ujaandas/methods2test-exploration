@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedProperties {
+    public static Set < String > bindAll ( Object instance , TestCase testCase ) { 
+    Set < String > usedProperties = new HashSet < > ( ) ; 
+    for ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) { 
+    String fullPropertyPath = entry . getKey ( ) . trim ( ) ; 
+    String value = entry . getValue ( ) . trim ( ) ; 
+    if ( bind0 ( instance , fullPropertyPath , value ) ) { 
+    usedProperties . add ( fullPropertyPath ) ; 
+    } } return usedProperties ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedPropertiesTest {
+    @Test
+     public void testReconstructObjectGraph ( ) {
+         TestCase testCase = new TestCase ( "STR" ) . setProperty ( "STR" , 10 ) ; 
+         Person person = new Person ( ) ; 
+         Set < String > usedProperties = bindAll ( person , testCase ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(10, person.getStr());
+Assert.assertTrue(usedProperties.contains("STR"));
+Assert.assertFalse(usedProperties.contains("INT"));
+Assert.assertFalse(usedProperties.contains("BOOL"));
+Assert.assertFalse(usedProperties.contains("DOUBLE"));
+Assert.assertFalse(usedProperties.contains("LIST"));
+Assert.assertFalse(usedProperties.contains("MAP"));
+Assert.assertFalse(usedProperties.contains("OBJECT"));
+Assert.assertFalse(usedProperties.contains("NESTED_OBJECT"));
+Assert.assertFalse(usedProperties.contains("NESTED_LIST"));
+Assert.assertFalse(usedProperties.contains("NESTED_MAP"));
+Assert.assertFalse(usedProperties.contains("NESTED_OBJECT_LIST"));
+Assert.assertFalse(usedProperties.contains("NESTED_OBJECT_MAP"));
+Assert.assertFalse(usedProperties.contains("NESTED_LIST_OBJECT"));
+Assert.assertFalse(usedProperties.contains("NESTED_MAP_OBJECT"));
+Assert.assertFalse(usedProperties.contains("NESTED_LIST_LIST"));
+Assert.assertFalse(usedProperties.contains("NESTED_MAP_MAP"));
+Assert.assertFalse(usedProperties.contains("NESTED_LIST_OBJECT_LIST"));
+Assert.assertFalse(usedProperties.contains("NESTED_MAP_OBJECT_MAP"));
+Assert.assertFalse(usedProperties.contains("NESTED_LIST_LIST_OBJECT"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(person.nullArm); ===
+0.590 - Assert.assertEquals(10, person.getStr())
+0.444 - Assert.assertFalse(usedProperties.contains("MAP"))
+0.423 - Assert.assertTrue(usedProperties.contains("STR"))
+0.417 - Assert.assertFalse(usedProperties.contains("INT"))
+0.411 - Assert.assertFalse(usedProperties.contains("BOOL"))
+0.411 - Assert.assertFalse(usedProperties.contains("LIST"))
+0.405 - Assert.assertFalse(usedProperties.contains("NESTED_MAP"))
+0.400 - Assert.assertFalse(usedProperties.contains("DOUBLE"))
+0.400 - Assert.assertFalse(usedProperties.contains("OBJECT"))
+0.386 - Assert.assertFalse(usedProperties.contains("NESTED_MAP_MAP"))
+0.375 - Assert.assertFalse(usedProperties.contains("NESTED_LIST"))
+0.372 - Assert.assertFalse(usedProperties.contains("NESTED_OBJECT_MAP"))
+0.372 - Assert.assertFalse(usedProperties.contains("NESTED_MAP_OBJECT"))
+0.366 - Assert.assertFalse(usedProperties.contains("NESTED_OBJECT"))
+0.356 - Assert.assertFalse(usedProperties.contains("NESTED_MAP_OBJECT_MAP"))
+0.353 - Assert.assertFalse(usedProperties.contains("NESTED_LIST_LIST"))
+0.345 - Assert.assertFalse(usedProperties.contains("NESTED_OBJECT_LIST"))
+0.345 - Assert.assertFalse(usedProperties.contains("NESTED_LIST_OBJECT"))
+0.326 - Assert.assertFalse(usedProperties.contains("NESTED_LIST_OBJECT_LIST"))
+0.326 - Assert.assertFalse(usedProperties.contains("NESTED_LIST_LIST_OBJECT"))

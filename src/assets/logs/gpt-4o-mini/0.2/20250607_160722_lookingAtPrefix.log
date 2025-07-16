@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package basis-technology-corp.tcl-regex-java;
+
+public class Matcher {
+    boolean lookingAt ( ) ;
+}
+
+package basis-technology-corp.tcl-regex-java;
+
+public class MatcherTest {
+    @Test
+     public void lookingAtPrefix ( ) throws Exception {
+         RePattern pattern = HsrePattern . compile ( "STR" , PatternFlags . ADVANCED ) ; 
+         ReMatcher matcher = pattern . matcher ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(matcher.lookingAt());
+assertEquals(0, matcher.start());
+assertEquals(3, matcher.end());
+assertEquals("STR", matcher.group());
+assertFalse(matcher.lookingAt("XYZ"));
+assertTrue(matcher.lookingAt("STRABC"));
+assertFalse(matcher.lookingAt("ABSTR"));
+assertEquals(0, matcher.regionStart());
+assertEquals(3, matcher.regionEnd());
+assertTrue(matcher.lookingAt("STR"));
+assertFalse(matcher.lookingAt("str"));
+assertTrue(matcher.lookingAt("STR123"));
+assertEquals(0, matcher.start(0));
+assertEquals(3, matcher.end(0));
+assertEquals("STR", matcher.group(0));
+assertTrue(matcher.lookingAt("STRXYZ"));
+assertFalse(matcher.lookingAt("XYZSTR"));
+assertTrue(matcher.lookingAt("STR STR"));
+assertEquals(0, matcher.start("STR"));
+assertEquals(3, matcher.end("STR"));
+assertTrue(matcher.lookingAt("STR!@#"));
+assertFalse(matcher.lookingAt("!@#STR"));
+assertTrue(matcher.lookingAt("STR\n"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(matcher.lookingAt()); ===
+0.925 - assertTrue(matcher.lookingAt("STR"))
+0.899 - assertTrue(matcher.lookingAt("STR\n"))
+0.886 - ```java
+assertTrue(matcher.lookingAt())
+0.886 - assertTrue(matcher.lookingAt("STRABC"))
+0.886 - assertTrue(matcher.lookingAt("STR123"))
+0.886 - assertTrue(matcher.lookingAt("STRXYZ"))
+0.886 - assertTrue(matcher.lookingAt("STR STR"))
+0.886 - assertTrue(matcher.lookingAt("STR!@#"))
+0.824 - assertFalse(matcher.lookingAt("XYZ"))
+0.824 - assertFalse(matcher.lookingAt("str"))
+0.800 - assertFalse(matcher.lookingAt("ABSTR"))
+0.789 - assertFalse(matcher.lookingAt("XYZSTR"))
+0.789 - assertFalse(matcher.lookingAt("!@#STR"))
+0.667 - assertEquals(3, matcher.end())
+0.656 - assertEquals(3, matcher.end(0))
+0.647 - assertEquals(0, matcher.regionStart())
+0.645 - assertEquals(0, matcher.start())
+0.636 - assertEquals(3, matcher.regionEnd())
+0.635 - assertEquals(0, matcher.start(0))
+0.615 - assertEquals(3, matcher.end("STR"))
+0.597 - assertEquals(0, matcher.start("STR"))
+0.576 - assertEquals("STR", matcher.group())
+0.567 - assertEquals("STR", matcher.group(0))
+0.000 - ```

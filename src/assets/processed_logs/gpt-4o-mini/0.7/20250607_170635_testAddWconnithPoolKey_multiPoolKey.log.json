@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic int count ( String poolKey ) {\nif ( StringUtils . isBlank ( poolKey ) ) {\nreturn 0 ;\n} ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nif ( null != pool ) {\nreturn pool . size ( ) ;\n} else {\nreturn 0 ;\n} }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testAddWconnithPoolKey_multiPoolKey ( ) throws InterruptedException {\nConnection conn = getAConn ( ) ;\ncm . add ( conn , poolKey ) ;\ncm . add ( conn , \"STR\" ) ;\ncm . add ( conn , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertEquals(1, cm.count(poolKey));\nAssert.assertEquals(2, cm.count(\"STR\"));\nAssert.assertTrue(cm.count(poolKey) > 0);\nAssert.assertTrue(cm.count(\"STR\") > 0);\nAssert.assertEquals(0, cm.count(\"NON_EXISTENT_POOL\"));\nAssert.assertTrue(cm.count(poolKey) <= 1);\nAssert.assertTrue(cm.count(\"STR\") <= 2);\nAssert.assertNotNull(cm.getConnectionPool(cm.connTasks.get(poolKey)));\nAssert.assertNotNull(cm.getConnectionPool(cm.connTasks.get(\"STR\")));\nAssert.assertTrue(cm.getConnectionPool(cm.connTasks.get(poolKey)).size() > 0);\nAssert.assertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).size() > 0);\nAssert.assertNotEquals(cm.count(poolKey), cm.count(\"STR\"));\nAssert.assertNotEquals(cm.count(\"STR\"), 0);\nAssert.assertTrue(cm.count(poolKey) + cm.count(\"STR\") > 0);\nAssert.assertTrue(cm.count(poolKey) >= 0);\nAssert.assertTrue(cm.count(\"STR\") >= 0);\nAssert.assertEquals(0, cm.count(\"INVALID_POOL_KEY\"));\nAssert.assertTrue(cm.getConnectionPool(cm.connTasks.get(poolKey)).contains(conn));\nAssert.assertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).contains(conn));\nAssert.assertEquals(2, cm.getConnectionPool(cm.connTasks.get(\"STR\")).size());\nAssert.assertEquals(1, cm.getConnectionPool(cm.connTasks.get(poolKey)).size());\n```\n====================\n\n",
+    "scores": [
+        0.892,
+        0.812,
+        0.8,
+        0.8,
+        0.781,
+        0.747,
+        0.716,
+        0.675,
+        0.65,
+        0.641,
+        0.621,
+        0.613,
+        0.603,
+        0.603,
+        0.547,
+        0.515,
+        0.486,
+        0.475,
+        0.409,
+        0.384,
+        0.381,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,cm.count(poolKey));"
+}

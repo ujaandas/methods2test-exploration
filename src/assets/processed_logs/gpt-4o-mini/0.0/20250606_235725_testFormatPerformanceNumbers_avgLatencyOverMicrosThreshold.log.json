@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollector {\npublic String formatIntervalPerformanceNumbers ( String testId ) {\nPerformanceStats latest = get ( testId , false ) ;\nif ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) {\nreturn \"STR\" ;\n} String latencyUnit = \"STR\" ;\nlong latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ;\nlong latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ;\nlong latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ;\nif ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) {\nlatencyUnit = \"STR\" ;\nlatencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ;\nlatency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ;\nlatencyMax = MICROSECONDS . toMillis ( latencyMax ) ;\n} return format ( \"STR\" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollectorTest {\n@Test\npublic void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {\nSimulatorAddress worker = workerAddress ( 3 , 1 ) ;\nMap < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ;\nperformanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ;\nperformanceStatsCollector . update ( worker , performanceStats ) ;\nString performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(performance);\nassertFalse(performance.isEmpty());\nassertTrue(performance.contains(\"800\"));\nassertTrue(performance.contains(\"100\"));\nassertTrue(performance.contains(\"300\"));\nassertTrue(performance.contains(\"2\"));\nassertTrue(performance.contains(\"2400\"));\nassertTrue(performance.contains(\"2500\"));\nassertTrue(performance.contains(\"STR\"));\nassertTrue(performance.contains(\"3\"));\nassertTrue(performance.contains(\"100\"));\nassertTrue(performance.contains(\"1000\"));\nassertTrue(performance.contains(\"2000\"));\nassertTrue(performance.contains(\"3000\"));\nassertTrue(performance.contains(\"4000\"));\nassertTrue(performance.contains(\"5000\"));\nassertTrue(performance.contains(\"6000\"));\nassertTrue(performance.contains(\"7000\"));\nassertTrue(performance.contains(\"8000\"));\nassertTrue(performance.contains(\"9000\"));\nassertTrue(performance.contains(\"10000\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.947,
+        0.947,
+        0.923,
+        0.923,
+        0.923,
+        0.923,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.9,
+        0.658,
+        0.548,
+        0.0
+    ],
+    "ground_truth": "assertTrue(performance.contains(\"STR\"));"
+}

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CompactedLinkSerializer {
+    @Override
+     public int getObjectSizeInByteBuffer ( ByteBuffer buffer ) { 
+     return buffer . get ( buffer . position ( ) + OShortSerializer . SHORT_SIZE ) + OByteSerializer . BYTE_SIZE + OShortSerializer . SHORT_SIZE ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CompactedLinkSerializerTest {
+    @Test
+     public void testSerializeThreeBytesInByteBuffer ( ) {
+         final OCompactedLinkSerializer linkSerializer = new OCompactedLinkSerializer ( ) ; 
+         final ORecordId rid = new ORecordId ( 123 , 65628 ) ; 
+         final int size = linkSerializer . getObjectSize ( rid ) ; 
+         ByteBuffer buffer = ByteBuffer . allocate ( size + 1 ) ; 
+         buffer . position ( 1 ) ; 
+         linkSerializer . serializeInByteBufferObject ( rid , buffer ) ; 
+         buffer . position ( 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertEquals(3, buffer.get(1));
+2. assertEquals(123, buffer.getShort(2));
+3. assertEquals(65628, buffer.getInt(4));
+4. assertEquals(0, buffer.get(8));
+5. assertEquals(0, buffer.get(9));
+6. assertEquals(0, buffer.get(10));
+7. assertEquals(0, buffer.get(11));
+8. assertEquals(0, buffer.get(12));
+9. assertEquals(0, buffer.get(13));
+10. assertEquals(0, buffer.get(14));
+11. assertEquals(0, buffer.get(15));
+12. assertEquals(0, buffer.get(16));
+13. assertEquals(0, buffer.get(17));
+14. assertEquals(0, buffer.get(18));
+15. assertEquals(0, buffer.get(19));
+16. assertEquals(0, buffer.get(20));
+17. assertEquals(0, buffer.get(21));
+18. assertEquals(0, buffer.get(22));
+19. assertEquals(0, buffer.get(23));
+20. assertEquals(0, buffer.get(24));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(size,linkSerializer.getObjectSizeInByteBuffer(buffer)); ===
+0.495 - 3. assertEquals(65628, buffer.getInt(4))
+0.469 - 4. assertEquals(0, buffer.get(8))
+0.469 - 5. assertEquals(0, buffer.get(9))
+0.465 - 6. assertEquals(0, buffer.get(10))
+0.465 - 7. assertEquals(0, buffer.get(11))
+0.465 - 8. assertEquals(0, buffer.get(12))
+0.465 - 9. assertEquals(0, buffer.get(13))
+0.460 - 10. assertEquals(0, buffer.get(14))
+0.460 - 11. assertEquals(0, buffer.get(15))
+0.460 - 12. assertEquals(0, buffer.get(16))
+0.460 - 13. assertEquals(0, buffer.get(17))
+0.460 - 14. assertEquals(0, buffer.get(18))
+0.460 - 15. assertEquals(0, buffer.get(19))
+0.460 - 16. assertEquals(0, buffer.get(20))
+0.460 - 17. assertEquals(0, buffer.get(21))
+0.460 - 18. assertEquals(0, buffer.get(22))
+0.460 - 19. assertEquals(0, buffer.get(23))
+0.460 - 20. assertEquals(0, buffer.get(24))
+0.457 - 2. assertEquals(123, buffer.getShort(2))
+0.414 - Assertions:
+
+1. assertEquals(3, buffer.get(1))

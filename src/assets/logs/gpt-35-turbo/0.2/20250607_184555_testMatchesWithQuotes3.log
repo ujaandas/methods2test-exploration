@@ -1,0 +1,64 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatchesWithQuotes3 ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, results.size());
+assertTrue(results.isEmpty());
+assertNotNull(results);
+assertEquals(1, results.size());
+assertFalse(results.isEmpty());
+assertNotNull(results.get(0));
+assertTrue(results.get(0) instanceof ODocument);
+assertEquals("expectedValue", results.get(0).field("fieldName"));
+assertNotEquals(0, results.get(0).field("fieldName"));
+assertTrue(results.contains(expectedDocument));
+assertFalse(results.contains(unexpectedDocument));
+assertEquals(expectedSize, results.size());
+assertTrue(results.size() > 0);
+assertFalse(results.size() == 0);
+assertEquals(expectedValue, results.get(0).field("fieldName"));
+assertNotNull(results.get(0).field("fieldName"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(0, results.size())
+0.933 - assertEquals(1, results.size())
+0.833 - assertFalse(results.size() == 0)
+0.793 - assertTrue(results.size() > 0)
+0.789 - assertEquals(expectedSize, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.712 - assertNotNull(results.get(0))
+0.678 - assertTrue(results.isEmpty())
+0.654 - assertNotNull(results)
+0.634 - assertNotEquals(0, results.get(0).field("fieldName"))
+0.571 - assertEquals(expectedValue, results.get(0).field("fieldName"))
+0.564 - assertNotNull(results.get(0).field("fieldName"))
+0.559 - assertEquals("expectedValue", results.get(0).field("fieldName"))
+0.557 - assertFalse(results.contains(unexpectedDocument))
+0.526 - assertTrue(results.contains(expectedDocument))
+0.507 - assertTrue(results.get(0) instanceof ODocument)

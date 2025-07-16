@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtension {
+    @Override
+     public ByteBuffer getPayloadData ( ) { 
+     return unmaskedpayload ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtensionTest {
+    @Test
+     public void testDecodeFrame ( ) throws InvalidDataException {
+         PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ; 
+         String str = "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         byte [ ] message = str . getBytes ( ) ; 
+         TextFrame frame = new TextFrame ( ) ; 
+         frame . setPayload ( ByteBuffer . wrap ( message ) ) ; 
+         deflateExtension . encodeFrame ( frame ) ; 
+         deflateExtension . decodeFrame ( frame ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(frame);
+Assert.assertTrue(frame.isFinal());
+Assert.assertEquals(0, frame.getRsv());
+Assert.assertEquals(0, frame.getPayloadLength());
+Assert.assertArrayEquals(message, frame.getPayload().array());
+Assert.assertEquals("STRSTRSTRSTRSTR", new String(frame.getPayload().array()));
+Assert.assertTrue(frame.isText());
+Assert.assertFalse(frame.isBinary());
+Assert.assertFalse(frame.hasExtensions());
+Assert.assertEquals(1, frame.getFin());
+Assert.assertEquals(1, frame.getOpCode());
+Assert.assertNotNull(deflateExtension.getPayloadData());
+Assert.assertTrue(deflateExtension.getPayloadData().hasRemaining());
+Assert.assertEquals(message.length, deflateExtension.getPayloadData().remaining());
+Assert.assertTrue(deflateExtension.getPayloadData().equals(ByteBuffer.wrap(message)));
+Assert.assertNotEquals(0, deflateExtension.getPayloadData().capacity());
+Assert.assertEquals("STRSTRSTRSTRSTR", new String(deflateExtension.getPayloadData().array()));
+Assert.assertNotEquals(frame.getPayload(), null);
+Assert.assertEquals(frame.getPayload().capacity(), message.length);
+Assert.assertTrue(deflateExtension.decodeFrame(frame));
+Assert.assertFalse(deflateExtension.decodeFrame(null));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(message,frame.getPayloadData().array()); ===
+0.964 - Assert.assertArrayEquals(message, frame.getPayload().array())
+0.702 - Assert.assertEquals(message.length, deflateExtension.getPayloadData().remaining())
+0.701 - Assert.assertEquals(0, frame.getPayloadLength())
+0.667 - Assert.assertEquals("STRSTRSTRSTRSTR", new String(frame.getPayload().array()))
+0.661 - Assert.assertEquals(frame.getPayload().capacity(), message.length)
+0.660 - Assert.assertNotEquals(frame.getPayload(), null)
+0.650 - Assert.assertNotEquals(0, deflateExtension.getPayloadData().capacity())
+0.622 - Assert.assertEquals(1, frame.getOpCode())
+0.598 - Assert.assertEquals(0, frame.getRsv())
+0.598 - Assert.assertEquals(1, frame.getFin())
+0.582 - Assert.assertEquals("STRSTRSTRSTRSTR", new String(deflateExtension.getPayloadData().array()))
+0.564 - Assert.assertTrue(deflateExtension.getPayloadData().hasRemaining())
+0.519 - Assert.assertTrue(deflateExtension.getPayloadData().equals(ByteBuffer.wrap(message)))
+0.514 - Assert.assertNotNull(deflateExtension.getPayloadData())
+0.512 - Assert.assertFalse(frame.isBinary())
+0.482 - Assert.assertTrue(frame.isText())
+0.476 - Assert.assertTrue(frame.isFinal())
+0.462 - Assert.assertFalse(frame.hasExtensions())
+0.385 - Assert.assertFalse(deflateExtension.decodeFrame(null))
+0.353 - ```java
+Assert.assertNotNull(frame)
+0.346 - Assert.assertTrue(deflateExtension.decodeFrame(frame))
+0.000 - ```

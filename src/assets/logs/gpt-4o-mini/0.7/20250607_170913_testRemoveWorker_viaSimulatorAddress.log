@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @Test
+     public void testRemoveWorker_viaSimulatorAddress ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         List < WorkerParameters > parametersList = newWorkerParametersList ( agentAddress , 5 ) ; 
+         registry . addWorkers ( parametersList ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(5, registry.workerCount());
+assertTrue(registry.hasWorker(agentAddress)); 
+assertNotNull(registry.getWorker(agentAddress)); 
+assertFalse(registry.isWorkerRemoved(agentAddress)); 
+assertEquals(parametersList.size(), registry.getWorkers().size()); 
+assertTrue(registry.getWorkers().containsAll(parametersList)); 
+assertFalse(registry.getWorkers().isEmpty()); 
+assertTrue(registry.workerCount() > 0); 
+assertNotEquals(0, registry.workerCount()); 
+assertSame(parametersList.get(0), registry.getWorker(agentAddress)); 
+assertEquals("Expected Worker Name", registry.getWorker(agentAddress).getName()); 
+assertTrue(registry.getWorker(agentAddress).isActive()); 
+assertFalse(registry.getWorker(agentAddress).isTerminated()); 
+assertEquals("Expected Worker Type", registry.getWorker(agentAddress).getType()); 
+assertTrue(registry.getWorkers().stream().allMatch(Worker::isActive)); 
+assertEquals(5, registry.getWorkers().stream().filter(Worker::isActive).count()); 
+assertNotNull(registry.getWorker(agentAddress).getStatus()); 
+assertEquals("Expected Status", registry.getWorker(agentAddress).getStatus()); 
+assertTrue(registry.workerCount() <= 5); 
+assertThrows(WorkerNotFoundException.class, () -> registry.getWorker(new SimulatorAddress())); 
+assertTrue(registry.getWorkers().size() <= 5); 
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(5,registry.workerCount()); ===
+0.937 - assertNotEquals(0, registry.workerCount())
+0.905 - ```java
+assertEquals(5, registry.workerCount())
+0.838 - assertTrue(registry.workerCount() > 0)
+0.827 - assertTrue(registry.workerCount() <= 5)
+0.683 - assertFalse(registry.getWorkers().isEmpty())
+0.652 - assertFalse(registry.isWorkerRemoved(agentAddress))
+0.635 - assertNotNull(registry.getWorker(agentAddress))
+0.634 - assertTrue(registry.hasWorker(agentAddress))
+0.617 - assertTrue(registry.getWorkers().size() <= 5)
+0.615 - assertEquals(5, registry.getWorkers().stream().filter(Worker::isActive).count())
+0.608 - assertEquals(parametersList.size(), registry.getWorkers().size())
+0.592 - assertFalse(registry.getWorker(agentAddress).isTerminated())
+0.584 - assertEquals("Expected Status", registry.getWorker(agentAddress).getStatus())
+0.581 - assertTrue(registry.getWorker(agentAddress).isActive())
+0.577 - assertNotNull(registry.getWorker(agentAddress).getStatus())
+0.574 - assertEquals("Expected Worker Name", registry.getWorker(agentAddress).getName())
+0.574 - assertEquals("Expected Worker Type", registry.getWorker(agentAddress).getType())
+0.566 - assertTrue(registry.getWorkers().containsAll(parametersList))
+0.538 - assertSame(parametersList.get(0), registry.getWorker(agentAddress))
+0.467 - assertTrue(registry.getWorkers().stream().allMatch(Worker::isActive))
+0.425 - assertThrows(WorkerNotFoundException.class, () -> registry.getWorker(new SimulatorAddress()))
+0.000 - ```

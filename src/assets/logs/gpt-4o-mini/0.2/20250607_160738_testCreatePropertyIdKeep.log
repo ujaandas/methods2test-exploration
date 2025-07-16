@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OClassImpl {
+    public Integer getId ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OClassImplTest {
+    @Test
+     public void testCreatePropertyIdKeep ( ) {
+         final OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass oClass = oSchema . createClass ( "STR" ) ; 
+         OProperty prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         Integer id = prop . getId ( ) ; 
+         oClass . dropProperty ( "STR" ) ; 
+         prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(prop);
+assertEquals("STR", prop.getName());
+assertEquals(OType.STRING, prop.getType());
+assertEquals(id, prop.getId());
+assertTrue(prop.getId() > 0);
+assertNotEquals(0, prop.getId());
+assertTrue(oClass.getProperties().contains(prop));
+assertEquals(1, oClass.getProperties().size());
+assertTrue(oClass.getProperty("STR") instanceof OProperty);
+assertSame(prop, oClass.getProperty("STR"));
+assertFalse(oClass.getProperties().isEmpty());
+assertEquals(oClass.getId(), prop.getOwnerClass().getId());
+assertNotEquals(id, oClass.getProperty("STR").getId());
+assertTrue(oClass.getProperty("STR").getId() > id);
+assertEquals(OType.STRING, oClass.getProperty("STR").getType());
+assertNotNull(oClass.getProperty("STR").getId());
+assertNotNull(oClass.getProperty("STR").getOwnerClass());
+assertEquals("STR", oClass.getProperty("STR").getName());
+assertTrue(oClass.getProperty("STR").isNotNull());
+assertFalse(oClass.getProperty("STR").isLinked());
+assertTrue(oClass.getProperty("STR").isMandatory());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(id,prop.getId()); ===
+1.000 - assertEquals(id, prop.getId())
+0.900 - assertNotEquals(0, prop.getId())
+0.794 - assertEquals("STR", prop.getName())
+0.764 - assertTrue(prop.getId() > 0)
+0.714 - assertEquals(OType.STRING, prop.getType())
+0.683 - assertNotEquals(id, oClass.getProperty("STR").getId())
+0.651 - assertEquals(oClass.getId(), prop.getOwnerClass().getId())
+0.595 - assertEquals(1, oClass.getProperties().size())
+0.545 - assertTrue(oClass.getProperty("STR").getId() > id)
+0.545 - assertNotNull(oClass.getProperty("STR").getId())
+0.535 - assertSame(prop, oClass.getProperty("STR"))
+0.524 - assertEquals("STR", oClass.getProperty("STR").getName())
+0.500 - ```java
+assertNotNull(prop)
+0.487 - assertFalse(oClass.getProperty("STR").isLinked())
+0.486 - assertFalse(oClass.getProperties().isEmpty())
+0.484 - assertEquals(OType.STRING, oClass.getProperty("STR").getType())
+0.436 - assertTrue(oClass.getProperties().contains(prop))
+0.425 - assertTrue(oClass.getProperty("STR").isMandatory())
+0.410 - assertTrue(oClass.getProperty("STR").isNotNull())
+0.376 - assertTrue(oClass.getProperty("STR") instanceof OProperty)
+0.376 - assertNotNull(oClass.getProperty("STR").getOwnerClass())
+0.000 - ```

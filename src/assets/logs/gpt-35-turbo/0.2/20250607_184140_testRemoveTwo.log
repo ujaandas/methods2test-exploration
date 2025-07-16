@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class TrackedMap {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class TrackedMapTest {
+    @Test
+     public void testRemoveTwo ( ) {
+         final ODocument doc = new ODocument ( ) ; 
+         final OTrackedMap < String > map = new OTrackedMap < String > ( doc ) ; 
+         map . put ( "STR" , "STR" ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(1, map.size());
+assertTrue(map.containsKey("STR"));
+assertEquals("STR", map.get("STR"));
+assertFalse(map.isDirty());
+map.remove("STR");
+assertTrue(map.isEmpty());
+assertFalse(map.containsKey("STR"));
+assertNull(map.get("STR"));
+assertTrue(map.isDirty());
+map.put("NEW", "NEW");
+assertEquals(1, map.size());
+assertTrue(map.containsKey("NEW"));
+assertEquals("NEW", map.get("NEW"));
+assertTrue(map.isDirty());
+map.clear();
+assertTrue(map.isEmpty());
+assertFalse(map.containsKey("NEW"));
+assertNull(map.get("NEW"));
+assertTrue(map.isDirty());
+map.put("KEY", "VALUE");
+assertEquals(1, map.size());
+assertTrue(map.containsKey("KEY"));
+assertEquals("VALUE", map.get("KEY"));
+assertTrue(map.isDirty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(doc.isDirty()); ===
+0.885 - assertFalse(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.627 - assertTrue(map.isEmpty())
+0.627 - assertTrue(map.isEmpty())
+0.623 - assertFalse(map.containsKey("STR"))
+0.623 - assertFalse(map.containsKey("NEW"))
+0.500 - assertTrue(map.containsKey("STR"))
+0.500 - assertEquals(1, map.size())
+0.500 - assertTrue(map.containsKey("NEW"))
+0.500 - assertEquals(1, map.size())
+0.500 - assertTrue(map.containsKey("KEY"))
+0.433 - assertEquals("STR", map.get("STR"))
+0.433 - assertEquals("NEW", map.get("NEW"))
+0.423 - assertNull(map.get("STR"))
+0.423 - assertNull(map.get("NEW"))
+0.419 - assertEquals("VALUE", map.get("KEY"))
+0.400 - Assertions:
+
+assertEquals(1, map.size())
+0.270 - map.clear()
+0.233 - map.remove("STR")
+0.174 - map.put("NEW", "NEW")
+0.167 - map.put("KEY", "VALUE")

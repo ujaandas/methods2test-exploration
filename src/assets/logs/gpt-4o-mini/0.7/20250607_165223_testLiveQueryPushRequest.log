@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class OLiveQueryMessagess {
+    public int getMonitorId ( ) { 
+    return monitorId ; 
+    }
+}
+
+package orientechnologies.orientdb.client;
+
+public class OLiveQueryMessagesTests {
+    @Test
+     public void testLiveQueryPushRequest ( ) throws IOException {
+         List < OLiveQueryResult > events = new ArrayList < > ( ) ; 
+         OResultInternal res = new OResultInternal ( ) ; 
+         res . setProperty ( "STR" , "STR" ) ; 
+         res . setProperty ( "STR" , 10 ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , res , null ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         OLiveQueryPushRequest pushRequest = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ; 
+         MockChannel channel = new MockChannel ( ) ; 
+         pushRequest . write ( channel ) ; 
+         channel . close ( ) ; 
+         OLiveQueryPushRequest pushRequestRead = new OLiveQueryPushRequest ( ) ; 
+         pushRequestRead . read ( channel ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(pushRequest.getMonitorId(), pushRequestRead.getMonitorId());
+assertEquals(pushRequest.getEvents().size(), pushRequestRead.getEvents().size());
+assertEquals(pushRequest.getEvents().get(0).getType(), pushRequestRead.getEvents().get(0).getType());
+assertEquals(pushRequest.getEvents().get(1).getType(), pushRequestRead.getEvents().get(1).getType());
+assertEquals(pushRequest.getEvents().get(2).getType(), pushRequestRead.getEvents().get(2).getType());
+assertEquals(pushRequest.getEvents().get(0).getResult().getProperty("STR"), pushRequestRead.getEvents().get(0).getResult().getProperty("STR"));
+assertEquals(pushRequest.getEvents().get(0).getResult().getProperty("STR", Integer.class), pushRequestRead.getEvents().get(0).getResult().getProperty("STR", Integer.class));
+assertNotNull(pushRequestRead.getEvents().get(0).getResult());
+assertNotNull(pushRequestRead.getEvents().get(1).getResult());
+assertNotNull(pushRequestRead.getEvents().get(2).getResult());
+assertNull(pushRequestRead.getEvents().get(2).getOldResult());
+assertNull(pushRequestRead.getEvents().get(0).getOldResult());
+assertEquals(pushRequestRead.getEvents().get(1).getOldResult().getProperty("STR"), pushRequestRead.getEvents().get(1).getOldResult().getProperty("STR"));
+assertNotNull(pushRequestRead.getEvents().get(1).getNewResult());
+assertEquals(pushRequestRead.getEvents().get(0).getNewResult().getProperty("STR"), pushRequestRead.getEvents().get(0).getNewResult().getProperty("STR"));
+assertTrue(pushRequest.getEvents().get(0).isCreateEvent());
+assertTrue(pushRequest.getEvents().get(1).isUpdateEvent());
+assertTrue(pushRequest.getEvents().get(2).isDeleteEvent());
+assertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty("STR", String.class), "STR");
+assertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty("STR", Integer.class), 10);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(pushRequestRead.getMonitorId(),10); ===
+0.698 - ```java
+assertEquals(pushRequest.getMonitorId(), pushRequestRead.getMonitorId())
+0.630 - assertNotNull(pushRequestRead.getEvents().get(0).getResult())
+0.630 - assertNotNull(pushRequestRead.getEvents().get(1).getResult())
+0.630 - assertNull(pushRequestRead.getEvents().get(0).getOldResult())
+0.613 - assertNotNull(pushRequestRead.getEvents().get(1).getNewResult())
+0.611 - assertNotNull(pushRequestRead.getEvents().get(2).getResult())
+0.611 - assertNull(pushRequestRead.getEvents().get(2).getOldResult())
+0.587 - assertEquals(pushRequest.getEvents().size(), pushRequestRead.getEvents().size())
+0.573 - assertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty("STR", Integer.class), 10)
+0.552 - assertTrue(pushRequest.getEvents().get(0).isCreateEvent())
+0.552 - assertTrue(pushRequest.getEvents().get(1).isUpdateEvent())
+0.533 - assertTrue(pushRequest.getEvents().get(2).isDeleteEvent())
+0.524 - assertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty("STR", String.class), "STR")
+0.521 - assertEquals(pushRequest.getEvents().get(0).getType(), pushRequestRead.getEvents().get(0).getType())
+0.521 - assertEquals(pushRequest.getEvents().get(1).getType(), pushRequestRead.getEvents().get(1).getType())
+0.507 - assertEquals(pushRequest.getEvents().get(2).getType(), pushRequestRead.getEvents().get(2).getType())
+0.404 - assertEquals(pushRequest.getEvents().get(0).getResult().getProperty("STR"), pushRequestRead.getEvents().get(0).getResult().getProperty("STR"))
+0.394 - assertEquals(pushRequestRead.getEvents().get(1).getOldResult().getProperty("STR"), pushRequestRead.getEvents().get(1).getOldResult().getProperty("STR"))
+0.384 - assertEquals(pushRequestRead.getEvents().get(0).getNewResult().getProperty("STR"), pushRequestRead.getEvents().get(0).getNewResult().getProperty("STR"))
+0.352 - assertEquals(pushRequest.getEvents().get(0).getResult().getProperty("STR", Integer.class), pushRequestRead.getEvents().get(0).getResult().getProperty("STR", Integer.class))
+0.000 - ```

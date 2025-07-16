@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic static boolean isValidOTPFormat ( String otp ) {\nif ( otp == null ) {\nreturn false ;\n} int len = otp . length ( ) ;\nfor ( char c : otp . toCharArray ( ) ) {\nif ( c < 0x20 || c > 0x7E ) {\nreturn false ;\n} } return OTP_MIN_LEN <= len && len <= OTP_MAX_LEN ;\n}\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testLongOTP ( ) {\nString otp = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(YubicoClient.isValidOTPFormat(otp));\nassertFalse(YubicoClient.isValidOTPFormat(null));\nassertFalse(YubicoClient.isValidOTPFormat(\"\"));\nassertFalse(YubicoClient.isValidOTPFormat(\" \"));\nassertFalse(YubicoClient.isValidOTPFormat(\"123456789012345678901234567890\")); // Assuming OTP_MAX_LEN < 30\nassertFalse(YubicoClient.isValidOTPFormat(\"!@#$%^&*()\")); // Non-printable characters\nassertFalse(YubicoClient.isValidOTPFormat(\"abc\\0def\")); // Null character\nassertTrue(YubicoClient.isValidOTPFormat(\"validOTP123\")); // Valid OTP\nassertFalse(YubicoClient.isValidOTPFormat(\"short\")); // Assuming OTP_MIN_LEN > 5\nassertFalse(YubicoClient.isValidOTPFormat(\"tooLongOTP12345678901234567890\")); // Assuming OTP_MAX_LEN < 30\nassertFalse(YubicoClient.isValidOTPFormat(\"abc\\x1Fdef\")); // Control character\nassertTrue(YubicoClient.isValidOTPFormat(\"123456\")); // Valid OTP\nassertFalse(YubicoClient.isValidOTPFormat(\"abc\\x7Fdef\")); // Delete character\nassertTrue(YubicoClient.isValidOTPFormat(\"YUB123456\")); // Valid OTP\nassertFalse(YubicoClient.isValidOTPFormat(\" \")); // Single space\nassertFalse(YubicoClient.isValidOTPFormat(\"abc\\x20def\")); // Space in between\nassertTrue(YubicoClient.isValidOTPFormat(\"A1B2C3D4E5\")); // Valid OTP\nassertFalse(YubicoClient.isValidOTPFormat(\"\")); // Empty string\nassertFalse(YubicoClient.isValidOTPFormat(\"abc\\x1Adef\")); // Substitute character\nassertTrue(YubicoClient.isValidOTPFormat(\"OTP123456\")); // Valid OTP\n```\n====================\n\n",
+    "scores": [
+        0.946,
+        0.946,
+        0.926,
+        0.851,
+        0.846,
+        0.846,
+        0.844,
+        0.772,
+        0.752,
+        0.752,
+        0.715,
+        0.693,
+        0.688,
+        0.688,
+        0.684,
+        0.672,
+        0.672,
+        0.672,
+        0.65,
+        0.612,
+        0.262
+    ],
+    "ground_truth": "assertFalse(YubicoClient.isValidOTPFormat(otp));"
+}

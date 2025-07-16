@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jribble.Java-Websockify;
+
+public class FlashPolicyHandler {
+    public FlashPolicyHandler ( ChannelBuffer policyResponse ) { 
+    super ( ) ; 
+    this . policyResponse = policyResponse ; 
+    }
+}
+
+package jribble.Java-Websockify;
+
+public class FlashPolicyHandlerTest {
+    @Test
+     public void testDecodeCustomResponse ( ) {
+         String XML = "STR" ; 
+         ChannelBuffer policyResponse = ChannelBuffers . copiedBuffer ( XML , CharsetUtil . UTF_8 ) ; 
+         embedder = new DecoderEmbedder < FlashPolicyRequest > ( new FlashPolicyHandler ( policyResponse ) ) ; 
+         String request = "STR" ; 
+         byte [ ] b = request . getBytes ( ) ; 
+         ChannelBuffer buf = wrappedBuffer ( b ) ; 
+         embedder . offer ( buf ) ; 
+         Object first = embedder . poll ( ) ; 
+         ChannelBuffer response = ( ChannelBuffer ) first ; 
+         String resp = new String ( response . array ( ) , 0 , response . readableBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(first);
+assertTrue(first instanceof ChannelBuffer);
+assertEquals(policyResponse, response);
+assertEquals(policyResponse.readableBytes(), response.readableBytes());
+assertArrayEquals(policyResponse.array(), response.array());
+assertTrue(response.isReadable());
+assertFalse(response.isWritable());
+assertEquals(CharsetUtil.UTF_8.name(), response.toString(CharsetUtil.UTF_8).charset().name());
+assertTrue(resp.contains("STR"));
+assertEquals("STR", response.toString(CharsetUtil.UTF_8));
+assertNotEquals("", resp);
+assertTrue(resp.length() > 0);
+assertTrue(resp.startsWith("S"));
+assertTrue(resp.endsWith("R"));
+assertTrue(response.readerIndex() == 0);
+assertTrue(response.writerIndex() == response.readableBytes());
+assertTrue(response.capacity() >= response.readableBytes());
+assertTrue(response.isDirect());
+assertTrue(response.toString(CharsetUtil.UTF_8).contains("STR"));
+assertFalse(resp.isEmpty());
+assertEquals(resp.length(), response.readableBytes());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(XML.equals(resp)); ===
+0.654 - assertNotEquals("", resp)
+0.618 - assertTrue(resp.length() > 0)
+0.586 - assertTrue(resp.endsWith("R"))
+0.582 - assertFalse(resp.isEmpty())
+0.576 - assertTrue(response.isDirect())
+0.567 - assertTrue(resp.contains("STR"))
+0.567 - assertTrue(resp.startsWith("S"))
+0.557 - assertTrue(response.isReadable())
+0.523 - assertEquals(policyResponse, response)
+0.523 - assertTrue(response.readerIndex() == 0)
+0.516 - assertFalse(response.isWritable())
+0.450 - assertEquals(resp.length(), response.readableBytes())
+0.442 - assertArrayEquals(policyResponse.array(), response.array())
+0.441 - assertTrue(first instanceof ChannelBuffer)
+0.429 - assertEquals("STR", response.toString(CharsetUtil.UTF_8))
+0.400 - assertTrue(response.capacity() >= response.readableBytes())
+0.386 - assertTrue(response.writerIndex() == response.readableBytes())
+0.371 - assertEquals(policyResponse.readableBytes(), response.readableBytes())
+0.370 - assertTrue(response.toString(CharsetUtil.UTF_8).contains("STR"))
+0.321 - ```java
+assertNotNull(first)
+0.300 - assertEquals(CharsetUtil.UTF_8.name(), response.toString(CharsetUtil.UTF_8).charset().name())
+0.000 - ```

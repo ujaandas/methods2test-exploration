@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfile {
+    protected void disableOpenJ9SCC ( List < String > dockerfileLines ) { 
+    final String RUN_CONFIGURE_COMMAND_LOWERCASE = "STR" ; 
+    for ( int i = 0 ; 
+    i < dockerfileLines . size ( ) ; 
+    i ++ ) { 
+    String line = dockerfileLines . get ( i ) ; 
+    if ( line . toLowerCase ( ) . equals ( RUN_CONFIGURE_COMMAND_LOWERCASE ) ) { 
+    debug ( "STR" ) ; 
+    dockerfileLines . add ( i , "STR" ) ; 
+    return ; 
+    } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfileTest {
+    @Test
+     public void testDisableOpenJ9SCC_lowercase ( ) throws Exception {
+         List < String > dockerfileLines = new ArrayList < String > ( ) ; 
+         List < String > expectedDockerfileLines = new ArrayList < String > ( ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         util . disableOpenJ9SCC ( dockerfileLines ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, dockerfileLines.size());
+assertEquals("STR", dockerfileLines.get(0));
+assertEquals("STR", dockerfileLines.get(1));
+assertEquals("STR", dockerfileLines.get(2));
+assertTrue(dockerfileLines.contains("STR"));
+assertFalse(dockerfileLines.contains("STR1"));
+assertTrue(dockerfileLines.indexOf("STR") >= 0);
+assertTrue(dockerfileLines.indexOf("STR") < dockerfileLines.size());
+assertEquals("STR", dockerfileLines.get(dockerfileLines.size() - 1));
+assertNotNull(dockerfileLines);
+assertNotSame(dockerfileLines, expectedDockerfileLines);
+assertTrue(dockerfileLines.equals(expectedDockerfileLines));
+assertFalse(dockerfileLines.isEmpty());
+assertTrue(dockerfileLines.stream().allMatch(line -> line.equals("STR")));
+assertEquals(1, Collections.frequency(dockerfileLines, "STR"));
+assertEquals(2, Collections.frequency(dockerfileLines, "STR"));
+assertNotEquals(dockerfileLines, Arrays.asList("STR", "STR1"));
+assertSame(dockerfileLines.get(0), "STR");
+assertSame(dockerfileLines.get(1), "STR");
+assertSame(dockerfileLines.get(2), "STR");
+assertArrayEquals(new String[]{"STR", "STR", "STR"}, dockerfileLines.toArray());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedDockerfileLines,dockerfileLines); ===
+0.643 - assertTrue(dockerfileLines.equals(expectedDockerfileLines))
+0.632 - assertEquals("STR", dockerfileLines.get(0))
+0.632 - assertEquals("STR", dockerfileLines.get(1))
+0.632 - assertEquals("STR", dockerfileLines.get(2))
+0.617 - assertNotSame(dockerfileLines, expectedDockerfileLines)
+0.606 - ```java
+assertEquals(3, dockerfileLines.size())
+0.602 - assertNotNull(dockerfileLines)
+0.602 - assertEquals(1, Collections.frequency(dockerfileLines, "STR"))
+0.602 - assertEquals(2, Collections.frequency(dockerfileLines, "STR"))
+0.602 - assertNotEquals(dockerfileLines, Arrays.asList("STR", "STR1"))
+0.571 - assertFalse(dockerfileLines.isEmpty())
+0.547 - assertArrayEquals(new String[]{"STR", "STR", "STR"}, dockerfileLines.toArray())
+0.531 - assertFalse(dockerfileLines.contains("STR1"))
+0.516 - assertSame(dockerfileLines.get(0), "STR")
+0.516 - assertSame(dockerfileLines.get(1), "STR")
+0.516 - assertSame(dockerfileLines.get(2), "STR")
+0.508 - assertEquals("STR", dockerfileLines.get(dockerfileLines.size() - 1))
+0.500 - assertTrue(dockerfileLines.contains("STR"))
+0.490 - assertTrue(dockerfileLines.indexOf("STR") >= 0)
+0.407 - assertTrue(dockerfileLines.indexOf("STR") < dockerfileLines.size())
+0.387 - assertTrue(dockerfileLines.stream().allMatch(line -> line.equals("STR")))
+0.000 - ```

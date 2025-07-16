@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", database.getCommand());\nassertEquals(Locale.GERMANY.getLanguage(), database.getLanguage());\nassertTrue(database.isConnected());\nassertFalse(database.isClosed());\nassertNotNull(database.getMetadata());\nassertNull(database.getError());\nassertNotEquals(0, database.getMetadataSize());\nassertArrayEquals(new String[]{\"STR\", Locale.GERMANY.getLanguage()}, database.getCommands());\nassertTrue(database.isUpdating());\nassertFalse(database.isIdle());\nassertNotNull(database.getUpdateTime());\nassertEquals(\"Germany\", database.getCountry());\nassertTrue(database.isMetadataLoaded());\nassertFalse(database.isMetadataRefreshing());\nassertEquals(200, database.getResponseCode());\nassertNotSame(Locale.GERMANY, database.getLocale());\nassertTrue(database.isUpdateSuccessful());\nassertFalse(database.isUpdateFailed());\nassertEquals(1, database.getCurrentUpdateCount());\nassertNotEquals(0, database.getUpdateCountSinceLastRefresh());\nassertTrue(database.isUpdateInProgress());\n====================\n\n",
+    "scores": [
+        0.535,
+        0.519,
+        0.486,
+        0.485,
+        0.482,
+        0.481,
+        0.451,
+        0.447,
+        0.443,
+        0.443,
+        0.441,
+        0.426,
+        0.423,
+        0.423,
+        0.419,
+        0.415,
+        0.387,
+        0.384,
+        0.365,
+        0.361,
+        0.346
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

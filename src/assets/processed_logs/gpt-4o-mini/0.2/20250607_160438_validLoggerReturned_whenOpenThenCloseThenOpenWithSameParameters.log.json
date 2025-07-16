@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluent.fluent-logger-java;\n\npublic class Bugfixes {\npublic void close ( ) {\nif ( sender != null ) {\nsender . flush ( ) ;\nsender . close ( ) ;\nsender = null ;\n} factory . purgeLogger ( this ) ;\n}\n}\n\npackage fluent.fluent-logger-java;\n\npublic class TestBugfixes {\n@Test\npublic void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {\nSystem . setProperty ( Config . FLUENT_SENDER_CLASS , \"STR\" ) ;\nFluentLogger logger = FluentLogger . getLogger ( \"STR\" ) ;\nlogger . log ( \"STR\" , Collections . < String , Object > emptyMap ( ) ) ;\nlogger . close ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(logger);\nAssert.assertTrue(logger.isClosed());\nAssert.assertEquals(\"STR\", logger.getName());\nAssert.assertEquals(0, logger.getLogCount());\nAssert.assertTrue(logger.getSender() == null);\nAssert.assertTrue(factory.getLoggerCount() == 0);\nAssert.assertTrue(factory.isLoggerPurged(logger));\nAssert.assertFalse(logger.isOpen());\nAssert.assertTrue(logger.getFlushCount() == 1);\nAssert.assertTrue(sender.isFlushed());\nAssert.assertTrue(sender.isClosed());\nAssert.assertTrue(factory.getActiveLoggers().isEmpty());\nAssert.assertTrue(factory.getPurgedLoggers().contains(logger));\nAssert.assertTrue(logger.getLastLogTime() < System.currentTimeMillis());\nAssert.assertTrue(logger.getLogQueue().isEmpty());\nAssert.assertTrue(logger.getPendingLogs().isEmpty());\nAssert.assertTrue(logger.getErrorCount() == 0);\nAssert.assertTrue(logger.getWarningCount() == 0);\nAssert.assertTrue(logger.getInfoCount() == 0);\nAssert.assertTrue(logger.getDebugCount() == 0);\nAssert.assertTrue(logger.getTraceCount() == 0);\n```\n====================\n\n",
+    "scores": [
+        0.706,
+        0.706,
+        0.7,
+        0.623,
+        0.618,
+        0.529,
+        0.525,
+        0.522,
+        0.522,
+        0.522,
+        0.522,
+        0.507,
+        0.494,
+        0.492,
+        0.484,
+        0.459,
+        0.459,
+        0.426,
+        0.423,
+        0.414,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "assertEquals(null,logger.sender);"
+}

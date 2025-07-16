@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class EnvFilter {\npublic Map < String , String > filter ( Map < String , String > env ) {\nMap < String , String > result = new HashMap < > ( ) ;\nfor ( Map . Entry < String , String > entry : env . entrySet ( ) ) {\nif ( ! maskPattern . matcher ( entry . getKey ( ) ) . matches ( ) ) result . put ( entry . getKey ( ) , entry . getValue ( ) ) ;\n} return result ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class EnvFilterTest {\n@Test\npublic void allows_overriding_mask ( ) {\nMap < String , String > env = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\n} } ;\nConfig config = createConfig ( ) ;\nnew EnvironmentVariablesConfigLoader ( env ) . load ( config ) ;\nEnvFilter envFilter = new EnvFilter ( config ) ;\nMap < String , String > expectedEnv = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\n} } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(5, expectedEnv.size());\nassertTrue(expectedEnv.containsKey(\"STR\"));\nassertEquals(\"STR\", expectedEnv.get(\"STR\"));\nassertNotNull(expectedEnv.get(\"STR\"));\nassertTrue(expectedEnv.values().contains(\"STR\"));\nassertFalse(expectedEnv.isEmpty());\nassertTrue(expectedEnv.keySet().contains(\"STR\"));\nassertEquals(\"STR\", expectedEnv.get(\"STR\"));\nassertNotEquals(\"DifferentValue\", expectedEnv.get(\"STR\"));\nassertTrue(expectedEnv.entrySet().stream().anyMatch(entry -> entry.getKey().equals(\"STR\") && entry.getValue().equals(\"STR\")));\nassertEquals(expectedEnv, envFilter.filter(env));\nassertTrue(envFilter.filter(env).keySet().contains(\"STR\"));\nassertFalse(envFilter.filter(env).isEmpty());\nassertEquals(5, envFilter.filter(env).size());\nassertTrue(envFilter.filter(env).values().stream().allMatch(value -> value.equals(\"STR\")));\nassertTrue(envFilter.filter(env).entrySet().stream().allMatch(entry -> entry.getValue().equals(\"STR\")));\nassertNotNull(envFilter.filter(env));\nassertTrue(envFilter.filter(env).containsKey(\"STR\"));\nassertEquals(\"STR\", envFilter.filter(env).get(\"STR\"));\nassertFalse(envFilter.filter(env).containsKey(\"NonExistentKey\"));\nassertTrue(envFilter.filter(env).values().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.791,
+        0.747,
+        0.727,
+        0.703,
+        0.652,
+        0.652,
+        0.642,
+        0.629,
+        0.606,
+        0.595,
+        0.577,
+        0.571,
+        0.571,
+        0.563,
+        0.526,
+        0.526,
+        0.517,
+        0.444,
+        0.405,
+        0.369,
+        0.0
+    ],
+    "ground_truth": "assertEquals(expectedEnv,envFilter.filter(env));"
+}

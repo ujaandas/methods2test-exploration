@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testOrderByDesc ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nString query = \"STR\" ;\nOResultSet result = db . query ( query ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedSize, result.stream().count());\nassertTrue(result.stream().allMatch(item -> item.getProperty(\"propertyName\") != null));\nassertEquals(expectedFirstValue, result.next().getProperty(\"propertyName\"));\nassertEquals(expectedSecondValue, result.next().getProperty(\"propertyName\"));\nassertTrue(result.stream().sorted(Comparator.comparing(item -> item.getProperty(\"propertyName\")).reversed()).collect(Collectors.toList()).equals(result.stream().collect(Collectors.toList())));\nassertFalse(result.isClosed());\nassertTrue(result.stream().anyMatch(item -> item.getProperty(\"anotherProperty\") == expectedValue));\nassertEquals(expectedValue, result.stream().filter(item -> item.getProperty(\"filterProperty\").equals(filterValue)).findFirst().get().getProperty(\"propertyName\"));\nassertEquals(expectedCount, result.stream().filter(item -> item.getProperty(\"countProperty\").equals(countValue)).count());\nassertTrue(result.stream().map(item -> item.getProperty(\"mapProperty\")).distinct().count() > 1);\nassertTrue(result.stream().allMatch(item -> item.getProperty(\"checkProperty\").equals(checkValue)));\nassertEquals(expectedLastValue, result.stream().reduce((first, second) -> second).get().getProperty(\"propertyName\"));\nassertTrue(result.stream().anyMatch(item -> item.getProperty(\"existsProperty\") != null));\nassertEquals(expectedAverage, result.stream().mapToDouble(item -> item.getProperty(\"averageProperty\")).average().orElse(0), delta);\nassertTrue(result.stream().filter(item -> item.getProperty(\"filterProperty\").equals(filterValue)).count() > 0);\nassertFalse(result.isEmpty());\nassertTrue(result.stream().allMatch(item -> item.getProperty(\"typeProperty\").equals(expectedType)));\nassertEquals(expectedDistinctCount, result.stream().map(item -> item.getProperty(\"distinctProperty\")).distinct().count());\nassertTrue(result.stream().anyMatch(item -> item.getProperty(\"booleanProperty\")));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.702,
+        0.69,
+        0.526,
+        0.513,
+        0.431,
+        0.429,
+        0.416,
+        0.411,
+        0.41,
+        0.408,
+        0.403,
+        0.4,
+        0.373,
+        0.355,
+        0.314,
+        0.301,
+        0.301,
+        0.247,
+        0.24,
+        0.237,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

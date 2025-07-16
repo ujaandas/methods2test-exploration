@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemote {\n< RET extends ORecord > RET save ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemoteTest {\n@Test\npublic void testRidSelect ( ) throws InterruptedException {\nMyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ;\nOVertex item = database . newVertex ( ) ;\nitem . save ( ) ;\nOLiveQueryMonitor live = database . live ( \"STR\" + item . getIdentity ( ) , listener ) ;\nitem . setProperty ( \"STR\" , \"STR\" ) ;\nitem . save ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", item.getProperty(\"STR\"));\nAssert.assertNotNull(item.getIdentity());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isPresent());\nAssert.assertEquals(1, listener.getResults().size());\nAssert.assertEquals(\"STR\" + item.getIdentity(), live.getName());\nAssert.assertTrue(live.isSubscribed(listener));\nAssert.assertTrue(live.unsubscribe(listener));\nAssert.assertTrue(live.subscribe(listener));\nAssert.assertTrue(live.isActive());\nAssert.assertTrue(live.pause());\nAssert.assertTrue(live.resume());\nAssert.assertTrue(live.shutdown());\nAssert.assertTrue(database.getVertex(item.getIdentity()).get().remove());\nAssert.assertNull(database.getVertex(item.getIdentity()).orElse(null));\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\nAssert.assertTrue(database.getVertex(item.getIdentity()).isEmpty());\n====================\n\n",
+    "scores": [
+        0.495,
+        0.475,
+        0.475,
+        0.472,
+        0.468,
+        0.462,
+        0.462,
+        0.457,
+        0.419,
+        0.39,
+        0.354,
+        0.33,
+        0.301,
+        0.301,
+        0.301,
+        0.301,
+        0.301,
+        0.301,
+        0.224,
+        0.208
+    ],
+    "ground_truth": "Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS));"
+}

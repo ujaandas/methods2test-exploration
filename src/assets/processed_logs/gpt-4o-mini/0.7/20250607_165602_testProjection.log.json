@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testProjection ( ) {\nlong idxUsagesBefore = indexUsages ( db ) ;\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedValue1, qResult.get(0).field(\"field1\"));\nassertEquals(expectedValue2, qResult.get(1).field(\"field2\"));\nassertEquals(expectedValue3, qResult.get(2).field(\"field3\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"field1\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"field2\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"field3\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"field1\").equals(expectedValue1)));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"field2\").equals(expectedValue2)));\nassertEquals(expectedDocumentId, qResult.get(0).getIdentity().toString());\nassertEquals(expectedDocumentType, qResult.get(0).getSchemaType().getName());\nassertTrue(qResult.get(0).field(\"field1\") instanceof String);\nassertFalse(qResult.get(0).field(\"field2\").toString().isEmpty());\nassertNotEquals(unexpectedValue, qResult.get(0).field(\"field4\"));\nassertEquals(expectedCount, qResult.stream().filter(doc -> doc.field(\"field5\").equals(filterValue)).count());\nassertNotNull(qResult.get(0).field(\"nestedField\"));\nassertEquals(expectedNestedValue, qResult.get(0).field(\"nestedField\").field(\"subField\"));\nassertTrue(qResult.size() <= maxExpectedSize);\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"dateField\").before(new Date())));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.63,
+        0.584,
+        0.584,
+        0.567,
+        0.562,
+        0.559,
+        0.55,
+        0.507,
+        0.49,
+        0.489,
+        0.476,
+        0.462,
+        0.436,
+        0.432,
+        0.416,
+        0.416,
+        0.386,
+        0.385,
+        0.379,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

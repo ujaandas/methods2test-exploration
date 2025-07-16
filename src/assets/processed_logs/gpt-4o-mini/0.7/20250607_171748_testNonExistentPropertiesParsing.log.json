@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtil {\nprotected static Properties getPropertiesResource ( URL resource ) {\nProperties answer = new Properties ( ) ;\nif ( resource != null ) {\ntry ( InputStream stream = resource . openStream ( ) ) {\nanswer . load ( stream ) ;\n} catch ( IOException e ) {\nthrow new IllegalStateException ( \"STR\" + resource , e ) ;\n} } return answer ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtilTest {\n@Test\npublic void testNonExistentPropertiesParsing ( ) {\nProperties props = SpringBootUtil . getPropertiesResource ( SpringBootUtilTest . class . getResource ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(props);\nassertTrue(props.isEmpty());\nassertFalse(props.containsKey(\"someKey\"));\nassertFalse(props.containsValue(\"someValue\"));\nassertEquals(0, props.size());\nassertTrue(props.stringPropertyNames().isEmpty());\nassertNull(props.getProperty(\"nonExistentKey\"));\nassertFalse(props.keySet().iterator().hasNext());\nassertFalse(props.values().iterator().hasNext());\nassertTrue(props.entrySet().isEmpty());\nassertEquals(\"defaultValue\", props.getProperty(\"defaultKey\", \"defaultValue\"));\nassertEquals(0, props.size());\nassertNull(props.getProperty(\"anotherNonExistentKey\"));\nassertFalse(props.containsKey(\"testKey\"));\nassertFalse(props.containsValue(\"testValue\"));\nassertTrue(props.equals(new Properties()));\nassertTrue(props.hashCode() != 0);\nassertTrue(props.toString().equals(\"{}\"));\nassertTrue(props.load(new StringReader(\"\")));\nassertFalse(props.containsKey(\"keyThatShouldNotExist\"));\nassertFalse(props.containsValue(\"valueThatShouldNotExist\"));\n```\n====================\n\n",
+    "scores": [
+        0.833,
+        0.625,
+        0.625,
+        0.596,
+        0.549,
+        0.507,
+        0.483,
+        0.459,
+        0.459,
+        0.459,
+        0.459,
+        0.459,
+        0.444,
+        0.431,
+        0.431,
+        0.412,
+        0.412,
+        0.406,
+        0.373,
+        0.354,
+        0.316,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(props);"
+}

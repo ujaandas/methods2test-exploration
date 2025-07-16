@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void removes_underscores_from_keys ( ) {
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( "STR" + "STR" + "STR" ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected value for key STR1", config.getString("STR1"));
+assertEquals("Expected value for key STR2", config.getString("STR2"));
+assertEquals("Expected value for key STR3", config.getString("STR3"));
+assertNull(config.getString("STR4"));
+assertTrue(config.getString("STR1").contains("Expected substring"));
+assertFalse(config.getString("STR2").isEmpty());
+assertEquals("Expected value for key STR1", config.getString("str1"));
+assertEquals("Expected value for key STR2", config.getString("str2"));
+assertEquals("Expected value for key STR3", config.getString("str3"));
+assertNotEquals("Unexpected value for key STR1", config.getString("STR1"), "Unexpected value");
+assertNotNull(config.getString("STR1"));
+assertTrue(config.getString("STR1").length() > 0);
+assertEquals("Expected value for key STR1", config.getString("STR1").trim());
+assertEquals("Expected value for key STR2", config.getString("STR2").toLowerCase());
+assertEquals("Expected value for key STR3", config.getString("STR3").toUpperCase());
+assertThrows(IllegalArgumentException.class, () -> config.getString("INVALID_KEY"));
+assertEquals("Expected value for key STR1", config.getString("STR1").replace(" ", ""));
+assertTrue(config.getString("STR1").matches("Expected regex pattern"));
+assertEquals("Expected value for key STR2", config.getString("STR2").substring(0, 5));
+assertFalse(config.getString("STR3").contains("Unexpected substring"));
+assertEquals("Expected value for key STR1", config.getString("STR1").concat(" additional text"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+0.835 - assertNull(config.getString("STR4"))
+0.805 - assertNotNull(config.getString("STR1"))
+0.804 - assertEquals("Expected value for key STR2", config.getString("STR2"))
+0.804 - assertEquals("Expected value for key STR3", config.getString("STR3"))
+0.756 - assertFalse(config.getString("STR2").isEmpty())
+0.754 - assertEquals("Expected value for key STR1", config.getString("STR1").trim())
+0.748 - ```java
+assertEquals("Expected value for key STR1", config.getString("STR1"))
+0.748 - assertEquals("Expected value for key STR1", config.getString("str1"))
+0.748 - assertEquals("Expected value for key STR2", config.getString("str2"))
+0.748 - assertEquals("Expected value for key STR3", config.getString("str3"))
+0.711 - assertTrue(config.getString("STR1").length() > 0)
+0.711 - assertEquals("Expected value for key STR2", config.getString("STR2").toLowerCase())
+0.711 - assertEquals("Expected value for key STR3", config.getString("STR3").toUpperCase())
+0.705 - assertEquals("Expected value for key STR1", config.getString("STR1").replace(" ", ""))
+0.705 - assertEquals("Expected value for key STR2", config.getString("STR2").substring(0, 5))
+0.662 - assertNotEquals("Unexpected value for key STR1", config.getString("STR1"), "Unexpected value")
+0.652 - assertEquals("Expected value for key STR1", config.getString("STR1").concat(" additional text"))
+0.607 - assertFalse(config.getString("STR3").contains("Unexpected substring"))
+0.587 - assertTrue(config.getString("STR1").contains("Expected substring"))
+0.577 - assertTrue(config.getString("STR1").matches("Expected regex pattern"))
+0.504 - assertThrows(IllegalArgumentException.class, () -> config.getString("INVALID_KEY"))
+0.000 - ```

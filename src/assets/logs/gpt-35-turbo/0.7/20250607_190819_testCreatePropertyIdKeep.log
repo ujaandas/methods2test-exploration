@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OClassImpl {
+    public Integer getId ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OClassImplTest {
+    @Test
+     public void testCreatePropertyIdKeep ( ) {
+         final OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass oClass = oSchema . createClass ( "STR" ) ; 
+         OProperty prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         Integer id = prop . getId ( ) ; 
+         oClass . dropProperty ( "STR" ) ; 
+         prop = oClass . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.STRING, prop.getType());
+Assert.assertTrue(prop.isMandatory());
+Assert.assertFalse(prop.isNotNull());
+Assert.assertFalse(prop.isReadonly());
+Assert.assertFalse(prop.isIndexed());
+Assert.assertFalse(prop.isFulltextIndexed());
+Assert.assertFalse(prop.isSparse());
+Assert.assertFalse(prop.isCollate());
+Assert.assertFalse(prop.isAutomatic());
+Assert.assertFalse(prop.isReadonly());
+Assert.assertEquals(0, prop.getMin());
+Assert.assertEquals(Integer.MAX_VALUE, prop.getMax());
+Assert.assertNull(prop.getRegexp());
+Assert.assertNull(prop.getCollate());
+Assert.assertNull(prop.getCustom(String.class));
+Assert.assertNull(prop.getLinkedClass());
+Assert.assertNull(prop.getLinkedType());
+Assert.assertEquals(0, prop.getLinkedType().getId());
+Assert.assertNull(prop.getOwnerClass().getSchema().getClass(prop.getOwnerClass().getName()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(id,prop.getId()); ===
+0.862 - Assert.assertEquals(0, prop.getMin())
+0.794 - Assert.assertEquals("STR", prop.getName())
+0.740 - Assert.assertEquals(0, prop.getLinkedType().getId())
+0.714 - Assert.assertEquals(OType.STRING, prop.getType())
+0.702 - Assert.assertNull(prop.getRegexp())
+0.690 - Assert.assertFalse(prop.isIndexed())
+0.690 - Assert.assertNull(prop.getCollate())
+0.689 - Assert.assertNull(prop.getLinkedType())
+0.678 - Assert.assertFalse(prop.isReadonly())
+0.678 - Assert.assertFalse(prop.isReadonly())
+0.677 - Assert.assertNull(prop.getLinkedClass())
+0.676 - Assert.assertEquals(Integer.MAX_VALUE, prop.getMax())
+0.667 - Assert.assertFalse(prop.isFulltextIndexed())
+0.667 - Assert.assertFalse(prop.isSparse())
+0.655 - Assert.assertFalse(prop.isNotNull())
+0.655 - Assert.assertFalse(prop.isCollate())
+0.633 - Assert.assertFalse(prop.isAutomatic())
+0.583 - Assert.assertNotNull(prop)
+0.580 - Assert.assertNull(prop.getCustom(String.class))
+0.576 - Assert.assertTrue(prop.isMandatory())
+0.351 - Assert.assertNull(prop.getOwnerClass().getSchema().getClass(prop.getOwnerClass().getName()))

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedProperties {
+    public static Set < String > bindAll ( Object instance , TestCase testCase ) { 
+    Set < String > usedProperties = new HashSet < > ( ) ; 
+    for ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) { 
+    String fullPropertyPath = entry . getKey ( ) . trim ( ) ; 
+    String value = entry . getValue ( ) . trim ( ) ; 
+    if ( bind0 ( instance , fullPropertyPath , value ) ) { 
+    usedProperties . add ( fullPropertyPath ) ; 
+    } } return usedProperties ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedPropertiesTest {
+    @Test
+     public void testReconstructObjectGraph ( ) {
+         TestCase testCase = new TestCase ( "STR" ) . setProperty ( "STR" , 10 ) ; 
+         Person person = new Person ( ) ; 
+         Set < String > usedProperties = bindAll ( person , testCase ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(10, person.getStr());
+Assert.assertTrue(usedProperties.contains("STR"));
+Assert.assertFalse(usedProperties.contains("INT"));
+Assert.assertFalse(usedProperties.contains("BOOL"));
+Assert.assertFalse(usedProperties.contains("DOUBLE"));
+Assert.assertFalse(usedProperties.contains("FLOAT"));
+Assert.assertFalse(usedProperties.contains("LONG"));
+Assert.assertFalse(usedProperties.contains("SHORT"));
+Assert.assertFalse(usedProperties.contains("BYTE"));
+Assert.assertFalse(usedProperties.contains("CHAR"));
+Assert.assertFalse(usedProperties.contains("STRING"));
+Assert.assertFalse(usedProperties.contains("BOOLEAN"));
+Assert.assertFalse(usedProperties.contains("DOUBLE_OBJ"));
+Assert.assertFalse(usedProperties.contains("FLOAT_OBJ"));
+Assert.assertFalse(usedProperties.contains("LONG_OBJ"));
+Assert.assertFalse(usedProperties.contains("SHORT_OBJ"));
+Assert.assertFalse(usedProperties.contains("BYTE_OBJ"));
+Assert.assertFalse(usedProperties.contains("CHAR_OBJ"));
+Assert.assertFalse(usedProperties.contains("OBJECT"));
+Assert.assertEquals(1, usedProperties.size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(person.nullArm); ===
+0.590 - Assert.assertEquals(10, person.getStr())
+0.438 - Assert.assertFalse(usedProperties.contains("CHAR"))
+0.432 - Assert.assertFalse(usedProperties.contains("FLOAT"))
+0.423 - Assert.assertTrue(usedProperties.contains("STR"))
+0.421 - Assert.assertFalse(usedProperties.contains("BOOLEAN"))
+0.417 - Assert.assertFalse(usedProperties.contains("INT"))
+0.416 - Assert.assertFalse(usedProperties.contains("CHAR_OBJ"))
+0.411 - Assert.assertFalse(usedProperties.contains("BOOL"))
+0.411 - Assert.assertFalse(usedProperties.contains("LONG"))
+0.411 - Assert.assertFalse(usedProperties.contains("BYTE"))
+0.410 - Assert.assertFalse(usedProperties.contains("FLOAT_OBJ"))
+0.405 - Assert.assertFalse(usedProperties.contains("SHORT"))
+0.400 - Assert.assertFalse(usedProperties.contains("DOUBLE"))
+0.400 - Assert.assertFalse(usedProperties.contains("STRING"))
+0.400 - Assert.assertFalse(usedProperties.contains("OBJECT"))
+0.394 - Assert.assertEquals(1, usedProperties.size())
+0.390 - Assert.assertFalse(usedProperties.contains("LONG_OBJ"))
+0.390 - Assert.assertFalse(usedProperties.contains("BYTE_OBJ"))
+0.385 - Assert.assertFalse(usedProperties.contains("SHORT_OBJ"))
+0.380 - Assert.assertFalse(usedProperties.contains("DOUBLE_OBJ"))

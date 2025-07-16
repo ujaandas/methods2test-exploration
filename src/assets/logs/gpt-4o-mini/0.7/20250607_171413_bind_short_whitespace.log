@@ -1,0 +1,156 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_Numerical {
+    static boolean bind0 ( Object object , String property , String value ) { 
+    value = value . trim ( ) ; 
+    String [ ] path = property . split ( "STR" ) ; 
+    object = findTargetObject ( object , property , path ) ; 
+    if ( object == null ) { 
+    return false ; 
+    } Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ; 
+    if ( field == null || isProbeField ( field ) ) { 
+    return false ; 
+    } try { 
+    setField ( field , object , value ) ; 
+    return true ; 
+    } catch ( Exception e ) { 
+    throw new BindException ( format ( "STR" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_NumericalTest {
+    @Test
+     public void bind_short_whitespace ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+PropertyBindingSupport_bind0_Numerical binder = new PropertyBindingSupport_bind0_Numerical();
+MyClass obj = new MyClass();
+String property = "myShortProperty";
+String value = "  5  ";
+
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(5, obj.getMyShortProperty());
+
+value = "  10  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(10, obj.getMyShortProperty());
+
+value = "  -3  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(-3, obj.getMyShortProperty());
+
+value = "  0  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(0, obj.getMyShortProperty());
+
+value = "  32767  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(32767, obj.getMyShortProperty());
+
+value = "  -32768  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(-32768, obj.getMyShortProperty());
+
+value = "  123  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(123, obj.getMyShortProperty());
+
+value = "  2.5  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  abc  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  2147483647  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = null;
+assertFalse(binder.bind0(obj, property, value));
+
+value = "   ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  32000  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(32000, obj.getMyShortProperty());
+
+value = "  -32000  ";
+assertTrue(binder.bind0(obj, property, value));
+assertEquals(-32000, obj.getMyShortProperty());
+
+value = "  5.5  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  32768  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  -32769  ";
+assertFalse(binder.bind0(obj, property, value));
+
+value = "  123456  ";
+assertFalse(b
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(bind0(testObject,"STR","STR")); ===
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.565 - assertTrue(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.488 - assertFalse(binder.bind0(obj, property, value))
+0.395 - assertEquals(0, obj.getMyShortProperty())
+0.390 - assertEquals(10, obj.getMyShortProperty())
+0.376 - assertEquals(32000, obj.getMyShortProperty())
+0.372 - assertEquals(-32000, obj.getMyShortProperty())
+0.370 - assertEquals(5, obj.getMyShortProperty())
+0.366 - assertEquals(-3, obj.getMyShortProperty())
+0.361 - assertEquals(123, obj.getMyShortProperty())
+0.353 - assertEquals(32767, obj.getMyShortProperty())
+0.349 - assertEquals(-32768, obj.getMyShortProperty())
+0.333 - assertFalse(b
+0.231 - value = "  abc  "
+0.219 - MyClass obj = new MyClass()
+0.204 - value = "   "
+0.200 - value = "  0  "
+0.196 - value = "  10  "
+0.196 - value = "  -3  "
+0.192 - value = "  123  "
+0.192 - value = "  2.5  "
+0.192 - value = "  5.5  "
+0.192 - String property = "myShortProperty"
+0.185 - value = "  32767  "
+0.185 - value = "  32000  "
+0.185 - value = "  32768  "
+0.182 - value = "  -32768  "
+0.182 - value = "  -32000  "
+0.182 - value = "  -32769  "
+0.182 - value = "  123456  "
+0.179 - String value = "  5  "
+0.175 - ```java
+PropertyBindingSupport_bind0_Numerical binder = new PropertyBindingSupport_bind0_Numerical()
+0.169 - value = "  2147483647  "
+0.157 - value = null

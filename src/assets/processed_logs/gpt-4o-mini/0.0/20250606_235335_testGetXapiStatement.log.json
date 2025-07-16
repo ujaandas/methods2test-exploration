@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class AttachmentResult {\npublic AttachmentResult ( String inputMessage , StatementResult inputStatements , Map < String , AttachmentAndType > inputAttachments ) {\nresponseMessage = inputMessage ;\nstatements = inputStatements ;\nattachments = inputAttachments ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class AttachmentResultTest {\n@Test\npublic void testGetXapiStatement ( ) {\nAttachmentResult a = new AttachmentResult ( RESPONSE_MESSAGE , statements , attachments ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(a);\nassertEquals(RESPONSE_MESSAGE, a.getResponseMessage());\nassertEquals(statements, a.getStatements());\nassertEquals(attachments, a.getAttachments());\nassertTrue(a.getAttachments().isEmpty());\nassertFalse(a.getAttachments().containsKey(\"nonexistentKey\"));\nassertTrue(a.getAttachments().containsKey(\"existingKey\"));\nassertEquals(1, a.getAttachments().size());\nassertNotSame(statements, a.getStatements());\nassertNotSame(attachments, a.getAttachments());\nassertTrue(a.getResponseMessage().length() > 0);\nassertTrue(a.getStatements() instanceof StatementResult);\nassertTrue(a.getAttachments() instanceof Map);\nassertTrue(a.getAttachments().get(\"existingKey\") instanceof AttachmentAndType);\nassertEquals(\"expectedType\", a.getAttachments().get(\"existingKey\").getType());\nassertEquals(\"expectedAttachment\", a.getAttachments().get(\"existingKey\").getAttachment());\nassertNotNull(a.getAttachments().get(\"existingKey\").getAttachment());\nassertNotNull(a.getStatements().getStatementId());\nassertTrue(a.getResponseMessage().contains(\"success\"));\nassertEquals(\"expectedResponse\", a.getResponseMessage());\nassertFalse(a.getAttachments().isEmpty());\nassertEquals(attachments.size(), a.getAttachments().size());\n```\n====================\n\n",
+    "scores": [
+        0.8,
+        0.492,
+        0.407,
+        0.393,
+        0.381,
+        0.367,
+        0.357,
+        0.351,
+        0.339,
+        0.328,
+        0.316,
+        0.314,
+        0.31,
+        0.297,
+        0.29,
+        0.286,
+        0.282,
+        0.274,
+        0.26,
+        0.217,
+        0.196,
+        0.192,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(a);"
+}

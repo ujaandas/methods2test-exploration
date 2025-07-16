@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testAddWconnithPoolKey_multiPoolKey ( ) throws InterruptedException {
+         Connection conn = getAConn ( ) ; 
+         cm . add ( conn , poolKey ) ; 
+         cm . add ( conn , "STR" ) ; 
+         cm . add ( conn , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(1, cm.count(poolKey));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("NON_EXISTING_KEY"));
+Assert.assertEquals(3, cm.count(poolKey));
+Assert.assertEquals(1, cm.count("NEW_KEY"));
+Assert.assertEquals(0, cm.count(""));
+Assert.assertEquals(3, cm.count("STR"));
+Assert.assertEquals(0, cm.count(null));
+Assert.assertEquals(1, cm.count(poolKey));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("ANOTHER_KEY"));
+Assert.assertEquals(3, cm.count(poolKey));
+Assert.assertEquals(1, cm.count("NEW_KEY"));
+Assert.assertEquals(0, cm.count(""));
+Assert.assertEquals(3, cm.count("STR"));
+Assert.assertEquals(0, cm.count(null));
+Assert.assertEquals(1, cm.count(poolKey));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("ANOTHER_KEY"));
+Assert.assertEquals(3, cm.count(poolKey));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,cm.count(poolKey)); ===
+1.000 - Assert.assertEquals(1, cm.count(poolKey))
+1.000 - Assert.assertEquals(1, cm.count(poolKey))
+1.000 - Assert.assertEquals(1, cm.count(poolKey))
+0.970 - Assert.assertEquals(3, cm.count(poolKey))
+0.970 - Assert.assertEquals(3, cm.count(poolKey))
+0.970 - Assert.assertEquals(3, cm.count(poolKey))
+0.825 - Assert.assertEquals(0, cm.count(null))
+0.825 - Assert.assertEquals(0, cm.count(null))
+0.820 - Assert.assertEquals(0, cm.count(""))
+0.820 - Assert.assertEquals(0, cm.count(""))
+0.794 - Assert.assertEquals(1, cm.count("NEW_KEY"))
+0.794 - Assert.assertEquals(1, cm.count("NEW_KEY"))
+0.781 - Assert.assertEquals(2, cm.count("STR"))
+0.781 - Assert.assertEquals(3, cm.count("STR"))
+0.781 - Assert.assertEquals(2, cm.count("STR"))
+0.781 - Assert.assertEquals(3, cm.count("STR"))
+0.781 - Assert.assertEquals(2, cm.count("STR"))
+0.722 - Assert.assertEquals(0, cm.count("ANOTHER_KEY"))
+0.722 - Assert.assertEquals(0, cm.count("ANOTHER_KEY"))
+0.675 - Assert.assertEquals(0, cm.count("NON_EXISTING_KEY"))

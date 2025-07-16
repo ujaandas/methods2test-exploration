@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLCreateProperty {\npublic String getName ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLCreatePropertyTest {\n@Test\npublic void testDefaultAndMinMaxUnsafeProperty ( ) throws Exception {\nfinal ODatabaseDocumentTx db = new ODatabaseDocumentTx ( \"STR\" + System . nanoTime ( ) ) ;\ndb . create ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nOClass companyClass = db . getMetadata ( ) . getSchema ( ) . getClass ( \"STR\" ) ;\nOProperty idProperty = companyClass . getProperty ( PROP_ID ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(idProperty);\nassertEquals(PROP_ID, idProperty.getName());\nassertEquals(OType.INTEGER, idProperty.getType());\nassertTrue(idProperty.isMandatory());\nassertFalse(idProperty.isReadonly());\nassertFalse(idProperty.isNotNull());\nassertTrue(idProperty.getMin() >= 0);\nassertTrue(idProperty.getMax() <= 100);\nassertEquals(1, idProperty.getDefaultValue());\nassertEquals(0, idProperty.getMin());\nassertEquals(100, idProperty.getMax());\nassertTrue(companyClass.getProperties().contains(idProperty));\nassertNotNull(companyClass.getProperty(\"name\"));\nassertTrue(companyClass.getProperty(\"name\").isMandatory());\nassertEquals(OType.STRING, companyClass.getProperty(\"name\").getType());\nassertFalse(companyClass.getProperty(\"age\").isReadonly());\nassertNotNull(companyClass.getProperty(\"age\").getDefaultValue());\nassertTrue(companyClass.getProperty(\"salary\").getMin() >= 0);\nassertTrue(companyClass.getProperty(\"salary\").getMax() >= 0);\nassertFalse(companyClass.getProperty(\"salary\").isNotNull());\nassertEquals(4, companyClass.getProperty(\"id\").getSize());\n```\n====================\n\n",
+    "scores": [
+        0.81,
+        0.785,
+        0.779,
+        0.744,
+        0.689,
+        0.675,
+        0.667,
+        0.667,
+        0.658,
+        0.592,
+        0.59,
+        0.533,
+        0.523,
+        0.52,
+        0.517,
+        0.509,
+        0.5,
+        0.485,
+        0.48,
+        0.475,
+        0.447,
+        0.0
+    ],
+    "ground_truth": "assertEquals(idProperty.getName(),PROP_ID);"
+}

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class CEFParser {\npublic CommonEvent parse ( String cefString , final boolean validate ) {\nreturn this . parse ( cefString , validate , Locale . ENGLISH ) ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class CEFParserTest {\n@Test\npublic void invalidMessageTypesTest ( ) throws Exception {\nString sample1 = \"STR\" ;\nCEFParser parser = new CEFParser ( ) ;\nCommonEvent event = parser . parse ( sample1 , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(event);\nassertEquals(\"Invalid CEF format\", event.getErrorMessage());\nassertFalse(event.isValid());\nassertEquals(0, event.getEventId());\nassertEquals(\"STR\", event.getRawMessage());\nassertEquals(\"Invalid\", event.getMessageType());\nassertTrue(event.getTimestamp().isEmpty());\nassertTrue(event.getSource().isEmpty());\nassertTrue(event.getDeviceVendor().isEmpty());\nassertTrue(event.getDeviceProduct().isEmpty());\nassertTrue(event.getDeviceVersion().isEmpty());\nassertTrue(event.getSignatureId().isEmpty());\nassertTrue(event.getName().isEmpty());\nassertTrue(event.getSeverity().isEmpty());\nassertTrue(event.getExtensions().isEmpty());\nassertEquals(0, event.getExtensionCount());\nassertTrue(event.getCategory().isEmpty());\nassertTrue(event.getSubCategory().isEmpty());\nassertTrue(event.getOutcome().isEmpty());\nassertTrue(event.getUser().isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.81,
+        0.622,
+        0.588,
+        0.519,
+        0.519,
+        0.517,
+        0.517,
+        0.5,
+        0.491,
+        0.483,
+        0.483,
+        0.476,
+        0.475,
+        0.467,
+        0.459,
+        0.459,
+        0.452,
+        0.444,
+        0.444,
+        0.411,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNull(event);"
+}

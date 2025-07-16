@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManager {\n@Override\npublic Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nurl . setConnectTimeout ( connectTimeout ) ;\nreturn this . connectionManager . getAndCreateIfAbsent ( url ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManagerTest {\n@Test\npublic void testCancelReConnection ( ) throws InterruptedException , RemotingException {\ndoInit ( false , true ) ;\nclient . enableReconnectSwitch ( ) ;\nString addr = \"STR\" ;\nUrl url = addressParser . parse ( addr ) ;\nclient . getConnection ( url , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(client.getConnection(url, 1000));\nassertTrue(client.isReconnectEnabled());\nassertEquals(1000, url.getConnectTimeout());\nassertTrue(client.connectionManager.hasConnection(url));\nassertFalse(client.connectionManager.isConnectionClosed(url));\nassertSame(client.connectionManager.getConnection(url), client.getConnection(url, 1000));\nassertTrue(client.connectionManager.getAndCreateIfAbsent(url) instanceof Connection);\nassertThrows(RemotingException.class, () -> client.getConnection(null, 1000));\nassertThrows(InterruptedException.class, () -> {\nThread.sleep(2000);\nclient.getConnection(url, 1000);\n});\nassertEquals(\"ExpectedConnectionState\", client.connectionManager.getConnectionState(url));\nassertNotEquals(\"UnexpectedConnectionState\", client.connectionManager.getConnectionState(url));\nassertTrue(client.connectionManager.isConnectionActive(url));\nassertFalse(client.connectionManager.isConnectionTimedOut(url));\nassertDoesNotThrow(() -> client.getConnection(url, 1000));\nassertTrue(client.connectionManager.isReconnectSwitchEnabled());\nassertEquals(\"ExpectedAddress\", client.connectionManager.getConnection(url).getAddress());\nassertNotEquals(\"InvalidAddress\", client.connectionManager.getConnection(url).getAddress());\nassertTrue(client.connectionManager.isUrlParsed(url));\nassertFalse(client.connectionManager.isUrlInvalid(url));\nassertEquals(1, client.connectionManager.getConnectionAttempts(url));\nassertTrue(client.connectionManager.hasActiveConnections());\n```\n====================\n\n",
+    "scores": [
+        0.654,
+        0.592,
+        0.574,
+        0.564,
+        0.56,
+        0.541,
+        0.522,
+        0.52,
+        0.515,
+        0.507,
+        0.5,
+        0.496,
+        0.496,
+        0.487,
+        0.467,
+        0.466,
+        0.452,
+        0.415,
+        0.391,
+        0.378,
+        0.375,
+        0.238,
+        0.031,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes());"
+}

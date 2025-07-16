@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_Numerical {\nstatic boolean bind0 ( Object object , String property , String value ) {\nvalue = value . trim ( ) ;\nString [ ] path = property . split ( \"STR\" ) ;\nobject = findTargetObject ( object , property , path ) ;\nif ( object == null ) {\nreturn false ;\n} Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ;\nif ( field == null || isProbeField ( field ) ) {\nreturn false ;\n} try {\nsetField ( field , object , value ) ;\nreturn true ;\n} catch ( Exception e ) {\nthrow new BindException ( format ( \"STR\" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_NumericalTest {\n@Test\npublic void bind_Integer ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"123\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"abc\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(null, \"testProperty\", \"123\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"probeField\", \"123\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"123.45\"));\nassertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"0\"));\nassertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-123\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23E2\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23E-2\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23E+2\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23e2\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23e-2\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.23e+2\"));\nassertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"2147483647\"));\nassertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-2147483648\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"2147483648\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-2147483649\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"1.7976931348623157E308\"));\nassertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), \"testProperty\", \"-1.7976931348623157E308\"));\n====================\n\n",
+    "scores": [
+        0.441,
+        0.438,
+        0.435,
+        0.432,
+        0.432,
+        0.423,
+        0.423,
+        0.423,
+        0.42,
+        0.42,
+        0.42,
+        0.42,
+        0.414,
+        0.411,
+        0.411,
+        0.409,
+        0.408,
+        0.38,
+        0.377
+    ],
+    "ground_truth": "assertTrue(bind0(testObject,\"STR\",\"STR\"));"
+}

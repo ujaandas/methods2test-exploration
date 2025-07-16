@@ -1,0 +1,128 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class UserProcessorRegisterHelper {
+    public static void registerUserProcessor ( UserProcessor < ? > processor , ConcurrentHashMap < String , UserProcessor < ? > > userProcessors ) { 
+    if ( null == processor ) { 
+    throw new RuntimeException ( "STR" ) ; 
+    } if ( processor instanceof MultiInterestUserProcessor ) { 
+    registerUserProcessor ( ( MultiInterestUserProcessor ) processor , userProcessors ) ; 
+    } else { 
+    if ( StringUtils . isBlank ( processor . interest ( ) ) ) { 
+    throw new RuntimeException ( "STR" ) ; 
+    } UserProcessor < ? > preProcessor = userProcessors . putIfAbsent ( processor . interest ( ) , processor ) ; 
+    if ( preProcessor != null ) { 
+    String errMsg = "STR" + processor . interest ( ) + "STR" ; 
+    throw new RuntimeException ( errMsg ) ; 
+    } } }
+}
+
+package sofastack.sofa-bolt;
+
+public class UserProcessorRegisterHelperTest {
+    @Test
+     public void testRegisterMultiInterestUserProcessor ( ) {
+         UserProcessor multiInterestUserProcessor = new SimpleServerMultiInterestUserProcessor ( ) ; 
+         UserProcessorRegisterHelper . registerUserProcessor ( multiInterestUserProcessor , userProcessors ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(userProcessors);
+assertTrue(userProcessors.isEmpty());
+
+UserProcessor<?> registeredProcessor = userProcessors.get(multiInterestUserProcessor.interest());
+assertNotNull(registeredProcessor);
+assertEquals(multiInterestUserProcessor, registeredProcessor);
+
+assertTrue(userProcessors.size() > 0);
+assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()));
+
+UserProcessor<?> anotherProcessor = new SimpleServerMultiInterestUserProcessor();
+UserProcessorRegisterHelper.registerUserProcessor(anotherProcessor, userProcessors);
+assertEquals(2, userProcessors.size());
+
+assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(null, userProcessors);
+});
+
+assertThrows(RuntimeException.class, () -> {
+    UserProcessor<?> invalidProcessor = new SimpleServerUserProcessor("");
+    UserProcessorRegisterHelper.registerUserProcessor(invalidProcessor, userProcessors);
+});
+
+assertThrows(RuntimeException.class, () -> {
+    UserProcessor<?> duplicateProcessor = new SimpleServerUserProcessor(multiInterestUserProcessor.interest());
+    UserProcessorRegisterHelper.registerUserProcessor(duplicateProcessor, userProcessors);
+});
+
+assertTrue(userProcessors.containsValue(multiInterestUserProcessor));
+assertTrue(userProcessors.containsValue(anotherProcessor));
+
+assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()));
+assertNotNull(userProcessors.get(anotherProcessor.interest()));
+
+assertEquals(2, userProcessors.size());
+assertTrue(userProcessors.keySet().contains(multiInterestUserProcessor.interest()));
+assertTrue(userProcessors.keySet().contains(anotherProcessor.interest()));
+
+assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(new SimpleServerUserProcessor(""), userProcessors);
+});
+
+assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(new SimpleServerUserProcessor("duplicateInterest"), userProcessors);
+});
+
+assertEquals(2, userProcessors.size());
+assertTrue(userProcessors.values().stream().anyMatch(p -> p instanceof SimpleServerMultiInterestUserProcessor));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(((SimpleServerMultiInterestUserProcessor)multiInterestUserProcessor).multiInterest().size(),userProcessors.size()); ===
+0.593 - assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()))
+0.588 - assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()))
+0.581 - assertTrue(userProcessors.keySet().contains(multiInterestUserProcessor.interest()))
+0.578 - assertEquals(multiInterestUserProcessor, registeredProcessor)
+0.552 - assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(null, userProcessors)
+0.550 - UserProcessorRegisterHelper.registerUserProcessor(duplicateProcessor, userProcessors)
+0.542 - assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(new SimpleServerUserProcessor("duplicateInterest"), userProcessors)
+0.539 - assertThrows(RuntimeException.class, () -> {
+    UserProcessorRegisterHelper.registerUserProcessor(new SimpleServerUserProcessor(""), userProcessors)
+0.526 - UserProcessorRegisterHelper.registerUserProcessor(anotherProcessor, userProcessors)
+0.526 - UserProcessorRegisterHelper.registerUserProcessor(invalidProcessor, userProcessors)
+0.503 - assertTrue(userProcessors.containsValue(multiInterestUserProcessor))
+0.487 - assertThrows(RuntimeException.class, () -> {
+    UserProcessor<?> duplicateProcessor = new SimpleServerUserProcessor(multiInterestUserProcessor.interest())
+0.464 - UserProcessor<?> registeredProcessor = userProcessors.get(multiInterestUserProcessor.interest())
+0.453 - assertTrue(userProcessors.values().stream().anyMatch(p -> p instanceof SimpleServerMultiInterestUserProcessor))
+0.443 - UserProcessor<?> anotherProcessor = new SimpleServerMultiInterestUserProcessor()
+0.439 - assertEquals(2, userProcessors.size())
+0.439 - assertEquals(2, userProcessors.size())
+0.439 - assertEquals(2, userProcessors.size())
+0.402 - assertThrows(RuntimeException.class, () -> {
+    UserProcessor<?> invalidProcessor = new SimpleServerUserProcessor("")
+0.383 - assertTrue(userProcessors.size() > 0)
+0.344 - assertTrue(userProcessors.isEmpty())
+0.328 - assertNotNull(userProcessors.get(anotherProcessor.interest()))
+0.314 - assertTrue(userProcessors.containsValue(anotherProcessor))
+0.305 - ```java
+assertNotNull(userProcessors)
+0.300 - assertTrue(userProcessors.keySet().contains(anotherProcessor.interest()))
+0.286 - assertNotNull(registeredProcessor)
+0.016 - })
+0.016 - })
+0.016 - })
+0.016 - })
+0.016 - })
+0.000 - ```

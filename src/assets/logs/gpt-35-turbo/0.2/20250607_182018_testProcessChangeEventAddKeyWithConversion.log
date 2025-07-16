@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    public void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) { 
+    final boolean result ; 
+    if ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    else result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    if ( ! result ) throw new IllegalArgumentException ( "STR" + changeEvent . getChangeType ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testProcessChangeEventAddKeyWithConversion ( ) {
+         final Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ; 
+         final OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . ADD , "STR" , "STR" ) ; 
+         propertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ; 
+         final Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ; 
+         addedKeys . put ( 12 , 1 ) ; 
+         final Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(keysToAdd.containsKey("STR"));
+Assert.assertTrue(keysToAdd.containsValue(1));
+Assert.assertTrue(keysToRemove.isEmpty());
+Assert.assertEquals(1, keysToAdd.size());
+Assert.assertTrue(keysToAdd.keySet().containsAll(addedKeys.keySet()));
+Assert.assertTrue(keysToAdd.values().containsAll(addedKeys.values()));
+Assert.assertTrue(keysToRemove.keySet().containsAll(removedKeys.keySet()));
+Assert.assertTrue(keysToRemove.values().containsAll(removedKeys.values()));
+Assert.assertTrue(keysToAdd.keySet().contains(12));
+Assert.assertTrue(keysToAdd.containsValue(1));
+Assert.assertTrue(keysToRemove.isEmpty());
+Assert.assertEquals(1, keysToAdd.size());
+Assert.assertTrue(keysToAdd.keySet().containsAll(addedKeys.keySet()));
+Assert.assertTrue(keysToAdd.values().containsAll(addedKeys.values()));
+Assert.assertTrue(keysToRemove.keySet().containsAll(removedKeys.keySet()));
+Assert.assertTrue(keysToRemove.values().containsAll(removedKeys.values()));
+Assert.assertTrue(keysToAdd.keySet().contains(12));
+Assert.assertTrue(keysToAdd.containsValue(1));
+Assert.assertTrue(keysToRemove.isEmpty());
+Assert.assertEquals(1, keysToAdd.size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(keysToAdd,addedKeys); ===
+0.738 - Assert.assertEquals(1, keysToAdd.size())
+0.738 - Assert.assertEquals(1, keysToAdd.size())
+0.738 - Assert.assertEquals(1, keysToAdd.size())
+0.603 - Assert.assertTrue(keysToAdd.containsKey("STR"))
+0.568 - Assert.assertTrue(keysToAdd.keySet().containsAll(addedKeys.keySet()))
+0.568 - Assert.assertTrue(keysToAdd.values().containsAll(addedKeys.values()))
+0.568 - Assert.assertTrue(keysToAdd.keySet().containsAll(addedKeys.keySet()))
+0.568 - Assert.assertTrue(keysToAdd.values().containsAll(addedKeys.values()))
+0.563 - Assert.assertTrue(keysToAdd.containsValue(1))
+0.563 - Assert.assertTrue(keysToAdd.containsValue(1))
+0.563 - Assert.assertTrue(keysToAdd.containsValue(1))
+0.553 - Assert.assertTrue(keysToAdd.keySet().contains(12))
+0.553 - Assert.assertTrue(keysToAdd.keySet().contains(12))
+0.537 - Assert.assertTrue(keysToRemove.isEmpty())
+0.537 - Assert.assertTrue(keysToRemove.isEmpty())
+0.537 - Assert.assertTrue(keysToRemove.isEmpty())
+0.440 - Assert.assertTrue(keysToRemove.keySet().containsAll(removedKeys.keySet()))
+0.440 - Assert.assertTrue(keysToRemove.values().containsAll(removedKeys.values()))
+0.440 - Assert.assertTrue(keysToRemove.keySet().containsAll(removedKeys.keySet()))
+0.440 - Assert.assertTrue(keysToRemove.values().containsAll(removedKeys.values()))

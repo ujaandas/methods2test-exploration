@@ -1,0 +1,166 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtils {
+    static Integer getPidFromBeanString ( String name ) { 
+    int indexOf = name . indexOf ( '@' ) ; 
+    if ( indexOf == - 1 ) { 
+    return null ; 
+    } String pidString = name . substring ( 0 , indexOf ) ; 
+    try { 
+    return Integer . parseInt ( pidString ) ; 
+    } catch ( NumberFormatException e ) { 
+    LOGGER . warn ( e ) ; 
+    return null ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtilsTest {
+    @Test
+     public void testGetPidStringOrNull ( ) {
+         Integer pid = getPidFromBeanString ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(pid);
+
+pid = getPidFromBeanString("123@someBean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(123), pid);
+
+pid = getPidFromBeanString("456@anotherBean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(456), pid);
+
+pid = getPidFromBeanString("789@yetAnotherBean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(789), pid);
+
+pid = getPidFromBeanString("0@zeroBean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(0), pid);
+
+pid = getPidFromBeanString("1000@largeBean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(1000), pid);
+
+pid = getPidFromBeanString("abc@invalid");
+assertNull(pid);
+
+pid = getPidFromBeanString("123abc@mixed");
+assertNull(pid);
+
+pid = getPidFromBeanString("@leadingAt");
+assertNull(pid);
+
+pid = getPidFromBeanString("trailingAt@");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(0), pid);
+
+pid = getPidFromBeanString("999999999@bigNumber");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(999999999), pid);
+
+pid = getPidFromBeanString("2147483647@maxInt");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(2147483647), pid);
+
+pid = getPidFromBeanString("-1@negative");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(-1), pid);
+
+pid = getPidFromBeanString("123@");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(123), pid);
+
+pid = getPidFromBeanString("123@beanName");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(123), pid);
+
+pid = getPidFromBeanString("0@bean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(0), pid);
+
+pid = getPidFromBeanString("999@bean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(999), pid);
+
+pid = getPidFromBeanString("123456@bean");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(123456), pid);
+
+pid = getPidFromBeanString("123@bean@extra");
+assertNotNull(pid);
+assertEquals(Integer.valueOf(123), pid);
+
+pid = getPidFromBeanString("notANumber@bean");
+assert
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(pid); ===
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+1.000 - assertNotNull(pid)
+0.909 - assertNull(pid)
+0.909 - assertNull(pid)
+0.909 - assertNull(pid)
+0.732 - ```java
+assertNull(pid)
+0.500 - assert
+0.481 - assertEquals(Integer.valueOf(0), pid)
+0.481 - assertEquals(Integer.valueOf(0), pid)
+0.481 - assertEquals(Integer.valueOf(0), pid)
+0.473 - assertEquals(Integer.valueOf(-1), pid)
+0.464 - assertEquals(Integer.valueOf(123), pid)
+0.464 - assertEquals(Integer.valueOf(456), pid)
+0.464 - assertEquals(Integer.valueOf(789), pid)
+0.464 - assertEquals(Integer.valueOf(123), pid)
+0.464 - assertEquals(Integer.valueOf(123), pid)
+0.464 - assertEquals(Integer.valueOf(999), pid)
+0.464 - assertEquals(Integer.valueOf(123), pid)
+0.456 - assertEquals(Integer.valueOf(1000), pid)
+0.441 - assertEquals(Integer.valueOf(123456), pid)
+0.419 - assertEquals(Integer.valueOf(999999999), pid)
+0.413 - assertEquals(Integer.valueOf(2147483647), pid)
+0.160 - pid = getPidFromBeanString("123@")
+0.154 - pid = getPidFromBeanString("0@bean")
+0.148 - pid = getPidFromBeanString("999@bean")
+0.143 - pid = getPidFromBeanString("0@zeroBean")
+0.143 - pid = getPidFromBeanString("@leadingAt")
+0.140 - pid = getPidFromBeanString("abc@invalid")
+0.140 - pid = getPidFromBeanString("trailingAt@")
+0.140 - pid = getPidFromBeanString("-1@negative")
+0.140 - pid = getPidFromBeanString("123456@bean")
+0.138 - pid = getPidFromBeanString("123@someBean")
+0.138 - pid = getPidFromBeanString("123abc@mixed")
+0.138 - pid = getPidFromBeanString("123@beanName")
+0.133 - pid = getPidFromBeanString("1000@largeBean")
+0.133 - pid = getPidFromBeanString("123@bean@extra")
+0.131 - pid = getPidFromBeanString("456@anotherBean")
+0.131 - pid = getPidFromBeanString("notANumber@bean")
+0.127 - pid = getPidFromBeanString("2147483647@maxInt")
+0.125 - pid = getPidFromBeanString("789@yetAnotherBean")
+0.123 - pid = getPidFromBeanString("999999999@bigNumber")

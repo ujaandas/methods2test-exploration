@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtil {\npublic static Map < String , Method > getAttributes ( Object mbeanLocation ) {\nMap < String , Method > result = new TreeMap < String , Method > ( ) ;\nMethod [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ;\nfor ( Method oneMethod : methods ) {\nMBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ;\nif ( attribute != null ) {\nresult . put ( attribute . name ( ) , oneMethod ) ;\n} } return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtilTest {\n@Test\npublic void testGetAttributes ( ) throws Exception {\nMap < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(atts);\nassertEquals(3, atts.size());\nassertTrue(atts.containsKey(\"attribute1\"));\nassertTrue(atts.containsKey(\"attribute2\"));\nassertTrue(atts.containsKey(\"attribute3\"));\nassertFalse(atts.containsKey(\"attribute4\"));\nassertTrue(atts.containsValue(method1));\nassertTrue(atts.containsValue(method2));\nassertTrue(atts.containsValue(method3));\nassertFalse(atts.containsValue(method4));\nassertTrue(atts.get(\"attribute1\").equals(method1));\nassertTrue(atts.get(\"attribute2\").equals(method2));\nassertTrue(atts.get(\"attribute3\").equals(method3));\nassertNull(atts.get(\"attribute4\"));\nassertTrue(atts.keySet().containsAll(Arrays.asList(\"attribute1\", \"attribute2\", \"attribute3\")));\nassertTrue(atts.values().containsAll(Arrays.asList(method1, method2, method3)));\nassertFalse(atts.values().contains(method4));\nassertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>(\"attribute1\", method1)));\nassertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>(\"attribute2\", method2)));\nassertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>(\"attribute3\", method3)));\n====================\n\n",
+    "scores": [
+        0.963,
+        0.609,
+        0.597,
+        0.59,
+        0.571,
+        0.545,
+        0.545,
+        0.545,
+        0.535,
+        0.522,
+        0.522,
+        0.522,
+        0.39,
+        0.39,
+        0.39,
+        0.327,
+        0.296,
+        0.296,
+        0.296,
+        0.286
+    ],
+    "ground_truth": "assertEquals(2,atts.size());"
+}

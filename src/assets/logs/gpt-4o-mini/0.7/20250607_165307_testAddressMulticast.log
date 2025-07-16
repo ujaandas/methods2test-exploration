@@ -1,0 +1,65 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class MacAddress {
+    public boolean isMulticast ( ) { 
+    return ( address [ 0 ] & MUTLTICAST_FLAG ) == MUTLTICAST_FLAG ; 
+    }
+}
+
+package fluenda.ParCEFone;
+
+public class MacAddressTest {
+    @Test
+     public void testAddressMulticast ( ) {
+         final MacAddress macAddress = new MacAddress ( MULTICAST_ADDRESS ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(macAddress.isMulticast());
+assertFalse(new MacAddress(UNICAST_ADDRESS).isMulticast());
+assertFalse(new MacAddress(RESERVED_ADDRESS).isMulticast());
+assertFalse(new MacAddress(BROADCAST_ADDRESS).isMulticast());
+assertTrue(new MacAddress(SECOND_MULTICAST_ADDRESS).isMulticast());
+assertTrue(new MacAddress(MULTICAST_ADDRESS).isMulticast());
+assertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x00).isMulticast());
+assertFalse(new MacAddress(0x00, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());
+assertFalse(new MacAddress(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF).isMulticast());
+assertTrue(new MacAddress(0x01, 0x80, 0xC2, 0x00, 0x00, 0x00).isMulticast());
+assertFalse(new MacAddress(0x02, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());
+assertTrue(new MacAddress(0x33, 0x33, 0x00, 0x00, 0x00, 0x01).isMulticast());
+assertTrue(new MacAddress(0x01, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());
+assertFalse(new MacAddress(0xAC, 0xDE, 0x48, 0x00, 0x00, 0x00).isMulticast());
+assertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x01).isMulticast());
+assertFalse(new MacAddress(0xC0, 0xA8, 0x01, 0x01, 0x00, 0x00).isMulticast());
+assertTrue(new MacAddress(0x01, 0x00, 0x5E
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(macAddress.isMulticast()); ===
+0.900 - ```java
+assertTrue(macAddress.isMulticast())
+0.745 - assertTrue(new MacAddress(MULTICAST_ADDRESS).isMulticast())
+0.693 - assertTrue(new MacAddress(SECOND_MULTICAST_ADDRESS).isMulticast())
+0.688 - assertFalse(new MacAddress(UNICAST_ADDRESS).isMulticast())
+0.681 - assertFalse(new MacAddress(RESERVED_ADDRESS).isMulticast())
+0.674 - assertFalse(new MacAddress(BROADCAST_ADDRESS).isMulticast())
+0.660 - assertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x00).isMulticast())
+0.660 - assertTrue(new MacAddress(0x01, 0x80, 0xC2, 0x00, 0x00, 0x00).isMulticast())
+0.660 - assertTrue(new MacAddress(0x33, 0x33, 0x00, 0x00, 0x00, 0x01).isMulticast())
+0.660 - assertTrue(new MacAddress(0x01, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast())
+0.660 - assertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x01).isMulticast())
+0.598 - assertFalse(new MacAddress(0x00, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast())
+0.598 - assertFalse(new MacAddress(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF).isMulticast())
+0.598 - assertFalse(new MacAddress(0x02, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast())
+0.598 - assertFalse(new MacAddress(0xAC, 0xDE, 0x48, 0x00, 0x00, 0x00).isMulticast())
+0.598 - assertFalse(new MacAddress(0xC0, 0xA8, 0x01, 0x01, 0x00, 0x00).isMulticast())
+0.560 - assertTrue(new MacAddress(0x01, 0x00, 0x5E

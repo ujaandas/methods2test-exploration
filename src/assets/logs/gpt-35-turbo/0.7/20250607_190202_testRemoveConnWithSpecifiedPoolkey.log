@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testRemoveConnWithSpecifiedPoolkey ( ) {
+         Connection conn1 = getAConn ( ) ; 
+         conn1 . addPoolKey ( "STR" ) ; 
+         Connection conn2 = getAConn ( ) ; 
+         conn2 . addPoolKey ( "STR" ) ; 
+         cm . add ( conn1 ) ; 
+         cm . add ( conn2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("ABC"));
+Assert.assertEquals(1, cm.count("XYZ"));
+Assert.assertEquals(0, cm.count(""));
+Assert.assertEquals(0, cm.count(null));
+Assert.assertEquals(0, cm.count("123"));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(1, cm.count("STR"));
+Assert.assertEquals(0, cm.count("XYZ"));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("ABC"));
+Assert.assertEquals(1, cm.count("STR"));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("XYZ"));
+Assert.assertEquals(1, cm.count("STR"));
+Assert.assertEquals(2, cm.count("STR"));
+Assert.assertEquals(0, cm.count("ABC"));
+Assert.assertEquals(1, cm.count("XYZ"));
+Assert.assertEquals(0, cm.count(""));
+Assert.assertEquals(0, cm.count(null));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,cm.count(poolKey)); ===
+0.825 - Assert.assertEquals(0, cm.count(null))
+0.825 - Assert.assertEquals(0, cm.count(null))
+0.820 - Assert.assertEquals(0, cm.count(""))
+0.820 - Assert.assertEquals(0, cm.count(""))
+0.812 - Assert.assertEquals(2, cm.count("STR"))
+0.812 - Assert.assertEquals(2, cm.count("STR"))
+0.812 - Assert.assertEquals(2, cm.count("STR"))
+0.812 - Assert.assertEquals(2, cm.count("STR"))
+0.812 - Assert.assertEquals(2, cm.count("STR"))
+0.781 - Assert.assertEquals(0, cm.count("ABC"))
+0.781 - Assert.assertEquals(1, cm.count("XYZ"))
+0.781 - Assert.assertEquals(0, cm.count("123"))
+0.781 - Assert.assertEquals(1, cm.count("STR"))
+0.781 - Assert.assertEquals(0, cm.count("XYZ"))
+0.781 - Assert.assertEquals(0, cm.count("ABC"))
+0.781 - Assert.assertEquals(1, cm.count("STR"))
+0.781 - Assert.assertEquals(0, cm.count("XYZ"))
+0.781 - Assert.assertEquals(1, cm.count("STR"))
+0.781 - Assert.assertEquals(0, cm.count("ABC"))
+0.781 - Assert.assertEquals(1, cm.count("XYZ"))

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLEdgeTransformer {\nlong countClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLEdgeTransformerTest {\n@Test\npublic void testDynamicEdgeClassMultipleValues ( ) {\nconfigure ( \"STR\" + \"STR\" + \"STR\" + name . getMethodName ( ) + \"STR\" ) ;\nOETLLoader loader = proc . getLoader ( ) ;\nODatabasePool pool = loader . getPool ( ) ;\nODatabaseDocument db = pool . acquire ( ) ;\ncreateClasses ( db ) ;\nOVertex vertex = db . newVertex ( \"STR\" ) ;\nvertex . setProperty ( \"STR\" , \"STR\" ) ;\ndb . save ( vertex ) ;\ndb . commit ( ) ;\ndb . close ( ) ;\nproc . execute ( ) ;\ndb = pool . acquire ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(vertex);\nAssert.assertEquals(\"STR\", vertex.getProperty(\"STR\"));\nAssert.assertEquals(1, db.countClass(\"STR\"));\nAssert.assertTrue(db.getClass(\"STR\").exists());\nAssert.assertEquals(\"ExpectedValue\", db.query(\"SELECT property FROM STR WHERE condition\").get(0).getProperty(\"property\"));\nAssert.assertTrue(db.countClass(\"AnotherClass\") > 0);\nAssert.assertFalse(db.getClass(\"NonExistentClass\").exists());\nAssert.assertEquals(5, db.countClass(\"SomeClass\"));\nAssert.assertNotEquals(0, db.countClass(\"STR\"));\nAssert.assertTrue(db.query(\"SELECT FROM STR WHERE property = 'value'\").size() > 0);\nAssert.assertEquals(\"ExpectedResult\", db.query(\"SELECT property FROM STR WHERE condition\").get(0).getProperty(\"property\"));\nAssert.assertTrue(db.getClass(\"STR\").getProperties().contains(\"STR\"));\nAssert.assertEquals(\"AnotherExpectedValue\", db.query(\"SELECT property FROM STR WHERE condition\").get(1).getProperty(\"property\"));\nAssert.assertNotNull(db.query(\"SELECT FROM STR\").get(0));\nAssert.assertEquals(3, db.countClass(\"ClassWithMultipleInstances\"));\nAssert.assertTrue(db.query(\"SELECT FROM STR WHERE property = 'value'\").isEmpty());\nAssert.assertEquals(\"FinalExpectedValue\", db.query(\"SELECT property FROM STR WHERE condition\").get(2).getProperty(\"property\"));\nAssert.assertTrue(db.getClass(\"STR\").getSuperClass() != null);\nAssert.assertEquals(10, db.countClass(\"ClassWithTenInstances\"));\nAssert.assertFalse(db.query(\"SELECT FROM STR WHERE property = 'nonexistent'\").contains(null));\nAssert.assertNotNull(db.query(\"SELECT FROM STR\").get(0).getProperty(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.933,
+        0.846,
+        0.747,
+        0.674,
+        0.667,
+        0.658,
+        0.617,
+        0.568,
+        0.539,
+        0.51,
+        0.506,
+        0.431,
+        0.388,
+        0.385,
+        0.379,
+        0.361,
+        0.359,
+        0.349,
+        0.344,
+        0.338,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,db.countClass(\"STR\"));"
+}

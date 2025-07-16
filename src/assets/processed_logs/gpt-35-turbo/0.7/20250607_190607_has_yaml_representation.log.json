@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class Config {\npublic String toYaml ( String rootKey ) {\ntry {\nStringBuilder out = new StringBuilder ( ) ;\nthis . print ( 0 , rootKey , out ) ;\nreturn out . toString ( ) ;\n} catch ( IOException e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class ConfigTest {\n@Test\npublic void has_yaml_representation ( ) {\nConfig config = new Config ( ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nString expected = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(expected, config.toYaml(\"rootKey\"));\nassertNotNull(config);\nassertTrue(config.toYaml(\"rootKey\").contains(\"STR\"));\nassertFalse(config.toYaml(\"rootKey\").isEmpty());\nassertSame(expected, config.toYaml(\"rootKey\"));\nassertNotSame(expected, config.toYaml(\"differentRootKey\"));\nassertArrayEquals(expected.toCharArray(), config.toYaml(\"rootKey\").toCharArray());\nassertEquals(expected.length(), config.toYaml(\"rootKey\").length());\nassertTrue(config.toYaml(\"rootKey\").startsWith(\"STR\"));\nassertFalse(config.toYaml(\"rootKey\").endsWith(\"rootKey\"));\nassertTrue(config.toYaml(\"rootKey\").matches(\"[A-Z]+\"));\nassertFalse(config.toYaml(\"rootKey\").equalsIgnoreCase(\"str\"));\nassertTrue(config.toYaml(\"rootKey\").contains(\"STR STR\"));\nassertFalse(config.toYaml(\"rootKey\").equals(\"STR STR\"));\nassertTrue(config.toYaml(\"rootKey\").equals(expected));\nassertFalse(config.toYaml(\"rootKey\").equalsIgnoreCase(expected));\nassertEquals(expected.toUpperCase(), config.toYaml(\"rootKey\").toUpperCase());\nassertNotEquals(expected.toLowerCase(), config.toYaml(\"rootKey\").toLowerCase());\nassertTrue(config.toYaml(\"rootKey\").contains(\"STR STR STR STR\"));\nassertFalse(config.toYaml(\"rootKey\").contains(\"differentRootKey\"));\nassertEquals(expected.substring(0, 3), config.toYaml(\"rootKey\").substring(0, 3));\n====================\n\n",
+    "scores": [
+        0.889,
+        0.795,
+        0.741,
+        0.72,
+        0.678,
+        0.667,
+        0.661,
+        0.65,
+        0.639,
+        0.622,
+        0.611,
+        0.598,
+        0.592,
+        0.56,
+        0.558,
+        0.542,
+        0.538,
+        0.536,
+        0.532,
+        0.523,
+        0.5
+    ],
+    "ground_truth": "assertEquals(expected,config.toYaml(\"STR\"));"
+}

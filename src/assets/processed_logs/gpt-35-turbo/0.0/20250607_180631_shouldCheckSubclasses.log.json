@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStep {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStepTest {\n@Test\npublic void shouldCheckSubclasses ( ) {\nOBasicCommandContext context = new OBasicCommandContext ( ) ;\ncontext . setDatabase ( database ) ;\nOClass parentClass = createClassInstance ( ) ;\nOClass childClass = createChildClassInstance ( parentClass ) ;\nCheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ;\nOResultSet result = step . syncPull ( context , 20 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(20, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getPropertyNames().contains(\"property1\")));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"property2\") == null));\nassertEquals(10, result.stream().filter(r -> r.getProperty(\"property3\").equals(\"value\")).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"property4\").equals(\"invalid\")));\nassertEquals(5, result.stream().filter(r -> r.getProperty(\"property5\") instanceof Integer).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"property6\") != null));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"property7\").equals(\"\")));\nassertEquals(15, result.stream().filter(r -> r.getProperty(\"property8\").equals(true)).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"property9\").equals(false)));\nassertEquals(8, result.stream().filter(r -> r.getProperty(\"property10\").toString().contains(\"substring\")).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"property11\") instanceof List));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"property12\").equals(0)));\nassertEquals(3, result.stream().filter(r -> r.getProperty(\"property13\").equals(\"value\")).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"property14\").equals(\"invalid\")));\nassertEquals(7, result.stream().filter(r -> r.getProperty(\"property15\") instanceof Double).count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"property16\") != null));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"property17\").equals(\"\")));\nassertEquals(12, result.stream().filter(r -> r.getProperty(\"property18\").equals(true)).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"property19\").equals(false)));\nassertEquals(6, result.stream().filter(r -> r.getProperty(\"property20\").toString().contains(\"substring\")).count());\n====================\n\n",
+    "scores": [
+        0.848,
+        0.586,
+        0.585,
+        0.58,
+        0.571,
+        0.571,
+        0.571,
+        0.549,
+        0.542,
+        0.542,
+        0.538,
+        0.518,
+        0.513,
+        0.508,
+        0.507,
+        0.507,
+        0.496,
+        0.496,
+        0.492,
+        0.48,
+        0.476
+    ],
+    "ground_truth": "Assert.assertEquals(0,result.stream().count());"
+}

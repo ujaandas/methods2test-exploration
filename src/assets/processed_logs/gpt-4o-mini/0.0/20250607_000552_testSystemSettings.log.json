@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConfigManager {\npublic static boolean dispatch_msg_list_in_default_executor ( ) {\nreturn ConfigManager . getBool ( RpcConfigs . DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR , RpcConfigs . DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR_DEFAULT ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConfigManagerTest {\n@Test\npublic void testSystemSettings ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nimport static org.junit.Assert.assertTrue;\nimport static org.junit.Assert.assertFalse;\n\n@Test\npublic void testSystemSettings() {\n// Assuming the default value is true\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Change the configuration to false and test\nConfigManager.setBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, false);\nassertFalse(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Change the configuration back to true and test\nConfigManager.setBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, true);\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Test the default value directly\nassertTrue(ConfigManager.getBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR_DEFAULT));\n\n// Test when the configuration is not set (should return default)\nConfigManager.clear(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR);\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Set to false and test again\nConfigManager.setBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, false);\nassertFalse(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Test with a different configuration key\nassertFalse(ConfigManager.getBool(\"non_existent_key\", false));\n\n// Test with a different default value\nassertTrue(ConfigManager.getBool(\"another_non_existent_key\", true));\n\n// Ensure the method is not null\nassertNotNull(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Test the method multiple times for consistency\nfor (int i = 0; i < 10; i++) {\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n}\n\n// Set to true and test again\nConfigManager.setBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, true);\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Test the method after clearing the configuration\nConfigManager.clear(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR);\nassertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());\n\n// Test with a different default value\nassertFalse(ConfigManager.getBool(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, false));\n\n// Test the method after setting a new default\nConfigManager.setBool(RpcConfigs.DIS\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.958,
+        0.949,
+        0.949,
+        0.783,
+        0.66,
+        0.479,
+        0.424,
+        0.36,
+        0.356,
+        0.353,
+        0.326,
+        0.294,
+        0.281,
+        0.28,
+        0.269,
+        0.253,
+        0.248,
+        0.185,
+        0.139,
+        0.028
+    ],
+    "ground_truth": "Assert.assertTrue(RpcConfigManager.dispatch_msg_list_in_default_executor());"
+}

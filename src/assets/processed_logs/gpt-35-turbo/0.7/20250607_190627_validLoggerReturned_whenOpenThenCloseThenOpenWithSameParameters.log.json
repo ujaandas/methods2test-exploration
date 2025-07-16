@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluent.fluent-logger-java;\n\npublic class Bugfixes {\npublic void close ( ) {\nif ( sender != null ) {\nsender . flush ( ) ;\nsender . close ( ) ;\nsender = null ;\n} factory . purgeLogger ( this ) ;\n}\n}\n\npackage fluent.fluent-logger-java;\n\npublic class TestBugfixes {\n@Test\npublic void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {\nSystem . setProperty ( Config . FLUENT_SENDER_CLASS , \"STR\" ) ;\nFluentLogger logger = FluentLogger . getLogger ( \"STR\" ) ;\nlogger . log ( \"STR\" , Collections . < String , Object > emptyMap ( ) ) ;\nlogger . close ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(logger.isOpen());\nAssert.assertEquals(\"STR\", logger.getSender().getFluentSender().getSenderConfig().getHost());\nAssert.assertEquals(24224, logger.getSender().getFluentSender().getSenderConfig().getPort());\nAssert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getTimeout());\nAssert.assertEquals(\"STR\", logger.getSender().getFluentSender().getSenderConfig().getTagPrefix());\nAssert.assertEquals(\"STR\", logger.getSender().getFluentSender().getSenderConfig().getLabel());\nAssert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getBufferCapacity());\nAssert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getAckResponseMode());\nAssert.assertEquals(100, logger.getSender().getFluentSender().getSenderConfig().getAckTimeout());\nAssert.assertEquals(5000, logger.getSender().getFluentSender().getSenderConfig().getMaxBufferSize());\nAssert.assertEquals(1000, logger.getSender().getFluentSender().getSenderConfig().getRetryWait());\nAssert.assertEquals(3, logger.getSender().getFluentSender().getSenderConfig().getMaxRetry());\nAssert.assertEquals(\"STR\", logger.getSender().getFluentSender().getSenderConfig().getSenderType());\nAssert.assertEquals(\"STR\", logger.getSender().getFluentSender().getSenderConfig().getEncoding());\nAssert.assertFalse(logger.isOpen());\nAssert.assertTrue(logger.getSender().getFluentSender().isTerminated());\nAssert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getHost());\nAssert.assertEquals(0, logger.getSender().getFluentSender().getSenderConfig().getPort());\nAssert.assertNull(logger.getSender().getFluentSender().getSenderConfig().getTagPrefix());\n====================\n\n",
+    "scores": [
+        0.7,
+        0.644,
+        0.482,
+        0.466,
+        0.466,
+        0.466,
+        0.462,
+        0.458,
+        0.45,
+        0.45,
+        0.45,
+        0.446,
+        0.443,
+        0.443,
+        0.442,
+        0.435,
+        0.429,
+        0.407,
+        0.389
+    ],
+    "ground_truth": "assertEquals(null,logger.sender);"
+}

@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class CEFParser {\npublic CommonEvent parse ( String cefString , final boolean validate , Locale locale ) {\nreturn this . parse ( cefString , validate , false , locale ) ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class CEFParserTest {\n@Test\npublic void validStringMessageWithoutTZWithLocaleAndValidationTest ( ) throws Exception {\nString sample1 = \"STR\" ;\nCEFParser parser = new CEFParser ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nCommonEvent result = parser.parse(sample1, true, Locale.US);\nassertNotNull(result);\nassertEquals(\"ExpectedField1\", result.getField1());\nassertEquals(\"ExpectedField2\", result.getField2());\nassertTrue(result.isValid());\nassertEquals(Locale.US, result.getLocale());\nassertEquals(\"ExpectedValue1\", result.getSomeOtherField());\nassertNotEquals(\"UnexpectedValue\", result.getAnotherField());\nassertNull(result.getFieldThatShouldBeNull());\nassertTrue(result.hasErrors());\nassertEquals(0, result.getErrorCount());\nassertEquals(\"ExpectedErrorMessage\", result.getErrorMessage());\nassertFalse(result.isEmpty());\nassertEquals(\"ExpectedDateTimeFormat\", result.getDateTime());\nassertArrayEquals(new String[]{\"ExpectedElement1\", \"ExpectedElement2\"}, result.getElements());\nassertTrue(result.contains(\"ExpectedElement\"));\nassertFalse(result.contains(\"UnexpectedElement\"));\nassertEquals(\"ExpectedCustomObject\", result.getCustomObject().toString());\nassertSame(result.getRelatedObject(), result.getRelatedObject());\nassertThrows(SomeExpectedException.class, () -> parser.parse(\"InvalidString\", true, Locale.US));\nassertNotSame(result.getField1(), result.getField2());\nassertTrue(result.getFieldList().contains(\"ExpectedListItem\"));\nassertEquals(\"ExpectedStringRepresentation\", result.toString());\nassertEquals(3, result.getFieldCount());\n```\n====================\n\n",
+    "scores": [
+        0.65,
+        0.552,
+        0.5,
+        0.381,
+        0.374,
+        0.371,
+        0.346,
+        0.313,
+        0.3,
+        0.298,
+        0.297,
+        0.282,
+        0.281,
+        0.271,
+        0.268,
+        0.258,
+        0.256,
+        0.252,
+        0.25,
+        0.25,
+        0.241,
+        0.239,
+        0.237,
+        0.207,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(parser.parse(sample1,true,Locale.FRANCE));"
+}

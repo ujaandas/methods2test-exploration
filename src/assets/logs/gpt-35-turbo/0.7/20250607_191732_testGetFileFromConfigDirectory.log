@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected File getFileFromConfigDirectory ( String file ) { 
+    File f = new File ( configDirectory , file ) ; 
+    if ( configDirectory != null && f . exists ( ) ) { 
+    return f ; 
+    } return null ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testGetFileFromConfigDirectory ( ) throws Exception {
+         DevUtil util = new DevTestUtil ( null , null , null , this . configDirectory , null , false , false ) ; 
+         File tempTextFile = new File ( configDirectory , "STR" ) ; 
+         Files . write ( tempTextFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File configFile = util . getFileFromConfigDirectory ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(configFile);
+Assert.assertTrue(configFile.exists());
+Assert.assertEquals(tempTextFile.getName(), configFile.getName());
+Assert.assertTrue(configFile.isFile());
+Assert.assertTrue(configFile.canRead());
+Assert.assertTrue(configFile.canWrite());
+Assert.assertFalse(configFile.isDirectory());
+Assert.assertTrue(configFile.length() > 0);
+Assert.assertTrue(configFile.getAbsolutePath().contains("config"));
+Assert.assertTrue(configFile.lastModified() > 0);
+Assert.assertFalse(configFile.isHidden());
+Assert.assertTrue(configFile.getParentFile().isDirectory());
+Assert.assertTrue(configFile.getPath().endsWith("STR"));
+Assert.assertTrue(configFile.getCanonicalPath().contains("OpenLiberty"));
+Assert.assertEquals("STR", Files.readAllLines(configFile.toPath()).get(0));
+Assert.assertTrue(configFile.canExecute());
+Assert.assertEquals("STR", Files.readAllLines(configFile.toPath()).get(0));
+Assert.assertTrue(configFile.getPath().endsWith("STR"));
+Assert.assertEquals(tempTextFile.getName(), configFile.getName());
+Assert.assertTrue(configFile.canRead());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(configFile.exists()); ===
+1.000 - Assert.assertTrue(configFile.exists())
+0.871 - Assert.assertTrue(configFile.isFile())
+0.844 - Assert.assertTrue(configFile.length() > 0)
+0.825 - Assert.assertTrue(configFile.canRead())
+0.825 - Assert.assertTrue(configFile.canRead())
+0.818 - Assert.assertTrue(configFile.canExecute())
+0.812 - Assert.assertTrue(configFile.canWrite())
+0.771 - Assert.assertTrue(configFile.lastModified() > 0)
+0.738 - Assert.assertFalse(configFile.isHidden())
+0.735 - Assert.assertFalse(configFile.isDirectory())
+0.699 - Assert.assertTrue(configFile.getParentFile().isDirectory())
+0.684 - Assert.assertTrue(configFile.getPath().endsWith("STR"))
+0.684 - Assert.assertTrue(configFile.getPath().endsWith("STR"))
+0.679 - Assert.assertNotNull(configFile)
+0.622 - Assert.assertTrue(configFile.getAbsolutePath().contains("config"))
+0.604 - Assert.assertTrue(configFile.getCanonicalPath().contains("OpenLiberty"))
+0.568 - Assert.assertEquals(tempTextFile.getName(), configFile.getName())
+0.568 - Assert.assertEquals(tempTextFile.getName(), configFile.getName())
+0.515 - Assert.assertEquals("STR", Files.readAllLines(configFile.toPath()).get(0))
+0.515 - Assert.assertEquals("STR", Files.readAllLines(configFile.toPath()).get(0))

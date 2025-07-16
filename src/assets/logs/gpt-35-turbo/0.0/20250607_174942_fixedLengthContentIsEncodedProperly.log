@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegration {
+    public static Response newFixedLengthResponse ( String msg ) { 
+    return newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegrationTest {
+    @Test
+     public void fixedLengthContentIsEncodedProperly ( ) throws IOException {
+         testServer . response = Response . newFixedLengthResponse ( "STR" ) ; 
+         HttpGet request = new HttpGet ( "STR" ) ; 
+         request . addHeader ( "STR" , "STR" ) ; 
+         HttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+Assert.assertEquals(response.getEntity().getContentType().getValue(), "text/html");
+Assert.assertEquals(EntityUtils.toString(response.getEntity()), "STR");
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("gzip"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("gzip"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("deflate"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("deflate"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("br"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("br"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("compress"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("compress"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("identity"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("identity"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("chunked"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("chunked"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("x-gzip"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("x-gzip"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("x-compress"));
+Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("x-compress"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",EntityUtils.toString(response.getEntity())); ===
+0.903 - Assert.assertEquals(EntityUtils.toString(response.getEntity()), "STR")
+0.515 - Assert.assertEquals(response.getEntity().getContentType().getValue(), "text/html")
+0.500 - Assert.assertEquals(response.getStatusLine().getStatusCode(), 200)
+0.383 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("br"))
+0.378 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("gzip"))
+0.378 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("br"))
+0.376 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("identity"))
+0.372 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("gzip"))
+0.372 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("x-gzip"))
+0.370 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("deflate"))
+0.370 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("chunked"))
+0.367 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("compress"))
+0.367 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("identity"))
+0.367 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("x-gzip"))
+0.365 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("deflate"))
+0.365 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("chunked"))
+0.362 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("compress"))
+0.362 - Assert.assertTrue(response.getFirstHeader("Content-Length").getValue().contains("x-compress"))
+0.358 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().contains("x-compress"))

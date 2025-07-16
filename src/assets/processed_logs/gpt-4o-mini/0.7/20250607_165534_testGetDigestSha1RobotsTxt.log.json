@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormat {\npublic static String getDigestSha1 ( byte [ ] bytes ) {\nreturn \"STR\" + base32 . encodeAsString ( DigestUtils . sha1 ( bytes ) ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormatTest {\n@Test\npublic void testGetDigestSha1RobotsTxt ( ) {\nString robotsTxt = \"STR\" ;\nbyte [ ] content = robotsTxt . getBytes ( StandardCharsets . UTF_8 ) ;\nString sha1str = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(sha1str);\nassertEquals(\"STR\" + base32.encodeAsString(DigestUtils.sha1(content)), sha1str);\nassertTrue(sha1str.startsWith(\"STR\"));\nassertEquals(32, sha1str.length());\nassertFalse(sha1str.isEmpty());\nassertTrue(sha1str.matches(\"STR[0-7A-V]*\"));\nassertFalse(sha1str.contains(\" \"));\nassertEquals(\"STR\", sha1str.substring(0, 3));\nassertTrue(sha1str.equals(\"STR\" + base32.encodeAsString(DigestUtils.sha1(content))));\nassertNotEquals(\"STR\", sha1str);\nassertNotEquals(\"STRINVALID\", sha1str);\nassertEquals(sha1str, WARCRecordFormat.getDigestSha1(content));\nassertNotEquals(sha1str, WARCRecordFormat.getDigestSha1(\"DifferentContent\".getBytes(StandardCharsets.UTF_8)));\nassertTrue(sha1str.equalsIgnoreCase(sha1str));\nassertFalse(sha1str.equalsIgnoreCase(\"STR\" + base32.encodeAsString(DigestUtils.sha1(\"DifferentContent\".getBytes(StandardCharsets.UTF_8)))));\nassertTrue(sha1str.contains(\"A\") || sha1str.contains(\"B\") || sha1str.contains(\"C\"));\nassertEquals(4, sha1str.length() % 5);\nassertTrue(sha1str.endsWith(\"A\") || sha1str.endsWith(\"B\") || sha1str.endsWith(\"C\"));\nassertTrue(Character.isLetter(sha1str.charAt(3)));\nassertTrue(Character.isDigit(sha1str.charAt(4)));\n```\n====================\n\n",
+    "scores": [
+        0.953,
+        0.686,
+        0.587,
+        0.587,
+        0.557,
+        0.55,
+        0.54,
+        0.535,
+        0.519,
+        0.5,
+        0.482,
+        0.454,
+        0.418,
+        0.404,
+        0.402,
+        0.4,
+        0.397,
+        0.37,
+        0.351,
+        0.329,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",sha1str,WARCRecordFormat.getDigestSha1(content));"
+}

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testDoubleWithingQuotes ( ) {
+         Double minDouble = 540282346638528870000000000000000000000.0d ; 
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(minDouble, res.get(0).field("field1"));
+Assert.assertNotNull(res);
+Assert.assertEquals(1, res.size());
+Assert.assertTrue(res.get(0).field("field2") instanceof Long);
+Assert.assertTrue(res.get(0).field("field3") instanceof String);
+Assert.assertNull(res.get(0).field("field4"));
+Assert.assertEquals(123, res.get(0).field("field5"));
+Assert.assertTrue(res.get(0).field("field6") instanceof Boolean);
+Assert.assertEquals("value", res.get(0).field("field7"));
+Assert.assertNotEquals("differentValue", res.get(0).field("field8"));
+Assert.assertTrue(res.get(0).field("field9") instanceof Date);
+Assert.assertEquals(3.14, res.get(0).field("field10"));
+Assert.assertTrue(res.get(0).field("field11") instanceof Integer);
+Assert.assertTrue(res.get(0).field("field12") instanceof Float);
+Assert.assertNull(res.get(0).field("field13"));
+Assert.assertTrue(res.get(0).field("field14") instanceof List);
+Assert.assertTrue(res.get(0).field("field15") instanceof Map);
+Assert.assertTrue(res.get(0).field("field16") instanceof Set);
+Assert.assertEquals(100, res.get(0).field("field17"));
+Assert.assertFalse((boolean) res.get(0).field("field18"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+0.692 - Assert.assertEquals(1, res.size())
+0.545 - Assert.assertNotNull(res)
+0.533 - Assert.assertFalse((boolean) res.get(0).field("field18"))
+0.514 - Assert.assertEquals(123, res.get(0).field("field5"))
+0.507 - Assert.assertEquals(100, res.get(0).field("field17"))
+0.500 - Assert.assertNull(res.get(0).field("field4"))
+0.500 - Assert.assertEquals(3.14, res.get(0).field("field10"))
+0.492 - Assert.assertNull(res.get(0).field("field13"))
+0.486 - Assert.assertEquals("value", res.get(0).field("field7"))
+0.474 - Assert.assertEquals(minDouble, res.get(0).field("field1"))
+0.419 - Assert.assertNotEquals("differentValue", res.get(0).field("field8"))
+0.410 - Assert.assertTrue(res.get(0).field("field2") instanceof Long)
+0.410 - Assert.assertTrue(res.get(0).field("field9") instanceof Date)
+0.410 - Assert.assertTrue(res.get(0).field("field15") instanceof Map)
+0.410 - Assert.assertTrue(res.get(0).field("field16") instanceof Set)
+0.405 - Assert.assertTrue(res.get(0).field("field14") instanceof List)
+0.400 - Assert.assertTrue(res.get(0).field("field3") instanceof String)
+0.400 - Assert.assertTrue(res.get(0).field("field12") instanceof Float)
+0.395 - Assert.assertTrue(res.get(0).field("field6") instanceof Boolean)
+0.390 - Assert.assertTrue(res.get(0).field("field11") instanceof Integer)

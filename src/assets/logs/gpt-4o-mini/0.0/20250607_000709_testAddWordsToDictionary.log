@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJava {
+    public KoreanPosJava getPos ( ) { 
+    return pos ; 
+    }
+}
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJavaTest {
+    @Test
+     public void testAddWordsToDictionary ( ) {
+         String text = "STR" ; 
+         Seq < KoreanTokenizer . KoreanToken > tokens = OpenKoreanTextProcessorJava . tokenize ( text ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(tokens);
+assertFalse(tokens.isEmpty());
+assertEquals(1, tokens.size());
+assertEquals("STR", tokens.get(0).getText());
+assertEquals(KoreanPosJava.NOUN, tokens.get(0).getPos());
+assertTrue(tokens.get(0).isNoun());
+assertFalse(tokens.get(0).isVerb());
+assertFalse(tokens.get(0).isAdjective());
+assertTrue(tokens.get(0).getStartIndex() >= 0);
+assertTrue(tokens.get(0).getEndIndex() > tokens.get(0).getStartIndex());
+assertEquals(0, tokens.get(0).getStartIndex());
+assertEquals(3, tokens.get(0).getEndIndex());
+assertNotNull(tokens.get(0).getMorphs());
+assertEquals(1, tokens.get(0).getMorphs().size());
+assertEquals("STR", tokens.get(0).getMorphs().get(0).getText());
+assertEquals(KoreanPosJava.NOUN, tokens.get(0).getMorphs().get(0).getPos());
+assertTrue(tokens.get(0).getMorphs().get(0).isNoun());
+assertFalse(tokens.get(0).getMorphs().get(0).isVerb());
+assertFalse(tokens.get(0).getMorphs().get(0).isAdjective());
+assertEquals(1, OpenKoreanProcessorJava.getPos().getWordCount());
+assertTrue(OpenKoreanProcessorJava.getPos().contains("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",OpenKoreanTextProcessorJava.tokensToJavaStringList(tokens).toString()); ===
+0.658 - assertEquals(1, OpenKoreanProcessorJava.getPos().getWordCount())
+0.597 - assertEquals(KoreanPosJava.NOUN, tokens.get(0).getPos())
+0.552 - assertEquals(KoreanPosJava.NOUN, tokens.get(0).getMorphs().get(0).getPos())
+0.530 - assertEquals("STR", tokens.get(0).getText())
+0.523 - assertTrue(OpenKoreanProcessorJava.getPos().contains("STR"))
+0.490 - assertEquals("STR", tokens.get(0).getMorphs().get(0).getText())
+0.467 - assertEquals(1, tokens.get(0).getMorphs().size())
+0.455 - assertEquals(3, tokens.get(0).getEndIndex())
+0.424 - assertEquals(1, tokens.size())
+0.418 - assertEquals(0, tokens.get(0).getStartIndex())
+0.376 - assertTrue(tokens.get(0).getStartIndex() >= 0)
+0.373 - assertFalse(tokens.isEmpty())
+0.372 - assertFalse(tokens.get(0).isAdjective())
+0.371 - assertFalse(tokens.get(0).isVerb())
+0.364 - assertFalse(tokens.get(0).getMorphs().get(0).isVerb())
+0.358 - assertTrue(tokens.get(0).isNoun())
+0.357 - assertNotNull(tokens.get(0).getMorphs())
+0.352 - assertTrue(tokens.get(0).getMorphs().get(0).isNoun())
+0.351 - assertFalse(tokens.get(0).getMorphs().get(0).isAdjective())
+0.329 - assertTrue(tokens.get(0).getEndIndex() > tokens.get(0).getStartIndex())
+0.271 - ```java
+assertNotNull(tokens)
+0.000 - ```

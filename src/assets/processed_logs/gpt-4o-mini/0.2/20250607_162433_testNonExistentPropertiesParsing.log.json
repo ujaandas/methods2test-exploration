@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtil {\nprotected static Properties getPropertiesResource ( URL resource ) {\nProperties answer = new Properties ( ) ;\nif ( resource != null ) {\ntry ( InputStream stream = resource . openStream ( ) ) {\nanswer . load ( stream ) ;\n} catch ( IOException e ) {\nthrow new IllegalStateException ( \"STR\" + resource , e ) ;\n} } return answer ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtilTest {\n@Test\npublic void testNonExistentPropertiesParsing ( ) {\nProperties props = SpringBootUtil . getPropertiesResource ( SpringBootUtilTest . class . getResource ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(props);\nassertTrue(props.isEmpty());\nassertFalse(props.containsKey(\"someKey\"));\nassertEquals(0, props.size());\nassertFalse(props.containsValue(\"someValue\"));\nassertNull(props.getProperty(\"nonExistentKey\"));\nassertThrows(IllegalStateException.class, () -> {\nSpringBootUtil.getPropertiesResource(null);\n});\nassertThrows(IllegalStateException.class, () -> {\nSpringBootUtil.getPropertiesResource(new URL(\"http://nonexistent.url\"));\n});\nassertEquals(\"STR\" + SpringBootUtilTest.class.getResource(\"STR\"), props.getProperty(\"errorMessage\"));\nassertNotEquals(\"someValue\", props.getProperty(\"someKey\"));\nassertTrue(props.keySet().isEmpty());\nassertTrue(props.values().isEmpty());\nassertFalse(props.containsKey(\"anotherKey\"));\nassertFalse(props.containsValue(\"anotherValue\"));\nassertEquals(0, props.size());\nassertThrows(IllegalStateException.class, () -> {\nSpringBootUtil.getPropertiesResource(new URL(\"file://nonexistent.properties\"));\n});\nassertNull(props.getProperty(\"missingKey\"));\nassertFalse(props.containsKey(\"keyThatShouldNotExist\"));\nassertTrue(props.isEmpty());\nassertEquals(0, props.size());\nassertFalse(props.containsValue(\"valueThatShouldNotExist\"));\n```\n====================\n\n",
+    "scores": [
+        0.833,
+        0.625,
+        0.625,
+        0.625,
+        0.596,
+        0.596,
+        0.54,
+        0.507,
+        0.5,
+        0.5,
+        0.468,
+        0.459,
+        0.438,
+        0.431,
+        0.412,
+        0.373,
+        0.354,
+        0.274,
+        0.222,
+        0.22,
+        0.204,
+        0.091,
+        0.091,
+        0.091,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(props);"
+}

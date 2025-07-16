@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Platform {
+    public static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) { 
+    try { 
+    for ( Method method : cls . getDeclaredMethods ( ) ) { 
+    if ( method . getName ( ) . equals ( methodName ) ) { 
+    return ( T ) method . invoke ( null , params ) ; 
+    } } throw new NoSuchMethodException ( cls + "STR" + methodName ) ; 
+    } catch ( Exception e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package jcodec.jcodec;
+
+public class PlatformTest {
+    @Test
+     public void testInvokeStatic2 ( ) {
+         int parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , "STR" , new Object [ ] { 
+     ByteBuffer . wrap ( "STR" . getBytes ( ) ) } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(parseBuf);
+assertEquals(0, parseBuf);
+assertTrue(parseBuf instanceof Integer);
+assertEquals(Integer.valueOf(0), Integer.valueOf(parseBuf));
+assertNotEquals(-1, parseBuf);
+assertTrue(parseBuf >= 0);
+assertFalse(parseBuf < 0);
+assertEquals(parseBuf, 0);
+assertSame(parseBuf, 0);
+assertThrows(RuntimeException.class, () -> Platform.invokeStaticMethod(PlatformTest.class, "nonExistentMethod", new Object[]{}));
+assertDoesNotThrow(() -> Platform.invokeStaticMethod(PlatformTest.class, "STR", new Object[]{}));
+assertTrue(parseBuf >= 0 && parseBuf < 100);
+assertEquals("string representation", String.valueOf(parseBuf));
+assertNotEquals("unexpected value", parseBuf);
+assertArrayEquals(new int[]{0}, new int[]{parseBuf});
+assertTrue(parseBuf > -1);
+assertFalse(parseBuf > 10);
+assertNotEquals(parseBuf, 10);
+assertTrue(parseBuf <= 0);
+assertEquals(Arrays.asList(0), Arrays.asList(parseBuf));
+assertNotSame(new Integer(0), parseBuf);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(42,parseBuf); ===
+0.939 - assertEquals(0, parseBuf)
+0.898 - assertEquals(parseBuf, 0)
+0.868 - assertNotEquals(-1, parseBuf)
+0.830 - assertNotEquals(parseBuf, 10)
+0.792 - assertFalse(parseBuf < 0)
+0.776 - assertFalse(parseBuf > 10)
+0.723 - assertSame(parseBuf, 0)
+0.708 - assertTrue(parseBuf >= 0)
+0.708 - assertTrue(parseBuf > -1)
+0.708 - assertTrue(parseBuf <= 0)
+0.676 - assertNotEquals("unexpected value", parseBuf)
+0.643 - ```java
+assertNotNull(parseBuf)
+0.622 - assertArrayEquals(new int[]{0}, new int[]{parseBuf})
+0.582 - assertEquals(Arrays.asList(0), Arrays.asList(parseBuf))
+0.581 - assertNotSame(new Integer(0), parseBuf)
+0.554 - assertEquals(Integer.valueOf(0), Integer.valueOf(parseBuf))
+0.548 - assertTrue(parseBuf instanceof Integer)
+0.548 - assertTrue(parseBuf >= 0 && parseBuf < 100)
+0.535 - assertEquals("string representation", String.valueOf(parseBuf))
+0.207 - assertDoesNotThrow(() -> Platform.invokeStaticMethod(PlatformTest.class, "STR", new Object[]{}))
+0.190 - assertThrows(RuntimeException.class, () -> Platform.invokeStaticMethod(PlatformTest.class, "nonExistentMethod", new Object[]{}))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfo {\npublic Object getTarget ( ) {\nreturn target ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfoTest {\n@Test\npublic void testImmutableQueryInfo ( ) throws Exception {\nMap < String , Method > setters = new HashMap < > ( ) ;\nsetters . put ( \"STR\" , null ) ;\nsetters . put ( \"STR\" , null ) ;\nObject target = new Object ( ) ;\nObjectName oname = new ObjectName ( \"STR\" ) ;\nObjectQueryInfo objectQueryInfo = new ObjectQueryInfo ( target , oname , setters ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(objectQueryInfo);\nassertEquals(target, objectQueryInfo.getTarget());\nassertEquals(oname, objectQueryInfo.getObjectName());\nassertEquals(setters, objectQueryInfo.getSetters());\nassertTrue(objectQueryInfo.isImmutable());\nassertFalse(objectQueryInfo.isModified());\nassertEquals(1, objectQueryInfo.getSetters().size());\nassertTrue(objectQueryInfo.getSetters().containsKey(\"STR\"));\nassertNull(objectQueryInfo.getSetters().get(\"STR\"));\nassertNotSame(new Object(), objectQueryInfo.getTarget());\nassertNotEquals(new Object(), objectQueryInfo);\nassertTrue(objectQueryInfo.toString().contains(\"ObjectQueryInfo\"));\nassertEquals(ObjectQueryInfo.class, objectQueryInfo.getClass());\nassertNotNull(objectQueryInfo.hashCode());\nassertTrue(objectQueryInfo.equals(objectQueryInfo));\nassertFalse(objectQueryInfo.equals(null));\nassertFalse(objectQueryInfo.equals(new Object()));\nassertTrue(objectQueryInfo.getSetters().isEmpty());\nassertThrows(UnsupportedOperationException.class, () -> objectQueryInfo.addSetter(\"NEW_STR\", null));\nassertDoesNotThrow(() -> objectQueryInfo.getTarget());\nassertTrue(objectQueryInfo.getObjectName().toString().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.915,
+        0.82,
+        0.742,
+        0.729,
+        0.701,
+        0.69,
+        0.681,
+        0.68,
+        0.68,
+        0.667,
+        0.667,
+        0.644,
+        0.63,
+        0.621,
+        0.61,
+        0.598,
+        0.578,
+        0.552,
+        0.548,
+        0.5,
+        0.426,
+        0.0
+    ],
+    "ground_truth": "assertSame(target,objectQueryInfo.getTarget());"
+}

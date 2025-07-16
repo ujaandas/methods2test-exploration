@@ -1,0 +1,112 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public Set < ORecord > getNewRecords ( ) { 
+    return getReal ( ) . newRecords ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLink ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         doc . field ( "STR" , doc2 ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(manager);
+Assert.assertTrue(manager.getNewRecords().isEmpty());
+
+doc.save();
+Assert.assertFalse(manager.getNewRecords().isEmpty());
+
+Set<ORecord> newRecords = manager.getNewRecords();
+Assert.assertEquals(1, newRecords.size());
+Assert.assertTrue(newRecords.contains(doc));
+
+doc2.save();
+Assert.assertFalse(manager.getNewRecords().isEmpty());
+
+newRecords = manager.getNewRecords();
+Assert.assertEquals(2, newRecords.size());
+Assert.assertTrue(newRecords.contains(doc2));
+
+doc.field("STR", "NEW_STR");
+Assert.assertFalse(manager.getNewRecords().isEmpty());
+
+newRecords = manager.getNewRecords();
+Assert.assertEquals(3, newRecords.size());
+Assert.assertTrue(newRecords.contains(doc));
+
+Assert.assertTrue(newRecords.contains(doc2));
+
+doc.delete();
+Assert.assertFalse(manager.getNewRecords().isEmpty());
+
+newRecords = manager.getNewRecords();
+Assert.assertEquals(2, newRecords.size());
+Assert.assertFalse(newRecords.contains(doc));
+
+Assert.assertTrue(newRecords.contains(doc2));
+
+doc2.field("STR", "ANOTHER_NEW_STR");
+Assert.assertFalse(manager.getNewRecords().isEmpty());
+
+newRecords = manager.getNewRecords();
+Assert.assertEquals(2, newRecords.size());
+Assert.assertTrue(newRecords.contains(doc2));
+
+doc2.delete();
+Assert.assertTrue(manager.getNewRecords().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,manager.getNewRecords().size()); ===
+0.835 - Assert.assertEquals(2, newRecords.size())
+0.835 - Assert.assertEquals(2, newRecords.size())
+0.835 - Assert.assertEquals(2, newRecords.size())
+0.826 - Assert.assertFalse(manager.getNewRecords().isEmpty())
+0.826 - Assert.assertFalse(manager.getNewRecords().isEmpty())
+0.826 - Assert.assertFalse(manager.getNewRecords().isEmpty())
+0.826 - Assert.assertFalse(manager.getNewRecords().isEmpty())
+0.826 - Assert.assertFalse(manager.getNewRecords().isEmpty())
+0.810 - Assert.assertEquals(1, newRecords.size())
+0.810 - Assert.assertEquals(3, newRecords.size())
+0.791 - Assert.assertTrue(manager.getNewRecords().isEmpty())
+0.791 - Assert.assertTrue(manager.getNewRecords().isEmpty())
+0.600 - newRecords = manager.getNewRecords()
+0.600 - newRecords = manager.getNewRecords()
+0.600 - newRecords = manager.getNewRecords()
+0.600 - newRecords = manager.getNewRecords()
+0.554 - Assert.assertFalse(newRecords.contains(doc))
+0.522 - Set<ORecord> newRecords = manager.getNewRecords()
+0.512 - Assert.assertTrue(newRecords.contains(doc))
+0.512 - Assert.assertTrue(newRecords.contains(doc))
+0.506 - Assert.assertTrue(newRecords.contains(doc2))
+0.506 - Assert.assertTrue(newRecords.contains(doc2))
+0.506 - Assert.assertTrue(newRecords.contains(doc2))
+0.506 - Assert.assertTrue(newRecords.contains(doc2))
+0.447 - ```java
+Assert.assertNotNull(manager)
+0.241 - doc.delete()
+0.237 - doc2.delete()
+0.214 - doc.save()
+0.211 - doc2.save()
+0.123 - doc2.field("STR", "ANOTHER_NEW_STR")
+0.111 - doc.field("STR", "NEW_STR")
+0.000 - ```

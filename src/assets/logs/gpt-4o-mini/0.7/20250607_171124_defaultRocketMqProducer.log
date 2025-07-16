@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package rhwayfun.spring-boot-rocketmq-starter;
+
+public class RocketMqAutoConfiguration {
+    public DefaultMQProducer getProducer ( ) { 
+    return producer ; 
+    }
+}
+
+package rhwayfun.spring-boot-rocketmq-starter;
+
+public class RocketMqAutoConfigurationTest {
+    @Test
+     public void defaultRocketMqProducer ( ) {
+         load ( "STR" + TEST_NAME_SERVER , "STR" + TEST_PRODUCER_GROUP ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+DefaultMQProducer producer = rocketMqAutoConfiguration.getProducer();
+assertNotNull(producer);
+assertEquals(TEST_NAME_SERVER, producer.getNamesrvAddr());
+assertEquals(TEST_PRODUCER_GROUP, producer.getProducerGroup());
+assertTrue(producer.isStart());
+assertFalse(producer.isShutdown());
+assertEquals(1, producer.getSendMsgTimeout());
+assertEquals(1, producer.getRetryTimesWhenSendFailed());
+assertEquals(1, producer.getRetryTimesWhenSendAsyncFailed());
+assertTrue(producer.getSendMsgTimeout() > 0);
+assertEquals(0, producer.getMaxMessageSize());
+assertNotNull(producer.getDefaultTopic());
+assertNotNull(producer.getSendCallback());
+assertTrue(producer.getInstanceName().length() > 0);
+assertEquals(1, producer.getMaxInMemoryMessages());
+assertNotNull(producer.getTransactionListener());
+assertEquals(0, producer.getMaxRetryTimes());
+assertFalse(producer.isSendLatencyFaultEnabled());
+assertNotNull(producer.getClientId());
+assertTrue(producer.getNamesrvAddr().contains(":"));
+assertTrue(producer.getProducerGroup().length() > 0);
+assertEquals(1, producer.getCompressMsgBodyOverHowmuch());
+assertFalse(producer.getWaitTimeWhenSendMsgFailed() < 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(this.context.containsBean("STR")); ===
+0.568 - assertTrue(producer.getNamesrvAddr().contains(":"))
+0.486 - assertTrue(producer.isStart())
+0.430 - assertFalse(producer.isSendLatencyFaultEnabled())
+0.419 - assertTrue(producer.getSendMsgTimeout() > 0)
+0.395 - assertNotNull(producer.getClientId())
+0.391 - assertNotNull(producer.getTransactionListener())
+0.385 - assertFalse(producer.isShutdown())
+0.367 - assertEquals(1, producer.getRetryTimesWhenSendFailed())
+0.347 - assertFalse(producer.getWaitTimeWhenSendMsgFailed() < 0)
+0.344 - assertTrue(producer.getInstanceName().length() > 0)
+0.340 - assertTrue(producer.getProducerGroup().length() > 0)
+0.330 - assertEquals(1, producer.getRetryTimesWhenSendAsyncFailed())
+0.299 - assertNotNull(producer)
+0.282 - assertNotNull(producer.getSendCallback())
+0.273 - assertEquals(0, producer.getMaxMessageSize())
+0.258 - assertEquals(1, producer.getMaxInMemoryMessages())
+0.256 - ```java
+DefaultMQProducer producer = rocketMqAutoConfiguration.getProducer()
+0.253 - assertEquals(0, producer.getMaxRetryTimes())
+0.250 - assertEquals(1, producer.getSendMsgTimeout())
+0.240 - assertEquals(TEST_NAME_SERVER, producer.getNamesrvAddr())
+0.240 - assertEquals(1, producer.getCompressMsgBodyOverHowmuch())
+0.235 - assertNotNull(producer.getDefaultTopic())
+0.229 - assertEquals(TEST_PRODUCER_GROUP, producer.getProducerGroup())
+0.000 - ```

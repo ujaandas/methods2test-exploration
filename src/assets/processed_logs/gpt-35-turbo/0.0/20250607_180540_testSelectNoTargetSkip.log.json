@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testSelectNoTargetSkip ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, result.size());\nassertTrue(result.isEmpty());\nassertNotNull(result);\nassertFalse(result.hasNext());\nassertEquals(0, result.stream().count());\nassertNotNull(result.iterator());\nassertTrue(result.getExecutionPlan().contains(\"STR\"));\nassertEquals(0, result.getExecutionTime());\nassertTrue(result.getExecutionPlan().startsWith(\"SELECT\"));\nassertFalse(result.isExplain());\nassertTrue(result.getExecutionPlan().endsWith(\"STR\"));\nassertEquals(0, result.getExecutionPlan().length());\nassertTrue(result.getExecutionPlan().matches(\"[A-Z]+\"));\nassertFalse(result.isLazy());\nassertTrue(result.getExecutionPlan().contains(\"SELECT\"));\nassertEquals(0, result.getExecutionPlan().indexOf(\"STR\"));\nassertTrue(result.getExecutionPlan().endsWith(\")\"));\nassertFalse(result.isExplainPlan());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.807,
+        0.767,
+        0.759,
+        0.719,
+        0.702,
+        0.657,
+        0.656,
+        0.647,
+        0.6,
+        0.541,
+        0.532,
+        0.475,
+        0.463,
+        0.463,
+        0.452,
+        0.447,
+        0.437
+    ],
+    "ground_truth": "Assert.assertFalse(result.hasNext());"
+}

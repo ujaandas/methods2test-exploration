@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(listener.getResult());
+assertEquals(1, listener.getResult().size());
+assertEquals("STR", item.getProperty("STR"));
+assertEquals(item.getIdentity(), listener.getResult().get(0).getIdentity());
+assertTrue(listener.isCompleted());
+assertFalse(listener.hasErrors());
+assertEquals("STR", listener.getResult().get(0).getProperty("STR"));
+assertTrue(item.exists());
+assertEquals(item.getIdentity(), listener.getLastIdentity());
+assertNotNull(database.getVertex(item.getIdentity()));
+assertEquals("STR", database.getVertex(item.getIdentity()).getProperty("STR"));
+assertTrue(database.getVertex(item.getIdentity()).isModified());
+assertEquals(1, database.countVertices());
+assertTrue(database.getVertices().contains(item));
+assertNotNull(database.getLiveQuery("STR" + item.getIdentity()));
+assertTrue(database.getLiveQuery("STR" + item.getIdentity()).isActive());
+assertEquals("STR", database.getLiveQuery("STR" + item.getIdentity()).getLastResult().getProperty("STR"));
+assertEquals(1, listener.getUpdateCount());
+assertEquals(item.getIdentity(), listener.getUpdateIdentity());
+assertFalse(listener.getErrors().isEmpty());
+assertEquals(0, listener.getErrorCount());
+assertTrue(listener.getExecutionTime() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.617 - assertTrue(listener.getExecutionTime() > 0)
+0.575 - assertTrue(listener.isCompleted())
+0.500 - assertEquals(1, listener.getResult().size())
+0.500 - assertFalse(listener.getErrors().isEmpty())
+0.489 - assertEquals(1, listener.getUpdateCount())
+0.488 - assertFalse(listener.hasErrors())
+0.473 - assertEquals(0, listener.getErrorCount())
+0.458 - ```java
+assertNotNull(listener.getResult())
+0.446 - assertEquals(item.getIdentity(), listener.getLastIdentity())
+0.439 - assertEquals(item.getIdentity(), listener.getUpdateIdentity())
+0.436 - assertTrue(item.exists())
+0.409 - assertEquals(item.getIdentity(), listener.getResult().get(0).getIdentity())
+0.387 - assertEquals("STR", listener.getResult().get(0).getProperty("STR"))
+0.354 - assertEquals("STR", item.getProperty("STR"))
+0.353 - assertTrue(database.getVertices().contains(item))
+0.344 - assertEquals(1, database.countVertices())
+0.340 - assertNotNull(database.getVertex(item.getIdentity()))
+0.330 - assertNotNull(database.getLiveQuery("STR" + item.getIdentity()))
+0.293 - assertTrue(database.getVertex(item.getIdentity()).isModified())
+0.293 - assertTrue(database.getLiveQuery("STR" + item.getIdentity()).isActive())
+0.277 - assertEquals("STR", database.getVertex(item.getIdentity()).getProperty("STR"))
+0.271 - assertEquals("STR", database.getLiveQuery("STR" + item.getIdentity()).getLastResult().getProperty("STR"))
+0.000 - ```

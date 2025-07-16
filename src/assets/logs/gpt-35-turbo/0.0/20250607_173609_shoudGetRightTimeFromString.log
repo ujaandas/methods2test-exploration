@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtils {
+    public static Date getTodayWithTime ( final String iTime ) throws ParseException { 
+    final SimpleDateFormat df = new SimpleDateFormat ( "STR" ) ; 
+    Calendar calParsed = Calendar . getInstance ( ) ; 
+    calParsed . setTime ( df . parse ( iTime ) ) ; 
+    Calendar cal = Calendar . getInstance ( ) ; 
+    cal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ; 
+    cal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ; 
+    cal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ; 
+    cal . set ( Calendar . MILLISECOND , 0 ) ; 
+    return cal . getTime ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtilsTest {
+    @Test
+     public void shoudGetRightTimeFromString ( ) throws ParseException {
+         Calendar calendar = Calendar . getInstance ( ) ; 
+         calendar . set ( Calendar . HOUR_OF_DAY , 5 ) ; 
+         calendar . set ( Calendar . MINUTE , 10 ) ; 
+         calendar . set ( Calendar . SECOND , 0 ) ; 
+         calendar . set ( Calendar . MILLISECOND , 0 ) ; 
+         Date d = OIOUtils . getTodayWithTime ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());
+Assert.assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());
+Assert.assertEquals(calendar.get(Calendar.SECOND), d.getSeconds());
+Assert.assertEquals(calendar.get(Calendar.MILLISECOND), d.getTime() % 1000);
+Assert.assertEquals(calendar.getTime(), d);
+Assert.assertNotNull(d);
+Assert.assertTrue(d instanceof Date);
+Assert.assertTrue(d.getTime() > 0);
+Assert.assertTrue(d.getTime() < System.currentTimeMillis());
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+Assert.assertTrue(d.getTime() % 1000 == 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(calendar.getTime(),d); ===
+1.000 - Assert.assertEquals(calendar.getTime(), d)
+0.678 - Assert.assertTrue(d.getTime() > 0)
+0.652 - Assert.assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes())
+0.652 - Assert.assertEquals(calendar.get(Calendar.SECOND), d.getSeconds())
+0.646 - Assert.assertEquals(calendar.get(Calendar.MILLISECOND), d.getTime() % 1000)
+0.632 - Assert.assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours())
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.615 - Assert.assertTrue(d.getTime() % 1000 == 0)
+0.476 - Assert.assertTrue(d.getTime() < System.currentTimeMillis())
+0.440 - Assert.assertNotNull(d)
+0.328 - Assert.assertTrue(d instanceof Date)

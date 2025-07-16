@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic OCompositeKey ( final Object ... keys ) {\nthis . keys = new ArrayList < Object > ( keys . length ) ;\nthis . comparator = ODefaultComparator . INSTANCE ;\nfor ( final Object key : keys ) addKey ( key ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {\nfinal ODocument document = new ODocument ( ) ;\ndocument . field ( \"STR\" , Collections . emptyList ( ) ) ;\ndocument . field ( \"STR\" , 12 ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . setNullValuesIgnored ( false ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(2, ((List) result).size());\nAssert.assertTrue(((List) result).contains(null));\nAssert.assertTrue(((List) result).contains(12));\nAssert.assertTrue(result instanceof List);\nAssert.assertTrue(result instanceof Collection);\nAssert.assertTrue(result instanceof Iterable);\nAssert.assertTrue(result instanceof Serializable);\nAssert.assertFalse(result instanceof Map);\nAssert.assertFalse(result instanceof String);\nAssert.assertFalse(result instanceof Integer);\nAssert.assertFalse(result instanceof Float);\nAssert.assertFalse(result instanceof Double);\nAssert.assertFalse(result instanceof Long);\nAssert.assertFalse(result instanceof Short);\nAssert.assertFalse(result instanceof Byte);\nAssert.assertFalse(result instanceof Character);\nAssert.assertFalse(result instanceof Boolean);\nAssert.assertFalse(result instanceof Date);\nAssert.assertFalse(result instanceof Calendar);\nAssert.assertFalse(result instanceof OCompositeIndexDefinition);\nAssert.assertFalse(result instanceof OCompositeKey);\nAssert.assertFalse(result instanceof ODefaultComparator);\n====================\n\n",
+    "scores": [
+        0.68,
+        0.591,
+        0.536,
+        0.536,
+        0.532,
+        0.532,
+        0.532,
+        0.531,
+        0.526,
+        0.526,
+        0.521,
+        0.521,
+        0.519,
+        0.516,
+        0.51,
+        0.485,
+        0.455,
+        0.451,
+        0.43,
+        0.424,
+        0.42,
+        0.371
+    ],
+    "ground_truth": "Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12)));"
+}

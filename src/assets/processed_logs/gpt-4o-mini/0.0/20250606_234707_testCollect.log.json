@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > List < X > collect ( List < T > coll , APartialFunction < ? super T , ? extends X , E > pf ) throws E {\nfinal List < X > result = createEmptyListOfType ( coll , true ) ;\nfor ( T o : coll ) {\nif ( pf . isDefinedAt ( o ) ) {\nresult . add ( pf . apply ( o ) ) ;\n} } return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testCollect ( ) throws Exception {\nAPartialFunctionNoThrow < Integer , Double > squareRoot = new APartialFunctionNoThrow < Integer , Double > ( ) {\n@Override\npublic boolean isDefinedAt ( Integer param ) {\nreturn param != 0 ;\n} @Override\npublic Double apply ( Integer param ) {\nreturn Math . sqrt ( param ) ;\n} } ;\nfinal List < Double > result = ACollectionHelper . collect ( Arrays . asList ( 0 , 1 , 2 , 3 , 4 ) , squareRoot ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(3, result.size());\nassertTrue(result.contains(1.0));\nassertTrue(result.contains(Math.sqrt(2)));\nassertTrue(result.contains(Math.sqrt(3)));\nassertFalse(result.contains(0.0));\nassertFalse(result.contains(Math.sqrt(4)));\nassertEquals(1.0, result.get(0), 0.0001);\nassertEquals(Math.sqrt(2), result.get(1), 0.0001);\nassertEquals(Math.sqrt(3), result.get(2), 0.0001);\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertTrue(result instanceof List);\nassertTrue(result.get(0) instanceof Double);\nassertTrue(result.get(1) instanceof Double);\nassertTrue(result.get(2) instanceof Double);\nassertEquals(3, result.stream().count());\nassertTrue(result.stream().allMatch(x -> x instanceof Double));\nassertTrue(result.stream().noneMatch(x -> x.equals(0.0)));\nassertTrue(result.stream().allMatch(x -> x >= 0));\nassertTrue(result.stream().anyMatch(x -> x.equals(1.0)));\nassertTrue(result.stream().anyMatch(x -> x.equals(Math.sqrt(2)));\nassertTrue(result.stream().anyMatch(x -> x.equals(Math.sqrt(3)));\n```\n====================\n\n",
+    "scores": [
+        0.848,
+        0.765,
+        0.746,
+        0.724,
+        0.677,
+        0.658,
+        0.658,
+        0.64,
+        0.623,
+        0.592,
+        0.557,
+        0.543,
+        0.543,
+        0.541,
+        0.514,
+        0.514,
+        0.514,
+        0.482,
+        0.476,
+        0.46,
+        0.44,
+        0.44,
+        0.0
+    ],
+    "ground_truth": "assertEquals(4,result.size());"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQuery {\npublic List < WorkerData > execute ( List < WorkerData > input ) {\nswitch ( targetType ) {\ncase ALL : return select ( input , null ) ;\ncase MEMBER : return select ( input , true ) ;\ncase CLIENT : return select ( input , false ) ;\ncase PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ;\nreturn ! result . isEmpty ( ) ? result : select ( input , true ) ;\ndefault : throw new IllegalStateException ( \"STR\" + targetType ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQueryTest {\n@Test\npublic void noFilters ( ) {\nlist . add ( new WorkerData ( newParameters ( agent1 , 1 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 2 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 3 , \"STR\" , \"STR\" ) ) ) ;\nList < WorkerData > result = new WorkerQuery ( ) . execute ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(3, result.size());\nAssert.assertEquals(1, result.get(0).getId());\nAssert.assertEquals(2, result.get(1).getId());\nAssert.assertEquals(3, result.get(2).getId());\nAssert.assertEquals(\"STR\", result.get(0).getType());\nAssert.assertEquals(\"STR\", result.get(1).getType());\nAssert.assertEquals(\"STR\", result.get(2).getType());\nAssert.assertEquals(\"STR\", result.get(0).getDescription());\nAssert.assertEquals(\"STR\", result.get(1).getDescription());\nAssert.assertEquals(\"STR\", result.get(2).getDescription());\nAssert.assertEquals(agent1, result.get(0).getAgent());\nAssert.assertEquals(agent1, result.get(1).getAgent());\nAssert.assertEquals(agent1, result.get(2).getAgent());\nAssert.assertEquals(1, result.get(0).getValue());\nAssert.assertEquals(1, result.get(1).getValue());\nAssert.assertEquals(1, result.get(2).getValue());\nAssert.assertEquals(true, result.get(0).isMember());\nAssert.assertEquals(true, result.get(1).isMember());\nAssert.assertEquals(true, result.get(2).isMember());\nAssert.assertEquals(false, result.get(0).isClient());\nAssert.assertEquals(false, result.get(1).isClient());\nAssert.assertEquals(false, result.get(2).isClient());\n====================\n\n",
+    "scores": [
+        0.778,
+        0.677,
+        0.677,
+        0.677,
+        0.667,
+        0.667,
+        0.667,
+        0.647,
+        0.647,
+        0.647,
+        0.646,
+        0.646,
+        0.646,
+        0.629,
+        0.629,
+        0.629,
+        0.618,
+        0.618,
+        0.618,
+        0.56,
+        0.56,
+        0.56
+    ],
+    "ground_truth": "assertEquals(list,result);"
+}

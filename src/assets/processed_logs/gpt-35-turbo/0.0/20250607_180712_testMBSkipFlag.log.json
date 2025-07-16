@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class CABAC {\npublic boolean readMBSkipFlag ( MDecoder mDecoder , SliceType slType , boolean leftAvailable , boolean topAvailable , int mbX ) {\nint base = slType == SliceType . P ? 11 : 24 ;\nboolean ret = mDecoder . decodeBin ( base + ( leftAvailable && ! skipFlagLeft ? 1 : 0 ) + ( topAvailable && ! skipFlagsTop [ mbX ] ? 1 : 0 ) ) == 1 ;\nskipFlagLeft = skipFlagsTop [ mbX ] = ret ;\nreturn ret ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class CABACTest {\n@Test\npublic void testMBSkipFlag ( ) {\nCABAC cabac = new CABAC ( 2 ) ;\nMockMDecoder m = new MockMDecoder ( new int [ ] {\n0 } , new int [ ] {\n11 } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 0));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 0));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 0));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 0));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 0));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 0));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 1));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 1));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 1));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 1));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 1));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 1));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 1));\nAssert.assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 1));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 2));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 2));\nAssert.assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 2));\n====================\n\n",
+    "scores": [
+        0.901,
+        0.892,
+        0.885,
+        0.877,
+        0.846,
+        0.846,
+        0.837,
+        0.837,
+        0.831,
+        0.831,
+        0.822,
+        0.822,
+        0.822,
+        0.822,
+        0.791,
+        0.781,
+        0.775,
+        0.766,
+        0.766
+    ],
+    "ground_truth": "Assert.assertEquals(false,cabac.readMBSkipFlag(m,SliceType.P,false,false,0));"
+}

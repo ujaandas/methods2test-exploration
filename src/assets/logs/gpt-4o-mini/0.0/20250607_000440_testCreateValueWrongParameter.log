@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( List < ? > params ) { 
+     if ( ! ( params . get ( 0 ) instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ; 
+     final List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     result . add ( createSingleValue ( mapParam ) ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueWrongParameter ( ) {
+         final Object result = propertyIndexByKey . createValue ( Collections . singletonList ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+assertTrue(result instanceof List);
+assertEquals(0, ((List<?>) result).size());
+assertNotNull(result);
+assertFalse(((List<?>) result).isEmpty());
+assertEquals(Collections.emptyList(), result);
+assertSame(Collections.emptyList(), result);
+assertTrue(result instanceof Collection);
+assertTrue(((Collection<?>) result).isEmpty());
+assertEquals(0, ((Collection<?>) result).size());
+assertNotEquals(Collections.singletonList("STR"), result);
+assertFalse(result instanceof Map);
+assertFalse(result instanceof Object[]);
+assertFalse(result instanceof Set);
+assertTrue(result.equals(Collections.emptyList()));
+assertFalse(result.equals(Collections.singletonList("STR")));
+assertThrows(ClassCastException.class, () -> {
+    ((Map<?, ?>) result).get("key");
+});
+assertDoesNotThrow(() -> {
+    List<?> list = (List<?>) result;
+});
+assertTrue(result.toString().equals("[]"));
+assertTrue(result.equals(new ArrayList<>()));
+assertTrue(result instanceof Iterable);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(result); ===
+0.923 - assertNotNull(result)
+0.818 - ```java
+assertNull(result)
+0.600 - assertTrue(result instanceof List)
+0.600 - assertFalse(result instanceof Map)
+0.600 - assertFalse(result instanceof Set)
+0.556 - assertTrue(result instanceof Iterable)
+0.552 - assertEquals(0, ((List<?>) result).size())
+0.548 - assertEquals(Collections.emptyList(), result)
+0.545 - assertFalse(result instanceof Object[])
+0.536 - assertTrue(result instanceof Collection)
+0.533 - assertSame(Collections.emptyList(), result)
+0.517 - assertFalse(((List<?>) result).isEmpty())
+0.508 - assertTrue(((Collection<?>) result).isEmpty())
+0.500 - assertEquals(0, ((Collection<?>) result).size())
+0.500 - assertTrue(result.toString().equals("[]"))
+0.492 - assertTrue(result.equals(new ArrayList<>()))
+0.486 - assertNotEquals(Collections.singletonList("STR"), result)
+0.441 - assertTrue(result.equals(Collections.emptyList()))
+0.429 - assertDoesNotThrow(() -> {
+    List<?> list = (List<?>) result
+0.385 - assertFalse(result.equals(Collections.singletonList("STR")))
+0.352 - assertThrows(ClassCastException.class, () -> {
+    ((Map<?, ?>) result).get("key")
+0.100 - })
+0.100 - })
+0.000 - ```

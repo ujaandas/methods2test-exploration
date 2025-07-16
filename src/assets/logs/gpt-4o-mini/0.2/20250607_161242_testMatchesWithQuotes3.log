@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatchesWithQuotes3 ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")));
+assertTrue(results.stream().anyMatch(doc -> "expectedValue".equals(doc.field("fieldName"))));
+assertEquals("expectedValue", results.get(0).field("fieldName"));
+assertEquals("expectedValue", results.get(1).field("fieldName"));
+assertNotNull(results.get(0).field("anotherField"));
+assertTrue(results.get(0).field("anotherField") instanceof String);
+assertEquals("expectedString", results.get(0).field("anotherField"));
+assertTrue(results.stream().allMatch(doc -> doc.field("numericField") instanceof Number));
+assertTrue(results.stream().allMatch(doc -> ((Number) doc.field("numericField")).intValue() > 0));
+assertEquals(3, results.get(0).field("listField").size());
+assertTrue(results.get(0).field("listField").contains("listValue"));
+assertNotNull(results.get(0).field("dateField"));
+assertTrue(results.get(0).field("dateField") instanceof Date);
+assertTrue(results.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean));
+assertTrue(results.stream().anyMatch(doc -> doc.field("booleanField")));
+assertEquals("expectedType", results.get(0).getClass().getSimpleName());
+assertTrue(results.stream().allMatch(doc -> doc.field("nestedField") instanceof ODocument));
+assertEquals("nestedValue", results.get(0).field("nestedField").field("nestedFieldName"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.789 - assertEquals(expectedSize, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.651 - assertEquals(3, results.get(0).field("listField").size())
+0.567 - ```java
+assertNotNull(results)
+0.564 - assertNotNull(results.get(0).field("dateField"))
+0.559 - assertEquals("expectedValue", results.get(0).field("fieldName"))
+0.543 - assertNotNull(results.get(0).field("anotherField"))
+0.540 - assertEquals("expectedType", results.get(0).getClass().getSimpleName())
+0.538 - assertEquals("expectedValue", results.get(1).field("fieldName"))
+0.536 - assertEquals("expectedString", results.get(0).field("anotherField"))
+0.458 - assertEquals("nestedValue", results.get(0).field("nestedField").field("nestedFieldName"))
+0.454 - assertTrue(results.get(0).field("listField").contains("listValue"))
+0.427 - assertTrue(results.get(0).field("dateField") instanceof Date)
+0.424 - assertTrue(results.stream().anyMatch(doc -> doc.field("booleanField")))
+0.404 - assertTrue(results.get(0).field("anotherField") instanceof String)
+0.404 - assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")))
+0.365 - assertTrue(results.stream().allMatch(doc -> doc.field("numericField") instanceof Number))
+0.362 - assertTrue(results.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean))
+0.361 - assertTrue(results.stream().allMatch(doc -> ((Number) doc.field("numericField")).intValue() > 0))
+0.359 - assertTrue(results.stream().allMatch(doc -> doc.field("nestedField") instanceof ODocument))
+0.350 - assertTrue(results.stream().anyMatch(doc -> "expectedValue".equals(doc.field("fieldName"))))
+0.000 - ```

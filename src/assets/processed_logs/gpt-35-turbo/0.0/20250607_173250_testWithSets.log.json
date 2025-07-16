@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.object;\n\npublic class SimpleParentChild {\n< RET extends T > RET load ( ORID recordId ) ;\n}\n\npackage orientechnologies.orientdb.object;\n\npublic class SimpleParentChildTest {\n@Test\npublic void testWithSets ( ) {\nObjectWithSet parent = new ObjectWithSet ( ) ;\nObjectWithSet child = new ObjectWithSet ( ) ;\nparent . addFriend ( child ) ;\nchild . setName ( \"STR\" ) ;\nObjectWithSet savedParent = database . save ( parent ) ;\nString parentId = savedParent . getId ( ) ;\nthis . database . close ( ) ;\nthis . database = new OObjectDatabaseTx ( url ) ;\nthis . database . open ( \"STR\" , \"STR\" ) ;\nObjectWithSet retrievedParent = this . database . load ( new ORecordId ( parentId ) ) ;\nObjectWithSet retrievedChild = retrievedParent . getFriends ( ) . iterator ( ) . next ( ) ;\nretrievedChild . setName ( \"STR\" ) ;\nthis . database . save ( retrievedParent ) ;\nthis . database . close ( ) ;\nthis . database = new OObjectDatabaseTx ( url ) ;\nthis . database . open ( \"STR\" , \"STR\" ) ;\nretrievedParent = this . database . load ( new ORecordId ( parentId ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", retrievedChild.getName());\nassertEquals(\"STR\", retrievedParent.getFriends().iterator().next().getName());\nassertEquals(1, retrievedParent.getFriends().size());\nassertTrue(retrievedParent.getFriends().contains(retrievedChild));\nassertNotNull(retrievedChild.getId());\nassertNotNull(retrievedParent.getId());\nassertEquals(parentId, retrievedParent.getId());\nassertEquals(\"STR\", retrievedParent.getName());\nassertEquals(\"STR\", retrievedChild.getName());\nassertNotEquals(parent, retrievedParent);\nassertNotEquals(child, retrievedChild);\nassertTrue(retrievedParent.getFriends().contains(retrievedChild));\nassertTrue(retrievedChild.getFriends().isEmpty());\nassertEquals(0, retrievedChild.getFriends().size());\nassertNotNull(retrievedParent.getFriends());\nassertNotNull(retrievedChild.getFriends());\nassertTrue(retrievedParent.getFriends().iterator().hasNext());\nassertTrue(retrievedChild.getFriends().isEmpty());\nassertFalse(retrievedChild.getFriends().iterator().hasNext());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.788,
+        0.756,
+        0.744,
+        0.73,
+        0.683,
+        0.683,
+        0.667,
+        0.639,
+        0.624,
+        0.624,
+        0.607,
+        0.576,
+        0.576,
+        0.561,
+        0.542,
+        0.522,
+        0.46,
+        0.46
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",retrievedParent.getFriends().iterator().next().getName());"
+}

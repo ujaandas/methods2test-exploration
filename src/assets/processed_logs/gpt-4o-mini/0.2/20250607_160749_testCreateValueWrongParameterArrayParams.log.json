@@ -1,0 +1,33 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyListIndexDefinition {\n@Override\npublic Object createValue ( final Object ... params ) {\nObject param = params [ 0 ] ;\nif ( ! ( param instanceof Collection ) ) {\ntry {\nreturn OType . convert ( param , keyType . getDefaultJavaType ( ) ) ;\n} catch ( Exception e ) {\nreturn null ;\n} } final Collection < ? > multiValueCollection = ( Collection < ? > ) param ;\nfinal List < Object > values = new ArrayList < > ( multiValueCollection . size ( ) ) ;\nfor ( final Object item : multiValueCollection ) {\nvalues . add ( createSingleValue ( item ) ) ;\n} return values ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyListIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameterArrayParams ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\n@Test\npublic void testCreateValueWrongParameterArrayParams() {\nOPropertyListIndexDefinition indexDefinition = new OPropertyListIndexDefinition();\n\n// Test with null parameter\nassertNull(indexDefinition.createValue(null));\n\n// Test with empty array\nassertNull(indexDefinition.createValue(new Object[0]));\n\n// Test with a single non-collection object\nassertNotNull(indexDefinition.createValue(\"testString\"));\n\n// Test with a single integer\nassertNotNull(indexDefinition.createValue(123));\n\n// Test with a single double\nassertNotNull(indexDefinition.createValue(123.45));\n\n// Test with a single boolean\nassertNotNull(indexDefinition.createValue(true));\n\n// Test with a single object\nObject testObject = new Object();\nassertNotNull(indexDefinition.createValue(testObject));\n\n// Test with a collection of strings\nCollection<String> stringCollection = Arrays.asList(\"one\", \"two\", \"three\");\nassertNotNull(indexDefinition.createValue(stringCollection));\n\n// Test with a collection of integers\nCollection<Integer> integerCollection = Arrays.asList(1, 2, 3);\nassertNotNull(indexDefinition.createValue(integerCollection));\n\n// Test with a collection of mixed types\nCollection<Object> mixedCollection = Arrays.asList(\"string\", 1, 2.0);\nassertNotNull(indexDefinition.createValue(mixedCollection));\n\n// Test with a collection containing null\nCollection<Object> nullCollection = Arrays.asList(\"string\", null, 3);\nassertNotNull(indexDefinition.createValue(nullCollection));\n\n// Test with a collection of empty strings\nCollection<String> emptyStringCollection = Arrays.asList(\"\", \"\", \"\");\nassertNotNull(indexDefinition.createValue(emptyStringCollection));\n\n// Test with a collection of empty collections\nCollection<Collection<Object>> emptyCollections = Arrays.asList(new ArrayList<>(), new ArrayList<>());\nassertNotNull(indexDefinition.createValue(emptyCollections));\n\n// Test with a collection of booleans\nCollection<Boolean> booleanCollection = Arrays.asList(true, false, true);\nassertNotNull(indexDefinition.createValue(booleanCollection));\n\n// Test with a collection of characters\nCollection<Character> charCollection = Arrays.asList('a', 'b', 'c');\nassertNotNull(indexDefinition.createValue(charCollection));\n\n// Test with a collection of long values\n\n====================\n\n",
+    "scores": [
+        0.612,
+        0.588,
+        0.588,
+        0.583,
+        0.577,
+        0.577,
+        0.571,
+        0.571,
+        0.569,
+        0.531,
+        0.517,
+        0.513,
+        0.508,
+        0.508,
+        0.478,
+        0.234,
+        0.229,
+        0.182,
+        0.18,
+        0.167,
+        0.145,
+        0.113,
+        0.112,
+        0.112,
+        0.1,
+        0.09
+    ],
+    "ground_truth": "Assert.assertNull(propertyIndex.createValue(\"STR\"));"
+}

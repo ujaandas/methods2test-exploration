@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue23 ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\n1. assertNotNull(schemas);\n2. assertEquals(1, schemas.size());\n3. XsdSchema schema = schemas.get(0);\n4. assertNotNull(schema);\n5. assertEquals(\"xsd:schema\", schema.getElementName());\n6. assertEquals(\"http://www.w3.org/2001/XMLSchema\", schema.getTargetNamespace());\n7. assertEquals(\"xsd\", schema.getPrefix());\n8. assertEquals(3, schema.getAttributes().size());\n9. assertTrue(schema.hasElementFormDefault());\n10. assertEquals(\"qualified\", schema.getElementFormDefault());\n11. assertTrue(schema.hasAttributeFormDefault());\n12. assertEquals(\"unqualified\", schema.getAttributeFormDefault());\n13. assertTrue(schema.hasVersion());\n14. assertEquals(\"1.0\", schema.getVersion());\n15. assertEquals(2, schema.getElements().size());\n16. assertTrue(schema.hasElement(\"xsd:element\"));\n17. assertTrue(schema.hasElement(\"xsd:complexType\"));\n18. assertEquals(\"xsd:element\", schema.getElements().get(0).getElementName());\n19. assertEquals(\"xsd:complexType\", schema.getElements().get(1).getElementName());\n20. assertTrue(schema.getElements().get(0).isTopLevelElement());\n====================\n\n",
+    "scores": [
+        0.52,
+        0.508,
+        0.5,
+        0.462,
+        0.444,
+        0.418,
+        0.417,
+        0.359,
+        0.357,
+        0.349,
+        0.34,
+        0.329,
+        0.323,
+        0.31,
+        0.294,
+        0.292,
+        0.267,
+        0.234,
+        0.22,
+        0.211
+    ],
+    "ground_truth": "Assert.assertTrue(true);"
+}

@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQuery {\npublic List < WorkerData > execute ( List < WorkerData > input ) {\nswitch ( targetType ) {\ncase ALL : return select ( input , null ) ;\ncase MEMBER : return select ( input , true ) ;\ncase CLIENT : return select ( input , false ) ;\ncase PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ;\nreturn ! result . isEmpty ( ) ? result : select ( input , true ) ;\ndefault : throw new IllegalStateException ( \"STR\" + targetType ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQueryTest {\n@Test\npublic void targetType_whenMember ( ) {\nlist . add ( new WorkerData ( newParameters ( agent1 , 1 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 2 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 3 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 4 , \"STR\" , \"STR\" ) ) ) ;\nList < WorkerData > result = new WorkerQuery ( ) . setTargetType ( TargetType . MEMBER ) . execute ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(4, result.size());\nassertTrue(result.stream().allMatch(worker -> worker.isMember()));\nassertTrue(result.stream().noneMatch(worker -> worker.isClient()));\nassertEquals(\"STR\", result.get(0).getParameter());\nassertEquals(\"STR\", result.get(1).getParameter());\nassertEquals(\"STR\", result.get(2).getParameter());\nassertEquals(\"STR\", result.get(3).getParameter());\nassertEquals(1, result.get(0).getId());\nassertEquals(2, result.get(1).getId());\nassertEquals(3, result.get(2).getId());\nassertEquals(4, result.get(3).getId());\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 1, \"STR\", \"STR\"))));\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 2, \"STR\", \"STR\"))));\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 3, \"STR\", \"STR\"))));\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 4, \"STR\", \"STR\"))));\nassertFalse(result.contains(new WorkerData(newParameters(agent1, 5, \"STR\", \"STR\"))));\nassertEquals(TargetType.MEMBER, result.get(0).getTargetType());\nassertEquals(TargetType.MEMBER, result.get(1).getTargetType());\nassertEquals(TargetType.MEMBER, result.get(2).getTargetType());\nassertEquals(TargetType.MEMBER, result.get(3).getTargetType());\nassertTrue(result.stream().allMatch(worker -> worker.getAgent().equals(agent1)));\nassertTrue(result.stream().allMatch(worker -> worker.getStatus().equals(\"STR\")));\n```\n====================\n\n",
+    "scores": [
+        0.674,
+        0.6,
+        0.562,
+        0.549,
+        0.519,
+        0.513,
+        0.5,
+        0.494,
+        0.494,
+        0.46,
+        0.46,
+        0.42,
+        0.42,
+        0.395,
+        0.308,
+        0.261,
+        0.259,
+        0.258,
+        0.231,
+        0.229,
+        0.229,
+        0.229,
+        0.229,
+        0.0
+    ],
+    "ground_truth": "assertEquals(asList(list.get(1),list.get(3)),result);"
+}

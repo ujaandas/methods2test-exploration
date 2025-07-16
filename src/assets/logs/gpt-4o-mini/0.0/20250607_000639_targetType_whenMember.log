@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQuery {
+    public List < WorkerData > execute ( List < WorkerData > input ) { 
+    switch ( targetType ) { 
+    case ALL : return select ( input , null ) ; 
+    case MEMBER : return select ( input , true ) ; 
+    case CLIENT : return select ( input , false ) ; 
+    case PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ; 
+    return ! result . isEmpty ( ) ? result : select ( input , true ) ; 
+    default : throw new IllegalStateException ( "STR" + targetType ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WorkerQueryTest {
+    @Test
+     public void targetType_whenMember ( ) {
+         list . add ( new WorkerData ( newParameters ( agent1 , 1 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 2 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 3 , "STR" , "STR" ) ) ) ; 
+         list . add ( new WorkerData ( newParameters ( agent1 , 4 , "STR" , "STR" ) ) ) ; 
+         List < WorkerData > result = new WorkerQuery ( ) . setTargetType ( TargetType . MEMBER ) . execute ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertEquals(4, result.size());
+assertTrue(result.stream().allMatch(worker -> worker.isMember()));
+assertTrue(result.stream().noneMatch(worker -> worker.isClient()));
+assertEquals("STR", result.get(0).getParameter());
+assertEquals("STR", result.get(1).getParameter());
+assertEquals("STR", result.get(2).getParameter());
+assertEquals("STR", result.get(3).getParameter());
+assertEquals(1, result.get(0).getId());
+assertEquals(2, result.get(1).getId());
+assertEquals(3, result.get(2).getId());
+assertEquals(4, result.get(3).getId());
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 1, "STR", "STR"))));
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 2, "STR", "STR"))));
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 3, "STR", "STR"))));
+assertTrue(result.contains(new WorkerData(newParameters(agent1, 4, "STR", "STR"))));
+assertFalse(result.contains(new WorkerData(newParameters(agent1, 5, "STR", "STR"))));
+assertEquals(TargetType.MEMBER, result.get(0).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(1).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(2).getTargetType());
+assertEquals(TargetType.MEMBER, result.get(3).getTargetType());
+assertTrue(result.stream().allMatch(worker -> worker.getAgent().equals(agent1)));
+assertTrue(result.stream().allMatch(worker -> worker.getStatus().equals("STR")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(asList(list.get(1),list.get(3)),result); ===
+0.674 - assertEquals(2, result.get(1).getId())
+0.600 - assertEquals("STR", result.get(1).getParameter())
+0.562 - assertEquals(4, result.get(3).getId())
+0.549 - assertEquals(TargetType.MEMBER, result.get(1).getTargetType())
+0.519 - assertEquals(4, result.size())
+0.513 - assertEquals(TargetType.MEMBER, result.get(3).getTargetType())
+0.500 - assertEquals("STR", result.get(3).getParameter())
+0.494 - assertEquals(1, result.get(0).getId())
+0.494 - assertEquals(3, result.get(2).getId())
+0.460 - assertEquals(TargetType.MEMBER, result.get(0).getTargetType())
+0.460 - assertEquals(TargetType.MEMBER, result.get(2).getTargetType())
+0.420 - assertEquals("STR", result.get(0).getParameter())
+0.420 - assertEquals("STR", result.get(2).getParameter())
+0.395 - ```java
+assertNotNull(result)
+0.308 - assertTrue(result.stream().allMatch(worker -> worker.getAgent().equals(agent1)))
+0.261 - assertTrue(result.stream().allMatch(worker -> worker.isMember()))
+0.259 - assertTrue(result.stream().noneMatch(worker -> worker.isClient()))
+0.258 - assertFalse(result.contains(new WorkerData(newParameters(agent1, 5, "STR", "STR"))))
+0.231 - assertTrue(result.stream().allMatch(worker -> worker.getStatus().equals("STR")))
+0.229 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 1, "STR", "STR"))))
+0.229 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 2, "STR", "STR"))))
+0.229 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 3, "STR", "STR"))))
+0.229 - assertTrue(result.contains(new WorkerData(newParameters(agent1, 4, "STR", "STR"))))
+0.000 - ```

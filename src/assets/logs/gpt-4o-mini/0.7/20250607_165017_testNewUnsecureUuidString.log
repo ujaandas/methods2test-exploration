@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class UuidUtil {
+    public static String newUnsecureUuidString ( ) { 
+    return newUnsecureUUID ( ) . toString ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class UuidUtilTest {
+    @Test
+     public void testNewUnsecureUuidString ( ) {
+         String uuid = newUnsecureUuidString ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(uuid);
+assertFalse(uuid.isEmpty());
+assertEquals(36, uuid.length());
+assertTrue(uuid.matches("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"));
+assertTrue(uuid.startsWith("0000"));
+assertFalse(uuid.equals(uuid.toUpperCase()));
+assertFalse(uuid.equals(uuid.toLowerCase()));
+assertNotEquals(uuid, UuidUtil.newUnsecureUuidString());
+assertNotEquals(uuid, UuidUtil.newUnsecureUuidString());
+assertTrue(uuid.contains("-"));
+assertTrue(uuid.split("-").length == 5);
+assertTrue(uuid.split("-")[0].length() == 8);
+assertTrue(uuid.split("-")[1].length() == 4);
+assertTrue(uuid.split("-")[2].length() == 4);
+assertTrue(uuid.split("-")[3].length() == 4);
+assertTrue(uuid.split("-")[4].length() == 12);
+assertTrue(uuid.charAt(8) == '-');
+assertTrue(uuid.charAt(13) == '-');
+assertTrue(uuid.charAt(18) == '-');
+assertTrue(uuid.charAt(23) == '-');
+assertDoesNotThrow(() -> UUID.fromString(uuid));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(uuid); ===
+0.826 - ```java
+assertNotNull(uuid)
+0.571 - assertEquals(36, uuid.length())
+0.565 - assertFalse(uuid.isEmpty())
+0.531 - assertTrue(uuid.contains("-"))
+0.520 - assertTrue(uuid.charAt(8) == '-')
+0.510 - assertTrue(uuid.charAt(13) == '-')
+0.510 - assertTrue(uuid.charAt(18) == '-')
+0.510 - assertTrue(uuid.charAt(23) == '-')
+0.481 - assertTrue(uuid.startsWith("0000"))
+0.469 - assertDoesNotThrow(() -> UUID.fromString(uuid))
+0.466 - assertNotEquals(uuid, UuidUtil.newUnsecureUuidString())
+0.466 - assertNotEquals(uuid, UuidUtil.newUnsecureUuidString())
+0.464 - assertTrue(uuid.split("-").length == 5)
+0.426 - assertTrue(uuid.split("-")[0].length() == 8)
+0.426 - assertTrue(uuid.split("-")[1].length() == 4)
+0.426 - assertTrue(uuid.split("-")[2].length() == 4)
+0.426 - assertTrue(uuid.split("-")[3].length() == 4)
+0.419 - assertTrue(uuid.split("-")[4].length() == 12)
+0.413 - assertFalse(uuid.equals(uuid.toUpperCase()))
+0.413 - assertFalse(uuid.equals(uuid.toLowerCase()))
+0.217 - assertTrue(uuid.matches("^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"))
+0.000 - ```

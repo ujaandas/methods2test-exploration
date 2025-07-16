@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void removes_underscores_from_keys ( ) {
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( "STR" + "STR" + "STR" ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected value for STR1", config.getString("STR1"));
+assertEquals("Expected value for STR2", config.getString("STR2"));
+assertEquals("Expected value for STR3", config.getString("STR3"));
+assertNotNull(config.getString("STR1"));
+assertNotNull(config.getString("STR2"));
+assertNotNull(config.getString("STR3"));
+assertTrue(config.getString("STR1").length() > 0);
+assertTrue(config.getString("STR2").length() > 0);
+assertTrue(config.getString("STR3").length() > 0);
+assertEquals("Value for STR1 should match", "Expected value for STR1", config.getString("STR1"));
+assertEquals("Value for STR2 should match", "Expected value for STR2", config.getString("STR2"));
+assertEquals("Value for STR3 should match", "Expected value for STR3", config.getString("STR3"));
+assertThrows(SomeExpectedException.class, () -> config.getString("NON_EXISTENT_KEY"));
+assertFalse(config.getString("STR1").isEmpty());
+assertFalse(config.getString("STR2").isEmpty());
+assertFalse(config.getString("STR3").isEmpty());
+assertEquals("Default value if key doesn't exist", "default", config.getString("NON_EXISTENT_KEY", "default"));
+assertNotEquals("Should not return empty string", "", config.getString("STR1"));
+assertNotEquals("Should not return empty string", "", config.getString("STR2"));
+assertNotEquals("Should not return empty string", "", config.getString("STR3"));
+assertSame("Same instance expected for STR1", config.getString("STR1"), config.getString("STR1"));
+assertSame("Same instance expected for STR2", config.getString("STR2"), config.getString("STR2"));
+assertSame("Same instance expected for STR3", config.getString("STR3"), config.getString("STR3"));
+assertTrue(config.getString("STR1").contains("Expected substring"));
+assertTrue(config.getString("STR2").contains("Expected substring"));
+assertTrue(config.getString("STR3").contains("Expected substring"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+0.827 - assertEquals("Expected value for STR2", config.getString("STR2"))
+0.827 - assertEquals("Expected value for STR3", config.getString("STR3"))
+0.805 - assertNotNull(config.getString("STR1"))
+0.805 - assertNotNull(config.getString("STR2"))
+0.805 - assertNotNull(config.getString("STR3"))
+0.768 - ```java
+assertEquals("Expected value for STR1", config.getString("STR1"))
+0.756 - assertFalse(config.getString("STR1").isEmpty())
+0.756 - assertFalse(config.getString("STR2").isEmpty())
+0.756 - assertFalse(config.getString("STR3").isEmpty())
+0.711 - assertTrue(config.getString("STR1").length() > 0)
+0.711 - assertTrue(config.getString("STR2").length() > 0)
+0.711 - assertTrue(config.getString("STR3").length() > 0)
+0.707 - assertNotEquals("Should not return empty string", "", config.getString("STR1"))
+0.707 - assertNotEquals("Should not return empty string", "", config.getString("STR2"))
+0.707 - assertNotEquals("Should not return empty string", "", config.getString("STR3"))
+0.662 - assertEquals("Value for STR1 should match", "Expected value for STR1", config.getString("STR1"))
+0.662 - assertEquals("Value for STR2 should match", "Expected value for STR2", config.getString("STR2"))
+0.662 - assertEquals("Value for STR3 should match", "Expected value for STR3", config.getString("STR3"))
+0.587 - assertTrue(config.getString("STR1").contains("Expected substring"))
+0.587 - assertTrue(config.getString("STR2").contains("Expected substring"))
+0.587 - assertTrue(config.getString("STR3").contains("Expected substring"))
+0.567 - assertSame("Same instance expected for STR1", config.getString("STR1"), config.getString("STR1"))
+0.567 - assertSame("Same instance expected for STR2", config.getString("STR2"), config.getString("STR2"))
+0.567 - assertSame("Same instance expected for STR3", config.getString("STR3"), config.getString("STR3"))
+0.538 - assertEquals("Default value if key doesn't exist", "default", config.getString("NON_EXISTENT_KEY", "default"))
+0.528 - assertThrows(SomeExpectedException.class, () -> config.getString("NON_EXISTENT_KEY"))
+0.000 - ```

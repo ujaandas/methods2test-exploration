@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParser {\npublic Date parse ( final String timestamp ) throws ProcessingException {\nif ( StringUtils . isBlank ( timestamp ) ) {\nreturn null ;\n} try {\nreturn parser . parse ( timestamp ) ;\n} catch ( Exception ex ) {\nthrow new ProcessingException ( \"STR\" + timestamp + \"STR\" , ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParserTest {\n@Test\npublic void testParseEpochMillis ( ) throws Exception {\nString format = TimestampParser . EPOCH_MILLIS ;\nlong time = System . currentTimeMillis ( ) ;\nDate parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(parsed);\nassertTrue(parsed instanceof Date);\nassertEquals(time, parsed.getTime());\nassertTrue(parsed.after(new Date(0))); // Ensure it's after epoch\nassertTrue(parsed.before(new Date(Long.MAX_VALUE))); // Ensure it's before max date\nassertEquals(new TimestampParser().parse(String.valueOf(time)).getTime(), parsed.getTime());\nassertNotEquals(new TimestampParser().parse(String.valueOf(time - 1000)).getTime(), parsed.getTime());\nassertEquals(new TimestampParser().parse(String.valueOf(time + 1000)).getTime(), parsed.getTime() + 1000);\nassertTrue(parsed.toString().contains(\"GMT\")); // Check for timezone\nassertTrue(parsed.toString().length() > 0); // Ensure string representation is not empty\nassertEquals(1, new TimestampParser().parse(String.valueOf(time)).compareTo(parsed));\nassertEquals(0, new TimestampParser().parse(String.valueOf(time)).compareTo(new Date(parsed.getTime())));\nassertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time - 1)));\nassertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time + 1)));\nassertTrue(parsed.getTime() % 1000 == 0); // Ensure milliseconds are correct\nassertTrue(parsed.getTime() >= 0); // Ensure time is non-negative\nassertEquals(\"GMT\", TimeZone.getDefault().getID()); // Check default timezone\nassertTrue(parsed.getTime() <= System.currentTimeMillis()); // Ensure parsed time is not in the future\nassertTrue(parsed.getTime() >= System.currentTimeMillis() - 1000); // Ensure parsed time is within the last second\nassertNotNull(new TimestampParser().parse(String.valueOf(time)).toInstant());\nassertEquals(parsed.getTime(), new TimestampParser().parse(String.valueOf(time)).getTime());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.704,
+        0.592,
+        0.537,
+        0.53,
+        0.522,
+        0.515,
+        0.5,
+        0.5,
+        0.495,
+        0.495,
+        0.484,
+        0.475,
+        0.467,
+        0.45,
+        0.439,
+        0.404,
+        0.382,
+        0.37,
+        0.321,
+        0.253,
+        0.0
+    ],
+    "ground_truth": "assertEquals(time,parsed.getTime());"
+}

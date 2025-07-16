@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rockagen.commons-lib;\n\npublic class OPLog {\npublic static Method getDeclaredMethod ( Class < ? > clazz , boolean recursively , String methodName , Class < ? > ... parameterTypes ) {\ntry {\nreturn clazz . getDeclaredMethod ( methodName , parameterTypes ) ;\n} catch ( NoSuchMethodException e ) {\nClass < ? > superClass = clazz . getSuperclass ( ) ;\nif ( superClass != null && recursively ) {\nreturn getDeclaredMethod ( superClass , true , methodName , parameterTypes ) ;\n} } catch ( SecurityException e ) {\nlog . error ( \"STR\" , e . getMessage ( ) , e ) ;\n} return null ;\n}\n}\n\npackage rockagen.commons-lib;\n\npublic class OPLogTest {\n@Test\npublic void testDescription ( ) throws SecurityException , NoSuchMethodException {\nPlog annotation = ( Plog ) ClassUtil . getDeclaredMethod ( getClass ( ) , false , \"STR\" ) . getAnnotation ( Plog . class ) ;\nString value = annotation . value ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(annotation);\nassertEquals(\"ExpectedValue\", value);\nassertTrue(value.length() > 0);\nassertFalse(value.isEmpty());\nassertEquals(\"AnotherExpectedValue\", annotation.value());\nassertNotEquals(\"UnexpectedValue\", value);\nassertTrue(value.contains(\"ExpectedSubstring\"));\nassertFalse(value.contains(\"UnexpectedSubstring\"));\nassertEquals(\"ExpectedValue\", annotation.value());\nassertNotNull(getClass().getDeclaredMethod(\"STR\"));\nassertTrue(Arrays.asList(getClass().getDeclaredMethods()).contains(getClass().getDeclaredMethod(\"STR\")));\nassertEquals(\"AnnotationClassName\", annotation.annotationType().getSimpleName());\nassertTrue(getClass().isAnnotationPresent(Plog.class));\nassertEquals(1, Arrays.stream(getClass().getDeclaredAnnotations()).filter(a -> a instanceof Plog).count());\nassertSame(annotation, getClass().getDeclaredMethod(\"STR\").getAnnotation(Plog.class));\nassertNotNull(getClass().getSuperclass().getDeclaredMethod(\"STR\"));\nassertNotNull(getClass().getSuperclass().getDeclaredMethod(\"STR\").getAnnotation(Plog.class));\nassertTrue(recursively);\nassertFalse(annotation.value().isEmpty());\nassertTrue(value.equals(\"ExpectedValue\") || value.equals(\"AnotherExpectedValue\"));\n```\n====================\n\n",
+    "scores": [
+        0.733,
+        0.677,
+        0.604,
+        0.603,
+        0.55,
+        0.528,
+        0.485,
+        0.427,
+        0.427,
+        0.417,
+        0.389,
+        0.385,
+        0.385,
+        0.374,
+        0.345,
+        0.33,
+        0.329,
+        0.325,
+        0.286,
+        0.264,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",value);"
+}

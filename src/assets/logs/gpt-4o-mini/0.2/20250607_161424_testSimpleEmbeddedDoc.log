@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerialization {
+    public int fields ( ) { 
+    checkForLoading ( ) ; 
+    checkForFields ( ) ; 
+    return _fieldSize ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerializationTest {
+    @Test
+     public void testSimpleEmbeddedDoc ( ) {
+         ODatabaseRecordThreadLocal . instance ( ) . remove ( ) ; 
+         ODocument document = new ODocument ( ) ; 
+         ODocument embedded = new ODocument ( ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         document . field ( "STR" , embedded , OType . EMBEDDED ) ; 
+         byte [ ] res = serializer . toStream ( document , false ) ; 
+         ODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] { 
+     } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(extr);
+assertEquals(1, extr.fields());
+assertTrue(extr.containsField("STR"));
+assertTrue(extr.field("STR") instanceof ODocument);
+ODocument extractedEmbedded = (ODocument) extr.field("STR");
+assertEquals("STR", extractedEmbedded.field("STR"));
+assertEquals("STR", extractedEmbedded.field("STR"));
+assertEquals(2, extractedEmbedded.fields());
+assertTrue(extractedEmbedded.containsField("STR"));
+assertEquals(embedded.getIdentity(), extractedEmbedded.getIdentity());
+assertNotSame(embedded, extractedEmbedded);
+assertTrue(extr.getIdentity().isNew());
+assertFalse(extr.isDirty());
+assertFalse(extr.isEmbedded());
+assertTrue(extr.getSchemaClass() == null);
+assertEquals(0, extr.getVersion());
+assertTrue(extr.getPropertyNames().contains("STR"));
+assertNotNull(extr.toJSON());
+assertNotNull(extr.toString());
+assertEquals(embedded.toString(), extractedEmbedded.toString());
+assertTrue(extr.getFieldTypes().containsKey("STR"));
+assertTrue(extr.getFieldTypes().get("STR").equals(embedded.getFieldTypes().get("STR")));
+assertFalse(extr.isEmbedded());
+assertTrue(extr.getField("STR") instanceof ODocument);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(document.fields(),extr.fields()); ===
+0.757 - assertEquals(1, extr.fields())
+0.644 - assertEquals(2, extractedEmbedded.fields())
+0.590 - assertEquals(0, extr.getVersion())
+0.560 - assertFalse(extr.isEmbedded())
+0.560 - assertFalse(extr.isEmbedded())
+0.556 - assertFalse(extr.isDirty())
+0.531 - assertEquals(embedded.getIdentity(), extractedEmbedded.getIdentity())
+0.526 - assertEquals("STR", extractedEmbedded.field("STR"))
+0.526 - assertEquals("STR", extractedEmbedded.field("STR"))
+0.523 - assertEquals(embedded.toString(), extractedEmbedded.toString())
+0.488 - assertTrue(extr.containsField("STR"))
+0.480 - assertNotNull(extr.toString())
+0.466 - assertNotNull(extr.toJSON())
+0.460 - ODocument extractedEmbedded = (ODocument) extr.field("STR")
+0.452 - assertTrue(extr.getSchemaClass() == null)
+0.442 - assertNotSame(embedded, extractedEmbedded)
+0.438 - assertTrue(extr.getFieldTypes().containsKey("STR"))
+0.434 - assertTrue(extr.getIdentity().isNew())
+0.430 - assertTrue(extr.field("STR") instanceof ODocument)
+0.409 - assertTrue(extr.getFieldTypes().get("STR").equals(embedded.getFieldTypes().get("STR")))
+0.389 - ```java
+assertNotNull(extr)
+0.379 - assertTrue(extractedEmbedded.containsField("STR"))
+0.375 - assertTrue(extr.getPropertyNames().contains("STR"))
+0.333 - assertTrue(extr.getField("STR") instanceof ODocument)
+0.000 - ```

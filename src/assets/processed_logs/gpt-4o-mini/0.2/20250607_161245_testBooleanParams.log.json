@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testBooleanParams ( ) {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( \"STR\" , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0).field(\"someField\").equals(\"expectedValue\"));\nassertTrue(qResult.get(0).field(\"booleanField\") instanceof Boolean);\nassertTrue((Boolean) qResult.get(0).field(\"booleanField\"));\nassertEquals(\"expectedString\", qResult.get(1).field(\"anotherField\"));\nassertNotEquals(\"unexpectedValue\", qResult.get(2).field(\"differentField\"));\nassertTrue(qResult.get(3).field(\"numericField\") instanceof Number);\nassertTrue(((Number) qResult.get(3).field(\"numericField\")).intValue() > 0);\nassertEquals(\"expectedType\", qResult.get(4).field(\"@class\"));\nassertTrue(qResult.get(5).field(\"dateField\") instanceof Date);\nassertNotNull(qResult.get(6).field(\"nestedField\"));\nassertEquals(\"nestedValue\", qResult.get(6).field(\"nestedField\").field(\"innerField\"));\nassertTrue(qResult.get(7).field(\"listField\") instanceof List);\nassertEquals(3, ((List<?>) qResult.get(7).field(\"listField\")).size());\nassertTrue(((List<?>) qResult.get(7).field(\"listField\")).contains(\"expectedListValue\"));\nassertTrue(qResult.get(8).field(\"mapField\") instanceof Map);\nassertTrue(((Map<?, ?>) qResult.get(8).field(\"mapField\")).containsKey(\"expectedKey\"));\nassertEquals(\"expectedMapValue\", ((Map<?, ?>) qResult.get(8).field(\"mapField\")).get(\"expectedKey\"));\nassertTrue(qResult.get(9).field(\"booleanField\") instanceof Boolean);\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.577,
+        0.567,
+        0.55,
+        0.539,
+        0.515,
+        0.505,
+        0.483,
+        0.478,
+        0.472,
+        0.444,
+        0.437,
+        0.427,
+        0.416,
+        0.413,
+        0.404,
+        0.4,
+        0.4,
+        0.379,
+        0.372,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

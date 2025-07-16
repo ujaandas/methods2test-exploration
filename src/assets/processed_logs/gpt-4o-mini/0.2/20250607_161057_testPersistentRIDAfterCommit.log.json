@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class Blueprints {\nboolean isPersistent ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class BlueprintsTest {\n@Test\npublic void testPersistentRIDAfterCommit ( ) {\nVertex v = graph . addVertex ( null ) ;\nv . setProperty ( \"STR\" , \"STR\" ) ;\ngraph . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(graph.isPersistent());\nassertNotNull(v);\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertTrue(v.getId().isPersistent());\nassertEquals(1, graph.getVertexCount());\nassertTrue(graph.getVertices().contains(v));\nassertFalse(v.getId().isNew());\nassertTrue(v.getId().isValid());\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertNotNull(v.getId());\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertTrue(graph.getEdges().isEmpty());\nassertFalse(v.getPropertyKeys().isEmpty());\nassertEquals(1, v.getPropertyKeys().size());\nassertTrue(v.getPropertyKeys().contains(\"STR\"));\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertTrue(graph.getVertices().iterator().hasNext());\nassertSame(v, graph.getVertices().iterator().next());\nassertEquals(1, graph.getEdges().size());\nassertTrue(graph.getEdges().isEmpty());\nassertFalse(graph.getVertices().isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.9,
+        0.72,
+        0.667,
+        0.649,
+        0.61,
+        0.61,
+        0.562,
+        0.529,
+        0.529,
+        0.527,
+        0.526,
+        0.512,
+        0.488,
+        0.488,
+        0.381,
+        0.381,
+        0.381,
+        0.381,
+        0.372,
+        0.361,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(((ORID)v.getId()).isPersistent());"
+}

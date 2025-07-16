@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNull {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNullTest {
+    @Test
+     public void testNotNullChangeToNullWithLists ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         db . begin ( ) ; 
+         doc . field ( "STR" , new String [ ] { 
+     "STR" } ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         db . begin ( ) ; 
+         doc . removeField ( "STR" ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(index);
+Assert.assertTrue(index.getSize() >= 0);
+Assert.assertEquals(0, index.getSize());
+Assert.assertFalse(index.contains("STR"));
+Assert.assertTrue(index.isEmpty());
+Assert.assertEquals(0, index.size());
+Assert.assertFalse(index.containsKey("STR"));
+Assert.assertTrue(index.get("STR") == null);
+Assert.assertThrows(IllegalArgumentException.class, () -> index.put("STR", null));
+Assert.assertEquals(0, index.getEntries().size());
+Assert.assertTrue(index.getEntries().isEmpty());
+Assert.assertFalse(index.hasKey("STR"));
+Assert.assertNull(index.get("STR"));
+Assert.assertEquals(0, index.getDocumentCount());
+Assert.assertFalse(index.isUnique());
+Assert.assertTrue(index.getMetadata().isEmpty());
+Assert.assertEquals("STR", index.getName());
+Assert.assertNotNull(index.getConfiguration());
+Assert.assertTrue(index.getConfiguration().isEmpty());
+Assert.assertFalse(index.isClosed());
+Assert.assertTrue(index.isDirty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(index.getSize(),1); ===
+0.935 - Assert.assertEquals(0, index.getSize())
+0.847 - Assert.assertEquals(0, index.size())
+0.788 - Assert.assertEquals("STR", index.getName())
+0.787 - Assert.assertTrue(index.getSize() >= 0)
+0.778 - Assert.assertEquals(0, index.getEntries().size())
+0.732 - Assert.assertEquals(0, index.getDocumentCount())
+0.712 - Assert.assertNull(index.get("STR"))
+0.700 - Assert.assertFalse(index.isUnique())
+0.667 - Assert.assertFalse(index.isClosed())
+0.635 - Assert.assertFalse(index.hasKey("STR"))
+0.629 - Assert.assertNotNull(index.getConfiguration())
+0.621 - Assert.assertTrue(index.isEmpty())
+0.621 - Assert.assertTrue(index.isDirty())
+0.620 - Assert.assertTrue(index.getEntries().isEmpty())
+0.615 - Assert.assertFalse(index.contains("STR"))
+0.615 - Assert.assertTrue(index.get("STR") == null)
+0.588 - Assert.assertFalse(index.containsKey("STR"))
+0.583 - Assert.assertTrue(index.getMetadata().isEmpty())
+0.545 - Assert.assertTrue(index.getConfiguration().isEmpty())
+0.508 - ```java
+Assert.assertNotNull(index)
+0.396 - Assert.assertThrows(IllegalArgumentException.class, () -> index.put("STR", null))
+0.000 - ```

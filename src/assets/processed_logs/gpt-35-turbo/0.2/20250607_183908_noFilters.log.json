@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQuery {\npublic List < WorkerData > execute ( List < WorkerData > input ) {\nswitch ( targetType ) {\ncase ALL : return select ( input , null ) ;\ncase MEMBER : return select ( input , true ) ;\ncase CLIENT : return select ( input , false ) ;\ncase PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ;\nreturn ! result . isEmpty ( ) ? result : select ( input , true ) ;\ndefault : throw new IllegalStateException ( \"STR\" + targetType ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQueryTest {\n@Test\npublic void noFilters ( ) {\nlist . add ( new WorkerData ( newParameters ( agent1 , 1 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 2 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 3 , \"STR\" , \"STR\" ) ) ) ;\nList < WorkerData > result = new WorkerQuery ( ) . execute ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(3, result.size());\nAssert.assertTrue(result.contains(new WorkerData(newParameters(agent1, 1, \"STR\", \"STR\"))));\nAssert.assertTrue(result.contains(new WorkerData(newParameters(agent1, 2, \"STR\", \"STR\"))));\nAssert.assertTrue(result.contains(new WorkerData(newParameters(agent1, 3, \"STR\", \"STR\"))));\nAssert.assertEquals(0, result.stream().filter(w -> w.isMember()).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.isClient()).count());\nAssert.assertEquals(3, result.stream().filter(w -> w.getTargetType() == TargetType.ALL).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getTargetType() == TargetType.MEMBER).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getTargetType() == TargetType.CLIENT).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getTargetType() == TargetType.PREFER_CLIENT).count());\nAssert.assertEquals(3, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 1, \"STR\", \"STR\"))).count());\nAssert.assertEquals(3, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 2, \"STR\", \"STR\"))).count());\nAssert.assertEquals(3, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 3, \"STR\", \"STR\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent2, 1, \"STR\", \"STR\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 1, \"STR1\", \"STR1\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 1, \"STR\", \"STR1\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent1, 2, \"STR1\", \"STR\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent2, 2, \"STR\", \"STR\"))).count());\nAssert.assertEquals(0, result.stream().filter(w -> w.getParameters().equals(newParameters(agent2, 3, \"STR\", \"STR\"))).count());\n\n====================\n\n",
+    "scores": [
+        0.778,
+        0.477,
+        0.477,
+        0.385,
+        0.375,
+        0.375,
+        0.353,
+        0.307,
+        0.307,
+        0.307,
+        0.307,
+        0.307,
+        0.307,
+        0.304,
+        0.304,
+        0.302,
+        0.288,
+        0.288,
+        0.288
+    ],
+    "ground_truth": "assertEquals(list,result);"
+}

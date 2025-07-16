@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfo {
+    static Properties loadGitProperties ( String fileName ) { 
+    Properties properties = new Properties ( ) ; 
+    InputStream inputStream = GitInfo . class . getClassLoader ( ) . getResourceAsStream ( fileName ) ; 
+    try { 
+    properties . load ( inputStream ) ; 
+    return properties ; 
+    } catch ( NullPointerException e ) { 
+    LOGGER . trace ( "STR" + fileName , e ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + fileName , e ) ; 
+    } finally { 
+    closeQuietly ( inputStream ) ; 
+    } return new UnknownGitProperties ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfoTest {
+    @Test
+     public void testLoadProperties ( ) {
+         Properties properties = GitInfo . loadGitProperties ( GitInfo . GIT_INFO_FILE ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("value1", properties.getProperty("key1"));
+assertNotNull(properties.getProperty("key2"));
+assertTrue(properties.containsKey("key3"));
+assertFalse(properties.isEmpty());
+assertEquals("value4", properties.getProperty("key4"));
+assertNull(properties.getProperty("key5"));
+assertTrue(properties.size() > 0);
+assertTrue(properties.getProperty("key6").contains("substring"));
+assertFalse(properties.containsKey("key7"));
+assertEquals(5, properties.size());
+assertTrue(properties.getProperty("key8").matches("[a-zA-Z0-9]+"));
+assertEquals("value9", properties.getProperty("key9"));
+assertTrue(properties.containsKey("key10"));
+assertNotNull(properties.getProperty("key11"));
+assertFalse(properties.isEmpty());
+assertEquals("value12", properties.getProperty("key12"));
+assertNull(properties.getProperty("key13"));
+assertTrue(properties.size() > 0);
+assertTrue(properties.getProperty("key14").contains("substring"));
+assertFalse(properties.containsKey("key15"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(properties); ===
+0.714 - assertNotNull(properties.getProperty("key2"))
+0.704 - assertNotNull(properties.getProperty("key11"))
+0.690 - assertEquals(5, properties.size())
+0.679 - assertTrue(properties.size() > 0)
+0.679 - assertTrue(properties.size() > 0)
+0.657 - assertNull(properties.getProperty("key5"))
+0.655 - assertFalse(properties.isEmpty())
+0.655 - assertFalse(properties.isEmpty())
+0.647 - assertNull(properties.getProperty("key13"))
+0.567 - assertTrue(properties.containsKey("key3"))
+0.559 - assertFalse(properties.containsKey("key7"))
+0.559 - assertTrue(properties.containsKey("key10"))
+0.551 - assertFalse(properties.containsKey("key15"))
+0.513 - assertEquals("value1", properties.getProperty("key1"))
+0.513 - assertEquals("value4", properties.getProperty("key4"))
+0.513 - assertEquals("value9", properties.getProperty("key9"))
+0.500 - assertEquals("value12", properties.getProperty("key12"))
+0.427 - assertTrue(properties.getProperty("key6").contains("substring"))
+0.422 - assertTrue(properties.getProperty("key14").contains("substring"))
+0.418 - assertTrue(properties.getProperty("key8").matches("[a-zA-Z0-9]+"))

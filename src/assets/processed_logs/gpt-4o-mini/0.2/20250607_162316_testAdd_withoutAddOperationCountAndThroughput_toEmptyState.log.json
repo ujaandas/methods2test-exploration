@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStats {\npublic long getOperationCount ( ) {\nreturn operationCount ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsTest {\n@Test\npublic void testAdd_withoutAddOperationCountAndThroughput_toEmptyState ( ) {\nPerformanceStats addState = new PerformanceStats ( ) ;\naddState . add ( new PerformanceStats ( 100 , 5.0 , 10.0 , 450.0d , 400 , 500 ) , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(100, addState.getOperationCount());\nassertEquals(5.0, addState.getAverageLatency(), 0.01);\nassertEquals(10.0, addState.getMaxLatency(), 0.01);\nassertEquals(450.0, addState.getMinLatency(), 0.01);\nassertEquals(400, addState.getThroughput());\nassertEquals(500, addState.getTotalOperations());\nassertTrue(addState.getOperationCount() > 0);\nassertTrue(addState.getAverageLatency() >= 0);\nassertTrue(addState.getMaxLatency() >= addState.getMinLatency());\nassertTrue(addState.getThroughput() > 0);\nassertTrue(addState.getTotalOperations() >= addState.getOperationCount());\nassertNotNull(addState);\nassertNotEquals(0, addState.getOperationCount());\nassertTrue(addState.getAverageLatency() <= addState.getMaxLatency());\nassertTrue(addState.getMinLatency() <= addState.getAverageLatency());\nassertTrue(addState.getThroughput() <= addState.getTotalOperations());\nassertTrue(addState.getTotalOperations() >= addState.getOperationCount());\nassertTrue(addState.getMaxLatency() >= 0);\nassertTrue(addState.getMinLatency() >= 0);\nassertTrue(addState.getAverageLatency() >= 0);\nassertTrue(addState.getThroughput() >= 0);\nassertTrue(addState.getOperationCount() <= addState.getTotalOperations());\n```\n====================\n\n",
+    "scores": [
+        0.946,
+        0.92,
+        0.86,
+        0.841,
+        0.795,
+        0.745,
+        0.722,
+        0.716,
+        0.684,
+        0.684,
+        0.643,
+        0.635,
+        0.632,
+        0.629,
+        0.629,
+        0.612,
+        0.612,
+        0.566,
+        0.522,
+        0.519,
+        0.518,
+        0.5,
+        0.0
+    ],
+    "ground_truth": "assertEquals(100,addState.getOperationCount());"
+}

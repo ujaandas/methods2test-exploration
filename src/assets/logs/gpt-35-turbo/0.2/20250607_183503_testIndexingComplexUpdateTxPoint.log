@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPoint {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPointTest {
+    @Test
+     public void testIndexingComplexUpdateTxPoint ( ) {
+         ODocument rome = newCity ( "STR" , 12.5 , 41.9 ) ; 
+         ODocument london = newCity ( "STR" , - 0.1275 , 51.507222 ) ; 
+         rome = db . save ( rome ) ; 
+         london = db . save ( london ) ; 
+         db . begin ( ) ; 
+         rome . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         db . save ( rome ) ; 
+         db . save ( london ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(2, index.getSize());
+Assert.assertTrue(index.contains(rome));
+Assert.assertTrue(index.contains(london));
+Assert.assertEquals(rome, index.get(rome.getIdentity()));
+Assert.assertEquals(london, index.get(london.getIdentity()));
+Assert.assertEquals(rome.field("STR"), newPoint(12.5, 41.9));
+Assert.assertEquals(london.field("STR"), newPoint(-0.1275, 51.507222));
+Assert.assertEquals(london.field("STR"), newPoint(12.5, 41.9));
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).size());
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).size());
+Assert.assertEquals(1, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(0).getIdentity());
+Assert.assertEquals(1, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(1).getIdentity());
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(0).getIdentity());
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(1).getIdentity());
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(0).field("STR"));
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(1).field("STR"));
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(0).field("STR"));
+Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(1).field("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,index.getSize()); ===
+0.968 - Assert.assertEquals(2, index.getSize())
+0.684 - Assert.assertEquals(rome, index.get(rome.getIdentity()))
+0.651 - Assert.assertEquals(london, index.get(london.getIdentity()))
+0.585 - Assert.assertTrue(index.contains(london))
+0.540 - Assert.assertTrue(index.contains(rome))
+0.513 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).size())
+0.504 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).size())
+0.463 - Assert.assertEquals(rome.field("STR"), newPoint(12.5, 41.9))
+0.452 - Assert.assertEquals(london.field("STR"), newPoint(12.5, 41.9))
+0.444 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(0).field("STR"))
+0.444 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(1).field("STR"))
+0.441 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(0).getIdentity())
+0.441 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-180, -90), newPoint(180, 90)).get(1).getIdentity())
+0.438 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(0).field("STR"))
+0.438 - Assert.assertEquals(2, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(1).field("STR"))
+0.434 - Assert.assertEquals(1, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(0).getIdentity())
+0.434 - Assert.assertEquals(1, index.getValuesBetween(newPoint(-0.2, 51.4), newPoint(12.6, 42)).get(1).getIdentity())
+0.413 - Assert.assertEquals(london.field("STR"), newPoint(-0.1275, 51.507222))

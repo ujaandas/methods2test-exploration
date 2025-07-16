@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testSelectNoTargetSkip ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(0, result.getTotalRecords());\nassertEquals(\"Expected Result\", result.next().getProperty(\"fieldName\"));\nassertFalse(result.hasNext());\nassertEquals(1, result.getFetchedRecords());\nassertTrue(result.isEmpty());\nassertEquals(\"Another Expected Result\", result.next().getProperty(\"anotherFieldName\"));\nassertNotEquals(\"Unexpected Result\", result.next().getProperty(\"fieldName\"));\nassertTrue(result.getProperty(\"fieldName\").contains(\"Expected Value\"));\nassertFalse(result.getProperty(\"fieldName\").isEmpty());\nassertEquals(\"Expected Type\", result.getProperty(\"fieldName\").getClass().getSimpleName());\nassertNotNull(result.getProperty(\"fieldName\"));\nassertTrue(result.getProperty(\"fieldName\").toString().startsWith(\"Prefix\"));\nassertEquals(200, result.getTotalRecords());\nassertTrue(result.getFetchedRecords() <= result.getTotalRecords());\nassertFalse(result.hasNext());\nassertTrue(result.getProperty(\"fieldName\").equals(\"Expected Value\"));\nassertEquals(0, result.getSkippedRecords());\nassertTrue(result.getProperty(\"fieldName\").length() > 0);\nassertNotNull(result.getProperty(\"anotherFieldName\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.877,
+        0.702,
+        0.638,
+        0.62,
+        0.62,
+        0.602,
+        0.592,
+        0.517,
+        0.507,
+        0.488,
+        0.469,
+        0.458,
+        0.452,
+        0.447,
+        0.438,
+        0.429,
+        0.414,
+        0.411,
+        0.404,
+        0.0
+    ],
+    "ground_truth": "Assert.assertFalse(result.hasNext());"
+}

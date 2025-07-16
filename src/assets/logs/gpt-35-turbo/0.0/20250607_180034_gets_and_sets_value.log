@@ -1,0 +1,66 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class Config {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class ConfigTest {
+    @Test
+     public void gets_and_sets_value ( ) {
+         Config config = new Config ( ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", config.getString("STR"));
+assertNotEquals("STR", config.getString("OTHER"));
+assertNull(config.getString("NULL"));
+assertNotNull(config.getString("STR"));
+assertTrue(config.getString("BOOL").equals("true") || config.getString("BOOL").equals("false"));
+assertFalse(config.getString("BOOL").equals("other"));
+assertSame(config.getString("STR"), config.getString("STR"));
+assertNotSame(config.getString("STR"), config.getString("OTHER"));
+assertTrue(config.getString("INT").matches("\\d+"));
+assertFalse(config.getString("INT").matches("\\D+"));
+assertTrue(config.getString("FLOAT").matches("\\d+\\.\\d+"));
+assertFalse(config.getString("FLOAT").matches("\\D+"));
+assertTrue(config.getString("EMAIL").matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"));
+assertFalse(config.getString("EMAIL").matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}"));
+assertTrue(config.getString("URL").matches("^(http|https)://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(/.*)?$"));
+assertFalse(config.getString("URL").matches("^(http|https)://[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}(/.*)?$"));
+assertTrue(config.getString("PHONE").matches("\\d{3}-\\d{3}-\\d{4}"));
+assertFalse(config.getString("PHONE").matches("\\d{3}-\\d{3}-\\d{3}"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+1.000 - assertEquals("STR", config.getString("STR"))
+0.923 - assertNotEquals("STR", config.getString("OTHER"))
+0.815 - assertNotNull(config.getString("STR"))
+0.759 - assertNull(config.getString("NULL"))
+0.745 - assertSame(config.getString("STR"), config.getString("STR"))
+0.674 - assertFalse(config.getString("INT").matches("\\D+"))
+0.660 - assertFalse(config.getString("FLOAT").matches("\\D+"))
+0.646 - assertFalse(config.getString("BOOL").equals("other"))
+0.638 - assertTrue(config.getString("INT").matches("\\d+"))
+0.598 - assertNotSame(config.getString("STR"), config.getString("OTHER"))
+0.583 - assertTrue(config.getString("FLOAT").matches("\\d+\\.\\d+"))
+0.549 - assertFalse(config.getString("PHONE").matches("\\d{3}-\\d{3}-\\d{3}"))
+0.518 - assertTrue(config.getString("PHONE").matches("\\d{3}-\\d{3}-\\d{4}"))
+0.448 - assertFalse(config.getString("URL").matches("^(http|https)://[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}(/.*)?$"))
+0.443 - assertFalse(config.getString("EMAIL").matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}"))
+0.441 - assertTrue(config.getString("BOOL").equals("true") || config.getString("BOOL").equals("false"))
+0.423 - assertTrue(config.getString("URL").matches("^(http|https)://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(/.*)?$"))
+0.417 - assertTrue(config.getString("EMAIL").matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"))

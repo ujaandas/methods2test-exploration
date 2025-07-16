@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class SaveLinkedTypeAny {
+    @Deprecated
+     < RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class SaveLinkedTypeAnyTest {
+    @Test
+     public void testAlterRemoveLinkedType ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . EMBEDDEDLIST , OType . ANY ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         List < ODocument > result = db . query ( new OSQLSynchQuery < ODocument > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(result);
+Assert.assertEquals(2, result.size());
+Assert.assertTrue(result.get(0) instanceof ODocument);
+Assert.assertTrue(result.get(1) instanceof ODocument);
+Assert.assertEquals("STR", result.get(0).field("STR"));
+Assert.assertEquals("STR", result.get(1).field("STR"));
+Assert.assertEquals(OType.EMBEDDEDLIST, prop.getType());
+Assert.assertEquals(OType.ANY, prop.getLinkedType());
+Assert.assertEquals("STR", classA.getName());
+Assert.assertTrue(schema.existsClass("STR"));
+Assert.assertTrue(schema.existsProperty("STR"));
+Assert.assertTrue(schema.getClass("STR").existsProperty("STR"));
+Assert.assertTrue(schema.getClass("STR").getProperty("STR").getType().equals(OType.EMBEDDEDLIST));
+Assert.assertTrue(schema.getClass("STR").getProperty("STR").getLinkedType().equals(OType.ANY));
+Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"));
+Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").existsProperty("STR"));
+Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getType().equals(OType.EMBEDDEDLIST));
+Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getLinkedType().equals(OType.ANY));
+Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getOwnerClass().getName().equals("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(result); ===
+1.000 - Assert.assertNotNull(result)
+0.640 - Assert.assertEquals(2, result.size())
+0.478 - Assert.assertEquals("STR", result.get(0).field("STR"))
+0.478 - Assert.assertEquals("STR", result.get(1).field("STR"))
+0.462 - Assert.assertTrue(result.get(0) instanceof ODocument)
+0.462 - Assert.assertTrue(result.get(1) instanceof ODocument)
+0.351 - Assert.assertEquals("STR", classA.getName())
+0.345 - Assert.assertTrue(schema.existsClass("STR"))
+0.338 - Assert.assertEquals(OType.ANY, prop.getLinkedType())
+0.328 - Assert.assertTrue(schema.existsProperty("STR"))
+0.294 - Assert.assertEquals(OType.EMBEDDEDLIST, prop.getType())
+0.260 - Assert.assertTrue(schema.getClass("STR").existsProperty("STR"))
+0.250 - Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"))
+0.234 - Assert.assertTrue(schema.getClass("STR").getProperty("STR").getType().equals(OType.EMBEDDEDLIST))
+0.202 - Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").existsProperty("STR"))
+0.195 - Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getType().equals(OType.EMBEDDEDLIST))
+0.191 - Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getOwnerClass().getName().equals("STR"))
+0.148 - Assert.assertTrue(schema.getClass("STR").getProperty("STR").getLinkedType().equals(OType.ANY))
+0.123 - Assert.assertTrue(db.getMetadata().getSchema().getClass("STR").getProperty("STR").getLinkedType().equals(OType.ANY))

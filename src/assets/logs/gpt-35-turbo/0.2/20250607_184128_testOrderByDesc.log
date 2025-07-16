@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testOrderByDesc ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         String query = "STR" ; 
+         OResultSet result = db . query ( query ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(5, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("name").toString().startsWith("A")));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("age") == null));
+assertEquals(3, result.stream().filter(r -> r.getProperty("gender").equals("Male")).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("city").equals("London")));
+assertEquals(2, result.stream().filter(r -> r.getProperty("status").equals("Active")).count());
+assertFalse(result.stream().allMatch(r -> r.getProperty("role").equals("Admin")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("department").equals("IT")));
+assertEquals(4, result.stream().filter(r -> r.getProperty("salary") > 50000).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("title").equals("Manager")));
+assertEquals(1, result.stream().filter(r -> r.getProperty("location").equals("New York")).count());
+assertFalse(result.stream().allMatch(r -> r.getProperty("team").equals("Sales")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("manager").equals("John")));
+assertEquals(2, result.stream().filter(r -> r.getProperty("experience") >= 5).count());
+assertTrue(result.stream().noneMatch(r -> r.getProperty("department").equals("HR")));
+assertEquals(3, result.stream().filter(r -> r.getProperty("rating") >= 4.0).count());
+assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("Inactive")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("location").equals("London")));
+assertEquals(4, result.stream().filter(r -> r.getProperty("role").equals("Developer")).count());
+assertFalse(result.stream().noneMatch(r -> r.getProperty("title").equals("Engineer")));
+assertTrue(result.stream().allMatch(r -> r.getProperty("team").equals("Engineering")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+0.597 - assertEquals(5, result.stream().count())
+0.407 - assertTrue(result.stream().noneMatch(r -> r.getProperty("city").equals("London")))
+0.407 - assertTrue(result.stream().anyMatch(r -> r.getProperty("manager").equals("John")))
+0.404 - assertTrue(result.stream().anyMatch(r -> r.getProperty("department").equals("IT")))
+0.404 - assertEquals(2, result.stream().filter(r -> r.getProperty("experience") >= 5).count())
+0.400 - assertTrue(result.stream().noneMatch(r -> r.getProperty("title").equals("Manager")))
+0.400 - assertTrue(result.stream().noneMatch(r -> r.getProperty("department").equals("HR")))
+0.396 - assertTrue(result.stream().anyMatch(r -> r.getProperty("location").equals("London")))
+0.396 - assertFalse(result.stream().anyMatch(r -> r.getProperty("age") == null))
+0.393 - assertTrue(result.stream().allMatch(r -> r.getProperty("team").equals("Engineering")))
+0.393 - assertEquals(3, result.stream().filter(r -> r.getProperty("rating") >= 4.0).count())
+0.389 - assertEquals(4, result.stream().filter(r -> r.getProperty("salary") > 50000).count())
+0.377 - assertEquals(1, result.stream().filter(r -> r.getProperty("location").equals("New York")).count())
+0.376 - assertTrue(result.stream().allMatch(r -> r.getProperty("name").toString().startsWith("A")))
+0.376 - assertEquals(3, result.stream().filter(r -> r.getProperty("gender").equals("Male")).count())
+0.370 - assertEquals(2, result.stream().filter(r -> r.getProperty("status").equals("Active")).count())
+0.367 - assertEquals(4, result.stream().filter(r -> r.getProperty("role").equals("Developer")).count())
+0.355 - assertFalse(result.stream().allMatch(r -> r.getProperty("role").equals("Admin")))
+0.355 - assertFalse(result.stream().allMatch(r -> r.getProperty("team").equals("Sales")))
+0.339 - assertFalse(result.stream().allMatch(r -> r.getProperty("status").equals("Inactive")))
+0.339 - assertFalse(result.stream().noneMatch(r -> r.getProperty("title").equals("Engineer")))

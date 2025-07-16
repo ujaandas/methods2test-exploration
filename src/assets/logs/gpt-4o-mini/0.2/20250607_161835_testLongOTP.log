@@ -1,0 +1,95 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    public static boolean isValidOTPFormat ( String otp ) { 
+    if ( otp == null ) { 
+    return false ; 
+    } int len = otp . length ( ) ; 
+    for ( char c : otp . toCharArray ( ) ) { 
+    if ( c < 0x20 || c > 0x7E ) { 
+    return false ; 
+    } } return OTP_MIN_LEN <= len && len <= OTP_MAX_LEN ; 
+    }
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testLongOTP ( ) {
+         String otp = "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(YubicoClient.isValidOTPFormat(otp));
+assertFalse(YubicoClient.isValidOTPFormat(null));
+assertFalse(YubicoClient.isValidOTPFormat(""));
+assertFalse(YubicoClient.isValidOTPFormat(" "));
+assertFalse(YubicoClient.isValidOTPFormat("123456789012345678901234567890")); // Assuming OTP_MAX_LEN < 30
+assertFalse(YubicoClient.isValidOTPFormat("!@#$%^&*()")); // Non-printable characters
+assertFalse(YubicoClient.isValidOTPFormat("abc\0def")); // Null character
+assertTrue(YubicoClient.isValidOTPFormat("validOTP123")); // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat("short")); // Assuming OTP_MIN_LEN > 5
+assertFalse(YubicoClient.isValidOTPFormat("tooLongOTP12345678901234567890")); // Assuming OTP_MAX_LEN < 30
+assertFalse(YubicoClient.isValidOTPFormat("abc\x1Fdef")); // Control character
+assertTrue(YubicoClient.isValidOTPFormat("123456")); // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat("abc\x7Fdef")); // Delete character
+assertTrue(YubicoClient.isValidOTPFormat("YUB123456")); // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat(" ")); // Single space
+assertFalse(YubicoClient.isValidOTPFormat("abc\x20def")); // Space in between
+assertTrue(YubicoClient.isValidOTPFormat("A1B2C3D4E5")); // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat("")); // Empty string
+assertFalse(YubicoClient.isValidOTPFormat("abc\x1Adef")); // Substitute character
+assertTrue(YubicoClient.isValidOTPFormat("OTP123456")); // Valid OTP
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(YubicoClient.isValidOTPFormat(otp)); ===
+0.946 - assertFalse(YubicoClient.isValidOTPFormat(""))
+0.946 - assertFalse(YubicoClient.isValidOTPFormat(" "))
+0.926 - assertFalse(YubicoClient.isValidOTPFormat(null))
+0.851 - ```java
+assertTrue(YubicoClient.isValidOTPFormat(otp))
+0.846 - // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat(" "))
+0.846 - // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat(""))
+0.844 - // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat("short"))
+0.772 - // Valid OTP
+assertFalse(YubicoClient.isValidOTPFormat("abc\x7Fdef"))
+0.752 - // Single space
+assertFalse(YubicoClient.isValidOTPFormat("abc\x20def"))
+0.752 - // Empty string
+assertFalse(YubicoClient.isValidOTPFormat("abc\x1Adef"))
+0.715 - assertFalse(YubicoClient.isValidOTPFormat("123456789012345678901234567890"))
+0.693 - // Non-printable characters
+assertFalse(YubicoClient.isValidOTPFormat("abc\0def"))
+0.688 - // Assuming OTP_MAX_LEN < 30
+assertFalse(YubicoClient.isValidOTPFormat("!@#$%^&*()"))
+0.688 - // Assuming OTP_MAX_LEN < 30
+assertFalse(YubicoClient.isValidOTPFormat("abc\x1Fdef"))
+0.684 - // Control character
+assertTrue(YubicoClient.isValidOTPFormat("123456"))
+0.672 - // Null character
+assertTrue(YubicoClient.isValidOTPFormat("validOTP123"))
+0.672 - // Delete character
+assertTrue(YubicoClient.isValidOTPFormat("YUB123456"))
+0.672 - // Space in between
+assertTrue(YubicoClient.isValidOTPFormat("A1B2C3D4E5"))
+0.650 - // Substitute character
+assertTrue(YubicoClient.isValidOTPFormat("OTP123456"))
+0.612 - // Assuming OTP_MIN_LEN > 5
+assertFalse(YubicoClient.isValidOTPFormat("tooLongOTP12345678901234567890"))
+0.262 - // Valid OTP
+```

@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNull {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNullTest {
+    @Test
+     public void testNotNullChangeToNullWithLists ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         db . begin ( ) ; 
+         doc . field ( "STR" , new String [ ] { 
+     "STR" } ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         db . begin ( ) ; 
+         doc . removeField ( "STR" ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(index.getInternal().size() == 0);
+Assert.assertTrue(index.getInternal().getFirstKey() == null);
+Assert.assertTrue(index.getInternal().getLastKey() == null);
+Assert.assertTrue(index.getInternal().getKeySize() == 0);
+Assert.assertTrue(index.getInternal().getValuesSize() == 0);
+Assert.assertTrue(index.getInternal().getKeysSize() == 0);
+Assert.assertTrue(index.getInternal().getFirstValue() == null);
+Assert.assertTrue(index.getInternal().getLastValue() == null);
+Assert.assertTrue(index.getInternal().getValues().isEmpty());
+Assert.assertTrue(index.getInternal().getValues("STR").isEmpty());
+Assert.assertTrue(index.getInternal().getValues("STR").size() == 0);
+Assert.assertTrue(index.getInternal().get("STR") == null);
+Assert.assertTrue(index.getInternal().getEntriesBetween(null, null).isEmpty());
+Assert.assertTrue(index.getInternal().getEntriesBetween("STR", "STR").isEmpty());
+Assert.assertTrue(index.getInternal().getEntriesMajor("STR").isEmpty());
+Assert.assertTrue(index.getInternal().getEntriesMajorEquals("STR").isEmpty());
+Assert.assertTrue(index.getInternal().getEntriesMinor("STR").isEmpty());
+Assert.assertTrue(index.getInternal().getEntriesMinorEquals("STR").isEmpty());
+Assert.assertTrue(index.getInternal().getEntries("STR", "STR").isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(index.getSize(),1); ===
+0.639 - Assert.assertTrue(index.getInternal().size() == 0)
+0.615 - Assert.assertTrue(index.getInternal().getKeySize() == 0)
+0.608 - Assert.assertTrue(index.getInternal().getKeysSize() == 0)
+0.593 - Assert.assertTrue(index.getInternal().getValuesSize() == 0)
+0.539 - Assert.assertTrue(index.getInternal().getValues("STR").size() == 0)
+0.532 - Assert.assertTrue(index.getInternal().get("STR") == null)
+0.524 - Assert.assertTrue(index.getInternal().getFirstValue() == null)
+0.519 - Assert.assertTrue(index.getInternal().getLastKey() == null)
+0.512 - Assert.assertTrue(index.getInternal().getFirstKey() == null)
+0.506 - Assert.assertTrue(index.getInternal().getLastValue() == null)
+0.500 - Assert.assertTrue(index.getInternal().getValues().isEmpty())
+0.472 - Assert.assertTrue(index.getInternal().getValues("STR").isEmpty())
+0.458 - Assert.assertTrue(index.getInternal().getEntries("STR", "STR").isEmpty())
+0.442 - Assert.assertTrue(index.getInternal().getEntriesMajor("STR").isEmpty())
+0.442 - Assert.assertTrue(index.getInternal().getEntriesMinor("STR").isEmpty())
+0.436 - Assert.assertTrue(index.getInternal().getEntriesBetween(null, null).isEmpty())
+0.427 - Assert.assertTrue(index.getInternal().getEntriesBetween("STR", "STR").isEmpty())
+0.416 - Assert.assertTrue(index.getInternal().getEntriesMajorEquals("STR").isEmpty())
+0.416 - Assert.assertTrue(index.getInternal().getEntriesMinorEquals("STR").isEmpty())

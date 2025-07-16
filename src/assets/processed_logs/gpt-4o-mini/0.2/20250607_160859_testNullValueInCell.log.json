@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testNullValueInCell ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(expectedSize, res.size());\nassertTrue(res.stream().allMatch(doc -> doc.containsField(\"expectedField\")));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"expectedField\").equals(expectedValue)));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"expectedField\") == null));\nassertEquals(expectedValue1, res.get(0).field(\"field1\"));\nassertEquals(expectedValue2, res.get(1).field(\"field2\"));\nassertTrue(res.get(2).field(\"field3\") instanceof String);\nassertEquals(expectedDate, res.get(3).field(\"dateField\"));\nassertTrue(res.get(4).field(\"numericField\") instanceof Number);\nassertEquals(expectedBoolean, res.get(5).field(\"booleanField\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"listField\") instanceof List));\nassertEquals(expectedListSize, res.get(6).field(\"listField\").size());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"mapField\") instanceof Map));\nassertEquals(expectedMapSize, res.get(7).field(\"mapField\").size());\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"optionalField\") != null));\nassertFalse(res.stream().anyMatch(doc -> doc.field(\"optionalField\").isEmpty()));\nassertEquals(expectedString, res.get(8).field(\"stringField\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"integerField\") instanceof Integer));\nassertEquals(expectedInteger, res.get(9).field(\"integerField\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.505,
+        0.462,
+        0.444,
+        0.444,
+        0.442,
+        0.439,
+        0.43,
+        0.418,
+        0.409,
+        0.409,
+        0.4,
+        0.372,
+        0.347,
+        0.343,
+        0.34,
+        0.34,
+        0.333,
+        0.315,
+        0.298,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

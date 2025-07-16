@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParser {
+    public Date parse ( final String timestamp ) throws ProcessingException { 
+    if ( StringUtils . isBlank ( timestamp ) ) { 
+    return null ; 
+    } try { 
+    return parser . parse ( timestamp ) ; 
+    } catch ( Exception ex ) { 
+    throw new ProcessingException ( "STR" + timestamp + "STR" , ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParserTest {
+    @Test
+     public void testParseEpochMillis ( ) throws Exception {
+         String format = TimestampParser . EPOCH_MILLIS ; 
+         long time = System . currentTimeMillis ( ) ; 
+         Date parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(parsed);
+Assert.assertTrue(parsed instanceof Date);
+Assert.assertEquals(time, parsed.getTime(), 100); // Allowing a small margin of error
+Assert.assertTrue(parsed.after(new Date(0))); // Ensure parsed date is after epoch
+Assert.assertTrue(parsed.before(new Date(Long.MAX_VALUE))); // Ensure parsed date is before max date
+Assert.assertEquals("Parsed date does not match expected", time, parsed.getTime());
+Assert.assertTrue("Parsed date should be within 1 second of current time", Math.abs(parsed.getTime() - time) < 1000);
+Assert.assertTrue("Parsed date should not be in the future", parsed.before(new Date()));
+Assert.assertFalse("Parsed date should not be null", parsed == null);
+Assert.assertEquals("Parsed date should be equal to expected date", parsed, new Date(time));
+Assert.assertNotEquals("Parsed date should not be equal to a future date", parsed, new Date(time + 10000));
+Assert.assertNotEquals("Parsed date should not be equal to a past date", parsed, new Date(time - 10000));
+Assert.assertTrue("Parsed date should represent a valid timestamp", parsed.getTime() > 0);
+Assert.assertTrue("Parsed date should be of type Date", parsed instanceof Date);
+Assert.assertEquals("Parsed date's milliseconds should match", time % 1000, parsed.getTime() % 1000);
+Assert.assertTrue("Parsed date should be greater than a specific past date", parsed.after(new Date(time - 100000)));
+Assert.assertTrue("Parsed date should be less than a specific future date", parsed.before(new Date(time + 100000)));
+Assert.assertNotSame("Parsed date should be a new instance", parsed, new Date(time));
+Assert.assertEquals("Parsed date should match the expected format", format, TimestampParser.format(parsed));
+Assert.assertTrue("Parsed date should not be equal to a string representation of a different timestamp", parsed.toString().equals(new Date(time + 100000).toString()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(time,parsed.getTime()); ===
+0.946 - Assert.assertEquals(time, parsed.getTime(), 100)
+0.593 - Assert.assertEquals("Parsed date's milliseconds should match", time % 1000, parsed.getTime() % 1000)
+0.574 - Assert.assertTrue("Parsed date should represent a valid timestamp", parsed.getTime() > 0)
+0.537 - Assert.assertTrue(parsed instanceof Date)
+0.532 - Assert.assertEquals("Parsed date should be equal to expected date", parsed, new Date(time))
+0.511 - // Ensure parsed date is before max date
+Assert.assertEquals("Parsed date does not match expected", time, parsed.getTime())
+0.500 - ```java
+Assert.assertNotNull(parsed)
+0.492 - Assert.assertTrue("Parsed date should be within 1 second of current time", Math.abs(parsed.getTime() - time) < 1000)
+0.492 - Assert.assertNotEquals("Parsed date should not be equal to a past date", parsed, new Date(time - 10000))
+0.491 - Assert.assertTrue("Parsed date should not be in the future", parsed.before(new Date()))
+0.483 - Assert.assertNotEquals("Parsed date should not be equal to a future date", parsed, new Date(time + 10000))
+0.455 - Assert.assertFalse("Parsed date should not be null", parsed == null)
+0.449 - Assert.assertTrue("Parsed date should be of type Date", parsed instanceof Date)
+0.447 - Assert.assertNotSame("Parsed date should be a new instance", parsed, new Date(time))
+0.431 - Assert.assertTrue("Parsed date should be less than a specific future date", parsed.before(new Date(time + 100000)))
+0.416 - // Allowing a small margin of error
+Assert.assertTrue(parsed.after(new Date(0)))
+0.415 - Assert.assertTrue("Parsed date should be greater than a specific past date", parsed.after(new Date(time - 100000)))
+0.394 - Assert.assertEquals("Parsed date should match the expected format", format, TimestampParser.format(parsed))
+0.362 - Assert.assertTrue("Parsed date should not be equal to a string representation of a different timestamp", parsed.toString().equals(new Date(time + 100000).toString()))
+0.345 - // Ensure parsed date is after epoch
+Assert.assertTrue(parsed.before(new Date(Long.MAX_VALUE)))
+0.000 - ```

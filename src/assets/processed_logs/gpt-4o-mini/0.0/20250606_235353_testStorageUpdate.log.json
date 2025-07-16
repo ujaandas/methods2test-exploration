@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(database);\nAssert.assertTrue(database.isOpen());\nAssert.assertEquals(Locale.GERMANY.getLanguage(), database.getLanguage());\nAssert.assertTrue(database.getAttributes().contains(ATTRIBUTES.SOME_ATTRIBUTE));\nAssert.assertEquals(expectedValue1, remoteMetadataReload.get(ATTRIBUTES.SOME_ATTRIBUTE));\nAssert.assertNotEquals(expectedValue2, remoteMetadataReload.get(ATTRIBUTES.ANOTHER_ATTRIBUTE));\nAssert.assertTrue(remoteMetadataReload.get(ATTRIBUTES.YET_ANOTHER_ATTRIBUTE) instanceof ExpectedType);\nAssert.assertFalse(remoteMetadataReload.get(ATTRIBUTES.SOME_ATTRIBUTE).isEmpty());\nAssert.assertThrows(ExpectedException.class, () -> remoteMetadataReload.get(ATTRIBUTES.INVALID_ATTRIBUTE));\nAssert.assertEquals(expectedSize, database.getRecords().size());\nAssert.assertTrue(database.getRecords().stream().allMatch(record -> record.isValid()));\nAssert.assertNotNull(remoteMetadataReload.get(ATTRIBUTES.EXISTING_ATTRIBUTE));\nAssert.assertEquals(expectedString, remoteMetadataReload.get(ATTRIBUTES.STRING_ATTRIBUTE));\nAssert.assertTrue(remoteMetadataReload.get(ATTRIBUTES.NUMERIC_ATTRIBUTE) > 0);\nAssert.assertFalse(remoteMetadataReload.get(ATTRIBUTES.BOOLEAN_ATTRIBUTE));\nAssert.assertArrayEquals(expectedArray, remoteMetadataReload.get(ATTRIBUTES.ARRAY_ATTRIBUTE));\nAssert.assertTrue(database.hasChanges());\nAssert.assertEquals(expectedTimestamp, database.getLastUpdateTime());\nAssert.assertNotSame(originalValue, remoteMetadataReload.get(ATTRIBUTES.MODIFIABLE_ATTRIBUTE));\nAssert.assertTrue(database.isTransactionActive());\nAssert.assertEquals(expectedObject, remoteMetadataReload.get(ATTRIBUTES.OBJECT_ATTRIBUTE));\n```\n====================\n\n",
+    "scores": [
+        0.535,
+        0.506,
+        0.503,
+        0.5,
+        0.471,
+        0.465,
+        0.46,
+        0.452,
+        0.449,
+        0.444,
+        0.438,
+        0.435,
+        0.434,
+        0.432,
+        0.427,
+        0.422,
+        0.388,
+        0.383,
+        0.364,
+        0.343,
+        0.293,
+        0.0
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

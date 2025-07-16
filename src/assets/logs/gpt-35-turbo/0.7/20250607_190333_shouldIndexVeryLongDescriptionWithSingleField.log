@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSort {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSortTest {
+    @Test
+     public void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {
+         db . save ( new ODocument ( "STR" ) . field ( "STR" , DESCRIPTION ) ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         long count = db . query ( "STR" ) . stream ( ) . count ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, count);
+assertTrue(count > 0);
+assertFalse(count == 0);
+assertNotNull(db.query("STR").stream().findFirst().orElse(null));
+assertEquals(DESCRIPTION, db.query("STR").stream().findFirst().get().getProperty("STR"));
+assertEquals(1, db.query("STR").stream().map(OResult::toElement).count());
+assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").equals(DESCRIPTION)));
+assertTrue(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").isEmpty()));
+assertEquals(1, db.query("STR").stream().filter(result -> result.getProperty("STR").equals(DESCRIPTION)).count());
+assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").equals(DESCRIPTION)));
+assertEquals(1, db.query("STR").stream().filter(result -> result.getProperty("STR").contains("long")).count());
+assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").contains("Description")));
+assertTrue(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").length() < 10));
+assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).max().getAsInt());
+assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).sum());
+assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).average().getAsDouble());
+assertTrue(db.query("STR").stream().map(result -> result.getProperty("STR")).allMatch(str -> str.length() > 0));
+assertFalse(db.query("STR").stream().map(result -> result.getProperty("STR")).anyMatch(str -> str.isEmpty()));
+assertEquals(1, db.query("STR").stream().collect(Collectors.toSet()).size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,count); ===
+1.000 - assertEquals(1, count)
+0.762 - assertFalse(count == 0)
+0.700 - assertTrue(count > 0)
+0.452 - assertEquals(1, db.query("STR").stream().map(OResult::toElement).count())
+0.396 - assertEquals(1, db.query("STR").stream().collect(Collectors.toSet()).size())
+0.329 - assertNotNull(db.query("STR").stream().findFirst().orElse(null))
+0.328 - assertEquals(1, db.query("STR").stream().filter(result -> result.getProperty("STR").contains("long")).count())
+0.321 - assertEquals(1, db.query("STR").stream().filter(result -> result.getProperty("STR").equals(DESCRIPTION)).count())
+0.317 - assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).sum())
+0.315 - assertEquals(DESCRIPTION, db.query("STR").stream().findFirst().get().getProperty("STR"))
+0.290 - assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).max().getAsInt())
+0.261 - assertEquals(1, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).average().getAsDouble())
+0.256 - assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").contains("Description")))
+0.250 - assertTrue(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").isEmpty()))
+0.246 - assertTrue(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").length() < 10))
+0.215 - assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").equals(DESCRIPTION)))
+0.215 - assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").equals(DESCRIPTION)))
+0.206 - assertTrue(db.query("STR").stream().map(result -> result.getProperty("STR")).allMatch(str -> str.length() > 0))
+0.206 - assertFalse(db.query("STR").stream().map(result -> result.getProperty("STR")).anyMatch(str -> str.isEmpty()))

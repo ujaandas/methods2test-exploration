@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilter {
+    public Map < String , String > filter ( Map < String , String > env ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    for ( Map . Entry < String , String > entry : env . entrySet ( ) ) { 
+    if ( ! maskPattern . matcher ( entry . getKey ( ) ) . matches ( ) ) result . put ( entry . getKey ( ) , entry . getValue ( ) ) ; 
+    } return result ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilterTest {
+    @Test
+     public void allows_overriding_mask ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         Config config = createConfig ( ) ; 
+         new EnvironmentVariablesConfigLoader ( env ) . load ( config ) ; 
+         EnvFilter envFilter = new EnvFilter ( config ) ; 
+         Map < String , String > expectedEnv = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expectedEnv.size(), envFilter.filter(env).size());
+assertEquals(expectedEnv.get("STR"), envFilter.filter(env).get("STR"));
+assertNull(envFilter.filter(env).get("OTHER_KEY"));
+assertTrue(envFilter.filter(env).containsKey("STR"));
+assertFalse(envFilter.filter(env).containsKey("OTHER_KEY"));
+assertTrue(envFilter.filter(env).containsValue("STR"));
+assertFalse(envFilter.filter(env).containsValue("OTHER_VALUE"));
+assertTrue(envFilter.filter(env).entrySet().containsAll(expectedEnv.entrySet()));
+assertFalse(envFilter.filter(env).entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "OTHER_VALUE")));
+assertTrue(envFilter.filter(env).keySet().containsAll(expectedEnv.keySet()));
+assertFalse(envFilter.filter(env).keySet().contains("OTHER_KEY"));
+assertTrue(envFilter.filter(env).values().containsAll(expectedEnv.values()));
+assertFalse(envFilter.filter(env).values().contains("OTHER_VALUE"));
+assertEquals(expectedEnv.entrySet(), envFilter.filter(env).entrySet());
+assertEquals(expectedEnv.keySet(), envFilter.filter(env).keySet());
+assertEquals(expectedEnv.values(), envFilter.filter(env).values());
+assertNotSame(expectedEnv, envFilter.filter(env));
+assertNotSame(expectedEnv.entrySet(), envFilter.filter(env).entrySet());
+assertNotSame(expectedEnv.keySet(), envFilter.filter(env).keySet());
+assertNotSame(expectedEnv.values(), envFilter.filter(env).values());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedEnv,envFilter.filter(env)); ===
+0.884 - assertNotSame(expectedEnv, envFilter.filter(env))
+0.870 - assertEquals(expectedEnv.size(), envFilter.filter(env).size())
+0.839 - assertEquals(expectedEnv.keySet(), envFilter.filter(env).keySet())
+0.839 - assertEquals(expectedEnv.values(), envFilter.filter(env).values())
+0.810 - assertEquals(expectedEnv.get("STR"), envFilter.filter(env).get("STR"))
+0.810 - assertEquals(expectedEnv.entrySet(), envFilter.filter(env).entrySet())
+0.743 - assertNotSame(expectedEnv.keySet(), envFilter.filter(env).keySet())
+0.743 - assertNotSame(expectedEnv.values(), envFilter.filter(env).values())
+0.718 - assertNotSame(expectedEnv.entrySet(), envFilter.filter(env).entrySet())
+0.639 - assertNull(envFilter.filter(env).get("OTHER_KEY"))
+0.606 - assertTrue(envFilter.filter(env).containsKey("STR"))
+0.604 - assertFalse(envFilter.filter(env).containsKey("OTHER_KEY"))
+0.594 - assertTrue(envFilter.filter(env).containsValue("STR"))
+0.582 - assertFalse(envFilter.filter(env).containsValue("OTHER_VALUE"))
+0.571 - assertFalse(envFilter.filter(env).keySet().contains("OTHER_KEY"))
+0.561 - assertFalse(envFilter.filter(env).values().contains("OTHER_VALUE"))
+0.488 - assertTrue(envFilter.filter(env).keySet().containsAll(expectedEnv.keySet()))
+0.488 - assertTrue(envFilter.filter(env).values().containsAll(expectedEnv.values()))
+0.472 - assertTrue(envFilter.filter(env).entrySet().containsAll(expectedEnv.entrySet()))
+0.405 - assertFalse(envFilter.filter(env).entrySet().contains(new AbstractMap.SimpleEntry<>("OTHER_KEY", "OTHER_VALUE")))

@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollector {\npublic boolean isEmpty ( ) {\nreturn ( operationCount == EMPTY_OPERATION_COUNT && intervalThroughput == EMPTY_THROUGHPUT ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollectorTest {\n@Test\npublic void testGet ( ) {\nupdate ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1000 , 200 , 500 , 1900.0d , 1800 , 2500 ) ) ;\nupdate ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1500 , 150 , 550 , 1600.0d , 1700 , 2400 ) ) ;\nupdate ( a2w1 , TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , 2200.0d , 2400 , 2800 ) ) ;\nPerformanceStats performanceStats = performanceStatsCollector . get ( TEST_CASE_ID_1 , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(performanceStats);\nassertEquals(1500, performanceStats.getOperationCount());\nassertEquals(150, performanceStats.getErrorCount());\nassertEquals(550, performanceStats.getSuccessCount());\nassertEquals(1600.0d, performanceStats.getAverageLatency(), 0.01);\nassertEquals(1700, performanceStats.getMinLatency());\nassertEquals(2400, performanceStats.getMaxLatency());\nassertEquals(1000, performanceStatsCollector.get(TEST_CASE_ID_1, false).getOperationCount());\nassertEquals(200, performanceStatsCollector.get(TEST_CASE_ID_1, false).getErrorCount());\nassertEquals(500, performanceStatsCollector.get(TEST_CASE_ID_1, false).getSuccessCount());\nassertEquals(1900.0d, performanceStatsCollector.get(TEST_CASE_ID_1, false).getAverageLatency(), 0.01);\nassertEquals(1800, performanceStatsCollector.get(TEST_CASE_ID_1, false).getMinLatency());\nassertEquals(2500, performanceStatsCollector.get(TEST_CASE_ID_1, false).getMaxLatency());\nassertTrue(performanceStatsCollector.isEmpty());\nassertFalse(performanceStatsCollector.isEmpty());\nassertEquals(3, performanceStatsCollector.getAllStats().size());\nassertTrue(performanceStatsCollector.getAllStats().containsKey(TEST_CASE_ID_1));\nassertTrue(performanceStatsCollector.getAllStats().containsKey(TEST_CASE_ID_2));\nassertEquals(0, performanceStatsCollector.get(TEST_CASE_ID_2, true).getOperationCount());\nassertEquals(0, performanceStatsCollector.get(TEST_CASE_ID_2, true).getErrorCount());\nassertEquals(0, performanceStatsCollector.get(TEST_CASE_ID_2, true).getSuccessCount());\nassertEquals(0.0d, performanceStatsCollector.get(TEST_CASE_ID_2, true).getAverageLatency(), 0.01);\nassertTrue(performanceStatsCollector.get(TEST_CASE_ID_2, true).isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.897,
+        0.814,
+        0.733,
+        0.719,
+        0.711,
+        0.703,
+        0.681,
+        0.641,
+        0.631,
+        0.627,
+        0.614,
+        0.532,
+        0.529,
+        0.528,
+        0.528,
+        0.525,
+        0.525,
+        0.52,
+        0.512,
+        0.508,
+        0.496,
+        0.496,
+        0.482,
+        0.0
+    ],
+    "ground_truth": "assertFalse(performanceStats.isEmpty());"
+}

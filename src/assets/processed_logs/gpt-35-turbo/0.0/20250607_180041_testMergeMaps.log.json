@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtil {\npublic static < K , V > Map < K , V > mergeMaps ( Map < K , V > map1 , Map < K , V > map2 ) {\nMap < K , V > answer = new HashMap < > ( ) ;\nif ( map2 != null ) {\nanswer . putAll ( map2 ) ;\n} if ( map1 != null ) {\nanswer . putAll ( map1 ) ;\n} return answer ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtilTest {\n@Test\npublic void testMergeMaps ( ) {\nMap < String , String > mapA = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > mapB = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > expectedA = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > expectedB = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB));\nassertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA));\nassertEquals(6, MapUtil.mergeMaps(mapA, mapB).size());\nassertEquals(6, MapUtil.mergeMaps(mapB, mapA).size());\nassertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey(\"STR\"));\nassertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue(\"STR\"));\nassertTrue(MapUtil.mergeMaps(mapB, mapA).containsKey(\"STR\"));\nassertTrue(MapUtil.mergeMaps(mapB, mapA).containsValue(\"STR\"));\nassertFalse(MapUtil.mergeMaps(mapA, mapB).isEmpty());\nassertFalse(MapUtil.mergeMaps(mapB, mapA).isEmpty());\nassertNotNull(MapUtil.mergeMaps(mapA, mapB));\nassertNotNull(MapUtil.mergeMaps(mapB, mapA));\nassertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB));\nassertNotSame(mapB, MapUtil.mergeMaps(mapB, mapA));\nassertNotSame(mapA, MapUtil.mergeMaps(mapB, mapA));\nassertNotSame(mapB, MapUtil.mergeMaps(mapA, mapB));\nassertNotEquals(mapA, MapUtil.mergeMaps(mapA, mapB));\nassertNotEquals(mapB, MapUtil.mergeMaps(mapB, mapA));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.942,
+        0.882,
+        0.835,
+        0.824,
+        0.8,
+        0.8,
+        0.796,
+        0.78,
+        0.76,
+        0.758,
+        0.757,
+        0.74,
+        0.718,
+        0.667,
+        0.655,
+        0.631,
+        0.619
+    ],
+    "ground_truth": "assertEquals(expectedA,MapUtil.mergeMaps(mapA,mapB));"
+}

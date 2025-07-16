@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public List < Connection > getAll ( String poolKey ) { 
+     ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     return null == pool ? new ArrayList < Connection > ( ) : pool . getAll ( ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testGetAllWithPoolKey ( ) {
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+List<Connection> connections = cm.getAll("poolKey");
+assertNotNull(connections);
+assertEquals(3, connections.size());
+assertTrue(connections.contains(getAConn()));
+assertTrue(connections.contains(getAConn()));
+assertTrue(connections.contains(getAConn()));
+assertFalse(connections.contains(null));
+assertTrue(connections.stream().allMatch(Objects::nonNull));
+assertTrue(connections.stream().distinct().count() <= connections.size());
+assertEquals(connections.get(0), connections.get(0));
+assertNotEquals(connections.get(0), connections.get(1));
+assertNotEquals(connections.get(1), connections.get(2));
+assertTrue(connections.get(0) instanceof Connection);
+assertTrue(connections.get(1) instanceof Connection);
+assertTrue(connections.get(2) instanceof Connection);
+assertEquals("Expected connection state", connections.get(0).getState());
+assertEquals("Expected connection state", connections.get(1).getState());
+assertEquals("Expected connection state", connections.get(2).getState());
+assertTrue(connections.stream().allMatch(conn -> conn.getPoolKey().equals("poolKey")));
+assertEquals("poolKey", connections.get(0).getPoolKey());
+assertEquals("poolKey", connections.get(1).getPoolKey());
+assertEquals("poolKey", connections.get(2).getPoolKey());
+assertTrue(connections.stream().anyMatch(conn -> conn.isActive()));
+assertFalse(connections.stream().allMatch(conn -> conn.isClosed()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,cm.getAll(poolKey).size()); ===
+0.720 - assertEquals(3, connections.size())
+0.543 - assertEquals(connections.get(0), connections.get(0))
+0.542 - assertEquals("poolKey", connections.get(0).getPoolKey())
+0.542 - assertEquals("poolKey", connections.get(1).getPoolKey())
+0.542 - assertEquals("poolKey", connections.get(2).getPoolKey())
+0.526 - assertNotEquals(connections.get(0), connections.get(1))
+0.526 - assertNotEquals(connections.get(1), connections.get(2))
+0.473 - assertEquals("Expected connection state", connections.get(0).getState())
+0.473 - assertEquals("Expected connection state", connections.get(1).getState())
+0.473 - assertEquals("Expected connection state", connections.get(2).getState())
+0.434 - assertFalse(connections.stream().allMatch(conn -> conn.isClosed()))
+0.433 - ```java
+List<Connection> connections = cm.getAll("poolKey")
+0.425 - assertFalse(connections.contains(null))
+0.424 - assertTrue(connections.contains(getAConn()))
+0.424 - assertTrue(connections.contains(getAConn()))
+0.424 - assertTrue(connections.contains(getAConn()))
+0.393 - assertTrue(connections.stream().distinct().count() <= connections.size())
+0.388 - assertNotNull(connections)
+0.374 - assertTrue(connections.get(0) instanceof Connection)
+0.374 - assertTrue(connections.get(1) instanceof Connection)
+0.374 - assertTrue(connections.get(2) instanceof Connection)
+0.336 - assertTrue(connections.stream().allMatch(conn -> conn.getPoolKey().equals("poolKey")))
+0.324 - assertTrue(connections.stream().anyMatch(conn -> conn.isActive()))
+0.280 - assertTrue(connections.stream().allMatch(Objects::nonNull))
+0.000 - ```

@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtils {
+    static File getFileFromUrl ( URL url , String className ) { 
+    String extURL = url . toExternalForm ( ) ; 
+    if ( extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( 0 , extURL . lastIndexOf ( '/' ) ) ; 
+    } else { 
+    String suffix = "STR" + className . replace ( "STR" , "STR" ) + "STR" ; 
+    extURL = extURL . replace ( suffix , "STR" ) ; 
+    if ( extURL . startsWith ( "STR" ) && extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( FILE_EXTENSION_LENGTH , extURL . lastIndexOf ( '/' ) ) ; 
+    } } try { 
+    url = new URL ( extURL ) ; 
+    } catch ( MalformedURLException e ) { 
+    EmptyStatement . ignore ( e ) ; 
+    } try { 
+    return new File ( url . toURI ( ) ) ; 
+    } catch ( Exception ignored ) { 
+    return new File ( url . getPath ( ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtilsTest {
+    @Test
+     public void testGetFileFromUrl_fromJarFile ( ) throws Exception {
+         URL url = new URL ( "STR" ) ; 
+         File file = WizardUtils . getFileFromUrl ( url , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(file);
+Assert.assertTrue(file.exists());
+Assert.assertTrue(file.isFile());
+Assert.assertEquals("expectedFileName", file.getName());
+Assert.assertEquals("expectedFilePath", file.getAbsolutePath());
+Assert.assertEquals("expectedFilePath", file.getCanonicalPath());
+Assert.assertTrue(file.canRead());
+Assert.assertFalse(file.isDirectory());
+Assert.assertTrue(file.length() > 0);
+Assert.assertTrue(file.getParentFile().exists());
+Assert.assertTrue(file.getParentFile().isDirectory());
+Assert.assertTrue(file.getParentFile().canRead());
+Assert.assertTrue(file.getName().endsWith(".expectedExtension"));
+Assert.assertEquals("expectedFileNameWithoutExtension", FilenameUtils.getBaseName(file.getName()));
+Assert.assertEquals("expectedFileExtension", FilenameUtils.getExtension(file.getName()));
+Assert.assertTrue(file.lastModified() > 0);
+Assert.assertTrue(file.getUsableSpace() > 0);
+Assert.assertTrue(file.getTotalSpace() > 0);
+Assert.assertTrue(file.getFreeSpace() > 0);
+Assert.assertTrue(file.getPath().contains("expectedPathComponent"));
+Assert.assertNotEquals("unrelatedFileName", file.getName());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(file); ===
+0.826 - ```java
+Assert.assertNotNull(file)
+0.591 - Assert.assertTrue(file.exists())
+0.591 - Assert.assertTrue(file.isFile())
+0.578 - Assert.assertTrue(file.canRead())
+0.565 - Assert.assertTrue(file.length() > 0)
+0.520 - Assert.assertFalse(file.isDirectory())
+0.500 - Assert.assertTrue(file.lastModified() > 0)
+0.500 - Assert.assertTrue(file.getFreeSpace() > 0)
+0.491 - Assert.assertTrue(file.getTotalSpace() > 0)
+0.481 - Assert.assertTrue(file.getUsableSpace() > 0)
+0.433 - Assert.assertTrue(file.getParentFile().exists())
+0.429 - Assert.assertNotEquals("unrelatedFileName", file.getName())
+0.426 - Assert.assertTrue(file.getParentFile().canRead())
+0.400 - Assert.assertTrue(file.getParentFile().isDirectory())
+0.364 - Assert.assertEquals("expectedFileName", file.getName())
+0.351 - Assert.assertEquals("expectedFilePath", file.getAbsolutePath())
+0.347 - Assert.assertEquals("expectedFilePath", file.getCanonicalPath())
+0.342 - Assert.assertTrue(file.getName().endsWith(".expectedExtension"))
+0.329 - Assert.assertTrue(file.getPath().contains("expectedPathComponent"))
+0.303 - Assert.assertEquals("expectedFileExtension", FilenameUtils.getExtension(file.getName()))
+0.294 - Assert.assertEquals("expectedFileNameWithoutExtension", FilenameUtils.getBaseName(file.getName()))
+0.000 - ```

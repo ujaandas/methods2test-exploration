@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public String formatIntervalPerformanceNumbers ( String testId ) { 
+    PerformanceStats latest = get ( testId , false ) ; 
+    if ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) { 
+    return "STR" ; 
+    } String latencyUnit = "STR" ; 
+    long latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ; 
+    long latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ; 
+    long latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ; 
+    if ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) { 
+    latencyUnit = "STR" ; 
+    latencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ; 
+    latency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ; 
+    latencyMax = MICROSECONDS . toMillis ( latencyMax ) ; 
+    } return format ( "STR" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {
+         SimulatorAddress worker = workerAddress ( 3 , 1 ) ; 
+         Map < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ; 
+         performanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ; 
+         performanceStatsCollector . update ( worker , performanceStats ) ; 
+         String performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(performance);
+assertFalse(performance.isEmpty());
+assertTrue(performance.contains("800"));
+assertTrue(performance.contains("100"));
+assertTrue(performance.contains("300"));
+assertTrue(performance.contains("2"));
+assertTrue(performance.contains("2400"));
+assertTrue(performance.contains("2500"));
+assertTrue(performance.contains("STR"));
+assertTrue(performance.contains("3"));
+assertTrue(performance.contains("100"));
+assertTrue(performance.contains("1000"));
+assertTrue(performance.contains("2000"));
+assertTrue(performance.contains("3000"));
+assertTrue(performance.contains("4000"));
+assertTrue(performance.contains("5000"));
+assertTrue(performance.contains("6000"));
+assertTrue(performance.contains("7000"));
+assertTrue(performance.contains("8000"));
+assertTrue(performance.contains("9000"));
+assertTrue(performance.contains("10000"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(performance.contains("STR")); ===
+1.000 - assertTrue(performance.contains("STR"))
+0.947 - assertTrue(performance.contains("2"))
+0.947 - assertTrue(performance.contains("3"))
+0.923 - assertTrue(performance.contains("800"))
+0.923 - assertTrue(performance.contains("100"))
+0.923 - assertTrue(performance.contains("300"))
+0.923 - assertTrue(performance.contains("100"))
+0.911 - assertTrue(performance.contains("2400"))
+0.911 - assertTrue(performance.contains("2500"))
+0.911 - assertTrue(performance.contains("1000"))
+0.911 - assertTrue(performance.contains("2000"))
+0.911 - assertTrue(performance.contains("3000"))
+0.911 - assertTrue(performance.contains("4000"))
+0.911 - assertTrue(performance.contains("5000"))
+0.911 - assertTrue(performance.contains("6000"))
+0.911 - assertTrue(performance.contains("7000"))
+0.911 - assertTrue(performance.contains("8000"))
+0.911 - assertTrue(performance.contains("9000"))
+0.900 - assertTrue(performance.contains("10000"))
+0.658 - assertFalse(performance.isEmpty())
+0.548 - ```java
+assertNotNull(performance)
+0.000 - ```

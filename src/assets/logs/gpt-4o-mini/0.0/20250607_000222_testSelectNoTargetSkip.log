@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecution {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecutionTest {
+    @Test
+     public void testSelectNoTargetSkip ( ) {
+         OResultSet result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(0, result.getTotalRecords());
+assertEquals("Expected Result", result.next().getProperty("fieldName"));
+assertFalse(result.isEmpty());
+assertEquals(5, result.size());
+assertTrue(result.stream().count() > 0);
+assertTrue(result.stream().allMatch(r -> r.getProperty("fieldName") != null));
+assertEquals("Expected Value", result.next().getProperty("anotherField"));
+assertNotEquals("Unexpected Value", result.next().getProperty("differentField"));
+assertTrue(result.iterator().hasNext());
+assertEquals("First Record", result.iterator().next().getProperty("name"));
+assertFalse(result.isClosed());
+assertTrue(result.getExecutionPlan().isPresent());
+assertEquals("Expected Type", result.getType());
+assertTrue(result.getMetadata().containsKey("metadataKey"));
+assertEquals(1, result.getMetadata().get("metadataKey"));
+assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next();
+    }
+});
+assertTrue(result.getQuery().contains("STR"));
+assertEquals(0, result.getSkippedRecords());
+assertTrue(result.getExecutionTime() >= 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(result.hasNext()); ===
+0.877 - assertTrue(result.hasNext())
+0.828 - assertFalse(result.isEmpty())
+0.814 - assertFalse(result.isClosed())
+0.759 - assertEquals(5, result.size())
+0.735 - assertTrue(result.iterator().hasNext())
+0.638 - assertEquals(0, result.getTotalRecords())
+0.609 - assertTrue(result.getExecutionTime() >= 0)
+0.606 - assertTrue(result.stream().count() > 0)
+0.595 - assertEquals("Expected Type", result.getType())
+0.592 - assertEquals(0, result.getSkippedRecords())
+0.564 - assertTrue(result.getExecutionPlan().isPresent())
+0.548 - assertEquals(1, result.getMetadata().get("metadataKey"))
+0.541 - assertTrue(result.getQuery().contains("STR"))
+0.517 - ```java
+assertNotNull(result)
+0.475 - assertEquals("First Record", result.iterator().next().getProperty("name"))
+0.469 - assertEquals("Expected Result", result.next().getProperty("fieldName"))
+0.460 - assertEquals("Expected Value", result.next().getProperty("anotherField"))
+0.455 - assertTrue(result.getMetadata().containsKey("metadataKey"))
+0.430 - assertNotEquals("Unexpected Value", result.next().getProperty("differentField"))
+0.427 - assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next()
+0.373 - assertTrue(result.stream().allMatch(r -> r.getProperty("fieldName") != null))
+0.061 - }
+})
+0.000 - ```

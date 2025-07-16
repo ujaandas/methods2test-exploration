@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\npublic OResultSet query ( String query , Object ... args ) {\ncheckOpenness ( ) ;\nreturn internal . query ( query , args ) ;\n}\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testWhileArrows ( ) throws Exception {\nOResultSet qResult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(qResult);\nassertTrue(qResult.hasNext());\nassertEquals(\"Expected result\", qResult.next().getProperty(\"propertyName\"));\nassertFalse(qResult.hasNext());\nassertEquals(0, qResult.stream().count());\nassertThrows(Exception.class, () -> db.query(\"INVALID QUERY\"));\nassertNotEquals(\"Unexpected result\", qResult.next().getProperty(\"propertyName\"));\nassertTrue(qResult.stream().allMatch(item -> item.getProperty(\"propertyName\").equals(\"expectedValue\")));\nassertEquals(5, qResult.stream().filter(item -> item.getProperty(\"propertyName\").equals(\"expectedValue\")).count());\nassertTrue(qResult.stream().anyMatch(item -> item.getProperty(\"propertyName\").equals(\"expectedValue\")));\nassertEquals(10, qResult.stream().mapToInt(item -> item.getProperty(\"propertyName\")).sum());\nassertArrayEquals(new String[]{\"value1\", \"value2\"}, qResult.stream().map(item -> item.getProperty(\"propertyName\")).toArray());\nassertTrue(qResult.stream().noneMatch(item -> item.getProperty(\"propertyName\").equals(\"unexpectedValue\")));\nassertEquals(\"Expected result\", qResult.stream().findFirst().get().getProperty(\"propertyName\"));\nassertEquals(\"Expected result\", qResult.stream().findAny().get().getProperty(\"propertyName\"));\nassertEquals(\"Expected result\", qResult.stream().max(Comparator.comparing(item -> item.getProperty(\"propertyName\"))).get().getProperty(\"propertyName\"));\nassertEquals(\"Expected result\", qResult.stream().min(Comparator.comparing(item -> item.getProperty(\"propertyName\"))).get().getProperty(\"propertyName\"));\nassertTrue(qResult.stream().anyMatch(item -> item.getProperty(\"propertyName\").contains(\"substring\")));\n====================\n\n",
+    "scores": [
+        0.678,
+        0.667,
+        0.667,
+        0.621,
+        0.451,
+        0.43,
+        0.393,
+        0.383,
+        0.377,
+        0.329,
+        0.322,
+        0.299,
+        0.281,
+        0.277,
+        0.277,
+        0.271,
+        0.261,
+        0.261
+    ],
+    "ground_truth": "Assert.assertEquals(3,size(qResult));"
+}

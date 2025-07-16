@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WizardUtils {\nstatic File getFileFromUrl ( URL url , String className ) {\nString extURL = url . toExternalForm ( ) ;\nif ( extURL . endsWith ( \"STR\" ) ) {\nextURL = extURL . substring ( 0 , extURL . lastIndexOf ( '/' ) ) ;\n} else {\nString suffix = \"STR\" + className . replace ( \"STR\" , \"STR\" ) + \"STR\" ;\nextURL = extURL . replace ( suffix , \"STR\" ) ;\nif ( extURL . startsWith ( \"STR\" ) && extURL . endsWith ( \"STR\" ) ) {\nextURL = extURL . substring ( FILE_EXTENSION_LENGTH , extURL . lastIndexOf ( '/' ) ) ;\n} } try {\nurl = new URL ( extURL ) ;\n} catch ( MalformedURLException e ) {\nEmptyStatement . ignore ( e ) ;\n} try {\nreturn new File ( url . toURI ( ) ) ;\n} catch ( Exception ignored ) {\nreturn new File ( url . getPath ( ) ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WizardUtilsTest {\n@Test\npublic void testGetFileFromUrl_fromJarFile ( ) throws Exception {\nURL url = new URL ( \"STR\" ) ;\nFile file = WizardUtils . getFileFromUrl ( url , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(file);\nassertTrue(file.exists());\nassertTrue(file.isFile());\nassertEquals(\"ExpectedFileName\", file.getName());\nassertEquals(\"ExpectedFilePath\", file.getAbsolutePath());\nassertTrue(file.canRead());\nassertFalse(file.isDirectory());\nassertTrue(file.length() > 0);\nassertTrue(file.getParentFile().exists());\nassertTrue(file.getParentFile().isDirectory());\nassertEquals(\"ExpectedFileExtension\", getFileExtension(file));\nassertTrue(file.getPath().contains(\"ExpectedSubstring\"));\nassertTrue(file.getPath().endsWith(\"ExpectedFileName\"));\nassertFalse(file.getPath().contains(\"UnexpectedSubstring\"));\nassertTrue(file.getPath().startsWith(\"ExpectedStart\"));\nassertNotEquals(\"UnexpectedFileName\", file.getName());\nassertNotEquals(\"UnexpectedFilePath\", file.getAbsolutePath());\nassertTrue(file.getCanonicalPath().equals(file.getAbsolutePath()));\nassertTrue(file.getPath().matches(\".*ExpectedRegex.*\"));\nassertTrue(file.lastModified() > 0);\nassertTrue(file.canWrite());\nassertTrue(file.canExecute());\n```\n====================\n\n",
+    "scores": [
+        0.826,
+        0.591,
+        0.591,
+        0.578,
+        0.565,
+        0.565,
+        0.542,
+        0.52,
+        0.5,
+        0.433,
+        0.43,
+        0.423,
+        0.4,
+        0.38,
+        0.364,
+        0.356,
+        0.351,
+        0.351,
+        0.351,
+        0.347,
+        0.333,
+        0.306,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(file);"
+}

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class H264Utils {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class H264UtilsTest {
+    @Test
+     public void testAvcCToAnnexB ( ) {
+         ArrayList < ByteBuffer > spsList = new ArrayList < ByteBuffer > ( ) ; 
+         spsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     's' , 't' , 'a' , 'n' } ) ) ; 
+         spsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     't' , 'h' , 'e' } ) ) ; 
+         ArrayList < ByteBuffer > ppsList = new ArrayList < ByteBuffer > ( ) ; 
+         ppsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     'm' , 'a' , 'n' } ) ) ; 
+         ppsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     'c' , 'o' , 'o' , 'l' } ) ) ; 
+         AvcCBox avcCBox = AvcCBox . createAvcCBox ( 66 , 0 , 42 , 0 , spsList , ppsList ) ; 
+         byte [ ] res = NIOUtils . toArray ( H264Utils . avcCToAnnexB ( avcCBox ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(res[0], 's');
+Assert.assertEquals(res[1], 't');
+Assert.assertEquals(res[2], 'a');
+Assert.assertEquals(res[3], 'n');
+Assert.assertEquals(res[4], 't');
+Assert.assertEquals(res[5], 'h');
+Assert.assertEquals(res[6], 'e');
+Assert.assertEquals(res[7], 'm');
+Assert.assertEquals(res[8], 'a');
+Assert.assertEquals(res[9], 'n');
+Assert.assertEquals(res[10], 'c');
+Assert.assertEquals(res[11], 'o');
+Assert.assertEquals(res[12], 'o');
+Assert.assertEquals(res[13], 'l');
+Assert.assertEquals(res[14], 0x00);
+Assert.assertEquals(res[15], 0x00);
+Assert.assertEquals(res[16], 0x00);
+Assert.assertEquals(res[17], 0x01);
+Assert.assertEquals(res[18], 0x09);
+Assert.assertEquals(res[19], 0x10);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(newbyte[]{0,0,0,1,0x67,'s','t','a','n',0,0,0,1,0x67,'t','h','e',0,0,0,1,0x68,'m','a','n',0,0,0,1,0x68,'c','o','o','l'},res); ===
+0.263 - Assert.assertEquals(res[14], 0x00)
+0.263 - Assert.assertEquals(res[15], 0x00)
+0.263 - Assert.assertEquals(res[16], 0x00)
+0.263 - Assert.assertEquals(res[17], 0x01)
+0.255 - Assert.assertEquals(res[0], 's')
+0.255 - Assert.assertEquals(res[1], 't')
+0.255 - Assert.assertEquals(res[2], 'a')
+0.255 - Assert.assertEquals(res[3], 'n')
+0.255 - Assert.assertEquals(res[4], 't')
+0.255 - Assert.assertEquals(res[5], 'h')
+0.255 - Assert.assertEquals(res[6], 'e')
+0.255 - Assert.assertEquals(res[7], 'm')
+0.255 - Assert.assertEquals(res[8], 'a')
+0.255 - Assert.assertEquals(res[9], 'n')
+0.253 - Assert.assertEquals(res[10], 'c')
+0.253 - Assert.assertEquals(res[11], 'o')
+0.253 - Assert.assertEquals(res[12], 'o')
+0.253 - Assert.assertEquals(res[13], 'l')
+0.251 - Assert.assertEquals(res[18], 0x09)
+0.251 - Assert.assertEquals(res[19], 0x10)

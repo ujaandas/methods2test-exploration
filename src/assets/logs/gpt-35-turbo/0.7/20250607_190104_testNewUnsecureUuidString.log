@@ -1,0 +1,65 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class UuidUtil {
+    public static String newUnsecureUuidString ( ) { 
+    return newUnsecureUUID ( ) . toString ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class UuidUtilTest {
+    @Test
+     public void testNewUnsecureUuidString ( ) {
+         String uuid = newUnsecureUuidString ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(uuid);
+assertTrue(uuid.length() > 0);
+assertTrue(uuid.matches("[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}"));
+assertFalse(uuid.isEmpty());
+assertTrue(uuid.contains("-"));
+assertTrue(uuid.split("-").length == 5);
+assertEquals(36, uuid.length());
+assertTrue(uuid.startsWith("0"));
+assertFalse(uuid.endsWith("0"));
+assertTrue(uuid.equalsIgnoreCase(uuid.toLowerCase()));
+assertNotEquals("12345678-1234-1234-1234-123456789012", uuid);
+assertTrue(uuid.matches("[0-9a-fA-F]+"));
+assertTrue(uuid.indexOf("-") != -1);
+assertTrue(uuid.lastIndexOf("-") == 23);
+assertTrue(uuid.lastIndexOf("-") != -1);
+assertTrue(uuid.indexOf("-") != 0);
+assertNotEquals("00000000-0000-0000-0000-000000000000", uuid);
+assertNotEquals("ffffffff-ffff-ffff-ffff-ffffffffffff", uuid);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(uuid); ===
+1.000 - assertNotNull(uuid)
+0.571 - assertEquals(36, uuid.length())
+0.565 - assertTrue(uuid.length() > 0)
+0.565 - assertFalse(uuid.isEmpty())
+0.531 - assertTrue(uuid.contains("-"))
+0.520 - assertFalse(uuid.endsWith("0"))
+0.510 - assertTrue(uuid.startsWith("0"))
+0.510 - assertTrue(uuid.indexOf("-") != 0)
+0.500 - assertTrue(uuid.indexOf("-") != -1)
+0.464 - assertTrue(uuid.split("-").length == 5)
+0.464 - assertTrue(uuid.lastIndexOf("-") == 23)
+0.464 - assertTrue(uuid.lastIndexOf("-") != -1)
+0.441 - assertTrue(uuid.matches("[0-9a-fA-F]+"))
+0.430 - assertNotEquals("12345678-1234-1234-1234-123456789012", uuid)
+0.430 - assertNotEquals("00000000-0000-0000-0000-000000000000", uuid)
+0.430 - assertNotEquals("ffffffff-ffff-ffff-ffff-ffffffffffff", uuid)
+0.361 - assertTrue(uuid.equalsIgnoreCase(uuid.toLowerCase()))
+0.295 - assertTrue(uuid.matches("[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}"))

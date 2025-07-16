@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testOptional3 ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(qResult);\nAssert.assertFalse(qResult.isEmpty());\nAssert.assertEquals(expectedSize, qResult.size());\nAssert.assertTrue(qResult.get(0).field(\"fieldName\") instanceof ExpectedType);\nAssert.assertEquals(expectedValue, qResult.get(0).field(\"fieldName\"));\nAssert.assertNotEquals(unexpectedValue, qResult.get(0).field(\"fieldName\"));\nAssert.assertTrue(qResult.stream().allMatch(doc -> doc.field(\"anotherField\") != null));\nAssert.assertTrue(qResult.stream().anyMatch(doc -> doc.field(\"fieldName\").equals(specificValue)));\nAssert.assertEquals(expectedDocumentId, qResult.get(0).getIdentity());\nAssert.assertTrue(qResult.stream().noneMatch(doc -> doc.field(\"fieldName\").equals(negativeValue)));\nAssert.assertEquals(expectedFieldCount, qResult.get(0).fields().size());\nAssert.assertTrue(qResult.stream().allMatch(doc -> doc.field(\"fieldName\").toString().contains(\"expectedSubstring\")));\nAssert.assertTrue(qResult.stream().anyMatch(doc -> doc.field(\"numericField\") > thresholdValue));\nAssert.assertEquals(expectedFieldValue, qResult.get(1).field(\"anotherField\"));\nAssert.assertNotNull(qResult.get(0).field(\"nestedField\"));\nAssert.assertTrue(qResult.get(0).field(\"nestedField\") instanceof ODocument);\nAssert.assertEquals(expectedNestedFieldValue, qResult.get(0).field(\"nestedField\").field(\"subField\"));\nAssert.assertEquals(expectedString, qResult.get(0).field(\"stringField\").toString());\nAssert.assertTrue(qResult.stream().allMatch(doc -> doc.field(\"booleanField\") == true));\nAssert.assertThrows(ExpectedException.class, () -> {\n// Code that should throw an exception\n});\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.624,
+        0.593,
+        0.571,
+        0.567,
+        0.562,
+        0.55,
+        0.545,
+        0.533,
+        0.459,
+        0.438,
+        0.4,
+        0.4,
+        0.392,
+        0.368,
+        0.356,
+        0.353,
+        0.307,
+        0.296,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

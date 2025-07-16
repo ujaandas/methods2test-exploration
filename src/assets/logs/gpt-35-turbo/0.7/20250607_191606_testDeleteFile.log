@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException { 
+    File targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ; 
+    if ( targetFile . exists ( ) ) { 
+    if ( targetFile . isDirectory ( ) ) { 
+    try { 
+    FileUtils . deleteDirectory ( targetFile ) ; 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } catch ( IllegalArgumentException e ) { 
+    debug ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } catch ( IOException e ) { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } } else { 
+    if ( targetFile . delete ( ) ) { 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } else { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testDeleteFile ( ) throws Exception {
+         File tempSrcFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( tempSrcFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File tempTargetFile = new File ( targetDir , "STR" ) ; 
+         Files . write ( tempTargetFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(tempSrcFile.exists());
+Assert.assertTrue(tempTargetFile.exists());
+Assert.assertTrue(tempSrcFile.isFile());
+Assert.assertTrue(tempTargetFile.isFile());
+Assert.assertEquals("STR", Files.readAllLines(tempSrcFile.toPath()).get(0));
+Assert.assertEquals("STR", Files.readAllLines(tempTargetFile.toPath()).get(0));
+Assert.assertTrue(tempSrcFile.delete());
+Assert.assertFalse(tempSrcFile.exists());
+Assert.assertTrue(tempTargetFile.exists());
+Assert.assertTrue(tempTargetFile.delete());
+Assert.assertFalse(tempTargetFile.exists());
+Assert.assertFalse(tempSrcFile.isFile());
+Assert.assertFalse(tempTargetFile.isFile());
+Assert.assertFalse(tempSrcFile.delete());
+Assert.assertFalse(tempTargetFile.delete());
+Assert.assertTrue(tempSrcFile.createNewFile());
+Assert.assertTrue(tempTargetFile.createNewFile());
+Assert.assertTrue(tempSrcFile.exists());
+Assert.assertTrue(tempTargetFile.exists());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(tempSrcFile.exists()); ===
+1.000 - Assert.assertTrue(tempSrcFile.exists())
+1.000 - Assert.assertTrue(tempSrcFile.exists())
+0.896 - Assert.assertTrue(tempTargetFile.exists())
+0.896 - Assert.assertTrue(tempTargetFile.exists())
+0.896 - Assert.assertTrue(tempTargetFile.exists())
+0.892 - Assert.assertFalse(tempSrcFile.exists())
+0.875 - Assert.assertTrue(tempSrcFile.isFile())
+0.875 - Assert.assertTrue(tempSrcFile.delete())
+0.794 - Assert.assertFalse(tempTargetFile.exists())
+0.789 - Assert.assertTrue(tempSrcFile.createNewFile())
+0.776 - Assert.assertTrue(tempTargetFile.isFile())
+0.776 - Assert.assertTrue(tempTargetFile.delete())
+0.769 - Assert.assertFalse(tempSrcFile.isFile())
+0.769 - Assert.assertFalse(tempSrcFile.delete())
+0.703 - Assert.assertTrue(tempTargetFile.createNewFile())
+0.676 - Assert.assertFalse(tempTargetFile.isFile())
+0.676 - Assert.assertFalse(tempTargetFile.delete())
+0.525 - Assert.assertEquals("STR", Files.readAllLines(tempSrcFile.toPath()).get(0))
+0.471 - Assert.assertEquals("STR", Files.readAllLines(tempTargetFile.toPath()).get(0))

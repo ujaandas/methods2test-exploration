@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class OConnectionExecutorTransaction {\nboolean isActive ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class OConnectionExecutorTransactionTest {\n@Test\npublic void testExecutionBeginTransaction ( ) {\nOConnectionBinaryExecutor executor = new OConnectionBinaryExecutor ( connection , server ) ;\nList < ORecordOperation > operations = new ArrayList < > ( ) ;\nODocument rec = new ODocument ( ) ;\nORecordInternal . setIdentity ( rec , new ORecordId ( 3 , - 2 ) ) ;\noperations . add ( new ORecordOperation ( rec , ORecordOperation . CREATED ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions to be inserted in place of <ASSERTIONS HERE>:\n\n1. assertEquals(0, operations.size());\n2. assertNotNull(executor.getConnection());\n3. assertNotNull(executor.getServer());\n4. assertTrue(executor.isActive());\n5. assertFalse(executor.isInactive());\n6. assertTrue(operations.isEmpty());\n7. assertNotNull(rec);\n8. assertNotNull(rec.getIdentity());\n9. assertEquals(3, rec.getIdentity().getClusterId());\n10. assertEquals(-2, rec.getIdentity().getClusterPosition());\n11. assertNotNull(rec.getRecordType());\n12. assertEquals(ORecordType.DOCUMENT, rec.getRecordType());\n13. assertTrue(operations.get(0).type == ORecordOperation.CREATED);\n14. assertNotNull(operations.get(0).record);\n15. assertEquals(rec, operations.get(0).record);\n16. assertNotNull(operations.get(0).record.getId());\n17. assertEquals(rec.getIdentity(), operations.get(0).record.getId());\n18. assertNotNull(operations.get(0).record.toStream());\n19. assertNotNull(operations.get(0).record.toStream());\n20. assertTrue(operations.get(0).record.toStream().length > 0);\n====================\n\n",
+    "scores": [
+        0.588,
+        0.537,
+        0.53,
+        0.525,
+        0.489,
+        0.483,
+        0.471,
+        0.471,
+        0.468,
+        0.465,
+        0.458,
+        0.442,
+        0.44,
+        0.43,
+        0.407,
+        0.396,
+        0.395,
+        0.393,
+        0.328,
+        0.29
+    ],
+    "ground_truth": "assertFalse(database.getTransaction().isActive());"
+}

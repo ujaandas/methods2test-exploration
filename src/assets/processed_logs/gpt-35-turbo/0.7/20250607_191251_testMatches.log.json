@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testMatches ( ) {\nList < ? > result = db . query ( new OSQLSynchQuery < Object > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, result.size());\nassertTrue(result.isEmpty());\nassertNotNull(result);\nassertEquals(1, result.size());\nassertFalse(result.isEmpty());\nassertTrue(result.contains(\"test\"));\nassertFalse(result.contains(\"invalid\"));\nassertEquals(\"expectedValue\", result.get(0));\nassertNotEquals(\"unexpectedValue\", result.get(0));\nassertTrue(result.size() > 0);\nassertFalse(result.size() == 0);\nassertNotNull(result.get(0));\nassertEquals(10, result.size());\nassertTrue(result.containsAll(expectedList));\nassertFalse(result.containsAll(unexpectedList));\nassertTrue(result.get(0) instanceof String);\nassertFalse(result.get(0) instanceof Integer);\n====================\n\n",
+    "scores": [
+        0.931,
+        0.931,
+        0.915,
+        0.828,
+        0.786,
+        0.724,
+        0.702,
+        0.667,
+        0.667,
+        0.64,
+        0.623,
+        0.618,
+        0.594,
+        0.556,
+        0.553,
+        0.521,
+        0.514
+    ],
+    "ground_truth": "assertEquals(result.size(),1);"
+}

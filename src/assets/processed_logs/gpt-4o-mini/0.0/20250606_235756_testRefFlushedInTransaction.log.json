@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testRefFlushedInTransaction ( ) {\ndatabase . begin ( ) ;\nOElement someTx = database . newElement ( \"STR\" ) ;\nsomeTx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( someTx ) ;\nOElement oneMore = database . newElement ( \"STR\" ) ;\noneMore . setProperty ( \"STR\" , \"STR\" ) ;\noneMore . setProperty ( \"STR\" , someTx ) ;\nOResultSet result = database . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nOResult firstResult = result.next();\nassertEquals(\"STR\", firstResult.getProperty(\"STR\"));\nassertEquals(\"STR\", firstResult.getProperty(\"STR\"));\nassertTrue(firstResult.getProperty(\"STR\") instanceof OElement);\nassertEquals(someTx.getIdentity(), firstResult.getProperty(\"STR\").getIdentity());\nassertEquals(\"STR\", firstResult.getProperty(\"STR\"));\nassertEquals(1, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"STR\").equals(\"STR\")));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"STR\").equals(\"INVALID\")));\nassertEquals(1, database.countElements(\"STR\"));\nassertEquals(2, database.countElements());\nassertTrue(database.getElements(\"STR\").contains(someTx));\nassertTrue(database.getElements(\"STR\").contains(oneMore));\nassertNotEquals(someTx.getIdentity(), oneMore.getIdentity());\nassertEquals(\"STR\", oneMore.getProperty(\"STR\"));\nassertNotNull(oneMore.getProperty(\"STR\"));\nassertTrue(database.isTransactionActive());\nassertTrue(database.getTransaction().isActive());\nassertDoesNotThrow(() -> database.commit());\nassertTrue(database.getTransaction().isActive());\nassertTrue(database.getTransaction().isFlushed());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.627,
+        0.608,
+        0.607,
+        0.607,
+        0.607,
+        0.595,
+        0.542,
+        0.538,
+        0.526,
+        0.494,
+        0.475,
+        0.471,
+        0.469,
+        0.46,
+        0.46,
+        0.432,
+        0.424,
+        0.423,
+        0.4,
+        0.4,
+        0.396,
+        0.346,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,result.stream().count());"
+}

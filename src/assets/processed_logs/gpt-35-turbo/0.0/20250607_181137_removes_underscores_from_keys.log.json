@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoader {\npublic String getString ( String key ) {\nreturn getIn ( normalize ( key ) , false ) . getString ( ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoaderTest {\n@Test\npublic void removes_underscores_from_keys ( ) {\nConfig config = new Config ( ) ;\nConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( \"STR\" + \"STR\" + \"STR\" ) ) ;\nconfigLoader . load ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STRSTRSTR\", config.getString(\"key\"));\nassertNotEquals(\"STR_STR_STR\", config.getString(\"key\"));\nassertTrue(config.getString(\"key\").contains(\"STR\"));\nassertFalse(config.getString(\"key\").isEmpty());\nassertNotNull(config.getString(\"key\"));\nassertNull(config.getString(\"key\"));\nassertSame(\"STRSTRSTR\", config.getString(\"key\"));\nassertNotSame(\"STR_STR_STR\", config.getString(\"key\"));\nassertTrue(config.getString(\"key\").startsWith(\"STR\"));\nassertFalse(config.getString(\"key\").endsWith(\"STR\"));\nassertEqualsIgnoringCase(\"strstrstr\", config.getString(\"key\"));\nassertArrayEquals(new String[]{\"STR\", \"STR\", \"STR\"}, config.getString(\"key\").split(\"\"));\nassertTrue(config.getString(\"key\").matches(\"[A-Z]+\"));\nassertFalse(config.getString(\"key\").matches(\"[0-9]+\"));\nassertEquals(9, config.getString(\"key\").length());\nassertNotEquals(10, config.getString(\"key\").length());\nassertTrue(config.getString(\"key\").equals(\"STRSTRSTR\"));\nassertFalse(config.getString(\"key\").equals(\"STR_STR_STR\"));\nassertTrue(config.getString(\"key\").equalsIgnoreCase(\"strstrstr\"));\nassertFalse(config.getString(\"key\").equalsIgnoreCase(\"str_str_str\"));\n====================\n\n",
+    "scores": [
+        0.87,
+        0.825,
+        0.778,
+        0.769,
+        0.769,
+        0.741,
+        0.737,
+        0.737,
+        0.716,
+        0.712,
+        0.697,
+        0.681,
+        0.673,
+        0.667,
+        0.653,
+        0.639,
+        0.635,
+        0.604,
+        0.559,
+        0.537
+    ],
+    "ground_truth": "assertEquals(\"STR\",config.getString(\"STR\"));"
+}

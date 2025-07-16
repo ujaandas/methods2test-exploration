@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testFetchFromSingleRid ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\nprintExecutionPlan ( result ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(1, result.stream().count());\nassertEquals(\"ExpectedValue\", result.getProperty(\"propertyName\"));\nassertFalse(result.isEmpty());\nassertTrue(result.next());\nassertNotEquals(\"NotExpectedValue\", result.getProperty(\"propertyName\"));\nassertTrue(result.hasNextPage());\nassertFalse(result.isClosed());\nassertTrue(result.getExecutionPlan().contains(\"expectedPlan\"));\nassertEquals(5, result.size());\nassertTrue(result.hasNextPage());\nassertEquals(3, result.getColumnCount());\nassertTrue(result.containsColumn(\"columnName\"));\nassertFalse(result.isExhausted());\nassertTrue(result.hasPrevious());\nassertEquals(10, result.getExecutionTime());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.933,
+        0.933,
+        0.906,
+        0.833,
+        0.721,
+        0.702,
+        0.702,
+        0.69,
+        0.64,
+        0.612,
+        0.6,
+        0.597,
+        0.597,
+        0.556,
+        0.413,
+        0.388
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

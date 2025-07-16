@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class SaveLinkedTypeAny {
+    @Deprecated
+     < RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class SaveLinkedTypeAnyTest {
+    @Test
+     public void testAlterRemoveLinkedType ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . EMBEDDEDLIST , OType . ANY ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         List < ODocument > result = db . query ( new OSQLSynchQuery < ODocument > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertEquals(2, result.size());
+assertTrue(result.get(0) instanceof ODocument);
+assertTrue(result.get(1) instanceof ODocument);
+assertEquals("STR", result.get(0).getClassName());
+assertEquals("STR", result.get(1).getClassName());
+assertNotNull(result.get(0).field("STR"));
+assertNotNull(result.get(1).field("STR"));
+assertTrue(result.get(0).field("STR") instanceof List<?>);
+assertTrue(result.get(1).field("STR") instanceof List<?>);
+assertTrue(((List<?>) result.get(0).field("STR")).isEmpty());
+assertTrue(((List<?>) result.get(1).field("STR")).isEmpty());
+assertEquals(0, ((List<?>) result.get(0).field("STR")).size());
+assertEquals(0, ((List<?>) result.get(1).field("STR")).size());
+assertNull(result.get(0).field("nonExistingField"));
+assertNull(result.get(1).field("nonExistingField"));
+assertFalse(result.get(0).isNew());
+assertFalse(result.get(1).isNew());
+assertTrue(result.get(0).getIdentity().isPersistent());
+assertTrue(result.get(1).getIdentity().isPersistent());
+assertEquals(0, db.countClass("STR"));
+assertEquals(2, db.countClusterElements("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(result); ===
+0.840 - ```java
+assertNotNull(result)
+0.677 - assertNotNull(result.get(0).field("STR"))
+0.677 - assertNotNull(result.get(1).field("STR"))
+0.640 - assertEquals(2, result.size())
+0.545 - assertFalse(result.get(0).isNew())
+0.545 - assertFalse(result.get(1).isNew())
+0.500 - assertNull(result.get(0).field("nonExistingField"))
+0.500 - assertNull(result.get(1).field("nonExistingField"))
+0.464 - assertEquals("STR", result.get(0).getClassName())
+0.464 - assertEquals("STR", result.get(1).getClassName())
+0.462 - assertTrue(result.get(0) instanceof ODocument)
+0.462 - assertTrue(result.get(1) instanceof ODocument)
+0.400 - assertTrue(result.get(0).getIdentity().isPersistent())
+0.400 - assertTrue(result.get(1).getIdentity().isPersistent())
+0.395 - assertTrue(result.get(0).field("STR") instanceof List<?>)
+0.395 - assertTrue(result.get(1).field("STR") instanceof List<?>)
+0.386 - assertEquals(0, db.countClass("STR"))
+0.358 - assertEquals(2, db.countClusterElements("STR"))
+0.350 - assertTrue(((List<?>) result.get(0).field("STR")).isEmpty())
+0.350 - assertTrue(((List<?>) result.get(1).field("STR")).isEmpty())
+0.346 - assertEquals(0, ((List<?>) result.get(0).field("STR")).size())
+0.346 - assertEquals(0, ((List<?>) result.get(1).field("STR")).size())
+0.000 - ```

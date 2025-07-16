@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package nidi3.graphviz-java.graphviz-java;
+
+public class Label {
+    @SafeVarargs
+     static < F extends For > Attributes < F > attrs ( Attributes < ? extends F > ... attributes ) { 
+     return attrs ( asList ( attributes ) ) ; 
+     }
+}
+
+package nidi3.graphviz-java.graphviz-java;
+
+public class LabelTest {
+    @Test
+     void external ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.jupiter.api.Assertions.*;
+
+Label label = new Label();
+Attributes<For> attrs1 = label.attrs(new Attributes<For>(), new Attributes<For>());
+Attributes<For> attrs2 = label.attrs(new Attributes<For>());
+Attributes<For> attrs3 = label.attrs();
+
+assertNotNull(attrs1);
+assertNotNull(attrs2);
+assertNotNull(attrs3);
+assertTrue(attrs1 instanceof Attributes);
+assertTrue(attrs2 instanceof Attributes);
+assertTrue(attrs3 instanceof Attributes);
+assertEquals(2, attrs1.size());
+assertEquals(0, attrs2.size());
+assertEquals(0, attrs3.size());
+assertThrows(NullPointerException.class, () -> label.attrs(null));
+assertDoesNotThrow(() -> label.attrs(new Attributes<For>(), new Attributes<For>(), new Attributes<For>()));
+assertTrue(label.attrs(new Attributes<For>(), new Attributes<For>()).equals(attrs1));
+assertFalse(attrs1.equals(attrs2));
+assertTrue(attrs1.equals(label.attrs(new Attributes<For>(), new Attributes<For>())));
+assertEquals(attrs1.hashCode(), label.attrs(new Attributes<For>(), new Attributes<For>()).hashCode());
+assertNotEquals(attrs1.hashCode(), attrs2.hashCode());
+assertTrue(attrs1.toString().contains("Attributes"));
+assertTrue(attrs2.toString().contains("Attributes"));
+assertTrue(attrs3.toString().contains("Attributes"));
+assertSame(attrs1, label.attrs(new Attributes<For>(), new Attributes<For>()));
+assertNotSame(attrs1, attrs2);
+assertTrue(attrs1.isEmpty());
+assertFalse(attrs1.isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(attrs(attr("STR",label.external())),attrs(label.external())); ===
+0.496 - assertNotEquals(attrs1.hashCode(), attrs2.hashCode())
+0.482 - assertEquals(attrs1.hashCode(), label.attrs(new Attributes<For>(), new Attributes<For>()).hashCode())
+0.479 - assertSame(attrs1, label.attrs(new Attributes<For>(), new Attributes<For>()))
+0.451 - assertEquals(2, attrs1.size())
+0.451 - assertEquals(0, attrs2.size())
+0.451 - assertEquals(0, attrs3.size())
+0.442 - assertTrue(attrs1.equals(label.attrs(new Attributes<For>(), new Attributes<For>())))
+0.396 - assertNotSame(attrs1, attrs2)
+0.378 - assertTrue(attrs1 instanceof Attributes)
+0.378 - assertTrue(attrs2 instanceof Attributes)
+0.378 - assertTrue(attrs3 instanceof Attributes)
+0.373 - assertFalse(attrs1.isEmpty())
+0.368 - assertTrue(attrs1.toString().contains("Attributes"))
+0.368 - assertTrue(attrs2.toString().contains("Attributes"))
+0.368 - assertTrue(attrs3.toString().contains("Attributes"))
+0.355 - assertFalse(attrs1.equals(attrs2))
+0.337 - assertTrue(attrs1.isEmpty())
+0.319 - Label label = new Label()
+0.319 - assertNotNull(attrs1)
+0.319 - assertNotNull(attrs2)
+0.319 - assertNotNull(attrs3)
+0.312 - Attributes<For> attrs2 = label.attrs(new Attributes<For>())
+0.302 - assertDoesNotThrow(() -> label.attrs(new Attributes<For>(), new Attributes<For>(), new Attributes<For>()))
+0.282 - Attributes<For> attrs1 = label.attrs(new Attributes<For>(), new Attributes<For>())
+0.267 - assertThrows(NullPointerException.class, () -> label.attrs(null))
+0.247 - assertTrue(label.attrs(new Attributes<For>(), new Attributes<For>()).equals(attrs1))
+0.204 - Attributes<For> attrs3 = label.attrs()
+0.126 - ```java
+import static org.junit.jupiter.api.Assertions.*
+0.000 - ```

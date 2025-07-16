@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScript {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScriptTest {\n@Test\npublic void testSleep ( ) throws Exception {\nlong begin = System . currentTimeMillis ( ) ;\nStringBuilder script = new StringBuilder ( ) ;\nscript . append ( \"STR\" ) ;\ndb . command ( new OCommandScript ( \"STR\" , script . toString ( ) ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", db.command(new OCommandScript(\"STR\", script.toString())).execute());\nassertNotEquals(0, System.currentTimeMillis() - begin);\nassertTrue(script.toString().contains(\"STR\"));\nassertFalse(script.toString().isEmpty());\nassertNotNull(db.command(new OCommandScript(\"STR\", script.toString())).execute());\nassertNull(null);\nassertSame(script.toString(), \"STR\");\nassertNotSame(db.command(new OCommandScript(\"STR\", script.toString())).execute(), \"test\");\nassertTrue(System.currentTimeMillis() - begin > 0);\nassertFalse(script.toString().equals(\"test\"));\nassertEquals(3, script.length());\nassertTrue(db.command(new OCommandScript(\"STR\", script.toString())).execute() instanceof String);\nassertFalse(script.toString().equals(\"STRING\"));\nassertEquals(1, script.indexOf(\"T\"));\nassertTrue(script.toString().startsWith(\"S\"));\nassertFalse(db.command(new OCommandScript(\"STR\", script.toString())).execute() instanceof Integer);\nassertEquals(4, script.capacity());\nassertTrue(script.toString().endsWith(\"R\"));\nassertFalse(script.toString().equals(\"STR \"));\nassertTrue(db.command(new OCommandScript(\"STR\", script.toString())).execute() != null);\n====================\n\n",
+    "scores": [
+        0.968,
+        0.82,
+        0.468,
+        0.435,
+        0.426,
+        0.375,
+        0.366,
+        0.36,
+        0.357,
+        0.354,
+        0.341,
+        0.338,
+        0.31,
+        0.29,
+        0.277,
+        0.27,
+        0.238,
+        0.203,
+        0.195,
+        0.178
+    ],
+    "ground_truth": "Assert.assertTrue(System.currentTimeMillis()-begin>=500);"
+}

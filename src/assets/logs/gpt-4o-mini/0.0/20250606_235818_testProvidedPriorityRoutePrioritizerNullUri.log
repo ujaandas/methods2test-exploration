@@ -1,0 +1,120 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    @Override
+     public Collection < UriResource > getPrioritizedRoutes ( ) { 
+     return Collections . unmodifiableCollection ( mappings ) ; 
+     }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testProvidedPriorityRoutePrioritizerNullUri ( ) {
+         ProvidedPriorityRoutePrioritizer routePrioritizer = new ProvidedPriorityRoutePrioritizer ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(routePrioritizer);
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+
+UriResource nullUriResource = null;
+routePrioritizer.addRoute(nullUriResource);
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource));
+
+UriResource validUriResource = new UriResource("validUri");
+routePrioritizer.addRoute(validUriResource);
+assertEquals(2, routePrioritizer.getPrioritizedRoutes().size());
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(validUriResource));
+
+routePrioritizer.removeRoute(nullUriResource);
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+assertFalse(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource));
+
+routePrioritizer.removeRoute(validUriResource);
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+
+routePrioritizer.addRoute(validUriResource);
+assertNotNull(routePrioritizer.getPrioritizedRoutes());
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+
+UriResource anotherValidUriResource = new UriResource("anotherValidUri");
+routePrioritizer.addRoute(anotherValidUriResource);
+assertEquals(2, routePrioritizer.getPrioritizedRoutes().size());
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource));
+
+routePrioritizer.clearRoutes();
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+
+routePrioritizer.addRoute(nullUriResource);
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+
+routePrioritizer.addRoute(validUriResource);
+routePrioritizer.addRoute(anotherValidUriResource);
+assertEquals(3, routePrioritizer.getPrioritizedRoutes().size());
+
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(validUriResource));
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource));
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource));
+
+routePrioritizer.removeRoute(anotherValidUriResource);
+assertEquals(2, routePrioritizer.getPrioritizedRoutes().size());
+assertFalse(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource));
+
+routePrioritizer.clearRoutes();
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size()); ===
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(2, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(2, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(3, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(2, routePrioritizer.getPrioritizedRoutes().size())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.845 - assertNotNull(routePrioritizer.getPrioritizedRoutes())
+0.786 - assertFalse(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource))
+0.763 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource))
+0.763 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(nullUriResource))
+0.757 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(validUriResource))
+0.757 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(validUriResource))
+0.743 - assertFalse(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource))
+0.721 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource))
+0.721 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(anotherValidUriResource))
+0.587 - routePrioritizer.clearRoutes()
+0.587 - routePrioritizer.clearRoutes()
+0.515 - ```java
+assertNotNull(routePrioritizer)
+0.505 - routePrioritizer.removeRoute(nullUriResource)
+0.500 - routePrioritizer.removeRoute(validUriResource)
+0.481 - routePrioritizer.addRoute(nullUriResource)
+0.481 - routePrioritizer.addRoute(nullUriResource)
+0.476 - routePrioritizer.addRoute(validUriResource)
+0.476 - routePrioritizer.addRoute(validUriResource)
+0.476 - routePrioritizer.addRoute(validUriResource)
+0.470 - routePrioritizer.removeRoute(anotherValidUriResource)
+0.446 - routePrioritizer.addRoute(anotherValidUriResource)
+0.446 - routePrioritizer.addRoute(anotherValidUriResource)
+0.241 - UriResource validUriResource = new UriResource("validUri")
+0.231 - UriResource anotherValidUriResource = new UriResource("anotherValidUri")
+0.215 - UriResource nullUriResource = null
+0.000 - ```

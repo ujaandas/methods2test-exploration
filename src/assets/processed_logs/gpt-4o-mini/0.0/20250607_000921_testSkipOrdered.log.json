@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testSkipOrdered ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(expectedSize, results.size());\nassertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));\nassertTrue(results.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedValue, results.get(0).field(\"fieldName\"));\nassertEquals(expectedValue, results.get(1).field(\"fieldName\"));\nassertNotEquals(unexpectedValue, results.get(2).field(\"fieldName\"));\nassertTrue(results.get(0).field(\"fieldName\").toString().startsWith(\"prefix\"));\nassertTrue(results.get(1).field(\"fieldName\").toString().endsWith(\"suffix\"));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"fieldName\").equals(specificValue)));\nassertEquals(expectedDocumentId, results.get(0).getIdentity());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"numericField\") > 0));\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"booleanField\") == false));\nassertEquals(expectedFieldCount, results.get(0).fieldNames().size());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"dateField\") instanceof Date));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"listField\") instanceof List));\nassertTrue(results.stream().allMatch(doc -> ((List<?>) doc.field(\"listField\")).size() > 0));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"mapField\") instanceof Map));\nassertEquals(expectedMapValue, results.get(0).field(\"mapField\").get(\"key\"));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"fieldName\").toString().matches(\"regexPattern\")));\nassertEquals(expectedOrder, results.stream().map(doc -> doc.field(\"orderField\")).collect(Collectors.toList()));\n```\n====================\n\n",
+    "scores": [
+        0.806,
+        0.721,
+        0.592,
+        0.587,
+        0.587,
+        0.565,
+        0.557,
+        0.557,
+        0.514,
+        0.433,
+        0.412,
+        0.406,
+        0.4,
+        0.396,
+        0.393,
+        0.389,
+        0.389,
+        0.385,
+        0.378,
+        0.378,
+        0.353,
+        0.318,
+        0.0
+    ],
+    "ground_truth": "assertEquals(19,results.size());"
+}

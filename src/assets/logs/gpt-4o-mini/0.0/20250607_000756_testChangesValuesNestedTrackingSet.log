@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollections {
+    public List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) { 
+    return Collections . unmodifiableList ( multiValueChangeEvents ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollectionsTest {
+    @Test
+     public void testChangesValuesNestedTrackingSet ( ) {
+         ODocument document = new ODocument ( ) ; 
+         Set objects = new HashSet ( ) ; 
+         document . field ( "STR" , objects ) ; 
+         Set subObjects = new HashSet ( ) ; 
+         objects . add ( subObjects ) ; 
+         ODocument nestedDoc = new ODocument ( ) ; 
+         subObjects . add ( nestedDoc ) ; 
+         document . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         objects = document . field ( "STR" ) ; 
+         subObjects = ( Set ) objects . iterator ( ) . next ( ) ; 
+         subObjects . add ( "STR" ) ; 
+         OMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(timeLine);
+assertEquals(1, timeLine.getChangeEvents().size());
+assertTrue(timeLine.getChangeEvents().get(0) instanceof OMultiValueChangeEvent);
+assertEquals(OMultiValueChangeEvent.EventType.ADD, timeLine.getChangeEvents().get(0).getEventType());
+assertEquals("STR", timeLine.getChangeEvents().get(0).getValue());
+assertEquals(1, timeLine.getChangeEvents().get(0).getOldValue().size());
+assertTrue(timeLine.getChangeEvents().get(0).getOldValue().contains(nestedDoc));
+assertFalse(timeLine.getChangeEvents().get(0).getOldValue().contains("STR"));
+assertEquals(2, timeLine.getChangeEvents().get(0).getNewValue().size());
+assertTrue(timeLine.getChangeEvents().get(0).getNewValue().contains(nestedDoc));
+assertTrue(timeLine.getChangeEvents().get(0).getNewValue().contains("STR"));
+assertEquals(document.getIdentity(), timeLine.getDocumentIdentity());
+assertEquals("STR", timeLine.getFieldName());
+assertEquals(1, timeLine.getChangeEvents().get(0).getIndex());
+assertNotNull(timeLine.getChangeEvents().get(0).getTimestamp());
+assertTrue(timeLine.getChangeEvents().get(0).isTracked());
+assertEquals(1, document.field("STR").size());
+assertTrue(document.field("STR").contains(subObjects));
+assertTrue(subObjects.contains("STR"));
+assertFalse(subObjects.isEmpty());
+assertEquals(1, subObjects.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,timeLine.getMultiValueChangeEvents().size()); ===
+0.907 - assertEquals(1, timeLine.getChangeEvents().size())
+0.773 - assertEquals(1, timeLine.getChangeEvents().get(0).getIndex())
+0.760 - assertEquals(1, timeLine.getChangeEvents().get(0).getOldValue().size())
+0.744 - assertEquals(2, timeLine.getChangeEvents().get(0).getNewValue().size())
+0.732 - assertEquals("STR", timeLine.getChangeEvents().get(0).getValue())
+0.690 - assertTrue(timeLine.getChangeEvents().get(0).isTracked())
+0.656 - assertNotNull(timeLine.getChangeEvents().get(0).getTimestamp())
+0.627 - assertEquals("STR", timeLine.getFieldName())
+0.618 - assertTrue(timeLine.getChangeEvents().get(0) instanceof OMultiValueChangeEvent)
+0.607 - assertFalse(timeLine.getChangeEvents().get(0).getOldValue().contains("STR"))
+0.582 - assertTrue(timeLine.getChangeEvents().get(0).getNewValue().contains("STR"))
+0.565 - assertTrue(timeLine.getChangeEvents().get(0).getOldValue().contains(nestedDoc))
+0.565 - assertTrue(timeLine.getChangeEvents().get(0).getNewValue().contains(nestedDoc))
+0.565 - assertEquals(1, subObjects.size())
+0.563 - assertEquals(1, document.field("STR").size())
+0.540 - assertEquals(document.getIdentity(), timeLine.getDocumentIdentity())
+0.532 - assertEquals(OMultiValueChangeEvent.EventType.ADD, timeLine.getChangeEvents().get(0).getEventType())
+0.400 - ```java
+assertNotNull(timeLine)
+0.391 - assertFalse(subObjects.isEmpty())
+0.301 - assertTrue(document.field("STR").contains(subObjects))
+0.247 - assertTrue(subObjects.contains("STR"))
+0.000 - ```

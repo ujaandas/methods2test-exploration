@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgb {
+    public byte [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgbTest {
+    @Test
+     public void testYuv420pToRgbH2H ( ) {
+         Yuv420pToRgb transform = new Yuv420pToRgb ( ) ; 
+         Picture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] { 
+     yH , uH , vH } , new byte [ ] [ ] { 
+     yL , uL , vL } , ColorSpace . YUV420 , 2 ) ; 
+         Picture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ; 
+         transform . transform ( _in , out ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(out);
+assertEquals(4, out.getWidth());
+assertEquals(4, out.getHeight());
+assertEquals(ColorSpace.RGB, out.getColorSpace());
+assertEquals(2, out.getBitDepth());
+
+byte[] expectedRgbData = { /* expected RGB values based on input YUV */ };
+byte[] actualRgbData = out.getPlaneData(0); // Assuming plane 0 is RGB data
+
+for (int i = 0; i < expectedRgbData.length; i++) {
+    assertEquals(expectedRgbData[i], actualRgbData[i]);
+}
+
+assertTrue(Arrays.equals(expectedRgbData, actualRgbData));
+
+for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+        int index = (i * 4 + j) * 3; // Assuming 3 bytes per pixel (RGB)
+        assertTrue(actualRgbData[index] >= 0);
+        assertTrue(actualRgbData[index] <= 255);
+        assertTrue(actualRgbData[index + 1] >= 0);
+        assertTrue(actualRgbData[index + 1] <= 255);
+        assertTrue(actualRgbData[index + 2] >= 0);
+        assertTrue(actualRgbData[index + 2] <= 255);
+    }
+}
+
+assertNotEquals(0, out.getPlaneData(0).length);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(rgbH,out.getPlaneData(0)); ===
+0.731 - }
+}
+
+assertNotEquals(0, out.getPlaneData(0).length)
+0.703 - assertEquals(4, out.getHeight())
+0.685 - assertEquals(4, out.getWidth())
+0.684 - assertEquals(2, out.getBitDepth())
+0.634 - byte[] actualRgbData = out.getPlaneData(0)
+0.615 - assertEquals(ColorSpace.RGB, out.getColorSpace())
+0.490 - }
+
+assertTrue(Arrays.equals(expectedRgbData, actualRgbData))
+0.475 - assertTrue(actualRgbData[index + 1] >= 0)
+0.475 - assertTrue(actualRgbData[index + 2] >= 0)
+0.450 - assertTrue(actualRgbData[index] <= 255)
+0.439 - assertTrue(actualRgbData[index + 1] <= 255)
+0.439 - assertTrue(actualRgbData[index + 2] <= 255)
+0.408 - i++) {
+    assertEquals(expectedRgbData[i], actualRgbData[i])
+0.377 - ```java
+assertNotNull(out)
+0.352 - // Assuming 3 bytes per pixel (RGB)
+        assertTrue(actualRgbData[index] >= 0)
+0.325 - // Assuming plane 0 is RGB data
+
+for (int i = 0
+0.239 - i < expectedRgbData.length
+0.155 - byte[] expectedRgbData = { /* expected RGB values based on input YUV */ }
+0.113 - for (int i = 0
+0.102 - i++) {
+    for (int j = 0
+0.090 - j++) {
+        int index = (i * 4 + j) * 3
+0.000 - i < 4
+0.000 - j < 4
+0.000 - ```

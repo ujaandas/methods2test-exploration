@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoader {\n@Override\npublic Source load ( final String sourceFile ) throws IOException {\nInputStream stream = locate ( sourceFile ) ;\nif ( stream != null ) {\ntry ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ;\nInputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) {\nString source = IOUtil . toString ( reader ) ;\nreturn new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ;\n} catch ( NoSuchAlgorithmException ex ) {\nthrow new IOException ( \"STR\" , ex ) ;\n} } else {\nreturn null ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoaderTest {\n@Test\npublic void testMissingSourceFileFromDirectory ( ) throws Exception {\nDirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNull(sourceLoader.load(\"missingFile.java\"));\nassertNull(sourceLoader.load(\"nonexistentFile.java\"));\nassertNull(sourceLoader.load(\"invalidFile.txt\"));\nassertNull(sourceLoader.load(\"emptyFile.java\"));\nassertNull(sourceLoader.load(\"fileWithoutExtension\"));\nassertNull(sourceLoader.load(\"fileWithInvalidExtension.pdf\"));\nassertNull(sourceLoader.load(\"fileWithNoContent.java\"));\nassertNull(sourceLoader.load(\"fileWithSpecialCharacters.java\"));\nassertNull(sourceLoader.load(\"fileWithWhiteSpace.java\"));\nassertNull(sourceLoader.load(\"fileWithTabs.java\"));\nassertNull(sourceLoader.load(\"fileWithNewLines.java\"));\nassertNull(sourceLoader.load(\"fileWithOnlyComments.java\"));\nassertNull(sourceLoader.load(\"fileWithOnlyWhitespace.java\"));\nassertNull(sourceLoader.load(\"fileWithOnlySpecialCharacters.java\"));\nassertNull(sourceLoader.load(\"fileWithOnlyNumbers.java\"));\nassertNull(sourceLoader.load(\"fileWithOnlySymbols.java\"));\nassertNull(sourceLoader.load(\"fileWithInvalidEncoding.java\"));\nassertNull(sourceLoader.load(\"fileWithInvalidFormat.java\"));\nassertNull(sourceLoader.load(\"fileWithInvalidPermissions.java\"));\nassertNull(sourceLoader.load(\"fileWithInvalidPath.java\"));\n====================\n\n",
+    "scores": [
+        0.795,
+        0.791,
+        0.786,
+        0.776,
+        0.742,
+        0.742,
+        0.739,
+        0.733,
+        0.731,
+        0.725,
+        0.71,
+        0.71,
+        0.702,
+        0.695,
+        0.688,
+        0.687,
+        0.68,
+        0.68,
+        0.66,
+        0.66
+    ],
+    "ground_truth": "assertNull(sourceLoader.load(\"STR\"));"
+}

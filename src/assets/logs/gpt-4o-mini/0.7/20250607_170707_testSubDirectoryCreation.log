@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class JsonWriter {
+    public final File getCoverallsFile ( ) { 
+    return coverallsFile ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class JsonWriterTest {
+    @Test
+     public void testSubDirectoryCreation ( ) throws Exception {
+         File f = new File ( new File ( folder . getRoot ( ) , "STR" ) , "STR" ) ; 
+         Job job = job ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(f);
+assertTrue(f.exists());
+assertTrue(f.isDirectory());
+assertEquals("STR", f.getName());
+assertTrue(f.getParentFile().exists());
+assertTrue(f.getParentFile().isDirectory());
+assertEquals("STR", f.getParentFile().getName());
+assertTrue(f.getAbsolutePath().contains("STR/STR"));
+assertTrue(f.getAbsolutePath().startsWith(folder.getRoot().getAbsolutePath()));
+assertTrue(job instanceof Job);
+assertEquals("Expected Job Name", job.getName());
+assertNotNull(job.getId());
+assertTrue(job.getId() > 0);
+assertEquals("Expected Repo Token", job.getRepoToken());
+assertNotNull(job.getServiceName());
+assertEquals("Expected Service Name", job.getServiceName());
+assertNotNull(job.getBranch());
+assertFalse(job.getBranch().isEmpty());
+assertNotNull(job.getCommit());
+assertFalse(job.getCommit().isEmpty());
+assertTrue(job.getCoverage() >= 0);
+assertTrue(job.getCoverage() <= 100);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(newJsonWriter(job,f).getCoverallsFile().getParentFile().isDirectory()); ===
+0.694 - assertTrue(f.getParentFile().isDirectory())
+0.588 - assertTrue(f.getParentFile().exists())
+0.500 - assertTrue(f.isDirectory())
+0.496 - assertTrue(job.getCoverage() >= 0)
+0.487 - assertFalse(job.getCommit().isEmpty())
+0.487 - assertTrue(job.getCoverage() <= 100)
+0.484 - assertEquals("STR", f.getParentFile().getName())
+0.471 - assertFalse(job.getBranch().isEmpty())
+0.424 - assertTrue(f.getAbsolutePath().contains("STR/STR"))
+0.403 - assertTrue(f.getAbsolutePath().startsWith(folder.getRoot().getAbsolutePath()))
+0.396 - assertNotNull(job.getBranch())
+0.396 - assertNotNull(job.getCommit())
+0.396 - assertTrue(job.getId() > 0)
+0.379 - assertNotNull(job.getServiceName())
+0.365 - assertEquals("Expected Service Name", job.getServiceName())
+0.350 - assertTrue(f.exists())
+0.349 - assertEquals("Expected Job Name", job.getName())
+0.346 - assertEquals("Expected Repo Token", job.getRepoToken())
+0.336 - assertNotNull(job.getId())
+0.321 - assertEquals("STR", f.getName())
+0.294 - assertTrue(job instanceof Job)
+0.190 - ```java
+assertNotNull(f)
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testFriendsOfFriendsArrows ( ) throws Exception {\nOResultSet qResult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(qResult);\nassertTrue(qResult.hasNext());\nassertEquals(10, qResult.stream().count());\nassertFalse(qResult.getProperty(\"name\").isEmpty());\nassertTrue(qResult.getProperty(\"age\") instanceof Integer);\nassertNotNull(qResult.getProperty(\"address\"));\nassertTrue(qResult.getProperty(\"address\") instanceof String);\nassertEquals(2, qResult.getPropertyNames().size());\nassertFalse(qResult.getPropertyNames().contains(\"email\"));\nassertTrue(qResult.getPropertyNames().contains(\"phone\"));\nassertEquals(5, qResult.getColumnNames().size());\nassertFalse(qResult.getColumnNames().contains(\"salary\"));\nassertTrue(qResult.getColumnNames().contains(\"city\"));\nassertEquals(3, qResult.getMetadata().size());\nassertTrue(qResult.getExecutionPlan() instanceof String);\nassertNotNull(qResult.getQueryText());\nassertFalse(qResult.getWarnings().isEmpty());\nassertTrue(qResult.getWarnings().contains(\"Warning: large result set\"));\nassertNotEquals(0, qResult.stream().mapToInt(row -> row.getProperty(\"age\")).sum());\nassertEquals(1, qResult.stream().filter(row -> row.getProperty(\"city\").equals(\"New York\")).count());\nassertTrue(qResult.stream().anyMatch(row -> row.getProperty(\"name\").equals(\"Alice\")));\nassertFalse(qResult.stream().allMatch(row -> row.getProperty(\"age\").equals(30)));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.667,
+        0.627,
+        0.603,
+        0.603,
+        0.6,
+        0.585,
+        0.579,
+        0.571,
+        0.565,
+        0.564,
+        0.557,
+        0.554,
+        0.552,
+        0.541,
+        0.495,
+        0.494,
+        0.488,
+        0.411,
+        0.389,
+        0.387,
+        0.374
+    ],
+    "ground_truth": "Assert.assertTrue(qResult.hasNext());"
+}

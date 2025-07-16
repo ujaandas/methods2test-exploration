@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic List < Connection > getAll ( String poolKey ) {\nConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nreturn null == pool ? new ArrayList < Connection > ( ) : pool . getAll ( ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testGetAllWithPoolKey ( ) {\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nList<Connection> connections = cm.getAll(\"poolKey\");\nassertNotNull(connections);\nassertEquals(3, connections.size());\nassertTrue(connections.contains(getAConn()));\nassertTrue(connections.contains(getAConn()));\nassertTrue(connections.contains(getAConn()));\nassertFalse(connections.contains(null));\nassertTrue(connections.stream().allMatch(Objects::nonNull));\nassertTrue(connections.stream().distinct().count() <= connections.size());\nassertEquals(connections.get(0), connections.get(0));\nassertNotEquals(connections.get(0), connections.get(1));\nassertNotEquals(connections.get(1), connections.get(2));\nassertTrue(connections.get(0) instanceof Connection);\nassertTrue(connections.get(1) instanceof Connection);\nassertTrue(connections.get(2) instanceof Connection);\nassertEquals(\"ExpectedConnectionString\", connections.get(0).getConnectionString());\nassertEquals(\"ExpectedConnectionString\", connections.get(1).getConnectionString());\nassertEquals(\"ExpectedConnectionString\", connections.get(2).getConnectionString());\nassertTrue(connections.stream().allMatch(conn -> conn.getStatus() == ConnectionStatus.ACTIVE));\nassertEquals(connections, cm.getAll(\"poolKey\"));\nassertNotSame(connections, cm.getAll(\"poolKey\"));\nassertThrows(IllegalArgumentException.class, () -> cm.getAll(null));\nassertThrows(IllegalArgumentException.class, () -> cm.getAll(\"\"));\n```\n====================\n\n",
+    "scores": [
+        0.759,
+        0.72,
+        0.636,
+        0.543,
+        0.526,
+        0.526,
+        0.438,
+        0.433,
+        0.427,
+        0.426,
+        0.426,
+        0.426,
+        0.425,
+        0.424,
+        0.424,
+        0.424,
+        0.393,
+        0.388,
+        0.374,
+        0.374,
+        0.374,
+        0.29,
+        0.28,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(3,cm.getAll(poolKey).size());"
+}

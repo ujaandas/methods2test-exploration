@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLEdgeTransformer {\nlong countClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLEdgeTransformerTest {\n@Test\npublic void testDynamicEdgeClassMultipleValues ( ) {\nconfigure ( \"STR\" + \"STR\" + \"STR\" + name . getMethodName ( ) + \"STR\" ) ;\nOETLLoader loader = proc . getLoader ( ) ;\nODatabasePool pool = loader . getPool ( ) ;\nODatabaseDocument db = pool . acquire ( ) ;\ncreateClasses ( db ) ;\nOVertex vertex = db . newVertex ( \"STR\" ) ;\nvertex . setProperty ( \"STR\" , \"STR\" ) ;\ndb . save ( vertex ) ;\ndb . commit ( ) ;\ndb . close ( ) ;\nproc . execute ( ) ;\ndb = pool . acquire ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(vertex);\nassertEquals(\"STR\", vertex.getProperty(\"STR\"));\nOEdge edge = vertex.addEdge(\"STR\", vertex);\nassertNotNull(edge);\nedge.setProperty(\"STR\", \"STR\");\ndb.save(edge);\ndb.commit();\nassertEquals(1, db.countClass(\"STR\"));\nOVertex newVertex = db.newVertex(\"STR\");\nnewVertex.setProperty(\"STR\", \"STR\");\ndb.save(newVertex);\ndb.commit();\nassertEquals(2, db.countClass(\"STR\"));\ndb.close();\nproc.execute();\ndb = pool.acquire();\nOVertex retrievedVertex = db.getVertex(vertex.getIdentity());\nassertNotNull(retrievedVertex);\nassertEquals(\"STR\", retrievedVertex.getProperty(\"STR\"));\nOEdge retrievedEdge = db.getEdge(edge.getIdentity());\nassertNotNull(retrievedEdge);\nassertEquals(\"STR\", retrievedEdge.getProperty(\"STR\"));\nassertEquals(1, db.countClass(\"STR\"));\nassertEquals(2, db.countClass(\"STR\"));\ndb.close();\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.972,
+        0.972,
+        0.617,
+        0.591,
+        0.578,
+        0.417,
+        0.4,
+        0.386,
+        0.371,
+        0.364,
+        0.348,
+        0.348,
+        0.34,
+        0.34,
+        0.338,
+        0.324,
+        0.282,
+        0.281,
+        0.245,
+        0.237,
+        0.189,
+        0.185,
+        0.16
+    ],
+    "ground_truth": "assertEquals(1,db.countClass(\"STR\"));"
+}

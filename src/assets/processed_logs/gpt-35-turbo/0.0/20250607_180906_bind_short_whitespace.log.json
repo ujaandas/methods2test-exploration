@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_Numerical {\nstatic boolean bind0 ( Object object , String property , String value ) {\nvalue = value . trim ( ) ;\nString [ ] path = property . split ( \"STR\" ) ;\nobject = findTargetObject ( object , property , path ) ;\nif ( object == null ) {\nreturn false ;\n} Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ;\nif ( field == null || isProbeField ( field ) ) {\nreturn false ;\n} try {\nsetField ( field , object , value ) ;\nreturn true ;\n} catch ( Exception e ) {\nthrow new BindException ( format ( \"STR\" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_NumericalTest {\n@Test\npublic void bind_short_whitespace ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(null, \"property\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"probeField\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"invalidProperty\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", null));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \" \"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"invalidValue\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"123abc\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"12.34\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"true\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"false\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"12345678901234567890\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"-12345678901234567890\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"0.12345678901234567890\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"0.0\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"0\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"-1\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"1.0\"));\n====================\n\n",
+    "scores": [
+        0.484,
+        0.45,
+        0.45,
+        0.446,
+        0.443,
+        0.439,
+        0.439,
+        0.435,
+        0.432,
+        0.432,
+        0.429,
+        0.425,
+        0.41,
+        0.409,
+        0.409,
+        0.386,
+        0.383,
+        0.38,
+        0.358
+    ],
+    "ground_truth": "assertTrue(bind0(testObject,\"STR\",\"STR\"));"
+}

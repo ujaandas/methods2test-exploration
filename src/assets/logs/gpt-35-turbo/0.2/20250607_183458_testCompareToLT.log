@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    public int compareTo ( final OCompositeKey otherKey ) { 
+    final Iterator < Object > inIter = keys . iterator ( ) ; 
+    final Iterator < Object > outIter = otherKey . keys . iterator ( ) ; 
+    while ( inIter . hasNext ( ) && outIter . hasNext ( ) ) { 
+    final Object inKey = inIter . next ( ) ; 
+    final Object outKey = outIter . next ( ) ; 
+    if ( outKey instanceof OAlwaysGreaterKey ) return - 1 ; 
+    if ( outKey instanceof OAlwaysLessKey ) return 1 ; 
+    if ( inKey instanceof OAlwaysGreaterKey ) return 1 ; 
+    if ( inKey instanceof OAlwaysLessKey ) return - 1 ; 
+    final int result = comparator . compare ( inKey , outKey ) ; 
+    if ( result != 0 ) return result ; 
+    } return 0 ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testCompareToLT ( ) {
+         final OCompositeKey compositeKey = new OCompositeKey ( ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         final OCompositeKey anotherCompositeKey = new OCompositeKey ( ) ; 
+         anotherCompositeKey . addKey ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(0, compositeKey.compareTo(anotherCompositeKey));
+Assert.assertTrue(compositeKey.compareTo(anotherCompositeKey) == 0);
+Assert.assertNotEquals(1, compositeKey.compareTo(anotherCompositeKey));
+Assert.assertFalse(compositeKey.compareTo(anotherCompositeKey) == 1);
+Assert.assertEquals(0, anotherCompositeKey.compareTo(compositeKey));
+Assert.assertTrue(anotherCompositeKey.compareTo(compositeKey) == 0);
+Assert.assertNotEquals(-1, anotherCompositeKey.compareTo(compositeKey));
+Assert.assertFalse(anotherCompositeKey.compareTo(compositeKey) == -1);
+Assert.assertEquals(0, compositeKey.compareTo(compositeKey));
+Assert.assertTrue(compositeKey.compareTo(compositeKey) == 0);
+Assert.assertNotEquals(1, compositeKey.compareTo(compositeKey));
+Assert.assertFalse(compositeKey.compareTo(compositeKey) == 1);
+Assert.assertEquals(0, anotherCompositeKey.compareTo(anotherCompositeKey));
+Assert.assertTrue(anotherCompositeKey.compareTo(anotherCompositeKey) == 0);
+Assert.assertNotEquals(-1, anotherCompositeKey.compareTo(anotherCompositeKey));
+Assert.assertFalse(anotherCompositeKey.compareTo(anotherCompositeKey) == -1);
+Assert.assertEquals(0, compositeKey.compareTo(null));
+Assert.assertTrue(compositeKey.compareTo(null) == 0);
+Assert.assertEquals(0, anotherCompositeKey.compareTo(null));
+Assert.assertTrue(anotherCompositeKey.compareTo(null) == 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(compositeKey.compareTo(anotherCompositeKey),-1); ===
+0.958 - Assert.assertEquals(0, compositeKey.compareTo(anotherCompositeKey))
+0.934 - Assert.assertNotEquals(1, compositeKey.compareTo(anotherCompositeKey))
+0.924 - Assert.assertFalse(compositeKey.compareTo(anotherCompositeKey) == 1)
+0.889 - Assert.assertEquals(0, anotherCompositeKey.compareTo(anotherCompositeKey))
+0.881 - Assert.assertTrue(compositeKey.compareTo(anotherCompositeKey) == 0)
+0.875 - Assert.assertEquals(0, compositeKey.compareTo(compositeKey))
+0.866 - Assert.assertFalse(anotherCompositeKey.compareTo(anotherCompositeKey) == -1)
+0.862 - Assert.assertNotEquals(-1, anotherCompositeKey.compareTo(anotherCompositeKey))
+0.852 - Assert.assertNotEquals(1, compositeKey.compareTo(compositeKey))
+0.839 - Assert.assertFalse(compositeKey.compareTo(compositeKey) == 1)
+0.816 - Assert.assertTrue(anotherCompositeKey.compareTo(anotherCompositeKey) == 0)
+0.807 - Assert.assertEquals(0, anotherCompositeKey.compareTo(compositeKey))
+0.793 - Assert.assertTrue(compositeKey.compareTo(compositeKey) == 0)
+0.783 - Assert.assertFalse(anotherCompositeKey.compareTo(compositeKey) == -1)
+0.780 - Assert.assertNotEquals(-1, anotherCompositeKey.compareTo(compositeKey))
+0.750 - Assert.assertEquals(0, compositeKey.compareTo(null))
+0.729 - Assert.assertTrue(anotherCompositeKey.compareTo(compositeKey) == 0)
+0.685 - Assert.assertEquals(0, anotherCompositeKey.compareTo(null))
+0.660 - Assert.assertTrue(compositeKey.compareTo(null) == 0)
+0.600 - Assert.assertTrue(anotherCompositeKey.compareTo(null) == 0)

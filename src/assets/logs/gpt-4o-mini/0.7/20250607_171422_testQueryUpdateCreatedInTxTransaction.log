@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteTransactionSupport {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteTransactionSupportTest {
+    @Test
+     public void testQueryUpdateCreatedInTxTransaction ( ) throws InterruptedException {
+         database . begin ( ) ; 
+         ODocument doc1 = new ODocument ( "STR" ) ; 
+         doc1 . setProperty ( "STR" , "STR" ) ; 
+         OIdentifiable id = database . save ( doc1 ) ; 
+         ODocument docx = new ODocument ( "STR" ) ; 
+         docx . setProperty ( "STR" , "STR" ) ; 
+         database . save ( docx ) ; 
+         OResultSet result = database . command ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(result);
+Assert.assertTrue(result.hasNext());
+Assert.assertEquals(2, result.getTotalRecords());
+Assert.assertTrue(result.next().getProperty("STR").equals("STR"));
+Assert.assertTrue(result.next().getProperty("STR").equals("STR"));
+Assert.assertNotEquals(result.next().getIdentity(), OIdentifiable.NULL);
+Assert.assertEquals(doc1.getIdentity(), result.next().getIdentity());
+Assert.assertEquals(docx.getIdentity(), result.next().getIdentity());
+Assert.assertTrue(result.getProperty("STR").contains("STR"));
+Assert.assertFalse(result.hasNext());
+Assert.assertTrue(result.isEmpty());
+Assert.assertTrue(result.getProperty("STR").size() > 0);
+Assert.assertEquals("STR", result.next().getProperty("STR"));
+Assert.assertNotEquals("NON_EXISTENT", result.next().getProperty("STR"));
+Assert.assertTrue(result.getProperty("STR").isPresent());
+Assert.assertFalse(result.isClosed());
+Assert.assertEquals(2, result.getFetchedRecords());
+Assert.assertTrue(result.getProperty("STR").stream().allMatch(s -> s.equals("STR")));
+Assert.assertEquals(OType.STRING, result.getProperty("STR").getType());
+Assert.assertTrue(result.getProperty("STR").stream().anyMatch(s -> s.equals("STR")));
+Assert.assertTrue(result.getProperty("STR").contains(doc1.getIdentity()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(result.hasNext()); ===
+1.000 - Assert.assertTrue(result.hasNext())
+0.877 - Assert.assertFalse(result.hasNext())
+0.821 - Assert.assertTrue(result.isEmpty())
+0.690 - Assert.assertFalse(result.isClosed())
+0.623 - Assert.assertTrue(result.getProperty("STR").isPresent())
+0.622 - Assert.assertTrue(result.getProperty("STR").size() > 0)
+0.588 - Assert.assertEquals(2, result.getTotalRecords())
+0.571 - Assert.assertEquals(2, result.getFetchedRecords())
+0.568 - Assert.assertTrue(result.getProperty("STR").contains("STR"))
+0.558 - Assert.assertTrue(result.next().getProperty("STR").equals("STR"))
+0.558 - Assert.assertTrue(result.next().getProperty("STR").equals("STR"))
+0.532 - Assert.assertTrue(result.getProperty("STR").contains(doc1.getIdentity()))
+0.526 - ```java
+Assert.assertNotNull(result)
+0.500 - Assert.assertEquals(doc1.getIdentity(), result.next().getIdentity())
+0.500 - Assert.assertEquals(docx.getIdentity(), result.next().getIdentity())
+0.500 - Assert.assertEquals("STR", result.next().getProperty("STR"))
+0.462 - Assert.assertNotEquals(result.next().getIdentity(), OIdentifiable.NULL)
+0.444 - Assert.assertEquals(OType.STRING, result.getProperty("STR").getType())
+0.435 - Assert.assertNotEquals("NON_EXISTENT", result.next().getProperty("STR"))
+0.427 - Assert.assertTrue(result.getProperty("STR").stream().allMatch(s -> s.equals("STR")))
+0.427 - Assert.assertTrue(result.getProperty("STR").stream().anyMatch(s -> s.equals("STR")))
+0.000 - ```

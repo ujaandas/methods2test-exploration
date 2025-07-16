@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MPEGES {\npublic static byte [ ] toArray ( ByteBuffer buffer ) {\nbyte [ ] result = new byte [ buffer . remaining ( ) ] ;\nbuffer . duplicate ( ) . get ( result ) ;\nreturn result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MPEGESTest {\n@Test\npublic void testESBuffer ( ) throws IOException {\nbyte [ ] mpeg = MPEGTestConst . mpeg ( ) ;\nbyte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ;\nbyte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegFrame } ) ;\nMPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ;\nPacket f1 = mpeges . getFrame ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(f1);\nAssert.assertEquals(frame1.length, f1.getData().length);\nAssert.assertArrayEquals(frame1, f1.getData());\nAssert.assertTrue(f1.getPresentationTimestamp() >= 0);\nAssert.assertTrue(f1.getDuration() > 0);\nAssert.assertEquals(MPEGTestConst._mpegHeader.length, f1.getHeader().length);\nAssert.assertArrayEquals(MPEGTestConst._mpegHeader, f1.getHeader());\nAssert.assertEquals(MPEGTestConst._mpegFrame.length, f1.getFrameData().length);\nAssert.assertArrayEquals(MPEGTestConst._mpegFrame, f1.getFrameData());\nAssert.assertNotEquals(0, f1.getSize());\nAssert.assertTrue(f1.isKeyFrame());\nAssert.assertNotNull(f1.getMetadata());\nAssert.assertEquals(\"expectedFormat\", f1.getFormat());\nAssert.assertTrue(f1.getData().length > 0);\nAssert.assertFalse(f1.isCorrupted());\nAssert.assertNotNull(f1.getFilePosition());\nAssert.assertTrue(f1.getFilePosition() >= 0);\nAssert.assertEquals(1, f1.getFrameNumber());\nAssert.assertArrayEquals(new byte[]{0, 1, 2}, f1.getExtraData());\nAssert.assertTrue(f1.getTimestamp() >= 0);\nAssert.assertEquals(32, f1.getBitrate());\n```\n====================\n\n",
+    "scores": [
+        0.809,
+        0.641,
+        0.624,
+        0.615,
+        0.568,
+        0.549,
+        0.535,
+        0.529,
+        0.522,
+        0.517,
+        0.512,
+        0.506,
+        0.492,
+        0.477,
+        0.44,
+        0.44,
+        0.44,
+        0.424,
+        0.419,
+        0.41,
+        0.321,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(frame1,NIOUtils.toArray(f1.getData()));"
+}

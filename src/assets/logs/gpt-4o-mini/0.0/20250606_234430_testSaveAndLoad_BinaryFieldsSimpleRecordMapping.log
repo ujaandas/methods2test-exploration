@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class OObjectBinaryDataStorage {
+    public < RET > RET load ( final ORID recordId ) { 
+    return ( RET ) load ( recordId , null ) ; 
+    }
+}
+
+package orientechnologies.orientdb.object;
+
+public class OObjectBinaryDataStorageTest {
+    @Test
+     public void testSaveAndLoad_BinaryFieldsSimpleRecordMapping ( ) throws IOException {
+         this . createDb ( ODocumentFieldHandlingStrategyFactory . SIMPLE ) ; 
+         Driver hunt = new Driver ( ) ; 
+         hunt . setName ( "STR" ) ; 
+         byte [ ] huntUglyPicture = randomBytes ( 1024 * 32 ) ; 
+         hunt . setImageData ( huntUglyPicture ) ; 
+         Driver savedHunt = this . databaseTx . save ( hunt ) ; 
+         Driver loadedHunt = this . databaseTx . load ( new ORecordId ( savedHunt . getId ( ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(loadedHunt);
+assertEquals(savedHunt.getId(), loadedHunt.getId());
+assertEquals(savedHunt.getName(), loadedHunt.getName());
+assertArrayEquals(savedHunt.getImageData(), loadedHunt.getImageData());
+assertEquals(savedHunt.getSomeOtherField(), loadedHunt.getSomeOtherField());
+assertNotSame(savedHunt, loadedHunt);
+assertTrue(loadedHunt instanceof Driver);
+assertEquals(savedHunt.getAnotherField(), loadedHunt.getAnotherField());
+assertNotNull(loadedHunt.getImageData());
+assertTrue(loadedHunt.getImageData().length > 0);
+assertEquals(32 * 1024, loadedHunt.getImageData().length);
+assertNotNull(loadedHunt.getCreationDate());
+assertNotNull(loadedHunt.getLastModifiedDate());
+assertTrue(loadedHunt.getCreationDate().before(new Date()));
+assertTrue(loadedHunt.getLastModifiedDate().before(new Date()));
+assertEquals(savedHunt.getSomeListField().size(), loadedHunt.getSomeListField().size());
+assertEquals(savedHunt.getSomeMapField().size(), loadedHunt.getSomeMapField().size());
+assertTrue(savedHunt.getSomeSetField().containsAll(loadedHunt.getSomeSetField()));
+assertEquals(savedHunt.getSomeEnumField(), loadedHunt.getSomeEnumField());
+assertNotNull(loadedHunt.getRelatedEntity());
+assertEquals(savedHunt.getRelatedEntity().getId(), loadedHunt.getRelatedEntity().getId());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(savedHunt); ===
+0.772 - ```java
+assertNotNull(loadedHunt)
+0.688 - assertNotNull(loadedHunt.getImageData())
+0.678 - assertNotSame(savedHunt, loadedHunt)
+0.657 - assertNotNull(loadedHunt.getCreationDate())
+0.647 - assertNotNull(loadedHunt.getRelatedEntity())
+0.620 - assertNotNull(loadedHunt.getLastModifiedDate())
+0.514 - assertEquals(savedHunt.getId(), loadedHunt.getId())
+0.487 - assertEquals(savedHunt.getName(), loadedHunt.getName())
+0.484 - assertTrue(loadedHunt instanceof Driver)
+0.429 - assertTrue(loadedHunt.getImageData().length > 0)
+0.409 - assertArrayEquals(savedHunt.getImageData(), loadedHunt.getImageData())
+0.404 - assertEquals(savedHunt.getAnotherField(), loadedHunt.getAnotherField())
+0.396 - assertEquals(savedHunt.getSomeEnumField(), loadedHunt.getSomeEnumField())
+0.388 - assertEquals(savedHunt.getSomeOtherField(), loadedHunt.getSomeOtherField())
+0.385 - assertEquals(32 * 1024, loadedHunt.getImageData().length)
+0.366 - assertTrue(loadedHunt.getCreationDate().before(new Date()))
+0.352 - assertEquals(savedHunt.getSomeMapField().size(), loadedHunt.getSomeMapField().size())
+0.349 - assertTrue(loadedHunt.getLastModifiedDate().before(new Date()))
+0.345 - assertEquals(savedHunt.getSomeListField().size(), loadedHunt.getSomeListField().size())
+0.343 - assertTrue(savedHunt.getSomeSetField().containsAll(loadedHunt.getSomeSetField()))
+0.339 - assertEquals(savedHunt.getRelatedEntity().getId(), loadedHunt.getRelatedEntity().getId())
+0.000 - ```

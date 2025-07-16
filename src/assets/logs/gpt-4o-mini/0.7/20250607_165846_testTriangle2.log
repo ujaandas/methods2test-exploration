@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testTriangle2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         List < ODocument > result = db . command ( new OCommandSQL ( query . toString ( ) ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertEquals(expectedSize, result.size());
+assertTrue(result.stream().allMatch(doc -> doc.containsField("fieldName1")));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName1").equals(expectedValue1)));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName2").equals(expectedValue2)));
+assertTrue(result.stream().allMatch(doc -> doc.field("fieldName3") instanceof String));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName4") instanceof Integer));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName5") > minValue));
+assertTrue(result.stream().noneMatch(doc -> doc.field("fieldName6") == null));
+assertTrue(result.stream().allMatch(doc -> doc.field("fieldName7").toString().startsWith("prefix")));
+assertEquals(expectedFieldValue, result.get(0).field("fieldName8"));
+assertTrue(result.stream().allMatch(doc -> doc.field("fieldName9").length() <= maxLength));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName10").equals(expectedValue3)));
+assertTrue(result.stream().allMatch(doc -> doc.field("fieldName11").equals("fixedValue")));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName12").contains("substring")));
+assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName13").matches("regexPattern")));
+assertTrue(result.stream().allMatch(doc -> doc.field("fieldName14") instanceof List));
+assertEquals(expectedDocumentId, result.get(0).getIdentity());
+assertFalse(result.stream().anyMatch(doc -> doc.field("fieldName15") < 0));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,result.size()); ===
+0.812 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.562 - assertEquals(expectedDocumentId, result.get(0).getIdentity())
+0.552 - ```java
+assertNotNull(result)
+0.547 - assertEquals(expectedFieldValue, result.get(0).field("fieldName8"))
+0.444 - assertFalse(result.stream().anyMatch(doc -> doc.field("fieldName15") < 0))
+0.392 - assertTrue(result.stream().noneMatch(doc -> doc.field("fieldName6") == null))
+0.388 - assertTrue(result.stream().allMatch(doc -> doc.containsField("fieldName1")))
+0.385 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName5") > minValue))
+0.364 - assertTrue(result.stream().allMatch(doc -> doc.field("fieldName14") instanceof List))
+0.360 - assertTrue(result.stream().allMatch(doc -> doc.field("fieldName3") instanceof String))
+0.357 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName4") instanceof Integer))
+0.348 - assertTrue(result.stream().allMatch(doc -> doc.field("fieldName9").length() <= maxLength))
+0.342 - assertTrue(result.stream().allMatch(doc -> doc.field("fieldName11").equals("fixedValue")))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName1").equals(expectedValue1)))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName2").equals(expectedValue2)))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName12").contains("substring")))
+0.336 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName10").equals(expectedValue3)))
+0.333 - assertTrue(result.stream().anyMatch(doc -> doc.field("fieldName13").matches("regexPattern")))
+0.315 - assertTrue(result.stream().allMatch(doc -> doc.field("fieldName7").toString().startsWith("prefix")))
+0.000 - ```

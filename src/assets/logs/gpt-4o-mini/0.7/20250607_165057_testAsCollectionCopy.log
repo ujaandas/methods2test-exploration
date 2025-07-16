@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopy {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopyTest {
+    @Test
+     public void testAsCollectionCopy ( ) {
+         final List < String > list = new ArrayList < > ( Arrays . asList ( "STR" , "STR" ) ) ; 
+         final ACollection < String > copied = ACollectionHelper . asACollectionCopy ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(copied);
+assertEquals(2, copied.size());
+assertTrue(copied.contains("STR"));
+assertFalse(copied.isEmpty());
+assertEquals(2, copied.stream().filter(s -> s.equals("STR")).count());
+assertTrue(copied instanceof List);
+assertEquals("STR", copied.get(0));
+assertEquals("STR", copied.get(1));
+assertEquals("STR", copied.stream().findFirst().orElse(null));
+assertEquals(2, copied.toArray().length);
+assertArrayEquals(new String[]{"STR", "STR"}, copied.toArray(new String[0]));
+assertThrows(IndexOutOfBoundsException.class, () -> copied.get(2));
+assertEquals(copied.size(), list.size());
+assertNotSame(copied, list);
+assertTrue(copied.equals(list));
+assertFalse(copied.isEmpty());
+assertTrue(copied.stream().anyMatch("STR"::equals));
+assertEquals(copied.stream().distinct().count(), 1);
+assertTrue(copied.containsAll(list));
+assertEquals(copied.stream().filter(s -> s.startsWith("S")).count(), 2);
+assertEquals(copied.stream().map(String::toUpperCase).count(), 2);
+assertFalse(copied.contains("NOT_IN_LIST"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,copied.size()); ===
+1.000 - assertEquals(2, copied.size())
+0.806 - assertEquals("STR", copied.get(0))
+0.806 - assertEquals("STR", copied.get(1))
+0.794 - assertEquals(copied.size(), list.size())
+0.735 - assertEquals(2, copied.toArray().length)
+0.724 - assertFalse(copied.isEmpty())
+0.724 - assertFalse(copied.isEmpty())
+0.633 - assertTrue(copied.equals(list))
+0.633 - assertEquals(copied.stream().distinct().count(), 1)
+0.607 - assertEquals("STR", copied.stream().findFirst().orElse(null))
+0.603 - assertTrue(copied.contains("STR"))
+0.589 - assertEquals(2, copied.stream().filter(s -> s.equals("STR")).count())
+0.585 - assertTrue(copied.containsAll(list))
+0.583 - assertFalse(copied.contains("NOT_IN_LIST"))
+0.582 - assertNotSame(copied, list)
+0.557 - assertTrue(copied instanceof List)
+0.552 - ```java
+assertNotNull(copied)
+0.538 - assertEquals(copied.stream().map(String::toUpperCase).count(), 2)
+0.515 - assertEquals(copied.stream().filter(s -> s.startsWith("S")).count(), 2)
+0.500 - assertTrue(copied.stream().anyMatch("STR"::equals))
+0.475 - assertArrayEquals(new String[]{"STR", "STR"}, copied.toArray(new String[0]))
+0.435 - assertThrows(IndexOutOfBoundsException.class, () -> copied.get(2))
+0.000 - ```

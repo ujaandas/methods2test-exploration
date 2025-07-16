@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTx {
+    T get ( Object iKey ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class DuplicateDictionaryIndexChangesTxTest {
+    @Test
+     public void testDuplicateNullsOnCreate ( ) {
+         db . begin ( ) ; 
+         final ODocument person1 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person2 = db . newInstance ( "STR" ) . save ( ) ; 
+         final ODocument person3 = db . newInstance ( "STR" ) . save ( ) ; 
+         person1 . field ( "STR" , "STR" ) . save ( ) ; 
+         person2 . field ( "STR" , "STR" ) . save ( ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+
+Assert.assertEquals(3, db.countClass("STR"));
+Assert.assertTrue(person1.getIdentity().isValid());
+Assert.assertTrue(person2.getIdentity().isValid());
+Assert.assertTrue(person3.getIdentity().isValid());
+Assert.assertEquals("STR", person1.field("STR"));
+Assert.assertEquals("STR", person2.field("STR"));
+Assert.assertEquals(1, db.countClass("STR", "STR", "STR"));
+Assert.assertEquals(3, db.countClass("STR", "STR"));
+Assert.assertEquals(1, db.countClass("STR", "STR", "STR", "STR"));
+Assert.assertEquals(3, db.countClass("STR", "STR", null));
+Assert.assertEquals(0, db.countClass("INT"));
+Assert.assertEquals(0, db.countClass("STR", "INT"));
+Assert.assertNull(person1.field("INT"));
+Assert.assertNull(person2.field("INT"));
+Assert.assertNull(person3.field("INT"));
+Assert.assertEquals(0, db.countClass("INT", "INT", "INT"));
+Assert.assertEquals(0, db.countClass("INT", "STR"));
+Assert.assertEquals(0, db.countClass("INT", "INT", "INT", "INT"));
+Assert.assertEquals(0, db.countClass("INT", "INT", null));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(person2,index.get("STR")); ===
+0.769 - Assert.assertEquals("STR", person2.field("STR"))
+0.744 - Assert.assertEquals("STR", person1.field("STR"))
+0.686 - Assert.assertNull(person2.field("INT"))
+0.657 - Assert.assertNull(person1.field("INT"))
+0.657 - Assert.assertNull(person3.field("INT"))
+0.595 - Assert.assertEquals(3, db.countClass("STR"))
+0.550 - Assert.assertEquals(3, db.countClass("STR", "STR"))
+0.550 - Assert.assertEquals(0, db.countClass("STR", "INT"))
+0.550 - Assert.assertEquals(0, db.countClass("INT", "STR"))
+0.543 - Assert.assertTrue(person2.getIdentity().isValid())
+0.541 - Assert.assertEquals(0, db.countClass("INT"))
+0.519 - Assert.assertTrue(person1.getIdentity().isValid())
+0.519 - Assert.assertTrue(person3.getIdentity().isValid())
+0.518 - Assert.assertEquals(3, db.countClass("STR", "STR", null))
+0.512 - Assert.assertEquals(1, db.countClass("STR", "STR", "STR"))
+0.478 - Assert.assertEquals(1, db.countClass("STR", "STR", "STR", "STR"))
+0.471 - Assert.assertEquals(0, db.countClass("INT", "INT", null))
+0.465 - Assert.assertEquals(0, db.countClass("INT", "INT", "INT"))
+0.435 - Assert.assertEquals(0, db.countClass("INT", "INT", "INT", "INT"))

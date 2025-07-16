@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testSkipOrdered ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(0, results.size());\nAssert.assertTrue(results.isEmpty());\nAssert.assertNotNull(results);\nAssert.assertNotEquals(10, results.size());\nAssert.assertTrue(results.contains(document));\nAssert.assertFalse(results.isEmpty());\nAssert.assertEquals(1, results.size());\nAssert.assertSame(document, results.get(0));\nAssert.assertNotSame(document, results.get(1));\nAssert.assertEquals(expectedSize, results.size());\nAssert.assertTrue(results.containsAll(expectedResults));\nAssert.assertFalse(results.contains(unexpectedResult));\nAssert.assertTrue(results.stream().allMatch(predicate));\nAssert.assertTrue(results.stream().anyMatch(predicate));\nAssert.assertTrue(results.stream().noneMatch(predicate));\nAssert.assertTrue(results.stream().filter(predicate).count() > 0);\nAssert.assertEquals(expectedResult, results.stream().findFirst().get());\nAssert.assertTrue(results.stream().allMatch(doc -> doc.field(\"name\").equals(\"John\")));\nAssert.assertTrue(results.stream().map(ODocument::field).allMatch(field -> field instanceof String));\nAssert.assertTrue(results.stream().anyMatch(doc -> doc.field(\"age\") instanceof Integer));\n====================\n\n",
+    "scores": [
+        0.984,
+        0.951,
+        0.923,
+        0.806,
+        0.721,
+        0.667,
+        0.642,
+        0.606,
+        0.596,
+        0.58,
+        0.58,
+        0.564,
+        0.532,
+        0.532,
+        0.525,
+        0.506,
+        0.483,
+        0.393,
+        0.389,
+        0.35
+    ],
+    "ground_truth": "assertEquals(19,results.size());"
+}

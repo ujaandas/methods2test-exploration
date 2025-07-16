@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class EbmlSint {
+    public static int ebmlSignedLength ( long val ) { 
+    if ( val <= 0x40 && val >= ( - 0x3F ) ) { 
+    return 1 ; 
+    } else if ( val <= 0x2000 && val >= ( - 0x1FFF ) ) { 
+    return 2 ; 
+    } else if ( val <= 0x100000 && val >= ( - 0x0FFFFF ) ) { 
+    return 3 ; 
+    } else if ( val <= 0x8000000 && val >= ( - 0x07FFFFFF ) ) { 
+    return 4 ; 
+    } else if ( val <= 0x400000000L && val >= - 0x03FFFFFFFFL ) { 
+    return 5 ; 
+    } else if ( val <= 0x20000000000L && val >= - 0x01FFFFFFFFFFL ) { 
+    return 6 ; 
+    } else if ( val <= 0x1000000000000L && val >= - 0x00FFFFFFFFFFFFL ) { 
+    return 7 ; 
+    } else { 
+    return 8 ; 
+    } }
+}
+
+package jcodec.jcodec;
+
+public class EbmlSintTest {
+    @Test
+     public void testNegativeVals ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, EbmlSint.ebmlSignedLength(0));
+assertEquals(1, EbmlSint.ebmlSignedLength(1));
+assertEquals(1, EbmlSint.ebmlSignedLength(-1));
+assertEquals(1, EbmlSint.ebmlSignedLength(0x3F));
+assertEquals(1, EbmlSint.ebmlSignedLength(-0x3F));
+assertEquals(2, EbmlSint.ebmlSignedLength(0x2000));
+assertEquals(2, EbmlSint.ebmlSignedLength(-0x1FFF));
+assertEquals(3, EbmlSint.ebmlSignedLength(0x100000));
+assertEquals(3, EbmlSint.ebmlSignedLength(-0x0FFFFF));
+assertEquals(4, EbmlSint.ebmlSignedLength(0x8000000));
+assertEquals(4, EbmlSint.ebmlSignedLength(-0x07FFFFFF));
+assertEquals(5, EbmlSint.ebmlSignedLength(0x400000000L));
+assertEquals(5, EbmlSint.ebmlSignedLength(-0x03FFFFFFFFL));
+assertEquals(6, EbmlSint.ebmlSignedLength(0x20000000000L));
+assertEquals(6, EbmlSint.ebmlSignedLength(-0x01FFFFFFFFFFL));
+assertEquals(7, EbmlSint.ebmlSignedLength(0x1000000000000L));
+assertEquals(7, EbmlSint.ebmlSignedLength(-0x00FFFFFFFFFFFFL));
+assertEquals(8, EbmlSint.ebmlSignedLength(0x20000000000000L));
+assertEquals(8, EbmlSint.ebmlSignedLength(-0x100000000000000L));
+assertEquals(8, EbmlSint.ebmlSignedLength(Long.MAX_VALUE));
+assertEquals(8, EbmlSint.ebmlSignedLength(Long.MIN_VALUE));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,ebmlSignedLength(-3)); ===
+0.864 - assertEquals(1, EbmlSint.ebmlSignedLength(-1))
+0.857 - assertEquals(1, EbmlSint.ebmlSignedLength(-0x3F))
+0.850 - assertEquals(1, EbmlSint.ebmlSignedLength(1))
+0.843 - assertEquals(1, EbmlSint.ebmlSignedLength(0x3F))
+0.791 - assertEquals(2, EbmlSint.ebmlSignedLength(-0x1FFF))
+0.776 - assertEquals(2, EbmlSint.ebmlSignedLength(0x2000))
+0.773 - ```java
+assertEquals(1, EbmlSint.ebmlSignedLength(0))
+0.773 - assertEquals(3, EbmlSint.ebmlSignedLength(-0x0FFFFF))
+0.759 - assertEquals(3, EbmlSint.ebmlSignedLength(0x100000))
+0.756 - assertEquals(4, EbmlSint.ebmlSignedLength(-0x07FFFFFF))
+0.753 - assertEquals(5, EbmlSint.ebmlSignedLength(-0x03FFFFFFFFL))
+0.750 - assertEquals(4, EbmlSint.ebmlSignedLength(0x8000000))
+0.725 - assertEquals(5, EbmlSint.ebmlSignedLength(0x400000000L))
+0.716 - assertEquals(6, EbmlSint.ebmlSignedLength(-0x01FFFFFFFFFFL))
+0.710 - assertEquals(6, EbmlSint.ebmlSignedLength(0x20000000000L))
+0.710 - assertEquals(8, EbmlSint.ebmlSignedLength(Long.MAX_VALUE))
+0.710 - assertEquals(8, EbmlSint.ebmlSignedLength(Long.MIN_VALUE))
+0.701 - assertEquals(7, EbmlSint.ebmlSignedLength(-0x00FFFFFFFFFFFFL))
+0.695 - assertEquals(7, EbmlSint.ebmlSignedLength(0x1000000000000L))
+0.694 - assertEquals(8, EbmlSint.ebmlSignedLength(-0x100000000000000L))
+0.688 - assertEquals(8, EbmlSint.ebmlSignedLength(0x20000000000000L))
+0.000 - ```

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public List < Method > findAll ( ) { 
+    List < Method > methods = findAllDeclaredMethods ( clazz ) ; 
+    for ( Method method : methods ) { 
+    verifyPublic ( method ) ; 
+    verifyNotStatic ( method ) ; 
+    verifyReturnType ( method ) ; 
+    verifyArgs ( method ) ; 
+    method . setAccessible ( true ) ; 
+    } return methods ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testSubClass_methodFoundInSuper ( ) {
+         List < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(methodList);
+assertFalse(methodList.isEmpty());
+assertEquals(1, methodList.size());
+assertEquals("expectedMethodName", methodList.get(0).getName());
+assertTrue(methodList.get(0).getReturnType().equals(Void.TYPE));
+assertFalse(methodList.get(0).getDeclaringClass().isInterface());
+assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));
+assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));
+assertArrayEquals(new Class<?>[0], methodList.get(0).getParameterTypes());
+assertTrue(methodList.get(0).isAccessible());
+assertNotNull(methodList.get(0).getAnnotations());
+assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));
+assertEquals(Subclass.class, methodList.get(0).getDeclaringClass());
+assertNotNull(methodList.get(0).getGenericReturnType());
+assertTrue(methodList.get(0).getGenericParameterTypes().length == 0);
+assertEquals(0, methodList.get(0).getParameterCount());
+assertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0);
+assertFalse(methodList.get(0).isSynthetic());
+assertTrue(methodList.get(0).getExceptionTypes().length == 0);
+assertEquals("void", methodList.get(0).getReturnType().getName());
+assertNotNull(methodList.get(0).toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,methodList.size()); ===
+1.000 - assertEquals(1, methodList.size())
+0.758 - assertFalse(methodList.isEmpty())
+0.675 - assertFalse(methodList.get(0).isSynthetic())
+0.674 - assertEquals(0, methodList.get(0).getParameterCount())
+0.649 - assertTrue(methodList.get(0).isAccessible())
+0.632 - assertNotNull(methodList.get(0).toString())
+0.611 - assertEquals("expectedMethodName", methodList.get(0).getName())
+0.606 - ```java
+assertNotNull(methodList)
+0.598 - assertEquals("void", methodList.get(0).getReturnType().getName())
+0.586 - assertEquals(Subclass.class, methodList.get(0).getDeclaringClass())
+0.585 - assertNotNull(methodList.get(0).getAnnotations())
+0.568 - assertNotNull(methodList.get(0).getGenericReturnType())
+0.558 - assertArrayEquals(new Class<?>[0], methodList.get(0).getParameterTypes())
+0.557 - assertFalse(methodList.get(0).getDeclaringClass().isInterface())
+0.515 - assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()))
+0.510 - assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class))
+0.500 - assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()))
+0.500 - assertTrue(methodList.get(0).getExceptionTypes().length == 0)
+0.479 - assertTrue(methodList.get(0).getReturnType().equals(Void.TYPE))
+0.479 - assertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0)
+0.465 - assertTrue(methodList.get(0).getGenericParameterTypes().length == 0)
+0.000 - ```

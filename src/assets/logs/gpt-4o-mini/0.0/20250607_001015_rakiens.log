@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void rakiens ( ) {
+         Word w = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(w);
+assertTrue(w.isRecognized());
+assertEquals("ExpectedWordForm1", w.getWordForm(0));
+assertEquals("ExpectedWordForm2", w.getWordForm(1));
+assertEquals("ExpectedWordForm3", w.getWordForm(2));
+assertFalse(w.isEmpty());
+assertTrue(w.hasMorphologicalAnalysis());
+assertEquals(3, w.getWordFormCount());
+assertTrue(w.getWordForms().contains("ExpectedWordForm1"));
+assertTrue(w.getWordForms().contains("ExpectedWordForm2"));
+assertTrue(w.getWordForms().contains("ExpectedWordForm3"));
+assertFalse(w.getWordForms().contains("UnexpectedWordForm"));
+assertEquals("ExpectedAnalysis1", w.getAnalysis(0));
+assertEquals("ExpectedAnalysis2", w.getAnalysis(1));
+assertEquals("ExpectedAnalysis3", w.getAnalysis(2));
+assertTrue(w.hasAnalysisFor("STR"));
+assertFalse(w.hasAnalysisFor("UnknownWord"));
+assertNotEquals("UnexpectedWordForm", w.getWordForm(0));
+assertTrue(w.getAllAnalyses().size() > 0);
+assertTrue(w.getAllAnalyses().contains("ExpectedAnalysis1"));
+assertFalse(w.getAllAnalyses().isEmpty());
+assertEquals("ExpectedMorphologicalFeature", w.getMorphologicalFeature(0));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(w.isRecognized()); ===
+1.000 - assertTrue(w.isRecognized())
+0.627 - assertTrue(w.getAllAnalyses().size() > 0)
+0.577 - assertFalse(w.isEmpty())
+0.571 - assertTrue(w.hasAnalysisFor("STR"))
+0.529 - assertTrue(w.hasMorphologicalAnalysis())
+0.500 - assertEquals(3, w.getWordFormCount())
+0.488 - assertTrue(w.getWordForms().contains("ExpectedWordForm1"))
+0.488 - assertTrue(w.getWordForms().contains("ExpectedWordForm2"))
+0.488 - assertTrue(w.getWordForms().contains("ExpectedWordForm3"))
+0.472 - assertFalse(w.hasAnalysisFor("UnknownWord"))
+0.435 - assertFalse(w.getAllAnalyses().isEmpty())
+0.409 - assertFalse(w.getWordForms().contains("UnexpectedWordForm"))
+0.386 - assertTrue(w.getAllAnalyses().contains("ExpectedAnalysis1"))
+0.385 - ```java
+assertNotNull(w)
+0.385 - assertEquals("ExpectedWordForm1", w.getWordForm(0))
+0.385 - assertEquals("ExpectedWordForm2", w.getWordForm(1))
+0.385 - assertEquals("ExpectedWordForm3", w.getWordForm(2))
+0.385 - assertEquals("ExpectedAnalysis1", w.getAnalysis(0))
+0.385 - assertEquals("ExpectedAnalysis2", w.getAnalysis(1))
+0.385 - assertEquals("ExpectedAnalysis3", w.getAnalysis(2))
+0.366 - assertNotEquals("UnexpectedWordForm", w.getWordForm(0))
+0.238 - assertEquals("ExpectedMorphologicalFeature", w.getMorphologicalFeature(0))
+0.000 - ```

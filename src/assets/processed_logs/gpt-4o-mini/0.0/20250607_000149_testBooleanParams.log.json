@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testBooleanParams ( ) {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( \"STR\" , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedValue1, qResult.get(0).field(\"fieldName1\"));\nassertEquals(expectedValue2, qResult.get(1).field(\"fieldName2\"));\nassertTrue(qResult.get(0).field(\"booleanField\") instanceof Boolean);\nassertTrue(qResult.get(0).field(\"booleanField\"));\nassertEquals(expectedString, qResult.get(0).field(\"stringField\"));\nassertNotEquals(unexpectedValue, qResult.get(0).field(\"fieldName3\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"booleanField\") instanceof Boolean));\nassertEquals(expectedCount, qResult.stream().filter(doc -> doc.field(\"booleanField\")).count());\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"fieldName1\").equals(expectedValue1)));\nassertFalse(qResult.stream().noneMatch(doc -> doc.field(\"fieldName2\").equals(expectedValue2)));\nassertEquals(expectedFieldValue, qResult.get(0).field(\"fieldName4\"));\nassertNotNull(qResult.get(0).field(\"nestedField\"));\nassertEquals(expectedNestedValue, qResult.get(0).field(\"nestedField\").field(\"nestedFieldName\"));\nassertTrue(qResult.get(0).field(\"listField\") instanceof List);\nassertEquals(expectedListSize, ((List<?>) qResult.get(0).field(\"listField\")).size());\nassertTrue(((List<?>) qResult.get(0).field(\"listField\")).contains(expectedListValue));\nassertEquals(expectedDate, qResult.get(0).field(\"dateField\"));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.578,
+        0.567,
+        0.559,
+        0.553,
+        0.55,
+        0.538,
+        0.538,
+        0.536,
+        0.536,
+        0.507,
+        0.5,
+        0.472,
+        0.435,
+        0.43,
+        0.4,
+        0.386,
+        0.377,
+        0.367,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

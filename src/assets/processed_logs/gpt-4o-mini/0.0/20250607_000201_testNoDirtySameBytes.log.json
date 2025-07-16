@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocument {\npublic boolean isDirty ( ) {\nreturn _dirty ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTest {\n@Test\npublic void testNoDirtySameBytes ( ) {\nODocument doc = new ODocument ( ) ;\nbyte [ ] bytes = new byte [ ] {\n0 , 1 , 2 , 3 , 4 , 5 } ;\ndoc . field ( \"STR\" , bytes ) ;\nODocumentInternal . clearTrackData ( doc ) ;\nORecordInternal . unsetDirty ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertFalse(doc.isDirty());\nAssert.assertNotNull(doc);\nAssert.assertEquals(1, doc.fieldNames().size());\nAssert.assertTrue(doc.fieldNames().contains(\"STR\"));\nAssert.assertArrayEquals(bytes, (byte[]) doc.field(\"STR\"));\nAssert.assertEquals(6, ((byte[]) doc.field(\"STR\")).length);\nAssert.assertTrue(Arrays.equals(bytes, (byte[]) doc.field(\"STR\")));\nAssert.assertNull(doc.field(\"NON_EXISTENT_FIELD\"));\nAssert.assertTrue(doc.isDirty() == false);\nAssert.assertFalse(doc.field(\"STR\") instanceof String);\nAssert.assertTrue(doc.field(\"STR\") instanceof byte[]);\nAssert.assertEquals(0, doc.getVersion());\nAssert.assertFalse(doc.isNew());\nAssert.assertFalse(doc.isDeleted());\nAssert.assertFalse(doc.isEmbedded());\nAssert.assertFalse(doc.isDirty());\nAssert.assertTrue(doc.getIdentity().isValid());\nAssert.assertEquals(0, doc.getField(\"STR\").hashCode());\nAssert.assertNotSame(new byte[]{0, 1, 2, 3, 4, 5}, doc.field(\"STR\"));\nAssert.assertTrue(doc.getSchemaType() == null);\nAssert.assertEquals(0, doc.getField(\"STR\").length);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.867,
+        0.852,
+        0.84,
+        0.764,
+        0.759,
+        0.621,
+        0.615,
+        0.563,
+        0.554,
+        0.545,
+        0.54,
+        0.528,
+        0.507,
+        0.5,
+        0.486,
+        0.486,
+        0.48,
+        0.464,
+        0.458,
+        0.425,
+        0.0
+    ],
+    "ground_truth": "assertFalse(doc.isDirty());"
+}

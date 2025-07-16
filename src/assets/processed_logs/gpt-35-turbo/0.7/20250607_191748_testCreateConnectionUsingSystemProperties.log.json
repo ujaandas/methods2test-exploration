@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactory {\n@Override\npublic MBeanAccessConnection createConnection ( ) throws IOException {\nJMXMBeanConnection result = null ;\ntry {\nVirtualMachine vm = this . attacher . attach ( jvmId ) ;\nString url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\nif ( url == null ) {\nString javaHome = vm . getSystemProperties ( ) . getProperty ( \"STR\" ) ;\nString agent = javaHome + File . separator + \"STR\" + File . separator + \"STR\" ;\nvm . loadAgent ( agent ) ;\nurl = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\n} if ( url != null ) {\nJMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ;\nJMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ;\nresult = this . jmxmBeanConnectionFactory . create ( connector ) ;\n} else {\nlog . warn ( \"STR\" , this . jvmId ) ;\n} } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) {\nlog . warn ( \"STR\" , this . jvmId , exc ) ;\n} return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactoryTest {\n@Test\npublic void testCreateConnectionUsingSystemProperties ( ) throws Exception {\nthis . initFactory ( ) ;\nMockito . when ( this . mockAttacher . attach ( \"STR\" ) ) . thenReturn ( this . mockVirtualMachine ) ;\nMockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ;\nMockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ;\nMockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSystemProperties . getProperty ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMBeanAccessConnection result = this . factory . createConnection ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(result);\nassertEquals(mockVirtualMachine, mockAttacher.attach(\"STR\"));\nassertEquals(mockAgentProperties, mockVirtualMachine.getAgentProperties());\nassertEquals(mockSystemProperties, mockVirtualMachine.getSystemProperties());\nassertNotNull(mockAgentProperties.getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY));\nassertEquals(\"STR\", mockAgentProperties.getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY));\nassertEquals(\"STR\", mockSystemProperties.getProperty(\"STR\"));\nverify(mockJmxServiceUrlFactory).createJMXServiceUrl(\"STR\");\nverify(mockJmxConnectorFactoryDelegate).connect(any(JMXServiceURL.class));\nverify(mockJmxmBeanConnectionFactory).create(any(JMXConnector.class));\nverify(mockLog).warn(\"STR\", \"STR\");\nverify(mockLog).warn(\"STR\", \"STR\", any(Exception.class));\nassertNotNull(result);\nassertEquals(mockVirtualMachine, mockAttacher.attach(\"STR\"));\nassertEquals(mockAgentProperties, mockVirtualMachine.getAgentProperties());\nassertEquals(mockSystemProperties, mockVirtualMachine.getSystemProperties());\nassertNotNull(mockAgentProperties.getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY));\nassertEquals(\"STR\", mockAgentProperties.getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY));\nassertEquals(\"STR\", mockSystemProperties.getProperty(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.418,
+        0.418,
+        0.417,
+        0.362,
+        0.362,
+        0.343,
+        0.343,
+        0.336,
+        0.336,
+        0.336,
+        0.331,
+        0.331,
+        0.312,
+        0.312,
+        0.303,
+        0.303,
+        0.3,
+        0.286,
+        0.253
+    ],
+    "ground_truth": "assertSame(result,this.mockJmxMbeanConnection);"
+}

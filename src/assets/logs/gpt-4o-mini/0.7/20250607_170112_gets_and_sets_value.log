@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class Config {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class ConfigTest {
+    @Test
+     public void gets_and_sets_value ( ) {
+         Config config = new Config ( ) ; 
+         config . set ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("STR", config.getString("STR"));
+assertNotNull(config.getString("STR"));
+assertTrue(config.getString("STR").equals("STR"));
+assertFalse(config.getString("STR").equals("INVALID"));
+assertEquals(3, config.getString("STR").length());
+assertTrue(config.getString("STR").startsWith("S"));
+assertTrue(config.getString("STR").endsWith("R"));
+assertNotEquals("DifferentString", config.getString("STR"));
+assertEquals("STR", config.getString("STR").toUpperCase());
+assertEquals("STR", config.getString("str"));
+assertEquals("STR", config.getString("Str"));
+assertFalse(config.getString("STR").isEmpty());
+assertThrows(IllegalArgumentException.class, () -> config.getString(null));
+assertThrows(IllegalArgumentException.class, () -> config.getString(""));
+assertEquals("STR", config.getString("STr"));
+assertNotSame("DifferentString", config.getString("STR"));
+assertNotEquals("STR", config.getString("ANOTHER_KEY"));
+assertEquals("STR", config.getString("STR").trim());
+assertTrue(config.getString("STR").contains("T"));
+assertTrue(config.getString("STR").length() > 0);
+assertTrue(config.getString("STR").matches(".*R$"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+0.977 - assertEquals("STR", config.getString("STr"))
+0.953 - assertEquals("STR", config.getString("Str"))
+0.930 - assertEquals("STR", config.getString("str"))
+0.925 - assertEquals("STR", config.getString("STR").trim())
+0.915 - ```java
+assertEquals("STR", config.getString("STR"))
+0.866 - assertNotEquals("STR", config.getString("ANOTHER_KEY"))
+0.860 - assertEquals("STR", config.getString("STR").toUpperCase())
+0.835 - assertEquals(3, config.getString("STR").length())
+0.815 - assertNotNull(config.getString("STR"))
+0.812 - assertNotEquals("DifferentString", config.getString("STR"))
+0.764 - assertFalse(config.getString("STR").isEmpty())
+0.727 - assertNotSame("DifferentString", config.getString("STR"))
+0.719 - assertTrue(config.getString("STR").length() > 0)
+0.701 - assertFalse(config.getString("STR").equals("INVALID"))
+0.696 - assertTrue(config.getString("STR").equals("STR"))
+0.696 - assertTrue(config.getString("STR").endsWith("R"))
+0.696 - assertTrue(config.getString("STR").contains("T"))
+0.681 - assertTrue(config.getString("STR").startsWith("S"))
+0.681 - assertTrue(config.getString("STR").matches(".*R$"))
+0.554 - assertThrows(IllegalArgumentException.class, () -> config.getString(""))
+0.509 - assertThrows(IllegalArgumentException.class, () -> config.getString(null))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(database);\nAssert.assertTrue(database.isOpen());\nAssert.assertEquals(\"ExpectedDatabaseName\", database.getName());\nAssert.assertEquals(Locale.GERMANY.getLanguage(), database.getLocale().getLanguage());\nAssert.assertTrue(database.getStorage().isUpdated());\nAssert.assertEquals(0, database.getStorage().getPendingOperationsCount());\nAssert.assertEquals(\"ExpectedStorageType\", database.getStorage().getType());\nAssert.assertNotEquals(0, database.getStorage().getRecordCount());\nAssert.assertTrue(database.getMetadata().isConsistent());\nAssert.assertTrue(database.getMetadata().getSchema().isValid());\nAssert.assertEquals(\"ExpectedAttributeType\", remoteMetadataReload.get(ATTRIBUTES.EXAMPLE_ATTRIBUTE).getClass().getSimpleName());\nAssert.assertNotNull(remoteMetadataReload.get(ATTRIBUTES.EXAMPLE_ATTRIBUTE));\nAssert.assertSame(remoteMetadataReload.get(ATTRIBUTES.EXAMPLE_ATTRIBUTE), database.getAttribute(ATTRIBUTES.EXAMPLE_ATTRIBUTE));\nAssert.assertFalse(database.getTransaction().isActive());\nAssert.assertTrue(database.getUsers().contains(\"admin\"));\nAssert.assertNotNull(database.getCurrentSession());\nAssert.assertTrue(database.getCurrentSession().isActive());\nAssert.assertEquals(1, database.getQueryHistory().size());\nAssert.assertTrue(database.getOperationsLog().isEmpty());\nAssert.assertEquals(\"ExpectedDefaultCharset\", database.getCharset().name());\nAssert.assertEquals(\"ExpectedDefaultTimezone\", database.getTimezone().getID());\n```\n====================\n\n",
+    "scores": [
+        0.497,
+        0.493,
+        0.46,
+        0.454,
+        0.446,
+        0.443,
+        0.44,
+        0.428,
+        0.426,
+        0.42,
+        0.42,
+        0.415,
+        0.415,
+        0.411,
+        0.409,
+        0.408,
+        0.383,
+        0.371,
+        0.364,
+        0.364,
+        0.293,
+        0.0
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb answered ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testAnswered ( ) {
+         Verb actual = Verbs . answered ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals("STR", actual.getId());
+assertEquals("answered", actual.getDisplayName());
+assertTrue(actual.isActive());
+assertFalse(actual.isDeprecated());
+assertEquals("verb", actual.getType());
+assertEquals("en-US", actual.getLanguage());
+assertEquals("Answered", actual.getDisplay().get("en-US"));
+assertEquals("verb", actual.getObjectType());
+assertNotNull(actual.getTimestamp());
+assertTrue(actual.getTimestamp().isBefore(Instant.now()));
+assertEquals("http://example.com/verbs/answered", actual.getUrl());
+assertEquals("Answered a question", actual.getDescription());
+assertEquals(1, actual.getVersion());
+assertTrue(actual.getCategories().isEmpty());
+assertNotNull(actual.getContext());
+assertEquals("http://example.com/context", actual.getContext().get("url"));
+assertEquals("test", actual.getContext().get("testKey"));
+assertEquals("example", actual.getActor().getName());
+assertEquals("http://example.com/actor", actual.getActor().getMbox());
+assertEquals("http://example.com/verb", actual.getObject().getId());
+assertEquals("http://example.com/definition", actual.getDefinition().getId());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.764 - assertNotNull(actual.getContext())
+0.737 - assertNotNull(actual.getTimestamp())
+0.600 - assertTrue(actual.isActive())
+0.582 - assertEquals("STR", actual.getId())
+0.571 - assertEquals(1, actual.getVersion())
+0.552 - assertEquals("verb", actual.getType())
+0.545 - assertFalse(actual.isDeprecated())
+0.508 - assertEquals("en-US", actual.getLanguage())
+0.500 - assertEquals("verb", actual.getObjectType())
+0.464 - assertEquals("answered", actual.getDisplayName())
+0.462 - assertTrue(actual.getCategories().isEmpty())
+0.444 - assertEquals("example", actual.getActor().getName())
+0.410 - assertEquals("Answered", actual.getDisplay().get("en-US"))
+0.385 - assertTrue(actual.getTimestamp().isBefore(Instant.now()))
+0.368 - assertEquals("test", actual.getContext().get("testKey"))
+0.359 - assertEquals("Answered a question", actual.getDescription())
+0.337 - assertEquals("http://example.com/actor", actual.getActor().getMbox())
+0.326 - assertEquals("http://example.com/verbs/answered", actual.getUrl())
+0.322 - assertEquals("http://example.com/verb", actual.getObject().getId())
+0.319 - assertEquals("http://example.com/context", actual.getContext().get("url"))
+0.309 - assertEquals("http://example.com/definition", actual.getDefinition().getId())
+0.000 - ```

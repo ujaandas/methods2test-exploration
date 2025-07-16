@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testNullValueInCellEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(1, res.size());\nassertTrue(res.get(0).containsField(\"column1\"));\nassertTrue(res.get(0).containsField(\"column2\"));\nassertEquals(\"ExpectedValue1\", res.get(0).field(\"column1\"));\nassertEquals(\"\", res.get(0).field(\"column2\")); // Checking for empty string\nassertNotNull(res.get(0).field(\"column3\"));\nassertEquals(\"ExpectedValue3\", res.get(0).field(\"column3\"));\nassertTrue(res.get(0).field(\"column4\") instanceof String);\nassertEquals(\"ExpectedValue4\", res.get(0).field(\"column4\"));\nassertTrue(res.get(0).field(\"column5\") instanceof Integer);\nassertEquals(123, res.get(0).field(\"column5\"));\nassertNotNull(res.get(0).field(\"timestamp\"));\nassertTrue(res.get(0).field(\"timestamp\") instanceof Date);\nassertEquals(\"ExpectedValue6\", res.get(0).field(\"column6\"));\nassertFalse(res.get(0).field(\"column7\").toString().isEmpty());\nassertTrue(res.get(0).field(\"column8\") instanceof List);\nassertEquals(3, ((List)res.get(0).field(\"column8\")).size());\nassertTrue(res.get(0).field(\"column9\") instanceof Map);\nassertTrue(((Map)res.get(0).field(\"column9\")).containsKey(\"key1\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.692,
+        0.598,
+        0.514,
+        0.514,
+        0.507,
+        0.466,
+        0.466,
+        0.462,
+        0.452,
+        0.444,
+        0.429,
+        0.429,
+        0.429,
+        0.429,
+        0.41,
+        0.405,
+        0.395,
+        0.391,
+        0.39,
+        0.344,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

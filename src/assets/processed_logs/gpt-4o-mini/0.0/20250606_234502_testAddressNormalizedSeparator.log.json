@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class MacAddress {\n@Override\npublic String toString ( ) {\nfinal StringBuilder builder = new StringBuilder ( ) ;\nfor ( int i = 0 ;\ni < address . length ;\ni ++ ) {\nif ( i != 0 ) {\nbuilder . append ( STANDARD_SEPARATOR ) ;\n} builder . append ( String . format ( \"STR\" , address [ i ] ) ) ;\n} return builder . toString ( ) ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class MacAddressTest {\n@Test\npublic void testAddressNormalizedSeparator ( ) {\nfinal MacAddress macAddress = new MacAddress ( NORMALIZED_ADDRESS ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(macAddress);\nassertEquals(\"STR00:11:22:33:44:55\", macAddress.toString());\nassertTrue(macAddress.toString().contains(\"STR\"));\nassertTrue(macAddress.toString().startsWith(\"STR\"));\nassertTrue(macAddress.toString().endsWith(\"55\"));\nassertEquals(17, macAddress.toString().length());\nassertTrue(macAddress.toString().matches(\"STR[0-9A-Fa-f]{2}(:STR[0-9A-Fa-f]{2}){5}\"));\nassertFalse(macAddress.toString().contains(\" \"));\nassertEquals(\"STR00:11:22:33:44:55\", macAddress.toString());\nassertNotEquals(\"STR00:11:22:33:44:56\", macAddress.toString());\nassertTrue(macAddress.toString().indexOf(\"STR\") >= 0);\nassertFalse(macAddress.toString().isEmpty());\nassertEquals(\"STR00:11:22:33:44:55\", macAddress.toString());\nassertTrue(macAddress.toString().length() > 0);\nassertTrue(macAddress.toString().contains(\":\"));\nassertEquals(\"STR00:11:22:33:44:55\", macAddress.toString());\nassertNotEquals(\"STR00:11:22:33:44:56\", macAddress.toString());\nassertTrue(macAddress.toString().matches(\"STR[0-9A-Fa-f]{2}(:STR[0-9A-Fa-f]{2}){5}\"));\nassertTrue(macAddress.toString().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.713,
+        0.661,
+        0.661,
+        0.661,
+        0.661,
+        0.653,
+        0.643,
+        0.643,
+        0.634,
+        0.612,
+        0.594,
+        0.588,
+        0.583,
+        0.583,
+        0.571,
+        0.571,
+        0.46,
+        0.432,
+        0.432,
+        0.0
+    ],
+    "ground_truth": "assertEquals(NORMALIZED_ADDRESS,macAddress.toString());"
+}

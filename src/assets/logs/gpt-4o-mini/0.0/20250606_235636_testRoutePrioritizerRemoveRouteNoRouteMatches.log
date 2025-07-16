@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    @Override
+     public Collection < UriResource > getPrioritizedRoutes ( ) { 
+     return Collections . unmodifiableCollection ( mappings ) ; 
+     }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testRoutePrioritizerRemoveRouteNoRouteMatches ( ) {
+         DefaultRoutePrioritizer prioritizer = new DefaultRoutePrioritizer ( ) ; 
+         prioritizer . addRoute ( "STR" , 100 , NotImplementedHandler . class ) ; 
+         prioritizer . removeRoute ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(0, prioritizer.getRoutes().size());
+assertFalse(prioritizer.getRoutes().containsKey("STR"));
+assertNull(prioritizer.getRoute("STR"));
+assertTrue(prioritizer.getRoutes().isEmpty());
+assertFalse(prioritizer.getRoutes().keySet().contains("STR"));
+assertThrows(RouteNotFoundException.class, () -> prioritizer.getRoute("STR"));
+assertEquals(0, prioritizer.getPrioritizedRoutes().size());
+assertFalse(prioritizer.getPrioritizedRoutes().stream().anyMatch(route -> route.getPath().equals("STR")));
+assertTrue(prioritizer.getPrioritizedRoutes().stream().noneMatch(route -> route.getPath().equals("STR")));
+assertNotNull(prioritizer.getRoutes());
+assertTrue(prioritizer.getRoutes().isEmpty());
+assertEquals(0, prioritizer.getRoutes().size());
+assertFalse(prioritizer.getRoutes().containsValue(NotImplementedHandler.class));
+assertThrows(IllegalArgumentException.class, () -> prioritizer.removeRoute(null));
+assertThrows(IllegalArgumentException.class, () -> prioritizer.removeRoute(""));
+assertDoesNotThrow(() -> prioritizer.removeRoute("NON_EXISTENT_ROUTE"));
+assertEquals(0, prioritizer.getRoutes().size());
+assertFalse(prioritizer.getRoutes().containsKey("STR"));
+assertTrue(prioritizer.getPrioritizedRoutes().isEmpty());
+assertFalse(prioritizer.getPrioritizedRoutes().stream().anyMatch(route -> route.getPath().equals("STR")));
+assertEquals(0, prioritizer.getPrioritizedRoutes().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,prioritizer.getPrioritizedRoutes().size()); ===
+0.982 - assertEquals(0, prioritizer.getPrioritizedRoutes().size())
+0.982 - assertEquals(0, prioritizer.getPrioritizedRoutes().size())
+0.874 - assertEquals(0, prioritizer.getRoutes().size())
+0.874 - assertEquals(0, prioritizer.getRoutes().size())
+0.832 - assertTrue(prioritizer.getPrioritizedRoutes().isEmpty())
+0.811 - ```java
+assertEquals(0, prioritizer.getRoutes().size())
+0.706 - assertTrue(prioritizer.getRoutes().isEmpty())
+0.706 - assertTrue(prioritizer.getRoutes().isEmpty())
+0.696 - assertFalse(prioritizer.getRoutes().containsKey("STR"))
+0.696 - assertFalse(prioritizer.getRoutes().containsKey("STR"))
+0.695 - assertNotNull(prioritizer.getRoutes())
+0.667 - assertNull(prioritizer.getRoute("STR"))
+0.644 - assertFalse(prioritizer.getRoutes().keySet().contains("STR"))
+0.625 - assertFalse(prioritizer.getPrioritizedRoutes().stream().anyMatch(route -> route.getPath().equals("STR")))
+0.625 - assertFalse(prioritizer.getPrioritizedRoutes().stream().anyMatch(route -> route.getPath().equals("STR")))
+0.600 - assertTrue(prioritizer.getPrioritizedRoutes().stream().noneMatch(route -> route.getPath().equals("STR")))
+0.574 - assertFalse(prioritizer.getRoutes().containsValue(NotImplementedHandler.class))
+0.496 - assertThrows(IllegalArgumentException.class, () -> prioritizer.removeRoute(""))
+0.492 - assertDoesNotThrow(() -> prioritizer.removeRoute("NON_EXISTENT_ROUTE"))
+0.489 - assertThrows(IllegalArgumentException.class, () -> prioritizer.removeRoute(null))
+0.489 - assertThrows(RouteNotFoundException.class, () -> prioritizer.getRoute("STR"))
+0.000 - ```

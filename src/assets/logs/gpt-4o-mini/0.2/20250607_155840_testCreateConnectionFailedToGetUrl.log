@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    @Override
+     public MBeanAccessConnection createConnection ( ) throws IOException { 
+     JMXMBeanConnection result = null ; 
+     try { 
+     VirtualMachine vm = this . attacher . attach ( jvmId ) ; 
+     String url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     if ( url == null ) { 
+     String javaHome = vm . getSystemProperties ( ) . getProperty ( "STR" ) ; 
+     String agent = javaHome + File . separator + "STR" + File . separator + "STR" ; 
+     vm . loadAgent ( agent ) ; 
+     url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     } if ( url != null ) { 
+     JMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ; 
+     JMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ; 
+     result = this . jmxmBeanConnectionFactory . create ( connector ) ; 
+     } else { 
+     log . warn ( "STR" , this . jvmId ) ; 
+     } } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) { 
+     log . warn ( "STR" , this . jvmId , exc ) ; 
+     } return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testCreateConnectionFailedToGetUrl ( ) throws Exception {
+         this . initFactory ( ) ; 
+         Mockito . when ( this . mockAttacher . attach ( "STR" ) ) . thenReturn ( this . mockVirtualMachine ) ; 
+         Mockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ; 
+         Mockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ; 
+         Mockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) ; 
+         MBeanAccessConnection result = this . factory . createConnection ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+Mockito.verify(this.mockVirtualMachine).getAgentProperties();
+Mockito.verify(this.mockVirtualMachine).getSystemProperties();
+Mockito.verify(this.mockVirtualMachine).loadAgent(Mockito.anyString());
+Mockito.verify(this.mockAgentProperties).getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY);
+Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).attach("STR");
+Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).getAgentProperties();
+Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).getSystemProperties();
+Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).loadAgent(Mockito.anyString());
+Mockito.verify(this.mockAgentProperties, Mockito.times(1)).getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY);
+Mockito.verify(this.log, Mockito.times(1)).warn(Mockito.eq("STR"), Mockito.eq("STR"));
+Mockito.verify(this.log, Mockito.times(0)).warn(Mockito.eq("STR"), Mockito.eq("STR"), Mockito.any());
+assertNotNull(this.factory);
+assertTrue(this.factory instanceof JMXJvmIdConnectionFactory);
+assertEquals("STR", this.jvmId);
+assertNotNull(this.mockAttacher);
+assertNotNull(this.mockVirtualMachine);
+assertNotNull(this.mockAgentProperties);
+assertNotNull(this.mockSystemProperties);
+assertNotNull(this.jmxServiceUrlFactory);
+assertNotNull(this.jmxConnectorFactoryDelegate);
+assertNotNull(this.jmxmBeanConnectionFactory);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+0.818 - ```java
+assertNull(result)
+0.578 - assertNotNull(this.factory)
+0.552 - assertNotNull(this.jmxServiceUrlFactory)
+0.526 - assertNotNull(this.mockAgentProperties)
+0.520 - assertNotNull(this.mockAttacher)
+0.517 - assertNotNull(this.mockSystemProperties)
+0.500 - assertNotNull(this.mockVirtualMachine)
+0.492 - assertNotNull(this.jmxConnectorFactoryDelegate)
+0.458 - assertEquals("STR", this.jvmId)
+0.413 - assertNotNull(this.jmxmBeanConnectionFactory)
+0.312 - assertTrue(this.factory instanceof JMXJvmIdConnectionFactory)
+0.205 - Mockito.verify(this.mockVirtualMachine).loadAgent(Mockito.anyString())
+0.205 - Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).attach("STR")
+0.203 - Mockito.verify(this.mockVirtualMachine).getSystemProperties()
+0.190 - Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).loadAgent(Mockito.anyString())
+0.188 - Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).getSystemProperties()
+0.179 - Mockito.verify(this.mockVirtualMachine).getAgentProperties()
+0.168 - Mockito.verify(this.mockVirtualMachine, Mockito.times(1)).getAgentProperties()
+0.158 - Mockito.verify(this.log, Mockito.times(1)).warn(Mockito.eq("STR"), Mockito.eq("STR"))
+0.139 - Mockito.verify(this.log, Mockito.times(0)).warn(Mockito.eq("STR"), Mockito.eq("STR"), Mockito.any())
+0.116 - Mockito.verify(this.mockAgentProperties).getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY)
+0.103 - Mockito.verify(this.mockAgentProperties, Mockito.times(1)).getProperty(JMXJvmIdConnectionFactory.COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY)
+0.000 - ```

@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testParamWithMatches ( ) {\nMap < String , Object > params = new HashMap < String , Object > ( ) ;\nparams . put ( \"STR\" , \"STR\" ) ;\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql , params ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, results.size());\nassertTrue(results.get(0).containsField(\"field1\"));\nassertFalse(results.isEmpty());\nassertNotNull(results.get(0));\nassertEquals(\"value1\", results.get(0).field(\"field1\"));\nassertTrue(results.get(0).field(\"field2\") instanceof Integer);\nassertEquals(100, results.get(0).field(\"field2\"));\nassertTrue(results.get(0).field(\"field3\") instanceof Boolean);\nassertTrue((Boolean) results.get(0).field(\"field3\"));\nassertEquals(\"expectedValue\", results.get(0).field(\"field4\"));\nassertNotNull(results.get(0).field(\"field5\"));\nassertEquals(5, results.get(0).field(\"field5\").size());\nassertTrue(results.get(0).field(\"field5\") instanceof List);\nassertTrue(results.get(0).field(\"field5\").get(0) instanceof String);\nassertEquals(\"value2\", results.get(0).field(\"field5\").get(0));\nassertTrue(results.get(0).field(\"field6\") instanceof Map);\nassertEquals(\"value3\", results.get(0).field(\"field6\").get(\"key1\"));\nassertEquals(123, results.get(0).field(\"field7\"));\nassertNull(results.get(0).field(\"field8\"));\n====================\n\n",
+    "scores": [
+        0.933,
+        0.733,
+        0.712,
+        0.675,
+        0.667,
+        0.667,
+        0.627,
+        0.611,
+        0.587,
+        0.578,
+        0.578,
+        0.568,
+        0.55,
+        0.519,
+        0.447,
+        0.442,
+        0.427,
+        0.427,
+        0.4
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

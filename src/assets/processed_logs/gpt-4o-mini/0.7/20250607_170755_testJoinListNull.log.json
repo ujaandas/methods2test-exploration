@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class Seq {\npublic static String join ( Collection < ? > list , String delimiter ) {\nif ( list == null || list . isEmpty ( ) ) {\nreturn \"STR\" ;\n} if ( delimiter == null ) {\ndelimiter = \"STR\" ;\n} StringBuilder s = new StringBuilder ( ) ;\nboolean first = true ;\nfor ( Object e : list ) {\nif ( first ) {\nfirst = false ;\n} else {\ns . append ( delimiter ) ;\n} s . append ( e ) ;\n} return s . toString ( ) ;\n}\n}\n\npackage redraiment.jactiverecord;\n\npublic class SeqTest {\n@Test\npublic void testJoinListNull ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nimport static org.junit.Assert.assertEquals;\nimport java.util.Arrays;\nimport java.util.Collections;\n\n@Test\npublic void testJoinListNull() {\nassertEquals(\"STR\", Seq.join(null, \",\"));\nassertEquals(\"STR\", Seq.join(Collections.emptyList(), \",\"));\nassertEquals(\"STR\", Seq.join(null, null));\nassertEquals(\"STR\", Seq.join(Collections.emptyList(), null));\nassertEquals(\"a\", Seq.join(Arrays.asList(\"a\"), \",\"));\nassertEquals(\"a\", Seq.join(Arrays.asList(\"a\"), null));\nassertEquals(\"a,b\", Seq.join(Arrays.asList(\"a\", \"b\"), \",\"));\nassertEquals(\"aSTRb\", Seq.join(Arrays.asList(\"a\", \"b\"), \"STR\"));\nassertEquals(\"1STR2STR3\", Seq.join(Arrays.asList(\"1\", \"2\", \"3\"), \"STR\"));\nassertEquals(\"aSTRbSTRc\", Seq.join(Arrays.asList(\"a\", \"b\", \"c\"), \"STR\"));\nassertEquals(\"1,2,3\", Seq.join(Arrays.asList(1, 2, 3), \",\"));\nassertEquals(\"true,false\", Seq.join(Arrays.asList(true, false), \",\"));\nassertEquals(\"null,null\", Seq.join(Arrays.asList(null, null), \",\"));\nassertEquals(\"\", Seq.join(Collections.singletonList(\"\"), \",\"));\nassertEquals(\" \", Seq.join(Collections.singletonList(\" \"), \",\"));\nassertEquals(\"a b\", Seq.join(Arrays.asList(\"a\", \"b\"), \" \"));\nassertEquals(\"1 2 3\", Seq.join(Arrays.asList(1, 2, 3), \" \"));\nassertEquals(\"x/y/z\", Seq.join(Arrays.asList(\"x\", \"y\", \"z\"), \"/\"));\nassertEquals(\"1STR2STR3STR4\", Seq.join(Arrays.asList(\"1\", \"2\", \"3\", \"4\"), \"STR\"));\nassertEquals(\"hello-world\", Seq.join(Arrays.asList(\"hello\", \"world\"), \"-\"));\nassertEquals(\"aSTRbSTRcSTRd\", Seq.join(Arrays.asList(\"a\", \"b\", \"c\", \"d\"), \"STR\"));\n}\n```\n====================\n\n",
+    "scores": [
+        0.886,
+        0.722,
+        0.72,
+        0.694,
+        0.681,
+        0.667,
+        0.667,
+        0.667,
+        0.654,
+        0.649,
+        0.645,
+        0.64,
+        0.64,
+        0.638,
+        0.625,
+        0.625,
+        0.621,
+        0.621,
+        0.604,
+        0.588,
+        0.571,
+        0.293,
+        0.239,
+        0.161,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",Seq.join(null,\"STR\"));"
+}

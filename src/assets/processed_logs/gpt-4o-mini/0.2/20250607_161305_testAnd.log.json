@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMathExpression {\npublic Object execute ( OResult iCurrentRecord , OCommandContext ctx ) {\nif ( childExpressions . size ( ) == 0 ) {\nreturn null ;\n} if ( childExpressions . size ( ) == 1 ) {\nreturn childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ;\n} if ( childExpressions . size ( ) == 2 ) {\nObject leftValue = childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ;\nObject rightValue = childExpressions . get ( 1 ) . execute ( iCurrentRecord , ctx ) ;\nreturn operators . get ( 0 ) . apply ( leftValue , rightValue ) ;\n} return calculateWithOpPriority ( iCurrentRecord , ctx ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMathExpressionTest {\n@Test\npublic void testAnd ( ) {\nOMathExpression exp = new OMathExpression ( - 1 ) ;\nexp . childExpressions . add ( integer ( 5 ) ) ;\nexp . operators . add ( OMathExpression . Operator . BIT_AND ) ;\nexp . childExpressions . add ( integer ( 1 ) ) ;\nObject result = exp . execute ( ( OResult ) null , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof Integer);\nassertEquals(1, result);\nassertEquals(1, (int) result);\nassertEquals(1, (Integer) result);\nassertTrue(result.equals(1));\nassertFalse(result.equals(0));\nassertNotEquals(5, result);\nassertNotEquals(2, result);\nassertNotEquals(3, result);\nassertNotEquals(4, result);\nassertTrue(result instanceof Number);\nassertTrue(((Integer) result) >= 0);\nassertTrue(((Integer) result) <= 5);\nassertTrue(result.toString().equals(\"1\"));\nassertTrue(result.hashCode() == 1);\nassertTrue(result.equals(Integer.valueOf(1)));\nassertFalse(result.equals(Integer.valueOf(5)));\nassertTrue(result instanceof Comparable);\nassertTrue(((Comparable) result).compareTo(0) > 0);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.87,
+        0.795,
+        0.65,
+        0.603,
+        0.597,
+        0.568,
+        0.567,
+        0.567,
+        0.553,
+        0.526,
+        0.512,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.485,
+        0.484,
+        0.469,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(resultinstanceofInteger);"
+}

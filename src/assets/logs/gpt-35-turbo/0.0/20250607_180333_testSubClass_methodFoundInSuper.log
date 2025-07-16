@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public List < Method > findAll ( ) { 
+    List < Method > methods = findAllDeclaredMethods ( clazz ) ; 
+    for ( Method method : methods ) { 
+    verifyPublic ( method ) ; 
+    verifyNotStatic ( method ) ; 
+    verifyReturnType ( method ) ; 
+    verifyArgs ( method ) ; 
+    method . setAccessible ( true ) ; 
+    } return methods ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testSubClass_methodFoundInSuper ( ) {
+         List < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, methodList.size());
+assertTrue(methodList.contains(Subclass.class.getMethod("methodFoundInSuper")));
+assertFalse(methodList.contains(Subclass.class.getMethod("methodNotFound")));
+assertTrue(methodList.get(0).getReturnType().equals(void.class));
+assertTrue(methodList.get(0).getParameterCount() == 0);
+assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));
+assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));
+assertTrue(methodList.get(0).isAccessible());
+assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));
+assertFalse(methodList.get(0).isAnnotationPresent(Setup.class));
+assertTrue(methodList.get(0).getAnnotations().length == 1);
+assertTrue(methodList.get(0).getAnnotations()[0].annotationType().equals(Teardown.class));
+assertFalse(methodList.get(0).getAnnotations()[0].annotationType().equals(Setup.class));
+assertTrue(methodList.get(0).getDeclaringClass().equals(Subclass.class));
+assertFalse(methodList.get(0).getDeclaringClass().equals(Superclass.class));
+assertTrue(methodList.get(0).getName().equals("methodFoundInSuper"));
+assertFalse(methodList.get(0).getName().equals("methodNotFound"));
+assertTrue(methodList.get(0).getReturnType().equals(void.class));
+assertFalse(methodList.get(0).getReturnType().equals(int.class));
+assertTrue(methodList.get(0).getParameterCount() == 0);
+assertFalse(methodList.get(0).getParameterCount() == 1);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,methodList.size()); ===
+1.000 - assertEquals(1, methodList.size())
+0.649 - assertTrue(methodList.get(0).isAccessible())
+0.581 - assertFalse(methodList.get(0).getParameterCount() == 1)
+0.562 - assertFalse(methodList.get(0).isAnnotationPresent(Setup.class))
+0.541 - assertTrue(methodList.get(0).getParameterCount() == 0)
+0.541 - assertTrue(methodList.get(0).getParameterCount() == 0)
+0.517 - assertTrue(methodList.get(0).getAnnotations().length == 1)
+0.515 - assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()))
+0.515 - assertFalse(methodList.get(0).getReturnType().equals(int.class))
+0.510 - assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class))
+0.510 - assertFalse(methodList.get(0).getName().equals("methodNotFound"))
+0.500 - assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()))
+0.477 - assertFalse(methodList.contains(Subclass.class.getMethod("methodNotFound")))
+0.474 - assertTrue(methodList.get(0).getReturnType().equals(void.class))
+0.474 - assertTrue(methodList.get(0).getReturnType().equals(void.class))
+0.463 - assertFalse(methodList.get(0).getDeclaringClass().equals(Superclass.class))
+0.455 - assertTrue(methodList.get(0).getName().equals("methodFoundInSuper"))
+0.450 - assertFalse(methodList.get(0).getAnnotations()[0].annotationType().equals(Setup.class))
+0.438 - assertTrue(methodList.get(0).getDeclaringClass().equals(Subclass.class))
+0.429 - assertTrue(methodList.contains(Subclass.class.getMethod("methodFoundInSuper")))
+0.410 - assertTrue(methodList.get(0).getAnnotations()[0].annotationType().equals(Teardown.class))

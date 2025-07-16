@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPoint {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPointTest {
+    @Test
+     public void testIndexingComplexUpdateTxPoint ( ) {
+         ODocument rome = newCity ( "STR" , 12.5 , 41.9 ) ; 
+         ODocument london = newCity ( "STR" , - 0.1275 , 51.507222 ) ; 
+         rome = db . save ( rome ) ; 
+         london = db . save ( london ) ; 
+         db . begin ( ) ; 
+         rome . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         db . save ( rome ) ; 
+         db . save ( london ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(index);
+Assert.assertTrue(index.getSize() > 0);
+Assert.assertEquals(2, index.getSize());
+Assert.assertTrue(index.contains(rome.getIdentity()));
+Assert.assertTrue(index.contains(london.getIdentity()));
+Assert.assertEquals(newPoint(12.5, 41.9), rome.field("STR"));
+Assert.assertEquals(newPoint(-0.1275, 51.507222), london.field("STR"));
+Assert.assertEquals(newPoint(12.5, 41.9), london.field("STR", 1));
+Assert.assertEquals(newPoint(12.5, 41.9), london.field("STR", 2));
+Assert.assertFalse(index.contains(newPoint(0, 0)));
+Assert.assertTrue(index.contains(newPoint(12.5, 41.9)));
+Assert.assertTrue(index.contains(newPoint(-0.1275, 51.507222)));
+Assert.assertEquals(1, index.getSize(newPoint(12.5, 41.9)));
+Assert.assertEquals(1, index.getSize(newPoint(-0.1275, 51.507222)));
+Assert.assertNotEquals(0, index.getSize(newPoint(12.5, 41.9)));
+Assert.assertNotEquals(0, index.getSize(newPoint(-0.1275, 51.507222)));
+Assert.assertTrue(index.getSize() <= 2);
+Assert.assertTrue(index.getSize() >= 2);
+Assert.assertTrue(index.getSize() == 2);
+Assert.assertFalse(index.isEmpty());
+Assert.assertEquals(2, index.getSize());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,index.getSize()); ===
+0.968 - Assert.assertEquals(2, index.getSize())
+0.968 - Assert.assertEquals(2, index.getSize())
+0.800 - Assert.assertTrue(index.getSize() > 0)
+0.787 - Assert.assertTrue(index.getSize() <= 2)
+0.787 - Assert.assertTrue(index.getSize() >= 2)
+0.787 - Assert.assertTrue(index.getSize() == 2)
+0.741 - Assert.assertEquals(1, index.getSize(newPoint(12.5, 41.9)))
+0.714 - Assert.assertNotEquals(0, index.getSize(newPoint(12.5, 41.9)))
+0.678 - Assert.assertFalse(index.isEmpty())
+0.674 - Assert.assertEquals(1, index.getSize(newPoint(-0.1275, 51.507222)))
+0.652 - Assert.assertNotEquals(0, index.getSize(newPoint(-0.1275, 51.507222)))
+0.575 - Assert.assertFalse(index.contains(newPoint(0, 0)))
+0.545 - Assert.assertTrue(index.contains(rome.getIdentity()))
+0.532 - Assert.assertTrue(index.contains(london.getIdentity()))
+0.508 - ```java
+Assert.assertNotNull(index)
+0.487 - Assert.assertTrue(index.contains(newPoint(12.5, 41.9)))
+0.465 - Assert.assertEquals(newPoint(12.5, 41.9), london.field("STR", 1))
+0.465 - Assert.assertEquals(newPoint(12.5, 41.9), london.field("STR", 2))
+0.463 - Assert.assertEquals(newPoint(12.5, 41.9), rome.field("STR"))
+0.442 - Assert.assertTrue(index.contains(newPoint(-0.1275, 51.507222)))
+0.435 - Assert.assertEquals(newPoint(-0.1275, 51.507222), london.field("STR"))
+0.000 - ```

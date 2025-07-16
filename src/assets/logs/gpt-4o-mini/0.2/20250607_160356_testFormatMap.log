@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class Seq {
+    public static List < String > map ( Collection < ? > from , String format ) { 
+    List < String > to = new ArrayList < > ( from . size ( ) ) ; 
+    for ( Object e : from ) { 
+    to . add ( String . format ( format , e ) ) ; 
+    } return to ; 
+    }
+}
+
+package redraiment.jactiverecord;
+
+public class SeqTest {
+    @Test
+     public void testFormatMap ( ) {
+         String [ ] actuals = Seq . map ( Arrays . asList ( "STR" , "STR" , "STR" ) , "STR" ) . toArray ( new String [ 0 ] ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, actuals.length);
+assertEquals("STR", actuals[0]);
+assertEquals("STR", actuals[1]);
+assertEquals("STR", actuals[2]);
+assertArrayEquals(new String[]{"STR", "STR", "STR"}, actuals);
+assertNotNull(actuals);
+assertTrue(actuals instanceof String[]);
+assertTrue(actuals.length > 0);
+assertFalse(actuals.length == 0);
+assertEquals("STR", actuals[0]);
+assertEquals("STR", actuals[1]);
+assertEquals("STR", actuals[2]);
+assertNotSame(actuals[0], actuals[1]);
+assertNotSame(actuals[1], actuals[2]);
+assertNotSame(actuals[0], actuals[2]);
+assertTrue(Arrays.asList(actuals).contains("STR"));
+assertFalse(Arrays.asList(actuals).contains("NOT_STR"));
+assertEquals("STR", actuals[0]);
+assertEquals("STR", actuals[1]);
+assertEquals("STR", actuals[2]);
+assertTrue(actuals.length <= 3);
+assertTrue(actuals.length >= 3);
+assertEquals(3, actuals.length);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(newString[]{"STR","STR","STR"},actuals); ===
+1.000 - assertArrayEquals(new String[]{"STR", "STR", "STR"}, actuals)
+0.621 - assertEquals("STR", actuals[0])
+0.621 - assertEquals("STR", actuals[1])
+0.621 - assertEquals("STR", actuals[2])
+0.621 - assertEquals("STR", actuals[0])
+0.621 - assertEquals("STR", actuals[1])
+0.621 - assertEquals("STR", actuals[2])
+0.621 - assertEquals("STR", actuals[0])
+0.621 - assertEquals("STR", actuals[1])
+0.621 - assertEquals("STR", actuals[2])
+0.506 - assertEquals(3, actuals.length)
+0.489 - assertTrue(actuals instanceof String[])
+0.473 - assertNotSame(actuals[0], actuals[1])
+0.473 - assertNotSame(actuals[1], actuals[2])
+0.473 - assertNotSame(actuals[0], actuals[2])
+0.463 - ```java
+assertEquals(3, actuals.length)
+0.430 - assertNotNull(actuals)
+0.414 - assertFalse(actuals.length == 0)
+0.411 - assertTrue(Arrays.asList(actuals).contains("STR"))
+0.400 - assertTrue(actuals.length > 0)
+0.395 - assertTrue(actuals.length <= 3)
+0.395 - assertTrue(actuals.length >= 3)
+0.393 - assertFalse(Arrays.asList(actuals).contains("NOT_STR"))
+0.000 - ```

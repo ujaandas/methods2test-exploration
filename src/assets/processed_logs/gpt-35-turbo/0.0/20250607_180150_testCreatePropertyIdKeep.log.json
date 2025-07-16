@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OClassImpl {\npublic Integer getId ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OClassImplTest {\n@Test\npublic void testCreatePropertyIdKeep ( ) {\nfinal OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ;\nOClass oClass = oSchema . createClass ( \"STR\" ) ;\nOProperty prop = oClass . createProperty ( \"STR\" , OType . STRING ) ;\nInteger id = prop . getId ( ) ;\noClass . dropProperty ( \"STR\" ) ;\nprop = oClass . createProperty ( \"STR\" , OType . STRING ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.STRING, prop.getType());\nAssert.assertEquals(id, prop.getId());\nAssert.assertTrue(oClass.properties().contains(prop));\nAssert.assertTrue(oClass.existsProperty(\"STR\"));\nAssert.assertEquals(1, oClass.properties().size());\nAssert.assertEquals(1, oClass.properties(\"STR\").size());\nAssert.assertEquals(1, oClass.properties(OType.STRING).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, false).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, true, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, false, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, true, false).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, false, false).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, true, true, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, false, true, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, true, false, true).size());\nAssert.assertEquals(1, oClass.properties(\"STR\", OType.STRING, false, false, true).size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.794,
+        0.714,
+        0.648,
+        0.605,
+        0.583,
+        0.554,
+        0.522,
+        0.517,
+        0.489,
+        0.485,
+        0.484,
+        0.48,
+        0.48,
+        0.462,
+        0.46,
+        0.457,
+        0.457,
+        0.455,
+        0.453
+    ],
+    "ground_truth": "assertEquals(id,prop.getId());"
+}

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Platform {
+    public static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) { 
+    try { 
+    for ( Method method : cls . getDeclaredMethods ( ) ) { 
+    if ( method . getName ( ) . equals ( methodName ) ) { 
+    return ( T ) method . invoke ( null , params ) ; 
+    } } throw new NoSuchMethodException ( cls + "STR" + methodName ) ; 
+    } catch ( Exception e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package jcodec.jcodec;
+
+public class PlatformTest {
+    @Test
+     public void testInvokeStatic2 ( ) {
+         int parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , "STR" , new Object [ ] { 
+     ByteBuffer . wrap ( "STR" . getBytes ( ) ) } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(8, parseBuf);
+Assert.assertNotNull(parseBuf);
+Assert.assertTrue(parseBuf > 0);
+Assert.assertNotEquals(0, parseBuf);
+Assert.assertFalse(parseBuf < 0);
+Assert.assertTrue(parseBuf == 8);
+Assert.assertNotEquals(10, parseBuf);
+Assert.assertTrue(parseBuf != 10);
+Assert.assertTrue(parseBuf <= 8);
+Assert.assertTrue(parseBuf >= 8);
+Assert.assertNotEquals(5, parseBuf);
+Assert.assertTrue(parseBuf < 10);
+Assert.assertTrue(parseBuf > 5);
+Assert.assertTrue(parseBuf <= 10);
+Assert.assertTrue(parseBuf >= 5);
+Assert.assertNotEquals(15, parseBuf);
+Assert.assertTrue(parseBuf != 15);
+Assert.assertTrue(parseBuf < 15);
+Assert.assertTrue(parseBuf > 0);
+Assert.assertTrue(parseBuf >= 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(42,parseBuf); ===
+0.939 - Assert.assertEquals(8, parseBuf)
+0.885 - Assert.assertNotEquals(0, parseBuf)
+0.885 - Assert.assertNotEquals(5, parseBuf)
+0.868 - Assert.assertNotEquals(10, parseBuf)
+0.868 - Assert.assertNotEquals(15, parseBuf)
+0.792 - Assert.assertFalse(parseBuf < 0)
+0.750 - Assert.assertNotNull(parseBuf)
+0.723 - Assert.assertTrue(parseBuf > 0)
+0.723 - Assert.assertTrue(parseBuf > 5)
+0.723 - Assert.assertTrue(parseBuf > 0)
+0.708 - Assert.assertTrue(parseBuf == 8)
+0.708 - Assert.assertTrue(parseBuf <= 8)
+0.708 - Assert.assertTrue(parseBuf >= 8)
+0.708 - Assert.assertTrue(parseBuf < 10)
+0.708 - Assert.assertTrue(parseBuf >= 5)
+0.708 - Assert.assertTrue(parseBuf < 15)
+0.708 - Assert.assertTrue(parseBuf >= 0)
+0.694 - Assert.assertTrue(parseBuf != 10)
+0.694 - Assert.assertTrue(parseBuf <= 10)
+0.694 - Assert.assertTrue(parseBuf != 15)

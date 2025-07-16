@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNull {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneNullTest {
+    @Test
+     public void testNotNullChangeToNullWithLists ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         db . begin ( ) ; 
+         doc . field ( "STR" , new String [ ] { 
+     "STR" } ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         db . begin ( ) ; 
+         doc . removeField ( "STR" ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(index);
+Assert.assertTrue(index.getSize() >= 0);
+Assert.assertEquals(0, index.getSize());
+Assert.assertFalse(index.containsKey("STR"));
+Assert.assertFalse(index.containsValue("STR"));
+Assert.assertTrue(index.getEntries().isEmpty());
+Assert.assertEquals(0, index.getDocumentCount());
+Assert.assertNull(index.get("STR"));
+Assert.assertTrue(index.getNames().isEmpty());
+Assert.assertTrue(index.getMetadata().isEmpty());
+Assert.assertTrue(index.getStatistics().getEntries() == 0);
+Assert.assertTrue(index.getStatistics().getDeleted() == 0);
+Assert.assertFalse(index.isUnique());
+Assert.assertFalse(index.isAutomatic());
+Assert.assertTrue(index.getIndexType().equals("NOT_UNIQUE"));
+Assert.assertTrue(index.getCollate().equals("default"));
+Assert.assertTrue(index.getVersion() >= 0);
+Assert.assertTrue(index.getName().equals("STR"));
+Assert.assertFalse(index.isNull());
+Assert.assertTrue(db.getMetadata().getIndexManager().getIndexes().size() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(index.getSize(),1); ===
+0.935 - Assert.assertEquals(0, index.getSize())
+0.787 - Assert.assertTrue(index.getSize() >= 0)
+0.732 - Assert.assertEquals(0, index.getDocumentCount())
+0.712 - Assert.assertNull(index.get("STR"))
+0.700 - Assert.assertFalse(index.isUnique())
+0.690 - Assert.assertFalse(index.isNull())
+0.667 - Assert.assertFalse(index.isAutomatic())
+0.656 - Assert.assertTrue(index.getVersion() >= 0)
+0.629 - Assert.assertFalse(index.containsValue("STR"))
+0.620 - Assert.assertTrue(index.getEntries().isEmpty())
+0.609 - Assert.assertTrue(index.getNames().isEmpty())
+0.588 - Assert.assertFalse(index.containsKey("STR"))
+0.583 - Assert.assertTrue(index.getMetadata().isEmpty())
+0.583 - Assert.assertTrue(index.getName().equals("STR"))
+0.550 - Assert.assertTrue(index.getStatistics().getEntries() == 0)
+0.550 - Assert.assertTrue(index.getStatistics().getDeleted() == 0)
+0.532 - Assert.assertTrue(index.getCollate().equals("default"))
+0.508 - ```java
+Assert.assertNotNull(index)
+0.500 - Assert.assertTrue(index.getIndexType().equals("NOT_UNIQUE"))
+0.465 - Assert.assertTrue(db.getMetadata().getIndexManager().getIndexes().size() > 0)
+0.000 - ```

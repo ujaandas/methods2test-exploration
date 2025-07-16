@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODirtyManager {\npublic boolean isSame ( ODirtyManager other ) {\nreturn this . getReal ( ) == other . getReal ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODirtyManagerTest {\n@Test\npublic void testLinkCollectionOther ( ) {\nODocument doc = new ODocument ( ) ;\ndoc . field ( \"STR\" , \"STR\" ) ;\nList < ODocument > lst = new ArrayList < ODocument > ( ) ;\nODocument doc1 = new ODocument ( ) ;\nlst . add ( doc1 ) ;\ndoc . field ( \"STR\" , lst ) ;\nSet < ODocument > set = new HashSet < ODocument > ( ) ;\nODocument doc2 = new ODocument ( ) ;\nset . add ( doc2 ) ;\ndoc . field ( \"STR\" , set ) ;\nODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ;\nODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ;\nODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(manager);\nassertNotNull(manager2);\nassertFalse(manager.isSame(manager2));\nassertTrue(manager.isSame(manager));\nassertTrue(manager2.isSame(manager2));\nassertNotSame(manager, manager2);\nassertEquals(manager.getReal(), manager.getReal());\nassertEquals(manager2.getReal(), manager2.getReal());\nassertNotEquals(manager.getReal(), manager2.getReal());\nassertTrue(manager instanceof ODirtyManager);\nassertTrue(manager2 instanceof ODirtyManager);\nassertNotNull(doc1);\nassertNotNull(doc2);\nassertTrue(lst.contains(doc1));\nassertTrue(set.contains(doc2));\nassertFalse(lst.contains(doc2));\nassertFalse(set.contains(doc1));\nassertEquals(1, lst.size());\nassertEquals(1, set.size());\nassertTrue(doc.field(\"STR\") instanceof Set);\nassertTrue(doc.field(\"STR\") instanceof List);\n```\n====================\n\n",
+    "scores": [
+        0.986,
+        0.986,
+        0.877,
+        0.759,
+        0.744,
+        0.644,
+        0.635,
+        0.576,
+        0.567,
+        0.515,
+        0.494,
+        0.485,
+        0.485,
+        0.442,
+        0.436,
+        0.418,
+        0.388,
+        0.364,
+        0.355,
+        0.355,
+        0.327,
+        0.0
+    ],
+    "ground_truth": "assertTrue(manager2.isSame(manager));"
+}

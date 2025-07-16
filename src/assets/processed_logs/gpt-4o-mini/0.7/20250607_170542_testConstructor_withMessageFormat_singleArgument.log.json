@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( String message , Object ... args ) {\nsuper ( format ( message , args ) ) ;\nObject lastArg = args [ args . length - 1 ] ;\nif ( lastArg instanceof Throwable ) {\ninitCause ( ( Throwable ) lastArg ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withMessageFormat_singleArgument ( ) {\nTestException exception = new TestException ( \"STR\" , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(exception);\nassertEquals(\"STR\", exception.getMessage());\nassertTrue(exception.getMessage().contains(\"1\"));\nassertEquals(1, Integer.parseInt(exception.getMessage().substring(exception.getMessage().indexOf(\"1\"))));\nassertTrue(exception.getMessage().startsWith(\"STR\"));\nassertFalse(exception.getMessage().isEmpty());\nassertEquals(exception.getCause(), null);\nassertEquals(exception.getClass(), TestException.class);\nassertTrue(exception instanceof TestException);\nassertFalse(exception instanceof Throwable);\nassertEquals(exception.toString(), \"hazelcast.hazelcast-simulator.simulator.TestException: STR\");\nassertNotEquals(exception.hashCode(), 0);\nassertNotEquals(exception.getMessage(), \"Different Message\");\nassertThrows(IllegalArgumentException.class, () -> {\nnew TestException(null);\n});\nassertDoesNotThrow(() -> {\nnew TestException(\"Test message with arg: %s\", \"arg1\");\n});\nassertEquals(\"Test message with arg: arg1\", new TestException(\"Test message with arg: %s\", \"arg1\").getMessage());\nassertTrue(exception.getLocalizedMessage().contains(\"STR\"));\nassertNotNull(exception.getStackTrace());\nassertTrue(exception.getStackTrace().length > 0);\nassertNotNull(exception.getClass().getDeclaredConstructors());\nassertEquals(TestException.class.getDeclaredConstructors().length, 1);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.765,
+        0.759,
+        0.72,
+        0.691,
+        0.689,
+        0.66,
+        0.659,
+        0.625,
+        0.614,
+        0.6,
+        0.591,
+        0.563,
+        0.559,
+        0.53,
+        0.514,
+        0.512,
+        0.51,
+        0.441,
+        0.421,
+        0.417,
+        0.045,
+        0.045,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",exception.getMessage());"
+}

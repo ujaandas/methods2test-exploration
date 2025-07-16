@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactory {\n@Override\npublic MBeanAccessConnection createConnection ( ) throws IOException {\nJMXMBeanConnection result = null ;\ntry {\nVirtualMachine vm = this . attacher . attach ( jvmId ) ;\nString url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\nif ( url == null ) {\nString javaHome = vm . getSystemProperties ( ) . getProperty ( \"STR\" ) ;\nString agent = javaHome + File . separator + \"STR\" + File . separator + \"STR\" ;\nvm . loadAgent ( agent ) ;\nurl = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ;\n} if ( url != null ) {\nJMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ;\nJMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ;\nresult = this . jmxmBeanConnectionFactory . create ( connector ) ;\n} else {\nlog . warn ( \"STR\" , this . jvmId ) ;\n} } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) {\nlog . warn ( \"STR\" , this . jvmId , exc ) ;\n} return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class JMXJvmIdConnectionFactoryTest {\n@Test\npublic void testCreateConnectionFailedToGetUrl ( ) throws Exception {\nthis . initFactory ( ) ;\nMockito . when ( this . mockAttacher . attach ( \"STR\" ) ) . thenReturn ( this . mockVirtualMachine ) ;\nMockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ;\nMockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ;\nMockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) ;\nMBeanAccessConnection result = this . factory . createConnection ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\nAssert.assertNull(result);\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+    ],
+    "ground_truth": "assertNull(result);"
+}

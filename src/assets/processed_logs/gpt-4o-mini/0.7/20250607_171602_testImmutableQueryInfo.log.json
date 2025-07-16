@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfo {\npublic Object getTarget ( ) {\nreturn target ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryInfoTest {\n@Test\npublic void testImmutableQueryInfo ( ) throws Exception {\nMap < String , Method > setters = new HashMap < > ( ) ;\nsetters . put ( \"STR\" , null ) ;\nsetters . put ( \"STR\" , null ) ;\nObject target = new Object ( ) ;\nObjectName oname = new ObjectName ( \"STR\" ) ;\nObjectQueryInfo objectQueryInfo = new ObjectQueryInfo ( target , oname , setters ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(objectQueryInfo);\nassertEquals(target, objectQueryInfo.getTarget());\nassertTrue(setters.containsKey(\"STR\"));\nassertNull(setters.get(\"STR\"));\nassertEquals(1, setters.size());\nassertNotNull(oname);\nassertEquals(\"STR\", oname.getName());\nassertTrue(objectQueryInfo instanceof ObjectQueryInfo);\nassertNotSame(new Object(), target);\nassertNotEquals(\"SomeOtherString\", oname.getName());\nassertTrue(objectQueryInfo.getTarget() instanceof Object);\nassertEquals(Object.class, objectQueryInfo.getTarget().getClass());\nassertNull(objectQueryInfo.getTarget().getClass().getMethod(\"toString\").invoke(objectQueryInfo.getTarget()));\nassertFalse(setters.isEmpty());\nassertTrue(setters.keySet().contains(\"STR\"));\nassertTrue(setters.values().isEmpty());\nassertEquals(\"STR\", setters.keySet().iterator().next());\nassertNotEquals(target.hashCode(), new Object().hashCode());\nassertSame(target, objectQueryInfo.getTarget());\nassertNotNull(objectQueryInfo.getClass().getDeclaredConstructors());\nassertEquals(1, objectQueryInfo.getClass().getDeclaredMethods().length);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.915,
+        0.713,
+        0.703,
+        0.603,
+        0.584,
+        0.551,
+        0.548,
+        0.532,
+        0.5,
+        0.474,
+        0.474,
+        0.466,
+        0.456,
+        0.422,
+        0.405,
+        0.36,
+        0.357,
+        0.321,
+        0.303,
+        0.271,
+        0.0
+    ],
+    "ground_truth": "assertSame(target,objectQueryInfo.getTarget());"
+}

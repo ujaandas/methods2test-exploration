@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testProjection ( ) {
+         long idxUsagesBefore = indexUsages ( db ) ; 
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc instanceof ODocument));
+assertEquals(expectedFieldValue, qResult.get(0).field("expectedField"));
+assertEquals(expectedFieldValue, qResult.get(1).field("expectedField"));
+assertEquals(expectedFieldValue, qResult.get(qResult.size() - 1).field("expectedField"));
+assertTrue(qResult.stream().allMatch(doc -> doc.containsField("expectedField")));
+assertEquals(expectedType, qResult.get(0).getClass());
+assertEquals(expectedType, qResult.get(1).getClass());
+assertEquals(expectedType, qResult.get(qResult.size() - 1).getClass());
+assertNotEquals(unexpectedValue, qResult.get(0).field("unexpectedField"));
+assertNotEquals(unexpectedValue, qResult.get(1).field("unexpectedField"));
+assertNotEquals(unexpectedValue, qResult.get(qResult.size() - 1).field("unexpectedField"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("anotherField").equals(expectedAnotherFieldValue)));
+assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("filterField").equals(filterValue)).count());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("numericField") > 0));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("booleanField") == true));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("nullField") != null));
+assertEquals(expectedString, qResult.get(0).field("stringField"));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("dateField").after(expectedDate)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(qResult.size(),1); ===
+0.789 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.610 - assertEquals(expectedType, qResult.get(0).getClass())
+0.610 - assertEquals(expectedType, qResult.get(1).getClass())
+0.598 - assertEquals(expectedType, qResult.get(qResult.size() - 1).getClass())
+0.567 - ```java
+assertNotNull(qResult)
+0.553 - assertEquals(expectedString, qResult.get(0).field("stringField"))
+0.520 - assertEquals(expectedFieldValue, qResult.get(0).field("expectedField"))
+0.510 - assertNotEquals(unexpectedValue, qResult.get(0).field("unexpectedField"))
+0.504 - assertEquals(expectedFieldValue, qResult.get(qResult.size() - 1).field("expectedField"))
+0.500 - assertEquals(expectedFieldValue, qResult.get(1).field("expectedField"))
+0.496 - assertNotEquals(unexpectedValue, qResult.get(qResult.size() - 1).field("unexpectedField"))
+0.490 - assertNotEquals(unexpectedValue, qResult.get(1).field("unexpectedField"))
+0.438 - assertTrue(qResult.stream().allMatch(doc -> doc instanceof ODocument))
+0.416 - assertTrue(qResult.stream().allMatch(doc -> doc.field("numericField") > 0))
+0.408 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("nullField") != null))
+0.400 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("booleanField") == true))
+0.389 - assertTrue(qResult.stream().allMatch(doc -> doc.containsField("expectedField")))
+0.371 - assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("filterField").equals(filterValue)).count())
+0.362 - assertTrue(qResult.stream().allMatch(doc -> doc.field("dateField").after(expectedDate)))
+0.316 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("anotherField").equals(expectedAnotherFieldValue)))
+0.000 - ```

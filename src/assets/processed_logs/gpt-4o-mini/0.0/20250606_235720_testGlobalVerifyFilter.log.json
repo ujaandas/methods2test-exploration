@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotationFilter {\npublic Method find ( ) {\nList < Method > methods = findAll ( ) ;\nswitch ( methods . size ( ) ) {\ncase 0 : return null ;\ncase 1 : return methods . iterator ( ) . next ( ) ;\ndefault : throw new ReflectionException ( format ( \"STR\" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotationFilterTest {\n@Test\npublic void testGlobalVerifyFilter ( ) {\nMethod method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Verify . class ) . withVoidReturnType ( ) . withFilter ( new VerifyFilter ( true ) ) . find ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(method);\nassertEquals(\"expectedMethodName\", method.getName());\nassertEquals(void.class, method.getReturnType());\nassertTrue(Modifier.isPublic(method.getModifiers()));\nassertTrue(method.isAnnotationPresent(Verify.class));\nassertEquals(0, method.getParameterCount());\nassertNotNull(method.getDeclaringClass());\nassertEquals(AnnotationTestClass.class, method.getDeclaringClass());\nassertTrue(method.getAnnotations().length > 0);\nassertTrue(Arrays.stream(method.getAnnotations()).anyMatch(a -> a.annotationType().equals(Verify.class)));\nassertFalse(method.isSynthetic());\nassertFalse(method.isBridge());\nassertFalse(method.isVarArgs());\nassertTrue(Modifier.isStatic(method.getModifiers()));\nassertFalse(Modifier.isFinal(method.getModifiers()));\nassertFalse(Modifier.isAbstract(method.getModifiers()));\nassertEquals(\"expectedReturnType\", method.getGenericReturnType().getTypeName());\nassertNotNull(method.getGenericParameterTypes());\nassertEquals(0, method.getGenericParameterTypes().length);\nassertTrue(method.getExceptionTypes().length == 0);\nassertEquals(\"expectedMethodSignature\", method.toGenericString());\n```\n====================\n\n",
+    "scores": [
+        0.769,
+        0.759,
+        0.675,
+        0.667,
+        0.652,
+        0.638,
+        0.627,
+        0.597,
+        0.596,
+        0.595,
+        0.569,
+        0.56,
+        0.55,
+        0.545,
+        0.527,
+        0.524,
+        0.523,
+        0.523,
+        0.492,
+        0.455,
+        0.36,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",method.getName());"
+}

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( List < ? > params ) {\nif ( ! ( params . get ( 0 ) instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ;\nfinal List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nresult . add ( createSingleValue ( mapParam ) ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameter ( ) {\nfinal Object result = propertyIndexByKey . createValue ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNull(result);\nassertTrue(result instanceof List);\nassertEquals(0, ((List) result).size());\nassertFalse(result instanceof Map);\nassertNotEquals(\"STRING\", result);\nassertNotNull(result);\nassertTrue(result instanceof Collection);\nassertNotSame(Collections.emptyList(), result);\nassertNotSame(Collections.emptyMap(), result);\nassertTrue(((Collection) result).isEmpty());\nassertEquals(Collections.emptyList(), result);\nassertNotEquals(1, ((Collection) result).size());\nassertNotEquals(\"STRING\", result.toString());\nassertEquals(0, result.hashCode());\nassertArrayEquals(new Object[0], ((Collection) result).toArray());\nassertNotSame(new ArrayList<>(), result);\nassertSame(Collections.emptyList(), result);\nassertFalse(((Collection) result).contains(\"STRING\"));\nassertEquals(0, ((Collection) result).hashCode());\nassertNotEquals(Collections.emptyList(), result);\nassertSame(new ArrayList<>(), result);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.923,
+        0.68,
+        0.627,
+        0.6,
+        0.6,
+        0.582,
+        0.557,
+        0.554,
+        0.548,
+        0.548,
+        0.54,
+        0.536,
+        0.536,
+        0.533,
+        0.533,
+        0.531,
+        0.528,
+        0.492,
+        0.429,
+        0.4
+    ],
+    "ground_truth": "Assert.assertNull(result);"
+}

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    ResponseStatus getStatus ( ) ;
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testTwoQueries ( ) throws YubicoVerificationException , YubicoValidationFailure {
+         String otp = "STR" ; 
+         VerificationResponse response = client . verify ( otp ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(response);
+assertEquals(ResponseStatus.SUCCESS, response.getStatus());
+assertEquals("expected_value", response.getSomeField());
+assertTrue(response.isValid());
+assertFalse(response.hasErrors());
+assertEquals("expected_id", response.getId());
+assertEquals("expected_timestamp", response.getTimestamp());
+assertNotEquals("unexpected_value", response.getSomeField());
+assertTrue(response.getSomeList().size() > 0);
+assertFalse(response.getSomeList().isEmpty());
+assertEquals(200, response.getHttpStatusCode());
+assertNotNull(response.getAdditionalData());
+assertTrue(response.getAdditionalData().containsKey("key"));
+assertEquals("expected_additional_value", response.getAdditionalData().get("key"));
+assertNull(response.getErrorMessage());
+assertTrue(response.getDuration() >= 0);
+assertEquals("expected_type", response.getType());
+assertTrue(response.getSomeField().length() > 0);
+assertFalse(response.isExpired());
+assertEquals("expected_user", response.getUser());
+assertTrue(response.getSomeField().matches("expected_regex"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(ResponseStatus.REPLAYED_OTP,response.getStatus()); ===
+0.857 - assertEquals(ResponseStatus.SUCCESS, response.getStatus())
+0.648 - assertEquals(200, response.getHttpStatusCode())
+0.642 - assertEquals("expected_id", response.getId())
+0.621 - assertEquals("expected_value", response.getSomeField())
+0.618 - assertEquals("expected_type", response.getType())
+0.618 - assertEquals("expected_user", response.getUser())
+0.595 - assertNotEquals("unexpected_value", response.getSomeField())
+0.583 - assertEquals("expected_timestamp", response.getTimestamp())
+0.523 - assertFalse(response.getSomeList().isEmpty())
+0.505 - assertFalse(response.hasErrors())
+0.505 - assertTrue(response.getDuration() >= 0)
+0.503 - assertEquals("expected_additional_value", response.getAdditionalData().get("key"))
+0.500 - assertNull(response.getErrorMessage())
+0.495 - assertNotNull(response.getAdditionalData())
+0.484 - assertFalse(response.isExpired())
+0.476 - assertTrue(response.getSomeList().size() > 0)
+0.457 - assertTrue(response.isValid())
+0.444 - assertTrue(response.getSomeField().length() > 0)
+0.439 - assertTrue(response.getSomeField().matches("expected_regex"))
+0.413 - assertTrue(response.getAdditionalData().containsKey("key"))
+0.387 - ```java
+assertNotNull(response)
+0.000 - ```

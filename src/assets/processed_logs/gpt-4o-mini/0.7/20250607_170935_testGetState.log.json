@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class ActivityState {\npublic JsonObject getState ( ) {\nreturn this . state ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class ActivityStateTest {\n@Test\npublic void testGetState ( ) {\nJsonObject expected = new JsonObject ( ) ;\nexpected . addProperty ( \"STR\" , \"STR\" ) ;\nJsonObject actual = activityState . getState ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(actual);\nassertEquals(expected.toString(), actual.toString());\nassertEquals(expected.get(\"STR\").getAsString(), actual.get(\"STR\").getAsString());\nassertTrue(actual.has(\"STR\"));\nassertFalse(actual.has(\"NON_EXISTENT_PROPERTY\"));\nassertEquals(1, actual.size());\nassertTrue(actual.entrySet().containsAll(expected.entrySet()));\nassertEquals(JsonPrimitive.class, actual.get(\"STR\").getClass());\nassertEquals(\"STR\", actual.get(\"STR\").getAsString());\nassertNotSame(expected, actual);\nassertTrue(actual.equals(expected));\nassertFalse(actual.equals(null));\nassertFalse(actual.equals(new Object()));\nassertTrue(expected.equals(actual));\nassertTrue(expected.toString().equals(actual.toString()));\nassertNotEquals(expected.hashCode(), actual.hashCode());\nassertEquals(expected.hashCode(), actual.hashCode());\nassertTrue(actual instanceof JsonObject);\nassertTrue(expected instanceof JsonObject);\nassertThrows(NullPointerException.class, () -> {\nnew JsonObject().get(\"NON_EXISTENT_PROPERTY\").getAsString();\n});\nassertArrayEquals(new String[]{\"STR\"}, actual.keySet().toArray());\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.667,
+        0.64,
+        0.607,
+        0.6,
+        0.566,
+        0.536,
+        0.508,
+        0.507,
+        0.5,
+        0.462,
+        0.444,
+        0.444,
+        0.435,
+        0.417,
+        0.393,
+        0.386,
+        0.361,
+        0.333,
+        0.3,
+        0.24,
+        0.087,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(actual);"
+}

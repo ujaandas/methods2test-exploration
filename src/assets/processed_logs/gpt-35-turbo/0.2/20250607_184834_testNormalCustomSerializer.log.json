@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializer {\n@Override\npublic Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nreturn this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializerTest {\n@Test\npublic void testNormalCustomSerializer ( ) throws Exception {\nNormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ;\nNormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ;\nCustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ;\nCustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ;\nRequestBody body = new RequestBody ( 1 , \"STR\" ) ;\nString ret = ( String ) client . invokeSync ( addr , body , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, body.getId());\nassertEquals(\"STR\", body.getContent());\nassertNotNull(ret);\nassertTrue(ret instanceof String);\nassertEquals(\"Response\", ret);\nassertNotEquals(0, ret.length());\nassertTrue(ret.contains(\"S\"));\nassertFalse(ret.isEmpty());\nassertEquals(3, ret.length());\nassertNotEquals(\"ABC\", ret);\nassertNull(null);\nassertTrue(ret.startsWith(\"S\"));\nassertFalse(ret.endsWith(\"X\"));\nassertTrue(ret.equals(\"STR\"));\nassertNotSame(body, ret);\nassertTrue(ret.matches(\"[A-Z]+\"));\nassertEquals(\"STR\", ret.toUpperCase());\nassertEquals(\"str\", ret.toLowerCase());\nassertTrue(ret.compareTo(\"STR\") == 0);\nassertFalse(ret.equalsIgnoreCase(\"str\"));\n====================\n\n",
+    "scores": [
+        0.494,
+        0.469,
+        0.46,
+        0.449,
+        0.449,
+        0.429,
+        0.404,
+        0.4,
+        0.391,
+        0.381,
+        0.354,
+        0.329,
+        0.322,
+        0.317,
+        0.308,
+        0.286,
+        0.267,
+        0.261,
+        0.261,
+        0.255
+    ],
+    "ground_truth": "Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+\"STR\",ret);"
+}

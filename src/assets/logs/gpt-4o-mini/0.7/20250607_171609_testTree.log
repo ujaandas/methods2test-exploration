@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public boolean hasCycles ( ) { 
+    return ! minimalCycles ( ) . isEmpty ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testTree ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( "STR" , "STR" ) , edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(graph);
+assertTrue(graph.hasCycles() == false);
+assertTrue(graph.getVertices().size() == 1);
+assertTrue(graph.getEdges().size() == 2);
+assertTrue(graph.getOutDegree("STR") == 2);
+assertTrue(graph.getInDegree("STR") == 2);
+assertTrue(graph.containsVertex("STR"));
+assertFalse(graph.containsVertex("NON_EXISTENT"));
+assertTrue(graph.getAdjacent("STR").contains("STR"));
+assertFalse(graph.getAdjacent("NON_EXISTENT").contains("STR"));
+assertTrue(graph.getEdgesFrom("STR").size() == 2);
+assertTrue(graph.getEdgesTo("STR").size() == 2);
+assertEquals(graph.getEdge("STR", "STR").size(), 2);
+assertSame(graph.getEdge("STR", "STR").get(0), graph.getEdge("STR", "STR").get(1));
+assertTrue(graph.getVertices().stream().allMatch(v -> v.equals("STR")));
+assertEquals(graph.getOutDegree("STR"), graph.getInDegree("STR"));
+assertTrue(graph.isDirected());
+assertEquals(graph.toString(), "ADiGraph{vertices=[STR], edges=[ASimpleEdge{from='STR', to='STR'}, ASimpleEdge{from='STR', to='STR'}]}");
+assertFalse(graph.isEmpty());
+assertTrue(graph.hasCycles());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(graph.hasCycles()); ===
+0.881 - assertTrue(graph.hasCycles())
+0.793 - assertFalse(graph.isEmpty())
+0.788 - assertTrue(graph.hasCycles() == false)
+0.667 - assertTrue(graph.isDirected())
+0.608 - assertFalse(graph.containsVertex("NON_EXISTENT"))
+0.580 - assertTrue(graph.containsVertex("STR"))
+0.563 - assertTrue(graph.getVertices().size() == 1)
+0.559 - assertTrue(graph.getEdges().size() == 2)
+0.543 - assertFalse(graph.getAdjacent("NON_EXISTENT").contains("STR"))
+0.532 - assertEquals(graph.getEdge("STR", "STR").size(), 2)
+0.522 - assertTrue(graph.getInDegree("STR") == 2)
+0.514 - assertTrue(graph.getOutDegree("STR") == 2)
+0.512 - assertTrue(graph.getAdjacent("STR").contains("STR"))
+0.507 - assertTrue(graph.getEdgesTo("STR").size() == 2)
+0.494 - assertTrue(graph.getEdgesFrom("STR").size() == 2)
+0.483 - ```java
+assertNotNull(graph)
+0.447 - assertEquals(graph.getOutDegree("STR"), graph.getInDegree("STR"))
+0.404 - assertTrue(graph.getVertices().stream().allMatch(v -> v.equals("STR")))
+0.367 - assertSame(graph.getEdge("STR", "STR").get(0), graph.getEdge("STR", "STR").get(1))
+0.261 - assertEquals(graph.toString(), "ADiGraph{vertices=[STR], edges=[ASimpleEdge{from='STR', to='STR'}, ASimpleEdge{from='STR', to='STR'}]}")
+0.000 - ```

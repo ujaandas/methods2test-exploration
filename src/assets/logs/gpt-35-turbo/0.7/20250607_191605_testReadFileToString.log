@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public String readFile ( File file ) throws IOException { 
+    return FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testReadFileToString ( ) throws Exception {
+         File tempFile = new File ( serverDirectory , "STR" ) ; 
+         Files . write ( tempFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         String fileString = util . readFile ( tempFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", fileString);
+assertNotNull(fileString);
+assertTrue(fileString.contains("STR"));
+assertEquals("UTF-8", StandardCharsets.UTF_8.name());
+assertTrue(tempFile.exists());
+assertEquals("STR", Files.readAllLines(tempFile.toPath()).get(0));
+assertTrue(tempFile.isFile());
+assertTrue(tempFile.canRead());
+assertFalse(fileString.isEmpty());
+assertEquals(3, fileString.length());
+assertTrue(tempFile.length() > 0);
+assertEquals("STR", fileString.trim());
+assertTrue(fileString.matches("[A-Z]+"));
+assertFalse(fileString.endsWith(" "));
+assertTrue(fileString.startsWith("S"));
+assertTrue(tempFile.getAbsolutePath().contains("STR"));
+assertTrue(fileString.matches("^[A-Z]+$"));
+assertTrue(fileString.contains("T"));
+assertEquals("STR", fileString.toUpperCase());
+assertEquals("STR", fileString.toLowerCase());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(fileString.equals("STR")); ===
+0.865 - assertTrue(fileString.contains("STR"))
+0.833 - assertTrue(fileString.contains("T"))
+0.811 - assertTrue(fileString.startsWith("S"))
+0.763 - assertTrue(fileString.matches("[A-Z]+"))
+0.744 - assertTrue(fileString.matches("^[A-Z]+$"))
+0.722 - assertFalse(fileString.endsWith(" "))
+0.667 - assertFalse(fileString.isEmpty())
+0.648 - assertEquals(3, fileString.length())
+0.623 - assertNotNull(fileString)
+0.615 - assertTrue(tempFile.exists())
+0.606 - assertTrue(tempFile.canRead())
+0.600 - assertEquals("STR", fileString.toUpperCase())
+0.600 - assertEquals("STR", fileString.toLowerCase())
+0.585 - assertTrue(tempFile.isFile())
+0.578 - assertTrue(tempFile.getAbsolutePath().contains("STR"))
+0.575 - assertEquals("STR", fileString.trim())
+0.567 - assertTrue(tempFile.length() > 0)
+0.545 - assertEquals("STR", fileString)
+0.391 - assertEquals("UTF-8", StandardCharsets.UTF_8.name())
+0.380 - assertEquals("STR", Files.readAllLines(tempFile.toPath()).get(0))

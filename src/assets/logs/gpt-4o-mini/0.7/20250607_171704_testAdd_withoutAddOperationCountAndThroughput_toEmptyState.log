@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStats {
+    public long getOperationCount ( ) { 
+    return operationCount ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsTest {
+    @Test
+     public void testAdd_withoutAddOperationCountAndThroughput_toEmptyState ( ) {
+         PerformanceStats addState = new PerformanceStats ( ) ; 
+         addState . add ( new PerformanceStats ( 100 , 5.0 , 10.0 , 450.0d , 400 , 500 ) , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(100, addState.getOperationCount());
+assertEquals(5.0, addState.getSomeOtherMetric1(), 0.001);
+assertEquals(10.0, addState.getSomeOtherMetric2(), 0.001);
+assertEquals(450.0, addState.getSomeOtherMetric3(), 0.001);
+assertEquals(400, addState.getSomeOtherMetric4());
+assertEquals(500, addState.getSomeOtherMetric5());
+assertNotNull(addState);
+assertTrue(addState.getOperationCount() > 0);
+assertFalse(addState.isSomeConditionMet());
+assertEquals(0, addState.getPreviousOperationCount());
+assertEquals(0.0, addState.getSomeOtherMetric1(), 0.001);
+assertTrue(addState.getSomeOtherMetric2() >= 0);
+assertFalse(addState.hasErrors());
+assertEquals("ExpectedStringValue", addState.getSomeStringValue());
+assertNotSame(addState, new PerformanceStats());
+assertArrayEquals(new double[]{5.0, 10.0}, addState.getSomeMetricArray(), 0.001);
+assertEquals(450.0, addState.calculateSomeDerivedMetric(), 0.001);
+assertTrue(addState.isInInitialState());
+assertEquals(0, addState.getErrorCount());
+assertSame(addState.getReferenceObject(), someExpectedObject);
+assertThrows(IllegalArgumentException.class, () -> addState.add(null, false));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(100,addState.getOperationCount()); ===
+0.920 - ```java
+assertEquals(100, addState.getOperationCount())
+0.898 - assertEquals(0, addState.getPreviousOperationCount())
+0.860 - assertEquals(0, addState.getErrorCount())
+0.841 - assertTrue(addState.getOperationCount() > 0)
+0.766 - assertEquals(400, addState.getSomeOtherMetric4())
+0.766 - assertEquals(500, addState.getSomeOtherMetric5())
+0.733 - assertEquals(10.0, addState.getSomeOtherMetric2(), 0.001)
+0.720 - assertEquals(0.0, addState.getSomeOtherMetric1(), 0.001)
+0.706 - assertEquals(450.0, addState.getSomeOtherMetric3(), 0.001)
+0.700 - assertEquals(5.0, addState.getSomeOtherMetric1(), 0.001)
+0.636 - assertFalse(addState.isSomeConditionMet())
+0.615 - assertTrue(addState.getSomeOtherMetric2() >= 0)
+0.608 - assertFalse(addState.hasErrors())
+0.595 - assertEquals("ExpectedStringValue", addState.getSomeStringValue())
+0.587 - assertEquals(450.0, addState.calculateSomeDerivedMetric(), 0.001)
+0.574 - assertArrayEquals(new double[]{5.0, 10.0}, addState.getSomeMetricArray(), 0.001)
+0.541 - assertTrue(addState.isInInitialState())
+0.527 - assertNotSame(addState, new PerformanceStats())
+0.522 - assertNotNull(addState)
+0.509 - assertSame(addState.getReferenceObject(), someExpectedObject)
+0.370 - assertThrows(IllegalArgumentException.class, () -> addState.add(null, false))
+0.000 - ```

@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterDocumentWithMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadataFilterParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertEquals(1, fields.size());
+assertTrue(fields.containsKey("urlField"));
+assertEquals("expectedUrlValue", fields.get("urlField"));
+assertTrue(fields.containsKey("metadataField"));
+assertEquals("expectedMetadataValue", fields.get("metadataField"));
+assertFalse(fields.containsKey("nonExistentField"));
+assertTrue(fields.keySet().stream().allMatch(key -> key instanceof String));
+assertEquals("expectedValueForKey", fields.get("expectedKey"));
+assertNotEquals("unexpectedValue", fields.get("expectedKey"));
+assertTrue(fields.values().stream().allMatch(value -> value instanceof String));
+assertEquals("expectedFieldCount", fields.size());
+assertTrue(fields.containsKey("anotherField"));
+assertEquals("anotherExpectedValue", fields.get("anotherField"));
+assertNotNull(fields.get("optionalField"));
+assertEquals("optionalExpectedValue", fields.get("optionalField"));
+assertTrue(fields.keySet().stream().anyMatch(key -> key.startsWith("prefix")));
+assertFalse(fields.isEmpty());
+assertEquals("expectedFieldValue", fields.get("fieldWithSpecialChars!@#"));
+assertTrue(fields.containsValue("someValue"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.633 - assertEquals("expectedUrlValue", fields.get("urlField"))
+0.602 - assertNotEquals("unexpectedValue", fields.get("expectedKey"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.596 - assertEquals("expectedValueForKey", fields.get("expectedKey"))
+0.593 - assertEquals("expectedFieldCount", fields.size())
+0.585 - assertEquals("anotherExpectedValue", fields.get("anotherField"))
+0.583 - assertFalse(fields.isEmpty())
+0.574 - assertEquals("expectedMetadataValue", fields.get("metadataField"))
+0.574 - assertEquals("optionalExpectedValue", fields.get("optionalField"))
+0.565 - assertNotNull(fields.get("optionalField"))
+0.552 - assertEquals("expectedFieldValue", fields.get("fieldWithSpecialChars!@#"))
+0.494 - assertTrue(fields.containsKey("urlField"))
+0.489 - assertFalse(fields.containsKey("nonExistentField"))
+0.477 - assertTrue(fields.containsValue("someValue"))
+0.472 - assertTrue(fields.containsKey("anotherField"))
+0.444 - ```java
+assertNotNull(fields)
+0.444 - assertTrue(fields.containsKey("metadataField"))
+0.370 - assertTrue(fields.keySet().stream().anyMatch(key -> key.startsWith("prefix")))
+0.368 - assertTrue(fields.keySet().stream().allMatch(key -> key instanceof String))
+0.305 - assertTrue(fields.values().stream().allMatch(value -> value instanceof String))
+0.000 - ```

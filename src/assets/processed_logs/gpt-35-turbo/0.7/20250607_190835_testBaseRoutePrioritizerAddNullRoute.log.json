@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\n@Override\npublic Collection < UriResource > getPrioritizedRoutes ( ) {\nreturn Collections . unmodifiableCollection ( mappings ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testBaseRoutePrioritizerAddNullRoute ( ) {\nDefaultRoutePrioritizer routePrioritizer = new DefaultRoutePrioritizer ( ) ;\nroutePrioritizer . addRoute ( null , 100 , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(routePrioritizer);\nassertEquals(1, routePrioritizer.getRoutes().size());\nassertEquals(100, routePrioritizer.getRoutes().get(0).getPriority());\nassertNull(routePrioritizer.getRoutes().get(0).getRoute());\nassertNull(routePrioritizer.getRoutes().get(0).getHandler());\nassertNull(routePrioritizer.getRoutes().get(0).getRegex());\nassertEquals(\"null\", routePrioritizer.getRoutes().get(0).toString());\nassertTrue(routePrioritizer.getRoutes().get(0).equals(routePrioritizer.getRoutes().get(0)));\nassertTrue(routePrioritizer.getRoutes().get(0).hashCode() == routePrioritizer.getRoutes().get(0).hashCode());\nassertFalse(routePrioritizer.getRoutes().get(0).equals(null));\nassertFalse(routePrioritizer.getRoutes().get(0).equals(new Object()));\nassertFalse(routePrioritizer.getRoutes().get(0).equals(new Route(null, 100, null, null)));\nassertEquals(0, routePrioritizer.getRoutes().get(0).compareTo(routePrioritizer.getRoutes().get(0)));\nassertTrue(routePrioritizer.getRoutes().contains(routePrioritizer.getRoutes().get(0)));\nassertTrue(routePrioritizer.getRoutes().containsAll(Arrays.asList(routePrioritizer.getRoutes().get(0))));\nassertFalse(routePrioritizer.getRoutes().isEmpty());\nassertFalse(routePrioritizer.getRoutes().remove(new Route(null, 100, null, null)));\nassertFalse(routePrioritizer.getRoutes().removeAll(Arrays.asList(new Route(null, 100, null, null))));\nassertFalse(routePrioritizer.getRoutes().retainAll(Arrays.asList(new Route(null, 100, null, null)));\nroutePrioritizer.getRoutes().clear();\n====================\n\n",
+    "scores": [
+        0.885,
+        0.761,
+        0.744,
+        0.729,
+        0.725,
+        0.7,
+        0.7,
+        0.699,
+        0.689,
+        0.689,
+        0.677,
+        0.667,
+        0.653,
+        0.619,
+        0.614,
+        0.614,
+        0.599,
+        0.573,
+        0.57,
+        0.559
+    ],
+    "ground_truth": "Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size());"
+}

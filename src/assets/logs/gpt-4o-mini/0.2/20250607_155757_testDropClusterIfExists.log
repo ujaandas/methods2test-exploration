@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecutionTest {
+    @Test
+     public void testDropClusterIfExists ( ) {
+         String cluster = "STR" ; 
+         ( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+int clusterId = ((ODropClusterStatementExecution) db).getClusterIdByName(cluster);
+assertNotNull(clusterId);
+assertTrue(clusterId >= 0);
+assertEquals("Cluster ID should match the expected value", expectedClusterId, clusterId);
+assertEquals("Cluster name should be STR", "STR", db.getStorage().getClusterNameById(clusterId));
+assertTrue("Cluster should exist after addition", db.getStorage().existsCluster(cluster));
+assertFalse("Cluster should not be empty", db.getStorage().getClusterSize(clusterId) == 0);
+assertEquals("Cluster size should be 0 after drop", 0, db.getStorage().getClusterSize(clusterId));
+assertThrows(ClusterNotFoundException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName("NON_EXISTENT_CLUSTER");
+});
+assertTrue("Cluster ID should be valid", clusterId >= 0);
+assertNotEquals("Cluster ID should not be -1", -1, clusterId);
+assertEquals("Cluster name should be STR", "STR", db.getStorage().getClusterNameById(clusterId));
+assertTrue("Cluster should be removable", db.getStorage().removeCluster(clusterId));
+assertFalse("Cluster should not exist after removal", db.getStorage().existsCluster(cluster));
+assertThrows(IllegalArgumentException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName(null);
+});
+assertThrows(IllegalArgumentException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName("");
+});
+assertEquals("Cluster ID should be the same after multiple calls", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName(cluster));
+assertNotEquals("Cluster ID should change after dropping", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName("ANOTHER_CLUSTER"));
+assertTrue("Cluster should be empty after drop", db.getStorage().getClusterSize(clusterId) == 0);
+assertEquals("Cluster count should decrease after drop", initialClusterCount - 1, db.getStorage().getClusterCount());
+assertTrue("Cluster should be dropped successfully", db.getStorage().removeCluster(clusterId));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(cluster)>0); ===
+0.667 - assertTrue("Cluster ID should be valid", clusterId >= 0)
+0.647 - assertTrue(clusterId >= 0)
+0.574 - ```java
+int clusterId = ((ODropClusterStatementExecution) db).getClusterIdByName(cluster)
+0.545 - assertTrue("Cluster should be empty after drop", db.getStorage().getClusterSize(clusterId) == 0)
+0.531 - assertNotEquals("Cluster ID should not be -1", -1, clusterId)
+0.522 - assertEquals("Cluster name should be STR", "STR", db.getStorage().getClusterNameById(clusterId))
+0.522 - assertEquals("Cluster name should be STR", "STR", db.getStorage().getClusterNameById(clusterId))
+0.520 - assertFalse("Cluster should not be empty", db.getStorage().getClusterSize(clusterId) == 0)
+0.500 - assertNotNull(clusterId)
+0.484 - assertTrue("Cluster should exist after addition", db.getStorage().existsCluster(cluster))
+0.481 - assertEquals("Cluster size should be 0 after drop", 0, db.getStorage().getClusterSize(clusterId))
+0.455 - assertTrue("Cluster should be removable", db.getStorage().removeCluster(clusterId))
+0.452 - assertThrows(IllegalArgumentException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName(null)
+0.444 - assertThrows(IllegalArgumentException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName("")
+0.443 - assertFalse("Cluster should not exist after removal", db.getStorage().existsCluster(cluster))
+0.441 - assertEquals("Cluster ID should be the same after multiple calls", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName(cluster))
+0.435 - assertEquals("Cluster ID should match the expected value", expectedClusterId, clusterId)
+0.421 - assertTrue("Cluster should be dropped successfully", db.getStorage().removeCluster(clusterId))
+0.393 - assertThrows(ClusterNotFoundException.class, () -> {
+    ((ODropClusterStatementExecution) db).getClusterIdByName("NON_EXISTENT_CLUSTER")
+0.374 - assertNotEquals("Cluster ID should change after dropping", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName("ANOTHER_CLUSTER"))
+0.318 - assertEquals("Cluster count should decrease after drop", initialClusterCount - 1, db.getStorage().getClusterCount())
+0.043 - })
+0.043 - })
+0.043 - })
+0.000 - ```

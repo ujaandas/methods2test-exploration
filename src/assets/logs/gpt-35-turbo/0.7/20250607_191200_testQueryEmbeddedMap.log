@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupport {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupportTest {
+    @Test
+     public void testQueryEmbeddedMap ( ) {
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . setProperty ( "STR" , "STR" ) ; 
+         ODocument emb = new ODocument ( ) ; 
+         emb . setProperty ( "STR" , "STR" ) ; 
+         Map < String , ODocument > map = new HashMap < > ( ) ; 
+         map . put ( "STR" , emb ) ; 
+         doc . setProperty ( "STR" , map , OType . EMBEDDEDMAP ) ; 
+         session . save ( doc ) ; 
+         OResultSet res = session . query ( "STR" ) ; 
+         OResult item = res . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertTrue(item.getProperty("STR") instanceof Map);
+Assert.assertTrue(item.getProperty("STR") instanceof HashMap);
+Assert.assertTrue(item.getProperty("STR") instanceof ODocument);
+Assert.assertEquals("STR", ((ODocument) item.getProperty("STR")).getProperty("STR"));
+Assert.assertTrue(((ODocument) item.getProperty("STR")).getProperty("STR") instanceof String);
+Assert.assertEquals("STR", ((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getProperty("STR"));
+Assert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getProperty("STR") instanceof String);
+Assert.assertEquals(doc.getIdentity(), item.getIdentity());
+Assert.assertTrue(item.getProperty("STR") instanceof Map);
+Assert.assertTrue(item.getProperty("STR") instanceof HashMap);
+Assert.assertTrue(item.getProperty("STR") instanceof ODocument);
+Assert.assertEquals(1, ((Map<String, ODocument>) item.getProperty("STR")).size());
+Assert.assertEquals(1, ((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getIdentity().toString());
+Assert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getIdentity() instanceof ORecordId);
+Assert.assertTrue(item.getProperty("STR") instanceof Map);
+Assert.assertTrue(item.getProperty("STR") instanceof HashMap);
+Assert.assertTrue(item.getProperty("STR") instanceof ODocument);
+Assert.assertEquals("STR", ((Map<String, ODocument>) item.getProperty("STR")).get("STR").getProperty("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(item.getProperty("STR")); ===
+0.815 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.744 - Assert.assertTrue(item.getProperty("STR") instanceof Map)
+0.744 - Assert.assertTrue(item.getProperty("STR") instanceof Map)
+0.744 - Assert.assertTrue(item.getProperty("STR") instanceof Map)
+0.711 - Assert.assertTrue(item.getProperty("STR") instanceof HashMap)
+0.711 - Assert.assertTrue(item.getProperty("STR") instanceof HashMap)
+0.711 - Assert.assertTrue(item.getProperty("STR") instanceof HashMap)
+0.696 - Assert.assertTrue(item.getProperty("STR") instanceof ODocument)
+0.696 - Assert.assertTrue(item.getProperty("STR") instanceof ODocument)
+0.696 - Assert.assertTrue(item.getProperty("STR") instanceof ODocument)
+0.587 - Assert.assertEquals(1, ((Map<String, ODocument>) item.getProperty("STR")).size())
+0.566 - Assert.assertEquals("STR", ((ODocument) item.getProperty("STR")).getProperty("STR"))
+0.529 - Assert.assertTrue(((ODocument) item.getProperty("STR")).getProperty("STR") instanceof String)
+0.523 - Assert.assertEquals(doc.getIdentity(), item.getIdentity())
+0.471 - Assert.assertEquals("STR", ((Map<String, ODocument>) item.getProperty("STR")).get("STR").getProperty("STR"))
+0.443 - Assert.assertEquals("STR", ((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getProperty("STR"))
+0.437 - Assert.assertEquals(1, ((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getIdentity().toString())
+0.426 - Assert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getIdentity() instanceof ORecordId)
+0.420 - Assert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty("STR")).get("STR")).getProperty("STR") instanceof String)

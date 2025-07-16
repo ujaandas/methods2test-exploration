@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_Numerical {
+    static boolean bind0 ( Object object , String property , String value ) { 
+    value = value . trim ( ) ; 
+    String [ ] path = property . split ( "STR" ) ; 
+    object = findTargetObject ( object , property , path ) ; 
+    if ( object == null ) { 
+    return false ; 
+    } Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ; 
+    if ( field == null || isProbeField ( field ) ) { 
+    return false ; 
+    } try { 
+    setField ( field , object , value ) ; 
+    return true ; 
+    } catch ( Exception e ) { 
+    throw new BindException ( format ( "STR" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_NumericalTest {
+    @Test
+     public void bind_Integer ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "123"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "abc"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(null, "testProperty", "123"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "probeField", "123"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "123.45"));
+assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "0"));
+assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-123"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E2"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E-2"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E+2"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e2"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e-2"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e+2"));
+assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "2147483647"));
+assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-2147483648"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "2147483648"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-2147483649"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.7976931348623157E308"));
+assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-1.7976931348623157E308"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(bind0(testObject,"STR","STR")); ===
+0.441 - assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "0"))
+0.438 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "probeField", "123"))
+0.435 - assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "123"))
+0.432 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "abc"))
+0.432 - assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-123"))
+0.423 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "123.45"))
+0.423 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E2"))
+0.423 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e2"))
+0.420 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E-2"))
+0.420 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23E+2"))
+0.420 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e-2"))
+0.420 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.23e+2"))
+0.414 - assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "2147483647"))
+0.411 - assertEquals(true, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-2147483648"))
+0.411 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "2147483648"))
+0.409 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(null, "testProperty", "123"))
+0.408 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-2147483649"))
+0.380 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "1.7976931348623157E308"))
+0.377 - assertEquals(false, PropertyBindingSupport_bind0_Numerical.bind0(new Object(), "testProperty", "-1.7976931348623157E308"))

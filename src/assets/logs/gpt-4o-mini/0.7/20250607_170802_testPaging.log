@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilder {
+    @Override
+     public String toString ( ) ;
+}
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilderTest {
+    @Test
+     public void testPaging ( ) {
+         sql . select ( ) . from ( "STR" ) . limit ( 10 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("SELECT * FROM STR LIMIT 10", sql.toString());
+assertTrue(sql.toString().contains("SELECT"));
+assertTrue(sql.toString().contains("FROM"));
+assertTrue(sql.toString().contains("STR"));
+assertTrue(sql.toString().contains("LIMIT 10"));
+assertFalse(sql.toString().contains("OFFSET"));
+assertEquals(1, sql.getSelectCount());
+assertEquals("STR", sql.getFromTable());
+assertEquals(10, sql.getLimit());
+assertTrue(sql.getOrderByFields().isEmpty());
+assertFalse(sql.hasWhereClause());
+assertTrue(sql.toString().startsWith("SELECT"));
+assertTrue(sql.toString().endsWith("LIMIT 10"));
+assertEquals(0, sql.getOffset());
+assertTrue(sql.getJoins().isEmpty());
+assertNotNull(sql.getSelectFields());
+assertEquals(1, sql.getFromTables().size());
+assertEquals("STR", sql.getFromTables().get(0));
+assertTrue(sql.toString().matches("SELECT \\* FROM [\\w]+ LIMIT \\d+"));
+assertEquals(0, sql.getGroupByFields().size());
+assertTrue(sql.toString().contains("SELECT *"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sql.toString()); ===
+0.778 - assertEquals("STR", sql.getFromTable())
+0.723 - ```java
+assertEquals("SELECT * FROM STR LIMIT 10", sql.toString())
+0.708 - assertEquals(10, sql.getLimit())
+0.708 - assertEquals(0, sql.getOffset())
+0.700 - assertEquals("STR", sql.getFromTables().get(0))
+0.686 - assertEquals(1, sql.getSelectCount())
+0.632 - assertEquals(1, sql.getFromTables().size())
+0.625 - assertFalse(sql.toString().contains("OFFSET"))
+0.608 - assertEquals(0, sql.getGroupByFields().size())
+0.605 - assertTrue(sql.toString().contains("STR"))
+0.597 - assertTrue(sql.toString().contains("FROM"))
+0.582 - assertTrue(sql.toString().contains("SELECT"))
+0.575 - assertTrue(sql.toString().contains("LIMIT 10"))
+0.575 - assertTrue(sql.toString().endsWith("LIMIT 10"))
+0.575 - assertTrue(sql.toString().contains("SELECT *"))
+0.571 - assertNotNull(sql.getSelectFields())
+0.568 - assertTrue(sql.toString().startsWith("SELECT"))
+0.543 - assertTrue(sql.getJoins().isEmpty())
+0.537 - assertFalse(sql.hasWhereClause())
+0.460 - assertTrue(sql.toString().matches("SELECT \\* FROM [\\w]+ LIMIT \\d+"))
+0.436 - assertTrue(sql.getOrderByFields().isEmpty())
+0.000 - ```

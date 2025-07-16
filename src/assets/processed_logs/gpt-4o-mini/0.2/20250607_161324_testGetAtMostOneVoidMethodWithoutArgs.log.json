@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic Method find ( ) {\nList < Method > methods = findAll ( ) ;\nswitch ( methods . size ( ) ) {\ncase 0 : return null ;\ncase 1 : return methods . iterator ( ) . next ( ) ;\ndefault : throw new ReflectionException ( format ( \"STR\" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testGetAtMostOneVoidMethodWithoutArgs ( ) {\nMethod method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Prepare . class ) . withVoidReturnType ( ) . withoutArgs ( ) . find ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(method);\nassertEquals(\"expectedMethodName\", method.getName());\nassertEquals(void.class, method.getReturnType());\nassertEquals(0, method.getParameterCount());\nassertTrue(Modifier.isPublic(method.getModifiers()));\nassertFalse(Modifier.isStatic(method.getModifiers()));\nassertFalse(Modifier.isAbstract(method.getModifiers()));\nassertFalse(Modifier.isFinal(method.getModifiers()));\nassertFalse(Modifier.isNative(method.getModifiers()));\nassertFalse(Modifier.isSynchronized(method.getModifiers()));\nassertFalse(Modifier.isStrict(method.getModifiers()));\nassertFalse(Modifier.isTransient(method.getModifiers()));\nassertFalse(Modifier.isVolatile(method.getModifiers()));\nassertTrue(method.isAnnotationPresent(ExpectedAnnotation.class));\nassertEquals(0, method.getDeclaredAnnotations().length);\nassertNotNull(method.getDeclaringClass());\nassertEquals(AnnotationTestClass.class, method.getDeclaringClass());\nassertTrue(method.getModifiers() & Modifier.PUBLIC != 0);\nassertTrue(method.getModifiers() & Modifier.VOLATILE == 0);\nassertTrue(method.getModifiers() & Modifier.STATIC == 0);\nassertTrue(method.getModifiers() & Modifier.ABSTRACT == 0);\nassertTrue(method.getModifiers() & Modifier.FINAL == 0);\n```\n====================\n\n",
+    "scores": [
+        0.769,
+        0.759,
+        0.675,
+        0.644,
+        0.597,
+        0.569,
+        0.562,
+        0.562,
+        0.545,
+        0.543,
+        0.539,
+        0.527,
+        0.527,
+        0.526,
+        0.523,
+        0.506,
+        0.5,
+        0.5,
+        0.492,
+        0.489,
+        0.489,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",method.getName());"
+}

@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class AlterProperty {
+    OProperty getProperty ( String iPropertyName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class AlterPropertyTest {
+    @Test
+     public void testPropertyRenaming ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty property = classA . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(property);
+assertEquals("STR", property.getName());
+assertEquals(OType.STRING, property.getType());
+assertTrue(classA.existsProperty("STR"));
+assertFalse(classA.existsProperty("NON_EXISTENT_PROPERTY"));
+assertEquals(1, classA.properties().size());
+assertTrue(schema.getClasses().contains(classA));
+assertEquals("STR", classA.getProperty("STR").getName());
+assertEquals(0, classA.getProperty("STR").getId());
+assertSame(property, classA.getProperty("STR"));
+assertNotNull(schema.getProperty("STR"));
+assertEquals(OType.STRING, schema.getProperty("STR").getType());
+assertTrue(classA.getProperties().contains(property));
+assertEquals(0, property.getId());
+assertFalse(classA.getProperties().isEmpty());
+assertEquals("STR", property.getFullName());
+assertTrue(classA.getProperties().stream().anyMatch(prop -> prop.getName().equals("STR")));
+assertEquals("STR", classA.getProperty("STR").getFullName());
+assertNotEquals(-1, classA.getProperty("STR").getId());
+assertTrue(classA.getProperty("STR").isPresent());
+assertEquals(classA.getName(), property.getOwnerClass().getName());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(property,classA.getProperty("STR")); ===
+0.915 - assertSame(property, classA.getProperty("STR"))
+0.825 - assertEquals(0, classA.getProperty("STR").getId())
+0.792 - assertNotEquals(-1, classA.getProperty("STR").getId())
+0.777 - assertEquals("STR", classA.getProperty("STR").getName())
+0.750 - assertTrue(classA.existsProperty("STR"))
+0.748 - assertEquals("STR", classA.getProperty("STR").getFullName())
+0.701 - assertTrue(classA.getProperty("STR").isPresent())
+0.700 - assertEquals(0, property.getId())
+0.691 - assertEquals(OType.STRING, schema.getProperty("STR").getType())
+0.674 - assertEquals("STR", property.getName())
+0.667 - assertEquals(1, classA.properties().size())
+0.667 - assertFalse(classA.getProperties().isEmpty())
+0.654 - assertFalse(classA.existsProperty("NON_EXISTENT_PROPERTY"))
+0.645 - assertEquals(OType.STRING, property.getType())
+0.644 - assertEquals("STR", property.getFullName())
+0.636 - assertNotNull(schema.getProperty("STR"))
+0.584 - assertEquals(classA.getName(), property.getOwnerClass().getName())
+0.554 - assertTrue(classA.getProperties().contains(property))
+0.500 - assertTrue(classA.getProperties().stream().anyMatch(prop -> prop.getName().equals("STR")))
+0.456 - ```java
+assertNotNull(property)
+0.438 - assertTrue(schema.getClasses().contains(classA))
+0.000 - ```

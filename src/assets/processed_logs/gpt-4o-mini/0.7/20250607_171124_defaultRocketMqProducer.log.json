@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rhwayfun.spring-boot-rocketmq-starter;\n\npublic class RocketMqAutoConfiguration {\npublic DefaultMQProducer getProducer ( ) {\nreturn producer ;\n}\n}\n\npackage rhwayfun.spring-boot-rocketmq-starter;\n\npublic class RocketMqAutoConfigurationTest {\n@Test\npublic void defaultRocketMqProducer ( ) {\nload ( \"STR\" + TEST_NAME_SERVER , \"STR\" + TEST_PRODUCER_GROUP ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nDefaultMQProducer producer = rocketMqAutoConfiguration.getProducer();\nassertNotNull(producer);\nassertEquals(TEST_NAME_SERVER, producer.getNamesrvAddr());\nassertEquals(TEST_PRODUCER_GROUP, producer.getProducerGroup());\nassertTrue(producer.isStart());\nassertFalse(producer.isShutdown());\nassertEquals(1, producer.getSendMsgTimeout());\nassertEquals(1, producer.getRetryTimesWhenSendFailed());\nassertEquals(1, producer.getRetryTimesWhenSendAsyncFailed());\nassertTrue(producer.getSendMsgTimeout() > 0);\nassertEquals(0, producer.getMaxMessageSize());\nassertNotNull(producer.getDefaultTopic());\nassertNotNull(producer.getSendCallback());\nassertTrue(producer.getInstanceName().length() > 0);\nassertEquals(1, producer.getMaxInMemoryMessages());\nassertNotNull(producer.getTransactionListener());\nassertEquals(0, producer.getMaxRetryTimes());\nassertFalse(producer.isSendLatencyFaultEnabled());\nassertNotNull(producer.getClientId());\nassertTrue(producer.getNamesrvAddr().contains(\":\"));\nassertTrue(producer.getProducerGroup().length() > 0);\nassertEquals(1, producer.getCompressMsgBodyOverHowmuch());\nassertFalse(producer.getWaitTimeWhenSendMsgFailed() < 0);\n```\n====================\n\n",
+    "scores": [
+        0.568,
+        0.486,
+        0.43,
+        0.419,
+        0.395,
+        0.391,
+        0.385,
+        0.367,
+        0.347,
+        0.344,
+        0.34,
+        0.33,
+        0.299,
+        0.282,
+        0.273,
+        0.258,
+        0.256,
+        0.253,
+        0.25,
+        0.24,
+        0.24,
+        0.235,
+        0.229,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(this.context.containsBean(\"STR\"));"
+}

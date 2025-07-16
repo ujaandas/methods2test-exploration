@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic List < Method > findAll ( ) {\nList < Method > methods = findAllDeclaredMethods ( clazz ) ;\nfor ( Method method : methods ) {\nverifyPublic ( method ) ;\nverifyNotStatic ( method ) ;\nverifyReturnType ( method ) ;\nverifyArgs ( method ) ;\nmethod . setAccessible ( true ) ;\n} return methods ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testSubClass_methodFoundInSuper ( ) {\nList < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(methodList);\nassertFalse(methodList.isEmpty());\nassertEquals(1, methodList.size());\nMethod method = methodList.get(0);\nassertEquals(\"methodNameExpected\", method.getName());\nassertTrue(Modifier.isPublic(method.getModifiers()));\nassertFalse(Modifier.isStatic(method.getModifiers()));\nassertEquals(void.class, method.getReturnType());\nassertEquals(0, method.getParameterCount());\nassertTrue(method.isAnnotationPresent(Teardown.class));\nassertEquals(Subclass.class, method.getDeclaringClass());\nassertNotNull(method.getAnnotations());\nassertTrue(Arrays.asList(method.getAnnotations()).contains(new Teardown()));\nassertEquals(1, method.getAnnotation(Teardown.class).value());\nassertFalse(method.isAccessible());\nmethod.setAccessible(true);\nassertTrue(method.isAccessible());\nassertThrows(SomeException.class, () -> method.invoke(instance));\nassertDoesNotThrow(() -> method.invoke(instance));\nassertEquals(\"expectedResult\", method.invoke(instance));\nassertNotEquals(\"unexpectedResult\", method.invoke(instance));\nassertNotSame(method, methodList.get(0));\nassertSame(method, methodList.get(0));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.758,
+        0.716,
+        0.696,
+        0.667,
+        0.667,
+        0.667,
+        0.625,
+        0.606,
+        0.602,
+        0.598,
+        0.595,
+        0.591,
+        0.565,
+        0.563,
+        0.508,
+        0.5,
+        0.488,
+        0.483,
+        0.471,
+        0.447,
+        0.407,
+        0.393,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,methodList.size());"
+}

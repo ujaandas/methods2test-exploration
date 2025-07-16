@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class Configs {
+    public static String getSystemPropertyWithMavenPropertyAsFallback ( Properties properties , String key ) { 
+    String val = System . getProperty ( key ) ; 
+    if ( val == null && properties != null ) { 
+    val = properties . getProperty ( key ) ; 
+    } return val ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ConfigsTest {
+    @Test
+     public void getPropertyValueTest ( ) {
+         properties . setProperty ( KEY_1 , value ) ; 
+         System . setProperty ( KEY_2 , value ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+2. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+3. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));
+4. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));
+5. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));
+6. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));
+7. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key"));
+8. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key", "default_value"));
+9. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistent_key", "default_value"));
+10. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistent_key", "default_value"));
+11. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key", "default_value"));
+12. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"));
+13. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2, "default_value"));
+14. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1, "default_value"));
+15. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2, "default_value"));
+16. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"));
+17. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2, "default_value"));
+18. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1, "default_value"));
+19. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2, "default_value"));
+20. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",Configs.getSystemPropertyWithMavenPropertyAsFallback(properties,KEY_1)); ===
+0.934 - 2. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.923 - 4. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2))
+0.893 - 3. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2))
+0.842 - Assertions:
+
+1. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.838 - 16. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"))
+0.833 - 5. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1))
+0.833 - 12. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"))
+0.827 - 17. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2, "default_value"))
+0.825 - 20. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1, "default_value"))
+0.823 - 13. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2, "default_value"))
+0.821 - 6. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2))
+0.817 - 7. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key"))
+0.759 - 14. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1, "default_value"))
+0.757 - 18. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1, "default_value"))
+0.755 - 8. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key", "default_value"))
+0.751 - 11. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistent_key", "default_value"))
+0.749 - 15. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2, "default_value"))
+0.746 - 19. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2, "default_value"))
+0.720 - 9. assertEquals("default_value", Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistent_key", "default_value"))
+0.711 - 10. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistent_key", "default_value"))

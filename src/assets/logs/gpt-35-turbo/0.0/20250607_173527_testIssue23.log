@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue23 ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(schemas);
+2. assertFalse(schemas.isEmpty());
+3. assertEquals(1, schemas.size());
+4. assertTrue(schemas.get(0) instanceof XsdSchema);
+5. assertNotNull(schemas.get(0).getTargetNamespace());
+6. assertNotNull(schemas.get(0).getElements());
+7. assertFalse(schemas.get(0).getElements().isEmpty());
+8. assertEquals(3, schemas.get(0).getElements().size());
+9. assertTrue(schemas.get(0).getElements().get(0) instanceof XsdElement);
+10. assertNotNull(schemas.get(0).getElements().get(0).getName());
+11. assertNotNull(schemas.get(0).getElements().get(0).getType());
+12. assertTrue(schemas.get(0).getElements().get(1) instanceof XsdElement);
+13. assertNotNull(schemas.get(0).getElements().get(1).getName());
+14. assertNotNull(schemas.get(0).getElements().get(1).getType());
+15. assertTrue(schemas.get(0).getElements().get(2) instanceof XsdElement);
+16. assertNotNull(schemas.get(0).getElements().get(2).getName());
+17. assertNotNull(schemas.get(0).getElements().get(2).getType());
+18. assertNotNull(schemas.get(0).getAttributes());
+19. assertFalse(schemas.get(0).getAttributes().isEmpty());
+20. assertEquals(2, schemas.get(0).getAttributes().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(true); ===
+0.444 - 4. assertTrue(schemas.get(0) instanceof XsdSchema)
+0.438 - 18. assertNotNull(schemas.get(0).getAttributes())
+0.417 - 2. assertFalse(schemas.isEmpty())
+0.417 - 3. assertEquals(1, schemas.size())
+0.393 - 6. assertNotNull(schemas.get(0).getElements())
+0.361 - 19. assertFalse(schemas.get(0).getAttributes().isEmpty())
+0.340 - Assertions:
+
+1. assertNotNull(schemas)
+0.329 - 9. assertTrue(schemas.get(0).getElements().get(0) instanceof XsdElement)
+0.326 - 12. assertTrue(schemas.get(0).getElements().get(1) instanceof XsdElement)
+0.326 - 15. assertTrue(schemas.get(0).getElements().get(2) instanceof XsdElement)
+0.324 - 5. assertNotNull(schemas.get(0).getTargetNamespace())
+0.319 - 7. assertFalse(schemas.get(0).getElements().isEmpty())
+0.306 - 20. assertEquals(2, schemas.get(0).getAttributes().size())
+0.290 - 8. assertEquals(3, schemas.get(0).getElements().size())
+0.253 - 10. assertNotNull(schemas.get(0).getElements().get(0).getName())
+0.253 - 11. assertNotNull(schemas.get(0).getElements().get(0).getType())
+0.253 - 13. assertNotNull(schemas.get(0).getElements().get(1).getName())
+0.253 - 14. assertNotNull(schemas.get(0).getElements().get(1).getType())
+0.253 - 16. assertNotNull(schemas.get(0).getElements().get(2).getName())
+0.253 - 17. assertNotNull(schemas.get(0).getElements().get(2).getType())

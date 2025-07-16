@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void rakiens ( ) {
+         Word w = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(w);
+assertTrue(w.isRecognized());
+assertEquals("ExpectedWordForm", w.getWordForm());
+assertFalse(w.getWordForms().isEmpty());
+assertEquals(3, w.getWordForms().size());
+assertTrue(w.getWordForms().contains("WordForm1"));
+assertTrue(w.getWordForms().contains("WordForm2"));
+assertTrue(w.getWordForms().contains("WordForm3"));
+assertFalse(w.getWordForms().contains("NonExistentWordForm"));
+assertEquals("ExpectedLemma", w.getLemma());
+assertTrue(w.getPartOfSpeech().matches("NOUN|VERB|ADJ"));
+assertEquals("ExpectedGender", w.getGender());
+assertEquals("ExpectedNumber", w.getNumber());
+assertEquals("ExpectedCase", w.getCase());
+assertTrue(w.getDefinition().length() > 0);
+assertNotNull(w.getSyllableStructure());
+assertFalse(w.getSyllableStructure().isEmpty());
+assertTrue(w.getMorphologicalTags().contains("Tag1"));
+assertTrue(w.getMorphologicalTags().contains("Tag2"));
+assertFalse(w.getMorphologicalTags().contains("InvalidTag"));
+assertEquals("ExpectedPronunciation", w.getPronunciation());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(w.isRecognized()); ===
+1.000 - assertTrue(w.isRecognized())
+0.559 - assertTrue(w.getDefinition().length() > 0)
+0.538 - assertTrue(w.getWordForms().contains("WordForm1"))
+0.538 - assertTrue(w.getWordForms().contains("WordForm2"))
+0.538 - assertTrue(w.getWordForms().contains("WordForm3"))
+0.507 - assertEquals(3, w.getWordForms().size())
+0.494 - assertTrue(w.getMorphologicalTags().contains("Tag1"))
+0.494 - assertTrue(w.getMorphologicalTags().contains("Tag2"))
+0.478 - assertNotNull(w.getSyllableStructure())
+0.448 - assertFalse(w.getWordForms().isEmpty())
+0.441 - assertEquals("ExpectedCase", w.getCase())
+0.429 - assertEquals("ExpectedLemma", w.getLemma())
+0.429 - assertTrue(w.getPartOfSpeech().matches("NOUN|VERB|ADJ"))
+0.417 - assertEquals("ExpectedGender", w.getGender())
+0.400 - assertFalse(w.getSyllableStructure().isEmpty())
+0.395 - assertEquals("ExpectedWordForm", w.getWordForm())
+0.389 - assertEquals("ExpectedNumber", w.getNumber())
+0.386 - assertFalse(w.getMorphologicalTags().contains("InvalidTag"))
+0.385 - ```java
+assertNotNull(w)
+0.382 - assertFalse(w.getWordForms().contains("NonExistentWordForm"))
+0.372 - assertEquals("ExpectedPronunciation", w.getPronunciation())
+0.000 - ```

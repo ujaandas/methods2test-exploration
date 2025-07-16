@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testRemoveConnWithSpecifiedPoolkey ( ) {
+         Connection conn1 = getAConn ( ) ; 
+         conn1 . addPoolKey ( "STR" ) ; 
+         Connection conn2 = getAConn ( ) ; 
+         conn2 . addPoolKey ( "STR" ) ; 
+         cm . add ( conn1 ) ; 
+         cm . add ( conn2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(2, cm.count("STR"));
+assertTrue(cm.getConnectionPool("STR").contains(conn1));
+assertTrue(cm.getConnectionPool("STR").contains(conn2));
+assertFalse(cm.getConnectionPool("STR").isEmpty());
+assertEquals(0, cm.count("NON_EXISTENT_POOL"));
+assertEquals(0, cm.count(null));
+assertEquals(0, cm.count(""));
+assertEquals(2, cm.count("STR"));
+cm.remove(conn1);
+assertEquals(1, cm.count("STR"));
+assertFalse(cm.getConnectionPool("STR").contains(conn1));
+assertTrue(cm.getConnectionPool("STR").contains(conn2));
+cm.remove(conn2);
+assertEquals(0, cm.count("STR"));
+assertTrue(cm.getConnectionPool("STR").isEmpty());
+assertEquals(0, cm.count("STR"));
+assertEquals(0, cm.count("ANOTHER_POOL"));
+assertEquals(0, cm.count(" "));
+assertEquals(0, cm.count("  "));
+assertEquals(0, cm.count("STR"));
+assertEquals(0, cm.count("INVALID_POOL_KEY"));
+assertEquals(0, cm.count("YET_ANOTHER_POOL"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,cm.count(poolKey)); ===
+0.825 - assertEquals(0, cm.count(null))
+0.820 - assertEquals(0, cm.count(""))
+0.820 - assertEquals(0, cm.count(" "))
+0.820 - assertEquals(0, cm.count("  "))
+0.812 - assertEquals(2, cm.count("STR"))
+0.781 - assertEquals(1, cm.count("STR"))
+0.781 - assertEquals(0, cm.count("STR"))
+0.781 - assertEquals(0, cm.count("STR"))
+0.781 - assertEquals(0, cm.count("STR"))
+0.722 - ```java
+assertEquals(2, cm.count("STR"))
+0.685 - assertEquals(0, cm.count("ANOTHER_POOL"))
+0.675 - assertEquals(0, cm.count("INVALID_POOL_KEY"))
+0.649 - assertEquals(0, cm.count("YET_ANOTHER_POOL"))
+0.641 - assertEquals(0, cm.count("NON_EXISTENT_POOL"))
+0.530 - assertFalse(cm.getConnectionPool("STR").isEmpty())
+0.488 - assertTrue(cm.getConnectionPool("STR").isEmpty())
+0.472 - assertFalse(cm.getConnectionPool("STR").contains(conn1))
+0.432 - assertTrue(cm.getConnectionPool("STR").contains(conn1))
+0.432 - assertTrue(cm.getConnectionPool("STR").contains(conn2))
+0.432 - assertTrue(cm.getConnectionPool("STR").contains(conn2))
+0.286 - cm.remove(conn1)
+0.286 - cm.remove(conn2)
+0.000 - ```

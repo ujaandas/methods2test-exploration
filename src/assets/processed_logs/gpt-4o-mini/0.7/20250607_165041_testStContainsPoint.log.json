@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctions {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctionsTest {\n@Test\npublic void testStContainsPoint ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(next);\nAssert.assertTrue(next.field(\"location\") instanceof OPoint);\nAssert.assertEquals(\"ExpectedValue\", next.field(\"someField\"));\nAssert.assertTrue(next.field(\"someBooleanField\"));\nAssert.assertFalse(next.field(\"someOtherBooleanField\"));\nAssert.assertNotEquals(0, next.field(\"someNumericField\"));\nAssert.assertTrue(next.field(\"collectionField\") instanceof Collection);\nAssert.assertEquals(3, ((Collection<?>) next.field(\"collectionField\")).size());\nAssert.assertTrue(((Collection<?>) next.field(\"collectionField\")).contains(\"ExpectedItem\"));\nAssert.assertTrue(next.field(\"dateField\") instanceof Date);\nAssert.assertTrue(((Date) next.field(\"dateField\")).before(new Date()));\nAssert.assertEquals(\"ExpectedString\", next.field(\"stringField\"));\nAssert.assertNotNull(next.field(\"nestedDocument\"));\nAssert.assertTrue(next.field(\"nestedDocument\").field(\"nestedField\") instanceof String);\nAssert.assertEquals(\"NestedValue\", next.field(\"nestedDocument\").field(\"nestedField\"));\nAssert.assertTrue(next.field(\"geoField\") instanceof OPoint);\nAssert.assertEquals(1.0, ((OPoint) next.field(\"geoField\")).getX(), 0.01);\nAssert.assertEquals(2.0, ((OPoint) next.field(\"geoField\")).getY(), 0.01);\nAssert.assertNotNull(next.field(\"anotherField\"));\nAssert.assertTrue(next.field(\"anotherField\") instanceof List);\nAssert.assertEquals(\"ExpectedValueInList\", ((List<?>) next.field(\"anotherField\")).get(0));\n```\n====================\n\n",
+    "scores": [
+        0.719,
+        0.682,
+        0.674,
+        0.623,
+        0.615,
+        0.608,
+        0.595,
+        0.592,
+        0.592,
+        0.566,
+        0.565,
+        0.558,
+        0.558,
+        0.552,
+        0.552,
+        0.545,
+        0.495,
+        0.495,
+        0.444,
+        0.425,
+        0.403,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(true,next.field(\"STR\"));"
+}

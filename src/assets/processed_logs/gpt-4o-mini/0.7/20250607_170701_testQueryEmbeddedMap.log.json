@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupport {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupportTest {\n@Test\npublic void testQueryEmbeddedMap ( ) {\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . setProperty ( \"STR\" , \"STR\" ) ;\nODocument emb = new ODocument ( ) ;\nemb . setProperty ( \"STR\" , \"STR\" ) ;\nMap < String , ODocument > map = new HashMap < > ( ) ;\nmap . put ( \"STR\" , emb ) ;\ndoc . setProperty ( \"STR\" , map , OType . EMBEDDEDMAP ) ;\nsession . save ( doc ) ;\nOResultSet res = session . query ( \"STR\" ) ;\nOResult item = res . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(item);\nassertTrue(item instanceof ODocument);\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item.getProperty(\"STR\") instanceof ODocument);\nODocument embeddedDoc = (ODocument) item.getProperty(\"STR\");\nassertEquals(\"STR\", embeddedDoc.getProperty(\"STR\"));\nassertEquals(1, embeddedDoc.size());\nassertTrue(embeddedDoc.containsField(\"STR\"));\nassertNotNull(doc);\nassertEquals(\"STR\", doc.getProperty(\"STR\"));\nassertTrue(doc.getProperty(\"STR\") instanceof Map);\nMap<String, ODocument> retrievedMap = (Map<String, ODocument>) doc.getProperty(\"STR\");\nassertEquals(1, retrievedMap.size());\nassertTrue(retrievedMap.containsKey(\"STR\"));\nassertNotNull(retrievedMap.get(\"STR\"));\nassertEquals(\"STR\", retrievedMap.get(\"STR\").getProperty(\"STR\"));\nassertTrue(session.exists(doc.getIdentity()));\nassertEquals(1, session.count(\"SELECT COUNT(*) FROM \" + doc.getClassName()));\nassertTrue(res.hasNext());\nassertEquals(\"STR\", res.getProperty(\"STR\"));\nassertNull(item.getProperty(\"NonExistentProperty\"));\nassertEquals(1, session.query(\"SELECT FROM \" + doc.getClassName()).size());\nassertTrue(res.stream().count() > 0);\n```\n====================\n\n",
+    "scores": [
+        0.815,
+        0.75,
+        0.737,
+        0.719,
+        0.705,
+        0.696,
+        0.675,
+        0.635,
+        0.585,
+        0.581,
+        0.571,
+        0.56,
+        0.543,
+        0.488,
+        0.466,
+        0.458,
+        0.444,
+        0.427,
+        0.411,
+        0.349,
+        0.318,
+        0.306,
+        0.296,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(item.getProperty(\"STR\"));"
+}

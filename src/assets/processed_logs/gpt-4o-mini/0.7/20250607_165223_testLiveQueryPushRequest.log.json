@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class OLiveQueryMessagess {\npublic int getMonitorId ( ) {\nreturn monitorId ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class OLiveQueryMessagesTests {\n@Test\npublic void testLiveQueryPushRequest ( ) throws IOException {\nList < OLiveQueryResult > events = new ArrayList < > ( ) ;\nOResultInternal res = new OResultInternal ( ) ;\nres . setProperty ( \"STR\" , \"STR\" ) ;\nres . setProperty ( \"STR\" , 10 ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , res , null ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ;\nOLiveQueryPushRequest pushRequest = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ;\nMockChannel channel = new MockChannel ( ) ;\npushRequest . write ( channel ) ;\nchannel . close ( ) ;\nOLiveQueryPushRequest pushRequestRead = new OLiveQueryPushRequest ( ) ;\npushRequestRead . read ( channel ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(pushRequest.getMonitorId(), pushRequestRead.getMonitorId());\nassertEquals(pushRequest.getEvents().size(), pushRequestRead.getEvents().size());\nassertEquals(pushRequest.getEvents().get(0).getType(), pushRequestRead.getEvents().get(0).getType());\nassertEquals(pushRequest.getEvents().get(1).getType(), pushRequestRead.getEvents().get(1).getType());\nassertEquals(pushRequest.getEvents().get(2).getType(), pushRequestRead.getEvents().get(2).getType());\nassertEquals(pushRequest.getEvents().get(0).getResult().getProperty(\"STR\"), pushRequestRead.getEvents().get(0).getResult().getProperty(\"STR\"));\nassertEquals(pushRequest.getEvents().get(0).getResult().getProperty(\"STR\", Integer.class), pushRequestRead.getEvents().get(0).getResult().getProperty(\"STR\", Integer.class));\nassertNotNull(pushRequestRead.getEvents().get(0).getResult());\nassertNotNull(pushRequestRead.getEvents().get(1).getResult());\nassertNotNull(pushRequestRead.getEvents().get(2).getResult());\nassertNull(pushRequestRead.getEvents().get(2).getOldResult());\nassertNull(pushRequestRead.getEvents().get(0).getOldResult());\nassertEquals(pushRequestRead.getEvents().get(1).getOldResult().getProperty(\"STR\"), pushRequestRead.getEvents().get(1).getOldResult().getProperty(\"STR\"));\nassertNotNull(pushRequestRead.getEvents().get(1).getNewResult());\nassertEquals(pushRequestRead.getEvents().get(0).getNewResult().getProperty(\"STR\"), pushRequestRead.getEvents().get(0).getNewResult().getProperty(\"STR\"));\nassertTrue(pushRequest.getEvents().get(0).isCreateEvent());\nassertTrue(pushRequest.getEvents().get(1).isUpdateEvent());\nassertTrue(pushRequest.getEvents().get(2).isDeleteEvent());\nassertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty(\"STR\", String.class), \"STR\");\nassertEquals(pushRequestRead.getEvents().get(0).getResult().getProperty(\"STR\", Integer.class), 10);\n```\n====================\n\n",
+    "scores": [
+        0.698,
+        0.63,
+        0.63,
+        0.63,
+        0.613,
+        0.611,
+        0.611,
+        0.587,
+        0.573,
+        0.552,
+        0.552,
+        0.533,
+        0.524,
+        0.521,
+        0.521,
+        0.507,
+        0.404,
+        0.394,
+        0.384,
+        0.352,
+        0.0
+    ],
+    "ground_truth": "assertEquals(pushRequestRead.getMonitorId(),10);"
+}

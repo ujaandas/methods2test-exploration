@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    public < T extends UriResponder > void setNotImplementedHandler ( Class < T > handler ) { 
+    router . setNotImplemented ( handler ) ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testHandlerSetters ( ) throws Exception {
+         final UriResponder notFoundHandler = new GeneralHandler ( ) { 
+     } ; 
+         final UriResponder notImplementedHandler = new GeneralHandler ( ) { 
+     } ; 
+         TestRouter router = new TestRouter ( ) ; 
+         RouterNanoHTTPD routerNanoHttpd = new RouterNanoHTTPD ( 9999 ) ; 
+         Field routerField = RouterNanoHTTPD . class . getDeclaredField ( "STR" ) ; 
+         routerField . setAccessible ( true ) ; 
+         routerField . set ( routerNanoHttpd , router ) ; 
+         routerNanoHttpd . setNotFoundHandler ( notFoundHandler . getClass ( ) ) ; 
+         routerNanoHttpd . setNotImplementedHandler ( notImplementedHandler . getClass ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+
+Assert.assertEquals(notFoundHandler, router.getNotFoundHandler());
+Assert.assertEquals(notImplementedHandler, router.getNotImplementedHandler());
+Assert.assertEquals(notFoundHandler.getClass(), router.getNotFoundHandler().getClass());
+Assert.assertEquals(notImplementedHandler.getClass(), router.getNotImplementedHandler().getClass());
+Assert.assertNotNull(router.getNotFoundHandler());
+Assert.assertNotNull(router.getNotImplementedHandler());
+Assert.assertNotEquals(notFoundHandler, router.getNotImplementedHandler());
+Assert.assertNotEquals(notImplementedHandler, router.getNotFoundHandler());
+Assert.assertNotEquals(notFoundHandler.getClass(), router.getNotImplementedHandler().getClass());
+Assert.assertNotEquals(notImplementedHandler.getClass(), router.getNotFoundHandler().getClass());
+Assert.assertTrue(router.getNotFoundHandler() instanceof GeneralHandler);
+Assert.assertTrue(router.getNotImplementedHandler() instanceof GeneralHandler);
+Assert.assertTrue(router.getNotFoundHandler().getClass().isAssignableFrom(GeneralHandler.class));
+Assert.assertTrue(router.getNotImplementedHandler().getClass().isAssignableFrom(GeneralHandler.class));
+Assert.assertNotEquals(notFoundHandler.getClass(), notImplementedHandler.getClass());
+Assert.assertNotEquals(router.getNotFoundHandler(), router.getNotImplementedHandler());
+Assert.assertNotEquals(router.getNotFoundHandler().getClass(), router.getNotImplementedHandler().getClass());
+Assert.assertNotEquals(router.getNotFoundHandler().getClass(), notImplementedHandler.getClass());
+Assert.assertNotEquals(router.getNotImplementedHandler().getClass(), notFoundHandler.getClass());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(notFoundHandler.getClass(),router.notFoundHandlerClass); ===
+0.912 - Assert.assertEquals(notFoundHandler.getClass(), router.getNotFoundHandler().getClass())
+0.821 - Assert.assertNotEquals(notFoundHandler.getClass(), router.getNotImplementedHandler().getClass())
+0.821 - Assert.assertNotEquals(notImplementedHandler.getClass(), router.getNotFoundHandler().getClass())
+0.816 - Assert.assertEquals(notFoundHandler, router.getNotFoundHandler())
+0.806 - Assert.assertNotEquals(notFoundHandler.getClass(), notImplementedHandler.getClass())
+0.767 - Assert.assertEquals(notImplementedHandler.getClass(), router.getNotImplementedHandler().getClass())
+0.750 - Assert.assertNotEquals(router.getNotFoundHandler().getClass(), router.getNotImplementedHandler().getClass())
+0.716 - Assert.assertNotEquals(notFoundHandler, router.getNotImplementedHandler())
+0.671 - Assert.assertNotEquals(router.getNotFoundHandler(), router.getNotImplementedHandler())
+0.657 - Assert.assertEquals(notImplementedHandler, router.getNotImplementedHandler())
+0.624 - Assert.assertTrue(router.getNotFoundHandler().getClass().isAssignableFrom(GeneralHandler.class))
+0.564 - Assert.assertTrue(router.getNotImplementedHandler().getClass().isAssignableFrom(GeneralHandler.class))
+0.534 - Assert.assertTrue(router.getNotFoundHandler() instanceof GeneralHandler)
+0.513 - Assert.assertNotEquals(router.getNotImplementedHandler().getClass(), notFoundHandler.getClass())
+0.500 - Assert.assertNotEquals(router.getNotFoundHandler().getClass(), notImplementedHandler.getClass())
+0.473 - Assert.assertNotNull(router.getNotFoundHandler())
+0.467 - Assert.assertTrue(router.getNotImplementedHandler() instanceof GeneralHandler)
+0.463 - Assert.assertNotEquals(notImplementedHandler, router.getNotFoundHandler())
+0.379 - Assert.assertNotNull(router.getNotImplementedHandler())

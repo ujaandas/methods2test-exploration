@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterProperty {\npublic OClass getLinkedClass ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterPropertyTest {\n@Test\npublic void testRemoveLinkedClass ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOClass classLinked = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . LINK , classLinked ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.LINK, prop.getType());\nAssert.assertEquals(classLinked, prop.getLinkedClass());\nAssert.assertTrue(classA.properties().contains(prop));\nAssert.assertTrue(classLinked.properties().contains(prop));\nAssert.assertTrue(classA.propertiesMap().containsKey(\"STR\"));\nAssert.assertTrue(classLinked.propertiesMap().containsKey(\"STR\"));\nAssert.assertTrue(classA.propertiesMap().containsValue(prop));\nAssert.assertTrue(classLinked.propertiesMap().containsValue(prop));\nAssert.assertTrue(classA.existsProperty(\"STR\"));\nAssert.assertTrue(classLinked.existsProperty(\"STR\"));\nAssert.assertTrue(classA.getProperty(\"STR\").equals(prop));\nAssert.assertTrue(classLinked.getProperty(\"STR\").equals(prop));\nAssert.assertTrue(classA.getProperty(\"STR\").getType().equals(OType.LINK));\nAssert.assertTrue(classLinked.getProperty(\"STR\").getType().equals(OType.LINK));\nAssert.assertTrue(classA.getProperty(\"STR\").getLinkedClass().equals(classLinked));\nAssert.assertTrue(classLinked.getProperty(\"STR\").getLinkedClass().equals(classLinked));\nAssert.assertTrue(classA.getProperty(\"STR\").getOwnerClass().equals(classA));\nAssert.assertTrue(classLinked.getProperty(\"STR\").getOwnerClass().equals(classA));\n====================\n\n",
+    "scores": [
+        0.747,
+        0.691,
+        0.6,
+        0.509,
+        0.507,
+        0.487,
+        0.469,
+        0.449,
+        0.423,
+        0.418,
+        0.414,
+        0.404,
+        0.395,
+        0.395,
+        0.383,
+        0.379,
+        0.366,
+        0.356,
+        0.355,
+        0.353
+    ],
+    "ground_truth": "assertNotNull(prop.getLinkedClass());"
+}

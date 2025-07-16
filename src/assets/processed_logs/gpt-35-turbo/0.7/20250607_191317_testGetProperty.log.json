@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class AbstractServiceSetup {\nprotected final String getProperty ( final String name ) {\nreturn env . get ( name ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class AbstractServiceSetupTest {\n@Test\npublic void testGetProperty ( ) {\nMap < String , String > env = new HashMap < String , String > ( ) ;\nenv . put ( \"STR\" , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", getProperty(\"STR\"));\nAssert.assertNull(getProperty(\"NULL\"));\nAssert.assertNotEquals(\"DIFFERENT\", getProperty(\"STR\"));\nAssert.assertTrue(env.containsKey(\"STR\"));\nAssert.assertFalse(env.containsKey(\"NOT_IN_MAP\"));\nAssert.assertNotNull(getProperty(\"STR\"));\nAssert.assertTrue(getProperty(\"STR\").contains(\"S\"));\nAssert.assertFalse(getProperty(\"STR\").isEmpty());\nAssert.assertTrue(getProperty(\"STR\").startsWith(\"S\"));\nAssert.assertTrue(getProperty(\"STR\").endsWith(\"R\"));\nAssert.assertEquals(3, getProperty(\"STR\").length());\nAssert.assertTrue(env.containsValue(\"STR\"));\nAssert.assertEquals(\"DEFAULT\", getPropertyOrDefault(\"DEFAULT\", \"KEY_NOT_FOUND\"));\nAssert.assertNotSame(\"STR\", getProperty(\"STR\"));\nAssert.assertTrue(env.size() == 1);\nAssert.assertTrue(env.isEmpty() == false);\nAssert.assertSame(\"STR\", getProperty(\"STR\"));\nAssert.assertFalse(env.isEmpty());\nAssert.assertNotNull(env.get(\"STR\"));\nAssert.assertNotEquals(\"DIFFERENT\", getProperty(\"NOT_IN_MAP\"));\n====================\n\n",
+    "scores": [
+        0.864,
+        0.767,
+        0.742,
+        0.742,
+        0.71,
+        0.675,
+        0.659,
+        0.654,
+        0.617,
+        0.608,
+        0.596,
+        0.596,
+        0.583,
+        0.562,
+        0.553,
+        0.548,
+        0.512,
+        0.5,
+        0.463,
+        0.373
+    ],
+    "ground_truth": "assertEquals(\"STR\",create(env).getProperty(\"STR\"));"
+}

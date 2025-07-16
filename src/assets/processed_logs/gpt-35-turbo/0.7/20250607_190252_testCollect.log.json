@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > List < X > collect ( List < T > coll , APartialFunction < ? super T , ? extends X , E > pf ) throws E {\nfinal List < X > result = createEmptyListOfType ( coll , true ) ;\nfor ( T o : coll ) {\nif ( pf . isDefinedAt ( o ) ) {\nresult . add ( pf . apply ( o ) ) ;\n} } return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testCollect ( ) throws Exception {\nAPartialFunctionNoThrow < Integer , Double > squareRoot = new APartialFunctionNoThrow < Integer , Double > ( ) {\n@Override\npublic boolean isDefinedAt ( Integer param ) {\nreturn param != 0 ;\n} @Override\npublic Double apply ( Integer param ) {\nreturn Math . sqrt ( param ) ;\n} } ;\nfinal List < Double > result = ACollectionHelper . collect ( Arrays . asList ( 0 , 1 , 2 , 3 , 4 ) , squareRoot ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions.assertEquals(0.0, result.get(0));\nAssertions.assertEquals(1.0, result.get(1));\nAssertions.assertEquals(1.4142135623730951, result.get(2));\nAssertions.assertEquals(1.7320508075688772, result.get(3));\nAssertions.assertEquals(2.0, result.get(4));\nAssertions.assertEquals(5, result.size());\nAssertions.assertTrue(result.contains(0.0));\nAssertions.assertTrue(result.contains(1.0));\nAssertions.assertTrue(result.contains(1.4142135623730951));\nAssertions.assertTrue(result.contains(1.7320508075688772));\nAssertions.assertTrue(result.contains(2.0));\nAssertions.assertFalse(result.contains(3.0));\nAssertions.assertFalse(result.contains(4.0));\nAssertions.assertFalse(result.contains(5.0));\nAssertions.assertFalse(result.contains(6.0));\nAssertions.assertFalse(result.contains(7.0));\nAssertions.assertFalse(result.contains(8.0));\nAssertions.assertFalse(result.contains(9.0));\nAssertions.assertFalse(result.contains(10.0));\nAssertions.assertTrue(result.stream().allMatch(d -> d >= 0.0));\n====================\n\n",
+    "scores": [
+        0.812,
+        0.704,
+        0.704,
+        0.704,
+        0.605,
+        0.581,
+        0.575,
+        0.575,
+        0.575,
+        0.575,
+        0.575,
+        0.575,
+        0.575,
+        0.568,
+        0.528,
+        0.528,
+        0.528,
+        0.46,
+        0.437,
+        0.437
+    ],
+    "ground_truth": "assertEquals(4,result.size());"
+}

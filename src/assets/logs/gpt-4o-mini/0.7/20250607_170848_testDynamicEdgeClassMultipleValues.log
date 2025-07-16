@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformer {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformerTest {
+    @Test
+     public void testDynamicEdgeClassMultipleValues ( ) {
+         configure ( "STR" + "STR" + "STR" + name . getMethodName ( ) + "STR" ) ; 
+         OETLLoader loader = proc . getLoader ( ) ; 
+         ODatabasePool pool = loader . getPool ( ) ; 
+         ODatabaseDocument db = pool . acquire ( ) ; 
+         createClasses ( db ) ; 
+         OVertex vertex = db . newVertex ( "STR" ) ; 
+         vertex . setProperty ( "STR" , "STR" ) ; 
+         db . save ( vertex ) ; 
+         db . commit ( ) ; 
+         db . close ( ) ; 
+         proc . execute ( ) ; 
+         db = pool . acquire ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(db);
+Assert.assertTrue(db.countClass("STR") > 0);
+Assert.assertEquals(1, db.countClass("STR"));
+Assert.assertEquals("STR", db.getVertex(vertex.getId()).getProperty("STR"));
+Assert.assertTrue(vertex.getId().isValid());
+Assert.assertFalse(vertex.getId().isNew());
+Assert.assertEquals("STR", db.getVertex(vertex.getId()).getProperty("STR"));
+Assert.assertTrue(db.getVertex(vertex.getId()).getProperty("STR").equals("STR"));
+Assert.assertNotEquals("DifferentValue", db.getVertex(vertex.getId()).getProperty("STR"));
+Assert.assertNotNull(db.getVertex(vertex.getId()));
+Assert.assertTrue(db.getVertex(vertex.getId()).getPropertyKeys().contains("STR"));
+Assert.assertTrue(db.getVertices("STR").size() > 0);
+Assert.assertEquals(1, db.getVertices("STR").size());
+Assert.assertTrue(db.getVertices("STR").stream().anyMatch(v -> v.getProperty("STR").equals("STR")));
+Assert.assertFalse(db.getVertices("DifferentClass").stream().anyMatch(v -> v.getProperty("STR").equals("STR")));
+Assert.assertEquals(1, db.getVertices().stream().filter(v -> v.getClassName().equals("STR")).count());
+Assert.assertTrue(db.getVertices().stream().anyMatch(v -> v.getProperty("STR").equals("STR")));
+Assert.assertNotNull(db.getVertices("STR").get(0));
+Assert.assertTrue(db.getVertices("STR").get(0).getId().isValid());
+Assert.assertEquals("STR", db.getVertices("STR").get(0).getProperty("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,db.countClass("STR")); ===
+1.000 - Assert.assertEquals(1, db.countClass("STR"))
+0.829 - Assert.assertTrue(db.countClass("STR") > 0)
+0.700 - Assert.assertEquals(1, db.getVertices("STR").size())
+0.557 - Assert.assertNotNull(db.getVertices("STR").get(0))
+0.538 - Assert.assertTrue(db.getVertices("STR").size() > 0)
+0.524 - Assert.assertEquals("STR", db.getVertex(vertex.getId()).getProperty("STR"))
+0.524 - Assert.assertEquals("STR", db.getVertex(vertex.getId()).getProperty("STR"))
+0.524 - Assert.assertEquals("STR", db.getVertices("STR").get(0).getProperty("STR"))
+0.520 - Assert.assertEquals(1, db.getVertices().stream().filter(v -> v.getClassName().equals("STR")).count())
+0.462 - Assert.assertNotEquals("DifferentValue", db.getVertex(vertex.getId()).getProperty("STR"))
+0.455 - Assert.assertTrue(db.getVertex(vertex.getId()).getPropertyKeys().contains("STR"))
+0.451 - Assert.assertFalse(vertex.getId().isNew())
+0.447 - Assert.assertTrue(db.getVertices("STR").get(0).getId().isValid())
+0.420 - Assert.assertFalse(db.getVertices("DifferentClass").stream().anyMatch(v -> v.getProperty("STR").equals("STR")))
+0.405 - Assert.assertNotNull(db.getVertex(vertex.getId()))
+0.393 - ```java
+Assert.assertNotNull(db)
+0.349 - Assert.assertTrue(db.getVertex(vertex.getId()).getProperty("STR").equals("STR"))
+0.333 - Assert.assertTrue(vertex.getId().isValid())
+0.314 - Assert.assertTrue(db.getVertices().stream().anyMatch(v -> v.getProperty("STR").equals("STR")))
+0.302 - Assert.assertTrue(db.getVertices("STR").stream().anyMatch(v -> v.getProperty("STR").equals("STR")))
+0.000 - ```

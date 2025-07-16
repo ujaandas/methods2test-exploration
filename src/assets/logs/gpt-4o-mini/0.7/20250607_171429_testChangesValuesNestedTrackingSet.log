@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollections {
+    public List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) { 
+    return Collections . unmodifiableList ( multiValueChangeEvents ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollectionsTest {
+    @Test
+     public void testChangesValuesNestedTrackingSet ( ) {
+         ODocument document = new ODocument ( ) ; 
+         Set objects = new HashSet ( ) ; 
+         document . field ( "STR" , objects ) ; 
+         Set subObjects = new HashSet ( ) ; 
+         objects . add ( subObjects ) ; 
+         ODocument nestedDoc = new ODocument ( ) ; 
+         subObjects . add ( nestedDoc ) ; 
+         document . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         objects = document . field ( "STR" ) ; 
+         subObjects = ( Set ) objects . iterator ( ) . next ( ) ; 
+         subObjects . add ( "STR" ) ; 
+         OMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(timeLine);
+assertEquals(1, timeLine.getAdded().size());
+assertTrue(timeLine.getAdded().contains("STR"));
+assertEquals(0, timeLine.getRemoved().size());
+assertEquals(1, timeLine.getChanged().size());
+assertTrue(timeLine.getChanged().contains(subObjects));
+assertTrue(document.field("STR").contains(subObjects));
+assertEquals(1, document.field("STR").size());
+assertTrue(subObjects.contains("STR"));
+assertEquals(1, subObjects.size());
+assertTrue(objects.contains(subObjects));
+assertTrue(objects.contains(nestedDoc));
+assertTrue(nestedDoc.field("STR").isEmpty());
+assertFalse(subObjects.isEmpty());
+assertTrue(objects instanceof Set);
+assertTrue(subObjects instanceof Set);
+assertNotSame(objects, subObjects);
+assertNotNull(document.getCollectionTimeLine("STR"));
+assertFalse(timeLine.getRemoved().contains("STR"));
+assertTrue(timeLine.getAdded().contains(subObjects));
+assertEquals(0, timeLine.getRemoved().size());
+assertEquals(1, timeLine.getChanged().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,timeLine.getMultiValueChangeEvents().size()); ===
+0.835 - assertEquals(1, timeLine.getChanged().size())
+0.835 - assertEquals(1, timeLine.getChanged().size())
+0.757 - assertEquals(0, timeLine.getRemoved().size())
+0.757 - assertEquals(0, timeLine.getRemoved().size())
+0.752 - assertEquals(1, timeLine.getAdded().size())
+0.587 - assertFalse(timeLine.getRemoved().contains("STR"))
+0.584 - assertTrue(timeLine.getChanged().contains(subObjects))
+0.565 - assertEquals(1, subObjects.size())
+0.563 - assertEquals(1, document.field("STR").size())
+0.528 - assertTrue(timeLine.getAdded().contains("STR"))
+0.505 - assertTrue(timeLine.getAdded().contains(subObjects))
+0.400 - ```java
+assertNotNull(timeLine)
+0.391 - assertFalse(subObjects.isEmpty())
+0.388 - assertTrue(nestedDoc.field("STR").isEmpty())
+0.360 - assertNotNull(document.getCollectionTimeLine("STR"))
+0.319 - assertTrue(subObjects instanceof Set)
+0.308 - assertTrue(objects instanceof Set)
+0.306 - assertTrue(objects.contains(nestedDoc))
+0.303 - assertTrue(objects.contains(subObjects))
+0.301 - assertTrue(document.field("STR").contains(subObjects))
+0.283 - assertNotSame(objects, subObjects)
+0.247 - assertTrue(subObjects.contains("STR"))
+0.000 - ```

@@ -1,0 +1,110 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public String formatIntervalPerformanceNumbers ( String testId ) { 
+    PerformanceStats latest = get ( testId , false ) ; 
+    if ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) { 
+    return "STR" ; 
+    } String latencyUnit = "STR" ; 
+    long latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ; 
+    long latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ; 
+    long latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ; 
+    if ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) { 
+    latencyUnit = "STR" ; 
+    latencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ; 
+    latency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ; 
+    latencyMax = MICROSECONDS . toMillis ( latencyMax ) ; 
+    } return format ( "STR" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {
+         SimulatorAddress worker = workerAddress ( 3 , 1 ) ; 
+         Map < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ; 
+         performanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ; 
+         performanceStatsCollector . update ( worker , performanceStats ) ; 
+         String performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(performance);
+assertFalse(performance.isEmpty());
+assertTrue(performance.contains("800")); // operation count
+assertTrue(performance.contains("0.04")); // throughput (example value)
+assertTrue(performance.contains("2")); // avg latency in ms
+assertTrue(performance.contains("2")); // 99.9 percentile latency in ms
+assertTrue(performance.contains("2")); // max latency in ms
+assertTrue(performance.contains("ms")); // check for latency unit
+assertTrue(performance.contains("STR")); // check for STR in case of empty stats
+assertTrue(performance.indexOf("300") < performance.indexOf("800")); // operation count is before latency
+assertTrue(performance.indexOf("100") < performance.indexOf("300")); // throughput is before avg latency
+assertTrue(performance.indexOf("2") < performance.indexOf("300")); // avg latency is before 99.9 percentile
+assertTrue(performance.indexOf("2") < performance.indexOf("2")); // 99.9 percentile is before max latency
+assertTrue(performance.indexOf("ms") < performance.indexOf("2")); // check latency unit position
+assertTrue(performance.matches(".*\\d{1,}.*")); // contains at least one digit
+assertTrue(performance.split(" ").length > 5); // ensure it's not too short
+assertTrue(performance.startsWith("STR")); // check format starts with STR
+assertTrue(performance.contains("LATENCY_PERCENTILE")); // check if percentile is included
+assertTrue(performance.indexOf("2") > performance.indexOf("0")); // avg latency is a positive number
+assertTrue(performance.contains("2000")); // expected latency avg in micros
+assertTrue(performance.contains("2500")); // expected max latency in micros
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(performance.contains("STR")); ===
+0.923 - assertTrue(performance.contains("800"))
+0.780 - // check for latency unit
+assertTrue(performance.contains("STR"))
+0.774 - // avg latency in ms
+assertTrue(performance.contains("2"))
+0.766 - // max latency in ms
+assertTrue(performance.contains("ms"))
+0.750 - // operation count
+assertTrue(performance.contains("0.04"))
+0.699 - // throughput (example value)
+assertTrue(performance.contains("2"))
+0.692 - // 99.9 percentile latency in ms
+assertTrue(performance.contains("2"))
+0.667 - // expected latency avg in micros
+assertTrue(performance.contains("2500"))
+0.661 - // avg latency is a positive number
+assertTrue(performance.contains("2000"))
+0.658 - assertFalse(performance.isEmpty())
+0.654 - // ensure it's not too short
+assertTrue(performance.startsWith("STR"))
+0.633 - // check format starts with STR
+assertTrue(performance.contains("LATENCY_PERCENTILE"))
+0.548 - ```java
+assertNotNull(performance)
+0.542 - // contains at least one digit
+assertTrue(performance.split(" ").length > 5)
+0.536 - // check latency unit position
+assertTrue(performance.matches(".*\\d{1,}.*"))
+0.462 - // check if percentile is included
+assertTrue(performance.indexOf("2") > performance.indexOf("0"))
+0.451 - // throughput is before avg latency
+assertTrue(performance.indexOf("2") < performance.indexOf("300"))
+0.444 - // avg latency is before 99.9 percentile
+assertTrue(performance.indexOf("2") < performance.indexOf("2"))
+0.441 - // check for STR in case of empty stats
+assertTrue(performance.indexOf("300") < performance.indexOf("800"))
+0.441 - // operation count is before latency
+assertTrue(performance.indexOf("100") < performance.indexOf("300"))
+0.441 - // 99.9 percentile is before max latency
+assertTrue(performance.indexOf("ms") < performance.indexOf("2"))
+0.282 - // expected max latency in micros
+```

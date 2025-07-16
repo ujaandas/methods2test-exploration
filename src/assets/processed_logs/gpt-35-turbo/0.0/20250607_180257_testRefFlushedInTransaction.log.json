@@ -1,0 +1,22 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testRefFlushedInTransaction ( ) {\ndatabase . begin ( ) ;\nOElement someTx = database . newElement ( \"STR\" ) ;\nsomeTx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( someTx ) ;\nOElement oneMore = database . newElement ( \"STR\" ) ;\noneMore . setProperty ( \"STR\" , \"STR\" ) ;\noneMore . setProperty ( \"STR\" , someTx ) ;\nOResultSet result = database . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(2, result.stream().count());\nassertTrue(result.stream().anyMatch(e -> e.getProperty(\"STR\").equals(\"STR\")));\nassertTrue(result.stream().anyMatch(e -> e.getProperty(\"STR\").equals(someTx)));\nassertFalse(result.stream().anyMatch(e -> e.getProperty(\"STR\").equals(\"OTHER\")));\nassertEquals(2, result.stream().filter(e -> e.getProperty(\"STR\").equals(\"STR\")).count());\nassertEquals(2, result.stream().filter(e -> e.getProperty(\"STR\").equals(someTx)).count());\nassertTrue(result.stream().allMatch(e -> e.getProperty(\"STR\").equals(\"STR\") || e.getProperty(\"STR\").equals(someTx)));\nassertFalse(result.stream().allMatch(e -> e.getProperty(\"STR\").equals(\"OTHER\")));\nassertEquals(2, result.stream().map(e -> e.getProperty(\"STR\")).distinct().count());\nassertTrue(result.stream().noneMatch(e -> e.getProperty(\"STR\").equals(\"OTHER\")));\nassertEquals(2, result.stream().map(e -> e.getProperty(\"STR\")).filter(Objects::nonNull).count());\nassertTrue(result.stream().anyMatch(e -> e.getProperty(\"STR\").equals(\"STR\") && e.getProperty(\"STR\").equals(someTx)));\nassertFalse(result.stream().allMatch(e -> e.getProperty(\"STR\").equals(\"STR\") && e.getProperty(\"STR\").equals(someTx)));\nassertEquals(2, result.stream().map(e -> e.getProperty(\"STR\")).filter(Objects::nonNull).distinct().count());\nassertTrue(result.stream().noneMatch(e -> e.getProperty(\"STR\").equals(\"OTHER\") && e.getProperty(\"STR\").equals(someTx)));\n====================\n\n",
+    "scores": [
+        0.835,
+        0.644,
+        0.613,
+        0.608,
+        0.576,
+        0.547,
+        0.547,
+        0.531,
+        0.526,
+        0.522,
+        0.513,
+        0.434,
+        0.411,
+        0.411,
+        0.403
+    ],
+    "ground_truth": "assertEquals(1,result.stream().count());"
+}

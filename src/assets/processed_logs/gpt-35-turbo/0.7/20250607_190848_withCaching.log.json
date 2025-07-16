@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage AlejandroRivera.embedded-rabbitmq;\n\npublic class ExtractorFactory {\npublic Extractor getNewInstance ( ) {\nExtractor extractor = new BasicExtractor ( config ) ;\nif ( config . shouldCachedDownload ( ) ) {\nextractor = new CachedExtractor ( extractor , config ) ;\n} return extractor ;\n}\n}\n\npackage AlejandroRivera.embedded-rabbitmq;\n\npublic class ExtractorFactoryTest {\n@Test\npublic void withCaching ( ) throws Exception {\nbuilder . useCachedDownload ( true ) ;\nExtractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(true, extractor instanceof CachedExtractor);\nassertEquals(builder.build().shouldCachedDownload(), true);\nassertNotNull(extractor);\nassertNotEquals(extractor, null);\nassertNotNull(extractor.getConfig());\nassertEquals(extractor.getConfig().shouldCachedDownload(), true);\nassertEquals(extractor.getClass(), Extractor.class);\nassertEquals(extractor.getClass(), CachedExtractor.class);\nassertNotEquals(extractor.getClass(), BasicExtractor.class);\nassertTrue(extractor instanceof Extractor);\nassertTrue(extractor instanceof CachedExtractor);\nassertTrue(extractor.getConfig().shouldCachedDownload());\nassertFalse(extractor instanceof BasicExtractor);\nassertNotNull(extractor.getConfig());\nassertNotNull(extractor.getConfig().getDownloadUrl());\nassertEquals(extractor.getConfig().getDownloadUrl(), \"https://example.com\");\nassertNotNull(extractor.getConfig().getUsername());\nassertEquals(extractor.getConfig().getUsername(), \"username\");\nassertNotNull(extractor.getConfig().getPassword());\nassertEquals(extractor.getConfig().getPassword(), \"password\");\nassertTrue(extractor.getConfig().isSecure());\n====================\n\n",
+    "scores": [
+        0.847,
+        0.786,
+        0.783,
+        0.685,
+        0.661,
+        0.623,
+        0.609,
+        0.608,
+        0.576,
+        0.574,
+        0.539,
+        0.536,
+        0.51,
+        0.51,
+        0.508,
+        0.5,
+        0.5,
+        0.492,
+        0.419,
+        0.409,
+        0.353
+    ],
+    "ground_truth": "assertTrue(extractor.getClass().equals(CachedExtractor.class));"
+}

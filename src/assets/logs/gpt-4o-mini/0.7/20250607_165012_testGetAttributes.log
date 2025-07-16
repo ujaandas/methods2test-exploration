@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtil {
+    public static Map < String , Method > getAttributes ( Object mbeanLocation ) { 
+    Map < String , Method > result = new TreeMap < String , Method > ( ) ; 
+    Method [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ; 
+    for ( Method oneMethod : methods ) { 
+    MBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ; 
+    if ( attribute != null ) { 
+    result . put ( attribute . name ( ) , oneMethod ) ; 
+    } } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtilTest {
+    @Test
+     public void testGetAttributes ( ) throws Exception {
+         Map < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(atts);
+assertFalse(atts.isEmpty());
+assertTrue(atts.containsKey("attribute1"));
+assertTrue(atts.containsKey("attribute2"));
+assertEquals(Method.class, atts.get("attribute1").getClass());
+assertEquals("expectedReturnType1", atts.get("attribute1").getReturnType().getName());
+assertEquals("expectedReturnType2", atts.get("attribute2").getReturnType().getName());
+assertTrue(atts.get("attribute1").isAnnotationPresent(MBeanAttribute.class));
+assertTrue(atts.get("attribute2").isAnnotationPresent(MBeanAttribute.class));
+assertEquals("attribute1", atts.get("attribute1").getAnnotation(MBeanAttribute.class).name());
+assertEquals("attribute2", atts.get("attribute2").getAnnotation(MBeanAttribute.class).name());
+assertEquals(0, atts.get("attribute1").getParameterCount());
+assertEquals(0, atts.get("attribute2").getParameterCount());
+assertTrue(atts.get("attribute1").getModifiers() & Modifier.PUBLIC != 0);
+assertTrue(atts.get("attribute2").getModifiers() & Modifier.PUBLIC != 0);
+assertNotEquals(atts.get("attribute1"), atts.get("attribute2"));
+assertEquals(2, atts.size());
+assertNotNull(atts.get("attribute1").getDeclaringClass());
+assertNotNull(atts.get("attribute2").getDeclaringClass());
+assertTrue(atts.get("attribute1").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()));
+assertTrue(atts.get("attribute2").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,atts.size()); ===
+1.000 - assertEquals(2, atts.size())
+0.704 - assertFalse(atts.isEmpty())
+0.565 - assertEquals(0, atts.get("attribute1").getParameterCount())
+0.565 - assertEquals(0, atts.get("attribute2").getParameterCount())
+0.529 - assertEquals(Method.class, atts.get("attribute1").getClass())
+0.522 - assertTrue(atts.containsKey("attribute1"))
+0.522 - assertTrue(atts.containsKey("attribute2"))
+0.519 - ```java
+assertNotNull(atts)
+0.517 - assertNotEquals(atts.get("attribute1"), atts.get("attribute2"))
+0.450 - assertEquals("expectedReturnType2", atts.get("attribute2").getReturnType().getName())
+0.432 - assertEquals("expectedReturnType1", atts.get("attribute1").getReturnType().getName())
+0.429 - assertNotNull(atts.get("attribute1").getDeclaringClass())
+0.429 - assertNotNull(atts.get("attribute2").getDeclaringClass())
+0.420 - assertEquals("attribute2", atts.get("attribute2").getAnnotation(MBeanAttribute.class).name())
+0.403 - assertEquals("attribute1", atts.get("attribute1").getAnnotation(MBeanAttribute.class).name())
+0.369 - assertTrue(atts.get("attribute1").isAnnotationPresent(MBeanAttribute.class))
+0.369 - assertTrue(atts.get("attribute2").isAnnotationPresent(MBeanAttribute.class))
+0.358 - assertTrue(atts.get("attribute1").getModifiers() & Modifier.PUBLIC != 0)
+0.358 - assertTrue(atts.get("attribute2").getModifiers() & Modifier.PUBLIC != 0)
+0.302 - assertTrue(atts.get("attribute1").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()))
+0.302 - assertTrue(atts.get("attribute2").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()))
+0.000 - ```

@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeys {
+    @Override
+     public Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) { 
+     if ( ioResult instanceof Map ) { 
+     return ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ; 
+     } if ( ioResult instanceof ODocument ) { 
+     return Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ; 
+     } if ( ioResult instanceof OResult ) { 
+     OResult res = ( OResult ) ioResult ; 
+     return res . getPropertyNames ( ) ; 
+     } if ( ioResult instanceof Collection ) { 
+     List result = new ArrayList ( ) ; 
+     for ( Object o : ( Collection ) ioResult ) { 
+     result . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ; 
+     } return result ; 
+     } return null ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeysTest {
+    @Test
+     public void testWithOResult ( ) {
+         OResultInternal resultInternal = new OResultInternal ( ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         Object result = function . execute ( null , null , null , resultInternal , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(2, ((List) result).size());
+assertTrue(((List) result).contains("STR"));
+assertFalse(((List) result).contains("INT"));
+assertTrue(((List) result).contains("DECIMAL"));
+assertFalse(((List) result).contains("BOOL"));
+assertFalse(((List) result).contains("DATE"));
+assertFalse(((List) result).contains("LINK"));
+assertFalse(((List) result).contains("EMBEDDED"));
+assertFalse(((List) result).contains("EMBEDDEDLIST"));
+assertFalse(((List) result).contains("EMBEDDEDSET"));
+assertFalse(((List) result).contains("EMBEDDEDMAP"));
+assertFalse(((List) result).contains("LINKLIST"));
+assertFalse(((List) result).contains("LINKSET"));
+assertFalse(((List) result).contains("LINKMAP"));
+assertFalse(((List) result).contains("BYTE"));
+assertFalse(((List) result).contains("SHORT"));
+assertFalse(((List) result).contains("LONG"));
+assertFalse(((List) result).contains("FLOAT"));
+assertFalse(((List) result).contains("DOUBLE"));
+assertFalse(((List) result).contains("BINARY"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newLinkedHashSet(Arrays.asList("STR","STR")),result); ===
+0.510 - assertEquals(2, ((List) result).size())
+0.426 - assertFalse(((List) result).contains("INT"))
+0.422 - assertFalse(((List) result).contains("BOOL"))
+0.422 - assertFalse(((List) result).contains("DATE"))
+0.422 - assertFalse(((List) result).contains("LINK"))
+0.422 - assertFalse(((List) result).contains("BYTE"))
+0.422 - assertFalse(((List) result).contains("LONG"))
+0.418 - assertFalse(((List) result).contains("SHORT"))
+0.418 - assertFalse(((List) result).contains("FLOAT"))
+0.414 - assertFalse(((List) result).contains("DOUBLE"))
+0.414 - assertFalse(((List) result).contains("BINARY"))
+0.411 - assertFalse(((List) result).contains("LINKSET"))
+0.411 - assertFalse(((List) result).contains("LINKMAP"))
+0.407 - assertFalse(((List) result).contains("EMBEDDED"))
+0.407 - assertFalse(((List) result).contains("LINKLIST"))
+0.397 - assertFalse(((List) result).contains("EMBEDDEDSET"))
+0.397 - assertFalse(((List) result).contains("EMBEDDEDMAP"))
+0.393 - assertFalse(((List) result).contains("EMBEDDEDLIST"))
+0.393 - assertTrue(((List) result).contains("STR"))
+0.378 - assertTrue(((List) result).contains("DECIMAL"))

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtil {\npublic static Map < String , Method > getAttributes ( Object mbeanLocation ) {\nMap < String , Method > result = new TreeMap < String , Method > ( ) ;\nMethod [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ;\nfor ( Method oneMethod : methods ) {\nMBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ;\nif ( attribute != null ) {\nresult . put ( attribute . name ( ) , oneMethod ) ;\n} } return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtilTest {\n@Test\npublic void testGetAttributes ( ) throws Exception {\nMap < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(atts);\nassertEquals(3, atts.size());\nassertTrue(atts.containsKey(\"attributeOne\"));\nassertTrue(atts.containsKey(\"attributeTwo\"));\nassertTrue(atts.containsKey(\"attributeThree\"));\nassertEquals(\"getAttributeOne\", atts.get(\"attributeOne\").getName());\nassertEquals(\"getAttributeTwo\", atts.get(\"attributeTwo\").getName());\nassertEquals(\"getAttributeThree\", atts.get(\"attributeThree\").getName());\nassertEquals(1, atts.get(\"attributeOne\").getParameterCount());\nassertEquals(0, atts.get(\"attributeTwo\").getParameterCount());\nassertEquals(0, atts.get(\"attributeThree\").getParameterCount());\nassertEquals(String.class, atts.get(\"attributeOne\").getReturnType());\nassertEquals(int.class, atts.get(\"attributeTwo\").getReturnType());\nassertEquals(boolean.class, atts.get(\"attributeThree\").getReturnType());\nassertTrue(atts.get(\"attributeOne\").isAnnotationPresent(MBeanAttribute.class));\nassertTrue(atts.get(\"attributeTwo\").isAnnotationPresent(MBeanAttribute.class));\nassertTrue(atts.get(\"attributeThree\").isAnnotationPresent(MBeanAttribute.class));\nassertEquals(\"Attribute One Description\", atts.get(\"attributeOne\").getAnnotation(MBeanAttribute.class).description());\nassertEquals(\"Attribute Two Description\", atts.get(\"attributeTwo\").getAnnotation(MBeanAttribute.class).description());\nassertEquals(\"Attribute Three Description\", atts.get(\"attributeThree\").getAnnotation(MBeanAttribute.class).description());\nassertNotEquals(atts.get(\"attributeOne\"), atts.get(\"attributeTwo\"));\nassertNotEquals(atts.get(\"attributeTwo\"), atts.get(\"attributeThree\"));\n```\n====================\n\n",
+    "scores": [
+        0.963,
+        0.552,
+        0.552,
+        0.539,
+        0.527,
+        0.519,
+        0.516,
+        0.516,
+        0.511,
+        0.507,
+        0.507,
+        0.495,
+        0.495,
+        0.495,
+        0.493,
+        0.484,
+        0.362,
+        0.362,
+        0.355,
+        0.34,
+        0.34,
+        0.331,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,atts.size());"
+}

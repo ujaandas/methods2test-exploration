@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjector {
+    public void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) { 
+    this . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , "STR" , objectName ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjectorTest {
+    @Test
+     public void testCopyOutWithLongForIntFields ( ) throws Exception {
+         this . attributeList . clear ( ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 17L ) ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 22L ) ) ; 
+         this . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(17L, target.getStr());
+Assert.assertEquals(22L, target.getStr());
+Assert.assertEquals(0L, target.getLongField());
+Assert.assertEquals(0, target.getIntField());
+Assert.assertEquals("17", target.getStr());
+Assert.assertEquals("22", target.getStr());
+Assert.assertNotNull(target.getStr());
+Assert.assertTrue(target.getStr().isEmpty());
+Assert.assertNotEquals(0L, target.getLongField());
+Assert.assertNotEquals(0, target.getIntField());
+Assert.assertNotEquals("17", target.getStr());
+Assert.assertNotEquals("22", target.getStr());
+Assert.assertTrue(!target.getStr().isEmpty());
+Assert.assertFalse(target.getStr().isEmpty());
+Assert.assertTrue(target.getLongField() > 0);
+Assert.assertTrue(target.getIntField() > 0);
+Assert.assertNotNull(target.getLongField());
+Assert.assertNotNull(target.getIntField());
+Assert.assertNotEquals(null, target.getLongField());
+Assert.assertNotEquals(null, target.getIntField());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(17,this.target.intValue); ===
+0.714 - Assert.assertEquals(17L, target.getStr())
+0.704 - Assert.assertEquals("17", target.getStr())
+0.685 - Assert.assertEquals(0, target.getIntField())
+0.676 - Assert.assertNotEquals("17", target.getStr())
+0.658 - Assert.assertNotEquals(0, target.getIntField())
+0.657 - Assert.assertEquals(22L, target.getStr())
+0.648 - Assert.assertEquals("22", target.getStr())
+0.640 - Assert.assertEquals(0L, target.getLongField())
+0.633 - Assert.assertNotEquals(null, target.getIntField())
+0.622 - Assert.assertNotEquals("22", target.getStr())
+0.615 - Assert.assertNotEquals(0L, target.getLongField())
+0.600 - Assert.assertNotEquals(null, target.getLongField())
+0.556 - Assert.assertNotNull(target.getIntField())
+0.537 - Assert.assertNotNull(target.getStr())
+0.535 - Assert.assertTrue(target.getIntField() > 0)
+0.533 - Assert.assertFalse(target.getStr().isEmpty())
+0.521 - Assert.assertNotNull(target.getLongField())
+0.500 - Assert.assertTrue(target.getLongField() > 0)
+0.486 - Assert.assertTrue(target.getStr().isEmpty())
+0.480 - Assert.assertTrue(!target.getStr().isEmpty())

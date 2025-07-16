@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolder {
+    public static long getAndClear ( Channel channel , Integer key ) { 
+    Map < Integer , Long > map = getArriveTimeMap ( channel ) ; 
+    Long result = map . remove ( key ) ; 
+    if ( result == null ) { 
+    return - 1 ; 
+    } return result ; 
+    }
+}
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolderTest {
+    @Test
+     public void testMultiThread ( ) throws InterruptedException {
+         final EmbeddedChannel channel = new EmbeddedChannel ( ) ; 
+         final CountDownLatch countDownLatch = new CountDownLatch ( 1 ) ; 
+         long start = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long end = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long time = ThreadLocalArriveTimeHolder . getAndClear ( channel , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(1, time);
+assertTrue(time >= start && time <= end);
+assertNotEquals(-1, time);
+ThreadLocalArriveTimeHolder.arrive(channel, 2);
+ThreadLocalArriveTimeHolder.arrive(channel, 3);
+ThreadLocalArriveTimeHolder.arrive(channel, 4);
+ThreadLocalArriveTimeHolder.arrive(channel, 5);
+ThreadLocalArriveTimeHolder.arrive(channel, 6);
+ThreadLocalArriveTimeHolder.arrive(channel, 7);
+ThreadLocalArriveTimeHolder.arrive(channel, 8);
+ThreadLocalArriveTimeHolder.arrive(channel, 9);
+ThreadLocalArriveTimeHolder.arrive(channel, 10);
+ThreadLocalArriveTimeHolder.arrive(channel, 11);
+ThreadLocalArriveTimeHolder.arrive(channel, 12);
+ThreadLocalArriveTimeHolder.arrive(channel, 13);
+ThreadLocalArriveTimeHolder.arrive(channel, 14);
+ThreadLocalArriveTimeHolder.arrive(channel, 15);
+ThreadLocalArriveTimeHolder.arrive(channel, 16);
+ThreadLocalArriveTimeHolder.arrive(channel, 17);
+ThreadLocalArriveTimeHolder.arrive(channel, 18);
+ThreadLocalArriveTimeHolder.arrive(channel, 19);
+ThreadLocalArriveTimeHolder.arrive(channel, 20);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(time>=start); ===
+0.807 - assertTrue(time >= start && time <= end)
+0.553 - assertNotEquals(-1, time)
+0.464 - Assertions:
+
+assertEquals(1, time)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 2)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 3)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 4)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 5)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 6)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 7)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 8)
+0.265 - ThreadLocalArriveTimeHolder.arrive(channel, 9)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 10)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 11)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 12)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 13)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 14)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 15)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 16)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 17)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 18)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 19)
+0.261 - ThreadLocalArriveTimeHolder.arrive(channel, 20)

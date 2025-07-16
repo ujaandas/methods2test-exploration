@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupport {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupportTest {\n@Test\npublic void testQueryEmbeddedMap ( ) {\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . setProperty ( \"STR\" , \"STR\" ) ;\nODocument emb = new ODocument ( ) ;\nemb . setProperty ( \"STR\" , \"STR\" ) ;\nMap < String , ODocument > map = new HashMap < > ( ) ;\nmap . put ( \"STR\" , emb ) ;\ndoc . setProperty ( \"STR\" , map , OType . EMBEDDEDMAP ) ;\nsession . save ( doc ) ;\nOResultSet res = session . query ( \"STR\" ) ;\nOResult item = res . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(item);\nassertTrue(item instanceof ODocument);\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item.getProperty(\"STR\") instanceof Map);\nMap<String, ODocument> retrievedMap = (Map<String, ODocument>) item.getProperty(\"STR\");\nassertEquals(1, retrievedMap.size());\nassertTrue(retrievedMap.containsKey(\"STR\"));\nassertNotNull(retrievedMap.get(\"STR\"));\nassertEquals(\"STR\", retrievedMap.get(\"STR\").getProperty(\"STR\"));\nassertTrue(retrievedMap.get(\"STR\") instanceof ODocument);\nassertEquals(\"STR\", retrievedMap.get(\"STR\").getProperty(\"STR\"));\nassertEquals(\"STR\", doc.getProperty(\"STR\"));\nassertEquals(1, doc.getProperty(\"STR\").size());\nassertTrue(doc.getProperty(\"STR\") instanceof Map);\nassertTrue(doc.getProperty(\"STR\").containsKey(\"STR\"));\nassertNotNull(doc.getProperty(\"STR\").get(\"STR\"));\nassertEquals(\"STR\", ((ODocument) doc.getProperty(\"STR\").get(\"STR\")).getProperty(\"STR\"));\nassertEquals(\"STR\", emb.getProperty(\"STR\"));\nassertEquals(1, emb.getProperty(\"STR\").size());\nassertTrue(emb.getProperty(\"STR\") instanceof String);\nassertEquals(\"STR\", emb.getProperty(\"STR\"));\nassertNotNull(session);\nassertTrue(res.hasNext());\n```\n====================\n\n",
+    "scores": [
+        0.815,
+        0.791,
+        0.775,
+        0.775,
+        0.747,
+        0.744,
+        0.737,
+        0.682,
+        0.675,
+        0.651,
+        0.635,
+        0.593,
+        0.585,
+        0.567,
+        0.56,
+        0.56,
+        0.543,
+        0.492,
+        0.488,
+        0.466,
+        0.457,
+        0.411,
+        0.349,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(item.getProperty(\"STR\"));"
+}

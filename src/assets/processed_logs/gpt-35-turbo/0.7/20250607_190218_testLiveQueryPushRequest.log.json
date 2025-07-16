@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class OLiveQueryMessagess {\npublic int getMonitorId ( ) {\nreturn monitorId ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class OLiveQueryMessagesTests {\n@Test\npublic void testLiveQueryPushRequest ( ) throws IOException {\nList < OLiveQueryResult > events = new ArrayList < > ( ) ;\nOResultInternal res = new OResultInternal ( ) ;\nres . setProperty ( \"STR\" , \"STR\" ) ;\nres . setProperty ( \"STR\" , 10 ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , res , null ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ;\nevents . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ;\nOLiveQueryPushRequest pushRequest = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ;\nMockChannel channel = new MockChannel ( ) ;\npushRequest . write ( channel ) ;\nchannel . close ( ) ;\nOLiveQueryPushRequest pushRequestRead = new OLiveQueryPushRequest ( ) ;\npushRequestRead . read ( channel ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(10, pushRequestRead.getMonitorId());\nAssert.assertEquals(OLiveQueryPushRequest.END, pushRequestRead.getState());\nAssert.assertEquals(3, pushRequestRead.getEvents().size());\nAssert.assertEquals(OLiveQueryResult.CREATE_EVENT, pushRequestRead.getEvents().get(0).getType());\nAssert.assertEquals(\"STR\", pushRequestRead.getEvents().get(0).getBefore().getProperty(\"STR\"));\nAssert.assertEquals(10, pushRequestRead.getEvents().get(0).getBefore().getProperty(\"NUM\"));\nAssert.assertNull(pushRequestRead.getEvents().get(0).getAfter());\nAssert.assertEquals(OLiveQueryResult.UPDATE_EVENT, pushRequestRead.getEvents().get(1).getType());\nAssert.assertNotNull(pushRequestRead.getEvents().get(1).getBefore());\nAssert.assertNotNull(pushRequestRead.getEvents().get(1).getAfter());\nAssert.assertEquals(OLiveQueryResult.DELETE_EVENT, pushRequestRead.getEvents().get(2).getType());\nAssert.assertNotNull(pushRequestRead.getEvents().get(2).getBefore());\nAssert.assertNull(pushRequestRead.getEvents().get(2).getAfter());\nAssert.assertTrue(channel.isClosed());\nAssert.assertEquals(10, channel.getWrittenBytes().length);\nAssert.assertArrayEquals(pushRequest.toStream(), channel.getWrittenBytes());\nAssert.assertEquals(10, pushRequestRead.getMonitorId());\nAssert.assertEquals(OLiveQueryPushRequest.END, pushRequestRead.getState());\nAssert.assertEquals(3, pushRequestRead.getEvents().size());\n====================\n\n",
+    "scores": [
+        0.936,
+        0.936,
+        0.763,
+        0.763,
+        0.654,
+        0.648,
+        0.648,
+        0.637,
+        0.637,
+        0.636,
+        0.635,
+        0.614,
+        0.605,
+        0.591,
+        0.563,
+        0.563,
+        0.548,
+        0.5,
+        0.364
+    ],
+    "ground_truth": "assertEquals(pushRequestRead.getMonitorId(),10);"
+}

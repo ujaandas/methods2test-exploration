@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testIndexedEdgeArrows ( ) {\nStringBuilder query = new StringBuilder ( ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nOResultSet result = db . query ( query . toString ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(3, result.size());\nassertTrue(result.next().getProperty(\"property1\").equals(\"expectedValue1\"));\nassertTrue(result.next().getProperty(\"property2\").equals(\"expectedValue2\"));\nassertTrue(result.next().getProperty(\"property3\").equals(\"expectedValue3\"));\nassertEquals(\"expectedType\", result.next().getType());\nassertFalse(result.hasNext());\nassertTrue(result.getPropertyNames().contains(\"property1\"));\nassertTrue(result.getPropertyNames().contains(\"property2\"));\nassertTrue(result.getPropertyNames().contains(\"property3\"));\nassertEquals(\"expectedValue1\", result.next().getProperty(\"property1\"));\nassertNotEquals(\"unexpectedValue\", result.next().getProperty(\"property1\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"property1\") != null));\nassertFalse(result.isEmpty());\nassertEquals(5, result.getProperty(\"count\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"property2\").equals(\"specificValue\")));\nassertNotNull(result.first());\nassertEquals(\"expectedValue\", result.first().getProperty(\"property1\"));\nassertTrue(result.first().getProperty(\"property4\").equals(\"additionalExpectedValue\"));\nassertEquals(2, result.stream().filter(r -> r.getProperty(\"property3\").equals(\"filterValue\")).count());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.877,
+        0.702,
+        0.702,
+        0.702,
+        0.563,
+        0.529,
+        0.529,
+        0.529,
+        0.526,
+        0.525,
+        0.466,
+        0.466,
+        0.466,
+        0.436,
+        0.433,
+        0.416,
+        0.412,
+        0.407,
+        0.37,
+        0.346,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

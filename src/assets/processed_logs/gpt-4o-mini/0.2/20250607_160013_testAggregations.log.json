@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testAggregations ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(expectedSize, results.size());\nassertTrue(results.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedValue, results.get(0).field(\"fieldName\"));\nassertEquals(expectedType, results.get(0).field(\"fieldName\").getClass());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"numericField\") instanceof Number));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"stringField\") instanceof String));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"booleanField\") instanceof Boolean));\nassertEquals(expectedAggregationValue, results.stream().mapToDouble(doc -> doc.field(\"numericField\")).sum(), delta);\nassertEquals(expectedCount, results.stream().filter(doc -> doc.field(\"filterField\").equals(filterValue)).count());\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"uniqueField\").equals(uniqueValue)));\nassertFalse(results.stream().anyMatch(doc -> doc.field(\"excludedField\").equals(excludedValue)));\nassertEquals(expectedMaxValue, results.stream().mapToDouble(doc -> doc.field(\"numericField\")).max().orElse(0), delta);\nassertEquals(expectedMinValue, results.stream().mapToDouble(doc -> doc.field(\"numericField\")).min().orElse(0), delta);\nassertTrue(results.stream().allMatch(doc -> doc.field(\"dateField\") instanceof Date));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"listField\") instanceof List));\nassertEquals(expectedListSize, results.get(0).field(\"listField\").size());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"mapField\") instanceof Map));\nassertEquals(expectedMapSize, results.get(0).field(\"mapField\").size());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"nestedField\").containsKey(\"key\")));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.593,
+        0.586,
+        0.574,
+        0.567,
+        0.515,
+        0.404,
+        0.4,
+        0.389,
+        0.383,
+        0.382,
+        0.382,
+        0.378,
+        0.378,
+        0.374,
+        0.368,
+        0.365,
+        0.362,
+        0.359,
+        0.356,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,results.size());"
+}

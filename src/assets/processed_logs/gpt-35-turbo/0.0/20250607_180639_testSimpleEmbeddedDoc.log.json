@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerialization {\npublic int fields ( ) {\ncheckForLoading ( ) ;\ncheckForFields ( ) ;\nreturn _fieldSize ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerializationTest {\n@Test\npublic void testSimpleEmbeddedDoc ( ) {\nODatabaseRecordThreadLocal . instance ( ) . remove ( ) ;\nODocument document = new ODocument ( ) ;\nODocument embedded = new ODocument ( ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\ndocument . field ( \"STR\" , embedded , OType . EMBEDDED ) ;\nbyte [ ] res = serializer . toStream ( document , false ) ;\nODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] {\n} ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(\"STR\", extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertNotNull(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).containsField(\"STR\"));\nassertEquals(2, extr.field(\"STR\", OType.EMBEDDED).fieldNames().size());\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).fieldNames().contains(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\") instanceof String);\nassertEquals(\"STR\", extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertNotNull(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).containsField(\"STR\"));\nassertEquals(2, extr.field(\"STR\", OType.EMBEDDED).fieldNames().size());\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).fieldNames().contains(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\") instanceof String);\nassertEquals(\"STR\", extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertNotNull(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).containsField(\"STR\"));\nassertEquals(2, extr.field(\"STR\", OType.EMBEDDED).fieldNames().size());\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).fieldNames().contains(\"STR\"));\nassertTrue(extr.field(\"STR\", OType.EMBEDDED).field(\"STR\") instanceof String);\n====================\n\n",
+    "scores": [
+        0.496,
+        0.496,
+        0.496,
+        0.491,
+        0.491,
+        0.439,
+        0.419,
+        0.419,
+        0.419,
+        0.4,
+        0.4,
+        0.4,
+        0.373,
+        0.373,
+        0.373,
+        0.339,
+        0.339,
+        0.339
+    ],
+    "ground_truth": "assertEquals(document.fields(),extr.fields());"
+}

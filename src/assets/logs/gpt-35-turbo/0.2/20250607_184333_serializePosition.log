@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OVarIntSerializer {
+    public static long readAsLong ( final BytesContainer bytes ) { 
+    return readSignedVarLong ( bytes ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OVarIntSerializerTest {
+    @Test
+     public void serializePosition ( ) {
+         BytesContainer bytes = new BytesContainer ( ) ; 
+         bytes . offset = OVarIntSerializer . write ( bytes , 16238 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(16238, OVarIntSerializer.readAsLong(bytes));
+assertEquals(1, bytes.offset);
+bytes.offset = 0;
+assertEquals(0, OVarIntSerializer.readAsLong(bytes));
+assertEquals(1, bytes.offset);
+bytes.offset = 0;
+assertEquals(-16238, OVarIntSerializer.readAsLong(bytes));
+assertEquals(1, bytes.offset);
+bytes.offset = 0;
+assertEquals(Long.MAX_VALUE, OVarIntSerializer.readAsLong(bytes));
+assertEquals(9, bytes.offset);
+bytes.offset = 0;
+assertEquals(Long.MIN_VALUE, OVarIntSerializer.readAsLong(bytes));
+assertEquals(9, bytes.offset);
+bytes.offset = 0;
+assertEquals(0, OVarIntSerializer.readAsLong(bytes));
+assertEquals(1, bytes.offset);
+bytes.offset = 0;
+assertEquals(1000000000, OVarIntSerializer.readAsLong(bytes));
+assertEquals(5, bytes.offset);
+bytes.offset = 0;
+assertEquals(-1000000000, OVarIntSerializer.readAsLong(bytes));
+assertEquals(5, bytes.offset);
+bytes.offset = 0;
+assertEquals(123456789, OVarIntSerializer.readAsLong(bytes));
+assertEquals(5, bytes.offset);
+bytes.offset = 0;
+assertEquals(-123456789, OVarIntSerializer.readAsLong(bytes));
+assertEquals(5, bytes.offset);
+bytes.offset = 0;
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(OVarIntSerializer.readAsLong(bytes),16238l); ===
+0.916 - assertEquals(0, OVarIntSerializer.readAsLong(bytes))
+0.916 - assertEquals(0, OVarIntSerializer.readAsLong(bytes))
+0.883 - assertEquals(16238, OVarIntSerializer.readAsLong(bytes))
+0.875 - assertEquals(-16238, OVarIntSerializer.readAsLong(bytes))
+0.852 - assertEquals(123456789, OVarIntSerializer.readAsLong(bytes))
+0.845 - assertEquals(1000000000, OVarIntSerializer.readAsLong(bytes))
+0.845 - assertEquals(-123456789, OVarIntSerializer.readAsLong(bytes))
+0.838 - assertEquals(-1000000000, OVarIntSerializer.readAsLong(bytes))
+0.817 - assertEquals(Long.MAX_VALUE, OVarIntSerializer.readAsLong(bytes))
+0.817 - assertEquals(Long.MIN_VALUE, OVarIntSerializer.readAsLong(bytes))
+0.452 - assertEquals(1, bytes.offset)
+0.452 - assertEquals(1, bytes.offset)
+0.452 - assertEquals(1, bytes.offset)
+0.452 - assertEquals(9, bytes.offset)
+0.452 - assertEquals(9, bytes.offset)
+0.452 - assertEquals(1, bytes.offset)
+0.452 - assertEquals(5, bytes.offset)
+0.452 - assertEquals(5, bytes.offset)
+0.452 - assertEquals(5, bytes.offset)
+0.452 - assertEquals(5, bytes.offset)
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0
+0.143 - bytes.offset = 0

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    @Override
+     public void fromDocument ( ODocument document ) { 
+     document . setLazyLoad ( false ) ; 
+     final String [ ] fieldNames = document . fieldNames ( ) ; 
+     final SortedMap < Integer , Object > keyMap = new TreeMap < Integer , Object > ( ) ; 
+     for ( String fieldName : fieldNames ) { 
+     if ( fieldName . startsWith ( "STR" ) ) { 
+     final String keyIndex = fieldName . substring ( 3 ) ; 
+     keyMap . put ( Integer . valueOf ( keyIndex ) , document . field ( fieldName ) ) ; 
+     } } keys . clear ( ) ; 
+     for ( Object value : keyMap . values ( ) ) keys . add ( value ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testDocumentSerializationCompositeKeyNull ( ) {
+         final OCompositeKey compositeKeyOne = new OCompositeKey ( ) ; 
+         compositeKeyOne . addKey ( 1 ) ; 
+         compositeKeyOne . addKey ( null ) ; 
+         compositeKeyOne . addKey ( 2 ) ; 
+         ODocument document = compositeKeyOne . toDocument ( ) ; 
+         final OCompositeKey compositeKeyTwo = new OCompositeKey ( ) ; 
+         compositeKeyTwo . fromDocument ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(1, compositeKeyTwo.getKeys().get(0));
+Assert.assertNull(compositeKeyTwo.getKeys().get(1));
+Assert.assertEquals(2, compositeKeyTwo.getKeys().get(2));
+Assert.assertEquals(3, compositeKeyTwo.getKeys().size());
+Assert.assertFalse(document.isLazyLoad());
+Assert.assertEquals(3, document.fieldNames().length);
+Assert.assertEquals(1, document.field("STR1"));
+Assert.assertNull(document.field("STR2"));
+Assert.assertEquals(2, document.field("STR3"));
+Assert.assertTrue(compositeKeyOne.equals(compositeKeyTwo));
+Assert.assertEquals(compositeKeyOne.hashCode(), compositeKeyTwo.hashCode());
+Assert.assertEquals(compositeKeyOne.toString(), compositeKeyTwo.toString());
+Assert.assertNotNull(compositeKeyTwo.toDocument());
+Assert.assertTrue(compositeKeyTwo.toDocument() instanceof ODocument);
+Assert.assertNotNull(compositeKeyTwo.getKeys());
+Assert.assertTrue(compositeKeyTwo.getKeys() instanceof List);
+Assert.assertTrue(compositeKeyTwo.getKeys().contains(null));
+Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(compositeKeyOne.getKeys()));
+Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(Arrays.asList(1, null, 2)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(compositeKeyOne,compositeKeyTwo); ===
+0.804 - Assert.assertEquals(compositeKeyOne.hashCode(), compositeKeyTwo.hashCode())
+0.804 - Assert.assertEquals(compositeKeyOne.toString(), compositeKeyTwo.toString())
+0.645 - Assert.assertEquals(1, compositeKeyTwo.getKeys().get(0))
+0.645 - Assert.assertEquals(2, compositeKeyTwo.getKeys().get(2))
+0.645 - Assert.assertEquals(3, compositeKeyTwo.getKeys().size())
+0.588 - Assert.assertNotNull(compositeKeyTwo.getKeys())
+0.583 - Assert.assertTrue(compositeKeyOne.equals(compositeKeyTwo))
+0.568 - Assert.assertNotNull(compositeKeyTwo.toDocument())
+0.562 - Assert.assertNull(compositeKeyTwo.getKeys().get(1))
+0.500 - Assert.assertTrue(compositeKeyTwo.getKeys() instanceof List)
+0.496 - Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(compositeKeyOne.getKeys()))
+0.495 - Assert.assertTrue(compositeKeyTwo.getKeys().contains(null))
+0.462 - Assert.assertTrue(compositeKeyTwo.toDocument() instanceof ODocument)
+0.458 - Assert.assertEquals(1, document.field("STR1"))
+0.458 - Assert.assertEquals(2, document.field("STR3"))
+0.404 - Assert.assertEquals(3, document.fieldNames().length)
+0.403 - Assert.assertTrue(compositeKeyTwo.getKeys().containsAll(Arrays.asList(1, null, 2)))
+0.380 - Assert.assertNull(document.field("STR2"))
+0.329 - Assert.assertFalse(document.isLazyLoad())

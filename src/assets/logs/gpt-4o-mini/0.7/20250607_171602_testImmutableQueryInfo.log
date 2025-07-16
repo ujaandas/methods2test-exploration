@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryInfo {
+    public Object getTarget ( ) { 
+    return target ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryInfoTest {
+    @Test
+     public void testImmutableQueryInfo ( ) throws Exception {
+         Map < String , Method > setters = new HashMap < > ( ) ; 
+         setters . put ( "STR" , null ) ; 
+         setters . put ( "STR" , null ) ; 
+         Object target = new Object ( ) ; 
+         ObjectName oname = new ObjectName ( "STR" ) ; 
+         ObjectQueryInfo objectQueryInfo = new ObjectQueryInfo ( target , oname , setters ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(objectQueryInfo);
+assertEquals(target, objectQueryInfo.getTarget());
+assertTrue(setters.containsKey("STR"));
+assertNull(setters.get("STR"));
+assertEquals(1, setters.size());
+assertNotNull(oname);
+assertEquals("STR", oname.getName());
+assertTrue(objectQueryInfo instanceof ObjectQueryInfo);
+assertNotSame(new Object(), target);
+assertNotEquals("SomeOtherString", oname.getName());
+assertTrue(objectQueryInfo.getTarget() instanceof Object);
+assertEquals(Object.class, objectQueryInfo.getTarget().getClass());
+assertNull(objectQueryInfo.getTarget().getClass().getMethod("toString").invoke(objectQueryInfo.getTarget()));
+assertFalse(setters.isEmpty());
+assertTrue(setters.keySet().contains("STR"));
+assertTrue(setters.values().isEmpty());
+assertEquals("STR", setters.keySet().iterator().next());
+assertNotEquals(target.hashCode(), new Object().hashCode());
+assertSame(target, objectQueryInfo.getTarget());
+assertNotNull(objectQueryInfo.getClass().getDeclaredConstructors());
+assertEquals(1, objectQueryInfo.getClass().getDeclaredMethods().length);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertSame(target,objectQueryInfo.getTarget()); ===
+1.000 - assertSame(target, objectQueryInfo.getTarget())
+0.915 - assertEquals(target, objectQueryInfo.getTarget())
+0.713 - assertTrue(objectQueryInfo.getTarget() instanceof Object)
+0.703 - assertEquals(Object.class, objectQueryInfo.getTarget().getClass())
+0.603 - assertEquals(1, objectQueryInfo.getClass().getDeclaredMethods().length)
+0.584 - assertNotNull(objectQueryInfo.getClass().getDeclaredConstructors())
+0.551 - assertTrue(objectQueryInfo instanceof ObjectQueryInfo)
+0.548 - ```java
+assertNotNull(objectQueryInfo)
+0.532 - assertNull(objectQueryInfo.getTarget().getClass().getMethod("toString").invoke(objectQueryInfo.getTarget()))
+0.500 - assertNull(setters.get("STR"))
+0.474 - assertEquals(1, setters.size())
+0.474 - assertFalse(setters.isEmpty())
+0.466 - assertNotEquals(target.hashCode(), new Object().hashCode())
+0.456 - assertNotSame(new Object(), target)
+0.422 - assertTrue(setters.keySet().contains("STR"))
+0.405 - assertTrue(setters.values().isEmpty())
+0.360 - assertEquals("STR", setters.keySet().iterator().next())
+0.357 - assertTrue(setters.containsKey("STR"))
+0.321 - assertEquals("STR", oname.getName())
+0.303 - assertNotNull(oname)
+0.271 - assertNotEquals("SomeOtherString", oname.getName())
+0.000 - ```

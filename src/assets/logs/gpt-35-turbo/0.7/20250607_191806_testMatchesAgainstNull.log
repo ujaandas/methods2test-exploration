@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Wildcards {
+    public static boolean matches ( final String text , final String wildcard ) { 
+    String pattern = wildcard . replace ( "STR" , "STR" ) . replace ( "STR" , "STR" ) ; 
+    return ( text != null && text . matches ( pattern ) ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class WildcardsTest {
+    @Test
+     public void testMatchesAgainstNull ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertFalse(Wildcards.matches(null, "*"));
+Assert.assertTrue(Wildcards.matches("", "*"));
+Assert.assertTrue(Wildcards.matches("abc", "abc"));
+Assert.assertTrue(Wildcards.matches("abc", "*"));
+Assert.assertTrue(Wildcards.matches("abc", "a*c"));
+Assert.assertTrue(Wildcards.matches("abc", "*c"));
+Assert.assertTrue(Wildcards.matches("abc", "a*"));
+Assert.assertFalse(Wildcards.matches("abc", "d*"));
+Assert.assertTrue(Wildcards.matches("abcdef", "a*f"));
+Assert.assertFalse(Wildcards.matches("abcdef", "a*e"));
+Assert.assertTrue(Wildcards.matches("abcdef", "*f"));
+Assert.assertTrue(Wildcards.matches("abcdef", "*"));
+Assert.assertTrue(Wildcards.matches("abcdef", "*abcdef"));
+Assert.assertTrue(Wildcards.matches("abcdef", "abcdef*"));
+Assert.assertFalse(Wildcards.matches("abcdef", "abcde*f"));
+Assert.assertTrue(Wildcards.matches("abcdef", "abcde*"));
+Assert.assertFalse(Wildcards.matches("abcdef", "abcde*g"));
+Assert.assertTrue(Wildcards.matches("abcdef", "*def"));
+Assert.assertTrue(Wildcards.matches("abcdef", "abc*"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Wildcards.matches(null,"STR")); ===
+0.951 - Assert.assertFalse(Wildcards.matches(null, "*"))
+0.833 - Assert.assertFalse(Wildcards.matches("abc", "d*"))
+0.795 - Assert.assertFalse(Wildcards.matches("abcdef", "a*e"))
+0.785 - Assert.assertTrue(Wildcards.matches("", "*"))
+0.761 - Assert.assertFalse(Wildcards.matches("abcdef", "abcde*f"))
+0.761 - Assert.assertFalse(Wildcards.matches("abcdef", "abcde*g"))
+0.756 - Assert.assertTrue(Wildcards.matches("abc", "*"))
+0.747 - Assert.assertTrue(Wildcards.matches("abc", "*c"))
+0.747 - Assert.assertTrue(Wildcards.matches("abc", "a*"))
+0.738 - Assert.assertTrue(Wildcards.matches("abc", "abc"))
+0.738 - Assert.assertTrue(Wildcards.matches("abc", "a*c"))
+0.729 - Assert.assertTrue(Wildcards.matches("abcdef", "*"))
+0.721 - Assert.assertTrue(Wildcards.matches("abcdef", "*f"))
+0.713 - Assert.assertTrue(Wildcards.matches("abcdef", "a*f"))
+0.705 - Assert.assertTrue(Wildcards.matches("abcdef", "*def"))
+0.705 - Assert.assertTrue(Wildcards.matches("abcdef", "abc*"))
+0.689 - Assert.assertTrue(Wildcards.matches("abcdef", "abcde*"))
+0.681 - Assert.assertTrue(Wildcards.matches("abcdef", "*abcdef"))
+0.681 - Assert.assertTrue(Wildcards.matches("abcdef", "abcdef*"))

@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public boolean isSame ( ODirtyManager other ) { 
+    return this . getReal ( ) == other . getReal ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLinkCollectionOther ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         List < ODocument > lst = new ArrayList < ODocument > ( ) ; 
+         ODocument doc1 = new ODocument ( ) ; 
+         lst . add ( doc1 ) ; 
+         doc . field ( "STR" , lst ) ; 
+         Set < ODocument > set = new HashSet < ODocument > ( ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         set . add ( doc2 ) ; 
+         doc . field ( "STR" , set ) ; 
+         ODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ; 
+         ODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(manager);
+Assert.assertNotNull(manager2);
+Assert.assertFalse(manager.isSame(manager2));
+Assert.assertNotSame(manager, manager2);
+Assert.assertTrue(manager.isSame(manager));
+Assert.assertTrue(manager2.isSame(manager2));
+Assert.assertTrue(manager.isSame(manager));
+Assert.assertNotEquals(manager.hashCode(), manager2.hashCode());
+Assert.assertNotEquals(manager.toString(), manager2.toString());
+Assert.assertFalse(manager.equals(manager2));
+Assert.assertTrue(manager.equals(manager));
+Assert.assertTrue(manager2.equals(manager2));
+Assert.assertNotNull(doc.getField("STR"));
+Assert.assertTrue(doc.getField("STR") instanceof List);
+Assert.assertTrue(doc.getField("STR") instanceof Set);
+Assert.assertTrue(lst.contains(doc1));
+Assert.assertTrue(set.contains(doc2));
+Assert.assertFalse(lst.contains(doc2));
+Assert.assertFalse(set.contains(doc1));
+Assert.assertEquals(1, lst.size());
+Assert.assertEquals(1, set.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(manager2.isSame(manager)); ===
+0.986 - Assert.assertTrue(manager2.isSame(manager2))
+0.986 - Assert.assertTrue(manager.isSame(manager))
+0.986 - Assert.assertTrue(manager.isSame(manager))
+0.877 - Assert.assertFalse(manager.isSame(manager2))
+0.849 - Assert.assertTrue(manager2.equals(manager2))
+0.845 - Assert.assertTrue(manager.equals(manager))
+0.740 - Assert.assertFalse(manager.equals(manager2))
+0.576 - Assert.assertNotNull(manager2)
+0.567 - Assert.assertNotSame(manager, manager2)
+0.515 - Assert.assertTrue(lst.contains(doc1))
+0.505 - Assert.assertNotEquals(manager.hashCode(), manager2.hashCode())
+0.485 - ```java
+Assert.assertNotNull(manager)
+0.485 - Assert.assertTrue(set.contains(doc2))
+0.462 - Assert.assertNotEquals(manager.toString(), manager2.toString())
+0.425 - Assert.assertTrue(doc.getField("STR") instanceof Set)
+0.420 - Assert.assertTrue(doc.getField("STR") instanceof List)
+0.418 - Assert.assertFalse(set.contains(doc1))
+0.400 - Assert.assertNotNull(doc.getField("STR"))
+0.388 - Assert.assertFalse(lst.contains(doc2))
+0.355 - Assert.assertEquals(1, lst.size())
+0.355 - Assert.assertEquals(1, set.size())
+0.000 - ```

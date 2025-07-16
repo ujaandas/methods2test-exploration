@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtension {\n@Override\npublic ByteBuffer getPayloadData ( ) {\nreturn unmaskedpayload ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtensionTest {\n@Test\npublic void testDecodeFrame ( ) throws InvalidDataException {\nPerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ;\nString str = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\nbyte [ ] message = str . getBytes ( ) ;\nTextFrame frame = new TextFrame ( ) ;\nframe . setPayload ( ByteBuffer . wrap ( message ) ) ;\ndeflateExtension . encodeFrame ( frame ) ;\ndeflateExtension . decodeFrame ( frame ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(frame);\nAssert.assertTrue(frame.isFinal());\nAssert.assertEquals(0, frame.getRsv());\nAssert.assertEquals(0, frame.getPayloadLength());\nAssert.assertArrayEquals(message, frame.getPayload().array());\nAssert.assertEquals(\"STRSTRSTRSTRSTR\", new String(frame.getPayload().array()));\nAssert.assertTrue(frame.isText());\nAssert.assertFalse(frame.isBinary());\nAssert.assertFalse(frame.hasExtensions());\nAssert.assertEquals(1, frame.getFin());\nAssert.assertEquals(1, frame.getOpCode());\nAssert.assertNotNull(deflateExtension.getPayloadData());\nAssert.assertTrue(deflateExtension.getPayloadData().hasRemaining());\nAssert.assertEquals(message.length, deflateExtension.getPayloadData().remaining());\nAssert.assertTrue(deflateExtension.getPayloadData().equals(ByteBuffer.wrap(message)));\nAssert.assertNotEquals(0, deflateExtension.getPayloadData().capacity());\nAssert.assertEquals(\"STRSTRSTRSTRSTR\", new String(deflateExtension.getPayloadData().array()));\nAssert.assertNotEquals(frame.getPayload(), null);\nAssert.assertEquals(frame.getPayload().capacity(), message.length);\nAssert.assertTrue(deflateExtension.decodeFrame(frame));\nAssert.assertFalse(deflateExtension.decodeFrame(null));\n```\n====================\n\n",
+    "scores": [
+        0.964,
+        0.702,
+        0.701,
+        0.667,
+        0.661,
+        0.66,
+        0.65,
+        0.622,
+        0.598,
+        0.598,
+        0.582,
+        0.564,
+        0.519,
+        0.514,
+        0.512,
+        0.482,
+        0.476,
+        0.462,
+        0.385,
+        0.353,
+        0.346,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(message,frame.getPayloadData().array());"
+}

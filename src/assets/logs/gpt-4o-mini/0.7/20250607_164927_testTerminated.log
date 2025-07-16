@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb terminated ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testTerminated ( ) {
+         Verb actual = Verbs . terminated ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(actual);
+Assert.assertEquals("STR", actual.getId());
+Assert.assertTrue(actual instanceof Verb);
+Assert.assertEquals("terminated", actual.getDisplayName());
+Assert.assertEquals("terminated", actual.getVerb());
+Assert.assertEquals("String representation of terminated", actual.getDescription());
+Assert.assertEquals(1, actual.getRelatedVerbs().size());
+Assert.assertTrue(actual.getRelatedVerbs().contains("started"));
+Assert.assertFalse(actual.isActive());
+Assert.assertTrue(actual.isFinal());
+Assert.assertEquals("terminated", actual.getStatus());
+Assert.assertNotEquals("running", actual.getStatus());
+Assert.assertTrue(actual.isSystemGenerated());
+Assert.assertEquals("1.0", actual.getVersion());
+Assert.assertTrue(actual.getTimestamp() > 0);
+Assert.assertEquals("User", actual.getActor());
+Assert.assertEquals("Event", actual.getObjectType());
+Assert.assertTrue(actual.getContext().isEmpty());
+Assert.assertNotNull(actual.getMetadata());
+Assert.assertTrue(actual.getMetadata().containsKey("created_at"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+Assert.assertNotNull(actual)
+0.750 - Assert.assertNotNull(actual.getMetadata())
+0.612 - Assert.assertTrue(actual.isFinal())
+0.588 - Assert.assertFalse(actual.isActive())
+0.582 - Assert.assertEquals("STR", actual.getId())
+0.576 - Assert.assertNotEquals("running", actual.getStatus())
+0.566 - Assert.assertTrue(actual instanceof Verb)
+0.542 - Assert.assertEquals("User", actual.getActor())
+0.536 - Assert.assertTrue(actual.getTimestamp() > 0)
+0.533 - Assert.assertEquals("1.0", actual.getVersion())
+0.508 - Assert.assertTrue(actual.isSystemGenerated())
+0.484 - Assert.assertTrue(actual.getContext().isEmpty())
+0.471 - Assert.assertEquals(1, actual.getRelatedVerbs().size())
+0.438 - Assert.assertEquals("terminated", actual.getVerb())
+0.431 - Assert.assertEquals("Event", actual.getObjectType())
+0.424 - Assert.assertEquals("terminated", actual.getStatus())
+0.394 - Assert.assertEquals("terminated", actual.getDisplayName())
+0.390 - Assert.assertTrue(actual.getRelatedVerbs().contains("started"))
+0.380 - Assert.assertTrue(actual.getMetadata().containsKey("created_at"))
+0.323 - Assert.assertEquals("String representation of terminated", actual.getDescription())
+0.000 - ```

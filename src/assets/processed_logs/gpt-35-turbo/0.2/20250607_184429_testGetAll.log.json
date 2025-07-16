@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic Map < String , List < Connection > > getAll ( ) {\nMap < String , List < Connection > > allConnections = new HashMap < String , List < Connection > > ( ) ;\nfor ( Map . Entry < String , RunStateRecordedFutureTask < ConnectionPool > > entry : this . getConnPools ( ) . entrySet ( ) ) {\nConnectionPool pool = FutureTaskUtil . getFutureTaskResult ( entry . getValue ( ) , logger ) ;\nif ( null != pool ) {\nallConnections . put ( entry . getKey ( ) , pool . getAll ( ) ) ;\n} } return allConnections ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testGetAll ( ) {\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\nMap < String , List < Connection > > conns = cm . getAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(4, conns.size());\nAssert.assertTrue(conns.containsKey(\"key1\"));\nAssert.assertTrue(conns.containsKey(\"key2\"));\nAssert.assertTrue(conns.containsKey(\"key3\"));\nAssert.assertTrue(conns.containsKey(\"key4\"));\nAssert.assertEquals(4, conns.get(\"key1\").size());\nAssert.assertEquals(4, conns.get(\"key2\").size());\nAssert.assertEquals(4, conns.get(\"key3\").size());\nAssert.assertEquals(4, conns.get(\"key4\").size());\nAssert.assertTrue(conns.get(\"key1\").get(0) instanceof Connection);\nAssert.assertTrue(conns.get(\"key2\").get(1) instanceof Connection);\nAssert.assertTrue(conns.get(\"key3\").get(2) instanceof Connection);\nAssert.assertTrue(conns.get(\"key4\").get(3) instanceof Connection);\nAssert.assertEquals(\"value1\", conns.get(\"key1\").get(0).getValue());\nAssert.assertEquals(\"value2\", conns.get(\"key2\").get(1).getValue());\nAssert.assertEquals(\"value3\", conns.get(\"key3\").get(2).getValue());\nAssert.assertEquals(\"value4\", conns.get(\"key4\").get(3).getValue());\nAssert.assertNotNull(conns.get(\"key1\").get(0).getTimestamp());\nAssert.assertNotNull(conns.get(\"key2\").get(1).getTimestamp());\nAssert.assertNotNull(conns.get(\"key3\").get(2).getTimestamp());\nAssert.assertNotNull(conns.get(\"key4\").get(3).getTimestamp());\n====================\n\n",
+    "scores": [
+        0.964,
+        0.794,
+        0.794,
+        0.794,
+        0.794,
+        0.585,
+        0.585,
+        0.585,
+        0.585,
+        0.581,
+        0.558,
+        0.558,
+        0.558,
+        0.463,
+        0.463,
+        0.463,
+        0.463,
+        0.405,
+        0.405,
+        0.405,
+        0.405
+    ],
+    "ground_truth": "Assert.assertEquals(1,conns.size());"
+}

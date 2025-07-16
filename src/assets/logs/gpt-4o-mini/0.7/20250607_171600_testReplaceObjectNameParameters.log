@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ParameterReplacer {
+    public String replaceObjectNameParameters ( String pattern , MBeanLocationParameterSource parameterSource ) { 
+    Matcher matcher = replaceParamPattern . matcher ( pattern ) ; 
+    StringBuffer result = new StringBuffer ( ) ; 
+    while ( matcher . find ( ) ) { 
+    String name = matcher . group ( "STR" ) ; 
+    String value = parameterSource . getParameter ( name ) ; 
+    if ( value != null ) { 
+    matcher . appendReplacement ( result , value ) ; 
+    } else { 
+    matcher . appendReplacement ( result , Matcher . quoteReplacement ( matcher . group ( ) ) ) ; 
+    } } matcher . appendTail ( result ) ; 
+    return result . toString ( ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ParameterReplacerTest {
+    @Test
+     public void testReplaceObjectNameParameters ( ) throws Exception {
+         Mockito . when ( this . mockSource . getParameter ( "STR" ) ) . thenReturn ( "STR" ) ; 
+         Mockito . when ( this . mockSource . getParameter ( "STR" ) ) . thenReturn ( "STR" ) ; 
+         Mockito . when ( this . mockSource . getParameter ( "STR" ) ) . thenReturn ( "STR" ) ; 
+         String result ; 
+         result = this . replacer . replaceObjectNameParameters ( "STR" , mockSource ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertEquals("STR", result);
+assertTrue(result instanceof String);
+assertFalse(result.isEmpty());
+assertEquals("STR", result.trim());
+assertEquals(3, result.length());
+assertTrue(result.contains("S"));
+assertTrue(result.contains("T"));
+assertTrue(result.contains("R"));
+assertFalse(result.contains("X"));
+assertTrue(result.equals("STR"));
+assertFalse(result.equals("str"));
+assertNotEquals("STRING", result);
+assertTrue(result.startsWith("S"));
+assertTrue(result.endsWith("R"));
+assertNotEquals("Other", result);
+assertEquals("STR", result.toUpperCase());
+assertEquals("str", result.toLowerCase());
+assertSame("STR", result);
+assertNotSame("STRING", result);
+assertTrue(result.equalsIgnoreCase("str"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+1.000 - assertEquals("STR", result)
+0.897 - assertNotEquals("STRING", result)
+0.881 - assertEquals("STR", result.trim())
+0.840 - assertSame("STR", result)
+0.807 - assertNotEquals("Other", result)
+0.788 - assertEquals("STR", result.toUpperCase())
+0.750 - assertNotSame("STRING", result)
+0.737 - assertEquals(3, result.length())
+0.697 - assertEquals("str", result.toLowerCase())
+0.621 - assertTrue(result.equals("STR"))
+0.618 - assertFalse(result.isEmpty())
+0.582 - ```java
+assertNotNull(result)
+0.576 - assertFalse(result.contains("X"))
+0.517 - assertTrue(result.contains("S"))
+0.517 - assertTrue(result.contains("T"))
+0.517 - assertTrue(result.contains("R"))
+0.517 - assertTrue(result.endsWith("R"))
+0.508 - assertFalse(result.equals("str"))
+0.500 - assertTrue(result instanceof String)
+0.500 - assertTrue(result.startsWith("S"))
+0.441 - assertTrue(result.equalsIgnoreCase("str"))
+0.000 - ```

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testParamWithMatches ( ) {
+         Map < String , Object > params = new HashMap < String , Object > ( ) ; 
+         params . put ( "STR" , "STR" ) ; 
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql , params ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, results.size());
+assertEquals("STR", results.get(0).field("fieldName"));
+assertTrue(results.get(0).field("fieldName").toString().contains("S"));
+assertFalse(results.isEmpty());
+assertNotNull(results);
+assertEquals(1, params.size());
+assertTrue(params.containsKey("STR"));
+assertEquals("STR", params.get("STR"));
+assertTrue(results.stream().allMatch(doc -> doc.field("fieldName").toString().startsWith("S")));
+assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().length() == 3).count());
+assertTrue(results.stream().anyMatch(doc -> doc.field("fieldName").toString().equals("STR")));
+assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().equalsIgnoreCase("str")).count());
+assertFalse(results.stream().allMatch(doc -> doc.field("fieldName").toString().isEmpty()));
+assertTrue(results.stream().noneMatch(doc -> doc.field("fieldName").toString().contains("X")));
+assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().matches("[A-Z]+")).count());
+assertTrue(params.containsValue("STR"));
+assertFalse(params.isEmpty());
+assertTrue(params.containsValue("STR"));
+assertEquals(1, params.keySet().size());
+assertTrue(params.keySet().contains("STR"));
+assertFalse(params.keySet().isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(1, results.size())
+0.780 - assertEquals(1, params.size())
+0.733 - assertFalse(results.isEmpty())
+0.706 - assertEquals(1, params.keySet().size())
+0.654 - assertNotNull(results)
+0.627 - assertEquals("STR", results.get(0).field("fieldName"))
+0.597 - assertEquals("STR", params.get("STR"))
+0.576 - assertFalse(params.isEmpty())
+0.500 - assertFalse(params.keySet().isEmpty())
+0.478 - assertTrue(params.containsKey("STR"))
+0.420 - assertTrue(results.get(0).field("fieldName").toString().contains("S"))
+0.406 - assertTrue(params.containsValue("STR"))
+0.406 - assertTrue(params.containsValue("STR"))
+0.403 - assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().length() == 3).count())
+0.390 - assertFalse(results.stream().allMatch(doc -> doc.field("fieldName").toString().isEmpty()))
+0.385 - assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().matches("[A-Z]+")).count())
+0.383 - assertEquals(1, results.stream().filter(doc -> doc.field("fieldName").toString().equalsIgnoreCase("str")).count())
+0.347 - assertTrue(results.stream().anyMatch(doc -> doc.field("fieldName").toString().equals("STR")))
+0.344 - assertTrue(results.stream().noneMatch(doc -> doc.field("fieldName").toString().contains("X")))
+0.341 - assertTrue(results.stream().allMatch(doc -> doc.field("fieldName").toString().startsWith("S")))
+0.329 - assertTrue(params.keySet().contains("STR"))

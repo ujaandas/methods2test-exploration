@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( List < ? > params ) { 
+     if ( ! ( params . get ( 0 ) instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ; 
+     final List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     result . add ( createSingleValue ( mapParam ) ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueWrongParameter ( ) {
+         final Object result = propertyIndexByKey . createValue ( Collections . singletonList ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(result);
+assertTrue(result instanceof List);
+assertEquals(0, ((List<?>) result).size());
+assertNotSame(Collections.singletonList("STR"), result);
+assertFalse(((List<?>) result).contains("STR"));
+assertEquals("Expected a null return for invalid parameter", null, result);
+assertTrue("Result should be an instance of List", result instanceof List);
+assertEquals("List should be empty for invalid input", 0, ((List<?>) result).size());
+assertFalse("Result should not contain any elements", ((List<?>) result).iterator().hasNext());
+assertNotNull(result, "Result should not be null but should be an empty list");
+assertSame("The result list should be a new instance", result, Collections.emptyList());
+assertEquals("Result's class should match List", ArrayList.class, result.getClass());
+assertTrue("Result should be a list type", result instanceof List);
+assertTrue("Result should not contain any elements", ((List<?>) result).isEmpty());
+assertThat("Result should not contain 'STR'", not(contains("STR")));
+assertTrue("Result should be of type List", result instanceof List<?>);
+assertEquals("Result should be empty", 0, ((List<?>) result).size());
+assertFalse("The result should not be a Map", result instanceof Map);
+assertNotEquals("Result should not be equal to the input", "STR", result);
+assertTrue("Result should not have any side effects", ((List<?>) result).isEmpty());
+assertThat("Result should be an empty list", result, is(empty()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(result); ===
+0.818 - ```java
+assertNull(result)
+0.600 - assertTrue(result instanceof List)
+0.552 - assertEquals(0, ((List<?>) result).size())
+0.472 - assertNotSame(Collections.singletonList("STR"), result)
+0.469 - assertFalse(((List<?>) result).contains("STR"))
+0.425 - assertEquals("Result should be empty", 0, ((List<?>) result).size())
+0.424 - assertNotNull(result, "Result should not be null but should be an empty list")
+0.421 - assertTrue("Result should be a list type", result instanceof List)
+0.421 - assertThat("Result should be an empty list", result, is(empty()))
+0.415 - assertNotEquals("Result should not be equal to the input", "STR", result)
+0.400 - assertTrue("Result should be of type List", result instanceof List<?>)
+0.390 - assertFalse("The result should not be a Map", result instanceof Map)
+0.386 - assertTrue("Result should be an instance of List", result instanceof List)
+0.381 - assertEquals("Expected a null return for invalid parameter", null, result)
+0.366 - assertEquals("List should be empty for invalid input", 0, ((List<?>) result).size())
+0.366 - assertTrue("Result should not contain any elements", ((List<?>) result).isEmpty())
+0.366 - assertTrue("Result should not have any side effects", ((List<?>) result).isEmpty())
+0.333 - assertEquals("Result's class should match List", ArrayList.class, result.getClass())
+0.325 - assertThat("Result should not contain 'STR'", not(contains("STR")))
+0.324 - assertFalse("Result should not contain any elements", ((List<?>) result).iterator().hasNext())
+0.292 - assertSame("The result list should be a new instance", result, Collections.emptyList())
+0.000 - ```

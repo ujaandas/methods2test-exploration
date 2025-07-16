@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public List < Method > findAll ( ) { 
+    List < Method > methods = findAllDeclaredMethods ( clazz ) ; 
+    for ( Method method : methods ) { 
+    verifyPublic ( method ) ; 
+    verifyNotStatic ( method ) ; 
+    verifyReturnType ( method ) ; 
+    verifyArgs ( method ) ; 
+    method . setAccessible ( true ) ; 
+    } return methods ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testSubClass_methodFoundInSuper ( ) {
+         List < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(methodList);
+assertFalse(methodList.isEmpty());
+assertEquals(1, methodList.size());
+assertEquals("expectedMethodName", methodList.get(0).getName());
+assertTrue(methodList.get(0).getReturnType().equals(void.class));
+assertTrue(methodList.get(0).getParameterCount() == 0);
+assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));
+assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));
+assertTrue(methodList.get(0).isAccessible());
+assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));
+assertEquals(Subclass.class, methodList.get(0).getDeclaringClass());
+assertNotNull(methodList.get(0).getAnnotation(Teardown.class));
+assertTrue(methodList.get(0).getAnnotations().length > 0);
+assertTrue(methodList.get(0).getAnnotations()[0] instanceof Teardown);
+assertNotNull(methodList.get(0).getGenericReturnType());
+assertTrue(methodList.get(0).getGenericParameterTypes().length == 0);
+assertTrue(methodList.get(0).getExceptionTypes().length == 0);
+assertTrue(methodList.get(0).getDeclaringClass().getSuperclass() != null);
+assertTrue(methodList.get(0).getDeclaringClass().getSuperclass().isAnnotationPresent(Teardown.class));
+assertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,methodList.size()); ===
+1.000 - assertEquals(1, methodList.size())
+0.758 - assertFalse(methodList.isEmpty())
+0.649 - assertTrue(methodList.get(0).isAccessible())
+0.611 - assertEquals("expectedMethodName", methodList.get(0).getName())
+0.606 - ```java
+assertNotNull(methodList)
+0.586 - assertEquals(Subclass.class, methodList.get(0).getDeclaringClass())
+0.568 - assertNotNull(methodList.get(0).getGenericReturnType())
+0.541 - assertTrue(methodList.get(0).getParameterCount() == 0)
+0.523 - assertTrue(methodList.get(0).getAnnotations().length > 0)
+0.515 - assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()))
+0.510 - assertTrue(methodList.get(0).isAnnotationPresent(Teardown.class))
+0.500 - assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()))
+0.500 - assertTrue(methodList.get(0).getExceptionTypes().length == 0)
+0.484 - assertNotNull(methodList.get(0).getAnnotation(Teardown.class))
+0.479 - assertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0)
+0.474 - assertTrue(methodList.get(0).getReturnType().equals(void.class))
+0.465 - assertTrue(methodList.get(0).getGenericParameterTypes().length == 0)
+0.460 - assertTrue(methodList.get(0).getAnnotations()[0] instanceof Teardown)
+0.442 - assertTrue(methodList.get(0).getDeclaringClass().getSuperclass() != null)
+0.343 - assertTrue(methodList.get(0).getDeclaringClass().getSuperclass().isAnnotationPresent(Teardown.class))
+0.000 - ```

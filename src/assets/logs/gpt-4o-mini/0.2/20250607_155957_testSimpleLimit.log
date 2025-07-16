@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testSimpleLimit ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.get(0) instanceof ODocument);
+assertEquals(expectedFieldValue, qResult.get(0).field("fieldName"));
+assertEquals(expectedFieldValue2, qResult.get(1).field("fieldName2"));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")));
+assertEquals(expectedId, qResult.get(0).getIdentity());
+assertNotEquals(unexpectedId, qResult.get(1).getIdentity());
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("John Doe")));
+assertEquals(expectedType, qResult.get(0).getSchemaType());
+assertTrue(qResult.size() <= maxExpectedSize);
+assertFalse(qResult.stream().anyMatch(doc -> doc.field("deleted").equals(true)));
+assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("category").equals("A")).count());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("createdAt") != null));
+assertEquals(expectedFieldValue3, qResult.get(2).field("fieldName3"));
+assertNotNull(qResult.get(0).field("nestedField"));
+assertEquals(expectedNestedFieldValue, qResult.get(0).field("nestedField").field("subField"));
+assertTrue(qResult.stream().map(doc -> doc.field("score")).allMatch(score -> score >= 0));
+assertEquals(expectedString, qResult.get(0).field("description"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("email").equals("test@example.com")));
+assertEquals(expectedFieldValue4, qResult.get(qResult.size() - 1).field("fieldName4"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.630 - assertTrue(qResult.size() <= maxExpectedSize)
+0.627 - assertEquals(expectedId, qResult.get(0).getIdentity())
+0.598 - assertEquals(expectedType, qResult.get(0).getSchemaType())
+0.591 - assertNotEquals(unexpectedId, qResult.get(1).getIdentity())
+0.567 - ```java
+assertNotNull(qResult)
+0.562 - assertEquals(expectedFieldValue, qResult.get(0).field("fieldName"))
+0.553 - assertEquals(expectedString, qResult.get(0).field("description"))
+0.551 - assertEquals(expectedFieldValue2, qResult.get(1).field("fieldName2"))
+0.551 - assertEquals(expectedFieldValue3, qResult.get(2).field("fieldName3"))
+0.550 - assertNotNull(qResult.get(0).field("nestedField"))
+0.513 - assertEquals(expectedFieldValue4, qResult.get(qResult.size() - 1).field("fieldName4"))
+0.507 - assertTrue(qResult.get(0) instanceof ODocument)
+0.459 - assertEquals(expectedNestedFieldValue, qResult.get(0).field("nestedField").field("subField"))
+0.434 - assertEquals(expectedCount, qResult.stream().filter(doc -> doc.field("category").equals("A")).count())
+0.426 - assertFalse(qResult.stream().anyMatch(doc -> doc.field("deleted").equals(true)))
+0.412 - assertTrue(qResult.stream().allMatch(doc -> doc.field("createdAt") != null))
+0.385 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("John Doe")))
+0.382 - assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")))
+0.372 - assertTrue(qResult.stream().map(doc -> doc.field("score")).allMatch(score -> score >= 0))
+0.353 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("email").equals("test@example.com")))
+0.000 - ```

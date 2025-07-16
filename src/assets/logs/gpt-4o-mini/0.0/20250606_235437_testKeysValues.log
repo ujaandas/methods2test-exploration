@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMap {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMapTest {
+    @Test
+     public void testKeysValues ( ) {
+         final AListMap < String , Integer > map = AListMap . < String , Integer > empty ( ) . updated ( "STR" , 1 ) . updated ( "STR" , 2 ) . updated ( "STR" , 3 ) . updated ( "STR" , 4 ) ; 
+         final ASet < String > keys = map . keys ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, keys.size());
+assertTrue(keys.contains("STR"));
+assertFalse(keys.contains("NON_EXISTENT_KEY"));
+assertEquals(1, map.size());
+assertEquals(Integer.valueOf(4), map.get("STR"));
+assertNotNull(map.keys());
+assertTrue(map.keys().isEmpty() == false);
+assertEquals(1, map.updated("NEW_KEY", 5).size());
+assertTrue(map.updated("NEW_KEY", 5).keys().contains("NEW_KEY"));
+assertEquals(Integer.valueOf(5), map.updated("NEW_KEY", 5).get("NEW_KEY"));
+assertEquals(1, map.updated("STR", 5).size());
+assertEquals(Integer.valueOf(5), map.updated("STR", 5).get("STR"));
+assertNotEquals(Integer.valueOf(3), map.get("STR"));
+assertEquals(1, map.updated("STR", 6).size());
+assertEquals(Integer.valueOf(6), map.updated("STR", 6).get("STR"));
+assertTrue(map.updated("STR", 7).keys().contains("STR"));
+assertEquals(1, map.updated("STR", 8).size());
+assertEquals(Integer.valueOf(8), map.updated("STR", 8).get("STR"));
+assertTrue(map.updated("STR", 9).keys().contains("STR"));
+assertEquals(1, map.updated("STR", 10).size());
+assertEquals(Integer.valueOf(10), map.updated("STR", 10).get("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,keys.size()); ===
+0.839 - ```java
+assertEquals(1, keys.size())
+0.830 - assertEquals(1, map.size())
+0.657 - assertEquals(1, map.updated("STR", 5).size())
+0.657 - assertEquals(1, map.updated("STR", 6).size())
+0.657 - assertEquals(1, map.updated("STR", 8).size())
+0.648 - assertEquals(1, map.updated("STR", 10).size())
+0.622 - assertEquals(1, map.updated("NEW_KEY", 5).size())
+0.577 - assertNotNull(map.keys())
+0.576 - assertTrue(keys.contains("STR"))
+0.521 - assertFalse(keys.contains("NON_EXISTENT_KEY"))
+0.514 - assertEquals(Integer.valueOf(4), map.get("STR"))
+0.468 - assertNotEquals(Integer.valueOf(3), map.get("STR"))
+0.455 - assertTrue(map.keys().isEmpty() == false)
+0.440 - assertEquals(Integer.valueOf(5), map.updated("STR", 5).get("STR"))
+0.440 - assertEquals(Integer.valueOf(6), map.updated("STR", 6).get("STR"))
+0.440 - assertEquals(Integer.valueOf(8), map.updated("STR", 8).get("STR"))
+0.430 - assertEquals(Integer.valueOf(10), map.updated("STR", 10).get("STR"))
+0.415 - assertTrue(map.updated("STR", 7).keys().contains("STR"))
+0.415 - assertTrue(map.updated("STR", 9).keys().contains("STR"))
+0.404 - assertEquals(Integer.valueOf(5), map.updated("NEW_KEY", 5).get("NEW_KEY"))
+0.333 - assertTrue(map.updated("NEW_KEY", 5).keys().contains("NEW_KEY"))
+0.000 - ```

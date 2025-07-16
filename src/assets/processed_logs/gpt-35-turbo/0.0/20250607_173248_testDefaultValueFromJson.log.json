@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValue {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class DefaultValueTest {\n@Test\npublic void testDefaultValueFromJson ( ) {\nOSchema schema = database . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . DATE ) ;\nprop . setDefaultValue ( ODateHelper . getDateTimeFormatInstance ( ) . format ( new Date ( ) ) ) ;\nODocument doc = new ODocument ( ) . fromJSON ( \"STR\" ) ;\nODocument saved = database . save ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(OType.DATE, saved.fieldType(\"STR\"));\nAssert.assertTrue(saved.containsField(\"STR\"));\nAssert.assertEquals(ODateHelper.getDateTimeFormatInstance().format(new Date()), saved.field(\"STR\"));\nAssert.assertNotNull(saved.field(\"STR\"));\nAssert.assertTrue(saved.field(\"STR\") instanceof Date);\nAssert.assertEquals(1, saved.fields());\nAssert.assertTrue(saved.getIdentity().isValid());\nAssert.assertTrue(saved.getIdentity().isPersistent());\nAssert.assertFalse(saved.getIdentity().isNew());\nAssert.assertTrue(saved.getIdentity().isTemporary());\nAssert.assertEquals(\"STR\", saved.getClassName());\nAssert.assertTrue(saved.isDirty());\nAssert.assertTrue(saved.isTrackingChanges());\nAssert.assertTrue(saved.isEmbedded());\nAssert.assertTrue(saved.isDocument());\nAssert.assertTrue(saved.isNew());\nAssert.assertTrue(saved.isElement());\nAssert.assertTrue(saved.isDirty());\nAssert.assertTrue(saved.isDirty(\"STR\"));\nAssert.assertTrue(saved.isEmbedded(\"STR\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.735,
+        0.732,
+        0.73,
+        0.708,
+        0.701,
+        0.7,
+        0.655,
+        0.635,
+        0.613,
+        0.603,
+        0.6,
+        0.6,
+        0.548,
+        0.543,
+        0.541,
+        0.521,
+        0.487,
+        0.481,
+        0.455
+    ],
+    "ground_truth": "assertNotNull(saved.field(\"STR\"));"
+}

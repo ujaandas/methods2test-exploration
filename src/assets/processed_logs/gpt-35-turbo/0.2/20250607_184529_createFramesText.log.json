@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455 {\n@Override\npublic List < Framedata > createFrames ( String text , boolean mask ) {\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ;\ncurframe . setTransferemasked ( mask ) ;\ntry {\ncurframe . isValid ( ) ;\n} catch ( InvalidDataException e ) {\nthrow new NotSendableException ( e ) ;\n} return Collections . singletonList ( ( Framedata ) curframe ) ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455Test {\n@Test\npublic void createFramesText ( ) throws Exception {\nDraft_6455 draft_6455 = new Draft_6455 ( ) ;\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( \"STR\" ) ) ) ;\ncurframe . setTransferemasked ( false ) ;\nList < Framedata > createdFrame = draft_6455 . createFrames ( \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(1, createdFrame.size());\nAssert.assertTrue(createdFrame.get(0) instanceof TextFrame);\nAssert.assertEquals(\"STR\", Charsetfunctions.stringUtf8(createdFrame.get(0).getPayloadData()));\nAssert.assertFalse(createdFrame.get(0).getTransfereMasked());\nAssert.assertTrue(createdFrame.get(0).isValid());\nAssert.assertThrows(NotSendableException.class, () -> draft_6455.createFrames(\"INVALID\", false));\nAssert.assertEquals(1, draft_6455.createFrames(\"\", false).size());\nAssert.assertTrue(draft_6455.createFrames(\"\", false).get(0) instanceof TextFrame);\nAssert.assertEquals(\"\", Charsetfunctions.stringUtf8(draft_6455.createFrames(\"\", false).get(0).getPayloadData()));\nAssert.assertFalse(draft_6455.createFrames(\"\", false).get(0).getTransfereMasked());\nAssert.assertTrue(draft_6455.createFrames(\"\", false).get(0).isValid());\nAssert.assertEquals(1, draft_6455.createFrames(\"LONGSTRING\", false).size());\nAssert.assertTrue(draft_6455.createFrames(\"LONGSTRING\", false).get(0) instanceof TextFrame);\nAssert.assertEquals(\"LONGSTRING\", Charsetfunctions.stringUtf8(draft_6455.createFrames(\"LONGSTRING\", false).get(0).getPayloadData()));\nAssert.assertFalse(draft_6455.createFrames(\"LONGSTRING\", false).get(0).getTransfereMasked());\nAssert.assertTrue(draft_6455.createFrames(\"LONGSTRING\", false).get(0).isValid());\nAssert.assertEquals(1, draft_6455.createFrames(\"SPECIALCHARS!@#$%\", false).size());\nAssert.assertTrue(draft_6455.createFrames(\"SPECIALCHARS!@#$%\", false).get(0) instanceof TextFrame);\nAssert.assertEquals(\"SPECIALCHARS!@#$%\", Charsetfunctions.stringUtf8(draft_6455.createFrames(\"SPECIALCHARS!@#$%\", false).get(0).getPayloadData()));\nAssert.assertFalse(draft_6455.createFrames(\"SPECIALCHARS!@#$%\", false).get(0).getTransfereMasked());\nAssert.assertTrue(draft_6455.createFrames(\"SPECIALCHARS!@#$%\", false).get(0).isValid());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.747,
+        0.684,
+        0.673,
+        0.636,
+        0.63,
+        0.565,
+        0.517,
+        0.515,
+        0.495,
+        0.467,
+        0.454,
+        0.439,
+        0.435,
+        0.434,
+        0.429,
+        0.4,
+        0.397,
+        0.38,
+        0.374,
+        0.349
+    ],
+    "ground_truth": "assertEquals(1,createdFrame.size());"
+}

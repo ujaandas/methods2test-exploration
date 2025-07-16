@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testMatches ( ) {\nList < ? > result = db . query ( new OSQLSynchQuery < Object > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertEquals(expectedSize, result.size());\nassertTrue(result.get(0) instanceof ExpectedType);\nassertEquals(expectedValue, result.get(0).getField(\"fieldName\"));\nassertEquals(expectedValue2, result.get(1).getField(\"fieldName2\"));\nassertTrue(result.contains(expectedObject));\nassertFalse(result.contains(unexpectedObject));\nassertEquals(expectedString, result.get(0).getStringField(\"stringField\"));\nassertTrue(result.stream().allMatch(item -> item instanceof ExpectedType));\nassertEquals(expectedInteger, result.get(2).getIntField(\"integerField\"));\nassertTrue(result.stream().anyMatch(item -> item.equals(expectedItem)));\nassertNotEquals(unexpectedValue, result.get(3).getField(\"fieldName\"));\nassertTrue(result.size() <= maxSize);\nassertFalse(result.isEmpty() || result.size() == expectedSize);\nassertNull(result.get(4).getField(\"nullableField\"));\nassertNotNull(result.get(5).getField(\"nonNullableField\"));\nassertEquals(expectedList, result.subList(0, 3));\nassertTrue(result.stream().map(Object::toString).collect(Collectors.toSet()).containsAll(expectedStringSet));\nassertSame(expectedObject, result.get(6));\nassertEquals(expectedMap, result.stream().collect(Collectors.toMap(Object::getId, Function.identity())));\nassertThrows(ExpectedException.class, () -> { /* invoke method that causes exception */ });\n```\n====================\n\n",
+    "scores": [
+        0.783,
+        0.724,
+        0.698,
+        0.667,
+        0.56,
+        0.552,
+        0.552,
+        0.551,
+        0.543,
+        0.528,
+        0.525,
+        0.515,
+        0.511,
+        0.5,
+        0.495,
+        0.488,
+        0.474,
+        0.408,
+        0.404,
+        0.397,
+        0.292,
+        0.241,
+        0.0
+    ],
+    "ground_truth": "assertEquals(result.size(),1);"
+}

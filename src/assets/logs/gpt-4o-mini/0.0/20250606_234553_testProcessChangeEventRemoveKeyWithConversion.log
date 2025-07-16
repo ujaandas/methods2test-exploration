@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    public void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) { 
+    final boolean result ; 
+    if ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    else result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    if ( ! result ) throw new IllegalArgumentException ( "STR" + changeEvent . getChangeType ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testProcessChangeEventRemoveKeyWithConversion ( ) {
+         final Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ; 
+         final OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . REMOVE , "STR" , "STR" ) ; 
+         propertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ; 
+         final Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ; 
+         removedKeys . put ( 12 , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, keysToRemove.size());
+assertTrue(keysToRemove.containsKey(12));
+assertEquals(Integer.valueOf(1), keysToRemove.get(12));
+assertEquals(0, keysToAdd.size());
+assertFalse(keysToAdd.containsKey(12));
+assertFalse(keysToAdd.containsKey(1));
+assertFalse(keysToAdd.containsKey(0));
+assertFalse(keysToRemove.containsKey(0));
+assertFalse(keysToRemove.containsKey(1));
+assertTrue(keysToRemove.containsKey(12));
+assertNotNull(multiValueChangeEvent);
+assertEquals(OMultiValueChangeEvent.OChangeType.REMOVE, multiValueChangeEvent.getChangeType());
+assertEquals("STR", multiValueChangeEvent.getOldValue());
+assertEquals("STR", multiValueChangeEvent.getNewValue());
+assertNotNull(propertyIndexByIntegerKey);
+assertDoesNotThrow(() -> propertyIndexByIntegerKey.processChangeEvent(multiValueChangeEvent, keysToAdd, keysToRemove));
+assertThrows(IllegalArgumentException.class, () -> {
+    propertyIndexByIntegerKey.processChangeEvent(new OMultiValueChangeEvent<>(OMultiValueChangeEvent.OChangeType.ADD, "STR", "STR"), keysToAdd, keysToRemove);
+});
+assertTrue(keysToRemove.isEmpty() || keysToRemove.size() == 1);
+assertTrue(keysToAdd.isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(keysToAdd,addedKeys); ===
+0.738 - assertEquals(0, keysToAdd.size())
+0.686 - assertFalse(keysToAdd.containsKey(1))
+0.686 - assertFalse(keysToAdd.containsKey(0))
+0.676 - assertFalse(keysToAdd.containsKey(12))
+0.605 - ```java
+assertEquals(1, keysToRemove.size())
+0.594 - assertTrue(keysToAdd.isEmpty())
+0.575 - assertFalse(keysToRemove.containsKey(0))
+0.575 - assertFalse(keysToRemove.containsKey(1))
+0.521 - assertTrue(keysToRemove.containsKey(12))
+0.521 - assertTrue(keysToRemove.containsKey(12))
+0.512 - assertEquals(Integer.valueOf(1), keysToRemove.get(12))
+0.466 - assertNotNull(propertyIndexByIntegerKey)
+0.418 - assertTrue(keysToRemove.isEmpty() || keysToRemove.size() == 1)
+0.409 - assertEquals("STR", multiValueChangeEvent.getOldValue())
+0.409 - assertEquals("STR", multiValueChangeEvent.getNewValue())
+0.406 - assertNotNull(multiValueChangeEvent)
+0.327 - assertDoesNotThrow(() -> propertyIndexByIntegerKey.processChangeEvent(multiValueChangeEvent, keysToAdd, keysToRemove))
+0.286 - assertEquals(OMultiValueChangeEvent.OChangeType.REMOVE, multiValueChangeEvent.getChangeType())
+0.208 - assertThrows(IllegalArgumentException.class, () -> {
+    propertyIndexByIntegerKey.processChangeEvent(new OMultiValueChangeEvent<>(OMultiValueChangeEvent.OChangeType.ADD, "STR", "STR"), keysToAdd, keysToRemove)
+0.057 - })
+0.000 - ```

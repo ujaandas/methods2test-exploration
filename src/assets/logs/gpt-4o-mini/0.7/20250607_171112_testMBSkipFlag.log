@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class CABAC {
+    public boolean readMBSkipFlag ( MDecoder mDecoder , SliceType slType , boolean leftAvailable , boolean topAvailable , int mbX ) { 
+    int base = slType == SliceType . P ? 11 : 24 ; 
+    boolean ret = mDecoder . decodeBin ( base + ( leftAvailable && ! skipFlagLeft ? 1 : 0 ) + ( topAvailable && ! skipFlagsTop [ mbX ] ? 1 : 0 ) ) == 1 ; 
+    skipFlagLeft = skipFlagsTop [ mbX ] = ret ; 
+    return ret ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class CABACTest {
+    @Test
+     public void testMBSkipFlag ( ) {
+         CABAC cabac = new CABAC ( 2 ) ; 
+         MockMDecoder m = new MockMDecoder ( new int [ ] { 
+     0 } , new int [ ] { 
+     11 } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 0));
+assertEquals(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0), true);
+assertEquals(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0), false);
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 1));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 1));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 1));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 1));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 1));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 1));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 1));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 1));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 2));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 2));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(false,cabac.readMBSkipFlag(m,SliceType.P,false,false,0)); ===
+0.920 - assertEquals(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0), true)
+0.901 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0))
+0.899 - assertEquals(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0), false)
+0.885 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 1))
+0.885 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 2))
+0.877 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 1))
+0.877 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 2))
+0.846 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 0))
+0.846 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 0))
+0.841 - ```java
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0))
+0.837 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 0))
+0.837 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 0))
+0.831 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, false, 1))
+0.831 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 1))
+0.822 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 1))
+0.822 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, false, true, 1))
+0.791 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 0))
+0.781 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 0))
+0.775 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, true, true, 1))
+0.766 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 1))
+0.000 - ```

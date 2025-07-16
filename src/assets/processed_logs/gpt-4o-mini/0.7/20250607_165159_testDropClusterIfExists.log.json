@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecutionTest {\n@Test\npublic void testDropClusterIfExists ( ) {\nString cluster = \"STR\" ;\n( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(db.getStorage().getClusterById(0));\nAssert.assertEquals(0, odropClusterStatementExecution.getClusterIdByName(\"STR\"));\nAssert.assertTrue(db.getStorage().getClusterById(0).getName().equals(\"STR\"));\nAssert.assertTrue(db.getStorage().getClusters().size() > 0);\nAssert.assertTrue(db.getStorage().clusterExists(\"STR\"));\nAssert.assertEquals(\"STR\", db.getStorage().getClusterById(0).getName());\nAssert.assertTrue(db.getStorage().getClusterById(0).isActive());\nAssert.assertNotEquals(-1, odropClusterStatementExecution.getClusterIdByName(\"STR\"));\nAssert.assertTrue(db.getStorage().getClusterById(0).isTemporary());\nAssert.assertNotNull(db.getStorage().getClusterById(0).getRecords());\nAssert.assertEquals(1, db.getStorage().getClusterIds().length);\nAssert.assertTrue(Arrays.asList(db.getStorage().getClusterNames()).contains(\"STR\"));\nAssert.assertEquals(\"STR\", db.getStorage().getClusterById(0).getClusterName());\nAssert.assertEquals(1, db.getStorage().getClusterCount());\nAssert.assertTrue(db.getStorage().getClusterNames().length > 0);\nAssert.assertTrue(db.getStorage().getClusterIds().length > 0);\nAssert.assertFalse(db.getStorage().getClusterNames().isEmpty());\nAssert.assertSame(db.getStorage().getCluster(\"STR\"), db.getStorage().getClusterById(0));\nAssert.assertFalse(db.getStorage().getClusterNames().contains(\"INVALID_CLUSTER\"));\nAssert.assertNull(db.getStorage().getClusterById(-1));\nAssert.assertTrue(db.getStorage().getClusterNames().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.694,
+        0.674,
+        0.646,
+        0.638,
+        0.629,
+        0.619,
+        0.6,
+        0.6,
+        0.578,
+        0.563,
+        0.561,
+        0.561,
+        0.55,
+        0.537,
+        0.534,
+        0.52,
+        0.517,
+        0.51,
+        0.508,
+        0.495,
+        0.495,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(cluster)>0);"
+}

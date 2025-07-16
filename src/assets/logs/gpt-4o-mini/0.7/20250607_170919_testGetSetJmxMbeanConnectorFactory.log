@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    public JMXMBeanConnectionFactory getJmxMBeanConnectionFactory ( ) { 
+    return jmxmBeanConnectionFactory ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testGetSetJmxMbeanConnectorFactory ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+JMXJvmIdConnectionFactory factory = new JMXJvmIdConnectionFactory();
+JMXMBeanConnectionFactory connectionFactory = factory.getJmxMBeanConnectionFactory();
+assertNotNull(connectionFactory);
+assertTrue(connectionFactory instanceof JMXMBeanConnectionFactory);
+assertEquals(expectedValue1, connectionFactory.getSomeProperty());
+assertEquals(expectedValue2, connectionFactory.getAnotherProperty());
+assertTrue(connectionFactory.isConnected());
+assertFalse(connectionFactory.isDisconnected());
+assertEquals(expectedValue3, connectionFactory.getServiceUrl());
+assertNotNull(connectionFactory.getMBeanServerConnection());
+assertTrue(connectionFactory.getMBeanServerConnection().isConnected());
+assertEquals(expectedValue4, connectionFactory.getDefaultDomain());
+assertTrue(connectionFactory.getMBeanNames().size() > 0);
+assertTrue(connectionFactory.getMBeanNames().contains(expectedMBeanName));
+assertNotNull(connectionFactory.getObjectInstance(expectedMBeanName));
+assertThrows(SomeException.class, () -> connectionFactory.someMethodThatThrows());
+assertDoesNotThrow(() -> connectionFactory.someMethodThatDoesNotThrow());
+assertEquals(expectedValue5, connectionFactory.getAttribute(expectedMBeanName, "attributeName"));
+assertTrue(connectionFactory.invokeOperation(expectedMBeanName, "operationName", parameters));
+assertFalse(connectionFactory.invokeOperation(expectedMBeanName, "nonExistentOperation", parameters));
+assertNotNull(connectionFactory.getMBeanInfo(expectedMBeanName));
+assertEquals(expectedValue6, connectionFactory.getMBeanAttribute(expectedMBeanName, "attributeName"));
+assertTrue(connectionFactory.isMBeanRegistered(expectedMBeanName));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(this.factory.getJmxMBeanConnectionFactory()instanceofDefaultJmxMBeanConnectionFactory); ===
+0.770 - assertTrue(connectionFactory instanceof JMXMBeanConnectionFactory)
+0.563 - assertTrue(connectionFactory.getMBeanServerConnection().isConnected())
+0.543 - assertTrue(connectionFactory.isConnected())
+0.538 - assertNotNull(connectionFactory.getMBeanServerConnection())
+0.521 - assertTrue(connectionFactory.invokeOperation(expectedMBeanName, "operationName", parameters))
+0.506 - assertTrue(connectionFactory.getMBeanNames().contains(expectedMBeanName))
+0.503 - assertTrue(connectionFactory.isMBeanRegistered(expectedMBeanName))
+0.494 - assertNotNull(connectionFactory.getObjectInstance(expectedMBeanName))
+0.490 - assertTrue(connectionFactory.getMBeanNames().size() > 0)
+0.490 - assertFalse(connectionFactory.invokeOperation(expectedMBeanName, "nonExistentOperation", parameters))
+0.486 - assertFalse(connectionFactory.isDisconnected())
+0.483 - JMXMBeanConnectionFactory connectionFactory = factory.getJmxMBeanConnectionFactory()
+0.472 - assertNotNull(connectionFactory.getMBeanInfo(expectedMBeanName))
+0.457 - assertEquals(expectedValue4, connectionFactory.getDefaultDomain())
+0.403 - assertNotNull(connectionFactory)
+0.398 - assertEquals(expectedValue5, connectionFactory.getAttribute(expectedMBeanName, "attributeName"))
+0.381 - ```java
+JMXJvmIdConnectionFactory factory = new JMXJvmIdConnectionFactory()
+0.378 - assertEquals(expectedValue6, connectionFactory.getMBeanAttribute(expectedMBeanName, "attributeName"))
+0.352 - assertEquals(expectedValue3, connectionFactory.getServiceUrl())
+0.348 - assertEquals(expectedValue1, connectionFactory.getSomeProperty())
+0.347 - assertDoesNotThrow(() -> connectionFactory.someMethodThatDoesNotThrow())
+0.343 - assertThrows(SomeException.class, () -> connectionFactory.someMethodThatThrows())
+0.341 - assertEquals(expectedValue2, connectionFactory.getAnotherProperty())
+0.000 - ```

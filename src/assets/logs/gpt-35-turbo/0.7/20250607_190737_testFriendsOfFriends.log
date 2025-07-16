@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsOfFriends ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(qResult);
+assertEquals(10, qResult.size());
+assertTrue(qResult.get(0).containsField("name"));
+assertFalse(qResult.isEmpty());
+assertNotNull(qResult.get(0).field("age"));
+assertTrue(qResult.get(0).field("age") instanceof Integer);
+assertEquals("John", qResult.get(0).field("name"));
+assertFalse(qResult.get(0).containsField("address"));
+assertTrue(qResult.get(0).field("friends") instanceof List);
+assertNotNull(qResult.get(0).field("friends"));
+assertTrue(qResult.get(0).<List>field("friends").size() > 0);
+assertEquals("Mary", qResult.get(0).<List>field("friends").get(0).field("name"));
+assertNotNull(qResult.get(0).field("friendsOfFriends"));
+assertTrue(qResult.get(0).<List>field("friendsOfFriends").size() > 0);
+assertFalse(qResult.get(0).<List>field("friendsOfFriends").isEmpty());
+assertTrue(qResult.get(0).<List>field("friendsOfFriends").get(0).field("name") instanceof String);
+assertEquals("Alice", qResult.get(0).<List>field("friendsOfFriends").get(0).field("name"));
+assertNotNull(qResult.get(0).field("friendsOfFriends").get(0).field("age"));
+assertTrue(qResult.get(0).<List>field("friendsOfFriends").get(0).field("age") instanceof Integer);
+assertEquals(25, qResult.get(0).<List>field("friendsOfFriends").get(0).field("age"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.984 - assertEquals(10, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.684 - assertEquals("John", qResult.get(0).field("name"))
+0.654 - assertNotNull(qResult)
+0.611 - assertNotNull(qResult.get(0).field("age"))
+0.585 - assertFalse(qResult.get(0).containsField("address"))
+0.564 - assertTrue(qResult.get(0).containsField("name"))
+0.526 - assertNotNull(qResult.get(0).field("friends"))
+0.523 - assertTrue(qResult.get(0).<List>field("friends").size() > 0)
+0.518 - assertNotNull(qResult.get(0).field("friendsOfFriends"))
+0.514 - assertEquals("Mary", qResult.get(0).<List>field("friends").get(0).field("name"))
+0.496 - assertEquals(25, qResult.get(0).<List>field("friendsOfFriends").get(0).field("age"))
+0.485 - assertFalse(qResult.get(0).<List>field("friendsOfFriends").isEmpty())
+0.474 - assertTrue(qResult.get(0).<List>field("friendsOfFriends").size() > 0)
+0.471 - assertEquals("Alice", qResult.get(0).<List>field("friendsOfFriends").get(0).field("name"))
+0.460 - assertTrue(qResult.get(0).field("friends") instanceof List)
+0.442 - assertTrue(qResult.get(0).field("age") instanceof Integer)
+0.438 - assertNotNull(qResult.get(0).field("friendsOfFriends").get(0).field("age"))
+0.352 - assertTrue(qResult.get(0).<List>field("friendsOfFriends").get(0).field("name") instanceof String)
+0.352 - assertTrue(qResult.get(0).<List>field("friendsOfFriends").get(0).field("age") instanceof Integer)

@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedProperties {
+    public static Set < String > bindAll ( Object instance , TestCase testCase ) { 
+    Set < String > usedProperties = new HashSet < > ( ) ; 
+    for ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) { 
+    String fullPropertyPath = entry . getKey ( ) . trim ( ) ; 
+    String value = entry . getValue ( ) . trim ( ) ; 
+    if ( bind0 ( instance , fullPropertyPath , value ) ) { 
+    usedProperties . add ( fullPropertyPath ) ; 
+    } } return usedProperties ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedPropertiesTest {
+    @Test
+     public void testReconstructObjectGraph ( ) {
+         TestCase testCase = new TestCase ( "STR" ) . setProperty ( "STR" , 10 ) ; 
+         Person person = new Person ( ) ; 
+         Set < String > usedProperties = bindAll ( person , testCase ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(person);
+assertEquals(10, person.getStr());
+assertTrue(usedProperties.contains("STR"));
+assertEquals(1, usedProperties.size());
+assertTrue(usedProperties.isEmpty() == false);
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("NON_EXISTENT_PROPERTY"));
+assertEquals("STR", usedProperties.iterator().next());
+assertNotEquals(0, usedProperties.size());
+assertTrue(usedProperties.stream().allMatch(prop -> prop.startsWith("STR")));
+assertTrue(usedProperties.stream().noneMatch(prop -> prop.startsWith("INVALID")));
+assertEquals("STR", usedProperties.stream().findFirst().orElse(null));
+assertTrue(usedProperties.stream().anyMatch(prop -> prop.equals("STR")));
+assertFalse(usedProperties.isEmpty());
+assertEquals(1, usedProperties.size());
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("INVALID_PROPERTY"));
+assertTrue(usedProperties.stream().allMatch(prop -> prop.trim().equals("STR")));
+assertNotNull(testCase.getProperties());
+assertEquals(1, testCase.getProperties().size());
+assertTrue(testCase.getProperties().containsKey("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(person.nullArm); ===
+0.724 - ```java
+assertNotNull(person)
+0.590 - assertEquals(10, person.getStr())
+0.559 - assertNotNull(testCase.getProperties())
+0.522 - assertNotEquals(0, usedProperties.size())
+0.424 - assertFalse(usedProperties.isEmpty())
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.394 - assertEquals(1, usedProperties.size())
+0.394 - assertEquals(1, usedProperties.size())
+0.389 - assertTrue(usedProperties.isEmpty() == false)
+0.376 - assertFalse(usedProperties.contains("INVALID_PROPERTY"))
+0.370 - assertEquals("STR", usedProperties.iterator().next())
+0.357 - assertTrue(testCase.getProperties().containsKey("STR"))
+0.351 - assertEquals("STR", usedProperties.stream().findFirst().orElse(null))
+0.342 - assertEquals(1, testCase.getProperties().size())
+0.333 - assertFalse(usedProperties.contains("NON_EXISTENT_PROPERTY"))
+0.323 - assertTrue(usedProperties.stream().anyMatch(prop -> prop.equals("STR")))
+0.321 - assertTrue(usedProperties.stream().allMatch(prop -> prop.trim().equals("STR")))
+0.311 - assertTrue(usedProperties.stream().allMatch(prop -> prop.startsWith("STR")))
+0.296 - assertTrue(usedProperties.stream().noneMatch(prop -> prop.startsWith("INVALID")))
+0.000 - ```

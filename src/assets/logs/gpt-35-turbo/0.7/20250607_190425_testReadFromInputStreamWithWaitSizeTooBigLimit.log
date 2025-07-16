@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytes {
+    int fromInputStream ( final InputStream in , final int maxSize ) throws IOException ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytesTest {
+    @Test
+     public void testReadFromInputStreamWithWaitSizeTooBigLimit ( ) throws Exception {
+         final byte [ ] data = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 } ; 
+         final InputStream is = new NotFullyAvailableAtTheTimeInputStream ( data , 5 ) ; 
+         final int result = testedInstance . fromInputStream ( is , 15 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(5, result);
+assertFalse(is.available() > 0);
+assertEquals(5, is.read());
+assertEquals(6, is.read());
+assertEquals(7, is.read());
+assertEquals(8, is.read());
+assertEquals(9, is.read());
+assertEquals(-1, is.read());
+assertEquals(0, is.available());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+assertEquals(-1, is.read());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,data.length); ===
+0.741 - assertEquals(5, result)
+0.613 - assertEquals(0, is.available())
+0.596 - assertEquals(5, is.read())
+0.596 - assertEquals(6, is.read())
+0.596 - assertEquals(7, is.read())
+0.596 - assertEquals(8, is.read())
+0.596 - assertEquals(9, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.586 - assertEquals(-1, is.read())
+0.525 - assertFalse(is.available() > 0)

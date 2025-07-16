@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class StackOverflow {
+    public Metadata ( ) { 
+    md = new HashMap < > ( ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class StackOverflowTest {
+    @Test
+     public void testNamespaceExtraction ( ) throws IOException {
+         prepareParserBolt ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         parse ( "STR" , "STR" , metadata ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(metadata);
+assertTrue(metadata.get("key1").isEmpty());
+assertEquals(0, metadata.size());
+assertFalse(metadata.containsKey("unrelatedKey"));
+assertNull(metadata.get("nonExistentKey"));
+assertTrue(metadata.get("key2").isEmpty());
+assertEquals("defaultValue", metadata.getOrDefault("key3", "defaultValue"));
+assertTrue(metadata.get("key4").isEmpty());
+assertFalse(metadata.containsKey("key5"));
+assertEquals(0, metadata.entrySet().size());
+assertTrue(metadata.keySet().isEmpty());
+assertTrue(metadata.values().isEmpty());
+assertNotEquals("unexpectedValue", metadata.get("key6"));
+assertTrue(metadata.get("key7").isEmpty());
+assertNull(metadata.get("key8"));
+assertFalse(metadata.containsValue("wrongValue"));
+assertEquals("expectedValue", metadata.getOrDefault("key9", "expectedValue"));
+assertNotNull(metadata.get("key10"));
+assertTrue(metadata.get("key11").isEmpty());
+assertEquals(0, metadata.values().size());
+assertTrue(metadata.isEmpty());
+assertEquals(0, metadata.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,output.getEmitted().size()); ===
+0.690 - assertEquals(0, metadata.entrySet().size())
+0.685 - assertEquals(0, metadata.size())
+0.685 - assertEquals(0, metadata.size())
+0.683 - assertEquals(0, metadata.values().size())
+0.476 - assertNull(metadata.get("nonExistentKey"))
+0.474 - assertNotEquals("unexpectedValue", metadata.get("key6"))
+0.469 - assertTrue(metadata.keySet().isEmpty())
+0.462 - assertEquals("expectedValue", metadata.getOrDefault("key9", "expectedValue"))
+0.452 - assertTrue(metadata.get("key1").isEmpty())
+0.452 - assertTrue(metadata.get("key2").isEmpty())
+0.452 - assertTrue(metadata.get("key4").isEmpty())
+0.452 - assertTrue(metadata.get("key7").isEmpty())
+0.447 - assertTrue(metadata.get("key11").isEmpty())
+0.444 - assertTrue(metadata.isEmpty())
+0.435 - assertEquals("defaultValue", metadata.getOrDefault("key3", "defaultValue"))
+0.434 - assertFalse(metadata.containsKey("key5"))
+0.432 - assertNull(metadata.get("key8"))
+0.420 - assertTrue(metadata.values().isEmpty())
+0.418 - assertFalse(metadata.containsKey("unrelatedKey"))
+0.410 - assertNotNull(metadata.get("key10"))
+0.396 - assertFalse(metadata.containsValue("wrongValue"))
+0.356 - ```java
+assertNotNull(metadata)
+0.000 - ```

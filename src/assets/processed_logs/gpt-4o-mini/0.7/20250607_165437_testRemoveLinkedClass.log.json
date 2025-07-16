@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterProperty {\npublic OClass getLinkedClass ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterPropertyTest {\n@Test\npublic void testRemoveLinkedClass ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOClass classLinked = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . LINK , classLinked ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.LINK, prop.getType());\nAssert.assertEquals(classLinked, prop.getLinkedClass());\nAssert.assertTrue(classA.properties().contains(prop));\nAssert.assertEquals(1, classA.properties().size());\nAssert.assertTrue(classA.getProperties().contains(prop));\nAssert.assertFalse(classA.getProperties().isEmpty());\nAssert.assertEquals(classA, prop.getParentClass());\nAssert.assertNotNull(schema.getClass(\"STR\"));\nAssert.assertEquals(2, schema.getClasses().size());\nAssert.assertTrue(schema.getClass(\"STR\").getProperties().contains(prop));\nAssert.assertEquals(1, classLinked.getProperties().size());\nAssert.assertTrue(classLinked.getProperties().isEmpty());\nAssert.assertTrue(schema.getClasses().stream().anyMatch(c -> c.getName().equals(\"STR\")));\nAssert.assertEquals(\"STR\", classA.getName());\nAssert.assertEquals(\"STR\", classLinked.getName());\nAssert.assertNotSame(classA, classLinked);\nAssert.assertSame(classLinked, prop.getLinkedClass());\nAssert.assertFalse(prop.isMultiValued());\nAssert.assertTrue(prop.isLink());\nAssert.assertFalse(prop.isEmbedded());\n```\n====================\n\n",
+    "scores": [
+        0.747,
+        0.716,
+        0.712,
+        0.667,
+        0.656,
+        0.603,
+        0.6,
+        0.58,
+        0.576,
+        0.538,
+        0.538,
+        0.522,
+        0.507,
+        0.494,
+        0.472,
+        0.444,
+        0.442,
+        0.424,
+        0.396,
+        0.366,
+        0.353,
+        0.348,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(prop.getLinkedClass());"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactory {\nint estimateSize ( ) {\nint s = SeekHead . id . length + 1 ;\ns += estimeteSeekSize ( a . get ( 0 ) . id . length , 1 ) ;\nfor ( int i = 1 ;\ni < a . size ( ) ;\ni ++ ) {\ns += estimeteSeekSize ( a . get ( i ) . id . length , a . get ( i ) . seekPointerSize ) ;\n} return s ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SeekHeadFactoryTest {\n@Test\npublic void testEdgeCasesWithFakeZ ( ) throws Exception {\nSeekHeadFactory a = new SeekHeadFactory ( - 1 ) ;\na . a . add ( createFakeZ ( Info . id , 0xFF ) ) ;\na . a . add ( createFakeZ ( Tracks . id , 0xFF05 ) ) ;\na . a . add ( createFakeZ ( Tags . id , 0xFEFFC0 ) ) ;\na . a . add ( createFakeZ ( Cues . id , 0xFF ) ) ;\nint computeSize = a . computeSeekHeadSize ( ) ;\nSystem . out . println ( \"STR\" + computeSize ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(estimatedSize1, computeSize);\nassertTrue(computeSize > 0);\nassertNotNull(a.a);\nassertEquals(4, a.a.size());\nassertTrue(a.a.get(0).id.length > 0);\nassertTrue(a.a.get(1).id.length > 0);\nassertTrue(a.a.get(2).id.length > 0);\nassertTrue(a.a.get(3).id.length > 0);\nassertEquals(0xFF, a.a.get(0).id.length);\nassertEquals(0xFF05, a.a.get(1).id.length);\nassertEquals(0xFEFFC0, a.a.get(2).id.length);\nassertEquals(0xFF, a.a.get(3).id.length);\nassertTrue(a.a.get(0).seekPointerSize > 0);\nassertTrue(a.a.get(1).seekPointerSize > 0);\nassertTrue(a.a.get(2).seekPointerSize > 0);\nassertTrue(a.a.get(3).seekPointerSize > 0);\nassertNotEquals(0, a.estimateSize());\nassertTrue(computeSize < Integer.MAX_VALUE);\nassertTrue(computeSize >= 0);\nassertEquals(expectedSize, computeSize);\nassertNotSame(previousSize, computeSize);\nassertTrue(computeSize <= maxSize);\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.825,
+        0.779,
+        0.647,
+        0.627,
+        0.618,
+        0.617,
+        0.568,
+        0.506,
+        0.494,
+        0.494,
+        0.488,
+        0.488,
+        0.488,
+        0.488,
+        0.482,
+        0.471,
+        0.433,
+        0.395,
+        0.395,
+        0.395,
+        0.395,
+        0.0
+    ],
+    "ground_truth": "assertEquals(a.estimateSize(),computeSize);"
+}

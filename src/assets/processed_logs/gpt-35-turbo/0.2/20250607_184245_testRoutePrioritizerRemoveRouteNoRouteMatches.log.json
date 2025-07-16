@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\n@Override\npublic Collection < UriResource > getPrioritizedRoutes ( ) {\nreturn Collections . unmodifiableCollection ( mappings ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testRoutePrioritizerRemoveRouteNoRouteMatches ( ) {\nDefaultRoutePrioritizer prioritizer = new DefaultRoutePrioritizer ( ) ;\nprioritizer . addRoute ( \"STR\" , 100 , NotImplementedHandler . class ) ;\nprioritizer . removeRoute ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());\nAssert.assertFalse(prioritizer.getPrioritizedRoutes().contains(\"STR\"));\nAssert.assertNull(prioritizer.getRouteHandler(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePriority(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePattern(\"STR\"));\nAssert.assertNull(prioritizer.getRouteHandler(\"NON_EXISTENT_ROUTE\"));\nAssert.assertNull(prioritizer.getRoutePriority(\"NON_EXISTENT_ROUTE\"));\nAssert.assertNull(prioritizer.getRoutePattern(\"NON_EXISTENT_ROUTE\"));\nAssert.assertNull(prioritizer.removeRoute(\"NON_EXISTENT_ROUTE\"));\nAssert.assertNull(prioritizer.getRouteHandler(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePriority(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePattern(\"STR\"));\nAssert.assertNull(prioritizer.removeRoute(\"STR\"));\nAssert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());\nAssert.assertFalse(prioritizer.getPrioritizedRoutes().contains(\"STR\"));\nAssert.assertNull(prioritizer.getRouteHandler(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePriority(\"STR\"));\nAssert.assertNull(prioritizer.getRoutePattern(\"STR\"));\nAssert.assertNull(prioritizer.removeRoute(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.982,
+        0.982,
+        0.817,
+        0.817,
+        0.654,
+        0.654,
+        0.654,
+        0.646,
+        0.646,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.571,
+        0.561,
+        0.542,
+        0.542
+    ],
+    "ground_truth": "Assert.assertEquals(1,prioritizer.getPrioritizedRoutes().size());"
+}

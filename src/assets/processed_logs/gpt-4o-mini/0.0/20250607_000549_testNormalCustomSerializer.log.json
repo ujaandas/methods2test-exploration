@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializer {\n@Override\npublic Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nreturn this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializerTest {\n@Test\npublic void testNormalCustomSerializer ( ) throws Exception {\nNormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ;\nNormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ;\nCustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ;\nCustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ;\nRequestBody body = new RequestBody ( 1 , \"STR\" ) ;\nString ret = ( String ) client . invokeSync ( addr , body , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(ret);\nassertEquals(\"ExpectedResponse\", ret);\nassertTrue(ret instanceof String);\nassertFalse(ret.isEmpty());\nassertEquals(10, ret.length());\nassertTrue(ret.contains(\"ExpectedSubstring\"));\nassertEquals(\"ExpectedResponse\", ret.trim());\nassertNotEquals(\"UnexpectedResponse\", ret);\nassertTrue(ret.startsWith(\"ExpectedStart\"));\nassertTrue(ret.endsWith(\"ExpectedEnd\"));\nassertEquals(\"ExpectedResponse\", new String(ret.getBytes(), StandardCharsets.UTF_8));\nassertFalse(ret.equalsIgnoreCase(\"unexpectedresponse\"));\nassertTrue(ret.matches(\"ExpectedRegexPattern\"));\nassertEquals(\"ExpectedResponse\", ret.toString());\nassertSame(\"ExpectedResponse\", ret);\nassertNotSame(\"UnexpectedResponse\", ret);\nassertArrayEquals(new String[]{\"ExpectedResponse\"}, new String[]{ret});\nassertTrue(Arrays.asList(\"ExpectedResponse\", \"AnotherValue\").contains(ret));\nassertEquals(\"ExpectedResponse\".hashCode(), ret.hashCode());\nassertTrue(ret.equals(\"ExpectedResponse\"));\nassertFalse(ret.equals(\"DifferentResponse\"));\nassertNotEquals(\"AnotherResponse\", ret);\n```\n====================\n\n",
+    "scores": [
+        0.454,
+        0.444,
+        0.431,
+        0.423,
+        0.407,
+        0.403,
+        0.4,
+        0.34,
+        0.337,
+        0.33,
+        0.328,
+        0.324,
+        0.322,
+        0.31,
+        0.31,
+        0.299,
+        0.261,
+        0.24,
+        0.231,
+        0.226,
+        0.222,
+        0.222,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+\"STR\",ret);"
+}

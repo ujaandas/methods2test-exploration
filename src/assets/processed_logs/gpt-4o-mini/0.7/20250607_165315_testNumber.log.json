@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void writeNumberLiteral ( long value , int numFracDigits ) throws IOException {\ncheckAcceptsValueAndPrefixComma ( ) ;\nif ( value < 0 ) {\nout . write ( '-' ) ;\nvalue = - value ;\n} if ( numFracDigits == 0 ) {\nout . write ( String . valueOf ( value ) ) ;\n} else {\nfinal long intPart = value / TEN_POW [ numFracDigits ] ;\nfinal String fracPart = String . valueOf ( 1_000_000_000 + value % TEN_POW [ numFracDigits ] ) . substring ( 10 - numFracDigits , 10 ) ;\nout . write ( String . valueOf ( intPart ) ) ;\nout . write ( \"STR\" ) ;\nout . write ( fracPart ) ;\n} afterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testNumber ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . writeNumberLiteral ( 12345 , 0 ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"12345\", result);\nassertTrue(result.length() > 0);\nassertFalse(result.isEmpty());\nassertFalse(result.contains(\"STR\"));\nassertTrue(result.matches(\"\\\\d+\"));\nassertEquals(5, result.length());\nassertTrue(result.startsWith(\"123\"));\nassertTrue(result.endsWith(\"45\"));\nassertNotNull(result);\nassertFalse(result.contains(\"-\"));\nassertTrue(result.contains(\"12345\"));\nassertEquals(12345, Integer.parseInt(result));\nassertNotEquals(\"00000\", result);\nassertFalse(result.equals(\"123\"));\nassertFalse(result.equals(\"123456\"));\nassertTrue(result.indexOf(\"5\") == 4);\nassertTrue(result.indexOf(\"3\") == 2);\nassertTrue(result.indexOf(\"1\") == 0);\nassertEquals(\"12345\", result.trim());\nassertTrue(Arrays.asList(\"12345\").contains(result));\nassertTrue(result.equals(result.trim()));\nassertEquals(\"12345\", result);\n```\n====================\n\n",
+    "scores": [
+        0.852,
+        0.807,
+        0.754,
+        0.742,
+        0.737,
+        0.681,
+        0.618,
+        0.6,
+        0.576,
+        0.576,
+        0.545,
+        0.525,
+        0.508,
+        0.508,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.484,
+        0.484,
+        0.484,
+        0.442,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

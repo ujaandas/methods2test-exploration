@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class UL {
+    public static UL newUL ( String ul ) { 
+    checkNotNull ( ul ) ; 
+    String [ ] split = StringUtils . splitS ( ul , "STR" ) ; 
+    byte b [ ] = new byte [ split . length ] ; 
+    for ( int i = 0 ; 
+    i < split . length ; 
+    i ++ ) { 
+    int parseInt = Integer . parseInt ( split [ i ] , 16 ) ; 
+    b [ i ] = ( byte ) parseInt ; 
+    } return new UL ( b ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ULTest {
+    @Test
+     public void testULFromString ( ) {
+         UL expected = new UL ( new byte [ ] { 
+     ( byte ) 0xff , 0xb , 1 , 2 , ( byte ) 0xff , 0xb , 1 , 2 } ) ; 
+         UL fromString = UL . newUL ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fromString);
+assertArrayEquals(expected.getBytes(), fromString.getBytes());
+assertEquals(expected, fromString);
+assertEquals(expected.hashCode(), fromString.hashCode());
+assertTrue(expected.equals(fromString));
+assertFalse(expected.equals(new UL(new byte[] {0x00})));
+assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()));
+assertEquals(expected.toString(), fromString.toString());
+assertEquals(expected.getClass(), fromString.getClass());
+assertNotSame(expected, fromString);
+assertTrue(fromString instanceof UL);
+assertFalse(fromString instanceof String);
+assertEquals(expected.getBytes().length, fromString.getBytes().length);
+assertArrayEquals(new byte[] { (byte) 0xff, (byte) 0xb, 1, 2, (byte) 0xff, (byte) 0xb, 1, 2 }, fromString.getBytes());
+assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()));
+assertNotEquals(expected, null);
+assertNotEquals(expected, new Object());
+assertThrows(NullPointerException.class, () -> UL.newUL(null));
+assertThrows(NumberFormatException.class, () -> UL.newUL("INVALID"));
+assertEquals(expected.toString(), "expected_string_representation"); // Adjust with actual expected representation
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(expected,fromString); ===
+1.000 - assertEquals(expected, fromString)
+0.836 - assertNotSame(expected, fromString)
+0.762 - assertNotEquals(expected, null)
+0.750 - assertEquals(expected.hashCode(), fromString.hashCode())
+0.750 - assertTrue(expected.equals(fromString))
+0.750 - assertEquals(expected.toString(), fromString.toString())
+0.750 - assertEquals(expected.getClass(), fromString.getClass())
+0.710 - assertArrayEquals(expected.getBytes(), fromString.getBytes())
+0.686 - assertNotEquals(expected, new Object())
+0.647 - assertEquals(expected.getBytes().length, fromString.getBytes().length)
+0.634 - assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()))
+0.634 - assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()))
+0.606 - ```java
+assertNotNull(fromString)
+0.586 - assertEquals(expected.toString(), "expected_string_representation")
+0.583 - assertFalse(fromString instanceof String)
+0.567 - assertTrue(fromString instanceof UL)
+0.471 - assertFalse(expected.equals(new UL(new byte[] {0x00})))
+0.418 - assertArrayEquals(new byte[] { (byte) 0xff, (byte) 0xb, 1, 2, (byte) 0xff, (byte) 0xb, 1, 2 }, fromString.getBytes())
+0.416 - // Adjust with actual expected representation
+```
+0.283 - assertThrows(NullPointerException.class, () -> UL.newUL(null))
+0.265 - assertThrows(NumberFormatException.class, () -> UL.newUL("INVALID"))

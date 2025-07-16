@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterProperty {\npublic OClass getLinkedClass ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterPropertyTest {\n@Test\npublic void testRemoveLinkedClass ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOClass classLinked = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . LINK , classLinked ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.LINK, prop.getType());\nAssert.assertEquals(classLinked, prop.getLinkedClass());\nAssert.assertTrue(classA.existsProperty(\"STR\"));\nAssert.assertEquals(1, classA.properties().size());\nAssert.assertEquals(1, classLinked.properties().size());\nAssert.assertTrue(classLinked.existsProperty(\"STR\"));\nAssert.assertTrue(classA.getIndexedProperties().isEmpty());\nAssert.assertTrue(classLinked.getIndexedProperties().isEmpty());\nAssert.assertFalse(prop.isMandatory());\nAssert.assertFalse(prop.isReadOnly());\nAssert.assertFalse(prop.isNotNull());\nAssert.assertFalse(prop.isNotNull());\nAssert.assertFalse(prop.isCollateCaseInsensitive());\nAssert.assertFalse(prop.isMin(\"0\"));\nAssert.assertFalse(prop.isMax(\"255\"));\nAssert.assertFalse(prop.isRegexp(\"\\\\d+\"));\nAssert.assertFalse(prop.isFullText());\nAssert.assertFalse(prop.isComposite());\nAssert.assertFalse(prop.isEncrypted());\n====================\n\n",
+    "scores": [
+        0.747,
+        0.691,
+        0.6,
+        0.576,
+        0.567,
+        0.562,
+        0.55,
+        0.545,
+        0.545,
+        0.538,
+        0.514,
+        0.507,
+        0.507,
+        0.507,
+        0.492,
+        0.492,
+        0.469,
+        0.458,
+        0.437,
+        0.395,
+        0.391
+    ],
+    "ground_truth": "assertNotNull(prop.getLinkedClass());"
+}

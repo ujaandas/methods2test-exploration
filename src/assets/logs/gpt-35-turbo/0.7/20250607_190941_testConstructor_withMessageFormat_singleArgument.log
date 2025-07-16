@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( String message , Object ... args ) { 
+    super ( format ( message , args ) ) ; 
+    Object lastArg = args [ args . length - 1 ] ; 
+    if ( lastArg instanceof Throwable ) { 
+    initCause ( ( Throwable ) lastArg ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withMessageFormat_singleArgument ( ) {
+         TestException exception = new TestException ( "STR" , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+
+assertEquals("STR", exception.getMessage());
+assertTrue(exception.getCause() == null);
+assertFalse(exception.getMessage().isEmpty());
+assertTrue(exception.getMessage().contains("STR"));
+assertFalse(exception.getMessage().contains("foo"));
+assertTrue(exception.getMessage().startsWith("S"));
+assertTrue(exception.getMessage().endsWith("R"));
+assertEquals(1, exception.getCause());
+assertNotNull(exception.getMessage());
+assertNotEquals("foo", exception.getMessage());
+assertTrue(exception.getMessage().length() > 0);
+assertTrue(exception.getMessage().matches("[A-Z]+"));
+assertFalse(exception.getMessage().matches("[0-9]+"));
+assertTrue(exception.getMessage().equalsIgnoreCase("str"));
+assertFalse(exception.getMessage().equalsIgnoreCase("STR"));
+assertTrue(exception.getMessage().toLowerCase().contains("str"));
+assertFalse(exception.getMessage().toUpperCase().contains("str"));
+assertTrue(exception.getMessage().indexOf("T") == 2);
+assertFalse(exception.getMessage().indexOf("S") == 1);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",exception.getMessage()); ===
+1.000 - assertEquals("STR", exception.getMessage())
+0.897 - assertNotEquals("foo", exception.getMessage())
+0.821 - assertEquals(1, exception.getCause())
+0.810 - assertNotNull(exception.getMessage())
+0.759 - assertFalse(exception.getMessage().isEmpty())
+0.713 - assertTrue(exception.getMessage().length() > 0)
+0.710 - assertFalse(exception.getMessage().contains("foo"))
+0.710 - assertFalse(exception.getMessage().indexOf("S") == 1)
+0.695 - assertFalse(exception.getMessage().matches("[0-9]+"))
+0.689 - assertTrue(exception.getMessage().endsWith("R"))
+0.674 - assertTrue(exception.getMessage().contains("STR"))
+0.674 - assertTrue(exception.getMessage().startsWith("S"))
+0.674 - assertTrue(exception.getMessage().indexOf("T") == 2)
+0.660 - assertTrue(exception.getMessage().matches("[A-Z]+"))
+0.653 - assertFalse(exception.getMessage().equalsIgnoreCase("STR"))
+0.650 - assertTrue(exception.getCause() == null)
+0.620 - assertTrue(exception.getMessage().equalsIgnoreCase("str"))
+0.617 - assertFalse(exception.getMessage().toUpperCase().contains("str"))
+0.585 - assertTrue(exception.getMessage().toLowerCase().contains("str"))

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilter {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilterTest {
+    @Test
+     public void testCustomDepthZero ( ) throws MalformedURLException {
+         URLFilter filter = createFilter ( "STR" , 3 ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( MetadataTransfer . maxDepthKeyName , "STR" ) ; 
+         String filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("Expected result for depth 0", filterResult);
+assertTrue(filterResult.contains("expectedSubstring"));
+assertFalse(filterResult.isEmpty());
+assertEquals("Expected URL format", new URL(filterResult).toExternalForm(), filterResult);
+assertTrue(filterResult.startsWith("http"));
+assertTrue(filterResult.endsWith(".com"));
+assertFalse(filterResult.contains("forbiddenSubstring"));
+assertTrue(filterResult.matches(".*[0-9].*"));
+assertNotEquals("Unexpected result", "unexpectedValue", filterResult);
+assertTrue(filterResult.length() > 10);
+assertFalse(filterResult.equals("invalidUrl"));
+assertTrue(filterResult.contains("expectedPath"));
+assertEquals("Expected protocol", "http", new URL(filterResult).getProtocol());
+assertNotEquals("Different URL expected", "http://example.com", filterResult);
+assertTrue(filterResult.contains("expectedQueryParam=value"));
+assertFalse(filterResult.contains("error"));
+assertTrue(filterResult.matches("https?://.*"));
+assertEquals("Expected depth value", 0, getDepth(filterResult));
+assertTrue(filterResult.startsWith("http://"));
+assertFalse(filterResult.contains("disallowedPath"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(null,filterResult); ===
+0.699 - assertEquals("Expected result for depth 0", filterResult)
+0.697 - assertFalse(filterResult.isEmpty())
+0.667 - ```java
+assertNotNull(filterResult)
+0.639 - assertNotEquals("Unexpected result", "unexpectedValue", filterResult)
+0.627 - assertTrue(filterResult.length() > 10)
+0.622 - assertEquals("Expected depth value", 0, getDepth(filterResult))
+0.622 - assertFalse(filterResult.contains("error"))
+0.597 - assertFalse(filterResult.equals("invalidUrl"))
+0.583 - assertTrue(filterResult.endsWith(".com"))
+0.568 - assertTrue(filterResult.startsWith("http"))
+0.558 - assertNotEquals("Different URL expected", "http://example.com", filterResult)
+0.554 - assertFalse(filterResult.contains("disallowedPath"))
+0.553 - assertTrue(filterResult.matches(".*[0-9].*"))
+0.545 - assertTrue(filterResult.startsWith("http://"))
+0.539 - assertEquals("Expected URL format", new URL(filterResult).toExternalForm(), filterResult)
+0.538 - assertTrue(filterResult.matches("https?://.*"))
+0.529 - assertFalse(filterResult.contains("forbiddenSubstring"))
+0.525 - assertTrue(filterResult.contains("expectedPath"))
+0.514 - assertEquals("Expected protocol", "http", new URL(filterResult).getProtocol())
+0.494 - assertTrue(filterResult.contains("expectedSubstring"))
+0.457 - assertTrue(filterResult.contains("expectedQueryParam=value"))
+0.000 - ```

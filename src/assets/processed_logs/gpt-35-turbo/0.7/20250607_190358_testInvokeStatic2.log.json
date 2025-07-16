@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Platform {\npublic static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) {\ntry {\nfor ( Method method : cls . getDeclaredMethods ( ) ) {\nif ( method . getName ( ) . equals ( methodName ) ) {\nreturn ( T ) method . invoke ( null , params ) ;\n} } throw new NoSuchMethodException ( cls + \"STR\" + methodName ) ;\n} catch ( Exception e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage jcodec.jcodec;\n\npublic class PlatformTest {\n@Test\npublic void testInvokeStatic2 ( ) {\nint parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , \"STR\" , new Object [ ] {\nByteBuffer . wrap ( \"STR\" . getBytes ( ) ) } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(6, parseBuf);\nAssert.assertTrue(parseBuf > 0);\nAssert.assertNotNull(parseBuf);\nAssert.assertNotEquals(0, parseBuf);\nAssert.assertTrue(parseBuf < 10);\nAssert.assertFalse(parseBuf == 10);\nAssert.assertEquals(ByteBuffer.wrap(\"STR\".getBytes()), parseBuf);\nAssert.assertNotEquals(10, parseBuf);\nAssert.assertTrue(parseBuf != 10);\nAssert.assertTrue(parseBuf >= 0);\nAssert.assertTrue(parseBuf <= 10);\nAssert.assertNotEquals(null, parseBuf);\nAssert.assertNotEquals(5, parseBuf);\nAssert.assertTrue(parseBuf != 5);\nAssert.assertTrue(parseBuf == 6);\nAssert.assertEquals(6, parseBuf);\nAssert.assertNotNull(parseBuf);\nAssert.assertNotEquals(4, parseBuf);\nAssert.assertTrue(parseBuf != 4);\nAssert.assertTrue(parseBuf > 5);\n====================\n\n",
+    "scores": [
+        0.939,
+        0.939,
+        0.923,
+        0.885,
+        0.885,
+        0.868,
+        0.836,
+        0.76,
+        0.75,
+        0.75,
+        0.723,
+        0.723,
+        0.708,
+        0.708,
+        0.708,
+        0.708,
+        0.708,
+        0.694,
+        0.694,
+        0.568
+    ],
+    "ground_truth": "assertEquals(42,parseBuf);"
+}

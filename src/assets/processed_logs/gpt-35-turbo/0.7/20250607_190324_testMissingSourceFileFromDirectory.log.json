@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoader {\n@Override\npublic Source load ( final String sourceFile ) throws IOException {\nInputStream stream = locate ( sourceFile ) ;\nif ( stream != null ) {\ntry ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ;\nInputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) {\nString source = IOUtil . toString ( reader ) ;\nreturn new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ;\n} catch ( NoSuchAlgorithmException ex ) {\nthrow new IOException ( \"STR\" , ex ) ;\n} } else {\nreturn null ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoaderTest {\n@Test\npublic void testMissingSourceFileFromDirectory ( ) throws Exception {\nDirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(null, sourceLoader.load(\"missingFile1\"));\nassertNull(sourceLoader.load(\"missingFile2\"));\nassertNull(sourceLoader.load(\"missingFile3\"));\nassertNull(sourceLoader.load(\"missingFile4\"));\nassertNull(sourceLoader.load(\"missingFile5\"));\nassertEquals(null, sourceLoader.load(\"missingFile6\"));\nassertNull(sourceLoader.load(\"missingFile7\"));\nassertNull(sourceLoader.load(\"missingFile8\"));\nassertNull(sourceLoader.load(\"missingFile9\"));\nassertNull(sourceLoader.load(\"missingFile10\"));\nassertEquals(null, sourceLoader.load(\"missingFile11\"));\nassertNull(sourceLoader.load(\"missingFile12\"));\nassertNull(sourceLoader.load(\"missingFile13\"));\nassertNull(sourceLoader.load(\"missingFile14\"));\nassertNull(sourceLoader.load(\"missingFile15\"));\nassertEquals(null, sourceLoader.load(\"missingFile16\"));\nassertNull(sourceLoader.load(\"missingFile17\"));\nassertNull(sourceLoader.load(\"missingFile18\"));\nassertNull(sourceLoader.load(\"missingFile19\"));\nassertNull(sourceLoader.load(\"missingFile20\"));\n====================\n\n",
+    "scores": [
+        0.815,
+        0.815,
+        0.815,
+        0.815,
+        0.815,
+        0.815,
+        0.815,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.805,
+        0.705,
+        0.705,
+        0.697,
+        0.697
+    ],
+    "ground_truth": "assertNull(sourceLoader.load(\"STR\"));"
+}

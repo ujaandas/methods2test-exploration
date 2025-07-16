@@ -1,0 +1,66 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( Throwable cause ) { 
+    super ( cause ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withCause ( ) {
+         RuntimeException cause = new RuntimeException ( ) ; 
+         TestException exception = new TestException ( cause ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(exception);
+Assert.assertEquals(cause, exception.getCause());
+Assert.assertTrue(exception instanceof TestException);
+Assert.assertEquals("java.lang.RuntimeException", exception.getCause().getClass().getName());
+Assert.assertTrue(exception.getMessage() == null);
+Assert.assertNotEquals(0, exception.hashCode());
+Assert.assertTrue(exception.equals(exception));
+Assert.assertNotEquals(cause, new TestException(new RuntimeException()));
+Assert.assertEquals(cause.hashCode(), exception.getCause().hashCode());
+Assert.assertNotEquals(0, exception.toString().length());
+Assert.assertTrue(exception.toString().contains("TestException"));
+Assert.assertFalse(exception.equals(null));
+Assert.assertTrue(exception.equals(exception));
+Assert.assertNotEquals(cause, new TestException(new IllegalArgumentException()));
+Assert.assertNotEquals(cause, new TestException(new NullPointerException()));
+Assert.assertNotEquals(cause, new TestException(new IllegalStateException()));
+Assert.assertTrue(exception.toString().startsWith("hazelcast.hazelcast-simulator.simulator.TestException:"));
+Assert.assertTrue(exception.toString().contains("java.lang.RuntimeException"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(cause,exception.getCause()); ===
+1.000 - Assert.assertEquals(cause, exception.getCause())
+0.784 - Assert.assertEquals(cause.hashCode(), exception.getCause().hashCode())
+0.734 - Assert.assertNotEquals(0, exception.hashCode())
+0.682 - Assert.assertNotEquals(0, exception.toString().length())
+0.667 - Assert.assertNotEquals(cause, new TestException(new RuntimeException()))
+0.667 - Assert.assertFalse(exception.equals(null))
+0.650 - Assert.assertTrue(exception.getMessage() == null)
+0.642 - Assert.assertNotEquals(cause, new TestException(new NullPointerException()))
+0.636 - Assert.assertNotEquals(cause, new TestException(new IllegalArgumentException()))
+0.636 - Assert.assertNotEquals(cause, new TestException(new IllegalStateException()))
+0.597 - Assert.assertEquals("java.lang.RuntimeException", exception.getCause().getClass().getName())
+0.594 - Assert.assertNotNull(exception)
+0.557 - Assert.assertTrue(exception.equals(exception))
+0.557 - Assert.assertTrue(exception.equals(exception))
+0.500 - Assert.assertTrue(exception instanceof TestException)
+0.449 - Assert.assertTrue(exception.toString().contains("TestException"))
+0.396 - Assert.assertTrue(exception.toString().contains("java.lang.RuntimeException"))
+0.312 - Assert.assertTrue(exception.toString().startsWith("hazelcast.hazelcast-simulator.simulator.TestException:"))

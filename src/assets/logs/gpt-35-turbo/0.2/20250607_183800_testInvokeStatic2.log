@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Platform {
+    public static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) { 
+    try { 
+    for ( Method method : cls . getDeclaredMethods ( ) ) { 
+    if ( method . getName ( ) . equals ( methodName ) ) { 
+    return ( T ) method . invoke ( null , params ) ; 
+    } } throw new NoSuchMethodException ( cls + "STR" + methodName ) ; 
+    } catch ( Exception e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package jcodec.jcodec;
+
+public class PlatformTest {
+    @Test
+     public void testInvokeStatic2 ( ) {
+         int parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , "STR" , new Object [ ] { 
+     ByteBuffer . wrap ( "STR" . getBytes ( ) ) } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(4, parseBuf);
+assertNotNull(parseBuf);
+assertTrue(parseBuf > 0);
+assertFalse(parseBuf < 0);
+assertEquals("test", String.valueOf(parseBuf));
+assertNotEquals(10, parseBuf);
+assertTrue(parseBuf != 0);
+assertArrayEquals(new byte[]{83, 84, 82}, ByteBuffer.wrap("STR".getBytes()).array());
+assertSame(PlatformTest.class, parseBuf.getClass());
+assertNotSame(Platform.class, parseBuf.getClass());
+assertEquals(ByteBuffer.wrap("STR".getBytes()), parseBuf);
+assertTrue(parseBuf instanceof Integer);
+assertFalse(parseBuf instanceof String);
+assertEquals(3, ByteBuffer.wrap("STR".getBytes()).array().length);
+assertNotNull(ByteBuffer.wrap("STR".getBytes()));
+assertNull(null);
+assertTrue(parseBuf == 4);
+assertFalse(parseBuf == 10);
+assertEquals(3, ByteBuffer.wrap("STR".getBytes()).array().length);
+assertNotEquals(0, parseBuf);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(42,parseBuf); ===
+0.885 - assertNotEquals(0, parseBuf)
+0.868 - assertNotEquals(10, parseBuf)
+0.792 - assertFalse(parseBuf < 0)
+0.774 - Assertions:
+
+assertEquals(4, parseBuf)
+0.760 - assertFalse(parseBuf == 10)
+0.750 - assertNotNull(parseBuf)
+0.723 - assertTrue(parseBuf > 0)
+0.708 - assertTrue(parseBuf != 0)
+0.708 - assertTrue(parseBuf == 4)
+0.657 - assertEquals("test", String.valueOf(parseBuf))
+0.613 - assertFalse(parseBuf instanceof String)
+0.568 - assertEquals(ByteBuffer.wrap("STR".getBytes()), parseBuf)
+0.548 - assertTrue(parseBuf instanceof Integer)
+0.537 - assertNull(null)
+0.514 - assertNotSame(Platform.class, parseBuf.getClass())
+0.507 - assertSame(PlatformTest.class, parseBuf.getClass())
+0.427 - assertEquals(3, ByteBuffer.wrap("STR".getBytes()).array().length)
+0.427 - assertEquals(3, ByteBuffer.wrap("STR".getBytes()).array().length)
+0.400 - assertArrayEquals(new byte[]{83, 84, 82}, ByteBuffer.wrap("STR".getBytes()).array())
+0.384 - assertNotNull(ByteBuffer.wrap("STR".getBytes()))

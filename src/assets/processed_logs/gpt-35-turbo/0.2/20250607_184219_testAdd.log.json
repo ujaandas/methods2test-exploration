@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic int count ( String poolKey ) {\nif ( StringUtils . isBlank ( poolKey ) ) {\nreturn 0 ;\n} ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nif ( null != pool ) {\nreturn pool . size ( ) ;\n} else {\nreturn 0 ;\n} }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testAdd ( ) {\nConnection conn = getAConn ( ) ;\ncm . add ( conn ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(1, cm.count(\"poolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") > 0);\nAssert.assertNotNull(cm.getConnectionPool(\"poolKey\"));\nAssert.assertEquals(0, cm.count(\"\"));\nAssert.assertEquals(0, cm.count(null));\nAssert.assertEquals(0, cm.count(\"nonExistentPoolKey\"));\nAssert.assertEquals(0, cm.count(\"invalidPoolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") >= 0);\nAssert.assertNotEquals(2, cm.count(\"poolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") == 0);\nAssert.assertNotEquals(0, cm.count(\"poolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") != 2);\nAssert.assertTrue(cm.count(\"poolKey\") <= 0);\nAssert.assertNotEquals(1, cm.count(\"invalidPoolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") < 2);\nAssert.assertTrue(cm.count(\"poolKey\") <= 1);\nAssert.assertTrue(cm.count(\"poolKey\") >= 0);\nAssert.assertNotEquals(0, cm.count(\"poolKey\"));\nAssert.assertTrue(cm.count(\"poolKey\") != 1);\nAssert.assertTrue(cm.count(\"poolKey\") == 0);\n====================\n\n",
+    "scores": [
+        0.971,
+        0.901,
+        0.901,
+        0.901,
+        0.827,
+        0.825,
+        0.821,
+        0.82,
+        0.788,
+        0.788,
+        0.785,
+        0.776,
+        0.776,
+        0.776,
+        0.776,
+        0.776,
+        0.776,
+        0.776,
+        0.776,
+        0.633
+    ],
+    "ground_truth": "Assert.assertEquals(1,cm.count(poolKey));"
+}

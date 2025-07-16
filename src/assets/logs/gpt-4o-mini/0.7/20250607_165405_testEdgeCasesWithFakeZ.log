@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class SeekHeadFactory {
+    int estimateSize ( ) { 
+    int s = SeekHead . id . length + 1 ; 
+    s += estimeteSeekSize ( a . get ( 0 ) . id . length , 1 ) ; 
+    for ( int i = 1 ; 
+    i < a . size ( ) ; 
+    i ++ ) { 
+    s += estimeteSeekSize ( a . get ( i ) . id . length , a . get ( i ) . seekPointerSize ) ; 
+    } return s ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class SeekHeadFactoryTest {
+    @Test
+     public void testEdgeCasesWithFakeZ ( ) throws Exception {
+         SeekHeadFactory a = new SeekHeadFactory ( - 1 ) ; 
+         a . a . add ( createFakeZ ( Info . id , 0xFF ) ) ; 
+         a . a . add ( createFakeZ ( Tracks . id , 0xFF05 ) ) ; 
+         a . a . add ( createFakeZ ( Tags . id , 0xFEFFC0 ) ) ; 
+         a . a . add ( createFakeZ ( Cues . id , 0xFF ) ) ; 
+         int computeSize = a . computeSeekHeadSize ( ) ; 
+         System . out . println ( "STR" + computeSize ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertTrue(computeSize > 0);
+Assert.assertEquals(estimateSize(a), computeSize);
+Assert.assertNotNull(a.a);
+Assert.assertEquals(4, a.a.size());
+Assert.assertTrue(a.a.get(0).id.length > 0);
+Assert.assertTrue(a.a.get(1).id.length > 0);
+Assert.assertTrue(a.a.get(2).id.length > 0);
+Assert.assertTrue(a.a.get(3).id.length > 0);
+Assert.assertEquals(0xFF, a.a.get(0).seekPointerSize);
+Assert.assertEquals(0xFF05, a.a.get(1).seekPointerSize);
+Assert.assertEquals(0xFEFFC0, a.a.get(2).seekPointerSize);
+Assert.assertEquals(0xFF, a.a.get(3).seekPointerSize);
+Assert.assertTrue(computeSize < 1000);
+Assert.assertFalse(computeSize == Integer.MAX_VALUE);
+Assert.assertFalse(computeSize < 0);
+Assert.assertTrue(computeSize % 2 == 0 || computeSize % 2 == 1);
+Assert.assertTrue(a.a.get(0).id.length + a.a.get(1).id.length + a.a.get(2).id.length + a.a.get(3).id.length > 0);
+Assert.assertNotEquals(0, a.estimateSize());
+Assert.assertNotNull(a.a.get(1).id);
+Assert.assertNotNull(a.a.get(2).id);
+Assert.assertNotNull(a.a.get(3).id);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(a.estimateSize(),computeSize); ===
+0.964 - Assert.assertEquals(estimateSize(a), computeSize)
+0.779 - Assert.assertNotEquals(0, a.estimateSize())
+0.676 - Assert.assertFalse(computeSize < 0)
+0.647 - Assert.assertEquals(4, a.a.size())
+0.600 - Assert.assertTrue(computeSize < 1000)
+0.575 - Assert.assertEquals(0xFF, a.a.get(0).seekPointerSize)
+0.575 - Assert.assertEquals(0xFF, a.a.get(3).seekPointerSize)
+0.562 - Assert.assertEquals(0xFF05, a.a.get(1).seekPointerSize)
+0.560 - ```java
+Assert.assertTrue(computeSize > 0)
+0.549 - Assert.assertEquals(0xFEFFC0, a.a.get(2).seekPointerSize)
+0.541 - Assert.assertFalse(computeSize == Integer.MAX_VALUE)
+0.477 - Assert.assertTrue(computeSize % 2 == 0 || computeSize % 2 == 1)
+0.433 - Assert.assertNotNull(a.a)
+0.429 - Assert.assertNotNull(a.a.get(1).id)
+0.429 - Assert.assertNotNull(a.a.get(2).id)
+0.429 - Assert.assertNotNull(a.a.get(3).id)
+0.395 - Assert.assertTrue(a.a.get(0).id.length > 0)
+0.395 - Assert.assertTrue(a.a.get(1).id.length > 0)
+0.395 - Assert.assertTrue(a.a.get(2).id.length > 0)
+0.395 - Assert.assertTrue(a.a.get(3).id.length > 0)
+0.317 - Assert.assertTrue(a.a.get(0).id.length + a.a.get(1).id.length + a.a.get(2).id.length + a.a.get(3).id.length > 0)
+0.000 - ```

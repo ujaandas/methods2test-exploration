@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected boolean isGeneratedConfigFile ( File fileChanged , File srcDir , File targetDir ) throws IOException { 
+    return ( fileChanged . getName ( ) . equals ( "STR" ) || fileChanged . getName ( ) . equals ( "STR" ) ) && isGeneratedTargetFile ( fileChanged , srcDir , targetDir ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testGeneratedConfigFiles ( ) throws Exception {
+         File sourceFile = new File ( configDirectory , "STR" ) ; 
+         createTargetFile ( sourceFile . getName ( ) , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(devUtil.isGeneratedConfigFile(sourceFile, srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "NOT_STR"), srcDir, targetDir));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "OTHER"), srcDir, targetDir));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("invalidSrcDir"), targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("invalidTargetDir")));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("emptyTargetDir")));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("emptySrcDir"), targetDir));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("nonExistentTargetDir")));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("nonExistentSrcDir"), targetDir));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("invalidTargetDir")));
+assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir));
+assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "NOT_STR"), srcDir, targetDir));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue("STR",util.isGeneratedConfigFile(sourceFile,configDirectory,targetDir)); ===
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.802 - assertTrue(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, targetDir))
+0.800 - ```java
+assertTrue(devUtil.isGeneratedConfigFile(sourceFile, srcDir, targetDir))
+0.754 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "OTHER"), srcDir, targetDir))
+0.746 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "NOT_STR"), srcDir, targetDir))
+0.746 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "NOT_STR"), srcDir, targetDir))
+0.698 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("emptyTargetDir")))
+0.698 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("emptySrcDir"), targetDir))
+0.691 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("invalidSrcDir"), targetDir))
+0.681 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("invalidTargetDir")))
+0.681 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("invalidTargetDir")))
+0.677 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), srcDir, new File("nonExistentTargetDir")))
+0.677 - assertFalse(devUtil.isGeneratedConfigFile(new File(configDirectory, "STR"), new File("nonExistentSrcDir"), targetDir))
+0.000 - ```

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class BambooEnvironmentVariables {
+    public Map < String , String > convert ( Map < String , String > env ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    for ( String key : env . keySet ( ) ) { 
+    Matcher matcher = BAMBOO_PATTERN . matcher ( key ) ; 
+    if ( matcher . lookingAt ( ) ) { 
+    String value = env . get ( key ) ; 
+    String strippedVar = matcher . group ( 1 ) ; 
+    result . put ( strippedVar , value ) ; 
+    } } result . putAll ( env ) ; 
+    return result ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class BambooEnvironmentVariablesTest {
+    @Test
+     public void duplicates_bamboo_prefixed_env_vars_with_prefixless_copy ( ) {
+         HashMap < String , String > env = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         Map < String , String > convertedEnv = new BambooEnvironmentVariables ( ) . convert ( env ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", convertedEnv.get("STR"));
+assertNull(convertedEnv.get("BAMBOO_STR"));
+assertNotNull(convertedEnv.get("STR"));
+assertEquals(1, convertedEnv.size());
+assertFalse(convertedEnv.containsKey("BAMBOO_STR"));
+assertTrue(convertedEnv.containsKey("STR"));
+assertTrue(convertedEnv.containsValue("STR"));
+assertNotEquals("STR", convertedEnv.get("BAMBOO_STR"));
+assertEquals(env.get("STR"), convertedEnv.get("STR"));
+assertNotSame(env.get("STR"), convertedEnv.get("STR"));
+assertTrue(convertedEnv.containsKey("STR"));
+assertFalse(convertedEnv.isEmpty());
+assertNotNull(convertedEnv);
+assertNotNull(convertedEnv.get("STR"));
+assertNotNull(convertedEnv.keySet());
+assertEquals(env.size(), convertedEnv.size());
+assertTrue(convertedEnv.containsValue("STR"));
+assertFalse(convertedEnv.containsValue("BAMBOO_STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",convertedEnv.get("STR")); ===
+1.000 - assertEquals("STR", convertedEnv.get("STR"))
+0.905 - assertEquals(env.get("STR"), convertedEnv.get("STR"))
+0.896 - assertNotEquals("STR", convertedEnv.get("BAMBOO_STR"))
+0.815 - assertNotNull(convertedEnv.get("STR"))
+0.815 - assertNotNull(convertedEnv.get("STR"))
+0.795 - assertEquals(1, convertedEnv.size())
+0.792 - assertNotSame(env.get("STR"), convertedEnv.get("STR"))
+0.776 - assertNull(convertedEnv.get("BAMBOO_STR"))
+0.713 - assertEquals(env.size(), convertedEnv.size())
+0.698 - assertTrue(convertedEnv.containsKey("STR"))
+0.698 - assertTrue(convertedEnv.containsKey("STR"))
+0.692 - assertFalse(convertedEnv.isEmpty())
+0.684 - assertNotNull(convertedEnv.keySet())
+0.682 - assertTrue(convertedEnv.containsValue("STR"))
+0.682 - assertTrue(convertedEnv.containsValue("STR"))
+0.681 - assertFalse(convertedEnv.containsKey("BAMBOO_STR"))
+0.667 - assertFalse(convertedEnv.containsValue("BAMBOO_STR"))
+0.629 - assertNotNull(convertedEnv)

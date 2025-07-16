@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    @Override
+     public boolean equals ( final Object o ) { 
+     if ( this == o ) return true ; 
+     if ( o == null || getClass ( ) != o . getClass ( ) ) return false ; 
+     final OCompositeKey that = ( OCompositeKey ) o ; 
+     return keys . equals ( that . keys ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testEqualNotSameKeys ( ) {
+         final OCompositeKey compositeKey = new OCompositeKey ( ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         final OCompositeKey anotherCompositeKey = new OCompositeKey ( ) ; 
+         anotherCompositeKey . addKey ( "STR" ) ; 
+         anotherCompositeKey . addKey ( "STR" ) ; 
+         anotherCompositeKey . addKey ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(compositeKey.equals(anotherCompositeKey));
+assertFalse(anotherCompositeKey.equals(compositeKey));
+assertNotEquals(compositeKey.hashCode(), anotherCompositeKey.hashCode());
+assertNotEquals(compositeKey.toString(), anotherCompositeKey.toString());
+assertTrue(compositeKey.equals(compositeKey));
+assertTrue(anotherCompositeKey.equals(anotherCompositeKey));
+assertFalse(compositeKey.equals(null));
+assertFalse(anotherCompositeKey.equals(null));
+assertFalse(compositeKey.equals(new Object()));
+assertFalse(anotherCompositeKey.equals(new Object()));
+assertTrue(compositeKey.equals(new OCompositeKey()));
+assertTrue(anotherCompositeKey.equals(new OCompositeKey()));
+assertFalse(compositeKey.equals(new OCompositeKey() {{ addKey("STR"); }}));
+assertFalse(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR"); }}));
+assertFalse(compositeKey.equals(new OCompositeKey() {{ addKey("STR"); addKey("STR"); }}));
+assertFalse(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR"); addKey("STR"); addKey("STR"); }}));
+assertTrue(compositeKey.equals(new OCompositeKey() {{ addKey("STR"); addKey("STR"); }}));
+assertTrue(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR"); addKey("STR"); addKey("STR"); }}));
+assertNotEquals(compositeKey.hashCode(), new OCompositeKey() {{ addKey("STR"); }}.hashCode());
+assertNotEquals(anotherCompositeKey.hashCode(), new OCompositeKey() {{ addKey("STR"); }}.hashCode());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(compositeKey.equals(anotherCompositeKey)); ===
+0.930 - ```java
+assertFalse(compositeKey.equals(anotherCompositeKey))
+0.857 - assertTrue(anotherCompositeKey.equals(anotherCompositeKey))
+0.846 - assertTrue(compositeKey.equals(new OCompositeKey()))
+0.837 - assertTrue(compositeKey.equals(compositeKey))
+0.814 - assertFalse(compositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.814 - assertFalse(compositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.769 - assertFalse(compositeKey.equals(null))
+0.752 - assertTrue(compositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.742 - assertNotEquals(compositeKey.hashCode(), anotherCompositeKey.hashCode())
+0.735 - assertFalse(compositeKey.equals(new Object()))
+0.726 - assertNotEquals(compositeKey.toString(), anotherCompositeKey.toString())
+0.673 - assertFalse(anotherCompositeKey.equals(null))
+0.651 - assertNotEquals(compositeKey.hashCode(), new OCompositeKey() {{ addKey("STR")
+0.629 - assertFalse(anotherCompositeKey.equals(new Object()))
+0.623 - assertFalse(anotherCompositeKey.equals(compositeKey))
+0.528 - assertFalse(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.528 - assertFalse(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.526 - assertNotEquals(anotherCompositeKey.hashCode(), new OCompositeKey() {{ addKey("STR")
+0.523 - assertTrue(anotherCompositeKey.equals(new OCompositeKey()))
+0.468 - assertTrue(anotherCompositeKey.equals(new OCompositeKey() {{ addKey("STR")
+0.182 - addKey("STR")
+0.182 - addKey("STR")
+0.182 - addKey("STR")
+0.182 - addKey("STR")
+0.182 - addKey("STR")
+0.182 - addKey("STR")
+0.179 - }}.hashCode())
+0.179 - }}.hashCode())
+0.070 - }}))
+0.070 - }}))
+0.070 - }}))
+0.070 - }}))
+0.070 - }}))
+0.070 - }}))
+0.000 - ```

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\nprotected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException {\nFile targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ;\nif ( targetFile . exists ( ) ) {\nif ( targetFile . isDirectory ( ) ) {\ntry {\nFileUtils . deleteDirectory ( targetFile ) ;\ninfo ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} catch ( IllegalArgumentException e ) {\ndebug ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" + e . getMessage ( ) ) ;\n} catch ( IOException e ) {\nerror ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" + e . getMessage ( ) ) ;\n} } else {\nif ( targetFile . delete ( ) ) {\ninfo ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} else {\nerror ( \"STR\" + targetFile . getCanonicalPath ( ) + \"STR\" ) ;\n} } } }\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testDeleteFile ( ) throws Exception {\nFile tempSrcFile = new File ( srcDir , \"STR\" ) ;\nFiles . write ( tempSrcFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nFile tempTargetFile = new File ( targetDir , \"STR\" ) ;\nFiles . write ( tempTargetFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(tempSrcFile.exists());\nassertTrue(tempTargetFile.exists());\nassertEquals(\"STR\", new String(Files.readAllBytes(tempSrcFile.toPath())));\nassertEquals(\"STR\", new String(Files.readAllBytes(tempTargetFile.toPath())));\nassertTrue(tempTargetFile.delete());\nassertFalse(tempTargetFile.exists());\nassertTrue(tempSrcFile.delete());\nassertFalse(tempSrcFile.exists());\nassertTrue(targetDir.isDirectory());\nassertTrue(srcDir.isDirectory());\nassertTrue(tempTargetFile.createNewFile());\nassertTrue(tempSrcFile.createNewFile());\nassertTrue(tempTargetFile.exists());\nassertTrue(tempSrcFile.exists());\nassertTrue(tempTargetFile.isFile());\nassertTrue(tempSrcFile.isFile());\nassertTrue(targetDir.list().length == 0);\nassertTrue(srcDir.list().length == 0);\nassertThrows(IOException.class, () -> Files.write(tempTargetFile.toPath(), \"New Content\".getBytes()));\nassertThrows(IOException.class, () -> Files.write(tempSrcFile.toPath(), \"New Content\".getBytes()));\nassertNotNull(tempTargetFile.getCanonicalPath());\nassertNotNull(tempSrcFile.getCanonicalPath());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.896,
+        0.896,
+        0.892,
+        0.889,
+        0.875,
+        0.875,
+        0.794,
+        0.789,
+        0.776,
+        0.776,
+        0.703,
+        0.675,
+        0.656,
+        0.627,
+        0.627,
+        0.6,
+        0.6,
+        0.505,
+        0.453,
+        0.448,
+        0.406,
+        0.0
+    ],
+    "ground_truth": "assertTrue(tempSrcFile.exists());"
+}

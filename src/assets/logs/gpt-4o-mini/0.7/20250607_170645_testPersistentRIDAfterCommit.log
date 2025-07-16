@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class Blueprints {
+    boolean isPersistent ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class BlueprintsTest {
+    @Test
+     public void testPersistentRIDAfterCommit ( ) {
+         Vertex v = graph . addVertex ( null ) ; 
+         v . setProperty ( "STR" , "STR" ) ; 
+         graph . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(graph.isPersistent());
+assertNotNull(v);
+assertEquals("STR", v.getProperty("STR"));
+assertNotNull(v.getId());
+assertTrue(v.getId().isPersistent());
+assertEquals(1, graph.getVertexCount());
+assertTrue(graph.getVertices().contains(v));
+assertFalse(graph.getVertices().isEmpty());
+assertTrue(graph.getEdges().isEmpty());
+assertEquals(0, graph.getEdgeCount());
+assertFalse(v.isModified());
+assertEquals("STR", v.getProperty("STR"));
+assertTrue(v.getProperties().containsKey("STR"));
+assertEquals(1, v.getPropertyKeys().size());
+assertTrue(v.getPropertyKeys().contains("STR"));
+assertNotNull(graph.getVertex(v.getId()));
+assertTrue(graph.getVertex(v.getId()).isPersistent());
+assertTrue(graph.getVertex(v.getId()).getProperty("STR").equals("STR"));
+assertTrue(v.getId().toString().matches("^[0-9]+:[0-9]+$"));
+assertEquals(graph.getVertex(v.getId()), v);
+assertFalse(graph.isModified());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(((ORID)v.getId()).isPersistent()); ===
+0.900 - assertTrue(v.getId().isPersistent())
+0.784 - assertTrue(graph.getVertex(v.getId()).isPersistent())
+0.667 - ```java
+assertTrue(graph.isPersistent())
+0.610 - assertTrue(graph.getEdges().isEmpty())
+0.529 - assertNotNull(v.getId())
+0.529 - assertTrue(graph.getVertices().contains(v))
+0.527 - assertTrue(v.getPropertyKeys().contains("STR"))
+0.522 - assertTrue(v.getProperties().containsKey("STR"))
+0.522 - assertTrue(graph.getVertex(v.getId()).getProperty("STR").equals("STR"))
+0.505 - assertTrue(v.getId().toString().matches("^[0-9]+:[0-9]+$"))
+0.488 - assertFalse(graph.getVertices().isEmpty())
+0.488 - assertEquals(1, graph.getVertexCount())
+0.471 - assertNotNull(graph.getVertex(v.getId()))
+0.465 - assertEquals(graph.getVertex(v.getId()), v)
+0.450 - assertEquals(0, graph.getEdgeCount())
+0.423 - assertFalse(v.isModified())
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.373 - assertFalse(graph.isModified())
+0.372 - assertEquals(1, v.getPropertyKeys().size())
+0.300 - assertNotNull(v)
+0.000 - ```

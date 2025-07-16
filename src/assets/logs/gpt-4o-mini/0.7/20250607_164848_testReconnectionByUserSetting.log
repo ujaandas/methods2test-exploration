@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManager {
+    @Override
+     public Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     url . setConnectTimeout ( connectTimeout ) ; 
+     return this . connectionManager . getAndCreateIfAbsent ( url ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManagerTest {
+    @Test
+     public void testReconnectionByUserSetting ( ) throws InterruptedException , RemotingException {
+         doInit ( false , true ) ; 
+         client . enableReconnectSwitch ( ) ; 
+         String addr = "STR" ; 
+         Url url = addressParser . parse ( addr ) ; 
+         Connection connection = client . getConnection ( url , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(connection);
+assertTrue(connection.isConnected());
+assertEquals(1000, connection.getConnectTimeout());
+assertEquals(addr, connection.getUrl().getAddress());
+assertEquals(client.getClientId(), connection.getClientId());
+assertTrue(client.isReconnectEnabled());
+assertNotNull(url);
+assertTrue(url.isValid());
+assertFalse(connection.isClosed());
+assertEquals(1, connectionManager.getConnectionCount());
+assertTrue(connectionManager.hasConnection(url));
+assertSame(connection, connectionManager.getConnection(url));
+assertTrue(client.getActiveConnections().contains(connection));
+assertEquals(0, client.getReconnectAttempts());
+assertFalse(client.isReconnecting());
+assertNotNull(client.getLastConnectionTime());
+assertTrue(client.getLastConnectionTime() > 0);
+assertEquals(connection.getProtocol(), "SOFABolt");
+assertTrue(client.getConnectionHistory().contains(connection));
+assertTrue(client.isConnectionOpen(url));
+assertFalse(client.isConnectionFailed(url));
+assertEquals(client.getReconnectDelay(), 1000);
+assertTrue(client.isConnectionHealthy(connection));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes()); ===
+0.739 - assertEquals(1000, connection.getConnectTimeout())
+0.617 - assertEquals(0, client.getReconnectAttempts())
+0.617 - assertNotNull(client.getLastConnectionTime())
+0.613 - assertTrue(client.getConnectionHistory().contains(connection))
+0.612 - assertEquals(client.getClientId(), connection.getClientId())
+0.610 - assertFalse(client.isConnectionFailed(url))
+0.607 - assertTrue(client.isConnectionHealthy(connection))
+0.604 - assertTrue(client.getLastConnectionTime() > 0)
+0.588 - assertTrue(client.isConnectionOpen(url))
+0.571 - assertFalse(client.isReconnecting())
+0.569 - assertEquals(1, connectionManager.getConnectionCount())
+0.562 - assertFalse(connection.isClosed())
+0.549 - assertEquals(addr, connection.getUrl().getAddress())
+0.548 - assertTrue(client.getActiveConnections().contains(connection))
+0.542 - assertEquals(client.getReconnectDelay(), 1000)
+0.541 - assertEquals(connection.getProtocol(), "SOFABolt")
+0.515 - assertTrue(client.isReconnectEnabled())
+0.490 - assertTrue(connection.isConnected())
+0.430 - assertSame(connection, connectionManager.getConnection(url))
+0.421 - ```java
+assertNotNull(connection)
+0.418 - assertTrue(connectionManager.hasConnection(url))
+0.299 - assertTrue(url.isValid())
+0.275 - assertNotNull(url)
+0.000 - ```

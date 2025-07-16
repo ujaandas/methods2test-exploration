@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > List < X > collect ( List < T > coll , APartialFunction < ? super T , ? extends X , E > pf ) throws E { 
+    final List < X > result = createEmptyListOfType ( coll , true ) ; 
+    for ( T o : coll ) { 
+    if ( pf . isDefinedAt ( o ) ) { 
+    result . add ( pf . apply ( o ) ) ; 
+    } } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testCollect ( ) throws Exception {
+         APartialFunctionNoThrow < Integer , Double > squareRoot = new APartialFunctionNoThrow < Integer , Double > ( ) { 
+     @Override
+     public boolean isDefinedAt ( Integer param ) { 
+     return param != 0 ; 
+     } @Override
+     public Double apply ( Integer param ) { 
+     return Math . sqrt ( param ) ; 
+     } } ; 
+         final List < Double > result = ACollectionHelper . collect ( Arrays . asList ( 0 , 1 , 2 , 3 , 4 ) , squareRoot ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, result.size());
+assertTrue(result.contains(1.0));
+assertTrue(result.contains(Math.sqrt(2)));
+assertTrue(result.contains(Math.sqrt(3)));
+assertFalse(result.contains(0.0));
+assertFalse(result.contains(Math.sqrt(4))); // Only if 4 is excluded, else remove this assertion
+assertEquals(Double.valueOf(1.0), result.get(0));
+assertEquals(Double.valueOf(Math.sqrt(2)), result.get(1));
+assertEquals(Double.valueOf(Math.sqrt(3)), result.get(2));
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertTrue(result.get(0) instanceof Double);
+assertTrue(result.get(1) instanceof Double);
+assertTrue(result.get(2) instanceof Double);
+assertEquals(3, result.stream().filter(x -> x instanceof Double).count());
+assertTrue(result.stream().allMatch(x -> x instanceof Double));
+assertEquals(3, Collections.frequency(result, Math.sqrt(2)));
+assertNotSame(result, Arrays.asList(0, 1, 2, 3, 4));
+assertNotSame(result, Arrays.asList(1, 2, 3, 4));
+assertNotNull(result.get(0));
+assertNotNull(result.get(1));
+assertNotNull(result.get(2));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,result.size()); ===
+0.848 - ```java
+assertEquals(3, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.702 - assertNotNull(result.get(0))
+0.702 - assertNotNull(result.get(1))
+0.702 - assertNotNull(result.get(2))
+0.677 - assertFalse(result.contains(0.0))
+0.640 - assertNotNull(result)
+0.623 - assertTrue(result.contains(1.0))
+0.592 - assertFalse(result.contains(Math.sqrt(4)))
+0.588 - assertEquals(Double.valueOf(Math.sqrt(2)), result.get(1))
+0.588 - assertEquals(Double.valueOf(Math.sqrt(3)), result.get(2))
+0.575 - assertEquals(3, Collections.frequency(result, Math.sqrt(2)))
+0.557 - assertEquals(3, result.stream().filter(x -> x instanceof Double).count())
+0.548 - assertNotSame(result, Arrays.asList(1, 2, 3, 4))
+0.543 - assertTrue(result.contains(Math.sqrt(2)))
+0.543 - assertTrue(result.contains(Math.sqrt(3)))
+0.533 - assertNotSame(result, Arrays.asList(0, 1, 2, 3, 4))
+0.514 - assertTrue(result.get(0) instanceof Double)
+0.514 - assertTrue(result.get(1) instanceof Double)
+0.514 - assertTrue(result.get(2) instanceof Double)
+0.460 - assertTrue(result.stream().allMatch(x -> x instanceof Double))
+0.417 - // Only if 4 is excluded, else remove this assertion
+assertEquals(Double.valueOf(1.0), result.get(0))
+0.000 - ```

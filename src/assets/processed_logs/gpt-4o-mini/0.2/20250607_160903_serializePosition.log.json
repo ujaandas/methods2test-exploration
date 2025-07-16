@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OVarIntSerializer {\npublic static long readAsLong ( final BytesContainer bytes ) {\nreturn readSignedVarLong ( bytes ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OVarIntSerializerTest {\n@Test\npublic void serializePosition ( ) {\nBytesContainer bytes = new BytesContainer ( ) ;\nbytes . offset = OVarIntSerializer . write ( bytes , 16238 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(bytes);\nAssert.assertTrue(bytes.offset > 0);\nAssert.assertEquals(16238, OVarIntSerializer.readAsLong(bytes));\nAssert.assertEquals(2, bytes.offset); // Assuming 16238 is serialized in 2 bytes\nAssert.assertTrue(bytes.get(0) > 0);\nAssert.assertTrue(bytes.get(1) > 0);\nAssert.assertTrue(bytes.get(0) < 256);\nAssert.assertTrue(bytes.get(1) < 256);\nAssert.assertEquals(16238, OVarIntSerializer.readAsLong(new BytesContainer(bytes.getBytes(), 0, bytes.offset)));\nAssert.assertNotEquals(0, bytes.get(0));\nAssert.assertNotEquals(0, bytes.get(1));\nAssert.assertTrue(bytes.get(0) != bytes.get(1));\nAssert.assertTrue(bytes.get(0) + bytes.get(1) > 16238);\nAssert.assertTrue(bytes.get(0) + bytes.get(1) < 32768);\nAssert.assertTrue(bytes.offset <= bytes.getBytes().length);\nAssert.assertTrue(bytes.getBytes().length > 0);\nAssert.assertTrue(bytes.getBytes().length >= bytes.offset);\nAssert.assertTrue(bytes.get(0) + bytes.get(1) >= 16238);\nAssert.assertTrue(bytes.get(0) + bytes.get(1) <= 32767);\nAssert.assertTrue(bytes.get(0) >= 0);\nAssert.assertTrue(bytes.get(1) >= 0);\n```\n====================\n\n",
+    "scores": [
+        0.883,
+        0.641,
+        0.46,
+        0.46,
+        0.452,
+        0.424,
+        0.42,
+        0.405,
+        0.405,
+        0.39,
+        0.39,
+        0.386,
+        0.386,
+        0.384,
+        0.381,
+        0.366,
+        0.366,
+        0.362,
+        0.36,
+        0.324,
+        0.324,
+        0.0
+    ],
+    "ground_truth": "assertEquals(OVarIntSerializer.readAsLong(bytes),16238l);"
+}

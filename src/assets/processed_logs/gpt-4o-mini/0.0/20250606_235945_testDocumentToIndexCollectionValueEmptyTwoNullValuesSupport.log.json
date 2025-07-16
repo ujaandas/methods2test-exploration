@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic OCompositeKey ( final Object ... keys ) {\nthis . keys = new ArrayList < Object > ( keys . length ) ;\nthis . comparator = ODefaultComparator . INSTANCE ;\nfor ( final Object key : keys ) addKey ( key ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {\nfinal ODocument document = new ODocument ( ) ;\ndocument . field ( \"STR\" , Collections . emptyList ( ) ) ;\ndocument . field ( \"STR\" , 12 ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . setNullValuesIgnored ( false ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(result);\nAssert.assertTrue(result instanceof List);\nAssert.assertEquals(2, ((List<?>) result).size());\nAssert.assertTrue(((List<?>) result).contains(12));\nAssert.assertTrue(((List<?>) result).contains(Collections.emptyList()));\nAssert.assertFalse(((List<?>) result).contains(null));\nAssert.assertEquals(12, ((List<?>) result).get(1));\nAssert.assertEquals(Collections.emptyList(), ((List<?>) result).get(0));\nAssert.assertTrue(((List<?>) result).get(0) instanceof List);\nAssert.assertTrue(((List<?>) result).get(0).isEmpty());\nAssert.assertTrue(((List<?>) result).get(1) instanceof Integer);\nAssert.assertEquals(OType.INTEGER, OType.getType(((List<?>) result).get(1)));\nAssert.assertNotEquals(0, ((List<?>) result).size());\nAssert.assertTrue(((List<?>) result).stream().allMatch(Objects::nonNull));\nAssert.assertTrue(((List<?>) result).stream().anyMatch(item -> item instanceof List));\nAssert.assertTrue(((List<?>) result).stream().anyMatch(item -> item instanceof Integer));\nAssert.assertEquals(\"STR\", compositeIndexDefinition.getKeys().get(0));\nAssert.assertFalse(compositeIndexDefinition.isNullValuesIgnored());\nAssert.assertEquals(1, compositeIndexDefinition.getIndexes().size());\nAssert.assertTrue(compositeIndexDefinition.getIndexes().get(0) instanceof OPropertyListIndexDefinition);\n```\n====================\n\n",
+    "scores": [
+        0.515,
+        0.5,
+        0.49,
+        0.472,
+        0.459,
+        0.449,
+        0.439,
+        0.43,
+        0.43,
+        0.429,
+        0.417,
+        0.408,
+        0.406,
+        0.403,
+        0.394,
+        0.39,
+        0.373,
+        0.36,
+        0.356,
+        0.258,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12)));"
+}

@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AList {
+    public static < T > AList < T > create ( Iterable < T > elements ) { 
+    if ( elements instanceof AList ) { 
+    return ( AList < T > ) elements ; 
+    } if ( elements instanceof List ) { 
+    return create ( ( List < T > ) elements ) ; 
+    } AList < T > result = nil ( ) ; 
+    for ( T el : elements ) { 
+    result = result . cons ( el ) ; 
+    } return result . reverse ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListTest {
+    @Test
+     public void testFromJavaUtil ( ) {
+         final AList < String > l = AList . < String > nil ( ) . cons ( "STR" ) . cons ( "STR" ) . cons ( "STR" ) ; 
+         final AList < String > l2 = AList . create ( Arrays . asList ( "STR" , "STR" , "STR" ) ) ; 
+         final AList < String > l3 = AList . create ( ( Iterable < String > ) Arrays . asList ( "STR" , "STR" , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(l, l2);
+assertEquals(l, l3);
+assertEquals(l2, l3);
+
+assertTrue(l.equals(l2));
+assertTrue(l.equals(l3));
+assertTrue(l2.equals(l3));
+
+assertFalse(l.isEmpty());
+assertFalse(l2.isEmpty());
+assertFalse(l3.isEmpty());
+
+assertTrue(l.size() == 3);
+assertTrue(l2.size() == 3);
+assertTrue(l3.size() == 3);
+
+assertTrue(l.contains("STR"));
+assertTrue(l2.contains("STR"));
+assertTrue(l3.contains("STR"));
+
+assertTrue(l.get(0).equals("STR"));
+assertTrue(l2.get(0).equals("STR"));
+assertTrue(l3.get(0).equals("STR"));
+
+assertFalse(l.get(1).equals("STR"));
+assertFalse(l2.get(1).equals("STR"));
+assertFalse(l3.get(1).equals("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(l,l2); ===
+1.000 - assertEquals(l, l2)
+0.944 - assertEquals(l, l3)
+0.919 - assertEquals(l2, l3)
+0.714 - assertTrue(l.equals(l2))
+0.667 - assertTrue(l.equals(l3))
+0.651 - assertTrue(l2.equals(l3))
+0.605 - assertFalse(l2.isEmpty())
+0.571 - assertFalse(l.isEmpty())
+0.558 - assertFalse(l3.isEmpty())
+0.524 - assertTrue(l2.size() == 3)
+0.500 - assertTrue(l.get(0).equals("STR"))
+0.491 - assertTrue(l2.get(0).equals("STR"))
+0.491 - assertTrue(l3.get(0).equals("STR"))
+0.491 - assertFalse(l.get(1).equals("STR"))
+0.488 - assertTrue(l.size() == 3)
+0.481 - assertFalse(l2.get(1).equals("STR"))
+0.481 - assertFalse(l3.get(1).equals("STR"))
+0.476 - assertTrue(l3.size() == 3)
+0.468 - assertTrue(l.contains("STR"))
+0.458 - assertTrue(l2.contains("STR"))
+0.458 - assertTrue(l3.contains("STR"))

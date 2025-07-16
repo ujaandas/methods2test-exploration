@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelper {
+    public static < T , X , E extends Throwable > Map < AEqualsWrapper < X > , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f , AEquality keyEquality ) throws E { 
+    final Map < AEqualsWrapper < X > , List < T > > result = new HashMap < > ( ) ; 
+    for ( T o : coll ) { 
+    final AEqualsWrapper < X > key = new AEqualsWrapper < > ( keyEquality , f . apply ( o ) ) ; 
+    List < T > perKey = result . get ( key ) ; 
+    if ( perKey == null ) { 
+    perKey = createEmptyListOfType ( coll , false ) ; 
+    result . put ( key , perKey ) ; 
+    } perKey . add ( o ) ; 
+    } return result ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ACollectionHelperTest {
+    @Test
+     public void testGroupByCustomEquality ( ) {
+         final AEquality equality = new AEquality ( ) { 
+     @Override
+     public boolean equals ( Object o1 , Object o2 ) { 
+     return ( ( Integer ) o1 ) % 2 == ( ( Integer ) o2 ) % 2 ; 
+     } @Override
+     public int hashCode ( Object o ) { 
+     return 0 ; 
+     } } ; 
+         final AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) { 
+     @Override
+     public Integer apply ( String param ) { 
+     return param . length ( ) ; 
+     } } ; 
+         final Map < AEqualsWrapper < Integer > , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) , len , equality ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(2, grouped.size());
+assertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 3)).size());
+assertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 4)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 6)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 7)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 8)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 9)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 10)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 11)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 12)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 13)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 14)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 15)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 16)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 17)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 18)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 19)).size());
+assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 20)).size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,grouped.size()); ===
+1.000 - assertEquals(2, grouped.size())
+0.598 - assertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 3)).size())
+0.598 - assertEquals(3, grouped.get(new AEqualsWrapper<>(equality, 4)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 5)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 6)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 7)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 8)).size())
+0.598 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 9)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 10)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 11)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 12)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 13)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 14)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 15)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 16)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 17)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 18)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 19)).size())
+0.592 - assertEquals(0, grouped.get(new AEqualsWrapper<>(equality, 20)).size())

@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class SegmentReader {
+    public ByteBuffer readToNextMarkerNewBuffer ( ) throws IOException { 
+    if ( done ) return null ; 
+    List < ByteBuffer > buffers = new ArrayList < ByteBuffer > ( ) ; 
+    readToNextMarkerBuffers ( buffers ) ; 
+    return NIOUtils . combineBuffers ( buffers ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class SegmentReaderTest {
+    @Test
+     public void testToNextMarkerPartialVar1 ( ) throws IOException {
+         byte [ ] bytes = new byte [ ] { 
+     0 , 0 , 1 , 42 , 43 , 44 , 45 , 46 , 0 , 0 , 1 , 43 } ; 
+         ReadableByteChannel ch = Channels . newChannel ( new ByteArrayInputStream ( bytes ) ) ; 
+         SegmentReader reader = new SegmentReader ( ch , 1 ) ; 
+         reader . setBufferIncrement ( 1 ) ; 
+         ByteBuffer buf1 = reader . readToNextMarkerNewBuffer ( ) ; 
+         ByteBuffer buf2 = reader . readToNextMarkerNewBuffer ( ) ; 
+         ByteBuffer buf3 = reader . readToNextMarkerNewBuffer ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, buf1.remaining());
+assertEquals(4, buf2.remaining());
+assertNull(buf3);
+assertEquals(42, buf1.get());
+assertEquals(43, buf1.get());
+assertEquals(44, buf1.get());
+assertEquals(45, buf1.get());
+assertEquals(1, buf2.remaining());
+assertEquals(46, buf2.get());
+assertEquals(0, buf2.remaining());
+assertEquals(1, buf3.remaining());
+assertEquals(43, buf3.get());
+assertEquals(0, buf3.remaining());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+assertEquals(0, reader.readToNextMarkerNewBuffer());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(ByteBuffer.wrap(bytes,0,8),buf1); ===
+0.528 - assertEquals(42, buf1.get())
+0.528 - assertEquals(43, buf1.get())
+0.528 - assertEquals(44, buf1.get())
+0.528 - assertEquals(45, buf1.get())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.505 - assertEquals(0, reader.readToNextMarkerNewBuffer())
+0.500 - assertEquals(46, buf2.get())
+0.500 - assertEquals(43, buf3.get())
+0.494 - assertEquals(4, buf1.remaining())
+0.494 - assertEquals(0, buf2.remaining())
+0.494 - assertEquals(0, buf3.remaining())
+0.468 - assertEquals(4, buf2.remaining())
+0.468 - assertEquals(1, buf2.remaining())
+0.468 - assertEquals(1, buf3.remaining())
+0.426 - assertNull(buf3)

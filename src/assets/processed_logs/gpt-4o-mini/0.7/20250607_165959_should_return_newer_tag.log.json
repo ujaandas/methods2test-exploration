@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamService {\npublic TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) {\nDate tag1Date = extractDate ( tag1 ) ;\nDate tag2Date = extractDate ( tag2 ) ;\nif ( tag1Date == null ) {\nreturn tag2 ;\n} if ( tag2Date == null ) {\nreturn tag1 ;\n} return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamServiceTest {\n@Test\npublic void should_return_newer_tag ( ) throws Exception {\nImageStreamService service = new ImageStreamService ( client , log ) ;\nTagEvent oldTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent latestTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(resultedTag);\nassertEquals(\"STR\", resultedTag.getName());\nassertNull(resultedTag.getImage());\nassertNull(resultedTag.getCreated());\nassertNull(resultedTag.getLastTriggered());\nassertEquals(latestTag, resultedTag);\nassertTrue(resultedTag instanceof TagEvent);\nassertFalse(oldTag.equals(resultedTag));\nassertNotEquals(oldTag, resultedTag);\nassertNotSame(oldTag, resultedTag);\nassertSame(latestTag.getName(), resultedTag.getName());\nassertNotSame(oldTag.getCreated(), resultedTag.getCreated());\nassertFalse(latestTag.getImage() == resultedTag.getImage());\nassertTrue(resultedTag.getLastTriggered() == null);\nassertTrue(resultedTag.getImage() == null);\nassertEquals(latestTag.getName(), resultedTag.getName());\nassertTrue(service.newerTag(latestTag, null).equals(latestTag));\nassertTrue(service.newerTag(null, oldTag).equals(oldTag));\nassertTrue(service.newerTag(latestTag, latestTag).equals(latestTag));\nassertTrue(service.newerTag(oldTag, oldTag).equals(oldTag));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.857,
+        0.778,
+        0.711,
+        0.706,
+        0.682,
+        0.674,
+        0.649,
+        0.609,
+        0.609,
+        0.592,
+        0.545,
+        0.533,
+        0.526,
+        0.511,
+        0.482,
+        0.454,
+        0.431,
+        0.396,
+        0.387,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(latestTag,resultedTag);"
+}

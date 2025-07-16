@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class SQLMoveVertexCommand {\n@Override\npublic int getDefaultClusterId ( ) {\nreturn delegate . getDefaultClusterId ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class SQLMoveVertexCommandTest {\n@Test\npublic void testMoveSingleRecordToAnotherClass ( ) {\nODocument doc = new ODocument ( \"STR\" ) . field ( \"STR\" , \"STR\" ) . field ( \"STR\" , \"STR\" ) . save ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(doc);\nassertEquals(\"STR\", doc.getClassName());\nassertEquals(\"STR\", doc.field(\"STR\"));\nassertEquals(\"STR\", doc.field(\"STR\"));\nassertTrue(doc.getIdentity().isValid());\nassertEquals(1, doc.getVersion());\nassertTrue(doc.getSchemaType().isDocument());\nassertFalse(doc.isNew());\nassertTrue(doc.getDatabase().exists(doc.getIdentity()));\nassertEquals(\"STR\", doc.field(\"STR\"));\nassertNotNull(doc.getRecordType());\nassertTrue(doc.getRecordType().isEmbedded());\nassertEquals(\"STR\", doc.field(\"STR\"));\nassertEquals(\"STR\", doc.field(\"STR\"));\nassertTrue(doc.getFieldNames().contains(\"STR\"));\nassertFalse(doc.isDirty());\nassertEquals(1, doc.getClusterId());\nassertTrue(doc.getDatabase().getClusterNameById(doc.getClusterId()).equals(\"STR\"));\nassertNotNull(doc.getDatabase().getCluster(doc.getClusterId()));\nassertEquals(doc.getIdentity(), doc.getDatabase().load(doc.getIdentity()));\nassertTrue(doc.getDatabase().getCluster(doc.getClusterId()).getRecords().contains(doc));\nassertEquals(doc.getIdentity(), doc.getDatabase().load(doc.getIdentity()));\n```\n====================\n\n",
+    "scores": [
+        0.6,
+        0.6,
+        0.577,
+        0.534,
+        0.514,
+        0.512,
+        0.504,
+        0.495,
+        0.478,
+        0.439,
+        0.43,
+        0.407,
+        0.407,
+        0.407,
+        0.407,
+        0.407,
+        0.403,
+        0.388,
+        0.378,
+        0.356,
+        0.347,
+        0.252,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(doc.getIdentity().getClusterId(),customer.getDefaultClusterId());"
+}

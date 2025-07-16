@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertEquals("STR" + item.getIdentity(), live.getName());
+Assert.assertTrue(listener.waitForUpdates(1));
+Assert.assertEquals(1, listener.getUpdates().size());
+Assert.assertEquals(item, listener.getUpdates().get(0));
+Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"));
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertEquals("STR" + item.getIdentity(), live.getName());
+Assert.assertTrue(listener.waitForUpdates(1));
+Assert.assertEquals(1, listener.getUpdates().size());
+Assert.assertEquals(item, listener.getUpdates().get(0));
+Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"));
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertEquals("STR" + item.getIdentity(), live.getName());
+Assert.assertTrue(listener.waitForUpdates(1));
+Assert.assertEquals(1, listener.getUpdates().size());
+Assert.assertEquals(item, listener.getUpdates().get(0));
+Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.615 - Assert.assertTrue(listener.waitForUpdates(1))
+0.615 - Assert.assertTrue(listener.waitForUpdates(1))
+0.615 - Assert.assertTrue(listener.waitForUpdates(1))
+0.500 - Assert.assertEquals(item, listener.getUpdates().get(0))
+0.500 - Assert.assertEquals(item, listener.getUpdates().get(0))
+0.500 - Assert.assertEquals(item, listener.getUpdates().get(0))
+0.495 - Assert.assertEquals(1, listener.getUpdates().size())
+0.495 - Assert.assertEquals(1, listener.getUpdates().size())
+0.495 - Assert.assertEquals(1, listener.getUpdates().size())
+0.417 - Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"))
+0.417 - Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"))
+0.417 - Assert.assertEquals("STR", listener.getUpdates().get(0).getProperty("STR"))
+0.354 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.354 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.354 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.208 - Assert.assertEquals("STR" + item.getIdentity(), live.getName())
+0.208 - Assert.assertEquals("STR" + item.getIdentity(), live.getName())
+0.208 - Assert.assertEquals("STR" + item.getIdentity(), live.getName())

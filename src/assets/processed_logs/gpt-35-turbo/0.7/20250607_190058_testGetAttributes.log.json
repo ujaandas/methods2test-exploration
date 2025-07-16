@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtil {\npublic static Map < String , Method > getAttributes ( Object mbeanLocation ) {\nMap < String , Method > result = new TreeMap < String , Method > ( ) ;\nMethod [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ;\nfor ( Method oneMethod : methods ) {\nMBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ;\nif ( attribute != null ) {\nresult . put ( attribute . name ( ) , oneMethod ) ;\n} } return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtilTest {\n@Test\npublic void testGetAttributes ( ) throws Exception {\nMap < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(atts);\nassertTrue(atts.size() == 1);\nassertTrue(atts.containsKey(\"testAttribute\"));\nassertEquals(\"getTestAttribute\", atts.get(\"testAttribute\").getName());\nassertFalse(atts.containsKey(\"invalidAttribute\"));\nassertNull(atts.get(\"invalidAttribute\"));\nassertTrue(atts.get(\"testAttribute\").getReturnType().equals(String.class));\nassertFalse(atts.get(\"testAttribute\").getReturnType().equals(Integer.class));\nassertTrue(atts.get(\"testAttribute\").getParameterCount() == 0);\nassertFalse(atts.get(\"testAttribute\").isVarArgs());\nassertTrue(atts.get(\"testAttribute\").getModifiers() == Modifier.PUBLIC);\nassertFalse(atts.get(\"testAttribute\").isAnnotationPresent(Deprecated.class));\nassertTrue(atts.get(\"testAttribute\").getAnnotation(MBeanAttribute.class) != null);\nassertFalse(atts.get(\"testAttribute\").getAnnotation(NotNull.class) != null);\nassertTrue(atts.get(\"testAttribute\").getDeclaringClass().equals(TestClass.class));\nassertFalse(atts.get(\"testAttribute\").isSynthetic());\nassertTrue(atts.get(\"testAttribute\").canAccess(this));\nassertFalse(atts.get(\"testAttribute\").isBridge());\nassertTrue(atts.get(\"testAttribute\").getGenericReturnType().equals(String.class));\nassertFalse(atts.get(\"testAttribute\").getGenericReturnType().equals(Integer.class));\n====================\n\n",
+    "scores": [
+        0.755,
+        0.609,
+        0.553,
+        0.545,
+        0.537,
+        0.532,
+        0.526,
+        0.526,
+        0.5,
+        0.475,
+        0.437,
+        0.42,
+        0.408,
+        0.396,
+        0.358,
+        0.337,
+        0.333,
+        0.33,
+        0.315,
+        0.309
+    ],
+    "ground_truth": "assertEquals(2,atts.size());"
+}

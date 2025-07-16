@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtil {
+    public static void mergeIfAbsent ( Map < String , String > map , Map < String , String > toMerge ) { 
+    for ( Map . Entry < String , String > entry : toMerge . entrySet ( ) ) { 
+    putIfAbsent ( map , entry . getKey ( ) , entry . getValue ( ) ) ; 
+    ; 
+    } }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtilTest {
+    @Test
+     public void testMergeIfAbsent ( ) {
+         Map < String , String > origMap = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > toMergeMap = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > expected = createMap ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) ; 
+         MapUtil . mergeIfAbsent ( origMap , toMergeMap ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expected.size(), origMap.size());
+assertTrue(origMap.containsKey("STR"));
+assertEquals("STR", origMap.get("STR"));
+assertFalse(origMap.containsKey("NEW_KEY"));
+origMap.put("NEW_KEY", "NEW_VALUE");
+assertEquals("NEW_VALUE", origMap.get("NEW_KEY"));
+assertTrue(origMap.containsKey("STR"));
+assertEquals("STR", origMap.get("STR"));
+assertEquals(expected.get("STR"), origMap.get("STR"));
+assertFalse(origMap.containsKey("ANOTHER_NEW_KEY"));
+origMap.put("ANOTHER_NEW_KEY", "ANOTHER_NEW_VALUE");
+assertEquals("ANOTHER_NEW_VALUE", origMap.get("ANOTHER_NEW_KEY"));
+assertEquals(expected.size(), origMap.size());
+assertTrue(origMap.containsKey("STR"));
+assertTrue(origMap.containsKey("NEW_KEY"));
+assertTrue(origMap.containsKey("ANOTHER_NEW_KEY"));
+assertEquals(expected.get("STR"), origMap.get("STR"));
+assertEquals(expected.get("NEW_KEY"), origMap.get("NEW_KEY"));
+assertEquals(expected.get("ANOTHER_NEW_KEY"), origMap.get("ANOTHER_NEW_KEY"));
+assertNotNull(origMap);
+assertNotSame(origMap, toMergeMap);
+assertNotEquals(origMap, toMergeMap);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expected,origMap); ===
+0.811 - assertEquals(expected.size(), origMap.size())
+0.732 - ```java
+assertEquals(expected.size(), origMap.size())
+0.732 - assertEquals(expected.get("STR"), origMap.get("STR"))
+0.732 - assertEquals(expected.get("STR"), origMap.get("STR"))
+0.667 - assertEquals(expected.get("NEW_KEY"), origMap.get("NEW_KEY"))
+0.654 - assertNotNull(origMap)
+0.647 - assertEquals("STR", origMap.get("STR"))
+0.647 - assertEquals("STR", origMap.get("STR"))
+0.646 - assertNotEquals(origMap, toMergeMap)
+0.566 - assertEquals(expected.get("ANOTHER_NEW_KEY"), origMap.get("ANOTHER_NEW_KEY"))
+0.564 - assertEquals("NEW_VALUE", origMap.get("NEW_KEY"))
+0.508 - assertNotSame(origMap, toMergeMap)
+0.493 - assertFalse(origMap.containsKey("NEW_KEY"))
+0.471 - assertTrue(origMap.containsKey("STR"))
+0.471 - assertTrue(origMap.containsKey("STR"))
+0.471 - assertTrue(origMap.containsKey("STR"))
+0.468 - assertEquals("ANOTHER_NEW_VALUE", origMap.get("ANOTHER_NEW_KEY"))
+0.444 - assertFalse(origMap.containsKey("ANOTHER_NEW_KEY"))
+0.444 - assertTrue(origMap.containsKey("NEW_KEY"))
+0.400 - assertTrue(origMap.containsKey("ANOTHER_NEW_KEY"))
+0.250 - origMap.put("NEW_KEY", "NEW_VALUE")
+0.200 - origMap.put("ANOTHER_NEW_KEY", "ANOTHER_NEW_VALUE")
+0.000 - ```

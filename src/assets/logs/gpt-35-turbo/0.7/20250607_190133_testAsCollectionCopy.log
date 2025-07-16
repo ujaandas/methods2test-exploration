@@ -1,0 +1,66 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopy {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopyTest {
+    @Test
+     public void testAsCollectionCopy ( ) {
+         final List < String > list = new ArrayList < > ( Arrays . asList ( "STR" , "STR" ) ) ; 
+         final ACollection < String > copied = ACollectionHelper . asACollectionCopy ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions.assertThat(copied).isNotNull();
+Assertions.assertThat(copied.size()).isEqualTo(2);
+Assertions.assertThat(copied.contains("STR")).isTrue();
+Assertions.assertThat(copied.get(0)).isEqualTo("STR");
+Assertions.assertThat(copied.get(1)).isEqualTo("STR");
+Assertions.assertThat(copied.remove("STR")).isTrue();
+Assertions.assertThat(copied.size()).isEqualTo(1);
+Assertions.assertThat(copied.contains("STR")).isFalse();
+Assertions.assertThat(copied.isEmpty()).isFalse();
+Assertions.assertThat(copied.add("NEW")).isTrue();
+Assertions.assertThat(copied.size()).isEqualTo(2);
+Assertions.assertThat(copied.get(1)).isEqualTo("NEW");
+Assertions.assertThat(copied.addAll(Arrays.asList("A", "B"))).isTrue();
+Assertions.assertThat(copied.size()).isEqualTo(4);
+Assertions.assertThat(copied.containsAll(Arrays.asList("A", "B"))).isTrue();
+Assertions.assertThat(copied.removeAll(Arrays.asList("A", "B"))).isTrue();
+Assertions.assertThat(copied.size()).isEqualTo(2);
+Assertions.assertThat(copied.clear()).isTrue();
+Assertions.assertThat(copied.isEmpty()).isTrue();
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,copied.size()); ===
+0.564 - Assertions.assertThat(copied.size()).isEqualTo(2)
+0.564 - Assertions.assertThat(copied.size()).isEqualTo(1)
+0.564 - Assertions.assertThat(copied.size()).isEqualTo(2)
+0.564 - Assertions.assertThat(copied.size()).isEqualTo(4)
+0.564 - Assertions.assertThat(copied.size()).isEqualTo(2)
+0.519 - Assertions.assertThat(copied.isEmpty()).isTrue()
+0.514 - Assertions.assertThat(copied).isNotNull()
+0.513 - Assertions.assertThat(copied.isEmpty()).isFalse()
+0.507 - Assertions.assertThat(copied.clear()).isTrue()
+0.487 - Assertions.assertThat(copied.add("NEW")).isTrue()
+0.482 - Assertions.assertThat(copied.contains("STR")).isTrue()
+0.476 - Assertions.assertThat(copied.contains("STR")).isFalse()
+0.469 - Assertions.assertThat(copied.remove("STR")).isTrue()
+0.463 - Assertions.assertThat(copied.get(0)).isEqualTo("STR")
+0.463 - Assertions.assertThat(copied.get(1)).isEqualTo("STR")
+0.463 - Assertions.assertThat(copied.get(1)).isEqualTo("NEW")
+0.408 - Assertions.assertThat(copied.addAll(Arrays.asList("A", "B"))).isTrue()
+0.396 - Assertions.assertThat(copied.removeAll(Arrays.asList("A", "B"))).isTrue()
+0.388 - Assertions.assertThat(copied.containsAll(Arrays.asList("A", "B"))).isTrue()

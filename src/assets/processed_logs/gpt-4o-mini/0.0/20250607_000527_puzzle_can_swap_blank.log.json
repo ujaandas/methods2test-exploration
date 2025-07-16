@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;\n\npublic class Puzzle {\npublic int getBlankIndex ( ) {\nfor ( int i = 0 ;\ni < cells . length ;\ni ++ ) {\nif ( cells [ i ] == blank ) {\nreturn i ;\n} } return - 1 ;\n}\n}\n\npackage TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;\n\npublic class PuzzleTest {\n@Test\npublic void puzzle_can_swap_blank ( ) {\nPuzzle p = new Puzzle ( getSolution ( ) ) ;\nPuzzle c = p . swapBlank ( 4 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(c);\nassertNotSame(p, c);\nassertEquals(p.getBlankIndex(), 4);\nassertEquals(c.getBlankIndex(), 0);\nassertArrayEquals(new int[]{1, 2, 3, blank, 5, 6, 7, 8}, c.getCells());\nassertEquals(c.getCells()[4], 5);\nassertEquals(c.getCells()[0], blank);\nassertTrue(c.isValid());\nassertFalse(p.isValid());\nassertEquals(p.getCells().length, c.getCells().length);\nassertTrue(Arrays.equals(p.getCells(), new int[]{1, 2, 3, 4, blank, 5, 6, 7, 8}));\nassertTrue(Arrays.equals(c.getCells(), new int[]{1, 2, 3, blank, 4, 5, 6, 7, 8}));\nassertEquals(c.getBlankIndex(), 3);\nassertEquals(p.getBlankIndex(), 4);\nassertNotEquals(p.getCells()[4], c.getCells()[4]);\nassertNotEquals(p.getCells()[0], c.getCells()[0]);\nassertTrue(c.isSwapped());\nassertFalse(p.isSwapped());\nassertEquals(c.getMoveCount(), p.getMoveCount() + 1);\nassertTrue(c.isSolved());\nassertFalse(p.isSolved());\n```\n====================\n\n",
+    "scores": [
+        0.939,
+        0.939,
+        0.909,
+        0.909,
+        0.688,
+        0.676,
+        0.593,
+        0.568,
+        0.561,
+        0.552,
+        0.542,
+        0.537,
+        0.535,
+        0.526,
+        0.517,
+        0.489,
+        0.464,
+        0.442,
+        0.431,
+        0.423,
+        0.386,
+        0.0
+    ],
+    "ground_truth": "assertEquals(4,c.getBlankIndex());"
+}

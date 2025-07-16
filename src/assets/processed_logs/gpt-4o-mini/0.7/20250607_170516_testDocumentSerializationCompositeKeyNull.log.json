@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\n@Override\npublic void fromDocument ( ODocument document ) {\ndocument . setLazyLoad ( false ) ;\nfinal String [ ] fieldNames = document . fieldNames ( ) ;\nfinal SortedMap < Integer , Object > keyMap = new TreeMap < Integer , Object > ( ) ;\nfor ( String fieldName : fieldNames ) {\nif ( fieldName . startsWith ( \"STR\" ) ) {\nfinal String keyIndex = fieldName . substring ( 3 ) ;\nkeyMap . put ( Integer . valueOf ( keyIndex ) , document . field ( fieldName ) ) ;\n} } keys . clear ( ) ;\nfor ( Object value : keyMap . values ( ) ) keys . add ( value ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testDocumentSerializationCompositeKeyNull ( ) {\nfinal OCompositeKey compositeKeyOne = new OCompositeKey ( ) ;\ncompositeKeyOne . addKey ( 1 ) ;\ncompositeKeyOne . addKey ( null ) ;\ncompositeKeyOne . addKey ( 2 ) ;\nODocument document = compositeKeyOne . toDocument ( ) ;\nfinal OCompositeKey compositeKeyTwo = new OCompositeKey ( ) ;\ncompositeKeyTwo . fromDocument ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(compositeKeyTwo);\nAssert.assertEquals(3, compositeKeyTwo.size());\nAssert.assertTrue(compositeKeyTwo.containsKey(1));\nAssert.assertTrue(compositeKeyTwo.containsKey(null));\nAssert.assertTrue(compositeKeyTwo.containsKey(2));\nAssert.assertNull(compositeKeyTwo.getKey(1));\nAssert.assertNull(compositeKeyTwo.getKey(null));\nAssert.assertNull(compositeKeyTwo.getKey(2));\nAssert.assertEquals(1, compositeKeyTwo.getKey(1));\nAssert.assertNull(compositeKeyTwo.getKey(null));\nAssert.assertEquals(2, compositeKeyTwo.getKey(2));\nAssert.assertFalse(compositeKeyTwo.isEmpty());\nAssert.assertTrue(compositeKeyTwo.keySet().contains(1));\nAssert.assertTrue(compositeKeyTwo.keySet().contains(null));\nAssert.assertTrue(compositeKeyTwo.keySet().contains(2));\nAssert.assertEquals(3, compositeKeyTwo.keySet().size());\nAssert.assertEquals(\"[1, null, 2]\", compositeKeyTwo.toString());\nAssert.assertNotSame(compositeKeyOne, compositeKeyTwo);\nAssert.assertTrue(compositeKeyTwo.equals(compositeKeyOne));\nAssert.assertNotEquals(compositeKeyTwo.hashCode(), compositeKeyOne.hashCode());\nAssert.assertTrue(compositeKeyTwo.getKeys().containsAll(compositeKeyOne.getKeys()));\n```\n====================\n\n",
+    "scores": [
+        0.879,
+        0.723,
+        0.713,
+        0.698,
+        0.698,
+        0.652,
+        0.633,
+        0.627,
+        0.61,
+        0.61,
+        0.602,
+        0.588,
+        0.588,
+        0.583,
+        0.552,
+        0.552,
+        0.533,
+        0.516,
+        0.516,
+        0.5,
+        0.496,
+        0.0
+    ],
+    "ground_truth": "assertEquals(compositeKeyOne,compositeKeyTwo);"
+}

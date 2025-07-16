@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecution {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecutionTest {
+    @Test
+     public void testSelectNoTargetSkip ( ) {
+         OResultSet result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(5, result.size()); // Assuming we expect 5 results
+assertTrue(result instanceof OResultSet);
+assertFalse(result.isEmpty());
+assertEquals("ExpectedFirstValue", result.next().get("fieldName")); // Replace with actual field name
+assertEquals("ExpectedSecondValue", result.next().get("fieldName")); // Replace with actual field name
+assertEquals("ExpectedThirdValue", result.next().get("fieldName")); // Replace with actual field name
+assertEquals("ExpectedFourthValue", result.next().get("fieldName")); // Replace with actual field name
+assertEquals("ExpectedFifthValue", result.next().get("fieldName")); // Replace with actual field name
+assertFalse(result.hasNext()); // After consuming all results
+assertEquals(0, result.skip(10).size()); // Testing skip beyond results
+assertEquals(2, result.skip(3).size()); // Testing skip with some results left
+result.reset();
+assertTrue(result.hasNext()); // Ensure we can iterate again after reset
+assertEquals("ExpectedFirstValue", result.next().get("fieldName")); // Check first value again after reset
+assertEquals("ExpectedSecondValue", result.next().get("fieldName")); // Check second value again after reset
+result.close();
+assertTrue(result.isClosed()); // Ensure the result set is closed
+assertThrows(NoSuchElementException.class, () -> result.next()); // Check for exception after results are consumed
+assertNotEquals("UnexpectedValue", result.next().get("fieldName")); // Replace with actual field name and value
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(result.hasNext()); ===
+0.877 - assertTrue(result.hasNext())
+0.877 - assertTrue(result.hasNext())
+0.828 - assertFalse(result.isEmpty())
+0.759 - assertEquals(5, result.size())
+0.690 - assertTrue(result.isClosed())
+0.667 - // Replace with actual field name
+assertFalse(result.hasNext())
+0.517 - ```java
+assertNotNull(result)
+0.500 - // Testing skip with some results left
+result.reset()
+0.489 - assertEquals("ExpectedFirstValue", result.next().get("fieldName"))
+0.473 - // Testing skip beyond results
+assertEquals(2, result.skip(3).size())
+0.468 - // After consuming all results
+assertEquals(0, result.skip(10).size())
+0.442 - // Check second value again after reset
+result.close()
+0.404 - // Assuming we expect 5 results
+assertTrue(result instanceof OResultSet)
+0.374 - // Replace with actual field name
+assertEquals("ExpectedThirdValue", result.next().get("fieldName"))
+0.374 - // Replace with actual field name
+assertEquals("ExpectedFifthValue", result.next().get("fieldName"))
+0.373 - // Ensure the result set is closed
+assertThrows(NoSuchElementException.class, () -> result.next())
+0.371 - // Replace with actual field name
+assertEquals("ExpectedSecondValue", result.next().get("fieldName"))
+0.371 - // Replace with actual field name
+assertEquals("ExpectedFourthValue", result.next().get("fieldName"))
+0.359 - // Check first value again after reset
+assertEquals("ExpectedSecondValue", result.next().get("fieldName"))
+0.354 - // Ensure we can iterate again after reset
+assertEquals("ExpectedFirstValue", result.next().get("fieldName"))
+0.336 - // Check for exception after results are consumed
+assertNotEquals("UnexpectedValue", result.next().get("fieldName"))
+0.261 - // Replace with actual field name and value
+```

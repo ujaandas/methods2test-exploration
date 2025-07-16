@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class InstallFeatureUtil {\n@SafeVarargs\npublic static Set < String > combineToSet ( Collection < String > ... collections ) {\nSet < String > result = new HashSet < String > ( ) ;\nSet < String > lowercaseSet = new HashSet < String > ( ) ;\nfor ( Collection < String > collection : collections ) {\nif ( collection != null ) {\nfor ( String value : collection ) {\nif ( ! lowercaseSet . contains ( value . toLowerCase ( ) ) ) {\nlowercaseSet . add ( value . toLowerCase ( ) ) ;\nresult . add ( value ) ;\n} } } } return result ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class InstallFeatureUtilTest {\n@Test\npublic void testCombineToSet ( ) throws Exception {\nSet < String > a = new HashSet < String > ( ) ;\na . add ( \"STR\" ) ;\na . add ( \"STR\" ) ;\nList < String > b = new ArrayList < String > ( ) ;\nb . add ( \"STR\" ) ;\nb . add ( \"STR\" ) ;\nList < String > c = new ArrayList < String > ( ) ;\nc . add ( \"STR\" ) ;\nc . add ( \"STR\" ) ;\nSet < String > result = InstallFeatureUtil . combineToSet ( a , b , c ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(1, result.size());\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.contains(\"str\"));\nassertFalse(result.contains(\"Str\"));\nassertFalse(result.contains(\"sTr\"));\nassertFalse(result.contains(\"STr\"));\nassertFalse(result.contains(\"stR\"));\nassertFalse(result.contains(\"sTr\"));\nassertTrue(result.isEmpty() == false);\nassertTrue(result instanceof Set);\nassertFalse(result.isEmpty());\nassertEquals(1, result.size());\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.contains(\"string\"));\nassertFalse(result.contains(\"S\"));\nassertFalse(result.contains(\"T\"));\nassertFalse(result.contains(\"R\"));\nassertFalse(result.contains(\"ST\"));\nassertFalse(result.contains(\"STRG\"));\nassertFalse(result.contains(\"STRINGS\"));\n```\n====================\n\n",
+    "scores": [
+        0.966,
+        0.966,
+        0.724,
+        0.677,
+        0.677,
+        0.677,
+        0.667,
+        0.656,
+        0.656,
+        0.656,
+        0.656,
+        0.656,
+        0.656,
+        0.646,
+        0.627,
+        0.618,
+        0.603,
+        0.603,
+        0.594,
+        0.567,
+        0.552,
+        0.0
+    ],
+    "ground_truth": "assertEquals(5,result.size());"
+}

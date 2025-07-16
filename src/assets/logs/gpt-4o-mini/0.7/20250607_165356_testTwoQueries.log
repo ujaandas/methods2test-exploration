@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    ResponseStatus getStatus ( ) ;
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testTwoQueries ( ) throws YubicoVerificationException , YubicoValidationFailure {
+         String otp = "STR" ; 
+         VerificationResponse response = client . verify ( otp ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(response);
+Assert.assertEquals(ResponseStatus.SUCCESS, response.getStatus());
+Assert.assertTrue(response.isValid());
+Assert.assertEquals("STR", response.getOtp());
+Assert.assertNotNull(response.getIdentity());
+Assert.assertTrue(response.getTimestamp() > 0);
+Assert.assertFalse(response.getPublicId().isEmpty());
+Assert.assertTrue(response.getSession().length() > 0);
+Assert.assertEquals("Expected response message", response.getMessage());
+Assert.assertTrue(response.getValidity() > 0);
+Assert.assertEquals("someExpectedValue", response.getSomeField());
+Assert.assertNotNull(response.getAdditionalData());
+Assert.assertFalse(response.getAdditionalData().isEmpty());
+Assert.assertTrue(response.hasError());
+Assert.assertNull(response.getErrorDetails());
+Assert.assertEquals(0, response.getErrorCode());
+Assert.assertTrue(response.isResponseTimeValid());
+Assert.assertEquals("Expected user identifier", response.getUserId());
+Assert.assertTrue(response.getSignature().length() > 0);
+Assert.assertEquals(VerificationStatus.VALID, response.getVerificationStatus());
+Assert.assertNotNull(response.getRequestId());
+Assert.assertEquals("expectedPublicId", response.getPublicId());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(ResponseStatus.REPLAYED_OTP,response.getStatus()); ===
+0.857 - Assert.assertEquals(ResponseStatus.SUCCESS, response.getStatus())
+0.707 - Assert.assertEquals(VerificationStatus.VALID, response.getVerificationStatus())
+0.626 - Assert.assertEquals("STR", response.getOtp())
+0.618 - Assert.assertEquals("Expected response message", response.getMessage())
+0.605 - Assert.assertEquals("someExpectedValue", response.getSomeField())
+0.598 - Assert.assertEquals("expectedPublicId", response.getPublicId())
+0.574 - Assert.assertEquals(0, response.getErrorCode())
+0.562 - Assert.assertEquals("Expected user identifier", response.getUserId())
+0.540 - Assert.assertNull(response.getErrorDetails())
+0.525 - Assert.assertNotNull(response.getIdentity())
+0.505 - Assert.assertTrue(response.getTimestamp() > 0)
+0.500 - Assert.assertTrue(response.getSignature().length() > 0)
+0.500 - Assert.assertNotNull(response.getRequestId())
+0.496 - Assert.assertFalse(response.getAdditionalData().isEmpty())
+0.495 - Assert.assertNotNull(response.getAdditionalData())
+0.490 - Assert.assertTrue(response.getValidity() > 0)
+0.486 - Assert.assertFalse(response.getPublicId().isEmpty())
+0.473 - Assert.assertTrue(response.hasError())
+0.472 - Assert.assertTrue(response.getSession().length() > 0)
+0.457 - Assert.assertTrue(response.isValid())
+0.423 - Assert.assertTrue(response.isResponseTimeValid())
+0.387 - ```java
+Assert.assertNotNull(response)
+0.000 - ```

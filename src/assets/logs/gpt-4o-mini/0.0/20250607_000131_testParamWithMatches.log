@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testParamWithMatches ( ) {
+         Map < String , Object > params = new HashMap < String , Object > ( ) ; 
+         params . put ( "STR" , "STR" ) ; 
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql , params ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(1, results.size());
+assertTrue(results.get(0).field("STR").equals("STR"));
+assertTrue(results.get(0).field("STR") instanceof String);
+assertEquals("STR", results.get(0).field("STR"));
+assertNotNull(results.get(0).field("id"));
+assertTrue(results.get(0).field("id") instanceof String);
+assertTrue(results.get(0).field("createdAt") instanceof Date);
+assertNotNull(results.get(0).field("updatedAt"));
+assertTrue(results.get(0).field("updatedAt") instanceof Date);
+assertTrue(results.get(0).field("name") instanceof String);
+assertEquals("ExpectedName", results.get(0).field("name"));
+assertTrue(results.get(0).field("active") instanceof Boolean);
+assertTrue(results.get(0).field("active"));
+assertNotNull(results.get(0).field("tags"));
+assertTrue(results.get(0).field("tags") instanceof List);
+assertEquals(3, ((List) results.get(0).field("tags")).size());
+assertTrue(((List) results.get(0).field("tags")).contains("tag1"));
+assertTrue(((List) results.get(0).field("tags")).contains("tag2"));
+assertTrue(((List) results.get(0).field("tags")).contains("tag3"));
+assertEquals("ExpectedDescription", results.get(0).field("description"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(1, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.675 - assertEquals("STR", results.get(0).field("STR"))
+0.629 - assertEquals(3, ((List) results.get(0).field("tags")).size())
+0.620 - assertNotNull(results.get(0).field("id"))
+0.598 - assertEquals("ExpectedName", results.get(0).field("name"))
+0.583 - assertTrue(results.get(0).field("active"))
+0.567 - ```java
+assertNotNull(results)
+0.564 - assertNotNull(results.get(0).field("updatedAt"))
+0.548 - assertNotNull(results.get(0).field("tags"))
+0.495 - assertEquals("ExpectedDescription", results.get(0).field("description"))
+0.482 - assertTrue(results.get(0).field("STR").equals("STR"))
+0.476 - assertTrue(results.get(0).field("tags") instanceof List)
+0.452 - assertTrue(results.get(0).field("id") instanceof String)
+0.447 - assertTrue(results.get(0).field("STR") instanceof String)
+0.442 - assertTrue(((List) results.get(0).field("tags")).contains("tag1"))
+0.442 - assertTrue(((List) results.get(0).field("tags")).contains("tag2"))
+0.442 - assertTrue(((List) results.get(0).field("tags")).contains("tag3"))
+0.442 - assertTrue(results.get(0).field("name") instanceof String)
+0.427 - assertTrue(results.get(0).field("createdAt") instanceof Date)
+0.427 - assertTrue(results.get(0).field("updatedAt") instanceof Date)
+0.427 - assertTrue(results.get(0).field("active") instanceof Boolean)
+0.000 - ```

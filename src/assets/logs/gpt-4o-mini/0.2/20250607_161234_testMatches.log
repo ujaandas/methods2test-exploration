@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatches ( ) {
+         List < ? > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertTrue(result instanceof List);
+assertEquals(expectedSize, result.size());
+assertTrue(result.contains(expectedElement));
+assertTrue(result.get(0) instanceof ExpectedType);
+assertEquals(expectedValue, result.get(0).getProperty("propertyName"));
+assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType));
+assertEquals(expectedValueAtIndex1, result.get(1));
+assertNotEquals(unexpectedValue, result.get(2));
+assertTrue(result.stream().anyMatch(item -> item.getProperty("propertyName").equals(expectedValue)));
+assertEquals(expectedString, result.get(3).toString());
+assertTrue(result.containsAll(expectedElements));
+assertFalse(result.contains(unexpectedElement));
+assertEquals(expectedValueAtIndex4, result.get(4).getAnotherProperty());
+assertTrue(result.size() <= maxSize);
+assertFalse(result.isEmpty());
+assertTrue(result.stream().allMatch(item -> item.getSomeProperty() != null));
+assertEquals(expectedType, result.get(5).getClass());
+assertTrue(result.stream().map(item -> item.getProperty("propertyName")).collect(Collectors.toSet()).contains(expectedUniqueValue));
+assertNotNull(result.get(6).getAnotherProperty());
+assertEquals(expectedList, result.subList(0, 3));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(result.size(),1); ===
+0.783 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.724 - assertFalse(result.isEmpty())
+0.698 - assertTrue(result.size() <= maxSize)
+0.667 - assertEquals(expectedList, result.subList(0, 3))
+0.640 - assertNotEquals(unexpectedValue, result.get(2))
+0.615 - assertEquals(expectedValueAtIndex1, result.get(1))
+0.600 - assertEquals(expectedType, result.get(5).getClass())
+0.585 - assertEquals(expectedString, result.get(3).toString())
+0.557 - assertTrue(result instanceof List)
+0.553 - assertFalse(result.contains(unexpectedElement))
+0.552 - ```java
+assertNotNull(result)
+0.521 - assertTrue(result.contains(expectedElement))
+0.513 - assertNotNull(result.get(6).getAnotherProperty())
+0.494 - assertTrue(result.containsAll(expectedElements))
+0.490 - assertEquals(expectedValue, result.get(0).getProperty("propertyName"))
+0.485 - assertEquals(expectedValueAtIndex4, result.get(4).getAnotherProperty())
+0.474 - assertTrue(result.get(0) instanceof ExpectedType)
+0.404 - assertTrue(result.stream().allMatch(item -> item instanceof ExpectedType))
+0.396 - assertTrue(result.stream().allMatch(item -> item.getSomeProperty() != null))
+0.315 - assertTrue(result.stream().anyMatch(item -> item.getProperty("propertyName").equals(expectedValue)))
+0.253 - assertTrue(result.stream().map(item -> item.getProperty("propertyName")).collect(Collectors.toSet()).contains(expectedUniqueValue))
+0.000 - ```

@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransaction {
+    boolean isActive ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransactionTest {
+    @Test
+     public void testExecutionBeginTransaction ( ) {
+         OConnectionBinaryExecutor executor = new OConnectionBinaryExecutor ( connection , server ) ; 
+         List < ORecordOperation > operations = new ArrayList < > ( ) ; 
+         ODocument rec = new ODocument ( ) ; 
+         ORecordInternal . setIdentity ( rec , new ORecordId ( 3 , - 2 ) ) ; 
+         operations . add ( new ORecordOperation ( rec , ORecordOperation . CREATED ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(executor)
+2. assertNotNull(operations)
+3. assertEquals(1, operations.size())
+4. assertNotNull(rec)
+5. assertNotNull(rec.getIdentity())
+6. assertEquals(3, rec.getIdentity().getClusterId())
+7. assertEquals(-2, rec.getIdentity().getClusterPosition())
+8. assertNotNull(operations.get(0))
+9. assertEquals(ORecordOperation.CREATED, operations.get(0).getType())
+10. assertNotNull(operations.get(0).getRecord())
+11. assertEquals(rec, operations.get(0).getRecord())
+12. assertTrue(executor.beginRequest())
+13. assertTrue(executor.getTransaction().isActive())
+14. assertNotNull(executor.getTransaction().getOperations())
+15. assertEquals(1, executor.getTransaction().getOperations().size())
+16. assertEquals(rec, executor.getTransaction().getOperations().get(0).getRecord())
+17. assertEquals(ORecordOperation.CREATED, executor.getTransaction().getOperations().get(0).getType())
+18. assertTrue(executor.commit())
+19. assertFalse(executor.getTransaction().isActive())
+20. assertTrue(executor.getTransaction().getOperations().isEmpty())
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(database.getTransaction().isActive()); ===
+0.076 - Assertions:
+
+1. assertNotNull(executor)
+2. assertNotNull(operations)
+3. assertEquals(1, operations.size())
+4. assertNotNull(rec)
+5. assertNotNull(rec.getIdentity())
+6. assertEquals(3, rec.getIdentity().getClusterId())
+7. assertEquals(-2, rec.getIdentity().getClusterPosition())
+8. assertNotNull(operations.get(0))
+9. assertEquals(ORecordOperation.CREATED, operations.get(0).getType())
+10. assertNotNull(operations.get(0).getRecord())
+11. assertEquals(rec, operations.get(0).getRecord())
+12. assertTrue(executor.beginRequest())
+13. assertTrue(executor.getTransaction().isActive())
+14. assertNotNull(executor.getTransaction().getOperations())
+15. assertEquals(1, executor.getTransaction().getOperations().size())
+16. assertEquals(rec, executor.getTransaction().getOperations().get(0).getRecord())
+17. assertEquals(ORecordOperation.CREATED, executor.getTransaction().getOperations().get(0).getType())
+18. assertTrue(executor.commit())
+19. assertFalse(executor.getTransaction().isActive())
+20. assertTrue(executor.getTransaction().getOperations().isEmpty())

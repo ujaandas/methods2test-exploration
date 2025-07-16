@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException { 
+    File targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ; 
+    try { 
+    FileUtils . copyFile ( fileChanged , targetResource ) ; 
+    info ( "STR" + fileChanged . getCanonicalPath ( ) + "STR" + targetResource . getCanonicalPath ( ) ) ; 
+    } catch ( FileNotFoundException ex ) { 
+    debug ( "STR" + fileChanged . getCanonicalPath ( ) ) ; 
+    } catch ( Exception ex ) { 
+    debug ( ex ) ; 
+    } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testCopyFile ( ) throws Exception {
+         File configFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( configFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         util . copyFile ( configFile , srcDir , targetDir , "STR" ) ; 
+         File targetFile = new File ( targetDir , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue("Target file should exist", targetFile.exists());
+assertEquals("Target file name should match", "STR", targetFile.getName());
+assertEquals("Target file size should match", configFile.length(), targetFile.length());
+assertArrayEquals("File content should match", Files.readAllBytes(configFile.toPath()), Files.readAllBytes(targetFile.toPath()));
+assertNotNull("Target file should not be null", targetFile);
+assertTrue("Target file should be a file", targetFile.isFile());
+assertFalse("Source file should not be deleted", configFile.exists());
+assertTrue("Source directory should still exist", srcDir.exists());
+assertTrue("Target directory should exist", targetDir.exists());
+assertNotSame("Target file should not be the same as source file", configFile, targetFile);
+assertTrue("Target file should be readable", targetFile.canRead());
+assertTrue("Target file should be writable", targetFile.canWrite());
+assertTrue("Target file should not be a directory", !targetFile.isDirectory());
+assertTrue("Target file should have correct last modified time", targetFile.lastModified() >= System.currentTimeMillis() - 1000);
+assertTrue("Target directory should contain the target file", new File(targetDir, targetFile.getName()).exists());
+assertEquals("Target file canonical path should match", targetResource.getCanonicalPath(), targetFile.getCanonicalPath());
+assertNotEquals("Target file should not be empty", 0, targetFile.length());
+assertTrue("File permissions should be set correctly", targetFile.canExecute());
+assertFalse("Source file should not be empty", configFile.length() == 0);
+assertTrue("File should have been copied correctly", FileUtils.contentEquals(configFile, targetFile));
+assertDoesNotThrow(() -> Files.deleteIfExists(targetFile.toPath()), "Should not throw exception when deleting target file");
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(targetFile.exists()); ===
+0.660 - ```java
+assertTrue("Target file should exist", targetFile.exists())
+0.622 - assertTrue("Target directory should exist", targetDir.exists())
+0.614 - assertTrue("Target file should be a file", targetFile.isFile())
+0.587 - assertTrue("Source directory should still exist", srcDir.exists())
+0.565 - assertTrue("Target file should be readable", targetFile.canRead())
+0.559 - assertTrue("Target file should be writable", targetFile.canWrite())
+0.549 - assertTrue("Target file should not be a directory", !targetFile.isDirectory())
+0.532 - assertFalse("Source file should not be deleted", configFile.exists())
+0.531 - assertNotEquals("Target file should not be empty", 0, targetFile.length())
+0.519 - assertTrue("File permissions should be set correctly", targetFile.canExecute())
+0.505 - assertEquals("Target file name should match", "STR", targetFile.getName())
+0.500 - assertNotNull("Target file should not be null", targetFile)
+0.482 - assertEquals("Target file size should match", configFile.length(), targetFile.length())
+0.459 - assertTrue("Target directory should contain the target file", new File(targetDir, targetFile.getName()).exists())
+0.421 - assertFalse("Source file should not be empty", configFile.length() == 0)
+0.386 - assertEquals("Target file canonical path should match", targetResource.getCanonicalPath(), targetFile.getCanonicalPath())
+0.381 - assertTrue("Target file should have correct last modified time", targetFile.lastModified() >= System.currentTimeMillis() - 1000)
+0.368 - assertTrue("File should have been copied correctly", FileUtils.contentEquals(configFile, targetFile))
+0.347 - assertDoesNotThrow(() -> Files.deleteIfExists(targetFile.toPath()), "Should not throw exception when deleting target file")
+0.345 - assertNotSame("Target file should not be the same as source file", configFile, targetFile)
+0.325 - assertArrayEquals("File content should match", Files.readAllBytes(configFile.toPath()), Files.readAllBytes(targetFile.toPath()))
+0.000 - ```

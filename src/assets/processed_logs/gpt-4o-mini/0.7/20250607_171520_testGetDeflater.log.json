@@ -1,0 +1,33 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtension {\npublic Deflater getDeflater ( ) {\nreturn deflater ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtensionTest {\n@Test\npublic void testGetDeflater ( ) {\nPerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nimport static org.junit.Assert.assertNotNull;\nimport static org.junit.Assert.assertTrue;\n\n@Test\npublic void testGetDeflater() {\nPerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension();\n\n// Assertions\nDeflater deflater = deflateExtension.getDeflater();\nassertNotNull(deflater);\nassertTrue(deflater instanceof Deflater);\nassertTrue(deflater.getAdler() >= 0);\nassertTrue(deflater.getTotalIn() >= 0);\nassertTrue(deflater.getTotalOut() >= 0);\n\n// Additional assertions\ndeflater.setInput(new byte[]{1, 2, 3});\nassertTrue(deflater.getTotalIn() > 0);\n\ndeflater.finish();\nassertTrue(deflater.isFinished());\n\ndeflater.reset();\nassertTrue(deflater.getTotalIn() == 0);\n\ndeflater.setLevel(Deflater.BEST_COMPRESSION);\nassertTrue(deflater.getLevel() == Deflater.BEST_COMPRESSION);\n\ndeflater.setStrategy(Deflater.DEFAULT_STRATEGY);\nassertTrue(deflater.getStrategy() == Deflater.DEFAULT_STRATEGY);\n\ndeflater.setInput(new byte[]{1, 2, 3, 4, 5});\nassertTrue(deflater.getTotalIn() > 0);\n\ndeflater.finish();\nassertTrue(deflater.getTotalOut() > 0);\n\ndeflater.end();\nassertTrue(deflater.isFinished());\n}\n```\n====================\n\n",
+    "scores": [
+        0.55,
+        0.506,
+        0.471,
+        0.428,
+        0.425,
+        0.397,
+        0.397,
+        0.358,
+        0.34,
+        0.322,
+        0.32,
+        0.311,
+        0.311,
+        0.309,
+        0.309,
+        0.306,
+        0.265,
+        0.262,
+        0.262,
+        0.257,
+        0.22,
+        0.186,
+        0.158,
+        0.138,
+        0.115,
+        0.0
+    ],
+    "ground_truth": "assertEquals(deflateExtension.getDeflater().finished(),newDeflater(Deflater.DEFAULT_COMPRESSION,true).finished());"
+}

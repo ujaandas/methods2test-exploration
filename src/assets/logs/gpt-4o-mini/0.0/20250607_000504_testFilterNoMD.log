@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class MetadataFilter {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class MetadataFilterTest {
+    @Test
+     public void testFilterNoMD ( ) throws MalformedURLException {
+         URLFilter filter = createFilter ( "STR" , "STR" ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("ExpectedResult1", filterResult);
+assertTrue(filterResult.contains("ExpectedSubstring1"));
+assertFalse(filterResult.isEmpty());
+assertEquals("ExpectedResult2", filter.filter(url, metadata, "DifferentURL").toString());
+assertNotEquals("UnexpectedResult", filterResult);
+assertTrue(filterResult.startsWith("ExpectedPrefix"));
+assertTrue(filterResult.endsWith("ExpectedSuffix"));
+assertEquals(10, filterResult.length());
+assertTrue(filterResult.matches("ExpectedRegexPattern"));
+assertFalse(filterResult.equals("AnotherUnexpectedResult"));
+assertTrue(filterResult.indexOf("ExpectedSubstring2") > -1);
+assertNull(filter.filter(url, metadata, null));
+assertTrue(filterResult.equalsIgnoreCase("expectedresult1"));
+assertSame(filterResult, filter.filter(url, metadata, url.toExternalForm()));
+assertNotSame(filterResult, filter.filter(url, metadata, "AnotherURL"));
+assertTrue(filterResult.contains("ExpectedPart1") && filterResult.contains("ExpectedPart2"));
+assertEquals("ExpectedResult3", filter.filter(url, metadata, "YetAnotherURL"));
+assertTrue(filterResult.length() > 5);
+assertFalse(filterResult.contains("UnexpectedPart"));
+assertTrue(filterResult.matches(".*Expected.*"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.703 - assertEquals("ExpectedResult1", filterResult)
+0.653 - assertNotEquals("UnexpectedResult", filterResult)
+0.635 - assertEquals(10, filterResult.length())
+0.561 - assertFalse(filterResult.isEmpty())
+0.537 - ```java
+assertNotNull(filterResult)
+0.512 - assertTrue(filterResult.length() > 5)
+0.483 - assertSame(filterResult, filter.filter(url, metadata, url.toExternalForm()))
+0.465 - assertFalse(filterResult.contains("UnexpectedPart"))
+0.459 - assertEquals("ExpectedResult3", filter.filter(url, metadata, "YetAnotherURL"))
+0.442 - assertTrue(filterResult.matches(".*Expected.*"))
+0.434 - assertFalse(filterResult.equals("AnotherUnexpectedResult"))
+0.429 - assertTrue(filterResult.endsWith("ExpectedSuffix"))
+0.424 - assertEquals("ExpectedResult2", filter.filter(url, metadata, "DifferentURL").toString())
+0.420 - assertTrue(filterResult.startsWith("ExpectedPrefix"))
+0.418 - assertNull(filter.filter(url, metadata, null))
+0.412 - assertTrue(filterResult.contains("ExpectedSubstring1"))
+0.408 - assertTrue(filterResult.matches("ExpectedRegexPattern"))
+0.404 - assertTrue(filterResult.indexOf("ExpectedSubstring2") > -1)
+0.393 - assertTrue(filterResult.equalsIgnoreCase("expectedresult1"))
+0.365 - assertNotSame(filterResult, filter.filter(url, metadata, "AnotherURL"))
+0.307 - assertTrue(filterResult.contains("ExpectedPart1") && filterResult.contains("ExpectedPart2"))
+0.000 - ```

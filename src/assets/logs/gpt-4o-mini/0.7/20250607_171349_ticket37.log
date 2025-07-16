@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void ticket37 ( ) {
+         locītājs . enablePrefixes = true ; 
+         Word panest = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(panest);
+assertTrue(panest.isRecognized());
+assertEquals("ExpectedWordForm1", panest.getWordForm(0));
+assertEquals("ExpectedWordForm2", panest.getWordForm(1));
+assertEquals(2, panest.getWordFormCount());
+assertTrue(panest.hasPrefix("ExpectedPrefix"));
+assertFalse(panest.hasSuffix("UnexpectedSuffix"));
+assertTrue(panest.getDerivationalForms().contains("ExpectedDerivationalForm"));
+assertFalse(panest.getDerivationalForms().contains("UnexpectedDerivationalForm"));
+assertEquals("ExpectedBaseForm", panest.getBaseForm());
+assertEquals(3, panest.getAffixCount());
+assertTrue(panest.getPrefixes().contains("ExpectedPrefix"));
+assertTrue(panest.getSuffixes().contains("ExpectedSuffix"));
+assertEquals("ExpectedMorphologicalAnalysis", panest.getMorphologicalAnalysis());
+assertFalse(panest.isIrregular());
+assertTrue(panest.isCompound());
+assertNotEquals("UnexpectedWordForm", panest.getWordForm(0));
+assertTrue(panest.getSynonyms().contains("ExpectedSynonym"));
+assertFalse(panest.getAntonyms().contains("UnexpectedAntonym"));
+assertEquals("ExpectedPartOfSpeech", panest.getPartOfSpeech());
+assertTrue(panest.isInflected());
+assertEquals(5, panest.getAllFormsCount());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(panest.isRecognized()); ===
+1.000 - assertTrue(panest.isRecognized())
+0.831 - assertTrue(panest.isInflected())
+0.812 - assertTrue(panest.isCompound())
+0.667 - assertFalse(panest.isIrregular())
+0.633 - assertTrue(panest.hasPrefix("ExpectedPrefix"))
+0.592 - assertEquals(3, panest.getAffixCount())
+0.568 - assertEquals(2, panest.getWordFormCount())
+0.568 - assertEquals(5, panest.getAllFormsCount())
+0.565 - assertTrue(panest.getPrefixes().contains("ExpectedPrefix"))
+0.565 - assertTrue(panest.getSuffixes().contains("ExpectedSuffix"))
+0.559 - assertTrue(panest.getSynonyms().contains("ExpectedSynonym"))
+0.537 - assertFalse(panest.hasSuffix("UnexpectedSuffix"))
+0.484 - ```java
+assertNotNull(panest)
+0.479 - assertFalse(panest.getAntonyms().contains("UnexpectedAntonym"))
+0.468 - assertTrue(panest.getDerivationalForms().contains("ExpectedDerivationalForm"))
+0.465 - assertEquals("ExpectedBaseForm", panest.getBaseForm())
+0.455 - assertEquals("ExpectedWordForm1", panest.getWordForm(0))
+0.455 - assertEquals("ExpectedWordForm2", panest.getWordForm(1))
+0.435 - assertNotEquals("UnexpectedWordForm", panest.getWordForm(0))
+0.426 - assertEquals("ExpectedPartOfSpeech", panest.getPartOfSpeech())
+0.404 - assertFalse(panest.getDerivationalForms().contains("UnexpectedDerivationalForm"))
+0.339 - assertEquals("ExpectedMorphologicalAnalysis", panest.getMorphologicalAnalysis())
+0.000 - ```

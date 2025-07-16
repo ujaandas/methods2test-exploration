@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testOrderByDesc ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         String query = "STR" ; 
+         OResultSet result = db . query ( query ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(5, result.size());
+assertTrue(result.hasNext());
+assertEquals("value1", result.next().getProperty("property1"));
+assertEquals("value2", result.next().getProperty("property2"));
+assertEquals("value3", result.next().getProperty("property3"));
+assertEquals("value4", result.next().getProperty("property4"));
+assertEquals("value5", result.next().getProperty("property5"));
+assertFalse(result.hasNext());
+assertEquals(5, result.stream().count());
+assertEquals(5, result.stream().filter(x -> x.getProperty("property1").equals("value1")).count());
+assertEquals(5, result.stream().filter(x -> x.getProperty("property2").equals("value2")).count());
+assertEquals(5, result.stream().filter(x -> x.getProperty("property3").equals("value3")).count());
+assertEquals(5, result.stream().filter(x -> x.getProperty("property4").equals("value4")).count());
+assertEquals(5, result.stream().filter(x -> x.getProperty("property5").equals("value5")).count());
+assertEquals(5, result.stream().map(x -> x.getProperty("property1")).distinct().count());
+assertEquals(5, result.stream().map(x -> x.getProperty("property2")).distinct().count());
+assertEquals(5, result.stream().map(x -> x.getProperty("property3")).distinct().count());
+assertEquals(5, result.stream().map(x -> x.getProperty("property4")).distinct().count());
+assertEquals(5, result.stream().map(x -> x.getProperty("property5")).distinct().count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.877 - assertFalse(result.hasNext())
+0.702 - assertEquals(5, result.size())
+0.597 - assertEquals(5, result.stream().count())
+0.472 - assertEquals("value1", result.next().getProperty("property1"))
+0.472 - assertEquals("value2", result.next().getProperty("property2"))
+0.472 - assertEquals("value3", result.next().getProperty("property3"))
+0.472 - assertEquals("value4", result.next().getProperty("property4"))
+0.472 - assertEquals("value5", result.next().getProperty("property5"))
+0.372 - assertEquals(5, result.stream().map(x -> x.getProperty("property1")).distinct().count())
+0.372 - assertEquals(5, result.stream().map(x -> x.getProperty("property2")).distinct().count())
+0.372 - assertEquals(5, result.stream().map(x -> x.getProperty("property3")).distinct().count())
+0.372 - assertEquals(5, result.stream().map(x -> x.getProperty("property4")).distinct().count())
+0.372 - assertEquals(5, result.stream().map(x -> x.getProperty("property5")).distinct().count())
+0.361 - assertEquals(5, result.stream().filter(x -> x.getProperty("property1").equals("value1")).count())
+0.361 - assertEquals(5, result.stream().filter(x -> x.getProperty("property2").equals("value2")).count())
+0.361 - assertEquals(5, result.stream().filter(x -> x.getProperty("property3").equals("value3")).count())
+0.361 - assertEquals(5, result.stream().filter(x -> x.getProperty("property4").equals("value4")).count())
+0.361 - assertEquals(5, result.stream().filter(x -> x.getProperty("property5").equals("value5")).count())

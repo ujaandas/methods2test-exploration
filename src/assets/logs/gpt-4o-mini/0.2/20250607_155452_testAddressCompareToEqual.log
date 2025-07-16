@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class MacAddress {
+    @Override
+     public int compareTo ( final MacAddress macAddress ) { 
+     int comparison = 0 ; 
+     for ( int i = 0 ; 
+     i < ADDRESS_LENGTH ; 
+     i ++ ) { 
+     comparison = address [ i ] - macAddress . address [ i ] ; 
+     if ( comparison != 0 ) { 
+     break ; 
+     } } return comparison ; 
+     }
+}
+
+package fluenda.ParCEFone;
+
+public class MacAddressTest {
+    @Test
+     public void testAddressCompareToEqual ( ) {
+         final MacAddress macAddress = new MacAddress ( MULTICAST_ADDRESS ) ; 
+         final int comparison = macAddress . compareTo ( macAddress ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(0, comparison);
+assertTrue(comparison == 0);
+assertFalse(comparison < 0);
+assertFalse(comparison > 0);
+assertNotNull(macAddress);
+assertNotNull(macAddress.compareTo(macAddress));
+assertSame(macAddress, macAddress);
+assertTrue(macAddress.compareTo(macAddress) == 0);
+assertEquals("Comparison should be zero for equal addresses", 0, comparison);
+assertThat(comparison, is(0));
+assertThat(comparison, equalTo(0));
+assertThat("Comparison result should be zero", comparison, is(0));
+assertThat("Comparison result should be zero", comparison, equalTo(0));
+assertTrue("Comparison result should be zero", comparison == 0);
+assertFalse("Comparison result should not be negative", comparison < 0);
+assertFalse("Comparison result should not be positive", comparison > 0);
+assertEquals("Expected comparison result", 0, comparison);
+assertTrue("Comparison result must be zero", comparison == 0);
+assertThat("Comparison result must be zero", comparison, is(0));
+assertThat("Comparison result must be equal to zero", comparison, equalTo(0));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(0,comparison); ===
+0.867 - ```java
+assertEquals(0, comparison)
+0.824 - assertFalse(comparison < 0)
+0.824 - assertFalse(comparison > 0)
+0.745 - assertTrue(comparison == 0)
+0.704 - assertThat(comparison, is(0))
+0.658 - assertEquals("Expected comparison result", 0, comparison)
+0.644 - assertThat(comparison, equalTo(0))
+0.553 - assertEquals("Comparison should be zero for equal addresses", 0, comparison)
+0.550 - assertTrue("Comparison result must be zero", comparison == 0)
+0.537 - assertTrue("Comparison result should be zero", comparison == 0)
+0.506 - assertThat("Comparison result must be zero", comparison, is(0))
+0.494 - assertFalse("Comparison result should not be negative", comparison < 0)
+0.494 - assertFalse("Comparison result should not be positive", comparison > 0)
+0.494 - assertThat("Comparison result should be zero", comparison, is(0))
+0.467 - assertThat("Comparison result should be zero", comparison, equalTo(0))
+0.466 - assertNotNull(macAddress.compareTo(macAddress))
+0.466 - assertTrue(macAddress.compareTo(macAddress) == 0)
+0.463 - assertThat("Comparison result must be equal to zero", comparison, equalTo(0))
+0.441 - assertSame(macAddress, macAddress)
+0.431 - assertNotNull(macAddress)
+0.000 - ```

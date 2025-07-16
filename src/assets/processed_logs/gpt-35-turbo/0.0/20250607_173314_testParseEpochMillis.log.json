@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParser {\npublic Date parse ( final String timestamp ) throws ProcessingException {\nif ( StringUtils . isBlank ( timestamp ) ) {\nreturn null ;\n} try {\nreturn parser . parse ( timestamp ) ;\n} catch ( Exception ex ) {\nthrow new ProcessingException ( \"STR\" + timestamp + \"STR\" , ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParserTest {\n@Test\npublic void testParseEpochMillis ( ) throws Exception {\nString format = TimestampParser . EPOCH_MILLIS ;\nlong time = System . currentTimeMillis ( ) ;\nDate parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(parsed);\nAssert.assertEquals(time, parsed.getTime());\nAssert.assertTrue(parsed.before(new Date()));\nAssert.assertTrue(parsed.after(new Date(time - 1000)));\nAssert.assertTrue(parsed.equals(new Date(time)));\nAssert.assertNotEquals(new Date(), parsed);\nAssert.assertNotEquals(null, parsed);\nAssert.assertNotEquals(\"12345\", parsed);\nAssert.assertNotEquals(parsed, \"12345\");\nAssert.assertTrue(parsed.getTime() > 0);\nAssert.assertTrue(parsed.getTime() < System.currentTimeMillis());\nAssert.assertTrue(parsed.getTime() > System.currentTimeMillis() - 1000);\nAssert.assertTrue(parsed.getTime() < System.currentTimeMillis() + 1000);\nAssert.assertTrue(parsed.getTime() == time);\nAssert.assertTrue(parsed.getTime() != 0);\nAssert.assertTrue(parsed.getTime() != Long.MAX_VALUE);\nAssert.assertTrue(parsed.getTime() != Long.MIN_VALUE);\nAssert.assertTrue(parsed.getTime() != Long.MAX_VALUE - 1);\nAssert.assertTrue(parsed.getTime() != Long.MIN_VALUE + 1);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.769,
+        0.758,
+        0.725,
+        0.676,
+        0.667,
+        0.636,
+        0.633,
+        0.633,
+        0.617,
+        0.617,
+        0.606,
+        0.592,
+        0.587,
+        0.571,
+        0.557,
+        0.556,
+        0.526,
+        0.526
+    ],
+    "ground_truth": "assertEquals(time,parsed.getTime());"
+}

@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(20, result.stream().count());
+assertEquals(childClass.getName(), result.getRecord().getProperty("@class"));
+assertEquals(parentClass.getName(), result.getRecord().getProperty("@superClass"));
+assertTrue(result.getExecutionPlan().contains("CheckClassTypeStep"));
+assertFalse(result.getExecutionPlan().contains("FilterStep"));
+assertEquals(0, result.getExecutionStats().getRecordsFetched());
+assertEquals(0, result.getExecutionStats().getRecordsFiltered());
+assertEquals(20, result.getExecutionStats().getRecordsProcessed());
+assertEquals(0, result.getExecutionStats().getRecordsReturned());
+assertEquals(0, result.getExecutionStats().getRecordsChanged());
+assertEquals(0, result.getExecutionStats().getRecordsScanned());
+assertTrue(result.getExecutionStats().getExecutionTimeMs() > 0);
+assertEquals(0, result.getExecutionStats().getTotalTime());
+assertEquals(20, result.getExecutionStats().getTotalRecords());
+assertEquals(0, result.getExecutionStats().getTotalResultRecords());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.987 - assertEquals(20, result.stream().count())
+0.647 - assertEquals(0, result.getExecutionStats().getRecordsReturned())
+0.646 - assertEquals(0, result.getExecutionStats().getTotalTime())
+0.634 - assertEquals(0, result.getExecutionStats().getRecordsFetched())
+0.634 - assertEquals(0, result.getExecutionStats().getRecordsChanged())
+0.634 - assertEquals(0, result.getExecutionStats().getRecordsScanned())
+0.627 - assertEquals(0, result.getExecutionStats().getRecordsFiltered())
+0.627 - assertTrue(result.hasNext())
+0.620 - assertEquals(20, result.getExecutionStats().getTotalRecords())
+0.600 - assertFalse(result.getExecutionPlan().contains("FilterStep"))
+0.596 - assertEquals(20, result.getExecutionStats().getRecordsProcessed())
+0.590 - assertEquals(0, result.getExecutionStats().getTotalResultRecords())
+0.533 - assertNotNull(result)
+0.523 - assertTrue(result.getExecutionPlan().contains("CheckClassTypeStep"))
+0.509 - assertEquals(childClass.getName(), result.getRecord().getProperty("@class"))
+0.500 - assertEquals(parentClass.getName(), result.getRecord().getProperty("@superClass"))
+0.500 - assertTrue(result.getExecutionStats().getExecutionTimeMs() > 0)

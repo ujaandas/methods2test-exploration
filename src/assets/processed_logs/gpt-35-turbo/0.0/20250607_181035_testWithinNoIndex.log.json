@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithin {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithinTest {\n@Test\npublic void testWithinNoIndex ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" + \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(next);\nAssert.assertTrue(next.field(\"fieldName\") instanceof String);\nAssert.assertEquals(5, next.field(\"intField\"));\nAssert.assertNotEquals(\"value\", next.field(\"otherField\"));\nAssert.assertTrue(next.field(\"booleanField\"));\nAssert.assertFalse(next.field(\"falseField\"));\nAssert.assertNull(next.field(\"nullField\"));\nAssert.assertNotSame(\"value\", next.field(\"differentField\"));\nAssert.assertTrue(next.field(\"collectionField\") instanceof Collection);\nAssert.assertTrue(next.field(\"mapField\") instanceof Map);\nAssert.assertTrue(next.field(\"arrayField\") instanceof Object[]);\nAssert.assertTrue(next.field(\"objectField\") instanceof CustomObject);\nAssert.assertTrue(next.field(\"nestedField\") instanceof ODocument);\nAssert.assertTrue(next.field(\"linkedField\") instanceof ORID);\nAssert.assertTrue(next.field(\"dateField\") instanceof Date);\nAssert.assertTrue(next.field(\"decimalField\") instanceof BigDecimal);\nAssert.assertTrue(next.field(\"longField\") instanceof Long);\nAssert.assertTrue(next.field(\"floatField\") instanceof Float);\nAssert.assertTrue(next.field(\"doubleField\") instanceof Double);\n====================\n\n",
+    "scores": [
+        0.757,
+        0.685,
+        0.676,
+        0.659,
+        0.622,
+        0.602,
+        0.588,
+        0.588,
+        0.584,
+        0.575,
+        0.575,
+        0.575,
+        0.565,
+        0.556,
+        0.547,
+        0.532,
+        0.529,
+        0.515,
+        0.509
+    ],
+    "ground_truth": "Assert.assertEquals(next.field(\"STR\"),true);"
+}

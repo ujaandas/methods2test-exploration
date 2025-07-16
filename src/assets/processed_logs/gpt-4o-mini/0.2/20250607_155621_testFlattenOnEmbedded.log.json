@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testFlattenOnEmbedded ( ) {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedFieldValue, qResult.get(0).field(\"fieldName\"));\nassertEquals(expectedFieldValue2, qResult.get(1).field(\"fieldName2\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedType, qResult.get(0).getClass());\nassertEquals(expectedId, qResult.get(0).getIdentity());\nassertNotEquals(unexpectedValue, qResult.get(0).field(\"fieldName\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"fieldName\").equals(specificValue)));\nassertEquals(expectedFieldCount, qResult.get(0).fields().size());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"status\").equals(\"inactive\")));\nassertEquals(expectedFirstDocumentId, qResult.get(0).getIdentity().toString());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"createdAt\") instanceof Date));\nassertEquals(expectedDate, qResult.get(0).field(\"createdAt\"));\nassertNotNull(qResult.get(0).field(\"nestedField\"));\nassertTrue(qResult.get(0).field(\"nestedField\") instanceof ODocument);\nassertEquals(expectedNestedFieldValue, qResult.get(0).field(\"nestedField\").field(\"nestedFieldName\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"isActive\") == true));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.61,
+        0.602,
+        0.602,
+        0.578,
+        0.567,
+        0.55,
+        0.542,
+        0.542,
+        0.51,
+        0.507,
+        0.467,
+        0.438,
+        0.419,
+        0.416,
+        0.407,
+        0.404,
+        0.382,
+        0.382,
+        0.356,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

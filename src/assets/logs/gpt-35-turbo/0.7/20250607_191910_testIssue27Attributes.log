@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue27Attributes ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions.assertEquals(1, schemas.size());
+Assertions.assertTrue(schemas.get(0).getAttributes().size() > 0);
+
+Assertions.assertEquals(2, schemas.get(0).getElements().size());
+Assertions.assertEquals("element1", schemas.get(0).getElements().get(0).getName());
+Assertions.assertEquals("element2", schemas.get(0).getElements().get(1).getName());
+
+Assertions.assertEquals(1, schemas.get(0).getComplexTypes().size());
+Assertions.assertEquals("complexType1", schemas.get(0).getComplexTypes().get(0).getName());
+
+Assertions.assertEquals(1, schemas.get(0).getSimpleTypes().size());
+Assertions.assertEquals("simpleType1", schemas.get(0).getSimpleTypes().get(0).getName());
+
+Assertions.assertEquals(1, schemas.get(0).getGroups().size());
+Assertions.assertEquals("group1", schemas.get(0).getGroups().get(0).getName());
+
+Assertions.assertEquals(1, schemas.get(0).getNotations().size());
+Assertions.assertEquals("notation1", schemas.get(0).getNotations().get(0).getName());
+
+Assertions.assertEquals(1, schemas.get(0).getIncludes().size());
+Assertions.assertEquals("include1", schemas.get(0).getIncludes().get(0).getSchemaLocation());
+
+Assertions.assertEquals(1, schemas.get(0).getImports().size());
+Assertions.assertEquals("import1", schemas.get(0).getImports().get(0).getNamespace());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,schemas.size()); ===
+0.845 - Assertions.assertEquals(1, schemas.size())
+0.667 - Assertions.assertEquals(1, schemas.get(0).getGroups().size())
+0.659 - Assertions.assertEquals(1, schemas.get(0).getImports().size())
+0.652 - Assertions.assertEquals(1, schemas.get(0).getIncludes().size())
+0.645 - Assertions.assertEquals(1, schemas.get(0).getNotations().size())
+0.632 - Assertions.assertEquals(1, schemas.get(0).getSimpleTypes().size())
+0.630 - Assertions.assertEquals(2, schemas.get(0).getElements().size())
+0.625 - Assertions.assertEquals(1, schemas.get(0).getComplexTypes().size())
+0.523 - Assertions.assertEquals("group1", schemas.get(0).getGroups().get(0).getName())
+0.505 - Assertions.assertEquals("element1", schemas.get(0).getElements().get(0).getName())
+0.500 - Assertions.assertTrue(schemas.get(0).getAttributes().size() > 0)
+0.496 - Assertions.assertEquals("notation1", schemas.get(0).getNotations().get(0).getName())
+0.491 - Assertions.assertEquals("import1", schemas.get(0).getImports().get(0).getNamespace())
+0.486 - Assertions.assertEquals("element2", schemas.get(0).getElements().get(1).getName())
+0.479 - Assertions.assertEquals("simpleType1", schemas.get(0).getSimpleTypes().get(0).getName())
+0.471 - Assertions.assertEquals("complexType1", schemas.get(0).getComplexTypes().get(0).getName())
+0.463 - Assertions.assertEquals("include1", schemas.get(0).getIncludes().get(0).getSchemaLocation())

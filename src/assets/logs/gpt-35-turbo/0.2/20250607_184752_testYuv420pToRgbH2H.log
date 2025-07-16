@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgb {
+    public byte [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgbTest {
+    @Test
+     public void testYuv420pToRgbH2H ( ) {
+         Yuv420pToRgb transform = new Yuv420pToRgb ( ) ; 
+         Picture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] { 
+     yH , uH , vH } , new byte [ ] [ ] { 
+     yL , uL , vL } , ColorSpace . YUV420 , 2 ) ; 
+         Picture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ; 
+         transform . transform ( _in , out ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(out);
+Assert.assertEquals(4, out.getWidth());
+Assert.assertEquals(4, out.getHeight());
+Assert.assertEquals(ColorSpace.RGB, out.getColor());
+Assert.assertNotNull(out.getData());
+Assert.assertNotNull(out.getData()[0]);
+Assert.assertNotNull(out.getData()[1]);
+Assert.assertNotNull(out.getData()[2]);
+Assert.assertEquals(4, out.getData()[0].length);
+Assert.assertEquals(4, out.getData()[1].length);
+Assert.assertEquals(4, out.getData()[2].length);
+Assert.assertNotNull(out.getData()[0][0]);
+Assert.assertNotNull(out.getData()[1][0]);
+Assert.assertNotNull(out.getData()[2][0]);
+Assert.assertEquals(0, out.getData()[0][0]);
+Assert.assertEquals(0, out.getData()[1][0]);
+Assert.assertEquals(0, out.getData()[2][0]);
+Assert.assertEquals(0, out.getData()[0][1]);
+Assert.assertEquals(0, out.getData()[1][1]);
+Assert.assertEquals(0, out.getData()[2][1]);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(rgbH,out.getPlaneData(0)); ===
+0.718 - Assert.assertEquals(0, out.getData()[0][0])
+0.718 - Assert.assertEquals(0, out.getData()[1][0])
+0.718 - Assert.assertEquals(0, out.getData()[2][0])
+0.718 - Assert.assertEquals(0, out.getData()[0][1])
+0.718 - Assert.assertEquals(0, out.getData()[1][1])
+0.718 - Assert.assertEquals(0, out.getData()[2][1])
+0.703 - Assert.assertEquals(4, out.getHeight())
+0.685 - Assert.assertEquals(4, out.getWidth())
+0.683 - Assert.assertEquals(4, out.getData()[0].length)
+0.683 - Assert.assertEquals(4, out.getData()[1].length)
+0.683 - Assert.assertEquals(4, out.getData()[2].length)
+0.648 - Assert.assertNotNull(out.getData())
+0.622 - Assert.assertNotNull(out.getData()[0])
+0.622 - Assert.assertNotNull(out.getData()[1])
+0.622 - Assert.assertNotNull(out.getData()[2])
+0.605 - Assert.assertEquals(ColorSpace.RGB, out.getColor())
+0.597 - Assert.assertNotNull(out.getData()[0][0])
+0.597 - Assert.assertNotNull(out.getData()[1][0])
+0.597 - Assert.assertNotNull(out.getData()[2][0])
+0.426 - Assert.assertNotNull(out)

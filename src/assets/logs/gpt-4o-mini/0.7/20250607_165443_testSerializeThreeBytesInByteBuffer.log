@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CompactedLinkSerializer {
+    @Override
+     public int getObjectSizeInByteBuffer ( ByteBuffer buffer ) { 
+     return buffer . get ( buffer . position ( ) + OShortSerializer . SHORT_SIZE ) + OByteSerializer . BYTE_SIZE + OShortSerializer . SHORT_SIZE ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CompactedLinkSerializerTest {
+    @Test
+     public void testSerializeThreeBytesInByteBuffer ( ) {
+         final OCompactedLinkSerializer linkSerializer = new OCompactedLinkSerializer ( ) ; 
+         final ORecordId rid = new ORecordId ( 123 , 65628 ) ; 
+         final int size = linkSerializer . getObjectSize ( rid ) ; 
+         ByteBuffer buffer = ByteBuffer . allocate ( size + 1 ) ; 
+         buffer . position ( 1 ) ; 
+         linkSerializer . serializeInByteBufferObject ( rid , buffer ) ; 
+         buffer . position ( 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertEquals(0, buffer.get(0));
+Assert.assertEquals(123, buffer.getShort(1));
+Assert.assertEquals(65628, buffer.getShort(3));
+Assert.assertEquals(0, buffer.get(5));
+Assert.assertEquals(0, buffer.get(6));
+Assert.assertEquals(size, buffer.remaining());
+Assert.assertTrue(buffer.hasRemaining());
+Assert.assertFalse(buffer.isReadOnly());
+Assert.assertEquals(7, buffer.position());
+Assert.assertEquals(size + 1, buffer.capacity());
+Assert.assertEquals(1, buffer.arrayOffset());
+Assert.assertNotNull(buffer.array());
+Assert.assertTrue(buffer.isDirect());
+Assert.assertEquals(buffer.limit(), size + 1);
+Assert.assertEquals(1, buffer.mark().position());
+Assert.assertEquals(0, buffer.get(0));
+Assert.assertTrue(buffer.isDirect());
+Assert.assertEquals(0, buffer.get());
+Assert.assertFalse(buffer.isReadOnly());
+Assert.assertEquals(0, buffer.get(0));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(size,linkSerializer.getObjectSizeInByteBuffer(buffer)); ===
+0.500 - Assert.assertEquals(size, buffer.remaining())
+0.495 - Assert.assertEquals(size + 1, buffer.capacity())
+0.484 - Assert.assertEquals(0, buffer.get())
+0.479 - Assert.assertEquals(0, buffer.get(5))
+0.479 - Assert.assertEquals(0, buffer.get(6))
+0.479 - Assert.assertEquals(0, buffer.get(0))
+0.479 - Assert.assertEquals(0, buffer.get(0))
+0.466 - Assert.assertEquals(123, buffer.getShort(1))
+0.457 - Assert.assertEquals(65628, buffer.getShort(3))
+0.442 - ```java
+Assert.assertEquals(0, buffer.get(0))
+0.440 - Assert.assertEquals(7, buffer.position())
+0.427 - Assert.assertEquals(1, buffer.arrayOffset())
+0.412 - Assert.assertEquals(buffer.limit(), size + 1)
+0.411 - Assert.assertEquals(1, buffer.mark().position())
+0.384 - Assert.assertFalse(buffer.isReadOnly())
+0.384 - Assert.assertFalse(buffer.isReadOnly())
+0.375 - Assert.assertNotNull(buffer.array())
+0.354 - Assert.assertTrue(buffer.isDirect())
+0.354 - Assert.assertTrue(buffer.isDirect())
+0.340 - Assert.assertTrue(buffer.hasRemaining())
+0.000 - ```

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testSkipOrdered ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));
+assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")));
+assertEquals(expectedValue, results.get(0).field("fieldName"));
+assertEquals(expectedValue, results.get(1).field("fieldName"));
+assertNotEquals(unexpectedValue, results.get(2).field("fieldName"));
+assertTrue(results.get(0).field("fieldName").toString().startsWith("prefix"));
+assertTrue(results.get(1).field("fieldName").toString().endsWith("suffix"));
+assertTrue(results.stream().anyMatch(doc -> doc.field("fieldName").equals(specificValue)));
+assertEquals(expectedDocumentId, results.get(0).getIdentity());
+assertTrue(results.stream().allMatch(doc -> doc.field("numericField") > 0));
+assertTrue(results.stream().noneMatch(doc -> doc.field("booleanField") == false));
+assertEquals(expectedFieldCount, results.get(0).fieldNames().size());
+assertTrue(results.stream().allMatch(doc -> doc.field("dateField") instanceof Date));
+assertTrue(results.stream().allMatch(doc -> doc.field("listField") instanceof List));
+assertTrue(results.stream().allMatch(doc -> ((List<?>) doc.field("listField")).size() > 0));
+assertTrue(results.stream().allMatch(doc -> doc.field("mapField") instanceof Map));
+assertEquals(expectedMapValue, results.get(0).field("mapField").get("key"));
+assertTrue(results.stream().allMatch(doc -> doc.field("fieldName").toString().matches("regexPattern")));
+assertEquals(expectedOrder, results.stream().map(doc -> doc.field("orderField")).collect(Collectors.toList()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(19,results.size()); ===
+0.806 - assertEquals(expectedSize, results.size())
+0.721 - assertFalse(results.isEmpty())
+0.592 - assertEquals(expectedFieldCount, results.get(0).fieldNames().size())
+0.587 - assertEquals(expectedValue, results.get(0).field("fieldName"))
+0.587 - assertEquals(expectedValue, results.get(1).field("fieldName"))
+0.565 - assertEquals(expectedDocumentId, results.get(0).getIdentity())
+0.557 - ```java
+assertNotNull(results)
+0.557 - assertNotEquals(unexpectedValue, results.get(2).field("fieldName"))
+0.514 - assertEquals(expectedMapValue, results.get(0).field("mapField").get("key"))
+0.433 - assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument))
+0.412 - assertTrue(results.stream().allMatch(doc -> doc.field("numericField") > 0))
+0.406 - assertEquals(expectedOrder, results.stream().map(doc -> doc.field("orderField")).collect(Collectors.toList()))
+0.400 - assertTrue(results.stream().allMatch(doc -> doc.containsField("fieldName")))
+0.396 - assertTrue(results.get(1).field("fieldName").toString().endsWith("suffix"))
+0.393 - assertTrue(results.stream().allMatch(doc -> ((List<?>) doc.field("listField")).size() > 0))
+0.389 - assertTrue(results.get(0).field("fieldName").toString().startsWith("prefix"))
+0.389 - assertTrue(results.stream().noneMatch(doc -> doc.field("booleanField") == false))
+0.385 - assertTrue(results.stream().allMatch(doc -> doc.field("mapField") instanceof Map))
+0.378 - assertTrue(results.stream().allMatch(doc -> doc.field("dateField") instanceof Date))
+0.378 - assertTrue(results.stream().allMatch(doc -> doc.field("listField") instanceof List))
+0.353 - assertTrue(results.stream().anyMatch(doc -> doc.field("fieldName").equals(specificValue)))
+0.318 - assertTrue(results.stream().allMatch(doc -> doc.field("fieldName").toString().matches("regexPattern")))
+0.000 - ```

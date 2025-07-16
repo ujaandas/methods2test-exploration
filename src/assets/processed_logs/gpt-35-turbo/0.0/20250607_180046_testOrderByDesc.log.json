@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testOrderByDesc ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nString query = \"STR\" ;\nOResultSet result = db . query ( query ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(5, result.size());\nassertTrue(result.hasNext());\nassertEquals(\"value1\", result.next().getProperty(\"property1\"));\nassertEquals(\"value2\", result.next().getProperty(\"property2\"));\nassertEquals(\"value3\", result.next().getProperty(\"property3\"));\nassertEquals(\"value4\", result.next().getProperty(\"property4\"));\nassertEquals(\"value5\", result.next().getProperty(\"property5\"));\nassertFalse(result.hasNext());\nassertEquals(5, result.stream().count());\nassertEquals(5, result.stream().filter(x -> x.getProperty(\"property1\").equals(\"value1\")).count());\nassertEquals(5, result.stream().filter(x -> x.getProperty(\"property2\").equals(\"value2\")).count());\nassertEquals(5, result.stream().filter(x -> x.getProperty(\"property3\").equals(\"value3\")).count());\nassertEquals(5, result.stream().filter(x -> x.getProperty(\"property4\").equals(\"value4\")).count());\nassertEquals(5, result.stream().filter(x -> x.getProperty(\"property5\").equals(\"value5\")).count());\nassertEquals(5, result.stream().map(x -> x.getProperty(\"property1\")).distinct().count());\nassertEquals(5, result.stream().map(x -> x.getProperty(\"property2\")).distinct().count());\nassertEquals(5, result.stream().map(x -> x.getProperty(\"property3\")).distinct().count());\nassertEquals(5, result.stream().map(x -> x.getProperty(\"property4\")).distinct().count());\nassertEquals(5, result.stream().map(x -> x.getProperty(\"property5\")).distinct().count());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.877,
+        0.702,
+        0.597,
+        0.472,
+        0.472,
+        0.472,
+        0.472,
+        0.472,
+        0.372,
+        0.372,
+        0.372,
+        0.372,
+        0.372,
+        0.361,
+        0.361,
+        0.361,
+        0.361,
+        0.361
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

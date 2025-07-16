@@ -1,0 +1,101 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package ExpediaGroup.beeju;
+
+public class BeejuCore {
+    public Path warehouseDir ( ) { 
+    return warehouseDir ; 
+    }
+}
+
+package ExpediaGroup.beeju;
+
+public class BeejuCoreTest {
+    @Test
+     public void deleteDirectory ( ) throws IOException {
+         BeejuCore testCore = new BeejuCore ( ) ; 
+         testCore . cleanUp ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+assertNotNull(testCore.warehouseDir());
+assertTrue(Files.exists(testCore.warehouseDir()));
+assertTrue(Files.isDirectory(testCore.warehouseDir()));
+assertTrue(Files.list(testCore.warehouseDir()).count() > 0);
+
+Path tempDir = Files.createTempDirectory("testDir");
+Files.createFile(tempDir.resolve("testFile.txt"));
+assertTrue(Files.exists(tempDir.resolve("testFile.txt")));
+
+testCore.cleanUp();
+assertFalse(Files.exists(tempDir.resolve("testFile.txt")));
+assertFalse(Files.exists(tempDir));
+
+assertEquals(0, Files.list(testCore.warehouseDir()).count());
+
+Path anotherTempDir = Files.createTempDirectory("anotherTestDir");
+Files.createFile(anotherTempDir.resolve("anotherTestFile.txt"));
+assertTrue(Files.exists(anotherTempDir.resolve("anotherTestFile.txt")));
+
+testCore.cleanUp();
+assertFalse(Files.exists(anotherTempDir.resolve("anotherTestFile.txt")));
+assertFalse(Files.exists(anotherTempDir));
+
+assertThrows(IOException.class, () -> {
+    Files.deleteIfExists(tempDir);
+});
+
+assertThrows(IOException.class, () -> {
+    Files.deleteIfExists(anotherTempDir);
+});
+
+assertTrue(Files.isEmpty(testCore.warehouseDir()));
+assertNotEquals(testCore.warehouseDir(), tempDir);
+assertNotEquals(testCore.warehouseDir(), anotherTempDir);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Files.exists(testCore.warehouseDir())); ===
+0.929 - assertTrue(Files.exists(testCore.warehouseDir()))
+0.860 - assertTrue(Files.isEmpty(testCore.warehouseDir()))
+0.827 - assertTrue(Files.isDirectory(testCore.warehouseDir()))
+0.826 - assertEquals(0, Files.list(testCore.warehouseDir()).count())
+0.804 - assertTrue(Files.list(testCore.warehouseDir()).count() > 0)
+0.762 - assertFalse(Files.exists(tempDir))
+0.750 - assertNotNull(testCore.warehouseDir())
+0.747 - assertFalse(Files.exists(anotherTempDir))
+0.694 - assertNotEquals(testCore.warehouseDir(), tempDir)
+0.648 - assertNotEquals(testCore.warehouseDir(), anotherTempDir)
+0.630 - assertFalse(Files.exists(tempDir.resolve("testFile.txt")))
+0.561 - assertTrue(Files.exists(tempDir.resolve("testFile.txt")))
+0.557 - assertFalse(Files.exists(anotherTempDir.resolve("anotherTestFile.txt")))
+0.496 - assertTrue(Files.exists(anotherTempDir.resolve("anotherTestFile.txt")))
+0.488 - assertThrows(IOException.class, () -> {
+    Files.deleteIfExists(anotherTempDir)
+0.483 - assertThrows(IOException.class, () -> {
+    Files.deleteIfExists(tempDir)
+0.429 - Path tempDir = Files.createTempDirectory("testDir")
+0.393 - Path anotherTempDir = Files.createTempDirectory("anotherTestDir")
+0.364 - Files.createFile(tempDir.resolve("testFile.txt"))
+0.353 - testCore.cleanUp()
+0.353 - testCore.cleanUp()
+0.301 - Files.createFile(anotherTempDir.resolve("anotherTestFile.txt"))
+0.272 - ```java
+import static org.junit.Assert.*
+0.267 - import java.nio.file.Files
+0.243 - import java.nio.file.Path
+0.038 - })
+0.038 - })
+0.000 - ```

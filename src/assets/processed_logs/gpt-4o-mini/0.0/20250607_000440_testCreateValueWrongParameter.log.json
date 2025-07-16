@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( List < ? > params ) {\nif ( ! ( params . get ( 0 ) instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ;\nfinal List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nresult . add ( createSingleValue ( mapParam ) ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameter ( ) {\nfinal Object result = propertyIndexByKey . createValue ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(result);\nassertTrue(result instanceof List);\nassertEquals(0, ((List<?>) result).size());\nassertNotNull(result);\nassertFalse(((List<?>) result).isEmpty());\nassertEquals(Collections.emptyList(), result);\nassertSame(Collections.emptyList(), result);\nassertTrue(result instanceof Collection);\nassertTrue(((Collection<?>) result).isEmpty());\nassertEquals(0, ((Collection<?>) result).size());\nassertNotEquals(Collections.singletonList(\"STR\"), result);\nassertFalse(result instanceof Map);\nassertFalse(result instanceof Object[]);\nassertFalse(result instanceof Set);\nassertTrue(result.equals(Collections.emptyList()));\nassertFalse(result.equals(Collections.singletonList(\"STR\")));\nassertThrows(ClassCastException.class, () -> {\n((Map<?, ?>) result).get(\"key\");\n});\nassertDoesNotThrow(() -> {\nList<?> list = (List<?>) result;\n});\nassertTrue(result.toString().equals(\"[]\"));\nassertTrue(result.equals(new ArrayList<>()));\nassertTrue(result instanceof Iterable);\n```\n====================\n\n",
+    "scores": [
+        0.923,
+        0.818,
+        0.6,
+        0.6,
+        0.6,
+        0.556,
+        0.552,
+        0.548,
+        0.545,
+        0.536,
+        0.533,
+        0.517,
+        0.508,
+        0.5,
+        0.5,
+        0.492,
+        0.486,
+        0.441,
+        0.429,
+        0.385,
+        0.352,
+        0.1,
+        0.1,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNull(result);"
+}

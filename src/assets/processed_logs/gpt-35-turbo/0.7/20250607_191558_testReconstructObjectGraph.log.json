@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedProperties {\npublic static Set < String > bindAll ( Object instance , TestCase testCase ) {\nSet < String > usedProperties = new HashSet < > ( ) ;\nfor ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) {\nString fullPropertyPath = entry . getKey ( ) . trim ( ) ;\nString value = entry . getValue ( ) . trim ( ) ;\nif ( bind0 ( instance , fullPropertyPath , value ) ) {\nusedProperties . add ( fullPropertyPath ) ;\n} } return usedProperties ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedPropertiesTest {\n@Test\npublic void testReconstructObjectGraph ( ) {\nTestCase testCase = new TestCase ( \"STR\" ) . setProperty ( \"STR\" , 10 ) ;\nPerson person = new Person ( ) ;\nSet < String > usedProperties = bindAll ( person , testCase ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", person.getName());\nassertEquals(10, person.getAge());\nassertFalse(usedProperties.isEmpty());\nassertTrue(usedProperties.contains(\"STR\"));\nassertTrue(usedProperties.size() == 1);\nassertNotNull(person);\nassertNotNull(usedProperties);\nassertTrue(person instanceof Person);\nassertTrue(usedProperties instanceof Set);\nassertTrue(person.getName() instanceof String);\nassertTrue(person.getAge() instanceof Integer);\nassertTrue(person.getName().equals(\"STR\"));\nassertTrue(person.getAge() == 10);\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"AGE\"));\nassertEquals(1, usedProperties.size());\nassertTrue(usedProperties.size() == 1);\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"AGE\"));\nassertTrue(usedProperties.size() == 1);\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"AGE\"));\nassertTrue(usedProperties.size() == 1);\n====================\n\n",
+    "scores": [
+        0.84,
+        0.655,
+        0.59,
+        0.567,
+        0.554,
+        0.54,
+        0.507,
+        0.493,
+        0.493,
+        0.444,
+        0.444,
+        0.444,
+        0.424,
+        0.423,
+        0.423,
+        0.423,
+        0.423,
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.394,
+        0.382
+    ],
+    "ground_truth": "assertNotNull(person.nullArm);"
+}

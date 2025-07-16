@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AOption {\npublic abstract T get ( ) ;\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AOptionTest {\n@Test\npublic void testSome ( ) throws Exception {\nfinal AOption < String > s = AOption . some ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(s);\nassertEquals(\"STR\", s.get());\nassertTrue(s instanceof AOption);\nassertFalse(s.isEmpty());\nassertEquals(\"STR\", s.map(String::toUpperCase).get());\nassertEquals(\"STR\", s.flatMap(value -> AOption.some(value)).get());\nassertEquals(\"STR\", s.filter(value -> value.equals(\"STR\")).get());\nassertThrows(NoSuchElementException.class, () -> AOption.none().get());\nassertEquals(\"Default\", s.orElse(\"Default\"));\nassertEquals(\"STR\", s.orElseGet(() -> \"Default\"));\nassertTrue(s.equals(AOption.some(\"STR\")));\nassertFalse(s.equals(AOption.some(\"OTHER\")));\nassertTrue(s.hashCode() != AOption.some(\"OTHER\").hashCode());\nassertTrue(s.toString().contains(\"STR\"));\nassertTrue(s.map(String::length).get() instanceof Integer);\nassertEquals(3, s.map(String::length).get().intValue());\nassertTrue(s.filter(value -> value.length() > 2).isPresent());\nassertFalse(s.filter(value -> value.length() < 2).isPresent());\nassertEquals(s, AOption.some(\"STR\"));\nassertNotEquals(s, AOption.none());\nassertTrue(s.isPresent());\nassertFalse(AOption.none().isPresent());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.712,
+        0.684,
+        0.645,
+        0.633,
+        0.629,
+        0.627,
+        0.607,
+        0.6,
+        0.577,
+        0.559,
+        0.543,
+        0.507,
+        0.507,
+        0.485,
+        0.447,
+        0.424,
+        0.392,
+        0.386,
+        0.386,
+        0.381,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",s.get());"
+}

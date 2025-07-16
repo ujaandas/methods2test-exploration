@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKey {\n@Override\npublic boolean equals ( final Object o ) {\nif ( this == o ) return true ;\nif ( o == null || getClass ( ) != o . getClass ( ) ) return false ;\nfinal OMultiKey oMultiKey = ( OMultiKey ) o ;\nif ( keys . size ( ) != oMultiKey . keys . size ( ) ) return false ;\nfor ( final Object inKey : keys ) {\nif ( ! oMultiKey . keys . contains ( inKey ) ) return false ;\n} return true ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKeyTest {\n@Test\npublic void testEqualsDifferentClass ( ) {\nfinal OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertFalse(multiKey.equals(null));\nassertFalse(multiKey.equals(new Object()));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR2\"))));\nassertTrue(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.emptyList())));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Arrays.asList(\"STR\", \"STR2\"))));\nassertTrue(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Arrays.asList(\"STR\", \"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new Object()))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(null))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR1\"))));\nassertTrue(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Arrays.asList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Arrays.asList(\"STR\", \"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR2\"))));\nassertTrue(multiKey.equals(new OMultiKey(Collections.singletonList(\"STR\"))));\nassertFalse(multiKey.equals(new OMultiKey(Arrays.asList(\"STR\", \"STR\", \"STR2\"))));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.779,
+        0.707,
+        0.667,
+        0.667,
+        0.66,
+        0.631,
+        0.631,
+        0.631,
+        0.625,
+        0.625,
+        0.625,
+        0.625,
+        0.588,
+        0.564,
+        0.564,
+        0.564,
+        0.564,
+        0.545,
+        0.513,
+        0.0
+    ],
+    "ground_truth": "assertFalse(multiKey.equals(\"STR\"));"
+}

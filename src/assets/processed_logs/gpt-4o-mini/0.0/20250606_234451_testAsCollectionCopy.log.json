@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AsCollectionCopy {\nint size ( ) ;\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AsCollectionCopyTest {\n@Test\npublic void testAsCollectionCopy ( ) {\nfinal List < String > list = new ArrayList < > ( Arrays . asList ( \"STR\" , \"STR\" ) ) ;\nfinal ACollection < String > copied = ACollectionHelper . asACollectionCopy ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(copied);\nassertEquals(2, copied.size());\nassertTrue(copied.contains(\"STR\"));\nassertFalse(copied.isEmpty());\nassertEquals(2, copied.stream().filter(s -> s.equals(\"STR\")).count());\nassertEquals(\"STR\", copied.get(0));\nassertEquals(\"STR\", copied.get(1));\nassertTrue(copied instanceof List);\nassertEquals(2, copied.toArray().length);\nassertTrue(copied.equals(new ArrayList<>(Arrays.asList(\"STR\", \"STR\"))));\nassertFalse(copied.equals(new ArrayList<>(Arrays.asList(\"STR\"))));\nassertTrue(copied.containsAll(Arrays.asList(\"STR\", \"STR\")));\nassertFalse(copied.contains(\"NOT_IN_LIST\"));\nassertEquals(copied.size(), new HashSet<>(copied).size());\nassertNotSame(copied, list);\nassertTrue(copied.stream().allMatch(s -> s instanceof String));\nassertDoesNotThrow(() -> copied.forEach(s -> {}));\nassertEquals(copied, ACollectionHelper.asACollectionCopy(new ArrayList<>(Arrays.asList(\"STR\", \"STR\"))));\nassertTrue(copied.stream().anyMatch(s -> s.equals(\"STR\")));\nassertEquals(2, copied.stream().distinct().count());\nassertTrue(copied.toString().contains(\"STR\"));\nassertEquals(copied.hashCode(), new ArrayList<>(Arrays.asList(\"STR\", \"STR\")).hashCode());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.806,
+        0.806,
+        0.735,
+        0.724,
+        0.684,
+        0.643,
+        0.603,
+        0.589,
+        0.583,
+        0.582,
+        0.557,
+        0.552,
+        0.514,
+        0.486,
+        0.473,
+        0.471,
+        0.46,
+        0.46,
+        0.456,
+        0.408,
+        0.403,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,copied.size());"
+}

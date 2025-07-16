@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ORecordBytes {\nint fromInputStream ( final InputStream in , final int maxSize ) throws IOException ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ORecordBytesTest {\n@Test\npublic void testReadFromInputStreamWithWaitSizeTooBigLimit ( ) throws Exception {\nfinal byte [ ] data = new byte [ ] {\n0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 } ;\nfinal InputStream is = new NotFullyAvailableAtTheTimeInputStream ( data , 5 ) ;\nfinal int result = testedInstance . fromInputStream ( is , 15 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(5, result);\nassertFalse(is.available() > 0);\nassertEquals(5, is.read());\nassertEquals(6, is.read());\nassertEquals(7, is.read());\nassertEquals(8, is.read());\nassertEquals(9, is.read());\nassertEquals(-1, is.read());\nassertEquals(0, is.available());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\nassertEquals(-1, is.read());\n====================\n\n",
+    "scores": [
+        0.741,
+        0.613,
+        0.596,
+        0.596,
+        0.596,
+        0.596,
+        0.596,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.586,
+        0.525
+    ],
+    "ground_truth": "Assert.assertEquals(result,data.length);"
+}

@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilter {
+    public Method find ( ) { 
+    List < Method > methods = findAll ( ) ; 
+    switch ( methods . size ( ) ) { 
+    case 0 : return null ; 
+    case 1 : return methods . iterator ( ) . next ( ) ; 
+    default : throw new ReflectionException ( format ( "STR" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilterTest {
+    @Test
+     public void testGlobalVerifyFilter ( ) {
+         Method method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Verify . class ) . withVoidReturnType ( ) . withFilter ( new VerifyFilter ( true ) ) . find ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(method);
+assertEquals("expectedMethodName", method.getName());
+assertEquals(void.class, method.getReturnType());
+assertTrue(Modifier.isPublic(method.getModifiers()));
+assertFalse(Modifier.isStatic(method.getModifiers()));
+assertTrue(method.isAnnotationPresent(Verify.class));
+assertEquals(0, method.getParameterCount());
+assertNotNull(method.getDeclaringClass());
+assertEquals(AnnotationTestClass.class, method.getDeclaringClass());
+assertTrue(Arrays.asList(method.getAnnotations()).contains(new Verify()));
+assertDoesNotThrow(() -> method.invoke(new AnnotationTestClass()));
+assertTrue(method.getGenericReturnType() instanceof Void);
+assertEquals(1, method.getDeclaredAnnotations().length);
+assertTrue(method.getAnnotatedReturnType().getAnnotations().length > 0);
+assertTrue(method.isAccessible());
+assertNotNull(method.getAnnotation(Verify.class));
+assertEquals("expectedAnnotationValue", method.getAnnotation(Verify.class).value());
+assertArrayEquals(new String[]{"expectedParameter"}, method.getParameterTypes());
+assertTrue(Arrays.stream(method.getDeclaredExceptions()).noneMatch(Exception.class::isAssignableFrom));
+assertNotNull(method.getAnnotation(Verify.class).toString());
+assertEquals("expectedStringRepresentation", method.toGenericString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",method.getName()); ===
+0.769 - assertEquals(0, method.getParameterCount())
+0.759 - assertEquals("expectedMethodName", method.getName())
+0.675 - assertEquals(void.class, method.getReturnType())
+0.644 - assertEquals(1, method.getDeclaredAnnotations().length)
+0.597 - assertNotNull(method.getDeclaringClass())
+0.580 - assertTrue(method.isAccessible())
+0.569 - assertEquals(AnnotationTestClass.class, method.getDeclaringClass())
+0.562 - assertFalse(Modifier.isStatic(method.getModifiers()))
+0.561 - assertArrayEquals(new String[]{"expectedParameter"}, method.getParameterTypes())
+0.552 - assertEquals("expectedStringRepresentation", method.toGenericString())
+0.541 - assertNotNull(method.getAnnotation(Verify.class))
+0.525 - assertEquals("expectedAnnotationValue", method.getAnnotation(Verify.class).value())
+0.523 - assertTrue(Modifier.isPublic(method.getModifiers()))
+0.500 - assertNotNull(method.getAnnotation(Verify.class).toString())
+0.492 - ```java
+assertNotNull(method)
+0.484 - assertTrue(method.getGenericReturnType() instanceof Void)
+0.455 - assertTrue(method.isAnnotationPresent(Verify.class))
+0.444 - assertTrue(Arrays.asList(method.getAnnotations()).contains(new Verify()))
+0.444 - assertDoesNotThrow(() -> method.invoke(new AnnotationTestClass()))
+0.438 - assertTrue(method.getAnnotatedReturnType().getAnnotations().length > 0)
+0.362 - assertTrue(Arrays.stream(method.getDeclaredExceptions()).noneMatch(Exception.class::isAssignableFrom))
+0.000 - ```

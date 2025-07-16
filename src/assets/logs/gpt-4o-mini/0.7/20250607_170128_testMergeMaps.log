@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtil {
+    public static < K , V > Map < K , V > mergeMaps ( Map < K , V > map1 , Map < K , V > map2 ) { 
+    Map < K , V > answer = new HashMap < > ( ) ; 
+    if ( map2 != null ) { 
+    answer . putAll ( map2 ) ; 
+    } if ( map1 != null ) { 
+    answer . putAll ( map1 ) ; 
+    } return answer ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MapUtilTest {
+    @Test
+     public void testMergeMaps ( ) {
+         Map < String , String > mapA = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > mapB = createMap ( "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > expectedA = createMap ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) ; 
+         Map < String , String > expectedB = createMap ( "STR" , "STR" , "STR" , "STR" , "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB));
+assertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA));
+assertNotNull(MapUtil.mergeMaps(mapA, mapB));
+assertNotNull(MapUtil.mergeMaps(mapB, mapA));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey("STR"));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue("STR"));
+assertEquals(2, MapUtil.mergeMaps(mapA, mapB).size());
+assertEquals(2, MapUtil.mergeMaps(mapB, mapA).size());
+assertEquals(0, MapUtil.mergeMaps(null, null).size());
+assertEquals(mapA, MapUtil.mergeMaps(mapA, null));
+assertEquals(mapB, MapUtil.mergeMaps(null, mapB));
+assertEquals(mapA.size(), MapUtil.mergeMaps(mapA, mapB).size());
+assertEquals(mapB.size(), MapUtil.mergeMaps(mapA, mapB).size());
+assertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB));
+assertNotSame(mapB, MapUtil.mergeMaps(mapB, mapA));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapA.keySet()));
+assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapB.keySet()));
+assertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapA.keySet()));
+assertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapB.keySet()));
+assertTrue(MapUtil.mergeMaps(null, mapB).keySet().containsAll(mapB.keySet()));
+assertTrue(MapUtil.mergeMaps(mapA, null).keySet().containsAll(mapA.keySet()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedA,MapUtil.mergeMaps(mapA,mapB)); ===
+0.942 - assertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA))
+0.929 - ```java
+assertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB))
+0.835 - assertEquals(2, MapUtil.mergeMaps(mapA, mapB).size())
+0.828 - assertEquals(mapA, MapUtil.mergeMaps(mapA, null))
+0.808 - assertEquals(mapB, MapUtil.mergeMaps(null, mapB))
+0.800 - assertNotNull(MapUtil.mergeMaps(mapA, mapB))
+0.800 - assertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB))
+0.796 - assertEquals(2, MapUtil.mergeMaps(mapB, mapA).size())
+0.779 - assertEquals(mapA.size(), MapUtil.mergeMaps(mapA, mapB).size())
+0.779 - assertEquals(mapB.size(), MapUtil.mergeMaps(mapA, mapB).size())
+0.758 - assertNotNull(MapUtil.mergeMaps(mapB, mapA))
+0.740 - assertNotSame(mapB, MapUtil.mergeMaps(mapB, mapA))
+0.680 - assertEquals(0, MapUtil.mergeMaps(null, null).size())
+0.667 - assertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey("STR"))
+0.655 - assertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue("STR"))
+0.578 - assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapA.keySet()))
+0.578 - assertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapB.keySet()))
+0.562 - assertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapB.keySet()))
+0.562 - assertTrue(MapUtil.mergeMaps(mapA, null).keySet().containsAll(mapA.keySet()))
+0.547 - assertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapA.keySet()))
+0.516 - assertTrue(MapUtil.mergeMaps(null, mapB).keySet().containsAll(mapB.keySet()))
+0.000 - ```

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilder {
+    @Override
+     public String toString ( ) ;
+}
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilderTest {
+    @Test
+     public void testSort ( ) {
+         sql . select ( ) . from ( "STR" ) . orderBy ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(sql);
+Assert.assertEquals("SELECT * FROM STR ORDER BY STR", sql.toString());
+Assert.assertTrue(sql.toString().contains("SELECT"));
+Assert.assertTrue(sql.toString().contains("FROM"));
+Assert.assertTrue(sql.toString().contains("ORDER BY"));
+Assert.assertTrue(sql.toString().contains("STR"));
+Assert.assertTrue(sql.toString().startsWith("SELECT"));
+Assert.assertTrue(sql.toString().endsWith("ORDER BY STR"));
+Assert.assertFalse(sql.toString().isEmpty());
+Assert.assertTrue(sql.toString().matches("SELECT \\* FROM STR ORDER BY STR"));
+Assert.assertEquals(1, sql.getSelectCount());
+Assert.assertEquals("STR", sql.getFromTable());
+Assert.assertEquals("STR", sql.getOrderByColumn());
+Assert.assertTrue(sql.toString().indexOf("SELECT") < sql.toString().indexOf("FROM"));
+Assert.assertTrue(sql.toString().indexOf("FROM") < sql.toString().indexOf("ORDER BY"));
+Assert.assertTrue(sql.toString().contains("SELECT *"));
+Assert.assertFalse(sql.toString().contains("DELETE"));
+Assert.assertFalse(sql.toString().contains("UPDATE"));
+Assert.assertFalse(sql.toString().contains("INSERT"));
+Assert.assertTrue(sql.toString().contains("ORDER BY STR"));
+Assert.assertTrue(sql.toString().toLowerCase().contains("select"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sql.toString()); ===
+0.778 - Assert.assertEquals("STR", sql.getFromTable())
+0.764 - Assert.assertEquals("SELECT * FROM STR ORDER BY STR", sql.toString())
+0.763 - Assert.assertEquals("STR", sql.getOrderByColumn())
+0.704 - Assert.assertFalse(sql.toString().isEmpty())
+0.686 - Assert.assertEquals(1, sql.getSelectCount())
+0.625 - Assert.assertFalse(sql.toString().contains("DELETE"))
+0.625 - Assert.assertFalse(sql.toString().contains("UPDATE"))
+0.625 - Assert.assertFalse(sql.toString().contains("INSERT"))
+0.605 - Assert.assertTrue(sql.toString().contains("STR"))
+0.597 - Assert.assertTrue(sql.toString().contains("FROM"))
+0.582 - Assert.assertTrue(sql.toString().contains("SELECT"))
+0.575 - Assert.assertTrue(sql.toString().contains("ORDER BY"))
+0.575 - Assert.assertTrue(sql.toString().contains("SELECT *"))
+0.568 - Assert.assertTrue(sql.toString().startsWith("SELECT"))
+0.554 - Assert.assertTrue(sql.toString().endsWith("ORDER BY STR"))
+0.554 - Assert.assertTrue(sql.toString().contains("ORDER BY STR"))
+0.495 - Assert.assertTrue(sql.toString().toLowerCase().contains("select"))
+0.469 - Assert.assertTrue(sql.toString().matches("SELECT \\* FROM STR ORDER BY STR"))
+0.433 - ```java
+Assert.assertNotNull(sql)
+0.422 - Assert.assertTrue(sql.toString().indexOf("SELECT") < sql.toString().indexOf("FROM"))
+0.418 - Assert.assertTrue(sql.toString().indexOf("FROM") < sql.toString().indexOf("ORDER BY"))
+0.000 - ```

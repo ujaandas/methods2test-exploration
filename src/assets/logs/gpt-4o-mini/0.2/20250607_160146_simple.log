@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class InitContainerHandler {
+    public boolean hasInitContainer ( PodTemplateSpecBuilder builder , String name ) { 
+    return getInitContainer ( builder , name ) != null ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class InitContainerHandlerTest {
+    @Test
+     public void simple ( ) {
+         PodTemplateSpecBuilder builder = getPodTemplateBuilder ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-1"));
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-2"));
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-3"));
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-4"));
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-5"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-6"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-7"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-8"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-9"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-10"));
+assertEquals(0, builder.getInitContainers().size());
+builder.addInitContainer(new InitContainer("init-container-1"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-1"));
+builder.addInitContainer(new InitContainer("init-container-2"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-2"));
+builder.removeInitContainer("init-container-1");
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-1"));
+assertEquals(1, builder.getInitContainers().size());
+builder.clearInitContainers();
+assertEquals(0, builder.getInitContainers().size());
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-3"));
+builder.addInitContainer(new InitContainer("init-container-4"));
+assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-4"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(handler.hasInitContainer(builder,"STR")); ===
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-2"))
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-3"))
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-4"))
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-5"))
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-1"))
+0.738 - assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-3"))
+0.696 - ```java
+assertFalse(initContainerHandler.hasInitContainer(builder, "init-container-1"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-6"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-7"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-8"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-9"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-1"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-2"))
+0.682 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-4"))
+0.677 - assertTrue(initContainerHandler.hasInitContainer(builder, "init-container-10"))
+0.627 - assertEquals(0, builder.getInitContainers().size())
+0.627 - assertEquals(1, builder.getInitContainers().size())
+0.627 - assertEquals(0, builder.getInitContainers().size())
+0.519 - builder.clearInitContainers()
+0.485 - builder.removeInitContainer("init-container-1")
+0.474 - builder.addInitContainer(new InitContainer("init-container-1"))
+0.474 - builder.addInitContainer(new InitContainer("init-container-2"))
+0.474 - builder.addInitContainer(new InitContainer("init-container-4"))
+0.000 - ```

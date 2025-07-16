@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testTriangle2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         List < ODocument > result = db . command ( new OCommandSQL ( query . toString ( ) ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertEquals(expectedSize, result.size());
+assertTrue(result.stream().allMatch(doc -> doc instanceof ODocument));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property1").equals(expectedValue1)));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property2").equals(expectedValue2)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property3") != null));
+assertTrue(result.stream().allMatch(doc -> doc.field("property4").toString().contains("expectedSubstring")));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property5").equals(expectedValue3)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property6") instanceof Integer));
+assertTrue(result.stream().allMatch(doc -> doc.field("property7").equals(expectedValue4)));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property8").equals(expectedValue5)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property9").toString().length() > 0));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property10").equals(expectedValue6)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property11") instanceof List));
+assertTrue(result.stream().allMatch(doc -> ((List<?>) doc.field("property12")).size() > 0));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property13").equals(expectedValue7)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property14").equals(expectedValue8)));
+assertTrue(result.stream().anyMatch(doc -> doc.field("property15").equals(expectedValue9)));
+assertTrue(result.stream().allMatch(doc -> doc.field("property16") instanceof Map));
+assertTrue(result.stream().allMatch(doc -> doc.field("property17").equals(expectedValue10)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,result.size()); ===
+0.812 - assertEquals(expectedSize, result.size())
+0.724 - assertFalse(result.isEmpty())
+0.552 - ```java
+assertNotNull(result)
+0.426 - assertTrue(result.stream().allMatch(doc -> doc instanceof ODocument))
+0.400 - assertTrue(result.stream().allMatch(doc -> doc.field("property3") != null))
+0.383 - assertTrue(result.stream().allMatch(doc -> ((List<?>) doc.field("property12")).size() > 0))
+0.370 - assertTrue(result.stream().allMatch(doc -> doc.field("property16") instanceof Map))
+0.367 - assertTrue(result.stream().allMatch(doc -> doc.field("property11") instanceof List))
+0.360 - assertTrue(result.stream().allMatch(doc -> doc.field("property6") instanceof Integer))
+0.345 - assertTrue(result.stream().allMatch(doc -> doc.field("property9").toString().length() > 0))
+0.342 - assertTrue(result.stream().anyMatch(doc -> doc.field("property1").equals(expectedValue1)))
+0.342 - assertTrue(result.stream().anyMatch(doc -> doc.field("property2").equals(expectedValue2)))
+0.342 - assertTrue(result.stream().anyMatch(doc -> doc.field("property5").equals(expectedValue3)))
+0.342 - assertTrue(result.stream().allMatch(doc -> doc.field("property7").equals(expectedValue4)))
+0.342 - assertTrue(result.stream().anyMatch(doc -> doc.field("property8").equals(expectedValue5)))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("property10").equals(expectedValue6)))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("property13").equals(expectedValue7)))
+0.339 - assertTrue(result.stream().allMatch(doc -> doc.field("property14").equals(expectedValue8)))
+0.339 - assertTrue(result.stream().anyMatch(doc -> doc.field("property15").equals(expectedValue9)))
+0.336 - assertTrue(result.stream().allMatch(doc -> doc.field("property17").equals(expectedValue10)))
+0.296 - assertTrue(result.stream().allMatch(doc -> doc.field("property4").toString().contains("expectedSubstring")))
+0.000 - ```

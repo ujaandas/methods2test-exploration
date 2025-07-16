@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public Collection < E > edges ( ) { 
+    return new ArrayIterable < > ( edges ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testNodesWithoutEdges ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( "STR" , "STR" , "STR" ) , Arrays . asList ( edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(graph);
+assertEquals(3, graph.nodes().size());
+assertTrue(graph.edges().isEmpty());
+assertTrue(graph.nodes().contains("STR"));
+assertEquals(0, graph.inDegree("STR"));
+assertEquals(0, graph.outDegree("STR"));
+assertFalse(graph.hasEdge("STR", "STR"));
+assertTrue(graph.nodes().stream().allMatch(node -> graph.inDegree(node) == 0 && graph.outDegree(node) == 0));
+assertTrue(graph.edges().isEmpty());
+assertEquals(0, graph.edgeCount());
+assertNotSame(graph.nodes(), graph.edges());
+assertTrue(graph.toString().contains("ADiGraph"));
+assertFalse(graph.nodes().contains("NON_EXISTENT_NODE"));
+assertThrows(IllegalArgumentException.class, () -> graph.addEdge("STR", "NON_EXISTENT_NODE"));
+assertThrows(IllegalArgumentException.class, () -> graph.removeEdge("STR", "NON_EXISTENT_NODE"));
+assertTrue(graph.toString().startsWith("ADiGraph"));
+assertFalse(graph.isDirected());
+assertEquals(Collections.emptyList(), graph.getEdgesBetween("STR", "STR"));
+assertFalse(graph.isEmpty());
+assertEquals(3, graph.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(eqSet(graph.edges(),edge("STR","STR"))); ===
+0.719 - assertFalse(graph.hasEdge("STR", "STR"))
+0.659 - assertTrue(graph.nodes().contains("STR"))
+0.635 - assertTrue(graph.edges().isEmpty())
+0.635 - assertTrue(graph.edges().isEmpty())
+0.623 - assertEquals(Collections.emptyList(), graph.getEdgesBetween("STR", "STR"))
+0.598 - assertEquals(0, graph.inDegree("STR"))
+0.591 - assertEquals(0, graph.outDegree("STR"))
+0.535 - assertEquals(3, graph.nodes().size())
+0.522 - assertNotSame(graph.nodes(), graph.edges())
+0.509 - assertFalse(graph.nodes().contains("NON_EXISTENT_NODE"))
+0.506 - assertEquals(0, graph.edgeCount())
+0.495 - assertTrue(graph.toString().startsWith("ADiGraph"))
+0.493 - assertThrows(IllegalArgumentException.class, () -> graph.removeEdge("STR", "NON_EXISTENT_NODE"))
+0.489 - assertThrows(IllegalArgumentException.class, () -> graph.addEdge("STR", "NON_EXISTENT_NODE"))
+0.485 - assertTrue(graph.toString().contains("ADiGraph"))
+0.469 - assertFalse(graph.isDirected())
+0.462 - assertFalse(graph.isEmpty())
+0.462 - assertEquals(3, graph.size())
+0.387 - assertTrue(graph.nodes().stream().allMatch(node -> graph.inDegree(node) == 0 && graph.outDegree(node) == 0))
+0.359 - ```java
+assertNotNull(graph)
+0.000 - ```

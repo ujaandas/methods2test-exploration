@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArray {
+    public int add ( T value ) { 
+    Objects . requireNonNull ( value ) ; 
+    while ( true ) { 
+    final int newIndex = size . get ( ) ; 
+    final int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ; 
+    final int containerSize = 1 << containerIndex ; 
+    final int indexInsideContainer = newIndex + 1 - containerSize ; 
+    AtomicReferenceArray < T > container = containers . get ( containerIndex ) ; 
+    if ( container == null ) { 
+    container = new AtomicReferenceArray < > ( containerSize ) ; 
+    if ( ! containers . compareAndSet ( containerIndex , null , container ) ) { 
+    container = containers . get ( containerIndex ) ; 
+    } } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) { 
+    size . incrementAndGet ( ) ; 
+    return newIndex ; 
+    } } }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArrayTest {
+    @Test
+     public void testSetTwoItems ( ) {
+         final CASObjectArray < Integer > array = new CASObjectArray < > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+array.add(1);
+array.add(2);
+assertEquals(0, array.add(1));
+assertEquals(1, array.add(2));
+assertEquals(2, array.size().get());
+assertEquals(1, array.get(0));
+assertEquals(2, array.get(1));
+assertNull(array.get(2));
+assertThrows(IndexOutOfBoundsException.class, () -> array.get(2));
+assertEquals(2, array.size().get());
+assertEquals(0, array.add(3));
+assertEquals(3, array.size().get());
+assertEquals(3, array.get(2));
+assertEquals(2, array.add(4));
+assertEquals(4, array.size().get());
+assertEquals(4, array.get(3));
+assertEquals(1, array.add(5));
+assertEquals(5, array.size().get());
+assertEquals(5, array.get(4));
+assertTrue(array.add(null) >= 0);
+assertFalse(array.add(null) >= 0);
+assertEquals(5, array.size().get());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,array.add(1)); ===
+1.000 - assertEquals(0, array.add(1))
+0.964 - assertEquals(0, array.add(3))
+0.929 - assertEquals(1, array.add(2))
+0.929 - assertEquals(2, array.add(4))
+0.929 - assertEquals(1, array.add(5))
+0.857 - assertEquals(2, array.get(1))
+0.821 - assertEquals(1, array.get(0))
+0.821 - assertEquals(3, array.get(2))
+0.821 - assertEquals(4, array.get(3))
+0.821 - assertEquals(5, array.get(4))
+0.746 - assertFalse(array.add(null) >= 0)
+0.742 - assertEquals(2, array.size().get())
+0.742 - assertEquals(2, array.size().get())
+0.742 - assertEquals(3, array.size().get())
+0.742 - assertEquals(4, array.size().get())
+0.742 - assertEquals(5, array.size().get())
+0.742 - assertEquals(5, array.size().get())
+0.692 - assertNull(array.get(2))
+0.690 - assertTrue(array.add(null) >= 0)
+0.583 - ```java
+array.add(1)
+0.550 - array.add(2)
+0.400 - assertThrows(IndexOutOfBoundsException.class, () -> array.get(2))
+0.000 - ```

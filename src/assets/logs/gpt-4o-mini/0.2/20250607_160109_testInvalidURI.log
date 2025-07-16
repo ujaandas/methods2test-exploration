@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testInvalidURI ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , true ) ; 
+         String nonURI = "STR" ; 
+         URL testSourceUrl = new URL ( nonURI ) ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expectedResult, normalizedUrl);
+assertNotNull(normalizedUrl);
+assertTrue(normalizedUrl instanceof String);
+assertFalse(normalizedUrl.isEmpty());
+assertEquals(nonURI.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.contains("STR"));
+assertFalse(normalizedUrl.contains("http"));
+assertFalse(normalizedUrl.contains("https"));
+assertFalse(normalizedUrl.startsWith("www"));
+assertFalse(normalizedUrl.startsWith("ftp"));
+assertFalse(normalizedUrl.startsWith("mailto"));
+assertFalse(normalizedUrl.startsWith("file"));
+assertFalse(normalizedUrl.startsWith("data"));
+assertFalse(normalizedUrl.startsWith("tel"));
+assertFalse(normalizedUrl.startsWith("sms"));
+assertTrue(normalizedUrl.equals(nonURI));
+assertNotSame(nonURI, normalizedUrl);
+assertTrue(normalizedUrl.equalsIgnoreCase(nonURI));
+assertEquals(nonURI.trim(), normalizedUrl.trim());
+assertTrue(normalizedUrl.matches(".*STR.*"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.857 - ```java
+assertEquals(expectedResult, normalizedUrl)
+0.625 - assertEquals(nonURI.trim(), normalizedUrl.trim())
+0.620 - assertEquals(nonURI.length(), normalizedUrl.length())
+0.605 - assertNotNull(normalizedUrl)
+0.578 - assertNotSame(nonURI, normalizedUrl)
+0.571 - assertFalse(normalizedUrl.isEmpty())
+0.527 - assertFalse(normalizedUrl.contains("http"))
+0.522 - assertFalse(normalizedUrl.contains("https"))
+0.522 - assertFalse(normalizedUrl.startsWith("www"))
+0.522 - assertFalse(normalizedUrl.startsWith("ftp"))
+0.522 - assertFalse(normalizedUrl.startsWith("tel"))
+0.522 - assertFalse(normalizedUrl.startsWith("sms"))
+0.516 - assertFalse(normalizedUrl.startsWith("file"))
+0.516 - assertFalse(normalizedUrl.startsWith("data"))
+0.505 - assertFalse(normalizedUrl.startsWith("mailto"))
+0.500 - assertTrue(normalizedUrl.equals(nonURI))
+0.494 - assertTrue(normalizedUrl instanceof String)
+0.494 - assertTrue(normalizedUrl.contains("STR"))
+0.478 - assertTrue(normalizedUrl.matches(".*STR.*"))
+0.449 - assertTrue(normalizedUrl.equalsIgnoreCase(nonURI))
+0.000 - ```

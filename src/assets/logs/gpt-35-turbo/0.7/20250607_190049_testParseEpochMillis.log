@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParser {
+    public Date parse ( final String timestamp ) throws ProcessingException { 
+    if ( StringUtils . isBlank ( timestamp ) ) { 
+    return null ; 
+    } try { 
+    return parser . parse ( timestamp ) ; 
+    } catch ( Exception ex ) { 
+    throw new ProcessingException ( "STR" + timestamp + "STR" , ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParserTest {
+    @Test
+     public void testParseEpochMillis ( ) throws Exception {
+         String format = TimestampParser . EPOCH_MILLIS ; 
+         long time = System . currentTimeMillis ( ) ; 
+         Date parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(new Date(time), parsed);
+assertNotNull(parsed);
+assertTrue(parsed.getTime() > 0);
+assertEquals("Invalid timestamp format", new TimestampParser(format).parse("abc"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(null));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(""));
+assertEquals(new Date(0), new TimestampParser(format).parse("0"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("abc"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("123abc"));
+assertEquals(new Date(123456789), new TimestampParser(format).parse("123456789"));
+assertEquals(new Date(0), new TimestampParser(format).parse("0"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("abc"));
+assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"));
+assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"));
+assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"));
+assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"));
+assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(time,parsed.getTime()); ===
+0.769 - assertTrue(parsed.getTime() > 0)
+0.725 - assertEquals(new Date(time), parsed)
+0.571 - assertNotNull(parsed)
+0.515 - assertEquals(new Date(0), new TimestampParser(format).parse("0"))
+0.515 - assertEquals(new Date(0), new TimestampParser(format).parse("0"))
+0.460 - assertEquals("Invalid timestamp format", new TimestampParser(format).parse("abc"))
+0.442 - assertEquals(new Date(123456789), new TimestampParser(format).parse("123456789"))
+0.379 - assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"))
+0.379 - assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"))
+0.379 - assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"))
+0.379 - assertEquals(new Date(946684800000L), new TimestampParser(format).parse("2000-01-01T00:00:00.000Z"))
+0.348 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(""))
+0.342 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse(null))
+0.339 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("abc"))
+0.339 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("abc"))
+0.331 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("123abc"))
+0.290 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"))
+0.290 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"))
+0.290 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"))
+0.290 - assertThrows(ProcessingException.class, () -> new TimestampParser(format).parse("2000-01-01T00:00:00.000"))

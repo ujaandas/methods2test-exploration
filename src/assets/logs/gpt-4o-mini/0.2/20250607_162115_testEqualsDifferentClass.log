@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKey {
+    @Override
+     public boolean equals ( final Object o ) { 
+     if ( this == o ) return true ; 
+     if ( o == null || getClass ( ) != o . getClass ( ) ) return false ; 
+     final OMultiKey oMultiKey = ( OMultiKey ) o ; 
+     if ( keys . size ( ) != oMultiKey . keys . size ( ) ) return false ; 
+     for ( final Object inKey : keys ) { 
+     if ( ! oMultiKey . keys . contains ( inKey ) ) return false ; 
+     } return true ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKeyTest {
+    @Test
+     public void testEqualsDifferentClass ( ) {
+         final OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(multiKey.equals(null));
+assertFalse(multiKey.equals(new Object()));
+assertFalse(multiKey.equals("Some String"));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("Different"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(1))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new Object()))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.emptyList())));
+assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("STR", "Another"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "Extra"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "STR"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "STR", "STR"))));
+assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("STR", "Different"))));
+assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("Another", "STR"))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(null))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new int[]{1, 2}))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new ArrayList<>()))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new HashMap<>()))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new HashSet<>()))));
+assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new OMultiKey(Collections.singletonList("Nested"))))));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(multiKey.equals("STR")); ===
+0.857 - assertFalse(multiKey.equals("Some String"))
+0.789 - assertFalse(multiKey.equals(new Object()))
+0.779 - ```java
+assertFalse(multiKey.equals(null))
+0.642 - assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("STR", "Another"))))
+0.642 - assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("Another", "STR"))))
+0.631 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR"))))
+0.631 - assertFalse(multiKey.equals(new OMultiKey(Arrays.asList("STR", "Different"))))
+0.598 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "STR"))))
+0.588 - assertFalse(multiKey.equals(new OMultiKey(Collections.emptyList())))
+0.588 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "Extra"))))
+0.569 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("STR", "STR", "STR"))))
+0.561 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(1))))
+0.547 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList("Different"))))
+0.545 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(null))))
+0.517 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new HashSet<>()))))
+0.513 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new Object()))))
+0.504 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new int[]{1, 2}))))
+0.500 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new HashMap<>()))))
+0.492 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new ArrayList<>()))))
+0.413 - assertFalse(multiKey.equals(new OMultiKey(Collections.singletonList(new OMultiKey(Collections.singletonList("Nested"))))))
+0.000 - ```

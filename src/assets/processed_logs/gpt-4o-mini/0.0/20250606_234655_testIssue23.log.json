@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue23 ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(schemas);\nassertFalse(schemas.isEmpty());\nassertEquals(expectedSchemaCount, schemas.size());\nassertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));\nassertEquals(expectedNamespace, schemas.get(0).getTargetNamespace());\nassertEquals(expectedElementCount, schemas.get(0).getElements().size());\nassertEquals(expectedAttributeCount, schemas.get(0).getAttributes().size());\nassertTrue(schemas.stream().anyMatch(schema -> schema.getName().equals(expectedSchemaName)));\nassertTrue(schemas.stream().anyMatch(schema -> schema.getVersion().equals(expectedVersion)));\nassertEquals(expectedDocumentation, schemas.get(0).getDocumentation());\nassertTrue(schemas.stream().allMatch(schema -> schema.getImports().isEmpty()));\nassertTrue(schemas.stream().allMatch(schema -> schema.getAnnotations().size() > 0));\nassertNotNull(schemas.get(0).getComplexTypes());\nassertNotNull(schemas.get(0).getSimpleTypes());\nassertTrue(schemas.get(0).getComplexTypes().stream().anyMatch(type -> type.getName().equals(expectedComplexTypeName)));\nassertTrue(schemas.get(0).getSimpleTypes().stream().anyMatch(type -> type.getName().equals(expectedSimpleTypeName)));\nassertEquals(expectedElementName, schemas.get(0).getElements().get(0).getName());\nassertTrue(schemas.get(0).getElements().stream().allMatch(element -> element.getType() != null));\nassertEquals(expectedSchemaDocumentation, schemas.get(0).getDocumentation());\nassertTrue(schemas.stream().anyMatch(schema -> schema.getName().equals(expectedSchemaName) && schema.getVersion().equals(expectedVersion)));\n```\n====================\n\n",
+    "scores": [
+        0.435,
+        0.391,
+        0.341,
+        0.326,
+        0.323,
+        0.317,
+        0.316,
+        0.312,
+        0.306,
+        0.302,
+        0.302,
+        0.286,
+        0.278,
+        0.265,
+        0.246,
+        0.244,
+        0.242,
+        0.233,
+        0.212,
+        0.211,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(true);"
+}

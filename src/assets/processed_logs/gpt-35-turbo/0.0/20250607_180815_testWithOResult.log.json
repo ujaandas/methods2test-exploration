@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLMethodKeys {\n@Override\npublic Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) {\nif ( ioResult instanceof Map ) {\nreturn ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ;\n} if ( ioResult instanceof ODocument ) {\nreturn Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ;\n} if ( ioResult instanceof OResult ) {\nOResult res = ( OResult ) ioResult ;\nreturn res . getPropertyNames ( ) ;\n} if ( ioResult instanceof Collection ) {\nList result = new ArrayList ( ) ;\nfor ( Object o : ( Collection ) ioResult ) {\nresult . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ;\n} return result ;\n} return null ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLMethodKeysTest {\n@Test\npublic void testWithOResult ( ) {\nOResultInternal resultInternal = new OResultInternal ( ) ;\nresultInternal . setProperty ( \"STR\" , \"STR\" ) ;\nresultInternal . setProperty ( \"STR\" , \"STR\" ) ;\nObject result = function . execute ( null , null , null , resultInternal , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(2, ((List) result).size());\nassertTrue(((List) result).contains(\"STR\"));\nassertFalse(((List) result).contains(\"INT\"));\nassertTrue(((List) result).contains(\"DECIMAL\"));\nassertFalse(((List) result).contains(\"BOOL\"));\nassertFalse(((List) result).contains(\"DATE\"));\nassertFalse(((List) result).contains(\"LINK\"));\nassertFalse(((List) result).contains(\"EMBEDDED\"));\nassertFalse(((List) result).contains(\"EMBEDDEDLIST\"));\nassertFalse(((List) result).contains(\"EMBEDDEDMAP\"));\nassertFalse(((List) result).contains(\"EMBEDDEDSET\"));\nassertFalse(((List) result).contains(\"LINKLIST\"));\nassertFalse(((List) result).contains(\"LINKMAP\"));\nassertFalse(((List) result).contains(\"LINKSET\"));\nassertFalse(((List) result).contains(\"BYTE\"));\nassertFalse(((List) result).contains(\"SHORT\"));\nassertFalse(((List) result).contains(\"LONG\"));\nassertFalse(((List) result).contains(\"FLOAT\"));\nassertFalse(((List) result).contains(\"DOUBLE\"));\nassertFalse(((List) result).contains(\"BINARY\"));\n====================\n\n",
+    "scores": [
+        0.51,
+        0.426,
+        0.422,
+        0.422,
+        0.422,
+        0.422,
+        0.422,
+        0.418,
+        0.418,
+        0.414,
+        0.414,
+        0.411,
+        0.411,
+        0.407,
+        0.407,
+        0.397,
+        0.397,
+        0.393,
+        0.393,
+        0.378
+    ],
+    "ground_truth": "assertEquals(newLinkedHashSet(Arrays.asList(\"STR\",\"STR\")),result);"
+}

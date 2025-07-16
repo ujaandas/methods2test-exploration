@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptions {\npublic List < String > getOptions ( ) {\nList < String > options = new ArrayList < String > ( ) ;\nif ( ! showWarnings ) {\noptions . add ( \"STR\" ) ;\n} addStringOption ( options , \"STR\" , source ) ;\naddStringOption ( options , \"STR\" , target ) ;\naddStringOption ( options , \"STR\" , release ) ;\nreturn options ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptionsTest {\n@Test\npublic void testRelease ( ) throws Exception {\nJavaCompilerOptions jco = new JavaCompilerOptions ( ) ;\njco . setRelease ( \"STR\" ) ;\nList < String > result = jco . getOptions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(3, result.size());\nassertTrue(result.contains(\"STR\"));\nassertTrue(result.contains(\"STR\"));\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.contains(\"STR\")); // Assuming showWarnings is false\nassertTrue(result.contains(\"source\"));\nassertTrue(result.contains(\"target\"));\nassertTrue(result.contains(\"release\"));\nassertEquals(\"STR\", result.get(0)); // Assuming order is maintained\nassertEquals(\"source\", result.get(1)); // Assuming order is maintained\nassertEquals(\"target\", result.get(2)); // Assuming order is maintained\nassertTrue(result.stream().anyMatch(option -> option.equals(\"STR\")));\nassertTrue(result.stream().anyMatch(option -> option.equals(\"source\")));\nassertTrue(result.stream().anyMatch(option -> option.equals(\"target\")));\nassertTrue(result.stream().anyMatch(option -> option.equals(\"release\")));\nassertFalse(result.stream().anyMatch(option -> option.equals(\"invalidOption\")));\nassertTrue(result.size() > 0);\nassertTrue(result.contains(\"STR\"));\nassertTrue(result.contains(\"STR\"));\nassertTrue(result.contains(\"STR\"));\nassertTrue(result.contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.806,
+        0.786,
+        0.656,
+        0.603,
+        0.603,
+        0.603,
+        0.603,
+        0.603,
+        0.603,
+        0.603,
+        0.576,
+        0.567,
+        0.552,
+        0.538,
+        0.538,
+        0.415,
+        0.408,
+        0.408,
+        0.404,
+        0.396,
+        0.325,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,result.size());"
+}

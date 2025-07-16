@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package tradier.dropwizard-raven;
+
+public class DroppingRavenLoggingFilter {
+    @Override
+     public FilterReply decide ( ILoggingEvent event ) { 
+     if ( event . getLoggerName ( ) . startsWith ( "STR" ) ) { 
+     return FilterReply . DENY ; 
+     } else { 
+     return FilterReply . NEUTRAL ; 
+     } }
+}
+
+package tradier.dropwizard-raven;
+
+public class DroppingRavenLoggingFilterTest {
+    @Test
+     public void verifyFilterAllowsNonSentryLoggers ( ) {
+         final DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ; 
+         filter . start ( ) ; 
+         final LoggingEvent evt = new LoggingEvent ( ) ; 
+         evt . setLoggerName ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(FilterReply.DENY, filter.decide(evt));
+assertNotNull(evt);
+assertTrue(evt.getLoggerName().equals("STR"));
+assertFalse(evt.getLoggerName().isEmpty());
+assertTrue(evt.getLoggerName().startsWith("S"));
+assertTrue(evt.getLoggerName().length() > 0);
+assertTrue(evt.getLoggerName().contains("T"));
+assertFalse(evt.getLoggerName().equals("NON_STR"));
+assertTrue(evt.getLoggerName().matches("STR.*"));
+assertFalse(evt.getLoggerName().equals("STR123"));
+assertTrue(evt.getLoggerName().substring(0, 3).equals("STR"));
+assertEquals("STR", evt.getLoggerName().substring(0, 3));
+assertTrue(evt.getLoggerName().toUpperCase().equals("STR"));
+assertFalse(evt.getLoggerName().toLowerCase().equals("str"));
+assertTrue(evt.getLoggerName().length() >= 3);
+assertTrue(evt.getLoggerName().startsWith("S") && evt.getLoggerName().length() > 2);
+assertFalse(evt.getLoggerName().equals("XYZ"));
+assertTrue(evt.getLoggerName().contains("R"));
+assertTrue(evt.getLoggerName().indexOf("T") > 0);
+assertTrue(evt.getLoggerName().endsWith("R"));
+assertFalse(evt.getLoggerName().equals("S"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(FilterReply.NEUTRAL,filter.decide(evt)); ===
+0.844 - ```java
+assertEquals(FilterReply.DENY, filter.decide(evt))
+0.400 - assertNotNull(evt)
+0.396 - assertEquals("STR", evt.getLoggerName().substring(0, 3))
+0.340 - assertFalse(evt.getLoggerName().isEmpty())
+0.333 - assertFalse(evt.getLoggerName().equals("NON_STR"))
+0.330 - assertTrue(evt.getLoggerName().equals("STR"))
+0.317 - assertFalse(evt.getLoggerName().equals("STR123"))
+0.298 - assertTrue(evt.getLoggerName().length() > 0)
+0.295 - assertTrue(evt.getLoggerName().length() >= 3)
+0.292 - assertFalse(evt.getLoggerName().equals("S"))
+0.289 - assertTrue(evt.getLoggerName().contains("T"))
+0.289 - assertTrue(evt.getLoggerName().contains("R"))
+0.289 - assertTrue(evt.getLoggerName().endsWith("R"))
+0.288 - assertTrue(evt.getLoggerName().toUpperCase().equals("STR"))
+0.286 - assertTrue(evt.getLoggerName().substring(0, 3).equals("STR"))
+0.286 - assertFalse(evt.getLoggerName().toLowerCase().equals("str"))
+0.286 - assertFalse(evt.getLoggerName().equals("XYZ"))
+0.286 - assertTrue(evt.getLoggerName().indexOf("T") > 0)
+0.283 - assertTrue(evt.getLoggerName().startsWith("S"))
+0.280 - assertTrue(evt.getLoggerName().matches("STR.*"))
+0.214 - assertTrue(evt.getLoggerName().startsWith("S") && evt.getLoggerName().length() > 2)
+0.000 - ```

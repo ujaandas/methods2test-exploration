@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OTruncateClassStatementExecution {
+    default OResultSet query ( String query , Object ... args ) throws OCommandSQLParsingException , OCommandExecutionException { 
+    throw new UnsupportedOperationException ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OTruncateClassStatementExecutionTest {
+    @Test
+     public void testTruncateVertexClassSubclassesWithIndex ( ) {
+         database . command ( "STR" ) ; 
+         database . command ( "STR" ) ; 
+         database . command ( "STR" ) ; 
+         database . command ( "STR" ) ; 
+         database . command ( "STR" ) ; 
+         database . command ( "STR" ) ; 
+         OResultSet result = database . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(5, result.getTotalRecords());
+assertEquals("ExpectedResult1", result.next().getProperty("property1"));
+assertEquals("ExpectedResult2", result.next().getProperty("property2"));
+assertEquals("ExpectedResult3", result.next().getProperty("property3"));
+assertEquals("ExpectedResult4", result.next().getProperty("property4"));
+assertEquals("ExpectedResult5", result.next().getProperty("property5"));
+assertFalse(result.hasNext());
+assertEquals(0, result.getTotalRecords() - result.getFetchedRecords());
+assertTrue(result.isClosed());
+assertEquals("ExpectedType", result.getType());
+assertNotEquals("UnexpectedResult", result.next().getProperty("property6"));
+assertTrue(result.getExecutionPlan().isEmpty());
+assertEquals("ExpectedClassName", result.getClassName());
+assertNotNull(result.getMetadata());
+assertTrue(result.getMetadata().containsKey("key"));
+assertEquals("ExpectedValue", result.getMetadata().get("key"));
+assertTrue(result.getQuery().contains("STR"));
+assertEquals(1, result.getQueryExecutionTime());
+assertTrue(result.getSessionId() > 0);
+assertFalse(result.isReadOnly());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(toList(result).size(),2); ===
+0.667 - assertFalse(result.hasNext())
+0.638 - assertFalse(result.isReadOnly())
+0.623 - assertEquals(5, result.getTotalRecords())
+0.615 - assertTrue(result.hasNext())
+0.610 - assertEquals("ExpectedType", result.getType())
+0.606 - assertTrue(result.isClosed())
+0.602 - assertEquals(1, result.getQueryExecutionTime())
+0.587 - assertEquals("ExpectedClassName", result.getClassName())
+0.556 - assertNotNull(result.getMetadata())
+0.556 - assertTrue(result.getSessionId() > 0)
+0.531 - assertEquals("ExpectedValue", result.getMetadata().get("key"))
+0.523 - assertEquals("ExpectedResult1", result.next().getProperty("property1"))
+0.523 - assertEquals("ExpectedResult2", result.next().getProperty("property2"))
+0.523 - assertEquals("ExpectedResult3", result.next().getProperty("property3"))
+0.523 - assertEquals("ExpectedResult4", result.next().getProperty("property4"))
+0.523 - assertEquals("ExpectedResult5", result.next().getProperty("property5"))
+0.505 - assertNotEquals("UnexpectedResult", result.next().getProperty("property6"))
+0.488 - assertTrue(result.getQuery().contains("STR"))
+0.485 - ```java
+assertNotNull(result)
+0.477 - assertTrue(result.getMetadata().containsKey("key"))
+0.476 - assertTrue(result.getExecutionPlan().isEmpty())
+0.462 - assertEquals(0, result.getTotalRecords() - result.getFetchedRecords())
+0.000 - ```

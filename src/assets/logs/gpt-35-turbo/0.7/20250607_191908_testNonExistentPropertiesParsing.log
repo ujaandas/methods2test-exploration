@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtil {
+    protected static Properties getPropertiesResource ( URL resource ) { 
+    Properties answer = new Properties ( ) ; 
+    if ( resource != null ) { 
+    try ( InputStream stream = resource . openStream ( ) ) { 
+    answer . load ( stream ) ; 
+    } catch ( IOException e ) { 
+    throw new IllegalStateException ( "STR" + resource , e ) ; 
+    } } return answer ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtilTest {
+    @Test
+     public void testNonExistentPropertiesParsing ( ) {
+         Properties props = SpringBootUtil . getPropertiesResource ( SpringBootUtilTest . class . getResource ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions for the testNonExistentPropertiesParsing method:
+
+1. assertNotNull(props);
+2. assertTrue(props.isEmpty());
+3. assertEquals(0, props.size());
+4. assertFalse(props.containsKey("key"));
+5. assertNull(props.getProperty("key"));
+6. assertEquals("default", props.getProperty("key", "default"));
+7. assertFalse(props.containsKey("anotherKey"));
+8. assertNull(props.getProperty("anotherKey"));
+9. assertEquals("default", props.getProperty("anotherKey", "default"));
+10. assertFalse(props.containsKey("yetAnotherKey"));
+11. assertNull(props.getProperty("yetAnotherKey"));
+12. assertEquals("default", props.getProperty("yetAnotherKey", "default"));
+13. assertFalse(props.containsKey("lastKey"));
+14. assertNull(props.getProperty("lastKey"));
+15. assertEquals("default", props.getProperty("lastKey", "default"));
+16. assertFalse(props.containsKey("testKey"));
+17. assertNull(props.getProperty("testKey"));
+18. assertEquals("default", props.getProperty("testKey", "default"));
+19. assertFalse(props.containsKey("exampleKey"));
+20. assertNull(props.getProperty("exampleKey"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(props); ===
+0.600 - 3. assertEquals(0, props.size())
+0.586 - 5. assertNull(props.getProperty("key"))
+0.571 - 2. assertTrue(props.isEmpty())
+0.540 - 14. assertNull(props.getProperty("lastKey"))
+0.540 - 17. assertNull(props.getProperty("testKey"))
+0.523 - 8. assertNull(props.getProperty("anotherKey"))
+0.515 - 20. assertNull(props.getProperty("exampleKey"))
+0.493 - 11. assertNull(props.getProperty("yetAnotherKey"))
+0.475 - 4. assertFalse(props.containsKey("key"))
+0.438 - 13. assertFalse(props.containsKey("lastKey"))
+0.438 - 16. assertFalse(props.containsKey("testKey"))
+0.424 - 7. assertFalse(props.containsKey("anotherKey"))
+0.418 - 19. assertFalse(props.containsKey("exampleKey"))
+0.404 - Assertions for the testNonExistentPropertiesParsing method:
+
+1. assertNotNull(props)
+0.400 - 10. assertFalse(props.containsKey("yetAnotherKey"))
+0.350 - 6. assertEquals("default", props.getProperty("key", "default"))
+0.329 - 15. assertEquals("default", props.getProperty("lastKey", "default"))
+0.329 - 18. assertEquals("default", props.getProperty("testKey", "default"))
+0.322 - 9. assertEquals("default", props.getProperty("anotherKey", "default"))
+0.308 - 12. assertEquals("default", props.getProperty("yetAnotherKey", "default"))

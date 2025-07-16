@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerialization {\npublic int fields ( ) {\ncheckForLoading ( ) ;\ncheckForFields ( ) ;\nreturn _fieldSize ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerializationTest {\n@Test\npublic void testSimpleEmbeddedDoc ( ) {\nODatabaseRecordThreadLocal . instance ( ) . remove ( ) ;\nODocument document = new ODocument ( ) ;\nODocument embedded = new ODocument ( ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\ndocument . field ( \"STR\" , embedded , OType . EMBEDDED ) ;\nbyte [ ] res = serializer . toStream ( document , false ) ;\nODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] {\n} ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(extr);\nAssert.assertTrue(extr instanceof ODocument);\nAssert.assertEquals(document.field(\"STR\", \"STR\"), extr.field(\"STR\"));\nAssert.assertNotNull(extr.field(\"STR\"));\nAssert.assertTrue(extr.field(\"STR\") instanceof ODocument);\nAssert.assertEquals(embedded.field(\"STR\"), extr.field(\"STR\").field(\"STR\"));\nAssert.assertNotNull(extr.field(\"STR\").field(\"STR\"));\nAssert.assertEquals(OType.EMBEDDED, extr.field(\"STR\").getType());\nAssert.assertEquals(2, document.fields());\nAssert.assertEquals(2, embedded.fields());\nAssert.assertEquals(1, extr.fields());\nAssert.assertTrue(Arrays.equals(res, serializer.toStream(extr, false)));\nAssert.assertEquals(document.getClassName(), extr.getClassName());\nAssert.assertFalse(document.equals(extr));\nAssert.assertTrue(document.hashCode() != extr.hashCode());\nAssert.assertEquals(document.size(), extr.size());\nAssert.assertEquals(document.getVersion(), extr.getVersion());\nAssert.assertEquals(document.getRecord(), extr.getRecord());\nAssert.assertTrue(document.equals(extr) || document.toString().equals(extr.toString()));\nAssert.assertEquals(document.hashCode(), extr.hashCode());\n====================\n\n",
+    "scores": [
+        0.86,
+        0.827,
+        0.795,
+        0.771,
+        0.765,
+        0.757,
+        0.745,
+        0.734,
+        0.714,
+        0.667,
+        0.641,
+        0.624,
+        0.574,
+        0.571,
+        0.504,
+        0.489,
+        0.438,
+        0.43,
+        0.43,
+        0.4
+    ],
+    "ground_truth": "assertEquals(document.fields(),extr.fields());"
+}

@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package ExpediaGroup.beeju;
+
+public class BeejuCore {
+    public Path warehouseDir ( ) { 
+    return warehouseDir ; 
+    }
+}
+
+package ExpediaGroup.beeju;
+
+public class BeejuCoreTest {
+    @Test
+     public void deleteDirectory ( ) throws IOException {
+         BeejuCore testCore = new BeejuCore ( ) ; 
+         testCore . cleanUp ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+@Test
+public void deleteDirectory() throws IOException {
+    BeejuCore testCore = new BeejuCore();
+    testCore.cleanUp();
+
+    Path warehousePath = testCore.warehouseDir();
+    
+    assertFalse(Files.exists(warehousePath));
+    assertTrue(Files.notExists(warehousePath));
+    assertEquals(0, Files.list(warehousePath).count());
+    assertTrue(Files.isDirectory(warehousePath));
+    assertTrue(Files.isWritable(warehousePath));
+    assertFalse(Files.isReadable(warehousePath));
+    assertFalse(Files.isExecutable(warehousePath));
+    assertTrue(Files.isHidden(warehousePath));
+    assertTrue(Files.isSymbolicLink(warehousePath));
+    assertTrue(Files.getLastModifiedTime(warehousePath).toMillis() < System.currentTimeMillis());
+    assertEquals(0, Files.size(warehousePath));
+    assertTrue(Files.getAttribute(warehousePath, "basic:size").equals(0L));
+    assertTrue(Files.getAttribute(warehousePath, "basic:lastModifiedTime") != null);
+    assertTrue(Files.getAttribute(warehousePath, "basic:creationTime") != null);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isRegularFile") == false);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isDirectory") == true);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isSymbolicLink") == false);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isOther") == false);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isHidden") == false);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isReadable") == false);
+    assertTrue(Files.getAttribute(warehousePath, "basic:isWritable") == true);
+}
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Files.exists(testCore.warehouseDir())); ===
+0.800 - assertFalse(Files.exists(warehousePath))
+0.688 - assertFalse(Files.isExecutable(warehousePath))
+0.681 - assertFalse(Files.isReadable(warehousePath))
+0.674 - assertTrue(Files.notExists(warehousePath))
+0.646 - assertEquals(0, Files.list(warehousePath).count())
+0.638 - assertTrue(Files.isDirectory(warehousePath))
+0.637 - assertEquals(0, Files.size(warehousePath))
+0.624 - assertTrue(Files.isWritable(warehousePath))
+0.615 - assertTrue(Files.isHidden(warehousePath))
+0.593 - Path warehousePath = testCore.warehouseDir()
+0.577 - assertTrue(Files.isSymbolicLink(warehousePath))
+0.529 - assertTrue(Files.getAttribute(warehousePath, "basic:isDirectory") == true)
+0.525 - assertTrue(Files.getAttribute(warehousePath, "basic:isOther") == false)
+0.521 - assertTrue(Files.getAttribute(warehousePath, "basic:size").equals(0L))
+0.517 - assertTrue(Files.getAttribute(warehousePath, "basic:isWritable") == true)
+0.508 - assertTrue(Files.getAttribute(warehousePath, "basic:creationTime") != null)
+0.504 - assertTrue(Files.getAttribute(warehousePath, "basic:isHidden") == false)
+0.500 - assertTrue(Files.getAttribute(warehousePath, "basic:isRegularFile") == false)
+0.496 - assertTrue(Files.getAttribute(warehousePath, "basic:isReadable") == false)
+0.480 - assertTrue(Files.getAttribute(warehousePath, "basic:isSymbolicLink") == false)
+0.476 - assertTrue(Files.getAttribute(warehousePath, "basic:lastModifiedTime") != null)
+0.457 - assertTrue(Files.getLastModifiedTime(warehousePath).toMillis() < System.currentTimeMillis())
+0.353 - testCore.cleanUp()
+0.299 - @Test
+public void deleteDirectory() throws IOException {
+    BeejuCore testCore = new BeejuCore()
+0.272 - ```java
+import static org.junit.Assert.*
+0.267 - import java.nio.file.Files
+0.243 - import java.nio.file.Path
+0.000 - }
+```

@@ -1,0 +1,102 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CollectionOfLinkInNestedDocument {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CollectionOfLinkInNestedDocumentTest {
+    @Test
+     public void nestedLinkSet ( ) {
+         ODocument doc1 = new ODocument ( ) ; 
+         doc1 . field ( "STR" , "STR" ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         doc2 . field ( "STR" , "STR" ) ; 
+         ODocument nested = new ODocument ( ) ; 
+         ORecordLazySet set = new ORecordLazySet ( nested ) ; 
+         set . add ( doc1 ) ; 
+         set . add ( doc2 ) ; 
+         nested . field ( "STR" , set ) ; 
+         ODocument base = new ODocument ( ) ; 
+         base . field ( "STR" , nested , OType . EMBEDDED ) ; 
+         OIdentifiable id = db . save ( base , db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         db . getLocalCache ( ) . clear ( ) ; 
+         ODocument base1 = db . load ( id . getIdentity ( ) ) ; 
+         ODocument nest1 = base1 . field ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(nest1);
+assertTrue(nest1 instanceof ODocument);
+assertEquals(2, nest1.field("STR").size());
+assertTrue(nest1.field("STR").contains(doc1));
+assertTrue(nest1.field("STR").contains(doc2));
+assertEquals("STR", nest1.field("STR").get(0).field("STR"));
+assertEquals("STR", nest1.field("STR").get(1).field("STR"));
+assertNotSame(doc1, nest1.field("STR").get(0));
+assertNotSame(doc2, nest1.field("STR").get(1));
+assertTrue(nest1.field("STR").get(0).getIdentity().isPersistent());
+assertTrue(nest1.field("STR").get(1).getIdentity().isPersistent());
+assertEquals(ODocument.class, nest1.field("STR").get(0).getClass());
+assertEquals(ODocument.class, nest1.field("STR").get(1).getClass());
+assertNotNull(base1);
+assertEquals("STR", base1.field("STR").field("STR").get(0).field("STR"));
+assertEquals("STR", base1.field("STR").field("STR").get(1).field("STR"));
+assertEquals(1, base1.getIdentity().getClusterId());
+assertTrue(base1.isDirty());
+assertFalse(nest1.isDirty());
+assertEquals(2, base1.field("STR").field("STR").size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(nest1); ===
+0.850 - assertNotNull(base1)
+0.833 - ```java
+assertNotNull(nest1)
+0.583 - assertFalse(nest1.isDirty())
+0.500 - assertTrue(nest1 instanceof ODocument)
+0.492 - assertNotSame(doc1, nest1.field("STR").get(0))
+0.492 - assertNotSame(doc2, nest1.field("STR").get(1))
+0.492 - assertEquals(2, nest1.field("STR").size())
+0.431 - assertTrue(nest1.field("STR").contains(doc1))
+0.431 - assertTrue(nest1.field("STR").contains(doc2))
+0.385 - assertEquals("STR", nest1.field("STR").get(0).field("STR"))
+0.385 - assertEquals("STR", nest1.field("STR").get(1).field("STR"))
+0.383 - assertTrue(base1.isDirty())
+0.351 - assertEquals(2, base1.field("STR").field("STR").size())
+0.349 - assertEquals(ODocument.class, nest1.field("STR").get(0).getClass())
+0.349 - assertEquals(ODocument.class, nest1.field("STR").get(1).getClass())
+0.326 - assertTrue(nest1.field("STR").get(0).getIdentity().isPersistent())
+0.326 - assertTrue(nest1.field("STR").get(1).getIdentity().isPersistent())
+0.314 - assertEquals(1, base1.getIdentity().getClusterId())
+0.220 - assertEquals("STR", base1.field("STR").field("STR").get(0).field("STR"))
+0.220 - assertEquals("STR", base1.field("STR").field("STR").get(1).field("STR"))
+0.000 - ```

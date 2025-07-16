@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SegmentTypeBox {\npublic static List < Atom > getRootAtoms ( SeekableByteChannel input ) throws IOException {\ninput . setPosition ( 0 ) ;\nList < Atom > result = new ArrayList < Atom > ( ) ;\nlong off = 0 ;\nHeader atom ;\nwhile ( off < input . size ( ) ) {\ninput . setPosition ( off ) ;\natom = Header . read ( NIOUtils . fetchFromChannel ( input , 16 ) ) ;\nif ( atom == null ) break ;\nresult . add ( new Atom ( atom , off ) ) ;\noff += atom . getSize ( ) ;\n} return result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SegmentTypeBoxTest {\n@Test\npublic void testParse ( ) throws Exception {\nByteBuffer buf = ByteBuffer . allocate ( 0x18 + 8 ) ;\nbuf . putInt ( 0x18 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . putInt ( 0 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . putInt ( 8 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . clear ( ) ;\nSeekableByteChannel input = ByteBufferSeekableByteChannel . readFromByteBuffer ( buf ) ;\nList < Atom > rootAtoms = MP4Util . getRootAtoms ( input ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(3, rootAtoms.size());\nAssert.assertEquals(\"STR\", rootAtoms.get(0).getFourcc());\nAssert.assertEquals(0, rootAtoms.get(0).getHeader().getSize());\nAssert.assertEquals(\"STR\", rootAtoms.get(1).getFourcc());\nAssert.assertEquals(0, rootAtoms.get(1).getHeader().getSize());\nAssert.assertEquals(\"STR\", rootAtoms.get(2).getFourcc());\nAssert.assertEquals(8, rootAtoms.get(2).getHeader().getSize());\nAssert.assertEquals(0x18, rootAtoms.get(0).getOffset());\nAssert.assertEquals(0x18 + 4, rootAtoms.get(1).getOffset());\nAssert.assertEquals(0x18 + 4 + 4, rootAtoms.get(2).getOffset());\nAssert.assertEquals(0x18, rootAtoms.get(0).getHeader().getSize());\nAssert.assertEquals(0, rootAtoms.get(1).getHeader().getSize());\nAssert.assertEquals(8, rootAtoms.get(2).getHeader().getSize());\nAssert.assertEquals(0x18, rootAtoms.get(0).getHeader().getDataLen());\nAssert.assertEquals(0, rootAtoms.get(1).getHeader().getDataLen());\nAssert.assertEquals(8, rootAtoms.get(2).getHeader().getDataLen());\nAssert.assertEquals(0x18 + 8, rootAtoms.get(2).getOffset() + rootAtoms.get(2).getHeader().getSize());\nAssert.assertEquals(0x18 + 8, input.position());\n====================\n\n",
+    "scores": [
+        0.969,
+        0.734,
+        0.716,
+        0.7,
+        0.7,
+        0.7,
+        0.699,
+        0.698,
+        0.698,
+        0.698,
+        0.698,
+        0.698,
+        0.674,
+        0.629,
+        0.629,
+        0.609,
+        0.58,
+        0.517
+    ],
+    "ground_truth": "assertEquals(2,rootAtoms.size());"
+}

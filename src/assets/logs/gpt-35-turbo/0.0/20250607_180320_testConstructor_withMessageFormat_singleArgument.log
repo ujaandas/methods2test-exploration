@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( String message , Object ... args ) { 
+    super ( format ( message , args ) ) ; 
+    Object lastArg = args [ args . length - 1 ] ; 
+    if ( lastArg instanceof Throwable ) { 
+    initCause ( ( Throwable ) lastArg ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withMessageFormat_singleArgument ( ) {
+         TestException exception = new TestException ( "STR" , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", exception.getMessage());
+Assert.assertEquals(1, exception.getArgs()[0]);
+Assert.assertNull(exception.getCause());
+Assert.assertTrue(exception instanceof Throwable);
+Assert.assertTrue(exception instanceof TestException);
+Assert.assertTrue(exception.getMessage().contains("STR"));
+Assert.assertTrue(exception.getMessage().contains("1"));
+Assert.assertTrue(exception.getMessage().contains("STR1"));
+Assert.assertTrue(exception.getMessage().length() > 0);
+Assert.assertNotNull(exception.getArgs());
+Assert.assertEquals(2, exception.getArgs().length);
+Assert.assertTrue(exception.getArgs()[0] instanceof String);
+Assert.assertTrue(exception.getArgs()[1] instanceof Integer);
+Assert.assertTrue(exception.getMessage().equals("STR1"));
+Assert.assertTrue(exception.getMessage().equals("STR" + 1));
+Assert.assertTrue(exception.getMessage().equals("STR" + "1"));
+Assert.assertTrue(exception.getMessage().equals("STR" + 1));
+Assert.assertTrue(exception.getMessage().equals("STR" + 1));
+Assert.assertTrue(exception.getMessage().equals("STR" + 1));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",exception.getMessage()); ===
+1.000 - Assert.assertEquals("STR", exception.getMessage())
+0.775 - Assert.assertEquals(1, exception.getArgs()[0])
+0.738 - Assert.assertEquals(2, exception.getArgs().length)
+0.730 - Assert.assertNull(exception.getCause())
+0.713 - Assert.assertTrue(exception.getMessage().length() > 0)
+0.689 - Assert.assertTrue(exception.getMessage().contains("1"))
+0.684 - Assert.assertNotNull(exception.getArgs())
+0.681 - Assert.assertTrue(exception.getMessage().equals("STR1"))
+0.674 - Assert.assertTrue(exception.getMessage().contains("STR"))
+0.674 - Assert.assertTrue(exception.getMessage().equals("STR" + 1))
+0.674 - Assert.assertTrue(exception.getMessage().equals("STR" + 1))
+0.674 - Assert.assertTrue(exception.getMessage().equals("STR" + 1))
+0.674 - Assert.assertTrue(exception.getMessage().equals("STR" + 1))
+0.667 - Assert.assertTrue(exception.getMessage().contains("STR1"))
+0.660 - Assert.assertTrue(exception.getMessage().equals("STR" + "1"))
+0.543 - Assert.assertTrue(exception.getArgs()[0] instanceof String)
+0.538 - Assert.assertTrue(exception.getArgs()[1] instanceof Integer)
+0.512 - Assert.assertTrue(exception instanceof TestException)
+0.488 - Assert.assertTrue(exception instanceof Throwable)

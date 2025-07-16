@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testIndexedEdgeArrows ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(3, result.size());
+assertTrue(result.next().getProperty("property1").equals("expectedValue1"));
+assertTrue(result.next().getProperty("property2").equals("expectedValue2"));
+assertTrue(result.next().getProperty("property3").equals("expectedValue3"));
+assertEquals("expectedType", result.next().getType());
+assertFalse(result.hasNext());
+assertTrue(result.getPropertyNames().contains("property1"));
+assertTrue(result.getPropertyNames().contains("property2"));
+assertTrue(result.getPropertyNames().contains("property3"));
+assertEquals("expectedValue1", result.next().getProperty("property1"));
+assertNotEquals("unexpectedValue", result.next().getProperty("property1"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("property1") != null));
+assertFalse(result.isEmpty());
+assertEquals(5, result.getProperty("count"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("property2").equals("specificValue")));
+assertNotNull(result.first());
+assertEquals("expectedValue", result.first().getProperty("property1"));
+assertTrue(result.first().getProperty("property4").equals("additionalExpectedValue"));
+assertEquals(2, result.stream().filter(r -> r.getProperty("property3").equals("filterValue")).count());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.877 - assertFalse(result.hasNext())
+0.702 - assertEquals(3, result.size())
+0.702 - assertFalse(result.isEmpty())
+0.702 - assertNotNull(result.first())
+0.563 - assertEquals(5, result.getProperty("count"))
+0.529 - assertTrue(result.getPropertyNames().contains("property1"))
+0.529 - assertTrue(result.getPropertyNames().contains("property2"))
+0.529 - assertTrue(result.getPropertyNames().contains("property3"))
+0.526 - ```java
+assertNotNull(result)
+0.525 - assertEquals("expectedType", result.next().getType())
+0.466 - assertTrue(result.next().getProperty("property1").equals("expectedValue1"))
+0.466 - assertTrue(result.next().getProperty("property2").equals("expectedValue2"))
+0.466 - assertTrue(result.next().getProperty("property3").equals("expectedValue3"))
+0.436 - assertTrue(result.stream().allMatch(r -> r.getProperty("property1") != null))
+0.433 - assertEquals("expectedValue1", result.next().getProperty("property1"))
+0.416 - assertNotEquals("unexpectedValue", result.next().getProperty("property1"))
+0.412 - assertEquals("expectedValue", result.first().getProperty("property1"))
+0.407 - assertTrue(result.first().getProperty("property4").equals("additionalExpectedValue"))
+0.370 - assertTrue(result.stream().anyMatch(r -> r.getProperty("property2").equals("specificValue")))
+0.346 - assertEquals(2, result.stream().filter(r -> r.getProperty("property3").equals("filterValue")).count())
+0.000 - ```

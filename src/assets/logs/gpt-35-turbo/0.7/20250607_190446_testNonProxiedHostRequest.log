@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactory {
+    public HttpClient create ( ) { 
+    return hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactoryTest {
+    @Test
+     public void testNonProxiedHostRequest ( ) throws Exception {
+         targetServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         proxyServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         Proxy proxy = new Proxy ( ) ; 
+         proxy . setHost ( "STR" ) ; 
+         proxy . setPort ( PROXY_PORT ) ; 
+         proxy . setProtocol ( "STR" ) ; 
+         proxy . setNonProxyHosts ( "STR" ) ; 
+         HttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ; 
+         String body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("Expected body content", "Actual body content", body);
+Assert.assertNotNull(client);
+Assert.assertTrue(body.contains("expectedString"));
+Assert.assertEquals(HttpStatus.SC_OK, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());
+Assert.assertTrue(body.length() > 0);
+Assert.assertNotEquals("Expected string", "Actual string");
+Assert.assertTrue(body.contains("specificString"));
+Assert.assertNotEquals(0, body.length());
+Assert.assertTrue(client instanceof HttpClient);
+Assert.assertNotNull(body);
+Assert.assertNotEquals(HttpStatus.SC_NOT_FOUND, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());
+Assert.assertTrue(body.startsWith("startString"));
+Assert.assertEquals("Expected content", body, "Actual content");
+Assert.assertTrue(body.endsWith("endString"));
+Assert.assertNotEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());
+Assert.assertNotEquals("Not this", "Not that");
+Assert.assertTrue(body.isEmpty());
+Assert.assertEquals("Expected length", 10, body.length());
+Assert.assertTrue(body.matches("regexPattern"));
+Assert.assertFalse(body.equals("differentString"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",body); ===
+0.679 - Assert.assertNotEquals(0, body.length())
+0.651 - Assert.assertNotNull(body)
+0.600 - Assert.assertNotEquals("Not this", "Not that")
+0.592 - Assert.assertEquals("Expected length", 10, body.length())
+0.553 - Assert.assertEquals("Expected content", body, "Actual content")
+0.520 - Assert.assertTrue(body.isEmpty())
+0.510 - Assert.assertTrue(body.length() > 0)
+0.500 - Assert.assertEquals("Expected body content", "Actual body content", body)
+0.478 - Assert.assertFalse(body.equals("differentString"))
+0.472 - Assert.assertNotEquals("Expected string", "Actual string")
+0.444 - Assert.assertNotNull(client)
+0.419 - Assert.assertTrue(body.endsWith("endString"))
+0.406 - Assert.assertTrue(body.matches("regexPattern"))
+0.394 - Assert.assertTrue(body.startsWith("startString"))
+0.388 - Assert.assertTrue(body.contains("expectedString"))
+0.388 - Assert.assertTrue(body.contains("specificString"))
+0.323 - Assert.assertTrue(client instanceof HttpClient)
+0.304 - Assert.assertEquals(HttpStatus.SC_OK, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode())
+0.281 - Assert.assertNotEquals(HttpStatus.SC_NOT_FOUND, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode())
+0.272 - Assert.assertNotEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode())

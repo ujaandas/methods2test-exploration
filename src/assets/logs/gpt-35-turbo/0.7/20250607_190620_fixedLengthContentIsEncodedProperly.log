@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegration {
+    public static Response newFixedLengthResponse ( String msg ) { 
+    return newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegrationTest {
+    @Test
+     public void fixedLengthContentIsEncodedProperly ( ) throws IOException {
+         testServer . response = Response . newFixedLengthResponse ( "STR" ) ; 
+         HttpGet request = new HttpGet ( "STR" ) ; 
+         request . addHeader ( "STR" , "STR" ) ; 
+         HttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(response.getStatusLine().getStatusCode(), HttpStatus.SC_OK);
+Assert.assertEquals(response.getEntity().getContentType().getValue(), NanoHTTPD.MIME_HTML);
+Assert.assertEquals(EntityUtils.toString(response.getEntity()), "STR");
+Assert.assertTrue(response.getFirstHeader("STR") != null);
+Assert.assertEquals(response.getFirstHeader("STR").getValue(), "STR");
+Assert.assertEquals(response.getFirstHeader("Content-Encoding").getValue(), "gzip");
+Assert.assertTrue(response.getEntity().getContentLength() > 0);
+Assert.assertTrue(response.getEntity().getContentLength() < "STR".length());
+Assert.assertEquals(response.getEntity().getContentEncoding().getValue(), "gzip");
+Assert.assertTrue(response.getEntity().getContentEncoding() != null);
+Assert.assertTrue(response.getEntity().getContentEncoding().getValue().contains("gzip"));
+Assert.assertTrue(response.getEntity().isChunked() == false);
+Assert.assertTrue(response.getEntity().getContent().available() > 0);
+Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'S');
+Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'T');
+Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'R');
+Assert.assertEquals(response.getEntity().getContent().read(), -1);
+Assert.assertTrue(response.getEntity().isStreaming() == false);
+Assert.assertEquals(response.getEntity().getContentEncoding().getValue(), "gzip");
+Assert.assertTrue(response.getEntity().isRepeatable() == false);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",EntityUtils.toString(response.getEntity())); ===
+0.903 - Assert.assertEquals(EntityUtils.toString(response.getEntity()), "STR")
+0.588 - Assert.assertEquals(response.getEntity().getContent().read(), -1)
+0.556 - Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'S')
+0.556 - Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'T')
+0.556 - Assert.assertEquals(response.getEntity().getContent().read(), (byte) 'R')
+0.531 - Assert.assertTrue(response.getEntity().isChunked() == false)
+0.522 - Assert.assertTrue(response.getEntity().getContentLength() > 0)
+0.522 - Assert.assertTrue(response.getEntity().isStreaming() == false)
+0.519 - Assert.assertEquals(response.getEntity().getContentEncoding().getValue(), "gzip")
+0.519 - Assert.assertEquals(response.getEntity().getContentEncoding().getValue(), "gzip")
+0.517 - Assert.assertTrue(response.getEntity().isRepeatable() == false)
+0.496 - Assert.assertTrue(response.getEntity().getContentEncoding() != null)
+0.496 - Assert.assertTrue(response.getEntity().getContent().available() > 0)
+0.488 - Assert.assertEquals(response.getFirstHeader("STR").getValue(), "STR")
+0.486 - Assert.assertEquals(response.getEntity().getContentType().getValue(), NanoHTTPD.MIME_HTML)
+0.469 - Assert.assertTrue(response.getEntity().getContentLength() < "STR".length())
+0.453 - Assert.assertEquals(response.getFirstHeader("Content-Encoding").getValue(), "gzip")
+0.451 - Assert.assertEquals(response.getStatusLine().getStatusCode(), HttpStatus.SC_OK)
+0.420 - Assert.assertTrue(response.getEntity().getContentEncoding().getValue().contains("gzip"))
+0.400 - Assert.assertTrue(response.getFirstHeader("STR") != null)

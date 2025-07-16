@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic static String getPublicId ( String otp ) {\nif ( ( otp == null ) || ( otp . length ( ) < OTP_MIN_LEN ) ) {\nthrow new IllegalArgumentException ( \"STR\" ) ;\n} Integer len = otp . length ( ) ;\nreturn otp . substring ( 0 , len - 32 ) . toLowerCase ( ) ;\n}\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testValidOTPPublicId ( ) {\nString testOtp = \"STR\" ;\nString testPublicId = \"STR\" ;\nString resultPublicId = YubicoClient . getPublicId ( testOtp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(resultPublicId);\nassertEquals(testPublicId.toLowerCase(), resultPublicId);\nassertTrue(resultPublicId.length() >= 0);\nassertTrue(resultPublicId.length() <= testOtp.length() - 32);\nassertFalse(resultPublicId.isEmpty());\nassertEquals(testPublicId.length(), resultPublicId.length() + 32);\nassertEquals(\"str\", resultPublicId.toLowerCase());\nassertNotEquals(testOtp, resultPublicId);\nassertTrue(resultPublicId.matches(\"[a-z0-9]+\"));\nassertFalse(resultPublicId.contains(\" \"));\nassertFalse(resultPublicId.contains(\"-\"));\nassertFalse(resultPublicId.startsWith(\"STR\"));\nassertFalse(resultPublicId.endsWith(\"STR\"));\nassertTrue(resultPublicId.equals(testPublicId.toLowerCase()));\nassertEquals(testPublicId.length() - 32, resultPublicId.length());\nassertTrue(resultPublicId.chars().allMatch(Character::isLowerCase));\nassertTrue(resultPublicId.chars().allMatch(Character::isLetterOrDigit));\nassertNotEquals(\"\", resultPublicId);\nassertNotEquals(null, resultPublicId);\nassertTrue(resultPublicId.length() < testOtp.length());\nassertFalse(resultPublicId.equalsIgnoreCase(testOtp));\n```\n====================\n\n",
+    "scores": [
+        0.854,
+        0.825,
+        0.805,
+        0.796,
+        0.796,
+        0.773,
+        0.697,
+        0.641,
+        0.617,
+        0.615,
+        0.61,
+        0.595,
+        0.582,
+        0.581,
+        0.532,
+        0.529,
+        0.523,
+        0.495,
+        0.474,
+        0.426,
+        0.411,
+        0.0
+    ],
+    "ground_truth": "assertEquals(testPublicId,resultPublicId);"
+}

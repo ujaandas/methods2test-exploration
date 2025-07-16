@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalProperty {\nString getName ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalPropertyTest {\n@Test\npublic void testGlobalPropertyCreate ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nschema . createGlobalProperty ( \"STR\" , OType . SHORT , 100 ) ;\nOGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.SHORT, prop.getType());\nAssert.assertEquals(100, prop.getId());\nAssert.assertTrue(schema.existsGlobalProperty(\"STR\"));\nAssert.assertTrue(schema.existsGlobalProperty(100));\nAssert.assertEquals(1, schema.getGlobalProperties().size());\nAssert.assertTrue(schema.getGlobalProperties().contains(prop));\nAssert.assertEquals(prop, schema.getGlobalProperty(\"STR\"));\nAssert.assertEquals(prop, schema.getGlobalProperty(100));\nAssert.assertEquals(prop, schema.getGlobalProperty(\"STR\", OType.SHORT));\nAssert.assertEquals(prop, schema.getGlobalProperty(100, OType.SHORT));\nAssert.assertTrue(schema.dropGlobalProperty(\"STR\"));\nAssert.assertFalse(schema.existsGlobalProperty(\"STR\"));\nAssert.assertNull(schema.getGlobalProperty(\"STR\"));\nAssert.assertTrue(schema.dropGlobalProperty(100));\nAssert.assertFalse(schema.existsGlobalProperty(100));\nAssert.assertNull(schema.getGlobalProperty(100));\nAssert.assertEquals(0, schema.getGlobalProperties().size());\n====================\n\n",
+    "scores": [
+        0.824,
+        0.75,
+        0.714,
+        0.676,
+        0.634,
+        0.625,
+        0.553,
+        0.545,
+        0.543,
+        0.528,
+        0.525,
+        0.518,
+        0.518,
+        0.513,
+        0.456,
+        0.453,
+        0.436,
+        0.421,
+        0.382
+    ],
+    "ground_truth": "assertEquals(prop.getName(),\"STR\");"
+}

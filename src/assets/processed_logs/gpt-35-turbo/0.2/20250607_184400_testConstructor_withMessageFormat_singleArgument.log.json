@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( String message , Object ... args ) {\nsuper ( format ( message , args ) ) ;\nObject lastArg = args [ args . length - 1 ] ;\nif ( lastArg instanceof Throwable ) {\ninitCause ( ( Throwable ) lastArg ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withMessageFormat_singleArgument ( ) {\nTestException exception = new TestException ( \"STR\" , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", exception.getMessage());\nAssert.assertEquals(1, exception.getArgs().length);\nAssert.assertEquals(1, exception.getArgs()[0]);\nAssert.assertNull(exception.getCause());\nAssert.assertTrue(exception instanceof Throwable);\nAssert.assertTrue(exception instanceof Exception);\nAssert.assertTrue(exception instanceof TestException);\nAssert.assertTrue(exception.getMessage().contains(\"STR\"));\nAssert.assertTrue(exception.getMessage().contains(\"1\"));\nAssert.assertTrue(exception.getMessage().contains(\"STR1\"));\nAssert.assertTrue(exception.getMessage().startsWith(\"STR\"));\nAssert.assertTrue(exception.getMessage().endsWith(\"1\"));\nAssert.assertFalse(exception.getMessage().isEmpty());\nAssert.assertNotEquals(\"ABC\", exception.getMessage());\nAssert.assertNotEquals(2, exception.getArgs().length);\nAssert.assertNotEquals(2, exception.getArgs()[0]);\nAssert.assertNotEquals(\"STR1\", exception.getMessage());\nAssert.assertNotEquals(\"STR2\", exception.getMessage());\nAssert.assertNotEquals(\"STR3\", exception.getMessage());\nAssert.assertNotEquals(\"STR4\", exception.getMessage());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.955,
+        0.955,
+        0.955,
+        0.955,
+        0.897,
+        0.775,
+        0.759,
+        0.747,
+        0.738,
+        0.73,
+        0.713,
+        0.689,
+        0.689,
+        0.674,
+        0.667,
+        0.66,
+        0.512,
+        0.488,
+        0.488
+    ],
+    "ground_truth": "assertEquals(\"STR\",exception.getMessage());"
+}

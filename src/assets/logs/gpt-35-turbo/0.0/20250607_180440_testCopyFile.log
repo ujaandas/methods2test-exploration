@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException { 
+    File targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ; 
+    try { 
+    FileUtils . copyFile ( fileChanged , targetResource ) ; 
+    info ( "STR" + fileChanged . getCanonicalPath ( ) + "STR" + targetResource . getCanonicalPath ( ) ) ; 
+    } catch ( FileNotFoundException ex ) { 
+    debug ( "STR" + fileChanged . getCanonicalPath ( ) ) ; 
+    } catch ( Exception ex ) { 
+    debug ( ex ) ; 
+    } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testCopyFile ( ) throws Exception {
+         File configFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( configFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         util . copyFile ( configFile , srcDir , targetDir , "STR" ) ; 
+         File targetFile = new File ( targetDir , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(targetFile.exists());
+Assert.assertTrue(targetFile.isFile());
+Assert.assertTrue(targetFile.canRead());
+Assert.assertTrue(targetFile.canWrite());
+Assert.assertEquals("STR", Files.readAllLines(targetFile.toPath()).get(0));
+Assert.assertEquals(configFile.length(), targetFile.length());
+Assert.assertEquals(configFile.lastModified(), targetFile.lastModified());
+Assert.assertNotEquals(configFile.getAbsolutePath(), targetFile.getAbsolutePath());
+Assert.assertNotEquals(configFile.getName(), targetFile.getName());
+Assert.assertNotEquals(configFile.getParent(), targetFile.getParent());
+Assert.assertNotEquals(configFile.getParentFile(), targetFile.getParentFile());
+Assert.assertNotEquals(configFile.toURI(), targetFile.toURI());
+Assert.assertNotEquals(configFile.toURL(), targetFile.toURL());
+Assert.assertNotEquals(configFile.toPath(), targetFile.toPath());
+Assert.assertNotEquals(configFile.getCanonicalPath(), targetFile.getCanonicalPath());
+Assert.assertNotEquals(configFile.getCanonicalFile(), targetFile.getCanonicalFile());
+Assert.assertNotEquals(configFile.getAbsoluteFile(), targetFile.getAbsoluteFile());
+Assert.assertNotEquals(configFile.getAbsoluteFile().getParent(), targetFile.getAbsoluteFile().getParent());
+Assert.assertNotEquals(configFile.getAbsoluteFile().getParentFile(), targetFile.getAbsoluteFile().getParentFile());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(targetFile.exists()); ===
+1.000 - Assert.assertTrue(targetFile.exists())
+0.871 - Assert.assertTrue(targetFile.isFile())
+0.825 - Assert.assertTrue(targetFile.canRead())
+0.812 - Assert.assertTrue(targetFile.canWrite())
+0.595 - Assert.assertEquals(configFile.length(), targetFile.length())
+0.565 - Assert.assertNotEquals(configFile.toURI(), targetFile.toURI())
+0.565 - Assert.assertNotEquals(configFile.toURL(), targetFile.toURL())
+0.562 - Assert.assertNotEquals(configFile.getName(), targetFile.getName())
+0.552 - Assert.assertNotEquals(configFile.toPath(), targetFile.toPath())
+0.538 - Assert.assertNotEquals(configFile.getParent(), targetFile.getParent())
+0.521 - Assert.assertEquals(configFile.lastModified(), targetFile.lastModified())
+0.515 - Assert.assertEquals("STR", Files.readAllLines(targetFile.toPath()).get(0))
+0.495 - Assert.assertNotEquals(configFile.getAbsolutePath(), targetFile.getAbsolutePath())
+0.495 - Assert.assertNotEquals(configFile.getParentFile(), targetFile.getParentFile())
+0.486 - Assert.assertNotEquals(configFile.getCanonicalPath(), targetFile.getCanonicalPath())
+0.476 - Assert.assertNotEquals(configFile.getAbsoluteFile(), targetFile.getAbsoluteFile())
+0.467 - Assert.assertNotEquals(configFile.getCanonicalFile(), targetFile.getCanonicalFile())
+0.403 - Assert.assertNotEquals(configFile.getAbsoluteFile().getParent(), targetFile.getAbsoluteFile().getParent())
+0.380 - Assert.assertNotEquals(configFile.getAbsoluteFile().getParentFile(), targetFile.getAbsoluteFile().getParentFile())

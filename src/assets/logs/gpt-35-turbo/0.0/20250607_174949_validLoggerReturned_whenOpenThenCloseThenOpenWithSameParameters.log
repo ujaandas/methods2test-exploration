@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluent.fluent-logger-java;
+
+public class Bugfixes {
+    public void close ( ) { 
+    if ( sender != null ) { 
+    sender . flush ( ) ; 
+    sender . close ( ) ; 
+    sender = null ; 
+    } factory . purgeLogger ( this ) ; 
+    }
+}
+
+package fluent.fluent-logger-java;
+
+public class TestBugfixes {
+    @Test
+     public void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {
+         System . setProperty ( Config . FLUENT_SENDER_CLASS , "STR" ) ; 
+         FluentLogger logger = FluentLogger . getLogger ( "STR" ) ; 
+         logger . log ( "STR" , Collections . < String , Object > emptyMap ( ) ) ; 
+         logger . close ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(logger);
+2. assertTrue(logger.isOpen());
+3. assertFalse(logger.isClosed());
+4. assertEquals("STR", logger.getTag());
+5. assertEquals(0, logger.getQueueSize());
+6. assertTrue(logger.getSender() instanceof STRSender);
+7. assertEquals(0, logger.getRetryCount());
+8. assertEquals(0, logger.getRetryInterval());
+9. assertFalse(logger.isFlushing());
+10. assertFalse(logger.isTerminated());
+11. assertTrue(logger.isRunning());
+12. assertEquals(0, logger.getBufferedRecordCount());
+13. assertEquals(0, logger.getBufferedByteSize());
+14. assertEquals(0, logger.getAckedRecordCount());
+15. assertEquals(0, logger.getAckedByteSize());
+16. assertEquals(0, logger.getDroppedRecordCount());
+17. assertEquals(0, logger.getDroppedByteSize());
+18. assertEquals(0, logger.getFailedRecordCount());
+19. assertEquals(0, logger.getFailedByteSize());
+20. assertNull(logger.getLastError());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(null,logger.sender); ===
+0.693 - 8. assertEquals(0, logger.getRetryInterval())
+0.676 - 5. assertEquals(0, logger.getQueueSize())
+0.667 - 4. assertEquals("STR", logger.getTag())
+0.667 - 7. assertEquals(0, logger.getRetryCount())
+0.658 - 15. assertEquals(0, logger.getAckedByteSize())
+0.656 - 3. assertFalse(logger.isClosed())
+0.649 - 19. assertEquals(0, logger.getFailedByteSize())
+0.641 - 17. assertEquals(0, logger.getDroppedByteSize())
+0.633 - 13. assertEquals(0, logger.getBufferedByteSize())
+0.623 - 2. assertTrue(logger.isOpen())
+0.610 - 12. assertEquals(0, logger.getBufferedRecordCount())
+0.609 - 10. assertFalse(logger.isTerminated())
+0.608 - 14. assertEquals(0, logger.getAckedRecordCount())
+0.606 - 9. assertFalse(logger.isFlushing())
+0.600 - 18. assertEquals(0, logger.getFailedRecordCount())
+0.593 - 16. assertEquals(0, logger.getDroppedRecordCount())
+0.559 - 20. assertNull(logger.getLastError())
+0.554 - 11. assertTrue(logger.isRunning())
+0.530 - 6. assertTrue(logger.getSender() instanceof STRSender)
+0.471 - Assertions:
+
+1. assertNotNull(logger)

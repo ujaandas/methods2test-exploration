@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testInvalidURI ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , true ) ;\nString nonURI = \"STR\" ;\nURL testSourceUrl = new URL ( nonURI ) ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(expectedResult, normalizedUrl);\nassertNotNull(normalizedUrl);\nassertTrue(normalizedUrl instanceof String);\nassertFalse(normalizedUrl.isEmpty());\nassertEquals(nonURI, normalizedUrl);\nassertNotSame(nonURI, normalizedUrl);\nassertTrue(normalizedUrl.length() > 0);\nassertFalse(normalizedUrl.contains(\" \"));\nassertFalse(normalizedUrl.contains(\"<\"));\nassertFalse(normalizedUrl.contains(\">\"));\nassertFalse(normalizedUrl.contains(\"#\"));\nassertFalse(normalizedUrl.contains(\"%\"));\nassertFalse(normalizedUrl.contains(\"{\"));\nassertFalse(normalizedUrl.contains(\"}\"));\nassertFalse(normalizedUrl.contains(\"|\"));\nassertFalse(normalizedUrl.contains(\"\\\\\"));\nassertFalse(normalizedUrl.contains(\"^\"));\nassertFalse(normalizedUrl.contains(\"~\"));\nassertFalse(normalizedUrl.contains(\"[\"));\nassertFalse(normalizedUrl.contains(\"]\"));\n```\n====================\n\n",
+    "scores": [
+        0.857,
+        0.707,
+        0.605,
+        0.578,
+        0.571,
+        0.552,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.545,
+        0.539,
+        0.524,
+        0.494,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

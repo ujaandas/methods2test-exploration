@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtils {
+    static File getFileFromUrl ( URL url , String className ) { 
+    String extURL = url . toExternalForm ( ) ; 
+    if ( extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( 0 , extURL . lastIndexOf ( '/' ) ) ; 
+    } else { 
+    String suffix = "STR" + className . replace ( "STR" , "STR" ) + "STR" ; 
+    extURL = extURL . replace ( suffix , "STR" ) ; 
+    if ( extURL . startsWith ( "STR" ) && extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( FILE_EXTENSION_LENGTH , extURL . lastIndexOf ( '/' ) ) ; 
+    } } try { 
+    url = new URL ( extURL ) ; 
+    } catch ( MalformedURLException e ) { 
+    EmptyStatement . ignore ( e ) ; 
+    } try { 
+    return new File ( url . toURI ( ) ) ; 
+    } catch ( Exception ignored ) { 
+    return new File ( url . getPath ( ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtilsTest {
+    @Test
+     public void testGetFileFromUrl_fromJarFile ( ) throws Exception {
+         URL url = new URL ( "STR" ) ; 
+         File file = WizardUtils . getFileFromUrl ( url , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(file.exists());
+Assert.assertTrue(file.isFile());
+Assert.assertTrue(file.canRead());
+Assert.assertTrue(file.canWrite());
+Assert.assertEquals("expectedFileName", file.getName());
+Assert.assertEquals("expectedParentDirectory", file.getParent());
+Assert.assertTrue(file.getAbsolutePath().contains("expectedSubstring"));
+Assert.assertFalse(file.isHidden());
+Assert.assertFalse(file.isDirectory());
+Assert.assertEquals(expectedSize, file.length());
+Assert.assertTrue(file.getPath().endsWith("expectedSuffix"));
+Assert.assertTrue(file.getPath().startsWith("expectedPrefix"));
+Assert.assertTrue(file.getPath().contains("expectedSubstring"));
+Assert.assertTrue(file.toURI().toString().contains("expectedSubstring"));
+Assert.assertTrue(file.toURI().toString().startsWith("expectedPrefix"));
+Assert.assertTrue(file.toURI().toString().endsWith("expectedSuffix"));
+Assert.assertTrue(file.toURI().toString().equals("expectedURI"));
+Assert.assertTrue(file.toPath().toString().contains("expectedSubstring"));
+Assert.assertTrue(file.toPath().toString().startsWith("expectedPrefix"));
+Assert.assertTrue(file.toPath().toString().endsWith("expectedSuffix"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(file); ===
+0.591 - Assert.assertTrue(file.exists())
+0.591 - Assert.assertTrue(file.isFile())
+0.578 - Assert.assertTrue(file.canRead())
+0.565 - Assert.assertTrue(file.canWrite())
+0.553 - Assert.assertFalse(file.isHidden())
+0.520 - Assert.assertFalse(file.isDirectory())
+0.407 - Assert.assertEquals(expectedSize, file.length())
+0.364 - Assert.assertEquals("expectedFileName", file.getName())
+0.361 - Assert.assertTrue(file.getPath().endsWith("expectedSuffix"))
+0.351 - Assert.assertTrue(file.getPath().startsWith("expectedPrefix"))
+0.347 - Assert.assertTrue(file.getPath().contains("expectedSubstring"))
+0.342 - Assert.assertTrue(file.toURI().toString().equals("expectedURI"))
+0.321 - Assert.assertTrue(file.toURI().toString().endsWith("expectedSuffix"))
+0.320 - Assert.assertEquals("expectedParentDirectory", file.getParent())
+0.317 - Assert.assertTrue(file.toPath().toString().endsWith("expectedSuffix"))
+0.313 - Assert.assertTrue(file.getAbsolutePath().contains("expectedSubstring"))
+0.313 - Assert.assertTrue(file.toURI().toString().startsWith("expectedPrefix"))
+0.310 - Assert.assertTrue(file.toURI().toString().contains("expectedSubstring"))
+0.310 - Assert.assertTrue(file.toPath().toString().startsWith("expectedPrefix"))
+0.306 - Assert.assertTrue(file.toPath().toString().contains("expectedSubstring"))

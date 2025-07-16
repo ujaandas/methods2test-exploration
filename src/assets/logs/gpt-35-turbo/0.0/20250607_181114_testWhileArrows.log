@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     public OResultSet query ( String query , Object ... args ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( query , args ) ; 
+     }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testWhileArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+assertEquals("Expected result", qResult.next().getProperty("propertyName"));
+assertFalse(qResult.hasNext());
+assertEquals(0, qResult.stream().count());
+assertThrows(Exception.class, () -> db.query("INVALID QUERY"));
+assertNotEquals("Unexpected result", qResult.next().getProperty("propertyName"));
+assertTrue(qResult.stream().allMatch(item -> item.getProperty("propertyName").equals("expectedValue")));
+assertEquals(5, qResult.stream().filter(item -> item.getProperty("propertyName").equals("expectedValue")).count());
+assertTrue(qResult.stream().anyMatch(item -> item.getProperty("propertyName").equals("expectedValue")));
+assertEquals(10, qResult.stream().mapToInt(item -> item.getProperty("propertyName")).sum());
+assertArrayEquals(new String[]{"value1", "value2"}, qResult.stream().map(item -> item.getProperty("propertyName")).toArray());
+assertTrue(qResult.stream().noneMatch(item -> item.getProperty("propertyName").equals("unexpectedValue")));
+assertEquals("Expected result", qResult.stream().findFirst().get().getProperty("propertyName"));
+assertEquals("Expected result", qResult.stream().findAny().get().getProperty("propertyName"));
+assertEquals("Expected result", qResult.stream().max(Comparator.comparing(item -> item.getProperty("propertyName"))).get().getProperty("propertyName"));
+assertEquals("Expected result", qResult.stream().min(Comparator.comparing(item -> item.getProperty("propertyName"))).get().getProperty("propertyName"));
+assertTrue(qResult.stream().anyMatch(item -> item.getProperty("propertyName").contains("substring")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,size(qResult)); ===
+0.678 - assertFalse(qResult.hasNext())
+0.667 - assertNotNull(qResult)
+0.667 - assertEquals(0, qResult.stream().count())
+0.621 - assertTrue(qResult.hasNext())
+0.451 - assertEquals("Expected result", qResult.next().getProperty("propertyName"))
+0.430 - assertNotEquals("Unexpected result", qResult.next().getProperty("propertyName"))
+0.393 - assertEquals(10, qResult.stream().mapToInt(item -> item.getProperty("propertyName")).sum())
+0.383 - assertEquals("Expected result", qResult.stream().findAny().get().getProperty("propertyName"))
+0.377 - assertEquals("Expected result", qResult.stream().findFirst().get().getProperty("propertyName"))
+0.329 - assertEquals(5, qResult.stream().filter(item -> item.getProperty("propertyName").equals("expectedValue")).count())
+0.322 - assertArrayEquals(new String[]{"value1", "value2"}, qResult.stream().map(item -> item.getProperty("propertyName")).toArray())
+0.299 - assertThrows(Exception.class, () -> db.query("INVALID QUERY"))
+0.281 - assertTrue(qResult.stream().anyMatch(item -> item.getProperty("propertyName").contains("substring")))
+0.277 - assertTrue(qResult.stream().allMatch(item -> item.getProperty("propertyName").equals("expectedValue")))
+0.277 - assertTrue(qResult.stream().anyMatch(item -> item.getProperty("propertyName").equals("expectedValue")))
+0.271 - assertTrue(qResult.stream().noneMatch(item -> item.getProperty("propertyName").equals("unexpectedValue")))
+0.261 - assertEquals("Expected result", qResult.stream().max(Comparator.comparing(item -> item.getProperty("propertyName"))).get().getProperty("propertyName"))
+0.261 - assertEquals("Expected result", qResult.stream().min(Comparator.comparing(item -> item.getProperty("propertyName"))).get().getProperty("propertyName"))

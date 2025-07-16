@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testArrayRange2 ( ) {\nStringBuilder query = new StringBuilder ( ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nOResultSet result = db . query ( query . toString ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedSize, result.size());\nassertTrue(result.stream().allMatch(res -> res instanceof OResult));\nassertTrue(result.stream().anyMatch(res -> res.getProperty(\"key\").equals(expectedValue)));\nassertFalse(result.isEmpty());\nassertEquals(expectedValue, result.next().getProperty(\"key\"));\nassertEquals(expectedType, result.next().getType());\nassertEquals(expectedCount, result.count());\nassertTrue(result.stream().map(res -> res.getProperty(\"anotherKey\")).distinct().count() > 1);\nassertTrue(result.stream().filter(res -> res.getProperty(\"conditionKey\").equals(conditionValue)).count() > 0);\nassertNotEquals(unexpectedValue, result.next().getProperty(\"key\"));\nassertThrows(NoSuchElementException.class, () -> {\nwhile (true) {\nresult.next();\n}\n});\nassertTrue(result.stream().allMatch(res -> validateResult(res)));\nassertEquals(expectedProperty, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertTrue(result.stream().anyMatch(res -> res.getProperty(\"numericKey\") > threshold));\nassertEquals(expectedString, result.stream().map(res -> res.getProperty(\"stringKey\")).collect(Collectors.joining(\",\")));\nassertTrue(result.stream().allMatch(res -> res.getProperty(\"dateKey\").isBefore(LocalDate.now())));\nassertFalse(result.stream().anyMatch(res -> res.getProperty(\"invalidKey\") == null));\nassertDoesNotThrow(() -> {\nwhile (result.hasNext()) {\nresult.next();\n}\n});\nassertNotSame(result, otherResult);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.702,
+        0.593,
+        0.59,
+        0.588,
+        0.556,
+        0.543,
+        0.538,
+        0.526,
+        0.484,
+        0.477,
+        0.452,
+        0.452,
+        0.431,
+        0.423,
+        0.414,
+        0.4,
+        0.376,
+        0.355,
+        0.35,
+        0.292,
+        0.062,
+        0.062,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

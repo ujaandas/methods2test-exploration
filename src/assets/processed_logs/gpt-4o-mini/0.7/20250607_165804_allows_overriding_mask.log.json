@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class EnvFilter {\npublic Map < String , String > filter ( Map < String , String > env ) {\nMap < String , String > result = new HashMap < > ( ) ;\nfor ( Map . Entry < String , String > entry : env . entrySet ( ) ) {\nif ( ! maskPattern . matcher ( entry . getKey ( ) ) . matches ( ) ) result . put ( entry . getKey ( ) , entry . getValue ( ) ) ;\n} return result ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class EnvFilterTest {\n@Test\npublic void allows_overriding_mask ( ) {\nMap < String , String > env = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\n} } ;\nConfig config = createConfig ( ) ;\nnew EnvironmentVariablesConfigLoader ( env ) . load ( config ) ;\nEnvFilter envFilter = new EnvFilter ( config ) ;\nMap < String , String > expectedEnv = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\nput ( \"STR\" , \"STR\" ) ;\n} } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected value for STR\", \"STR\", expectedEnv.get(\"STR\"));\nassertTrue(\"Expected env should contain STR\", expectedEnv.containsKey(\"STR\"));\nassertFalse(\"Expected env should not contain masked key\", expectedEnv.containsKey(\"MASKED_KEY\"));\nassertEquals(\"Size of expected env should be 5\", 5, expectedEnv.size());\nassertNotNull(\"Expected env should not be null\", expectedEnv);\nassertTrue(\"Expected env should be an instance of HashMap\", expectedEnv instanceof HashMap);\nassertEquals(\"Value for STR should match\", \"STR\", expectedEnv.get(\"STR\"));\nassertEquals(\"Expected env should have unique keys\", expectedEnv.keySet().size(), expectedEnv.size());\nassertTrue(\"Expected env should have value for STR\", expectedEnv.get(\"STR\").equals(\"STR\"));\nassertFalse(\"Expected env should not contain empty entries\", expectedEnv.containsValue(\"\"));\nassertTrue(\"Expected env should include at least one key\", expectedEnv.size() > 0);\nassertTrue(\"Expected env should not be equal to another empty map\", !expectedEnv.equals(new HashMap<>()));\nassertEquals(\"Expected value for STR should match\", \"STR\", expectedEnv.get(\"STR\"));\nassertTrue(\"Expected env should not have null keys\", !expectedEnv.containsKey(null));\nassertTrue(\"Expected env should not have null values\", !expectedEnv.containsValue(null));\nassertTrue(\"Expected env should have specific keys\", expectedEnv.keySet().containsAll(Arrays.asList(\"STR\")));\nassertEquals(\"Expected env should have the same value for STR\", \"STR\", expectedEnv.get(\"STR\"));\nassertNotEquals(\"Expected env should not be equal to a different map\", expectedEnv, new HashMap<String, String>() {{ put(\"DIFFERENT_KEY\", \"VALUE\"); }});\nassertTrue(\"Expected env should be filtered correctly\", expectedEnv.get(\"STR\").equals(\"STR\"));\nassertTrue(\"Expected env should contain STR key\", expectedEnv.containsKey(\"STR\"));\nassertFalse(\"Expected env should not contain masked keys\", expectedEnv.containsKey(\"MASKED\"));\n```\n====================\n\n",
+    "scores": [
+        0.509,
+        0.509,
+        0.487,
+        0.475,
+        0.468,
+        0.452,
+        0.443,
+        0.438,
+        0.437,
+        0.412,
+        0.403,
+        0.4,
+        0.397,
+        0.393,
+        0.389,
+        0.382,
+        0.376,
+        0.375,
+        0.373,
+        0.368,
+        0.328,
+        0.04,
+        0.0
+    ],
+    "ground_truth": "assertEquals(expectedEnv,envFilter.filter(env));"
+}

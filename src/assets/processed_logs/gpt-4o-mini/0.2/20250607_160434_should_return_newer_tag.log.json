@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamService {\npublic TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) {\nDate tag1Date = extractDate ( tag1 ) ;\nDate tag2Date = extractDate ( tag2 ) ;\nif ( tag1Date == null ) {\nreturn tag2 ;\n} if ( tag2Date == null ) {\nreturn tag1 ;\n} return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ImageStreamServiceTest {\n@Test\npublic void should_return_newer_tag ( ) throws Exception {\nImageStreamService service = new ImageStreamService ( client , log ) ;\nTagEvent oldTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent latestTag = new TagEvent ( \"STR\" , null , null , null ) ;\nTagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(resultedTag);\nassertEquals(latestTag, resultedTag);\nassertEquals(\"STR\", resultedTag.getName());\nassertNull(resultedTag.getImage());\nassertNull(resultedTag.getReference());\nassertNull(resultedTag.getGeneration());\nassertTrue(resultedTag instanceof TagEvent);\nassertSame(latestTag, resultedTag);\nassertNotSame(oldTag, resultedTag);\nassertTrue(resultedTag.equals(latestTag));\nassertFalse(resultedTag.equals(oldTag));\nassertTrue(resultedTag.hashCode() == latestTag.hashCode());\nassertFalse(resultedTag.hashCode() == oldTag.hashCode());\nassertTrue(resultedTag.toString().contains(\"STR\"));\nassertTrue(resultedTag.toString().contains(\"TagEvent\"));\nassertEquals(1, service.newerTag(oldTag, latestTag).hashCode());\nassertNotEquals(oldTag.hashCode(), latestTag.hashCode());\nassertTrue(resultedTag.getName().length() > 0);\nassertTrue(resultedTag.getImage() == null);\nassertTrue(resultedTag.getReference() == null);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.882,
+        0.711,
+        0.706,
+        0.609,
+        0.609,
+        0.595,
+        0.579,
+        0.575,
+        0.568,
+        0.533,
+        0.533,
+        0.526,
+        0.506,
+        0.506,
+        0.5,
+        0.494,
+        0.471,
+        0.444,
+        0.44,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(latestTag,resultedTag);"
+}

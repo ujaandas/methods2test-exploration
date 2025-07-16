@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public List < Method > findAll ( ) { 
+    List < Method > methods = findAllDeclaredMethods ( clazz ) ; 
+    for ( Method method : methods ) { 
+    verifyPublic ( method ) ; 
+    verifyNotStatic ( method ) ; 
+    verifyReturnType ( method ) ; 
+    verifyArgs ( method ) ; 
+    method . setAccessible ( true ) ; 
+    } return methods ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testSubClass_methodFoundInSuper ( ) {
+         List < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertThat(methodList.size(), is(equalTo(1)));
+assertThat(methodList.get(0).getName(), is(equalTo("tearDown")));
+assertThat(methodList.get(0).getReturnType(), is(equalTo(void.class)));
+assertThat(methodList.get(0).getParameterCount(), is(equalTo(0)));
+assertThat(methodList.get(0).getModifiers(), is(equalTo(Modifier.PUBLIC)));
+assertThat(methodList.get(0).getModifiers(), is(not(equalTo(Modifier.STATIC)));
+assertThat(methodList.get(0).getAnnotations(), notNullValue());
+assertThat(methodList.get(0).getAnnotations().length, is(equalTo(1)));
+assertThat(methodList.get(0).getAnnotations()[0], instanceOf(Teardown.class));
+assertThat(methodList.get(0).isAccessible(), is(true));
+assertThat(methodList.get(0).getDeclaringClass(), is(equalTo(Superclass.class)));
+assertThat(methodList.get(0).getExceptionTypes(), empty());
+assertThat(methodList.get(0).getParameterTypes(), emptyArray());
+assertThat(methodList.get(0).getGenericReturnType(), is(equalTo(void.class)));
+assertThat(methodList.get(0).getGenericParameterTypes(), emptyArray());
+assertThat(methodList.get(0).getTypeParameters(), emptyArray());
+assertThat(methodList.get(0).toGenericString(), is(equalTo("void Superclass.tearDown()")));
+assertThat(methodList.get(0).toString(), is(equalTo("void Superclass.tearDown()")));
+assertThat(methodList.get(0).hashCode(), is(not(equalTo(0)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,methodList.size()); ===
+0.675 - assertThat(methodList.size(), is(equalTo(1)))
+0.581 - assertThat(methodList.get(0).isAccessible(), is(true))
+0.533 - assertThat(methodList.get(0).getExceptionTypes(), empty())
+0.522 - assertThat(methodList.get(0).hashCode(), is(not(equalTo(0)))
+0.511 - assertThat(methodList.get(0).getAnnotations(), notNullValue())
+0.505 - assertThat(methodList.get(0).getParameterTypes(), emptyArray())
+0.505 - assertThat(methodList.get(0).getTypeParameters(), emptyArray())
+0.479 - assertThat(methodList.get(0).getName(), is(equalTo("tearDown")))
+0.474 - assertThat(methodList.get(0).getParameterCount(), is(equalTo(0)))
+0.471 - assertThat(methodList.get(0).getGenericParameterTypes(), emptyArray())
+0.455 - assertThat(methodList.get(0).getAnnotations().length, is(equalTo(1)))
+0.451 - assertThat(methodList.get(0).getReturnType(), is(equalTo(void.class)))
+0.440 - assertThat(methodList.get(0).getGenericReturnType(), is(equalTo(void.class)))
+0.434 - assertThat(methodList.get(0).getModifiers(), is(equalTo(Modifier.PUBLIC)))
+0.422 - assertThat(methodList.get(0).getAnnotations()[0], instanceOf(Teardown.class))
+0.418 - assertThat(methodList.get(0).getModifiers(), is(not(equalTo(Modifier.STATIC)))
+0.411 - assertThat(methodList.get(0).getDeclaringClass(), is(equalTo(Superclass.class)))
+0.404 - assertThat(methodList.get(0).toString(), is(equalTo("void Superclass.tearDown()")))
+0.380 - assertThat(methodList.get(0).toGenericString(), is(equalTo("void Superclass.tearDown()")))

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Circle {
+    @Override
+     public Properties getEnvironment ( ) { 
+     Properties environment = new Properties ( ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BUILD_NUMBER ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_BRANCH ) ) ; 
+     addProperty ( environment , "STR" , getProperty ( CIRCLE_COMMIT ) ) ; 
+     return environment ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class CircleTest {
+    @Test
+     public void testGetEnvironment ( ) {
+         Properties properties = new Circle ( env ( ) ) . getEnvironment ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(properties);
+assertTrue(properties.containsKey("STR"));
+assertEquals("expected_build_number", properties.getProperty("STR"));
+assertEquals("expected_branch", properties.getProperty("STR"));
+assertEquals("expected_commit", properties.getProperty("STR"));
+assertEquals(3, properties.size());
+assertTrue(properties.getProperty("STR").matches("expected_pattern"));
+assertFalse(properties.getProperty("STR").isEmpty());
+assertEquals("expected_build_number", properties.getProperty(CIRCLE_BUILD_NUMBER));
+assertEquals("expected_branch", properties.getProperty(CIRCLE_BRANCH));
+assertEquals("expected_commit", properties.getProperty(CIRCLE_COMMIT));
+assertTrue(properties.getProperty(CIRCLE_BUILD_NUMBER).length() > 0);
+assertTrue(properties.getProperty(CIRCLE_BRANCH).length() > 0);
+assertTrue(properties.getProperty(CIRCLE_COMMIT).length() > 0);
+assertNotEquals("unexpected_value", properties.getProperty("STR"));
+assertTrue(properties.getProperty("STR").contains("expected_substring"));
+assertFalse(properties.getProperty("STR").contains("unexpected_substring"));
+assertTrue(properties.keySet().containsAll(Set.of(CIRCLE_BUILD_NUMBER, CIRCLE_BRANCH, CIRCLE_COMMIT)));
+assertTrue(properties.values().stream().allMatch(value -> value instanceof String));
+assertEquals("expected_value", properties.getProperty("STR", "default_value"));
+assertNotEquals("default_value", properties.getProperty("STR"));
+assertThrows(NullPointerException.class, () -> properties.getProperty(null));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,properties.size()); ===
+1.000 - assertEquals(3, properties.size())
+0.649 - assertTrue(properties.containsKey("STR"))
+0.617 - assertEquals("expected_branch", properties.getProperty("STR"))
+0.617 - assertEquals("expected_commit", properties.getProperty("STR"))
+0.611 - assertNotEquals("default_value", properties.getProperty("STR"))
+0.606 - ```java
+assertNotNull(properties)
+0.592 - assertNotEquals("unexpected_value", properties.getProperty("STR"))
+0.588 - assertFalse(properties.getProperty("STR").isEmpty())
+0.580 - assertEquals("expected_build_number", properties.getProperty("STR"))
+0.569 - assertEquals("expected_branch", properties.getProperty(CIRCLE_BRANCH))
+0.569 - assertEquals("expected_commit", properties.getProperty(CIRCLE_COMMIT))
+0.532 - assertEquals("expected_value", properties.getProperty("STR", "default_value"))
+0.509 - assertEquals("expected_build_number", properties.getProperty(CIRCLE_BUILD_NUMBER))
+0.495 - assertTrue(properties.getProperty(CIRCLE_BRANCH).length() > 0)
+0.495 - assertTrue(properties.getProperty(CIRCLE_COMMIT).length() > 0)
+0.465 - assertTrue(properties.getProperty(CIRCLE_BUILD_NUMBER).length() > 0)
+0.463 - assertFalse(properties.getProperty("STR").contains("unexpected_substring"))
+0.453 - assertThrows(NullPointerException.class, () -> properties.getProperty(null))
+0.451 - assertTrue(properties.getProperty("STR").matches("expected_pattern"))
+0.438 - assertTrue(properties.getProperty("STR").contains("expected_substring"))
+0.411 - assertTrue(properties.values().stream().allMatch(value -> value instanceof String))
+0.346 - assertTrue(properties.keySet().containsAll(Set.of(CIRCLE_BUILD_NUMBER, CIRCLE_BRANCH, CIRCLE_COMMIT)))
+0.000 - ```

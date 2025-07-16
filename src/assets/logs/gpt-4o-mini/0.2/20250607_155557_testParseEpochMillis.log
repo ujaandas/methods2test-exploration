@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParser {
+    public Date parse ( final String timestamp ) throws ProcessingException { 
+    if ( StringUtils . isBlank ( timestamp ) ) { 
+    return null ; 
+    } try { 
+    return parser . parse ( timestamp ) ; 
+    } catch ( Exception ex ) { 
+    throw new ProcessingException ( "STR" + timestamp + "STR" , ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParserTest {
+    @Test
+     public void testParseEpochMillis ( ) throws Exception {
+         String format = TimestampParser . EPOCH_MILLIS ; 
+         long time = System . currentTimeMillis ( ) ; 
+         Date parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(parsed);
+assertTrue(parsed instanceof Date);
+assertEquals(time, parsed.getTime());
+assertTrue(parsed.after(new Date(0))); // Ensure it's after epoch
+assertTrue(parsed.before(new Date(Long.MAX_VALUE))); // Ensure it's before max date
+assertEquals(new TimestampParser().parse(String.valueOf(time)).getTime(), parsed.getTime());
+assertNotEquals(new TimestampParser().parse(String.valueOf(time - 1000)).getTime(), parsed.getTime());
+assertEquals(new TimestampParser().parse(String.valueOf(time + 1000)).getTime(), parsed.getTime() + 1000);
+assertTrue(parsed.toString().contains("GMT")); // Check for timezone
+assertTrue(parsed.toString().length() > 0); // Ensure string representation is not empty
+assertEquals(1, new TimestampParser().parse(String.valueOf(time)).compareTo(parsed));
+assertEquals(0, new TimestampParser().parse(String.valueOf(time)).compareTo(new Date(parsed.getTime())));
+assertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time - 1)));
+assertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time + 1)));
+assertTrue(parsed.getTime() % 1000 == 0); // Ensure milliseconds are correct
+assertTrue(parsed.getTime() >= 0); // Ensure time is non-negative
+assertEquals("GMT", TimeZone.getDefault().getID()); // Check default timezone
+assertTrue(parsed.getTime() <= System.currentTimeMillis()); // Ensure parsed time is not in the future
+assertTrue(parsed.getTime() >= System.currentTimeMillis() - 1000); // Ensure parsed time is within the last second
+assertNotNull(new TimestampParser().parse(String.valueOf(time)).toInstant());
+assertEquals(parsed.getTime(), new TimestampParser().parse(String.valueOf(time)).getTime());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(time,parsed.getTime()); ===
+1.000 - assertEquals(time, parsed.getTime())
+0.704 - assertTrue(parsed.getTime() % 1000 == 0)
+0.592 - assertTrue(parsed.after(new Date(0)))
+0.537 - assertTrue(parsed instanceof Date)
+0.530 - assertNotEquals(new TimestampParser().parse(String.valueOf(time - 1000)).getTime(), parsed.getTime())
+0.522 - assertEquals(new TimestampParser().parse(String.valueOf(time + 1000)).getTime(), parsed.getTime() + 1000)
+0.515 - // Ensure milliseconds are correct
+assertTrue(parsed.getTime() >= 0)
+0.500 - ```java
+assertNotNull(parsed)
+0.500 - assertEquals(0, new TimestampParser().parse(String.valueOf(time)).compareTo(new Date(parsed.getTime())))
+0.495 - assertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time - 1)))
+0.495 - assertNotEquals(parsed, new TimestampParser().parse(String.valueOf(time + 1)))
+0.484 - assertEquals(parsed.getTime(), new TimestampParser().parse(String.valueOf(time)).getTime())
+0.475 - assertTrue(parsed.toString().contains("GMT"))
+0.467 - // Ensure it's before max date
+assertEquals(new TimestampParser().parse(String.valueOf(time)).getTime(), parsed.getTime())
+0.450 - // Ensure time is non-negative
+assertEquals("GMT", TimeZone.getDefault().getID())
+0.439 - // Check default timezone
+assertTrue(parsed.getTime() <= System.currentTimeMillis())
+0.404 - // Check for timezone
+assertTrue(parsed.toString().length() > 0)
+0.382 - // Ensure parsed time is not in the future
+assertTrue(parsed.getTime() >= System.currentTimeMillis() - 1000)
+0.370 - // Ensure it's after epoch
+assertTrue(parsed.before(new Date(Long.MAX_VALUE)))
+0.321 - // Ensure string representation is not empty
+assertEquals(1, new TimestampParser().parse(String.valueOf(time)).compareTo(parsed))
+0.253 - // Ensure parsed time is within the last second
+assertNotNull(new TimestampParser().parse(String.valueOf(time)).toInstant())
+0.000 - ```

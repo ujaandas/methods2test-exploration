@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class AbstractServiceSetup {\nprotected final String getProperty ( final String name ) {\nreturn env . get ( name ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class AbstractServiceSetupTest {\n@Test\npublic void testGetProperty ( ) {\nMap < String , String > env = new HashMap < String , String > ( ) ;\nenv . put ( \"STR\" , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAbstractServiceSetup serviceSetup = new AbstractServiceSetup() {\n@Override\nprotected String getProperty(String name) {\nreturn env.get(name);\n}\n};\n\nassertEquals(\"STR\", serviceSetup.getProperty(\"STR\"));\nassertNull(serviceSetup.getProperty(\"NON_EXISTENT\"));\nassertEquals(\"VALUE1\", serviceSetup.getProperty(\"KEY1\"));\nassertEquals(\"VALUE2\", serviceSetup.getProperty(\"KEY2\"));\nassertNull(serviceSetup.getProperty(\"EMPTY_KEY\"));\nassertEquals(\"TEST_VALUE\", serviceSetup.getProperty(\"TEST_KEY\"));\nassertEquals(\"123\", serviceSetup.getProperty(\"NUMERIC_KEY\"));\nassertEquals(\"true\", serviceSetup.getProperty(\"BOOLEAN_KEY\"));\nassertEquals(\"false\", serviceSetup.getProperty(\"ANOTHER_BOOLEAN_KEY\"));\nassertEquals(\"DEFAULT\", serviceSetup.getProperty(\"DEFAULT_KEY\"));\nassertEquals(\"SOME_VALUE\", serviceSetup.getProperty(\"SOME_KEY\"));\nassertEquals(\"ANOTHER_VALUE\", serviceSetup.getProperty(\"ANOTHER_KEY\"));\nassertNull(serviceSetup.getProperty(\"UNDEFINED_KEY\"));\nassertEquals(\"STRING_VALUE\", serviceSetup.getProperty(\"STRING_KEY\"));\nassertEquals(\"CONFIG_VALUE\", serviceSetup.getProperty(\"CONFIG_KEY\"));\nassertEquals(\"ENV_VALUE\", serviceSetup.getProperty(\"ENV_KEY\"));\nassertEquals(\"PATH_VALUE\", serviceSetup.getProperty(\"PATH_KEY\"));\nassertEquals(\"USER_VALUE\", serviceSetup.getProperty(\"USER_KEY\"));\nassertEquals(\"HOST_VALUE\", serviceSetup.getProperty(\"HOST_KEY\"));\nassertEquals(\"PORT_VALUE\", serviceSetup.getProperty(\"PORT_KEY\"));\nassertEquals(\"API_KEY_VALUE\", serviceSetup.getProperty(\"API_KEY\"));\n```\n====================\n\n",
+    "scores": [
+        0.832,
+        0.718,
+        0.708,
+        0.708,
+        0.708,
+        0.686,
+        0.686,
+        0.679,
+        0.673,
+        0.673,
+        0.673,
+        0.673,
+        0.672,
+        0.655,
+        0.649,
+        0.639,
+        0.626,
+        0.615,
+        0.608,
+        0.606,
+        0.563,
+        0.321,
+        0.0,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",create(env).getProperty(\"STR\"));"
+}

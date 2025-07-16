@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupport {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupportTest {
+    @Test
+     public void testQueryEmbeddedMap ( ) {
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . setProperty ( "STR" , "STR" ) ; 
+         ODocument emb = new ODocument ( ) ; 
+         emb . setProperty ( "STR" , "STR" ) ; 
+         Map < String , ODocument > map = new HashMap < > ( ) ; 
+         map . put ( "STR" , emb ) ; 
+         doc . setProperty ( "STR" , map , OType . EMBEDDEDMAP ) ; 
+         session . save ( doc ) ; 
+         OResultSet res = session . query ( "STR" ) ; 
+         OResult item = res . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(item);
+assertTrue(item instanceof ODocument);
+assertEquals("STR", item.getProperty("STR"));
+assertTrue(item.getProperty("STR") instanceof Map);
+Map<String, ODocument> retrievedMap = (Map<String, ODocument>) item.getProperty("STR");
+assertEquals(1, retrievedMap.size());
+assertTrue(retrievedMap.containsKey("STR"));
+assertNotNull(retrievedMap.get("STR"));
+assertEquals("STR", retrievedMap.get("STR").getProperty("STR"));
+assertTrue(retrievedMap.get("STR") instanceof ODocument);
+assertEquals("STR", retrievedMap.get("STR").getProperty("STR"));
+assertEquals("STR", doc.getProperty("STR"));
+assertEquals(1, doc.getProperty("STR").size());
+assertTrue(doc.getProperty("STR") instanceof Map);
+assertTrue(doc.getProperty("STR").containsKey("STR"));
+assertNotNull(doc.getProperty("STR").get("STR"));
+assertEquals("STR", ((ODocument) doc.getProperty("STR").get("STR")).getProperty("STR"));
+assertEquals("STR", emb.getProperty("STR"));
+assertEquals(1, emb.getProperty("STR").size());
+assertTrue(emb.getProperty("STR") instanceof String);
+assertEquals("STR", emb.getProperty("STR"));
+assertNotNull(session);
+assertTrue(res.hasNext());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(item.getProperty("STR")); ===
+0.815 - assertEquals("STR", item.getProperty("STR"))
+0.791 - assertNotNull(doc.getProperty("STR").get("STR"))
+0.775 - assertEquals("STR", emb.getProperty("STR"))
+0.775 - assertEquals("STR", emb.getProperty("STR"))
+0.747 - assertEquals(1, emb.getProperty("STR").size())
+0.744 - assertTrue(item.getProperty("STR") instanceof Map)
+0.737 - assertNotNull(retrievedMap.get("STR"))
+0.682 - assertTrue(emb.getProperty("STR") instanceof String)
+0.675 - assertEquals("STR", doc.getProperty("STR"))
+0.651 - assertEquals(1, doc.getProperty("STR").size())
+0.635 - assertTrue(doc.getProperty("STR") instanceof Map)
+0.593 - assertTrue(doc.getProperty("STR").containsKey("STR"))
+0.585 - ```java
+assertNotNull(item)
+0.567 - assertNotNull(session)
+0.560 - assertEquals("STR", retrievedMap.get("STR").getProperty("STR"))
+0.560 - assertEquals("STR", retrievedMap.get("STR").getProperty("STR"))
+0.543 - assertTrue(retrievedMap.containsKey("STR"))
+0.492 - Map<String, ODocument> retrievedMap = (Map<String, ODocument>) item.getProperty("STR")
+0.488 - assertEquals("STR", ((ODocument) doc.getProperty("STR").get("STR")).getProperty("STR"))
+0.466 - assertEquals(1, retrievedMap.size())
+0.457 - assertTrue(retrievedMap.get("STR") instanceof ODocument)
+0.411 - assertTrue(item instanceof ODocument)
+0.349 - assertTrue(res.hasNext())
+0.000 - ```

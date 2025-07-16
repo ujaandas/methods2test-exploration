@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class GlobalSwitch {
+    @Override
+    @Deprecated
+     public boolean isConnectionMonitorSwitchOn ( ) { 
+     return option ( BoltClientOption . CONN_MONITOR_SWITCH ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class GlobalSwitchTest {
+    @Test
+     public void testSystemSettings_takesEffect_before_defaultvalue ( ) {
+         System . setProperty ( Configs . CONN_RECONNECT_SWITCH , "STR" ) ; 
+         System . setProperty ( Configs . CONN_MONITOR_SWITCH , "STR" ) ; 
+         client1 = new RpcClient ( ) ; 
+         client2 = new RpcClient ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertTrue(client1.isConnectionMonitorSwitchOn());
+Assert.assertTrue(client2.isConnectionMonitorSwitchOn());
+Assert.assertEquals("Expected value for client1", expectedValue1, client1.getSomeSetting());
+Assert.assertEquals("Expected value for client2", expectedValue2, client2.getSomeSetting());
+Assert.assertFalse(client1.isSomeOtherSwitchOn());
+Assert.assertFalse(client2.isSomeOtherSwitchOn());
+Assert.assertNotNull(client1.getConnection());
+Assert.assertNotNull(client2.getConnection());
+Assert.assertTrue(client1.isReconnectSwitchOn());
+Assert.assertTrue(client2.isReconnectSwitchOn());
+Assert.assertEquals("Expected state for client1", expectedState1, client1.getState());
+Assert.assertEquals("Expected state for client2", expectedState2, client2.getState());
+Assert.assertTrue(client1.isFeatureEnabled());
+Assert.assertTrue(client2.isFeatureEnabled());
+Assert.assertEquals("Expected timeout for client1", expectedTimeout1, client1.getTimeout());
+Assert.assertEquals("Expected timeout for client2", expectedTimeout2, client2.getTimeout());
+Assert.assertTrue(client1.isConnectionActive());
+Assert.assertTrue(client2.isConnectionActive());
+Assert.assertNotEquals(client1.getId(), client2.getId());
+Assert.assertTrue(client1.hasValidConfiguration());
+Assert.assertTrue(client2.hasValidConfiguration());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(client1.isConnectionMonitorSwitchOn()); ===
+0.980 - Assert.assertTrue(client2.isConnectionMonitorSwitchOn())
+0.925 - ```java
+Assert.assertTrue(client1.isConnectionMonitorSwitchOn())
+0.844 - Assert.assertTrue(client1.isReconnectSwitchOn())
+0.822 - Assert.assertTrue(client2.isReconnectSwitchOn())
+0.787 - Assert.assertTrue(client1.isConnectionActive())
+0.764 - Assert.assertTrue(client2.isConnectionActive())
+0.725 - Assert.assertFalse(client1.isSomeOtherSwitchOn())
+0.703 - Assert.assertFalse(client2.isSomeOtherSwitchOn())
+0.667 - Assert.assertNotNull(client1.getConnection())
+0.652 - Assert.assertTrue(client1.hasValidConfiguration())
+0.644 - Assert.assertNotNull(client2.getConnection())
+0.630 - Assert.assertTrue(client2.hasValidConfiguration())
+0.598 - Assert.assertTrue(client1.isFeatureEnabled())
+0.575 - Assert.assertTrue(client2.isFeatureEnabled())
+0.474 - Assert.assertNotEquals(client1.getId(), client2.getId())
+0.393 - Assert.assertEquals("Expected state for client2", expectedState2, client2.getState())
+0.377 - Assert.assertEquals("Expected state for client1", expectedState1, client1.getState())
+0.375 - Assert.assertEquals("Expected value for client1", expectedValue1, client1.getSomeSetting())
+0.375 - Assert.assertEquals("Expected timeout for client2", expectedTimeout2, client2.getTimeout())
+0.359 - Assert.assertEquals("Expected value for client2", expectedValue2, client2.getSomeSetting())
+0.344 - Assert.assertEquals("Expected timeout for client1", expectedTimeout1, client1.getTimeout())
+0.000 - ```

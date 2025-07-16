@@ -1,0 +1,125 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AThreadPool {
+    static int prime ( int number , Set < Integer > exceptions ) { 
+    int numPrevPrimes = 0 ; 
+    for ( int candidate = 1 ; 
+    candidate < Integer . MAX_VALUE ; 
+    candidate ++ ) { 
+    if ( isPrime ( candidate ) && ! exceptions . contains ( candidate ) ) { 
+    if ( numPrevPrimes >= number ) { 
+    return candidate ; 
+    } numPrevPrimes += 1 ; 
+    } } return 1 ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AThreadPoolTest {
+    @Test
+     public void testPrime ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.HashSet;
+import java.util.Set;
+
+public class AThreadPoolTest {
+    @Test
+    public void testPrime() {
+        Set<Integer> exceptions = new HashSet<>();
+        
+        assertEquals(2, AThreadPool.prime(0, exceptions));
+        assertEquals(3, AThreadPool.prime(1, exceptions));
+        assertEquals(5, AThreadPool.prime(2, exceptions));
+        assertEquals(7, AThreadPool.prime(3, exceptions));
+        assertEquals(11, AThreadPool.prime(4, exceptions));
+        assertEquals(13, AThreadPool.prime(5, exceptions));
+        assertEquals(17, AThreadPool.prime(6, exceptions));
+        assertEquals(19, AThreadPool.prime(7, exceptions));
+        assertEquals(23, AThreadPool.prime(8, exceptions));
+        assertEquals(29, AThreadPool.prime(9, exceptions));
+        assertEquals(31, AThreadPool.prime(10, exceptions));
+        
+        exceptions.add(2);
+        assertEquals(3, AThreadPool.prime(0, exceptions));
+        
+        exceptions.add(3);
+        assertEquals(5, AThreadPool.prime(1, exceptions));
+        
+        exceptions.add(5);
+        assertEquals(7, AThreadPool.prime(2, exceptions));
+        
+        exceptions.add(7);
+        assertEquals(11, AThreadPool.prime(3, exceptions));
+
+        exceptions.clear(); // Reset exceptions
+        exceptions.add(11);
+        assertEquals(13, AThreadPool.prime(4, exceptions));
+        
+        exceptions.add(13);
+        assertEquals(17, AThreadPool.prime(5, exceptions));
+        
+        exceptions.add(17);
+        assertEquals(19, AThreadPool.prime(6, exceptions));
+        
+        assertEquals(23, AThreadPool.prime(7, exceptions));
+    }
+}
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,AThreadPoolImpl.prime(0,Collections.emptySet())); ===
+0.786 - assertEquals(31, AThreadPool.prime(10, exceptions))
+0.782 - assertEquals(2, AThreadPool.prime(0, exceptions))
+0.782 - assertEquals(3, AThreadPool.prime(0, exceptions))
+0.775 - assertEquals(11, AThreadPool.prime(4, exceptions))
+0.775 - assertEquals(13, AThreadPool.prime(5, exceptions))
+0.775 - assertEquals(17, AThreadPool.prime(6, exceptions))
+0.775 - assertEquals(19, AThreadPool.prime(7, exceptions))
+0.775 - assertEquals(11, AThreadPool.prime(3, exceptions))
+0.775 - assertEquals(13, AThreadPool.prime(4, exceptions))
+0.775 - assertEquals(17, AThreadPool.prime(5, exceptions))
+0.775 - assertEquals(19, AThreadPool.prime(6, exceptions))
+0.764 - assertEquals(3, AThreadPool.prime(1, exceptions))
+0.764 - assertEquals(5, AThreadPool.prime(2, exceptions))
+0.764 - assertEquals(7, AThreadPool.prime(3, exceptions))
+0.764 - assertEquals(5, AThreadPool.prime(1, exceptions))
+0.764 - assertEquals(7, AThreadPool.prime(2, exceptions))
+0.757 - assertEquals(23, AThreadPool.prime(8, exceptions))
+0.757 - assertEquals(29, AThreadPool.prime(9, exceptions))
+0.757 - assertEquals(23, AThreadPool.prime(7, exceptions))
+0.433 - public class AThreadPoolTest {
+    @Test
+    public void testPrime() {
+        Set<Integer> exceptions = new HashSet<>()
+0.296 - exceptions.clear()
+0.283 - // Reset exceptions
+        exceptions.add(11)
+0.275 - exceptions.add(2)
+0.275 - exceptions.add(3)
+0.275 - exceptions.add(5)
+0.275 - exceptions.add(7)
+0.272 - exceptions.add(13)
+0.272 - exceptions.add(17)
+0.195 - import java.util.Set
+0.186 - import static org.junit.Assert.*
+0.140 - import java.util.HashSet
+0.132 - ```java
+import org.junit.Test
+0.000 - }
+}
+```

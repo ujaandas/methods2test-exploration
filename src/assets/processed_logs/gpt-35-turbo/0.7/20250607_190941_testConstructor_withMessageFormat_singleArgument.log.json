@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( String message , Object ... args ) {\nsuper ( format ( message , args ) ) ;\nObject lastArg = args [ args . length - 1 ] ;\nif ( lastArg instanceof Throwable ) {\ninitCause ( ( Throwable ) lastArg ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withMessageFormat_singleArgument ( ) {\nTestException exception = new TestException ( \"STR\" , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "\nassertEquals(\"STR\", exception.getMessage());\nassertTrue(exception.getCause() == null);\nassertFalse(exception.getMessage().isEmpty());\nassertTrue(exception.getMessage().contains(\"STR\"));\nassertFalse(exception.getMessage().contains(\"foo\"));\nassertTrue(exception.getMessage().startsWith(\"S\"));\nassertTrue(exception.getMessage().endsWith(\"R\"));\nassertEquals(1, exception.getCause());\nassertNotNull(exception.getMessage());\nassertNotEquals(\"foo\", exception.getMessage());\nassertTrue(exception.getMessage().length() > 0);\nassertTrue(exception.getMessage().matches(\"[A-Z]+\"));\nassertFalse(exception.getMessage().matches(\"[0-9]+\"));\nassertTrue(exception.getMessage().equalsIgnoreCase(\"str\"));\nassertFalse(exception.getMessage().equalsIgnoreCase(\"STR\"));\nassertTrue(exception.getMessage().toLowerCase().contains(\"str\"));\nassertFalse(exception.getMessage().toUpperCase().contains(\"str\"));\nassertTrue(exception.getMessage().indexOf(\"T\") == 2);\nassertFalse(exception.getMessage().indexOf(\"S\") == 1);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.897,
+        0.821,
+        0.81,
+        0.759,
+        0.713,
+        0.71,
+        0.71,
+        0.695,
+        0.689,
+        0.674,
+        0.674,
+        0.674,
+        0.66,
+        0.653,
+        0.65,
+        0.62,
+        0.617,
+        0.585
+    ],
+    "ground_truth": "assertEquals(\"STR\",exception.getMessage());"
+}

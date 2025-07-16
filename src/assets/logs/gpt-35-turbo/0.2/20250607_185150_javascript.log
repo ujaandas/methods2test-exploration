@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutor {
+    public void execute ( final ExecuteScriptOperation operation , final Promise promise ) { 
+    if ( operation . isFireAndForget ( ) ) { 
+    promise . answer ( "STR" ) ; 
+    } String fullCommand = operation . getCommand ( ) ; 
+    int indexColon = fullCommand . indexOf ( "STR" ) ; 
+    String extension = fullCommand . substring ( 0 , indexColon ) ; 
+    final String command = fullCommand . substring ( indexColon + 1 ) ; 
+    final Callable < String > task ; 
+    if ( extension . equals ( "STR" ) ) { 
+    task = newBashScriptCallable ( command ) ; 
+    } else { 
+    task = newGenericScriptCallable ( extension , command ) ; 
+    } new Thread ( ( ) -> { 
+    try { 
+    String result = task . call ( ) ; 
+    promise . answer ( result ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + command , e ) ; 
+    promise . answer ( e ) ; 
+    } } ) . start ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutorTest {
+    @Test
+     public void javascript ( ) {
+         ExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( "STR" , false ) ; 
+         StubPromise promise = new StubPromise ( ) ; 
+         scriptExecutor . execute ( scriptOperation , promise ) ; 
+         promise . assertCompletesEventually ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", promise.getResult());
+assertFalse(promise.isCancelled());
+assertTrue(promise.isDone());
+assertNotNull(promise.getResult());
+assertNotNull(promise.getException());
+assertEquals("STR", promise.getException().getMessage());
+assertTrue(promise.getException() instanceof Exception);
+assertTrue(promise.getDuration() > 0);
+assertTrue(promise.getStartTime() > 0);
+assertTrue(promise.getEndTime() > 0);
+assertEquals("STR", promise.getCommand());
+assertTrue(promise.getCommand().contains("STR"));
+assertTrue(promise.getCommand().startsWith("STR"));
+assertTrue(promise.getCommand().endsWith("STR"));
+assertTrue(promise.getCommand().length() > 0);
+assertTrue(promise.getCommand().indexOf("STR") >= 0);
+assertFalse(promise.isTimedOut());
+assertFalse(promise.isFailed());
+assertTrue(promise.isSucceeded());
+assertEquals("STR", promise.getExtension());
+assertTrue(promise.getExtension().equals("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(promise.getAnswer()instanceofString); ===
+0.780 - assertTrue(promise.getException() instanceof Exception)
+0.667 - assertTrue(promise.getEndTime() > 0)
+0.644 - assertTrue(promise.getCommand().length() > 0)
+0.639 - assertTrue(promise.getCommand().indexOf("STR") >= 0)
+0.634 - assertTrue(promise.getDuration() > 0)
+0.632 - assertTrue(promise.getCommand().contains("STR"))
+0.627 - assertTrue(promise.getStartTime() > 0)
+0.619 - assertTrue(promise.getCommand().startsWith("STR"))
+0.613 - assertTrue(promise.isDone())
+0.611 - assertTrue(promise.getCommand().endsWith("STR"))
+0.611 - assertTrue(promise.getExtension().equals("STR"))
+0.600 - assertTrue(promise.isSucceeded())
+0.568 - assertNotNull(promise.getResult())
+0.548 - assertNotNull(promise.getException())
+0.543 - assertFalse(promise.isCancelled())
+0.525 - assertFalse(promise.isTimedOut())
+0.517 - assertEquals("STR", promise.getExtension())
+0.513 - assertFalse(promise.isFailed())
+0.512 - assertEquals("STR", promise.getResult())
+0.506 - assertEquals("STR", promise.getCommand())
+0.490 - assertEquals("STR", promise.getException().getMessage())

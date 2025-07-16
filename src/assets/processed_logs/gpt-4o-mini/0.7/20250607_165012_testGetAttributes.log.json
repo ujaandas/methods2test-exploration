@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtil {\npublic static Map < String , Method > getAttributes ( Object mbeanLocation ) {\nMap < String , Method > result = new TreeMap < String , Method > ( ) ;\nMethod [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ;\nfor ( Method oneMethod : methods ) {\nMBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ;\nif ( attribute != null ) {\nresult . put ( attribute . name ( ) , oneMethod ) ;\n} } return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class MBeanAnnotationUtilTest {\n@Test\npublic void testGetAttributes ( ) throws Exception {\nMap < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(atts);\nassertFalse(atts.isEmpty());\nassertTrue(atts.containsKey(\"attribute1\"));\nassertTrue(atts.containsKey(\"attribute2\"));\nassertEquals(Method.class, atts.get(\"attribute1\").getClass());\nassertEquals(\"expectedReturnType1\", atts.get(\"attribute1\").getReturnType().getName());\nassertEquals(\"expectedReturnType2\", atts.get(\"attribute2\").getReturnType().getName());\nassertTrue(atts.get(\"attribute1\").isAnnotationPresent(MBeanAttribute.class));\nassertTrue(atts.get(\"attribute2\").isAnnotationPresent(MBeanAttribute.class));\nassertEquals(\"attribute1\", atts.get(\"attribute1\").getAnnotation(MBeanAttribute.class).name());\nassertEquals(\"attribute2\", atts.get(\"attribute2\").getAnnotation(MBeanAttribute.class).name());\nassertEquals(0, atts.get(\"attribute1\").getParameterCount());\nassertEquals(0, atts.get(\"attribute2\").getParameterCount());\nassertTrue(atts.get(\"attribute1\").getModifiers() & Modifier.PUBLIC != 0);\nassertTrue(atts.get(\"attribute2\").getModifiers() & Modifier.PUBLIC != 0);\nassertNotEquals(atts.get(\"attribute1\"), atts.get(\"attribute2\"));\nassertEquals(2, atts.size());\nassertNotNull(atts.get(\"attribute1\").getDeclaringClass());\nassertNotNull(atts.get(\"attribute2\").getDeclaringClass());\nassertTrue(atts.get(\"attribute1\").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()));\nassertTrue(atts.get(\"attribute2\").getDeclaringClass().isAssignableFrom(testAnnotation1.getClass()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.704,
+        0.565,
+        0.565,
+        0.529,
+        0.522,
+        0.522,
+        0.519,
+        0.517,
+        0.45,
+        0.432,
+        0.429,
+        0.429,
+        0.42,
+        0.403,
+        0.369,
+        0.369,
+        0.358,
+        0.358,
+        0.302,
+        0.302,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,atts.size());"
+}

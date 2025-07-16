@@ -1,0 +1,101 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilter {
+    @Override
+     public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) { 
+     if ( sourceUrl == null || ( ! ignoreOutsideHost && ! ignoreOutsideDomain ) ) { 
+     return urlToFilter ; 
+     } URL tURL ; 
+     try { 
+     tURL = new URL ( urlToFilter ) ; 
+     } catch ( MalformedURLException e1 ) { 
+     return null ; 
+     } String fromHost ; 
+     String fromDomain = null ; 
+     if ( sourceUrl == previousSourceUrl ) { 
+     fromHost = previousSourceHost ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = previousSourceDomain ; 
+     } } else { 
+     fromHost = sourceUrl . getHost ( ) ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = PaidLevelDomain . getPLD ( fromHost ) ; 
+     } previousSourceHost = fromHost ; 
+     previousSourceDomain = fromDomain ; 
+     previousSourceUrl = sourceUrl ; 
+     } String toHost = tURL . getHost ( ) ; 
+     if ( ignoreOutsideHost ) { 
+     if ( toHost == null || ! toHost . equalsIgnoreCase ( fromHost ) ) { 
+     return null ; 
+     } } if ( ignoreOutsideDomain ) { 
+     String toDomain = PaidLevelDomain . getPLD ( toHost ) ; 
+     if ( toDomain == null || ! toDomain . equals ( fromDomain ) ) { 
+     return null ; 
+     } } return urlToFilter ; 
+     }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilterTest {
+    @Test
+     public void testWithinHostOnly ( ) throws MalformedURLException {
+         HostURLFilter allAllowed = createFilter ( true , false ) ; 
+         URL sourceURL = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( sourceURL , metadata , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", filterResult);
+assertNotNull(filterResult);
+assertNotEquals("", filterResult);
+assertTrue(filterResult.contains("STR"));
+assertFalse(filterResult.isEmpty());
+assertEquals("STR", filterResult.trim());
+assertTrue(filterResult.startsWith("S"));
+assertTrue(filterResult.endsWith("R"));
+assertTrue(filterResult.matches("[A-Z]+"));
+assertTrue(filterResult.length() > 0);
+assertTrue(filterResult.equals("STR"));
+assertFalse(filterResult.equalsIgnoreCase("str"));
+assertTrue(filterResult.contains("S") && filterResult.contains("R"));
+assertTrue(filterResult.matches("[A-Z]{3}"));
+assertTrue(filterResult.indexOf("T") == 2);
+assertTrue(filterResult.lastIndexOf("R") == 2);
+assertTrue(filterResult.substring(1, 2).equals("T"));
+assertTrue(filterResult.replace("S", "T").equals("TTR"));
+assertTrue(filterResult.toUpperCase().equals("STR"));
+assertTrue(filterResult.toLowerCase().equals("str"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",filterResult); ===
+1.000 - assertEquals("STR", filterResult)
+0.906 - assertNotEquals("", filterResult)
+0.901 - assertEquals("STR", filterResult.trim())
+0.746 - assertNotNull(filterResult)
+0.687 - assertFalse(filterResult.isEmpty())
+0.627 - assertTrue(filterResult.length() > 0)
+0.600 - assertTrue(filterResult.endsWith("R"))
+0.600 - assertTrue(filterResult.equals("STR"))
+0.583 - assertTrue(filterResult.contains("STR"))
+0.583 - assertTrue(filterResult.startsWith("S"))
+0.583 - assertTrue(filterResult.indexOf("T") == 2)
+0.568 - assertFalse(filterResult.equalsIgnoreCase("str"))
+0.568 - assertTrue(filterResult.matches("[A-Z]+"))
+0.553 - assertTrue(filterResult.matches("[A-Z]{3}"))
+0.553 - assertTrue(filterResult.lastIndexOf("R") == 2)
+0.506 - assertTrue(filterResult.substring(1, 2).equals("T"))
+0.500 - assertTrue(filterResult.toUpperCase().equals("STR"))
+0.500 - assertTrue(filterResult.toLowerCase().equals("str"))
+0.483 - assertTrue(filterResult.replace("S", "T").equals("TTR"))
+0.429 - assertTrue(filterResult.contains("S") && filterResult.contains("R"))

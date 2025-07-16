@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilter {
+    public Map < String , String > filter ( Map < String , String > env ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    for ( Map . Entry < String , String > entry : env . entrySet ( ) ) { 
+    if ( ! maskPattern . matcher ( entry . getKey ( ) ) . matches ( ) ) result . put ( entry . getKey ( ) , entry . getValue ( ) ) ; 
+    } return result ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilterTest {
+    @Test
+     public void allows_overriding_mask ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         Config config = createConfig ( ) ; 
+         new EnvironmentVariablesConfigLoader ( env ) . load ( config ) ; 
+         EnvFilter envFilter = new EnvFilter ( config ) ; 
+         Map < String , String > expectedEnv = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expectedEnv.size(), envFilter.filter(env).size());
+assertEquals(expectedEnv.get("STR"), envFilter.filter(env).get("STR"));
+assertNull(envFilter.filter(env).get("NON_EXISTING_KEY"));
+assertTrue(envFilter.filter(env).containsKey("STR"));
+assertFalse(envFilter.filter(env).containsKey("NON_EXISTING_KEY"));
+assertTrue(envFilter.filter(env).containsValue("STR"));
+assertFalse(envFilter.filter(env).containsValue("NON_EXISTING_VALUE"));
+assertTrue(envFilter.filter(env).entrySet().containsAll(expectedEnv.entrySet()));
+assertFalse(envFilter.filter(env).entrySet().containsAll(Collections.singletonMap("NON_EXISTING_KEY", "NON_EXISTING_VALUE").entrySet()));
+assertTrue(envFilter.filter(env).keySet().containsAll(expectedEnv.keySet()));
+assertFalse(envFilter.filter(env).keySet().containsAll(Collections.singleton("NON_EXISTING_KEY")));
+assertTrue(envFilter.filter(env).values().containsAll(expectedEnv.values()));
+assertFalse(envFilter.filter(env).values().containsAll(Collections.singleton("NON_EXISTING_VALUE")));
+assertNotEquals(expectedEnv, envFilter.filter(env));
+assertArrayEquals(expectedEnv.keySet().toArray(), envFilter.filter(env).keySet().toArray());
+assertArrayEquals(expectedEnv.values().toArray(), envFilter.filter(env).values().toArray());
+assertNotNull(envFilter.filter(env));
+assertNotSame(expectedEnv, envFilter.filter(env));
+assertSame(env, envFilter.filter(env));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedEnv,envFilter.filter(env)); ===
+0.969 - assertNotEquals(expectedEnv, envFilter.filter(env))
+0.884 - assertNotSame(expectedEnv, envFilter.filter(env))
+0.870 - assertEquals(expectedEnv.size(), envFilter.filter(env).size())
+0.810 - assertEquals(expectedEnv.get("STR"), envFilter.filter(env).get("STR"))
+0.810 - assertSame(env, envFilter.filter(env))
+0.747 - assertNotNull(envFilter.filter(env))
+0.686 - assertArrayEquals(expectedEnv.keySet().toArray(), envFilter.filter(env).keySet().toArray())
+0.686 - assertArrayEquals(expectedEnv.values().toArray(), envFilter.filter(env).values().toArray())
+0.606 - assertTrue(envFilter.filter(env).containsKey("STR"))
+0.596 - assertNull(envFilter.filter(env).get("NON_EXISTING_KEY"))
+0.594 - assertTrue(envFilter.filter(env).containsValue("STR"))
+0.566 - assertFalse(envFilter.filter(env).containsKey("NON_EXISTING_KEY"))
+0.547 - assertFalse(envFilter.filter(env).containsValue("NON_EXISTING_VALUE"))
+0.488 - assertTrue(envFilter.filter(env).keySet().containsAll(expectedEnv.keySet()))
+0.488 - assertTrue(envFilter.filter(env).values().containsAll(expectedEnv.values()))
+0.472 - assertTrue(envFilter.filter(env).entrySet().containsAll(expectedEnv.entrySet()))
+0.441 - assertFalse(envFilter.filter(env).keySet().containsAll(Collections.singleton("NON_EXISTING_KEY")))
+0.435 - assertFalse(envFilter.filter(env).values().containsAll(Collections.singleton("NON_EXISTING_VALUE")))
+0.352 - assertFalse(envFilter.filter(env).entrySet().containsAll(Collections.singletonMap("NON_EXISTING_KEY", "NON_EXISTING_VALUE").entrySet()))

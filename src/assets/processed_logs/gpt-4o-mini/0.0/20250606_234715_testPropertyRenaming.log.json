@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterProperty {\nOProperty getProperty ( String iPropertyName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterPropertyTest {\n@Test\npublic void testPropertyRenaming ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty property = classA . createProperty ( \"STR\" , OType . STRING ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(property);\nAssert.assertEquals(\"STR\", property.getName());\nAssert.assertEquals(OType.STRING, property.getType());\nAssert.assertTrue(classA.getProperties().contains(property));\nAssert.assertEquals(1, classA.getProperties().size());\nAssert.assertEquals(\"STR\", classA.getProperty(\"STR\").getName());\nAssert.assertEquals(OType.STRING, classA.getProperty(\"STR\").getType());\nAssert.assertFalse(classA.getProperties().isEmpty());\nAssert.assertTrue(schema.getClasses().contains(classA));\nAssert.assertEquals(\"STR\", classA.getName());\nAssert.assertTrue(schema.getProperty(\"STR\") instanceof OProperty);\nAssert.assertEquals(1, schema.getProperties().size());\nAssert.assertTrue(schema.getProperties().contains(property));\nAssert.assertNotNull(schema.getClass(\"STR\"));\nAssert.assertEquals(1, schema.getClasses().size());\nAssert.assertTrue(classA.getSuperClass() == null);\nAssert.assertTrue(property.isNotNull());\nAssert.assertFalse(property.isLinked());\nAssert.assertTrue(property.isMandatory());\nAssert.assertEquals(0, property.getMin());\nAssert.assertEquals(Integer.MAX_VALUE, property.getMax());\nAssert.assertTrue(property.getDefaultValue() == null);\n```\n====================\n\n",
+    "scores": [
+        0.777,
+        0.764,
+        0.731,
+        0.691,
+        0.674,
+        0.667,
+        0.667,
+        0.645,
+        0.624,
+        0.577,
+        0.575,
+        0.561,
+        0.554,
+        0.545,
+        0.543,
+        0.538,
+        0.533,
+        0.518,
+        0.5,
+        0.456,
+        0.438,
+        0.436,
+        0.0
+    ],
+    "ground_truth": "assertEquals(property,classA.getProperty(\"STR\"));"
+}

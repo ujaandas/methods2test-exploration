@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializer {
+    @Override
+     public Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     return this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializerTest {
+    @Test
+     public void testNormalCustomSerializer ( ) throws Exception {
+         NormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ; 
+         NormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ; 
+         CustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ; 
+         CustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ; 
+         RequestBody body = new RequestBody ( 1 , "STR" ) ; 
+         String ret = ( String ) client . invokeSync ( addr , body , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(ret);
+Assert.assertTrue(ret instanceof String);
+Assert.assertEquals("ExpectedStringValue", ret);
+Assert.assertFalse(ret.isEmpty());
+Assert.assertEquals(12, ret.length());
+Assert.assertTrue(ret.contains("STR"));
+Assert.assertFalse(ret.contains("ERROR"));
+Assert.assertEquals("ExpectedPrefix", ret.substring(0, 14));
+Assert.assertEquals("ExpectedSuffix", ret.substring(ret.length() - 14));
+Assert.assertTrue(ret.matches("ExpectedRegexPattern"));
+Assert.assertNotEquals("UnexpectedValue", ret);
+Assert.assertTrue(ret.startsWith("ExpectedStart"));
+Assert.assertTrue(ret.endsWith("ExpectedEnd"));
+Assert.assertEquals("SomeSpecificValue", parseValueFromResponse(ret));
+Assert.assertNull(parseErrorFromResponse(ret));
+Assert.assertTrue(validateResponseStructure(ret));
+Assert.assertTrue(validateResponseContent(ret));
+Assert.assertEquals("ExpectedKey", getValueFromJsonResponse(ret, "key"));
+Assert.assertTrue(isValidResponseFormat(ret));
+Assert.assertTrue(containsExpectedField(ret, "expectedField"));
+Assert.assertFalse(hasUnexpectedField(ret, "unexpectedField"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+"STR",ret); ===
+0.444 - Assert.assertNotEquals("UnexpectedValue", ret)
+0.440 - Assert.assertEquals("ExpectedStringValue", ret)
+0.400 - Assert.assertEquals(12, ret.length())
+0.396 - Assert.assertEquals("ExpectedPrefix", ret.substring(0, 14))
+0.348 - Assert.assertTrue(ret.contains("STR"))
+0.344 - Assert.assertEquals("ExpectedSuffix", ret.substring(ret.length() - 14))
+0.343 - Assert.assertTrue(isValidResponseFormat(ret))
+0.337 - Assert.assertTrue(validateResponseContent(ret))
+0.330 - Assert.assertFalse(hasUnexpectedField(ret, "unexpectedField"))
+0.330 - Assert.assertTrue(validateResponseStructure(ret))
+0.328 - Assert.assertEquals("SomeSpecificValue", parseValueFromResponse(ret))
+0.323 - Assert.assertEquals("ExpectedKey", getValueFromJsonResponse(ret, "key"))
+0.322 - Assert.assertFalse(ret.isEmpty())
+0.299 - ```java
+Assert.assertNotNull(ret)
+0.295 - Assert.assertFalse(ret.contains("ERROR"))
+0.280 - Assert.assertNull(parseErrorFromResponse(ret))
+0.278 - Assert.assertTrue(containsExpectedField(ret, "expectedField"))
+0.261 - Assert.assertTrue(ret instanceof String)
+0.240 - Assert.assertTrue(ret.endsWith("ExpectedEnd"))
+0.231 - Assert.assertTrue(ret.startsWith("ExpectedStart"))
+0.222 - Assert.assertTrue(ret.matches("ExpectedRegexPattern"))
+0.000 - ```

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtils {\npublic static Date getTodayWithTime ( final String iTime ) throws ParseException {\nfinal SimpleDateFormat df = new SimpleDateFormat ( \"STR\" ) ;\nCalendar calParsed = Calendar . getInstance ( ) ;\ncalParsed . setTime ( df . parse ( iTime ) ) ;\nCalendar cal = Calendar . getInstance ( ) ;\ncal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ;\ncal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ;\ncal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ;\ncal . set ( Calendar . MILLISECOND , 0 ) ;\nreturn cal . getTime ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtilsTest {\n@Test\npublic void shoudGetRightTimeFromString ( ) throws ParseException {\nCalendar calendar = Calendar . getInstance ( ) ;\ncalendar . set ( Calendar . HOUR_OF_DAY , 5 ) ;\ncalendar . set ( Calendar . MINUTE , 10 ) ;\ncalendar . set ( Calendar . SECOND , 0 ) ;\ncalendar . set ( Calendar . MILLISECOND , 0 ) ;\nDate d = OIOUtils . getTodayWithTime ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());\nAssert.assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());\nAssert.assertEquals(calendar.get(Calendar.SECOND), d.getSeconds());\nAssert.assertEquals(calendar.get(Calendar.MILLISECOND), d.getTime() % 1000);\nAssert.assertEquals(calendar.getTime(), d);\nAssert.assertNotEquals(null, d);\nAssert.assertNotNull(d);\nAssert.assertTrue(d.getTime() > 0);\nAssert.assertTrue(d.getTime() < System.currentTimeMillis());\nAssert.assertTrue(d.getTime() < System.currentTimeMillis() + 1000);\nAssert.assertTrue(d.getTime() > System.currentTimeMillis() - 1000);\nAssert.assertTrue(d.getTime() % 1000 == 0);\nAssert.assertTrue(d.getTime() % 1000 < 1000);\nAssert.assertTrue(d.getTime() % 1000 >= 0);\nAssert.assertTrue(d.getTime() % 1000 < 1000);\nAssert.assertTrue(d.getTime() % 1000 >= 0);\nAssert.assertTrue(d.getTime() % 1000 < 1000);\nAssert.assertTrue(d.getTime() % 1000 >= 0);\nAssert.assertTrue(d.getTime() % 1000 < 1000);\nAssert.assertTrue(d.getTime() % 1000 >= 0);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.678,
+        0.652,
+        0.652,
+        0.646,
+        0.632,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.597,
+        0.597,
+        0.597,
+        0.597,
+        0.596,
+        0.476,
+        0.449,
+        0.449,
+        0.44
+    ],
+    "ground_truth": "assertEquals(calendar.getTime(),d);"
+}

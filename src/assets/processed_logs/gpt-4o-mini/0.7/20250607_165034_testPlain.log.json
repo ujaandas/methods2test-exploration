@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecution {\nOSequence getSequence ( String iName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecutionTest {\n@Test\npublic void testPlain ( ) {\nString name = \"STR\" ;\ndb . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nOSequence sequence = db.getMetadata().getSequenceLibrary().getSequence(name);\nassertNotNull(sequence);\nassertEquals(name, sequence.getName());\nassertEquals(OSequence.SEQUENCE_TYPE.CACHED, sequence.getType());\nassertEquals(0, sequence.getCurrentValue());\nassertEquals(1, sequence.getIncrement());\nassertEquals(100, sequence.getCacheSize());\nassertEquals(0, sequence.getMinValue());\nassertEquals(Long.MAX_VALUE, sequence.getMaxValue());\nassertFalse(sequence.isCycle());\nassertEquals(0, sequence.getInitialValue());\nassertEquals(0, sequence.getStartValue());\nassertEquals(0, sequence.getLastValue());\nassertEquals(1, sequence.getNextValue());\nassertEquals(1, sequence.getCurrentValue());\nassertTrue(sequence.getCreateParams() instanceof OSequence.CreateParams);\nassertNotNull(sequence.getCreateParams().getIncrement());\nassertNotNull(sequence.getCreateParams().getCacheSize());\nassertNotNull(sequence.getCreateParams().getInitialValue());\nassertNotNull(sequence.getCreateParams().getMinValue());\nassertNotNull(sequence.getCreateParams().getMaxValue());\nassertNotNull(sequence.getCreateParams().isCycle());\nassertNotNull(sequence.getCreateParams().getStartValue());\n```\n====================\n\n",
+    "scores": [
+        0.781,
+        0.556,
+        0.544,
+        0.544,
+        0.54,
+        0.535,
+        0.529,
+        0.527,
+        0.486,
+        0.477,
+        0.477,
+        0.473,
+        0.473,
+        0.464,
+        0.464,
+        0.463,
+        0.459,
+        0.45,
+        0.446,
+        0.436,
+        0.413,
+        0.396,
+        0.386,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));"
+}

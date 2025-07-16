@@ -1,0 +1,104 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Travis {
+    @Override
+     public String getBranch ( ) { 
+     return getProperty ( TRAVIS_BRANCH ) ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TravisTest {
+    @Test
+     public void testGetBranch ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public void testGetBranch() {
+    Travis travis = new Travis();
+    
+    // Mocking the getProperty method
+    String expectedBranch = "main";
+    travis = mock(Travis.class);
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn(expectedBranch);
+    
+    assertEquals("Branch should be main", expectedBranch, travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("develop");
+    assertEquals("Branch should be develop", "develop", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("feature-xyz");
+    assertEquals("Branch should be feature-xyz", "feature-xyz", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("hotfix-123");
+    assertEquals("Branch should be hotfix-123", "hotfix-123", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("release-1.0");
+    assertEquals("Branch should be release-1.0", "release-1.0", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("bugfix/issue-456");
+    assertEquals("Branch should be bugfix/issue-456", "bugfix/issue-456", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("experimental/changes");
+    assertEquals("Branch should be experimental/changes", "experimental/changes", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("staging");
+    assertEquals("Branch should be staging", "staging", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("testing");
+    assertEquals("Branch should be testing", "testing", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("release-candidate");
+    assertEquals("Branch should be release-candidate", "release-candidate", travis.getBranch());
+    
+    when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("integration");
+    assertEquals("Branch should be integration
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",newTravis(env()).getBranch()); ===
+0.614 - assertEquals("Branch should be develop", "develop", travis.getBranch())
+0.614 - assertEquals("Branch should be staging", "staging", travis.getBranch())
+0.614 - assertEquals("Branch should be testing", "testing", travis.getBranch())
+0.603 - assertEquals("Branch should be main", expectedBranch, travis.getBranch())
+0.574 - assertEquals("Branch should be feature-xyz", "feature-xyz", travis.getBranch())
+0.574 - assertEquals("Branch should be release-1.0", "release-1.0", travis.getBranch())
+0.567 - assertEquals("Branch should be hotfix-123", "hotfix-123", travis.getBranch())
+0.537 - assertEquals("Branch should be release-candidate", "release-candidate", travis.getBranch())
+0.530 - assertEquals("Branch should be bugfix/issue-456", "bugfix/issue-456", travis.getBranch())
+0.514 - assertEquals("Branch should be experimental/changes", "experimental/changes", travis.getBranch())
+0.460 - assertEquals("Branch should be integration
+0.310 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn(expectedBranch)
+0.283 - public void testGetBranch() {
+    Travis travis = new Travis()
+0.278 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("integration")
+0.274 - travis = mock(Travis.class)
+0.267 - ```java
+import static org.junit.Assert.assertEquals
+0.267 - // Mocking the getProperty method
+    String expectedBranch = "main"
+0.264 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("release-candidate")
+0.258 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("experimental/changes")
+0.252 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("develop")
+0.252 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("staging")
+0.252 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("testing")
+0.246 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("hotfix-123")
+0.243 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("feature-xyz")
+0.243 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("release-1.0")
+0.233 - when(travis.getProperty("TRAVIS_BRANCH")).thenReturn("bugfix/issue-456")
+0.190 - import static org.mockito.Mockito.mock
+0.143 - import static org.mockito.Mockito.when

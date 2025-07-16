@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_Numerical {\nstatic boolean bind0 ( Object object , String property , String value ) {\nvalue = value . trim ( ) ;\nString [ ] path = property . split ( \"STR\" ) ;\nobject = findTargetObject ( object , property , path ) ;\nif ( object == null ) {\nreturn false ;\n} Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ;\nif ( field == null || isProbeField ( field ) ) {\nreturn false ;\n} try {\nsetField ( field , object , value ) ;\nreturn true ;\n} catch ( Exception e ) {\nthrow new BindException ( format ( \"STR\" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_NumericalTest {\n@Test\npublic void bind_Integer ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nPropertyBindingSupport_bind0_Numerical binder = new PropertyBindingSupport_bind0_Numerical();\nMyObject obj = new MyObject();\n\n// Test binding to an Integer property\nassertTrue(binder.bind0(obj, \"integerProperty\", \"10\"));\nassertEquals(10, obj.getIntegerProperty().intValue());\n\nassertTrue(binder.bind0(obj, \"integerProperty\", \"-5\"));\nassertEquals(-5, obj.getIntegerProperty().intValue());\n\nassertTrue(binder.bind0(obj, \"integerProperty\", \"0\"));\nassertEquals(0, obj.getIntegerProperty().intValue());\n\nassertFalse(binder.bind0(obj, \"integerProperty\", \"abc\")); // Invalid binding\nassertEquals(0, obj.getIntegerProperty().intValue()); // Should remain unchanged\n\nassertTrue(binder.bind0(obj, \"integerProperty\", \"  25  \")); // Test with whitespace\nassertEquals(25, obj.getIntegerProperty().intValue());\n\n// Test binding to a non-existent property\nassertFalse(binder.bind0(obj, \"nonExistentProperty\", \"30\"));\n\n// Test binding to a field that is a probe field\nassertFalse(binder.bind0(obj, \"probeField\", \"50\"));\n\n// Test binding with null value\nassertFalse(binder.bind0(obj, \"integerProperty\", null));\n\n// Test binding with empty string\nassertFalse(binder.bind0(obj, \"integerProperty\", \"\"));\nassertEquals(25, obj.getIntegerProperty().intValue()); // Should remain unchanged\n\n// Test binding with a large number\nassertTrue(binder.bind0(obj, \"integerProperty\", \"100000\"));\nassertEquals(100000, obj.getIntegerProperty().intValue());\n\n// Test binding to a property with a trailing space\nassertTrue(binder.bind0(obj, \"integerProperty\", \"  75  \"));\nassertEquals(75, obj.getIntegerProperty().intValue());\n\n// Test binding to a negative large number\nassertTrue(binder.bind0(obj, \"integerProperty\", \"-99999\"));\nassertEquals(-99999, obj.getIntegerProperty().intValue());\n\n// Test binding to a decimal number (will fail)\nassertFalse(binder.bind0(obj, \"integerProperty\", \"10.5\"));\n\n====================\n\n",
+    "scores": [
+        0.565,
+        0.559,
+        0.484,
+        0.441,
+        0.413,
+        0.391,
+        0.382,
+        0.38,
+        0.375,
+        0.37,
+        0.347,
+        0.342,
+        0.338,
+        0.261,
+        0.258,
+        0.258,
+        0.258,
+        0.258,
+        0.247,
+        0.247,
+        0.22,
+        0.212,
+        0.211,
+        0.175
+    ],
+    "ground_truth": "assertTrue(bind0(testObject,\"STR\",\"STR\"));"
+}

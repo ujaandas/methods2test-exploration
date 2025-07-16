@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializer {\n@Override\npublic int getObjectSize ( String object , Object ... hints ) {\nfinal byte [ ] encoded = object . getBytes ( StandardCharsets . UTF_8 ) ;\nreturn OShortSerializer . SHORT_SIZE + encoded . length ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializerTest {\n@Test\npublic void testSerializeWALChanges ( ) {\nfinal int serializationOffset = 5 ;\nfinal ByteBuffer buffer = ByteBuffer . allocateDirect ( stringSerializer . getObjectSize ( OBJECT ) + serializationOffset ) . order ( ByteOrder . nativeOrder ( ) ) ;\nfinal byte [ ] data = new byte [ stringSerializer . getObjectSize ( OBJECT ) ] ;\nstringSerializer . serializeNativeObject ( OBJECT , data , 0 ) ;\nOWALChanges walChanges = new OWALChangesTree ( ) ;\nwalChanges . setBinaryValue ( buffer , data , serializationOffset ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(walChanges);\nassertEquals(buffer.capacity(), stringSerializer.getObjectSize(OBJECT) + serializationOffset);\nassertEquals(data.length, stringSerializer.getObjectSize(OBJECT));\nassertTrue(buffer.isDirect());\nassertEquals(ByteOrder.nativeOrder(), buffer.order());\nassertEquals(0, buffer.position());\nassertEquals(0, buffer.limit());\nassertEquals(0, buffer.remaining());\nassertArrayEquals(data, Arrays.copyOfRange(buffer.array(), serializationOffset, buffer.position() + data.length));\nassertTrue(walChanges instanceof OWALChangesTree);\nassertNotNull(walChanges.getBinaryValue());\nassertEquals(data.length, walChanges.getBinaryValue().length);\nassertTrue(Arrays.equals(data, walChanges.getBinaryValue()));\nassertEquals(serializationOffset, walChanges.getBinaryOffset());\nassertNotEquals(0, walChanges.getBinaryValue().length);\nassertTrue(walChanges.hasBinaryValue());\nassertFalse(walChanges.isEmpty());\nassertEquals(OBJECT.length(), walChanges.getBinaryValue().length);\nassertTrue(walChanges.getBinaryValue()[0] != 0);\nassertEquals(OBJECT, new String(walChanges.getBinaryValue(), StandardCharsets.UTF_8));\nassertNotNull(walChanges.toString());\nassertTrue(walChanges.toString().contains(\"OWALChangesTree\"));\n```\n====================\n\n",
+    "scores": [
+        0.586,
+        0.571,
+        0.469,
+        0.446,
+        0.381,
+        0.374,
+        0.37,
+        0.353,
+        0.352,
+        0.341,
+        0.338,
+        0.335,
+        0.333,
+        0.321,
+        0.32,
+        0.318,
+        0.305,
+        0.302,
+        0.301,
+        0.299,
+        0.282,
+        0.24,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(stringSerializer.getObjectSizeInByteBuffer(buffer,walChanges,serializationOffset),stringSerializer.getObjectSize(OBJECT));"
+}

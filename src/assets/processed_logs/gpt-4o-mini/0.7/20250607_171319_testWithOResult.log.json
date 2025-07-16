@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLMethodKeys {\n@Override\npublic Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) {\nif ( ioResult instanceof Map ) {\nreturn ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ;\n} if ( ioResult instanceof ODocument ) {\nreturn Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ;\n} if ( ioResult instanceof OResult ) {\nOResult res = ( OResult ) ioResult ;\nreturn res . getPropertyNames ( ) ;\n} if ( ioResult instanceof Collection ) {\nList result = new ArrayList ( ) ;\nfor ( Object o : ( Collection ) ioResult ) {\nresult . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ;\n} return result ;\n} return null ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLMethodKeysTest {\n@Test\npublic void testWithOResult ( ) {\nOResultInternal resultInternal = new OResultInternal ( ) ;\nresultInternal . setProperty ( \"STR\" , \"STR\" ) ;\nresultInternal . setProperty ( \"STR\" , \"STR\" ) ;\nObject result = function . execute ( null , null , null , resultInternal , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof List);\nassertEquals(1, ((List<?>) result).size());\nassertTrue(((List<?>) result).contains(\"STR\"));\nassertFalse(((List<?>) result).contains(\"NON_EXISTENT_PROPERTY\"));\nassertEquals(\"STR\", ((List<?>) result).get(0));\nassertTrue(((List<?>) result).get(0) instanceof String);\nassertEquals(1, ((List<?>) result).stream().distinct().count());\nassertFalse(((List<?>) result).isEmpty());\nassertTrue(((List<?>) result).toString().contains(\"STR\"));\nassertEquals(\"[STR]\", result.toString());\nassertEquals(\"STR\", ((List<?>) result).get(0));\nassertNotSame(result, new ArrayList<>());\nassertTrue(result instanceof Collection);\nassertTrue(result.stream().allMatch(item -> item instanceof String));\nassertDoesNotThrow(() -> { ((List<?>) result).forEach(System.out::println); });\nassertEquals(1, ((List<?>) result).indexOf(\"STR\"));\nassertTrue(((List<?>) result).containsAll(Arrays.asList(\"STR\")));\nassertEquals(result.hashCode(), Arrays.asList(\"STR\").hashCode());\nassertEquals(result.size(), 1);\nassertTrue(result.getClass().isAssignableFrom(ArrayList.class));\n```\n====================\n\n",
+    "scores": [
+        0.625,
+        0.562,
+        0.5,
+        0.495,
+        0.495,
+        0.495,
+        0.46,
+        0.438,
+        0.426,
+        0.413,
+        0.382,
+        0.375,
+        0.359,
+        0.357,
+        0.347,
+        0.34,
+        0.311,
+        0.309,
+        0.291,
+        0.291,
+        0.233,
+        0.03,
+        0.0
+    ],
+    "ground_truth": "assertEquals(newLinkedHashSet(Arrays.asList(\"STR\",\"STR\")),result);"
+}

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManager {
+    @Override
+     public Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     url . setConnectTimeout ( connectTimeout ) ; 
+     return this . connectionManager . getAndCreateIfAbsent ( url ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManagerTest {
+    @Test
+     public void testCancelReConnection ( ) throws InterruptedException , RemotingException {
+         doInit ( false , true ) ; 
+         client . enableReconnectSwitch ( ) ; 
+         String addr = "STR" ; 
+         Url url = addressParser . parse ( addr ) ; 
+         client . getConnection ( url , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(client);
+Assert.assertTrue(client.isReconnectSwitchEnabled());
+Assert.assertEquals("STR", addr);
+Assert.assertNotNull(url);
+Assert.assertEquals(1000, url.getConnectTimeout());
+Assert.assertNotNull(client.getConnection(url, 1000));
+Assert.assertTrue(client.getConnection(url, 1000) instanceof Connection);
+Assert.assertEquals(1, client.getConnections().size());
+Assert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)));
+Assert.assertEquals(1, client.getConnections().size());
+Assert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)));
+Assert.assertNotNull(client.getConnection(url, 1000).getChannel());
+Assert.assertTrue(client.getConnection(url, 1000).isFine());
+Assert.assertTrue(client.getConnection(url, 1000).isConnected());
+Assert.assertTrue(client.getConnection(url, 1000).isActive());
+Assert.assertTrue(client.getConnection(url, 1000).isWritable());
+Assert.assertTrue(client.getConnection(url, 1000).isAvailable());
+Assert.assertTrue(client.getConnection(url, 1000).isClosed());
+Assert.assertTrue(client.getConnection(url, 1000).isReconnect());
+Assert.assertTrue(client.getConnection(url, 1000).isServerSide());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes()); ===
+0.654 - Assert.assertEquals(1000, url.getConnectTimeout())
+0.630 - Assert.assertEquals(1, client.getConnections().size())
+0.630 - Assert.assertEquals(1, client.getConnections().size())
+0.576 - Assert.assertTrue(client.getConnection(url, 1000).isReconnect())
+0.567 - Assert.assertNotNull(client.getConnection(url, 1000).getChannel())
+0.565 - Assert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)))
+0.565 - Assert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)))
+0.557 - Assert.assertTrue(client.getConnection(url, 1000).isActive())
+0.548 - Assert.assertTrue(client.getConnection(url, 1000) instanceof Connection)
+0.539 - Assert.assertTrue(client.getConnection(url, 1000).isClosed())
+0.531 - Assert.assertTrue(client.getConnection(url, 1000).isFine())
+0.523 - Assert.assertNotNull(client.getConnection(url, 1000))
+0.521 - Assert.assertTrue(client.getConnection(url, 1000).isServerSide())
+0.505 - Assert.assertTrue(client.isReconnectSwitchEnabled())
+0.496 - Assert.assertTrue(client.getConnection(url, 1000).isWritable())
+0.492 - Assert.assertTrue(client.getConnection(url, 1000).isAvailable())
+0.458 - Assert.assertTrue(client.getConnection(url, 1000).isConnected())
+0.386 - Assert.assertNotNull(client)
+0.372 - Assert.assertEquals("STR", addr)
+0.275 - Assert.assertNotNull(url)

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLScript {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLScriptTest {
+    @Test
+     public void testSleep ( ) throws Exception {
+         long begin = System . currentTimeMillis ( ) ; 
+         StringBuilder script = new StringBuilder ( ) ; 
+         script . append ( "STR" ) ; 
+         db . command ( new OCommandScript ( "STR" , script . toString ( ) ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(db);
+Assert.assertTrue(db.isOpen());
+Assert.assertEquals("ExpectedValue", db.getSomeValue());
+Assert.assertTrue(db.getTransaction().isActive());
+Assert.assertEquals(0, db.getPendingOperationsCount());
+Assert.assertTrue(db.getClusterNames().contains("ExpectedCluster"));
+Assert.assertFalse(db.getClusterNames().isEmpty());
+Assert.assertNotEquals(0, db.countClass("ExpectedClass"));
+Assert.assertTrue(db.getRecord("ExpectedRecordId").exists());
+Assert.assertEquals("ExpectedResult", db.command(new OCommandSQL("SELECT * FROM ExpectedClass")).execute());
+Assert.assertTrue(db.getSchema().existsClass("ExpectedClass"));
+Assert.assertEquals("ExpectedPropertyValue", db.getRecord("ExpectedRecordId").field("ExpectedProperty"));
+Assert.assertTrue(db.getCluster("ExpectedCluster").getRecords().size() > 0);
+Assert.assertNotNull(db.getMetadata());
+Assert.assertTrue(db.getMetadata().getSchema().getClasses().size() > 0);
+Assert.assertEquals(1, db.getCluster("ExpectedCluster").getRecords().size());
+Assert.assertTrue(db.getCluster("ExpectedCluster").getRecords().stream().anyMatch(record -> record.field("ExpectedField").equals("ExpectedValue")));
+Assert.assertTrue(db.getUsers().contains("ExpectedUser"));
+Assert.assertFalse(db.getUsers().isEmpty());
+Assert.assertEquals("ExpectedDatabaseName", db.getName());
+Assert.assertTrue(db.getStatistics().getRecordCount() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(System.currentTimeMillis()-begin>=500); ===
+0.472 - Assert.assertTrue(db.isOpen())
+0.469 - Assert.assertTrue(db.getStatistics().getRecordCount() > 0)
+0.450 - Assert.assertTrue(db.getMetadata().getSchema().getClasses().size() > 0)
+0.440 - Assert.assertTrue(db.getTransaction().isActive())
+0.422 - Assert.assertTrue(db.getClusterNames().contains("ExpectedCluster"))
+0.417 - Assert.assertTrue(db.getCluster("ExpectedCluster").getRecords().size() > 0)
+0.413 - Assert.assertFalse(db.getClusterNames().isEmpty())
+0.404 - Assert.assertTrue(db.getUsers().contains("ExpectedUser"))
+0.376 - Assert.assertFalse(db.getUsers().isEmpty())
+0.365 - Assert.assertTrue(db.getSchema().existsClass("ExpectedClass"))
+0.358 - Assert.assertEquals(0, db.getPendingOperationsCount())
+0.333 - Assert.assertTrue(db.getRecord("ExpectedRecordId").exists())
+0.325 - Assert.assertEquals(1, db.getCluster("ExpectedCluster").getRecords().size())
+0.300 - Assert.assertNotNull(db.getMetadata())
+0.297 - ```java
+Assert.assertNotNull(db)
+0.286 - Assert.assertNotEquals(0, db.countClass("ExpectedClass"))
+0.262 - Assert.assertEquals("ExpectedPropertyValue", db.getRecord("ExpectedRecordId").field("ExpectedProperty"))
+0.257 - Assert.assertTrue(db.getCluster("ExpectedCluster").getRecords().stream().anyMatch(record -> record.field("ExpectedField").equals("ExpectedValue")))
+0.229 - Assert.assertEquals("ExpectedValue", db.getSomeValue())
+0.224 - Assert.assertEquals("ExpectedDatabaseName", db.getName())
+0.167 - Assert.assertEquals("ExpectedResult", db.command(new OCommandSQL("SELECT * FROM ExpectedClass")).execute())
+0.000 - ```

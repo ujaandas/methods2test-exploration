@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( Object ... params ) { 
+     if ( ! ( params [ 0 ] instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ; 
+     final List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     Object val = createSingleValue ( mapParam ) ; 
+     result . add ( val ) ; 
+     } if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) { 
+     return result . get ( 0 ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueByValueTwoParametersArrayParams ( ) {
+         final Object result = propertyIndexByValue . createValue ( mapToTest , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", ((List<Object>) result).get(0));
+assertEquals(1, ((List<Object>) result).size());
+assertTrue(result instanceof List);
+assertTrue(((List<Object>) result).get(0) instanceof Object);
+assertTrue(((List<Object>) result).get(0) instanceof String);
+assertFalse(((List<Object>) result).isEmpty());
+assertNotNull(result);
+assertNotNull(((List<Object>) result).get(0));
+assertNotEquals(0, ((List<Object>) result).size());
+assertTrue(((List<Object>) result).get(0) instanceof String);
+assertTrue(((List<Object>) result).get(0) instanceof Object);
+assertEquals(mapToTest, ((List<Object>) result).get(0));
+assertNotNull(((List<Object>) result).get(0));
+assertNotNull(result);
+assertEquals(1, ((List<Object>) result).size());
+assertTrue(result instanceof List);
+assertTrue(((List<Object>) result).get(0) instanceof String);
+assertNotEquals(0, ((List<Object>) result).size());
+assertFalse(((List<Object>) result).isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofCollection); ===
+0.829 - assertTrue(result instanceof List)
+0.829 - assertTrue(result instanceof List)
+0.653 - assertTrue(((List<Object>) result).get(0) instanceof Object)
+0.653 - assertTrue(((List<Object>) result).get(0) instanceof String)
+0.653 - assertTrue(((List<Object>) result).get(0) instanceof String)
+0.653 - assertTrue(((List<Object>) result).get(0) instanceof Object)
+0.653 - assertTrue(((List<Object>) result).get(0) instanceof String)
+0.508 - assertNotNull(result)
+0.508 - assertNotNull(result)
+0.434 - assertFalse(((List<Object>) result).isEmpty())
+0.434 - assertFalse(((List<Object>) result).isEmpty())
+0.410 - assertEquals(1, ((List<Object>) result).size())
+0.410 - assertEquals(1, ((List<Object>) result).size())
+0.395 - assertNotEquals(0, ((List<Object>) result).size())
+0.395 - assertNotEquals(0, ((List<Object>) result).size())
+0.390 - assertNotNull(((List<Object>) result).get(0))
+0.390 - assertNotNull(((List<Object>) result).get(0))
+0.374 - assertEquals(mapToTest, ((List<Object>) result).get(0))
+0.368 - assertEquals("STR", ((List<Object>) result).get(0))

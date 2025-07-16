@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class BambooEnvironmentVariables {
+    public Map < String , String > convert ( Map < String , String > env ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    for ( String key : env . keySet ( ) ) { 
+    Matcher matcher = BAMBOO_PATTERN . matcher ( key ) ; 
+    if ( matcher . lookingAt ( ) ) { 
+    String value = env . get ( key ) ; 
+    String strippedVar = matcher . group ( 1 ) ; 
+    result . put ( strippedVar , value ) ; 
+    } } result . putAll ( env ) ; 
+    return result ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class BambooEnvironmentVariablesTest {
+    @Test
+     public void duplicates_bamboo_prefixed_env_vars_with_prefixless_copy ( ) {
+         HashMap < String , String > env = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         Map < String , String > convertedEnv = new BambooEnvironmentVariables ( ) . convert ( env ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, convertedEnv.size());
+assertTrue(convertedEnv.containsKey("STR"));
+assertEquals("STR", convertedEnv.get("STR"));
+assertFalse(convertedEnv.containsKey("BAMBOO_STR"));
+assertEquals("STR", convertedEnv.get("STR"));
+assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX_STR"));
+assertTrue(convertedEnv.isEmpty() == false);
+assertTrue(convertedEnv.keySet().contains("STR"));
+assertTrue(convertedEnv.values().contains("STR"));
+assertEquals("STR", convertedEnv.get("STR"));
+assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX"));
+assertTrue(convertedEnv.keySet().size() == 1);
+assertTrue(convertedEnv.values().size() == 1);
+assertTrue(convertedEnv.get("STR").equals("STR"));
+assertFalse(convertedEnv.containsKey("BAMBOO_STR"));
+assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX_STR"));
+assertTrue(convertedEnv.entrySet().stream().anyMatch(entry -> entry.getKey().equals("STR")));
+assertTrue(convertedEnv.entrySet().stream().anyMatch(entry -> entry.getValue().equals("STR")));
+assertTrue(convertedEnv.keySet().stream().allMatch(key -> key.equals("STR")));
+assertTrue(convertedEnv.values().stream().allMatch(value -> value.equals("STR")));
+assertTrue(convertedEnv.size() == 1);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",convertedEnv.get("STR")); ===
+1.000 - assertEquals("STR", convertedEnv.get("STR"))
+1.000 - assertEquals("STR", convertedEnv.get("STR"))
+1.000 - assertEquals("STR", convertedEnv.get("STR"))
+0.721 - ```java
+assertEquals(1, convertedEnv.size())
+0.698 - assertTrue(convertedEnv.containsKey("STR"))
+0.696 - assertTrue(convertedEnv.get("STR").equals("STR"))
+0.681 - assertFalse(convertedEnv.containsKey("BAMBOO_STR"))
+0.681 - assertFalse(convertedEnv.containsKey("BAMBOO_STR"))
+0.674 - assertTrue(convertedEnv.keySet().contains("STR"))
+0.674 - assertTrue(convertedEnv.values().contains("STR"))
+0.649 - assertTrue(convertedEnv.size() == 1)
+0.634 - assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX_STR"))
+0.634 - assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX_STR"))
+0.619 - assertFalse(convertedEnv.containsKey("BAMBOO_PREFIX"))
+0.605 - assertTrue(convertedEnv.keySet().size() == 1)
+0.581 - assertTrue(convertedEnv.values().size() == 1)
+0.548 - assertTrue(convertedEnv.isEmpty() == false)
+0.525 - assertTrue(convertedEnv.keySet().stream().allMatch(key -> key.equals("STR")))
+0.508 - assertTrue(convertedEnv.values().stream().allMatch(value -> value.equals("STR")))
+0.481 - assertTrue(convertedEnv.entrySet().stream().anyMatch(entry -> entry.getKey().equals("STR")))
+0.474 - assertTrue(convertedEnv.entrySet().stream().anyMatch(entry -> entry.getValue().equals("STR")))
+0.000 - ```

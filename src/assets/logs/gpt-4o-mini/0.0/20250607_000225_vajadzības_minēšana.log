@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void vajadzības_minēšana ( ) {
+         locītājs . enablePrefixes = true ; 
+         Word vārds = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(vārds);
+assertTrue(vārds.isRecognized());
+assertEquals("STR", vārds.getBaseForm());
+assertTrue(vārds.getWordforms().size() > 0);
+assertTrue(vārds.getWordforms().contains("STR"));
+assertTrue(vārds.getWordforms().contains("STRs"));
+assertTrue(vārds.getWordforms().contains("STRing"));
+assertFalse(vārds.getWordforms().contains("XYZ"));
+assertEquals("noun", vārds.getPartOfSpeech());
+assertTrue(vārds.hasPrefix("S"));
+assertTrue(vārds.hasSuffix("R"));
+assertEquals(3, vārds.getWordforms().get(0).length());
+assertTrue(vārds.getWordforms().stream().allMatch(word -> word.startsWith("S")));
+assertTrue(vārds.getWordforms().stream().anyMatch(word -> word.endsWith("R")));
+assertEquals("STR", vārds.getWordforms().get(0));
+assertNotEquals("XYZ", vārds.getWordforms().get(0));
+assertTrue(vārds.getWordforms().contains("STRed"));
+assertTrue(vārds.getWordforms().contains("STRinged"));
+assertFalse(vārds.getWordforms().isEmpty());
+assertEquals(5, vārds.getWordforms().size());
+assertTrue(vārds.isRecognized());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(vārds.isRecognized()); ===
+1.000 - assertTrue(vārds.isRecognized())
+1.000 - assertTrue(vārds.isRecognized())
+0.658 - assertTrue(vārds.getWordforms().size() > 0)
+0.656 - assertTrue(vārds.hasPrefix("S"))
+0.656 - assertTrue(vārds.hasSuffix("R"))
+0.625 - assertTrue(vārds.getWordforms().contains("STR"))
+0.617 - assertTrue(vārds.getWordforms().contains("STRs"))
+0.588 - assertTrue(vārds.getWordforms().contains("STRinged"))
+0.585 - assertTrue(vārds.getWordforms().contains("STRed"))
+0.560 - assertEquals(5, vārds.getWordforms().size())
+0.554 - assertTrue(vārds.getWordforms().contains("STRing"))
+0.543 - assertFalse(vārds.getWordforms().contains("XYZ"))
+0.535 - assertEquals("STR", vārds.getBaseForm())
+0.507 - assertFalse(vārds.getWordforms().isEmpty())
+0.500 - assertEquals("noun", vārds.getPartOfSpeech())
+0.476 - assertEquals(3, vārds.getWordforms().get(0).length())
+0.467 - ```java
+assertNotNull(vārds)
+0.439 - assertNotEquals("XYZ", vārds.getWordforms().get(0))
+0.430 - assertEquals("STR", vārds.getWordforms().get(0))
+0.389 - assertTrue(vārds.getWordforms().stream().anyMatch(word -> word.endsWith("R")))
+0.382 - assertTrue(vārds.getWordforms().stream().allMatch(word -> word.startsWith("S")))
+0.000 - ```

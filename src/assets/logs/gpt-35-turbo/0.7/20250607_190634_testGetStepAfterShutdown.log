@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePoller {
+    @Override
+     public Step getNextStep ( ) { 
+     if ( done || shutdownInd ) { 
+     return null ; 
+     } Step result = new Step ( ) { 
+     @Override
+     public void execute ( ) { 
+     try { 
+     pollOneObject ( target ) ; 
+     } catch ( Exception exc ) { 
+     failureException = exc ; 
+     } finally { 
+     done = true ; 
+     } } @Override
+     public boolean isBlocking ( ) { 
+     return true ; 
+     } } ; 
+     return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePollerTest {
+    @Test
+     public void testGetStepAfterShutdown ( ) throws Exception {
+         this . poller . shutdown ( ) ; 
+         JmxAttributePoller . PollOneObjectSchedulerProcess process = this . poller . new PollOneObjectSchedulerProcess ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(process);
+assertFalse(process.isBlocking());
+assertNotNull(process.getTarget());
+assertEquals("STR", process.getTarget());
+assertTrue(process.isDone());
+assertNotNull(process.getFailureException());
+assertFalse(poller.isShutdown());
+assertTrue(poller.isDone());
+assertNull(poller.getNextStep());
+assertNotNull(poller.getFailureException());
+assertTrue(poller.isBlocking());
+assertNotNull(poller.getNextStep());
+assertFalse(poller.isDone());
+assertNotNull(poller.getFailureException());
+assertTrue(poller.isBlocking());
+assertNotNull(poller.getNextStep());
+assertFalse(poller.isDone());
+assertNotNull(poller.getFailureException());
+assertTrue(poller.isBlocking());
+assertNotNull(poller.getNextStep());
+assertFalse(poller.isDone());
+assertNotNull(poller.getFailureException());
+assertTrue(poller.isBlocking());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(process.getNextStep()); ===
+0.862 - assertNull(poller.getNextStep())
+0.824 - assertNotNull(poller.getNextStep())
+0.824 - assertNotNull(poller.getNextStep())
+0.824 - assertNotNull(poller.getNextStep())
+0.806 - assertNotNull(process.getTarget())
+0.753 - assertNotNull(process.getFailureException())
+0.694 - assertEquals("STR", process.getTarget())
+0.691 - assertNotNull(process)
+0.656 - assertTrue(process.isDone())
+0.632 - assertNotNull(poller.getFailureException())
+0.632 - assertNotNull(poller.getFailureException())
+0.632 - assertNotNull(poller.getFailureException())
+0.632 - assertNotNull(poller.getFailureException())
+0.606 - assertFalse(process.isBlocking())
+0.500 - assertTrue(poller.isDone())
+0.500 - assertTrue(poller.isBlocking())
+0.500 - assertTrue(poller.isBlocking())
+0.500 - assertTrue(poller.isBlocking())
+0.500 - assertTrue(poller.isBlocking())
+0.459 - assertFalse(poller.isDone())
+0.459 - assertFalse(poller.isDone())
+0.459 - assertFalse(poller.isDone())
+0.400 - assertFalse(poller.isShutdown())

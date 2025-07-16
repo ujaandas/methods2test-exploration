@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawner {\npublic void awaitCompletion ( ) {\nfor ( Thread thread : threads ) {\ntry {\nthread . join ( ) ;\n} catch ( InterruptedException e ) {\nthrow rethrow ( e ) ;\n} } if ( caughtException != null ) {\nthrow rethrow ( caughtException ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawnerTest {\n@Test\npublic void testThreadSpawnerException_reportException ( ) {\nFile exceptionFile = new File ( getUserDir ( ) , \"STR\" ) ;\nThreadSpawner spawner = new ThreadSpawner ( \"STR\" ) ;\nspawner . spawn ( new Runnable ( ) {\n@Override\npublic void run ( ) {\nthrow new CommandLineExitException ( \"STR\" ) ;\n} } ) ;\nspawner . awaitCompletion ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(spawner);\nAssert.assertTrue(spawner.hasSpawnedThreads());\nAssert.assertEquals(1, spawner.getThreadCount());\nAssert.assertTrue(spawner.hasExceptions());\nAssert.assertTrue(spawner.getCaughtException() instanceof CommandLineExitException);\nAssert.assertEquals(\"STR\", spawner.getCaughtException().getMessage());\nAssert.assertTrue(spawner.isCompleted());\nAssert.assertFalse(spawner.hasUnjoinedThreads());\nAssert.assertEquals(Thread.State.TERMINATED, spawner.getThreadState(0));\nAssert.assertTrue(spawner.getThread(0).isAlive());\nAssert.assertTrue(spawner.getThread(0).getName().contains(\"STR\"));\nAssert.assertNotEquals(Thread.State.NEW, spawner.getThreadState(0));\nAssert.assertTrue(spawner.getExceptionFile().exists());\nAssert.assertTrue(spawner.getExceptionFile().isFile());\nAssert.assertTrue(spawner.getExceptionFile().canRead());\nAssert.assertTrue(spawner.getExceptionFile().length() > 0);\nAssert.assertNotNull(spawner.getCompletionTime());\nAssert.assertTrue(spawner.getExecutionDuration() > 0);\nAssert.assertTrue(spawner.getSpawnedRunnable().getClass().isAnonymousClass());\nAssert.assertNull(spawner.getThread(0).getUncaughtExceptionHandler());\nAssert.assertTrue(spawner.getThread(0).getPriority() >= Thread.MIN_PRIORITY);\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.741,
+        0.707,
+        0.696,
+        0.651,
+        0.567,
+        0.564,
+        0.553,
+        0.505,
+        0.5,
+        0.493,
+        0.474,
+        0.462,
+        0.458,
+        0.435,
+        0.416,
+        0.4,
+        0.351,
+        0.258,
+        0.25,
+        0.247,
+        0.0
+    ],
+    "ground_truth": "assertTrue(exceptionFile.exists());"
+}

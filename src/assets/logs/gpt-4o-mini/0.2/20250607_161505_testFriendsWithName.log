@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsWithName ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("name") != null));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("relationship").equals("friend")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Alice")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Bob")));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Charlie")));
+assertTrue(qResult.stream().noneMatch(doc -> doc.field("name").equals("Eve")));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("age") >= 18));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")));
+assertEquals("Alice", qResult.get(0).field("name"));
+assertEquals("Bob", qResult.get(1).field("name"));
+assertEquals("Charlie", qResult.get(2).field("name"));
+assertNotEquals(qResult.get(0).field("id"), qResult.get(1).field("id"));
+assertTrue(qResult.stream().map(doc -> doc.field("id")).distinct().count() == qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("createdAt") != null));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("updatedAt") != null));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("location") != null));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("location").equals("Earth")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.692 - assertEquals("Bob", qResult.get(1).field("name"))
+0.675 - assertEquals("Alice", qResult.get(0).field("name"))
+0.659 - assertEquals("Charlie", qResult.get(2).field("name"))
+0.567 - ```java
+assertNotNull(qResult)
+0.540 - assertNotEquals(qResult.get(0).field("id"), qResult.get(1).field("id"))
+0.454 - assertTrue(qResult.stream().map(doc -> doc.field("id")).distinct().count() == qResult.size())
+0.447 - assertTrue(qResult.stream().allMatch(doc -> doc.field("age") >= 18))
+0.433 - assertTrue(qResult.stream().allMatch(doc -> doc.field("name") != null))
+0.416 - assertTrue(qResult.stream().allMatch(doc -> doc.field("location") != null))
+0.412 - assertTrue(qResult.stream().allMatch(doc -> doc.field("createdAt") != null))
+0.412 - assertTrue(qResult.stream().allMatch(doc -> doc.field("updatedAt") != null))
+0.400 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Bob")))
+0.396 - assertTrue(qResult.stream().noneMatch(doc -> doc.field("name").equals("Eve")))
+0.393 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Alice")))
+0.385 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("name").equals("Charlie")))
+0.382 - assertTrue(qResult.stream().allMatch(doc -> doc.field("status").equals("active")))
+0.378 - assertTrue(qResult.stream().allMatch(doc -> doc.field("location").equals("Earth")))
+0.362 - assertTrue(qResult.stream().allMatch(doc -> doc.field("relationship").equals("friend")))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class f {\n@Deprecated\n< RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class f {\n@Test\npublic void testMixCompositeQuery ( ) {\nList < ODocument > docs = db . query ( new OSQLSynchQuery < ODocument > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(docs);\nassertFalse(docs.isEmpty());\nassertEquals(expectedSize, docs.size());\nfor (ODocument doc : docs) {\nassertNotNull(doc.getProperty(\"propertyName1\"));\nassertTrue(doc.getProperty(\"propertyName1\") instanceof String);\nassertNotNull(doc.getProperty(\"propertyName2\"));\nassertTrue(doc.getProperty(\"propertyName2\") instanceof Integer);\n}\nassertTrue(docs.stream().allMatch(doc -> doc.getProperty(\"propertyName1\").equals(\"expectedValue\")));\nassertTrue(docs.stream().anyMatch(doc -> doc.getProperty(\"propertyName2\").equals(expectedInteger)));\nassertEquals(expectedValue, docs.get(0).getProperty(\"propertyName3\"));\nassertTrue(docs.stream().noneMatch(doc -> doc.getProperty(\"propertyName4\") == null));\nassertTrue(docs.stream().allMatch(doc -> doc.getProperty(\"propertyName5\").toString().length() > 0));\nassertEquals(expectedDocumentId, docs.get(0).getIdentity().toString());\nassertTrue(docs.stream().anyMatch(doc -> doc.getProperty(\"propertyName6\").equals(\"anotherExpectedValue\")));\nassertFalse(docs.stream().anyMatch(doc -> doc.getProperty(\"propertyName7\").equals(\"invalidValue\")));\nassertTrue(docs.stream().allMatch(doc -> doc.getProperty(\"propertyName8\").equals(\"constantValue\")));\nassertEquals(expectedType, docs.get(0).getClass());\nassertTrue(docs.stream().anyMatch(doc -> doc.getProperty(\"propertyName9\").equals(expectedCondition)));\nassertFalse(docs.stream().allMatch(doc -> doc.getProperty(\"propertyName10\").equals(\"notExpectedValue\")));\nassertNotNull(docs.get(0).getProperty(\"propertyName11\"));\nassertTrue(docs.stream().allMatch(doc -> doc.getProperty(\"propertyName12\").toString().contains(\"substring\")));\n```\n====================\n\n",
+    "scores": [
+        0.8,
+        0.704,
+        0.605,
+        0.519,
+        0.484,
+        0.479,
+        0.459,
+        0.434,
+        0.347,
+        0.336,
+        0.322,
+        0.318,
+        0.295,
+        0.274,
+        0.27,
+        0.269,
+        0.258,
+        0.258,
+        0.254,
+        0.248,
+        0.244,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,docs.size());"
+}

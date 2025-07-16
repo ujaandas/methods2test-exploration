@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class ModeInfo {\npublic int readKfIntraMode ( int miCol , int miRow , int blSz , VPXBooleanDecoder decoder , DecodingContext c ) {\nboolean availAbove = miRow > 0 ;\nboolean availLeft = miCol > c . getMiTileStartCol ( ) ;\nint [ ] aboveIntraModes = c . getAboveModes ( ) ;\nint [ ] leftIntraModes = c . getLeftModes ( ) ;\nint aboveMode ;\nint leftMode ;\naboveMode = availAbove ? aboveIntraModes [ miCol ] : DC_PRED ;\nleftMode = availLeft ? leftIntraModes [ miRow % 8 ] : DC_PRED ;\nshort [ ] [ ] [ ] probs = c . getKfYModeProbs ( ) ;\nint intraMode = decoder . readTree ( TREE_INTRA_MODE , probs [ aboveMode ] [ leftMode ] ) ;\naboveIntraModes [ miCol ] = intraMode ;\nleftIntraModes [ miRow % 8 ] = intraMode ;\nreturn intraMode ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class ModeInfoTest {\n@Test\npublic void testReadIntraMode ( ) {\nMockVPXBooleanDecoder decoder = new MockVPXBooleanDecoder ( new int [ ] {\n91 , 30 , 32 , 116 , 93 } , new int [ ] {\n1 , 1 , 1 , 1 , 0 } ) ;\nDecodingContext c = new DecodingContext ( ) ;\nint miCol = 2 ;\nint miRow = 0 ;\nint blSz = 3 ;\nc . miTileStartCol = 0 ;\nc . aboveModes = new int [ 16 ] ;\nc . leftModes = new int [ 16 ] ;\nc . leftModes [ 0 ] = 3 ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(3, c.leftModes[0]);\nAssert.assertEquals(0, c.aboveModes[2]);\nAssert.assertEquals(0, c.leftModes[2]);\nAssert.assertEquals(116, decoder.readTree(1, c.getKfYModeProbs()[3][3]));\nAssert.assertEquals(91, decoder.readTree(1, c.getKfYModeProbs()[3][3]));\nAssert.assertEquals(1, c.aboveModes[2]);\nAssert.assertEquals(1, c.leftModes[2]);\nAssert.assertEquals(30, decoder.readTree(1, c.getKfYModeProbs()[1][3]));\nAssert.assertEquals(1, c.aboveModes[2]);\nAssert.assertEquals(1, c.leftModes[2]);\nAssert.assertEquals(32, decoder.readTree(1, c.getKfYModeProbs()[1][1]));\nAssert.assertEquals(1, c.aboveModes[2]);\nAssert.assertEquals(1, c.leftModes[2]);\nAssert.assertEquals(93, decoder.readTree(1, c.getKfYModeProbs()[1][3]));\nAssert.assertEquals(1, c.aboveModes[2]);\nAssert.assertEquals(1, c.leftModes[2]);\nAssert.assertEquals(0, c.aboveModes[2]);\nAssert.assertEquals(0, c.leftModes[2]);\nAssert.assertEquals(0, c.aboveModes[2]);\nAssert.assertEquals(0, c.leftModes[2]);\n====================\n\n",
+    "scores": [
+        0.408,
+        0.388,
+        0.388,
+        0.388,
+        0.388,
+        0.388,
+        0.388,
+        0.388,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.37,
+        0.368
+    ],
+    "ground_truth": "Assert.assertEquals(3,newModeInfo().readKfIntraMode(miCol,miRow,blSz,decoder,c));"
+}

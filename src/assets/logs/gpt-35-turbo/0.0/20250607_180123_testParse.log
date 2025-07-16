@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class SegmentTypeBox {
+    public static List < Atom > getRootAtoms ( SeekableByteChannel input ) throws IOException { 
+    input . setPosition ( 0 ) ; 
+    List < Atom > result = new ArrayList < Atom > ( ) ; 
+    long off = 0 ; 
+    Header atom ; 
+    while ( off < input . size ( ) ) { 
+    input . setPosition ( off ) ; 
+    atom = Header . read ( NIOUtils . fetchFromChannel ( input , 16 ) ) ; 
+    if ( atom == null ) break ; 
+    result . add ( new Atom ( atom , off ) ) ; 
+    off += atom . getSize ( ) ; 
+    } return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class SegmentTypeBoxTest {
+    @Test
+     public void testParse ( ) throws Exception {
+         ByteBuffer buf = ByteBuffer . allocate ( 0x18 + 8 ) ; 
+         buf . putInt ( 0x18 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . putInt ( 0 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . putInt ( 8 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . clear ( ) ; 
+         SeekableByteChannel input = ByteBufferSeekableByteChannel . readFromByteBuffer ( buf ) ; 
+         List < Atom > rootAtoms = MP4Util . getRootAtoms ( input ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(3, rootAtoms.size());
+Assert.assertEquals("STR", rootAtoms.get(0).getFourcc());
+Assert.assertEquals(0, rootAtoms.get(0).getOffset());
+Assert.assertEquals(0, rootAtoms.get(0).getSize());
+Assert.assertEquals("STR", rootAtoms.get(1).getFourcc());
+Assert.assertEquals(24, rootAtoms.get(1).getOffset());
+Assert.assertEquals(0, rootAtoms.get(1).getSize());
+Assert.assertEquals("STR", rootAtoms.get(2).getFourcc());
+Assert.assertEquals(32, rootAtoms.get(2).getOffset());
+Assert.assertEquals(8, rootAtoms.get(2).getSize());
+Assert.assertEquals(0, rootAtoms.get(2).getChildren().size());
+Assert.assertEquals(0, rootAtoms.get(1).getChildren().size());
+Assert.assertEquals(0, rootAtoms.get(0).getChildren().size());
+Assert.assertEquals(0, rootAtoms.get(2).getHeader().getVersion());
+Assert.assertEquals(0, rootAtoms.get(1).getHeader().getVersion());
+Assert.assertEquals(0, rootAtoms.get(0).getHeader().getVersion());
+Assert.assertEquals(0, rootAtoms.get(2).getHeader().getFlags());
+Assert.assertEquals(0, rootAtoms.get(1).getHeader().getFlags());
+Assert.assertEquals(0, rootAtoms.get(0).getHeader().getFlags());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,rootAtoms.size()); ===
+0.969 - Assert.assertEquals(3, rootAtoms.size())
+0.811 - Assert.assertEquals(0, rootAtoms.get(0).getSize())
+0.811 - Assert.assertEquals(0, rootAtoms.get(1).getSize())
+0.811 - Assert.assertEquals(8, rootAtoms.get(2).getSize())
+0.779 - Assert.assertEquals(24, rootAtoms.get(1).getOffset())
+0.779 - Assert.assertEquals(32, rootAtoms.get(2).getOffset())
+0.763 - Assert.assertEquals(0, rootAtoms.get(0).getOffset())
+0.729 - Assert.assertEquals(0, rootAtoms.get(2).getChildren().size())
+0.729 - Assert.assertEquals(0, rootAtoms.get(1).getChildren().size())
+0.729 - Assert.assertEquals(0, rootAtoms.get(0).getChildren().size())
+0.700 - Assert.assertEquals("STR", rootAtoms.get(0).getFourcc())
+0.700 - Assert.assertEquals("STR", rootAtoms.get(1).getFourcc())
+0.700 - Assert.assertEquals("STR", rootAtoms.get(2).getFourcc())
+0.652 - Assert.assertEquals(0, rootAtoms.get(2).getHeader().getVersion())
+0.652 - Assert.assertEquals(0, rootAtoms.get(1).getHeader().getVersion())
+0.652 - Assert.assertEquals(0, rootAtoms.get(0).getHeader().getVersion())
+0.644 - Assert.assertEquals(0, rootAtoms.get(2).getHeader().getFlags())
+0.644 - Assert.assertEquals(0, rootAtoms.get(1).getHeader().getFlags())
+0.644 - Assert.assertEquals(0, rootAtoms.get(0).getHeader().getFlags())

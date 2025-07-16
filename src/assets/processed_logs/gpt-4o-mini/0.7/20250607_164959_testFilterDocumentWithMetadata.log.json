@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterDocumentWithMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadataFilterParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertEquals(1, fields.size());\nassertFalse(fields.isEmpty());\nassertTrue(fields.containsValue(\"STR\"));\nassertNull(fields.get(\"non_existent_key\"));\nassertNotEquals(\"different_value\", fields.get(\"STR\"));\nassertTrue(fields.keySet().stream().anyMatch(key -> key.equals(\"STR\")));\nassertEquals(\"STR\", fields.get(\"STR\").trim());\nassertTrue(fields.values().stream().anyMatch(value -> value.equals(\"STR\")));\nassertSame(fields.get(\"STR\"), fields.get(\"STR\"));\nassertEquals(fields.get(\"STR\").length(), 3);\nassertTrue(fields.keySet().iterator().hasNext());\nassertFalse(fields.containsKey(\"another_key\"));\nassertNotEquals(fields.size(), 0);\nassertTrue(fields.values().stream().allMatch(value -> value instanceof String));\nassertThrows(NullPointerException.class, () -> fields.get(null));\nassertEquals(\"STR\", fields.get(\"STR\").toUpperCase());\nassertTrue(fields.containsKey(\"STR\") && fields.get(\"STR\").length() > 0);\nassertEquals(\"STR\", fields.get(\"STR\").toLowerCase());\nassertNotEquals(fields.get(\"STR\"), \"different_string\");\n```\n====================\n\n",
+    "scores": [
+        0.925,
+        0.851,
+        0.787,
+        0.787,
+        0.756,
+        0.729,
+        0.716,
+        0.694,
+        0.646,
+        0.64,
+        0.6,
+        0.6,
+        0.585,
+        0.583,
+        0.565,
+        0.517,
+        0.444,
+        0.44,
+        0.423,
+        0.339,
+        0.328,
+        0.305,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

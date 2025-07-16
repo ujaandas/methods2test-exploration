@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Picture {
+    public int [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class PictureTest {
+    @Test
+     public void testToAndFrom ( ) throws Exception {
+         int [ ] Y = randomIntArray ( 4096 , 4 , 1019 ) ; 
+         int [ ] U = randomIntArray ( 2048 , 4 , 1019 ) ; 
+         int [ ] V = randomIntArray ( 2048 , 4 , 1019 ) ; 
+         PictureHiBD pictureHbd = PictureHiBD . createPictureWithDepth ( 64 , 64 , new int [ ] [ ] { 
+     Y , U , V } , ColorSpace . YUV422 , 10 ) ; 
+         Picture picture = Picture . fromPictureHiBD ( pictureHbd ) ; 
+         PictureHiBD resultHbd = picture . toPictureHiBD ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertArrayEquals(Y, resultHbd.getPlaneData(0));
+assertArrayEquals(U, resultHbd.getPlaneData(1));
+assertArrayEquals(V, resultHbd.getPlaneData(2));
+assertEquals(64, resultHbd.getWidth());
+assertEquals(64, resultHbd.getHeight());
+assertEquals(10, resultHbd.getBitDepth());
+assertEquals(ColorSpace.YUV422, resultHbd.getColorSpace());
+assertEquals(3, resultHbd.getNumPlanes());
+assertNotNull(resultHbd.getPlaneData(0));
+assertNotNull(resultHbd.getPlaneData(1));
+assertNotNull(resultHbd.getPlaneData(2));
+assertTrue(resultHbd.getPlaneData(0).length > 0);
+assertTrue(resultHbd.getPlaneData(1).length > 0);
+assertTrue(resultHbd.getPlaneData(2).length > 0);
+assertEquals(4096, resultHbd.getPlaneData(0).length);
+assertEquals(2048, resultHbd.getPlaneData(1).length);
+assertEquals(2048, resultHbd.getPlaneData(2).length);
+assertNotSame(Y, resultHbd.getPlaneData(0));
+assertNotSame(U, resultHbd.getPlaneData(1));
+assertNotSame(V, resultHbd.getPlaneData(2));
+assertTrue(Arrays.equals(Y, resultHbd.getPlaneData(0)));
+assertTrue(Arrays.equals(U, resultHbd.getPlaneData(1)));
+assertTrue(Arrays.equals(V, resultHbd.getPlaneData(2)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(Y,resultHbd.getPlaneData(0)); ===
+0.957 - assertArrayEquals(U, resultHbd.getPlaneData(1))
+0.957 - assertArrayEquals(V, resultHbd.getPlaneData(2))
+0.920 - ```java
+assertArrayEquals(Y, resultHbd.getPlaneData(0))
+0.900 - assertTrue(Arrays.equals(Y, resultHbd.getPlaneData(0)))
+0.860 - assertTrue(Arrays.equals(U, resultHbd.getPlaneData(1)))
+0.860 - assertTrue(Arrays.equals(V, resultHbd.getPlaneData(2)))
+0.825 - assertEquals(4096, resultHbd.getPlaneData(0).length)
+0.818 - assertNotSame(Y, resultHbd.getPlaneData(0))
+0.814 - assertEquals(3, resultHbd.getNumPlanes())
+0.814 - assertNotNull(resultHbd.getPlaneData(0))
+0.804 - assertEquals(2048, resultHbd.getPlaneData(1).length)
+0.804 - assertEquals(2048, resultHbd.getPlaneData(2).length)
+0.791 - assertNotNull(resultHbd.getPlaneData(1))
+0.791 - assertNotNull(resultHbd.getPlaneData(2))
+0.773 - assertNotSame(U, resultHbd.getPlaneData(1))
+0.773 - assertNotSame(V, resultHbd.getPlaneData(2))
+0.762 - assertEquals(64, resultHbd.getHeight())
+0.761 - assertTrue(resultHbd.getPlaneData(0).length > 0)
+0.747 - assertEquals(64, resultHbd.getWidth())
+0.744 - assertEquals(10, resultHbd.getBitDepth())
+0.739 - assertTrue(resultHbd.getPlaneData(1).length > 0)
+0.739 - assertTrue(resultHbd.getPlaneData(2).length > 0)
+0.660 - assertEquals(ColorSpace.YUV422, resultHbd.getColorSpace())
+0.000 - ```

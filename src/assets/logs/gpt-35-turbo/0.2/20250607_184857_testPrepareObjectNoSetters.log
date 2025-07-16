@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparer {
+    public ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException { 
+    ObjectQueryInfo result ; 
+    String onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ; 
+    if ( onamePattern != null ) { 
+    Map < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ; 
+    if ( attributeSetters . size ( ) > 0 ) { 
+    String onameString ; 
+    if ( obj instanceof MBeanLocationParameterSource ) { 
+    onameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ; 
+    } else { 
+    onameString = onamePattern ; 
+    } ObjectName oname = new ObjectName ( onameString ) ; 
+    result = new ObjectQueryInfo ( obj , oname , attributeSetters ) ; 
+    } else { 
+    this . logNoAttributeThrottle . warn ( log , "STR" , onamePattern ) ; 
+    result = null ; 
+    } } else { 
+    log . warn ( "STR" ) ; 
+    result = null ; 
+    } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparerTest {
+    @Test
+     public void testPrepareObjectNoSetters ( ) throws Exception {
+         this . initPreparer ( ) ; 
+         ObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(result);
+assertNull(result.getObjectName());
+assertNull(result.getAttributeSetters());
+assertNull(result.getObject());
+assertNull(result);
+assertEquals(0, result.getAttributeSetters().size());
+assertTrue(preparer.prepareObjectQuery(testTarget001) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget002) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget003) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget004) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget005) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget006) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget007) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget008) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget009) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget010) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget011) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget012) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget013) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget014) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget015) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget016) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget017) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget018) instanceof ObjectQueryInfo);
+assertTrue(preparer.prepareObjectQuery(testTarget019) instanceof ObjectQueryInfo);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+1.000 - assertNull(result)
+0.923 - assertNotNull(result)
+0.750 - assertNull(result.getObject())
+0.692 - assertNull(result.getObjectName())
+0.621 - assertNull(result.getAttributeSetters())
+0.464 - assertEquals(0, result.getAttributeSetters().size())
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget001) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget002) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget003) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget004) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget005) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget006) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget007) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget008) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget009) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget010) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget011) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget012) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget013) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget014) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget015) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget016) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget017) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget018) instanceof ObjectQueryInfo)
+0.268 - assertTrue(preparer.prepareObjectQuery(testTarget019) instanceof ObjectQueryInfo)

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( Object ... params ) {\nif ( ! ( params [ 0 ] instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ;\nfinal List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nObject val = createSingleValue ( mapParam ) ;\nresult . add ( val ) ;\n} if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) {\nreturn result . get ( 0 ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueByValueTwoParametersArrayParams ( ) {\nfinal Object result = propertyIndexByValue . createValue ( mapToTest , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(2, ((List) result).size());\nassertTrue(((List) result).contains(\"STR\"));\nassertTrue(((List) result).contains(\"STR\"));\nassertFalse(((List) result).contains(\"INT\"));\nassertNotNull(result);\nassertNotEquals(0, ((List) result).size());\nassertTrue(result instanceof List);\nassertTrue(result instanceof Collection);\nassertTrue(result instanceof Object);\nassertTrue(result instanceof ArrayList);\nassertTrue(result instanceof List);\nassertTrue(result instanceof Collection);\nassertTrue(result instanceof Object);\nassertTrue(result instanceof ArrayList);\nassertTrue(result instanceof List);\nassertTrue(result instanceof Collection);\nassertTrue(result instanceof Object);\nassertTrue(result instanceof ArrayList);\nassertTrue(result instanceof List);\nassertTrue(result instanceof Collection);\nassertTrue(result instanceof Object);\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.861,
+        0.861,
+        0.861,
+        0.861,
+        0.829,
+        0.829,
+        0.829,
+        0.829,
+        0.773,
+        0.773,
+        0.773,
+        0.525,
+        0.525,
+        0.508,
+        0.453,
+        0.444,
+        0.436
+    ],
+    "ground_truth": "Assert.assertTrue(resultinstanceofCollection);"
+}

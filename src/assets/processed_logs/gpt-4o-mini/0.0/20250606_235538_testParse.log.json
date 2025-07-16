@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SegmentTypeBox {\npublic static List < Atom > getRootAtoms ( SeekableByteChannel input ) throws IOException {\ninput . setPosition ( 0 ) ;\nList < Atom > result = new ArrayList < Atom > ( ) ;\nlong off = 0 ;\nHeader atom ;\nwhile ( off < input . size ( ) ) {\ninput . setPosition ( off ) ;\natom = Header . read ( NIOUtils . fetchFromChannel ( input , 16 ) ) ;\nif ( atom == null ) break ;\nresult . add ( new Atom ( atom , off ) ) ;\noff += atom . getSize ( ) ;\n} return result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SegmentTypeBoxTest {\n@Test\npublic void testParse ( ) throws Exception {\nByteBuffer buf = ByteBuffer . allocate ( 0x18 + 8 ) ;\nbuf . putInt ( 0x18 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . putInt ( 0 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . putInt ( 8 ) ;\nbuf . put ( \"STR\" . getBytes ( ) ) ;\nbuf . clear ( ) ;\nSeekableByteChannel input = ByteBufferSeekableByteChannel . readFromByteBuffer ( buf ) ;\nList < Atom > rootAtoms = MP4Util . getRootAtoms ( input ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(rootAtoms);\nassertEquals(3, rootAtoms.size());\nassertEquals(0, rootAtoms.get(0).getOffset());\nassertEquals(24, rootAtoms.get(0).getHeader().getSize());\nassertEquals(\"STR\", new String(rootAtoms.get(0).getHeader().getType()));\nassertEquals(24, rootAtoms.get(1).getOffset());\nassertEquals(8, rootAtoms.get(1).getHeader().getSize());\nassertEquals(\"STR\", new String(rootAtoms.get(1).getHeader().getType()));\nassertEquals(32, rootAtoms.get(2).getOffset());\nassertEquals(8, rootAtoms.get(2).getHeader().getSize());\nassertEquals(\"STR\", new String(rootAtoms.get(2).getHeader().getType()));\nassertTrue(rootAtoms.get(0).getHeader().getSize() > 0);\nassertTrue(rootAtoms.get(1).getHeader().getSize() > 0);\nassertTrue(rootAtoms.get(2).getHeader().getSize() > 0);\nassertEquals(0, rootAtoms.get(0).getHeader().getFlags());\nassertEquals(0, rootAtoms.get(1).getHeader().getFlags());\nassertEquals(0, rootAtoms.get(2).getHeader().getFlags());\nassertTrue(rootAtoms.get(0).getHeader().getType().length() > 0);\nassertTrue(rootAtoms.get(1).getHeader().getType().length() > 0);\nassertTrue(rootAtoms.get(2).getHeader().getType().length() > 0);\nassertEquals(0x18, rootAtoms.get(0).getHeader().getSize());\nassertEquals(0x8, rootAtoms.get(1).getHeader().getSize());\nassertEquals(0x8, rootAtoms.get(2).getHeader().getSize());\n```\n====================\n\n",
+    "scores": [
+        0.969,
+        0.779,
+        0.779,
+        0.763,
+        0.713,
+        0.698,
+        0.698,
+        0.682,
+        0.682,
+        0.674,
+        0.644,
+        0.644,
+        0.644,
+        0.594,
+        0.571,
+        0.571,
+        0.571,
+        0.554,
+        0.554,
+        0.554,
+        0.473,
+        0.473,
+        0.473,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,rootAtoms.size());"
+}

@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testDocFromJsonEmbedded ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass c0 = schema . createClass ( "STR" ) ; 
+         OClass c1 = schema . createClass ( "STR" ) ; 
+         c1 . createProperty ( "STR" , OType . STRING ) ; 
+         c1 . createProperty ( "STR" , OType . EMBEDDED , c0 ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . fromJSON ( "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" ) ; 
+         db . save ( doc ) ; 
+         List < ODocument > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(result);
+Assert.assertFalse(result.isEmpty());
+Assert.assertEquals(1, result.size());
+Assert.assertEquals("STR", result.get(0).getClassName());
+Assert.assertTrue(result.get(0).containsField("STR"));
+Assert.assertTrue(result.get(0).field("STR") instanceof String);
+Assert.assertEquals("expectedStringValue", result.get(0).field("STR"));
+Assert.assertTrue(result.get(0).containsField("STR"));
+Assert.assertTrue(result.get(0).field("STR") instanceof ODocument);
+Assert.assertNotNull(result.get(0).field("STR"));
+Assert.assertEquals("STR", ((ODocument) result.get(0).field("STR")).getClassName());
+Assert.assertTrue(((ODocument) result.get(0).field("STR")).containsField("STR"));
+Assert.assertTrue(((ODocument) result.get(0).field("STR")).field("STR") instanceof String);
+Assert.assertEquals("expectedEmbeddedStringValue", ((ODocument) result.get(0).field("STR")).field("STR"));
+Assert.assertTrue(result.get(0).getIdentity().isValid());
+Assert.assertEquals(1, db.countClass("STR"));
+Assert.assertEquals(1, db.countClass("STR"));
+Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"));
+Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"));
+Assert.assertEquals(1, db.countClass("STR"));
+Assert.assertNotNull(result.get(0).getCreationDate());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result.size(),0); ===
+0.931 - Assert.assertEquals(1, result.size())
+0.724 - Assert.assertFalse(result.isEmpty())
+0.649 - Assert.assertEquals("STR", result.get(0).getClassName())
+0.571 - Assert.assertNotNull(result.get(0).field("STR"))
+0.560 - Assert.assertNotNull(result.get(0).getCreationDate())
+0.554 - Assert.assertEquals(1, db.countClass("STR"))
+0.554 - Assert.assertEquals(1, db.countClass("STR"))
+0.554 - Assert.assertEquals(1, db.countClass("STR"))
+0.552 - ```java
+Assert.assertNotNull(result)
+0.527 - Assert.assertEquals("expectedStringValue", result.get(0).field("STR"))
+0.507 - Assert.assertTrue(result.get(0).containsField("STR"))
+0.507 - Assert.assertTrue(result.get(0).containsField("STR"))
+0.487 - Assert.assertTrue(result.get(0).getIdentity().isValid())
+0.485 - Assert.assertEquals("STR", ((ODocument) result.get(0).field("STR")).getClassName())
+0.458 - Assert.assertTrue(result.get(0).field("STR") instanceof String)
+0.442 - Assert.assertTrue(result.get(0).field("STR") instanceof ODocument)
+0.384 - Assert.assertEquals("expectedEmbeddedStringValue", ((ODocument) result.get(0).field("STR")).field("STR"))
+0.376 - Assert.assertTrue(((ODocument) result.get(0).field("STR")).containsField("STR"))
+0.349 - Assert.assertTrue(((ODocument) result.get(0).field("STR")).field("STR") instanceof String)
+0.295 - Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"))
+0.295 - Assert.assertTrue(db.getMetadata().getSchema().existsClass("STR"))
+0.000 - ```

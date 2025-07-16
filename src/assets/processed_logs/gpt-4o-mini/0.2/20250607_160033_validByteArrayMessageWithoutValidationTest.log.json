@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class CEFParser {\npublic CommonEvent parse ( byte [ ] cefByteArray ) {\nString cefString ;\ncefString = new String ( cefByteArray , Charset . forName ( \"STR\" ) ) ;\nreturn this . parse ( cefString , false ) ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class CEFParserTest {\n@Test\npublic void validByteArrayMessageWithoutValidationTest ( ) throws Exception {\nString sample1 = \"STR\" ;\nCEFParser parser = new CEFParser ( ) ;\nbyte [ ] sample1Array = sample1 . getBytes ( Charset . forName ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nCommonEvent event = parser.parse(sample1Array);\nassertNotNull(event);\nassertEquals(\"ExpectedField1\", event.getField1());\nassertEquals(\"ExpectedField2\", event.getField2());\nassertTrue(event.getField3() > 0);\nassertFalse(event.getField4().isEmpty());\nassertEquals(\"ExpectedValue\", event.getField5());\nassertNotEquals(\"UnexpectedValue\", event.getField6());\nassertTrue(event.getField7().contains(\"ExpectedSubstring\"));\nassertNull(event.getField8());\nassertEquals(10, event.getField9().size());\nassertTrue(event.getField10() instanceof ExpectedType);\nassertEquals(\"ExpectedString\", event.getField11());\nassertFalse(event.getField12().isPresent());\nassertTrue(event.getField13() >= 0);\nassertEquals(\"ExpectedFormat\", event.getField14().getFormat());\nassertNotSame(event.getField15(), event.getField16());\nassertTrue(event.getField17().matches(\"ExpectedRegex\"));\nassertEquals(\"ExpectedDate\", event.getField18().toString());\nassertArrayEquals(new int[]{1, 2, 3}, event.getField19());\nassertTrue(event.getField20().isValid());\nassertEquals(\"ExpectedMessage\", event.getMessage());\nassertNotNull(event.getTimestamp());\n```\n====================\n\n",
+    "scores": [
+        0.652,
+        0.557,
+        0.526,
+        0.486,
+        0.395,
+        0.366,
+        0.351,
+        0.346,
+        0.341,
+        0.333,
+        0.333,
+        0.323,
+        0.323,
+        0.308,
+        0.3,
+        0.292,
+        0.277,
+        0.275,
+        0.273,
+        0.27,
+        0.27,
+        0.244,
+        0.222,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(parser.parse(sample1Array));"
+}

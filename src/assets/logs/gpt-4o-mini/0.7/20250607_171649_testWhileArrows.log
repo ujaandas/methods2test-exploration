@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     public OResultSet query ( String query , Object ... args ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( query , args ) ; 
+     }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testWhileArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.getProperty("propertyName").equals(expectedValue));
+assertFalse(qResult.isEmpty());
+assertTrue(qResult.next().getProperty("anotherProperty").equals(anotherExpectedValue));
+assertEquals(expectedType, qResult.next().getType());
+assertTrue(qResult.next().getProperty("numericProperty") > 0);
+assertNotEquals(unexpectedValue, qResult.next().getProperty("differentProperty"));
+assertTrue(qResult.next().getProperty("listProperty") instanceof List);
+assertTrue(((List) qResult.next().getProperty("listProperty")).contains(expectedListValue));
+assertEquals(expectedMapValue, qResult.next().getProperty("mapProperty").get("key"));
+assertTrue(qResult.next().getProperty("booleanProperty"));
+assertEquals(expectedDate, qResult.next().getProperty("dateProperty"));
+assertTrue(qResult.next().getProperty("stringProperty").startsWith("prefix"));
+assertNotNull(qResult.next().getProperty("nestedProperty").get("nestedKey"));
+assertTrue(qResult.count() > 1);
+assertTrue(qResult.next().getProperty("setProperty") instanceof Set);
+assertEquals(expectedEnumValue, qResult.next().getProperty("enumProperty"));
+assertTrue(qResult.next().getProperty("optionalProperty") == null);
+assertTrue(qResult.getProperty("propertyName").equals(expectedValue) || qResult.getProperty("propertyName").equals(anotherExpectedValue));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,size(qResult)); ===
+0.714 - assertEquals(expectedSize, qResult.size())
+0.678 - assertFalse(qResult.isEmpty())
+0.621 - assertTrue(qResult.hasNext())
+0.621 - assertTrue(qResult.count() > 1)
+0.576 - ```java
+assertNotNull(qResult)
+0.575 - assertEquals(expectedType, qResult.next().getType())
+0.469 - assertEquals(expectedDate, qResult.next().getProperty("dateProperty"))
+0.447 - assertEquals(expectedEnumValue, qResult.next().getProperty("enumProperty"))
+0.422 - assertNotEquals(unexpectedValue, qResult.next().getProperty("differentProperty"))
+0.419 - assertTrue(qResult.next().getProperty("booleanProperty"))
+0.411 - assertEquals(expectedMapValue, qResult.next().getProperty("mapProperty").get("key"))
+0.409 - assertTrue(qResult.next().getProperty("numericProperty") > 0)
+0.387 - assertTrue(qResult.next().getProperty("optionalProperty") == null)
+0.379 - assertTrue(qResult.next().getProperty("setProperty") instanceof Set)
+0.371 - assertTrue(qResult.next().getProperty("listProperty") instanceof List)
+0.367 - assertTrue(qResult.getProperty("propertyName").equals(expectedValue))
+0.343 - assertNotNull(qResult.next().getProperty("nestedProperty").get("nestedKey"))
+0.340 - assertTrue(qResult.next().getProperty("stringProperty").startsWith("prefix"))
+0.313 - assertTrue(qResult.next().getProperty("anotherProperty").equals(anotherExpectedValue))
+0.303 - assertTrue(((List) qResult.next().getProperty("listProperty")).contains(expectedListValue))
+0.220 - assertTrue(qResult.getProperty("propertyName").equals(expectedValue) || qResult.getProperty("propertyName").equals(anotherExpectedValue))
+0.000 - ```

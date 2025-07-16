@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class H264Utils {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class H264UtilsTest {
+    @Test
+     public void testAvcCToAnnexB ( ) {
+         ArrayList < ByteBuffer > spsList = new ArrayList < ByteBuffer > ( ) ; 
+         spsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     's' , 't' , 'a' , 'n' } ) ) ; 
+         spsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     't' , 'h' , 'e' } ) ) ; 
+         ArrayList < ByteBuffer > ppsList = new ArrayList < ByteBuffer > ( ) ; 
+         ppsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     'm' , 'a' , 'n' } ) ) ; 
+         ppsList . add ( ByteBuffer . wrap ( new byte [ ] { 
+     'c' , 'o' , 'o' , 'l' } ) ) ; 
+         AvcCBox avcCBox = AvcCBox . createAvcCBox ( 66 , 0 , 42 , 0 , spsList , ppsList ) ; 
+         byte [ ] res = NIOUtils . toArray ( H264Utils . avcCToAnnexB ( avcCBox ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        assertNotNull(res);
+        assertEquals(12, res.length);
+        assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4));
+        assertArrayEquals(new byte[]{'s', 't', 'a', 'n'}, Arrays.copyOfRange(res, 4, 8));
+        assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12));
+        assertArrayEquals(new byte[]{'m', 'a', 'n'}, Arrays.copyOfRange(res, 12, 15));
+        assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19));
+        assertArrayEquals(new byte[]{'c', 'o', 'o', 'l'}, Arrays.copyOfRange(res, 19, 23));
+        assertEquals('s', res[4]);
+        assertEquals('t', res[5]);
+        assertEquals('a', res[6]);
+        assertEquals('n', res[7]);
+        assertEquals('m', res[12]);
+        assertEquals('a', res[13]);
+        assertEquals('n', res[14]);
+        assertEquals('c', res[19]);
+        assertEquals('o', res[20]);
+        assertEquals('o', res[21]);
+        assertEquals('l', res[22]);
+        assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4)));
+        assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12)));
+        assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(newbyte[]{0,0,0,1,0x67,'s','t','a','n',0,0,0,1,0x67,'t','h','e',0,0,0,1,0x68,'m','a','n',0,0,0,1,0x68,'c','o','o','l'},res); ===
+0.458 - assertArrayEquals(new byte[]{'s', 't', 'a', 'n'}, Arrays.copyOfRange(res, 4, 8))
+0.454 - assertArrayEquals(new byte[]{'c', 'o', 'o', 'l'}, Arrays.copyOfRange(res, 19, 23))
+0.425 - assertArrayEquals(new byte[]{'m', 'a', 'n'}, Arrays.copyOfRange(res, 12, 15))
+0.417 - assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4))
+0.396 - assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12))
+0.394 - assertArrayEquals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19))
+0.393 - assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 0, 4)))
+0.372 - assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 8, 12)))
+0.370 - assertTrue(Arrays.equals(new byte[]{0, 0, 0, 1}, Arrays.copyOfRange(res, 15, 19)))
+0.255 - assertEquals('s', res[4])
+0.255 - assertEquals('t', res[5])
+0.255 - assertEquals('a', res[6])
+0.255 - assertEquals('n', res[7])
+0.253 - assertEquals('m', res[12])
+0.253 - assertEquals('a', res[13])
+0.253 - assertEquals('n', res[14])
+0.253 - assertEquals('c', res[19])
+0.253 - assertEquals('o', res[20])
+0.253 - assertEquals('o', res[21])
+0.253 - assertEquals('l', res[22])
+0.226 - assertEquals(12, res.length)
+0.156 - ```java
+        assertNotNull(res)
+0.000 - ```

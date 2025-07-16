@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtil {
+    protected static Properties getPropertiesFromYamlResource ( URL resource ) { 
+    return getPropertiesFromYamlResource ( null , resource ) ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtilTest {
+    @Test
+     public void testNonExistentYamlToPropertiesParsing ( ) {
+         Properties props = YamlUtil . getPropertiesFromYamlResource ( SpringBootUtilTest . class . getResource ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(props);
+assertTrue(props.isEmpty());
+assertFalse(props.containsKey("someKey"));
+assertEquals(0, props.size());
+assertFalse(props.containsValue("someValue"));
+assertFalse(props.keySet().iterator().hasNext());
+assertFalse(props.values().iterator().hasNext());
+assertNotNull(props);
+assertTrue(props.stringPropertyNames().isEmpty());
+assertThrows(IllegalArgumentException.class, () -> props.getProperty("nonExistentKey"));
+assertDoesNotThrow(() -> props.load(new StringReader("key: value")));
+assertFalse(props.containsKey("key"));
+assertNull(props.getProperty("key"));
+assertFalse(props.stringPropertyNames().contains("key"));
+assertNotEquals("value", props.getProperty("key"));
+assertNotEquals(1, props.size());
+assertTrue(props.getProperty("anotherKey") == null);
+assertThrows(NullPointerException.class, () -> props.getProperty(null));
+assertTrue(props.equals(new Properties()));
+assertFalse(props.equals(new Object()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(props); ===
+1.000 - assertNotNull(props)
+0.756 - ```java
+assertNull(props)
+0.706 - assertNotEquals(1, props.size())
+0.625 - assertEquals(0, props.size())
+0.607 - assertNull(props.getProperty("key"))
+0.596 - assertTrue(props.isEmpty())
+0.522 - assertNotEquals("value", props.getProperty("key"))
+0.491 - assertFalse(props.containsKey("key"))
+0.483 - assertFalse(props.equals(new Object()))
+0.459 - assertFalse(props.containsKey("someKey"))
+0.459 - assertTrue(props.equals(new Properties()))
+0.431 - assertFalse(props.containsValue("someValue"))
+0.412 - assertFalse(props.keySet().iterator().hasNext())
+0.412 - assertFalse(props.values().iterator().hasNext())
+0.409 - assertThrows(NullPointerException.class, () -> props.getProperty(null))
+0.406 - assertTrue(props.stringPropertyNames().isEmpty())
+0.406 - assertTrue(props.getProperty("anotherKey") == null)
+0.381 - assertDoesNotThrow(() -> props.load(new StringReader("key: value")))
+0.368 - assertFalse(props.stringPropertyNames().contains("key"))
+0.308 - assertThrows(IllegalArgumentException.class, () -> props.getProperty("nonExistentKey"))
+0.000 - ```

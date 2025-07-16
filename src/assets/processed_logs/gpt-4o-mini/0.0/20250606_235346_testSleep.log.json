@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScript {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLScriptTest {\n@Test\npublic void testSleep ( ) throws Exception {\nlong begin = System . currentTimeMillis ( ) ;\nStringBuilder script = new StringBuilder ( ) ;\nscript . append ( \"STR\" ) ;\ndb . command ( new OCommandScript ( \"STR\" , script . toString ( ) ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(db);\nAssert.assertTrue(db.isOpen());\nAssert.assertEquals(\"ExpectedResult\", db.command(new OCommandScript(\"STR\", script.toString())).execute());\nAssert.assertTrue(System.currentTimeMillis() - begin < 1000);\nAssert.assertTrue(db.getClusterNames().size() > 0);\nAssert.assertTrue(db.countClass(\"SomeClass\") > 0);\nAssert.assertFalse(db.getClusterNames().isEmpty());\nAssert.assertNotEquals(0, db.countClusterElements(\"SomeCluster\"));\nAssert.assertTrue(db.getMetadata().getSchema().getClasses().size() > 0);\nAssert.assertNotNull(db.getMetadata().getSchema().getClass(\"SomeClass\"));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperties().size() > 0);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\") != null);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getType() == String.class);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").isMandatory());\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").isReadonly());\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getMin() >= 0);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getMax() <= 100);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getDefaultValue().equals(\"DefaultValue\"));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getLinkedClass() == null);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"SomeClass\").getProperty(\"SomeProperty\").getType() == String.class);\n```\n====================\n\n",
+    "scores": [
+        0.939,
+        0.539,
+        0.533,
+        0.472,
+        0.45,
+        0.413,
+        0.397,
+        0.396,
+        0.368,
+        0.358,
+        0.34,
+        0.329,
+        0.327,
+        0.321,
+        0.303,
+        0.297,
+        0.278,
+        0.233,
+        0.233,
+        0.181,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(System.currentTimeMillis()-begin>=500);"
+}

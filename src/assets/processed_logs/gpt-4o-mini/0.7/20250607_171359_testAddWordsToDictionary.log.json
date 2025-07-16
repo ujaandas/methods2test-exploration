@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage open-korean-text.open-korean-text;\n\npublic class OpenKoreanProcessorJava {\npublic KoreanPosJava getPos ( ) {\nreturn pos ;\n}\n}\n\npackage open-korean-text.open-korean-text;\n\npublic class OpenKoreanProcessorJavaTest {\n@Test\npublic void testAddWordsToDictionary ( ) {\nString text = \"STR\" ;\nSeq < KoreanTokenizer . KoreanToken > tokens = OpenKoreanTextProcessorJava . tokenize ( text ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(tokens);\nassertFalse(tokens.isEmpty());\nassertEquals(expectedTokenCount, tokens.size());\nassertEquals(\"STR\", tokens.get(0).getText());\nassertEquals(KoreanPosJava.NOUN, tokens.get(0).getPos());\nassertTrue(tokens.get(0).isNoun());\nassertFalse(tokens.get(0).isVerb());\nassertTrue(tokens.stream().allMatch(token -> token.getText().length() > 0));\nassertTrue(tokens.stream().noneMatch(token -> token.getText().isEmpty()));\nassertTrue(tokens.stream().anyMatch(token -> token.getText().equals(\"STR\")));\nassertEquals(KoreanTokenizer.KoreanTokenType.WORD, tokens.get(0).getType());\nassertEquals(0, tokens.get(0).getStartIndex());\nassertEquals(3, tokens.get(0).getEndIndex());\nassertTrue(tokens.stream().allMatch(token -> token.getStartIndex() >= 0));\nassertTrue(tokens.stream().allMatch(token -> token.getEndIndex() <= text.length()));\nassertEquals(1, tokens.stream().filter(token -> token.getText().equals(\"STR\")).count());\nassertEquals(KoreanPosJava.UNKNOWN, tokens.get(1).getPos());\nassertTrue(tokens.get(1).isUnknown());\nassertEquals(1, tokens.stream().filter(token -> token.getPos() == KoreanPosJava.NOUN).count());\nassertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.NOUN));\nassertTrue(tokens.stream().anyMatch(token -> token.getPos() == KoreanPosJava.VERB));\n```\n====================\n\n",
+    "scores": [
+        0.597,
+        0.585,
+        0.53,
+        0.503,
+        0.455,
+        0.444,
+        0.418,
+        0.416,
+        0.404,
+        0.373,
+        0.371,
+        0.358,
+        0.349,
+        0.329,
+        0.312,
+        0.3,
+        0.298,
+        0.298,
+        0.298,
+        0.271,
+        0.233,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",OpenKoreanTextProcessorJava.tokensToJavaStringList(tokens).toString());"
+}

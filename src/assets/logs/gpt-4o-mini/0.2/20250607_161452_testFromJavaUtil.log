@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AList {
+    public static < T > AList < T > create ( Iterable < T > elements ) { 
+    if ( elements instanceof AList ) { 
+    return ( AList < T > ) elements ; 
+    } if ( elements instanceof List ) { 
+    return create ( ( List < T > ) elements ) ; 
+    } AList < T > result = nil ( ) ; 
+    for ( T el : elements ) { 
+    result = result . cons ( el ) ; 
+    } return result . reverse ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListTest {
+    @Test
+     public void testFromJavaUtil ( ) {
+         final AList < String > l = AList . < String > nil ( ) . cons ( "STR" ) . cons ( "STR" ) . cons ( "STR" ) ; 
+         final AList < String > l2 = AList . create ( Arrays . asList ( "STR" , "STR" , "STR" ) ) ; 
+         final AList < String > l3 = AList . create ( ( Iterable < String > ) Arrays . asList ( "STR" , "STR" , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, l.size());
+assertEquals(3, l2.size());
+assertEquals(3, l3.size());
+assertTrue(l.equals(l2));
+assertTrue(l.equals(l3));
+assertFalse(l.isEmpty());
+assertFalse(l2.isEmpty());
+assertFalse(l3.isEmpty());
+assertEquals("STR", l.head());
+assertEquals("STR", l2.head());
+assertEquals("STR", l3.head());
+assertEquals("STR", l.tail().head());
+assertEquals("STR", l2.tail().head());
+assertEquals("STR", l3.tail().head());
+assertEquals(2, l.tail().size());
+assertEquals(2, l2.tail().size());
+assertEquals(2, l3.tail().size());
+assertTrue(l.contains("STR"));
+assertTrue(l2.contains("STR"));
+assertTrue(l3.contains("STR"));
+assertFalse(l.contains("NOT_STR"));
+assertFalse(l2.contains("NOT_STR"));
+assertFalse(l3.contains("NOT_STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(l,l2); ===
+0.791 - assertEquals(3, l2.size())
+0.744 - assertEquals(3, l3.size())
+0.723 - assertEquals("STR", l2.head())
+0.714 - assertTrue(l.equals(l2))
+0.696 - assertEquals("STR", l.head())
+0.681 - assertEquals("STR", l3.head())
+0.680 - assertEquals(2, l2.tail().size())
+0.667 - assertTrue(l.equals(l3))
+0.653 - assertEquals(2, l.tail().size())
+0.640 - ```java
+assertEquals(3, l.size())
+0.640 - assertEquals(2, l3.tail().size())
+0.630 - assertEquals("STR", l2.tail().head())
+0.605 - assertFalse(l2.isEmpty())
+0.604 - assertEquals("STR", l.tail().head())
+0.593 - assertEquals("STR", l3.tail().head())
+0.571 - assertFalse(l.isEmpty())
+0.558 - assertFalse(l3.isEmpty())
+0.491 - assertFalse(l2.contains("NOT_STR"))
+0.468 - assertTrue(l.contains("STR"))
+0.462 - assertFalse(l.contains("NOT_STR"))
+0.458 - assertTrue(l2.contains("STR"))
+0.458 - assertTrue(l3.contains("STR"))
+0.453 - assertFalse(l3.contains("NOT_STR"))
+0.000 - ```

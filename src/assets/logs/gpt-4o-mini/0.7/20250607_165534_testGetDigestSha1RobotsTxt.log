@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormat {
+    public static String getDigestSha1 ( byte [ ] bytes ) { 
+    return "STR" + base32 . encodeAsString ( DigestUtils . sha1 ( bytes ) ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormatTest {
+    @Test
+     public void testGetDigestSha1RobotsTxt ( ) {
+         String robotsTxt = "STR" ; 
+         byte [ ] content = robotsTxt . getBytes ( StandardCharsets . UTF_8 ) ; 
+         String sha1str = "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(sha1str);
+assertEquals("STR" + base32.encodeAsString(DigestUtils.sha1(content)), sha1str);
+assertTrue(sha1str.startsWith("STR"));
+assertEquals(32, sha1str.length());
+assertFalse(sha1str.isEmpty());
+assertTrue(sha1str.matches("STR[0-7A-V]*"));
+assertFalse(sha1str.contains(" "));
+assertEquals("STR", sha1str.substring(0, 3));
+assertTrue(sha1str.equals("STR" + base32.encodeAsString(DigestUtils.sha1(content))));
+assertNotEquals("STR", sha1str);
+assertNotEquals("STRINVALID", sha1str);
+assertEquals(sha1str, WARCRecordFormat.getDigestSha1(content));
+assertNotEquals(sha1str, WARCRecordFormat.getDigestSha1("DifferentContent".getBytes(StandardCharsets.UTF_8)));
+assertTrue(sha1str.equalsIgnoreCase(sha1str));
+assertFalse(sha1str.equalsIgnoreCase("STR" + base32.encodeAsString(DigestUtils.sha1("DifferentContent".getBytes(StandardCharsets.UTF_8)))));
+assertTrue(sha1str.contains("A") || sha1str.contains("B") || sha1str.contains("C"));
+assertEquals(4, sha1str.length() % 5);
+assertTrue(sha1str.endsWith("A") || sha1str.endsWith("B") || sha1str.endsWith("C"));
+assertTrue(Character.isLetter(sha1str.charAt(3)));
+assertTrue(Character.isDigit(sha1str.charAt(4)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sha1str,WARCRecordFormat.getDigestSha1(content)); ===
+0.953 - assertEquals(sha1str, WARCRecordFormat.getDigestSha1(content))
+0.686 - assertNotEquals(sha1str, WARCRecordFormat.getDigestSha1("DifferentContent".getBytes(StandardCharsets.UTF_8)))
+0.587 - assertEquals("STR" + base32.encodeAsString(DigestUtils.sha1(content)), sha1str)
+0.587 - assertEquals("STR", sha1str.substring(0, 3))
+0.557 - assertNotEquals("STR", sha1str)
+0.550 - assertTrue(sha1str.equals("STR" + base32.encodeAsString(DigestUtils.sha1(content))))
+0.540 - assertEquals(32, sha1str.length())
+0.535 - assertEquals(4, sha1str.length() % 5)
+0.519 - assertNotEquals("STRINVALID", sha1str)
+0.500 - assertFalse(sha1str.contains(" "))
+0.482 - assertTrue(sha1str.equalsIgnoreCase(sha1str))
+0.454 - assertFalse(sha1str.isEmpty())
+0.418 - assertTrue(sha1str.matches("STR[0-7A-V]*"))
+0.404 - assertTrue(sha1str.startsWith("STR"))
+0.402 - assertFalse(sha1str.equalsIgnoreCase("STR" + base32.encodeAsString(DigestUtils.sha1("DifferentContent".getBytes(StandardCharsets.UTF_8)))))
+0.400 - assertTrue(Character.isDigit(sha1str.charAt(4)))
+0.397 - assertTrue(Character.isLetter(sha1str.charAt(3)))
+0.370 - assertTrue(sha1str.endsWith("A") || sha1str.endsWith("B") || sha1str.endsWith("C"))
+0.351 - ```java
+assertNotNull(sha1str)
+0.329 - assertTrue(sha1str.contains("A") || sha1str.contains("B") || sha1str.contains("C"))
+0.000 - ```

@@ -1,0 +1,108 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Travis {
+    @Override
+     public String getPullRequest ( ) { 
+     return getProperty ( TRAVIS_PULL_REQUEST ) ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TravisTest {
+    @Test
+     public void testGetPullRequest ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
+
+public void testGetPullRequest() {
+    // Create a mock of the Travis class
+    Travis travisMock = mock(Travis.class);
+    
+    // Define the behavior of the getProperty method
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("12345");
+    
+    // Test case 1: Verify that getPullRequest returns the correct pull request number
+    assertEquals("12345", travisMock.getPullRequest());
+    
+    // Test case 2: Verify that getPullRequest does not return null
+    assertNotNull(travisMock.getPullRequest());
+
+    // Test case 3: Verify that getPullRequest returns the expected value when PR is set
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("67890");
+    assertEquals("67890", travisMock.getPullRequest());
+
+    // Test case 4: Verify that getPullRequest returns an empty string when no PR is set
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("");
+    assertEquals("", travisMock.getPullRequest());
+
+    // Test case 5: Verify that getPullRequest returns null when property is missing
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn(null);
+    assertEquals(null, travisMock.getPullRequest());
+
+    // Test case 6: Check if getPullRequest calls getProperty with correct key
+    travisMock.getPullRequest();
+    verify(travisMock).getProperty("TRAVIS_PULL_REQUEST");
+
+    // Test case 7: Verify that getPullRequest returns a numeric string
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("98765");
+    assertEquals("98765", travisMock.getPullRequest());
+
+    // Test case 8: Verify behavior when TRAVIS_PULL_REQUEST is not a number
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("abcde");
+    assertEquals("abcde", travisMock.getPullRequest());
+
+    // Test case 9: Test for leading and trailing spaces in pull request number
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn(" 54321 ");
+    assertEquals(" 54321 ", trav
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",newTravis(env()).getPullRequest()); ===
+0.804 - assertEquals("", travisMock.getPullRequest())
+0.765 - assertEquals("67890", travisMock.getPullRequest())
+0.765 - assertEquals("98765", travisMock.getPullRequest())
+0.765 - assertEquals("abcde", travisMock.getPullRequest())
+0.747 - assertEquals(null, travisMock.getPullRequest())
+0.487 - assertEquals(" 54321 ", trav
+0.451 - // Test case 1: Verify that getPullRequest returns the correct pull request number
+    assertEquals("12345", travisMock.getPullRequest())
+0.430 - // Test case 2: Verify that getPullRequest does not return null
+    assertNotNull(travisMock.getPullRequest())
+0.403 - // Test case 6: Check if getPullRequest calls getProperty with correct key
+    travisMock.getPullRequest()
+0.302 - verify(travisMock).getProperty("TRAVIS_PULL_REQUEST")
+0.269 - // Test case 8: Verify behavior when TRAVIS_PULL_REQUEST is not a number
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("abcde")
+0.253 - // Test case 7: Verify that getPullRequest returns a numeric string
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("98765")
+0.253 - ```java
+import static org.junit.Assert.assertEquals
+0.246 - // Test case 9: Test for leading and trailing spaces in pull request number
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn(" 54321 ")
+0.243 - // Test case 4: Verify that getPullRequest returns an empty string when no PR is set
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("")
+0.242 - // Test case 5: Verify that getPullRequest returns null when property is missing
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn(null)
+0.241 - // Define the behavior of the getProperty method
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("12345")
+0.240 - public void testGetPullRequest() {
+    // Create a mock of the Travis class
+    Travis travisMock = mock(Travis.class)
+0.236 - // Test case 3: Verify that getPullRequest returns the expected value when PR is set
+    when(travisMock.getProperty("TRAVIS_PULL_REQUEST")).thenReturn("67890")
+0.227 - import static org.junit.Assert.assertNotNull
+0.093 - import static org.mockito.Mockito.*

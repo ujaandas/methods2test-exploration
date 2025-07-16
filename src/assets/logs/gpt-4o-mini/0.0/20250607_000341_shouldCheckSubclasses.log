@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(20, result.getTotalRecords());
+assertTrue(result.stream().allMatch(r -> r.getProperty("className").equals(childClass.getName())));
+assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("someProperty") != null));
+assertFalse(result.stream().anyMatch(r -> r.getProperty("someProperty").equals("invalidValue")));
+assertEquals("ExpectedValue", result.stream().findFirst().get().getProperty("expectedProperty"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("anotherProperty").equals("expectedAnotherValue")));
+assertEquals(1, result.stream().filter(r -> r.getProperty("specificProperty").equals("specificValue")).count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0));
+assertTrue(result.stream().allMatch(r -> r.getProperty("dateProperty") instanceof Date));
+assertTrue(result.stream().allMatch(r -> r.getProperty("booleanProperty") instanceof Boolean));
+assertEquals(5, result.stream().filter(r -> r.getProperty("category").equals("category1")).count());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("uniqueIdentifier") != null));
+assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("relatedClass").equals("relatedClassName")));
+assertEquals(10, result.stream().filter(r -> r.getProperty("type").equals("typeA")).count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("level") >= 1 && r.getProperty("level") <= 5));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.725 - assertEquals(20, result.getTotalRecords())
+0.627 - assertTrue(result.hasNext())
+0.609 - assertEquals(10, result.stream().filter(r -> r.getProperty("type").equals("typeA")).count())
+0.563 - assertEquals(5, result.stream().filter(r -> r.getProperty("category").equals("category1")).count())
+0.526 - assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0))
+0.522 - assertEquals("ExpectedValue", result.stream().findFirst().get().getProperty("expectedProperty"))
+0.521 - assertTrue(result.stream().anyMatch(r -> r.getProperty("uniqueIdentifier") != null))
+0.517 - assertEquals(1, result.stream().filter(r -> r.getProperty("specificProperty").equals("specificValue")).count())
+0.504 - assertTrue(result.stream().anyMatch(r -> r.getProperty("someProperty") != null))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")))
+0.488 - assertTrue(result.stream().allMatch(r -> r.getProperty("dateProperty") instanceof Date))
+0.481 - assertFalse(result.stream().anyMatch(r -> r.getProperty("someProperty").equals("invalidValue")))
+0.471 - ```java
+assertNotNull(result)
+0.465 - assertTrue(result.stream().allMatch(r -> r.getProperty("booleanProperty") instanceof Boolean))
+0.459 - assertTrue(result.stream().allMatch(r -> r.getProperty("className").equals(childClass.getName())))
+0.455 - assertTrue(result.stream().allMatch(r -> r.getProperty("level") >= 1 && r.getProperty("level") <= 5))
+0.441 - assertTrue(result.stream().anyMatch(r -> r.getProperty("relatedClass").equals("relatedClassName")))
+0.437 - assertTrue(result.stream().allMatch(r -> r.getProperty("parentClassName").equals(parentClass.getName())))
+0.434 - assertTrue(result.stream().anyMatch(r -> r.getProperty("anotherProperty").equals("expectedAnotherValue")))
+0.000 - ```

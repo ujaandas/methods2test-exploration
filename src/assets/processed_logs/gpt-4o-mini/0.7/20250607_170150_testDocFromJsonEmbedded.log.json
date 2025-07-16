@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTx {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTxTest {\n@Test\npublic void testDocFromJsonEmbedded ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass c0 = schema . createClass ( \"STR\" ) ;\nOClass c1 = schema . createClass ( \"STR\" ) ;\nc1 . createProperty ( \"STR\" , OType . STRING ) ;\nc1 . createProperty ( \"STR\" , OType . EMBEDDED , c0 ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . fromJSON ( \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ) ;\ndb . save ( doc ) ;\nList < ODocument > result = db . query ( new OSQLSynchQuery < Object > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(result);\nAssert.assertFalse(result.isEmpty());\nAssert.assertEquals(1, result.size());\nAssert.assertEquals(\"STR\", result.get(0).getClassName());\nAssert.assertTrue(result.get(0).containsField(\"STR\"));\nAssert.assertTrue(result.get(0).field(\"STR\") instanceof String);\nAssert.assertEquals(\"expectedStringValue\", result.get(0).field(\"STR\"));\nAssert.assertTrue(result.get(0).containsField(\"STR\"));\nAssert.assertTrue(result.get(0).field(\"STR\") instanceof ODocument);\nAssert.assertNotNull(result.get(0).field(\"STR\"));\nAssert.assertEquals(\"STR\", ((ODocument) result.get(0).field(\"STR\")).getClassName());\nAssert.assertTrue(((ODocument) result.get(0).field(\"STR\")).containsField(\"STR\"));\nAssert.assertTrue(((ODocument) result.get(0).field(\"STR\")).field(\"STR\") instanceof String);\nAssert.assertEquals(\"expectedEmbeddedStringValue\", ((ODocument) result.get(0).field(\"STR\")).field(\"STR\"));\nAssert.assertTrue(result.get(0).getIdentity().isValid());\nAssert.assertEquals(1, db.countClass(\"STR\"));\nAssert.assertEquals(1, db.countClass(\"STR\"));\nAssert.assertTrue(db.getMetadata().getSchema().existsClass(\"STR\"));\nAssert.assertTrue(db.getMetadata().getSchema().existsClass(\"STR\"));\nAssert.assertEquals(1, db.countClass(\"STR\"));\nAssert.assertNotNull(result.get(0).getCreationDate());\n```\n====================\n\n",
+    "scores": [
+        0.931,
+        0.724,
+        0.649,
+        0.571,
+        0.56,
+        0.554,
+        0.554,
+        0.554,
+        0.552,
+        0.527,
+        0.507,
+        0.507,
+        0.487,
+        0.485,
+        0.458,
+        0.442,
+        0.384,
+        0.376,
+        0.349,
+        0.295,
+        0.295,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(result.size(),0);"
+}

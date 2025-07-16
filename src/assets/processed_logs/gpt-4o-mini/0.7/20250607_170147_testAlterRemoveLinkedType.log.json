@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAny {\n@Deprecated\n< RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAnyTest {\n@Test\npublic void testAlterRemoveLinkedType ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . EMBEDDEDLIST , OType . ANY ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nList < ODocument > result = db . query ( new OSQLSynchQuery < ODocument > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(2, result.size());\nassertTrue(result.get(0) instanceof ODocument);\nassertTrue(result.get(1) instanceof ODocument);\nassertEquals(\"STR\", result.get(0).getClassName());\nassertEquals(\"STR\", result.get(1).getClassName());\nassertNotNull(result.get(0).field(\"STR\"));\nassertNotNull(result.get(1).field(\"STR\"));\nassertTrue(result.get(0).field(\"STR\") instanceof List<?>);\nassertTrue(result.get(1).field(\"STR\") instanceof List<?>);\nassertTrue(((List<?>) result.get(0).field(\"STR\")).isEmpty());\nassertTrue(((List<?>) result.get(1).field(\"STR\")).isEmpty());\nassertEquals(0, ((List<?>) result.get(0).field(\"STR\")).size());\nassertEquals(0, ((List<?>) result.get(1).field(\"STR\")).size());\nassertNull(result.get(0).field(\"nonExistingField\"));\nassertNull(result.get(1).field(\"nonExistingField\"));\nassertFalse(result.get(0).isNew());\nassertFalse(result.get(1).isNew());\nassertTrue(result.get(0).getIdentity().isPersistent());\nassertTrue(result.get(1).getIdentity().isPersistent());\nassertEquals(0, db.countClass(\"STR\"));\nassertEquals(2, db.countClusterElements(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.677,
+        0.677,
+        0.64,
+        0.545,
+        0.545,
+        0.5,
+        0.5,
+        0.464,
+        0.464,
+        0.462,
+        0.462,
+        0.4,
+        0.4,
+        0.395,
+        0.395,
+        0.386,
+        0.358,
+        0.35,
+        0.35,
+        0.346,
+        0.346,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(result);"
+}

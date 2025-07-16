@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecution {
+    OSequence getSequence ( String iName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropSequenceStatementExecutionTest {
+    @Test
+     public void testPlain ( ) {
+         String name = "STR" ; 
+         db . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+OSequence sequence = db.getMetadata().getSequenceLibrary().getSequence(name);
+assertNotNull(sequence);
+assertEquals(name, sequence.getName());
+assertEquals(OSequence.SEQUENCE_TYPE.CACHED, sequence.getType());
+assertEquals(0, sequence.getCurrentValue());
+assertEquals(1, sequence.getIncrement());
+assertEquals(100, sequence.getCacheSize());
+assertTrue(sequence.isCyclic());
+assertFalse(sequence.isAutoIncrement());
+assertEquals(0, sequence.getMinValue());
+assertEquals(Long.MAX_VALUE, sequence.getMaxValue());
+assertEquals(0, sequence.getStartValue());
+assertEquals(0, sequence.getLastValue());
+assertEquals(0, sequence.getInitialValue());
+assertEquals(0, sequence.getStep());
+assertEquals(0, sequence.getAllocationSize());
+assertEquals(0, sequence.getCurrentValue());
+assertEquals(0, sequence.getNextValue());
+assertEquals(0, sequence.getPreviousValue());
+assertEquals(0, sequence.getLastAllocatedValue());
+assertEquals(0, sequence.getLastUsedValue());
+assertEquals(0, sequence.getLastCacheValue());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name)); ===
+0.781 - ```java
+OSequence sequence = db.getMetadata().getSequenceLibrary().getSequence(name)
+0.486 - assertEquals(name, sequence.getName())
+0.481 - assertEquals(0, sequence.getStep())
+0.477 - assertEquals(1, sequence.getIncrement())
+0.477 - assertEquals(0, sequence.getNextValue())
+0.473 - assertNotNull(sequence)
+0.473 - assertEquals(0, sequence.getStartValue())
+0.464 - assertEquals(0, sequence.getCurrentValue())
+0.464 - assertEquals(0, sequence.getCurrentValue())
+0.463 - assertEquals(0, sequence.getMinValue())
+0.460 - assertEquals(0, sequence.getPreviousValue())
+0.460 - assertEquals(0, sequence.getLastUsedValue())
+0.459 - assertEquals(0, sequence.getLastValue())
+0.456 - assertEquals(0, sequence.getLastCacheValue())
+0.450 - assertEquals(100, sequence.getCacheSize())
+0.446 - assertEquals(0, sequence.getInitialValue())
+0.441 - assertEquals(0, sequence.getLastAllocatedValue())
+0.439 - assertEquals(0, sequence.getAllocationSize())
+0.436 - assertEquals(OSequence.SEQUENCE_TYPE.CACHED, sequence.getType())
+0.413 - assertEquals(Long.MAX_VALUE, sequence.getMaxValue())
+0.396 - assertTrue(sequence.isCyclic())
+0.367 - assertFalse(sequence.isAutoIncrement())
+0.000 - ```

@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class ContentActivities {
+    public ArrayList < Activity > getOther ( ) { 
+    return other ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ContentActivitiesTest {
+    @Test
+     public void testSetOther ( ) {
+         String newID = "STR" + ID ; 
+         ArrayList < Activity > expected = other ; 
+         expected . add ( new Activity ( newID ) ) ; 
+         contextActivities . setOther ( expected ) ; 
+         ArrayList < Activity > actual = contextActivities . getOther ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.contains(new Activity(newID)));
+assertFalse(actual.isEmpty());
+assertEquals(expected.get(0), actual.get(0));
+assertEquals(expected.get(1), actual.get(1));
+assertTrue(actual.containsAll(expected));
+assertFalse(actual.contains(new Activity("INVALID_ID")));
+assertEquals(expected, actual);
+assertSame(expected, actual);
+assertNotSame(new ArrayList<Activity>(), actual);
+assertTrue(actual.stream().anyMatch(activity -> activity.getId().equals(newID)));
+assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1));
+assertTrue(actual.size() > 0);
+assertFalse(actual.equals(new ArrayList<Activity>()));
+assertTrue(actual.stream().allMatch(activity -> activity instanceof Activity));
+assertNotEquals(expected.hashCode(), new ArrayList<Activity>().hashCode());
+assertTrue(expected.stream().allMatch(activity -> actual.contains(activity)));
+assertEquals(expected.toString(), actual.toString());
+assertNotEquals(expected, new ArrayList<Activity>());
+assertTrue(actual.stream().map(Activity::getId).collect(Collectors.toSet()).contains(newID));
+assertEquals(expected.size(), actual.size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.625 - assertTrue(actual.size() > 0)
+0.600 - assertFalse(actual.isEmpty())
+0.583 - assertSame(expected, actual)
+0.560 - assertEquals(expected, actual)
+0.507 - assertNotSame(new ArrayList<Activity>(), actual)
+0.492 - assertTrue(actual.containsAll(expected))
+0.469 - assertEquals(expected.size(), actual.size())
+0.469 - assertEquals(expected.get(0), actual.get(0))
+0.469 - assertEquals(expected.get(1), actual.get(1))
+0.469 - assertEquals(expected.size(), actual.size())
+0.444 - assertEquals(expected.toString(), actual.toString())
+0.441 - assertTrue(actual.contains(new Activity(newID)))
+0.411 - assertFalse(actual.equals(new ArrayList<Activity>()))
+0.395 - assertFalse(actual.contains(new Activity("INVALID_ID")))
+0.366 - assertNotEquals(expected, new ArrayList<Activity>())
+0.362 - assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1))
+0.354 - assertTrue(expected.stream().allMatch(activity -> actual.contains(activity)))
+0.316 - assertTrue(actual.stream().allMatch(activity -> activity instanceof Activity))
+0.303 - assertTrue(actual.stream().anyMatch(activity -> activity.getId().equals(newID)))
+0.280 - assertNotEquals(expected.hashCode(), new ArrayList<Activity>().hashCode())
+0.265 - assertTrue(actual.stream().map(Activity::getId).collect(Collectors.toSet()).contains(newID))
+0.000 - ```

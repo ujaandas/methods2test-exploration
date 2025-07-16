@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public String readFile ( File file ) throws IOException { 
+    return FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testReadFileToString ( ) throws Exception {
+         File tempFile = new File ( serverDirectory , "STR" ) ; 
+         Files . write ( tempFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         String fileString = util . readFile ( tempFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(fileString);
+Assert.assertEquals("STR", fileString);
+Assert.assertTrue(fileString instanceof String);
+Assert.assertFalse(fileString.isEmpty());
+Assert.assertEquals(3, fileString.length());
+Assert.assertTrue(fileString.contains("S"));
+Assert.assertTrue(fileString.contains("T"));
+Assert.assertTrue(fileString.contains("R"));
+Assert.assertEquals('S', fileString.charAt(0));
+Assert.assertEquals('T', fileString.charAt(1));
+Assert.assertEquals('R', fileString.charAt(2));
+Assert.assertEquals("STR".hashCode(), fileString.hashCode());
+Assert.assertEquals(fileString.trim(), "STR");
+Assert.assertNotSame("", fileString);
+Assert.assertTrue(fileString.equalsIgnoreCase("str"));
+Assert.assertTrue(fileString.startsWith("S"));
+Assert.assertTrue(fileString.endsWith("R"));
+Assert.assertNotEquals("Different String", fileString);
+Assert.assertNotSame(fileString, new String("STR"));
+Assert.assertTrue(fileString.matches("STR"));
+Assert.assertFalse(fileString.contains("X"));
+Assert.assertEquals("STR".toUpperCase(), fileString.toUpperCase());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(fileString.equals("STR")); ===
+0.877 - Assert.assertTrue(fileString.matches("STR"))
+0.833 - Assert.assertTrue(fileString.contains("S"))
+0.833 - Assert.assertTrue(fileString.contains("T"))
+0.833 - Assert.assertTrue(fileString.contains("R"))
+0.833 - Assert.assertTrue(fileString.endsWith("R"))
+0.811 - Assert.assertTrue(fileString.startsWith("S"))
+0.805 - Assert.assertTrue(fileString.equalsIgnoreCase("str"))
+0.712 - Assert.assertEquals(fileString.trim(), "STR")
+0.712 - Assert.assertFalse(fileString.contains("X"))
+0.692 - Assert.assertNotSame(fileString, new String("STR"))
+0.667 - Assert.assertFalse(fileString.isEmpty())
+0.649 - Assert.assertTrue(fileString instanceof String)
+0.648 - Assert.assertEquals(3, fileString.length())
+0.622 - Assert.assertEquals('S', fileString.charAt(0))
+0.622 - Assert.assertEquals('R', fileString.charAt(2))
+0.595 - Assert.assertEquals('T', fileString.charAt(1))
+0.594 - Assert.assertNotSame("", fileString)
+0.574 - Assert.assertEquals("STR".toUpperCase(), fileString.toUpperCase())
+0.551 - ```java
+Assert.assertNotNull(fileString)
+0.545 - Assert.assertEquals("STR", fileString)
+0.545 - Assert.assertEquals("STR".hashCode(), fileString.hashCode())
+0.469 - Assert.assertNotEquals("Different String", fileString)
+0.000 - ```

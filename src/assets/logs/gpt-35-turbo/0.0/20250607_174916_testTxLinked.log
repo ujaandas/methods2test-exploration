@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSave {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSaveTest {
+    @Test
+     public void testTxLinked ( ) {
+         db . getMetadata ( ) . getSchema ( ) . createClass ( "STR" ) ; 
+         db . begin ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         ODocument doc1 = new ODocument ( "STR" ) ; 
+         doc . field ( "STR" , doc1 ) ; 
+         ODocument doc2 = new ODocument ( "STR" ) ; 
+         doc1 . field ( "STR" , doc2 ) ; 
+         doc2 . field ( "STR" , doc ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(doc.containsField("STR"));
+Assert.assertTrue(doc1.containsField("STR"));
+Assert.assertTrue(doc2.containsField("STR"));
+Assert.assertEquals(doc.field("STR"), doc1);
+Assert.assertEquals(doc1.field("STR"), doc2);
+Assert.assertEquals(doc2.field("STR"), doc);
+Assert.assertEquals(doc1.field("STR"), doc2);
+Assert.assertEquals(doc2.field("STR"), doc);
+Assert.assertEquals(doc2.field("STR"), doc1);
+Assert.assertEquals(doc1.field("STR"), doc);
+Assert.assertTrue(doc1.equals(doc2.field("STR")));
+Assert.assertTrue(doc2.equals(doc.field("STR")));
+Assert.assertTrue(doc.equals(doc1.field("STR")));
+Assert.assertTrue(doc1.equals(doc2.field("STR")));
+Assert.assertTrue(doc2.equals(doc.field("STR")));
+Assert.assertTrue(doc.equals(doc1.field("STR")));
+Assert.assertTrue(doc1.equals(doc2.field("STR")));
+Assert.assertTrue(doc2.equals(doc.field("STR")));
+Assert.assertTrue(doc.equals(doc1.field("STR")));
+Assert.assertTrue(doc1.equals(doc2.field("STR")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,db.countClass("STR")); ===
+0.676 - Assert.assertEquals(doc.field("STR"), doc1)
+0.676 - Assert.assertEquals(doc2.field("STR"), doc)
+0.676 - Assert.assertEquals(doc2.field("STR"), doc)
+0.676 - Assert.assertEquals(doc1.field("STR"), doc)
+0.667 - Assert.assertEquals(doc1.field("STR"), doc2)
+0.667 - Assert.assertEquals(doc1.field("STR"), doc2)
+0.667 - Assert.assertEquals(doc2.field("STR"), doc1)
+0.639 - Assert.assertTrue(doc.containsField("STR"))
+0.630 - Assert.assertTrue(doc1.containsField("STR"))
+0.630 - Assert.assertTrue(doc2.containsField("STR"))
+0.597 - Assert.assertTrue(doc2.equals(doc.field("STR")))
+0.597 - Assert.assertTrue(doc.equals(doc1.field("STR")))
+0.597 - Assert.assertTrue(doc2.equals(doc.field("STR")))
+0.597 - Assert.assertTrue(doc.equals(doc1.field("STR")))
+0.597 - Assert.assertTrue(doc2.equals(doc.field("STR")))
+0.597 - Assert.assertTrue(doc.equals(doc1.field("STR")))
+0.590 - Assert.assertTrue(doc1.equals(doc2.field("STR")))
+0.590 - Assert.assertTrue(doc1.equals(doc2.field("STR")))
+0.590 - Assert.assertTrue(doc1.equals(doc2.field("STR")))
+0.590 - Assert.assertTrue(doc1.equals(doc2.field("STR")))

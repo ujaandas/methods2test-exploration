@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Platform {
+    public static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) { 
+    try { 
+    for ( Method method : cls . getDeclaredMethods ( ) ) { 
+    if ( method . getName ( ) . equals ( methodName ) ) { 
+    return ( T ) method . invoke ( null , params ) ; 
+    } } throw new NoSuchMethodException ( cls + "STR" + methodName ) ; 
+    } catch ( Exception e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package jcodec.jcodec;
+
+public class PlatformTest {
+    @Test
+     public void testInvokeStatic2 ( ) {
+         int parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , "STR" , new Object [ ] { 
+     ByteBuffer . wrap ( "STR" . getBytes ( ) ) } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(parseBuf);
+assertTrue(parseBuf instanceof Integer);
+assertEquals(0, parseBuf);
+assertEquals(1, parseBuf + 1);
+assertNotEquals(-1, parseBuf);
+assertTrue(parseBuf >= 0);
+assertFalse(parseBuf < 0);
+assertEquals(Integer.valueOf(parseBuf), Integer.valueOf(parseBuf));
+assertSame(parseBuf, parseBuf);
+assertNotSame(parseBuf, new Integer(parseBuf + 1));
+assertTrue(parseBuf >= 0 && parseBuf <= 10);
+assertEquals("Expected value", 0, parseBuf);
+assertArrayEquals(new int[]{0}, new int[]{parseBuf});
+assertTrue(parseBuf % 2 == 0 || parseBuf % 2 == 1);
+assertFalse(parseBuf > 10);
+assertTrue(parseBuf < 5 || parseBuf > 10);
+assertEquals("Buffer size should be 1", 1, ByteBuffer.wrap("STR".getBytes()).capacity());
+assertNotEquals("Value should not be null", null, parseBuf);
+assertTrue("Value should be positive", parseBuf >= 0);
+assertFalse("Value should not be negative", parseBuf < 0);
+assertEquals("Value should be equal to itself", parseBuf, parseBuf);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(42,parseBuf); ===
+0.939 - assertEquals(0, parseBuf)
+0.902 - assertEquals(1, parseBuf + 1)
+0.868 - assertNotEquals(-1, parseBuf)
+0.792 - assertFalse(parseBuf < 0)
+0.776 - assertFalse(parseBuf > 10)
+0.708 - assertTrue(parseBuf >= 0)
+0.708 - assertEquals("Expected value", 0, parseBuf)
+0.643 - ```java
+assertNotNull(parseBuf)
+0.630 - assertSame(parseBuf, parseBuf)
+0.622 - assertArrayEquals(new int[]{0}, new int[]{parseBuf})
+0.590 - assertNotEquals("Value should not be null", null, parseBuf)
+0.567 - assertTrue(parseBuf < 5 || parseBuf > 10)
+0.556 - assertTrue("Value should be positive", parseBuf >= 0)
+0.548 - assertTrue(parseBuf instanceof Integer)
+0.548 - assertTrue(parseBuf >= 0 && parseBuf <= 10)
+0.541 - assertEquals("Value should be equal to itself", parseBuf, parseBuf)
+0.533 - assertFalse("Value should not be negative", parseBuf < 0)
+0.523 - assertTrue(parseBuf % 2 == 0 || parseBuf % 2 == 1)
+0.489 - assertEquals(Integer.valueOf(parseBuf), Integer.valueOf(parseBuf))
+0.479 - assertNotSame(parseBuf, new Integer(parseBuf + 1))
+0.374 - assertEquals("Buffer size should be 1", 1, ByteBuffer.wrap("STR".getBytes()).capacity())
+0.000 - ```

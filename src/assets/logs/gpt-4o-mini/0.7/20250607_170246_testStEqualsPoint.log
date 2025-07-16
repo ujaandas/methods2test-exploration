@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctions {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctionsTest {
+    @Test
+     public void testStEqualsPoint ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(next);
+assertTrue(next instanceof ODocument);
+assertTrue(next.field("fieldName") instanceof String);
+assertEquals("expectedValue", next.field("fieldName"));
+assertNotEquals("unexpectedValue", next.field("fieldName"));
+assertTrue(next.field("anotherField") instanceof Integer);
+assertTrue((Integer) next.field("anotherField") > 0);
+assertEquals(5, next.field("numericField"));
+assertFalse(next.field("booleanField"));
+assertTrue(next.field("collectionField") instanceof Collection);
+assertFalse(((Collection) next.field("collectionField")).isEmpty());
+assertTrue(((Collection) next.field("collectionField")).contains("expectedItem"));
+assertEquals("expectedString", next.field("stringField"));
+assertNotNull(next.field("dateField"));
+assertTrue(next.field("dateField") instanceof Date);
+assertEquals("expectedId", next.getIdentity().toString());
+assertTrue(next.field("geoField") instanceof GeoPoint);
+assertTrue(((GeoPoint) next.field("geoField")).getLatitude() >= -90);
+assertTrue(((GeoPoint) next.field("geoField")).getLatitude() <= 90);
+assertTrue(((GeoPoint) next.field("geoField")).getLongitude() >= -180);
+assertTrue(((GeoPoint) next.field("geoField")).getLongitude() <= 180);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.718 - assertEquals(5, next.field("numericField"))
+0.667 - assertFalse(next.field("booleanField"))
+0.649 - assertNotNull(next.field("dateField"))
+0.629 - assertEquals("expectedValue", next.field("fieldName"))
+0.609 - assertEquals("expectedString", next.field("stringField"))
+0.596 - assertNotEquals("unexpectedValue", next.field("fieldName"))
+0.588 - assertTrue(next.field("dateField") instanceof Date)
+0.575 - assertTrue(next.field("fieldName") instanceof String)
+0.568 - assertTrue(next.field("geoField") instanceof GeoPoint)
+0.549 - assertTrue(next.field("anotherField") instanceof Integer)
+0.541 - assertTrue((Integer) next.field("anotherField") > 0)
+0.522 - assertEquals("expectedId", next.getIdentity().toString())
+0.520 - assertTrue(((GeoPoint) next.field("geoField")).getLatitude() <= 90)
+0.515 - assertTrue(next.field("collectionField") instanceof Collection)
+0.515 - assertTrue(((GeoPoint) next.field("geoField")).getLatitude() >= -90)
+0.510 - assertFalse(((Collection) next.field("collectionField")).isEmpty())
+0.510 - assertTrue(((GeoPoint) next.field("geoField")).getLongitude() <= 180)
+0.505 - assertTrue(((GeoPoint) next.field("geoField")).getLongitude() >= -180)
+0.444 - ```java
+assertNotNull(next)
+0.431 - assertTrue(((Collection) next.field("collectionField")).contains("expectedItem"))
+0.423 - assertTrue(next instanceof ODocument)
+0.000 - ```

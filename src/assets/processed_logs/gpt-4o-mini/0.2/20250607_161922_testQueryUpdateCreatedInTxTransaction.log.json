@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testQueryUpdateCreatedInTxTransaction ( ) throws InterruptedException {\ndatabase . begin ( ) ;\nODocument doc1 = new ODocument ( \"STR\" ) ;\ndoc1 . setProperty ( \"STR\" , \"STR\" ) ;\nOIdentifiable id = database . save ( doc1 ) ;\nODocument docx = new ODocument ( \"STR\" ) ;\ndocx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( docx ) ;\nOResultSet result = database . command ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(2, result.getTotalRecords());\nassertTrue(result.next().getProperty(\"STR\").equals(\"STR\"));\nassertTrue(result.next().getProperty(\"STR\").equals(\"STR\"));\nassertFalse(result.hasNext());\nassertEquals(\"STR\", doc1.getProperty(\"STR\"));\nassertEquals(\"STR\", docx.getProperty(\"STR\"));\nassertNotEquals(doc1.getIdentity(), docx.getIdentity());\nassertTrue(database.countClass(\"STR\") > 0);\nassertEquals(2, database.countClass(\"STR\"));\nassertTrue(database.load(id).getProperty(\"STR\").equals(\"STR\"));\nassertNotNull(database.load(id));\nassertNotNull(database.load(docx.getIdentity()));\nassertTrue(database.getMetadata().getSchema().existsClass(\"STR\"));\nassertTrue(database.getMetadata().getSchema().getClass(\"STR\").getProperty(\"STR\") != null);\nassertEquals(\"STR\", database.command(\"SELECT FROM STR WHERE STR = 'STR'\").next().getProperty(\"STR\"));\nassertTrue(database.command(\"SELECT FROM STR WHERE STR = 'STR'\").getTotalRecords() > 0);\nassertTrue(database.command(\"SELECT FROM STR\").getTotalRecords() >= 2);\nassertTrue(result.getProperty(\"STR\").equals(\"STR\"));\nassertTrue(result.getProperty(\"STR\").equals(\"STR\"));\nassertEquals(2, result.getTotalRecords());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.877,
+        0.588,
+        0.588,
+        0.582,
+        0.582,
+        0.559,
+        0.558,
+        0.558,
+        0.526,
+        0.5,
+        0.457,
+        0.447,
+        0.43,
+        0.422,
+        0.404,
+        0.39,
+        0.355,
+        0.338,
+        0.338,
+        0.278,
+        0.264,
+        0.0
+    ],
+    "ground_truth": "assertTrue(result.hasNext());"
+}

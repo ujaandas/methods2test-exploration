@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class InstallFeatureUtil {
+    @SafeVarargs
+     public static Set < String > combineToSet ( Collection < String > ... collections ) { 
+     Set < String > result = new HashSet < String > ( ) ; 
+     Set < String > lowercaseSet = new HashSet < String > ( ) ; 
+     for ( Collection < String > collection : collections ) { 
+     if ( collection != null ) { 
+     for ( String value : collection ) { 
+     if ( ! lowercaseSet . contains ( value . toLowerCase ( ) ) ) { 
+     lowercaseSet . add ( value . toLowerCase ( ) ) ; 
+     result . add ( value ) ; 
+     } } } } return result ; 
+     }
+}
+
+package OpenLiberty.ci.common;
+
+public class InstallFeatureUtilTest {
+    @Test
+     public void testCombineToSet ( ) throws Exception {
+         Set < String > a = new HashSet < String > ( ) ; 
+         a . add ( "STR" ) ; 
+         a . add ( "STR" ) ; 
+         List < String > b = new ArrayList < String > ( ) ; 
+         b . add ( "STR" ) ; 
+         b . add ( "STR" ) ; 
+         List < String > c = new ArrayList < String > ( ) ; 
+         c . add ( "STR" ) ; 
+         c . add ( "STR" ) ; 
+         Set < String > result = InstallFeatureUtil . combineToSet ( a , b , c ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, result.size());
+assertTrue(result.contains("STR"));
+assertFalse(result.contains("str"));
+assertEquals(1, a.size());
+assertEquals(1, b.size());
+assertEquals(1, c.size());
+assertTrue(result.containsAll(a));
+assertTrue(result.containsAll(b));
+assertTrue(result.containsAll(c));
+assertFalse(result.contains("abc"));
+assertFalse(result.contains("123"));
+assertFalse(result.contains(null));
+assertTrue(result.contains("STR"));
+assertTrue(result.contains("str"));
+assertTrue(result.contains("StR"));
+assertEquals(3, result.size());
+assertEquals(3, a.size());
+assertEquals(3, b.size());
+assertEquals(3, c.size());
+assertTrue(result.containsAll(a));
+assertTrue(result.containsAll(b));
+assertTrue(result.containsAll(c));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(5,result.size()); ===
+0.966 - assertEquals(1, result.size())
+0.966 - assertEquals(3, result.size())
+0.830 - assertEquals(1, a.size())
+0.830 - assertEquals(1, b.size())
+0.830 - assertEquals(1, c.size())
+0.830 - assertEquals(3, a.size())
+0.830 - assertEquals(3, b.size())
+0.830 - assertEquals(3, c.size())
+0.667 - assertFalse(result.contains(null))
+0.656 - assertFalse(result.contains("str"))
+0.656 - assertFalse(result.contains("abc"))
+0.656 - assertFalse(result.contains("123"))
+0.613 - assertTrue(result.containsAll(a))
+0.613 - assertTrue(result.containsAll(b))
+0.613 - assertTrue(result.containsAll(c))
+0.613 - assertTrue(result.containsAll(a))
+0.613 - assertTrue(result.containsAll(b))
+0.613 - assertTrue(result.containsAll(c))
+0.603 - assertTrue(result.contains("STR"))
+0.603 - assertTrue(result.contains("STR"))
+0.603 - assertTrue(result.contains("str"))
+0.603 - assertTrue(result.contains("StR"))

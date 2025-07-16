@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( Throwable cause ) {\nsuper ( cause ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withCause ( ) {\nRuntimeException cause = new RuntimeException ( ) ;\nTestException exception = new TestException ( cause ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(exception);\nassertEquals(cause, exception.getCause());\nassertTrue(exception instanceof TestException);\nassertTrue(exception.getCause() instanceof RuntimeException);\nassertEquals(\"java.lang.RuntimeException\", exception.getCause().getClass().getName());\nassertEquals(\"TestException\", exception.getClass().getSimpleName());\nassertNotEquals(exception, cause);\nassertNotEquals(exception, null);\nassertNotEquals(exception, new TestException(new RuntimeException()));\nassertTrue(exception.toString().contains(\"TestException\"));\nassertTrue(exception.toString().contains(\"java.lang.RuntimeException\"));\nassertEquals(0, exception.getStackTrace().length);\nassertTrue(exception.getMessage() == null);\nassertFalse(exception.getMessage() != null);\nassertEquals(exception.getClass().getName(), \"hazelcast.hazelcast-simulator.simulator.TestException\");\nassertNotNull(exception.getStackTrace());\nassertTrue(exception.getStackTrace().length > 0);\nassertEquals(exception.getStackTrace()[0].getClassName(), \"hazelcast.hazelcast-simulator.simulator.TestException\");\nassertEquals(exception.getStackTrace()[0].getMethodName(), \"<init>\");\nassertEquals(exception.getStackTrace()[0].getLineNumber(), 1); // Adjust line number based on actual line\nassertTrue(exception.getCause() instanceof Throwable);\nassertFalse(exception.getCause() instanceof Exception);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.75,
+        0.727,
+        0.691,
+        0.679,
+        0.676,
+        0.675,
+        0.674,
+        0.65,
+        0.62,
+        0.605,
+        0.597,
+        0.592,
+        0.579,
+        0.547,
+        0.528,
+        0.5,
+        0.471,
+        0.457,
+        0.449,
+        0.405,
+        0.396,
+        0.0
+    ],
+    "ground_truth": "assertEquals(cause,exception.getCause());"
+}

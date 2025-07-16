@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilter {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class MaxDepthFilterTest {
+    @Test
+     public void testCustomDepth ( ) throws MalformedURLException {
+         URLFilter filter = createFilter ( "STR" , 1 ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( MetadataTransfer . maxDepthKeyName , "STR" ) ; 
+         metadata . setValue ( MetadataTransfer . depthKeyName , "STR" ) ; 
+         String filterResult = filter . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("Expected result for depth 1", filterResult);
+assertTrue(filterResult.contains("expectedSubstring"));
+assertFalse(filterResult.isEmpty());
+assertEquals("Expected URL format", new URL(filterResult).toExternalForm(), filterResult);
+assertTrue(filterResult.startsWith("http"));
+assertTrue(filterResult.endsWith(".com"));
+assertFalse(filterResult.contains("forbiddenSubstring"));
+assertTrue(filterResult.matches(".*[0-9].*"));
+assertNotEquals("Unexpected result", "unwantedResult", filterResult);
+assertTrue(filterResult.length() > 10);
+assertFalse(filterResult.equals("invalidURL"));
+assertTrue(filterResult.indexOf("expectedPart") >= 0);
+assertEquals("Expected depth value", "1", metadata.getValue(MetadataTransfer.depthKeyName));
+assertTrue(Integer.parseInt(metadata.getValue(MetadataTransfer.maxDepthKeyName)) > 0);
+assertNotSame("Should not be the same object", filterResult, "anotherString");
+assertTrue(filterResult.contains("validDomain"));
+assertFalse(filterResult.contains("maliciousDomain"));
+assertEquals("Expected metadata value", "STR", metadata.getValue(MetadataTransfer.maxDepthKeyName));
+assertTrue(filterResult.matches("http[s]?://.*"));
+assertNotNull(metadata);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.707 - assertEquals("Expected result for depth 1", filterResult)
+0.702 - assertEquals("Expected URL format", new URL(filterResult).toExternalForm(), filterResult)
+0.607 - assertNotEquals("Unexpected result", "unwantedResult", filterResult)
+0.561 - assertFalse(filterResult.isEmpty())
+0.537 - ```java
+assertNotNull(filterResult)
+0.506 - assertTrue(filterResult.length() > 10)
+0.495 - assertFalse(filterResult.equals("invalidURL"))
+0.477 - assertTrue(filterResult.endsWith(".com"))
+0.467 - assertTrue(filterResult.startsWith("http"))
+0.460 - assertFalse(filterResult.contains("maliciousDomain"))
+0.457 - assertTrue(filterResult.matches(".*[0-9].*"))
+0.447 - assertFalse(filterResult.contains("forbiddenSubstring"))
+0.442 - assertTrue(filterResult.contains("validDomain"))
+0.438 - assertTrue(filterResult.matches("http[s]?://.*"))
+0.429 - assertTrue(filterResult.indexOf("expectedPart") >= 0)
+0.416 - assertTrue(filterResult.contains("expectedSubstring"))
+0.393 - assertNotSame("Should not be the same object", filterResult, "anotherString")
+0.388 - assertEquals("Expected depth value", "1", metadata.getValue(MetadataTransfer.depthKeyName))
+0.366 - assertEquals("Expected metadata value", "STR", metadata.getValue(MetadataTransfer.maxDepthKeyName))
+0.314 - assertNotNull(metadata)
+0.246 - assertTrue(Integer.parseInt(metadata.getValue(MetadataTransfer.maxDepthKeyName)) > 0)
+0.000 - ```

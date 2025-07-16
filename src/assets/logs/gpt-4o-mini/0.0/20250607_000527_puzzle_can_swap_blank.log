@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class Puzzle {
+    public int getBlankIndex ( ) { 
+    for ( int i = 0 ; 
+    i < cells . length ; 
+    i ++ ) { 
+    if ( cells [ i ] == blank ) { 
+    return i ; 
+    } } return - 1 ; 
+    }
+}
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class PuzzleTest {
+    @Test
+     public void puzzle_can_swap_blank ( ) {
+         Puzzle p = new Puzzle ( getSolution ( ) ) ; 
+         Puzzle c = p . swapBlank ( 4 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(c);
+assertNotSame(p, c);
+assertEquals(p.getBlankIndex(), 4);
+assertEquals(c.getBlankIndex(), 0);
+assertArrayEquals(new int[]{1, 2, 3, blank, 5, 6, 7, 8}, c.getCells());
+assertEquals(c.getCells()[4], 5);
+assertEquals(c.getCells()[0], blank);
+assertTrue(c.isValid());
+assertFalse(p.isValid());
+assertEquals(p.getCells().length, c.getCells().length);
+assertTrue(Arrays.equals(p.getCells(), new int[]{1, 2, 3, 4, blank, 5, 6, 7, 8}));
+assertTrue(Arrays.equals(c.getCells(), new int[]{1, 2, 3, blank, 4, 5, 6, 7, 8}));
+assertEquals(c.getBlankIndex(), 3);
+assertEquals(p.getBlankIndex(), 4);
+assertNotEquals(p.getCells()[4], c.getCells()[4]);
+assertNotEquals(p.getCells()[0], c.getCells()[0]);
+assertTrue(c.isSwapped());
+assertFalse(p.isSwapped());
+assertEquals(c.getMoveCount(), p.getMoveCount() + 1);
+assertTrue(c.isSolved());
+assertFalse(p.isSolved());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,c.getBlankIndex()); ===
+0.939 - assertEquals(c.getBlankIndex(), 0)
+0.939 - assertEquals(c.getBlankIndex(), 3)
+0.909 - assertEquals(p.getBlankIndex(), 4)
+0.909 - assertEquals(p.getBlankIndex(), 4)
+0.688 - assertEquals(c.getCells()[4], 5)
+0.676 - assertEquals(c.getCells()[0], blank)
+0.593 - assertNotEquals(p.getCells()[4], c.getCells()[4])
+0.568 - assertNotEquals(p.getCells()[0], c.getCells()[0])
+0.561 - assertFalse(p.isValid())
+0.552 - assertFalse(p.isSolved())
+0.542 - assertFalse(p.isSwapped())
+0.537 - assertEquals(c.getMoveCount(), p.getMoveCount() + 1)
+0.535 - assertEquals(p.getCells().length, c.getCells().length)
+0.526 - assertTrue(c.isSolved())
+0.517 - assertTrue(c.isSwapped())
+0.489 - assertArrayEquals(new int[]{1, 2, 3, blank, 5, 6, 7, 8}, c.getCells())
+0.464 - assertTrue(c.isValid())
+0.442 - assertTrue(Arrays.equals(c.getCells(), new int[]{1, 2, 3, blank, 4, 5, 6, 7, 8}))
+0.431 - assertNotSame(p, c)
+0.423 - assertTrue(Arrays.equals(p.getCells(), new int[]{1, 2, 3, 4, blank, 5, 6, 7, 8}))
+0.386 - ```java
+assertNotNull(c)
+0.000 - ```

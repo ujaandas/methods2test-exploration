@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ReflectionUtils {\npublic static void setFieldValue ( Object instance , Field field , Object value ) {\nfield . setAccessible ( true ) ;\nsetFieldValue0 ( instance , field , value ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ReflectionUtilsTest {\n@Test\npublic void testSetFieldValue ( ) {\nSetFieldTest setFieldTest = new SetFieldTest ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"Value should be set correctly\", expectedValue, actualValue);\nAssert.assertNotNull(\"Instance should not be null\", setFieldTest);\nAssert.assertNotNull(\"Field should not be null\", field);\nAssert.assertNotNull(\"Value should not be null\", value);\nAssert.assertTrue(\"Field should be accessible\", field.isAccessible());\nAssert.assertEquals(\"Instance should be the same\", setFieldTest, instance);\nAssert.assertEquals(\"Field should be the same\", field, setFieldTest.getClass().getDeclaredField(\"fieldName\"));\nAssert.assertEquals(\"Value should be the same\", value, setFieldTest.getFieldName());\nAssert.assertNotEquals(\"Field should not be the same\", field, setFieldTest.getClass().getDeclaredField(\"otherFieldName\"));\nAssert.assertNotEquals(\"Value should not be the same\", value, setFieldTest.getOtherFieldName());\nAssert.assertNotEquals(\"Instance should not be the same\", new SetFieldTest(), instance);\nAssert.assertNotEquals(\"Field should not be the same\", new SetFieldTest().getClass().getDeclaredField(\"fieldName\"), field);\nAssert.assertNotEquals(\"Value should not be the same\", new SetFieldTest().getFieldName(), value);\nAssert.assertTrue(\"Field should be set successfully\", setFieldTest.getFieldName().equals(value));\nAssert.assertTrue(\"Field should be set successfully\", setFieldTest.getFieldName().equals(field.get(setFieldTest)));\nAssert.assertTrue(\"Field should be set successfully\", setFieldTest.getFieldName().equals(ReflectionUtils.setFieldValue(setFieldTest, field, value)));\nAssert.assertTrue(\"Field should be set successfully\", setFieldTest.getFieldName().equals(ReflectionUtils.setFieldValue(setFieldTest, field, value).getFieldName()));\nAssert.assertTrue(\"Field should be set successfully\", setFieldTest.getFieldName().equals(ReflectionUtils.setFieldValue(setFieldTest, field, value).getClass().getDeclaredField(\"fieldName\").get(setFieldTest)));\n====================\n\n",
+    "scores": [
+        0.582,
+        0.566,
+        0.539,
+        0.53,
+        0.513,
+        0.5,
+        0.495,
+        0.468,
+        0.463,
+        0.456,
+        0.455,
+        0.434,
+        0.42,
+        0.335,
+        0.333,
+        0.33,
+        0.318,
+        0.279
+    ],
+    "ground_truth": "assertNull(setFieldTest.injectField);"
+}

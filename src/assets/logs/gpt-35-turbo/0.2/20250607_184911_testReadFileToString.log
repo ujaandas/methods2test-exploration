@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public String readFile ( File file ) throws IOException { 
+    return FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testReadFileToString ( ) throws Exception {
+         File tempFile = new File ( serverDirectory , "STR" ) ; 
+         Files . write ( tempFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         String fileString = util . readFile ( tempFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", fileString);
+assertNotNull(fileString);
+assertTrue(fileString.contains("S"));
+assertFalse(fileString.isEmpty());
+assertTrue(fileString.length() > 0);
+assertNotEquals("ABC", fileString);
+assertTrue(fileString.startsWith("S"));
+assertTrue(fileString.endsWith("R"));
+assertTrue(fileString.matches("[A-Z]+"));
+assertTrue(fileString.equalsIgnoreCase("str"));
+assertTrue(fileString.contains("T"));
+assertTrue(fileString.contains("R"));
+assertTrue(fileString.matches("[A-Z]+"));
+assertTrue(fileString.matches("[a-z]+"));
+assertTrue(fileString.matches("[A-Za-z]+"));
+assertTrue(fileString.matches("[0-9A-Z]+"));
+assertTrue(fileString.matches("[a-zA-Z0-9]+"));
+assertTrue(fileString.matches("[a-zA-Z0-9 ]+"));
+assertTrue(fileString.matches("[a-zA-Z0-9!@#$%^&*()_+]+"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(fileString.equals("STR")); ===
+0.833 - assertTrue(fileString.contains("S"))
+0.833 - assertTrue(fileString.endsWith("R"))
+0.833 - assertTrue(fileString.contains("T"))
+0.833 - assertTrue(fileString.contains("R"))
+0.811 - assertTrue(fileString.startsWith("S"))
+0.805 - assertTrue(fileString.equalsIgnoreCase("str"))
+0.763 - assertTrue(fileString.matches("[A-Z]+"))
+0.763 - assertTrue(fileString.matches("[A-Z]+"))
+0.763 - assertTrue(fileString.matches("[a-z]+"))
+0.754 - assertTrue(fileString.length() > 0)
+0.734 - assertTrue(fileString.matches("[A-Za-z]+"))
+0.734 - assertTrue(fileString.matches("[0-9A-Z]+"))
+0.707 - assertTrue(fileString.matches("[a-zA-Z0-9]+"))
+0.707 - assertTrue(fileString.matches("[a-zA-Z0-9 ]+"))
+0.667 - assertFalse(fileString.isEmpty())
+0.623 - assertNotNull(fileString)
+0.617 - assertTrue(fileString.matches("[a-zA-Z0-9!@#$%^&*()_+]+"))
+0.551 - assertNotEquals("ABC", fileString)
+0.545 - assertEquals("STR", fileString)

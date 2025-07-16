@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtil {
+    public static Map < String , Method > getAttributes ( Object mbeanLocation ) { 
+    Map < String , Method > result = new TreeMap < String , Method > ( ) ; 
+    Method [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ; 
+    for ( Method oneMethod : methods ) { 
+    MBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ; 
+    if ( attribute != null ) { 
+    result . put ( attribute . name ( ) , oneMethod ) ; 
+    } } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtilTest {
+    @Test
+     public void testGetAttributes ( ) throws Exception {
+         Map < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(atts);
+assertEquals(3, atts.size());
+assertTrue(atts.containsKey("attributeOne"));
+assertTrue(atts.containsKey("attributeTwo"));
+assertTrue(atts.containsKey("attributeThree"));
+assertEquals("getAttributeOne", atts.get("attributeOne").getName());
+assertEquals("getAttributeTwo", atts.get("attributeTwo").getName());
+assertEquals("getAttributeThree", atts.get("attributeThree").getName());
+assertEquals(1, atts.get("attributeOne").getParameterCount());
+assertEquals(0, atts.get("attributeTwo").getParameterCount());
+assertEquals(0, atts.get("attributeThree").getParameterCount());
+assertEquals(String.class, atts.get("attributeOne").getReturnType());
+assertEquals(int.class, atts.get("attributeTwo").getReturnType());
+assertEquals(boolean.class, atts.get("attributeThree").getReturnType());
+assertTrue(atts.get("attributeOne").isAnnotationPresent(MBeanAttribute.class));
+assertTrue(atts.get("attributeTwo").isAnnotationPresent(MBeanAttribute.class));
+assertTrue(atts.get("attributeThree").isAnnotationPresent(MBeanAttribute.class));
+assertEquals("Attribute One Description", atts.get("attributeOne").getAnnotation(MBeanAttribute.class).description());
+assertEquals("Attribute Two Description", atts.get("attributeTwo").getAnnotation(MBeanAttribute.class).description());
+assertEquals("Attribute Three Description", atts.get("attributeThree").getAnnotation(MBeanAttribute.class).description());
+assertNotEquals(atts.get("attributeOne"), atts.get("attributeTwo"));
+assertNotEquals(atts.get("attributeTwo"), atts.get("attributeThree"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,atts.size()); ===
+0.963 - assertEquals(3, atts.size())
+0.552 - assertEquals(1, atts.get("attributeOne").getParameterCount())
+0.552 - assertEquals(0, atts.get("attributeTwo").getParameterCount())
+0.539 - assertEquals(0, atts.get("attributeThree").getParameterCount())
+0.527 - assertEquals(int.class, atts.get("attributeTwo").getReturnType())
+0.519 - ```java
+assertNotNull(atts)
+0.516 - assertEquals("getAttributeOne", atts.get("attributeOne").getName())
+0.516 - assertEquals("getAttributeTwo", atts.get("attributeTwo").getName())
+0.511 - assertEquals(String.class, atts.get("attributeOne").getReturnType())
+0.507 - assertTrue(atts.containsKey("attributeOne"))
+0.507 - assertTrue(atts.containsKey("attributeTwo"))
+0.495 - assertEquals("getAttributeThree", atts.get("attributeThree").getName())
+0.495 - assertEquals(boolean.class, atts.get("attributeThree").getReturnType())
+0.495 - assertNotEquals(atts.get("attributeOne"), atts.get("attributeTwo"))
+0.493 - assertTrue(atts.containsKey("attributeThree"))
+0.484 - assertNotEquals(atts.get("attributeTwo"), atts.get("attributeThree"))
+0.362 - assertTrue(atts.get("attributeOne").isAnnotationPresent(MBeanAttribute.class))
+0.362 - assertTrue(atts.get("attributeTwo").isAnnotationPresent(MBeanAttribute.class))
+0.355 - assertTrue(atts.get("attributeThree").isAnnotationPresent(MBeanAttribute.class))
+0.340 - assertEquals("Attribute One Description", atts.get("attributeOne").getAnnotation(MBeanAttribute.class).description())
+0.340 - assertEquals("Attribute Two Description", atts.get("attributeTwo").getAnnotation(MBeanAttribute.class).description())
+0.331 - assertEquals("Attribute Three Description", atts.get("attributeThree").getAnnotation(MBeanAttribute.class).description())
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testDoubleWithingQuotes ( ) {\nDouble minDouble = 540282346638528870000000000000000000000.0d ;\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(1, res.size());\nassertTrue(res.get(0).fieldExists(\"fieldName1\"));\nassertTrue(res.get(0).fieldExists(\"fieldName2\"));\nassertEquals(minDouble, res.get(0).field(\"fieldName1\"));\nassertEquals(\"expectedStringValue\", res.get(0).field(\"fieldName2\"));\nassertTrue(res.get(0).field(\"fieldName3\") instanceof Integer);\nassertEquals(12345, res.get(0).field(\"fieldName3\"));\nassertTrue(res.get(0).field(\"fieldName4\") instanceof String);\nassertEquals(\"anotherExpectedValue\", res.get(0).field(\"fieldName4\"));\nassertNotNull(res.get(0).field(\"fieldName5\"));\nassertTrue(res.get(0).field(\"fieldName6\") instanceof List);\nassertEquals(3, ((List) res.get(0).field(\"fieldName6\")).size());\nassertTrue(((List) res.get(0).field(\"fieldName6\")).contains(\"value1\"));\nassertTrue(((List) res.get(0).field(\"fieldName6\")).contains(\"value2\"));\nassertTrue(((List) res.get(0).field(\"fieldName6\")).contains(\"value3\"));\nassertEquals(\"expectedDateValue\", res.get(0).field(\"fieldName7\"));\nassertTrue(res.get(0).field(\"fieldName8\") instanceof Map);\nassertEquals(\"expectedMapValue\", ((Map) res.get(0).field(\"fieldName8\")).get(\"key1\"));\nassertEquals(\"expectedMapValue2\", ((Map) res.get(0).field(\"fieldName8\")).get(\"key2\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.692,
+        0.474,
+        0.462,
+        0.459,
+        0.459,
+        0.451,
+        0.45,
+        0.437,
+        0.4,
+        0.395,
+        0.391,
+        0.39,
+        0.387,
+        0.381,
+        0.376,
+        0.352,
+        0.349,
+        0.337,
+        0.337,
+        0.337,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegration {\npublic static Response newFixedLengthResponse ( String msg ) {\nreturn newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegrationTest {\n@Test\npublic void fixedLengthContentIsEncodedProperly ( ) throws IOException {\ntestServer . response = Response . newFixedLengthResponse ( \"STR\" ) ;\nHttpGet request = new HttpGet ( \"STR\" ) ;\nrequest . addHeader ( \"STR\" , \"STR\" ) ;\nHttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(response);\nAssert.assertEquals(200, response.getStatusLine().getStatusCode());\nAssert.assertEquals(\"text/html\", EntityUtils.getContentType(response.getEntity()).getValue());\nAssert.assertEquals(\"STR\", EntityUtils.toString(response.getEntity()));\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).contains(\"STR\"));\nAssert.assertTrue(response.containsHeader(\"Content-Encoding\"));\nAssert.assertEquals(\"gzip\", response.getFirstHeader(\"Content-Encoding\").getValue());\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).length() < 100);\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).length() > 0);\nAssert.assertNotEquals(\"STR\", EntityUtils.toString(response.getEntity()));\nAssert.assertTrue(response.getHeaders(\"Content-Length\").length > 0);\nAssert.assertTrue(response.getHeaders(\"Content-Type\").length > 0);\nAssert.assertEquals(\"gzip\", response.getFirstHeader(\"Content-Encoding\").getValue());\nAssert.assertNotNull(response.getEntity());\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).startsWith(\"<html>\"));\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).endsWith(\"</html>\"));\nAssert.assertTrue(response.getStatusLine().toString().contains(\"OK\"));\nAssert.assertTrue(response.getHeaders(\"Cache-Control\").length > 0);\nAssert.assertTrue(response.getHeaders(\"Vary\").length > 0);\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).contains(\"<body>\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.976,
+        0.803,
+        0.791,
+        0.773,
+        0.756,
+        0.75,
+        0.748,
+        0.745,
+        0.639,
+        0.533,
+        0.496,
+        0.496,
+        0.441,
+        0.419,
+        0.418,
+        0.417,
+        0.41,
+        0.409,
+        0.403,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",EntityUtils.toString(response.getEntity()));"
+}

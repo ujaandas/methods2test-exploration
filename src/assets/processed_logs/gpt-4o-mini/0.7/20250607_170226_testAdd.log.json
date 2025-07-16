@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic int count ( String poolKey ) {\nif ( StringUtils . isBlank ( poolKey ) ) {\nreturn 0 ;\n} ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nif ( null != pool ) {\nreturn pool . size ( ) ;\n} else {\nreturn 0 ;\n} }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testAdd ( ) {\nConnection conn = getAConn ( ) ;\ncm . add ( conn ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, cm.count(\"defaultPoolKey\"));\nassertTrue(cm.getConnectionPool(\"defaultPoolKey\").contains(conn));\nassertNotNull(cm.getConnectionPool(\"defaultPoolKey\"));\nassertFalse(cm.getConnectionPool(\"defaultPoolKey\").isEmpty());\nassertEquals(\"defaultPoolKey\", conn.getPoolKey());\nassertTrue(cm.getConnectionPool(\"defaultPoolKey\").size() > 0);\nassertSame(conn, cm.getConnectionPool(\"defaultPoolKey\").get(0));\nassertTrue(cm.getConnectionPool(\"defaultPoolKey\").stream().anyMatch(c -> c.equals(conn)));\nassertNotNull(cm.connTasks.get(\"defaultPoolKey\"));\nassertEquals(1, cm.connTasks.get(\"defaultPoolKey\").size());\nassertTrue(cm.connTasks.containsKey(\"defaultPoolKey\"));\nassertEquals(\"defaultPoolKey\", cm.connTasks.keySet().iterator().next());\nassertFalse(cm.connTasks.isEmpty());\nassertNull(cm.getConnectionPool(\"invalidPoolKey\"));\nassertEquals(0, cm.count(\"invalidPoolKey\"));\nassertEquals(0, cm.count(\"\"));\nassertEquals(0, cm.count(null));\nassertTrue(cm.getConnectionPool(\"defaultPoolKey\").size() == 1);\nassertTrue(cm.getConnectionPool(\"defaultPoolKey\").stream().filter(c -> c.equals(conn)).count() == 1);\nassertFalse(cm.getConnectionPool(\"defaultPoolKey\").contains(getAConn()));\n```\n====================\n\n",
+    "scores": [
+        0.827,
+        0.825,
+        0.82,
+        0.771,
+        0.689,
+        0.61,
+        0.588,
+        0.578,
+        0.568,
+        0.558,
+        0.552,
+        0.532,
+        0.505,
+        0.505,
+        0.5,
+        0.495,
+        0.476,
+        0.469,
+        0.341,
+        0.283,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,cm.count(poolKey));"
+}

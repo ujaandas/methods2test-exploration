@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class AttachmentResult {
+    public AttachmentResult ( String inputMessage , StatementResult inputStatements , Map < String , AttachmentAndType > inputAttachments ) { 
+    responseMessage = inputMessage ; 
+    statements = inputStatements ; 
+    attachments = inputAttachments ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class AttachmentResultTest {
+    @Test
+     public void testGetXapiStatement ( ) {
+         AttachmentResult a = new AttachmentResult ( RESPONSE_MESSAGE , statements , attachments ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(a);
+assertEquals(RESPONSE_MESSAGE, a.getResponseMessage());
+assertEquals(statements, a.getStatements());
+assertEquals(attachments, a.getAttachments());
+assertTrue(a.getAttachments().isEmpty());
+assertFalse(a.getAttachments().containsKey("nonexistentKey"));
+assertTrue(a.getAttachments().containsKey("existingKey"));
+assertEquals(1, a.getAttachments().size());
+assertNotSame(statements, a.getStatements());
+assertNotSame(attachments, a.getAttachments());
+assertTrue(a.getResponseMessage().length() > 0);
+assertTrue(a.getStatements() instanceof StatementResult);
+assertTrue(a.getAttachments() instanceof Map);
+assertTrue(a.getAttachments().get("existingKey") instanceof AttachmentAndType);
+assertEquals("expectedType", a.getAttachments().get("existingKey").getType());
+assertEquals("expectedAttachment", a.getAttachments().get("existingKey").getAttachment());
+assertNotNull(a.getAttachments().get("existingKey").getAttachment());
+assertNotNull(a.getStatements().getStatementId());
+assertTrue(a.getResponseMessage().contains("success"));
+assertEquals("expectedResponse", a.getResponseMessage());
+assertFalse(a.getAttachments().isEmpty());
+assertEquals(attachments.size(), a.getAttachments().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(a); ===
+0.800 - ```java
+assertNotNull(a)
+0.492 - assertNotNull(a.getStatements().getStatementId())
+0.407 - assertNotSame(statements, a.getStatements())
+0.393 - assertNotSame(attachments, a.getAttachments())
+0.381 - assertNotNull(a.getAttachments().get("existingKey").getAttachment())
+0.367 - assertEquals(attachments, a.getAttachments())
+0.357 - assertTrue(a.getAttachments().isEmpty())
+0.351 - assertFalse(a.getAttachments().isEmpty())
+0.339 - assertTrue(a.getAttachments() instanceof Map)
+0.328 - assertTrue(a.getResponseMessage().length() > 0)
+0.316 - assertEquals(1, a.getAttachments().size())
+0.314 - assertTrue(a.getStatements() instanceof StatementResult)
+0.310 - assertEquals(statements, a.getStatements())
+0.297 - assertEquals(attachments.size(), a.getAttachments().size())
+0.290 - assertEquals(RESPONSE_MESSAGE, a.getResponseMessage())
+0.286 - assertTrue(a.getResponseMessage().contains("success"))
+0.282 - assertEquals("expectedResponse", a.getResponseMessage())
+0.274 - assertTrue(a.getAttachments().containsKey("existingKey"))
+0.260 - assertFalse(a.getAttachments().containsKey("nonexistentKey"))
+0.217 - assertTrue(a.getAttachments().get("existingKey") instanceof AttachmentAndType)
+0.196 - assertEquals("expectedType", a.getAttachments().get("existingKey").getType())
+0.192 - assertEquals("expectedAttachment", a.getAttachments().get("existingKey").getAttachment())
+0.000 - ```

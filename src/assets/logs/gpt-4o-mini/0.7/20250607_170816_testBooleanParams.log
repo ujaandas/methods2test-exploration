@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testBooleanParams ( ) {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( "STR" , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(1, qResult.size());
+assertTrue(qResult.get(0).field("someField").equals("expectedValue"));
+assertTrue(qResult.get(0).field("booleanField") instanceof Boolean);
+assertTrue((Boolean) qResult.get(0).field("booleanField"));
+assertFalse((Boolean) qResult.get(0).field("anotherBooleanField"));
+assertEquals("someString", qResult.get(0).field("stringField"));
+assertEquals(123, qResult.get(0).field("integerField"));
+assertNotEquals(0, qResult.get(0).field("floatField"));
+assertTrue(qResult.get(0).field("listField") instanceof List);
+assertEquals(3, ((List) qResult.get(0).field("listField")).size());
+assertTrue(qResult.get(0).field("mapField") instanceof Map);
+assertEquals("value", qResult.get(0).field("mapField").get("key"));
+assertNotNull(qResult.get(0).field("dateField"));
+assertTrue(qResult.get(0).field("dateField") instanceof Date);
+assertNotEquals("", qResult.get(0).field("nonEmptyField"));
+assertFalse(qResult.get(0).field("emptyField").isEmpty());
+assertTrue(qResult.get(0).field("nullField") == null);
+assertEquals("expectedType", qResult.get(0).field("typeField"));
+assertTrue(qResult.get(0).field("booleanField").equals(true));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(qResult.size(),1); ===
+0.933 - assertEquals(1, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.627 - assertNotEquals(0, qResult.get(0).field("floatField"))
+0.619 - assertEquals(123, qResult.get(0).field("integerField"))
+0.598 - assertNotEquals("", qResult.get(0).field("nonEmptyField"))
+0.596 - assertEquals(3, ((List) qResult.get(0).field("listField")).size())
+0.567 - ```java
+assertNotNull(qResult)
+0.565 - assertEquals("someString", qResult.get(0).field("stringField"))
+0.565 - assertEquals("expectedType", qResult.get(0).field("typeField"))
+0.564 - assertNotNull(qResult.get(0).field("dateField"))
+0.547 - assertEquals("value", qResult.get(0).field("mapField").get("key"))
+0.519 - assertTrue(qResult.get(0).field("nullField") == null)
+0.506 - assertFalse(qResult.get(0).field("emptyField").isEmpty())
+0.484 - assertFalse((Boolean) qResult.get(0).field("anotherBooleanField"))
+0.483 - assertTrue((Boolean) qResult.get(0).field("booleanField"))
+0.472 - assertTrue(qResult.get(0).field("listField") instanceof List)
+0.444 - assertTrue(qResult.get(0).field("someField").equals("expectedValue"))
+0.440 - assertTrue(qResult.get(0).field("booleanField").equals(true))
+0.437 - assertTrue(qResult.get(0).field("mapField") instanceof Map)
+0.427 - assertTrue(qResult.get(0).field("dateField") instanceof Date)
+0.400 - assertTrue(qResult.get(0).field("booleanField") instanceof Boolean)
+0.000 - ```

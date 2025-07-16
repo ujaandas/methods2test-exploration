@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TagUtils {
+    public static Map < String , String > parseTags ( String s ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    if ( "STR" . equals ( s ) ) { 
+    return result ; 
+    } for ( String keyValue : s . split ( "STR" ) ) { 
+    if ( keyValue . contains ( "STR" ) ) { 
+    String [ ] array = keyValue . split ( "STR" ) ; 
+    result . put ( array [ 0 ] , array [ 1 ] ) ; 
+    } else { 
+    result . put ( keyValue , "STR" ) ; 
+    } } return result ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TagUtilsTest {
+    @Test
+     public void parseTags ( ) {
+         Map < String , String > result = TagUtils . parseTags ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(0, result.size());
+assertTrue(result.isEmpty());
+assertNotNull(result);
+assertTrue(result instanceof Map);
+assertTrue(result.containsKey("key"));
+assertFalse(result.containsValue("value"));
+assertEquals("value", result.get("key"));
+assertTrue(result.keySet().contains("key"));
+assertTrue(result.values().contains("value"));
+assertTrue(result.entrySet().contains("key=value"));
+assertEquals(1, result.size());
+assertNotEquals(0, result.size());
+assertTrue(result.containsKey("key") && result.containsValue("value"));
+assertFalse(result.isEmpty());
+assertEquals(1, result.keySet().size());
+assertEquals(1, result.values().size());
+assertTrue(result.entrySet().size() > 0);
+assertTrue(result.keySet().contains("key") && result.values().contains("value"));
+assertFalse(result.containsKey("nonExistentKey"));
+assertNull(result.get("nonExistentKey"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(toMap("STR","STR","STR","STR","STR","STR"),result); ===
+0.457 - assertEquals(1, result.size())
+0.451 - assertEquals("value", result.get("key"))
+0.442 - assertNotEquals(0, result.size())
+0.416 - assertEquals(1, result.keySet().size())
+0.416 - assertEquals(1, result.values().size())
+0.400 - Assertions:
+
+assertEquals(0, result.size())
+0.381 - assertNotNull(result)
+0.370 - assertFalse(result.isEmpty())
+0.330 - assertTrue(result.isEmpty())
+0.324 - assertFalse(result.containsValue("value"))
+0.319 - assertTrue(result instanceof Map)
+0.311 - assertNull(result.get("nonExistentKey"))
+0.304 - assertFalse(result.containsKey("nonExistentKey"))
+0.300 - assertTrue(result.containsKey("key"))
+0.297 - assertTrue(result.entrySet().size() > 0)
+0.283 - assertTrue(result.keySet().contains("key"))
+0.278 - assertTrue(result.values().contains("value"))
+0.263 - assertTrue(result.entrySet().contains("key=value"))
+0.229 - assertTrue(result.containsKey("key") && result.containsValue("value"))
+0.213 - assertTrue(result.keySet().contains("key") && result.values().contains("value"))

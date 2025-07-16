@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testNoDirtySameBytes ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         byte [ ] bytes = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 } ; 
+         doc . field ( "STR" , bytes ) ; 
+         ODocumentInternal . clearTrackData ( doc ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertFalse(doc.isDirty());
+2. assertEquals(6, doc.toStream().length);
+3. assertArrayEquals(bytes, doc.field("STR"));
+4. assertNull(doc.field("NEW_FIELD"));
+5. assertTrue(doc.isTrackingChanges());
+6. assertFalse(doc.isTrackingChanges());
+7. assertTrue(doc.isDirty());
+8. assertFalse(doc.isDirty());
+9. assertNotNull(doc.field("STR"));
+10. assertNull(doc.field("NON_EXISTING_FIELD"));
+11. assertTrue(doc.isDirty());
+12. assertFalse(doc.isDirty());
+13. assertEquals(6, doc.toStream().length);
+14. assertArrayEquals(bytes, doc.field("STR"));
+15. assertNull(doc.field("NEW_FIELD"));
+16. assertTrue(doc.isTrackingChanges());
+17. assertFalse(doc.isTrackingChanges());
+18. assertTrue(doc.isDirty());
+19. assertFalse(doc.isDirty());
+20. assertNotNull(doc.field("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(doc.isDirty()); ===
+0.963 - 8. assertFalse(doc.isDirty())
+0.945 - 12. assertFalse(doc.isDirty())
+0.945 - 19. assertFalse(doc.isDirty())
+0.830 - 7. assertTrue(doc.isDirty())
+0.815 - 11. assertTrue(doc.isDirty())
+0.815 - 18. assertTrue(doc.isDirty())
+0.776 - Assertions:
+
+1. assertFalse(doc.isDirty())
+0.688 - 6. assertFalse(doc.isTrackingChanges())
+0.677 - 17. assertFalse(doc.isTrackingChanges())
+0.571 - 5. assertTrue(doc.isTrackingChanges())
+0.562 - 16. assertTrue(doc.isTrackingChanges())
+0.554 - 2. assertEquals(6, doc.toStream().length)
+0.545 - 13. assertEquals(6, doc.toStream().length)
+0.542 - 9. assertNotNull(doc.field("STR"))
+0.533 - 20. assertNotNull(doc.field("STR"))
+0.522 - 3. assertArrayEquals(bytes, doc.field("STR"))
+0.516 - 4. assertNull(doc.field("NEW_FIELD"))
+0.514 - 14. assertArrayEquals(bytes, doc.field("STR"))
+0.508 - 15. assertNull(doc.field("NEW_FIELD"))
+0.444 - 10. assertNull(doc.field("NON_EXISTING_FIELD"))

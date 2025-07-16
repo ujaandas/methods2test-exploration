@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic Object getDocumentValueToIndex ( final ODocument iDocument ) {\nfinal List < OCompositeKey > compositeKeys = new ArrayList < OCompositeKey > ( 10 ) ;\nfinal OCompositeKey firstKey = new OCompositeKey ( ) ;\nboolean containsCollection = false ;\ncompositeKeys . add ( firstKey ) ;\nfor ( final OIndexDefinition indexDefinition : indexDefinitions ) {\nfinal Object result = indexDefinition . getDocumentValueToIndex ( iDocument ) ;\nif ( result == null && isNullValuesIgnored ( ) ) return null ;\nif ( result instanceof Collection && ( ( Collection ) result ) . isEmpty ( ) && isNullValuesIgnored ( ) ) return null ;\ncontainsCollection = addKey ( firstKey , compositeKeys , containsCollection , result ) ;\n} if ( ! containsCollection ) return firstKey ;\nreturn compositeKeys ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexMapValueSuccessful ( ) {\nfinal ODocument document = new ODocument ( ) ;\nfinal Map < String , String > stringMap = new HashMap < String , String > ( ) ;\nstringMap . put ( \"STR\" , \"STR\" ) ;\nstringMap . put ( \"STR\" , \"STR\" ) ;\ndocument . field ( \"STR\" , 12 ) ;\ndocument . field ( \"STR\" , stringMap ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyMapIndexDefinition ( \"STR\" , \"STR\" , OType . STRING , OPropertyMapIndexDefinition . INDEX_BY . KEY ) ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\nfinal Collection < OCompositeKey > collectionResult = ( Collection < OCompositeKey > ) result ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof Collection);\nassertEquals(2, ((Collection<?>) result).size());\nassertTrue(((Collection<?>) result).stream().allMatch(key -> key instanceof OCompositeKey));\nassertTrue(((Collection<?>) result).containsKey(\"STR\"));\nassertTrue(((Collection<?>) result).containsKey(\"STR\"));\nassertEquals(12, ((OCompositeKey) ((Collection<?>) result).toArray()[0]).getValue());\nassertEquals(\"STR\", ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getValue());\nassertTrue(((OCompositeKey) ((Collection<?>) result).toArray()[0]).getValue() instanceof Integer);\nassertTrue(((OCompositeKey) ((Collection<?>) result).toArray()[1]).getValue() instanceof String);\nassertFalse(((OCompositeKey) ((Collection<?>) result).toArray()[1]).getValue() instanceof Integer);\nassertNotNull(((OCompositeKey) ((Collection<?>) result).toArray()[0]).getFieldValue(\"STR\"));\nassertNotNull(((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\"));\nassertEquals(\"STR\", ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\"));\nassertTrue(((OCompositeKey) ((Collection<?>) result).toArray()[0]).getFieldValue(\"STR\") instanceof Integer);\nassertTrue(((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\") instanceof Map);\nassertEquals(2, ((Map<?, ?>) ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\")).size());\nassertTrue(((Map<?, ?>) ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\")).containsKey(\"STR\"));\nassertTrue(((Map<?, ?>) ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\")).containsValue(\"STR\"));\nassertTrue(((Map<?, ?>) ((OCompositeKey) ((Collection<?>) result).toArray()[1]).getFieldValue(\"STR\")).get(\"STR\").equals(\"STR\"));\nassertFalse(((Collection<?>) result).isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.824,
+        0.682,
+        0.602,
+        0.602,
+        0.533,
+        0.52,
+        0.496,
+        0.494,
+        0.473,
+        0.469,
+        0.469,
+        0.448,
+        0.441,
+        0.436,
+        0.427,
+        0.424,
+        0.42,
+        0.408,
+        0.385,
+        0.38,
+        0.37,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(collectionResult.size(),2);"
+}

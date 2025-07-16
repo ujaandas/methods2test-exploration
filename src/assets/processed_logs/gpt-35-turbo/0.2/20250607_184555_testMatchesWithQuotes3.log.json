@@ -1,0 +1,23 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testMatchesWithQuotes3 ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, results.size());\nassertTrue(results.isEmpty());\nassertNotNull(results);\nassertEquals(1, results.size());\nassertFalse(results.isEmpty());\nassertNotNull(results.get(0));\nassertTrue(results.get(0) instanceof ODocument);\nassertEquals(\"expectedValue\", results.get(0).field(\"fieldName\"));\nassertNotEquals(0, results.get(0).field(\"fieldName\"));\nassertTrue(results.contains(expectedDocument));\nassertFalse(results.contains(unexpectedDocument));\nassertEquals(expectedSize, results.size());\nassertTrue(results.size() > 0);\nassertFalse(results.size() == 0);\nassertEquals(expectedValue, results.get(0).field(\"fieldName\"));\nassertNotNull(results.get(0).field(\"fieldName\"));\n====================\n\n",
+    "scores": [
+        0.933,
+        0.933,
+        0.833,
+        0.793,
+        0.789,
+        0.733,
+        0.712,
+        0.678,
+        0.654,
+        0.634,
+        0.571,
+        0.564,
+        0.559,
+        0.557,
+        0.526,
+        0.507
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

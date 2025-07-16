@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(listener);
+assertTrue(listener.isTriggered());
+assertEquals("STR", item.getProperty("STR"));
+assertEquals(item.getIdentity(), live.getIdentity());
+assertTrue(live.isActive());
+assertFalse(live.isClosed());
+assertEquals(1, listener.getCount());
+assertTrue(database.contains(item.getIdentity()));
+assertEquals("STR", item.getProperty("STR"));
+assertNotNull(item.getRecord());
+assertEquals(item.getRecord().getIdentity(), item.getIdentity());
+assertFalse(item.isNew());
+assertTrue(item.getProperty("STR").equals("STR"));
+assertTrue(database.getVertices().contains(item));
+assertNotNull(database.getLiveQuery("STR" + item.getIdentity()));
+assertTrue(database.getLiveQueries().size() > 0);
+assertTrue(database.getLiveQueries().contains(live));
+assertFalse(live.hasErrors());
+assertEquals(item.getClass(), OVertex.class);
+assertTrue(item.isDirty());
+assertNotNull(live.getQuery());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.552 - assertTrue(listener.isTriggered())
+0.500 - assertEquals(1, listener.getCount())
+0.475 - assertTrue(live.isActive())
+0.431 - assertTrue(database.contains(item.getIdentity()))
+0.431 - assertTrue(item.getProperty("STR").equals("STR"))
+0.430 - assertTrue(item.isDirty())
+0.405 - ```java
+assertNotNull(listener)
+0.404 - assertTrue(database.getLiveQueries().size() > 0)
+0.386 - assertNotNull(live.getQuery())
+0.385 - assertEquals(item.getIdentity(), live.getIdentity())
+0.385 - assertFalse(item.isNew())
+0.381 - assertNotNull(item.getRecord())
+0.379 - assertEquals(item.getRecord().getIdentity(), item.getIdentity())
+0.370 - assertFalse(live.isClosed())
+0.366 - assertFalse(live.hasErrors())
+0.354 - assertEquals("STR", item.getProperty("STR"))
+0.354 - assertEquals("STR", item.getProperty("STR"))
+0.354 - assertEquals(item.getClass(), OVertex.class)
+0.353 - assertTrue(database.getVertices().contains(item))
+0.330 - assertNotNull(database.getLiveQuery("STR" + item.getIdentity()))
+0.305 - assertTrue(database.getLiveQueries().contains(live))
+0.000 - ```

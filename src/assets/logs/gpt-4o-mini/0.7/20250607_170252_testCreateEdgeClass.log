@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    default OClass createEdgeClass ( String className ) { 
+    return createClass ( className , "STR" ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testCreateEdgeClass ( ) {
+         OClass clazz = db . createEdgeClass ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(clazz);
+assertEquals("STR", clazz.getName());
+assertTrue(clazz instanceof OClass);
+assertTrue(clazz.isEdgeClass());
+assertFalse(clazz.isAbstract());
+assertEquals("EDGE", clazz.getType());
+assertEquals(1, clazz.getProperties().size());
+assertEquals("default", clazz.getDefaultCluster());
+assertTrue(clazz.getSuperClass() == null);
+assertEquals(0, clazz.getSubClasses().size());
+assertNotNull(clazz.getSchema());
+assertTrue(clazz.getSchema().getClasses().contains(clazz));
+assertEquals(0, clazz.getIndices().size());
+assertFalse(clazz.isPolymorphic());
+assertEquals(1, db.getEdgeClasses().size());
+assertTrue(db.getEdgeClasses().contains(clazz));
+assertNotNull(clazz.getClusterIds());
+assertFalse(clazz.getClusterIds().isEmpty());
+assertEquals(1, clazz.getClusterIds().size());
+assertEquals(clazz.getClusterIds().get(0), clazz.getDefaultClusterId());
+assertEquals(0, clazz.getMethods().size());
+assertEquals(0, clazz.getEvents().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(clazz); ===
+0.833 - ```java
+assertNotNull(clazz)
+0.769 - assertNotNull(clazz.getSchema())
+0.714 - assertNotNull(clazz.getClusterIds())
+0.549 - assertTrue(clazz.isEdgeClass())
+0.549 - assertFalse(clazz.isAbstract())
+0.545 - assertEquals("STR", clazz.getName())
+0.536 - assertEquals("EDGE", clazz.getType())
+0.528 - assertTrue(clazz instanceof OClass)
+0.519 - assertFalse(clazz.isPolymorphic())
+0.500 - assertEquals(0, clazz.getEvents().size())
+0.492 - assertEquals(0, clazz.getIndices().size())
+0.492 - assertEquals(0, clazz.getMethods().size())
+0.475 - assertTrue(clazz.getSuperClass() == null)
+0.469 - assertEquals(1, clazz.getProperties().size())
+0.469 - assertEquals(0, clazz.getSubClasses().size())
+0.469 - assertEquals(1, clazz.getClusterIds().size())
+0.448 - assertTrue(db.getEdgeClasses().contains(clazz))
+0.438 - assertFalse(clazz.getClusterIds().isEmpty())
+0.406 - assertEquals("default", clazz.getDefaultCluster())
+0.385 - assertTrue(clazz.getSchema().getClasses().contains(clazz))
+0.355 - assertEquals(1, db.getEdgeClasses().size())
+0.333 - assertEquals(clazz.getClusterIds().get(0), clazz.getDefaultClusterId())
+0.000 - ```

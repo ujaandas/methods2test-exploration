@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtil {
+    protected static Properties getPropertiesResource ( URL resource ) { 
+    Properties answer = new Properties ( ) ; 
+    if ( resource != null ) { 
+    try ( InputStream stream = resource . openStream ( ) ) { 
+    answer . load ( stream ) ; 
+    } catch ( IOException e ) { 
+    throw new IllegalStateException ( "STR" + resource , e ) ; 
+    } } return answer ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtilTest {
+    @Test
+     public void testNonExistentPropertiesParsing ( ) {
+         Properties props = SpringBootUtil . getPropertiesResource ( SpringBootUtilTest . class . getResource ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(props);
+assertTrue(props.isEmpty());
+assertFalse(props.containsKey("someKey"));
+assertEquals(0, props.size());
+assertFalse(props.containsValue("someValue"));
+assertNull(props.getProperty("nonExistentKey"));
+assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(null);
+});
+assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(new URL("http://nonexistent.url"));
+});
+assertEquals("STR" + SpringBootUtilTest.class.getResource("STR"), props.getProperty("errorMessage"));
+assertNotEquals("someValue", props.getProperty("someKey"));
+assertTrue(props.keySet().isEmpty());
+assertTrue(props.values().isEmpty());
+assertFalse(props.containsKey("anotherKey"));
+assertFalse(props.containsValue("anotherValue"));
+assertEquals(0, props.size());
+assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(new URL("file://nonexistent.properties"));
+});
+assertNull(props.getProperty("missingKey"));
+assertFalse(props.containsKey("keyThatShouldNotExist"));
+assertTrue(props.isEmpty());
+assertEquals(0, props.size());
+assertFalse(props.containsValue("valueThatShouldNotExist"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(props); ===
+0.833 - ```java
+assertNotNull(props)
+0.625 - assertEquals(0, props.size())
+0.625 - assertEquals(0, props.size())
+0.625 - assertEquals(0, props.size())
+0.596 - assertTrue(props.isEmpty())
+0.596 - assertTrue(props.isEmpty())
+0.540 - assertNull(props.getProperty("missingKey"))
+0.507 - assertNull(props.getProperty("nonExistentKey"))
+0.500 - assertTrue(props.keySet().isEmpty())
+0.500 - assertTrue(props.values().isEmpty())
+0.468 - assertNotEquals("someValue", props.getProperty("someKey"))
+0.459 - assertFalse(props.containsKey("someKey"))
+0.438 - assertFalse(props.containsKey("anotherKey"))
+0.431 - assertFalse(props.containsValue("someValue"))
+0.412 - assertFalse(props.containsValue("anotherValue"))
+0.373 - assertFalse(props.containsKey("keyThatShouldNotExist"))
+0.354 - assertFalse(props.containsValue("valueThatShouldNotExist"))
+0.274 - assertEquals("STR" + SpringBootUtilTest.class.getResource("STR"), props.getProperty("errorMessage"))
+0.222 - assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(new URL("file://nonexistent.properties"))
+0.220 - assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(null)
+0.204 - assertThrows(IllegalStateException.class, () -> {
+    SpringBootUtil.getPropertiesResource(new URL("http://nonexistent.url"))
+0.091 - })
+0.091 - })
+0.091 - })
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class EbmlSint {\npublic static int ebmlSignedLength ( long val ) {\nif ( val <= 0x40 && val >= ( - 0x3F ) ) {\nreturn 1 ;\n} else if ( val <= 0x2000 && val >= ( - 0x1FFF ) ) {\nreturn 2 ;\n} else if ( val <= 0x100000 && val >= ( - 0x0FFFFF ) ) {\nreturn 3 ;\n} else if ( val <= 0x8000000 && val >= ( - 0x07FFFFFF ) ) {\nreturn 4 ;\n} else if ( val <= 0x400000000L && val >= - 0x03FFFFFFFFL ) {\nreturn 5 ;\n} else if ( val <= 0x20000000000L && val >= - 0x01FFFFFFFFFFL ) {\nreturn 6 ;\n} else if ( val <= 0x1000000000000L && val >= - 0x00FFFFFFFFFFFFL ) {\nreturn 7 ;\n} else {\nreturn 8 ;\n} }\n}\n\npackage jcodec.jcodec;\n\npublic class EbmlSintTest {\n@Test\npublic void testNegativeVals ( ) throws Exception {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, EbmlSint.ebmlSignedLength(0));\nassertEquals(1, EbmlSint.ebmlSignedLength(1));\nassertEquals(1, EbmlSint.ebmlSignedLength(-1));\nassertEquals(1, EbmlSint.ebmlSignedLength(0x3F));\nassertEquals(1, EbmlSint.ebmlSignedLength(-0x3F));\nassertEquals(2, EbmlSint.ebmlSignedLength(0x2000));\nassertEquals(2, EbmlSint.ebmlSignedLength(-0x1FFF));\nassertEquals(3, EbmlSint.ebmlSignedLength(0x100000));\nassertEquals(3, EbmlSint.ebmlSignedLength(-0x0FFFFF));\nassertEquals(4, EbmlSint.ebmlSignedLength(0x8000000));\nassertEquals(4, EbmlSint.ebmlSignedLength(-0x07FFFFFF));\nassertEquals(5, EbmlSint.ebmlSignedLength(0x400000000L));\nassertEquals(5, EbmlSint.ebmlSignedLength(-0x03FFFFFFFFL));\nassertEquals(6, EbmlSint.ebmlSignedLength(0x20000000000L));\nassertEquals(6, EbmlSint.ebmlSignedLength(-0x01FFFFFFFFFFL));\nassertEquals(7, EbmlSint.ebmlSignedLength(0x1000000000000L));\nassertEquals(7, EbmlSint.ebmlSignedLength(-0x00FFFFFFFFFFFFL));\nassertEquals(8, EbmlSint.ebmlSignedLength(0x20000000000000L));\nassertEquals(8, EbmlSint.ebmlSignedLength(-0x100000000000000L));\nassertEquals(8, EbmlSint.ebmlSignedLength(Long.MAX_VALUE));\nassertEquals(8, EbmlSint.ebmlSignedLength(Long.MIN_VALUE));\n```\n====================\n\n",
+    "scores": [
+        0.864,
+        0.857,
+        0.85,
+        0.843,
+        0.791,
+        0.776,
+        0.773,
+        0.773,
+        0.759,
+        0.756,
+        0.753,
+        0.75,
+        0.725,
+        0.716,
+        0.71,
+        0.71,
+        0.71,
+        0.701,
+        0.695,
+        0.694,
+        0.688,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,ebmlSignedLength(-3));"
+}

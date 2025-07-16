@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( List < ? > params ) {\nif ( ! ( params . get ( 0 ) instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ;\nfinal List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nresult . add ( createSingleValue ( mapParam ) ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameter ( ) {\nfinal Object result = propertyIndexByKey . createValue ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNull(result);\nAssert.assertTrue(result instanceof List);\nAssert.assertEquals(0, ((List) result).size());\nAssert.assertTrue(((List) result).isEmpty());\nAssert.assertNotEquals(1, ((List) result).size());\nAssert.assertNotNull(result);\nAssert.assertFalse(result instanceof Map);\nAssert.assertNotEquals(2, ((List) result).size());\nAssert.assertNotSame(Collections.singletonList(\"STR\"), result);\nAssert.assertNotEquals(\"STR\", result);\nAssert.assertNotSame(Collections.emptyList(), result);\nAssert.assertNotSame(Collections.emptyMap(), result);\nAssert.assertNotEquals(Collections.singletonList(\"STR\"), result);\nAssert.assertNotEquals(Collections.emptyList(), result);\nAssert.assertNotEquals(Collections.emptyMap(), result);\nAssert.assertNotSame(Collections.singletonList(\"STR\"), ((List) result).get(0));\nAssert.assertNotEquals(\"STR\", ((List) result).get(0));\nAssert.assertNotSame(Collections.emptyList(), ((List) result).get(0));\nAssert.assertNotSame(Collections.emptyMap(), ((List) result).get(0));\nAssert.assertNotEquals(Collections.singletonList(\"STR\"), ((List) result).get(0));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.923,
+        0.723,
+        0.6,
+        0.6,
+        0.586,
+        0.586,
+        0.582,
+        0.562,
+        0.556,
+        0.554,
+        0.548,
+        0.548,
+        0.54,
+        0.486,
+        0.472,
+        0.442,
+        0.436,
+        0.404,
+        0.391
+    ],
+    "ground_truth": "Assert.assertNull(result);"
+}

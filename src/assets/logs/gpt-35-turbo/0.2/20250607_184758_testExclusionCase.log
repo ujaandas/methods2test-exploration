@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractor {
+    public String text ( Element element ) { 
+    if ( noText ) return "STR" ; 
+    if ( inclusionPatterns . size ( ) == 0 && excludedTags . size ( ) == 0 ) { 
+    return _text ( element ) ; 
+    } Elements matches = new Elements ( ) ; 
+    for ( String pattern : inclusionPatterns ) { 
+    matches = element . select ( pattern ) ; 
+    if ( ! matches . isEmpty ( ) ) break ; 
+    } if ( matches . isEmpty ( ) ) { 
+    matches . add ( element ) ; 
+    } final StringBuilder accum = new StringBuilder ( ) ; 
+    for ( Element node : matches ) { 
+    accum . append ( _text ( node ) ) . append ( "STR" ) ; 
+    } return accum . toString ( ) . trim ( ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractorTest {
+    @Test
+     public void testExclusionCase ( ) throws IOException {
+         Config conf = new Config ( ) ; 
+         conf . put ( TextExtractor . EXCLUDE_PARAM_NAME , "STR" ) ; 
+         TextExtractor extractor = new TextExtractor ( conf ) ; 
+         String content = "STR" ; 
+         Document jsoupDoc = Parser . htmlParser ( ) . parseInput ( content , "STR" ) ; 
+         String text = extractor . text ( jsoupDoc . body ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", text);
+assertNotEquals("STR", text);
+assertTrue(text.contains("STR"));
+assertFalse(text.isEmpty());
+assertNotNull(text);
+assertNull(null);
+assertEquals("Expected text", text);
+assertNotEquals("Unexpected text", text);
+assertTrue(text.length() > 0);
+assertFalse(text.equals("STR"));
+assertTrue(text.startsWith("S"));
+assertFalse(text.endsWith("R"));
+assertTrue(text.matches("[a-zA-Z0-9 ]+"));
+assertFalse(text.equalsIgnoreCase("str"));
+assertTrue(text.contains("S") && text.contains("R"));
+assertFalse(text.contains("X"));
+assertTrue(text.trim().length() == text.length());
+assertFalse(text.equals(" "));
+assertTrue(text.charAt(0) == 'S');
+assertEquals("STR", text.toUpperCase());
+assertNotEquals("str", text.toLowerCase());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",text); ===
+1.000 - assertEquals("STR", text)
+0.941 - assertNotEquals("STR", text)
+0.774 - assertEquals("STR", text.toUpperCase())
+0.737 - assertEquals("Expected text", text)
+0.677 - assertNotEquals("Unexpected text", text)
+0.655 - assertFalse(text.equals("STR"))
+0.651 - assertNotNull(text)
+0.646 - assertNotEquals("str", text.toLowerCase())
+0.588 - assertFalse(text.isEmpty())
+0.577 - assertFalse(text.equals(" "))
+0.571 - assertTrue(text.contains("STR"))
+0.545 - assertFalse(text.endsWith("R"))
+0.545 - assertFalse(text.contains("X"))
+0.510 - assertTrue(text.length() > 0)
+0.500 - assertNull(null)
+0.486 - assertTrue(text.contains("S") && text.contains("R"))
+0.473 - assertTrue(text.charAt(0) == 'S')
+0.464 - assertTrue(text.startsWith("S"))
+0.462 - assertFalse(text.equalsIgnoreCase("str"))
+0.406 - assertTrue(text.matches("[a-zA-Z0-9 ]+"))
+0.366 - assertTrue(text.trim().length() == text.length())

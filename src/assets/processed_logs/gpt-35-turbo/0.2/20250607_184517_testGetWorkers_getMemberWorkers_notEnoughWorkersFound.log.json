@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(4, registry.workerCount());\nAssert.assertNotEquals(3, registry.workerCount());\nAssert.assertTrue(registry.workerCount() > 0);\nAssert.assertFalse(registry.workerCount() == 0);\nAssert.assertNotNull(registry);\nAssert.assertNull(null);\nAssert.assertSame(worker, registry.getWorker(0));\nAssert.assertNotSame(worker, registry.getWorker(1));\nAssert.assertTrue(registry.getWorkers().contains(worker));\nAssert.assertFalse(registry.getWorkers().isEmpty());\nAssert.assertEquals(2, registry.getWorkers().size());\nAssert.assertTrue(registry.getWorkers().get(0).getStatus().equals(\"STR\"));\nAssert.assertFalse(registry.getWorkers().get(1).getStatus().equals(\"ABC\"));\nAssert.assertTrue(registry.getWorkers().get(0).getAgentAddress().equals(agentAddress));\nAssert.assertFalse(registry.getWorkers().get(1).getAgentAddress().equals(null));\nAssert.assertTrue(registry.getWorkers().get(0).getId() != registry.getWorkers().get(1).getId());\nAssert.assertTrue(registry.getWorkers().get(0).getType().equals(\"Worker\"));\nAssert.assertFalse(registry.getWorkers().get(1).getType().equals(\"Agent\"));\nAssert.assertTrue(registry.getWorkers().get(0).getAgentIndex() == 0);\nAssert.assertFalse(registry.getWorkers().get(1).getAgentIndex() == 1);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.937,
+        0.868,
+        0.838,
+        0.756,
+        0.683,
+        0.667,
+        0.642,
+        0.592,
+        0.59,
+        0.568,
+        0.557,
+        0.552,
+        0.533,
+        0.527,
+        0.5,
+        0.495,
+        0.462,
+        0.435,
+        0.407
+    ],
+    "ground_truth": "assertEquals(4,registry.workerCount());"
+}

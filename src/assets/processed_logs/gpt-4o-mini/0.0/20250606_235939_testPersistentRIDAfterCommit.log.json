@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class Blueprints {\nboolean isPersistent ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class BlueprintsTest {\n@Test\npublic void testPersistentRIDAfterCommit ( ) {\nVertex v = graph . addVertex ( null ) ;\nv . setProperty ( \"STR\" , \"STR\" ) ;\ngraph . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(graph.isPersistent());\nassertNotNull(v);\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertTrue(v.getId().isPersistent());\nassertEquals(1, graph.getVertexCount());\nassertFalse(v.getId().isNew());\nassertTrue(v.getId().isValid());\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertNotNull(v.getId());\nassertTrue(graph.getVertices().contains(v));\nassertEquals(1, graph.getEdges().size());\nassertTrue(graph.getEdges().stream().anyMatch(edge -> edge.getInVertex().equals(v) || edge.getOutVertex().equals(v)));\nassertTrue(graph.getVertices().stream().anyMatch(vertex -> vertex.getId().equals(v.getId())));\nassertEquals(\"STR\", v.getProperty(\"STR\"));\nassertFalse(v.getProperty(\"NON_EXISTENT_PROPERTY\") != null);\nassertEquals(0, graph.getEdges().size());\nassertTrue(graph.getVertices().stream().anyMatch(vertex -> vertex.getProperty(\"STR\").equals(\"STR\")));\nassertNotNull(graph.getVertex(v.getId()));\nassertTrue(graph.getVertex(v.getId()).isPersistent());\nassertEquals(1, graph.getVertex(v.getId()).getProperty(\"STR\").length());\nassertFalse(graph.getVertex(v.getId()).getProperty(\"STR\").isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.9,
+        0.784,
+        0.72,
+        0.667,
+        0.649,
+        0.529,
+        0.529,
+        0.526,
+        0.488,
+        0.471,
+        0.464,
+        0.4,
+        0.381,
+        0.381,
+        0.381,
+        0.38,
+        0.376,
+        0.361,
+        0.361,
+        0.344,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(((ORID)v.getId()).isPersistent());"
+}

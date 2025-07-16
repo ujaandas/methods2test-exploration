@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class JmxAttributePoller {\n@Override\npublic Step getNextStep ( ) {\nif ( done || shutdownInd ) {\nreturn null ;\n} Step result = new Step ( ) {\n@Override\npublic void execute ( ) {\ntry {\npollOneObject ( target ) ;\n} catch ( Exception exc ) {\nfailureException = exc ;\n} finally {\ndone = true ;\n} } @Override\npublic boolean isBlocking ( ) {\nreturn true ;\n} } ;\nreturn result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class JmxAttributePollerTest {\n@Test\npublic void testGetStepAfterShutdown ( ) throws Exception {\nthis . poller . shutdown ( ) ;\nJmxAttributePoller . PollOneObjectSchedulerProcess process = this . poller . new PollOneObjectSchedulerProcess ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(process);\nAssert.assertTrue(process instanceof JmxAttributePoller.PollOneObjectSchedulerProcess);\nAssert.assertEquals(\"STR\", process.getTarget());\nAssert.assertFalse(poller.isRunning());\nAssert.assertTrue(poller.isShutdown());\nAssert.assertTrue(poller.done);\nAssert.assertNull(poller.getNextStep());\nAssert.assertThrows(IllegalStateException.class, () -> poller.pollOneObject(\"STR\"));\nAssert.assertEquals(0, poller.getPendingTasksCount());\nAssert.assertTrue(poller.getFailureException() instanceof NullPointerException);\nAssert.assertTrue(poller.getShutdownInd());\nAssert.assertFalse(poller.hasActiveProcess());\nAssert.assertEquals(0, poller.getActiveProcessCount());\nAssert.assertTrue(poller.isBlocked());\nAssert.assertTrue(poller.isShutdown());\nAssert.assertNotNull(poller.getLastExecutedStep());\nAssert.assertFalse(poller.hasPendingTasks());\nAssert.assertEquals(\"Expected message\", poller.getFailureMessage());\nAssert.assertFalse(poller.isFailure());\nAssert.assertFalse(poller.isDone());\nAssert.assertEquals(\"Expected state\", poller.getState());\nAssert.assertTrue(poller.isFailureHandled());\n```\n====================\n\n",
+    "scores": [
+        0.862,
+        0.694,
+        0.684,
+        0.603,
+        0.529,
+        0.508,
+        0.505,
+        0.5,
+        0.487,
+        0.481,
+        0.479,
+        0.464,
+        0.459,
+        0.438,
+        0.438,
+        0.438,
+        0.429,
+        0.429,
+        0.406,
+        0.4,
+        0.291,
+        0.283,
+        0.0
+    ],
+    "ground_truth": "assertNull(process.getNextStep());"
+}

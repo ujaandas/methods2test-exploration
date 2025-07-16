@@ -1,0 +1,23 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class Seq {\npublic static String join ( Collection < ? > list , String delimiter ) {\nif ( list == null || list . isEmpty ( ) ) {\nreturn \"STR\" ;\n} if ( delimiter == null ) {\ndelimiter = \"STR\" ;\n} StringBuilder s = new StringBuilder ( ) ;\nboolean first = true ;\nfor ( Object e : list ) {\nif ( first ) {\nfirst = false ;\n} else {\ns . append ( delimiter ) ;\n} s . append ( e ) ;\n} return s . toString ( ) ;\n}\n}\n\npackage redraiment.jactiverecord;\n\npublic class SeqTest {\n@Test\npublic void testJoinListEmpty ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"\", Seq.join(new ArrayList<>(), \",\"));\n\nassertEquals(\"1\", Seq.join(Collections.singletonList(1), \",\"));\n\nassertEquals(\"1,2\", Seq.join(Arrays.asList(1, 2), \",\"));\n\nassertEquals(\"a,b,c\", Seq.join(Arrays.asList(\"a\", \"b\", \"c\"), \",\"));\n\nassertEquals(\"true,false,true\", Seq.join(Arrays.asList(true, false, true), \",\"));\n\nassertEquals(\"1.0,2.0,3.0\", Seq.join(Arrays.asList(1.0, 2.0, 3.0), \",\"));\n\nassertEquals(\"apple,banana,orange\", Seq.join(Arrays.asList(\"apple\", \"banana\", \"orange\"), \",\"));\n\nassertEquals(\"1,2,3,4,5\", Seq.join(Arrays.asList(1, 2, 3, 4, 5), \",\"));\n\nassertEquals(\"hello,world\", Seq.join(Arrays.asList(\"hello\", \"world\"), \",\"));\n\nassertEquals(\"1,2,3,4,5,6,7,8,9,10\", Seq.join(IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList()), \",\"));\n\nassertEquals(\"a,b,c,d,e,f,g,h,i,j\", Seq.join(IntStream.rangeClosed('a', 'j').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList()), \",\"));\n\nassertEquals(\"1.0,2.0,3.0,4.0,5.0\", Seq.join(DoubleStream.iterate(1.0, n -> n + 1).limit(5).boxed().collect(Collectors.toList()), \",\"));\n\nassertEquals(\"true,false,true,false,true\", Seq.join(Stream.generate(() -> true).limit(5).collect(Collectors.toList()), \",\"));\n\nassertEquals(\"apple,banana,orange,apple,banana,orange\", Seq.join(Stream.generate(() -> \"apple\").limit(3).flatMap(s -> Stream.of(s, \"banana\", \"orange\")).collect(Collectors.toList()), \",\"));\n\nassertEquals(\"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15\", Seq.join(IntStream.iterate(1, n -> n + 1).limit(15).boxed().collect(Collectors.toList()), \",\"));\n\nassertEquals(\"a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z\", Seq.join(IntStream.rangeClosed('a', 'z').map\n====================\n\n",
+    "scores": [
+        0.729,
+        0.61,
+        0.6,
+        0.55,
+        0.541,
+        0.524,
+        0.508,
+        0.493,
+        0.474,
+        0.461,
+        0.441,
+        0.432,
+        0.414,
+        0.402,
+        0.346,
+        0.345
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",Seq.join(Collections.EMPTY_LIST,\"STR\"));"
+}

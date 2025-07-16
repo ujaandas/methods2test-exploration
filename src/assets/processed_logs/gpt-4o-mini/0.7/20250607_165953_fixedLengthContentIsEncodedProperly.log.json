@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegration {\npublic static Response newFixedLengthResponse ( String msg ) {\nreturn newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegrationTest {\n@Test\npublic void fixedLengthContentIsEncodedProperly ( ) throws IOException {\ntestServer . response = Response . newFixedLengthResponse ( \"STR\" ) ;\nHttpGet request = new HttpGet ( \"STR\" ) ;\nrequest . addHeader ( \"STR\" , \"STR\" ) ;\nHttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(response);\nAssert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());\nAssert.assertEquals(\"text/html\", EntityUtils.getContentType(response));\nAssert.assertEquals(\"STR\", EntityUtils.toString(response.getEntity()));\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).contains(\"STR\"));\nAssert.assertTrue(response.getFirstHeader(\"Content-Encoding\").getValue().equals(\"gzip\"));\nAssert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0);\nAssert.assertTrue(response.getAllHeaders().length > 0);\nAssert.assertEquals(\"STR\", response.getFirstHeader(\"STR\").getValue());\nAssert.assertTrue(response.getFirstHeader(\"Content-Type\").getValue().contains(\"html\"));\nAssert.assertTrue(response.getEntity().getContentType().getValue().contains(\"text/html\"));\nAssert.assertNotEquals(0, response.getEntity().getContentLength());\nAssert.assertFalse(EntityUtils.toString(response.getEntity()).isEmpty());\nAssert.assertTrue(response.getStatusLine().toString().contains(\"OK\"));\nAssert.assertNotNull(response.getEntity());\nAssert.assertTrue(EntityUtils.toString(response.getEntity()).length() > 0);\nAssert.assertEquals(\"gzip\", response.getFirstHeader(\"Content-Encoding\").getValue());\nAssert.assertFalse(EntityUtils.toString(response.getEntity()).contains(\"error\"));\nAssert.assertNotNull(response.getHeaders(\"Content-Encoding\"));\nAssert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0);\nAssert.assertTrue(response.getEntity().isRepeatable());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.835,
+        0.803,
+        0.785,
+        0.773,
+        0.734,
+        0.734,
+        0.694,
+        0.639,
+        0.6,
+        0.585,
+        0.556,
+        0.55,
+        0.496,
+        0.466,
+        0.43,
+        0.419,
+        0.417,
+        0.409,
+        0.397,
+        0.378,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",EntityUtils.toString(response.getEntity()));"
+}

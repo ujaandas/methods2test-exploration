@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class GoTimeUtil {\npublic static Integer durationSeconds ( String duration ) {\nBigDecimal ns = durationNs ( duration ) ;\nif ( ns == null ) {\nreturn null ;\n} BigDecimal sec = ns . divide ( new BigDecimal ( 1_000_000_000 ) ) ;\nif ( sec . compareTo ( new BigDecimal ( Integer . MAX_VALUE ) ) > 0 ) {\nthrow new IllegalArgumentException ( \"STR\" ) ;\n} return sec . intValue ( ) ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class GoTimeUtilTest {\n@Test\npublic void testConversion ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds(\"1000000000ns\"));\nassertEquals(Integer.valueOf(2), GoTimeUtil.durationSeconds(\"2000000000ns\"));\nassertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds(\"0ns\"));\nassertEquals(Integer.valueOf(5), GoTimeUtil.durationSeconds(\"5000000000ns\"));\nassertEquals(Integer.valueOf(10), GoTimeUtil.durationSeconds(\"10000000000ns\"));\nassertEquals(Integer.valueOf(15), GoTimeUtil.durationSeconds(\"15000000000ns\"));\nassertEquals(Integer.valueOf(30), GoTimeUtil.durationSeconds(\"30000000000ns\"));\nassertEquals(Integer.valueOf(60), GoTimeUtil.durationSeconds(\"60000000000ns\"));\nassertEquals(Integer.valueOf(120), GoTimeUtil.durationSeconds(\"120000000000ns\"));\nassertEquals(Integer.valueOf(180), GoTimeUtil.durationSeconds(\"180000000000ns\"));\nassertEquals(Integer.valueOf(240), GoTimeUtil.durationSeconds(\"240000000000ns\"));\nassertEquals(Integer.valueOf(300), GoTimeUtil.durationSeconds(\"300000000000ns\"));\nassertEquals(Integer.valueOf(429496729), GoTimeUtil.durationSeconds(\"429496729000000000ns\"));\nassertThrows(IllegalArgumentException.class, () -> GoTimeUtil.durationSeconds(\"429496730000000000ns\"));\nassertNull(GoTimeUtil.durationSeconds(null));\nassertNull(GoTimeUtil.durationSeconds(\"invalid\"));\nassertEquals(Integer.valueOf(1), GoTimeUtil.durationSeconds(\"1ns\"));\nassertEquals(Integer.valueOf(0), GoTimeUtil.durationSeconds(\"999999999ns\"));\nassertEquals(Integer.valueOf(2147483647), GoTimeUtil.durationSeconds(\"2147483647000000000ns\"));\nassertThrows(IllegalArgumentException.class, () -> GoTimeUtil.durationSeconds(\"2147483648000000000ns\"));\n```\n====================\n\n",
+    "scores": [
+        0.735,
+        0.735,
+        0.698,
+        0.688,
+        0.688,
+        0.683,
+        0.677,
+        0.677,
+        0.677,
+        0.672,
+        0.672,
+        0.672,
+        0.662,
+        0.642,
+        0.625,
+        0.62,
+        0.62,
+        0.611,
+        0.44,
+        0.437,
+        0.0
+    ],
+    "ground_truth": "assertEquals(newInteger(23),durationSeconds(\"STR\"));"
+}

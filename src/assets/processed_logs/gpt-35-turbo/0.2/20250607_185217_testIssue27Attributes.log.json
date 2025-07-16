@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue27Attributes ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(1, schemas.size());\nassertTrue(schemas.get(0).getTargetNamespace().equals(\"http://www.w3.org/2001/XMLSchema\"));\nassertTrue(schemas.get(0).getElements().size() > 0);\nassertTrue(schemas.get(0).getAttributes().size() > 0);\nassertTrue(schemas.get(0).getComplexTypes().size() > 0);\nassertTrue(schemas.get(0).getSimpleTypes().size() > 0);\nassertTrue(schemas.get(0).getGroups().size() > 0);\nassertTrue(schemas.get(0).getNotations().size() == 0);\nassertTrue(schemas.get(0).getImports().size() == 0);\nassertTrue(schemas.get(0).getIncludes().size() == 0);\nassertTrue(schemas.get(0).getRedefines().size() == 0);\nassertTrue(schemas.get(0).getAnnotations().size() == 0);\nassertTrue(schemas.get(0).getElements().get(0).getName().equals(\"element1\"));\nassertTrue(schemas.get(0).getAttributes().get(0).getName().equals(\"attribute1\"));\nassertTrue(schemas.get(0).getComplexTypes().get(0).getName().equals(\"complexType1\"));\nassertTrue(schemas.get(0).getSimpleTypes().get(0).getName().equals(\"simpleType1\"));\nassertTrue(schemas.get(0).getGroups().get(0).getName().equals(\"group1\"));\nassertTrue(schemas.get(0).getElements().get(0).getType().equals(\"type1\"));\nassertTrue(schemas.get(0).getAttributes().get(0).getType().equals(\"type2\"));\nassertTrue(schemas.get(0).getComplexTypes().get(0).getAttributes().size() > 0);\n====================\n\n",
+    "scores": [
+        0.822,
+        0.597,
+        0.582,
+        0.582,
+        0.575,
+        0.568,
+        0.568,
+        0.568,
+        0.561,
+        0.554,
+        0.554,
+        0.434,
+        0.412,
+        0.408,
+        0.4,
+        0.396,
+        0.382,
+        0.375,
+        0.368,
+        0.35
+    ],
+    "ground_truth": "Assert.assertEquals(1,schemas.size());"
+}

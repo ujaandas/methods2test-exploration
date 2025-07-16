@@ -1,0 +1,110 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public String formatIntervalPerformanceNumbers ( String testId ) { 
+    PerformanceStats latest = get ( testId , false ) ; 
+    if ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) { 
+    return "STR" ; 
+    } String latencyUnit = "STR" ; 
+    long latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ; 
+    long latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ; 
+    long latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ; 
+    if ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) { 
+    latencyUnit = "STR" ; 
+    latencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ; 
+    latency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ; 
+    latencyMax = MICROSECONDS . toMillis ( latencyMax ) ; 
+    } return format ( "STR" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {
+         SimulatorAddress worker = workerAddress ( 3 , 1 ) ; 
+         Map < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ; 
+         performanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ; 
+         performanceStatsCollector . update ( worker , performanceStats ) ; 
+         String performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(performance);
+assertFalse(performance.isEmpty());
+assertTrue(performance.contains("800")); // Operation Count
+assertTrue(performance.contains("2400")); // Avg Latency in micros
+assertTrue(performance.contains("2")); // Avg Latency in millis
+assertTrue(performance.contains("2500")); // 999 Percentile Latency in micros
+assertTrue(performance.contains("3")); // Max Latency in millis
+assertTrue(performance.contains("STR")); // Latency Unit
+assertTrue(performance.contains("THROUGHPUT_VALUE")); // Replace with expected throughput value
+assertTrue(performance.contains("INTERVAL_LATENCY_PERCENTILE")); // Replace with expected percentile value
+assertTrue(performance.indexOf("2400") < performance.indexOf("2500")); // Avg Latency < 999 Percentile
+assertTrue(performance.indexOf("2500") < performance.indexOf("3")); // 999 Percentile < Max Latency
+assertTrue(performance.split(" ").length <= 10); // Ensure performance string is not too long
+assertTrue(performance.contains("OPERATION_COUNT_FORMAT_LENGTH")); // Replace with expected format length
+assertTrue(performance.contains("THROUGHPUT_FORMAT_LENGTH")); // Replace with expected format length
+assertTrue(performance.contains("LATENCY_FORMAT_LENGTH")); // Replace with expected format length
+assertTrue(performance.contains("INTERVAL_LATENCY_PERCENTILE")); // Ensure percentile is included
+assertTrue(performance.startsWith("STR")); // Ensure it starts with expected string
+assertTrue(performance.endsWith("STR")); // Ensure it ends with expected string
+assertTrue(performance.contains("EXPECTED_STRING")); // Replace with any expected string in the output
+assertTrue(performance.contains("ANOTHER_EXPECTED_STRING")); // Replace with another expected string in the output
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(performance.contains("STR")); ===
+0.923 - assertTrue(performance.contains("800"))
+0.788 - // Max Latency in millis
+assertTrue(performance.contains("STR"))
+0.750 - // Operation Count
+assertTrue(performance.contains("2400"))
+0.742 - // Avg Latency in micros
+assertTrue(performance.contains("2"))
+0.724 - // Latency Unit
+assertTrue(performance.contains("THROUGHPUT_VALUE"))
+0.720 - // Avg Latency in millis
+assertTrue(performance.contains("2500"))
+0.673 - // 999 Percentile Latency in micros
+assertTrue(performance.contains("3"))
+0.658 - assertFalse(performance.isEmpty())
+0.634 - // Ensure it ends with expected string
+assertTrue(performance.contains("EXPECTED_STRING"))
+0.624 - // Ensure percentile is included
+assertTrue(performance.startsWith("STR"))
+0.585 - // Replace with expected format length
+assertTrue(performance.contains("LATENCY_FORMAT_LENGTH"))
+0.584 - // Ensure it starts with expected string
+assertTrue(performance.endsWith("STR"))
+0.571 - // Replace with expected format length
+assertTrue(performance.contains("THROUGHPUT_FORMAT_LENGTH"))
+0.559 - // Replace with expected format length
+assertTrue(performance.contains("INTERVAL_LATENCY_PERCENTILE"))
+0.557 - // Replace with any expected string in the output
+assertTrue(performance.contains("ANOTHER_EXPECTED_STRING"))
+0.548 - ```java
+assertNotNull(performance)
+0.547 - // Replace with expected throughput value
+assertTrue(performance.contains("INTERVAL_LATENCY_PERCENTILE"))
+0.535 - // Ensure performance string is not too long
+assertTrue(performance.contains("OPERATION_COUNT_FORMAT_LENGTH"))
+0.527 - // 999 Percentile < Max Latency
+assertTrue(performance.split(" ").length <= 10)
+0.462 - // Avg Latency < 999 Percentile
+assertTrue(performance.indexOf("2500") < performance.indexOf("3"))
+0.420 - // Replace with expected percentile value
+assertTrue(performance.indexOf("2400") < performance.indexOf("2500"))
+0.227 - // Replace with another expected string in the output
+```

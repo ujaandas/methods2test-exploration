@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( Throwable cause ) {\nsuper ( cause ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withCause ( ) {\nRuntimeException cause = new RuntimeException ( ) ;\nTestException exception = new TestException ( cause ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(exception);\nAssert.assertEquals(cause, exception.getCause());\nAssert.assertTrue(exception instanceof TestException);\nAssert.assertEquals(\"java.lang.RuntimeException\", exception.getCause().getClass().getName());\nAssert.assertTrue(exception.getMessage() == null);\nAssert.assertNotEquals(0, exception.hashCode());\nAssert.assertTrue(exception.equals(exception));\nAssert.assertNotEquals(cause, new TestException(new RuntimeException()));\nAssert.assertEquals(cause.hashCode(), exception.getCause().hashCode());\nAssert.assertNotEquals(0, exception.toString().length());\nAssert.assertTrue(exception.toString().contains(\"TestException\"));\nAssert.assertFalse(exception.equals(null));\nAssert.assertTrue(exception.equals(exception));\nAssert.assertNotEquals(cause, new TestException(new IllegalArgumentException()));\nAssert.assertNotEquals(cause, new TestException(new NullPointerException()));\nAssert.assertNotEquals(cause, new TestException(new IllegalStateException()));\nAssert.assertTrue(exception.toString().startsWith(\"hazelcast.hazelcast-simulator.simulator.TestException:\"));\nAssert.assertTrue(exception.toString().contains(\"java.lang.RuntimeException\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.784,
+        0.734,
+        0.682,
+        0.667,
+        0.667,
+        0.65,
+        0.642,
+        0.636,
+        0.636,
+        0.597,
+        0.594,
+        0.557,
+        0.557,
+        0.5,
+        0.449,
+        0.396,
+        0.312
+    ],
+    "ground_truth": "assertEquals(cause,exception.getCause());"
+}

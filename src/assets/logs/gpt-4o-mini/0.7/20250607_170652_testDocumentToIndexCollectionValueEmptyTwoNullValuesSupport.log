@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public OCompositeKey ( final Object ... keys ) { 
+    this . keys = new ArrayList < Object > ( keys . length ) ; 
+    this . comparator = ODefaultComparator . INSTANCE ; 
+    for ( final Object key : keys ) addKey ( key ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         document . field ( "STR" , Collections . emptyList ( ) ) ; 
+         document . field ( "STR" , 12 ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . setNullValuesIgnored ( false ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertEquals(2, ((List<?>) result).size());
+assertTrue(((List<?>) result).contains(12));
+assertTrue(((List<?>) result).contains(Collections.emptyList()));
+assertFalse(((List<?>) result).contains(null));
+assertEquals(12, ((List<?>) result).get(1));
+assertEquals(Collections.emptyList(), ((List<?>) result).get(0));
+assertEquals(OType.INTEGER, compositeIndexDefinition.getIndexType("STR"));
+assertEquals("STR", compositeIndexDefinition.getIndexPropertyName("STR"));
+assertFalse(compositeIndexDefinition.isNullValuesIgnored());
+assertTrue(compositeIndexDefinition.getIndexes().size() > 0);
+assertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyListIndexDefinition));
+assertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyIndexDefinition));
+assertEquals(2, compositeIndexDefinition.getIndexes().size());
+assertEquals("STR", compositeIndexDefinition.getIndexes().get(0).getPropertyName());
+assertEquals("STR", compositeIndexDefinition.getIndexes().get(1).getPropertyName());
+assertEquals(0, compositeIndexDefinition.getIndexes().get(0).getNullCount());
+assertEquals(0, compositeIndexDefinition.getIndexes().get(1).getNullCount());
+assertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains("12"));
+assertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains("[]"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12))); ===
+0.515 - assertEquals(2, ((List<?>) result).size())
+0.490 - assertEquals(12, ((List<?>) result).get(1))
+0.472 - assertFalse(((List<?>) result).contains(null))
+0.430 - assertTrue(result instanceof List)
+0.430 - assertEquals(2, compositeIndexDefinition.getIndexes().size())
+0.426 - assertEquals(0, compositeIndexDefinition.getIndexes().get(0).getNullCount())
+0.426 - assertEquals(0, compositeIndexDefinition.getIndexes().get(1).getNullCount())
+0.421 - assertEquals(OType.INTEGER, compositeIndexDefinition.getIndexType("STR"))
+0.417 - assertFalse(compositeIndexDefinition.isNullValuesIgnored())
+0.408 - assertTrue(((List<?>) result).contains(12))
+0.406 - assertEquals("STR", compositeIndexDefinition.getIndexPropertyName("STR"))
+0.403 - assertTrue(((List<?>) result).contains(Collections.emptyList()))
+0.390 - assertEquals(Collections.emptyList(), ((List<?>) result).get(0))
+0.378 - assertEquals("STR", compositeIndexDefinition.getIndexes().get(0).getPropertyName())
+0.378 - assertEquals("STR", compositeIndexDefinition.getIndexes().get(1).getPropertyName())
+0.356 - ```java
+assertNotNull(result)
+0.353 - assertTrue(compositeIndexDefinition.getIndexes().size() > 0)
+0.293 - assertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains("12"))
+0.268 - assertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains("[]"))
+0.250 - assertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyIndexDefinition))
+0.244 - assertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyListIndexDefinition))
+0.000 - ```

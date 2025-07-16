@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class CABAC {
+    public boolean readMBSkipFlag ( MDecoder mDecoder , SliceType slType , boolean leftAvailable , boolean topAvailable , int mbX ) { 
+    int base = slType == SliceType . P ? 11 : 24 ; 
+    boolean ret = mDecoder . decodeBin ( base + ( leftAvailable && ! skipFlagLeft ? 1 : 0 ) + ( topAvailable && ! skipFlagsTop [ mbX ] ? 1 : 0 ) ) == 1 ; 
+    skipFlagLeft = skipFlagsTop [ mbX ] = ret ; 
+    return ret ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class CABACTest {
+    @Test
+     public void testMBSkipFlag ( ) {
+         CABAC cabac = new CABAC ( 2 ) ; 
+         MockMDecoder m = new MockMDecoder ( new int [ ] { 
+     0 } , new int [ ] { 
+     11 } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.P, false, true, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.B, true, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.B, true, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.I, true, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.I, false, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.I, true, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.I, false, true, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.SP, true, true, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.SP, false, false, 0));
+assertTrue(cabac.readMBSkipFlag(m, SliceType.SP, true, false, 0));
+assertFalse(cabac.readMBSkipFlag(m, SliceType.SP, false, true, 0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(false,cabac.readMBSkipFlag(m,SliceType.P,false,false,0)); ===
+0.916 - assertFalse(cabac.readMBSkipFlag(m, SliceType.P, false, false, 0))
+0.909 - assertFalse(cabac.readMBSkipFlag(m, SliceType.SP, false, false, 0))
+0.901 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, false, 0))
+0.901 - assertFalse(cabac.readMBSkipFlag(m, SliceType.I, false, false, 0))
+0.862 - assertFalse(cabac.readMBSkipFlag(m, SliceType.P, false, true, 0))
+0.855 - assertFalse(cabac.readMBSkipFlag(m, SliceType.SP, false, true, 0))
+0.846 - assertFalse(cabac.readMBSkipFlag(m, SliceType.B, false, true, 0))
+0.846 - assertFalse(cabac.readMBSkipFlag(m, SliceType.I, false, true, 0))
+0.837 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, false, 0))
+0.831 - assertTrue(cabac.readMBSkipFlag(m, SliceType.SP, true, false, 0))
+0.822 - assertTrue(cabac.readMBSkipFlag(m, SliceType.B, true, false, 0))
+0.822 - assertTrue(cabac.readMBSkipFlag(m, SliceType.I, true, false, 0))
+0.781 - assertTrue(cabac.readMBSkipFlag(m, SliceType.P, true, true, 0))
+0.775 - assertTrue(cabac.readMBSkipFlag(m, SliceType.SP, true, true, 0))
+0.766 - assertTrue(cabac.readMBSkipFlag(m, SliceType.B, true, true, 0))
+0.766 - assertTrue(cabac.readMBSkipFlag(m, SliceType.I, true, true, 0))

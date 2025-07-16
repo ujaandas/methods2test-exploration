@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManager {
+    @Override
+     public Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     url . setConnectTimeout ( connectTimeout ) ; 
+     return this . connectionManager . getAndCreateIfAbsent ( url ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ReconnectManagerTest {
+    @Test
+     public void testCancelReConnection ( ) throws InterruptedException , RemotingException {
+         doInit ( false , true ) ; 
+         client . enableReconnectSwitch ( ) ; 
+         String addr = "STR" ; 
+         Url url = addressParser . parse ( addr ) ; 
+         client . getConnection ( url , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(client.getConnection(url, 1000));
+assertTrue(client.isReconnectEnabled());
+assertEquals(1000, url.getConnectTimeout());
+assertTrue(client.connectionManager.hasConnection(url));
+assertFalse(client.connectionManager.isConnectionClosed(url));
+assertSame(client.connectionManager.getConnection(url), client.getConnection(url, 1000));
+assertTrue(client.connectionManager.getAndCreateIfAbsent(url) instanceof Connection);
+assertThrows(RemotingException.class, () -> client.getConnection(null, 1000));
+assertThrows(InterruptedException.class, () -> {
+    Thread.sleep(2000);
+    client.getConnection(url, 1000);
+});
+assertEquals("ExpectedConnectionState", client.connectionManager.getConnectionState(url));
+assertNotEquals("UnexpectedConnectionState", client.connectionManager.getConnectionState(url));
+assertTrue(client.connectionManager.isConnectionActive(url));
+assertFalse(client.connectionManager.isConnectionTimedOut(url));
+assertDoesNotThrow(() -> client.getConnection(url, 1000));
+assertTrue(client.connectionManager.isReconnectSwitchEnabled());
+assertEquals("ExpectedAddress", client.connectionManager.getConnection(url).getAddress());
+assertNotEquals("InvalidAddress", client.connectionManager.getConnection(url).getAddress());
+assertTrue(client.connectionManager.isUrlParsed(url));
+assertFalse(client.connectionManager.isUrlInvalid(url));
+assertEquals(1, client.connectionManager.getConnectionAttempts(url));
+assertTrue(client.connectionManager.hasActiveConnections());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes()); ===
+0.654 - assertEquals(1000, url.getConnectTimeout())
+0.592 - assertTrue(client.connectionManager.isReconnectSwitchEnabled())
+0.574 - assertEquals(1, client.connectionManager.getConnectionAttempts(url))
+0.564 - assertFalse(client.connectionManager.isUrlInvalid(url))
+0.560 - assertFalse(client.connectionManager.isConnectionTimedOut(url))
+0.541 - assertTrue(client.connectionManager.isConnectionActive(url))
+0.522 - assertTrue(client.connectionManager.isUrlParsed(url))
+0.520 - assertFalse(client.connectionManager.isConnectionClosed(url))
+0.515 - assertTrue(client.isReconnectEnabled())
+0.507 - assertEquals("ExpectedAddress", client.connectionManager.getConnection(url).getAddress())
+0.500 - assertNotEquals("InvalidAddress", client.connectionManager.getConnection(url).getAddress())
+0.496 - assertTrue(client.connectionManager.hasActiveConnections())
+0.496 - assertTrue(client.connectionManager.hasConnection(url))
+0.487 - ```java
+assertNotNull(client.getConnection(url, 1000))
+0.467 - assertEquals("ExpectedConnectionState", client.connectionManager.getConnectionState(url))
+0.466 - assertDoesNotThrow(() -> client.getConnection(url, 1000))
+0.452 - assertNotEquals("UnexpectedConnectionState", client.connectionManager.getConnectionState(url))
+0.415 - assertThrows(RemotingException.class, () -> client.getConnection(null, 1000))
+0.391 - client.getConnection(url, 1000)
+0.378 - assertSame(client.connectionManager.getConnection(url), client.getConnection(url, 1000))
+0.375 - assertTrue(client.connectionManager.getAndCreateIfAbsent(url) instanceof Connection)
+0.238 - assertThrows(InterruptedException.class, () -> {
+    Thread.sleep(2000)
+0.031 - })
+0.000 - ```

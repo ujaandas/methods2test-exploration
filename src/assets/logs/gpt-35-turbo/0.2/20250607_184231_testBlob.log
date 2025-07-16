@@ -1,0 +1,66 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecutionTest {
+    @Test
+     public void testBlob ( ) {
+         String clusterName = "STR" ; 
+         OResultSet result = db . command ( "STR" + clusterName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(result);
+Assert.assertTrue(result.hasNext());
+Assert.assertEquals(1, result.stream().count());
+Assert.assertTrue(result.next().getProperty("clusterName") instanceof String);
+Assert.assertEquals(clusterName, result.next().getProperty("clusterName"));
+Assert.assertFalse(result.hasNext());
+Assert.assertThrows(NoSuchElementException.class, result::next);
+Assert.assertThrows(UnsupportedOperationException.class, () -> result.remove());
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName") instanceof String));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").equals(clusterName)));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").length() == 3));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").matches("[A-Z]+")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").startsWith("S")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").endsWith("R")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").contains("T")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").equalsIgnoreCase("str")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").toLowerCase().equals("str")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").toUpperCase().equals("STR")));
+Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").compareToIgnoreCase("str") == 0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(clusterName)>0); ===
+0.552 - Assert.assertTrue(result.next().getProperty("clusterName") instanceof String)
+0.545 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").equals(clusterName)))
+0.474 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").length() == 3))
+0.467 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").endsWith("R")))
+0.467 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").contains("T")))
+0.460 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName") instanceof String))
+0.460 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").startsWith("S")))
+0.460 - Assert.assertEquals(1, result.stream().count())
+0.454 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").matches("[A-Z]+")))
+0.447 - Assert.assertTrue(result.hasNext())
+0.435 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").equalsIgnoreCase("str")))
+0.431 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").compareToIgnoreCase("str") == 0))
+0.424 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").toLowerCase().equals("str")))
+0.424 - Assert.assertTrue(result.stream().allMatch(item -> item.getProperty("clusterName").toUpperCase().equals("STR")))
+0.404 - Assert.assertEquals(clusterName, result.next().getProperty("clusterName"))
+0.364 - Assert.assertFalse(result.hasNext())
+0.350 - Assert.assertThrows(NoSuchElementException.class, result::next)
+0.290 - Assert.assertNotNull(result)
+0.222 - Assert.assertThrows(UnsupportedOperationException.class, () -> result.remove())

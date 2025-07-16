@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     public OResultSet query ( String query , Object ... args ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( query , args ) ; 
+     }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testWhileArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+assertEquals(1, qResult.getProperty("someProperty"));
+assertEquals("expectedValue", qResult.getProperty("anotherProperty"));
+assertFalse(qResult.isEmpty());
+assertEquals(5, qResult.size());
+assertTrue(qResult.stream().allMatch(result -> result.getProperty("status").equals("active")));
+assertTrue(qResult.stream().anyMatch(result -> result.getProperty("id").equals("specificId")));
+assertEquals("expectedType", qResult.getProperty("type"));
+assertNotEquals("unexpectedValue", qResult.getProperty("differentProperty"));
+assertTrue(qResult.stream().noneMatch(result -> result.getProperty("error") != null));
+assertEquals("expectedString", qResult.getProperty("stringField"));
+assertTrue(qResult.stream().map(result -> result.getProperty("numericField")).allMatch(num -> num instanceof Number));
+assertEquals(3.14, qResult.getProperty("floatField"), 0.01);
+assertTrue(qResult.stream().map(result -> result.getProperty("listField")).allMatch(list -> list instanceof List));
+assertEquals("expectedJson", qResult.getProperty("jsonField"));
+assertTrue(qResult.stream().allMatch(result -> result.getProperty("dateField") instanceof Date));
+assertTrue(qResult.stream().anyMatch(result -> result.getProperty("booleanField") == true));
+assertEquals("expectedValue", qResult.getProperty("nestedField.nestedProperty"));
+assertNotNull(qResult.getProperty("optionalField"));
+assertTrue(qResult.stream().allMatch(result -> result.getProperty("enumField").equals("EXPECTED_ENUM")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,size(qResult)); ===
+0.780 - assertEquals(5, qResult.size())
+0.678 - assertFalse(qResult.isEmpty())
+0.621 - assertTrue(qResult.hasNext())
+0.576 - ```java
+assertNotNull(qResult)
+0.575 - assertEquals(1, qResult.getProperty("someProperty"))
+0.558 - assertEquals(3.14, qResult.getProperty("floatField"), 0.01)
+0.541 - assertEquals("expectedType", qResult.getProperty("type"))
+0.511 - assertEquals("expectedJson", qResult.getProperty("jsonField"))
+0.489 - assertEquals("expectedString", qResult.getProperty("stringField"))
+0.474 - assertEquals("expectedValue", qResult.getProperty("anotherProperty"))
+0.450 - assertNotNull(qResult.getProperty("optionalField"))
+0.442 - assertNotEquals("unexpectedValue", qResult.getProperty("differentProperty"))
+0.426 - assertEquals("expectedValue", qResult.getProperty("nestedField.nestedProperty"))
+0.327 - assertTrue(qResult.stream().noneMatch(result -> result.getProperty("error") != null))
+0.310 - assertTrue(qResult.stream().anyMatch(result -> result.getProperty("booleanField") == true))
+0.298 - assertTrue(qResult.stream().allMatch(result -> result.getProperty("status").equals("active")))
+0.298 - assertTrue(qResult.stream().anyMatch(result -> result.getProperty("id").equals("specificId")))
+0.298 - assertTrue(qResult.stream().allMatch(result -> result.getProperty("dateField") instanceof Date))
+0.275 - assertTrue(qResult.stream().allMatch(result -> result.getProperty("enumField").equals("EXPECTED_ENUM")))
+0.263 - assertTrue(qResult.stream().map(result -> result.getProperty("listField")).allMatch(list -> list instanceof List))
+0.257 - assertTrue(qResult.stream().map(result -> result.getProperty("numericField")).allMatch(num -> num instanceof Number))
+0.000 - ```

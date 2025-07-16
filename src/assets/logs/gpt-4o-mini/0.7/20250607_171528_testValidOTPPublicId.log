@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    public static String getPublicId ( String otp ) { 
+    if ( ( otp == null ) || ( otp . length ( ) < OTP_MIN_LEN ) ) { 
+    throw new IllegalArgumentException ( "STR" ) ; 
+    } Integer len = otp . length ( ) ; 
+    return otp . substring ( 0 , len - 32 ) . toLowerCase ( ) ; 
+    }
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testValidOTPPublicId ( ) {
+         String testOtp = "STR" ; 
+         String testPublicId = "STR" ; 
+         String resultPublicId = YubicoClient . getPublicId ( testOtp ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(resultPublicId);
+assertEquals(testPublicId.toLowerCase(), resultPublicId);
+assertTrue(resultPublicId.length() >= 0);
+assertTrue(resultPublicId.length() <= testOtp.length() - 32);
+assertFalse(resultPublicId.isEmpty());
+assertEquals(testPublicId.length(), resultPublicId.length() + 32);
+assertEquals("str", resultPublicId.toLowerCase());
+assertNotEquals(testOtp, resultPublicId);
+assertTrue(resultPublicId.matches("[a-z0-9]+"));
+assertFalse(resultPublicId.contains(" "));
+assertFalse(resultPublicId.contains("-"));
+assertFalse(resultPublicId.startsWith("STR"));
+assertFalse(resultPublicId.endsWith("STR"));
+assertTrue(resultPublicId.equals(testPublicId.toLowerCase()));
+assertEquals(testPublicId.length() - 32, resultPublicId.length());
+assertTrue(resultPublicId.chars().allMatch(Character::isLowerCase));
+assertTrue(resultPublicId.chars().allMatch(Character::isLetterOrDigit));
+assertNotEquals("", resultPublicId);
+assertNotEquals(null, resultPublicId);
+assertTrue(resultPublicId.length() < testOtp.length());
+assertFalse(resultPublicId.equalsIgnoreCase(testOtp));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(testPublicId,resultPublicId); ===
+0.854 - assertEquals(testPublicId.toLowerCase(), resultPublicId)
+0.825 - assertNotEquals(testOtp, resultPublicId)
+0.805 - assertNotEquals(null, resultPublicId)
+0.796 - assertEquals(testPublicId.length(), resultPublicId.length() + 32)
+0.796 - assertEquals(testPublicId.length() - 32, resultPublicId.length())
+0.773 - assertNotEquals("", resultPublicId)
+0.697 - assertEquals("str", resultPublicId.toLowerCase())
+0.641 - assertFalse(resultPublicId.isEmpty())
+0.617 - assertFalse(resultPublicId.contains(" "))
+0.615 - ```java
+assertNotNull(resultPublicId)
+0.610 - assertFalse(resultPublicId.contains("-"))
+0.595 - assertFalse(resultPublicId.endsWith("STR"))
+0.582 - assertTrue(resultPublicId.length() >= 0)
+0.581 - assertFalse(resultPublicId.startsWith("STR"))
+0.532 - assertFalse(resultPublicId.equalsIgnoreCase(testOtp))
+0.529 - assertTrue(resultPublicId.equals(testPublicId.toLowerCase()))
+0.523 - assertTrue(resultPublicId.matches("[a-z0-9]+"))
+0.495 - assertTrue(resultPublicId.length() < testOtp.length())
+0.474 - assertTrue(resultPublicId.length() <= testOtp.length() - 32)
+0.426 - assertTrue(resultPublicId.chars().allMatch(Character::isLowerCase))
+0.411 - assertTrue(resultPublicId.chars().allMatch(Character::isLetterOrDigit))
+0.000 - ```

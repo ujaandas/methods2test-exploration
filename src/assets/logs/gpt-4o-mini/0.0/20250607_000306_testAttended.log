@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb attended ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testAttended ( ) {
+         Verb actual = Verbs . attended ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals("STR", actual.getId());
+assertTrue(actual instanceof Verb);
+assertEquals("attended", actual.getDisplay().get("en-US").get("name"));
+assertEquals("attended", actual.getDisplay().get("en").get("name"));
+assertEquals("STR", actual.getObjectType());
+assertEquals("Verb", actual.getType());
+assertTrue(actual.getTimestamp() instanceof Date);
+assertEquals("http://adlnet.gov/expapi/verbs/attended", actual.getId());
+assertTrue(actual.getContext() instanceof Context);
+assertEquals(0, actual.getResult().getScore().getRaw(), 0.01);
+assertEquals("http://example.com", actual.getActor().getMbox());
+assertEquals("http://example.com", actual.getActor().getOpenID());
+assertEquals("http://example.com", actual.getActor().getName());
+assertEquals("http://example.com", actual.getObject().getId());
+assertEquals("http://example.com", actual.getObject().getObjectType());
+assertNotNull(actual.getObject().getExtensions());
+assertEquals(1, actual.getObject().getExtensions().size());
+assertTrue(actual.getObject().getExtensions().containsKey("customExtension"));
+assertEquals("value", actual.getObject().getExtensions().get("customExtension"));
+assertNotNull(actual.getAuthority());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.737 - assertNotNull(actual.getAuthority())
+0.600 - assertNotNull(actual.getObject().getExtensions())
+0.582 - assertEquals("STR", actual.getId())
+0.566 - assertTrue(actual instanceof Verb)
+0.552 - assertEquals("Verb", actual.getType())
+0.508 - assertEquals("STR", actual.getObjectType())
+0.441 - assertTrue(actual.getTimestamp() instanceof Date)
+0.435 - assertTrue(actual.getContext() instanceof Context)
+0.410 - assertEquals(1, actual.getObject().getExtensions().size())
+0.400 - assertEquals(0, actual.getResult().getScore().getRaw(), 0.01)
+0.341 - assertEquals("http://example.com", actual.getObject().getId())
+0.337 - assertEquals("http://example.com", actual.getActor().getMbox())
+0.337 - assertEquals("http://example.com", actual.getActor().getName())
+0.330 - assertEquals("http://adlnet.gov/expapi/verbs/attended", actual.getId())
+0.329 - assertEquals("http://example.com", actual.getActor().getOpenID())
+0.322 - assertEquals("attended", actual.getDisplay().get("en").get("name"))
+0.320 - assertEquals("value", actual.getObject().getExtensions().get("customExtension"))
+0.311 - assertEquals("attended", actual.getDisplay().get("en-US").get("name"))
+0.311 - assertEquals("http://example.com", actual.getObject().getObjectType())
+0.306 - assertTrue(actual.getObject().getExtensions().containsKey("customExtension"))
+0.000 - ```

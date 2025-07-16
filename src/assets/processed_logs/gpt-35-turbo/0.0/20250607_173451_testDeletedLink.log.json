@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.object;\n\npublic class ObjectWithDeletedLink {\n< RET extends T > RET reload ( final T iObject , String iFetchPlan , boolean iIgnoreCache ) ;\n}\n\npackage orientechnologies.orientdb.object;\n\npublic class TestObjectWithDeletedLink {\n@Test\npublic void testDeletedLink ( ) {\ndb . activateOnCurrentThread ( ) ;\nSimpleSelfRef ob1 = new SimpleSelfRef ( ) ;\nob1 . setName ( \"STR\" ) ;\nSimpleSelfRef ob2 = new SimpleSelfRef ( ) ;\nob2 . setName ( \"STR\" ) ;\nob1 . setFriend ( ob2 ) ;\nob1 = db . save ( ob1 ) ;\nob1 = db . reload ( ob1 , \"STR\" , true ) ;\nob2 = ob1 . getFriend ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", ob1.getName());\nassertEquals(\"STR\", ob2.getName());\nassertNotNull(ob1.getFriend());\nassertEquals(\"STR\", ob1.getFriend().getName());\nassertEquals(\"STR\", ob2.getName());\nassertNotNull(ob2.getFriend());\nassertEquals(\"STR\", ob2.getFriend().getName());\nassertNotSame(ob1, ob2);\nassertNotSame(ob1.getFriend(), ob2);\nassertNotSame(ob2.getFriend(), ob1);\nassertEquals(ob1.getFriend(), ob2);\nassertEquals(ob2.getFriend(), ob1);\nassertTrue(ob1.getFriend() instanceof SimpleSelfRef);\nassertTrue(ob2.getFriend() instanceof SimpleSelfRef);\nassertEquals(\"STR\", ob1.getFriend().getName());\nassertEquals(\"STR\", ob2.getFriend().getName());\nassertNotEquals(ob1, ob2);\nassertNotEquals(ob1.getFriend(), ob2);\nassertNotEquals(ob2.getFriend(), ob1);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.967,
+        0.848,
+        0.818,
+        0.812,
+        0.794,
+        0.781,
+        0.762,
+        0.667,
+        0.667,
+        0.64,
+        0.64,
+        0.635,
+        0.603,
+        0.603,
+        0.6,
+        0.593,
+        0.575,
+        0.538
+    ],
+    "ground_truth": "Assert.assertNotNull(ob1.getFriend());"
+}

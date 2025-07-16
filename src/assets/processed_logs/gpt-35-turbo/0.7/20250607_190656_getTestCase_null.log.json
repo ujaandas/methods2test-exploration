@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Suite {\npublic TestCase getTestCase ( String testCaseId ) {\nif ( testCaseId == null ) {\nreturn null ;\n} for ( TestCase testCase : testCaseList ) {\nif ( testCaseId . equals ( testCase . getId ( ) ) ) {\nreturn testCase ;\n} } return null ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestSuiteTest {\n@Test\npublic void getTestCase_null ( ) throws Exception {\nTestSuite testSuite = new TestSuite ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNull(testSuite.getTestCase(null));\nAssert.assertNull(testSuite.getTestCase(\"\"));\nAssert.assertNull(testSuite.getTestCase(\"invalidId\"));\nAssert.assertNotNull(testSuite.getTestCase(\"validId\"));\nAssert.assertEquals(\"validId\", testSuite.getTestCase(\"validId\").getId());\nAssert.assertEquals(1, testSuite.getTestCaseList().size());\nAssert.assertTrue(testSuite.getTestCaseList().contains(testSuite.getTestCase(\"validId\")));\nAssert.assertNull(testSuite.getTestCase(\"nonExistentId\"));\nAssert.assertSame(testSuite.getTestCase(\"validId\"), testSuite.getTestCase(\"validId\"));\nAssert.assertNotSame(testSuite.getTestCase(\"validId\"), testSuite.getTestCase(\"differentId\"));\nAssert.assertTrue(testSuite.getTestCase(\"validId\") instanceof TestCase);\nAssert.assertNotEquals(\"differentId\", testSuite.getTestCase(\"validId\").getId());\nAssert.assertNotNull(testSuite.getTestCase(\"validId\").toString());\nAssert.assertNotNull(testSuite.getTestCase(\"validId\").hashCode());\nAssert.assertEquals(testSuite.getTestCase(\"validId\").hashCode(), testSuite.getTestCase(\"validId\").hashCode());\nAssert.assertNotEquals(testSuite.getTestCase(\"validId\").hashCode(), testSuite.getTestCase(\"differentId\").hashCode());\nAssert.assertNotEquals(testSuite.getTestCase(\"validId\").hashCode(), testSuite.getTestCase(\"nonExistentId\").hashCode());\nAssert.assertNotNull(testSuite.getTestCase(\"validId\").equals(testSuite.getTestCase(\"validId\")));\nAssert.assertNull(testSuite.getTestCase(\"nonExistentId\").toString());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.921,
+        0.871,
+        0.837,
+        0.809,
+        0.742,
+        0.742,
+        0.742,
+        0.72,
+        0.66,
+        0.636,
+        0.634,
+        0.598,
+        0.569,
+        0.545,
+        0.537,
+        0.5,
+        0.476,
+        0.47
+    ],
+    "ground_truth": "assertNull(testSuite.getTestCase(null));"
+}

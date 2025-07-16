@@ -1,0 +1,144 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyListIndexDefinition {
+    @Override
+     public Object createValue ( final Object ... params ) { 
+     Object param = params [ 0 ] ; 
+     if ( ! ( param instanceof Collection ) ) { 
+     try { 
+     return OType . convert ( param , keyType . getDefaultJavaType ( ) ) ; 
+     } catch ( Exception e ) { 
+     return null ; 
+     } } final Collection < ? > multiValueCollection = ( Collection < ? > ) param ; 
+     final List < Object > values = new ArrayList < > ( multiValueCollection . size ( ) ) ; 
+     for ( final Object item : multiValueCollection ) { 
+     values . add ( createSingleValue ( item ) ) ; 
+     } return values ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyListIndexDefinitionTest {
+    @Test
+     public void testCreateValueWrongParameterArrayParams ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+@Test
+public void testCreateValueWrongParameterArrayParams() {
+    OPropertyListIndexDefinition indexDefinition = new OPropertyListIndexDefinition();
+
+    // Test with null parameter
+    assertNull(indexDefinition.createValue(null));
+
+    // Test with empty array
+    assertNull(indexDefinition.createValue(new Object[0]));
+
+    // Test with a single non-collection object
+    assertNotNull(indexDefinition.createValue("testString"));
+    
+    // Test with a single integer
+    assertNotNull(indexDefinition.createValue(123));
+
+    // Test with a single double
+    assertNotNull(indexDefinition.createValue(123.45));
+
+    // Test with a single boolean
+    assertNotNull(indexDefinition.createValue(true));
+
+    // Test with a single object
+    Object testObject = new Object();
+    assertNotNull(indexDefinition.createValue(testObject));
+
+    // Test with a collection of strings
+    Collection<String> stringCollection = Arrays.asList("one", "two", "three");
+    assertNotNull(indexDefinition.createValue(stringCollection));
+
+    // Test with a collection of integers
+    Collection<Integer> integerCollection = Arrays.asList(1, 2, 3);
+    assertNotNull(indexDefinition.createValue(integerCollection));
+
+    // Test with a collection of mixed types
+    Collection<Object> mixedCollection = Arrays.asList("string", 1, 2.0);
+    assertNotNull(indexDefinition.createValue(mixedCollection));
+
+    // Test with a collection containing null
+    Collection<Object> nullCollection = Arrays.asList("string", null, 3);
+    assertNotNull(indexDefinition.createValue(nullCollection));
+
+    // Test with a collection of empty strings
+    Collection<String> emptyStringCollection = Arrays.asList("", "", "");
+    assertNotNull(indexDefinition.createValue(emptyStringCollection));
+
+    // Test with a collection of empty collections
+    Collection<Collection<Object>> emptyCollections = Arrays.asList(new ArrayList<>(), new ArrayList<>());
+    assertNotNull(indexDefinition.createValue(emptyCollections));
+
+    // Test with a collection of booleans
+    Collection<Boolean> booleanCollection = Arrays.asList(true, false, true);
+    assertNotNull(indexDefinition.createValue(booleanCollection));
+
+    // Test with a collection of characters
+    Collection<Character> charCollection = Arrays.asList('a', 'b', 'c');
+    assertNotNull(indexDefinition.createValue(charCollection));
+
+    // Test with a collection of long values
+
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(propertyIndex.createValue("STR")); ===
+0.612 - assertNotNull(indexDefinition.createValue(testObject))
+0.588 - assertNotNull(indexDefinition.createValue(nullCollection))
+0.588 - assertNotNull(indexDefinition.createValue(charCollection))
+0.583 - assertNotNull(indexDefinition.createValue(mixedCollection))
+0.577 - assertNotNull(indexDefinition.createValue(stringCollection))
+0.577 - assertNotNull(indexDefinition.createValue(emptyCollections))
+0.571 - assertNotNull(indexDefinition.createValue(integerCollection))
+0.571 - assertNotNull(indexDefinition.createValue(booleanCollection))
+0.569 - assertNotNull(indexDefinition.createValue(emptyStringCollection))
+0.531 - // Test with null parameter
+    assertNull(indexDefinition.createValue(null))
+0.517 - // Test with a single integer
+    assertNotNull(indexDefinition.createValue(123))
+0.513 - // Test with a single boolean
+    assertNotNull(indexDefinition.createValue(true))
+0.508 - // Test with empty array
+    assertNull(indexDefinition.createValue(new Object[0]))
+0.508 - // Test with a single double
+    assertNotNull(indexDefinition.createValue(123.45))
+0.478 - // Test with a single non-collection object
+    assertNotNull(indexDefinition.createValue("testString"))
+0.234 - // Test with a collection of long values
+0.229 - // Test with a single object
+    Object testObject = new Object()
+0.182 - // Test with a collection containing null
+    Collection<Object> nullCollection = Arrays.asList("string", null, 3)
+0.180 - ```java
+@Test
+public void testCreateValueWrongParameterArrayParams() {
+    OPropertyListIndexDefinition indexDefinition = new OPropertyListIndexDefinition()
+0.167 - // Test with a collection of strings
+    Collection<String> stringCollection = Arrays.asList("one", "two", "three")
+0.145 - // Test with a collection of empty collections
+    Collection<Collection<Object>> emptyCollections = Arrays.asList(new ArrayList<>(), new ArrayList<>())
+0.113 - // Test with a collection of mixed types
+    Collection<Object> mixedCollection = Arrays.asList("string", 1, 2.0)
+0.112 - // Test with a collection of empty strings
+    Collection<String> emptyStringCollection = Arrays.asList("", "", "")
+0.112 - // Test with a collection of booleans
+    Collection<Boolean> booleanCollection = Arrays.asList(true, false, true)
+0.100 - // Test with a collection of characters
+    Collection<Character> charCollection = Arrays.asList('a', 'b', 'c')
+0.090 - // Test with a collection of integers
+    Collection<Integer> integerCollection = Arrays.asList(1, 2, 3)

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class Activity {\npublic JsonElement serialize ( ) {\nJsonObject obj = new JsonObject ( ) ;\nif ( this . id != null ) {\nobj . addProperty ( \"STR\" , this . id ) ;\n} if ( this . definition != null ) {\nobj . add ( \"STR\" , this . definition . serialize ( ) ) ;\n} return obj ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class ActivityTest {\n@Test\npublic void testSerialize ( ) {\nString expected = \"STR\" ;\nJsonElement actual = activity . serialize ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(expected, actual.getAsJsonObject().get(\"STR\").getAsString());\nassertNotNull(actual.getAsJsonObject().get(\"STR\"));\nassertTrue(actual.getAsJsonObject().has(\"STR\"));\nassertFalse(actual.getAsJsonObject().has(\"OTHER\"));\nassertEquals(1, actual.getAsJsonObject().entrySet().size());\nassertNotNull(actual.getAsJsonObject().get(\"definition\"));\nassertTrue(actual.getAsJsonObject().get(\"definition\").isJsonObject());\nassertFalse(actual.getAsJsonObject().get(\"definition\").isJsonArray());\nassertNotNull(actual.getAsJsonObject().get(\"definition\").getAsJsonObject().get(\"STR\"));\nassertEquals(\"STR\", actual.getAsJsonObject().get(\"definition\").getAsJsonObject().get(\"STR\").getAsString());\nassertTrue(actual.getAsJsonObject().get(\"definition\").getAsJsonObject().has(\"STR\"));\nassertFalse(actual.getAsJsonObject().get(\"definition\").getAsJsonObject().has(\"OTHER\"));\nassertEquals(1, actual.getAsJsonObject().get(\"definition\").getAsJsonObject().entrySet().size());\nassertNotEquals(\"OTHER\", actual.getAsJsonObject().get(\"STR\").getAsString());\nassertNotEquals(\"OTHER\", actual.getAsJsonObject().get(\"definition\").getAsJsonObject().get(\"STR\").getAsString());\nassertNotEquals(\"STR\", actual.getAsJsonObject().get(\"OTHER\"));\nassertNotEquals(\"STR\", actual.getAsJsonObject().get(\"definition\").getAsJsonObject().get(\"OTHER\"));\nassertNotNull(actual);\nassertTrue(actual.isJsonObject());\nassertFalse(actual.isJsonArray());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.592,
+        0.556,
+        0.556,
+        0.538,
+        0.469,
+        0.441,
+        0.423,
+        0.405,
+        0.4,
+        0.393,
+        0.333,
+        0.333,
+        0.325,
+        0.301,
+        0.29,
+        0.288,
+        0.28,
+        0.278,
+        0.254
+    ],
+    "ground_truth": "assertNotNull(actual);"
+}

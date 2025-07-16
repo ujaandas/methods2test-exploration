@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    @Override
+     public Collection < UriResource > getPrioritizedRoutes ( ) { 
+     return Collections . unmodifiableCollection ( mappings ) ; 
+     }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testRoutePrioritizerRemoveRouteNoRouteMatches ( ) {
+         DefaultRoutePrioritizer prioritizer = new DefaultRoutePrioritizer ( ) ; 
+         prioritizer . addRoute ( "STR" , 100 , NotImplementedHandler . class ) ; 
+         prioritizer . removeRoute ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());
+Assert.assertFalse(prioritizer.getPrioritizedRoutes().contains("STR"));
+Assert.assertNull(prioritizer.getRouteHandler("STR"));
+Assert.assertNull(prioritizer.getRoutePriority("STR"));
+Assert.assertNull(prioritizer.getRoutePattern("STR"));
+Assert.assertNull(prioritizer.getRouteHandler("NON_EXISTENT_ROUTE"));
+Assert.assertNull(prioritizer.getRoutePriority("NON_EXISTENT_ROUTE"));
+Assert.assertNull(prioritizer.getRoutePattern("NON_EXISTENT_ROUTE"));
+Assert.assertNull(prioritizer.removeRoute("NON_EXISTENT_ROUTE"));
+Assert.assertNull(prioritizer.getRouteHandler("STR"));
+Assert.assertNull(prioritizer.getRoutePriority("STR"));
+Assert.assertNull(prioritizer.getRoutePattern("STR"));
+Assert.assertNull(prioritizer.removeRoute("STR"));
+Assert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());
+Assert.assertFalse(prioritizer.getPrioritizedRoutes().contains("STR"));
+Assert.assertNull(prioritizer.getRouteHandler("STR"));
+Assert.assertNull(prioritizer.getRoutePriority("STR"));
+Assert.assertNull(prioritizer.getRoutePattern("STR"));
+Assert.assertNull(prioritizer.removeRoute("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,prioritizer.getPrioritizedRoutes().size()); ===
+0.982 - Assert.assertEquals(0, prioritizer.getPrioritizedRoutes().size())
+0.982 - Assert.assertEquals(0, prioritizer.getPrioritizedRoutes().size())
+0.817 - Assert.assertFalse(prioritizer.getPrioritizedRoutes().contains("STR"))
+0.817 - Assert.assertFalse(prioritizer.getPrioritizedRoutes().contains("STR"))
+0.654 - Assert.assertNull(prioritizer.getRoutePriority("STR"))
+0.654 - Assert.assertNull(prioritizer.getRoutePriority("STR"))
+0.654 - Assert.assertNull(prioritizer.getRoutePriority("STR"))
+0.646 - Assert.assertNull(prioritizer.removeRoute("STR"))
+0.646 - Assert.assertNull(prioritizer.removeRoute("STR"))
+0.621 - Assert.assertNull(prioritizer.getRouteHandler("STR"))
+0.621 - Assert.assertNull(prioritizer.getRoutePattern("STR"))
+0.621 - Assert.assertNull(prioritizer.getRouteHandler("STR"))
+0.621 - Assert.assertNull(prioritizer.getRoutePattern("STR"))
+0.621 - Assert.assertNull(prioritizer.getRouteHandler("STR"))
+0.621 - Assert.assertNull(prioritizer.getRoutePattern("STR"))
+0.571 - Assert.assertNull(prioritizer.getRoutePriority("NON_EXISTENT_ROUTE"))
+0.561 - Assert.assertNull(prioritizer.removeRoute("NON_EXISTENT_ROUTE"))
+0.542 - Assert.assertNull(prioritizer.getRouteHandler("NON_EXISTENT_ROUTE"))
+0.542 - Assert.assertNull(prioritizer.getRoutePattern("NON_EXISTENT_ROUTE"))

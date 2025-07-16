@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testDontFixMangledQueryString ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ; 
+         URL testSourceUrl = new URL ( "STR" ) ; 
+         String testUrl = "STR" ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expectedResult, normalizedUrl);
+assertNotNull(normalizedUrl);
+assertTrue(normalizedUrl.startsWith("http://"));
+assertFalse(normalizedUrl.endsWith("/"));
+assertEquals(testUrl.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.contains("example.com"));
+assertFalse(normalizedUrl.contains("localhost"));
+assertTrue(normalizedUrl.matches(".*[0-9].*"));
+assertFalse(normalizedUrl.isEmpty());
+assertTrue(normalizedUrl.equals(expectedResult));
+assertNotEquals(testUrl, normalizedUrl);
+assertTrue(normalizedUrl.matches(".*[a-zA-Z].*"));
+assertFalse(normalizedUrl.contains(" "));
+assertTrue(normalizedUrl.contains("http://"));
+assertTrue(normalizedUrl.contains("www."));
+assertTrue(normalizedUrl.matches(".*[a-z].*"));
+assertFalse(normalizedUrl.endsWith(".html"));
+assertTrue(normalizedUrl.startsWith("http://www."));
+assertFalse(normalizedUrl.contains("https://"));
+assertTrue(normalizedUrl.matches(".*[A-Z].*"));
+assertFalse(normalizedUrl.endsWith(".pdf"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - assertEquals(expectedResult, normalizedUrl)
+0.744 - assertNotEquals(testUrl, normalizedUrl)
+0.634 - assertEquals(testUrl.length(), normalizedUrl.length())
+0.605 - assertNotNull(normalizedUrl)
+0.571 - assertFalse(normalizedUrl.isEmpty())
+0.562 - assertTrue(normalizedUrl.equals(expectedResult))
+0.552 - assertFalse(normalizedUrl.contains(" "))
+0.545 - assertFalse(normalizedUrl.endsWith("/"))
+0.527 - assertFalse(normalizedUrl.endsWith(".pdf"))
+0.522 - assertFalse(normalizedUrl.endsWith(".html"))
+0.505 - assertFalse(normalizedUrl.contains("https://"))
+0.500 - assertFalse(normalizedUrl.contains("localhost"))
+0.489 - assertTrue(normalizedUrl.contains("www."))
+0.473 - assertTrue(normalizedUrl.contains("http://"))
+0.468 - assertTrue(normalizedUrl.matches(".*[0-9].*"))
+0.468 - assertTrue(normalizedUrl.matches(".*[a-z].*"))
+0.468 - assertTrue(normalizedUrl.matches(".*[A-Z].*"))
+0.463 - assertTrue(normalizedUrl.startsWith("http://"))
+0.454 - assertTrue(normalizedUrl.contains("example.com"))
+0.454 - assertTrue(normalizedUrl.matches(".*[a-zA-Z].*"))
+0.444 - assertTrue(normalizedUrl.startsWith("http://www."))

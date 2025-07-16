@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluent.fluent-logger-java;\n\npublic class Bugfixes {\npublic void close ( ) {\nif ( sender != null ) {\nsender . flush ( ) ;\nsender . close ( ) ;\nsender = null ;\n} factory . purgeLogger ( this ) ;\n}\n}\n\npackage fluent.fluent-logger-java;\n\npublic class TestBugfixes {\n@Test\npublic void validLoggerReturned_whenOpenThenCloseThenOpenWithSameParameters ( ) {\nSystem . setProperty ( Config . FLUENT_SENDER_CLASS , \"STR\" ) ;\nFluentLogger logger = FluentLogger . getLogger ( \"STR\" ) ;\nlogger . log ( \"STR\" , Collections . < String , Object > emptyMap ( ) ) ;\nlogger . close ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(logger);\nAssert.assertTrue(logger.isClosed());\nAssert.assertEquals(0, logger.getPendingLogsCount());\nAssert.assertNull(logger.getSender());\nAssert.assertTrue(factory.isLoggerPurged(logger));\nAssert.assertFalse(factory.containsLogger(logger));\nAssert.assertTrue(factory.getClosedLoggers().contains(logger));\nAssert.assertTrue(factory.getPurgedLoggers().contains(logger));\nAssert.assertThrows(IllegalStateException.class, () -> logger.log(\"STR\", Collections.emptyMap()));\nAssert.assertEquals(\"Expected sender class\", \"STR\", System.getProperty(Config.FLUENT_SENDER_CLASS));\nAssert.assertNotEquals(\"Unexpected sender instance\", originalSender, logger.getSender());\nAssert.assertEquals(\"Expected log count to be zero\", 0, logger.getLogCount());\nAssert.assertFalse(logger.hasPendingLogs());\nAssert.assertTrue(factory.getActiveLoggers().isEmpty());\nAssert.assertFalse(logger.isOpen());\nAssert.assertTrue(logger.isClosed());\nAssert.assertTrue(factory.getLoggerStatus(logger) == LoggerStatus.CLOSED);\nAssert.assertFalse(factory.isLoggerActive(logger));\nAssert.assertTrue(factory.getClosedLoggers().contains(logger));\nAssert.assertEquals(\"Expected logger name\", \"STR\", logger.getName());\nAssert.assertTrue(logger.getFlushCount() > 0);\n```\n====================\n\n",
+    "scores": [
+        0.71,
+        0.7,
+        0.658,
+        0.647,
+        0.623,
+        0.623,
+        0.562,
+        0.532,
+        0.529,
+        0.526,
+        0.525,
+        0.48,
+        0.459,
+        0.453,
+        0.437,
+        0.437,
+        0.414,
+        0.4,
+        0.396,
+        0.35,
+        0.339,
+        0.0
+    ],
+    "ground_truth": "assertEquals(null,logger.sender);"
+}

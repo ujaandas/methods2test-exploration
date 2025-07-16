@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollections {\npublic List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) {\nreturn Collections . unmodifiableList ( multiValueChangeEvents ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollectionsTest {\n@Test\npublic void testChangesValuesNestedTrackingSet ( ) {\nODocument document = new ODocument ( ) ;\nSet objects = new HashSet ( ) ;\ndocument . field ( \"STR\" , objects ) ;\nSet subObjects = new HashSet ( ) ;\nobjects . add ( subObjects ) ;\nODocument nestedDoc = new ODocument ( ) ;\nsubObjects . add ( nestedDoc ) ;\ndocument . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ;\nobjects = document . field ( \"STR\" ) ;\nsubObjects = ( Set ) objects . iterator ( ) . next ( ) ;\nsubObjects . add ( \"STR\" ) ;\nOMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(timeLine);\nassertEquals(1, timeLine.getChangeEvents().size());\nassertTrue(timeLine.getChangeEvents().get(0) instanceof OMultiValueChangeEvent);\nassertEquals(OMultiValueChangeEvent.EventType.ADD, timeLine.getChangeEvents().get(0).getEventType());\nassertEquals(\"STR\", timeLine.getChangeEvents().get(0).getValue());\nassertEquals(1, timeLine.getChangeEvents().get(0).getOldValue().size());\nassertTrue(timeLine.getChangeEvents().get(0).getOldValue().contains(nestedDoc));\nassertFalse(timeLine.getChangeEvents().get(0).getOldValue().contains(\"STR\"));\nassertEquals(2, subObjects.size());\nassertTrue(subObjects.contains(\"STR\"));\nassertTrue(subObjects.contains(nestedDoc));\nassertEquals(1, objects.size());\nassertTrue(objects.contains(subObjects));\nassertEquals(1, document.field(\"STR\").size());\nassertTrue(document.field(\"STR\").contains(subObjects));\nassertEquals(1, document.getField(\"STR\").size());\nassertTrue(document.getField(\"STR\").contains(subObjects));\nassertNotNull(document.getCollectionTimeLine(\"STR\"));\nassertEquals(1, document.getCollectionTimeLine(\"STR\").getChangeEvents().size());\nassertEquals(\"STR\", document.getCollectionTimeLine(\"STR\").getChangeEvents().get(0).getValue());\nassertEquals(OMultiValueChangeEvent.EventType.ADD, document.getCollectionTimeLine(\"STR\").getChangeEvents().get(0).getEventType());\n```\n====================\n\n",
+    "scores": [
+        0.907,
+        0.76,
+        0.732,
+        0.715,
+        0.623,
+        0.618,
+        0.607,
+        0.592,
+        0.584,
+        0.565,
+        0.563,
+        0.543,
+        0.532,
+        0.449,
+        0.414,
+        0.4,
+        0.36,
+        0.303,
+        0.301,
+        0.297,
+        0.247,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,timeLine.getMultiValueChangeEvents().size());"
+}

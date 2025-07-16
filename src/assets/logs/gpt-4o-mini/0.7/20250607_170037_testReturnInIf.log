@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OScriptExecution {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OScriptExecutionTest {
+    @Test
+     public void testReturnInIf ( ) {
+         String className = "STR" ; 
+         db . createClass ( className ) ; 
+         String script = "STR" ; 
+         script += "STR" + className + "STR" ; 
+         script += "STR" + className + "STR" ; 
+         script += "STR" ; 
+         script += "STR" + className + "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" + className + "STR" ; 
+         db . execute ( "STR" , script ) ; 
+         OResultSet rs = db . query ( "STR" + className ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(rs);
+Assert.assertTrue(rs.hasNext());
+Assert.assertEquals(1, rs.stream().count());
+Assert.assertTrue(rs.stream().anyMatch(r -> r.getProperty("name").equals(className)));
+Assert.assertEquals("expectedValue", rs.next().getProperty("propertyName"));
+Assert.assertEquals("anotherExpectedValue", rs.next().getProperty("anotherPropertyName"));
+Assert.assertFalse(rs.isEmpty());
+Assert.assertEquals("STR" + className + "STR", rs.next().getProperty("someProperty"));
+Assert.assertTrue(rs.stream().allMatch(r -> r.getProperty("type").equals("expectedType")));
+Assert.assertNotEquals("unexpectedValue", rs.next().getProperty("differentPropertyName"));
+Assert.assertNotNull(rs.next().getProperty("createdAt"));
+Assert.assertTrue(rs.stream().map(r -> r.getProperty("status")).allMatch(status -> status.equals("active")));
+Assert.assertEquals("someExpectedValue", rs.next().getProperty("someField"));
+Assert.assertTrue(rs.stream().anyMatch(r -> r.getProperty("id") != null));
+Assert.assertEquals(1, rs.next().getProperty("countProperty"));
+Assert.assertFalse(rs.stream().anyMatch(r -> r.getProperty("isDeleted")));
+Assert.assertEquals("expectedType", rs.next().getProperty("classType"));
+Assert.assertTrue(rs.stream().map(r -> r.getProperty("field")).anyMatch(field -> field.contains("expectedSubstring")));
+Assert.assertNotNull(rs.next().getProperty("updatedAt"));
+Assert.assertEquals("finalExpectedValue", rs.next().getProperty("finalField"));
+Assert.assertTrue(rs.stream().allMatch(r -> r.getProperty("isActive")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals((Object)2L,rs.next().getProperty("STR")); ===
+0.759 - Assert.assertEquals("expectedType", rs.next().getProperty("classType"))
+0.748 - Assert.assertEquals(1, rs.next().getProperty("countProperty"))
+0.717 - Assert.assertEquals("expectedValue", rs.next().getProperty("propertyName"))
+0.711 - Assert.assertEquals("someExpectedValue", rs.next().getProperty("someField"))
+0.699 - Assert.assertEquals("finalExpectedValue", rs.next().getProperty("finalField"))
+0.686 - Assert.assertNotNull(rs.next().getProperty("createdAt"))
+0.686 - Assert.assertNotNull(rs.next().getProperty("updatedAt"))
+0.651 - Assert.assertEquals("STR" + className + "STR", rs.next().getProperty("someProperty"))
+0.642 - Assert.assertEquals("anotherExpectedValue", rs.next().getProperty("anotherPropertyName"))
+0.642 - Assert.assertNotEquals("unexpectedValue", rs.next().getProperty("differentPropertyName"))
+0.564 - Assert.assertFalse(rs.stream().anyMatch(r -> r.getProperty("isDeleted")))
+0.539 - Assert.assertTrue(rs.stream().anyMatch(r -> r.getProperty("id") != null))
+0.539 - Assert.assertTrue(rs.stream().allMatch(r -> r.getProperty("isActive")))
+0.500 - Assert.assertEquals(1, rs.stream().count())
+0.487 - Assert.assertFalse(rs.isEmpty())
+0.481 - Assert.assertTrue(rs.stream().anyMatch(r -> r.getProperty("name").equals(className)))
+0.478 - Assert.assertTrue(rs.stream().allMatch(r -> r.getProperty("type").equals("expectedType")))
+0.442 - Assert.assertTrue(rs.hasNext())
+0.413 - Assert.assertTrue(rs.stream().map(r -> r.getProperty("status")).allMatch(status -> status.equals("active")))
+0.388 - Assert.assertTrue(rs.stream().map(r -> r.getProperty("field")).anyMatch(field -> field.contains("expectedSubstring")))
+0.308 - ```java
+Assert.assertNotNull(rs)
+0.000 - ```

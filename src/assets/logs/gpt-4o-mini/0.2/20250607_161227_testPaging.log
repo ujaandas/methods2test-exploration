@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilder {
+    @Override
+     public String toString ( ) ;
+}
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilderTest {
+    @Test
+     public void testPaging ( ) {
+         sql . select ( ) . from ( "STR" ) . limit ( 10 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(sql);
+Assert.assertEquals("SELECT * FROM STR LIMIT 10", sql.toString());
+Assert.assertTrue(sql.toString().contains("SELECT"));
+Assert.assertTrue(sql.toString().contains("FROM STR"));
+Assert.assertTrue(sql.toString().contains("LIMIT 10"));
+Assert.assertFalse(sql.toString().isEmpty());
+Assert.assertTrue(sql.toString().startsWith("SELECT"));
+Assert.assertTrue(sql.toString().endsWith("LIMIT 10"));
+Assert.assertTrue(sql.toString().matches("SELECT \\* FROM STR LIMIT \\d+"));
+Assert.assertEquals(1, sql.getSelectCount());
+Assert.assertEquals("STR", sql.getFromTable());
+Assert.assertEquals(10, sql.getLimit());
+Assert.assertTrue(sql.getQueryParts().size() > 0);
+Assert.assertTrue(sql.getQueryParts().contains("SELECT"));
+Assert.assertTrue(sql.getQueryParts().contains("FROM STR"));
+Assert.assertTrue(sql.getQueryParts().contains("LIMIT 10"));
+Assert.assertNotEquals("SELECT * FROM STR", sql.toString());
+Assert.assertNotEquals("SELECT * FROM OTHER LIMIT 10", sql.toString());
+Assert.assertTrue(sql.toString().contains("LIMIT"));
+Assert.assertTrue(sql.toString().contains("STR"));
+Assert.assertTrue(sql.toString().contains("SELECT *"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sql.toString()); ===
+0.829 - Assert.assertNotEquals("SELECT * FROM STR", sql.toString())
+0.791 - Assert.assertEquals("SELECT * FROM STR LIMIT 10", sql.toString())
+0.778 - Assert.assertEquals("STR", sql.getFromTable())
+0.747 - Assert.assertNotEquals("SELECT * FROM OTHER LIMIT 10", sql.toString())
+0.708 - Assert.assertEquals(10, sql.getLimit())
+0.704 - Assert.assertFalse(sql.toString().isEmpty())
+0.686 - Assert.assertEquals(1, sql.getSelectCount())
+0.605 - Assert.assertTrue(sql.toString().contains("STR"))
+0.590 - Assert.assertTrue(sql.toString().contains("LIMIT"))
+0.582 - Assert.assertTrue(sql.toString().contains("SELECT"))
+0.575 - Assert.assertTrue(sql.toString().contains("FROM STR"))
+0.575 - Assert.assertTrue(sql.toString().contains("LIMIT 10"))
+0.575 - Assert.assertTrue(sql.toString().endsWith("LIMIT 10"))
+0.575 - Assert.assertTrue(sql.toString().contains("SELECT *"))
+0.568 - Assert.assertTrue(sql.toString().startsWith("SELECT"))
+0.474 - Assert.assertTrue(sql.toString().matches("SELECT \\* FROM STR LIMIT \\d+"))
+0.471 - Assert.assertTrue(sql.getQueryParts().contains("LIMIT 10"))
+0.459 - Assert.assertTrue(sql.getQueryParts().size() > 0)
+0.433 - ```java
+Assert.assertNotNull(sql)
+0.424 - Assert.assertTrue(sql.getQueryParts().contains("FROM STR"))
+0.405 - Assert.assertTrue(sql.getQueryParts().contains("SELECT"))
+0.000 - ```

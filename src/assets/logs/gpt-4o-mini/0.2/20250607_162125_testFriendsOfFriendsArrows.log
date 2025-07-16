@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testFriendsOfFriendsArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(qResult);
+Assert.assertTrue(qResult.hasNext());
+Assert.assertEquals(5, qResult.size());
+Assert.assertTrue(qResult.next().getProperty("name").equals("Alice"));
+Assert.assertTrue(qResult.next().getProperty("name").equals("Bob"));
+Assert.assertTrue(qResult.next().getProperty("name").equals("Charlie"));
+Assert.assertTrue(qResult.next().getProperty("relationship").equals("friend"));
+Assert.assertTrue(qResult.next().getProperty("relationship").equals("friend"));
+Assert.assertTrue(qResult.next().getProperty("degree").equals(2));
+Assert.assertFalse(qResult.hasNext());
+Assert.assertTrue(qResult.getProperty("location").equals("New York"));
+Assert.assertTrue(qResult.getProperty("age") instanceof Integer);
+Assert.assertTrue(qResult.getProperty("active").equals(true));
+Assert.assertTrue(qResult.getProperty("hobbies").contains("hiking"));
+Assert.assertTrue(qResult.getProperty("hobbies").contains("reading"));
+Assert.assertTrue(qResult.getProperty("friendsCount") >= 3);
+Assert.assertTrue(qResult.getProperty("lastInteraction") instanceof Date);
+Assert.assertTrue(qResult.getProperty("status").equals("active"));
+Assert.assertTrue(qResult.getProperty("email").matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"));
+Assert.assertTrue(qResult.getProperty("phoneNumber").matches("^\\+?[0-9]{10,15}$"));
+Assert.assertTrue(qResult.getProperty("city").equals("Los Angeles"));
+Assert.assertTrue(qResult.getProperty("country").equals("USA"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(qResult.hasNext()); ===
+1.000 - Assert.assertTrue(qResult.hasNext())
+0.881 - Assert.assertFalse(qResult.hasNext())
+0.712 - Assert.assertEquals(5, qResult.size())
+0.582 - Assert.assertTrue(qResult.getProperty("friendsCount") >= 3)
+0.578 - Assert.assertTrue(qResult.getProperty("active").equals(true))
+0.575 - Assert.assertTrue(qResult.next().getProperty("degree").equals(2))
+0.575 - Assert.assertTrue(qResult.getProperty("status").equals("active"))
+0.571 - Assert.assertTrue(qResult.getProperty("age") instanceof Integer)
+0.565 - Assert.assertTrue(qResult.getProperty("country").equals("USA"))
+0.562 - Assert.assertTrue(qResult.next().getProperty("name").equals("Bob"))
+0.556 - Assert.assertTrue(qResult.getProperty("location").equals("New York"))
+0.556 - Assert.assertTrue(qResult.getProperty("hobbies").contains("hiking"))
+0.549 - Assert.assertTrue(qResult.next().getProperty("name").equals("Alice"))
+0.549 - Assert.assertTrue(qResult.getProperty("hobbies").contains("reading"))
+0.542 - ```java
+Assert.assertNotNull(qResult)
+0.539 - Assert.assertTrue(qResult.getProperty("city").equals("Los Angeles"))
+0.538 - Assert.assertTrue(qResult.next().getProperty("name").equals("Charlie"))
+0.538 - Assert.assertTrue(qResult.getProperty("lastInteraction") instanceof Date)
+0.500 - Assert.assertTrue(qResult.next().getProperty("relationship").equals("friend"))
+0.500 - Assert.assertTrue(qResult.next().getProperty("relationship").equals("friend"))
+0.476 - Assert.assertTrue(qResult.getProperty("phoneNumber").matches("^\\+?[0-9]{10,15}$"))
+0.404 - Assert.assertTrue(qResult.getProperty("email").matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"))
+0.000 - ```

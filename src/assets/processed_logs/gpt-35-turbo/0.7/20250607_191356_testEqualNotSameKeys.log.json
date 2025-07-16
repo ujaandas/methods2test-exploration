@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\n@Override\npublic boolean equals ( final Object o ) {\nif ( this == o ) return true ;\nif ( o == null || getClass ( ) != o . getClass ( ) ) return false ;\nfinal OCompositeKey that = ( OCompositeKey ) o ;\nreturn keys . equals ( that . keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testEqualNotSameKeys ( ) {\nfinal OCompositeKey compositeKey = new OCompositeKey ( ) ;\ncompositeKey . addKey ( \"STR\" ) ;\ncompositeKey . addKey ( \"STR\" ) ;\nfinal OCompositeKey anotherCompositeKey = new OCompositeKey ( ) ;\nanotherCompositeKey . addKey ( \"STR\" ) ;\nanotherCompositeKey . addKey ( \"STR\" ) ;\nanotherCompositeKey . addKey ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(compositeKey, compositeKey);\nassertEquals(compositeKey, anotherCompositeKey);\nassertEquals(anotherCompositeKey, compositeKey);\nassertNotEquals(null, compositeKey);\nassertNotEquals(compositeKey, null);\nassertNotEquals(compositeKey, new Object());\nassertNotEquals(compositeKey, new OCompositeKey());\nassertEquals(compositeKey, compositeKey);\nassertEquals(compositeKey, anotherCompositeKey);\nassertEquals(anotherCompositeKey, compositeKey);\nassertNotSame(compositeKey, anotherCompositeKey);\nassertSame(compositeKey, compositeKey);\nassertSame(anotherCompositeKey, anotherCompositeKey);\nassertNotSame(compositeKey, new OCompositeKey());\nassertNotSame(anotherCompositeKey, new OCompositeKey());\nassertEquals(compositeKey.hashCode(), anotherCompositeKey.hashCode());\nassertEquals(compositeKey.toString(), anotherCompositeKey.toString());\nassertNotEquals(compositeKey.getClass(), anotherCompositeKey.getClass());\nassertNotEquals(compositeKey.keys, anotherCompositeKey.keys);\n====================\n\n",
+    "scores": [
+        0.848,
+        0.848,
+        0.82,
+        0.804,
+        0.774,
+        0.76,
+        0.744,
+        0.739,
+        0.733,
+        0.733,
+        0.727,
+        0.648,
+        0.646,
+        0.646,
+        0.575,
+        0.566,
+        0.558,
+        0.553,
+        0.529
+    ],
+    "ground_truth": "assertFalse(compositeKey.equals(anotherCompositeKey));"
+}

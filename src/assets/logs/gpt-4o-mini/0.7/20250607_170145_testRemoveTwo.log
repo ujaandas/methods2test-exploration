@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class TrackedMap {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class TrackedMapTest {
+    @Test
+     public void testRemoveTwo ( ) {
+         final ODocument doc = new ODocument ( ) ; 
+         final OTrackedMap < String > map = new OTrackedMap < String > ( doc ) ; 
+         map . put ( "STR" , "STR" ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(map.isDirty());
+map.remove("STR");
+assertTrue(map.isDirty());
+assertNull(map.get("STR"));
+assertFalse(map.containsKey("STR"));
+assertEquals(0, map.size());
+map.put("NEW_STR", "NEW_VALUE");
+assertTrue(map.isDirty());
+assertEquals("NEW_VALUE", map.get("NEW_STR"));
+assertTrue(map.containsKey("NEW_STR"));
+assertEquals(1, map.size());
+map.clear();
+assertTrue(map.isDirty());
+assertEquals(0, map.size());
+assertFalse(map.containsKey("NEW_STR"));
+assertNull(map.get("NEW_STR"));
+assertFalse(map.isDirty());
+ODocument newDoc = new ODocument();
+OTrackedMap<String> newMap = new OTrackedMap<>(newDoc);
+newMap.put("KEY", "VALUE");
+assertFalse(newMap.isDirty());
+newMap.put("KEY", "NEW_VALUE");
+assertTrue(newMap.isDirty());
+assertEquals("NEW_VALUE", newMap.get("KEY"));
+assertTrue(newMap.isDirty());
+newMap.remove("KEY");
+assertTrue(newMap.isDirty());
+assertNull(newMap.get("KEY"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(doc.isDirty()); ===
+0.885 - assertFalse(map.isDirty())
+0.836 - assertFalse(newMap.isDirty())
+0.767 - ```java
+assertFalse(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.745 - assertTrue(map.isDirty())
+0.704 - assertTrue(newMap.isDirty())
+0.704 - assertTrue(newMap.isDirty())
+0.704 - assertTrue(newMap.isDirty())
+0.623 - assertFalse(map.containsKey("STR"))
+0.585 - assertFalse(map.containsKey("NEW_STR"))
+0.500 - assertEquals(0, map.size())
+0.500 - assertEquals(1, map.size())
+0.500 - assertEquals(0, map.size())
+0.469 - assertTrue(map.containsKey("NEW_STR"))
+0.423 - assertNull(map.get("STR"))
+0.400 - assertNull(newMap.get("KEY"))
+0.393 - assertNull(map.get("NEW_STR"))
+0.377 - assertEquals("NEW_VALUE", newMap.get("KEY"))
+0.371 - assertEquals("NEW_VALUE", map.get("NEW_STR"))
+0.270 - map.clear()
+0.237 - OTrackedMap<String> newMap = new OTrackedMap<>(newDoc)
+0.233 - map.remove("STR")
+0.217 - newMap.remove("KEY")
+0.214 - ODocument newDoc = new ODocument()
+0.157 - newMap.put("KEY", "VALUE")
+0.145 - newMap.put("KEY", "NEW_VALUE")
+0.143 - map.put("NEW_STR", "NEW_VALUE")
+0.000 - ```

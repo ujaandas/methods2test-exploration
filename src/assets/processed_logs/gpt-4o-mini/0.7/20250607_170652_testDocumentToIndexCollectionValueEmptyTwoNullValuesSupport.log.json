@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic OCompositeKey ( final Object ... keys ) {\nthis . keys = new ArrayList < Object > ( keys . length ) ;\nthis . comparator = ODefaultComparator . INSTANCE ;\nfor ( final Object key : keys ) addKey ( key ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {\nfinal ODocument document = new ODocument ( ) ;\ndocument . field ( \"STR\" , Collections . emptyList ( ) ) ;\ndocument . field ( \"STR\" , 12 ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . setNullValuesIgnored ( false ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof List);\nassertEquals(2, ((List<?>) result).size());\nassertTrue(((List<?>) result).contains(12));\nassertTrue(((List<?>) result).contains(Collections.emptyList()));\nassertFalse(((List<?>) result).contains(null));\nassertEquals(12, ((List<?>) result).get(1));\nassertEquals(Collections.emptyList(), ((List<?>) result).get(0));\nassertEquals(OType.INTEGER, compositeIndexDefinition.getIndexType(\"STR\"));\nassertEquals(\"STR\", compositeIndexDefinition.getIndexPropertyName(\"STR\"));\nassertFalse(compositeIndexDefinition.isNullValuesIgnored());\nassertTrue(compositeIndexDefinition.getIndexes().size() > 0);\nassertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyListIndexDefinition));\nassertTrue(compositeIndexDefinition.getIndexes().stream().anyMatch(index -> index instanceof OPropertyIndexDefinition));\nassertEquals(2, compositeIndexDefinition.getIndexes().size());\nassertEquals(\"STR\", compositeIndexDefinition.getIndexes().get(0).getPropertyName());\nassertEquals(\"STR\", compositeIndexDefinition.getIndexes().get(1).getPropertyName());\nassertEquals(0, compositeIndexDefinition.getIndexes().get(0).getNullCount());\nassertEquals(0, compositeIndexDefinition.getIndexes().get(1).getNullCount());\nassertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains(\"12\"));\nassertTrue(compositeIndexDefinition.getDocumentValueToIndex(document).toString().contains(\"[]\"));\n```\n====================\n\n",
+    "scores": [
+        0.515,
+        0.49,
+        0.472,
+        0.43,
+        0.43,
+        0.426,
+        0.426,
+        0.421,
+        0.417,
+        0.408,
+        0.406,
+        0.403,
+        0.39,
+        0.378,
+        0.378,
+        0.356,
+        0.353,
+        0.293,
+        0.268,
+        0.25,
+        0.244,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12)));"
+}

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjector {
+    public void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) { 
+    this . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , "STR" , objectName ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class AttributeInjectorTest {
+    @Test
+     public void testCopyOutWithLongForIntFields ( ) throws Exception {
+         this . attributeList . clear ( ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 17L ) ) ; 
+         this . attributeList . add ( new Attribute ( "STR" , 22L ) ) ; 
+         this . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(17, this.target.getSomeIntField());
+assertEquals(22, this.target.getAnotherIntField());
+assertNotNull(this.target);
+assertTrue(this.attributeList.size() > 0);
+assertEquals("Expected Value", this.target.getSomeStringField());
+assertNotEquals(0, this.target.getSomeLongField());
+assertTrue(this.attributeSetters.containsKey("STR"));
+assertTrue(this.target instanceof ExpectedClassType);
+assertEquals(2, this.injector.getInvocationCount());
+assertFalse(this.target.isSomeBooleanField());
+assertSame(this.target.getSomeObjectField(), expectedObject);
+assertNotSame(this.target.getDifferentObjectField(), unexpectedObject);
+assertTrue(this.target.getListField().contains(expectedItem));
+assertFalse(this.target.getSetField().isEmpty());
+assertEquals(expectedMapSize, this.target.getMapField().size());
+assertThrows(ExpectedException.class, () -> this.injector.copyOutAttributes(invalidTarget, attributeList, attributeSetters, objectName));
+assertArrayEquals(expectedArray, this.target.getArrayField());
+assertEquals(expectedValue, this.target.calculateSomeValue());
+assertTrue(this.target.isInitialized());
+assertNull(this.target.getNullableField());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(17,this.target.intValue); ===
+0.711 - assertTrue(this.target.isInitialized())
+0.703 - ```java
+assertEquals(17, this.target.getSomeIntField())
+0.698 - assertEquals(22, this.target.getAnotherIntField())
+0.680 - assertEquals(expectedValue, this.target.calculateSomeValue())
+0.674 - assertNotEquals(0, this.target.getSomeLongField())
+0.667 - assertNotNull(this.target)
+0.644 - assertEquals(2, this.injector.getInvocationCount())
+0.634 - assertFalse(this.target.isSomeBooleanField())
+0.608 - assertNull(this.target.getNullableField())
+0.606 - assertEquals("Expected Value", this.target.getSomeStringField())
+0.606 - assertEquals(expectedMapSize, this.target.getMapField().size())
+0.598 - assertArrayEquals(expectedArray, this.target.getArrayField())
+0.598 - assertTrue(this.target instanceof ExpectedClassType)
+0.588 - assertFalse(this.target.getSetField().isEmpty())
+0.553 - assertTrue(this.attributeList.size() > 0)
+0.510 - assertTrue(this.target.getListField().contains(expectedItem))
+0.509 - assertNotSame(this.target.getDifferentObjectField(), unexpectedObject)
+0.500 - assertSame(this.target.getSomeObjectField(), expectedObject)
+0.427 - assertTrue(this.attributeSetters.containsKey("STR"))
+0.311 - assertThrows(ExpectedException.class, () -> this.injector.copyOutAttributes(invalidTarget, attributeList, attributeSetters, objectName))
+0.000 - ```

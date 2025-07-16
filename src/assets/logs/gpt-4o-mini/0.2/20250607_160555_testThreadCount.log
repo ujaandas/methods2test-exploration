@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class MetronomeSupplier {
+    @Override
+     public Metronome get ( ) { 
+     if ( metronomeClass == EmptyMetronome . class ) { 
+     return EmptyMetronome . INSTANCE ; 
+     } try { 
+     Constructor < ? extends Metronome > constructor = metronomeClass . getConstructor ( Metronome . class ) ; 
+     return constructor . newInstance ( masterMetronome ) ; 
+     } catch ( Exception e ) { 
+     throw new RuntimeException ( e ) ; 
+     } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class MetronomeSupplierTest {
+    @Test
+     public void testThreadCount ( ) {
+         PropertyBinding propertyBinding = new PropertyBinding ( new TestCase ( "STR" ) . setProperty ( "STR" , "STR" ) ) ; 
+         MetronomeSupplier supplier = new MetronomeSupplier ( "STR" , propertyBinding , 10 ) ; 
+         Metronome m = supplier . get ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(m);
+assertTrue(m instanceof Metronome);
+assertEquals(10, supplier.getThreadCount());
+assertEquals("STR", supplier.getPropertyBinding().getProperty("STR"));
+assertTrue(supplier.getMetronomeClass() == Metronome.class || supplier.getMetronomeClass() == EmptyMetronome.class);
+assertSame(EmptyMetronome.INSTANCE, supplier.get(EmptyMetronome.class));
+assertNotSame(m, supplier.get());
+assertEquals(m.getClass(), supplier.get().getClass());
+assertTrue(m.isRunning());
+assertFalse(m.isPaused());
+assertEquals(0, m.getElapsedTime());
+assertTrue(m.getInterval() > 0);
+assertEquals("Expected Metronome type", Metronome.class, m.getClass());
+assertNotNull(supplier.getMasterMetronome());
+assertTrue(supplier.getMasterMetronome() instanceof Metronome);
+assertEquals("STR", supplier.getPropertyBinding().getProperty("STR"));
+assertTrue(supplier.getThreadCount() > 0);
+assertNotNull(supplier.getMetronomeClass());
+assertTrue(supplier.getMetronomeClass().isAssignableFrom(m.getClass()));
+assertEquals("Metronome should be initialized", m.getState(), Metronome.State.INITIALIZED);
+assertFalse(supplier.getMetronomeClass() == null);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(SleepingMetronome.class,m.getClass()); ===
+0.776 - assertEquals("Expected Metronome type", Metronome.class, m.getClass())
+0.624 - assertNotNull(supplier.getMetronomeClass())
+0.619 - assertFalse(supplier.getMetronomeClass() == null)
+0.595 - assertEquals(0, m.getElapsedTime())
+0.595 - assertTrue(supplier.getMetronomeClass().isAssignableFrom(m.getClass()))
+0.522 - assertEquals(10, supplier.getThreadCount())
+0.510 - assertEquals(m.getClass(), supplier.get().getClass())
+0.488 - assertTrue(m instanceof Metronome)
+0.468 - assertNotNull(supplier.getMasterMetronome())
+0.467 - assertSame(EmptyMetronome.INSTANCE, supplier.get(EmptyMetronome.class))
+0.465 - assertTrue(supplier.getMetronomeClass() == Metronome.class || supplier.getMetronomeClass() == EmptyMetronome.class)
+0.459 - assertEquals("Metronome should be initialized", m.getState(), Metronome.State.INITIALIZED)
+0.430 - assertTrue(m.getInterval() > 0)
+0.427 - assertFalse(m.isPaused())
+0.420 - assertNotSame(m, supplier.get())
+0.418 - assertTrue(supplier.getMasterMetronome() instanceof Metronome)
+0.407 - assertEquals("STR", supplier.getPropertyBinding().getProperty("STR"))
+0.407 - assertEquals("STR", supplier.getPropertyBinding().getProperty("STR"))
+0.404 - assertTrue(supplier.getThreadCount() > 0)
+0.373 - assertTrue(m.isRunning())
+0.297 - ```java
+assertNotNull(m)
+0.000 - ```

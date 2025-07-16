@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutor {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutorTest {
+    @Test
+     public void testMultipleCreateEdgeOnTheSameLet ( ) {
+         OrientDB factory = new OrientDB ( "STR" , "STR" , "STR" , OrientDBConfig . defaultConfig ( ) ) ; 
+         String dbName = getClass ( ) . getSimpleName ( ) + "STR" ; 
+         factory . create ( dbName , ODatabaseType . MEMORY ) ; 
+         ODatabaseDocument db = factory . open ( dbName , "STR" , "STR" ) ; 
+         String script = "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         OResultSet result = db . execute ( "STR" , script ) ; 
+         result . close ( ) ; 
+         result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(0, result.size());
+assertFalse(result.hasNext());
+assertNull(result.next());
+assertTrue(result.getExecutionPlan().contains("CREATE EDGE"));
+assertNotNull(result.getProperty("property1"));
+assertEquals("value1", result.getProperty("property1"));
+assertTrue(result.getProperty("property2") instanceof Integer);
+assertEquals(100, result.getProperty("property2"));
+assertFalse(result.getProperty("property3"));
+assertTrue(result.getProperty("property4") instanceof List);
+assertEquals(3, ((List) result.getProperty("property4")).size());
+assertTrue(result.getProperty("property5") instanceof Map);
+assertEquals("data", ((Map) result.getProperty("property5")).get("key"));
+assertEquals(0, ((Map) result.getProperty("property5")).get("count"));
+assertNotEquals("error", result.getErrorMessage());
+assertEquals(200, result.getStatusCode());
+assertTrue(result.getExecutionTime() <= 1000);
+assertTrue(result.getExecutionTime() >= 500);
+assertTrue(result.getExecutionTimeInMilliseconds() >= 500);
+assertTrue(result.getExecutionTimeInNanoseconds() <= 1000000000);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,result.stream().count()); ===
+0.684 - assertEquals(200, result.getStatusCode())
+0.676 - assertFalse(result.hasNext())
+0.659 - assertEquals(100, result.getProperty("property2"))
+0.656 - assertNull(result.next())
+0.642 - Assertions:
+
+assertEquals(0, result.size())
+0.642 - assertEquals(0, ((Map) result.getProperty("property5")).get("count"))
+0.624 - assertEquals("value1", result.getProperty("property1"))
+0.602 - assertFalse(result.getProperty("property3"))
+0.594 - assertEquals(3, ((List) result.getProperty("property4")).size())
+0.591 - assertNotEquals("error", result.getErrorMessage())
+0.569 - assertEquals("data", ((Map) result.getProperty("property5")).get("key"))
+0.566 - assertTrue(result.getExecutionPlan().contains("CREATE EDGE"))
+0.565 - assertNotNull(result.getProperty("property1"))
+0.519 - assertTrue(result.getExecutionTime() >= 500)
+0.512 - assertTrue(result.getExecutionTime() <= 1000)
+0.444 - assertTrue(result.getProperty("property2") instanceof Integer)
+0.421 - assertTrue(result.getProperty("property5") instanceof Map)
+0.421 - assertTrue(result.getExecutionTimeInMilliseconds() >= 500)
+0.396 - assertTrue(result.getExecutionTimeInNanoseconds() <= 1000000000)
+0.396 - assertTrue(result.getProperty("property4") instanceof List)

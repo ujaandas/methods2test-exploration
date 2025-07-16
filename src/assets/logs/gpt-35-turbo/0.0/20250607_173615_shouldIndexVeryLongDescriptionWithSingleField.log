@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSort {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSortTest {
+    @Test
+     public void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {
+         db . save ( new ODocument ( "STR" ) . field ( "STR" , DESCRIPTION ) ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         long count = db . query ( "STR" ) . stream ( ) . count ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, count);
+assertTrue(count > 0);
+assertFalse(count == 0);
+assertNotNull(db.query("STR").stream().findFirst().orElse(null));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").equals(DESCRIPTION)).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").equals(DESCRIPTION)));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().contains("long")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().contains("long")));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().length() > 10).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().length() > 10));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().startsWith("V")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().startsWith("V")));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().endsWith("eld")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().endsWith("eld")));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().matches("[a-zA-Z]+")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().matches("[a-zA-Z]+")));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().equalsIgnoreCase(DESCRIPTION)).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().equalsIgnoreCase(DESCRIPTION)));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().toLowerCase().contains("single")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().toLowerCase().contains("single")));
+assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().toUpperCase().contains("FIELD")).count());
+assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().toUpperCase().contains("FIELD")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,count); ===
+1.000 - assertEquals(1, count)
+0.762 - assertFalse(count == 0)
+0.700 - assertTrue(count > 0)
+0.353 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").equals(DESCRIPTION)).count())
+0.344 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().length() > 10).count())
+0.333 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().startsWith("V")).count())
+0.333 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().endsWith("eld")).count())
+0.331 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().contains("long")).count())
+0.329 - assertNotNull(db.query("STR").stream().findFirst().orElse(null))
+0.321 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().matches("[a-zA-Z]+")).count())
+0.300 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().equalsIgnoreCase(DESCRIPTION)).count())
+0.296 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().toUpperCase().contains("FIELD")).count())
+0.294 - assertEquals(1, db.query("STR").stream().filter(doc -> doc.field("STR").toString().toLowerCase().contains("single")).count())
+0.256 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().contains("long")))
+0.239 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").equals(DESCRIPTION)))
+0.232 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().length() > 10))
+0.224 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().startsWith("V")))
+0.224 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().endsWith("eld")))
+0.215 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().matches("[a-zA-Z]+")))
+0.211 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().toLowerCase().contains("single")))
+0.200 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().equalsIgnoreCase(DESCRIPTION)))
+0.197 - assertTrue(db.query("STR").stream().anyMatch(doc -> doc.field("STR").toString().toUpperCase().contains("FIELD")))

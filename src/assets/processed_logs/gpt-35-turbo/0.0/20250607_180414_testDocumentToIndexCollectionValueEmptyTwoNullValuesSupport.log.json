@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic OCompositeKey ( final Object ... keys ) {\nthis . keys = new ArrayList < Object > ( keys . length ) ;\nthis . comparator = ODefaultComparator . INSTANCE ;\nfor ( final Object key : keys ) addKey ( key ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {\nfinal ODocument document = new ODocument ( ) ;\ndocument . field ( \"STR\" , Collections . emptyList ( ) ) ;\ndocument . field ( \"STR\" , 12 ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . setNullValuesIgnored ( false ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(2, result);\nassertNotNull(result);\nassertTrue(result instanceof List);\nassertFalse(result instanceof Map);\nassertEquals(Collections.singletonList(12), result);\nassertNotEquals(Collections.singletonList(0), result);\nassertTrue(((List) result).contains(12));\nassertFalse(((List) result).contains(0));\nassertEquals(1, ((List) result).size());\nassertNotEquals(0, ((List) result).size());\nassertTrue(((List) result).get(0) instanceof Integer);\nassertFalse(((List) result).get(0) instanceof String);\nassertEquals(12, ((List) result).get(0));\nassertNotEquals(0, ((List) result).get(0));\nassertTrue(((List) result).isEmpty());\nassertFalse(((List) result).isEmpty());\nassertEquals(0, ((List) result).indexOf(12));\nassertNotEquals(-1, ((List) result).indexOf(12));\nassertTrue(((List) result).containsAll(Collections.singletonList(12)));\nassertFalse(((List) result).containsAll(Collections.singletonList(0)));\n====================\n\n",
+    "scores": [
+        0.531,
+        0.531,
+        0.516,
+        0.515,
+        0.505,
+        0.495,
+        0.486,
+        0.485,
+        0.482,
+        0.475,
+        0.468,
+        0.45,
+        0.431,
+        0.431,
+        0.43,
+        0.42,
+        0.42,
+        0.39,
+        0.36,
+        0.354
+    ],
+    "ground_truth": "Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12)));"
+}

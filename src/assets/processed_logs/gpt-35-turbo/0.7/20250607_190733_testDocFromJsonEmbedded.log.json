@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTx {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTxTest {\n@Test\npublic void testDocFromJsonEmbedded ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass c0 = schema . createClass ( \"STR\" ) ;\nOClass c1 = schema . createClass ( \"STR\" ) ;\nc1 . createProperty ( \"STR\" , OType . STRING ) ;\nc1 . createProperty ( \"STR\" , OType . EMBEDDED , c0 ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . fromJSON ( \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ) ;\ndb . save ( doc ) ;\nList < ODocument > result = db . query ( new OSQLSynchQuery < Object > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(1, result.size());\nAssert.assertEquals(\"STR\", result.get(0).field(\"STR\"));\nAssert.assertNull(result.get(0).field(\"EMBEDDED\"));\nAssert.assertTrue(result.get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(result.get(0).field(\"EMBEDDED\") instanceof ODocument);\nAssert.assertEquals(11, result.get(0).field(\"STR\").toString().length());\nAssert.assertEquals(1, ((List<?>) result.get(0).field(\"EMBEDDED\")).size());\nAssert.assertEquals(\"STR\", ((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\"));\nAssert.assertEquals(11, ((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\").toString().length());\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertEquals(\"STRSTRSTRSTRSTRSTRSTRSTRSTRSTRSTR\", ((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\"));\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertEquals(11, ((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\").toString().length());\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\nAssert.assertTrue(((List<?>) result.get(0).field(\"EMBEDDED\")).get(0).field(\"STR\") instanceof String);\n====================\n\n",
+    "scores": [
+        0.931,
+        0.64,
+        0.574,
+        0.556,
+        0.543,
+        0.458,
+        0.432,
+        0.418,
+        0.391,
+        0.391,
+        0.34,
+        0.319,
+        0.319,
+        0.319,
+        0.319,
+        0.319,
+        0.319,
+        0.319,
+        0.319
+    ],
+    "ground_truth": "Assert.assertEquals(result.size(),0);"
+}

@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctions {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctionsTest {
+    @Test
+     public void testStEqualsPoint ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(next);
+assertTrue(next instanceof ODocument);
+assertEquals("ExpectedFieldName", next.field("FieldName"));
+assertEquals("ExpectedValue", next.field("FieldName"));
+assertTrue(next.containsField("FieldName"));
+assertFalse(next.containsField("NonExistentField"));
+assertEquals(3, next.field("SomeCollection").size());
+assertTrue(next.field("SomeCollection").contains("ExpectedItem"));
+assertFalse(next.field("SomeCollection").isEmpty());
+assertEquals("ExpectedString", next.field("STRField"));
+assertNotEquals("UnexpectedValue", next.field("FieldName"));
+assertTrue(next.field("NumericField") instanceof Number);
+assertEquals(100, next.field("NumericField"));
+assertNotNull(next.field("DateField"));
+assertTrue(next.field("BooleanField"));
+assertFalse(next.field("AnotherBooleanField"));
+assertEquals("ExpectedNestedValue", next.field("NestedField.NestedKey"));
+assertTrue(next.field("ListField") instanceof List);
+assertEquals(5, next.field("ListField").size());
+assertTrue(next.field("ListField").contains("ExpectedListItem"));
+assertEquals("ExpectedType", next.getClass().getSimpleName());
+assertNotNull(next.getIdentity());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.707 - assertEquals(5, next.field("ListField").size())
+0.700 - assertEquals(100, next.field("NumericField"))
+0.697 - assertEquals("ExpectedString", next.field("STRField"))
+0.690 - assertEquals(3, next.field("SomeCollection").size())
+0.649 - assertNotNull(next.field("DateField"))
+0.629 - assertEquals("ExpectedValue", next.field("FieldName"))
+0.622 - assertTrue(next.field("BooleanField"))
+0.621 - assertFalse(next.field("SomeCollection").isEmpty())
+0.610 - assertFalse(next.field("AnotherBooleanField"))
+0.602 - assertEquals("ExpectedFieldName", next.field("FieldName"))
+0.596 - assertNotEquals("UnexpectedValue", next.field("FieldName"))
+0.588 - assertTrue(next.field("ListField") instanceof List)
+0.557 - assertTrue(next.containsField("FieldName"))
+0.556 - assertTrue(next.field("NumericField") instanceof Number)
+0.552 - assertFalse(next.containsField("NonExistentField"))
+0.523 - assertEquals("ExpectedNestedValue", next.field("NestedField.NestedKey"))
+0.522 - assertNotNull(next.getIdentity())
+0.515 - assertTrue(next.field("SomeCollection").contains("ExpectedItem"))
+0.500 - assertTrue(next.field("ListField").contains("ExpectedListItem"))
+0.479 - assertEquals("ExpectedType", next.getClass().getSimpleName())
+0.444 - ```java
+assertNotNull(next)
+0.423 - assertTrue(next instanceof ODocument)
+0.000 - ```

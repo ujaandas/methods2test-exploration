@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Wildcards {
+    public static boolean matches ( final String text , final String wildcard ) { 
+    String pattern = wildcard . replace ( "STR" , "STR" ) . replace ( "STR" , "STR" ) ; 
+    return ( text != null && text . matches ( pattern ) ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class WildcardsTest {
+    @Test
+     public void testMatchesAgainstNull ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(Wildcards.matches("example", "example"));
+assertFalse(Wildcards.matches("example", "test"));
+assertTrue(Wildcards.matches("test123", "test*"));
+assertFalse(Wildcards.matches("test123", "example*"));
+assertTrue(Wildcards.matches("abc", "a?c"));
+assertFalse(Wildcards.matches("abc", "b?d"));
+assertTrue(Wildcards.matches("hello", "h*llo"));
+assertFalse(Wildcards.matches("hello", "x*llo"));
+assertTrue(Wildcards.matches("wildcard", "w*card"));
+assertFalse(Wildcards.matches("wildcard", "c*ard"));
+assertTrue(Wildcards.matches("12345", "123*"));
+assertFalse(Wildcards.matches("12345", "456*"));
+assertTrue(Wildcards.matches("abcde", "a?c?e"));
+assertFalse(Wildcards.matches("abcde", "a?b?e"));
+assertTrue(Wildcards.matches("test", "t*t"));
+assertFalse(Wildcards.matches("test", "e*s"));
+assertTrue(Wildcards.matches("match", "m*ch"));
+assertFalse(Wildcards.matches("match", "x*ch"));
+assertTrue(Wildcards.matches("str", "s*r"));
+assertFalse(Wildcards.matches("str", "t*r"));
+assertTrue(Wildcards.matches("sample", "sam*le"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Wildcards.matches(null,"STR")); ===
+0.831 - assertFalse(Wildcards.matches("hello", "x*llo"))
+0.824 - assertFalse(Wildcards.matches("abc", "b?d"))
+0.824 - assertFalse(Wildcards.matches("str", "t*r"))
+0.814 - assertFalse(Wildcards.matches("test", "e*s"))
+0.800 - assertFalse(Wildcards.matches("example", "test"))
+0.795 - assertFalse(Wildcards.matches("12345", "456*"))
+0.795 - assertFalse(Wildcards.matches("match", "x*ch"))
+0.787 - assertFalse(Wildcards.matches("abcde", "a?b?e"))
+0.783 - assertFalse(Wildcards.matches("wildcard", "c*ard"))
+0.750 - assertTrue(Wildcards.matches("hello", "h*llo"))
+0.745 - assertFalse(Wildcards.matches("test123", "example*"))
+0.738 - assertTrue(Wildcards.matches("abc", "a?c"))
+0.738 - assertTrue(Wildcards.matches("str", "s*r"))
+0.729 - assertTrue(Wildcards.matches("test", "t*t"))
+0.713 - assertTrue(Wildcards.matches("12345", "123*"))
+0.713 - assertTrue(Wildcards.matches("match", "m*ch"))
+0.711 - assertTrue(Wildcards.matches("sample", "sam*le"))
+0.705 - assertTrue(Wildcards.matches("abcde", "a?c?e"))
+0.696 - assertTrue(Wildcards.matches("wildcard", "w*card"))
+0.689 - assertTrue(Wildcards.matches("test123", "test*"))
+0.640 - ```java
+assertTrue(Wildcards.matches("example", "example"))
+0.000 - ```

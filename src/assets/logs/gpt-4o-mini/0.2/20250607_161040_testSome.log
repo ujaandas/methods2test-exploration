@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AOption {
+    public abstract T get ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AOptionTest {
+    @Test
+     public void testSome ( ) throws Exception {
+         final AOption < String > s = AOption . some ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(s);
+assertEquals("STR", s.get());
+assertTrue(s instanceof AOption);
+assertFalse(s.isEmpty());
+assertEquals("STR", s.map(String::toUpperCase).get());
+assertEquals("STR", s.flatMap(value -> AOption.some(value)).get());
+assertEquals("STR", s.filter(value -> value.equals("STR")).get());
+assertThrows(NoSuchElementException.class, () -> AOption.none().get());
+assertEquals("Default", s.orElse("Default"));
+assertEquals("STR", s.orElseGet(() -> "Default"));
+assertTrue(s.equals(AOption.some("STR")));
+assertFalse(s.equals(AOption.some("OTHER")));
+assertTrue(s.hashCode() != AOption.some("OTHER").hashCode());
+assertTrue(s.toString().contains("STR"));
+assertTrue(s.map(String::length).get() instanceof Integer);
+assertEquals(3, s.map(String::length).get().intValue());
+assertTrue(s.filter(value -> value.length() > 2).isPresent());
+assertFalse(s.filter(value -> value.length() < 2).isPresent());
+assertEquals(s, AOption.some("STR"));
+assertNotEquals(s, AOption.none());
+assertTrue(s.isPresent());
+assertFalse(AOption.none().isPresent());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",s.get()); ===
+1.000 - assertEquals("STR", s.get())
+0.712 - assertEquals("STR", s.orElseGet(() -> "Default"))
+0.684 - assertEquals("STR", s.map(String::toUpperCase).get())
+0.645 - assertEquals(s, AOption.some("STR"))
+0.633 - assertNotEquals(s, AOption.none())
+0.629 - assertEquals("Default", s.orElse("Default"))
+0.627 - assertFalse(s.isEmpty())
+0.607 - assertEquals("STR", s.filter(value -> value.equals("STR")).get())
+0.600 - assertEquals("STR", s.flatMap(value -> AOption.some(value)).get())
+0.577 - assertTrue(s.isPresent())
+0.559 - assertTrue(s.equals(AOption.some("STR")))
+0.543 - assertEquals(3, s.map(String::length).get().intValue())
+0.507 - assertTrue(s.toString().contains("STR"))
+0.507 - assertFalse(s.equals(AOption.some("OTHER")))
+0.485 - assertFalse(AOption.none().isPresent())
+0.447 - assertTrue(s.hashCode() != AOption.some("OTHER").hashCode())
+0.424 - assertFalse(s.filter(value -> value.length() < 2).isPresent())
+0.392 - ```java
+assertNotNull(s)
+0.386 - assertTrue(s instanceof AOption)
+0.386 - assertTrue(s.map(String::length).get() instanceof Integer)
+0.381 - assertTrue(s.filter(value -> value.length() > 2).isPresent())
+0.362 - assertThrows(NoSuchElementException.class, () -> AOption.none().get())
+0.000 - ```

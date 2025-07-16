@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class CEFParser {\npublic CommonEvent parse ( String cefString , final boolean validate , Locale locale ) {\nreturn this . parse ( cefString , validate , false , locale ) ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class CEFParserTest {\n@Test\npublic void validStringMessageWithoutTZWithLocaleAndValidationTest ( ) throws Exception {\nString sample1 = \"STR\" ;\nCEFParser parser = new CEFParser ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "CommonEvent event = parser.parse(sample1, true, Locale.US);\nassertNotNull(event);\nassertEquals(\"Expected value\", event.getValue());\nassertFalse(event.isInvalid());\nassertTrue(event.isValid());\nassertTrue(event.isComplete());\nassertEquals(0, event.getErrorCount());\nassertEquals(Locale.US, event.getLocale());\nassertEquals(\"Expected string\", event.getString());\nassertNotEquals(\"Unexpected value\", event.getValue());\nassertTrue(event.isValid());\nassertFalse(event.isInvalid());\nassertEquals(0, event.getErrorCount());\nassertNotNull(event.getTimestamp());\nassertTrue(event.getTimestamp().isValid());\nassertEquals(\"Expected timestamp\", event.getTimestamp().toString());\nassertEquals(\"Expected type\", event.getType());\nassertFalse(event.hasErrors());\nassertTrue(event.isComplete());\nassertEquals(\"Expected locale\", event.getLocale());\nassertEquals(\"Expected value\", event.getValue());\n====================\n\n",
+    "scores": [
+        0.685,
+        0.48,
+        0.444,
+        0.424,
+        0.424,
+        0.408,
+        0.375,
+        0.353,
+        0.353,
+        0.353,
+        0.351,
+        0.321,
+        0.317,
+        0.317,
+        0.304,
+        0.304,
+        0.303,
+        0.291,
+        0.267,
+        0.257,
+        0.257
+    ],
+    "ground_truth": "Assert.assertNotNull(parser.parse(sample1,true,Locale.FRANCE));"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedProperties {\npublic static Set < String > bindAll ( Object instance , TestCase testCase ) {\nSet < String > usedProperties = new HashSet < > ( ) ;\nfor ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) {\nString fullPropertyPath = entry . getKey ( ) . trim ( ) ;\nString value = entry . getValue ( ) . trim ( ) ;\nif ( bind0 ( instance , fullPropertyPath , value ) ) {\nusedProperties . add ( fullPropertyPath ) ;\n} } return usedProperties ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedPropertiesTest {\n@Test\npublic void testReconstructObjectGraph ( ) {\nTestCase testCase = new TestCase ( \"STR\" ) . setProperty ( \"STR\" , 10 ) ;\nPerson person = new Person ( ) ;\nSet < String > usedProperties = bindAll ( person , testCase ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, usedProperties.size());\nassertTrue(usedProperties.contains(\"STR\"));\nassertEquals(10, person.getSTR());\nassertNotNull(person);\nassertTrue(person instanceof Person);\nassertEquals(\"STR\", testCase.getProperties().keySet().iterator().next());\nassertEquals(\"10\", testCase.getProperties().get(\"STR\"));\nassertTrue(usedProperties.isEmpty() == false);\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"NON_EXISTENT_PROPERTY\"));\nassertNotEquals(5, person.getSTR());\nassertNotEquals(0, usedProperties.size());\nassertEquals(10, person.getSTR());\nassertNotNull(testCase.getProperties());\nassertTrue(testCase.getProperties().size() > 0);\nassertEquals(1, testCase.getProperties().size());\nassertTrue(testCase.getProperties().containsKey(\"STR\"));\nassertEquals(10, (int) testCase.getProperties().get(\"STR\"));\nassertTrue(testCase.getProperties().get(\"STR\") instanceof String);\nassertFalse(usedProperties.contains(\"INVALID_PROPERTY\"));\nassertEquals(10, person.getSTR());\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.635,
+        0.559,
+        0.557,
+        0.557,
+        0.557,
+        0.54,
+        0.522,
+        0.423,
+        0.423,
+        0.389,
+        0.376,
+        0.357,
+        0.351,
+        0.351,
+        0.342,
+        0.333,
+        0.313,
+        0.304,
+        0.302,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(person.nullArm);"
+}

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ParameterReplacer {\npublic String replaceObjectNameParameters ( String pattern , MBeanLocationParameterSource parameterSource ) {\nMatcher matcher = replaceParamPattern . matcher ( pattern ) ;\nStringBuffer result = new StringBuffer ( ) ;\nwhile ( matcher . find ( ) ) {\nString name = matcher . group ( \"STR\" ) ;\nString value = parameterSource . getParameter ( name ) ;\nif ( value != null ) {\nmatcher . appendReplacement ( result , value ) ;\n} else {\nmatcher . appendReplacement ( result , Matcher . quoteReplacement ( matcher . group ( ) ) ) ;\n} } matcher . appendTail ( result ) ;\nreturn result . toString ( ) ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ParameterReplacerTest {\n@Test\npublic void testReplaceObjectNameParameters ( ) throws Exception {\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nMockito . when ( this . mockSource . getParameter ( \"STR\" ) ) . thenReturn ( \"STR\" ) ;\nString result ;\nresult = this . replacer . replaceObjectNameParameters ( \"STR\" , mockSource ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", result);\nassertNotEquals(\"ABC\", result);\nassertNotNull(result);\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.isEmpty());\nassertSame(\"STR\", result);\nassertThat(result, is(\"STR\"));\nassertThat(result, not(\"ABC\"));\nassertEqualsIgnoringCase(\"str\", result);\nassertThat(result, containsString(\"S\"));\nassertThat(result, startsWith(\"S\"));\nassertThat(result, endsWith(\"R\"));\nassertThat(result.length(), greaterThan(0));\nassertThat(result, equalToIgnoringWhiteSpace(\" STR \"));\nassertThat(result, instanceOf(String.class));\nassertThat(result, equalToCompressingWhiteSpace(\" STR \"));\nassertThat(result, matches(\"S[a-z]{2}\"));\nassertThat(result, anyOf(equalTo(\"STR\"), equalTo(\"STRING\")));\nassertThat(result, allOf(startsWith(\"S\"), endsWith(\"R\")));\nassertThat(result, notNullValue());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.84,
+        0.836,
+        0.719,
+        0.681,
+        0.618,
+        0.593,
+        0.545,
+        0.533,
+        0.517,
+        0.508,
+        0.5,
+        0.5,
+        0.469,
+        0.462,
+        0.45,
+        0.442,
+        0.441,
+        0.435,
+        0.37
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

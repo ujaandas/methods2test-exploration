@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class HttpClientFactory {\npublic HttpClient create ( ) {\nreturn hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class HttpClientFactoryTest {\n@Test\npublic void testNonProxiedHostRequest ( ) throws Exception {\ntargetServer . stubFor ( get ( urlMatching ( \"STR\" ) ) . willReturn ( aResponse ( ) . withBody ( \"STR\" ) ) ) ;\nproxyServer . stubFor ( get ( urlMatching ( \"STR\" ) ) . willReturn ( aResponse ( ) . withBody ( \"STR\" ) ) ) ;\nProxy proxy = new Proxy ( ) ;\nproxy . setHost ( \"STR\" ) ;\nproxy . setPort ( PROXY_PORT ) ;\nproxy . setProtocol ( \"STR\" ) ;\nproxy . setNonProxyHosts ( \"STR\" ) ;\nHttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ;\nString body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"Expected body content\", \"Actual body content\", body);\nAssert.assertNotNull(client);\nAssert.assertTrue(body.contains(\"expectedString\"));\nAssert.assertEquals(HttpStatus.SC_OK, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());\nAssert.assertTrue(body.length() > 0);\nAssert.assertNotEquals(\"Expected string\", \"Actual string\");\nAssert.assertTrue(body.contains(\"specificString\"));\nAssert.assertNotEquals(0, body.length());\nAssert.assertTrue(client instanceof HttpClient);\nAssert.assertNotNull(body);\nAssert.assertNotEquals(HttpStatus.SC_NOT_FOUND, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());\nAssert.assertTrue(body.startsWith(\"startString\"));\nAssert.assertEquals(\"Expected content\", body, \"Actual content\");\nAssert.assertTrue(body.endsWith(\"endString\"));\nAssert.assertNotEquals(HttpStatus.SC_INTERNAL_SERVER_ERROR, client.execute(new HttpGet(TARGET_URL)).getStatusLine().getStatusCode());\nAssert.assertNotEquals(\"Not this\", \"Not that\");\nAssert.assertTrue(body.isEmpty());\nAssert.assertEquals(\"Expected length\", 10, body.length());\nAssert.assertTrue(body.matches(\"regexPattern\"));\nAssert.assertFalse(body.equals(\"differentString\"));\n====================\n\n",
+    "scores": [
+        0.679,
+        0.651,
+        0.6,
+        0.592,
+        0.553,
+        0.52,
+        0.51,
+        0.5,
+        0.478,
+        0.472,
+        0.444,
+        0.419,
+        0.406,
+        0.394,
+        0.388,
+        0.388,
+        0.323,
+        0.304,
+        0.281,
+        0.272
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",body);"
+}

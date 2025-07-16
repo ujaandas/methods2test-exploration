@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testParamWithMatches ( ) {
+         Map < String , Object > params = new HashMap < String , Object > ( ) ; 
+         params . put ( "STR" , "STR" ) ; 
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql , params ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(1, results.size());
+assertTrue(results.get(0).containsField("STR"));
+assertEquals("STR", results.get(0).field("STR"));
+assertEquals("STR", results.get(0).getProperty("STR"));
+assertTrue(results.get(0) instanceof ODocument);
+assertTrue(results.get(0).getIdentity().isValid());
+assertNotNull(results.get(0).getClassName());
+assertEquals("ExpectedClassName", results.get(0).getClassName());
+assertTrue(results.get(0).isNew());
+assertFalse(results.get(0).isDirty());
+assertFalse(results.get(0).isEmbedded());
+assertEquals(1, results.stream().filter(doc -> "STR".equals(doc.field("STR"))).count());
+assertTrue(results.stream().allMatch(doc -> doc.field("STR").equals("STR")));
+assertFalse(results.stream().anyMatch(doc -> doc.field("STR") == null));
+assertTrue(results.stream().map(ODocument::getIdentity).distinct().count() == results.size());
+assertNotSame(results.get(0), new ODocument());
+assertNotEquals("DifferentValue", results.get(0).field("STR"));
+assertNull(results.get(0).field("NonExistentField"));
+assertEquals("ExpectedValue", results.get(0).field("SomeOtherField"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(1, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.687 - assertFalse(results.get(0).isDirty())
+0.675 - assertEquals("STR", results.get(0).field("STR"))
+0.657 - assertFalse(results.get(0).isEmbedded())
+0.656 - assertTrue(results.get(0).isNew())
+0.602 - assertEquals("STR", results.get(0).getProperty("STR"))
+0.595 - assertNotNull(results.get(0).getClassName())
+0.571 - assertTrue(results.get(0).containsField("STR"))
+0.571 - assertNotEquals("DifferentValue", results.get(0).field("STR"))
+0.567 - ```java
+assertNotNull(results)
+0.559 - assertEquals("ExpectedClassName", results.get(0).getClassName())
+0.541 - assertNotSame(results.get(0), new ODocument())
+0.537 - assertNull(results.get(0).field("NonExistentField"))
+0.531 - assertEquals("ExpectedValue", results.get(0).field("SomeOtherField"))
+0.507 - assertTrue(results.get(0) instanceof ODocument)
+0.500 - assertTrue(results.get(0).getIdentity().isValid())
+0.474 - assertFalse(results.stream().anyMatch(doc -> doc.field("STR") == null))
+0.456 - assertEquals(1, results.stream().filter(doc -> "STR".equals(doc.field("STR"))).count())
+0.413 - assertTrue(results.stream().map(ODocument::getIdentity).distinct().count() == results.size())
+0.404 - assertTrue(results.stream().allMatch(doc -> doc.field("STR").equals("STR")))
+0.000 - ```

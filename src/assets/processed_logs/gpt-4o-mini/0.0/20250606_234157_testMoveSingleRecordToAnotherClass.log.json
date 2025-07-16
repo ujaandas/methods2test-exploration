@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class SQLMoveVertexCommand {\n@Override\npublic int getDefaultClusterId ( ) {\nreturn delegate . getDefaultClusterId ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class SQLMoveVertexCommandTest {\n@Test\npublic void testMoveSingleRecordToAnotherClass ( ) {\nODocument doc = new ODocument ( \"STR\" ) . field ( \"STR\" , \"STR\" ) . field ( \"STR\" , \"STR\" ) . save ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(doc);\nAssert.assertEquals(\"STR\", doc.getClassName());\nAssert.assertEquals(\"STR\", doc.field(\"STR\"));\nAssert.assertEquals(\"STR\", doc.field(\"STR\"));\nAssert.assertTrue(doc.getIdentity().isValid());\nAssert.assertTrue(doc.getVersion() >= 0);\nAssert.assertTrue(doc.getSchemaClass() != null);\nAssert.assertEquals(1, doc.getFieldNames().size());\nAssert.assertTrue(doc.containsField(\"STR\"));\nAssert.assertFalse(doc.containsField(\"NON_EXISTENT_FIELD\"));\nAssert.assertEquals(\"STR\", doc.field(\"STR\"));\nAssert.assertNotEquals(\"DIFFERENT_VALUE\", doc.field(\"STR\"));\nAssert.assertTrue(doc.getDatabase().isOpen());\nAssert.assertEquals(\"STR\", doc.getProperty(\"STR\"));\nAssert.assertTrue(doc.getIdentity().toString().startsWith(\"#\"));\nAssert.assertNotNull(doc.getDatabase().getClusterById(doc.getDefaultClusterId()));\nAssert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getName().equals(\"STR\"));\nAssert.assertEquals(1, doc.getDatabase().countClusterElements(doc.getDefaultClusterId()));\nAssert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc));\nAssert.assertEquals(doc.getVersion(), doc.getDatabase().load(doc.getIdentity()).getVersion());\nAssert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().size() > 0);\nAssert.assertTrue(doc.getDatabase().getClusterById(doc.getDefaultClusterId()).getRecords().contains(doc));\n```\n====================\n\n",
+    "scores": [
+        0.755,
+        0.722,
+        0.659,
+        0.651,
+        0.64,
+        0.64,
+        0.534,
+        0.506,
+        0.504,
+        0.496,
+        0.487,
+        0.437,
+        0.407,
+        0.407,
+        0.407,
+        0.4,
+        0.383,
+        0.372,
+        0.372,
+        0.37,
+        0.359,
+        0.252,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(doc.getIdentity().getClusterId(),customer.getDefaultClusterId());"
+}

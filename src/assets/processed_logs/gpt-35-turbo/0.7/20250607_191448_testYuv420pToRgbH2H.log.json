@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Yuv420pToRgb {\npublic byte [ ] getPlaneData ( int plane ) {\nreturn data [ plane ] ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class Yuv420pToRgbTest {\n@Test\npublic void testYuv420pToRgbH2H ( ) {\nYuv420pToRgb transform = new Yuv420pToRgb ( ) ;\nPicture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] {\nyH , uH , vH } , new byte [ ] [ ] {\nyL , uL , vL } , ColorSpace . YUV420 , 2 ) ;\nPicture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ;\ntransform . transform ( _in , out ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(4, out.getWidth());\nassertEquals(4, out.getHeight());\nassertEquals(ColorSpace.RGB, out.getColor());\nassertArrayEquals(yH, _in.getPlaneData(0));\nassertArrayEquals(uH, _in.getPlaneData(1));\nassertArrayEquals(vH, _in.getPlaneData(2));\nassertArrayEquals(yL, _in.getPlaneData(3));\nassertArrayEquals(uL, _in.getPlaneData(4));\nassertArrayEquals(vL, _in.getPlaneData(5));\nassertArrayEquals(expectedRedChannel, out.getPlaneData(0));\nassertArrayEquals(expectedGreenChannel, out.getPlaneData(1));\nassertArrayEquals(expectedBlueChannel, out.getPlaneData(2));\nassertEquals(expectedPixelValue, out.getRGB(0, 0));\nassertEquals(expectedPixelValue, out.getRGB(1, 1));\nassertEquals(expectedPixelValue, out.getRGB(2, 2));\nassertEquals(expectedPixelValue, out.getRGB(3, 3));\nassertEquals(expectedPixelValue, out.getRGB(0, 3));\nassertEquals(expectedPixelValue, out.getRGB(3, 0));\nassertEquals(expectedPixelValue, out.getRGB(1, 2));\nassertEquals(expectedPixelValue, out.getRGB(2, 1));\n====================\n\n",
+    "scores": [
+        0.881,
+        0.857,
+        0.857,
+        0.833,
+        0.833,
+        0.833,
+        0.78,
+        0.765,
+        0.752,
+        0.703,
+        0.605,
+        0.581,
+        0.549,
+        0.549,
+        0.549,
+        0.527,
+        0.527,
+        0.527,
+        0.527,
+        0.527
+    ],
+    "ground_truth": "Assert.assertArrayEquals(rgbH,out.getPlaneData(0));"
+}

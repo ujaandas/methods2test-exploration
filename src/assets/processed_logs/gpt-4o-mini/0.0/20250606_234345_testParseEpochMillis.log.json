@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParser {\npublic Date parse ( final String timestamp ) throws ProcessingException {\nif ( StringUtils . isBlank ( timestamp ) ) {\nreturn null ;\n} try {\nreturn parser . parse ( timestamp ) ;\n} catch ( Exception ex ) {\nthrow new ProcessingException ( \"STR\" + timestamp + \"STR\" , ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParserTest {\n@Test\npublic void testParseEpochMillis ( ) throws Exception {\nString format = TimestampParser . EPOCH_MILLIS ;\nlong time = System . currentTimeMillis ( ) ;\nDate parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(parsed);\nassertTrue(parsed instanceof Date);\nassertEquals(time, parsed.getTime());\nassertTrue(parsed.before(new Date()));\nassertTrue(parsed.after(new Date(time - 1000)));\nassertTrue(parsed.after(new Date(time - 5000)));\nassertTrue(parsed.before(new Date(time + 1000)));\nassertTrue(parsed.before(new Date(time + 5000)));\nassertEquals(0, parsed.compareTo(new Date(time)));\nassertEquals(time, parsed.getTime());\nassertTrue(parsed.getTime() >= 0);\nassertTrue(parsed.getTime() <= System.currentTimeMillis());\nassertNotEquals(new Date(0), parsed);\nassertTrue(parsed.toString().contains(\"GMT\"));\nassertTrue(parsed.toString().contains(\"UTC\"));\nassertTrue(parsed.toString().length() > 0);\nassertFalse(parsed.toString().isEmpty());\nassertTrue(parsed.getTime() % 1000 == 0);\nassertTrue(parsed.getTime() >= 0);\nassertTrue(parsed.getTime() <= System.currentTimeMillis());\nassertEquals(\"Expected timestamp format\", format, TimestampParser.EPOCH_MILLIS);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.758,
+        0.758,
+        0.704,
+        0.683,
+        0.667,
+        0.592,
+        0.587,
+        0.557,
+        0.557,
+        0.55,
+        0.55,
+        0.549,
+        0.549,
+        0.537,
+        0.507,
+        0.5,
+        0.475,
+        0.475,
+        0.455,
+        0.0
+    ],
+    "ground_truth": "assertEquals(time,parsed.getTime());"
+}

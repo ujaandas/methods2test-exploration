@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public boolean isSame ( ODirtyManager other ) { 
+    return this . getReal ( ) == other . getReal ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLinkCollectionOther ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         List < ODocument > lst = new ArrayList < ODocument > ( ) ; 
+         ODocument doc1 = new ODocument ( ) ; 
+         lst . add ( doc1 ) ; 
+         doc . field ( "STR" , lst ) ; 
+         Set < ODocument > set = new HashSet < ODocument > ( ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         set . add ( doc2 ) ; 
+         doc . field ( "STR" , set ) ; 
+         ODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ; 
+         ODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(manager);
+assertNotNull(manager2);
+assertFalse(manager.isSame(manager2));
+assertTrue(manager.isSame(manager));
+assertTrue(manager2.isSame(manager2));
+assertNotSame(manager, manager2);
+assertEquals(manager.getReal(), manager.getReal());
+assertEquals(manager2.getReal(), manager2.getReal());
+assertNotEquals(manager.getReal(), manager2.getReal());
+assertTrue(manager instanceof ODirtyManager);
+assertTrue(manager2 instanceof ODirtyManager);
+assertFalse(manager.equals(null));
+assertFalse(manager2.equals(null));
+assertFalse(manager.equals(new Object()));
+assertFalse(manager2.equals(new Object()));
+assertTrue(manager.equals(manager));
+assertTrue(manager2.equals(manager2));
+assertNotEquals(manager.hashCode(), manager2.hashCode());
+assertEquals(manager.hashCode(), manager.hashCode());
+assertEquals(manager2.hashCode(), manager2.hashCode());
+assertNotEquals(manager.toString(), manager2.toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(manager2.isSame(manager)); ===
+0.986 - assertTrue(manager2.isSame(manager2))
+0.986 - assertTrue(manager.isSame(manager))
+0.877 - assertFalse(manager.isSame(manager2))
+0.849 - assertTrue(manager2.equals(manager2))
+0.845 - assertTrue(manager.equals(manager))
+0.759 - assertTrue(manager2 instanceof ODirtyManager)
+0.744 - assertTrue(manager instanceof ODirtyManager)
+0.652 - assertEquals(manager2.hashCode(), manager2.hashCode())
+0.644 - assertEquals(manager2.getReal(), manager2.getReal())
+0.644 - assertEquals(manager.hashCode(), manager.hashCode())
+0.635 - assertEquals(manager.getReal(), manager.getReal())
+0.629 - assertFalse(manager2.equals(null))
+0.609 - assertFalse(manager.equals(null))
+0.576 - assertNotNull(manager2)
+0.571 - assertFalse(manager2.equals(new Object()))
+0.567 - assertNotSame(manager, manager2)
+0.553 - assertFalse(manager.equals(new Object()))
+0.505 - assertNotEquals(manager.hashCode(), manager2.hashCode())
+0.494 - assertNotEquals(manager.getReal(), manager2.getReal())
+0.485 - ```java
+assertNotNull(manager)
+0.462 - assertNotEquals(manager.toString(), manager2.toString())
+0.000 - ```

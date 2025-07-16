@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue23 ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(schemas);
+2. assertFalse(schemas.isEmpty());
+3. assertEquals(3, schemas.size());
+4. assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));
+5. assertTrue(schemas.stream().allMatch(schema -> schema.getNamespace().equals("http://www.w3.org/2001/XMLSchema")));
+6. assertTrue(schemas.stream().allMatch(schema -> schema.getElements().size() > 0));
+7. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributes().size() > 0));
+8. assertTrue(schemas.stream().allMatch(schema -> schema.getComplexTypes().size() > 0));
+9. assertTrue(schemas.stream().allMatch(schema -> schema.getSimpleTypes().size() > 0));
+10. assertTrue(schemas.stream().allMatch(schema -> schema.getImports().size() == 0));
+11. assertTrue(schemas.stream().allMatch(schema -> schema.getIncludes().size() == 0));
+12. assertTrue(schemas.stream().allMatch(schema -> schema.getRedefines().size() == 0));
+13. assertTrue(schemas.stream().allMatch(schema -> schema.getAnnotations().size() == 0));
+14. assertTrue(schemas.stream().allMatch(schema -> schema.getNotations().size() == 0));
+15. assertTrue(schemas.stream().allMatch(schema -> schema.getGroups().size() == 0));
+16. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributesGroups().size() == 0));
+17. assertTrue(schemas.stream().allMatch(schema -> schema.getAny().size() == 0));
+18. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherAttributes().size() == 0));
+19. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherElements().size() == 0));
+20. assertTrue(schemas.stream().allMatch(schema -> schema.getDocumentation().isEmpty());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(true); ===
+0.417 - 2. assertFalse(schemas.isEmpty())
+0.417 - 3. assertEquals(3, schemas.size())
+0.340 - 15. assertTrue(schemas.stream().allMatch(schema -> schema.getGroups().size() == 0))
+0.340 - Assertions:
+
+1. assertNotNull(schemas)
+0.333 - 4. assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema))
+0.333 - 7. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributes().size() > 0))
+0.333 - 11. assertTrue(schemas.stream().allMatch(schema -> schema.getIncludes().size() == 0))
+0.330 - 17. assertTrue(schemas.stream().allMatch(schema -> schema.getAny().size() == 0))
+0.320 - 20. assertTrue(schemas.stream().allMatch(schema -> schema.getDocumentation().isEmpty())
+0.319 - 6. assertTrue(schemas.stream().allMatch(schema -> schema.getElements().size() > 0))
+0.316 - 10. assertTrue(schemas.stream().allMatch(schema -> schema.getImports().size() == 0))
+0.311 - 18. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherAttributes().size() == 0))
+0.309 - 9. assertTrue(schemas.stream().allMatch(schema -> schema.getSimpleTypes().size() > 0))
+0.309 - 12. assertTrue(schemas.stream().allMatch(schema -> schema.getRedefines().size() == 0))
+0.309 - 14. assertTrue(schemas.stream().allMatch(schema -> schema.getNotations().size() == 0))
+0.308 - 16. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributesGroups().size() == 0))
+0.306 - 8. assertTrue(schemas.stream().allMatch(schema -> schema.getComplexTypes().size() > 0))
+0.303 - 13. assertTrue(schemas.stream().allMatch(schema -> schema.getAnnotations().size() == 0))
+0.297 - 19. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherElements().size() == 0))
+0.248 - 5. assertTrue(schemas.stream().allMatch(schema -> schema.getNamespace().equals("http://www.w3.org/2001/XMLSchema")))

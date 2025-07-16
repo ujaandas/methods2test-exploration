@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class ModeInfo {
+    public int readKfIntraMode ( int miCol , int miRow , int blSz , VPXBooleanDecoder decoder , DecodingContext c ) { 
+    boolean availAbove = miRow > 0 ; 
+    boolean availLeft = miCol > c . getMiTileStartCol ( ) ; 
+    int [ ] aboveIntraModes = c . getAboveModes ( ) ; 
+    int [ ] leftIntraModes = c . getLeftModes ( ) ; 
+    int aboveMode ; 
+    int leftMode ; 
+    aboveMode = availAbove ? aboveIntraModes [ miCol ] : DC_PRED ; 
+    leftMode = availLeft ? leftIntraModes [ miRow % 8 ] : DC_PRED ; 
+    short [ ] [ ] [ ] probs = c . getKfYModeProbs ( ) ; 
+    int intraMode = decoder . readTree ( TREE_INTRA_MODE , probs [ aboveMode ] [ leftMode ] ) ; 
+    aboveIntraModes [ miCol ] = intraMode ; 
+    leftIntraModes [ miRow % 8 ] = intraMode ; 
+    return intraMode ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ModeInfoTest {
+    @Test
+     public void testReadIntraMode ( ) {
+         MockVPXBooleanDecoder decoder = new MockVPXBooleanDecoder ( new int [ ] { 
+     91 , 30 , 32 , 116 , 93 } , new int [ ] { 
+     1 , 1 , 1 , 1 , 0 } ) ; 
+         DecodingContext c = new DecodingContext ( ) ; 
+         int miCol = 2 ; 
+         int miRow = 0 ; 
+         int blSz = 3 ; 
+         c . miTileStartCol = 0 ; 
+         c . aboveModes = new int [ 16 ] ; 
+         c . leftModes = new int [ 16 ] ; 
+         c . leftModes [ 0 ] = 3 ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+int expectedIntraMode = 2; // Replace with the expected value based on your logic
+assertEquals(expectedIntraMode, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+assertEquals(3, c.aboveModes[miCol]);
+assertEquals(3, c.leftModes[miRow % 8]);
+assertNotNull(c.getKfYModeProbs());
+assertTrue(c.getMiTileStartCol() >= 0);
+assertTrue(c.getAboveModes().length >= 16);
+assertTrue(c.getLeftModes().length >= 16);
+assertTrue(c.getKfYModeProbs().length > 0);
+assertTrue(c.getKfYModeProbs()[0].length > 0);
+assertTrue(c.getKfYModeProbs()[0][0].length > 0);
+assertTrue(c.getKfYModeProbs()[0][0][0] >= 0);
+assertTrue(c.getKfYModeProbs()[0][0][0] <= 255);
+assertEquals(DC_PRED, c.aboveModes[0]);
+assertEquals(DC_PRED, c.leftModes[0]);
+assertNotEquals(0, c.aboveModes[miCol]);
+assertNotEquals(0, c.leftModes[miRow % 8]);
+assertTrue(availAbove || c.aboveModes[miCol] == DC_PRED);
+assertTrue(availLeft || c.leftModes[miRow % 8] == DC_PRED);
+assertTrue(miCol >= 0 && miCol < 16);
+assertTrue(miRow >= 0 && miRow < 16);
+assertTrue(blSz > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,newModeInfo().readKfIntraMode(miCol,miRow,blSz,decoder,c)); ===
+0.650 - // Replace with the expected value based on your logic
+assertEquals(expectedIntraMode, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.481 - assertEquals(3, c.aboveModes[miCol])
+0.477 - assertEquals(3, c.leftModes[miRow % 8])
+0.450 - assertNotEquals(0, c.aboveModes[miCol])
+0.446 - assertNotEquals(0, c.leftModes[miRow % 8])
+0.372 - assertTrue(c.getKfYModeProbs().length > 0)
+0.369 - assertTrue(miCol >= 0 && miCol < 16)
+0.367 - assertEquals(DC_PRED, c.leftModes[0])
+0.364 - assertEquals(DC_PRED, c.aboveModes[0])
+0.362 - assertTrue(c.getKfYModeProbs()[0].length > 0)
+0.357 - assertTrue(c.getLeftModes().length >= 16)
+0.354 - assertTrue(c.getAboveModes().length >= 16)
+0.353 - assertTrue(c.getKfYModeProbs()[0][0].length > 0)
+0.336 - assertNotNull(c.getKfYModeProbs())
+0.336 - assertTrue(availAbove || c.aboveModes[miCol] == DC_PRED)
+0.320 - assertTrue(availLeft || c.leftModes[miRow % 8] == DC_PRED)
+0.311 - assertTrue(miRow >= 0 && miRow < 16)
+0.308 - assertTrue(blSz > 0)
+0.293 - assertTrue(c.getKfYModeProbs()[0][0][0] >= 0)
+0.288 - assertTrue(c.getKfYModeProbs()[0][0][0] <= 255)
+0.275 - assertTrue(c.getMiTileStartCol() >= 0)
+0.272 - ```java
+int expectedIntraMode = 2
+0.000 - ```

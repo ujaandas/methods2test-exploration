@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfile {
+    protected void disableOpenJ9SCC ( List < String > dockerfileLines ) { 
+    final String RUN_CONFIGURE_COMMAND_LOWERCASE = "STR" ; 
+    for ( int i = 0 ; 
+    i < dockerfileLines . size ( ) ; 
+    i ++ ) { 
+    String line = dockerfileLines . get ( i ) ; 
+    if ( line . toLowerCase ( ) . equals ( RUN_CONFIGURE_COMMAND_LOWERCASE ) ) { 
+    debug ( "STR" ) ; 
+    dockerfileLines . add ( i , "STR" ) ; 
+    return ; 
+    } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilPrepareDockerfileTest {
+    @Test
+     public void testDisableOpenJ9SCC_lowercase ( ) throws Exception {
+         List < String > dockerfileLines = new ArrayList < String > ( ) ; 
+         List < String > expectedDockerfileLines = new ArrayList < String > ( ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         dockerfileLines . add ( "STR" ) ; 
+         util . disableOpenJ9SCC ( dockerfileLines ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         expectedDockerfileLines . add ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, dockerfileLines.size());
+assertEquals("STR", dockerfileLines.get(0));
+assertEquals("STR", dockerfileLines.get(1));
+assertEquals("STR", dockerfileLines.get(2));
+assertTrue(dockerfileLines.contains("STR"));
+assertFalse(dockerfileLines.contains("STR1"));
+assertTrue(dockerfileLines.indexOf("STR") >= 0);
+assertEquals(0, dockerfileLines.indexOf("STR"));
+assertEquals(1, dockerfileLines.indexOf("STR", 1));
+assertNotNull(dockerfileLines);
+assertNotSame(dockerfileLines, expectedDockerfileLines);
+assertTrue(dockerfileLines.size() > expectedDockerfileLines.size());
+assertTrue(dockerfileLines.size() >= 3);
+assertFalse(dockerfileLines.isEmpty());
+assertTrue(dockerfileLines.get(2).equals("STR"));
+assertEquals("STR", dockerfileLines.get(dockerfileLines.size() - 1));
+assertTrue(dockerfileLines.stream().allMatch(line -> line.equals("STR")));
+assertEquals(expectedDockerfileLines.size() + 1, dockerfileLines.size());
+assertNotEquals(expectedDockerfileLines, dockerfileLines);
+assertTrue(dockerfileLines.containsAll(expectedDockerfileLines));
+assertTrue(dockerfileLines.indexOf("STR") == 0 || dockerfileLines.indexOf("STR") == 1);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedDockerfileLines,dockerfileLines); ===
+0.972 - assertNotEquals(expectedDockerfileLines, dockerfileLines)
+0.869 - assertEquals(expectedDockerfileLines.size() + 1, dockerfileLines.size())
+0.632 - assertEquals("STR", dockerfileLines.get(0))
+0.632 - assertEquals("STR", dockerfileLines.get(1))
+0.632 - assertEquals("STR", dockerfileLines.get(2))
+0.617 - assertNotSame(dockerfileLines, expectedDockerfileLines)
+0.606 - ```java
+assertEquals(3, dockerfileLines.size())
+0.606 - assertEquals(0, dockerfileLines.indexOf("STR"))
+0.602 - assertNotNull(dockerfileLines)
+0.594 - assertEquals(1, dockerfileLines.indexOf("STR", 1))
+0.593 - assertTrue(dockerfileLines.size() > expectedDockerfileLines.size())
+0.581 - assertTrue(dockerfileLines.containsAll(expectedDockerfileLines))
+0.571 - assertFalse(dockerfileLines.isEmpty())
+0.533 - assertTrue(dockerfileLines.size() >= 3)
+0.531 - assertFalse(dockerfileLines.contains("STR1"))
+0.508 - assertEquals("STR", dockerfileLines.get(dockerfileLines.size() - 1))
+0.500 - assertTrue(dockerfileLines.contains("STR"))
+0.490 - assertTrue(dockerfileLines.indexOf("STR") >= 0)
+0.475 - assertTrue(dockerfileLines.get(2).equals("STR"))
+0.387 - assertTrue(dockerfileLines.stream().allMatch(line -> line.equals("STR")))
+0.361 - assertTrue(dockerfileLines.indexOf("STR") == 0 || dockerfileLines.indexOf("STR") == 1)
+0.000 - ```

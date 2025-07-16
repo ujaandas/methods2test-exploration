@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( double value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    out . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testDoubleWithFrac0 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 1.23 , 0 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("1", result);
+assertNotEquals("1.23", result);
+assertNotEquals("1.230", result);
+assertTrue(result.startsWith("1"));
+assertFalse(result.endsWith("."));
+assertTrue(result.contains("1"));
+assertFalse(result.contains("23"));
+assertTrue(result.matches("\\d+"));
+assertFalse(result.isEmpty());
+assertTrue(result.length() > 0);
+assertFalse(result.equals("1.23"));
+assertFalse(result.equals("1.230"));
+assertTrue(result.contains("1.2"));
+assertFalse(result.contains("1.23"));
+assertTrue(result.matches("\\d+\\.\\d+"));
+assertFalse(result.matches("\\d+\\.\\d+\\d"));
+assertTrue(result.matches("\\d+\\.\\d"));
+assertFalse(result.matches("\\d+\\.\\d\\d"));
+assertTrue(result.matches("\\d+\\.\\d{2}"));
+assertFalse(result.matches("\\d+\\.\\d{3}"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.920 - assertEquals("1", result)
+0.821 - assertNotEquals("1.23", result)
+0.807 - assertNotEquals("1.230", result)
+0.618 - assertFalse(result.isEmpty())
+0.576 - assertFalse(result.endsWith("."))
+0.567 - assertFalse(result.contains("23"))
+0.548 - assertFalse(result.contains("1.23"))
+0.545 - assertTrue(result.length() > 0)
+0.517 - assertTrue(result.contains("1"))
+0.500 - assertTrue(result.startsWith("1"))
+0.500 - assertTrue(result.matches("\\d+"))
+0.500 - assertFalse(result.equals("1.23"))
+0.500 - assertTrue(result.contains("1.2"))
+0.492 - assertFalse(result.equals("1.230"))
+0.486 - assertFalse(result.matches("\\d+\\.\\d\\d"))
+0.486 - assertFalse(result.matches("\\d+\\.\\d{3}"))
+0.479 - assertFalse(result.matches("\\d+\\.\\d+\\d"))
+0.455 - assertTrue(result.matches("\\d+\\.\\d"))
+0.448 - assertTrue(result.matches("\\d+\\.\\d+"))
+0.435 - assertTrue(result.matches("\\d+\\.\\d{2}"))

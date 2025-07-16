@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsOfFriends ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"friend\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"friendOfFriend\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\") instanceof ODocument));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friendOfFriend\") instanceof ODocument));\nassertEquals(expectedFriendName, qResult.get(0).field(\"friend\").field(\"name\"));\nassertEquals(expectedFriendOfFriendName, qResult.get(0).field(\"friendOfFriend\").field(\"name\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friend\").field(\"name\").equals(\"Alice\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friendOfFriend\").field(\"name\").equals(\"Bob\")));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"friend\").field(\"name\").equals(\"Charlie\")));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"friendOfFriend\").field(\"name\").equals(\"David\")));\nassertEquals(expectedFriendCount, qResult.stream().filter(doc -> doc.field(\"friend\").field(\"name\").equals(\"Alice\")).count());\nassertEquals(expectedFriendOfFriendCount, qResult.stream().filter(doc -> doc.field(\"friendOfFriend\").field(\"name\").equals(\"Bob\")).count());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\").field(\"age\") > 18));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friendOfFriend\").field(\"age\") > 18));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\").field(\"status\").equals(\"active\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friendOfFriend\").field(\"status\").equals(\"active\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friend\").field(\"location\").equals(\"New York\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friendOfFriend\").field(\"location\").equals(\"Los Angeles\")));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.567,
+        0.505,
+        0.439,
+        0.416,
+        0.385,
+        0.385,
+        0.375,
+        0.371,
+        0.359,
+        0.35,
+        0.341,
+        0.339,
+        0.333,
+        0.333,
+        0.326,
+        0.326,
+        0.318,
+        0.313,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

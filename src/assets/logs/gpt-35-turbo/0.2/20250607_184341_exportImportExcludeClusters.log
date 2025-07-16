@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseImport {
+    boolean existsClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseImportTest {
+    @Test
+     public void exportImportExcludeClusters ( ) throws IOException {
+         ODatabaseDocument db = new ODatabaseDocumentTx ( "STR" + ODatabaseImportTest . class . getSimpleName ( ) + "STR" ) ; 
+         db . create ( ) ; 
+         db . getMetadata ( ) . getSchema ( ) . createClass ( "STR" ) ; 
+         ByteArrayOutputStream output = new ByteArrayOutputStream ( ) ; 
+         ODatabaseExport export = new ODatabaseExport ( ( ODatabaseDocumentInternal ) db , output , new OCommandOutputListener ( ) { 
+     @Override
+     public void onMessage ( String iText ) { 
+     } } ) ; 
+         export . setOptions ( "STR" ) ; 
+         export . exportDatabase ( ) ; 
+         db . drop ( ) ; 
+         ODatabaseDocument dbImp = new ODatabaseDocumentTx ( "STR" + ODatabaseImportTest . class . getSimpleName ( ) ) ; 
+         dbImp . create ( ) ; 
+         ODatabaseImport importer = new ODatabaseImport ( ( ODatabaseDocumentInternal ) dbImp , new ByteArrayInputStream ( output . toByteArray ( ) ) , new OCommandOutputListener ( ) { 
+     @Override
+     public void onMessage ( String iText ) { 
+     } } ) ; 
+         importer . importDatabase ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(dbImp.existsClass("STR"));
+Assert.assertEquals(1, dbImp.getMetadata().getSchema().getClasses().size());
+Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR"));
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").existsProperty("prop1"));
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").existsProperty("prop2"));
+Assert.assertEquals(2, dbImp.getMetadata().getSchema().getClass("STR").properties().size());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isNotNull());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isNotNull());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isIndexed());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isIndexed());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isMandatory());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isMandatory());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isReadOnly());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isReadOnly());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isNotNull());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isNotNull());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isIndexed());
+Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isIndexed());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR")); ===
+1.000 - Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass("STR"))
+0.800 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").existsProperty("prop1"))
+0.800 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").existsProperty("prop2"))
+0.775 - Assert.assertEquals(1, dbImp.getMetadata().getSchema().getClasses().size())
+0.759 - Assert.assertEquals(2, dbImp.getMetadata().getSchema().getClass("STR").properties().size())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isNotNull())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isNotNull())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isIndexed())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isIndexed())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isNotNull())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isNotNull())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isIndexed())
+0.753 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isIndexed())
+0.748 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isReadOnly())
+0.748 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isReadOnly())
+0.744 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop1").isMandatory())
+0.744 - Assert.assertTrue(dbImp.getMetadata().getSchema().getClass("STR").getProperty("prop2").isMandatory())
+0.735 - Assert.assertTrue(dbImp.existsClass("STR"))

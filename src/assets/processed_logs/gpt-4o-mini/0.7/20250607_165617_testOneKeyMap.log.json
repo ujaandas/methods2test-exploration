@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKey {\npublic OMultiKey ( final Collection < ? > keys ) {\nthis . keys = new ArrayList < Object > ( keys ) ;\nhash = generateHashCode ( keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKeyTest {\n@Test\npublic void testOneKeyMap ( ) {\nfinal Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ;\nfinal OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nmultiKeyMap . put ( multiKey , new Object ( ) ) ;\nfinal OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nfinal Object mapResult = multiKeyMap . get ( anotherMultiKey ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(mapResult);\nassertTrue(mapResult instanceof Object);\nassertEquals(1, multiKeyMap.size());\nassertSame(mapResult, multiKeyMap.get(multiKey));\nassertNotSame(mapResult, new Object());\nassertEquals(multiKey, anotherMultiKey);\nassertTrue(multiKeyMap.containsKey(anotherMultiKey));\nassertFalse(multiKeyMap.containsKey(new OMultiKey(Collections.singletonList(\"DIFF\"))));\nassertNotEquals(multiKey.hashCode(), new OMultiKey(Collections.singletonList(\"DIFF\")).hashCode());\nassertEquals(multiKey.hashCode(), anotherMultiKey.hashCode());\nassertTrue(multiKeyMap.keySet().contains(multiKey));\nassertTrue(multiKeyMap.values().contains(mapResult));\nassertEquals(multiKeyMap.get(multiKey), multiKeyMap.get(anotherMultiKey));\nassertFalse(multiKeyMap.isEmpty());\nassertFalse(multiKeyMap.containsValue(new Object()));\nassertNotNull(multiKeyMap.entrySet());\nassertTrue(multiKeyMap.entrySet().size() > 0);\nassertEquals(\"Expected value for multiKey\", mapResult.toString());\nassertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(mapResult)));\nassertThrows(NullPointerException.class, () -> multiKeyMap.put(null, new Object()));\nassertThrows(NullPointerException.class, () -> multiKeyMap.put(multiKey, null));\n```\n====================\n\n",
+    "scores": [
+        0.857,
+        0.667,
+        0.623,
+        0.59,
+        0.526,
+        0.483,
+        0.479,
+        0.452,
+        0.448,
+        0.447,
+        0.388,
+        0.377,
+        0.347,
+        0.347,
+        0.343,
+        0.342,
+        0.333,
+        0.333,
+        0.292,
+        0.286,
+        0.239,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(mapResult);"
+}

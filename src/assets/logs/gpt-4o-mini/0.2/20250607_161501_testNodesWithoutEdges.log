@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public Collection < E > edges ( ) { 
+    return new ArrayIterable < > ( edges ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testNodesWithoutEdges ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( "STR" , "STR" , "STR" ) , Arrays . asList ( edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(graph);
+assertEquals(3, graph.nodes().size());
+assertTrue(graph.nodes().contains("STR"));
+assertFalse(graph.edges().iterator().hasNext());
+assertEquals(0, graph.edges().size());
+assertTrue(graph.isEmpty());
+assertFalse(graph.containsNode("NON_EXISTENT"));
+assertFalse(graph.containsEdge(edge("STR", "STR")));
+assertEquals(0, graph.inDegree("STR"));
+assertEquals(0, graph.outDegree("STR"));
+assertEquals(0, graph.degree("STR"));
+assertTrue(graph.getAdjacentNodes("STR").isEmpty());
+assertTrue(graph.getIncomingEdges("STR").isEmpty());
+assertTrue(graph.getOutgoingEdges("STR").isEmpty());
+assertEquals(0, graph.numberOfEdges());
+assertEquals(3, graph.numberOfNodes());
+assertTrue(graph.getEdges().isEmpty());
+assertFalse(graph.hasPath("STR", "STR"));
+assertFalse(graph.isDirected());
+assertTrue(graph.getEdgesBetween("STR", "STR").isEmpty());
+assertFalse(graph.hasCycle());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(eqSet(graph.edges(),edge("STR","STR"))); ===
+0.740 - assertFalse(graph.containsEdge(edge("STR", "STR")))
+0.736 - assertTrue(graph.getEdgesBetween("STR", "STR").isEmpty())
+0.659 - assertTrue(graph.nodes().contains("STR"))
+0.652 - assertFalse(graph.hasPath("STR", "STR"))
+0.614 - assertTrue(graph.getEdges().isEmpty())
+0.612 - assertEquals(0, graph.degree("STR"))
+0.598 - assertEquals(0, graph.inDegree("STR"))
+0.594 - assertTrue(graph.getIncomingEdges("STR").isEmpty())
+0.594 - assertTrue(graph.getOutgoingEdges("STR").isEmpty())
+0.591 - assertEquals(0, graph.outDegree("STR"))
+0.581 - assertEquals(0, graph.edges().size())
+0.554 - assertTrue(graph.getAdjacentNodes("STR").isEmpty())
+0.545 - assertTrue(graph.isEmpty())
+0.536 - assertFalse(graph.edges().iterator().hasNext())
+0.535 - assertEquals(3, graph.nodes().size())
+0.506 - assertEquals(0, graph.numberOfEdges())
+0.495 - assertFalse(graph.containsNode("NON_EXISTENT"))
+0.483 - assertEquals(3, graph.numberOfNodes())
+0.469 - assertFalse(graph.isDirected())
+0.456 - assertFalse(graph.hasCycle())
+0.359 - ```java
+assertNotNull(graph)
+0.000 - ```

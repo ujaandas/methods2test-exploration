@@ -1,0 +1,108 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class TrackedSet {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class TrackedSetTest {
+    @Test
+     public void testRemoveNotificationOne ( ) {
+         final ODocument doc = new ODocument ( ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(doc.isDirty());
+doc.setDirty();
+assertTrue(doc.isDirty());
+doc.clearDirty();
+assertFalse(doc.isDirty());
+doc.addField("field1", "value1");
+assertTrue(doc.isDirty());
+doc.removeField("field1");
+assertTrue(doc.isDirty());
+doc.addField("field2", "value2");
+assertTrue(doc.isDirty());
+doc.save();
+assertFalse(doc.isDirty());
+doc.setField("field2", "new_value");
+assertTrue(doc.isDirty());
+doc.reset();
+assertFalse(doc.isDirty());
+doc.addField("field3", "value3");
+assertTrue(doc.isDirty());
+doc.removeField("field3");
+assertTrue(doc.isDirty());
+doc.addField("field4", "value4");
+assertTrue(doc.isDirty());
+doc.clearDirty();
+assertFalse(doc.isDirty());
+doc.setField("field5", "value5");
+assertTrue(doc.isDirty());
+doc.save();
+assertFalse(doc.isDirty());
+doc.setField("field6", "value6");
+assertTrue(doc.isDirty());
+doc.clearDirty();
+assertFalse(doc.isDirty());
+doc.setDirty();
+assertTrue(doc.isDirty());
+doc.removeField("field4");
+assertTrue(doc.isDirty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(doc.isDirty()); ===
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+0.867 - ```java
+assertFalse(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.863 - assertTrue(doc.isDirty())
+0.600 - doc.setDirty()
+0.600 - doc.setDirty()
+0.524 - doc.clearDirty()
+0.524 - doc.clearDirty()
+0.524 - doc.clearDirty()
+0.432 - doc.reset()
+0.389 - doc.save()
+0.389 - doc.save()
+0.275 - doc.removeField("field1")
+0.275 - doc.removeField("field3")
+0.275 - doc.removeField("field4")
+0.246 - doc.addField("field1", "value1")
+0.246 - doc.addField("field2", "value2")
+0.246 - doc.addField("field3", "value3")
+0.246 - doc.addField("field4", "value4")
+0.246 - doc.setField("field5", "value5")
+0.246 - doc.setField("field6", "value6")
+0.233 - doc.setField("field2", "new_value")
+0.000 - ```

@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_Numerical {\nstatic boolean bind0 ( Object object , String property , String value ) {\nvalue = value . trim ( ) ;\nString [ ] path = property . split ( \"STR\" ) ;\nobject = findTargetObject ( object , property , path ) ;\nif ( object == null ) {\nreturn false ;\n} Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ;\nif ( field == null || isProbeField ( field ) ) {\nreturn false ;\n} try {\nsetField ( field , object , value ) ;\nreturn true ;\n} catch ( Exception e ) {\nthrow new BindException ( format ( \"STR\" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_bind0_NumericalTest {\n@Test\npublic void bind_short_whitespace ( ) {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(null, \"property\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"probeField\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"probeValue\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"123\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"invalidProperty\", \"value\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"nested.property\", \"value\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"nested.probeField\", \"value\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"nested.property\", \"123\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"nested.invalidProperty\", \"value\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"3.14\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"abc\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"-456\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"1.2.3\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"0\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"1.2.3.4\"));\nAssert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"999999999\"));\nAssert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, \"property\", \"1,000\"));\n====================\n\n",
+    "scores": [
+        0.5,
+        0.492,
+        0.488,
+        0.488,
+        0.484,
+        0.469,
+        0.465,
+        0.458,
+        0.439,
+        0.432,
+        0.432,
+        0.425,
+        0.425,
+        0.415,
+        0.409,
+        0.403,
+        0.388,
+        0.358
+    ],
+    "ground_truth": "assertTrue(bind0(testObject,\"STR\",\"STR\"));"
+}

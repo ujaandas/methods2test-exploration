@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public String readFile ( File file ) throws IOException { 
+    return FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testReadFileToString ( ) throws Exception {
+         File tempFile = new File ( serverDirectory , "STR" ) ; 
+         Files . write ( tempFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         String fileString = util . readFile ( tempFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fileString);
+assertEquals("STR", fileString);
+assertTrue(fileString.length() > 0);
+assertFalse(fileString.isEmpty());
+assertTrue(fileString.contains("S"));
+assertTrue(fileString.contains("T"));
+assertTrue(fileString.contains("R"));
+assertEquals(3, fileString.length());
+assertEquals("STR".getBytes(StandardCharsets.UTF_8).length, fileString.getBytes(StandardCharsets.UTF_8).length);
+assertEquals("STR", new String(fileString.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8));
+assertNotEquals("string", fileString);
+assertTrue(fileString.equalsIgnoreCase("str"));
+assertFalse(fileString.equals("STR "));
+assertTrue(fileString.startsWith("S"));
+assertTrue(fileString.endsWith("R"));
+assertEquals(fileString.charAt(0), 'S');
+assertEquals(fileString.charAt(1), 'T');
+assertEquals(fileString.charAt(2), 'R');
+assertTrue(fileString.matches("[A-Z]+"));
+assertFalse(fileString.matches("[0-9]+"));
+assertTrue(fileString instanceof String);
+assertSame(fileString, util.readFile(tempFile));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(fileString.equals("STR")); ===
+0.904 - assertFalse(fileString.equals("STR "))
+0.833 - assertTrue(fileString.contains("S"))
+0.833 - assertTrue(fileString.contains("T"))
+0.833 - assertTrue(fileString.contains("R"))
+0.833 - assertTrue(fileString.endsWith("R"))
+0.811 - assertTrue(fileString.startsWith("S"))
+0.805 - assertTrue(fileString.equalsIgnoreCase("str"))
+0.763 - assertTrue(fileString.matches("[A-Z]+"))
+0.754 - assertTrue(fileString.length() > 0)
+0.675 - assertFalse(fileString.matches("[0-9]+"))
+0.667 - assertFalse(fileString.isEmpty())
+0.649 - assertTrue(fileString instanceof String)
+0.648 - assertEquals(3, fileString.length())
+0.622 - assertEquals(fileString.charAt(0), 'S')
+0.622 - assertEquals(fileString.charAt(1), 'T')
+0.622 - assertEquals(fileString.charAt(2), 'R')
+0.610 - assertSame(fileString, util.readFile(tempFile))
+0.551 - ```java
+assertNotNull(fileString)
+0.545 - assertEquals("STR", fileString)
+0.500 - assertNotEquals("string", fileString)
+0.406 - assertEquals("STR", new String(fileString.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8))
+0.370 - assertEquals("STR".getBytes(StandardCharsets.UTF_8).length, fileString.getBytes(StandardCharsets.UTF_8).length)
+0.000 - ```

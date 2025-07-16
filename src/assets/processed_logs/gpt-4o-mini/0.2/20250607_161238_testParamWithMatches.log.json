@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testParamWithMatches ( ) {\nMap < String , Object > params = new HashMap < String , Object > ( ) ;\nparams . put ( \"STR\" , \"STR\" ) ;\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql , params ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(1, results.size());\nassertTrue(results.get(0) instanceof ODocument);\nassertEquals(\"STR\", results.get(0).field(\"STR\"));\nassertEquals(\"ExpectedValue1\", results.get(0).field(\"Field1\"));\nassertEquals(\"ExpectedValue2\", results.get(0).field(\"Field2\"));\nassertNotNull(results.get(0).field(\"Field3\"));\nassertTrue(results.get(0).field(\"Field4\") instanceof SomeExpectedType);\nassertEquals(123, results.get(0).field(\"Field5\"));\nassertTrue(results.get(0).field(\"Field6\").toString().contains(\"ExpectedSubstring\"));\nassertEquals(3.14, results.get(0).field(\"Field7\"));\nassertNotEquals(\"UnexpectedValue\", results.get(0).field(\"Field8\"));\nassertTrue(results.get(0).field(\"Field9\").isEmpty());\nassertFalse(results.get(0).field(\"Field10\").isEmpty());\nassertEquals(\"ExpectedValue3\", results.get(0).field(\"Field11\"));\nassertTrue(results.get(0).field(\"Field12\") instanceof List);\nassertEquals(2, ((List) results.get(0).field(\"Field12\")).size());\nassertTrue(((List) results.get(0).field(\"Field12\")).contains(\"ExpectedItem\"));\nassertNotNull(results.get(0).field(\"Field13\"));\nassertTrue(results.get(0).field(\"Field14\") instanceof Map);\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.733,
+        0.675,
+        0.667,
+        0.658,
+        0.609,
+        0.587,
+        0.579,
+        0.571,
+        0.571,
+        0.567,
+        0.565,
+        0.547,
+        0.524,
+        0.507,
+        0.488,
+        0.442,
+        0.437,
+        0.388,
+        0.377,
+        0.372,
+        0.0
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilter {\n@Override\npublic FilterReply decide ( ILoggingEvent event ) {\nif ( event . getLoggerName ( ) . startsWith ( \"STR\" ) ) {\nreturn FilterReply . DENY ;\n} else {\nreturn FilterReply . NEUTRAL ;\n} }\n}\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilterTest {\n@Test\npublic void verifyFilterAllowsNonSentryLoggers ( ) {\nfinal DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ;\nfilter . start ( ) ;\nfinal LoggingEvent evt = new LoggingEvent ( ) ;\nevt . setLoggerName ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(FilterReply.DENY, filter.decide(evt));\nassertNotNull(evt);\nassertTrue(evt.getLoggerName().equals(\"STR\"));\nassertFalse(evt.getLoggerName().isEmpty());\nassertTrue(evt.getLoggerName().startsWith(\"S\"));\nassertTrue(evt.getLoggerName().length() > 0);\nassertTrue(evt.getLoggerName().contains(\"T\"));\nassertFalse(evt.getLoggerName().equals(\"NON_STR\"));\nassertTrue(evt.getLoggerName().matches(\"STR.*\"));\nassertFalse(evt.getLoggerName().equals(\"STR123\"));\nassertTrue(evt.getLoggerName().substring(0, 3).equals(\"STR\"));\nassertEquals(\"STR\", evt.getLoggerName().substring(0, 3));\nassertTrue(evt.getLoggerName().toUpperCase().equals(\"STR\"));\nassertFalse(evt.getLoggerName().toLowerCase().equals(\"str\"));\nassertTrue(evt.getLoggerName().length() >= 3);\nassertTrue(evt.getLoggerName().startsWith(\"S\") && evt.getLoggerName().length() > 2);\nassertFalse(evt.getLoggerName().equals(\"XYZ\"));\nassertTrue(evt.getLoggerName().contains(\"R\"));\nassertTrue(evt.getLoggerName().indexOf(\"T\") > 0);\nassertTrue(evt.getLoggerName().endsWith(\"R\"));\nassertFalse(evt.getLoggerName().equals(\"S\"));\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.4,
+        0.396,
+        0.34,
+        0.333,
+        0.33,
+        0.317,
+        0.298,
+        0.295,
+        0.292,
+        0.289,
+        0.289,
+        0.289,
+        0.288,
+        0.286,
+        0.286,
+        0.286,
+        0.286,
+        0.283,
+        0.28,
+        0.214,
+        0.0
+    ],
+    "ground_truth": "assertEquals(FilterReply.NEUTRAL,filter.decide(evt));"
+}

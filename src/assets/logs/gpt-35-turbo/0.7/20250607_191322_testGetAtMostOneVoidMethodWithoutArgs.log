@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetriever {
+    public Method find ( ) { 
+    List < Method > methods = findAll ( ) ; 
+    switch ( methods . size ( ) ) { 
+    case 0 : return null ; 
+    case 1 : return methods . iterator ( ) . next ( ) ; 
+    default : throw new ReflectionException ( format ( "STR" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotatedMethodRetrieverTest {
+    @Test
+     public void testGetAtMostOneVoidMethodWithoutArgs ( ) {
+         Method method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Prepare . class ) . withVoidReturnType ( ) . withoutArgs ( ) . find ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(method);
+Assert.assertEquals("methodName", method.getName());
+Assert.assertEquals(void.class, method.getReturnType());
+Assert.assertEquals(0, method.getParameterCount());
+Assert.assertTrue(method.getModifiers() == Modifier.PUBLIC || method.getModifiers() == (Modifier.PUBLIC | Modifier.FINAL));
+Assert.assertTrue(Modifier.isStatic(method.getModifiers()));
+Assert.assertTrue(Modifier.isFinal(method.getModifiers()));
+Assert.assertTrue(Modifier.isPublic(method.getModifiers()));
+Assert.assertFalse(Modifier.isPrivate(method.getModifiers()));
+Assert.assertFalse(Modifier.isProtected(method.getModifiers()));
+Assert.assertFalse(Modifier.isAbstract(method.getModifiers()));
+Assert.assertFalse(Modifier.isSynchronized(method.getModifiers()));
+Assert.assertFalse(Modifier.isNative(method.getModifiers()));
+Assert.assertFalse(Modifier.isStrict(method.getModifiers()));
+Assert.assertFalse(Modifier.isTransient(method.getModifiers()));
+Assert.assertFalse(Modifier.isVolatile(method.getModifiers()));
+Assert.assertFalse(Modifier.isInterface(method.getModifiers()));
+Assert.assertFalse(Modifier.isStrict(method.getModifiers()));
+Assert.assertFalse(Modifier.isBridge(method.getModifiers()));
+Assert.assertFalse(Modifier.isSynthetic(method.getModifiers()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",method.getName()); ===
+0.835 - Assert.assertEquals("methodName", method.getName())
+0.769 - Assert.assertEquals(0, method.getParameterCount())
+0.675 - Assert.assertEquals(void.class, method.getReturnType())
+0.562 - Assert.assertFalse(Modifier.isStrict(method.getModifiers()))
+0.562 - Assert.assertFalse(Modifier.isStrict(method.getModifiers()))
+0.561 - Assert.assertNotNull(method)
+0.552 - Assert.assertTrue(Modifier.isFinal(method.getModifiers()))
+0.543 - Assert.assertFalse(Modifier.isTransient(method.getModifiers()))
+0.543 - Assert.assertFalse(Modifier.isSynthetic(method.getModifiers()))
+0.539 - Assert.assertFalse(Modifier.isNative(method.getModifiers()))
+0.539 - Assert.assertFalse(Modifier.isBridge(method.getModifiers()))
+0.533 - Assert.assertFalse(Modifier.isPrivate(method.getModifiers()))
+0.527 - Assert.assertFalse(Modifier.isAbstract(method.getModifiers()))
+0.527 - Assert.assertFalse(Modifier.isVolatile(method.getModifiers()))
+0.526 - Assert.assertFalse(Modifier.isSynchronized(method.getModifiers()))
+0.523 - Assert.assertTrue(Modifier.isStatic(method.getModifiers()))
+0.523 - Assert.assertTrue(Modifier.isPublic(method.getModifiers()))
+0.522 - Assert.assertFalse(Modifier.isProtected(method.getModifiers()))
+0.522 - Assert.assertFalse(Modifier.isInterface(method.getModifiers()))
+0.322 - Assert.assertTrue(method.getModifiers() == Modifier.PUBLIC || method.getModifiers() == (Modifier.PUBLIC | Modifier.FINAL))

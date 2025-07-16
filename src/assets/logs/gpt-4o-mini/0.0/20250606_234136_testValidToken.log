@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OClientConnection {
+    public Boolean getTokenBased ( ) { 
+    return tokenBased ; 
+    }
+}
+
+package orientechnologies.orientdb.server;
+
+public class OClientConnectionTest {
+    @Test
+     public void testValidToken ( ) throws IOException {
+         OClientConnection conn = new OClientConnection ( 1 , protocol ) ; 
+         OTokenHandler handler = new OTokenHandlerImpl ( server ) ; 
+         byte [ ] tokenBytes = handler . getSignedBinaryToken ( db , db . getUser ( ) , conn . getData ( ) ) ; 
+         conn . validateSession ( tokenBytes , handler , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(conn);
+Assert.assertTrue(conn.getTokenBased());
+Assert.assertEquals(expectedToken, tokenBytes);
+Assert.assertTrue(conn.isSessionValid());
+Assert.assertEquals(expectedUser, conn.getUser());
+Assert.assertNotNull(conn.getData());
+Assert.assertTrue(conn.getData().length > 0);
+Assert.assertEquals(expectedProtocol, conn.getProtocol());
+Assert.assertNotNull(handler);
+Assert.assertTrue(handler.isTokenValid(tokenBytes));
+Assert.assertEquals(expectedDatabase, db);
+Assert.assertNotNull(db.getUser());
+Assert.assertTrue(db.getUser().isAuthenticated());
+Assert.assertEquals(expectedSessionId, conn.getSessionId());
+Assert.assertTrue(conn.isConnected());
+Assert.assertFalse(conn.isClosed());
+Assert.assertEquals(expectedTimeout, conn.getTimeout());
+Assert.assertNotNull(conn.getLastActivity());
+Assert.assertTrue(conn.getLastActivity().isBefore(Instant.now()));
+Assert.assertEquals(expectedClientVersion, conn.getClientVersion());
+Assert.assertTrue(conn.getTokenBased());
+Assert.assertNotNull(conn.getSessionData());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(conn.getTokenBased()); ===
+1.000 - Assert.assertTrue(conn.getTokenBased())
+1.000 - Assert.assertTrue(conn.getTokenBased())
+0.742 - Assert.assertTrue(conn.isConnected())
+0.738 - Assert.assertTrue(conn.isSessionValid())
+0.667 - Assert.assertFalse(conn.isClosed())
+0.657 - Assert.assertTrue(conn.getData().length > 0)
+0.656 - Assert.assertNotNull(conn.getData())
+0.647 - Assert.assertNotNull(conn.getSessionData())
+0.622 - Assert.assertTrue(db.getUser().isAuthenticated())
+0.609 - Assert.assertNotNull(conn.getLastActivity())
+0.605 - Assert.assertTrue(handler.isTokenValid(tokenBytes))
+0.576 - Assert.assertNotNull(db.getUser())
+0.556 - Assert.assertTrue(conn.getLastActivity().isBefore(Instant.now()))
+0.548 - Assert.assertEquals(expectedUser, conn.getUser())
+0.532 - Assert.assertEquals(expectedTimeout, conn.getTimeout())
+0.530 - Assert.assertEquals(expectedSessionId, conn.getSessionId())
+0.514 - Assert.assertEquals(expectedToken, tokenBytes)
+0.492 - Assert.assertEquals(expectedDatabase, db)
+0.469 - Assert.assertEquals(expectedProtocol, conn.getProtocol())
+0.462 - Assert.assertEquals(expectedClientVersion, conn.getClientVersion())
+0.441 - ```java
+Assert.assertNotNull(conn)
+0.296 - Assert.assertNotNull(handler)
+0.000 - ```

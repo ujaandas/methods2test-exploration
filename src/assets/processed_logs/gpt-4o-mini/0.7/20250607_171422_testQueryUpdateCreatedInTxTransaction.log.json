@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupport {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteTransactionSupportTest {\n@Test\npublic void testQueryUpdateCreatedInTxTransaction ( ) throws InterruptedException {\ndatabase . begin ( ) ;\nODocument doc1 = new ODocument ( \"STR\" ) ;\ndoc1 . setProperty ( \"STR\" , \"STR\" ) ;\nOIdentifiable id = database . save ( doc1 ) ;\nODocument docx = new ODocument ( \"STR\" ) ;\ndocx . setProperty ( \"STR\" , \"STR\" ) ;\ndatabase . save ( docx ) ;\nOResultSet result = database . command ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(result);\nAssert.assertTrue(result.hasNext());\nAssert.assertEquals(2, result.getTotalRecords());\nAssert.assertTrue(result.next().getProperty(\"STR\").equals(\"STR\"));\nAssert.assertTrue(result.next().getProperty(\"STR\").equals(\"STR\"));\nAssert.assertNotEquals(result.next().getIdentity(), OIdentifiable.NULL);\nAssert.assertEquals(doc1.getIdentity(), result.next().getIdentity());\nAssert.assertEquals(docx.getIdentity(), result.next().getIdentity());\nAssert.assertTrue(result.getProperty(\"STR\").contains(\"STR\"));\nAssert.assertFalse(result.hasNext());\nAssert.assertTrue(result.isEmpty());\nAssert.assertTrue(result.getProperty(\"STR\").size() > 0);\nAssert.assertEquals(\"STR\", result.next().getProperty(\"STR\"));\nAssert.assertNotEquals(\"NON_EXISTENT\", result.next().getProperty(\"STR\"));\nAssert.assertTrue(result.getProperty(\"STR\").isPresent());\nAssert.assertFalse(result.isClosed());\nAssert.assertEquals(2, result.getFetchedRecords());\nAssert.assertTrue(result.getProperty(\"STR\").stream().allMatch(s -> s.equals(\"STR\")));\nAssert.assertEquals(OType.STRING, result.getProperty(\"STR\").getType());\nAssert.assertTrue(result.getProperty(\"STR\").stream().anyMatch(s -> s.equals(\"STR\")));\nAssert.assertTrue(result.getProperty(\"STR\").contains(doc1.getIdentity()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.877,
+        0.821,
+        0.69,
+        0.623,
+        0.622,
+        0.588,
+        0.571,
+        0.568,
+        0.558,
+        0.558,
+        0.532,
+        0.526,
+        0.5,
+        0.5,
+        0.5,
+        0.462,
+        0.444,
+        0.435,
+        0.427,
+        0.427,
+        0.0
+    ],
+    "ground_truth": "assertTrue(result.hasNext());"
+}

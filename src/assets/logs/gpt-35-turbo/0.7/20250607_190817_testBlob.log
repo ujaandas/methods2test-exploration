@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecutionTest {
+    @Test
+     public void testBlob ( ) {
+         String clusterName = "STR" ; 
+         OResultSet result = db . command ( "STR" + clusterName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals("STR", result.getProperty("clusterName"));
+assertFalse(result.getProperty("clusterName").isEmpty());
+assertInstanceOf(OResultSet.class, result);
+assertNotEquals(0, result.size());
+assertNotNull(result.iterator());
+assertTrue(result.iterator().hasNext());
+assertEquals(1, result.stream().count());
+assertTrue(result.stream().anyMatch(x -> x.getProperty("clusterName").equals("STR")));
+assertEquals("STR", result.stream().findFirst().get().getProperty("clusterName"));
+assertTrue(result.stream().allMatch(x -> x.getProperty("clusterName").equals("STR")));
+assertFalse(result.stream().noneMatch(x -> x.getProperty("clusterName").equals("STR")));
+assertEquals(1, result.stream().filter(x -> x.getProperty("clusterName").equals("STR")).count());
+assertTrue(result.stream().map(x -> x.getProperty("clusterName")).anyMatch("STR"::equals));
+assertFalse(result.stream().map(x -> x.getProperty("clusterName")).allMatch("STR"::equals);
+assertEquals("STR", result.stream().map(x -> x.getProperty("clusterName")).findFirst().get());
+assertTrue(result.stream().map(x -> x.getProperty("clusterName")).noneMatch("STR"::equals);
+assertEquals(1, result.stream().map(x -> x.getProperty("clusterName")).filter("STR"::equals).count());
+assertTrue(result.stream().map(x -> x.getProperty("clusterName")).distinct().count() == 1);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(clusterName)>0); ===
+0.594 - assertEquals("STR", result.getProperty("clusterName"))
+0.558 - assertFalse(result.getProperty("clusterName").isEmpty())
+0.531 - assertEquals("STR", result.stream().findFirst().get().getProperty("clusterName"))
+0.489 - assertTrue(result.stream().anyMatch(x -> x.getProperty("clusterName").equals("STR")))
+0.489 - assertTrue(result.stream().allMatch(x -> x.getProperty("clusterName").equals("STR")))
+0.478 - assertTrue(result.stream().map(x -> x.getProperty("clusterName")).distinct().count() == 1)
+0.471 - assertTrue(result.stream().map(x -> x.getProperty("clusterName")).anyMatch("STR"::equals))
+0.471 - assertTrue(result.stream().map(x -> x.getProperty("clusterName")).noneMatch("STR"::equals)
+0.464 - assertEquals("STR", result.stream().map(x -> x.getProperty("clusterName")).findFirst().get())
+0.460 - assertTrue(result.iterator().hasNext())
+0.460 - assertEquals(1, result.stream().count())
+0.447 - assertTrue(result.hasNext())
+0.440 - assertEquals(1, result.stream().filter(x -> x.getProperty("clusterName").equals("STR")).count())
+0.436 - assertFalse(result.stream().noneMatch(x -> x.getProperty("clusterName").equals("STR")))
+0.426 - assertFalse(result.stream().map(x -> x.getProperty("clusterName")).allMatch("STR"::equals)
+0.425 - assertEquals(1, result.stream().map(x -> x.getProperty("clusterName")).filter("STR"::equals).count())
+0.400 - assertNotNull(result.iterator())
+0.315 - assertInstanceOf(OResultSet.class, result)
+0.300 - assertNotEquals(0, result.size())
+0.290 - assertNotNull(result)

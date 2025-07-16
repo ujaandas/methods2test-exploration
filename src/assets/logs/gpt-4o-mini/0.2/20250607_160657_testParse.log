@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class SegmentTypeBox {
+    public static List < Atom > getRootAtoms ( SeekableByteChannel input ) throws IOException { 
+    input . setPosition ( 0 ) ; 
+    List < Atom > result = new ArrayList < Atom > ( ) ; 
+    long off = 0 ; 
+    Header atom ; 
+    while ( off < input . size ( ) ) { 
+    input . setPosition ( off ) ; 
+    atom = Header . read ( NIOUtils . fetchFromChannel ( input , 16 ) ) ; 
+    if ( atom == null ) break ; 
+    result . add ( new Atom ( atom , off ) ) ; 
+    off += atom . getSize ( ) ; 
+    } return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class SegmentTypeBoxTest {
+    @Test
+     public void testParse ( ) throws Exception {
+         ByteBuffer buf = ByteBuffer . allocate ( 0x18 + 8 ) ; 
+         buf . putInt ( 0x18 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . putInt ( 0 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . putInt ( 8 ) ; 
+         buf . put ( "STR" . getBytes ( ) ) ; 
+         buf . clear ( ) ; 
+         SeekableByteChannel input = ByteBufferSeekableByteChannel . readFromByteBuffer ( buf ) ; 
+         List < Atom > rootAtoms = MP4Util . getRootAtoms ( input ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(rootAtoms);
+assertEquals(3, rootAtoms.size());
+assertEquals(0, rootAtoms.get(0).getOffset());
+assertEquals(24, rootAtoms.get(0).getHeader().getSize());
+assertEquals("STR", new String(rootAtoms.get(0).getHeader().getType()));
+assertEquals(24, rootAtoms.get(1).getOffset());
+assertEquals(8, rootAtoms.get(1).getHeader().getSize());
+assertEquals("STR", new String(rootAtoms.get(1).getHeader().getType()));
+assertEquals(32, rootAtoms.get(2).getOffset());
+assertEquals(8, rootAtoms.get(2).getHeader().getSize());
+assertEquals("STR", new String(rootAtoms.get(2).getHeader().getType()));
+assertTrue(rootAtoms.get(0).getHeader().getSize() > 0);
+assertTrue(rootAtoms.get(1).getHeader().getSize() > 0);
+assertTrue(rootAtoms.get(2).getHeader().getSize() > 0);
+assertEquals(0, rootAtoms.get(0).getHeader().getFlags());
+assertEquals(0, rootAtoms.get(1).getHeader().getFlags());
+assertEquals(0, rootAtoms.get(2).getHeader().getFlags());
+assertTrue(rootAtoms.get(0).getHeader().getType().length() > 0);
+assertTrue(rootAtoms.get(1).getHeader().getType().length() > 0);
+assertTrue(rootAtoms.get(2).getHeader().getType().length() > 0);
+assertTrue(rootAtoms.get(0).getHeader().getSize() > rootAtoms.get(1).getHeader().getSize());
+assertTrue(rootAtoms.get(1).getHeader().getSize() > rootAtoms.get(2).getHeader().getSize());
+assertEquals("STR", rootAtoms.get(0).getHeader().getType());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,rootAtoms.size()); ===
+0.969 - assertEquals(3, rootAtoms.size())
+0.779 - assertEquals(24, rootAtoms.get(1).getOffset())
+0.779 - assertEquals(32, rootAtoms.get(2).getOffset())
+0.763 - assertEquals(0, rootAtoms.get(0).getOffset())
+0.713 - assertEquals(24, rootAtoms.get(0).getHeader().getSize())
+0.698 - assertEquals(8, rootAtoms.get(1).getHeader().getSize())
+0.698 - assertEquals(8, rootAtoms.get(2).getHeader().getSize())
+0.644 - assertEquals(0, rootAtoms.get(0).getHeader().getFlags())
+0.644 - assertEquals(0, rootAtoms.get(1).getHeader().getFlags())
+0.644 - assertEquals(0, rootAtoms.get(2).getHeader().getFlags())
+0.622 - assertEquals("STR", rootAtoms.get(0).getHeader().getType())
+0.594 - ```java
+assertNotNull(rootAtoms)
+0.571 - assertTrue(rootAtoms.get(0).getHeader().getSize() > 0)
+0.571 - assertTrue(rootAtoms.get(1).getHeader().getSize() > 0)
+0.571 - assertTrue(rootAtoms.get(2).getHeader().getSize() > 0)
+0.554 - assertEquals("STR", new String(rootAtoms.get(0).getHeader().getType()))
+0.554 - assertEquals("STR", new String(rootAtoms.get(1).getHeader().getType()))
+0.554 - assertEquals("STR", new String(rootAtoms.get(2).getHeader().getType()))
+0.473 - assertTrue(rootAtoms.get(0).getHeader().getType().length() > 0)
+0.473 - assertTrue(rootAtoms.get(1).getHeader().getType().length() > 0)
+0.473 - assertTrue(rootAtoms.get(2).getHeader().getType().length() > 0)
+0.413 - assertTrue(rootAtoms.get(0).getHeader().getSize() > rootAtoms.get(1).getHeader().getSize())
+0.413 - assertTrue(rootAtoms.get(1).getHeader().getSize() > rootAtoms.get(2).getHeader().getSize())
+0.000 - ```

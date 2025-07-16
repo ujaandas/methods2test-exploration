@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CASObjectArray {\npublic int add ( T value ) {\nObjects . requireNonNull ( value ) ;\nwhile ( true ) {\nfinal int newIndex = size . get ( ) ;\nfinal int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ;\nfinal int containerSize = 1 << containerIndex ;\nfinal int indexInsideContainer = newIndex + 1 - containerSize ;\nAtomicReferenceArray < T > container = containers . get ( containerIndex ) ;\nif ( container == null ) {\ncontainer = new AtomicReferenceArray < > ( containerSize ) ;\nif ( ! containers . compareAndSet ( containerIndex , null , container ) ) {\ncontainer = containers . get ( containerIndex ) ;\n} } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) {\nsize . incrementAndGet ( ) ;\nreturn newIndex ;\n} } }\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CASObjectArrayTest {\n@Test\npublic void testSetTwoItems ( ) {\nfinal CASObjectArray < Integer > array = new CASObjectArray < > ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, array.add(5));\nassertEquals(1, array.add(10));\nassertEquals(2, array.add(15));\nassertEquals(3, array.add(20));\nassertEquals(4, array.add(25));\nassertEquals(5, array.add(30));\nassertEquals(6, array.add(35));\nassertEquals(7, array.add(40));\nassertEquals(8, array.add(45));\nassertEquals(9, array.add(50));\nassertEquals(10, array.add(55));\nassertEquals(11, array.add(60));\nassertEquals(12, array.add(65));\nassertEquals(13, array.add(70));\nassertEquals(14, array.add(75));\nassertEquals(15, array.add(80));\nassertEquals(16, array.add(85));\nassertEquals(17, array.add(90));\nassertEquals(18, array.add(95));\nassertEquals(19, array.add(100));\n====================\n\n",
+    "scores": [
+        0.964,
+        0.947,
+        0.947,
+        0.931,
+        0.915,
+        0.912,
+        0.912,
+        0.912,
+        0.912,
+        0.912,
+        0.912,
+        0.912,
+        0.897,
+        0.897,
+        0.897,
+        0.897,
+        0.897,
+        0.897,
+        0.897,
+        0.897
+    ],
+    "ground_truth": "Assert.assertEquals(0,array.add(1));"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OScriptExecution {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OScriptExecutionTest {\n@Test\npublic void testReturnInIf ( ) {\nString className = \"STR\" ;\ndb . createClass ( className ) ;\nString script = \"STR\" ;\nscript += \"STR\" + className + \"STR\" ;\nscript += \"STR\" + className + \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" + className + \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" + className + \"STR\" ;\ndb . execute ( \"STR\" , script ) ;\nOResultSet rs = db . query ( \"STR\" + className ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(rs);\nAssert.assertTrue(rs.hasNext());\nAssert.assertEquals(1, rs.stream().count());\nAssert.assertTrue(rs.stream().anyMatch(r -> r.getProperty(\"name\").equals(className)));\nAssert.assertEquals(\"expectedValue\", rs.next().getProperty(\"propertyName\"));\nAssert.assertEquals(\"anotherExpectedValue\", rs.next().getProperty(\"anotherPropertyName\"));\nAssert.assertFalse(rs.isEmpty());\nAssert.assertEquals(\"STR\" + className + \"STR\", rs.next().getProperty(\"someProperty\"));\nAssert.assertTrue(rs.stream().allMatch(r -> r.getProperty(\"type\").equals(\"expectedType\")));\nAssert.assertNotEquals(\"unexpectedValue\", rs.next().getProperty(\"differentPropertyName\"));\nAssert.assertNotNull(rs.next().getProperty(\"createdAt\"));\nAssert.assertTrue(rs.stream().map(r -> r.getProperty(\"status\")).allMatch(status -> status.equals(\"active\")));\nAssert.assertEquals(\"someExpectedValue\", rs.next().getProperty(\"someField\"));\nAssert.assertTrue(rs.stream().anyMatch(r -> r.getProperty(\"id\") != null));\nAssert.assertEquals(1, rs.next().getProperty(\"countProperty\"));\nAssert.assertFalse(rs.stream().anyMatch(r -> r.getProperty(\"isDeleted\")));\nAssert.assertEquals(\"expectedType\", rs.next().getProperty(\"classType\"));\nAssert.assertTrue(rs.stream().map(r -> r.getProperty(\"field\")).anyMatch(field -> field.contains(\"expectedSubstring\")));\nAssert.assertNotNull(rs.next().getProperty(\"updatedAt\"));\nAssert.assertEquals(\"finalExpectedValue\", rs.next().getProperty(\"finalField\"));\nAssert.assertTrue(rs.stream().allMatch(r -> r.getProperty(\"isActive\")));\n```\n====================\n\n",
+    "scores": [
+        0.759,
+        0.748,
+        0.717,
+        0.711,
+        0.699,
+        0.686,
+        0.686,
+        0.651,
+        0.642,
+        0.642,
+        0.564,
+        0.539,
+        0.539,
+        0.5,
+        0.487,
+        0.481,
+        0.478,
+        0.442,
+        0.413,
+        0.388,
+        0.308,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals((Object)2L,rs.next().getProperty(\"STR\"));"
+}

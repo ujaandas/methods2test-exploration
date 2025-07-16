@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerialization {\npublic int fields ( ) {\ncheckForLoading ( ) ;\ncheckForFields ( ) ;\nreturn _fieldSize ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentSchemalessBinarySerializationTest {\n@Test\npublic void testSimpleEmbeddedDoc ( ) {\nODatabaseRecordThreadLocal . instance ( ) . remove ( ) ;\nODocument document = new ODocument ( ) ;\nODocument embedded = new ODocument ( ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\nembedded . field ( \"STR\" , \"STR\" ) ;\ndocument . field ( \"STR\" , embedded , OType . EMBEDDED ) ;\nbyte [ ] res = serializer . toStream ( document , false ) ;\nODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] {\n} ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(extr);\nassertEquals(1, extr.fields());\nassertTrue(extr.containsField(\"STR\"));\nassertTrue(extr.field(\"STR\") instanceof ODocument);\nODocument extractedEmbedded = (ODocument) extr.field(\"STR\");\nassertEquals(\"STR\", extractedEmbedded.field(\"STR\"));\nassertEquals(\"STR\", extractedEmbedded.field(\"STR\"));\nassertEquals(2, extractedEmbedded.fields());\nassertEquals(0, extr.getIdentity().getClusterId());\nassertTrue(extr.getIdentity().isNew());\nassertFalse(extractedEmbedded.getIdentity().isNew());\nassertEquals(extr.toStream().length, res.length);\nassertNotSame(extr, document);\nassertTrue(extr.getSchema().isEmpty());\nassertFalse(extr.getFieldNames().isEmpty());\nassertEquals(document.getIdentity(), extr.getIdentity());\nassertTrue(extr.getFieldNames().contains(\"STR\"));\nassertEquals(embedded.getIdentity(), extractedEmbedded.getIdentity());\nassertNotNull(extr.field(\"STR\"));\nassertTrue(extractedEmbedded.equals(embedded));\nassertNotSame(extractedEmbedded, embedded);\nassertEquals(extractedEmbedded.fields(), embedded.fields());\nassertTrue(extr.getVersion() >= 0);\nassertFalse(extr.isEmbedded());\n```\n====================\n\n",
+    "scores": [
+        0.757,
+        0.718,
+        0.7,
+        0.644,
+        0.571,
+        0.56,
+        0.553,
+        0.531,
+        0.526,
+        0.526,
+        0.523,
+        0.488,
+        0.478,
+        0.466,
+        0.46,
+        0.452,
+        0.442,
+        0.434,
+        0.434,
+        0.43,
+        0.412,
+        0.396,
+        0.395,
+        0.389,
+        0.0
+    ],
+    "ground_truth": "assertEquals(document.fields(),extr.fields());"
+}

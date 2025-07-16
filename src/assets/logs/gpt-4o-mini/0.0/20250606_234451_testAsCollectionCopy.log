@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopy {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AsCollectionCopyTest {
+    @Test
+     public void testAsCollectionCopy ( ) {
+         final List < String > list = new ArrayList < > ( Arrays . asList ( "STR" , "STR" ) ) ; 
+         final ACollection < String > copied = ACollectionHelper . asACollectionCopy ( list ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(copied);
+assertEquals(2, copied.size());
+assertTrue(copied.contains("STR"));
+assertFalse(copied.isEmpty());
+assertEquals(2, copied.stream().filter(s -> s.equals("STR")).count());
+assertEquals("STR", copied.get(0));
+assertEquals("STR", copied.get(1));
+assertTrue(copied instanceof List);
+assertEquals(2, copied.toArray().length);
+assertTrue(copied.equals(new ArrayList<>(Arrays.asList("STR", "STR"))));
+assertFalse(copied.equals(new ArrayList<>(Arrays.asList("STR"))));
+assertTrue(copied.containsAll(Arrays.asList("STR", "STR")));
+assertFalse(copied.contains("NOT_IN_LIST"));
+assertEquals(copied.size(), new HashSet<>(copied).size());
+assertNotSame(copied, list);
+assertTrue(copied.stream().allMatch(s -> s instanceof String));
+assertDoesNotThrow(() -> copied.forEach(s -> {}));
+assertEquals(copied, ACollectionHelper.asACollectionCopy(new ArrayList<>(Arrays.asList("STR", "STR"))));
+assertTrue(copied.stream().anyMatch(s -> s.equals("STR")));
+assertEquals(2, copied.stream().distinct().count());
+assertTrue(copied.toString().contains("STR"));
+assertEquals(copied.hashCode(), new ArrayList<>(Arrays.asList("STR", "STR")).hashCode());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,copied.size()); ===
+1.000 - assertEquals(2, copied.size())
+0.806 - assertEquals("STR", copied.get(0))
+0.806 - assertEquals("STR", copied.get(1))
+0.735 - assertEquals(2, copied.toArray().length)
+0.724 - assertFalse(copied.isEmpty())
+0.684 - assertEquals(2, copied.stream().distinct().count())
+0.643 - assertEquals(copied.size(), new HashSet<>(copied).size())
+0.603 - assertTrue(copied.contains("STR"))
+0.589 - assertEquals(2, copied.stream().filter(s -> s.equals("STR")).count())
+0.583 - assertFalse(copied.contains("NOT_IN_LIST"))
+0.582 - assertNotSame(copied, list)
+0.557 - assertTrue(copied instanceof List)
+0.552 - ```java
+assertNotNull(copied)
+0.514 - assertTrue(copied.toString().contains("STR"))
+0.486 - assertDoesNotThrow(() -> copied.forEach(s -> {}))
+0.473 - assertFalse(copied.equals(new ArrayList<>(Arrays.asList("STR"))))
+0.471 - assertTrue(copied.stream().anyMatch(s -> s.equals("STR")))
+0.460 - assertTrue(copied.containsAll(Arrays.asList("STR", "STR")))
+0.460 - assertTrue(copied.stream().allMatch(s -> s instanceof String))
+0.456 - assertEquals(copied.hashCode(), new ArrayList<>(Arrays.asList("STR", "STR")).hashCode())
+0.408 - assertTrue(copied.equals(new ArrayList<>(Arrays.asList("STR", "STR"))))
+0.403 - assertEquals(copied, ACollectionHelper.asACollectionCopy(new ArrayList<>(Arrays.asList("STR", "STR"))))
+0.000 - ```

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\npublic int compareTo ( final OCompositeKey otherKey ) {\nfinal Iterator < Object > inIter = keys . iterator ( ) ;\nfinal Iterator < Object > outIter = otherKey . keys . iterator ( ) ;\nwhile ( inIter . hasNext ( ) && outIter . hasNext ( ) ) {\nfinal Object inKey = inIter . next ( ) ;\nfinal Object outKey = outIter . next ( ) ;\nif ( outKey instanceof OAlwaysGreaterKey ) return - 1 ;\nif ( outKey instanceof OAlwaysLessKey ) return 1 ;\nif ( inKey instanceof OAlwaysGreaterKey ) return 1 ;\nif ( inKey instanceof OAlwaysLessKey ) return - 1 ;\nfinal int result = comparator . compare ( inKey , outKey ) ;\nif ( result != 0 ) return result ;\n} return 0 ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testCompareToLT ( ) {\nfinal OCompositeKey compositeKey = new OCompositeKey ( ) ;\ncompositeKey . addKey ( \"STR\" ) ;\ncompositeKey . addKey ( \"STR\" ) ;\nfinal OCompositeKey anotherCompositeKey = new OCompositeKey ( ) ;\nanotherCompositeKey . addKey ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(0, compositeKey.compareTo(anotherCompositeKey));\nAssert.assertTrue(compositeKey.compareTo(anotherCompositeKey) == 0);\nAssert.assertNotEquals(1, compositeKey.compareTo(anotherCompositeKey));\nAssert.assertFalse(compositeKey.compareTo(anotherCompositeKey) == 1);\nAssert.assertEquals(0, anotherCompositeKey.compareTo(compositeKey));\nAssert.assertTrue(anotherCompositeKey.compareTo(compositeKey) == 0);\nAssert.assertNotEquals(-1, anotherCompositeKey.compareTo(compositeKey));\nAssert.assertFalse(anotherCompositeKey.compareTo(compositeKey) == -1);\nAssert.assertEquals(0, compositeKey.compareTo(compositeKey));\nAssert.assertTrue(compositeKey.compareTo(compositeKey) == 0);\nAssert.assertNotEquals(1, compositeKey.compareTo(compositeKey));\nAssert.assertFalse(compositeKey.compareTo(compositeKey) == 1);\nAssert.assertEquals(0, anotherCompositeKey.compareTo(anotherCompositeKey));\nAssert.assertTrue(anotherCompositeKey.compareTo(anotherCompositeKey) == 0);\nAssert.assertNotEquals(-1, anotherCompositeKey.compareTo(anotherCompositeKey));\nAssert.assertFalse(anotherCompositeKey.compareTo(anotherCompositeKey) == -1);\nAssert.assertEquals(0, compositeKey.compareTo(null));\nAssert.assertTrue(compositeKey.compareTo(null) == 0);\nAssert.assertEquals(0, anotherCompositeKey.compareTo(null));\nAssert.assertTrue(anotherCompositeKey.compareTo(null) == 0);\n====================\n\n",
+    "scores": [
+        0.958,
+        0.934,
+        0.924,
+        0.889,
+        0.881,
+        0.875,
+        0.866,
+        0.862,
+        0.852,
+        0.839,
+        0.816,
+        0.807,
+        0.793,
+        0.783,
+        0.78,
+        0.75,
+        0.729,
+        0.685,
+        0.66,
+        0.6
+    ],
+    "ground_truth": "assertEquals(compositeKey.compareTo(anotherCompositeKey),-1);"
+}

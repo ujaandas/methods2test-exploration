@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testNonStandardPercentEncoding ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( false , false ) ; 
+         URL testSourceUrl = new URL ( "STR" ) ; 
+         String inputURL = "STR" ; 
+         String expectedURL = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , inputURL ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(normalizedUrl);
+assertEquals(expectedURL, normalizedUrl);
+assertTrue(normalizedUrl.startsWith("http"));
+assertFalse(normalizedUrl.contains(" ")); 
+assertFalse(normalizedUrl.contains("%20")); 
+assertTrue(normalizedUrl.endsWith(".com") || normalizedUrl.endsWith(".org") || normalizedUrl.endsWith(".net"));
+assertEquals(expectedURL.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.matches("^[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,;=%-]+$"));
+assertFalse(normalizedUrl.contains(".."));
+assertFalse(normalizedUrl.contains("//"));
+assertTrue(normalizedUrl.indexOf("http") == 0 || normalizedUrl.indexOf("https") == 0);
+assertNotEquals(inputURL, normalizedUrl);
+assertTrue(normalizedUrl.equalsIgnoreCase(expectedURL));
+assertTrue(normalizedUrl.contains("://"));
+assertFalse(normalizedUrl.contains("ftp"));
+assertTrue(normalizedUrl.matches("^(http|https)://.*"));
+assertTrue(normalizedUrl.length() <= 2048);
+assertFalse(normalizedUrl.contains("mailto:"));
+assertTrue(normalizedUrl.indexOf("?") == -1 || normalizedUrl.indexOf("#") > normalizedUrl.indexOf("?"));
+assertFalse(normalizedUrl.contains("javascript:"));
+assertTrue(normalizedUrl.split("/").length >= 3);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedURL,normalizedUrl); ===
+0.929 - assertEquals(expectedURL, normalizedUrl)
+0.786 - assertNotEquals(inputURL, normalizedUrl)
+0.765 - assertEquals(expectedURL.length(), normalizedUrl.length())
+0.571 - assertFalse(normalizedUrl.contains(" "))
+0.568 - ```java
+assertNotNull(normalizedUrl)
+0.558 - assertFalse(normalizedUrl.contains(".."))
+0.558 - assertFalse(normalizedUrl.contains("//"))
+0.552 - assertFalse(normalizedUrl.contains("%20"))
+0.552 - assertFalse(normalizedUrl.contains("ftp"))
+0.527 - assertFalse(normalizedUrl.contains("mailto:"))
+0.518 - assertTrue(normalizedUrl.length() <= 2048)
+0.512 - assertTrue(normalizedUrl.contains("://"))
+0.505 - assertFalse(normalizedUrl.contains("javascript:"))
+0.494 - assertTrue(normalizedUrl.startsWith("http"))
+0.484 - assertTrue(normalizedUrl.split("/").length >= 3)
+0.440 - assertTrue(normalizedUrl.equalsIgnoreCase(expectedURL))
+0.440 - assertTrue(normalizedUrl.matches("^(http|https)://.*"))
+0.396 - assertTrue(normalizedUrl.matches("^[a-zA-Z0-9._~:/?#[\\]@!$&'()*+,
+0.355 - assertTrue(normalizedUrl.indexOf("http") == 0 || normalizedUrl.indexOf("https") == 0)
+0.310 - assertTrue(normalizedUrl.indexOf("?") == -1 || normalizedUrl.indexOf("#") > normalizedUrl.indexOf("?"))
+0.291 - assertTrue(normalizedUrl.endsWith(".com") || normalizedUrl.endsWith(".org") || normalizedUrl.endsWith(".net"))
+0.074 - =%-]+$"))
+0.000 - ```

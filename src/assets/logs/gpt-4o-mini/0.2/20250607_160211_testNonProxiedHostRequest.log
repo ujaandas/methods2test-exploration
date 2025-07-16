@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactory {
+    public HttpClient create ( ) { 
+    return hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactoryTest {
+    @Test
+     public void testNonProxiedHostRequest ( ) throws Exception {
+         targetServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         proxyServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         Proxy proxy = new Proxy ( ) ; 
+         proxy . setHost ( "STR" ) ; 
+         proxy . setPort ( PROXY_PORT ) ; 
+         proxy . setProtocol ( "STR" ) ; 
+         proxy . setNonProxyHosts ( "STR" ) ; 
+         HttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ; 
+         String body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(body);
+assertEquals("STR", body);
+assertTrue(body.contains("STR"));
+assertFalse(body.isEmpty());
+assertTrue(body.length() > 0);
+assertTrue(body.startsWith("S"));
+assertTrue(body.endsWith("R"));
+assertEquals(3, body.split("S").length - 1);
+assertTrue(body.matches(".*STR.*"));
+assertFalse(body.matches(".*INVALID.*"));
+assertNotEquals("INVALID", body);
+assertTrue(body.equalsIgnoreCase("str"));
+assertThat(body, containsString("STR"));
+assertThat(body, startsWith("S"));
+assertThat(body, endsWith("R"));
+assertThat(body, is(not(emptyOrNullString())));
+assertThat(body, is(not(equalTo("INVALID"))));
+assertThat(body, hasLength(3));
+assertThat(body, allOf(containsString("S"), containsString("T"), containsString("R")));
+assertThat(body, anyOf(containsString("S"), containsString("X")));
+assertThat(body, is(not(containsString("INVALID"))));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",body); ===
+1.000 - assertEquals("STR", body)
+0.764 - assertNotEquals("INVALID", body)
+0.594 - assertEquals(3, body.split("S").length - 1)
+0.588 - assertFalse(body.isEmpty())
+0.571 - assertTrue(body.contains("STR"))
+0.549 - ```java
+assertNotNull(body)
+0.510 - assertTrue(body.length() > 0)
+0.491 - assertThat(body, hasLength(3))
+0.484 - assertThat(body, containsString("STR"))
+0.481 - assertTrue(body.endsWith("R"))
+0.481 - assertThat(body, endsWith("R"))
+0.469 - assertFalse(body.matches(".*INVALID.*"))
+0.469 - assertTrue(body.equalsIgnoreCase("str"))
+0.464 - assertTrue(body.startsWith("S"))
+0.464 - assertThat(body, startsWith("S"))
+0.441 - assertTrue(body.matches(".*STR.*"))
+0.412 - assertThat(body, is(not(equalTo("INVALID"))))
+0.377 - assertThat(body, is(not(emptyOrNullString())))
+0.347 - assertThat(body, is(not(containsString("INVALID"))))
+0.299 - assertThat(body, anyOf(containsString("S"), containsString("X")))
+0.243 - assertThat(body, allOf(containsString("S"), containsString("T"), containsString("R")))
+0.000 - ```

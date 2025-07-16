@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class GlobalSwitch {\n@Override\n@Deprecated\npublic boolean isConnectionMonitorSwitchOn ( ) {\nreturn option ( BoltClientOption . CONN_MONITOR_SWITCH ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class GlobalSwitchTest {\n@Test\npublic void testSystemSettings_takesEffect_before_defaultvalue ( ) {\nSystem . setProperty ( Configs . CONN_RECONNECT_SWITCH , \"STR\" ) ;\nSystem . setProperty ( Configs . CONN_MONITOR_SWITCH , \"STR\" ) ;\nclient1 = new RpcClient ( ) ;\nclient2 = new RpcClient ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertTrue(client1.isConnectionMonitorSwitchOn());\nAssert.assertTrue(client2.isConnectionMonitorSwitchOn());\nAssert.assertEquals(\"Expected value for client1\", expectedValue1, client1.getSomeSetting());\nAssert.assertEquals(\"Expected value for client2\", expectedValue2, client2.getSomeSetting());\nAssert.assertFalse(client1.isSomeOtherSwitchOn());\nAssert.assertFalse(client2.isSomeOtherSwitchOn());\nAssert.assertNotNull(client1.getConnection());\nAssert.assertNotNull(client2.getConnection());\nAssert.assertTrue(client1.isReconnectSwitchOn());\nAssert.assertTrue(client2.isReconnectSwitchOn());\nAssert.assertEquals(\"Expected state for client1\", expectedState1, client1.getState());\nAssert.assertEquals(\"Expected state for client2\", expectedState2, client2.getState());\nAssert.assertTrue(client1.isFeatureEnabled());\nAssert.assertTrue(client2.isFeatureEnabled());\nAssert.assertFalse(client1.isFeatureDisabled());\nAssert.assertFalse(client2.isFeatureDisabled());\nAssert.assertEquals(\"Expected timeout for client1\", expectedTimeout1, client1.getTimeout());\nAssert.assertEquals(\"Expected timeout for client2\", expectedTimeout2, client2.getTimeout());\nAssert.assertTrue(client1.isConnectionActive());\nAssert.assertTrue(client2.isConnectionActive());\nAssert.assertNotEquals(client1.getId(), client2.getId());\n```\n====================\n\n",
+    "scores": [
+        0.98,
+        0.925,
+        0.844,
+        0.822,
+        0.787,
+        0.764,
+        0.725,
+        0.703,
+        0.667,
+        0.644,
+        0.598,
+        0.575,
+        0.539,
+        0.517,
+        0.474,
+        0.393,
+        0.377,
+        0.375,
+        0.375,
+        0.359,
+        0.344,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(client1.isConnectionMonitorSwitchOn());"
+}

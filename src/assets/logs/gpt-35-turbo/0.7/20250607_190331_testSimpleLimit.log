@@ -1,0 +1,65 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testSimpleLimit ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(qResult);
+assertEquals(5, qResult.size());
+assertTrue(qResult.get(0) instanceof ODocument);
+assertFalse(qResult.isEmpty());
+assertNotEquals(0, qResult.size());
+assertNull(null);
+assertTrue(qResult.contains(document));
+assertFalse(qResult.contains(null));
+assertEquals(3, qResult.get(2).field("field"));
+assertTrue(qResult.get(1).containsField("field"));
+assertFalse(qResult.get(0).containsField("nonExistentField"));
+assertTrue(qResult.get(2).field("field") instanceof Integer);
+assertEquals("value", qResult.get(0).field("stringField"));
+assertEquals(1, qResult.get(1).field("intField"));
+assertTrue(qResult.get(2).field("booleanField"));
+assertFalse(qResult.get(2).field("nonExistentField"));
+assertTrue(qResult.get(0).field("arrayField") instanceof List);
+assertEquals(2, qResult.get(1).field("arrayField").size());
+assertTrue(qResult.get(2).field("nestedDocument") instanceof ODocument);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.967 - assertEquals(5, qResult.size())
+0.921 - assertNotEquals(0, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.720 - assertEquals(3, qResult.get(2).field("field"))
+0.718 - assertEquals(1, qResult.get(1).field("intField"))
+0.677 - assertFalse(qResult.contains(null))
+0.667 - assertEquals(2, qResult.get(1).field("arrayField").size())
+0.654 - assertNotNull(qResult)
+0.621 - assertEquals("value", qResult.get(0).field("stringField"))
+0.588 - assertTrue(qResult.contains(document))
+0.557 - assertTrue(qResult.get(1).containsField("field"))
+0.554 - assertFalse(qResult.get(2).field("nonExistentField"))
+0.538 - assertTrue(qResult.get(2).field("booleanField"))
+0.527 - assertFalse(qResult.get(0).containsField("nonExistentField"))
+0.507 - assertTrue(qResult.get(0) instanceof ODocument)
+0.435 - assertNull(null)
+0.432 - assertTrue(qResult.get(2).field("field") instanceof Integer)
+0.422 - assertTrue(qResult.get(0).field("arrayField") instanceof List)
+0.404 - assertTrue(qResult.get(2).field("nestedDocument") instanceof ODocument)

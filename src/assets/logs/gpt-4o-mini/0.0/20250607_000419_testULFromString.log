@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class UL {
+    public static UL newUL ( String ul ) { 
+    checkNotNull ( ul ) ; 
+    String [ ] split = StringUtils . splitS ( ul , "STR" ) ; 
+    byte b [ ] = new byte [ split . length ] ; 
+    for ( int i = 0 ; 
+    i < split . length ; 
+    i ++ ) { 
+    int parseInt = Integer . parseInt ( split [ i ] , 16 ) ; 
+    b [ i ] = ( byte ) parseInt ; 
+    } return new UL ( b ) ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ULTest {
+    @Test
+     public void testULFromString ( ) {
+         UL expected = new UL ( new byte [ ] { 
+     ( byte ) 0xff , 0xb , 1 , 2 , ( byte ) 0xff , 0xb , 1 , 2 } ) ; 
+         UL fromString = UL . newUL ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fromString);
+assertArrayEquals(expected.getBytes(), fromString.getBytes());
+assertEquals(expected.getBytes().length, fromString.getBytes().length);
+assertEquals((byte) 0xff, fromString.getBytes()[0]);
+assertEquals((byte) 0xb, fromString.getBytes()[1]);
+assertEquals((byte) 1, fromString.getBytes()[2]);
+assertEquals((byte) 2, fromString.getBytes()[3]);
+assertEquals((byte) 0xff, fromString.getBytes()[4]);
+assertEquals((byte) 0xb, fromString.getBytes()[5]);
+assertEquals((byte) 1, fromString.getBytes()[6]);
+assertEquals((byte) 2, fromString.getBytes()[7]);
+assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()));
+assertNotSame(expected, fromString);
+assertTrue(fromString instanceof UL);
+assertEquals(8, fromString.getBytes().length);
+assertArrayEquals(new byte[] { (byte) 0xff, (byte) 0xb, 1, 2, (byte) 0xff, (byte) 0xb, 1, 2 }, fromString.getBytes());
+assertEquals(expected.toString(), fromString.toString());
+assertTrue(fromString.equals(expected));
+assertFalse(fromString.equals(null));
+assertFalse(fromString.equals(new Object()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(expected,fromString); ===
+0.836 - assertNotSame(expected, fromString)
+0.750 - assertEquals(expected.toString(), fromString.toString())
+0.710 - assertArrayEquals(expected.getBytes(), fromString.getBytes())
+0.684 - assertEquals((byte) 1, fromString.getBytes()[2])
+0.684 - assertEquals((byte) 2, fromString.getBytes()[3])
+0.684 - assertEquals((byte) 1, fromString.getBytes()[6])
+0.684 - assertEquals((byte) 2, fromString.getBytes()[7])
+0.667 - assertEquals((byte) 0xb, fromString.getBytes()[1])
+0.667 - assertEquals((byte) 0xb, fromString.getBytes()[5])
+0.659 - assertEquals((byte) 0xff, fromString.getBytes()[0])
+0.659 - assertEquals((byte) 0xff, fromString.getBytes()[4])
+0.649 - assertEquals(8, fromString.getBytes().length)
+0.647 - assertEquals(expected.getBytes().length, fromString.getBytes().length)
+0.634 - assertTrue(Arrays.equals(expected.getBytes(), fromString.getBytes()))
+0.609 - assertFalse(fromString.equals(null))
+0.606 - ```java
+assertNotNull(fromString)
+0.583 - assertTrue(fromString.equals(expected))
+0.567 - assertTrue(fromString instanceof UL)
+0.553 - assertFalse(fromString.equals(new Object()))
+0.418 - assertArrayEquals(new byte[] { (byte) 0xff, (byte) 0xb, 1, 2, (byte) 0xff, (byte) 0xb, 1, 2 }, fromString.getBytes())
+0.000 - ```

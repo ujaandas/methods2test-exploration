@@ -1,0 +1,164 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArray {
+    public int add ( T value ) { 
+    Objects . requireNonNull ( value ) ; 
+    while ( true ) { 
+    final int newIndex = size . get ( ) ; 
+    final int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ; 
+    final int containerSize = 1 << containerIndex ; 
+    final int indexInsideContainer = newIndex + 1 - containerSize ; 
+    AtomicReferenceArray < T > container = containers . get ( containerIndex ) ; 
+    if ( container == null ) { 
+    container = new AtomicReferenceArray < > ( containerSize ) ; 
+    if ( ! containers . compareAndSet ( containerIndex , null , container ) ) { 
+    container = containers . get ( containerIndex ) ; 
+    } } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) { 
+    size . incrementAndGet ( ) ; 
+    return newIndex ; 
+    } } }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArrayTest {
+    @Test
+     public void testCompareAndSetSingleItem ( ) {
+         final CASObjectArray < Integer > array = new CASObjectArray < > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        // Test adding a single item
+        int index1 = array.add(1);
+        assertEquals(0, index1);
+        
+        // Test adding a second item
+        int index2 = array.add(2);
+        assertEquals(1, index2);
+        
+        // Test adding a third item
+        int index3 = array.add(3);
+        assertEquals(2, index3);
+        
+        // Test adding a null item (should throw NullPointerException)
+        assertThrows(NullPointerException.class, () -> array.add(null));
+        
+        // Test size after adding three items
+        assertEquals(3, array.size.get());
+        
+        // Test adding a fourth item
+        int index4 = array.add(4);
+        assertEquals(3, index4);
+        
+        // Test size after adding four items
+        assertEquals(4, array.size.get());
+        
+        // Test adding a fifth item
+        int index5 = array.add(5);
+        assertEquals(4, index5);
+        
+        // Test size after adding five items
+        assertEquals(5, array.size.get());
+        
+        // Test adding a sixth item
+        int index6 = array.add(6);
+        assertEquals(5, index6);
+        
+        // Test size after adding six items
+        assertEquals(6, array.size.get());
+        
+        // Test adding an item after reaching the initial container size
+        int index7 = array.add(7);
+        assertEquals(6, index7);
+        
+        // Test size after adding seventh item
+        assertEquals(7, array.size.get());
+        
+        // Test adding multiple items and check their indices
+        for (int i = 8; i < 20; i++) {
+            int index = array.add(i);
+            assertEquals(i - 1, index);
+        }
+        
+        // Test final size after adding 20 items
+        assertEquals(20, array.size.get());
+        
+        // Test if the items are correctly stored
+        for (int i = 1; i <= 20; i++) {
+            assertEquals(i, array.containers.get(0).get(i - 1));
+        }
+        
+        // Test adding an item after reaching the maximum size of the first container
+        int index21 = array.add(21);
+        assertEquals(20, index21);
+        
+        // Test size after adding 21 items
+       
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,array.add(1)); ===
+0.720 - assertEquals(0, index1)
+0.692 - assertEquals(20, index21)
+0.640 - assertEquals(1, index2)
+0.640 - assertEquals(2, index3)
+0.640 - assertEquals(3, index4)
+0.640 - assertEquals(4, index5)
+0.640 - assertEquals(5, index6)
+0.640 - assertEquals(6, index7)
+0.627 - assertEquals(i - 1, index)
+0.610 - i++) {
+            assertEquals(i, array.containers.get(0).get(i - 1))
+0.511 - // Test size after adding six items
+        assertEquals(6, array.size.get())
+0.505 - // Test size after adding four items
+        assertEquals(4, array.size.get())
+0.505 - // Test size after adding five items
+        assertEquals(5, array.size.get())
+0.500 - // Test size after adding three items
+        assertEquals(3, array.size.get())
+0.495 - // Test size after adding seventh item
+        assertEquals(7, array.size.get())
+0.490 - }
+        
+        // Test final size after adding 20 items
+        assertEquals(20, array.size.get())
+0.436 - i++) {
+            int index = array.add(i)
+0.411 - // Test adding a sixth item
+        int index6 = array.add(6)
+0.405 - // Test adding a second item
+        int index2 = array.add(2)
+0.390 - ```java
+        // Test adding a single item
+        int index1 = array.add(1)
+0.384 - // Test adding a third item
+        int index3 = array.add(3)
+0.384 - // Test adding a fifth item
+        int index5 = array.add(5)
+0.378 - // Test adding a fourth item
+        int index4 = array.add(4)
+0.343 - // Test adding an item after reaching the initial container size
+        int index7 = array.add(7)
+0.300 - }
+        
+        // Test adding an item after reaching the maximum size of the first container
+        int index21 = array.add(21)
+0.294 - // Test adding a null item (should throw NullPointerException)
+        assertThrows(NullPointerException.class, () -> array.add(null))
+0.250 - // Test size after adding 21 items
+0.247 - // Test if the items are correctly stored
+        for (int i = 1
+0.143 - // Test adding multiple items and check their indices
+        for (int i = 8
+0.062 - i < 20
+0.061 - i <= 20

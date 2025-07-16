@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class HttpIndex {\npublic int getVersion ( ) {\nreturn _recordVersion ;\n}\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class HttpIndexTest {\n@Test\npublic void updateKey ( ) throws IOException {\nput ( \"STR\" + getDatabaseName ( ) + \"STR\" ) . payload ( \"STR\" , CONTENT . JSON ) . exec ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\" + getDatabaseName() + \"STR\", httpIndex.getKey());\nassertNotNull(httpIndex);\nassertTrue(httpIndex.getVersion() >= 0);\nassertFalse(httpIndex.getVersion() < 0);\nassertNotEquals(0, httpIndex.getVersion());\nassertSame(\"STR\", httpIndex.getPayload());\nassertNotSame(\"STR\", httpIndex.getPayload());\nassertTrue(httpIndex.getPayload().contains(\"S\"));\nassertFalse(httpIndex.getPayload().isEmpty());\nassertEquals(CONTENT.JSON, httpIndex.getContentType());\nassertNotEquals(CONTENT.XML, httpIndex.getContentType());\nassertTrue(httpIndex.getContentType().toString().contains(\"JSON\"));\nassertFalse(httpIndex.getContentType().toString().contains(\"XML\"));\nassertTrue(httpIndex.getContentType().toString().equalsIgnoreCase(\"json\"));\nassertFalse(httpIndex.getContentType().toString().equalsIgnoreCase(\"xml\"));\nassertArrayEquals(new String[]{\"STR\", \"STR\"}, httpIndex.getPayloadArray());\nassertThrows(IOException.class, () -> { throw new IOException(); });\nassertDoesNotThrow(() -> { httpIndex.updateKey(); });\nassertTimeout(Duration.ofMillis(100), () -> { httpIndex.updateKey(); });\nassertTimeoutPreemptively(Duration.ofMillis(100), () -> { httpIndex.updateKey(); });\n====================\n\n",
+    "scores": [
+        0.512,
+        0.481,
+        0.462,
+        0.448,
+        0.426,
+        0.42,
+        0.414,
+        0.414,
+        0.407,
+        0.38,
+        0.345,
+        0.343,
+        0.333,
+        0.33,
+        0.321,
+        0.315,
+        0.302,
+        0.275,
+        0.263,
+        0.263,
+        0.031,
+        0.031,
+        0.031,
+        0.031
+    ],
+    "ground_truth": "Assert.assertEquals(getResponse().getStatusLine().getStatusCode(),201);"
+}

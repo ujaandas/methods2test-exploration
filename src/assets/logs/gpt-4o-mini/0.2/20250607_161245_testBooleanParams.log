@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testBooleanParams ( ) {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( "STR" , true ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.get(0).field("someField").equals("expectedValue"));
+assertTrue(qResult.get(0).field("booleanField") instanceof Boolean);
+assertTrue((Boolean) qResult.get(0).field("booleanField"));
+assertEquals("expectedString", qResult.get(1).field("anotherField"));
+assertNotEquals("unexpectedValue", qResult.get(2).field("differentField"));
+assertTrue(qResult.get(3).field("numericField") instanceof Number);
+assertTrue(((Number) qResult.get(3).field("numericField")).intValue() > 0);
+assertEquals("expectedType", qResult.get(4).field("@class"));
+assertTrue(qResult.get(5).field("dateField") instanceof Date);
+assertNotNull(qResult.get(6).field("nestedField"));
+assertEquals("nestedValue", qResult.get(6).field("nestedField").field("innerField"));
+assertTrue(qResult.get(7).field("listField") instanceof List);
+assertEquals(3, ((List<?>) qResult.get(7).field("listField")).size());
+assertTrue(((List<?>) qResult.get(7).field("listField")).contains("expectedListValue"));
+assertTrue(qResult.get(8).field("mapField") instanceof Map);
+assertTrue(((Map<?, ?>) qResult.get(8).field("mapField")).containsKey("expectedKey"));
+assertEquals("expectedMapValue", ((Map<?, ?>) qResult.get(8).field("mapField")).get("expectedKey"));
+assertTrue(qResult.get(9).field("booleanField") instanceof Boolean);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(qResult.size(),1); ===
+0.789 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.577 - assertEquals(3, ((List<?>) qResult.get(7).field("listField")).size())
+0.567 - ```java
+assertNotNull(qResult)
+0.550 - assertNotNull(qResult.get(6).field("nestedField"))
+0.539 - assertEquals("expectedType", qResult.get(4).field("@class"))
+0.515 - assertEquals("expectedString", qResult.get(1).field("anotherField"))
+0.505 - assertNotEquals("unexpectedValue", qResult.get(2).field("differentField"))
+0.483 - assertTrue((Boolean) qResult.get(0).field("booleanField"))
+0.478 - assertEquals("nestedValue", qResult.get(6).field("nestedField").field("innerField"))
+0.472 - assertTrue(qResult.get(7).field("listField") instanceof List)
+0.444 - assertTrue(qResult.get(0).field("someField").equals("expectedValue"))
+0.437 - assertTrue(qResult.get(8).field("mapField") instanceof Map)
+0.427 - assertTrue(qResult.get(5).field("dateField") instanceof Date)
+0.416 - assertTrue(((Number) qResult.get(3).field("numericField")).intValue() > 0)
+0.413 - assertEquals("expectedMapValue", ((Map<?, ?>) qResult.get(8).field("mapField")).get("expectedKey"))
+0.404 - assertTrue(qResult.get(3).field("numericField") instanceof Number)
+0.400 - assertTrue(qResult.get(0).field("booleanField") instanceof Boolean)
+0.400 - assertTrue(qResult.get(9).field("booleanField") instanceof Boolean)
+0.379 - assertTrue(((List<?>) qResult.get(7).field("listField")).contains("expectedListValue"))
+0.372 - assertTrue(((Map<?, ?>) qResult.get(8).field("mapField")).containsKey("expectedKey"))
+0.000 - ```

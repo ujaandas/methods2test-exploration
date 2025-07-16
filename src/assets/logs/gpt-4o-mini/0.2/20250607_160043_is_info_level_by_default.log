@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLogger {
+    public static Config createConfig ( ) { 
+    Config config = new Config ( ) ; 
+    config . set ( CUCUMBERPRO_CONNECTION_TIMEOUT , 5000 ) ; 
+    config . set ( CUCUMBERPRO_ENVMASK , "STR" ) ; 
+    config . setNull ( CUCUMBERPRO_LOGFILE ) ; 
+    config . set ( CUCUMBERPRO_LOGGING , "STR" ) ; 
+    config . setNull ( CUCUMBERPRO_PROFILE ) ; 
+    config . setNull ( CUCUMBERPRO_PROJECTNAME ) ; 
+    config . setNull ( CUCUMBERPRO_TOKEN ) ; 
+    config . set ( CUCUMBERPRO_URL , "STR" ) ; 
+    return config ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLoggerTest {
+    @Test
+     public void is_info_level_by_default ( ) {
+         Config config = createConfig ( ) ; 
+         Logger . SystemLogger logger = new Logger . SystemLogger ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(5000, config.get(CUCUMBERPRO_CONNECTION_TIMEOUT));
+assertEquals("STR", config.get(CUCUMBERPRO_ENVMASK));
+assertNull(config.get(CUCUMBERPRO_LOGFILE));
+assertEquals("STR", config.get(CUCUMBERPRO_LOGGING));
+assertNull(config.get(CUCUMBERPRO_PROFILE));
+assertNull(config.get(CUCUMBERPRO_PROJECTNAME));
+assertNull(config.get(CUCUMBERPRO_TOKEN));
+assertEquals("STR", config.get(CUCUMBERPRO_URL));
+assertTrue(logger.isInfoLevel());
+assertFalse(logger.isDebugLevel());
+assertFalse(logger.isErrorLevel());
+assertFalse(logger.isWarnLevel());
+assertFalse(logger.isFatalLevel());
+assertEquals("Default logger name", logger.getName());
+assertNotNull(logger.getConfig());
+assertTrue(logger.isLoggingEnabled());
+assertEquals("STR", logger.getEnvMask());
+assertEquals(5000, logger.getConnectionTimeout());
+assertEquals("STR", logger.getUrl());
+assertNull(logger.getLogFile());
+assertNull(logger.getProfile());
+assertNull(logger.getProjectName());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(Logger.Level.INFO,logger.level); ===
+0.638 - assertEquals("Default logger name", logger.getName())
+0.590 - assertFalse(logger.isFatalLevel())
+0.582 - assertEquals("STR", logger.getUrl())
+0.578 - assertEquals("STR", logger.getEnvMask())
+0.571 - assertFalse(logger.isWarnLevel())
+0.564 - assertFalse(logger.isDebugLevel())
+0.564 - assertFalse(logger.isErrorLevel())
+0.526 - assertTrue(logger.isInfoLevel())
+0.522 - assertEquals(5000, logger.getConnectionTimeout())
+0.507 - assertNull(logger.getLogFile())
+0.507 - assertNull(logger.getProfile())
+0.481 - assertNull(logger.getProjectName())
+0.468 - assertNotNull(logger.getConfig())
+0.444 - assertTrue(logger.isLoggingEnabled())
+0.442 - assertEquals("STR", config.get(CUCUMBERPRO_LOGGING))
+0.418 - assertEquals("STR", config.get(CUCUMBERPRO_URL))
+0.400 - assertEquals("STR", config.get(CUCUMBERPRO_ENVMASK))
+0.372 - ```java
+assertEquals(5000, config.get(CUCUMBERPRO_CONNECTION_TIMEOUT))
+0.368 - assertNull(config.get(CUCUMBERPRO_LOGFILE))
+0.353 - assertNull(config.get(CUCUMBERPRO_TOKEN))
+0.345 - assertNull(config.get(CUCUMBERPRO_PROFILE))
+0.330 - assertNull(config.get(CUCUMBERPRO_PROJECTNAME))
+0.000 - ```

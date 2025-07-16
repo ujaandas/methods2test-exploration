@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class SegmentReader {\npublic ByteBuffer readToNextMarkerNewBuffer ( ) throws IOException {\nif ( done ) return null ;\nList < ByteBuffer > buffers = new ArrayList < ByteBuffer > ( ) ;\nreadToNextMarkerBuffers ( buffers ) ;\nreturn NIOUtils . combineBuffers ( buffers ) ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class SegmentReaderTest {\n@Test\npublic void testToNextMarkerPartialVar1 ( ) throws IOException {\nbyte [ ] bytes = new byte [ ] {\n0 , 0 , 1 , 42 , 43 , 44 , 45 , 46 , 0 , 0 , 1 , 43 } ;\nReadableByteChannel ch = Channels . newChannel ( new ByteArrayInputStream ( bytes ) ) ;\nSegmentReader reader = new SegmentReader ( ch , 1 ) ;\nreader . setBufferIncrement ( 1 ) ;\nByteBuffer buf1 = reader . readToNextMarkerNewBuffer ( ) ;\nByteBuffer buf2 = reader . readToNextMarkerNewBuffer ( ) ;\nByteBuffer buf3 = reader . readToNextMarkerNewBuffer ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(buf1);\nassertEquals(8, buf1.remaining());\nassertEquals(0, buf1.get(0));\nassertEquals(0, buf1.get(1));\nassertEquals(1, buf1.get(2));\nassertEquals(42, buf1.get(3));\nassertEquals(43, buf1.get(4));\nassertEquals(44, buf1.get(5));\nassertEquals(45, buf1.get(6));\nassertEquals(46, buf1.get(7));\n\nassertNotNull(buf2);\nassertEquals(2, buf2.remaining());\nassertEquals(0, buf2.get(0));\nassertEquals(0, buf2.get(1));\n\nassertNotNull(buf3);\nassertEquals(1, buf3.remaining());\nassertEquals(1, buf3.get(0));\n```\n====================\n\n",
+    "scores": [
+        0.556,
+        0.556,
+        0.556,
+        0.528,
+        0.528,
+        0.521,
+        0.521,
+        0.521,
+        0.521,
+        0.521,
+        0.519,
+        0.5,
+        0.468,
+        0.468,
+        0.406,
+        0.406,
+        0.389,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(ByteBuffer.wrap(bytes,0,8),buf1);"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemote {\n< RET extends ORecord > RET save ( ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class OLiveQueryRemoteTest {\n@Test\npublic void testRidSelect ( ) throws InterruptedException {\nMyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ;\nOVertex item = database . newVertex ( ) ;\nitem . save ( ) ;\nOLiveQueryMonitor live = database . live ( \"STR\" + item . getIdentity ( ) , listener ) ;\nitem . setProperty ( \"STR\" , \"STR\" ) ;\nitem . save ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(listener);\nassertTrue(listener.isTriggered());\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertEquals(item.getIdentity(), listener.getLastIdentity());\nassertEquals(\"STR\", listener.getLastPropertyValue());\nassertTrue(item.exists());\nassertEquals(1, listener.getUpdateCount());\nassertTrue(listener.getLatch().getCount() == 0);\nassertNotNull(database.getVertex(item.getIdentity()));\nassertEquals(item, database.getVertex(item.getIdentity()));\nassertTrue(item.getProperty(\"STR\").equals(\"STR\"));\nassertTrue(listener.getLastEventType() == OLiveQueryEventType.UPDATE);\nassertTrue(listener.getLastEventSource() instanceof OVertex);\nassertTrue(listener.getLastEventSource().getIdentity().equals(item.getIdentity()));\nassertNotNull(listener.getLastEventTime());\nassertTrue(listener.getLastEventTime() > 0);\nassertTrue(listener.getLastEventSource().getProperty(\"STR\").equals(\"STR\"));\nassertTrue(listener.getLatch().await(1, TimeUnit.SECONDS));\nassertTrue(listener.getUpdateCount() > 0);\nassertFalse(listener.getLatch().await(0, TimeUnit.SECONDS));\nassertTrue(listener.getLastEventSource().isDirty());\n```\n====================\n\n",
+    "scores": [
+        0.927,
+        0.865,
+        0.617,
+        0.592,
+        0.565,
+        0.558,
+        0.552,
+        0.547,
+        0.489,
+        0.489,
+        0.486,
+        0.446,
+        0.436,
+        0.433,
+        0.431,
+        0.418,
+        0.405,
+        0.394,
+        0.385,
+        0.354,
+        0.34,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS));"
+}

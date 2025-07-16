@@ -1,0 +1,20 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormat {\npublic static String getDigestSha1 ( byte [ ] bytes1 , byte [ ] bytes2 ) {\nMessageDigest sha1 = DigestUtils . getSha1Digest ( ) ;\nsha1 . update ( bytes1 ) ;\nreturn \"STR\" + base32 . encodeAsString ( sha1 . digest ( bytes2 ) ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormatTest {\n@Test\npublic void testGetDigestSha1TwoByteArrays ( ) {\nbyte [ ] content1 = {\n'a' , 'b' , 'c' } ;\nbyte [ ] content2 = {\n'd' , 'e' , 'f' } ;\nString sha1str = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals( \"STRd7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertEquals( \"STR\" + \"d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotEquals( \"STR\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( \"STR\" ) ) ;\nassertFalse( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . isEmpty ( ) ) ;\nassertSame( sha1str + \"d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotSame( sha1str , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertArrayEquals( sha1str . toCharArray ( ) , \"STR\" . toCharArray ( ) ) ;\nassertThrows( NullPointerException . class , ( ) -> WARCRecordFormat . getDigestSha1 ( null , null ) ) ;\nassertTimeoutPreemptively( Duration . ofSeconds ( 1 ) , ( ) -> WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertLinesMatch( Arrays . asList ( \"STR\" , \"d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7\" ) , Arrays . asList ( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . split ( \"\" ) ) ) ;\nassertAll(\n( ) -> assertNotNull ( WARCRecordFormat . getDigestSha1 ( content1 , content2 )\n====================\n\n",
+    "scores": [
+        0.926,
+        0.886,
+        0.837,
+        0.805,
+        0.748,
+        0.746,
+        0.744,
+        0.734,
+        0.702,
+        0.682,
+        0.595,
+        0.54,
+        0.394
+    ],
+    "ground_truth": "assertEquals(\"STR\",sha1str,WARCRecordFormat.getDigestSha1(content1,content2));"
+}

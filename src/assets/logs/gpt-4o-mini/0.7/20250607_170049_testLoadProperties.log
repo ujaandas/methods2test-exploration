@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfo {
+    static Properties loadGitProperties ( String fileName ) { 
+    Properties properties = new Properties ( ) ; 
+    InputStream inputStream = GitInfo . class . getClassLoader ( ) . getResourceAsStream ( fileName ) ; 
+    try { 
+    properties . load ( inputStream ) ; 
+    return properties ; 
+    } catch ( NullPointerException e ) { 
+    LOGGER . trace ( "STR" + fileName , e ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + fileName , e ) ; 
+    } finally { 
+    closeQuietly ( inputStream ) ; 
+    } return new UnknownGitProperties ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class GitInfoTest {
+    @Test
+     public void testLoadProperties ( ) {
+         Properties properties = GitInfo . loadGitProperties ( GitInfo . GIT_INFO_FILE ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(properties);
+assertTrue(properties.size() > 0);
+assertTrue(properties.containsKey("git.commit.id"));
+assertTrue(properties.containsKey("git.build.time"));
+assertTrue(properties.containsKey("git.branch"));
+assertEquals("expected_commit_id", properties.getProperty("git.commit.id"));
+assertEquals("expected_build_time", properties.getProperty("git.build.time"));
+assertEquals("expected_branch_name", properties.getProperty("git.branch"));
+assertTrue(properties.containsKey("git.tags"));
+assertNotNull(properties.getProperty("git.tags"));
+assertTrue(properties.getProperty("git.tags").length() > 0);
+assertTrue(properties.containsKey("git.remote.origin.url"));
+assertNotNull(properties.getProperty("git.remote.origin.url"));
+assertEquals("expected_remote_url", properties.getProperty("git.remote.origin.url"));
+assertFalse(properties.getProperty("git.commit.id").isEmpty());
+assertFalse(properties.getProperty("git.build.time").isEmpty());
+assertFalse(properties.getProperty("git.branch").isEmpty());
+assertFalse(properties.getProperty("git.tags").isEmpty());
+assertTrue(properties.containsKey("git.commit.user.name"));
+assertTrue(properties.containsKey("git.commit.user.email"));
+assertEquals("expected_user_name", properties.getProperty("git.commit.user.name"));
+assertEquals("expected_user_email", properties.getProperty("git.commit.user.email"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(properties); ===
+0.862 - ```java
+assertNotNull(properties)
+0.679 - assertTrue(properties.size() > 0)
+0.676 - assertNotNull(properties.getProperty("git.tags"))
+0.575 - assertNotNull(properties.getProperty("git.remote.origin.url"))
+0.535 - assertTrue(properties.containsKey("git.tags"))
+0.521 - assertTrue(properties.containsKey("git.branch"))
+0.500 - assertTrue(properties.containsKey("git.commit.id"))
+0.494 - assertTrue(properties.containsKey("git.build.time"))
+0.463 - assertTrue(properties.getProperty("git.tags").length() > 0)
+0.463 - assertFalse(properties.getProperty("git.tags").isEmpty())
+0.458 - assertTrue(properties.containsKey("git.commit.user.name"))
+0.452 - assertTrue(properties.containsKey("git.remote.origin.url"))
+0.452 - assertFalse(properties.getProperty("git.branch").isEmpty())
+0.452 - assertTrue(properties.containsKey("git.commit.user.email"))
+0.437 - assertFalse(properties.getProperty("git.commit.id").isEmpty())
+0.432 - assertFalse(properties.getProperty("git.build.time").isEmpty())
+0.396 - assertEquals("expected_build_time", properties.getProperty("git.build.time"))
+0.389 - assertEquals("expected_remote_url", properties.getProperty("git.remote.origin.url"))
+0.384 - assertEquals("expected_commit_id", properties.getProperty("git.commit.id"))
+0.370 - assertEquals("expected_user_email", properties.getProperty("git.commit.user.email"))
+0.367 - assertEquals("expected_branch_name", properties.getProperty("git.branch"))
+0.358 - assertEquals("expected_user_name", properties.getProperty("git.commit.user.name"))
+0.000 - ```

@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupport {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupportTest {
+    @Test
+     public void testQueryEmbedded ( ) {
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . setProperty ( "STR" , "STR" ) ; 
+         ODocument emb = new ODocument ( ) ; 
+         emb . setProperty ( "STR" , "STR" ) ; 
+         doc . setProperty ( "STR" , emb , OType . EMBEDDED ) ; 
+         session . save ( doc ) ; 
+         OResultSet res = session . query ( "STR" ) ; 
+         OResult item = res . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals("STR", item.getProperty("STR"));
+assertTrue(item.getProperty("STR") instanceof ODocument);
+assertEquals("STR", ((ODocument) item.getProperty("STR")).getProperty("STR"));
+assertNotNull(item.getProperty("STR"));
+assertEquals(1, res.stream().count());
+assertTrue(res.hasNext());
+assertEquals("STR", res.next().getProperty("STR"));
+assertNotNull(res.next());
+assertNotNull(res);
+assertTrue(res.hasNext());
+assertEquals("STR", doc.getProperty("STR"));
+assertEquals("STR", emb.getProperty("STR"));
+assertTrue(doc.getProperty("STR") instanceof ODocument);
+assertTrue(emb.getProperty("STR") instanceof String);
+assertEquals(1, session.count());
+assertNotNull(session);
+assertTrue(session.isOpen());
+assertEquals(1, session.getClusterNames().size());
+assertTrue(session.getClusterNames().contains("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(item.getProperty("STR")); ===
+1.000 - assertNotNull(item.getProperty("STR"))
+0.775 - assertEquals("STR", emb.getProperty("STR"))
+0.702 - Assertions:
+
+assertEquals("STR", item.getProperty("STR"))
+0.696 - assertTrue(item.getProperty("STR") instanceof ODocument)
+0.682 - assertTrue(emb.getProperty("STR") instanceof String)
+0.675 - assertEquals("STR", doc.getProperty("STR"))
+0.644 - assertEquals("STR", res.next().getProperty("STR"))
+0.593 - assertTrue(doc.getProperty("STR") instanceof ODocument)
+0.571 - assertNotNull(res.next())
+0.571 - assertNotNull(res)
+0.567 - assertNotNull(session)
+0.566 - assertEquals("STR", ((ODocument) item.getProperty("STR")).getProperty("STR"))
+0.484 - assertTrue(session.getClusterNames().contains("STR"))
+0.394 - assertTrue(session.isOpen())
+0.372 - assertEquals(1, session.getClusterNames().size())
+0.349 - assertTrue(res.hasNext())
+0.349 - assertTrue(res.hasNext())
+0.319 - assertEquals(1, session.count())
+0.297 - assertEquals(1, res.stream().count())

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testNullValueInCellEmptyString ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(1, res.size());
+assertTrue(res.get(0).containsField("column1"));
+assertTrue(res.get(0).containsField("column2"));
+assertEquals("ExpectedValue1", res.get(0).field("column1"));
+assertEquals("", res.get(0).field("column2")); // Checking for empty string
+assertNotNull(res.get(0).field("column3"));
+assertEquals("ExpectedValue3", res.get(0).field("column3"));
+assertTrue(res.get(0).field("column4") instanceof String);
+assertEquals("ExpectedValue4", res.get(0).field("column4"));
+assertTrue(res.get(0).field("column5") instanceof Integer);
+assertEquals(123, res.get(0).field("column5"));
+assertNotNull(res.get(0).field("timestamp"));
+assertTrue(res.get(0).field("timestamp") instanceof Date);
+assertEquals("ExpectedValue6", res.get(0).field("column6"));
+assertFalse(res.get(0).field("column7").toString().isEmpty());
+assertTrue(res.get(0).field("column8") instanceof List);
+assertEquals(3, ((List)res.get(0).field("column8")).size());
+assertTrue(res.get(0).field("column9") instanceof Map);
+assertTrue(((Map)res.get(0).field("column9")).containsKey("key1"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.692 - assertEquals(1, res.size())
+0.598 - assertFalse(res.get(0).field("column7").toString().isEmpty())
+0.514 - assertEquals("", res.get(0).field("column2"))
+0.514 - assertNotNull(res.get(0).field("timestamp"))
+0.507 - assertEquals(123, res.get(0).field("column5"))
+0.466 - assertTrue(res.get(0).containsField("column1"))
+0.466 - assertTrue(res.get(0).containsField("column2"))
+0.462 - ```java
+assertNotNull(res)
+0.452 - assertEquals(3, ((List)res.get(0).field("column8")).size())
+0.444 - assertTrue(res.get(0).field("timestamp") instanceof Date)
+0.429 - assertEquals("ExpectedValue1", res.get(0).field("column1"))
+0.429 - assertEquals("ExpectedValue3", res.get(0).field("column3"))
+0.429 - assertEquals("ExpectedValue4", res.get(0).field("column4"))
+0.429 - assertEquals("ExpectedValue6", res.get(0).field("column6"))
+0.410 - assertTrue(res.get(0).field("column9") instanceof Map)
+0.405 - assertTrue(res.get(0).field("column8") instanceof List)
+0.395 - assertTrue(res.get(0).field("column4") instanceof String)
+0.391 - assertTrue(((Map)res.get(0).field("column9")).containsKey("key1"))
+0.390 - assertTrue(res.get(0).field("column5") instanceof Integer)
+0.344 - // Checking for empty string
+assertNotNull(res.get(0).field("column3"))
+0.000 - ```

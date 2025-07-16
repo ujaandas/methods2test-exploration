@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testDontFixMangledQueryString ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ; 
+         URL testSourceUrl = new URL ( "STR" ) ; 
+         String testUrl = "STR" ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(normalizedUrl);
+assertEquals(expectedResult, normalizedUrl);
+assertTrue(normalizedUrl.startsWith("http"));
+assertFalse(normalizedUrl.contains(" ")); // Check for spaces
+assertTrue(normalizedUrl.contains("?")); // Check for query string presence
+assertFalse(normalizedUrl.endsWith("&")); // Check for trailing ampersand
+assertFalse(normalizedUrl.contains("&&")); // Check for double ampersand
+assertEquals(expectedResult.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.matches("https?://.*")); // Check for valid URL format
+assertFalse(normalizedUrl.contains("#")); // Check for fragment presence
+assertFalse(normalizedUrl.contains("javascript:")); // Check for javascript injection
+assertFalse(normalizedUrl.contains("data:")); // Check for data URI
+assertFalse(normalizedUrl.contains("mailto:")); // Check for mailto links
+assertFalse(normalizedUrl.contains("ftp:")); // Check for ftp links
+assertTrue(normalizedUrl.contains("param=value")); // Check for specific query param
+assertEquals(expectedResult.toLowerCase(), normalizedUrl.toLowerCase()); // Check case insensitivity
+assertTrue(normalizedUrl.split("\\?").length <= 2); // Check for single query string
+assertTrue(normalizedUrl.length() <= 2048); // Check for URL length
+assertTrue(normalizedUrl.indexOf("param1") < normalizedUrl.indexOf("param2")); // Check order of parameters
+assertEquals(new URL("http://example.com/").getHost(), new URL(normalizedUrl).getHost()); // Check host consistency
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - assertEquals(expectedResult, normalizedUrl)
+0.627 - // Check for double ampersand
+assertEquals(expectedResult.length(), normalizedUrl.length())
+0.571 - // Check for specific query param
+assertEquals(expectedResult.toLowerCase(), normalizedUrl.toLowerCase())
+0.552 - assertFalse(normalizedUrl.contains(" "))
+0.548 - ```java
+assertNotNull(normalizedUrl)
+0.478 - assertTrue(normalizedUrl.startsWith("http"))
+0.458 - assertTrue(normalizedUrl.matches("https?://.*"))
+0.456 - // Check order of parameters
+assertEquals(new URL("http://example.com/").getHost(), new URL(normalizedUrl).getHost())
+0.429 - // Check for data URI
+assertFalse(normalizedUrl.contains("mailto:"))
+0.425 - // Check for valid URL format
+assertFalse(normalizedUrl.contains("#"))
+0.425 - // Check for mailto links
+assertFalse(normalizedUrl.contains("ftp:"))
+0.423 - // Check for spaces
+assertTrue(normalizedUrl.contains("?"))
+0.410 - // Check for trailing ampersand
+assertFalse(normalizedUrl.contains("&&"))
+0.407 - // Check for query string presence
+assertFalse(normalizedUrl.endsWith("&"))
+0.393 - // Check for javascript injection
+assertFalse(normalizedUrl.contains("data:"))
+0.384 - // Check for fragment presence
+assertFalse(normalizedUrl.contains("javascript:"))
+0.379 - // Check for ftp links
+assertTrue(normalizedUrl.contains("param=value"))
+0.379 - // Check for single query string
+assertTrue(normalizedUrl.length() <= 2048)
+0.364 - // Check case insensitivity
+assertTrue(normalizedUrl.split("\\?").length <= 2)
+0.308 - // Check for URL length
+assertTrue(normalizedUrl.indexOf("param1") < normalizedUrl.indexOf("param2"))
+0.135 - // Check host consistency
+```

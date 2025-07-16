@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue23 ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(schemas);
+2. assertEquals(1, schemas.size());
+3. XsdSchema schema = schemas.get(0);
+4. assertNotNull(schema);
+5. assertEquals("xsd:schema", schema.getElementName());
+6. assertEquals("http://www.w3.org/2001/XMLSchema", schema.getTargetNamespace());
+7. assertEquals("xsd", schema.getPrefix());
+8. assertEquals(3, schema.getAttributes().size());
+9. assertTrue(schema.hasElementFormDefault());
+10. assertEquals("qualified", schema.getElementFormDefault());
+11. assertTrue(schema.hasAttributeFormDefault());
+12. assertEquals("unqualified", schema.getAttributeFormDefault());
+13. assertTrue(schema.hasVersion());
+14. assertEquals("1.0", schema.getVersion());
+15. assertEquals(2, schema.getElements().size());
+16. assertTrue(schema.hasElement("xsd:element"));
+17. assertTrue(schema.hasElement("xsd:complexType"));
+18. assertEquals("xsd:element", schema.getElements().get(0).getElementName());
+19. assertEquals("xsd:complexType", schema.getElements().get(1).getElementName());
+20. assertTrue(schema.getElements().get(0).isTopLevelElement());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(true); ===
+0.520 - 13. assertTrue(schema.hasVersion())
+0.508 - 11. assertTrue(schema.hasAttributeFormDefault())
+0.500 - 9. assertTrue(schema.hasElementFormDefault())
+0.462 - 4. assertNotNull(schema)
+0.444 - 16. assertTrue(schema.hasElement("xsd:element"))
+0.418 - 17. assertTrue(schema.hasElement("xsd:complexType"))
+0.417 - 2. assertEquals(1, schemas.size())
+0.359 - 20. assertTrue(schema.getElements().get(0).isTopLevelElement())
+0.357 - 7. assertEquals("xsd", schema.getPrefix())
+0.349 - 8. assertEquals(3, schema.getAttributes().size())
+0.340 - Assertions:
+
+1. assertNotNull(schemas)
+0.329 - 12. assertEquals("unqualified", schema.getAttributeFormDefault())
+0.323 - 15. assertEquals(2, schema.getElements().size())
+0.310 - 14. assertEquals("1.0", schema.getVersion())
+0.294 - 5. assertEquals("xsd:schema", schema.getElementName())
+0.292 - 3. XsdSchema schema = schemas.get(0)
+0.267 - 10. assertEquals("qualified", schema.getElementFormDefault())
+0.234 - 6. assertEquals("http://www.w3.org/2001/XMLSchema", schema.getTargetNamespace())
+0.220 - 18. assertEquals("xsd:element", schema.getElements().get(0).getElementName())
+0.211 - 19. assertEquals("xsd:complexType", schema.getElements().get(1).getElementName())

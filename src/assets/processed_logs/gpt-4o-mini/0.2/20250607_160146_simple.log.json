@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class InitContainerHandler {\npublic boolean hasInitContainer ( PodTemplateSpecBuilder builder , String name ) {\nreturn getInitContainer ( builder , name ) != null ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class InitContainerHandlerTest {\n@Test\npublic void simple ( ) {\nPodTemplateSpecBuilder builder = getPodTemplateBuilder ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-1\"));\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-2\"));\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-3\"));\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-4\"));\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-5\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-6\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-7\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-8\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-9\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-10\"));\nassertEquals(0, builder.getInitContainers().size());\nbuilder.addInitContainer(new InitContainer(\"init-container-1\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-1\"));\nbuilder.addInitContainer(new InitContainer(\"init-container-2\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-2\"));\nbuilder.removeInitContainer(\"init-container-1\");\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-1\"));\nassertEquals(1, builder.getInitContainers().size());\nbuilder.clearInitContainers();\nassertEquals(0, builder.getInitContainers().size());\nassertFalse(initContainerHandler.hasInitContainer(builder, \"init-container-3\"));\nbuilder.addInitContainer(new InitContainer(\"init-container-4\"));\nassertTrue(initContainerHandler.hasInitContainer(builder, \"init-container-4\"));\n```\n====================\n\n",
+    "scores": [
+        0.738,
+        0.738,
+        0.738,
+        0.738,
+        0.738,
+        0.738,
+        0.696,
+        0.682,
+        0.682,
+        0.682,
+        0.682,
+        0.682,
+        0.682,
+        0.682,
+        0.677,
+        0.627,
+        0.627,
+        0.627,
+        0.519,
+        0.485,
+        0.474,
+        0.474,
+        0.474,
+        0.0
+    ],
+    "ground_truth": "assertFalse(handler.hasInitContainer(builder,\"STR\"));"
+}

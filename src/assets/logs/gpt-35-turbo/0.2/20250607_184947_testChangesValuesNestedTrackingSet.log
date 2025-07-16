@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollections {
+    public List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) { 
+    return Collections . unmodifiableList ( multiValueChangeEvents ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollectionsTest {
+    @Test
+     public void testChangesValuesNestedTrackingSet ( ) {
+         ODocument document = new ODocument ( ) ; 
+         Set objects = new HashSet ( ) ; 
+         document . field ( "STR" , objects ) ; 
+         Set subObjects = new HashSet ( ) ; 
+         objects . add ( subObjects ) ; 
+         ODocument nestedDoc = new ODocument ( ) ; 
+         subObjects . add ( nestedDoc ) ; 
+         document . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         objects = document . field ( "STR" ) ; 
+         subObjects = ( Set ) objects . iterator ( ) . next ( ) ; 
+         subObjects . add ( "STR" ) ; 
+         OMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(subObjects.contains("STR"));
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().size());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().size());
+Assert.assertEquals("STR", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getValue());
+Assert.assertEquals(OMultiValueChangeEvent.OPERATION.ADD, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getOperation());
+Assert.assertEquals(subObjects, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getMultiValue());
+Assert.assertEquals("STR", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getKey());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeTime());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeIndex());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeType());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeSequence());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeCounter());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeId());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());
+Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,timeLine.getMultiValueChangeEvents().size()); ===
+1.000 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().size())
+0.825 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().size())
+0.730 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeTime())
+0.726 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeId())
+0.718 - Assert.assertEquals("STR", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getKey())
+0.717 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeType())
+0.713 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeIndex())
+0.709 - Assert.assertEquals("STR", timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getValue())
+0.704 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion())
+0.704 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeCounter())
+0.704 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion())
+0.704 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion())
+0.704 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeVersion())
+0.699 - Assert.assertEquals(1, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getChangeSequence())
+0.679 - Assert.assertEquals(subObjects, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getMultiValue())
+0.580 - Assert.assertEquals(OMultiValueChangeEvent.OPERATION.ADD, timeLine.getMultiValueChangeEvents().get(0).getChangeEvents().get(0).getOperation())
+0.247 - Assert.assertTrue(subObjects.contains("STR"))

@@ -1,0 +1,101 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtils {
+    public static Date getTodayWithTime ( final String iTime ) throws ParseException { 
+    final SimpleDateFormat df = new SimpleDateFormat ( "STR" ) ; 
+    Calendar calParsed = Calendar . getInstance ( ) ; 
+    calParsed . setTime ( df . parse ( iTime ) ) ; 
+    Calendar cal = Calendar . getInstance ( ) ; 
+    cal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ; 
+    cal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ; 
+    cal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ; 
+    cal . set ( Calendar . MILLISECOND , 0 ) ; 
+    return cal . getTime ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtilsTest {
+    @Test
+     public void shoudGetRightTimeFromString ( ) throws ParseException {
+         Calendar calendar = Calendar . getInstance ( ) ; 
+         calendar . set ( Calendar . HOUR_OF_DAY , 5 ) ; 
+         calendar . set ( Calendar . MINUTE , 10 ) ; 
+         calendar . set ( Calendar . SECOND , 0 ) ; 
+         calendar . set ( Calendar . MILLISECOND , 0 ) ; 
+         Date d = OIOUtils . getTodayWithTime ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        assertNotNull(d);
+        assertEquals(5, calendar.get(Calendar.HOUR_OF_DAY));
+        assertEquals(10, calendar.get(Calendar.MINUTE));
+        assertEquals(0, calendar.get(Calendar.SECOND));
+        assertEquals(0, calendar.get(Calendar.MILLISECOND));
+        assertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR));
+        assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH));
+        assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        assertTrue(d instanceof Date);
+        assertEquals(d.getTime(), calendar.getTimeInMillis());
+        assertTrue(d.after(new Date(0))); // Check if date is after epoch
+        assertTrue(d.before(new Date(Long.MAX_VALUE))); // Check if date is before max date
+        assertEquals(0, d.getTime() % 1000); // Ensure milliseconds are zero
+        assertEquals(10, calendar.get(Calendar.MINUTE));
+        assertNotEquals(calendar.getTimeInMillis(), d.getTime() + 1000); // Check they are not 1 second apart
+        assertNotEquals(calendar.getTimeInMillis(), d.getTime() - 1000); // Check they are not 1 second apart
+        assertEquals(0, calendar.get(Calendar.MILLISECOND)); // Verify milliseconds
+        assertTrue(d.equals(calendar.getTime())); // Check equality
+        assertTrue(d.before(Calendar.getInstance().getTime())); // Ensure date is in the past
+        assertTrue(d.after(new Date(System.currentTimeMillis() - 100000))); // Ensure date is recent
+        assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH)); // Check day
+        assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH)); // Check month
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(calendar.getTime(),d); ===
+0.744 - assertEquals(d.getTime(), calendar.getTimeInMillis())
+0.723 - assertNotEquals(calendar.getTimeInMillis(), d.getTime() + 1000)
+0.709 - assertEquals(0, calendar.get(Calendar.SECOND))
+0.700 - assertEquals(10, calendar.get(Calendar.MINUTE))
+0.667 - assertEquals(5, calendar.get(Calendar.HOUR_OF_DAY))
+0.667 - assertEquals(0, calendar.get(Calendar.MILLISECOND))
+0.653 - // Verify milliseconds
+        assertTrue(d.equals(calendar.getTime()))
+0.548 - // Check they are not 1 second apart
+        assertNotEquals(calendar.getTimeInMillis(), d.getTime() - 1000)
+0.526 - // Check if date is before max date
+        assertEquals(0, d.getTime() % 1000)
+0.521 - assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH))
+0.519 - // Ensure milliseconds are zero
+        assertEquals(10, calendar.get(Calendar.MINUTE))
+0.513 - assertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR))
+0.500 - // Check equality
+        assertTrue(d.before(Calendar.getInstance().getTime()))
+0.491 - // Check they are not 1 second apart
+        assertEquals(0, calendar.get(Calendar.MILLISECOND))
+0.477 - // Check day
+        assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH))
+0.466 - assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+0.403 - // Ensure date is recent
+        assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+0.379 - ```java
+        assertNotNull(d)
+0.338 - assertTrue(d.after(new Date(0)))
+0.331 - // Ensure date is in the past
+        assertTrue(d.after(new Date(System.currentTimeMillis() - 100000)))
+0.328 - assertTrue(d instanceof Date)
+0.210 - // Check if date is after epoch
+        assertTrue(d.before(new Date(Long.MAX_VALUE)))
+0.080 - // Check month
+```

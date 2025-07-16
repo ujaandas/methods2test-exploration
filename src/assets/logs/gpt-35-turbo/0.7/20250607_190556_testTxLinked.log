@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSave {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class RecursiveLinkedSaveTest {
+    @Test
+     public void testTxLinked ( ) {
+         db . getMetadata ( ) . getSchema ( ) . createClass ( "STR" ) ; 
+         db . begin ( ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         ODocument doc1 = new ODocument ( "STR" ) ; 
+         doc . field ( "STR" , doc1 ) ; 
+         ODocument doc2 = new ODocument ( "STR" ) ; 
+         doc1 . field ( "STR" , doc2 ) ; 
+         doc2 . field ( "STR" , doc ) ; 
+         db . save ( doc ) ; 
+         db . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(doc);
+Assert.assertNotNull(doc1);
+Assert.assertNotNull(doc2);
+Assert.assertEquals("STR", doc.getClassName());
+Assert.assertEquals("STR", doc1.getClassName());
+Assert.assertEquals("STR", doc2.getClassName());
+Assert.assertEquals(doc1, doc.field("STR"));
+Assert.assertEquals(doc2, doc1.field("STR"));
+Assert.assertEquals(doc, doc2.field("STR"));
+Assert.assertTrue(doc.getIdentity().isValid());
+Assert.assertTrue(doc1.getIdentity().isValid());
+Assert.assertTrue(doc2.getIdentity().isValid());
+Assert.assertNotNull(db.load(doc.getIdentity()));
+Assert.assertNotNull(db.load(doc1.getIdentity()));
+Assert.assertNotNull(db.load(doc2.getIdentity()));
+Assert.assertEquals(doc1, doc.field("STR"));
+Assert.assertEquals(doc2, doc1.field("STR"));
+Assert.assertEquals(doc, doc2.field("STR"));
+Assert.assertEquals(3, db.countClass("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,db.countClass("STR")); ===
+1.000 - Assert.assertEquals(3, db.countClass("STR"))
+0.704 - Assert.assertEquals(doc1, doc.field("STR"))
+0.704 - Assert.assertEquals(doc, doc2.field("STR"))
+0.704 - Assert.assertEquals(doc1, doc.field("STR"))
+0.704 - Assert.assertEquals(doc, doc2.field("STR"))
+0.694 - Assert.assertEquals(doc2, doc1.field("STR"))
+0.694 - Assert.assertEquals(doc2, doc1.field("STR"))
+0.676 - Assert.assertEquals("STR", doc.getClassName())
+0.667 - Assert.assertEquals("STR", doc1.getClassName())
+0.667 - Assert.assertEquals("STR", doc2.getClassName())
+0.468 - Assert.assertNotNull(db.load(doc.getIdentity()))
+0.462 - Assert.assertNotNull(db.load(doc1.getIdentity()))
+0.462 - Assert.assertNotNull(db.load(doc2.getIdentity()))
+0.444 - Assert.assertNotNull(doc)
+0.436 - Assert.assertNotNull(doc1)
+0.436 - Assert.assertNotNull(doc2)
+0.320 - Assert.assertTrue(doc.getIdentity().isValid())
+0.316 - Assert.assertTrue(doc1.getIdentity().isValid())
+0.316 - Assert.assertTrue(doc2.getIdentity().isValid())

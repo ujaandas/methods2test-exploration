@@ -1,0 +1,61 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testInvalidURI ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , true ) ; 
+         String nonURI = "STR" ; 
+         URL testSourceUrl = new URL ( nonURI ) ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expectedResult, normalizedUrl);
+assertEquals("http://www.example.com", urlFilter.filter(new URL("http://www.example.com"), new Metadata(), "http://www.example.com"));
+assertEquals("https://www.example.com", urlFilter.filter(new URL("https://www.example.com"), new Metadata(), "https://www.example.com"));
+assertEquals("ftp://www.example.com", urlFilter.filter(new URL("ftp://www.example.com"), new Metadata(), "ftp://www.example.com"));
+assertEquals("http://www.example.com:8080", urlFilter.filter(new URL("http://www.example.com:8080"), new Metadata(), "http://www.example.com:8080"));
+assertEquals("http://www.example.com/path", urlFilter.filter(new URL("http://www.example.com/path"), new Metadata(), "http://www.example.com/path"));
+assertEquals("http://www.example.com/path?query=1", urlFilter.filter(new URL("http://www.example.com/path?query=1"), new Metadata(), "http://www.example.com/path?query=1"));
+assertEquals("http://www.example.com/path#fragment", urlFilter.filter(new URL("http://www.example.com/path#fragment"), new Metadata(), "http://www.example.com/path#fragment"));
+assertEquals("https://www.example.com/path", urlFilter.filter(new URL("https://www.example.com/path"), new Metadata(), "https://www.example.com/path"));
+assertEquals("http://www.example.com/path/", urlFilter.filter(new URL("http://www.example.com/path/"), new Metadata(), "http://www.example.com/path/"));
+assertEquals("http://www.example.com/path/index.html", urlFilter.filter(new URL("http://www.example.com/path/index.html"), new Metadata(), "http://www.example.com/path/index.html"));
+assertEquals("http://www.example.com/path/index.html?query=1", urlFilter.filter(new URL("http://www.example.com/path/index.html?query=1"), new Metadata(), "http://www.example.com/path/index.html?query=1"));
+assertEquals("http://www.example.com/path/index.html#fragment", urlFilter.filter(new URL("http://www.example.com/path/index.html#fragment"), new Metadata(), "http://www.example.com/path/index.html#fragment"));
+assertEquals("http://www.example.com:8080/path", urlFilter.filter(new URL("http://www.example.com:8080/path"), new Metadata(), "http://www.example.com:8080/path"));
+assertEquals("
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - assertEquals(expectedResult, normalizedUrl)
+0.452 - assertEquals("
+0.301 - assertEquals("ftp://www.example.com", urlFilter.filter(new URL("ftp://www.example.com"), new Metadata(), "ftp://www.example.com"))
+0.295 - assertEquals("http://www.example.com", urlFilter.filter(new URL("http://www.example.com"), new Metadata(), "http://www.example.com"))
+0.293 - assertEquals("http://www.example.com/path", urlFilter.filter(new URL("http://www.example.com/path"), new Metadata(), "http://www.example.com/path"))
+0.291 - assertEquals("https://www.example.com", urlFilter.filter(new URL("https://www.example.com"), new Metadata(), "https://www.example.com"))
+0.289 - assertEquals("https://www.example.com/path", urlFilter.filter(new URL("https://www.example.com/path"), new Metadata(), "https://www.example.com/path"))
+0.289 - assertEquals("http://www.example.com/path/", urlFilter.filter(new URL("http://www.example.com/path/"), new Metadata(), "http://www.example.com/path/"))
+0.284 - assertEquals("http://www.example.com/path#fragment", urlFilter.filter(new URL("http://www.example.com/path#fragment"), new Metadata(), "http://www.example.com/path#fragment"))
+0.277 - assertEquals("http://www.example.com/path/index.html", urlFilter.filter(new URL("http://www.example.com/path/index.html"), new Metadata(), "http://www.example.com/path/index.html"))
+0.272 - assertEquals("http://www.example.com:8080", urlFilter.filter(new URL("http://www.example.com:8080"), new Metadata(), "http://www.example.com:8080"))
+0.272 - assertEquals("http://www.example.com:8080/path", urlFilter.filter(new URL("http://www.example.com:8080/path"), new Metadata(), "http://www.example.com:8080/path"))
+0.260 - assertEquals("http://www.example.com/path?query=1", urlFilter.filter(new URL("http://www.example.com/path?query=1"), new Metadata(), "http://www.example.com/path?query=1"))
+0.145 - assertEquals("http://www.example.com/path/index.html?query=1", urlFilter.filter(new URL("http://www.example.com/path/index.html?query=1"), new Metadata(), "http://www.example.com/path/index.html?query=1"))
+0.143 - assertEquals("http://www.example.com/path/index.html#fragment", urlFilter.filter(new URL("http://www.example.com/path/index.html#fragment"), new Metadata(), "http://www.example.com/path/index.html#fragment"))

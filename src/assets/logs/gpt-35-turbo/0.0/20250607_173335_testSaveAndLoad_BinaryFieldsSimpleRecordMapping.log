@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class OObjectBinaryDataStorage {
+    public < RET > RET load ( final ORID recordId ) { 
+    return ( RET ) load ( recordId , null ) ; 
+    }
+}
+
+package orientechnologies.orientdb.object;
+
+public class OObjectBinaryDataStorageTest {
+    @Test
+     public void testSaveAndLoad_BinaryFieldsSimpleRecordMapping ( ) throws IOException {
+         this . createDb ( ODocumentFieldHandlingStrategyFactory . SIMPLE ) ; 
+         Driver hunt = new Driver ( ) ; 
+         hunt . setName ( "STR" ) ; 
+         byte [ ] huntUglyPicture = randomBytes ( 1024 * 32 ) ; 
+         hunt . setImageData ( huntUglyPicture ) ; 
+         Driver savedHunt = this . databaseTx . save ( hunt ) ; 
+         Driver loadedHunt = this . databaseTx . load ( new ORecordId ( savedHunt . getId ( ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", loadedHunt.getName());
+Assert.assertArrayEquals(huntUglyPicture, loadedHunt.getImageData());
+Assert.assertEquals(hunt.getId(), loadedHunt.getId());
+Assert.assertNotNull(loadedHunt);
+Assert.assertEquals(Driver.class, loadedHunt.getClass());
+Assert.assertEquals(1024 * 32, loadedHunt.getImageData().length);
+Assert.assertEquals("STR", savedHunt.getName());
+Assert.assertArrayEquals(huntUglyPicture, savedHunt.getImageData());
+Assert.assertEquals(hunt.getId(), savedHunt.getId());
+Assert.assertNotNull(savedHunt);
+Assert.assertEquals(Driver.class, savedHunt.getClass());
+Assert.assertEquals(1024 * 32, savedHunt.getImageData().length);
+Assert.assertNotEquals(savedHunt, loadedHunt);
+Assert.assertNotSame(savedHunt, loadedHunt);
+Assert.assertNotEquals(savedHunt.getName(), loadedHunt.getName());
+Assert.assertNotEquals(savedHunt.getImageData(), loadedHunt.getImageData());
+Assert.assertNotEquals(savedHunt.getId(), loadedHunt.getId());
+Assert.assertNotSame(savedHunt.getName(), loadedHunt.getName());
+Assert.assertNotSame(savedHunt.getImageData(), loadedHunt.getImageData());
+Assert.assertNotSame(savedHunt.getId(), loadedHunt.getId());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(savedHunt); ===
+1.000 - Assert.assertNotNull(savedHunt)
+0.898 - Assert.assertNotNull(loadedHunt)
+0.721 - Assert.assertNotEquals(savedHunt, loadedHunt)
+0.678 - Assert.assertNotSame(savedHunt, loadedHunt)
+0.603 - Assert.assertEquals("STR", savedHunt.getName())
+0.571 - Assert.assertNotEquals(savedHunt.getId(), loadedHunt.getId())
+0.543 - Assert.assertNotEquals(savedHunt.getName(), loadedHunt.getName())
+0.535 - Assert.assertEquals(Driver.class, savedHunt.getClass())
+0.533 - Assert.assertNotSame(savedHunt.getId(), loadedHunt.getId())
+0.529 - Assert.assertEquals(hunt.getId(), savedHunt.getId())
+0.506 - Assert.assertNotSame(savedHunt.getName(), loadedHunt.getName())
+0.494 - Assert.assertEquals(1024 * 32, savedHunt.getImageData().length)
+0.484 - Assert.assertNotEquals(savedHunt.getImageData(), loadedHunt.getImageData())
+0.469 - Assert.assertEquals("STR", loadedHunt.getName())
+0.449 - Assert.assertNotSame(savedHunt.getImageData(), loadedHunt.getImageData())
+0.435 - Assert.assertEquals(hunt.getId(), loadedHunt.getId())
+0.434 - Assert.assertArrayEquals(huntUglyPicture, savedHunt.getImageData())
+0.417 - Assert.assertEquals(Driver.class, loadedHunt.getClass())
+0.385 - Assert.assertEquals(1024 * 32, loadedHunt.getImageData().length)
+0.357 - Assert.assertArrayEquals(huntUglyPicture, loadedHunt.getImageData())

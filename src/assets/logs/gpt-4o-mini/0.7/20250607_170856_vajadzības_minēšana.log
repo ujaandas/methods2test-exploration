@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void vajadzības_minēšana ( ) {
+         locītājs . enablePrefixes = true ; 
+         Word vārds = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(vārds);
+assertTrue(vārds.isRecognized());
+assertFalse(vārds.getWordforms().isEmpty());
+assertEquals("ExpectedForm1", vārds.getWordforms().get(0));
+assertEquals("ExpectedForm2", vārds.getWordforms().get(1));
+assertTrue(vārds.getWordforms().contains("ExpectedForm3"));
+assertFalse(vārds.getWordforms().contains("UnexpectedForm"));
+assertEquals(3, vārds.getWordforms().size());
+assertTrue(vārds.hasPrefix("PREFIX"));
+assertFalse(vārds.hasSuffix("SUFFIX"));
+assertTrue(vārds.getAnalysis().contains("AnalysisDetail1"));
+assertFalse(vārds.getAnalysis().contains("UnrelatedDetail"));
+assertEquals("BaseForm", vārds.getBaseForm());
+assertEquals("PartOfSpeech", vārds.getPartOfSpeech());
+assertNotNull(vārds.getDerivations());
+assertFalse(vārds.getDerivations().isEmpty());
+assertTrue(vārds.getDerivations().contains("DerivedForm1"));
+assertFalse(vārds.getDerivations().contains("NonDerivedForm"));
+assertEquals("SomeSpecificAnalysis", vārds.getSpecificAnalysis());
+assertTrue(vārds.isValid());
+assertFalse(vārds.isAmbiguous());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(vārds.isRecognized()); ===
+1.000 - assertTrue(vārds.isRecognized())
+0.814 - assertTrue(vārds.isValid())
+0.625 - assertFalse(vārds.isAmbiguous())
+0.609 - assertTrue(vārds.hasPrefix("PREFIX"))
+0.593 - assertTrue(vārds.getDerivations().contains("DerivedForm1"))
+0.571 - assertTrue(vārds.getAnalysis().contains("AnalysisDetail1"))
+0.560 - assertEquals(3, vārds.getWordforms().size())
+0.556 - assertTrue(vārds.getWordforms().contains("ExpectedForm3"))
+0.551 - assertNotNull(vārds.getDerivations())
+0.522 - assertFalse(vārds.getAnalysis().contains("UnrelatedDetail"))
+0.514 - assertFalse(vārds.hasSuffix("SUFFIX"))
+0.511 - assertFalse(vārds.getDerivations().contains("NonDerivedForm"))
+0.507 - assertFalse(vārds.getWordforms().isEmpty())
+0.500 - assertEquals("BaseForm", vārds.getBaseForm())
+0.494 - assertFalse(vārds.getDerivations().isEmpty())
+0.478 - assertFalse(vārds.getWordforms().contains("UnexpectedForm"))
+0.467 - ```java
+assertNotNull(vārds)
+0.452 - assertEquals("PartOfSpeech", vārds.getPartOfSpeech())
+0.396 - assertEquals("SomeSpecificAnalysis", vārds.getSpecificAnalysis())
+0.382 - assertEquals("ExpectedForm1", vārds.getWordforms().get(0))
+0.382 - assertEquals("ExpectedForm2", vārds.getWordforms().get(1))
+0.000 - ```

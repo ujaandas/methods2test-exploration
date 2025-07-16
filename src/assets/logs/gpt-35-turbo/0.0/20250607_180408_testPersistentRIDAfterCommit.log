@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class Blueprints {
+    boolean isPersistent ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class BlueprintsTest {
+    @Test
+     public void testPersistentRIDAfterCommit ( ) {
+         Vertex v = graph . addVertex ( null ) ; 
+         v . setProperty ( "STR" , "STR" ) ; 
+         graph . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(v);
+assertTrue(v.getId() instanceof ORID);
+assertTrue(v.getProperty("STR").equals("STR"));
+assertTrue(v.getPropertyKeys().contains("STR"));
+assertTrue(graph.getVertices().contains(v));
+assertTrue(graph.getVertices().size() == 1);
+assertTrue(graph.getEdges().isEmpty());
+assertTrue(graph.getVertex(v.getId()).equals(v));
+assertTrue(graph.getVertex(v.getId()).getProperty("STR").equals("STR"));
+assertTrue(graph.getVertex(v.getId()).getPropertyKeys().contains("STR"));
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT).isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN).isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH).isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, "EDGE_LABEL").isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, "EDGE_LABEL").isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, "EDGE_LABEL").isEmpty());
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, "EDGE_LABEL").size() == 0);
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, "EDGE_LABEL").size() == 0);
+assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, "EDGE_LABEL").size() == 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(((ORID)v.getId()).isPersistent()); ===
+0.633 - assertTrue(v.getId() instanceof ORID)
+0.610 - assertTrue(graph.getEdges().isEmpty())
+0.587 - assertTrue(graph.getVertex(v.getId()).equals(v))
+0.565 - assertTrue(graph.getVertices().size() == 1)
+0.552 - assertTrue(graph.getVertex(v.getId()).getPropertyKeys().contains("STR"))
+0.529 - assertTrue(graph.getVertices().contains(v))
+0.527 - assertTrue(v.getPropertyKeys().contains("STR"))
+0.522 - assertTrue(graph.getVertex(v.getId()).getProperty("STR").equals("STR"))
+0.504 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN).isEmpty())
+0.500 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT).isEmpty())
+0.496 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH).isEmpty())
+0.484 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, "EDGE_LABEL").size() == 0)
+0.481 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, "EDGE_LABEL").size() == 0)
+0.477 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, "EDGE_LABEL").size() == 0)
+0.453 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.IN, "EDGE_LABEL").isEmpty())
+0.450 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.OUT, "EDGE_LABEL").isEmpty())
+0.446 - assertTrue(graph.getVertex(v.getId()).getEdges(Direction.BOTH, "EDGE_LABEL").isEmpty())
+0.422 - assertTrue(v.getProperty("STR").equals("STR"))
+0.300 - assertNotNull(v)

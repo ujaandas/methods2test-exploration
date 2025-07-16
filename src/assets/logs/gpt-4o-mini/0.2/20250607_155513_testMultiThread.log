@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolder {
+    public static long getAndClear ( Channel channel , Integer key ) { 
+    Map < Integer , Long > map = getArriveTimeMap ( channel ) ; 
+    Long result = map . remove ( key ) ; 
+    if ( result == null ) { 
+    return - 1 ; 
+    } return result ; 
+    }
+}
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolderTest {
+    @Test
+     public void testMultiThread ( ) throws InterruptedException {
+         final EmbeddedChannel channel = new EmbeddedChannel ( ) ; 
+         final CountDownLatch countDownLatch = new CountDownLatch ( 1 ) ; 
+         long start = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long end = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long time = ThreadLocalArriveTimeHolder . getAndClear ( channel , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(time >= 0);
+assertEquals(time, end - start);
+assertEquals(time, ThreadLocalArriveTimeHolder.getAndClear(channel, 1));
+assertNotEquals(time, -1);
+assertEquals(ThreadLocalArriveTimeHolder.getAndClear(channel, 1), -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 2) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 3) == -1);
+assertEquals(ThreadLocalArriveTimeHolder.getAndClear(channel, 1), -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(time>=start); ===
+0.720 - ```java
+assertTrue(time >= 0)
+0.706 - assertEquals(time, end - start)
+0.553 - assertNotEquals(time, -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 2) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 3) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.404 - assertTrue(ThreadLocalArriveTimeHolder.getAndClear(channel, 1) == -1)
+0.356 - assertEquals(ThreadLocalArriveTimeHolder.getAndClear(channel, 1), -1)
+0.356 - assertEquals(ThreadLocalArriveTimeHolder.getAndClear(channel, 1), -1)
+0.348 - assertEquals(time, ThreadLocalArriveTimeHolder.getAndClear(channel, 1))
+0.000 - ```

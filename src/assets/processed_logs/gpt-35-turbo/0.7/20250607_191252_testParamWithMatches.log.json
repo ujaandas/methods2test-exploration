@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testParamWithMatches ( ) {\nMap < String , Object > params = new HashMap < String , Object > ( ) ;\nparams . put ( \"STR\" , \"STR\" ) ;\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql , params ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, results.size());\nassertEquals(\"STR\", results.get(0).field(\"fieldName\"));\nassertTrue(results.get(0).field(\"fieldName\").toString().contains(\"S\"));\nassertFalse(results.isEmpty());\nassertNotNull(results);\nassertEquals(1, params.size());\nassertTrue(params.containsKey(\"STR\"));\nassertEquals(\"STR\", params.get(\"STR\"));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"fieldName\").toString().startsWith(\"S\")));\nassertEquals(1, results.stream().filter(doc -> doc.field(\"fieldName\").toString().length() == 3).count());\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"fieldName\").toString().equals(\"STR\")));\nassertEquals(1, results.stream().filter(doc -> doc.field(\"fieldName\").toString().equalsIgnoreCase(\"str\")).count());\nassertFalse(results.stream().allMatch(doc -> doc.field(\"fieldName\").toString().isEmpty()));\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"fieldName\").toString().contains(\"X\")));\nassertEquals(1, results.stream().filter(doc -> doc.field(\"fieldName\").toString().matches(\"[A-Z]+\")).count());\nassertTrue(params.containsValue(\"STR\"));\nassertFalse(params.isEmpty());\nassertTrue(params.containsValue(\"STR\"));\nassertEquals(1, params.keySet().size());\nassertTrue(params.keySet().contains(\"STR\"));\nassertFalse(params.keySet().isEmpty());\n====================\n\n",
+    "scores": [
+        0.933,
+        0.78,
+        0.733,
+        0.706,
+        0.654,
+        0.627,
+        0.597,
+        0.576,
+        0.5,
+        0.478,
+        0.42,
+        0.406,
+        0.406,
+        0.403,
+        0.39,
+        0.385,
+        0.383,
+        0.347,
+        0.344,
+        0.341,
+        0.329
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

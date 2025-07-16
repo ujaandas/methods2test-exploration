@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CompactedLinkSerializer {\n@Override\npublic int getObjectSizeInByteBuffer ( ByteBuffer buffer ) {\nreturn buffer . get ( buffer . position ( ) + OShortSerializer . SHORT_SIZE ) + OByteSerializer . BYTE_SIZE + OShortSerializer . SHORT_SIZE ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CompactedLinkSerializerTest {\n@Test\npublic void testSerializeThreeBytesInByteBuffer ( ) {\nfinal OCompactedLinkSerializer linkSerializer = new OCompactedLinkSerializer ( ) ;\nfinal ORecordId rid = new ORecordId ( 123 , 65628 ) ;\nfinal int size = linkSerializer . getObjectSize ( rid ) ;\nByteBuffer buffer = ByteBuffer . allocate ( size + 1 ) ;\nbuffer . position ( 1 ) ;\nlinkSerializer . serializeInByteBufferObject ( rid , buffer ) ;\nbuffer . position ( 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertEquals(0, buffer.get(0));\nAssert.assertEquals(123, buffer.getShort(1));\nAssert.assertEquals(65628, buffer.getShort(3));\nAssert.assertEquals(0, buffer.get(5));\nAssert.assertEquals(0, buffer.get(6));\nAssert.assertEquals(size, buffer.remaining());\nAssert.assertTrue(buffer.hasRemaining());\nAssert.assertFalse(buffer.isReadOnly());\nAssert.assertEquals(7, buffer.position());\nAssert.assertEquals(size + 1, buffer.capacity());\nAssert.assertEquals(1, buffer.arrayOffset());\nAssert.assertNotNull(buffer.array());\nAssert.assertTrue(buffer.isDirect());\nAssert.assertEquals(buffer.limit(), size + 1);\nAssert.assertEquals(1, buffer.mark().position());\nAssert.assertEquals(0, buffer.get(0));\nAssert.assertTrue(buffer.isDirect());\nAssert.assertEquals(0, buffer.get());\nAssert.assertFalse(buffer.isReadOnly());\nAssert.assertEquals(0, buffer.get(0));\n```\n====================\n\n",
+    "scores": [
+        0.5,
+        0.495,
+        0.484,
+        0.479,
+        0.479,
+        0.479,
+        0.479,
+        0.466,
+        0.457,
+        0.442,
+        0.44,
+        0.427,
+        0.412,
+        0.411,
+        0.384,
+        0.384,
+        0.375,
+        0.354,
+        0.354,
+        0.34,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(size,linkSerializer.getObjectSizeInByteBuffer(buffer));"
+}

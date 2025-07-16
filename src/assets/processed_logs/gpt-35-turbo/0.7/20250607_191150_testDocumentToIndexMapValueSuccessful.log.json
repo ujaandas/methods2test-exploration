@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinition {\npublic Object getDocumentValueToIndex ( final ODocument iDocument ) {\nfinal List < OCompositeKey > compositeKeys = new ArrayList < OCompositeKey > ( 10 ) ;\nfinal OCompositeKey firstKey = new OCompositeKey ( ) ;\nboolean containsCollection = false ;\ncompositeKeys . add ( firstKey ) ;\nfor ( final OIndexDefinition indexDefinition : indexDefinitions ) {\nfinal Object result = indexDefinition . getDocumentValueToIndex ( iDocument ) ;\nif ( result == null && isNullValuesIgnored ( ) ) return null ;\nif ( result instanceof Collection && ( ( Collection ) result ) . isEmpty ( ) && isNullValuesIgnored ( ) ) return null ;\ncontainsCollection = addKey ( firstKey , compositeKeys , containsCollection , result ) ;\n} if ( ! containsCollection ) return firstKey ;\nreturn compositeKeys ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeIndexDefinitionTest {\n@Test\npublic void testDocumentToIndexMapValueSuccessful ( ) {\nfinal ODocument document = new ODocument ( ) ;\nfinal Map < String , String > stringMap = new HashMap < String , String > ( ) ;\nstringMap . put ( \"STR\" , \"STR\" ) ;\nstringMap . put ( \"STR\" , \"STR\" ) ;\ndocument . field ( \"STR\" , 12 ) ;\ndocument . field ( \"STR\" , stringMap ) ;\nfinal OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( \"STR\" ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( \"STR\" , \"STR\" , OType . INTEGER ) ) ;\ncompositeIndexDefinition . addIndex ( new OPropertyMapIndexDefinition ( \"STR\" , \"STR\" , OType . STRING , OPropertyMapIndexDefinition . INDEX_BY . KEY ) ) ;\nfinal Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ;\nfinal Collection < OCompositeKey > collectionResult = ( Collection < OCompositeKey > ) result ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(result);\nassertNotNull(collectionResult);\nassertEquals(2, collectionResult.size());\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"12\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\nassertTrue(collectionResult.stream().anyMatch(key -> key.getKeys().contains(\"STR\")));\n====================\n\n",
+    "scores": [
+        0.949,
+        0.743,
+        0.517,
+        0.5,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496,
+        0.496
+    ],
+    "ground_truth": "Assert.assertEquals(collectionResult.size(),2);"
+}

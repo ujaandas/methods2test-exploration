@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class ObjectWithDeletedLink {
+    < RET extends T > RET reload ( final T iObject , String iFetchPlan , boolean iIgnoreCache ) ;
+}
+
+package orientechnologies.orientdb.object;
+
+public class TestObjectWithDeletedLink {
+    @Test
+     public void testDeletedLink ( ) {
+         db . activateOnCurrentThread ( ) ; 
+         SimpleSelfRef ob1 = new SimpleSelfRef ( ) ; 
+         ob1 . setName ( "STR" ) ; 
+         SimpleSelfRef ob2 = new SimpleSelfRef ( ) ; 
+         ob2 . setName ( "STR" ) ; 
+         ob1 . setFriend ( ob2 ) ; 
+         ob1 = db . save ( ob1 ) ; 
+         ob1 = db . reload ( ob1 , "STR" , true ) ; 
+         ob2 = ob1 . getFriend ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", ob1.getName());
+assertEquals("STR", ob2.getName());
+assertNotNull(ob1.getFriend());
+assertNotNull(ob2.getFriend());
+assertEquals(ob1.getFriend().getName(), ob2.getName());
+assertEquals(ob2.getFriend().getName(), ob1.getName());
+assertEquals(ob1.getFriend().getFriend(), ob2);
+assertEquals(ob2.getFriend().getFriend(), ob1);
+assertTrue(ob1.getFriend().equals(ob2));
+assertTrue(ob2.getFriend().equals(ob1));
+assertTrue(ob1.getFriend().getFriend().equals(ob2));
+assertTrue(ob2.getFriend().getFriend().equals(ob1));
+assertTrue(ob1.getFriend().getName().equals("STR"));
+assertTrue(ob2.getFriend().getName().equals("STR"));
+assertTrue(ob1.getFriend().getFriend().getName().equals("STR"));
+assertTrue(ob2.getFriend().getFriend().getName().equals("STR"));
+assertTrue(ob1.getFriend().getFriend().getFriend().getName().equals("STR"));
+assertTrue(ob2.getFriend().getFriend().getFriend().getName().equals("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(ob1.getFriend()); ===
+1.000 - assertNotNull(ob1.getFriend())
+0.967 - assertNotNull(ob2.getFriend())
+0.696 - assertTrue(ob1.getFriend().equals(ob2))
+0.667 - assertEquals(ob1.getFriend().getFriend(), ob2)
+0.667 - assertTrue(ob2.getFriend().equals(ob1))
+0.640 - assertEquals(ob2.getFriend().getFriend(), ob1)
+0.635 - assertEquals("STR", ob1.getName())
+0.603 - assertEquals("STR", ob2.getName())
+0.602 - assertEquals(ob1.getFriend().getName(), ob2.getName())
+0.593 - assertTrue(ob1.getFriend().getFriend().equals(ob2))
+0.593 - assertTrue(ob1.getFriend().getName().equals("STR"))
+0.578 - assertEquals(ob2.getFriend().getName(), ob1.getName())
+0.568 - assertTrue(ob2.getFriend().getFriend().equals(ob1))
+0.568 - assertTrue(ob2.getFriend().getName().equals("STR"))
+0.516 - assertTrue(ob1.getFriend().getFriend().getName().equals("STR"))
+0.495 - assertTrue(ob2.getFriend().getFriend().getName().equals("STR"))
+0.457 - assertTrue(ob1.getFriend().getFriend().getFriend().getName().equals("STR"))
+0.438 - assertTrue(ob2.getFriend().getFriend().getFriend().getName().equals("STR"))

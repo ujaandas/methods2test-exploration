@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( Object ... params ) {\nif ( ! ( params [ 0 ] instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ;\nfinal List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nObject val = createSingleValue ( mapParam ) ;\nresult . add ( val ) ;\n} if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) {\nreturn result . get ( 0 ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueByValueTwoParametersArrayParams ( ) {\nfinal Object result = propertyIndexByValue . createValue ( mapToTest , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", ((List<Object>) result).get(0));\nassertEquals(1, ((List<Object>) result).size());\nassertTrue(result instanceof List);\nassertTrue(((List<Object>) result).get(0) instanceof Object);\nassertTrue(((List<Object>) result).get(0) instanceof String);\nassertFalse(((List<Object>) result).isEmpty());\nassertNotNull(result);\nassertNotNull(((List<Object>) result).get(0));\nassertNotEquals(0, ((List<Object>) result).size());\nassertTrue(((List<Object>) result).get(0) instanceof String);\nassertTrue(((List<Object>) result).get(0) instanceof Object);\nassertEquals(mapToTest, ((List<Object>) result).get(0));\nassertNotNull(((List<Object>) result).get(0));\nassertNotNull(result);\nassertEquals(1, ((List<Object>) result).size());\nassertTrue(result instanceof List);\nassertTrue(((List<Object>) result).get(0) instanceof String);\nassertNotEquals(0, ((List<Object>) result).size());\nassertFalse(((List<Object>) result).isEmpty());\n====================\n\n",
+    "scores": [
+        0.829,
+        0.829,
+        0.653,
+        0.653,
+        0.653,
+        0.653,
+        0.653,
+        0.508,
+        0.508,
+        0.434,
+        0.434,
+        0.41,
+        0.41,
+        0.395,
+        0.395,
+        0.39,
+        0.39,
+        0.374,
+        0.368
+    ],
+    "ground_truth": "Assert.assertTrue(resultinstanceofCollection);"
+}

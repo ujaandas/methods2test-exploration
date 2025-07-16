@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void ts ( ) {
+         Word nopūsts = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(nopūsts);
+assertTrue(nopūsts.isRecognized());
+assertFalse(nopūsts.getWordforms().isEmpty());
+assertEquals("ExpectedWordform1", nopūsts.getWordforms().get(0));
+assertEquals("ExpectedWordform2", nopūsts.getWordforms().get(1));
+assertEquals(2, nopūsts.getWordforms().size());
+assertTrue(nopūsts.getWordforms().contains("ExpectedWordform1"));
+assertTrue(nopūsts.getWordforms().contains("ExpectedWordform2"));
+assertFalse(nopūsts.getWordforms().contains("UnexpectedWordform"));
+assertNotEquals("UnexpectedWordform", nopūsts.getWordforms().get(0));
+assertTrue(nopūsts.getWordforms().stream().allMatch(wordform -> wordform.length() > 0));
+assertEquals("ExpectedAnalysisResult", nopūsts.getAnalysisResult());
+assertNotNull(nopūsts.getMorphologicalFeatures());
+assertTrue(nopūsts.getMorphologicalFeatures().contains("Feature1"));
+assertTrue(nopūsts.getMorphologicalFeatures().contains("Feature2"));
+assertFalse(nopūsts.getMorphologicalFeatures().isEmpty());
+assertEquals("ExpectedFeatureCount", nopūsts.getMorphologicalFeatures().size());
+assertTrue(nopūsts.getWordforms().stream().anyMatch(wordform -> wordform.startsWith("ExpectedPrefix")));
+assertFalse(nopūsts.getWordforms().stream().anyMatch(wordform -> wordform.endsWith("UnexpectedSuffix")));
+assertEquals("ExpectedFirstWordform", nopūsts.getFirstWordform());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(nopūsts.isRecognized()); ===
+1.000 - assertTrue(nopūsts.isRecognized())
+0.582 - assertEquals(2, nopūsts.getWordforms().size())
+0.578 - assertNotNull(nopūsts.getMorphologicalFeatures())
+0.554 - assertTrue(nopūsts.getMorphologicalFeatures().contains("Feature1"))
+0.554 - assertTrue(nopūsts.getMorphologicalFeatures().contains("Feature2"))
+0.551 - assertTrue(nopūsts.getWordforms().contains("ExpectedWordform1"))
+0.551 - assertTrue(nopūsts.getWordforms().contains("ExpectedWordform2"))
+0.532 - assertFalse(nopūsts.getWordforms().isEmpty())
+0.500 - ```java
+assertNotNull(nopūsts)
+0.480 - assertFalse(nopūsts.getWordforms().contains("UnexpectedWordform"))
+0.462 - assertFalse(nopūsts.getMorphologicalFeatures().isEmpty())
+0.460 - assertEquals("ExpectedAnalysisResult", nopūsts.getAnalysisResult())
+0.449 - assertEquals("ExpectedFirstWordform", nopūsts.getFirstWordform())
+0.446 - assertEquals("ExpectedFeatureCount", nopūsts.getMorphologicalFeatures().size())
+0.393 - assertTrue(nopūsts.getWordforms().stream().allMatch(wordform -> wordform.length() > 0))
+0.392 - assertEquals("ExpectedWordform1", nopūsts.getWordforms().get(0))
+0.392 - assertEquals("ExpectedWordform2", nopūsts.getWordforms().get(1))
+0.385 - assertTrue(nopūsts.getWordforms().stream().anyMatch(wordform -> wordform.startsWith("ExpectedPrefix")))
+0.376 - assertNotEquals("UnexpectedWordform", nopūsts.getWordforms().get(0))
+0.338 - assertFalse(nopūsts.getWordforms().stream().anyMatch(wordform -> wordform.endsWith("UnexpectedSuffix")))
+0.000 - ```

@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic void set ( String key , String value ) {\nsetIn ( normalize ( key ) , RealValue . fromString ( value ) ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void ignores_log_level_case ( ) {\nConfig config = createConfig ( ) ;\nconfig . set ( Keys . CUCUMBERPRO_LOGGING , \"STR\" ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", config.get(Keys.CUCUMBERPRO_LOGGING));\nassertNotNull(logger);\nassertTrue(logger instanceof Logger.SystemLogger);\nassertEquals(\"normalized_key\", logger.normalize(\"key\"));\nassertEquals(RealValue.fromString(\"value\"), logger.setIn(\"normalized_key\", RealValue.fromString(\"value\")));\nassertNotEquals(\"str\", config.get(Keys.CUCUMBERPRO_LOGGING));\nassertNotSame(logger, new Logger.SystemLogger(config));\nassertFalse(logger instanceof String);\nassertNotEquals(\"key\", logger.normalize(\"key\"));\nassertNotEquals(RealValue.fromString(\"value\"), logger.setIn(\"normalized_key\", RealValue.fromString(\"different_value\")));\nassertNull(config.get(Keys.CUCUMBERPRO_LOGGING));\nassertNotEquals(\"STR\", config.get(Keys.CUCUMBERPRO_LOGGING));\nassertNotEquals(\"normalized_key\", logger.normalize(\"different_key\"));\nassertNotEquals(RealValue.fromString(\"value\"), logger.setIn(\"different_normalized_key\", RealValue.fromString(\"value\")));\nassertNotNull(config);\nassertNotNull(logger.normalize(\"key\"));\nassertNotNull(logger.setIn(\"normalized_key\", RealValue.fromString(\"value\")));\nassertTrue(config instanceof Config);\nassertTrue(logger instanceof Logger.SystemLogger);\n====================\n\n",
+    "scores": [
+        0.571,
+        0.566,
+        0.5,
+        0.485,
+        0.482,
+        0.478,
+        0.478,
+        0.454,
+        0.45,
+        0.416,
+        0.404,
+        0.404,
+        0.389,
+        0.366,
+        0.364,
+        0.358,
+        0.358,
+        0.35,
+        0.278
+    ],
+    "ground_truth": "assertEquals(Logger.Level.DEBUG,logger.level);"
+}

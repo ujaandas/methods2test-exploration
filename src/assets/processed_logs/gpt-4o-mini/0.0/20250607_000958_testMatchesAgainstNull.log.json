@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class Wildcards {\npublic static boolean matches ( final String text , final String wildcard ) {\nString pattern = wildcard . replace ( \"STR\" , \"STR\" ) . replace ( \"STR\" , \"STR\" ) ;\nreturn ( text != null && text . matches ( pattern ) ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class WildcardsTest {\n@Test\npublic void testMatchesAgainstNull ( ) throws Exception {\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(Wildcards.matches(\"testString\", \"testString\"));\nassertFalse(Wildcards.matches(\"testString\", \"otherString\"));\nassertTrue(Wildcards.matches(\"test123\", \"test*\"));\nassertFalse(Wildcards.matches(\"test123\", \"test?\"));\nassertTrue(Wildcards.matches(\"testString\", \"testS*\"));\nassertFalse(Wildcards.matches(\"testString\", \"testS?\"));\nassertTrue(Wildcards.matches(\"testString\", \"testS*ring\"));\nassertFalse(Wildcards.matches(\"testString\", \"testS*wrong\"));\nassertTrue(Wildcards.matches(\"testString\", \"t?stString\"));\nassertFalse(Wildcards.matches(\"testString\", \"t?stStrin?\"));\nassertTrue(Wildcards.matches(\"testString\", \"t*String\"));\nassertFalse(Wildcards.matches(\"testString\", \"t*Strin?\"));\nassertTrue(Wildcards.matches(\"testString\", \"t*\"));\nassertFalse(Wildcards.matches(\"testString\", \"t?\"));\nassertTrue(Wildcards.matches(\"testString\", \"*String\"));\nassertFalse(Wildcards.matches(\"testString\", \"?String\"));\nassertTrue(Wildcards.matches(\"testString\", \"t*St*ng\"));\nassertFalse(Wildcards.matches(\"testString\", \"t*St?ng\"));\nassertTrue(Wildcards.matches(\"testString\", \"t*\"));\nassertFalse(Wildcards.matches(null, \"testString\"));\n```\n====================\n\n",
+    "scores": [
+        0.879,
+        0.791,
+        0.779,
+        0.771,
+        0.771,
+        0.769,
+        0.763,
+        0.747,
+        0.74,
+        0.74,
+        0.711,
+        0.711,
+        0.702,
+        0.695,
+        0.695,
+        0.689,
+        0.688,
+        0.673,
+        0.673,
+        0.623,
+        0.0
+    ],
+    "ground_truth": "assertFalse(Wildcards.matches(null,\"STR\"));"
+}

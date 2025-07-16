@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalProperty {
+    String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalPropertyTest {
+    @Test
+     public void testGlobalPropertyCreate ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         schema . createGlobalProperty ( "STR" , OType . SHORT , 100 ) ; 
+         OGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.SHORT, prop.getType());
+Assert.assertEquals(100, prop.getId());
+Assert.assertTrue(schema.existsGlobalProperty("STR"));
+Assert.assertTrue(schema.existsGlobalProperty(100));
+Assert.assertEquals(1, schema.getGlobalProperties().size());
+Assert.assertTrue(schema.getGlobalProperties().contains(prop));
+Assert.assertEquals(prop, schema.getGlobalProperty("STR"));
+Assert.assertEquals(prop, schema.getGlobalProperty(100));
+Assert.assertEquals(prop, schema.getGlobalProperty("STR", OType.SHORT));
+Assert.assertEquals(prop, schema.getGlobalProperty(100, OType.SHORT));
+Assert.assertTrue(schema.dropGlobalProperty("STR"));
+Assert.assertFalse(schema.existsGlobalProperty("STR"));
+Assert.assertNull(schema.getGlobalProperty("STR"));
+Assert.assertTrue(schema.dropGlobalProperty(100));
+Assert.assertFalse(schema.existsGlobalProperty(100));
+Assert.assertNull(schema.getGlobalProperty(100));
+Assert.assertEquals(0, schema.getGlobalProperties().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(prop.getName(),"STR"); ===
+0.824 - Assert.assertEquals("STR", prop.getName())
+0.750 - Assert.assertEquals(100, prop.getId())
+0.714 - Assert.assertEquals(prop, schema.getGlobalProperty("STR"))
+0.676 - Assert.assertEquals(OType.SHORT, prop.getType())
+0.634 - Assert.assertEquals(prop, schema.getGlobalProperty(100))
+0.625 - Assert.assertEquals(prop, schema.getGlobalProperty("STR", OType.SHORT))
+0.553 - Assert.assertEquals(prop, schema.getGlobalProperty(100, OType.SHORT))
+0.545 - Assert.assertNull(schema.getGlobalProperty("STR"))
+0.543 - Assert.assertFalse(schema.existsGlobalProperty("STR"))
+0.528 - Assert.assertNotNull(prop)
+0.525 - Assert.assertTrue(schema.existsGlobalProperty("STR"))
+0.518 - Assert.assertEquals(1, schema.getGlobalProperties().size())
+0.518 - Assert.assertEquals(0, schema.getGlobalProperties().size())
+0.513 - Assert.assertTrue(schema.dropGlobalProperty("STR"))
+0.456 - Assert.assertFalse(schema.existsGlobalProperty(100))
+0.453 - Assert.assertNull(schema.getGlobalProperty(100))
+0.436 - Assert.assertTrue(schema.existsGlobalProperty(100))
+0.421 - Assert.assertTrue(schema.dropGlobalProperty(100))
+0.382 - Assert.assertTrue(schema.getGlobalProperties().contains(prop))

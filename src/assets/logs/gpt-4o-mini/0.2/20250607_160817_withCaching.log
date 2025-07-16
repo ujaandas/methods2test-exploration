@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactory {
+    public Extractor getNewInstance ( ) { 
+    Extractor extractor = new BasicExtractor ( config ) ; 
+    if ( config . shouldCachedDownload ( ) ) { 
+    extractor = new CachedExtractor ( extractor , config ) ; 
+    } return extractor ; 
+    }
+}
+
+package AlejandroRivera.embedded-rabbitmq;
+
+public class ExtractorFactoryTest {
+    @Test
+     public void withCaching ( ) throws Exception {
+         builder . useCachedDownload ( true ) ; 
+         Extractor extractor = new ExtractorFactory ( builder . build ( ) ) . getNewInstance ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(extractor);
+assertTrue(extractor instanceof CachedExtractor);
+assertTrue(((CachedExtractor) extractor).getWrappedExtractor() instanceof BasicExtractor);
+assertEquals(config, ((CachedExtractor) extractor).getConfig());
+assertTrue(((CachedExtractor) extractor).isCachingEnabled());
+assertEquals("Expected value", extractor.someMethod());
+assertEquals("Expected value", extractor.anotherMethod());
+assertNotNull(extractor.getSomeProperty());
+assertEquals(0, extractor.getCachedItemsCount());
+assertTrue(extractor.isInitialized());
+assertFalse(extractor.hasErrors());
+assertTrue(extractor.supportsFeatureX());
+assertEquals("Expected result", extractor.processData(inputData));
+assertNotNull(extractor.getCache());
+assertTrue(extractor.getCache().isEmpty());
+assertEquals("Expected output", extractor.performAction(actionInput));
+assertTrue(extractor.isReady());
+assertFalse(extractor.isShutdown());
+assertEquals("Expected state", extractor.getState());
+assertTrue(extractor.isValid());
+assertNotNull(extractor.getLogger());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(extractor.getClass().equals(CachedExtractor.class)); ===
+0.685 - assertTrue(extractor instanceof CachedExtractor)
+0.635 - assertTrue(extractor.getCache().isEmpty())
+0.577 - assertNotNull(extractor.getCache())
+0.569 - assertEquals(0, extractor.getCachedItemsCount())
+0.559 - assertTrue(extractor.isReady())
+0.545 - assertTrue(((CachedExtractor) extractor).isCachingEnabled())
+0.538 - assertTrue(extractor.isValid())
+0.510 - assertTrue(extractor.supportsFeatureX())
+0.505 - assertTrue(extractor.isInitialized())
+0.500 - assertFalse(extractor.hasErrors())
+0.490 - assertNotNull(extractor.getLogger())
+0.488 - assertEquals(config, ((CachedExtractor) extractor).getConfig())
+0.462 - assertNotNull(extractor.getSomeProperty())
+0.454 - assertFalse(extractor.isShutdown())
+0.446 - assertEquals("Expected state", extractor.getState())
+0.446 - assertTrue(((CachedExtractor) extractor).getWrappedExtractor() instanceof BasicExtractor)
+0.432 - assertEquals("Expected result", extractor.processData(inputData))
+0.419 - assertEquals("Expected output", extractor.performAction(actionInput))
+0.404 - assertEquals("Expected value", extractor.someMethod())
+0.393 - assertEquals("Expected value", extractor.anotherMethod())
+0.383 - ```java
+assertNotNull(extractor)
+0.000 - ```

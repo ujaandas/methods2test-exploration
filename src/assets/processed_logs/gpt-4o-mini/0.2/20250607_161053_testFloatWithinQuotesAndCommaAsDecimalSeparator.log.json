@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testFloatWithinQuotesAndCommaAsDecimalSeparator ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(3, res.size());\nassertEquals(\"expectedValue1\", res.get(0).field(\"fieldName1\"));\nassertEquals(\"expectedValue2\", res.get(1).field(\"fieldName2\"));\nassertEquals(\"expectedValue3\", res.get(2).field(\"fieldName3\"));\nassertEquals(1.23f, res.get(0).field(\"floatField\"), 0.01);\nassertEquals(4.56f, res.get(1).field(\"floatField\"), 0.01);\nassertEquals(7.89f, res.get(2).field(\"floatField\"), 0.01);\nassertEquals(\"stringValue\", res.get(0).field(\"stringField\"));\nassertTrue(res.get(1).field(\"booleanField\"));\nassertFalse(res.get(2).field(\"booleanField\"));\nassertEquals(123, res.get(0).field(\"intField\"));\nassertEquals(456, res.get(1).field(\"intField\"));\nassertEquals(789, res.get(2).field(\"intField\"));\nassertNotEquals(\"unexpectedValue\", res.get(0).field(\"fieldName1\"));\nassertTrue(res.get(0).field(\"dateField\") instanceof Date);\nassertEquals(\"2023-10-01\", new SimpleDateFormat(\"yyyy-MM-dd\").format(res.get(0).field(\"dateField\")));\nassertEquals(\"2023-10-02\", new SimpleDateFormat(\"yyyy-MM-dd\").format(res.get(1).field(\"dateField\")));\nassertEquals(\"2023-10-03\", new SimpleDateFormat(\"yyyy-MM-dd\").format(res.get(2).field(\"dateField\")));\nassertNotNull(res.get(0).field(\"nestedField\"));\nassertEquals(\"nestedValue\", res.get(0).field(\"nestedField\").field(\"nestedFieldName\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.692,
+        0.563,
+        0.5,
+        0.5,
+        0.5,
+        0.472,
+        0.462,
+        0.457,
+        0.447,
+        0.444,
+        0.444,
+        0.444,
+        0.414,
+        0.414,
+        0.414,
+        0.396,
+        0.395,
+        0.345,
+        0.306,
+        0.306,
+        0.306,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

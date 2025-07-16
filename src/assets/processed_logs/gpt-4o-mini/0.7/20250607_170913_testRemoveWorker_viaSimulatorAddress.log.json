@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@Test\npublic void testRemoveWorker_viaSimulatorAddress ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nList < WorkerParameters > parametersList = newWorkerParametersList ( agentAddress , 5 ) ;\nregistry . addWorkers ( parametersList ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(5, registry.workerCount());\nassertTrue(registry.hasWorker(agentAddress));\nassertNotNull(registry.getWorker(agentAddress));\nassertFalse(registry.isWorkerRemoved(agentAddress));\nassertEquals(parametersList.size(), registry.getWorkers().size());\nassertTrue(registry.getWorkers().containsAll(parametersList));\nassertFalse(registry.getWorkers().isEmpty());\nassertTrue(registry.workerCount() > 0);\nassertNotEquals(0, registry.workerCount());\nassertSame(parametersList.get(0), registry.getWorker(agentAddress));\nassertEquals(\"Expected Worker Name\", registry.getWorker(agentAddress).getName());\nassertTrue(registry.getWorker(agentAddress).isActive());\nassertFalse(registry.getWorker(agentAddress).isTerminated());\nassertEquals(\"Expected Worker Type\", registry.getWorker(agentAddress).getType());\nassertTrue(registry.getWorkers().stream().allMatch(Worker::isActive));\nassertEquals(5, registry.getWorkers().stream().filter(Worker::isActive).count());\nassertNotNull(registry.getWorker(agentAddress).getStatus());\nassertEquals(\"Expected Status\", registry.getWorker(agentAddress).getStatus());\nassertTrue(registry.workerCount() <= 5);\nassertThrows(WorkerNotFoundException.class, () -> registry.getWorker(new SimulatorAddress()));\nassertTrue(registry.getWorkers().size() <= 5);\n```\n====================\n\n",
+    "scores": [
+        0.937,
+        0.905,
+        0.838,
+        0.827,
+        0.683,
+        0.652,
+        0.635,
+        0.634,
+        0.617,
+        0.615,
+        0.608,
+        0.592,
+        0.584,
+        0.581,
+        0.577,
+        0.574,
+        0.574,
+        0.566,
+        0.538,
+        0.467,
+        0.425,
+        0.0
+    ],
+    "ground_truth": "assertEquals(5,registry.workerCount());"
+}

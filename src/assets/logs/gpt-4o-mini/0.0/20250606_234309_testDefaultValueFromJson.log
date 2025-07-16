@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class DefaultValue {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class DefaultValueTest {
+    @Test
+     public void testDefaultValueFromJson ( ) {
+         OSchema schema = database . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . DATE ) ; 
+         prop . setDefaultValue ( ODateHelper . getDateTimeFormatInstance ( ) . format ( new Date ( ) ) ) ; 
+         ODocument doc = new ODocument ( ) . fromJSON ( "STR" ) ; 
+         ODocument saved = database . save ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(saved);
+assertEquals("STR", saved.getClassName());
+assertTrue(saved.containsField("STR"));
+assertNotNull(saved.field("STR"));
+assertTrue(saved.field("STR") instanceof Date);
+assertEquals(prop.getDefaultValue(), saved.field("STR"));
+assertEquals(1, database.countClass("STR"));
+assertEquals(1, database.countClusterElements("STR"));
+assertTrue(database.getMetadata().getSchema().existsClass("STR"));
+assertEquals(OType.DATE, prop.getType());
+assertEquals("STR", prop.getName());
+assertEquals(1, saved.getIdentity().getClusterId());
+assertTrue(saved.getIdentity().isPersistent());
+assertFalse(saved.getIdentity().isNew());
+assertNotNull(saved.getProperty("STR"));
+assertEquals(prop.getDefaultValue(), saved.getProperty("STR"));
+assertTrue(saved.getProperty("STR") instanceof Date);
+assertEquals(1, database.getCluster("STR").getRecords().size());
+assertTrue(saved.getProperty("STR").after(new Date(0)));
+assertTrue(saved.getProperty("STR").before(new Date()));
+assertEquals(saved.getProperty("STR"), ODateHelper.getDateTimeFormatInstance().format(new Date()));
+assertFalse(saved.getProperty("STR").equals(null));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(saved.field("STR")); ===
+1.000 - assertNotNull(saved.field("STR"))
+0.806 - assertNotNull(saved.getProperty("STR"))
+0.732 - assertTrue(saved.containsField("STR"))
+0.705 - assertEquals(prop.getDefaultValue(), saved.field("STR"))
+0.701 - assertTrue(saved.field("STR") instanceof Date)
+0.656 - ```java
+assertNotNull(saved)
+0.574 - assertEquals(prop.getDefaultValue(), saved.getProperty("STR"))
+0.554 - assertTrue(saved.getProperty("STR") instanceof Date)
+0.554 - assertFalse(saved.getProperty("STR").equals(null))
+0.548 - assertEquals("STR", saved.getClassName())
+0.530 - assertEquals(1, saved.getIdentity().getClusterId())
+0.529 - assertTrue(saved.getProperty("STR").after(new Date(0)))
+0.529 - assertTrue(saved.getProperty("STR").before(new Date()))
+0.521 - assertFalse(saved.getIdentity().isNew())
+0.507 - assertEquals("STR", prop.getName())
+0.481 - assertTrue(saved.getIdentity().isPersistent())
+0.480 - assertEquals(1, database.countClass("STR"))
+0.447 - assertEquals(1, database.countClusterElements("STR"))
+0.379 - assertEquals(1, database.getCluster("STR").getRecords().size())
+0.372 - assertEquals(saved.getProperty("STR"), ODateHelper.getDateTimeFormatInstance().format(new Date()))
+0.347 - assertTrue(database.getMetadata().getSchema().existsClass("STR"))
+0.306 - assertEquals(OType.DATE, prop.getType())
+0.000 - ```

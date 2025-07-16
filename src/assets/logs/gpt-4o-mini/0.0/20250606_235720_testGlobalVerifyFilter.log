@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilter {
+    public Method find ( ) { 
+    List < Method > methods = findAll ( ) ; 
+    switch ( methods . size ( ) ) { 
+    case 0 : return null ; 
+    case 1 : return methods . iterator ( ) . next ( ) ; 
+    default : throw new ReflectionException ( format ( "STR" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilterTest {
+    @Test
+     public void testGlobalVerifyFilter ( ) {
+         Method method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Verify . class ) . withVoidReturnType ( ) . withFilter ( new VerifyFilter ( true ) ) . find ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(method);
+assertEquals("expectedMethodName", method.getName());
+assertEquals(void.class, method.getReturnType());
+assertTrue(Modifier.isPublic(method.getModifiers()));
+assertTrue(method.isAnnotationPresent(Verify.class));
+assertEquals(0, method.getParameterCount());
+assertNotNull(method.getDeclaringClass());
+assertEquals(AnnotationTestClass.class, method.getDeclaringClass());
+assertTrue(method.getAnnotations().length > 0);
+assertTrue(Arrays.stream(method.getAnnotations()).anyMatch(a -> a.annotationType().equals(Verify.class)));
+assertFalse(method.isSynthetic());
+assertFalse(method.isBridge());
+assertFalse(method.isVarArgs());
+assertTrue(Modifier.isStatic(method.getModifiers()));
+assertFalse(Modifier.isFinal(method.getModifiers()));
+assertFalse(Modifier.isAbstract(method.getModifiers()));
+assertEquals("expectedReturnType", method.getGenericReturnType().getTypeName());
+assertNotNull(method.getGenericParameterTypes());
+assertEquals(0, method.getGenericParameterTypes().length);
+assertTrue(method.getExceptionTypes().length == 0);
+assertEquals("expectedMethodSignature", method.toGenericString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",method.getName()); ===
+0.769 - assertEquals(0, method.getParameterCount())
+0.759 - assertEquals("expectedMethodName", method.getName())
+0.675 - assertEquals(void.class, method.getReturnType())
+0.667 - assertFalse(method.isBridge())
+0.652 - assertEquals(0, method.getGenericParameterTypes().length)
+0.638 - assertFalse(method.isSynthetic())
+0.627 - assertFalse(method.isVarArgs())
+0.597 - assertNotNull(method.getDeclaringClass())
+0.596 - assertEquals("expectedReturnType", method.getGenericReturnType().getTypeName())
+0.595 - assertNotNull(method.getGenericParameterTypes())
+0.569 - assertEquals(AnnotationTestClass.class, method.getDeclaringClass())
+0.560 - assertEquals("expectedMethodSignature", method.toGenericString())
+0.550 - assertTrue(method.getAnnotations().length > 0)
+0.545 - assertFalse(Modifier.isFinal(method.getModifiers()))
+0.527 - assertFalse(Modifier.isAbstract(method.getModifiers()))
+0.524 - assertTrue(method.getExceptionTypes().length == 0)
+0.523 - assertTrue(Modifier.isPublic(method.getModifiers()))
+0.523 - assertTrue(Modifier.isStatic(method.getModifiers()))
+0.492 - ```java
+assertNotNull(method)
+0.455 - assertTrue(method.isAnnotationPresent(Verify.class))
+0.360 - assertTrue(Arrays.stream(method.getAnnotations()).anyMatch(a -> a.annotationType().equals(Verify.class)))
+0.000 - ```

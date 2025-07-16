@@ -1,0 +1,96 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException { 
+    File targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ; 
+    if ( targetFile . exists ( ) ) { 
+    if ( targetFile . isDirectory ( ) ) { 
+    try { 
+    FileUtils . deleteDirectory ( targetFile ) ; 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } catch ( IllegalArgumentException e ) { 
+    debug ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } catch ( IOException e ) { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } } else { 
+    if ( targetFile . delete ( ) ) { 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } else { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testDeleteFile ( ) throws Exception {
+         File tempSrcFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( tempSrcFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File tempTargetFile = new File ( targetDir , "STR" ) ; 
+         Files . write ( tempTargetFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(tempSrcFile.exists());
+assertTrue(tempTargetFile.exists());
+assertEquals("STR", new String(Files.readAllBytes(tempSrcFile.toPath())));
+assertEquals("STR", new String(Files.readAllBytes(tempTargetFile.toPath())));
+devUtil.deleteFile(tempTargetFile, targetDir, targetDir, "STR");
+assertFalse(tempTargetFile.exists());
+assertFalse(tempTargetFile.isDirectory());
+assertFalse(tempSrcFile.exists());
+assertTrue(tempSrcFile.isFile());
+assertFalse(tempSrcFile.isDirectory());
+assertTrue(targetDir.isDirectory());
+assertTrue(targetDir.listFiles().length == 0);
+assertThrows(IOException.class, () -> {
+    devUtil.deleteFile(new File("non_existing_file"), dir, targetDir, "non_existing_file");
+});
+assertTrue(targetDir.canRead());
+assertTrue(targetDir.canWrite());
+assertTrue(targetDir.canExecute());
+assertNotNull(devUtil);
+assertNotNull(tempSrcFile);
+assertNotNull(tempTargetFile);
+assertTrue(tempTargetFile.getCanonicalPath().endsWith("STR"));
+assertTrue(targetDir.getCanonicalPath().endsWith("targetDir"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(tempSrcFile.exists()); ===
+0.896 - assertTrue(tempTargetFile.exists())
+0.892 - assertFalse(tempSrcFile.exists())
+0.889 - ```java
+assertTrue(tempSrcFile.exists())
+0.875 - assertTrue(tempSrcFile.isFile())
+0.794 - assertFalse(tempTargetFile.exists())
+0.743 - assertFalse(tempSrcFile.isDirectory())
+0.690 - assertNotNull(tempSrcFile)
+0.658 - assertFalse(tempTargetFile.isDirectory())
+0.627 - assertTrue(targetDir.isDirectory())
+0.625 - assertTrue(targetDir.canWrite())
+0.606 - assertTrue(targetDir.canExecute())
+0.603 - assertTrue(targetDir.canRead())
+0.590 - assertNotNull(tempTargetFile)
+0.587 - assertTrue(targetDir.listFiles().length == 0)
+0.581 - assertTrue(tempTargetFile.getCanonicalPath().endsWith("STR"))
+0.505 - assertEquals("STR", new String(Files.readAllBytes(tempSrcFile.toPath())))
+0.489 - assertTrue(targetDir.getCanonicalPath().endsWith("targetDir"))
+0.453 - assertEquals("STR", new String(Files.readAllBytes(tempTargetFile.toPath())))
+0.444 - assertNotNull(devUtil)
+0.370 - devUtil.deleteFile(tempTargetFile, targetDir, targetDir, "STR")
+0.305 - assertThrows(IOException.class, () -> {
+    devUtil.deleteFile(new File("non_existing_file"), dir, targetDir, "non_existing_file")
+0.059 - })
+0.000 - ```

@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void izskanjas ( ) {
+         locītājs . enableGuessing = true ; 
+         locītājs . enableVocative = false ; 
+         locītājs . guessVerbs = true ; 
+         locītājs . enableAllGuesses = true ; 
+         Word austrumlatvija = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(austrumlatvija);
+assertTrue(austrumlatvija.isRecognized());
+assertEquals("ExpectedWordForm1", austrumlatvija.getWordForm(0));
+assertEquals("ExpectedWordForm2", austrumlatvija.getWordForm(1));
+assertEquals("ExpectedWordForm3", austrumlatvija.getWordForm(2));
+assertTrue(austrumlatvija.getWordForms().size() > 0);
+assertTrue(austrumlatvija.getWordForms().contains("ExpectedWordForm1"));
+assertTrue(austrumlatvija.getWordForms().contains("ExpectedWordForm2"));
+assertFalse(austrumlatvija.getWordForms().contains("UnexpectedWordForm"));
+assertEquals(3, austrumlatvija.getWordForms().size());
+assertTrue(austrumlatvija.hasVerbForms());
+assertFalse(austrumlatvija.hasNounForms());
+assertTrue(austrumlatvija.isPlural());
+assertFalse(austrumlatvija.isSingular());
+assertEquals("ExpectedGender", austrumlatvija.getGender());
+assertEquals("ExpectedCase", austrumlatvija.getCase());
+assertTrue(austrumlatvija.isInVocative());
+assertFalse(austrumlatvija.isInGenitive());
+assertTrue(austrumlatvija.isInDative());
+assertEquals("ExpectedRoot", austrumlatvija.getRoot());
+assertNotEquals("UnexpectedRoot", austrumlatvija.getRoot());
+assertTrue(austrumlatvija.isPastTense());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(austrumlatvija.isRecognized()); ===
+1.000 - assertTrue(austrumlatvija.isRecognized())
+0.840 - assertTrue(austrumlatvija.isPastTense())
+0.800 - assertTrue(austrumlatvija.isInDative())
+0.795 - assertTrue(austrumlatvija.isPlural())
+0.780 - assertTrue(austrumlatvija.hasVerbForms())
+0.780 - assertTrue(austrumlatvija.isInVocative())
+0.771 - assertFalse(austrumlatvija.isInGenitive())
+0.725 - assertTrue(austrumlatvija.getWordForms().size() > 0)
+0.716 - assertFalse(austrumlatvija.isSingular())
+0.699 - assertFalse(austrumlatvija.hasNounForms())
+0.645 - assertEquals(3, austrumlatvija.getWordForms().size())
+0.607 - assertTrue(austrumlatvija.getWordForms().contains("ExpectedWordForm1"))
+0.607 - assertTrue(austrumlatvija.getWordForms().contains("ExpectedWordForm2"))
+0.596 - assertEquals("ExpectedCase", austrumlatvija.getCase())
+0.596 - assertEquals("ExpectedRoot", austrumlatvija.getRoot())
+0.590 - ```java
+assertNotNull(austrumlatvija)
+0.571 - assertEquals("ExpectedGender", austrumlatvija.getGender())
+0.566 - assertNotEquals("UnexpectedRoot", austrumlatvija.getRoot())
+0.544 - assertFalse(austrumlatvija.getWordForms().contains("UnexpectedWordForm"))
+0.538 - assertEquals("ExpectedWordForm1", austrumlatvija.getWordForm(0))
+0.538 - assertEquals("ExpectedWordForm2", austrumlatvija.getWordForm(1))
+0.538 - assertEquals("ExpectedWordForm3", austrumlatvija.getWordForm(2))
+0.000 - ```

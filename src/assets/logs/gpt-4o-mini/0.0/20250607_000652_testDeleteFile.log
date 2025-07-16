@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException { 
+    File targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ; 
+    if ( targetFile . exists ( ) ) { 
+    if ( targetFile . isDirectory ( ) ) { 
+    try { 
+    FileUtils . deleteDirectory ( targetFile ) ; 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } catch ( IllegalArgumentException e ) { 
+    debug ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } catch ( IOException e ) { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } } else { 
+    if ( targetFile . delete ( ) ) { 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } else { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testDeleteFile ( ) throws Exception {
+         File tempSrcFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( tempSrcFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File tempTargetFile = new File ( targetDir , "STR" ) ; 
+         Files . write ( tempTargetFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(tempSrcFile.exists());
+assertTrue(tempTargetFile.exists());
+assertEquals("STR", new String(Files.readAllBytes(tempSrcFile.toPath())));
+assertEquals("STR", new String(Files.readAllBytes(tempTargetFile.toPath())));
+assertTrue(tempTargetFile.delete());
+assertFalse(tempTargetFile.exists());
+assertTrue(tempSrcFile.delete());
+assertFalse(tempSrcFile.exists());
+assertTrue(tempTargetFile.getParentFile().exists());
+assertTrue(tempSrcFile.getParentFile().exists());
+assertTrue(tempTargetFile.getParentFile().isDirectory());
+assertTrue(tempSrcFile.getParentFile().isDirectory());
+assertTrue(tempTargetFile.getParentFile().list().length == 0);
+assertTrue(tempSrcFile.getParentFile().list().length == 0);
+assertNotNull(tempTargetFile.getCanonicalPath());
+assertNotNull(tempSrcFile.getCanonicalPath());
+assertTrue(tempTargetFile.getParentFile().canWrite());
+assertTrue(tempSrcFile.getParentFile().canWrite());
+assertTrue(tempTargetFile.getParentFile().canRead());
+assertTrue(tempSrcFile.getParentFile().canRead());
+assertTrue(tempTargetFile.getParentFile().delete());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(tempSrcFile.exists()); ===
+0.896 - assertTrue(tempTargetFile.exists())
+0.892 - assertFalse(tempSrcFile.exists())
+0.889 - ```java
+assertTrue(tempSrcFile.exists())
+0.875 - assertTrue(tempSrcFile.delete())
+0.800 - assertTrue(tempSrcFile.getParentFile().exists())
+0.794 - assertFalse(tempTargetFile.exists())
+0.776 - assertTrue(tempTargetFile.delete())
+0.723 - assertTrue(tempTargetFile.getParentFile().exists())
+0.707 - assertTrue(tempSrcFile.getParentFile().canWrite())
+0.706 - assertTrue(tempSrcFile.getParentFile().isDirectory())
+0.691 - assertTrue(tempSrcFile.getParentFile().canRead())
+0.682 - assertTrue(tempSrcFile.getParentFile().list().length == 0)
+0.675 - assertNotNull(tempSrcFile.getCanonicalPath())
+0.651 - assertTrue(tempTargetFile.getParentFile().delete())
+0.636 - assertTrue(tempTargetFile.getParentFile().isDirectory())
+0.635 - assertTrue(tempTargetFile.getParentFile().canWrite())
+0.619 - assertTrue(tempTargetFile.getParentFile().canRead())
+0.615 - assertTrue(tempTargetFile.getParentFile().list().length == 0)
+0.600 - assertNotNull(tempTargetFile.getCanonicalPath())
+0.505 - assertEquals("STR", new String(Files.readAllBytes(tempSrcFile.toPath())))
+0.453 - assertEquals("STR", new String(Files.readAllBytes(tempTargetFile.toPath())))
+0.000 - ```

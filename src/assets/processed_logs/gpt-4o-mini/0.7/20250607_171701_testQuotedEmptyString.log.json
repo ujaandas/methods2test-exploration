@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testQuotedEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(expectedSize, res.size());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"yourFieldName\") != null));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"yourFieldName\").isEmpty()));\nassertEquals(expectedFieldValue, res.get(0).field(\"yourFieldName\"));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"anotherFieldName\").equals(expectedValue)));\nassertEquals(expectedType, res.get(0).field(\"typeField\"));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"invalidField\") != null));\nassertEquals(expectedDocumentId, res.get(0).getIdentity().toString());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"numericField\") instanceof Number));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"dateField\") instanceof Date));\nassertEquals(expectedTimestamp, res.get(0).field(\"timestampField\").getTime());\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertFalse(res.stream().anyMatch(doc -> doc.field(\"status\").equals(\"inactive\")));\nassertEquals(expectedSum, res.stream().mapToDouble(doc -> doc.field(\"numericField\")).sum(), delta);\nassertTrue(res.stream().allMatch(doc -> doc.field(\"flagField\") == true));\nassertEquals(expectedCount, res.stream().filter(doc -> doc.field(\"category\").equals(\"A\")).count());\nassertNotNull(res.get(0).field(\"nestedDocument\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"listField\") instanceof List));\nassertEquals(expectedListSize, res.get(0).field(\"listField\").size());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.48,
+        0.463,
+        0.462,
+        0.431,
+        0.431,
+        0.43,
+        0.426,
+        0.4,
+        0.391,
+        0.362,
+        0.347,
+        0.347,
+        0.333,
+        0.333,
+        0.333,
+        0.331,
+        0.318,
+        0.317,
+        0.291,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

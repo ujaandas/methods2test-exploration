@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseImport {\nboolean existsClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseImportTest {\n@Test\npublic void exportImportExcludeClusters ( ) throws IOException {\nODatabaseDocument db = new ODatabaseDocumentTx ( \"STR\" + ODatabaseImportTest . class . getSimpleName ( ) + \"STR\" ) ;\ndb . create ( ) ;\ndb . getMetadata ( ) . getSchema ( ) . createClass ( \"STR\" ) ;\nByteArrayOutputStream output = new ByteArrayOutputStream ( ) ;\nODatabaseExport export = new ODatabaseExport ( ( ODatabaseDocumentInternal ) db , output , new OCommandOutputListener ( ) {\n@Override\npublic void onMessage ( String iText ) {\n} } ) ;\nexport . setOptions ( \"STR\" ) ;\nexport . exportDatabase ( ) ;\ndb . drop ( ) ;\nODatabaseDocument dbImp = new ODatabaseDocumentTx ( \"STR\" + ODatabaseImportTest . class . getSimpleName ( ) ) ;\ndbImp . create ( ) ;\nODatabaseImport importer = new ODatabaseImport ( ( ODatabaseDocumentInternal ) dbImp , new ByteArrayInputStream ( output . toByteArray ( ) ) , new OCommandOutputListener ( ) {\n@Override\npublic void onMessage ( String iText ) {\n} } ) ;\nimporter . importDatabase ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(importer.existsClass(\"STR\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().existsClass(\"STR\"));\nAssert.assertEquals(1, dbImp.countClass(\"STR\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop1\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop2\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop3\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop4\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop5\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop6\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop7\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop8\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop9\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop10\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop11\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop12\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop13\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop14\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop15\"));\nAssert.assertTrue(dbImp.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"prop16\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.795,
+        0.795,
+        0.795,
+        0.795,
+        0.795,
+        0.795,
+        0.795,
+        0.673,
+        0.554
+    ],
+    "ground_truth": "Assert.assertTrue(dbImp.getMetadata().getSchema().existsClass(\"STR\"));"
+}

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Exception {\npublic TestException ( Throwable cause ) {\nsuper ( cause ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class TestExceptionTest {\n@Test\npublic void testConstructor_withCause ( ) {\nRuntimeException cause = new RuntimeException ( ) ;\nTestException exception = new TestException ( cause ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(exception);\nAssert.assertEquals(cause, exception.getCause());\nAssert.assertTrue(exception.getMessage() == null);\nAssert.assertTrue(exception.toString().contains(\"TestException\"));\nAssert.assertTrue(exception.toString().contains(\"RuntimeException\"));\nAssert.assertTrue(exception.toString().contains(\"Caused by:\"));\nAssert.assertTrue(exception.toString().contains(\"java.lang.RuntimeException\"));\nAssert.assertTrue(exception.toString().contains(\"at hazelcast.hazelcast-simulator.simulator.TestExceptionTest.testConstructor_withCause\"));\nAssert.assertTrue(exception.toString().contains(\"Suppressed:\"));\nAssert.assertTrue(exception.getSuppressed().length == 0);\nAssert.assertTrue(exception.getClass().getSimpleName().equals(\"TestException\"));\nAssert.assertTrue(exception.getClass().getSuperclass().getSimpleName().equals(\"Exception\"));\nAssert.assertTrue(exception.hashCode() != 0);\nAssert.assertTrue(exception.equals(exception));\nAssert.assertFalse(exception.equals(null));\nAssert.assertFalse(exception.equals(new Object()));\nAssert.assertTrue(exception.equals(new TestException(cause)));\nAssert.assertTrue(exception.equals(exception));\nAssert.assertTrue(exception.hashCode() == new TestException(cause).hashCode());\nAssert.assertTrue(exception.hashCode() == exception.hashCode());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.667,
+        0.65,
+        0.621,
+        0.613,
+        0.61,
+        0.594,
+        0.574,
+        0.559,
+        0.557,
+        0.557,
+        0.532,
+        0.5,
+        0.5,
+        0.5,
+        0.468,
+        0.449,
+        0.436,
+        0.396,
+        0.329
+    ],
+    "ground_truth": "assertEquals(cause,exception.getCause());"
+}

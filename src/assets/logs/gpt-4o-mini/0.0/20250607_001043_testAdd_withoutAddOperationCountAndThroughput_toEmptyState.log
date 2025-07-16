@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStats {
+    public long getOperationCount ( ) { 
+    return operationCount ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsTest {
+    @Test
+     public void testAdd_withoutAddOperationCountAndThroughput_toEmptyState ( ) {
+         PerformanceStats addState = new PerformanceStats ( ) ; 
+         addState . add ( new PerformanceStats ( 100 , 5.0 , 10.0 , 450.0d , 400 , 500 ) , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(100, addState.getOperationCount());
+assertEquals(5.0, addState.getAverageLatency(), 0.01);
+assertEquals(10.0, addState.getMaxLatency(), 0.01);
+assertEquals(450.0, addState.getMinLatency(), 0.01);
+assertEquals(400, addState.getSuccessCount());
+assertEquals(500, addState.getFailureCount());
+assertTrue(addState.isEmpty());
+assertFalse(addState.isFull());
+assertNotNull(addState.getStartTime());
+assertNotNull(addState.getEndTime());
+assertTrue(addState.getThroughput() > 0);
+assertEquals(0, addState.getPendingOperations());
+assertTrue(addState.getOperationCount() >= 0);
+assertTrue(addState.getAverageLatency() >= 0);
+assertTrue(addState.getMaxLatency() >= addState.getMinLatency());
+assertTrue(addState.getSuccessCount() + addState.getFailureCount() >= addState.getOperationCount());
+assertTrue(addState.getFailureCount() <= addState.getOperationCount());
+assertTrue(addState.getThroughput() <= addState.getOperationCount());
+assertNotEquals(0, addState.getDuration());
+assertTrue(addState.getDuration() >= 0);
+assertEquals(0, addState.getErrorCount());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(100,addState.getOperationCount()); ===
+0.920 - ```java
+assertEquals(100, addState.getOperationCount())
+0.860 - assertEquals(0, addState.getErrorCount())
+0.839 - assertEquals(0, addState.getPendingOperations())
+0.831 - assertTrue(addState.getOperationCount() >= 0)
+0.828 - assertNotEquals(0, addState.getDuration())
+0.822 - assertEquals(400, addState.getSuccessCount())
+0.822 - assertEquals(500, addState.getFailureCount())
+0.745 - assertEquals(10.0, addState.getMaxLatency(), 0.01)
+0.722 - assertEquals(5.0, addState.getAverageLatency(), 0.01)
+0.716 - assertEquals(450.0, addState.getMinLatency(), 0.01)
+0.699 - assertTrue(addState.getDuration() >= 0)
+0.684 - assertTrue(addState.getFailureCount() <= addState.getOperationCount())
+0.679 - assertTrue(addState.getThroughput() <= addState.getOperationCount())
+0.643 - assertTrue(addState.getThroughput() > 0)
+0.632 - assertFalse(addState.isFull())
+0.629 - assertTrue(addState.getAverageLatency() >= 0)
+0.610 - assertNotNull(addState.getEndTime())
+0.595 - assertNotNull(addState.getStartTime())
+0.553 - assertTrue(addState.getSuccessCount() + addState.getFailureCount() >= addState.getOperationCount())
+0.553 - assertTrue(addState.isEmpty())
+0.519 - assertTrue(addState.getMaxLatency() >= addState.getMinLatency())
+0.000 - ```

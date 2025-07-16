@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class f {
+    @Deprecated
+     < RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class f {
+    @Test
+     public void testMixCompositeQuery ( ) {
+         List < ODocument > docs = db . query ( new OSQLSynchQuery < ODocument > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(docs);
+assertFalse(docs.isEmpty());
+assertEquals(expectedSize, docs.size());
+for (ODocument doc : docs) {
+    assertNotNull(doc.getField("fieldName1"));
+    assertNotNull(doc.getField("fieldName2"));
+    assertTrue(doc.getField("fieldName1") instanceof String);
+    assertTrue(doc.getField("fieldName2") instanceof Integer);
+}
+ODocument firstDoc = docs.get(0);
+assertEquals(expectedValue1, firstDoc.getField("fieldName1"));
+assertEquals(expectedValue2, firstDoc.getField("fieldName2"));
+assertTrue(firstDoc.containsField("fieldName3"));
+assertEquals(expectedListSize, firstDoc.getField("fieldName3").size());
+for (ODocument doc : docs) {
+    assertTrue(doc.getField("fieldName2") >= 0);
+}
+assertTrue(docs.stream().allMatch(doc -> doc.getField("fieldName1").toString().contains("expectedSubstring")));
+assertEquals(expectedDocId, docs.get(0).getIdentity());
+assertNotSame(docs.get(0), docs.get(1));
+assertTrue(docs.stream().anyMatch(doc -> doc.getField("fieldName4").equals(expectedValue4)));
+assertFalse(docs.stream().noneMatch(doc -> doc.getField("fieldName5").equals(expectedValue5)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,docs.size()); ===
+0.800 - assertEquals(expectedSize, docs.size())
+0.704 - assertFalse(docs.isEmpty())
+0.585 - assertNotSame(docs.get(0), docs.get(1))
+0.575 - assertEquals(expectedDocId, docs.get(0).getIdentity())
+0.529 - assertNotNull(doc.getField("fieldName2"))
+0.529 - assertEquals(expectedValue1, firstDoc.getField("fieldName1"))
+0.519 - ```java
+assertNotNull(docs)
+0.506 - assertEquals(expectedValue2, firstDoc.getField("fieldName2"))
+0.500 - assertEquals(expectedListSize, firstDoc.getField("fieldName3").size())
+0.427 - assertTrue(firstDoc.containsField("fieldName3"))
+0.391 - for (ODocument doc : docs) {
+    assertNotNull(doc.getField("fieldName1"))
+0.370 - for (ODocument doc : docs) {
+    assertTrue(doc.getField("fieldName2") >= 0)
+0.346 - assertTrue(doc.getField("fieldName1") instanceof String)
+0.345 - }
+ODocument firstDoc = docs.get(0)
+0.341 - assertTrue(doc.getField("fieldName2") instanceof Integer)
+0.274 - assertTrue(docs.stream().anyMatch(doc -> doc.getField("fieldName4").equals(expectedValue4)))
+0.269 - assertFalse(docs.stream().noneMatch(doc -> doc.getField("fieldName5").equals(expectedValue5)))
+0.263 - }
+assertTrue(docs.stream().allMatch(doc -> doc.getField("fieldName1").toString().contains("expectedSubstring")))
+0.000 - ```

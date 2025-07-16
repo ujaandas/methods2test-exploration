@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class AlterProperty {
+    OProperty getProperty ( String iPropertyName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class AlterPropertyTest {
+    @Test
+     public void testPropertyRenaming ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OProperty property = classA . createProperty ( "STR" , OType . STRING ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(property);
+Assert.assertEquals("STR", property.getName());
+Assert.assertEquals(OType.STRING, property.getType());
+Assert.assertTrue(classA.getProperties().contains(property));
+Assert.assertEquals(1, classA.getProperties().size());
+Assert.assertEquals("STR", classA.getProperty("STR").getName());
+Assert.assertEquals(OType.STRING, classA.getProperty("STR").getType());
+Assert.assertFalse(classA.getProperties().isEmpty());
+Assert.assertTrue(schema.getClasses().contains(classA));
+Assert.assertEquals("STR", classA.getName());
+Assert.assertNotNull(schema.getClass("STR"));
+Assert.assertTrue(schema.getClass("STR").getProperties().contains(property));
+Assert.assertEquals(1, schema.getClass("STR").getProperties().size());
+Assert.assertEquals(property, classA.getProperty("STR"));
+Assert.assertNotNull(schema.getClass("STR").getProperty("STR"));
+Assert.assertEquals(OType.STRING, schema.getClass("STR").getProperty("STR").getType());
+Assert.assertTrue(schema.getClass("STR").getProperty("STR").isNotNull());
+Assert.assertFalse(property.isLinked());
+Assert.assertEquals(0, property.getLinkedClasses().size());
+Assert.assertFalse(property.isMandatory());
+Assert.assertFalse(property.isReadonly());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(property,classA.getProperty("STR")); ===
+1.000 - Assert.assertEquals(property, classA.getProperty("STR"))
+0.777 - Assert.assertEquals("STR", classA.getProperty("STR").getName())
+0.764 - Assert.assertEquals(OType.STRING, classA.getProperty("STR").getType())
+0.731 - Assert.assertEquals(1, classA.getProperties().size())
+0.674 - Assert.assertEquals("STR", property.getName())
+0.667 - Assert.assertFalse(classA.getProperties().isEmpty())
+0.667 - Assert.assertEquals("STR", classA.getName())
+0.654 - Assert.assertNotNull(schema.getClass("STR").getProperty("STR"))
+0.645 - Assert.assertEquals(OType.STRING, property.getType())
+0.635 - Assert.assertEquals(OType.STRING, schema.getClass("STR").getProperty("STR").getType())
+0.612 - Assert.assertEquals(0, property.getLinkedClasses().size())
+0.606 - Assert.assertEquals(1, schema.getClass("STR").getProperties().size())
+0.602 - Assert.assertFalse(property.isMandatory())
+0.602 - Assert.assertTrue(schema.getClass("STR").getProperty("STR").isNotNull())
+0.575 - Assert.assertFalse(property.isLinked())
+0.561 - Assert.assertFalse(property.isReadonly())
+0.554 - Assert.assertTrue(classA.getProperties().contains(property))
+0.518 - Assert.assertNotNull(schema.getClass("STR"))
+0.479 - Assert.assertTrue(schema.getClass("STR").getProperties().contains(property))
+0.456 - ```java
+Assert.assertNotNull(property)
+0.438 - Assert.assertTrue(schema.getClasses().contains(classA))
+0.000 - ```

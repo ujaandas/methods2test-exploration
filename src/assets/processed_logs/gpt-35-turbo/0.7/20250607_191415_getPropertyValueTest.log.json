@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class Configs {\npublic static String getSystemPropertyWithMavenPropertyAsFallback ( Properties properties , String key ) {\nString val = System . getProperty ( key ) ;\nif ( val == null && properties != null ) {\nval = properties . getProperty ( key ) ;\n} return val ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ConfigsTest {\n@Test\npublic void getPropertyValueTest ( ) {\nproperties . setProperty ( KEY_1 , value ) ;\nSystem . setProperty ( KEY_2 , value ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"nonexistent\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"nonexistent\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, null));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, null));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"   \"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"   \"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"KEY_1\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"KEY_1\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"KEY_2\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"KEY_2\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"KEY_3\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"KEY_3\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"key_1\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"key_1\"));\n====================\n\n",
+    "scores": [
+        0.944,
+        0.939,
+        0.933,
+        0.928,
+        0.928,
+        0.909,
+        0.909,
+        0.906,
+        0.899,
+        0.862,
+        0.857,
+        0.856,
+        0.851,
+        0.846,
+        0.846,
+        0.824,
+        0.824,
+        0.823,
+        0.814,
+        0.807
+    ],
+    "ground_truth": "assertEquals(\"STR\",Configs.getSystemPropertyWithMavenPropertyAsFallback(properties,KEY_1));"
+}

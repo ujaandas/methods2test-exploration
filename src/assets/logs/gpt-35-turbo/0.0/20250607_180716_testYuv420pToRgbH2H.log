@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgb {
+    public byte [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class Yuv420pToRgbTest {
+    @Test
+     public void testYuv420pToRgbH2H ( ) {
+         Yuv420pToRgb transform = new Yuv420pToRgb ( ) ; 
+         Picture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] { 
+     yH , uH , vH } , new byte [ ] [ ] { 
+     yL , uL , vL } , ColorSpace . YUV420 , 2 ) ; 
+         Picture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ; 
+         transform . transform ( _in , out ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(4, out.getWidth());
+assertEquals(4, out.getHeight());
+assertEquals(ColorSpace.RGB, out.getColor());
+assertArrayEquals(yH, transform.getPlaneData(0));
+assertArrayEquals(uH, transform.getPlaneData(1));
+assertArrayEquals(vH, transform.getPlaneData(2));
+assertArrayEquals(yL, transform.getPlaneData(3));
+assertArrayEquals(uL, transform.getPlaneData(4));
+assertArrayEquals(vL, transform.getPlaneData(5));
+assertNotNull(out.getData());
+assertNotNull(out.getData()[0]);
+assertNotNull(out.getData()[1]);
+assertNotNull(out.getData()[2]);
+assertNotNull(out.getData()[3]);
+assertNotNull(out.getData()[4]);
+assertNotNull(out.getData()[5]);
+assertEquals(2, out.getBitDepth());
+assertEquals(2, _in.getBitDepth());
+assertEquals(ColorSpace.YUV420, _in.getColor());
+assertEquals(4, _in.getWidth());
+assertEquals(4, _in.getHeight());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(rgbH,out.getPlaneData(0)); ===
+0.844 - assertArrayEquals(yH, transform.getPlaneData(0))
+0.822 - assertArrayEquals(uH, transform.getPlaneData(1))
+0.822 - assertArrayEquals(vH, transform.getPlaneData(2))
+0.800 - assertArrayEquals(yL, transform.getPlaneData(3))
+0.800 - assertArrayEquals(uL, transform.getPlaneData(4))
+0.800 - assertArrayEquals(vL, transform.getPlaneData(5))
+0.703 - assertEquals(4, out.getHeight())
+0.684 - assertEquals(2, out.getBitDepth())
+0.648 - assertNotNull(out.getData())
+0.622 - assertNotNull(out.getData()[0])
+0.622 - assertNotNull(out.getData()[1])
+0.622 - assertNotNull(out.getData()[2])
+0.622 - assertNotNull(out.getData()[3])
+0.622 - assertNotNull(out.getData()[4])
+0.622 - assertNotNull(out.getData()[5])
+0.622 - assertEquals(4, _in.getHeight())
+0.605 - assertEquals(2, _in.getBitDepth())
+0.605 - assertEquals(ColorSpace.RGB, out.getColor())
+0.603 - assertEquals(4, _in.getWidth())
+0.581 - Assertions:
+
+assertEquals(4, out.getWidth())
+0.517 - assertEquals(ColorSpace.YUV420, _in.getColor())

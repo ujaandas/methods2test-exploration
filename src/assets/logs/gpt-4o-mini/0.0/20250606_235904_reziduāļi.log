@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void reziduāļi ( ) {
+         locītājs . enableDiminutive = true ; 
+         locītājs . enablePrefixes = true ; 
+         locītājs . enableGuessing = true ; 
+         locītājs . enableAllGuesses = true ; 
+         locītājs . meklētsalikteņus = true ; 
+         Word m = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(m);
+assertTrue(m.isRecognized());
+assertEquals("ExpectedWordForm1", m.getWordForm(0));
+assertEquals("ExpectedWordForm2", m.getWordForm(1));
+assertTrue(m.getWordForms().size() > 0);
+assertTrue(m.getWordForms().contains("ExpectedWordForm1"));
+assertTrue(m.getWordForms().contains("ExpectedWordForm2"));
+assertFalse(m.getWordForms().contains("UnexpectedWordForm"));
+assertEquals("ExpectedDiminutiveForm", m.getDiminutiveForm());
+assertTrue(m.hasPrefixes());
+assertTrue(m.hasGuesses());
+assertTrue(m.hasAllGuesses());
+assertTrue(m.isDiminutiveEnabled());
+assertTrue(m.isPrefixesEnabled());
+assertTrue(m.isGuessingEnabled());
+assertTrue(m.isAllGuessesEnabled());
+assertTrue(m.isSearchingCompoundWords());
+assertEquals("ExpectedAnalysisResult", m.getAnalysisResult());
+assertNotEquals("UnexpectedAnalysisResult", m.getAnalysisResult());
+assertTrue(m.getAnalysisDetails().size() > 0);
+assertTrue(m.getAnalysisDetails().contains("ExpectedDetail1"));
+assertTrue(m.getAnalysisDetails().contains("ExpectedDetail2"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(m.isRecognized()); ===
+1.000 - assertTrue(m.isRecognized())
+0.754 - assertTrue(m.isGuessingEnabled())
+0.721 - assertTrue(m.isPrefixesEnabled())
+0.704 - assertTrue(m.hasGuesses())
+0.698 - assertTrue(m.isDiminutiveEnabled())
+0.698 - assertTrue(m.isAllGuessesEnabled())
+0.676 - assertTrue(m.isSearchingCompoundWords())
+0.667 - assertTrue(m.hasAllGuesses())
+0.655 - assertTrue(m.hasPrefixes())
+0.620 - assertTrue(m.getAnalysisDetails().size() > 0)
+0.615 - assertTrue(m.getWordForms().size() > 0)
+0.488 - assertTrue(m.getWordForms().contains("ExpectedWordForm1"))
+0.488 - assertTrue(m.getWordForms().contains("ExpectedWordForm2"))
+0.467 - assertTrue(m.getAnalysisDetails().contains("ExpectedDetail1"))
+0.467 - assertTrue(m.getAnalysisDetails().contains("ExpectedDetail2"))
+0.432 - assertEquals("ExpectedAnalysisResult", m.getAnalysisResult())
+0.409 - assertFalse(m.getWordForms().contains("UnexpectedWordForm"))
+0.409 - assertNotEquals("UnexpectedAnalysisResult", m.getAnalysisResult())
+0.385 - ```java
+assertNotNull(m)
+0.385 - assertEquals("ExpectedWordForm1", m.getWordForm(0))
+0.385 - assertEquals("ExpectedWordForm2", m.getWordForm(1))
+0.341 - assertEquals("ExpectedDiminutiveForm", m.getDiminutiveForm())
+0.000 - ```

@@ -1,0 +1,89 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLFunctionAstar {
+    public long countEdges ( final String iClassName ) { 
+    makeActive ( ) ; 
+    if ( isUseLightweightEdges ( ) ) throw new UnsupportedOperationException ( "STR" ) ; 
+    return getRawGraph ( ) . countClass ( iClassName ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLFunctionAstarTest {
+    @Test
+     public void test6Execute ( ) throws Exception {
+         Map < String , Object > options = new HashMap < String , Object > ( ) ; 
+         options . put ( OSQLFunctionAstar . PARAM_DIRECTION , "STR" ) ; 
+         options . put ( OSQLFunctionAstar . PARAM_PARALLEL , true ) ; 
+         options . put ( OSQLFunctionAstar . PARAM_EDGE_TYPE_NAMES , new String [ ] { 
+     "STR" } ) ; 
+         options . put ( OSQLFunctionAstar . PARAM_VERTEX_AXIS_NAMES , new String [ ] { 
+     "STR" , "STR" } ) ; 
+         final List < OrientVertex > result = functionAstar . execute ( null , null , null , new Object [ ] { 
+     v6 , v1 , "STR" , options } , new OBasicCommandContext ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertFalse(result.isEmpty());
+assertEquals(2, result.size());
+assertTrue(result.get(0) instanceof OrientVertex);
+assertTrue(result.get(1) instanceof OrientVertex);
+assertEquals("ExpectedVertexId1", result.get(0).getId().toString());
+assertEquals("ExpectedVertexId2", result.get(1).getId().toString());
+assertEquals("ExpectedPropertyValue1", result.get(0).getProperty("propertyName1"));
+assertEquals("ExpectedPropertyValue2", result.get(1).getProperty("propertyName2"));
+assertEquals("ExpectedEdgeType", result.get(0).getEdges(Direction.OUT, "STR").iterator().next().getLabel());
+assertEquals("ExpectedEdgeType", result.get(1).getEdges(Direction.OUT, "STR").iterator().next().getLabel());
+assertEquals("ExpectedVertexName1", result.get(0).getProperty("name"));
+assertEquals("ExpectedVertexName2", result.get(1).getProperty("name"));
+assertNotNull(result.get(0).getProperty("creationDate"));
+assertNotNull(result.get(1).getProperty("creationDate"));
+assertTrue(result.get(0).getProperty("active"));
+assertTrue(result.get(1).getProperty("active"));
+assertEquals(1, result.get(0).getEdges(Direction.IN).size());
+assertEquals(1, result.get(1).getEdges(Direction.IN).size());
+assertTrue(result.get(0).getEdges(Direction.OUT).stream().anyMatch(edge -> edge.getLabel().equals("STR")));
+assertTrue(result.get(1).getEdges(Direction.OUT).stream().anyMatch(edge -> edge.getLabel().equals("STR")));
+assertNotNull(result.get(0).getProperty("customProperty"));
+assertNotNull(result.get(1).getProperty("customProperty"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(16,graph.countEdges("STR")); ===
+0.580 - assertEquals(2, result.size())
+0.525 - assertEquals(1, result.get(0).getEdges(Direction.IN).size())
+0.525 - assertEquals(1, result.get(1).getEdges(Direction.IN).size())
+0.464 - assertFalse(result.isEmpty())
+0.440 - assertEquals("ExpectedVertexName1", result.get(0).getProperty("name"))
+0.434 - assertEquals("ExpectedVertexId1", result.get(0).getId().toString())
+0.422 - assertEquals("ExpectedVertexName2", result.get(1).getProperty("name"))
+0.415 - assertEquals("ExpectedVertexId2", result.get(1).getId().toString())
+0.414 - assertEquals("ExpectedEdgeType", result.get(0).getEdges(Direction.OUT, "STR").iterator().next().getLabel())
+0.414 - assertTrue(result.get(1).getProperty("active"))
+0.400 - assertEquals("ExpectedEdgeType", result.get(1).getEdges(Direction.OUT, "STR").iterator().next().getLabel())
+0.397 - assertEquals("ExpectedPropertyValue1", result.get(0).getProperty("propertyName1"))
+0.396 - assertNotNull(result.get(1).getProperty("creationDate"))
+0.388 - assertNotNull(result.get(1).getProperty("customProperty"))
+0.380 - assertEquals("ExpectedPropertyValue2", result.get(1).getProperty("propertyName2"))
+0.377 - ```java
+assertNotNull(result)
+0.368 - assertTrue(result.get(0).getProperty("active"))
+0.354 - assertNotNull(result.get(0).getProperty("creationDate"))
+0.347 - assertTrue(result.get(1).getEdges(Direction.OUT).stream().anyMatch(edge -> edge.getLabel().equals("STR")))
+0.347 - assertNotNull(result.get(0).getProperty("customProperty"))
+0.345 - assertTrue(result.get(1) instanceof OrientVertex)
+0.333 - assertTrue(result.get(0).getEdges(Direction.OUT).stream().anyMatch(edge -> edge.getLabel().equals("STR")))
+0.299 - assertTrue(result.get(0) instanceof OrientVertex)
+0.000 - ```

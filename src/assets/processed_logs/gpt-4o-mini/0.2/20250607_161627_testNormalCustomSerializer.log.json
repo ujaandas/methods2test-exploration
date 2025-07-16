@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializer {\n@Override\npublic Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nreturn this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializerTest {\n@Test\npublic void testNormalCustomSerializer ( ) throws Exception {\nNormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ;\nNormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ;\nCustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ;\nCustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ;\nRequestBody body = new RequestBody ( 1 , \"STR\" ) ;\nString ret = ( String ) client . invokeSync ( addr , body , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(ret);\nassertEquals(\"ExpectedResponse\", ret);\nassertTrue(ret instanceof String);\nassertFalse(ret.isEmpty());\nassertEquals(\"ExpectedResponse\", ret.trim());\nassertEquals(12, ret.length());\nassertTrue(ret.contains(\"ExpectedSubstring\"));\nassertFalse(ret.contains(\"UnexpectedSubstring\"));\nassertEquals(\"ExpectedResponse\", new String(ret.getBytes(), StandardCharsets.UTF_8));\nassertNotSame(\"DifferentResponse\", ret);\nassertTrue(ret.matches(\"ExpectedRegexPattern\"));\nassertEquals(\"ExpectedResponse\", ret.toString());\nassertArrayEquals(new byte[]{1, 2, 3}, ret.getBytes());\nassertTrue(ret.startsWith(\"ExpectedStart\"));\nassertTrue(ret.endsWith(\"ExpectedEnd\"));\nassertNotEquals(\"AnotherResponse\", ret);\nassertSame(\"ExpectedResponse\", ret);\nassertTrue(ret.equalsIgnoreCase(\"expectedresponse\"));\nassertNull(client.invokeSync(addr, null, 1000));\nassertThrows(RemotingException.class, () -> client.invokeSync(addr, body, -1));\nassertDoesNotThrow(() -> client.invokeSync(addr, body, 1000));\nassertEquals(\"ExpectedResponse\", ret.replace(\" \", \"\"));\n```\n====================\n\n",
+    "scores": [
+        0.454,
+        0.444,
+        0.423,
+        0.407,
+        0.4,
+        0.393,
+        0.36,
+        0.343,
+        0.337,
+        0.322,
+        0.319,
+        0.31,
+        0.299,
+        0.269,
+        0.261,
+        0.257,
+        0.24,
+        0.237,
+        0.231,
+        0.226,
+        0.222,
+        0.208,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+\"STR\",ret);"
+}

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testDoubleWithingQuotes ( ) {
+         Double minDouble = 540282346638528870000000000000000000000.0d ; 
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(1, res.size());
+assertTrue(res.get(0).fieldExists("fieldName1"));
+assertTrue(res.get(0).fieldExists("fieldName2"));
+assertEquals(minDouble, res.get(0).field("fieldName1"));
+assertEquals("expectedStringValue", res.get(0).field("fieldName2"));
+assertTrue(res.get(0).field("fieldName3") instanceof String);
+assertEquals(12345, res.get(0).field("fieldName4"));
+assertNotEquals(0, res.get(0).field("fieldName5"));
+assertTrue(res.get(0).field("fieldName6") instanceof List);
+assertEquals(3, ((List) res.get(0).field("fieldName6")).size());
+assertTrue(((List) res.get(0).field("fieldName6")).contains("expectedValue"));
+assertNotNull(res.get(0).field("fieldName7"));
+assertTrue(res.get(0).field("fieldName8") instanceof Map);
+assertEquals("expectedMapValue", ((Map) res.get(0).field("fieldName8")).get("key"));
+assertTrue(res.get(0).field("fieldName9") instanceof Double);
+assertEquals(0.0, res.get(0).field("fieldName10"));
+assertTrue(res.get(0).field("fieldName11") instanceof Date);
+assertEquals("expectedDateValue", res.get(0).field("fieldName12").toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.692 - assertEquals(1, res.size())
+0.480 - assertNotEquals(0, res.get(0).field("fieldName5"))
+0.480 - assertEquals(0.0, res.get(0).field("fieldName10"))
+0.474 - assertEquals(12345, res.get(0).field("fieldName4"))
+0.462 - ```java
+assertNotNull(res)
+0.459 - assertTrue(res.get(0).fieldExists("fieldName1"))
+0.459 - assertTrue(res.get(0).fieldExists("fieldName2"))
+0.451 - assertNotNull(res.get(0).field("fieldName7"))
+0.450 - assertEquals(minDouble, res.get(0).field("fieldName1"))
+0.437 - assertEquals(3, ((List) res.get(0).field("fieldName6")).size())
+0.395 - assertTrue(res.get(0).field("fieldName8") instanceof Map)
+0.392 - assertEquals("expectedDateValue", res.get(0).field("fieldName12").toString())
+0.391 - assertEquals("expectedStringValue", res.get(0).field("fieldName2"))
+0.390 - assertTrue(res.get(0).field("fieldName6") instanceof List)
+0.386 - assertTrue(res.get(0).field("fieldName11") instanceof Date)
+0.381 - assertTrue(res.get(0).field("fieldName3") instanceof String)
+0.381 - assertTrue(res.get(0).field("fieldName9") instanceof Double)
+0.355 - assertEquals("expectedMapValue", ((Map) res.get(0).field("fieldName8")).get("key"))
+0.314 - assertTrue(((List) res.get(0).field("fieldName6")).contains("expectedValue"))
+0.000 - ```

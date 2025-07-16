@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoader {
+    @Override
+     public Source load ( final String sourceFile ) throws IOException { 
+     InputStream stream = locate ( sourceFile ) ; 
+     if ( stream != null ) { 
+     try ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ; 
+     InputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) { 
+     String source = IOUtil . toString ( reader ) ; 
+     return new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ; 
+     } catch ( NoSuchAlgorithmException ex ) { 
+     throw new IOException ( "STR" , ex ) ; 
+     } } else { 
+     return null ; 
+     } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoaderTest {
+    @Test
+     public void testMissingSourceFileFromDirectory ( ) throws Exception {
+         DirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNull(sourceLoader.load("missingFile.java"));
+assertNull(sourceLoader.load("nonexistentFile.java"));
+assertNull(sourceLoader.load("invalidFile.txt"));
+assertNull(sourceLoader.load("emptyFile.java"));
+assertNull(sourceLoader.load("fileWithoutExtension"));
+assertNull(sourceLoader.load("fileWithInvalidExtension.pdf"));
+assertNull(sourceLoader.load("fileWithNoContent.java"));
+assertNull(sourceLoader.load("fileWithSpecialCharacters.java"));
+assertNull(sourceLoader.load("fileWithWhiteSpace.java"));
+assertNull(sourceLoader.load("fileWithTabs.java"));
+assertNull(sourceLoader.load("fileWithNewLines.java"));
+assertNull(sourceLoader.load("fileWithOnlyComments.java"));
+assertNull(sourceLoader.load("fileWithOnlyWhitespace.java"));
+assertNull(sourceLoader.load("fileWithOnlySpecialCharacters.java"));
+assertNull(sourceLoader.load("fileWithOnlyNumbers.java"));
+assertNull(sourceLoader.load("fileWithOnlySymbols.java"));
+assertNull(sourceLoader.load("fileWithInvalidEncoding.java"));
+assertNull(sourceLoader.load("fileWithInvalidFormat.java"));
+assertNull(sourceLoader.load("fileWithInvalidPermissions.java"));
+assertNull(sourceLoader.load("fileWithInvalidPath.java"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(sourceLoader.load("STR")); ===
+0.795 - assertNull(sourceLoader.load("emptyFile.java"))
+0.791 - assertNull(sourceLoader.load("fileWithTabs.java"))
+0.786 - assertNull(sourceLoader.load("invalidFile.txt"))
+0.776 - assertNull(sourceLoader.load("missingFile.java"))
+0.742 - assertNull(sourceLoader.load("nonexistentFile.java"))
+0.742 - assertNull(sourceLoader.load("fileWithoutExtension"))
+0.739 - assertNull(sourceLoader.load("fileWithWhiteSpace.java"))
+0.733 - assertNull(sourceLoader.load("fileWithNewLines.java"))
+0.731 - assertNull(sourceLoader.load("fileWithOnlySymbols.java"))
+0.725 - assertNull(sourceLoader.load("fileWithNoContent.java"))
+0.710 - assertNull(sourceLoader.load("fileWithOnlyNumbers.java"))
+0.710 - assertNull(sourceLoader.load("fileWithInvalidPath.java"))
+0.702 - assertNull(sourceLoader.load("fileWithOnlyComments.java"))
+0.695 - assertNull(sourceLoader.load("fileWithInvalidFormat.java"))
+0.688 - assertNull(sourceLoader.load("fileWithOnlyWhitespace.java"))
+0.687 - assertNull(sourceLoader.load("fileWithSpecialCharacters.java"))
+0.680 - assertNull(sourceLoader.load("fileWithInvalidExtension.pdf"))
+0.680 - assertNull(sourceLoader.load("fileWithInvalidEncoding.java"))
+0.660 - assertNull(sourceLoader.load("fileWithOnlySpecialCharacters.java"))
+0.660 - assertNull(sourceLoader.load("fileWithInvalidPermissions.java"))

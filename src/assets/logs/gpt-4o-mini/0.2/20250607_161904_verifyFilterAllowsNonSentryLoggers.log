@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package tradier.dropwizard-raven;
+
+public class DroppingRavenLoggingFilter {
+    @Override
+     public FilterReply decide ( ILoggingEvent event ) { 
+     if ( event . getLoggerName ( ) . startsWith ( "STR" ) ) { 
+     return FilterReply . DENY ; 
+     } else { 
+     return FilterReply . NEUTRAL ; 
+     } }
+}
+
+package tradier.dropwizard-raven;
+
+public class DroppingRavenLoggingFilterTest {
+    @Test
+     public void verifyFilterAllowsNonSentryLoggers ( ) {
+         final DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ; 
+         filter . start ( ) ; 
+         final LoggingEvent evt = new LoggingEvent ( ) ; 
+         evt . setLoggerName ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(FilterReply.DENY, filter.decide(evt));
+assertNotNull(filter);
+assertTrue(filter instanceof DroppingRavenLoggingFilter);
+assertEquals("STR", evt.getLoggerName());
+assertTrue(evt.getLoggerName().startsWith("S"));
+assertFalse(evt.getLoggerName().startsWith("A"));
+assertFalse(evt.getLoggerName().startsWith("B"));
+assertFalse(evt.getLoggerName().startsWith("C"));
+assertFalse(evt.getLoggerName().startsWith("D"));
+assertFalse(evt.getLoggerName().startsWith("E"));
+assertFalse(evt.getLoggerName().startsWith("F"));
+assertFalse(evt.getLoggerName().startsWith("G"));
+assertFalse(evt.getLoggerName().startsWith("H"));
+assertFalse(evt.getLoggerName().startsWith("I"));
+assertFalse(evt.getLoggerName().startsWith("J"));
+assertFalse(evt.getLoggerName().startsWith("K"));
+assertFalse(evt.getLoggerName().startsWith("L"));
+assertFalse(evt.getLoggerName().startsWith("M"));
+assertFalse(evt.getLoggerName().startsWith("N"));
+assertFalse(evt.getLoggerName().startsWith("O"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(FilterReply.NEUTRAL,filter.decide(evt)); ===
+0.844 - ```java
+assertEquals(FilterReply.DENY, filter.decide(evt))
+0.462 - assertEquals("STR", evt.getLoggerName())
+0.438 - assertNotNull(filter)
+0.320 - assertFalse(evt.getLoggerName().startsWith("A"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("B"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("C"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("D"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("E"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("F"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("G"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("H"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("I"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("J"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("K"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("L"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("M"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("N"))
+0.320 - assertFalse(evt.getLoggerName().startsWith("O"))
+0.283 - assertTrue(filter instanceof DroppingRavenLoggingFilter)
+0.283 - assertTrue(evt.getLoggerName().startsWith("S"))
+0.000 - ```

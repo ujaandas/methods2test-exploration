@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCreateClusterStatementExecutionTest {
+    @Test
+     public void testBlob ( ) {
+         String clusterName = "STR" ; 
+         OResultSet result = db . command ( "STR" + clusterName ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(1, result.stream().count());
+assertEquals(clusterName, result.next().getProperty("name"));
+assertEquals(0, result.next().getProperty("id")); // Assuming the ID is 0 for the first cluster
+assertEquals("Cluster creation successful", result.next().getProperty("message"));
+assertTrue(result.next().getProperty("status"));
+assertNotEquals("", result.next().getProperty("creationTime"));
+assertTrue(result.next().getProperty("isPersistent"));
+assertEquals("STR", result.next().getProperty("type"));
+assertEquals("Test cluster for STR", result.next().getProperty("description"));
+assertNotNull(result.next().getProperty("metadata"));
+assertEquals(0, result.next().getProperty("recordCount"));
+assertEquals(clusterName, result.next().getProperty("name"));
+assertFalse(result.next().getProperty("isDeleted"));
+assertTrue(result.next().getProperty("isShared"));
+assertEquals("default", result.next().getProperty("defaultRole"));
+assertNotNull(result.next().getProperty("permissions"));
+assertTrue(result.next().getProperty("isReplicationEnabled"));
+assertEquals("cluster", result.next().getProperty("entityType"));
+assertEquals("STR", result.next().getProperty("clusterType"));
+assertEquals("active", result.next().getProperty("status"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(clusterName)>0); ===
+0.537 - assertEquals("STR", result.next().getProperty("clusterType"))
+0.460 - assertNotNull(result.next().getProperty("metadata"))
+0.460 - assertEquals(1, result.stream().count())
+0.447 - assertTrue(result.hasNext())
+0.447 - assertNotNull(result.next().getProperty("permissions"))
+0.430 - assertEquals(clusterName, result.next().getProperty("name"))
+0.430 - assertEquals(clusterName, result.next().getProperty("name"))
+0.416 - assertTrue(result.next().getProperty("isPersistent"))
+0.416 - assertEquals("STR", result.next().getProperty("type"))
+0.412 - assertTrue(result.next().getProperty("isShared"))
+0.404 - assertEquals(0, result.next().getProperty("recordCount"))
+0.404 - assertNotEquals("", result.next().getProperty("creationTime"))
+0.400 - assertEquals(0, result.next().getProperty("id"))
+0.400 - assertTrue(result.next().getProperty("status"))
+0.375 - assertEquals("default", result.next().getProperty("defaultRole"))
+0.367 - assertTrue(result.next().getProperty("isReplicationEnabled"))
+0.364 - assertFalse(result.next().getProperty("isDeleted"))
+0.340 - assertEquals("active", result.next().getProperty("status"))
+0.328 - assertEquals("Test cluster for STR", result.next().getProperty("description"))
+0.324 - assertEquals("cluster", result.next().getProperty("entityType"))
+0.270 - // Assuming the ID is 0 for the first cluster
+assertEquals("Cluster creation successful", result.next().getProperty("message"))
+0.260 - ```java
+assertNotNull(result)
+0.000 - ```

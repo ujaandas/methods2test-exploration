@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( Object ... params ) {\nif ( ! ( params [ 0 ] instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ;\nfinal List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nObject val = createSingleValue ( mapParam ) ;\nresult . add ( val ) ;\n} if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) {\nreturn result . get ( 0 ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueByValueTwoParametersArrayParams ( ) {\nfinal Object result = propertyIndexByValue . createValue ( mapToTest , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(result);\nAssert.assertTrue(result instanceof List);\nAssert.assertEquals(2, ((List) result).size());\nAssert.assertEquals(\"STR\", ((List) result).get(1));\nAssert.assertTrue(((List) result).get(0) instanceof List);\nAssert.assertEquals(2, ((List) ((List) result).get(0)).size());\nAssert.assertEquals(\"key1\", ((List) ((List) result).get(0)).get(0));\nAssert.assertEquals(\"value1\", ((List) ((List) result).get(0)).get(1));\nAssert.assertTrue(((List) result).get(1) instanceof String);\nAssert.assertEquals(\"STR\", ((List) result).get(1));\nAssert.assertTrue(propertyIndexByValue.getFieldsToIndex().size() == 1);\nAssert.assertTrue(mapToTest instanceof Map);\nAssert.assertEquals(2, mapToTest.size());\nAssert.assertTrue(mapToTest.containsKey(\"key1\"));\nAssert.assertTrue(mapToTest.containsValue(\"value1\"));\nAssert.assertTrue(mapToTest.containsKey(\"key2\"));\nAssert.assertTrue(mapToTest.containsValue(\"value2\"));\nAssert.assertEquals(\"value2\", mapToTest.get(\"key2\"));\nAssert.assertEquals(\"value1\", mapToTest.get(\"key1\"));\n====================\n\n",
+    "scores": [
+        0.829,
+        0.713,
+        0.694,
+        0.682,
+        0.53,
+        0.53,
+        0.508,
+        0.506,
+        0.506,
+        0.453,
+        0.405,
+        0.405,
+        0.4,
+        0.392,
+        0.378,
+        0.343,
+        0.341,
+        0.341,
+        0.286
+    ],
+    "ground_truth": "Assert.assertTrue(resultinstanceofCollection);"
+}

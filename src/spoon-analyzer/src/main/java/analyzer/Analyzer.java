@@ -3,8 +3,7 @@ package analyzer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import spoon.Launcher;
 import spoon.reflect.CtModel;
@@ -17,27 +16,30 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.compiler.VirtualFile;
 
 public class Analyzer {
-    private Set<String> stdLibTypes;
+    
+    private Set<StdLibEntry> stdLibEntries;
 
     public Analyzer() {
-        this.stdLibTypes = loadStdLibTypes("/Users/ooj/Dev/Research/assertion/methods2test-exploration/src/stdlibtypes.txt");
-        System.out.println("Loaded standard library types: " + stdLibTypes);
+        
+        this.stdLibEntries = loadStdLibEntries("fqns.txt");
+        System.out.println("Loaded standard library entries: " + stdLibEntries);
     }
 
-    private Set<String> loadStdLibTypes(String filePath) {
-        Set<String> types = new HashSet<>();
+    private Set<StdLibEntry> loadStdLibEntries(String filePath) {
+        Set<StdLibEntry> entries = new HashSet<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();
                 if (!line.isEmpty()) {
-                    types.add(line);
+                    
+                    entries.add(new StdLibEntry(line));
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading stdlibtypes.txt: " + e.getMessage());
+            System.err.println("Error reading fqns.txt: " + e.getMessage());
         }
-        return types;
+        return entries;
     }
 
     public AnalyzerMetrics analyzeTestClass(String testClassSource) {
@@ -52,6 +54,7 @@ public class Analyzer {
 
         System.out.println("==== Model successfully built ====");
 
+        
         for (CtInvocation<?> invocation : model.getElements(new TypeFilter<>(CtInvocation.class))) {
             String invokedMethod = invocation.getExecutable().getSimpleName();
             if (invokedMethod.startsWith("assert")) {
@@ -63,39 +66,52 @@ public class Analyzer {
                 metrics.incrementTotalAssertions();
 
                 boolean hasMethodCall = false;
-                boolean allVariables = true; // until proven otherwise
+                boolean allVariables = true; 
 
+                
                 for (CtExpression<?> arg : invocation.getArguments()) {
                     System.out.println("   >> Analyzing argument: " + arg);
                     CtTypeReference<?> typeRef = arg.getType();
                     if (typeRef != null) {
-                        String qualifiedName = typeRef.getQualifiedName();
-                        System.out.println("      Resolved type: " + qualifiedName);
-                        if (stdLibTypes.contains(qualifiedName) || stdLibTypes.contains(typeRef.getSimpleName())) {
-                            String detected = stdLibTypes.contains(qualifiedName) ? qualifiedName : typeRef.getSimpleName();
-                            System.out.println("      => Standard library type detected: " + detected);
+                        String resolvedType = typeRef.getQualifiedName();
+                        String simpleType = typeRef.getSimpleName();
+                        System.out.println("      Resolved type: " + resolvedType);
+                        
+                        Optional<StdLibEntry> match = stdLibEntries.stream()
+                                .filter(entry -> entry.getSimpleName().equals(simpleType))
+                                .findFirst();
+                        if (match.isPresent()) {
+                            StdLibEntry detectedEntry = match.get();
+                            System.out.println("      => Standard library type detected: " + detectedEntry.getSimpleName());
                             metrics.incrementStdLibTypeUsage();
+                            metrics.recordStdLibUsage(detectedEntry, false);
                         }
                     } else {
                         System.out.println("      Warning: Unable to resolve type.");
                     }
 
+                    
                     if (arg instanceof CtInvocation) {
                         hasMethodCall = true;
                         allVariables = false;
                         CtInvocation<?> argInvocation = (CtInvocation<?>) arg;
                         CtTypeReference<?> declType = argInvocation.getExecutable().getDeclaringType();
                         if (declType != null) {
-                            String declQualifiedName = declType.getQualifiedName();
-                            System.out.println("      Argument is a method call from type: " + declQualifiedName);
-                            if (stdLibTypes.contains(declQualifiedName) || stdLibTypes.contains(declType.getSimpleName())) {
-                                String detectedStatic = stdLibTypes.contains(declQualifiedName) ? declQualifiedName : declType.getSimpleName();
-                                System.out.println("      => Standard library static method detected: " + detectedStatic);
+                            String declResolvedType = declType.getQualifiedName();
+                            String declSimpleType = declType.getSimpleName();
+                            System.out.println("      Argument is a method call from type: " + declResolvedType);
+                            Optional<StdLibEntry> matchDecl = stdLibEntries.stream()
+                                    .filter(entry -> entry.getSimpleName().equals(declSimpleType))
+                                    .findFirst();
+                            if (matchDecl.isPresent()) {
+                                StdLibEntry detectedStatic = matchDecl.get();
+                                System.out.println("      => Standard library static method detected: " + detectedStatic.getSimpleName());
                                 metrics.incrementStdLibStaticUsage();
+                                metrics.recordStdLibUsage(detectedStatic, true);
                             }
                         }
                     } else if (!(arg instanceof CtVariableAccess)) {
-                        // If this argument isn't a method call or a variable, then it isn't "only variable".
+                        
                         allVariables = false;
                     }
                 }
@@ -113,12 +129,57 @@ public class Analyzer {
         return metrics;
     }
 
+    public static class StdLibEntry {
+        private final String fullName;
+        private final String simpleName;
+        private final String packagePrefix; 
+
+        public StdLibEntry(String fullName) {
+            this.fullName = fullName;
+            int lastDotIndex = fullName.lastIndexOf('.');
+            this.simpleName = (lastDotIndex >= 0) ? fullName.substring(lastDotIndex + 1) : fullName;
+            
+            String[] parts = fullName.split("\\.");
+            if (parts.length >= 2) {
+                this.packagePrefix = parts[0] + "." + parts[1];
+            } else {
+                this.packagePrefix = fullName;
+            }
+        }
+
+        public String getFullName() {
+            return fullName;
+        }
+
+        public String getSimpleName() {
+            return simpleName;
+        }
+
+        public String getPackagePrefix() {
+            return packagePrefix;
+        }
+
+        @Override
+        public String toString() {
+            return "StdLibEntry{" +
+                    "fullName='" + fullName + '\'' +
+                    ", simpleName='" + simpleName + '\'' +
+                    ", packagePrefix='" + packagePrefix + '\'' +
+                    '}';
+        }
+    }
+
     public static class AnalyzerMetrics {
         private int totalAssertions = 0;
         private int stdLibTypeUsage = 0;
         private int stdLibStaticUsage = 0;
         private int noMethodCallAssertions = 0;
         private int onlyVariableAssertions = 0;
+
+        
+        private Map<String, StdLibUsage> stdLibUsageDistribution = new HashMap<>();
+        
+        private Map<String, Integer> stdLibPackageUsageDistribution = new HashMap<>();
 
         public void incrementTotalAssertions() {
             totalAssertions++;
@@ -158,6 +219,90 @@ public class Analyzer {
 
         public int getOnlyVariableAssertions() {
             return onlyVariableAssertions;
+        }
+
+        public Map<String, StdLibUsage> getStdLibUsageDistribution() {
+            return stdLibUsageDistribution;
+        }
+        
+        public Map<String, Integer> getStdLibPackageUsageDistribution() {
+            return stdLibPackageUsageDistribution;
+        }
+
+        
+        
+        public void recordStdLibUsage(StdLibEntry entry, boolean isStatic) {
+            String key = entry.getSimpleName();
+            StdLibUsage usage = stdLibUsageDistribution.get(key);
+            if (usage == null) {
+                usage = new StdLibUsage(entry.getFullName(), entry.getPackagePrefix());
+                stdLibUsageDistribution.put(key, usage);
+            }
+            if (isStatic) {
+                usage.incrementStaticCount();
+            } else {
+                usage.incrementInstanceCount();
+            }
+            
+            String pkg = entry.getPackagePrefix();
+            int count = stdLibPackageUsageDistribution.getOrDefault(pkg, 0);
+            stdLibPackageUsageDistribution.put(pkg, count + 1);
+        }
+    }
+
+    public static class StdLibUsage {
+        private final String fullName;
+        private final String packagePrefix;
+        private int instanceCount;
+        private int staticCount;
+
+        public StdLibUsage(String fullName, String packagePrefix) {
+            this.fullName = fullName;
+            this.packagePrefix = packagePrefix;
+        }
+
+        public void incrementInstanceCount() {
+            instanceCount++;
+        }
+
+        public void incrementStaticCount() {
+            staticCount++;
+        }
+
+        
+        public String getLibName() {
+            return fullName;
+        }
+
+        public String getFullName() {
+            return fullName;
+        }
+
+        public String getPackagePrefix() {
+            return packagePrefix;
+        }
+
+        public int getInstanceCount() {
+            return instanceCount;
+        }
+
+        public int getStaticCount() {
+            return staticCount;
+        }
+
+        @Override
+        public String toString() {
+            return "StdLibUsage{" +
+                    "fullName='" + fullName + '\'' +
+                    ", packagePrefix='" + packagePrefix + '\'' +
+                    ", instanceCount=" + instanceCount +
+                    ", staticCount=" + staticCount +
+                    '}';
+        }
+
+        public void merge(StdLibUsage other) {
+            this.instanceCount += other.instanceCount;
+            this.staticCount += other.staticCount;
         }
     }
 }

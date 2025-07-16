@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMathExpression {
+    public Object execute ( OResult iCurrentRecord , OCommandContext ctx ) { 
+    if ( childExpressions . size ( ) == 0 ) { 
+    return null ; 
+    } if ( childExpressions . size ( ) == 1 ) { 
+    return childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ; 
+    } if ( childExpressions . size ( ) == 2 ) { 
+    Object leftValue = childExpressions . get ( 0 ) . execute ( iCurrentRecord , ctx ) ; 
+    Object rightValue = childExpressions . get ( 1 ) . execute ( iCurrentRecord , ctx ) ; 
+    return operators . get ( 0 ) . apply ( leftValue , rightValue ) ; 
+    } return calculateWithOpPriority ( iCurrentRecord , ctx ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMathExpressionTest {
+    @Test
+     public void testAnd ( ) {
+         OMathExpression exp = new OMathExpression ( - 1 ) ; 
+         exp . childExpressions . add ( integer ( 5 ) ) ; 
+         exp . operators . add ( OMathExpression . Operator . BIT_AND ) ; 
+         exp . childExpressions . add ( integer ( 1 ) ) ; 
+         Object result = exp . execute ( ( OResult ) null , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof Integer);
+assertEquals(1, result);
+assertEquals(1, (int) result);
+assertEquals(1, (Integer) result);
+assertTrue(result.equals(1));
+assertFalse(result.equals(0));
+assertNotEquals(5, result);
+assertNotEquals(2, result);
+assertNotEquals(3, result);
+assertNotEquals(4, result);
+assertTrue(result instanceof Number);
+assertTrue(((Integer) result) >= 0);
+assertTrue(((Integer) result) <= 5);
+assertTrue(result.toString().equals("1"));
+assertTrue(result.hashCode() == 1);
+assertTrue(result.equals(Integer.valueOf(1)));
+assertFalse(result.equals(Integer.valueOf(5)));
+assertTrue(result instanceof Comparable);
+assertTrue(((Comparable) result).compareTo(0) > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofInteger); ===
+1.000 - assertTrue(result instanceof Integer)
+0.870 - assertTrue(result instanceof Number)
+0.795 - assertTrue(result instanceof Comparable)
+0.650 - assertTrue(result.equals(Integer.valueOf(1)))
+0.603 - assertTrue(result.equals(1))
+0.597 - assertTrue(result.hashCode() == 1)
+0.568 - assertFalse(result.equals(Integer.valueOf(5)))
+0.567 - assertTrue(((Integer) result) >= 0)
+0.567 - assertTrue(((Integer) result) <= 5)
+0.553 - assertTrue(result.toString().equals("1"))
+0.526 - assertEquals(1, result)
+0.512 - assertTrue(((Comparable) result).compareTo(0) > 0)
+0.500 - assertFalse(result.equals(0))
+0.500 - assertNotEquals(5, result)
+0.500 - assertNotEquals(2, result)
+0.500 - assertNotEquals(3, result)
+0.500 - assertNotEquals(4, result)
+0.485 - assertEquals(1, (Integer) result)
+0.484 - assertEquals(1, (int) result)
+0.469 - ```java
+assertNotNull(result)
+0.000 - ```

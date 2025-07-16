@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OFilterOptimizer {\n@Override\npublic String toString ( ) {\nStringBuilder buffer = new StringBuilder ( 128 ) ;\nbuffer . append ( '(' ) ;\nbuffer . append ( left ) ;\nif ( operator != null ) {\nbuffer . append ( ' ' ) ;\nbuffer . append ( operator ) ;\nbuffer . append ( ' ' ) ;\nif ( right instanceof String ) {\nbuffer . append ( '\\'' ) ;\n} buffer . append ( right ) ;\nif ( right instanceof String ) {\nbuffer . append ( '\\'' ) ;\n} buffer . append ( ')' ) ;\n} return buffer . toString ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OFilterOptimizerTest {\n@Test\npublic void testOptimizePartialOptimizationMethod ( ) throws Exception {\nfinal OSQLFilter filter = OSQLEngine . getInstance ( ) . parseCondition ( \"STR\" , null , \"STR\" ) ;\nfinal OSQLFilterCondition condition = filter . getRootCondition ( ) ;\nfinal OIndexSearchResult searchResult = new OIndexSearchResult ( ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getOperator ( ) , ( ( OSQLFilterItemField ) ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getLeft ( ) ) . getFieldChain ( ) , 3 ) ;\noptimizer . optimize ( filter , searchResult ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"toString() method should return correct string representation\", \"(STR STR STR)\", optimizer.toString());\nassertEquals(\"Left operand should be 'STR'\", \"STR\", ((OSQLFilterCondition)condition.getLeft()).getLeft().toString());\nassertEquals(\"Operator should be null\", null, ((OSQLFilterCondition)condition.getLeft()).getOperator());\nassertEquals(\"Right operand should be 'STR'\", \"STR\", ((OSQLFilterCondition)condition.getLeft()).getRight().toString());\nassertEquals(\"Field chain should be 'STR'\", \"STR\", ((OSQLFilterItemField)((OSQLFilterCondition)condition.getLeft()).getLeft()).getFieldChain());\nassertEquals(\"Search result operator should be 'STR'\", \"STR\", searchResult.getOperator());\nassertEquals(\"Search result field chain should be 'STR'\", \"STR\", searchResult.getFieldChain());\nassertEquals(\"Search result value should be 3\", 3, searchResult.getValue());\nassertTrue(\"Optimizer should successfully optimize filter\", optimizer.optimize(filter, searchResult));\nassertNotNull(\"Root condition should not be null\", filter.getRootCondition());\nassertNotNull(\"Left operand of root condition should not be null\", ((OSQLFilterCondition)filter.getRootCondition()).getLeft());\nassertNotNull(\"Right operand of root condition should not be null\", ((OSQLFilterCondition)filter.getRootCondition()).getRight());\nassertNotNull(\"Left operand of root condition should not be null\", ((OSQLFilterItemField)((OSQLFilterCondition)filter.getRootCondition()).getLeft()).getFieldChain());\nassertNotNull(\"Right operand of root condition should not be null\", ((OSQLFilterCondition)filter.getRootCondition()).getRight().toString());\nassertFalse(\"Optimizer should not return false\", !optimizer.optimize(filter, searchResult));\nassertEquals(\"Root condition should be 'STR'\", \"STR\", filter.getRootCondition().toString());\nassertNotEquals(\"Left operand should not be null\", null, ((OSQLFilterCondition)condition.getLeft()));\nassertNotEquals(\"Right operand should not be null\", null, ((OSQLFilterCondition)condition.getRight()));\nassertNotEquals(\"Search result should not be null\", null, searchResult);\n====================\n\n",
+    "scores": [
+        0.709,
+        0.551,
+        0.506,
+        0.505,
+        0.494,
+        0.488,
+        0.474,
+        0.469,
+        0.468,
+        0.43,
+        0.411,
+        0.406,
+        0.404,
+        0.391,
+        0.387,
+        0.366,
+        0.35,
+        0.284,
+        0.265
+    ],
+    "ground_truth": "Assert.assertEquals(filter.getRootCondition().toString(),\"STR\");"
+}

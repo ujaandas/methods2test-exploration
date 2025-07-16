@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Tokenize {
+    public static LinkedList < Word > tokenize ( Analyzer morphoAnalyzer , String chunk , boolean bruteSplit ) { 
+    if ( bruteSplit ) { 
+    LinkedList < Word > tokens = new LinkedList < Word > ( ) ; 
+    if ( chunk == null ) return tokens ; 
+    String [ ] parts_of_string = chunk . trim ( ) . split ( "STR" ) ; 
+    for ( String part : parts_of_string ) { 
+    if ( part . length ( ) > 0 ) tokens . add ( ( morphoAnalyzer == null ) ? new Word ( part ) : morphoAnalyzer . analyze ( part ) ) ; 
+    } return tokens ; 
+    } else { 
+    return tokenize ( morphoAnalyzer , chunk ) ; 
+    } }
+}
+
+package PeterisP.morphology;
+
+public class TokenizeTest {
+    @Test
+     public void singleletters ( ) {
+         LinkedList < Word > tokens ; 
+         tokens = Splitting . tokenize ( locītājs , "STR" , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, tokens.size());
+assertTrue(tokens.isEmpty());
+assertEquals(1, tokens.size());
+assertEquals("a", tokens.get(0).getWord());
+assertEquals(2, tokens.size());
+assertEquals("a", tokens.get(0).getWord());
+assertEquals("b", tokens.get(1).getWord());
+assertEquals(3, tokens.size());
+assertEquals("a", tokens.get(0).getWord());
+assertEquals("b", tokens.get(1).getWord());
+assertEquals("c", tokens.get(2).getWord());
+assertTrue(tokens.get(0).getWord().equals("a"));
+assertTrue(tokens.get(1).getWord().equals("b"));
+assertTrue(tokens.get(2).getWord().equals("c"));
+assertNotNull(tokens.get(0));
+assertNotNull(tokens.get(1));
+assertNotNull(tokens.get(2));
+assertNull(tokens.get(3));
+assertFalse(tokens.isEmpty());
+assertTrue(tokens.contains(new Word("a")));
+assertFalse(tokens.contains(new Word("d")));
+assertEquals(0, tokens.indexOf(new Word("a")));
+assertEquals(1, tokens.indexOf(new Word("b")));
+assertEquals(-1, tokens.indexOf(new Word("d")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,tokens.size()); ===
+1.000 - assertEquals(3, tokens.size())
+0.966 - assertEquals(0, tokens.size())
+0.966 - assertEquals(1, tokens.size())
+0.966 - assertEquals(2, tokens.size())
+0.741 - assertNull(tokens.get(3))
+0.724 - assertFalse(tokens.isEmpty())
+0.714 - assertEquals("a", tokens.get(0).getWord())
+0.714 - assertEquals("a", tokens.get(0).getWord())
+0.714 - assertEquals("b", tokens.get(1).getWord())
+0.714 - assertEquals("a", tokens.get(0).getWord())
+0.714 - assertEquals("b", tokens.get(1).getWord())
+0.714 - assertEquals("c", tokens.get(2).getWord())
+0.712 - assertEquals(0, tokens.indexOf(new Word("a")))
+0.712 - assertEquals(1, tokens.indexOf(new Word("b")))
+0.703 - assertEquals(-1, tokens.indexOf(new Word("d")))
+0.702 - assertNotNull(tokens.get(0))
+0.702 - assertNotNull(tokens.get(1))
+0.702 - assertNotNull(tokens.get(2))
+0.667 - assertTrue(tokens.isEmpty())
+0.620 - assertFalse(tokens.contains(new Word("d")))
+0.571 - assertTrue(tokens.contains(new Word("a")))
+0.500 - assertTrue(tokens.get(0).getWord().equals("a"))
+0.500 - assertTrue(tokens.get(1).getWord().equals("b"))
+0.500 - assertTrue(tokens.get(2).getWord().equals("c"))

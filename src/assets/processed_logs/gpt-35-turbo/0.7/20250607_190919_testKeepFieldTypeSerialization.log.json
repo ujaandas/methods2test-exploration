@@ -1,0 +1,22 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocument {\npublic OType fieldType ( final String iFieldName ) {\ncheckForLoading ( ) ;\ncheckForFields ( iFieldName ) ;\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nif ( entry != null ) return entry . type ;\nreturn null ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTest {\n@Test\npublic void testKeepFieldTypeSerialization ( ) throws Exception {\nODocument doc = new ODocument ( ) ;\ndoc . field ( \"STR\" , 10 , OType . INTEGER ) ;\ndoc . field ( \"STR\" , new ORecordId ( 1 , 2 ) , OType . LINK ) ;\ndoc . field ( \"STR\" , 20 , OType . STRING ) ;\ndoc . field ( \"STR\" , new byte [ ] {\n30 } , OType . BINARY ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(OType.INTEGER, doc.fieldType(\"STR\"));\nAssert.assertEquals(OType.LINK, doc.fieldType(\"STR\"));\nAssert.assertEquals(OType.STRING, doc.fieldType(\"STR\"));\nAssert.assertEquals(OType.BINARY, doc.fieldType(\"STR\"));\n\nAssert.assertNull(doc.fieldType(\"NON_EXISTENT_FIELD\"));\n\ndoc.field(\"NUM\", 100, OType.INTEGER);\nAssert.assertEquals(OType.INTEGER, doc.fieldType(\"NUM\"));\n\ndoc.removeField(\"STR\");\nAssert.assertNull(doc.fieldType(\"STR\"));\n\ndoc.field(\"BOOL\", true, OType.BOOLEAN);\nAssert.assertEquals(OType.BOOLEAN, doc.fieldType(\"BOOL\"));\n\ndoc.field(\"DECIMAL\", 10.5, OType.DECIMAL);\nAssert.assertEquals(OType.DECIMAL, doc.fieldType(\"DECIMAL\"));\n\ndoc.field(\"DATE\", new Date(), OType.DATE);\nAssert.assertEquals(OType.DATE, doc.fieldType(\"DATE\"));\n====================\n\n",
+    "scores": [
+        0.75,
+        0.731,
+        0.716,
+        0.716,
+        0.708,
+        0.681,
+        0.659,
+        0.646,
+        0.639,
+        0.62,
+        0.611,
+        0.535,
+        0.5,
+        0.483,
+        0.429
+    ],
+    "ground_truth": "assertEquals(doc.fieldType(\"STR\"),OType.INTEGER);"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryPreparer {\npublic Object getTarget ( ) {\nreturn target ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryPreparerTest {\n@Test\npublic void testPrepareObjectQueryWithParameterReplacement ( ) throws Exception {\nObjectQueryInfo result ;\nthis . initPreparer ( ) ;\nMockito . when ( this . mockParameterReplacer . replaceObjectNameParameters ( TEST_ONAME_STR002 , this . testTarget002 ) ) . thenReturn ( TEST_ONAME_STR002B ) ;\nresult = this . preparer . prepareObjectQuery ( this . testTarget002 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(TEST_ONAME_STR002B, result.getObjectName());\nassertEquals(this.testTarget002, result.getTarget());\nassertTrue(result.isPrepared());\nassertFalse(result.hasErrors());\nassertEquals(expectedParameterCount, result.getParameterCount());\nassertEquals(expectedQueryString, result.getQueryString());\nassertNotNull(result.getParameters());\nassertEquals(expectedParameterValue, result.getParameters().get(\"parameterKey\"));\nassertTrue(result.getExecutionTime() >= 0);\nassertEquals(expectedResultType, result.getResultType());\nassertNotNull(result.getMetadata());\nassertEquals(expectedMetadataValue, result.getMetadata().get(\"metadataKey\"));\nassertTrue(result.isValid());\nassertFalse(result.isEmpty());\nassertEquals(expectedRowCount, result.getRowCount());\nassertEquals(expectedColumnCount, result.getColumnCount());\nassertNotNull(result.getExecutionPlan());\nassertEquals(expectedExecutionPlanValue, result.getExecutionPlan().get(\"planKey\"));\nassertTrue(result.getWarnings().isEmpty());\nassertEquals(expectedErrorMessage, result.getErrorMessage());\n```\n====================\n\n",
+    "scores": [
+        0.92,
+        0.577,
+        0.574,
+        0.558,
+        0.55,
+        0.549,
+        0.547,
+        0.536,
+        0.525,
+        0.524,
+        0.52,
+        0.519,
+        0.517,
+        0.513,
+        0.5,
+        0.494,
+        0.491,
+        0.484,
+        0.477,
+        0.472,
+        0.359,
+        0.0
+    ],
+    "ground_truth": "assertSame(this.testTarget002,result.getTarget());"
+}

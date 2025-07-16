@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecution {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecutionTest {
+    @Test
+     public void testFetchFromSingleRid ( ) {
+         OResultSet result = db . query ( "STR" ) ; 
+         printExecutionPlan ( result ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, result.size());
+assertTrue(result.hasNext());
+assertEquals("value1", result.getString("column1"));
+assertEquals(123, result.getInt("column2"));
+assertFalse(result.getBoolean("column3"));
+assertNotNull(result.getDate("column4"));
+assertEquals(3.14, result.getDouble("column5"), 0.001);
+assertEquals("text", result.getString("column6"));
+assertTrue(result.next());
+assertEquals("value2", result.getString("column1"));
+assertEquals(456, result.getInt("column2"));
+assertTrue(result.getBoolean("column3"));
+assertNotNull(result.getDate("column4"));
+assertEquals(6.28, result.getDouble("column5"), 0.001);
+assertEquals("text2", result.getString("column6"));
+assertFalse(result.next());
+assertEquals(2, result.size());
+assertFalse(result.hasNext());
+assertEquals("value3", result.getString("column1"));
+assertEquals(789, result.getInt("column2"));
+assertFalse(result.getBoolean("column3"));
+assertNotNull(result.getDate("column4"));
+assertEquals(9.42, result.getDouble("column5"), 0.001);
+assertEquals("text3", result.getString("column6"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.906 - assertTrue(result.next())
+0.877 - assertFalse(result.hasNext())
+0.778 - assertFalse(result.next())
+0.702 - assertEquals(1, result.size())
+0.702 - assertEquals(2, result.size())
+0.647 - assertTrue(result.getBoolean("column3"))
+0.588 - assertNotNull(result.getDate("column4"))
+0.588 - assertNotNull(result.getDate("column4"))
+0.588 - assertNotNull(result.getDate("column4"))
+0.571 - assertEquals(123, result.getInt("column2"))
+0.571 - assertEquals(456, result.getInt("column2"))
+0.571 - assertEquals(789, result.getInt("column2"))
+0.551 - assertFalse(result.getBoolean("column3"))
+0.551 - assertFalse(result.getBoolean("column3"))
+0.526 - assertEquals("text", result.getString("column6"))
+0.519 - assertEquals("text2", result.getString("column6"))
+0.519 - assertEquals("text3", result.getString("column6"))
+0.513 - assertEquals("value1", result.getString("column1"))
+0.513 - assertEquals("value2", result.getString("column1"))
+0.513 - assertEquals("value3", result.getString("column1"))
+0.500 - assertEquals(3.14, result.getDouble("column5"), 0.001)
+0.500 - assertEquals(6.28, result.getDouble("column5"), 0.001)
+0.500 - assertEquals(9.42, result.getDouble("column5"), 0.001)

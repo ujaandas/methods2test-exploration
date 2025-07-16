@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic static String getPublicId ( String otp ) {\nif ( ( otp == null ) || ( otp . length ( ) < OTP_MIN_LEN ) ) {\nthrow new IllegalArgumentException ( \"STR\" ) ;\n} Integer len = otp . length ( ) ;\nreturn otp . substring ( 0 , len - 32 ) . toLowerCase ( ) ;\n}\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testValidOTPPublicId ( ) {\nString testOtp = \"STR\" ;\nString testPublicId = \"STR\" ;\nString resultPublicId = YubicoClient . getPublicId ( testOtp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(resultPublicId);\nassertEquals(testPublicId.toLowerCase(), resultPublicId);\nassertEquals(testPublicId.length(), resultPublicId.length() + 32);\nassertTrue(resultPublicId.matches(\"^[a-z0-9]+$\"));\nassertFalse(resultPublicId.isEmpty());\nassertTrue(resultPublicId.length() > 0);\nassertTrue(resultPublicId.length() < testOtp.length());\nassertEquals(testPublicId, resultPublicId.toUpperCase());\nassertNotEquals(testOtp, resultPublicId);\nassertTrue(resultPublicId.startsWith(testPublicId.substring(0, 1).toLowerCase()));\nassertTrue(resultPublicId.endsWith(testPublicId.substring(testPublicId.length() - 1).toLowerCase()));\nassertTrue(resultPublicId.contains(testPublicId.substring(1, 2).toLowerCase()));\nassertFalse(resultPublicId.contains(\" \"));\nassertFalse(resultPublicId.contains(\"-\"));\nassertFalse(resultPublicId.contains(\"_\"));\nassertFalse(resultPublicId.contains(\".\"));\nassertFalse(resultPublicId.contains(\",\"));\nassertFalse(resultPublicId.contains(\"/\"));\nassertFalse(resultPublicId.contains(\":\"));\nassertFalse(resultPublicId.contains(\";\"));\nassertFalse(resultPublicId.contains(\"@\"));\n```\n====================\n\n",
+    "scores": [
+        0.854,
+        0.854,
+        0.825,
+        0.796,
+        0.641,
+        0.617,
+        0.615,
+        0.615,
+        0.61,
+        0.61,
+        0.61,
+        0.61,
+        0.61,
+        0.61,
+        0.61,
+        0.59,
+        0.511,
+        0.495,
+        0.454,
+        0.38,
+        0.331,
+        0.045,
+        0.0
+    ],
+    "ground_truth": "assertEquals(testPublicId,resultPublicId);"
+}

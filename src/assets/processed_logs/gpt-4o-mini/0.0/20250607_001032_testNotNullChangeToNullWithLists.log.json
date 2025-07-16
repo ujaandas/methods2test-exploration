@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNull {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNullTest {\n@Test\npublic void testNotNullChangeToNullWithLists ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\ndb . begin ( ) ;\ndoc . field ( \"STR\" , new String [ ] {\n\"STR\" } ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\ndb . begin ( ) ;\ndoc . removeField ( \"STR\" ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(index);\nAssert.assertTrue(index.getSize() >= 0);\nAssert.assertEquals(0, index.getSize());\nAssert.assertFalse(index.contains(\"STR\"));\nAssert.assertTrue(index.isEmpty());\nAssert.assertEquals(0, index.size());\nAssert.assertFalse(index.containsKey(\"STR\"));\nAssert.assertTrue(index.get(\"STR\") == null);\nAssert.assertThrows(IllegalArgumentException.class, () -> index.put(\"STR\", null));\nAssert.assertEquals(0, index.getEntries().size());\nAssert.assertTrue(index.getEntries().isEmpty());\nAssert.assertFalse(index.hasKey(\"STR\"));\nAssert.assertNull(index.get(\"STR\"));\nAssert.assertEquals(0, index.getDocumentCount());\nAssert.assertFalse(index.isUnique());\nAssert.assertTrue(index.getMetadata().isEmpty());\nAssert.assertEquals(\"STR\", index.getName());\nAssert.assertNotNull(index.getConfiguration());\nAssert.assertTrue(index.getConfiguration().isEmpty());\nAssert.assertFalse(index.isClosed());\nAssert.assertTrue(index.isDirty());\n```\n====================\n\n",
+    "scores": [
+        0.935,
+        0.847,
+        0.788,
+        0.787,
+        0.778,
+        0.732,
+        0.712,
+        0.7,
+        0.667,
+        0.635,
+        0.629,
+        0.621,
+        0.621,
+        0.62,
+        0.615,
+        0.615,
+        0.588,
+        0.583,
+        0.545,
+        0.508,
+        0.396,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(index.getSize(),1);"
+}

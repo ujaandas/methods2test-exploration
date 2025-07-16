@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class About {\npublic JsonObject getExtensions ( ) {\nreturn extensions ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class AboutTest {\n@Test\npublic void testSetExtensions ( ) {\nJsonObject expected = new JsonObject ( ) ;\nexpected . addProperty ( \"STR\" , UUID . randomUUID ( ) . toString ( ) ) ;\nabout . setExtensions ( expected ) ;\nJsonObject actual = about . getExtensions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(actual);\nassertEquals(expected.size(), actual.size());\nassertTrue(actual.has(\"STR\"));\nassertEquals(expected.get(\"STR\").getAsString(), actual.get(\"STR\").getAsString());\nassertTrue(actual.entrySet().containsAll(expected.entrySet()));\nassertEquals(expected, actual);\nassertNotSame(expected, actual);\nassertTrue(actual.isJsonObject());\nassertFalse(actual.isJsonArray());\nassertTrue(actual.get(\"STR\").isJsonPrimitive());\nassertTrue(actual.get(\"STR\").getAsJsonPrimitive().isString());\nassertNotEquals(\"\", actual.get(\"STR\").getAsString());\nassertTrue(actual.get(\"STR\").getAsString().length() > 0);\nassertTrue(actual.get(\"STR\").getAsString().matches(\"^[\\\\w-]+$\"));\nassertTrue(actual.get(\"STR\").getAsString().length() <= 36);\nassertTrue(actual.get(\"STR\").getAsString().contains(\"-\"));\nassertFalse(actual.has(\"nonexistentKey\"));\nassertEquals(expected.get(\"STR\").getAsString().length(), actual.get(\"STR\").getAsString().length());\nassertTrue(actual.get(\"STR\").getAsString().startsWith(\"a\") || actual.get(\"STR\").getAsString().startsWith(\"b\"));\nassertTrue(actual.get(\"STR\").getAsString().endsWith(\"z\") || actual.get(\"STR\").getAsString().endsWith(\"y\"));\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.667,
+        0.6,
+        0.56,
+        0.556,
+        0.556,
+        0.528,
+        0.484,
+        0.469,
+        0.441,
+        0.4,
+        0.39,
+        0.385,
+        0.366,
+        0.361,
+        0.353,
+        0.3,
+        0.271,
+        0.24,
+        0.233,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(actual);"
+}

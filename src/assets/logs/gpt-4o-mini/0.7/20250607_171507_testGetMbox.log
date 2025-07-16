@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Actor {
+    public String getMbox ( ) { 
+    return mbox ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ActorTest {
+    @Test
+     public void testGetMbox ( ) {
+         String expected = MBOX ; 
+         String actual = agent . getMbox ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(expected, actual);
+assertNotNull(actual);
+assertTrue(actual instanceof String);
+assertFalse(actual.isEmpty());
+assertEquals("Expected MBOX format", "mailto:example@example.com", actual);
+assertNotSame("Different instances should not be the same", expected, actual);
+assertTrue("Actual MBOX should contain @", actual.contains("@"));
+assertTrue("Actual MBOX should start with mailto:", actual.startsWith("mailto:"));
+assertFalse("Actual MBOX should not be blank", actual.trim().isEmpty());
+assertEquals("MBOX length should be greater than 5", true, actual.length() > 5);
+assertTrue("MBOX should not contain spaces", !actual.contains(" "));
+assertEquals("MBOX should end with .com", true, actual.endsWith(".com"));
+assertTrue("Actual MBOX should match regex", actual.matches("mailto:[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}"));
+assertNotEquals("MBOX should not be null", null, actual);
+assertEquals("MBOX should not be 'undefined'", "undefined", actual);
+assertSame("The expected and actual MBOX should reference the same object", expected, actual);
+assertTrue("Actual MBOX should contain 'example'", actual.contains("example"));
+assertEquals("MBOX should be equal to expected value", expected, actual);
+assertTrue("Actual MBOX should not be empty", !actual.isEmpty());
+assertFalse("Actual MBOX should not be 'null'", actual.equals("null"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+1.000 - assertNotNull(actual)
+0.600 - assertFalse(actual.isEmpty())
+0.545 - assertTrue(actual instanceof String)
+0.535 - assertNotEquals("MBOX should not be null", null, actual)
+0.483 - ```java
+assertEquals(expected, actual)
+0.424 - assertFalse("Actual MBOX should not be 'null'", actual.equals("null"))
+0.400 - assertNotSame("Different instances should not be the same", expected, actual)
+0.400 - assertTrue("Actual MBOX should contain @", actual.contains("@"))
+0.400 - assertEquals("MBOX should be equal to expected value", expected, actual)
+0.390 - assertEquals("MBOX should not be 'undefined'", "undefined", actual)
+0.380 - assertTrue("Actual MBOX should not be empty", !actual.isEmpty())
+0.374 - assertEquals("Expected MBOX format", "mailto:example@example.com", actual)
+0.372 - assertFalse("Actual MBOX should not be blank", actual.trim().isEmpty())
+0.368 - assertEquals("MBOX should end with .com", true, actual.endsWith(".com"))
+0.366 - assertTrue("MBOX should not contain spaces", !actual.contains(" "))
+0.362 - assertTrue("Actual MBOX should contain 'example'", actual.contains("example"))
+0.356 - assertEquals("MBOX length should be greater than 5", true, actual.length() > 5)
+0.354 - assertTrue("Actual MBOX should start with mailto:", actual.startsWith("mailto:"))
+0.311 - assertSame("The expected and actual MBOX should reference the same object", expected, actual)
+0.264 - assertTrue("Actual MBOX should match regex", actual.matches("mailto:[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}"))
+0.000 - ```

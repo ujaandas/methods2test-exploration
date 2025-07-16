@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPoint {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialTxPointTest {\n@Test\npublic void testIndexingComplexUpdateTxPoint ( ) {\nODocument rome = newCity ( \"STR\" , 12.5 , 41.9 ) ;\nODocument london = newCity ( \"STR\" , - 0.1275 , 51.507222 ) ;\nrome = db . save ( rome ) ;\nlondon = db . save ( london ) ;\ndb . begin ( ) ;\nrome . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( - 0.1275 , 51.507222 ) ) ;\nlondon . field ( \"STR\" , newPoint ( 12.5 , 41.9 ) ) ;\ndb . save ( rome ) ;\ndb . save ( london ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(index);\nAssert.assertTrue(index.getSize() > 0);\nAssert.assertEquals(2, index.getSize());\nAssert.assertTrue(index.contains(rome.getIdentity()));\nAssert.assertTrue(index.contains(london.getIdentity()));\nAssert.assertEquals(newPoint(12.5, 41.9), rome.field(\"STR\"));\nAssert.assertEquals(newPoint(-0.1275, 51.507222), london.field(\"STR\"));\nAssert.assertEquals(newPoint(12.5, 41.9), london.field(\"STR\", 1));\nAssert.assertEquals(newPoint(12.5, 41.9), london.field(\"STR\", 2));\nAssert.assertFalse(index.contains(newPoint(0, 0)));\nAssert.assertTrue(index.contains(newPoint(12.5, 41.9)));\nAssert.assertTrue(index.contains(newPoint(-0.1275, 51.507222)));\nAssert.assertEquals(1, index.getSize(newPoint(12.5, 41.9)));\nAssert.assertEquals(1, index.getSize(newPoint(-0.1275, 51.507222)));\nAssert.assertNotEquals(0, index.getSize(newPoint(12.5, 41.9)));\nAssert.assertNotEquals(0, index.getSize(newPoint(-0.1275, 51.507222)));\nAssert.assertTrue(index.getSize() <= 2);\nAssert.assertTrue(index.getSize() >= 2);\nAssert.assertTrue(index.getSize() == 2);\nAssert.assertFalse(index.isEmpty());\nAssert.assertEquals(2, index.getSize());\n```\n====================\n\n",
+    "scores": [
+        0.968,
+        0.968,
+        0.8,
+        0.787,
+        0.787,
+        0.787,
+        0.741,
+        0.714,
+        0.678,
+        0.674,
+        0.652,
+        0.575,
+        0.545,
+        0.532,
+        0.508,
+        0.487,
+        0.465,
+        0.465,
+        0.463,
+        0.442,
+        0.435,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(3,index.getSize());"
+}

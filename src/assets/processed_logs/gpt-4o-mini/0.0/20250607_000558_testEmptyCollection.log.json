@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLJsonExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLJsonExtractorTest {\n@Test\npublic void testEmptyCollection ( ) {\nconfigure ( \"STR\" ) ;\nproc . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(proc);\nassertTrue(proc.getCollection().isEmpty());\nassertEquals(0, proc.getProcessedCount());\nassertEquals(0, proc.getErrorCount());\nassertTrue(proc.getOutput().isEmpty());\nassertFalse(proc.hasErrors());\nassertTrue(proc.getLogs().isEmpty());\nassertEquals(\"Expected configuration\", \"STR\", proc.getConfiguration());\nassertNull(proc.getLastProcessedItem());\nassertTrue(proc.getPipeline().isEmpty());\nassertEquals(\"Expected extractor state\", ExtractorState.INITIALIZED, proc.getState());\nassertTrue(proc.getMetrics().isEmpty());\nassertFalse(proc.isRunning());\nassertEquals(\"Expected start time\", 0, proc.getStartTime());\nassertEquals(\"Expected end time\", 0, proc.getEndTime());\nassertTrue(proc.getErrorMessages().isEmpty());\nassertEquals(\"Expected total items processed\", 0, proc.getTotalItemsProcessed());\nassertEquals(\"Expected total items failed\", 0, proc.getTotalItemsFailed());\nassertTrue(proc.getOutputFormat().isEmpty());\nassertFalse(proc.isCompleted());\nassertEquals(\"Expected extractor type\", \"JSON\", proc.getExtractorType());\n```\n====================\n\n",
+    "scores": [
+        0.676,
+        0.657,
+        0.556,
+        0.548,
+        0.543,
+        0.541,
+        0.541,
+        0.539,
+        0.526,
+        0.521,
+        0.513,
+        0.506,
+        0.492,
+        0.485,
+        0.476,
+        0.459,
+        0.455,
+        0.444,
+        0.431,
+        0.383,
+        0.361,
+        0.0
+    ],
+    "ground_truth": "assertEquals(0,getResult().size());"
+}

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package basis-technology-corp.tcl-regex-java;
+
+public class ColorMap {
+    short subcolor ( int c ) throws RegexException { 
+    return subcolor ( c , 1 ) ; 
+    }
+}
+
+package basis-technology-corp.tcl-regex-java;
+
+public class ColorMapTest {
+    @Test
+     public void testVerySimple ( ) throws Exception {
+         ColorMap cm = new ColorMap ( compiler ) ; 
+         cm . subcolor ( 'a' ) ; 
+         cm . okcolors ( nfa ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(cm);
+Assert.assertEquals(1, cm.subcolor('a'));
+Assert.assertTrue(cm.subcolor('a') >= 0);
+Assert.assertTrue(cm.subcolor('a') <= Short.MAX_VALUE);
+Assert.assertEquals(1, cm.subcolor('b'));
+Assert.assertNotEquals(cm.subcolor('a'), cm.subcolor('b'));
+Assert.assertEquals(2, cm.subcolor('c'));
+Assert.assertEquals(3, cm.subcolor('d'));
+Assert.assertTrue(cm.subcolor('e') > 0);
+Assert.assertTrue(cm.subcolor('f') < 4);
+Assert.assertEquals(1, cm.subcolor('g'));
+Assert.assertEquals(2, cm.subcolor('h'));
+Assert.assertEquals(0, cm.subcolor(' '));
+Assert.assertEquals(Short.MIN_VALUE, cm.subcolor('\0'));
+Assert.assertThrows(RegexException.class, () -> cm.subcolor(-1));
+Assert.assertThrows(RegexException.class, () -> cm.subcolor(256));
+Assert.assertEquals(5, cm.subcolor('i'));
+Assert.assertNotEquals(cm.subcolor('j'), cm.subcolor('k'));
+Assert.assertTrue(cm.subcolor('l') >= 0);
+Assert.assertTrue(cm.subcolor('m') <= Short.MAX_VALUE);
+Assert.assertEquals(4, cm.subcolor('n'));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,cm.subcolor('a')); ===
+1.000 - Assert.assertEquals(1, cm.subcolor('a'))
+0.969 - Assert.assertEquals(1, cm.subcolor('b'))
+0.969 - Assert.assertEquals(1, cm.subcolor('g'))
+0.952 - Assert.assertEquals(0, cm.subcolor(' '))
+0.938 - Assert.assertEquals(2, cm.subcolor('c'))
+0.938 - Assert.assertEquals(3, cm.subcolor('d'))
+0.938 - Assert.assertEquals(2, cm.subcolor('h'))
+0.938 - Assert.assertEquals(5, cm.subcolor('i'))
+0.938 - Assert.assertEquals(4, cm.subcolor('n'))
+0.794 - Assert.assertTrue(cm.subcolor('a') >= 0)
+0.774 - Assert.assertTrue(cm.subcolor('e') > 0)
+0.774 - Assert.assertTrue(cm.subcolor('f') < 4)
+0.762 - Assert.assertTrue(cm.subcolor('l') >= 0)
+0.759 - Assert.assertEquals(Short.MIN_VALUE, cm.subcolor('\0'))
+0.732 - Assert.assertNotEquals(cm.subcolor('a'), cm.subcolor('b'))
+0.732 - Assert.assertNotEquals(cm.subcolor('j'), cm.subcolor('k'))
+0.649 - Assert.assertTrue(cm.subcolor('a') <= Short.MAX_VALUE)
+0.623 - Assert.assertTrue(cm.subcolor('m') <= Short.MAX_VALUE)
+0.535 - Assert.assertThrows(RegexException.class, () -> cm.subcolor(-1))
+0.529 - Assert.assertThrows(RegexException.class, () -> cm.subcolor(256))
+0.421 - ```java
+Assert.assertNotNull(cm)
+0.000 - ```

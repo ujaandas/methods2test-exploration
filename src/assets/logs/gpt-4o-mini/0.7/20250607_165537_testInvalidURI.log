@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testInvalidURI ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , true ) ; 
+         String nonURI = "STR" ; 
+         URL testSourceUrl = new URL ( nonURI ) ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , nonURI ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(normalizedUrl);
+assertEquals(expectedResult, normalizedUrl);
+assertTrue(normalizedUrl instanceof String);
+assertFalse(normalizedUrl.isEmpty());
+assertEquals(nonURI.length(), normalizedUrl.length());
+assertTrue(normalizedUrl.equals(expectedResult));
+assertNotSame(normalizedUrl, sourceUrl.toString());
+assertSame(expectedResult, normalizedUrl);
+assertFalse(normalizedUrl.contains(" "));
+
+assertTrue(Arrays.asList("STR").contains(normalizedUrl));
+assertFalse(normalizedUrl.contains("http:"));
+assertFalse(normalizedUrl.contains("https:"));
+assertNotEquals("http://", normalizedUrl);
+assertNotEquals("https://", normalizedUrl);
+assertEquals(nonURI.trim(), normalizedUrl.trim());
+assertTrue(normalizedUrl.equalsIgnoreCase(expectedResult));
+assertThrows(IllegalArgumentException.class, () -> {
+    new URL(normalizedUrl);
+});
+assertNotEquals("invalid", normalizedUrl);
+assertTrue(normalizedUrl.equals(expectedResult));
+assertSame(normalizedUrl, expectedResult);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - assertEquals(expectedResult, normalizedUrl)
+0.841 - assertSame(expectedResult, normalizedUrl)
+0.682 - assertNotEquals("http://", normalizedUrl)
+0.682 - assertNotEquals("invalid", normalizedUrl)
+0.674 - assertNotEquals("https://", normalizedUrl)
+0.625 - assertEquals(nonURI.trim(), normalizedUrl.trim())
+0.620 - assertEquals(nonURI.length(), normalizedUrl.length())
+0.615 - assertTrue(Arrays.asList("STR").contains(normalizedUrl))
+0.571 - assertFalse(normalizedUrl.isEmpty())
+0.562 - assertTrue(normalizedUrl.equals(expectedResult))
+0.562 - assertTrue(normalizedUrl.equals(expectedResult))
+0.552 - assertFalse(normalizedUrl.contains(" "))
+0.548 - ```java
+assertNotNull(normalizedUrl)
+0.545 - assertSame(normalizedUrl, expectedResult)
+0.522 - assertFalse(normalizedUrl.contains("http:"))
+0.516 - assertFalse(normalizedUrl.contains("https:"))
+0.509 - assertTrue(normalizedUrl.equalsIgnoreCase(expectedResult))
+0.494 - assertTrue(normalizedUrl instanceof String)
+0.454 - assertNotSame(normalizedUrl, sourceUrl.toString())
+0.420 - assertThrows(IllegalArgumentException.class, () -> {
+    new URL(normalizedUrl)
+0.040 - })
+0.000 - ```

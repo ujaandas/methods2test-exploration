@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testRelativeCanonicalURL ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . canonicalMetadataParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fields);\nassertTrue(fields.containsKey(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertEquals(1, fields.size());\nassertTrue(fields.containsKey(AbstractIndexerBolt.urlFieldParamName));\nassertTrue(fields.containsKey(AbstractIndexerBolt.canonicalMetadataParamName));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.urlFieldParamName));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));\nassertNotNull(fields.get(\"STR\"));\nassertEquals(\"STR\", fields.get(\"STR\"));\nassertNotEquals(\"DifferentValue\", fields.get(\"STR\"));\nassertTrue(fields instanceof Map);\nassertFalse(fields.isEmpty());\nassertSame(\"STR\", fields.get(\"STR\"));\nassertNotSame(\"AnotherValue\", fields.get(\"STR\"));\nassertTrue(fields.keySet().contains(\"STR\"));\nassertTrue(fields.values().contains(\"STR\"));\nassertEquals(\"STR\", fields.getOrDefault(\"STR\", \"DefaultValue\"));\nassertEquals(\"DefaultValue\", fields.getOrDefault(\"NonExistentKey\", \"DefaultValue\"));\nassertFalse(fields.keySet().contains(\"NonExistentKey\"));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.urlFieldParamName));\nassertEquals(\"STR\", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));\n```\n====================\n\n",
+    "scores": [
+        0.925,
+        0.925,
+        0.821,
+        0.723,
+        0.72,
+        0.712,
+        0.694,
+        0.622,
+        0.6,
+        0.583,
+        0.581,
+        0.581,
+        0.571,
+        0.571,
+        0.529,
+        0.529,
+        0.5,
+        0.49,
+        0.444,
+        0.432,
+        0.339,
+        0.314,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

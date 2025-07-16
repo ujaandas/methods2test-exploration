@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    public void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) { 
+    final boolean result ; 
+    if ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    else result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ; 
+    if ( ! result ) throw new IllegalArgumentException ( "STR" + changeEvent . getChangeType ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testProcessChangeEventAddKeyWithConversion ( ) {
+         final Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ; 
+         final Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ; 
+         final OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . ADD , "STR" , "STR" ) ; 
+         propertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ; 
+         final Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ; 
+         addedKeys . put ( 12 , 1 ) ; 
+         final Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, keysToAdd.size());
+assertTrue(keysToAdd.containsKey(12));
+assertEquals(Integer.valueOf(1), keysToAdd.get(12));
+assertEquals(0, keysToRemove.size());
+assertFalse(keysToRemove.containsKey(12));
+assertFalse(keysToRemove.containsValue(1));
+assertTrue(propertyIndexByIntegerKey.isKeyPresent(12));
+assertFalse(propertyIndexByIntegerKey.isKeyPresent(13));
+assertEquals(1, propertyIndexByIntegerKey.getTotalKeys());
+assertTrue(propertyIndexByIntegerKey.hasKey(12));
+assertFalse(propertyIndexByIntegerKey.hasKey(13));
+assertNotNull(multiValueChangeEvent);
+assertEquals(OMultiValueChangeEvent.OChangeType.ADD, multiValueChangeEvent.getChangeType());
+assertEquals("STR", multiValueChangeEvent.getOldValue());
+assertEquals("STR", multiValueChangeEvent.getNewValue());
+assertNotNull(propertyIndexByIntegerKey);
+assertTrue(propertyIndexByIntegerKey.isInitialized());
+assertEquals("Expected key not found in keysToAdd", 1, keysToAdd.size());
+assertEquals("Expected key not found in keysToRemove", 0, keysToRemove.size());
+assertTrue(keysToAdd.keySet().contains(12));
+assertFalse(keysToRemove.keySet().contains(12));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(keysToAdd,addedKeys); ===
+0.676 - assertEquals(0, keysToRemove.size())
+0.658 - ```java
+assertEquals(1, keysToAdd.size())
+0.629 - assertTrue(keysToAdd.containsKey(12))
+0.578 - assertEquals(Integer.valueOf(1), keysToAdd.get(12))
+0.568 - assertFalse(keysToRemove.containsKey(12))
+0.553 - assertTrue(keysToAdd.keySet().contains(12))
+0.551 - assertEquals("Expected key not found in keysToAdd", 1, keysToAdd.size())
+0.525 - assertFalse(keysToRemove.keySet().contains(12))
+0.517 - assertEquals(1, propertyIndexByIntegerKey.getTotalKeys())
+0.507 - assertFalse(keysToRemove.containsValue(1))
+0.466 - assertNotNull(propertyIndexByIntegerKey)
+0.463 - assertFalse(propertyIndexByIntegerKey.hasKey(13))
+0.462 - assertEquals("Expected key not found in keysToRemove", 0, keysToRemove.size())
+0.432 - assertFalse(propertyIndexByIntegerKey.isKeyPresent(13))
+0.420 - assertTrue(propertyIndexByIntegerKey.hasKey(12))
+0.409 - assertEquals("STR", multiValueChangeEvent.getOldValue())
+0.409 - assertEquals("STR", multiValueChangeEvent.getNewValue())
+0.406 - assertNotNull(multiValueChangeEvent)
+0.395 - assertTrue(propertyIndexByIntegerKey.isInitialized())
+0.391 - assertTrue(propertyIndexByIntegerKey.isKeyPresent(12))
+0.293 - assertEquals(OMultiValueChangeEvent.OChangeType.ADD, multiValueChangeEvent.getChangeType())
+0.000 - ```

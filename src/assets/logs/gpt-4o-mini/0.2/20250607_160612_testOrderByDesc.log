@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testOrderByDesc ( ) {
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         String query = "STR" ; 
+         OResultSet result = db . query ( query ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedSize, result.stream().count());
+assertTrue(result.stream().allMatch(item -> item.getProperty("propertyName") != null));
+assertEquals(expectedFirstValue, result.next().getProperty("propertyName"));
+assertEquals(expectedSecondValue, result.next().getProperty("propertyName"));
+assertTrue(result.stream().sorted(Comparator.comparing(item -> item.getProperty("propertyName")).reversed()).collect(Collectors.toList()).equals(result.stream().collect(Collectors.toList())));
+assertFalse(result.isClosed());
+assertTrue(result.stream().anyMatch(item -> item.getProperty("anotherProperty") == expectedValue));
+assertEquals(expectedValue, result.stream().filter(item -> item.getProperty("filterProperty").equals(filterValue)).findFirst().get().getProperty("propertyName"));
+assertEquals(expectedCount, result.stream().filter(item -> item.getProperty("countProperty").equals(countValue)).count());
+assertTrue(result.stream().map(item -> item.getProperty("mapProperty")).distinct().count() > 1);
+assertTrue(result.stream().allMatch(item -> item.getProperty("checkProperty").equals(checkValue)));
+assertEquals(expectedLastValue, result.stream().reduce((first, second) -> second).get().getProperty("propertyName"));
+assertTrue(result.stream().anyMatch(item -> item.getProperty("existsProperty") != null));
+assertEquals(expectedAverage, result.stream().mapToDouble(item -> item.getProperty("averageProperty")).average().orElse(0), delta);
+assertTrue(result.stream().filter(item -> item.getProperty("filterProperty").equals(filterValue)).count() > 0);
+assertFalse(result.isEmpty());
+assertTrue(result.stream().allMatch(item -> item.getProperty("typeProperty").equals(expectedType)));
+assertEquals(expectedDistinctCount, result.stream().map(item -> item.getProperty("distinctProperty")).distinct().count());
+assertTrue(result.stream().anyMatch(item -> item.getProperty("booleanProperty")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.702 - assertFalse(result.isEmpty())
+0.690 - assertFalse(result.isClosed())
+0.526 - ```java
+assertNotNull(result)
+0.513 - assertEquals(expectedSize, result.stream().count())
+0.431 - assertEquals(expectedFirstValue, result.next().getProperty("propertyName"))
+0.429 - assertTrue(result.stream().anyMatch(item -> item.getProperty("existsProperty") != null))
+0.416 - assertTrue(result.stream().allMatch(item -> item.getProperty("typeProperty").equals(expectedType)))
+0.411 - assertTrue(result.stream().anyMatch(item -> item.getProperty("booleanProperty")))
+0.410 - assertTrue(result.stream().anyMatch(item -> item.getProperty("anotherProperty") == expectedValue))
+0.408 - assertEquals(expectedSecondValue, result.next().getProperty("propertyName"))
+0.403 - assertTrue(result.stream().map(item -> item.getProperty("mapProperty")).distinct().count() > 1)
+0.400 - assertTrue(result.stream().allMatch(item -> item.getProperty("propertyName") != null))
+0.373 - assertTrue(result.stream().filter(item -> item.getProperty("filterProperty").equals(filterValue)).count() > 0)
+0.355 - assertTrue(result.stream().allMatch(item -> item.getProperty("checkProperty").equals(checkValue)))
+0.314 - assertEquals(expectedLastValue, result.stream().reduce((first, second) -> second).get().getProperty("propertyName"))
+0.301 - assertEquals(expectedCount, result.stream().filter(item -> item.getProperty("countProperty").equals(countValue)).count())
+0.301 - assertEquals(expectedDistinctCount, result.stream().map(item -> item.getProperty("distinctProperty")).distinct().count())
+0.247 - assertEquals(expectedAverage, result.stream().mapToDouble(item -> item.getProperty("averageProperty")).average().orElse(0), delta)
+0.240 - assertTrue(result.stream().sorted(Comparator.comparing(item -> item.getProperty("propertyName")).reversed()).collect(Collectors.toList()).equals(result.stream().collect(Collectors.toList())))
+0.237 - assertEquals(expectedValue, result.stream().filter(item -> item.getProperty("filterProperty").equals(filterValue)).findFirst().get().getProperty("propertyName"))
+0.000 - ```

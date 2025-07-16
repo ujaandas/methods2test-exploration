@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtils {\npublic static Date getTodayWithTime ( final String iTime ) throws ParseException {\nfinal SimpleDateFormat df = new SimpleDateFormat ( \"STR\" ) ;\nCalendar calParsed = Calendar . getInstance ( ) ;\ncalParsed . setTime ( df . parse ( iTime ) ) ;\nCalendar cal = Calendar . getInstance ( ) ;\ncal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ;\ncal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ;\ncal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ;\ncal . set ( Calendar . MILLISECOND , 0 ) ;\nreturn cal . getTime ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OIOUtilsTest {\n@Test\npublic void shoudGetRightTimeFromString ( ) throws ParseException {\nCalendar calendar = Calendar . getInstance ( ) ;\ncalendar . set ( Calendar . HOUR_OF_DAY , 5 ) ;\ncalendar . set ( Calendar . MINUTE , 10 ) ;\ncalendar . set ( Calendar . SECOND , 0 ) ;\ncalendar . set ( Calendar . MILLISECOND , 0 ) ;\nDate d = OIOUtils . getTodayWithTime ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(d);\nassertEquals(5, d.getHours());\nassertEquals(10, d.getMinutes());\nassertEquals(0, d.getSeconds());\nassertEquals(0, d.getTime() % 1000);\nassertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR));\nassertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH));\nassertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));\nassertTrue(d.after(new Date(0))); // Ensure the date is after epoch\nassertTrue(d.before(new Date(Long.MAX_VALUE))); // Ensure the date is before max date\nassertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());\nassertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());\nassertEquals(calendar.get(Calendar.SECOND), d.getSeconds());\nassertEquals(0, d.getTime() % 1000);\nassertNotEquals(calendar.getTimeInMillis(), d.getTime());\nassertTrue(d instanceof Date);\nassertFalse(d.equals(new Date(0))); // Ensure it's not equal to epoch\nassertTrue(d.compareTo(new Date()) < 0); // Ensure it's before now\nassertTrue(d.compareTo(new Date(Long.MAX_VALUE)) < 0); // Ensure it's before max date\nassertEquals(calendar.get(Calendar.MILLISECOND), 0);\nassertEquals(calendar.getTimeInMillis(), d.getTime() - (d.getTime() % 1000));\nassertTrue(d.toString().contains(\"GMT\")); // Check if it contains GMT\nassertEquals(calendar.getTimeZone(), TimeZone.getDefault());\n```\n====================\n\n",
+    "scores": [
+        0.764,
+        0.758,
+        0.758,
+        0.708,
+        0.688,
+        0.677,
+        0.652,
+        0.652,
+        0.648,
+        0.574,
+        0.537,
+        0.527,
+        0.521,
+        0.513,
+        0.476,
+        0.466,
+        0.379,
+        0.351,
+        0.347,
+        0.338,
+        0.328,
+        0.321,
+        0.206,
+        0.0
+    ],
+    "ground_truth": "assertEquals(calendar.getTime(),d);"
+}

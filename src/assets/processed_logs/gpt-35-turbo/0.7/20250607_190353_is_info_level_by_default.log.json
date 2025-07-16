@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic static Config createConfig ( ) {\nConfig config = new Config ( ) ;\nconfig . set ( CUCUMBERPRO_CONNECTION_TIMEOUT , 5000 ) ;\nconfig . set ( CUCUMBERPRO_ENVMASK , \"STR\" ) ;\nconfig . setNull ( CUCUMBERPRO_LOGFILE ) ;\nconfig . set ( CUCUMBERPRO_LOGGING , \"STR\" ) ;\nconfig . setNull ( CUCUMBERPRO_PROFILE ) ;\nconfig . setNull ( CUCUMBERPRO_PROJECTNAME ) ;\nconfig . setNull ( CUCUMBERPRO_TOKEN ) ;\nconfig . set ( CUCUMBERPRO_URL , \"STR\" ) ;\nreturn config ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void is_info_level_by_default ( ) {\nConfig config = createConfig ( ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", config.get(CUCUMBERPRO_ENVMASK));\nAssert.assertEquals(null, config.get(CUCUMBERPRO_LOGFILE));\nAssert.assertEquals(\"STR\", config.get(CUCUMBERPRO_LOGGING));\nAssert.assertEquals(null, config.get(CUCUMBERPRO_PROFILE));\nAssert.assertEquals(null, config.get(CUCUMBERPRO_PROJECTNAME));\nAssert.assertEquals(null, config.get(CUCUMBERPRO_TOKEN));\nAssert.assertEquals(\"STR\", config.get(CUCUMBERPRO_URL));\nAssert.assertEquals(5000, config.get(CUCUMBERPRO_CONNECTION_TIMEOUT));\nAssert.assertTrue(logger.isInfoLevel());\nAssert.assertFalse(logger.isErrorLevel());\nAssert.assertFalse(logger.isDebugEnabled());\nAssert.assertFalse(logger.isWarnLevel());\nAssert.assertFalse(logger.isTraceLevel());\nAssert.assertFalse(logger.isFatalLevel());\nAssert.assertFalse(logger.isOffLevel());\nAssert.assertFalse(logger.isAllLevel());\nAssert.assertFalse(logger.isConfigLevel());\nAssert.assertFalse(logger.isFineLevel());\nAssert.assertFalse(logger.isFinerLevel());\nAssert.assertFalse(logger.isFinestLevel());\n====================\n\n",
+    "scores": [
+        0.605,
+        0.59,
+        0.579,
+        0.571,
+        0.571,
+        0.564,
+        0.564,
+        0.564,
+        0.557,
+        0.557,
+        0.526,
+        0.5,
+        0.442,
+        0.426,
+        0.418,
+        0.413,
+        0.404,
+        0.4,
+        0.4,
+        0.388
+    ],
+    "ground_truth": "assertEquals(Logger.Level.INFO,logger.level);"
+}

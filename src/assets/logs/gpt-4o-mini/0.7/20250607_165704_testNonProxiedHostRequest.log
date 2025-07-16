@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactory {
+    public HttpClient create ( ) { 
+    return hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class HttpClientFactoryTest {
+    @Test
+     public void testNonProxiedHostRequest ( ) throws Exception {
+         targetServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         proxyServer . stubFor ( get ( urlMatching ( "STR" ) ) . willReturn ( aResponse ( ) . withBody ( "STR" ) ) ) ; 
+         Proxy proxy = new Proxy ( ) ; 
+         proxy . setHost ( "STR" ) ; 
+         proxy . setPort ( PROXY_PORT ) ; 
+         proxy . setProtocol ( "STR" ) ; 
+         proxy . setNonProxyHosts ( "STR" ) ; 
+         HttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ; 
+         String body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(body);
+assertEquals("STR", body);
+assertEquals("application/json", response.getContentType());
+assertTrue(body.contains("STR"));
+assertFalse(body.isEmpty());
+assertEquals(200, response.getStatusLine().getStatusCode());
+assertTrue(EntityUtils.toString(response.getEntity()).length() > 0);
+assertThat(body, containsString("expectedString"));
+assertThat(response.getAllHeaders(), hasItem(new Header("Content-Type", "application/json")));
+assertThat(response.getStatusLine().getStatusCode(), is(equalTo(200)));
+assertNotNull(response.getEntity());
+assertTrue(response.getEntity().getContentLength() > 0);
+assertEquals("STR", EntityUtils.toString(response.getEntity()).trim());
+assertTrue(response.getEntity().getContentType().getValue().contains("application/json"));
+assertThat(response.getStatusLine().getReasonPhrase(), is(equalTo("OK")));
+assertNotNull(client);
+assertTrue(client instanceof HttpClient);
+assertThat(proxy.getHost(), is(equalTo("STR")));
+assertThat(proxy.getPort(), is(equalTo(PROXY_PORT)));
+assertTrue(proxy.getNonProxyHosts().contains("STR"));
+assertFalse(client.isAborted());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",body); ===
+1.000 - assertEquals("STR", body)
+0.588 - assertFalse(body.isEmpty())
+0.571 - assertTrue(body.contains("STR"))
+0.549 - ```java
+assertNotNull(body)
+0.509 - assertFalse(client.isAborted())
+0.486 - assertThat(proxy.getHost(), is(equalTo("STR")))
+0.473 - assertEquals("STR", EntityUtils.toString(response.getEntity()).trim())
+0.463 - assertEquals("application/json", response.getContentType())
+0.444 - assertNotNull(client)
+0.421 - assertTrue(proxy.getNonProxyHosts().contains("STR"))
+0.415 - assertEquals(200, response.getStatusLine().getStatusCode())
+0.356 - assertThat(body, containsString("expectedString"))
+0.347 - assertThat(proxy.getPort(), is(equalTo(PROXY_PORT)))
+0.323 - assertTrue(client instanceof HttpClient)
+0.305 - assertNotNull(response.getEntity())
+0.292 - assertTrue(EntityUtils.toString(response.getEntity()).length() > 0)
+0.292 - assertThat(response.getStatusLine().getReasonPhrase(), is(equalTo("OK")))
+0.281 - assertThat(response.getAllHeaders(), hasItem(new Header("Content-Type", "application/json")))
+0.260 - assertTrue(response.getEntity().getContentLength() > 0)
+0.258 - assertThat(response.getStatusLine().getStatusCode(), is(equalTo(200)))
+0.248 - assertTrue(response.getEntity().getContentType().getValue().contains("application/json"))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReload {\nObject get ( ATTRIBUTES iAttribute ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteMetadataReloadTest {\n@Test\npublic void testStorageUpdate ( ) throws InterruptedException {\ndatabase . command ( \"STR\" , Locale . GERMANY . getLanguage ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(database);\nAssert.assertTrue(database.isOpen());\nAssert.assertEquals(Locale.GERMANY.getLanguage(), database.getLanguage());\nAssert.assertEquals(0, database.getStorage().getRecordCount());\nAssert.assertTrue(database.getMetadata().isUpdated());\nAssert.assertTrue(database.getSchema().isValid());\nAssert.assertNotNull(database.getMetadata().get(ATTRIBUTES.SCHEMA));\nAssert.assertTrue(database.getMetadata().get(ATTRIBUTES.SCHEMA).isLoaded());\nAssert.assertNotNull(database.getMetadata().get(ATTRIBUTES.CLASS));\nAssert.assertTrue(database.getMetadata().get(ATTRIBUTES.CLASS).isInitialized());\nAssert.assertEquals(\"ExpectedDatabaseName\", database.getName());\nAssert.assertTrue(database.getTransaction().isActive());\nAssert.assertFalse(database.getTransaction().isRollback());\nAssert.assertNotNull(database.getStorage().getClusterNames());\nAssert.assertTrue(database.getStorage().getClusterNames().length > 0);\nAssert.assertNotNull(database.getMetadata().get(ATTRIBUTES.VERSION));\nAssert.assertTrue(database.getMetadata().get(ATTRIBUTES.VERSION).compareTo(\"1.0\") >= 0);\nAssert.assertNotNull(database.getMetadata().get(ATTRIBUTES.OBJECTS));\nAssert.assertTrue(database.getMetadata().get(ATTRIBUTES.OBJECTS).size() > 0);\nAssert.assertNotNull(database.getMetadata().get(ATTRIBUTES.INDEXES));\nAssert.assertTrue(database.getMetadata().get(ATTRIBUTES.INDEXES).isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.562,
+        0.553,
+        0.55,
+        0.549,
+        0.543,
+        0.541,
+        0.536,
+        0.535,
+        0.523,
+        0.523,
+        0.506,
+        0.452,
+        0.408,
+        0.406,
+        0.406,
+        0.403,
+        0.4,
+        0.397,
+        0.368,
+        0.364,
+        0.293,
+        0.0
+    ],
+    "ground_truth": "assertEquals(database.get(ODatabase.ATTRIBUTES.LOCALELANGUAGE),Locale.GERMANY.getLanguage());"
+}

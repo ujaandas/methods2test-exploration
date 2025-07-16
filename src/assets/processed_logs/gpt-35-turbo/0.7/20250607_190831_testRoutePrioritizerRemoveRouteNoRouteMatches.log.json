@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\n@Override\npublic Collection < UriResource > getPrioritizedRoutes ( ) {\nreturn Collections . unmodifiableCollection ( mappings ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testRoutePrioritizerRemoveRouteNoRouteMatches ( ) {\nDefaultRoutePrioritizer prioritizer = new DefaultRoutePrioritizer ( ) ;\nprioritizer . addRoute ( \"STR\" , 100 , NotImplementedHandler . class ) ;\nprioritizer . removeRoute ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(prioritizer.getPrioritizedRoutes().isEmpty());\nAssert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());\nAssert.assertNull(prioritizer.getRoute(\"STR\"));\nAssert.assertFalse(prioritizer.routeExists(\"STR\"));\nAssert.assertFalse(prioritizer.removeRoute(\"NON_EXISTING_ROUTE\"));\nAssert.assertTrue(prioritizer.addRoute(\"STR\", 100, NotImplementedHandler.class));\nAssert.assertFalse(prioritizer.getPrioritizedRoutes().isEmpty());\nAssert.assertEquals(1, prioritizer.getPrioritizedRoutes().size());\nAssert.assertNotNull(prioritizer.getRoute(\"STR\"));\nAssert.assertTrue(prioritizer.routeExists(\"STR\"));\nAssert.assertTrue(prioritizer.removeRoute(\"STR\"));\nAssert.assertTrue(prioritizer.getPrioritizedRoutes().isEmpty());\nAssert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());\nAssert.assertNull(prioritizer.getRoute(\"STR\"));\nAssert.assertFalse(prioritizer.routeExists(\"STR\"));\nAssert.assertFalse(prioritizer.removeRoute(\"STR\"));\nAssert.assertFalse(prioritizer.addRoute(\"STR\", 100, NotImplementedHandler.class));\nAssert.assertTrue(prioritizer.getPrioritizedRoutes().isEmpty());\nAssert.assertEquals(0, prioritizer.getPrioritizedRoutes().size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.982,
+        0.982,
+        0.982,
+        0.86,
+        0.832,
+        0.832,
+        0.832,
+        0.667,
+        0.667,
+        0.66,
+        0.646,
+        0.626,
+        0.62,
+        0.62,
+        0.586,
+        0.574,
+        0.496,
+        0.469
+    ],
+    "ground_truth": "Assert.assertEquals(1,prioritizer.getPrioritizedRoutes().size());"
+}

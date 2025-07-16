@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class JsonWriter {\npublic final File getCoverallsFile ( ) {\nreturn coverallsFile ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class JsonWriterTest {\n@Test\npublic void testSubDirectoryCreation ( ) throws Exception {\nFile f = new File ( new File ( folder . getRoot ( ) , \"STR\" ) , \"STR\" ) ;\nJob job = job ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(f);\nassertTrue(f.exists());\nassertTrue(f.isDirectory());\nassertEquals(\"STR\", f.getName());\nassertEquals(folder.getRoot().getAbsolutePath() + File.separator + \"STR\", f.getParent());\nassertTrue(f.listFiles().length == 0);\nassertTrue(f.mkdirs());\nassertTrue(f.isDirectory());\nassertTrue(f.canRead());\nassertTrue(f.canWrite());\nassertTrue(f.canExecute());\nassertFalse(f.isHidden());\nassertTrue(f.getAbsolutePath().endsWith(\"STR\" + File.separator + \"STR\"));\nassertTrue(f.getAbsolutePath().contains(\"STR\"));\nassertEquals(0, f.list().length);\nassertTrue(f.getAbsolutePath().startsWith(folder.getRoot().getAbsolutePath()));\nassertNotEquals(f.getAbsolutePath(), folder.getRoot().getAbsolutePath());\nassertTrue(f.getAbsolutePath().contains(\"STR\"));\nassertTrue(f.getAbsolutePath().matches(\".*/STR/STR$\"));\nassertFalse(f.delete());\nassertTrue(f.mkdirs());\n```\n====================\n\n",
+    "scores": [
+        0.5,
+        0.5,
+        0.451,
+        0.443,
+        0.438,
+        0.438,
+        0.403,
+        0.4,
+        0.397,
+        0.382,
+        0.381,
+        0.35,
+        0.35,
+        0.35,
+        0.339,
+        0.336,
+        0.327,
+        0.321,
+        0.321,
+        0.288,
+        0.19,
+        0.0
+    ],
+    "ground_truth": "assertTrue(newJsonWriter(job,f).getCoverallsFile().getParentFile().isDirectory());"
+}

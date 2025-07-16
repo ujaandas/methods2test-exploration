@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class Registry {\npublic int workerCount ( ) {\nreturn workers . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class RegistryTest {\n@ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {\nSimulatorAddress agentAddress = addAgent ( ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\nregistry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(4, registry.workerCount());\nassertNotNull(registry.getWorker(\"worker1\"));\nassertNotNull(registry.getWorker(\"worker2\"));\nassertNotNull(registry.getWorker(\"worker3\"));\nassertNotNull(registry.getWorker(\"worker4\"));\nassertEquals(4, registry.getWorkers(\"STR\").size());\nassertEquals(0, registry.getWorkers(\"UNKNOWN\").size());\nassertTrue(registry.containsWorker(\"worker1\"));\nassertTrue(registry.containsWorker(\"worker2\"));\nassertTrue(registry.containsWorker(\"worker3\"));\nassertTrue(registry.containsWorker(\"worker4\"));\nassertFalse(registry.containsWorker(\"worker5\"));\nassertEquals(2, registry.getAgents().size());\nassertEquals(4, registry.getAllWorkers().size());\nregistry.removeWorker(\"worker1\");\nassertEquals(3, registry.workerCount());\nassertFalse(registry.containsWorker(\"worker1\"));\nassertThrows(IllegalArgumentException.class, () -> registry.addWorker(null));\nassertThrows(IllegalArgumentException.class, () -> registry.addWorkers(null));\nassertThrows(IllegalArgumentException.class, () -> registry.removeWorker(null));\nregistry.clear();\nassertEquals(0, registry.workerCount());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.974,
+        0.974,
+        0.753,
+        0.736,
+        0.716,
+        0.681,
+        0.635,
+        0.635,
+        0.634,
+        0.634,
+        0.634,
+        0.634,
+        0.595,
+        0.595,
+        0.595,
+        0.595,
+        0.486,
+        0.482,
+        0.474,
+        0.457,
+        0.444
+    ],
+    "ground_truth": "assertEquals(4,registry.workerCount());"
+}

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected void deleteFile ( File deletedFile , File dir , File targetDir , String targetFileName ) throws IOException { 
+    File targetFile = getTargetFile ( deletedFile , dir , targetDir , targetFileName ) ; 
+    if ( targetFile . exists ( ) ) { 
+    if ( targetFile . isDirectory ( ) ) { 
+    try { 
+    FileUtils . deleteDirectory ( targetFile ) ; 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } catch ( IllegalArgumentException e ) { 
+    debug ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } catch ( IOException e ) { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" + e . getMessage ( ) ) ; 
+    } } else { 
+    if ( targetFile . delete ( ) ) { 
+    info ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } else { 
+    error ( "STR" + targetFile . getCanonicalPath ( ) + "STR" ) ; 
+    } } } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testDeleteFile ( ) throws Exception {
+         File tempSrcFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( tempSrcFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         File tempTargetFile = new File ( targetDir , "STR" ) ; 
+         Files . write ( tempTargetFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(tempSrcFile.exists());
+Assert.assertTrue(tempSrcFile.isFile());
+Assert.assertTrue(tempTargetFile.exists());
+Assert.assertTrue(tempTargetFile.isFile());
+Assert.assertEquals("STR", Files.readAllLines(tempSrcFile.toPath()).get(0));
+Assert.assertEquals("STR", Files.readAllLines(tempTargetFile.toPath()).get(0));
+devUtil.deleteFile(tempSrcFile, srcDir, targetDir, "STR");
+Assert.assertFalse(tempSrcFile.exists());
+Assert.assertFalse(tempSrcFile.isFile());
+Assert.assertFalse(tempTargetFile.exists());
+Assert.assertFalse(tempTargetFile.isFile());
+Assert.assertTrue(Files.notExists(tempSrcFile.toPath()));
+Assert.assertTrue(Files.notExists(tempTargetFile.toPath()));
+Assert.assertFalse(Files.exists(tempSrcFile.toPath()));
+Assert.assertFalse(Files.exists(tempTargetFile.toPath()));
+Assert.assertFalse(Files.isRegularFile(tempSrcFile.toPath()));
+Assert.assertFalse(Files.isRegularFile(tempTargetFile.toPath()));
+Assert.assertFalse(Files.isDirectory(tempSrcFile.toPath()));
+Assert.assertFalse(Files.isDirectory(tempTargetFile.toPath()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(tempSrcFile.exists()); ===
+1.000 - Assert.assertTrue(tempSrcFile.exists())
+0.896 - Assert.assertTrue(tempTargetFile.exists())
+0.892 - Assert.assertFalse(tempSrcFile.exists())
+0.875 - Assert.assertTrue(tempSrcFile.isFile())
+0.794 - Assert.assertFalse(tempTargetFile.exists())
+0.776 - Assert.assertTrue(tempTargetFile.isFile())
+0.769 - Assert.assertFalse(tempSrcFile.isFile())
+0.676 - Assert.assertFalse(tempTargetFile.isFile())
+0.667 - Assert.assertTrue(Files.notExists(tempSrcFile.toPath()))
+0.608 - Assert.assertFalse(Files.exists(tempSrcFile.toPath()))
+0.595 - Assert.assertFalse(Files.isDirectory(tempSrcFile.toPath()))
+0.581 - Assert.assertFalse(Files.isRegularFile(tempSrcFile.toPath()))
+0.571 - Assert.assertTrue(Files.notExists(tempTargetFile.toPath()))
+0.537 - Assert.assertFalse(Files.exists(tempTargetFile.toPath()))
+0.529 - Assert.assertFalse(Files.isDirectory(tempTargetFile.toPath()))
+0.525 - Assert.assertEquals("STR", Files.readAllLines(tempSrcFile.toPath()).get(0))
+0.517 - Assert.assertFalse(Files.isRegularFile(tempTargetFile.toPath()))
+0.471 - Assert.assertEquals("STR", Files.readAllLines(tempTargetFile.toPath()).get(0))
+0.419 - devUtil.deleteFile(tempSrcFile, srcDir, targetDir, "STR")

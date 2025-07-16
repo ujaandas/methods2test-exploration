@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class Configs {
+    public static String getSystemPropertyWithMavenPropertyAsFallback ( Properties properties , String key ) { 
+    String val = System . getProperty ( key ) ; 
+    if ( val == null && properties != null ) { 
+    val = properties . getProperty ( key ) ; 
+    } return val ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ConfigsTest {
+    @Test
+     public void getPropertyValueTest ( ) {
+         properties . setProperty ( KEY_1 , value ) ; 
+         System . setProperty ( KEY_2 , value ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));
+assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistentKey"));
+properties.setProperty("nonexistentKey", "fallbackValue");
+assertEquals("fallbackValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistentKey"));
+System.clearProperty(KEY_2);
+assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));
+System.setProperty(KEY_2, null);
+assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));
+properties.setProperty(KEY_1, null);
+assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+properties.setProperty(KEY_1, "newValue");
+assertEquals("newValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+System.setProperty(KEY_1, "systemValue");
+assertEquals("systemValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));
+System.setProperty("anotherKey", "anotherValue");
+assertEquals("anotherValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"));
+properties.setProperty("anotherKey", "fallbackValue");
+assertEquals("anotherValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"));
+System.clearProperty("anotherKey");
+assertEquals("fallbackValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"));
+assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));
+assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistentKey"));
+properties.setProperty("keyWithEmptyValue", "");
+assertEquals("", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "keyWithEmptyValue"));
+System.setProperty("keyWithEmptyValue", "systemValue");
+assertEquals("systemValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "keyWithEmptyValue"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",Configs.getSystemPropertyWithMavenPropertyAsFallback(properties,KEY_1)); ===
+0.941 - assertEquals("newValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.933 - assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2))
+0.933 - assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2))
+0.930 - assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.926 - assertEquals("systemValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.919 - assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2))
+0.904 - ```java
+assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1))
+0.869 - assertEquals("", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "keyWithEmptyValue"))
+0.847 - assertEquals("anotherValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"))
+0.847 - assertEquals("anotherValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"))
+0.843 - assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1))
+0.843 - assertEquals("fallbackValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "anotherKey"))
+0.831 - assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistentKey"))
+0.826 - assertEquals("fallbackValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "nonexistentKey"))
+0.822 - assertEquals("systemValue", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, "keyWithEmptyValue"))
+0.780 - assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, "nonexistentKey"))
+0.364 - System.setProperty("keyWithEmptyValue", "systemValue")
+0.342 - System.clearProperty(KEY_2)
+0.336 - System.setProperty("anotherKey", "anotherValue")
+0.333 - System.setProperty(KEY_2, null)
+0.326 - System.setProperty(KEY_1, "systemValue")
+0.323 - System.clearProperty("anotherKey")
+0.258 - properties.setProperty(KEY_1, null)
+0.246 - properties.setProperty(KEY_1, "newValue")
+0.176 - properties.setProperty("keyWithEmptyValue", "")
+0.169 - properties.setProperty("anotherKey", "fallbackValue")
+0.164 - properties.setProperty("nonexistentKey", "fallbackValue")
+0.000 - ```

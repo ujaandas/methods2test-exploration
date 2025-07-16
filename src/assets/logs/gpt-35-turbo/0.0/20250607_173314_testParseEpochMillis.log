@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParser {
+    public Date parse ( final String timestamp ) throws ProcessingException { 
+    if ( StringUtils . isBlank ( timestamp ) ) { 
+    return null ; 
+    } try { 
+    return parser . parse ( timestamp ) ; 
+    } catch ( Exception ex ) { 
+    throw new ProcessingException ( "STR" + timestamp + "STR" , ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParserTest {
+    @Test
+     public void testParseEpochMillis ( ) throws Exception {
+         String format = TimestampParser . EPOCH_MILLIS ; 
+         long time = System . currentTimeMillis ( ) ; 
+         Date parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(parsed);
+Assert.assertEquals(time, parsed.getTime());
+Assert.assertTrue(parsed.before(new Date()));
+Assert.assertTrue(parsed.after(new Date(time - 1000)));
+Assert.assertTrue(parsed.equals(new Date(time)));
+Assert.assertNotEquals(new Date(), parsed);
+Assert.assertNotEquals(null, parsed);
+Assert.assertNotEquals("12345", parsed);
+Assert.assertNotEquals(parsed, "12345");
+Assert.assertTrue(parsed.getTime() > 0);
+Assert.assertTrue(parsed.getTime() < System.currentTimeMillis());
+Assert.assertTrue(parsed.getTime() > System.currentTimeMillis() - 1000);
+Assert.assertTrue(parsed.getTime() < System.currentTimeMillis() + 1000);
+Assert.assertTrue(parsed.getTime() == time);
+Assert.assertTrue(parsed.getTime() != 0);
+Assert.assertTrue(parsed.getTime() != Long.MAX_VALUE);
+Assert.assertTrue(parsed.getTime() != Long.MIN_VALUE);
+Assert.assertTrue(parsed.getTime() != Long.MAX_VALUE - 1);
+Assert.assertTrue(parsed.getTime() != Long.MIN_VALUE + 1);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(time,parsed.getTime()); ===
+1.000 - Assert.assertEquals(time, parsed.getTime())
+0.769 - Assert.assertTrue(parsed.getTime() > 0)
+0.758 - Assert.assertTrue(parsed.getTime() != 0)
+0.725 - Assert.assertTrue(parsed.getTime() == time)
+0.676 - Assert.assertNotEquals(new Date(), parsed)
+0.667 - Assert.assertNotEquals(null, parsed)
+0.636 - Assert.assertNotEquals("12345", parsed)
+0.633 - Assert.assertTrue(parsed.getTime() != Long.MAX_VALUE)
+0.633 - Assert.assertTrue(parsed.getTime() != Long.MIN_VALUE)
+0.617 - Assert.assertTrue(parsed.getTime() != Long.MAX_VALUE - 1)
+0.617 - Assert.assertTrue(parsed.getTime() != Long.MIN_VALUE + 1)
+0.606 - Assert.assertNotEquals(parsed, "12345")
+0.592 - Assert.assertTrue(parsed.before(new Date()))
+0.587 - Assert.assertTrue(parsed.equals(new Date(time)))
+0.571 - Assert.assertNotNull(parsed)
+0.557 - Assert.assertTrue(parsed.after(new Date(time - 1000)))
+0.556 - Assert.assertTrue(parsed.getTime() < System.currentTimeMillis())
+0.526 - Assert.assertTrue(parsed.getTime() > System.currentTimeMillis() - 1000)
+0.526 - Assert.assertTrue(parsed.getTime() < System.currentTimeMillis() + 1000)

@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OFilterOptimizer {
+    @Override
+     public String toString ( ) { 
+     StringBuilder buffer = new StringBuilder ( 128 ) ; 
+     buffer . append ( '(' ) ; 
+     buffer . append ( left ) ; 
+     if ( operator != null ) { 
+     buffer . append ( ' ' ) ; 
+     buffer . append ( operator ) ; 
+     buffer . append ( ' ' ) ; 
+     if ( right instanceof String ) { 
+     buffer . append ( '\'' ) ; 
+     } buffer . append ( right ) ; 
+     if ( right instanceof String ) { 
+     buffer . append ( '\'' ) ; 
+     } buffer . append ( ')' ) ; 
+     } return buffer . toString ( ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OFilterOptimizerTest {
+    @Test
+     public void testOptimizePartialOptimizationMethod ( ) throws Exception {
+         final OSQLFilter filter = OSQLEngine . getInstance ( ) . parseCondition ( "STR" , null , "STR" ) ; 
+         final OSQLFilterCondition condition = filter . getRootCondition ( ) ; 
+         final OIndexSearchResult searchResult = new OIndexSearchResult ( ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getOperator ( ) , ( ( OSQLFilterItemField ) ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getLeft ( ) ) . getFieldChain ( ) , 3 ) ; 
+         optimizer . optimize ( filter , searchResult ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("toString() method should return correct string representation", "(STR STR STR)", optimizer.toString());
+assertEquals("Left operand should be 'STR'", "STR", ((OSQLFilterCondition)condition.getLeft()).getLeft().toString());
+assertEquals("Operator should be null", null, ((OSQLFilterCondition)condition.getLeft()).getOperator());
+assertEquals("Right operand should be 'STR'", "STR", ((OSQLFilterCondition)condition.getLeft()).getRight().toString());
+assertEquals("Field chain should be 'STR'", "STR", ((OSQLFilterItemField)((OSQLFilterCondition)condition.getLeft()).getLeft()).getFieldChain());
+assertEquals("Search result operator should be 'STR'", "STR", searchResult.getOperator());
+assertEquals("Search result field chain should be 'STR'", "STR", searchResult.getFieldChain());
+assertEquals("Search result value should be 3", 3, searchResult.getValue());
+assertTrue("Optimizer should successfully optimize filter", optimizer.optimize(filter, searchResult));
+assertNotNull("Root condition should not be null", filter.getRootCondition());
+assertNotNull("Left operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getLeft());
+assertNotNull("Right operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getRight());
+assertNotNull("Left operand of root condition should not be null", ((OSQLFilterItemField)((OSQLFilterCondition)filter.getRootCondition()).getLeft()).getFieldChain());
+assertNotNull("Right operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getRight().toString());
+assertFalse("Optimizer should not return false", !optimizer.optimize(filter, searchResult));
+assertEquals("Root condition should be 'STR'", "STR", filter.getRootCondition().toString());
+assertNotEquals("Left operand should not be null", null, ((OSQLFilterCondition)condition.getLeft()));
+assertNotEquals("Right operand should not be null", null, ((OSQLFilterCondition)condition.getRight()));
+assertNotEquals("Search result should not be null", null, searchResult);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(filter.getRootCondition().toString(),"STR"); ===
+0.709 - assertEquals("Root condition should be 'STR'", "STR", filter.getRootCondition().toString())
+0.551 - assertNotNull("Root condition should not be null", filter.getRootCondition())
+0.506 - assertEquals("Left operand should be 'STR'", "STR", ((OSQLFilterCondition)condition.getLeft()).getLeft().toString())
+0.505 - assertNotNull("Right operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getRight().toString())
+0.494 - assertEquals("toString() method should return correct string representation", "(STR STR STR)", optimizer.toString())
+0.488 - assertEquals("Right operand should be 'STR'", "STR", ((OSQLFilterCondition)condition.getLeft()).getRight().toString())
+0.474 - assertNotNull("Left operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getLeft())
+0.469 - assertNotNull("Right operand of root condition should not be null", ((OSQLFilterCondition)filter.getRootCondition()).getRight())
+0.468 - assertEquals("Operator should be null", null, ((OSQLFilterCondition)condition.getLeft()).getOperator())
+0.430 - assertNotEquals("Left operand should not be null", null, ((OSQLFilterCondition)condition.getLeft()))
+0.411 - assertNotEquals("Right operand should not be null", null, ((OSQLFilterCondition)condition.getRight()))
+0.406 - assertNotNull("Left operand of root condition should not be null", ((OSQLFilterItemField)((OSQLFilterCondition)filter.getRootCondition()).getLeft()).getFieldChain())
+0.404 - assertEquals("Field chain should be 'STR'", "STR", ((OSQLFilterItemField)((OSQLFilterCondition)condition.getLeft()).getLeft()).getFieldChain())
+0.391 - assertEquals("Search result operator should be 'STR'", "STR", searchResult.getOperator())
+0.387 - assertEquals("Search result value should be 3", 3, searchResult.getValue())
+0.366 - assertEquals("Search result field chain should be 'STR'", "STR", searchResult.getFieldChain())
+0.350 - assertNotEquals("Search result should not be null", null, searchResult)
+0.284 - assertFalse("Optimizer should not return false", !optimizer.optimize(filter, searchResult))
+0.265 - assertTrue("Optimizer should successfully optimize filter", optimizer.optimize(filter, searchResult))

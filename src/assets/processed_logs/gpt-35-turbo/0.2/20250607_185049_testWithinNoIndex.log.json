@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithin {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithinTest {\n@Test\npublic void testWithinNoIndex ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" + \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STRSTR\", next.field(\"fieldName1\"));\nAssert.assertTrue(next.field(\"fieldName2\") instanceof ORID);\nAssert.assertEquals(\"expectedValue\", next.field(\"fieldName3\"));\nAssert.assertNotNull(next.field(\"fieldName4\"));\nAssert.assertNotEquals(\"unexpectedValue\", next.field(\"fieldName5\"));\nAssert.assertTrue(next.field(\"fieldName6\") instanceof ODocument);\nAssert.assertNull(next.field(\"fieldName7\"));\nAssert.assertTrue(next.field(\"fieldName8\") instanceof OIdentifiable);\nAssert.assertTrue(next.field(\"fieldName9\") instanceof String);\nAssert.assertEquals(100, next.field(\"fieldName10\"));\nAssert.assertFalse(next.field(\"fieldName11\") instanceof Integer);\nAssert.assertTrue(next.field(\"fieldName12\") instanceof List);\nAssert.assertEquals(0, next.field(\"fieldName13\"));\nAssert.assertTrue(next.field(\"fieldName14\") instanceof Map);\nAssert.assertTrue(next.field(\"fieldName15\") instanceof Set);\nAssert.assertEquals(3.14, next.field(\"fieldName16\"));\nAssert.assertTrue(next.field(\"fieldName17\") instanceof Boolean);\nAssert.assertEquals(50L, next.field(\"fieldName18\"));\nAssert.assertTrue(next.field(\"fieldName19\") instanceof Date);\nAssert.assertTrue(next.field(\"fieldName20\") instanceof Double);\n====================\n\n",
+    "scores": [
+        0.727,
+        0.709,
+        0.709,
+        0.7,
+        0.675,
+        0.667,
+        0.64,
+        0.622,
+        0.593,
+        0.589,
+        0.584,
+        0.581,
+        0.581,
+        0.581,
+        0.575,
+        0.575,
+        0.571,
+        0.568,
+        0.556,
+        0.526
+    ],
+    "ground_truth": "Assert.assertEquals(next.field(\"STR\"),true);"
+}

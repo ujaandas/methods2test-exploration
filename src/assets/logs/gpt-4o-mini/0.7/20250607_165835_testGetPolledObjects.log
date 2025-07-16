@@ -1,0 +1,106 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePoller {
+    public List < Object > getPolledObjects ( ) { 
+    return Collections . unmodifiableList ( polledObjects ) ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JmxAttributePollerTest {
+    @Test
+     public void testGetPolledObjects ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+JmxAttributePoller poller = new JmxAttributePoller();
+List<Object> polledObjects = poller.getPolledObjects();
+assertNotNull(polledObjects);
+assertTrue(polledObjects.isEmpty());
+
+poller.addPolledObject(new Object());
+polledObjects = poller.getPolledObjects();
+assertEquals(1, polledObjects.size());
+assertNotNull(polledObjects.get(0));
+
+poller.addPolledObject("Test Object");
+polledObjects = poller.getPolledObjects();
+assertEquals(2, polledObjects.size());
+assertTrue(polledObjects.contains("Test Object"));
+
+poller.addPolledObject(123);
+polledObjects = poller.getPolledObjects();
+assertEquals(3, polledObjects.size());
+assertTrue(polledObjects.contains(123));
+
+assertTrue(polledObjects.contains(new Object()));
+assertFalse(polledObjects.contains(null));
+
+poller.clearPolledObjects();
+polledObjects = poller.getPolledObjects();
+assertTrue(polledObjects.isEmpty());
+
+poller.addPolledObject("Another Object");
+assertEquals("Another Object", polledObjects.get(0));
+
+poller.addPolledObject(new ArrayList<>());
+assertTrue(polledObjects.contains(new ArrayList<>()));
+
+assertEquals(1, poller.getPolledObjects().size());
+assertTrue(poller.getPolledObjects().get(0) instanceof ArrayList);
+
+poller.removePolledObject("Another Object");
+assertFalse(polledObjects.contains("Another Object"));
+
+assertThrows(UnsupportedOperationException.class, () -> {
+    polledObjects.add("New Object");
+});
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(this.polledObjects,this.poller.getPolledObjects()); ===
+0.745 - polledObjects = poller.getPolledObjects()
+0.745 - polledObjects = poller.getPolledObjects()
+0.745 - polledObjects = poller.getPolledObjects()
+0.745 - polledObjects = poller.getPolledObjects()
+0.721 - assertEquals(1, poller.getPolledObjects().size())
+0.702 - List<Object> polledObjects = poller.getPolledObjects()
+0.626 - assertEquals(1, polledObjects.size())
+0.626 - assertEquals(2, polledObjects.size())
+0.626 - assertEquals(3, polledObjects.size())
+0.619 - assertEquals("Another Object", polledObjects.get(0))
+0.618 - assertTrue(polledObjects.contains(new Object()))
+0.613 - assertTrue(polledObjects.contains("Test Object"))
+0.609 - assertFalse(polledObjects.contains("Another Object"))
+0.592 - assertNotNull(polledObjects.get(0))
+0.577 - assertFalse(polledObjects.contains(null))
+0.571 - assertTrue(polledObjects.isEmpty())
+0.571 - assertTrue(polledObjects.isEmpty())
+0.540 - assertTrue(poller.getPolledObjects().get(0) instanceof ArrayList)
+0.529 - assertTrue(polledObjects.contains(123))
+0.511 - poller.clearPolledObjects()
+0.505 - assertNotNull(polledObjects)
+0.487 - assertTrue(polledObjects.contains(new ArrayList<>()))
+0.467 - poller.addPolledObject(123)
+0.449 - poller.addPolledObject(new Object())
+0.447 - poller.addPolledObject(new ArrayList<>())
+0.446 - assertThrows(UnsupportedOperationException.class, () -> {
+    polledObjects.add("New Object")
+0.424 - poller.addPolledObject("Test Object")
+0.419 - poller.removePolledObject("Another Object")
+0.412 - poller.addPolledObject("Another Object")
+0.353 - ```java
+JmxAttributePoller poller = new JmxAttributePoller()
+0.031 - })
+0.000 - ```

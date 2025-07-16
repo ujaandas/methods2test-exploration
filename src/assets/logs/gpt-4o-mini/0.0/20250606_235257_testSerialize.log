@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Activity {
+    public JsonElement serialize ( ) { 
+    JsonObject obj = new JsonObject ( ) ; 
+    if ( this . id != null ) { 
+    obj . addProperty ( "STR" , this . id ) ; 
+    } if ( this . definition != null ) { 
+    obj . add ( "STR" , this . definition . serialize ( ) ) ; 
+    } return obj ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ActivityTest {
+    @Test
+     public void testSerialize ( ) {
+         String expected = "STR" ; 
+         JsonElement actual = activity . serialize ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertTrue(actual.isJsonObject());
+assertTrue(actual.getAsJsonObject().has("STR"));
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertTrue(actual.getAsJsonObject().get("STR").isJsonPrimitive());
+assertEquals(1, actual.getAsJsonObject().size());
+assertFalse(actual.getAsJsonObject().has("definition"));
+activity.id = "testId";
+actual = activity.serialize();
+assertEquals("testId", actual.getAsJsonObject().get("STR").getAsString());
+assertEquals(1, actual.getAsJsonObject().size());
+activity.definition = new Definition(); // Assuming Definition class exists
+JsonElement definitionElement = activity.definition.serialize();
+actual = activity.serialize();
+assertTrue(actual.getAsJsonObject().has("definition"));
+assertEquals(definitionElement, actual.getAsJsonObject().get("definition"));
+assertTrue(actual.getAsJsonObject().get("definition").isJsonObject());
+activity.id = null;
+actual = activity.serialize();
+assertFalse(actual.getAsJsonObject().has("STR"));
+activity.definition = null;
+actual = activity.serialize();
+assertEquals(0, actual.getAsJsonObject().size());
+activity.id = "anotherTestId";
+activity.definition = new Definition();
+actual = activity.serialize();
+assertEquals("anotherTestId", actual.getAsJsonObject().get("STR").getAsString());
+assertTrue(actual.getAsJsonObject().has("definition"));
+assertEquals(2, actual.getAsJsonObject().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.556 - assertTrue(actual.isJsonObject())
+0.471 - assertEquals(1, actual.getAsJsonObject().size())
+0.471 - assertEquals(1, actual.getAsJsonObject().size())
+0.471 - assertEquals(0, actual.getAsJsonObject().size())
+0.471 - assertEquals(2, actual.getAsJsonObject().size())
+0.441 - assertTrue(actual.getAsJsonObject().has("STR"))
+0.435 - assertFalse(actual.getAsJsonObject().has("STR"))
+0.400 - assertTrue(actual.getAsJsonObject().has("definition"))
+0.400 - assertTrue(actual.getAsJsonObject().has("definition"))
+0.395 - assertFalse(actual.getAsJsonObject().has("definition"))
+0.349 - assertTrue(actual.getAsJsonObject().get("STR").isJsonPrimitive())
+0.333 - assertTrue(actual.getAsJsonObject().get("definition").isJsonObject())
+0.324 - activity.id = null
+0.316 - assertEquals(definitionElement, actual.getAsJsonObject().get("definition"))
+0.311 - activity.definition = null
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.301 - assertEquals("testId", actual.getAsJsonObject().get("STR").getAsString())
+0.300 - assertEquals("anotherTestId", actual.getAsJsonObject().get("STR").getAsString())
+0.292 - actual = activity.serialize()
+0.292 - actual = activity.serialize()
+0.292 - actual = activity.serialize()
+0.292 - actual = activity.serialize()
+0.292 - actual = activity.serialize()
+0.248 - // Assuming Definition class exists
+JsonElement definitionElement = activity.definition.serialize()
+0.167 - activity.id = "anotherTestId"
+0.146 - activity.id = "testId"
+0.143 - activity.definition = new Definition()
+0.143 - activity.definition = new Definition()
+0.000 - ```

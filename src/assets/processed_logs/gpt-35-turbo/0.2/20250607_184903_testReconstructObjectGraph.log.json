@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedProperties {\npublic static Set < String > bindAll ( Object instance , TestCase testCase ) {\nSet < String > usedProperties = new HashSet < > ( ) ;\nfor ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) {\nString fullPropertyPath = entry . getKey ( ) . trim ( ) ;\nString value = entry . getValue ( ) . trim ( ) ;\nif ( bind0 ( instance , fullPropertyPath , value ) ) {\nusedProperties . add ( fullPropertyPath ) ;\n} } return usedProperties ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedPropertiesTest {\n@Test\npublic void testReconstructObjectGraph ( ) {\nTestCase testCase = new TestCase ( \"STR\" ) . setProperty ( \"STR\" , 10 ) ;\nPerson person = new Person ( ) ;\nSet < String > usedProperties = bindAll ( person , testCase ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(10, person.getStr());\nAssert.assertTrue(usedProperties.contains(\"STR\"));\nAssert.assertFalse(usedProperties.contains(\"INT\"));\nAssert.assertFalse(usedProperties.contains(\"BOOL\"));\nAssert.assertFalse(usedProperties.contains(\"DOUBLE\"));\nAssert.assertFalse(usedProperties.contains(\"FLOAT\"));\nAssert.assertFalse(usedProperties.contains(\"LONG\"));\nAssert.assertFalse(usedProperties.contains(\"SHORT\"));\nAssert.assertFalse(usedProperties.contains(\"BYTE\"));\nAssert.assertFalse(usedProperties.contains(\"CHAR\"));\nAssert.assertFalse(usedProperties.contains(\"STRING\"));\nAssert.assertFalse(usedProperties.contains(\"BOOLEAN\"));\nAssert.assertFalse(usedProperties.contains(\"DOUBLE_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"FLOAT_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"LONG_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"SHORT_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"BYTE_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"CHAR_OBJ\"));\nAssert.assertFalse(usedProperties.contains(\"OBJECT\"));\nAssert.assertEquals(1, usedProperties.size());\n====================\n\n",
+    "scores": [
+        0.59,
+        0.438,
+        0.432,
+        0.423,
+        0.421,
+        0.417,
+        0.416,
+        0.411,
+        0.411,
+        0.411,
+        0.41,
+        0.405,
+        0.4,
+        0.4,
+        0.4,
+        0.394,
+        0.39,
+        0.39,
+        0.385,
+        0.38
+    ],
+    "ground_truth": "assertNotNull(person.nullArm);"
+}

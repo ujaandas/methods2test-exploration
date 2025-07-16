@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatchesWithQuotes3 ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(expectedSize, results.size());
+assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));
+assertTrue(results.stream().anyMatch(doc -> doc.field("name").equals("expectedName")));
+assertTrue(results.stream().allMatch(doc -> doc.field("status").equals("active")));
+assertTrue(results.stream().noneMatch(doc -> doc.field("status").equals("inactive")));
+assertTrue(results.stream().anyMatch(doc -> doc.field("age") > 18));
+assertTrue(results.stream().allMatch(doc -> doc.field("createdDate") != null));
+assertTrue(results.stream().allMatch(doc -> doc.field("tags") instanceof List));
+assertTrue(results.stream().allMatch(doc -> ((List) doc.field("tags")).contains("expectedTag")));
+assertTrue(results.stream().allMatch(doc -> doc.field("score") >= 0));
+assertTrue(results.stream().allMatch(doc -> doc.field("score") <= 100));
+assertTrue(results.stream().anyMatch(doc -> doc.field("email").contains("@")));
+assertTrue(results.stream().allMatch(doc -> doc.field("isVerified") instanceof Boolean));
+assertTrue(results.stream().allMatch(doc -> doc.field("lastLogin") instanceof Date));
+assertTrue(results.stream().allMatch(doc -> doc.field("profile") != null));
+assertTrue(results.stream().allMatch(doc -> doc.field("location") instanceof ODocument));
+assertTrue(results.stream().allMatch(doc -> doc.field("preferences") instanceof Map));
+assertTrue(results.stream().allMatch(doc -> doc.field("preferences").containsKey("language")));
+assertTrue(results.stream().allMatch(doc -> doc.field("preferences").get("language").equals("English")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.789 - assertEquals(expectedSize, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.567 - ```java
+assertNotNull(results)
+0.473 - assertTrue(results.stream().anyMatch(doc -> doc.field("age") > 18))
+0.454 - assertTrue(results.stream().allMatch(doc -> doc.field("score") <= 100))
+0.442 - assertTrue(results.stream().allMatch(doc -> doc.field("score") >= 0))
+0.438 - assertTrue(results.stream().allMatch(doc -> doc instanceof ODocument))
+0.420 - assertTrue(results.stream().allMatch(doc -> doc.field("profile") != null))
+0.404 - assertTrue(results.stream().allMatch(doc -> doc.field("createdDate") != null))
+0.400 - assertTrue(results.stream().allMatch(doc -> doc.field("tags") instanceof List))
+0.396 - assertTrue(results.stream().anyMatch(doc -> doc.field("email").contains("@")))
+0.382 - assertTrue(results.stream().allMatch(doc -> doc.field("status").equals("active")))
+0.382 - assertTrue(results.stream().allMatch(doc -> doc.field("lastLogin") instanceof Date))
+0.378 - assertTrue(results.stream().allMatch(doc -> doc.field("preferences") instanceof Map))
+0.372 - assertTrue(results.stream().noneMatch(doc -> doc.field("status").equals("inactive")))
+0.368 - assertTrue(results.stream().anyMatch(doc -> doc.field("name").equals("expectedName")))
+0.368 - assertTrue(results.stream().allMatch(doc -> doc.field("isVerified") instanceof Boolean))
+0.368 - assertTrue(results.stream().allMatch(doc -> doc.field("location") instanceof ODocument))
+0.344 - assertTrue(results.stream().allMatch(doc -> doc.field("preferences").containsKey("language")))
+0.341 - assertTrue(results.stream().allMatch(doc -> ((List) doc.field("tags")).contains("expectedTag")))
+0.318 - assertTrue(results.stream().allMatch(doc -> doc.field("preferences").get("language").equals("English")))
+0.000 - ```

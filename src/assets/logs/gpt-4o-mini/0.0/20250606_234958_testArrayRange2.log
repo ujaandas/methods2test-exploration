@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testArrayRange2 ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(3, result.size());
+assertTrue(result.get(0).getProperty("fieldName").equals("expectedValue1"));
+assertTrue(result.get(1).getProperty("fieldName").equals("expectedValue2"));
+assertTrue(result.get(2).getProperty("fieldName").equals("expectedValue3"));
+assertFalse(result.isEmpty());
+assertTrue(result.get(0).getProperty("anotherField").contains("expectedSubstring"));
+assertEquals("expectedType", result.get(0).getProperty("@type"));
+assertNotEquals(result.get(0).getProperty("fieldName"), result.get(1).getProperty("fieldName"));
+assertTrue(result.get(0).getProperty("numericField") > 0);
+assertTrue(result.get(1).getProperty("booleanField"));
+assertFalse(result.get(2).getProperty("booleanField"));
+assertEquals("expectedValue1", result.next().getProperty("fieldName"));
+assertEquals("expectedValue2", result.next().getProperty("fieldName"));
+assertEquals("expectedValue3", result.next().getProperty("fieldName"));
+assertThrows(NoSuchElementException.class, () -> result.next());
+assertEquals(3, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("fieldName").startsWith("STR")));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("fieldName").equals("expectedValue1")));
+assertTrue(result.stream().noneMatch(r -> r.getProperty("fieldName").equals("unexpectedValue")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.702 - assertEquals(3, result.size())
+0.702 - assertFalse(result.isEmpty())
+0.597 - assertEquals(3, result.stream().count())
+0.568 - assertTrue(result.get(1).getProperty("booleanField"))
+0.554 - assertTrue(result.get(0).getProperty("numericField") > 0)
+0.545 - assertThrows(NoSuchElementException.class, () -> result.next())
+0.526 - ```java
+assertNotNull(result)
+0.488 - assertFalse(result.get(2).getProperty("booleanField"))
+0.485 - assertTrue(result.get(0).getProperty("fieldName").equals("expectedValue1"))
+0.485 - assertTrue(result.get(1).getProperty("fieldName").equals("expectedValue2"))
+0.485 - assertTrue(result.get(2).getProperty("fieldName").equals("expectedValue3"))
+0.468 - assertTrue(result.get(0).getProperty("anotherField").contains("expectedSubstring"))
+0.440 - assertEquals("expectedType", result.get(0).getProperty("@type"))
+0.433 - assertTrue(result.stream().anyMatch(r -> r.getProperty("fieldName").equals("expectedValue1")))
+0.433 - assertEquals("expectedValue1", result.next().getProperty("fieldName"))
+0.433 - assertEquals("expectedValue2", result.next().getProperty("fieldName"))
+0.433 - assertEquals("expectedValue3", result.next().getProperty("fieldName"))
+0.426 - assertTrue(result.stream().noneMatch(r -> r.getProperty("fieldName").equals("unexpectedValue")))
+0.389 - assertTrue(result.stream().allMatch(r -> r.getProperty("fieldName").startsWith("STR")))
+0.328 - assertNotEquals(result.get(0).getProperty("fieldName"), result.get(1).getProperty("fieldName"))
+0.000 - ```

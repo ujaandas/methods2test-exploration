@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage basis-technology-corp.tcl-regex-java;\n\npublic class Smp {\nboolean find ( ) ;\n}\n\npackage basis-technology-corp.tcl-regex-java;\n\npublic class SmpTest {\n@Test\npublic void findCharClass ( ) throws Exception {\nRePattern pattern = HsrePattern . compile ( \"STR\" , PatternFlags . ADVANCED ) ;\nReMatcher matcher = pattern . matcher ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(matcher.find());\nassertEquals(0, matcher.start());\nassertEquals(3, matcher.end());\nassertEquals(\"STR\", matcher.group());\nassertFalse(matcher.find(1));\nassertTrue(matcher.find(0));\nassertFalse(matcher.find(3));\nassertTrue(matcher.matches());\nassertFalse(matcher.find(\"XYZ\"));\nassertTrue(matcher.find(\"TEST STR TEST\"));\nassertEquals(5, matcher.start(\"STR\"));\nassertEquals(8, matcher.end(\"STR\"));\nassertEquals(\"STR\", matcher.group(0));\nassertThrows(IndexOutOfBoundsException.class, () -> matcher.group(1));\nassertTrue(matcher.hitEnd());\nassertFalse(matcher.lookingAt());\nassertEquals(0, matcher.appendReplacement(new StringBuilder(), \"REPLACED\").length());\nassertEquals(\"REPLACED\", matcher.appendTail(new StringBuilder(\"PREFIX\")).toString());\nassertTrue(matcher.region(0, 3).find());\nassertEquals(\"STR\", matcher.group(0));\nassertEquals(0, matcher.toString().indexOf(\"STR\"));\nassertFalse(matcher.find(\"NOT_FOUND\"));\nassertTrue(matcher.reset().find());\n```\n====================\n\n",
+    "scores": [
+        0.981,
+        0.926,
+        0.867,
+        0.867,
+        0.852,
+        0.852,
+        0.812,
+        0.8,
+        0.8,
+        0.793,
+        0.764,
+        0.724,
+        0.719,
+        0.7,
+        0.667,
+        0.613,
+        0.59,
+        0.587,
+        0.581,
+        0.581,
+        0.478,
+        0.411,
+        0.407,
+        0.0
+    ],
+    "ground_truth": "assertTrue(matcher.find());"
+}

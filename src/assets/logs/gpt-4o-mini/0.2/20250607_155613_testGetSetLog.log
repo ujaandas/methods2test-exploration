@@ -1,0 +1,174 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class BatchPollProcessor {
+    public Logger getLog ( ) { 
+    return log ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class BatchPollProcessorTest {
+    @Test
+     public void testGetSetLog ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Logger logger = Logger.getLogger(BatchPollProcessor.class.getName());
+BatchPollProcessor processor = new BatchPollProcessor();
+
+// Test default log
+assertNotNull(processor.getLog());
+assertEquals(Logger.getLogger(BatchPollProcessor.class.getName()), processor.getLog());
+
+// Test setting a custom log
+processor.setLog(logger);
+assertEquals(logger, processor.getLog());
+
+// Test log is not null after setting
+processor.setLog(logger);
+assertNotNull(processor.getLog());
+
+// Test log instance type
+assertTrue(processor.getLog() instanceof Logger);
+
+// Test log name
+assertEquals(logger.getName(), processor.getLog().getName());
+
+// Test log level
+logger.setLevel(Level.INFO);
+processor.setLog(logger);
+assertEquals(Level.INFO, processor.getLog().getLevel());
+
+// Test log handlers
+Handler[] handlers = processor.getLog().getHandlers();
+assertNotNull(handlers);
+assertTrue(handlers.length >= 0);
+
+// Test log configuration
+processor.getLog().setUseParentHandlers(false);
+assertFalse(processor.getLog().getUseParentHandlers());
+
+// Test log formatting
+SimpleFormatter formatter = new SimpleFormatter();
+for (Handler handler : handlers) {
+    handler.setFormatter(formatter);
+    assertEquals(formatter.getClass(), handler.getFormatter().getClass());
+}
+
+// Test log filtering
+processor.getLog().setFilter(new Filter() {
+    public boolean isLoggable(LogRecord record) {
+        return true;
+    }
+});
+assertNotNull(processor.getLog().getFilter());
+
+// Test log message
+String testMessage = "Test log message";
+processor.getLog().info(testMessage);
+assertTrue(processor.getLog().isLoggable(Level.INFO));
+
+// Test log exception
+Exception testException = new Exception("Test exception");
+processor.getLog().log(Level.SEVERE, "Exception occurred", testException);
+assertTrue(processor.getLog().isLoggable(Level.SEVERE));
+
+// Test log flush
+for (Handler handler : handlers) {
+    handler.flush();
+    assertTrue(handler.getClass().getMethod("flush").getDeclaringClass() == Handler.class);
+}
+
+// Test log close
+for (Handler handler : handlers) {
+    handler.close();
+    assertTrue(handler.getClass().getMethod("close").getDeclaringClass() == Handler.class);
+}
+
+// Test log serialization
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+ObjectOutputStream oos = new ObjectOutputStream(baos);
+oos.writeObject(processor.getLog());
+oos.flush();
+byte[] logBytes = baos.toByte
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(this.processor.getLog()); ===
+0.930 - assertNotNull(processor.getLog())
+0.795 - assertNotNull(processor.getLog().getFilter())
+0.750 - // Test default log
+assertNotNull(processor.getLog())
+0.675 - assertEquals(logger, processor.getLog())
+0.603 - oos.writeObject(processor.getLog())
+0.593 - assertTrue(processor.getLog().isLoggable(Level.INFO))
+0.587 - assertFalse(processor.getLog().getUseParentHandlers())
+0.581 - assertTrue(processor.getLog().isLoggable(Level.SEVERE))
+0.565 - assertEquals(Level.INFO, processor.getLog().getLevel())
+0.559 - // Test log is not null after setting
+processor.setLog(logger)
+0.557 - assertNotNull(handlers)
+0.548 - processor.setLog(logger)
+0.535 - // Test setting a custom log
+processor.setLog(logger)
+0.523 - // Test log name
+assertEquals(logger.getName(), processor.getLog().getName())
+0.514 - processor.getLog().info(testMessage)
+0.509 - // Test log instance type
+assertTrue(processor.getLog() instanceof Logger)
+0.472 - // Test log handlers
+Handler[] handlers = processor.getLog().getHandlers()
+0.472 - assertEquals(Logger.getLogger(BatchPollProcessor.class.getName()), processor.getLog())
+0.414 - ```java
+Logger logger = Logger.getLogger(BatchPollProcessor.class.getName())
+0.411 - // Test log configuration
+processor.getLog().setUseParentHandlers(false)
+0.404 - BatchPollProcessor processor = new BatchPollProcessor()
+0.377 - assertEquals(formatter.getClass(), handler.getFormatter().getClass())
+0.353 - assertTrue(handlers.length >= 0)
+0.352 - processor.getLog().log(Level.SEVERE, "Exception occurred", testException)
+0.299 - }
+
+// Test log filtering
+processor.getLog().setFilter(new Filter() {
+    public boolean isLoggable(LogRecord record) {
+        return true
+0.279 - assertTrue(handler.getClass().getMethod("flush").getDeclaringClass() == Handler.class)
+0.279 - assertTrue(handler.getClass().getMethod("close").getDeclaringClass() == Handler.class)
+0.259 - }
+
+// Test log serialization
+ByteArrayOutputStream baos = new ByteArrayOutputStream()
+0.247 - // Test log message
+String testMessage = "Test log message"
+0.245 - oos.flush()
+0.225 - // Test log level
+logger.setLevel(Level.INFO)
+0.224 - // Test log flush
+for (Handler handler : handlers) {
+    handler.flush()
+0.202 - for (Handler handler : handlers) {
+    handler.setFormatter(formatter)
+0.188 - byte[] logBytes = baos.toByte
+0.178 - }
+
+// Test log close
+for (Handler handler : handlers) {
+    handler.close()
+0.175 - // Test log formatting
+SimpleFormatter formatter = new SimpleFormatter()
+0.147 - // Test log exception
+Exception testException = new Exception("Test exception")
+0.092 - ObjectOutputStream oos = new ObjectOutputStream(baos)
+0.048 - }
+})

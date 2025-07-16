@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MPEGES {\npublic static byte [ ] toArray ( ByteBuffer buffer ) {\nbyte [ ] result = new byte [ buffer . remaining ( ) ] ;\nbuffer . duplicate ( ) . get ( result ) ;\nreturn result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MPEGESTest {\n@Test\npublic void testES ( ) throws IOException {\nbyte [ ] mpeg = MPEGTestConst . mpeg ( ) ;\nbyte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ;\nbyte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegFrame } ) ;\nMPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ;\nByteBuffer buf = ByteBuffer . allocate ( 1024 ) ;\nPacket f1 = mpeges . frame ( buf ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(f1);\nassertEquals(frame1.length, f1.size());\nassertArrayEquals(frame1, MPEGES.toArray(f1.getBuffer()));\nassertTrue(f1.hasData());\nassertFalse(f1.isEndOfStream());\nassertEquals(0, f1.getTimestamp());\nassertEquals(1, f1.getFrameNumber());\nassertTrue(f1.getBuffer().remaining() > 0);\nassertEquals(32, f1.getDataSize());\nassertNotEquals(frame2.length, f1.size());\nassertArrayEquals(frame2, MPEGES.toArray(f1.getBuffer()));\nassertTrue(f1.getBuffer().position() > 0);\nassertFalse(f1.getBuffer().hasRemaining());\nassertEquals(\"Expected frame type\", \"video\", f1.getFrameType());\nassertNotNull(f1.getMetadata());\nassertTrue(f1.getMetadata().containsKey(\"duration\"));\nassertEquals(0.033, f1.getMetadata().get(\"duration\"), 0.001);\nassertTrue(f1.getBuffer().isReadOnly());\nassertEquals(0, f1.getErrorCount());\nassertTrue(f1.getBuffer().capacity() <= 1024);\nassertFalse(f1.isCorrupted());\n```\n====================\n\n",
+    "scores": [
+        0.786,
+        0.768,
+        0.607,
+        0.581,
+        0.562,
+        0.549,
+        0.542,
+        0.539,
+        0.533,
+        0.506,
+        0.5,
+        0.474,
+        0.449,
+        0.437,
+        0.426,
+        0.424,
+        0.421,
+        0.421,
+        0.417,
+        0.404,
+        0.321,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(frame1,NIOUtils.toArray(f1.getData()));"
+}

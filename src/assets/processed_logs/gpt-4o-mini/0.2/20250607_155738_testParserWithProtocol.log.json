@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcAddressParser {\npublic String getIp ( ) {\nreturn ip ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcAddressParserTest {\n@Test\npublic void testParserWithProtocol ( ) throws RemotingException {\nString url = \"STR\" ;\nRpcAddressParser parser = new RpcAddressParser ( ) ;\nUrl btUrl = parser . parse ( url ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(btUrl);\nassertEquals(\"expectedHost\", btUrl.getHost());\nassertEquals(8080, btUrl.getPort());\nassertEquals(\"http\", btUrl.getProtocol());\nassertTrue(btUrl.isSecure());\nassertFalse(btUrl.isEmpty());\nassertEquals(\"expectedPath\", btUrl.getPath());\nassertEquals(\"expectedQuery\", btUrl.getQuery());\nassertEquals(\"expectedFragment\", btUrl.getFragment());\nassertEquals(\"expectedUserInfo\", btUrl.getUserInfo());\nassertEquals(\"expectedAuthority\", btUrl.getAuthority());\nassertTrue(btUrl.hasParameter(\"paramName\"));\nassertEquals(\"paramValue\", btUrl.getParameter(\"paramName\"));\nassertEquals(3, btUrl.getParameterCount());\nassertTrue(btUrl.getParameters().containsKey(\"paramName\"));\nassertFalse(btUrl.getParameters().isEmpty());\nassertEquals(\"expectedCharset\", btUrl.getCharset());\nassertNotEquals(\"unexpectedValue\", btUrl.getParameter(\"anotherParam\"));\nassertTrue(btUrl.isValid());\nassertEquals(\"expectedStringRepresentation\", btUrl.toString());\nassertEquals(\"expectedHost:8080\", btUrl.getHostAndPort());\nassertNotEquals(\"invalidHost\", btUrl.getHost());\n```\n====================\n\n",
+    "scores": [
+        0.776,
+        0.767,
+        0.727,
+        0.727,
+        0.709,
+        0.709,
+        0.703,
+        0.682,
+        0.675,
+        0.659,
+        0.656,
+        0.644,
+        0.629,
+        0.615,
+        0.597,
+        0.596,
+        0.59,
+        0.567,
+        0.549,
+        0.5,
+        0.492,
+        0.44,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",btUrl.getIp());"
+}

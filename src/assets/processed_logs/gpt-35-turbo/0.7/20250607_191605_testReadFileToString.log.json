@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\npublic String readFile ( File file ) throws IOException {\nreturn FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testReadFileToString ( ) throws Exception {\nFile tempFile = new File ( serverDirectory , \"STR\" ) ;\nFiles . write ( tempFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nString fileString = util . readFile ( tempFile ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", fileString);\nassertNotNull(fileString);\nassertTrue(fileString.contains(\"STR\"));\nassertEquals(\"UTF-8\", StandardCharsets.UTF_8.name());\nassertTrue(tempFile.exists());\nassertEquals(\"STR\", Files.readAllLines(tempFile.toPath()).get(0));\nassertTrue(tempFile.isFile());\nassertTrue(tempFile.canRead());\nassertFalse(fileString.isEmpty());\nassertEquals(3, fileString.length());\nassertTrue(tempFile.length() > 0);\nassertEquals(\"STR\", fileString.trim());\nassertTrue(fileString.matches(\"[A-Z]+\"));\nassertFalse(fileString.endsWith(\" \"));\nassertTrue(fileString.startsWith(\"S\"));\nassertTrue(tempFile.getAbsolutePath().contains(\"STR\"));\nassertTrue(fileString.matches(\"^[A-Z]+$\"));\nassertTrue(fileString.contains(\"T\"));\nassertEquals(\"STR\", fileString.toUpperCase());\nassertEquals(\"STR\", fileString.toLowerCase());\n====================\n\n",
+    "scores": [
+        0.865,
+        0.833,
+        0.811,
+        0.763,
+        0.744,
+        0.722,
+        0.667,
+        0.648,
+        0.623,
+        0.615,
+        0.606,
+        0.6,
+        0.6,
+        0.585,
+        0.578,
+        0.575,
+        0.567,
+        0.545,
+        0.391,
+        0.38
+    ],
+    "ground_truth": "assertTrue(fileString.equals(\"STR\"));"
+}

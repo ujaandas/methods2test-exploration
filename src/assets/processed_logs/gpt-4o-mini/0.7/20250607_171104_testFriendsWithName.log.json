@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsWithName ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"name\") != null));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"John\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Jane\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"relationship\").equals(\"friend\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"age\") >= 18));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"active\") == true));\nassertEquals(\"Friend\", qResult.get(0).field(\"relationship\"));\nassertEquals(\"John\", qResult.get(0).field(\"name\"));\nassertNotEquals(qResult.get(0).field(\"id\"), qResult.get(1).field(\"id\"));\nassertTrue(qResult.stream().map(doc -> doc.field(\"name\")).distinct().count() > 1);\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"city\").equals(\"New York\")));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"status\").equals(\"inactive\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Alice\")));\nassertEquals(\"Doe\", qResult.get(qResult.size() - 1).field(\"lastName\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friendsCount\") > 0));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Bob\") && doc.field(\"age\") < 30));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"gender\").equals(\"male\") || doc.field(\"gender\").equals(\"female\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Charlie\") && doc.field(\"relationship\").equals(\"colleague\")));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.684,
+        0.598,
+        0.584,
+        0.567,
+        0.54,
+        0.447,
+        0.433,
+        0.424,
+        0.416,
+        0.396,
+        0.396,
+        0.393,
+        0.393,
+        0.385,
+        0.372,
+        0.362,
+        0.333,
+        0.288,
+        0.269,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

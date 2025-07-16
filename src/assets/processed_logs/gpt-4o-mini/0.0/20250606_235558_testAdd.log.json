@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic int count ( String poolKey ) {\nif ( StringUtils . isBlank ( poolKey ) ) {\nreturn 0 ;\n} ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nif ( null != pool ) {\nreturn pool . size ( ) ;\n} else {\nreturn 0 ;\n} }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testAdd ( ) {\nConnection conn = getAConn ( ) ;\ncm . add ( conn ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(cm);\nassertNotNull(conn);\nassertTrue(cm.getConnectionPool().contains(conn));\nassertEquals(1, cm.count(conn.getPoolKey()));\nassertTrue(cm.getConnectionPool().size() > 0);\nassertTrue(cm.getConnectionPool().isEmpty() == false);\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn));\nassertEquals(conn, cm.getConnectionPool().get(conn.getPoolKey()).get(0));\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1);\nassertFalse(cm.getConnectionPool().get(conn.getPoolKey()).isEmpty());\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).indexOf(conn) >= 0);\nassertEquals(\"Expected pool size after adding connection\", 1, cm.count(conn.getPoolKey()));\nassertNotEquals(\"Pool should not be empty after adding connection\", 0, cm.count(conn.getPoolKey()));\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).contains(conn));\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).size() == 1);\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isActive());\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).get(0).isValid());\nassertEquals(\"Pool size should be 1 after adding one connection\", 1, cm.count(conn.getPoolKey()));\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().allMatch(Connection::isActive));\nassertTrue(cm.getConnectionPool().get(conn.getPoolKey()).stream().anyMatch(c -> c.equals(conn));\n```\n====================\n\n",
+    "scores": [
+        0.842,
+        0.558,
+        0.552,
+        0.533,
+        0.526,
+        0.504,
+        0.5,
+        0.495,
+        0.463,
+        0.46,
+        0.46,
+        0.438,
+        0.438,
+        0.43,
+        0.43,
+        0.426,
+        0.414,
+        0.354,
+        0.286,
+        0.27,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,cm.count(poolKey));"
+}

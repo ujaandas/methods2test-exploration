@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage redraiment.jactiverecord;\n\npublic class Seq {\npublic static List < String > map ( Collection < ? > from , String format ) {\nList < String > to = new ArrayList < > ( from . size ( ) ) ;\nfor ( Object e : from ) {\nto . add ( String . format ( format , e ) ) ;\n} return to ;\n}\n}\n\npackage redraiment.jactiverecord;\n\npublic class SeqTest {\n@Test\npublic void testFormatMap ( ) {\nString [ ] actuals = Seq . map ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" ) , \"STR\" ) . toArray ( new String [ 0 ] ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(3, actuals.length);\nassertEquals(\"STR\", actuals[0]);\nassertEquals(\"STR\", actuals[1]);\nassertEquals(\"STR\", actuals[2]);\nassertNotNull(actuals);\nassertTrue(actuals instanceof String[]);\nassertEquals(\"STR\", actuals[0]);\nassertTrue(Arrays.asList(actuals).contains(\"STR\"));\nassertFalse(Arrays.asList(actuals).contains(\"NOT_STR\"));\nassertEquals(\"STR\", actuals[actuals.length - 1]);\nassertEquals(\"STR\", actuals[1]);\nassertEquals(\"STR\", actuals[2]);\nassertTrue(actuals.length >= 1);\nassertEquals(3, Arrays.stream(actuals).filter(s -> s.equals(\"STR\")).count());\nassertEquals(\"STR\", actuals[0]);\nassertNotEquals(\"NOT_STR\", actuals[0]);\nassertTrue(actuals.length <= 3);\nassertArrayEquals(new String[]{\"STR\", \"STR\", \"STR\"}, actuals);\nassertSame(\"STR\", actuals[1]);\nassertNotSame(\"NOT_STR\", actuals[0]);\nassertAll(\"Check all assertions\",\n() -> assertEquals(\"STR\", actuals[0]),\n() -> assertEquals(\"STR\", actuals[1]),\n() -> assertEquals(\"STR\", actuals[2])\n);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.621,
+        0.574,
+        0.529,
+        0.518,
+        0.489,
+        0.478,
+        0.463,
+        0.43,
+        0.411,
+        0.395,
+        0.395,
+        0.393,
+        0.354,
+        0.305,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(newString[]{\"STR\",\"STR\",\"STR\"},actuals);"
+}

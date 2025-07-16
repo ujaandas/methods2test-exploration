@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testQuotedEmptyString ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+
+assertEquals(0, res.size());
+assertNotNull(res);
+assertTrue(res.isEmpty());
+assertFalse(res.contains(null));
+assertTrue(res.stream().allMatch(doc -> doc.fieldNames().isEmpty()));
+assertTrue(res.stream().allMatch(doc -> doc.toMap().isEmpty()));
+assertEquals(0, res.stream().mapToInt(doc -> doc.size()).sum());
+assertTrue(res.stream().allMatch(doc -> doc.toJSON().isEmpty()));
+assertTrue(res.stream().allMatch(doc -> doc.toJSON("rid,@version,@class").isEmpty()));
+assertNotNull(res.stream().findFirst().orElse(null));
+assertTrue(res.stream().allMatch(doc -> doc.getRecord().getIdentity().isValid()));
+assertTrue(res.stream().allMatch(doc -> doc.getRecord().getClassName().equals("")));
+assertTrue(res.stream().allMatch(doc -> doc.getRecord().getVersion() == 0));
+assertTrue(res.stream().allMatch(doc -> doc.getRecord().getDatabase().getName().equals("")));
+assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getName().equals("")));
+assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getClusterIds().isEmpty()));
+assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getProperties().isEmpty()));
+assertTrue(res.stream().allMatch(doc -> doc.getClassName().equals("")));
+assertTrue(res.stream().allMatch(doc -> doc.getIdentity().isValid()));
+assertTrue(res.stream().allMatch(doc -> doc.getVersion() == 0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+0.863 - assertTrue(res.isEmpty())
+0.737 - assertFalse(res.contains(null))
+0.692 - assertEquals(0, res.size())
+0.545 - assertNotNull(res)
+0.506 - assertTrue(res.stream().allMatch(doc -> doc.toMap().isEmpty()))
+0.500 - assertTrue(res.stream().allMatch(doc -> doc.toJSON().isEmpty()))
+0.478 - assertTrue(res.stream().allMatch(doc -> doc.fieldNames().isEmpty()))
+0.436 - assertNotNull(res.stream().findFirst().orElse(null))
+0.419 - assertEquals(0, res.stream().mapToInt(doc -> doc.size()).sum())
+0.404 - assertTrue(res.stream().allMatch(doc -> doc.toJSON("rid,@version,@class").isEmpty()))
+0.400 - assertTrue(res.stream().allMatch(doc -> doc.getVersion() == 0))
+0.393 - assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getClusterIds().isEmpty()))
+0.393 - assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getProperties().isEmpty()))
+0.387 - assertTrue(res.stream().allMatch(doc -> doc.getIdentity().isValid()))
+0.358 - assertTrue(res.stream().allMatch(doc -> doc.getClassName().equals("")))
+0.351 - assertTrue(res.stream().allMatch(doc -> doc.getRecord().getVersion() == 0))
+0.343 - assertTrue(res.stream().allMatch(doc -> doc.getRecord().getIdentity().isValid()))
+0.318 - assertTrue(res.stream().allMatch(doc -> doc.getRecord().getClassName().equals("")))
+0.318 - assertTrue(res.stream().allMatch(doc -> doc.getSchemaClass().getName().equals("")))
+0.293 - assertTrue(res.stream().allMatch(doc -> doc.getRecord().getDatabase().getName().equals("")))

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\n@Override\npublic Collection < UriResource > getPrioritizedRoutes ( ) {\nreturn Collections . unmodifiableCollection ( mappings ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testProvidedPriorityRoutePrioritizerNullUri ( ) {\nProvidedPriorityRoutePrioritizer routePrioritizer = new ProvidedPriorityRoutePrioritizer ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(routePrioritizer);\nassertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());\nroutePrioritizer.addRoute(new UriResource(\"GET\", \"/test\", null));\nassertFalse(routePrioritizer.getPrioritizedRoutes().isEmpty());\nassertEquals(1, routePrioritizer.getPrioritizedRoutes().size());\nroutePrioritizer.addRoute(new UriResource(\"POST\", \"/test2\", null));\nassertEquals(2, routePrioritizer.getPrioritizedRoutes().size());\nassertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource(\"GET\", \"/test\", null)));\nassertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource(\"POST\", \"/test2\", null)));\nroutePrioritizer.removeRoute(new UriResource(\"GET\", \"/test\", null));\nassertFalse(routePrioritizer.getPrioritizedRoutes().contains(new UriResource(\"GET\", \"/test\", null)));\nassertEquals(1, routePrioritizer.getPrioritizedRoutes().size());\nroutePrioritizer.clearRoutes();\nassertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());\nroutePrioritizer.addRoute(new UriResource(\"GET\", \"/test\", null));\nroutePrioritizer.addRoute(new UriResource(\"GET\", \"/test\", null));\nassertEquals(1, routePrioritizer.getPrioritizedRoutes().size());\nroutePrioritizer.clearRoutes();\nassertEquals(0, routePrioritizer.getPrioritizedRoutes().size());\nroutePrioritizer.addRoute(new UriResource(\"GET\", \"/test\", null));\nroutePrioritizer.addRoute(new UriResource(\"POST\", \"/test2\", null));\nroutePrioritizer.addRoute(new UriResource(\"PUT\", \"/test3\", null));\nassertEquals(3, routePrioritizer.getPrioritizedRoutes().size());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.984,
+        0.984,
+        0.984,
+        0.984,
+        0.984,
+        0.871,
+        0.846,
+        0.846,
+        0.704,
+        0.684,
+        0.675,
+        0.587,
+        0.587,
+        0.559,
+        0.476,
+        0.455,
+        0.455,
+        0.455,
+        0.455,
+        0.452,
+        0.448,
+        0.448
+    ],
+    "ground_truth": "Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size());"
+}

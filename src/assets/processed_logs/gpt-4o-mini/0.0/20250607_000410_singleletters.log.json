@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage PeterisP.morphology;\n\npublic class Tokenize {\npublic static LinkedList < Word > tokenize ( Analyzer morphoAnalyzer , String chunk , boolean bruteSplit ) {\nif ( bruteSplit ) {\nLinkedList < Word > tokens = new LinkedList < Word > ( ) ;\nif ( chunk == null ) return tokens ;\nString [ ] parts_of_string = chunk . trim ( ) . split ( \"STR\" ) ;\nfor ( String part : parts_of_string ) {\nif ( part . length ( ) > 0 ) tokens . add ( ( morphoAnalyzer == null ) ? new Word ( part ) : morphoAnalyzer . analyze ( part ) ) ;\n} return tokens ;\n} else {\nreturn tokenize ( morphoAnalyzer , chunk ) ;\n} }\n}\n\npackage PeterisP.morphology;\n\npublic class TokenizeTest {\n@Test\npublic void singleletters ( ) {\nLinkedList < Word > tokens ;\ntokens = Splitting . tokenize ( loc\u012bt\u0101js , \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(tokens);\nassertEquals(1, tokens.size());\nassertEquals(\"l\", tokens.get(0).getText());\nassertEquals(\"l\", tokens.get(0).getText());\nassertTrue(tokens.get(0) instanceof Word);\nassertEquals(\"l\", tokens.get(0).toString());\nassertEquals(\"l\", tokens.get(0).getLemma());\nassertEquals(\"NOUN\", tokens.get(0).getPartOfSpeech());\nassertEquals(1, tokens.get(0).getFrequency());\nassertTrue(tokens.get(0).isValid());\nassertEquals(\"l\", tokens.get(0).getRoot());\nassertEquals(1, tokens.get(0).getSyllableCount());\nassertFalse(tokens.get(0).isCompound());\nassertTrue(tokens.get(0).isSingular());\nassertFalse(tokens.get(0).isPlural());\nassertEquals(\"NOMINATIVE\", tokens.get(0).getCase());\nassertEquals(\"SINGULAR\", tokens.get(0).getNumber());\nassertEquals(\"l\", tokens.get(0).getInflection());\nassertEquals(\"l\", tokens.get(0).getMorphologicalFeatures());\nassertEquals(\"l\", tokens.get(0).getSemanticRole());\nassertEquals(\"l\", tokens.get(0).getPronunciation());\nassertEquals(\"l\", tokens.get(0).getSynonyms().get(0));\n```\n====================\n\n",
+    "scores": [
+        0.966,
+        0.714,
+        0.714,
+        0.714,
+        0.704,
+        0.704,
+        0.685,
+        0.667,
+        0.658,
+        0.658,
+        0.649,
+        0.636,
+        0.633,
+        0.633,
+        0.625,
+        0.618,
+        0.617,
+        0.617,
+        0.597,
+        0.575,
+        0.552,
+        0.529,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,tokens.size());"
+}

@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testProjection ( ) {
+         long idxUsagesBefore = indexUsages ( db ) ; 
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.stream().allMatch(doc -> doc instanceof ODocument));
+assertEquals(expectedFieldValue, qResult.get(0).field("expectedField"));
+assertEquals(expectedFieldValue, qResult.get(1).field("expectedField"));
+assertTrue(qResult.get(0).field("anotherField") instanceof String);
+assertTrue(qResult.get(1).field("anotherField") instanceof String);
+assertEquals(expectedFieldCount, qResult.get(0).fieldNames().size());
+assertEquals(expectedFieldCount, qResult.get(1).fieldNames().size());
+assertNotEquals(unexpectedValue, qResult.get(0).field("unexpectedField"));
+assertNotEquals(unexpectedValue, qResult.get(1).field("unexpectedField"));
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("searchField").equals(searchValue)));
+assertFalse(qResult.stream().anyMatch(doc -> doc.field("searchField").equals(nonExistentValue)));
+assertEquals(expectedType, qResult.get(0).getClass());
+assertEquals(expectedType, qResult.get(1).getClass());
+assertTrue(qResult.stream().allMatch(doc -> doc.field("numericField") instanceof Number));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean));
+assertEquals(expectedSum, qResult.stream().mapToDouble(doc -> doc.field("numericField")).sum(), delta);
+assertEquals(expectedAverage, qResult.stream().mapToDouble(doc -> doc.field("numericField")).average().orElse(0), delta);
+assertTrue(qResult.stream().allMatch(doc -> doc.field("dateField").after(startDate) && doc.field("dateField").before(endDate)));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(qResult.size(),1); ===
+0.789 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.610 - assertEquals(expectedType, qResult.get(0).getClass())
+0.610 - assertEquals(expectedType, qResult.get(1).getClass())
+0.577 - assertEquals(expectedFieldCount, qResult.get(0).fieldNames().size())
+0.577 - assertEquals(expectedFieldCount, qResult.get(1).fieldNames().size())
+0.567 - ```java
+assertNotNull(qResult)
+0.520 - assertEquals(expectedFieldValue, qResult.get(0).field("expectedField"))
+0.510 - assertNotEquals(unexpectedValue, qResult.get(0).field("unexpectedField"))
+0.500 - assertEquals(expectedFieldValue, qResult.get(1).field("expectedField"))
+0.490 - assertNotEquals(unexpectedValue, qResult.get(1).field("unexpectedField"))
+0.438 - assertTrue(qResult.stream().allMatch(doc -> doc instanceof ODocument))
+0.438 - assertEquals(expectedSum, qResult.stream().mapToDouble(doc -> doc.field("numericField")).sum(), delta)
+0.426 - assertTrue(qResult.get(1).field("anotherField") instanceof String)
+0.404 - assertTrue(qResult.get(0).field("anotherField") instanceof String)
+0.384 - assertEquals(expectedAverage, qResult.stream().mapToDouble(doc -> doc.field("numericField")).average().orElse(0), delta)
+0.371 - assertFalse(qResult.stream().anyMatch(doc -> doc.field("searchField").equals(nonExistentValue)))
+0.365 - assertTrue(qResult.stream().allMatch(doc -> doc.field("numericField") instanceof Number))
+0.362 - assertTrue(qResult.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean))
+0.356 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("searchField").equals(searchValue)))
+0.288 - assertTrue(qResult.stream().allMatch(doc -> doc.field("dateField").after(startDate) && doc.field("dateField").before(endDate)))
+0.000 - ```

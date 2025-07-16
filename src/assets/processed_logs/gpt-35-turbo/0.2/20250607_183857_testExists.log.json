@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , E extends Throwable > boolean exists ( Iterable < T > coll , APredicate < ? super T , E > pred ) throws E {\nfor ( T o : coll ) {\nif ( pred . apply ( o ) ) {\nreturn true ;\n} } return false ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testExists ( ) {\nfinal APredicateNoThrow < String > len1 = new APredicateNoThrow < String > ( ) {\n@Override\npublic boolean apply ( String o ) {\nreturn o . length ( ) == 1 ;\n} } ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"a\", \"bb\", \"ccc\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"apple\", \"banana\", \"cherry\"), len1));\nassertTrue(ACollectionHelper.exists(Collections.emptyList(), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"dog\", \"cat\", \"bird\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"1\", \"22\", \"333\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"hello\", \"world\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"x\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"aa\", \"bbb\", \"cccc\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"z\", \"y\", \"x\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"apple\", \"banana\", \"cherry\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"1\", \"22\", \"333\"), len1));\nassertFalse(ACollectionHelper.exists(Collections.emptyList(), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"x\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"aa\", \"bbb\", \"cccc\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"z\", \"y\", \"x\"), len1));\nassertFalse(ACollectionHelper.exists(Arrays.asList(\"apple\", \"banana\", \"cherry\"), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"1\", \"22\", \"333\"), len1));\nassertFalse(ACollectionHelper.exists(Collections.emptyList(), len1));\nassertTrue(ACollectionHelper.exists(Arrays.asList(\"x\"), len1));\n====================\n\n",
+    "scores": [
+        0.815,
+        0.815,
+        0.815,
+        0.77,
+        0.769,
+        0.769,
+        0.76,
+        0.76,
+        0.755,
+        0.753,
+        0.753,
+        0.753,
+        0.723,
+        0.723,
+        0.722,
+        0.722,
+        0.722,
+        0.7,
+        0.692
+    ],
+    "ground_truth": "assertEquals(false,ACollectionHelper.exists(Arrays.<String>asList(),len1));"
+}

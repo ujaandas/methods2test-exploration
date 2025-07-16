@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraph {\npublic boolean hasCycles ( ) {\nreturn ! minimalCycles ( ) . isEmpty ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraphTest {\n@Test\npublic void testTree ( ) {\nfinal ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( \"STR\" , \"STR\" ) , edge ( \"STR\" , \"STR\" ) ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(graph);\nassertTrue(graph.hasCycles() == false);\nassertEquals(0, graph.getNumberOfEdges());\nassertEquals(1, graph.getNumberOfVertices());\nassertTrue(graph.containsVertex(\"STR\"));\nassertFalse(graph.containsVertex(\"NON_EXISTENT\"));\nassertTrue(graph.getAdjacentVertices(\"STR\").isEmpty());\nassertTrue(graph.getEdges().isEmpty());\nassertEquals(\"STR\", graph.getVertex(\"STR\"));\nassertTrue(graph.getInDegree(\"STR\") == 0);\nassertTrue(graph.getOutDegree(\"STR\") == 2);\nassertTrue(graph.getEdgesFrom(\"STR\").size() == 2);\nassertTrue(graph.getEdgesTo(\"STR\").isEmpty());\nassertTrue(graph.getVertices().contains(\"STR\"));\nassertFalse(graph.getVertices().contains(\"NON_EXISTENT\"));\nassertTrue(graph.isEmpty() == false);\nassertTrue(graph.hasEdge(\"STR\", \"STR\"));\nassertFalse(graph.hasEdge(\"NON_EXISTENT\", \"STR\"));\nassertTrue(graph.getEdge(\"STR\", \"STR\") != null);\nassertTrue(graph.getEdge(\"STR\", \"NON_EXISTENT\") == null);\nassertEquals(2, graph.getSelfLoops(\"STR\").size());\nassertTrue(graph.getMinimalCycles().isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.788,
+        0.641,
+        0.632,
+        0.618,
+        0.608,
+        0.603,
+        0.6,
+        0.594,
+        0.58,
+        0.559,
+        0.556,
+        0.552,
+        0.538,
+        0.522,
+        0.519,
+        0.514,
+        0.507,
+        0.5,
+        0.494,
+        0.483,
+        0.432,
+        0.386,
+        0.0
+    ],
+    "ground_truth": "assertFalse(graph.hasCycles());"
+}

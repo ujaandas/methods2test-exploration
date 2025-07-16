@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class About {
+    public JsonObject getExtensions ( ) { 
+    return extensions ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class AboutTest {
+    @Test
+     public void testSetExtensions ( ) {
+         JsonObject expected = new JsonObject ( ) ; 
+         expected . addProperty ( "STR" , UUID . randomUUID ( ) . toString ( ) ) ; 
+         about . setExtensions ( expected ) ; 
+         JsonObject actual = about . getExtensions ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.has("STR"));
+assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString());
+assertTrue(actual.entrySet().containsAll(expected.entrySet()));
+assertEquals(expected, actual);
+assertNotSame(expected, actual);
+assertTrue(actual.isJsonObject());
+assertFalse(actual.isJsonArray());
+assertTrue(actual.get("STR").isJsonPrimitive());
+assertTrue(actual.get("STR").getAsJsonPrimitive().isString());
+assertNotEquals("", actual.get("STR").getAsString());
+assertTrue(actual.get("STR").getAsString().length() > 0);
+assertTrue(actual.get("STR").getAsString().matches("^[\\w-]+$"));
+assertTrue(actual.get("STR").getAsString().length() <= 36);
+assertTrue(actual.get("STR").getAsString().contains("-"));
+assertFalse(actual.has("nonexistentKey"));
+assertEquals(expected.get("STR").getAsString().length(), actual.get("STR").getAsString().length());
+assertTrue(actual.get("STR").getAsString().startsWith("a") || actual.get("STR").getAsString().startsWith("b"));
+assertTrue(actual.get("STR").getAsString().endsWith("z") || actual.get("STR").getAsString().endsWith("y"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.600 - assertTrue(actual.has("STR"))
+0.560 - assertEquals(expected, actual)
+0.556 - assertTrue(actual.isJsonObject())
+0.556 - assertFalse(actual.isJsonArray())
+0.528 - assertNotEquals("", actual.get("STR").getAsString())
+0.484 - assertFalse(actual.has("nonexistentKey"))
+0.469 - assertEquals(expected.size(), actual.size())
+0.441 - assertTrue(actual.get("STR").isJsonPrimitive())
+0.400 - assertTrue(actual.get("STR").getAsString().length() > 0)
+0.390 - assertTrue(actual.get("STR").getAsString().length() <= 36)
+0.385 - assertTrue(actual.get("STR").getAsString().contains("-"))
+0.366 - assertTrue(actual.get("STR").getAsJsonPrimitive().isString())
+0.361 - assertTrue(actual.entrySet().containsAll(expected.entrySet()))
+0.353 - assertTrue(actual.get("STR").getAsString().matches("^[\\w-]+$"))
+0.300 - assertEquals(expected.get("STR").getAsString(), actual.get("STR").getAsString())
+0.271 - assertEquals(expected.get("STR").getAsString().length(), actual.get("STR").getAsString().length())
+0.240 - assertTrue(actual.get("STR").getAsString().endsWith("z") || actual.get("STR").getAsString().endsWith("y"))
+0.233 - assertTrue(actual.get("STR").getAsString().startsWith("a") || actual.get("STR").getAsString().startsWith("b"))
+0.000 - ```

@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MergeResource {
+    public static HasMetadata mergeResources ( HasMetadata item1 , HasMetadata item2 , Logger log , boolean switchOnLocalCustomisation ) { 
+    if ( item1 instanceof Deployment && item2 instanceof Deployment ) { 
+    return mergeDeployments ( ( Deployment ) item1 , ( Deployment ) item2 , log , switchOnLocalCustomisation ) ; 
+    } if ( item1 instanceof ConfigMap && item2 instanceof ConfigMap ) { 
+    ConfigMap cm1 = ( ConfigMap ) item1 ; 
+    ConfigMap cm2 = ( ConfigMap ) item2 ; 
+    return mergeConfigMaps ( cm1 , cm2 , log , switchOnLocalCustomisation ) ; 
+    } mergeMetadata ( item1 , item2 ) ; 
+    return item1 ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class MergeResourceTest {
+    @Test
+     public void testMergeDeploymentMetadataWithNoSpec ( ) throws Exception {
+         Deployment resource = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( "STR" ) . addToAnnotations ( "STR" , "STR" ) . addToAnnotations ( "STR" , "STR" ) . addToAnnotations ( "STR" , "STR" ) . addToAnnotations ( "STR" , "STR" ) . endMetadata ( ) . withNewSpec ( ) . withNewTemplate ( ) . withNewSpec ( ) . addNewContainer ( ) . withImage ( "STR" ) . endContainer ( ) . endSpec ( ) . endTemplate ( ) . endSpec ( ) . build ( ) ; 
+         Deployment override = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( "STR" ) . addToAnnotations ( "STR" , "STR" ) . addToAnnotations ( "STR" , "STR" ) . endMetadata ( ) . build ( ) ; 
+         HasMetadata answer = KubernetesResourceUtil . mergeResources ( resource , override , log , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", answer.getMetadata().getName());
+assertEquals(3, answer.getMetadata().getAnnotations().size());
+assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"));
+assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"));
+assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"));
+assertNotNull(((Deployment) answer).getSpec());
+assertNotNull(((Deployment) answer).getSpec().getTemplate());
+assertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec());
+assertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers());
+assertEquals(1, ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().size());
+assertEquals("STR", ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getImage());
+assertNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getName());
+assertEquals(2, answer.getMetadata().getAnnotations().size());
+assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"));
+assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"));
+assertNull(answer.getSpec());
+assertNotNull(answer.getSpec());
+assertNotNull(answer.getSpec());
+assertNotNull(answer.getSpec());
+assertNotNull(answer.getSpec());
+assertNotNull(answer.getSpec());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(answer); ===
+0.808 - assertNotNull(answer.getSpec())
+0.808 - assertNotNull(answer.getSpec())
+0.808 - assertNotNull(answer.getSpec())
+0.808 - assertNotNull(answer.getSpec())
+0.808 - assertNotNull(answer.getSpec())
+0.735 - assertNull(answer.getSpec())
+0.636 - assertNotNull(((Deployment) answer).getSpec())
+0.525 - assertNotNull(((Deployment) answer).getSpec().getTemplate())
+0.467 - assertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec())
+0.451 - assertEquals("STR", answer.getMetadata().getName())
+0.396 - assertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers())
+0.395 - assertEquals(3, answer.getMetadata().getAnnotations().size())
+0.395 - assertEquals(2, answer.getMetadata().getAnnotations().size())
+0.360 - assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"))
+0.360 - assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"))
+0.360 - assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"))
+0.360 - assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"))
+0.360 - assertEquals("STR", answer.getMetadata().getAnnotations().get("STR"))
+0.300 - assertNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getName())
+0.263 - assertEquals(1, ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().size())
+0.233 - assertEquals("STR", ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getImage())

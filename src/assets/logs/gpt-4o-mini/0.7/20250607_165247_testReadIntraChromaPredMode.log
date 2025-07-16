@@ -1,0 +1,109 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class CABAC {
+    public int readIntraChromaPredMode ( MDecoder decoder , int mbX , MBType left , MBType top , boolean leftAvailable , boolean topAvailable ) { 
+    int ctx = 64 ; 
+    ctx += ! leftAvailable || left == null || ! left . isIntra ( ) || chromaPredModeLeft == 0 ? 0 : 1 ; 
+    ctx += ! topAvailable || top == null || ! top . isIntra ( ) || chromaPredModeTop [ mbX ] == 0 ? 0 : 1 ; 
+    int mode ; 
+    if ( decoder . decodeBin ( ctx ) == 0 ) mode = 0 ; 
+    else if ( decoder . decodeBin ( 67 ) == 0 ) mode = 1 ; 
+    else if ( decoder . decodeBin ( 67 ) == 0 ) mode = 2 ; 
+    else mode = 3 ; 
+    chromaPredModeLeft = chromaPredModeTop [ mbX ] = mode ; 
+    return mode ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class CABACTest {
+    @Test
+     public void testReadIntraChromaPredMode ( ) {
+         MockMDecoder m = new MockMDecoder ( new int [ ] { 
+     0 } , new int [ ] { 
+     64 } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        int mode = m.readIntraChromaPredMode(decoder, 0, null, null, false, false);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), null, true, false);
+        assertEquals(1, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(true), false, true);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(true), true, true);
+        assertEquals(1, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), null, true, false);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(false), false, true);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(false), true, true);
+        assertEquals(1, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), new MBType(true), true, true);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(true), true, true);
+        assertEquals(1, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), new MBType(false), true, true);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(true), false, true);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), null, true, false);
+        assertEquals(1, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), null, true, false);
+        assertEquals(0, mode);
+
+        mode = m.readIntraChromaPredMode(decoder, 0
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,newCABAC(1).readIntraChromaPredMode(m,0,null,null,false,false)); ===
+0.684 - ```java
+        int mode = m.readIntraChromaPredMode(decoder, 0, null, null, false, false)
+0.596 - mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(true), false, true)
+0.596 - mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(true), false, true)
+0.592 - mode = m.readIntraChromaPredMode(decoder, 0, null, new MBType(false), false, true)
+0.570 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), null, true, false)
+0.570 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), null, true, false)
+0.566 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), null, true, false)
+0.566 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), null, true, false)
+0.506 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(false), true, true)
+0.484 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(true), true, true)
+0.484 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(true), new MBType(true), true, true)
+0.475 - mode = m.readIntraChromaPredMode(decoder, 0
+0.469 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), new MBType(true), true, true)
+0.466 - mode = m.readIntraChromaPredMode(decoder, 0, new MBType(false), new MBType(false), true, true)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.408 - assertEquals(0, mode)
+0.388 - assertEquals(1, mode)
+0.388 - assertEquals(1, mode)
+0.388 - assertEquals(1, mode)
+0.388 - assertEquals(1, mode)
+0.388 - assertEquals(1, mode)

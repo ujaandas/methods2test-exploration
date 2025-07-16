@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\nResponseStatus getStatus ( ) ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testTwoQueries ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(response);\nassertEquals(ResponseStatus.SUCCESS, response.getStatus());\nassertEquals(\"expected_value\", response.getSomeField());\nassertTrue(response.isValid());\nassertFalse(response.hasErrors());\nassertEquals(\"expected_id\", response.getId());\nassertEquals(\"expected_timestamp\", response.getTimestamp());\nassertNotEquals(\"unexpected_value\", response.getSomeField());\nassertTrue(response.getSomeList().size() > 0);\nassertFalse(response.getSomeList().isEmpty());\nassertEquals(200, response.getHttpStatusCode());\nassertNotNull(response.getAdditionalData());\nassertTrue(response.getAdditionalData().containsKey(\"key\"));\nassertEquals(\"expected_additional_value\", response.getAdditionalData().get(\"key\"));\nassertNull(response.getErrorMessage());\nassertTrue(response.getDuration() >= 0);\nassertEquals(\"expected_type\", response.getType());\nassertTrue(response.getSomeField().length() > 0);\nassertFalse(response.isExpired());\nassertEquals(\"expected_user\", response.getUser());\nassertTrue(response.getSomeField().matches(\"expected_regex\"));\n```\n====================\n\n",
+    "scores": [
+        0.857,
+        0.648,
+        0.642,
+        0.621,
+        0.618,
+        0.618,
+        0.595,
+        0.583,
+        0.523,
+        0.505,
+        0.505,
+        0.503,
+        0.5,
+        0.495,
+        0.484,
+        0.476,
+        0.457,
+        0.444,
+        0.439,
+        0.413,
+        0.387,
+        0.0
+    ],
+    "ground_truth": "assertEquals(ResponseStatus.REPLAYED_OTP,response.getStatus());"
+}

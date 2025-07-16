@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollector {\npublic boolean isEmpty ( ) {\nreturn ( operationCount == EMPTY_OPERATION_COUNT && intervalThroughput == EMPTY_THROUGHPUT ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollectorTest {\n@Test\npublic void testGet ( ) {\nupdate ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1000 , 200 , 500 , 1900.0d , 1800 , 2500 ) ) ;\nupdate ( a1w1 , TEST_CASE_ID_1 , new PerformanceStats ( 1500 , 150 , 550 , 1600.0d , 1700 , 2400 ) ) ;\nupdate ( a2w1 , TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , 2200.0d , 2400 , 2800 ) ) ;\nPerformanceStats performanceStats = performanceStatsCollector . get ( TEST_CASE_ID_1 , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1000, performanceStats.getOperationCount());\nassertEquals(200, performanceStats.getErrorCount());\nassertEquals(500, performanceStats.getThroughput());\nassertEquals(1900.0d, performanceStats.getLatency());\nassertEquals(1800, performanceStats.getMinLatency());\nassertEquals(2500, performanceStats.getMaxLatency());\nassertEquals(1500, performanceStats.getOperationCount());\nassertEquals(150, performanceStats.getErrorCount());\nassertEquals(550, performanceStats.getThroughput());\nassertEquals(1600.0d, performanceStats.getLatency());\nassertEquals(1700, performanceStats.getMinLatency());\nassertEquals(2400, performanceStats.getMaxLatency());\nassertEquals(800, performanceStats.getOperationCount());\nassertEquals(100, performanceStats.getErrorCount());\nassertEquals(300, performanceStats.getThroughput());\nassertEquals(2200.0d, performanceStats.getLatency());\nassertEquals(2400, performanceStats.getMinLatency());\nassertEquals(2800, performanceStats.getMaxLatency());\nassertNotNull(performanceStats);\nassertTrue(performanceStats.isEmpty());\nassertFalse(performanceStats.isEmpty());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.909,
+        0.733,
+        0.733,
+        0.733,
+        0.719,
+        0.719,
+        0.719,
+        0.719,
+        0.719,
+        0.719,
+        0.714,
+        0.711,
+        0.711,
+        0.711,
+        0.711,
+        0.711,
+        0.711,
+        0.688,
+        0.681,
+        0.681
+    ],
+    "ground_truth": "assertFalse(performanceStats.isEmpty());"
+}

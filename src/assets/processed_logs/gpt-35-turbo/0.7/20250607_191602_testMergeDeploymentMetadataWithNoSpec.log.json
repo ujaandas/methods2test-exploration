@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MergeResource {\npublic static HasMetadata mergeResources ( HasMetadata item1 , HasMetadata item2 , Logger log , boolean switchOnLocalCustomisation ) {\nif ( item1 instanceof Deployment && item2 instanceof Deployment ) {\nreturn mergeDeployments ( ( Deployment ) item1 , ( Deployment ) item2 , log , switchOnLocalCustomisation ) ;\n} if ( item1 instanceof ConfigMap && item2 instanceof ConfigMap ) {\nConfigMap cm1 = ( ConfigMap ) item1 ;\nConfigMap cm2 = ( ConfigMap ) item2 ;\nreturn mergeConfigMaps ( cm1 , cm2 , log , switchOnLocalCustomisation ) ;\n} mergeMetadata ( item1 , item2 ) ;\nreturn item1 ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MergeResourceTest {\n@Test\npublic void testMergeDeploymentMetadataWithNoSpec ( ) throws Exception {\nDeployment resource = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . endMetadata ( ) . withNewSpec ( ) . withNewTemplate ( ) . withNewSpec ( ) . addNewContainer ( ) . withImage ( \"STR\" ) . endContainer ( ) . endSpec ( ) . endTemplate ( ) . endSpec ( ) . build ( ) ;\nDeployment override = new DeploymentBuilder ( ) . withNewMetadata ( ) . withName ( \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . addToAnnotations ( \"STR\" , \"STR\" ) . endMetadata ( ) . build ( ) ;\nHasMetadata answer = KubernetesResourceUtil . mergeResources ( resource , override , log , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", answer.getMetadata().getName());\nassertEquals(3, answer.getMetadata().getAnnotations().size());\nassertEquals(\"STR\", answer.getMetadata().getAnnotations().get(\"STR\"));\nassertEquals(\"STR\", answer.getMetadata().getAnnotations().get(\"STR\"));\nassertEquals(\"STR\", answer.getMetadata().getAnnotations().get(\"STR\"));\nassertNotNull(((Deployment) answer).getSpec());\nassertNotNull(((Deployment) answer).getSpec().getTemplate());\nassertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec());\nassertNotNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers());\nassertEquals(1, ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().size());\nassertEquals(\"STR\", ((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getImage());\nassertNull(((Deployment) answer).getSpec().getTemplate().getSpec().getContainers().get(0).getName());\nassertEquals(2, answer.getMetadata().getAnnotations().size());\nassertEquals(\"STR\", answer.getMetadata().getAnnotations().get(\"STR\"));\nassertEquals(\"STR\", answer.getMetadata().getAnnotations().get(\"STR\"));\nassertNull(answer.getSpec());\nassertNotNull(answer.getSpec());\nassertNotNull(answer.getSpec());\nassertNotNull(answer.getSpec());\nassertNotNull(answer.getSpec());\nassertNotNull(answer.getSpec());\n====================\n\n",
+    "scores": [
+        0.808,
+        0.808,
+        0.808,
+        0.808,
+        0.808,
+        0.735,
+        0.636,
+        0.525,
+        0.467,
+        0.451,
+        0.396,
+        0.395,
+        0.395,
+        0.36,
+        0.36,
+        0.36,
+        0.36,
+        0.36,
+        0.3,
+        0.263,
+        0.233
+    ],
+    "ground_truth": "assertNotNull(answer);"
+}

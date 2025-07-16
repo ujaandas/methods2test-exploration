@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public Map < String , List < Connection > > getAll ( ) { 
+     Map < String , List < Connection > > allConnections = new HashMap < String , List < Connection > > ( ) ; 
+     for ( Map . Entry < String , RunStateRecordedFutureTask < ConnectionPool > > entry : this . getConnPools ( ) . entrySet ( ) ) { 
+     ConnectionPool pool = FutureTaskUtil . getFutureTaskResult ( entry . getValue ( ) , logger ) ; 
+     if ( null != pool ) { 
+     allConnections . put ( entry . getKey ( ) , pool . getAll ( ) ) ; 
+     } } return allConnections ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testGetAll ( ) {
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         Map < String , List < Connection > > conns = cm . getAll ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(4, conns.size());
+Assert.assertTrue(conns.containsKey("key1"));
+Assert.assertTrue(conns.containsKey("key2"));
+Assert.assertTrue(conns.containsKey("key3"));
+Assert.assertTrue(conns.containsKey("key4"));
+Assert.assertEquals(4, conns.get("key1").size());
+Assert.assertEquals(4, conns.get("key2").size());
+Assert.assertEquals(4, conns.get("key3").size());
+Assert.assertEquals(4, conns.get("key4").size());
+Assert.assertTrue(conns.get("key1").get(0) instanceof Connection);
+Assert.assertTrue(conns.get("key2").get(0) instanceof Connection);
+Assert.assertTrue(conns.get("key3").get(0) instanceof Connection);
+Assert.assertTrue(conns.get("key4").get(0) instanceof Connection);
+Assert.assertNotNull(conns.get("key1").get(0));
+Assert.assertNotNull(conns.get("key2").get(0));
+Assert.assertNotNull(conns.get("key3").get(0));
+Assert.assertNotNull(conns.get("key4").get(0));
+Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key2").get(0));
+Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key3").get(0));
+Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key4").get(0));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,conns.size()); ===
+0.964 - Assert.assertEquals(4, conns.size())
+0.794 - Assert.assertEquals(4, conns.get("key1").size())
+0.794 - Assert.assertEquals(4, conns.get("key2").size())
+0.794 - Assert.assertEquals(4, conns.get("key3").size())
+0.794 - Assert.assertEquals(4, conns.get("key4").size())
+0.585 - Assert.assertTrue(conns.containsKey("key1"))
+0.585 - Assert.assertTrue(conns.containsKey("key2"))
+0.585 - Assert.assertTrue(conns.containsKey("key3"))
+0.585 - Assert.assertTrue(conns.containsKey("key4"))
+0.567 - Assert.assertNotNull(conns.get("key1").get(0))
+0.567 - Assert.assertNotNull(conns.get("key2").get(0))
+0.567 - Assert.assertNotNull(conns.get("key3").get(0))
+0.567 - Assert.assertNotNull(conns.get("key4").get(0))
+0.532 - Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key2").get(0))
+0.532 - Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key3").get(0))
+0.532 - Assert.assertNotEquals(conns.get("key1").get(0), conns.get("key4").get(0))
+0.405 - Assert.assertTrue(conns.get("key1").get(0) instanceof Connection)
+0.405 - Assert.assertTrue(conns.get("key2").get(0) instanceof Connection)
+0.405 - Assert.assertTrue(conns.get("key3").get(0) instanceof Connection)
+0.405 - Assert.assertTrue(conns.get("key4").get(0) instanceof Connection)

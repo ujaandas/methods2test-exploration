@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctions {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialMiscFunctionsTest {
+    @Test
+     public void testStContainsPoint ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("value1", next.field("field1"));
+assertEquals("value2", next.field("field2"));
+assertEquals("value3", next.field("field3"));
+assertEquals("value4", next.field("field4"));
+assertEquals("value5", next.field("field5"));
+assertEquals("value6", next.field("field6"));
+assertEquals("value7", next.field("field7"));
+assertEquals("value8", next.field("field8"));
+assertEquals("value9", next.field("field9"));
+assertEquals("value10", next.field("field10"));
+assertEquals("value11", next.field("field11"));
+assertEquals("value12", next.field("field12"));
+assertEquals("value13", next.field("field13"));
+assertEquals("value14", next.field("field14"));
+assertEquals("value15", next.field("field15"));
+assertEquals("value16", next.field("field16"));
+assertEquals("value17", next.field("field17"));
+assertEquals("value18", next.field("field18"));
+assertEquals("value19", next.field("field19"));
+assertEquals("value20", next.field("field20"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(true,next.field("STR")); ===
+0.785 - assertEquals("value1", next.field("field1"))
+0.785 - assertEquals("value2", next.field("field2"))
+0.785 - assertEquals("value3", next.field("field3"))
+0.785 - assertEquals("value4", next.field("field4"))
+0.785 - assertEquals("value5", next.field("field5"))
+0.785 - assertEquals("value6", next.field("field6"))
+0.785 - assertEquals("value7", next.field("field7"))
+0.785 - assertEquals("value8", next.field("field8"))
+0.785 - assertEquals("value9", next.field("field9"))
+0.765 - assertEquals("value10", next.field("field10"))
+0.765 - assertEquals("value11", next.field("field11"))
+0.765 - assertEquals("value12", next.field("field12"))
+0.765 - assertEquals("value13", next.field("field13"))
+0.765 - assertEquals("value14", next.field("field14"))
+0.765 - assertEquals("value15", next.field("field15"))
+0.765 - assertEquals("value16", next.field("field16"))
+0.765 - assertEquals("value17", next.field("field17"))
+0.765 - assertEquals("value18", next.field("field18"))
+0.765 - assertEquals("value19", next.field("field19"))
+0.765 - assertEquals("value20", next.field("field20"))

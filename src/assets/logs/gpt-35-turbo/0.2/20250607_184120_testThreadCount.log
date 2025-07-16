@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class MetronomeSupplier {
+    @Override
+     public Metronome get ( ) { 
+     if ( metronomeClass == EmptyMetronome . class ) { 
+     return EmptyMetronome . INSTANCE ; 
+     } try { 
+     Constructor < ? extends Metronome > constructor = metronomeClass . getConstructor ( Metronome . class ) ; 
+     return constructor . newInstance ( masterMetronome ) ; 
+     } catch ( Exception e ) { 
+     throw new RuntimeException ( e ) ; 
+     } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class MetronomeSupplierTest {
+    @Test
+     public void testThreadCount ( ) {
+         PropertyBinding propertyBinding = new PropertyBinding ( new TestCase ( "STR" ) . setProperty ( "STR" , "STR" ) ) ; 
+         MetronomeSupplier supplier = new MetronomeSupplier ( "STR" , propertyBinding , 10 ) ; 
+         Metronome m = supplier . get ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(m instanceof Metronome);
+Assert.assertNotNull(m);
+Assert.assertEquals(10, supplier.getThreadCount());
+Assert.assertNotEquals(0, supplier.getThreadCount());
+Assert.assertNotSame(EmptyMetronome.INSTANCE, m);
+Assert.assertNotEquals(EmptyMetronome.INSTANCE, m);
+Assert.assertNotSame(supplier.getMasterMetronome(), m);
+Assert.assertNotNull(supplier.getMetronomeClass());
+Assert.assertNotEquals(0, supplier.getMetronomeClass());
+Assert.assertNotEquals(0, supplier.getMasterMetronome());
+Assert.assertTrue(supplier.getMetronomeClass().isAssignableFrom(m.getClass()));
+Assert.assertTrue(supplier.getMasterMetronome() instanceof Metronome);
+Assert.assertTrue(supplier.getThreadCount() > 0);
+Assert.assertTrue(supplier.getThreadCount() <= 10);
+Assert.assertTrue(supplier.getPropertyBinding().getTestCase().getProperty("STR").equals("STR"));
+Assert.assertTrue(supplier.getMetronomeClass().equals(EmptyMetronome.class));
+Assert.assertTrue(supplier.getMetronomeClass().equals(m.getClass()));
+Assert.assertTrue(supplier.getThreadCount() == 10);
+Assert.assertTrue(supplier.getPropertyBinding().getTestCase().getProperty("STR").equals("STR"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(SleepingMetronome.class,m.getClass()); ===
+0.680 - Assert.assertNotEquals(0, supplier.getMetronomeClass())
+0.649 - Assert.assertTrue(supplier.getMetronomeClass().equals(m.getClass()))
+0.624 - Assert.assertNotNull(supplier.getMetronomeClass())
+0.595 - Assert.assertTrue(supplier.getMetronomeClass().isAssignableFrom(m.getClass()))
+0.587 - Assert.assertNotEquals(EmptyMetronome.INSTANCE, m)
+0.571 - Assert.assertNotEquals(0, supplier.getMasterMetronome())
+0.522 - Assert.assertEquals(10, supplier.getThreadCount())
+0.511 - Assert.assertNotEquals(0, supplier.getThreadCount())
+0.504 - Assert.assertTrue(supplier.getMetronomeClass().equals(EmptyMetronome.class))
+0.488 - Assert.assertTrue(m instanceof Metronome)
+0.467 - Assert.assertNotSame(EmptyMetronome.INSTANCE, m)
+0.458 - Assert.assertNotSame(supplier.getMasterMetronome(), m)
+0.418 - Assert.assertTrue(supplier.getMasterMetronome() instanceof Metronome)
+0.404 - Assert.assertTrue(supplier.getThreadCount() > 0)
+0.396 - Assert.assertTrue(supplier.getThreadCount() <= 10)
+0.396 - Assert.assertTrue(supplier.getThreadCount() == 10)
+0.333 - Assert.assertNotNull(m)
+0.217 - Assert.assertTrue(supplier.getPropertyBinding().getTestCase().getProperty("STR").equals("STR"))
+0.217 - Assert.assertTrue(supplier.getPropertyBinding().getTestCase().getProperty("STR").equals("STR"))

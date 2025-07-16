@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollections {
+    public List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) { 
+    return Collections . unmodifiableList ( multiValueChangeEvents ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTrackingNestedCollectionsTest {
+    @Test
+     public void testChangesValuesNestedTrackingSet ( ) {
+         ODocument document = new ODocument ( ) ; 
+         Set objects = new HashSet ( ) ; 
+         document . field ( "STR" , objects ) ; 
+         Set subObjects = new HashSet ( ) ; 
+         objects . add ( subObjects ) ; 
+         ODocument nestedDoc = new ODocument ( ) ; 
+         subObjects . add ( nestedDoc ) ; 
+         document . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ; 
+         objects = document . field ( "STR" ) ; 
+         subObjects = ( Set ) objects . iterator ( ) . next ( ) ; 
+         subObjects . add ( "STR" ) ; 
+         OMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(timeLine)
+2. assertTrue(timeLine.size() > 0)
+3. assertTrue(timeLine.get(0).getChangeEvents().size() > 0)
+4. assertEquals(1, timeLine.get(0).getChangeEvents().size())
+5. assertTrue(timeLine.get(0).getChangeEvents().get(0).getChangeType() == OMultiValueChangeEvent.OChangeType.ADD)
+6. assertEquals("STR", timeLine.get(0).getChangeEvents().get(0).getKey())
+7. assertEquals(nestedDoc, timeLine.get(0).getChangeEvents().get(0).getValue())
+8. assertTrue(document.isTrackingChanges())
+9. assertTrue(document.isTrackingChanges("STR"))
+10. assertTrue(document.isTrackingChanges("STR", nestedDoc))
+11. assertTrue(document.isTrackingChanges("STR", "STR"))
+12. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.ADD))
+13. assertFalse(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.REMOVE))
+14. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE))
+15. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE, nestedDoc))
+16. assertFalse(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE, "INVALID"))
+17. assertTrue(document.getCollectionTimeLine("STR").size() > 0)
+18. assertEquals(1, document.getCollectionTimeLine("STR").size())
+19. assertEquals(1, document.getCollectionTimeLine("STR").get(0).getChangeEvents().size())
+20. assertEquals(1, document.getCollectionTimeLine("STR").get(0).getChangeEvents().get(0).getChangeVersion())
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,timeLine.getMultiValueChangeEvents().size()); ===
+0.073 - Assertions:
+
+1. assertNotNull(timeLine)
+2. assertTrue(timeLine.size() > 0)
+3. assertTrue(timeLine.get(0).getChangeEvents().size() > 0)
+4. assertEquals(1, timeLine.get(0).getChangeEvents().size())
+5. assertTrue(timeLine.get(0).getChangeEvents().get(0).getChangeType() == OMultiValueChangeEvent.OChangeType.ADD)
+6. assertEquals("STR", timeLine.get(0).getChangeEvents().get(0).getKey())
+7. assertEquals(nestedDoc, timeLine.get(0).getChangeEvents().get(0).getValue())
+8. assertTrue(document.isTrackingChanges())
+9. assertTrue(document.isTrackingChanges("STR"))
+10. assertTrue(document.isTrackingChanges("STR", nestedDoc))
+11. assertTrue(document.isTrackingChanges("STR", "STR"))
+12. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.ADD))
+13. assertFalse(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.REMOVE))
+14. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE))
+15. assertTrue(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE, nestedDoc))
+16. assertFalse(document.isTrackingChanges("STR", "STR", OMultiValueChangeEvent.OChangeType.UPDATE, "INVALID"))
+17. assertTrue(document.getCollectionTimeLine("STR").size() > 0)
+18. assertEquals(1, document.getCollectionTimeLine("STR").size())
+19. assertEquals(1, document.getCollectionTimeLine("STR").get(0).getChangeEvents().size())
+20. assertEquals(1, document.getCollectionTimeLine("STR").get(0).getChangeEvents().get(0).getChangeVersion())

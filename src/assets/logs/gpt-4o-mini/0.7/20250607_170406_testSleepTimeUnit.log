@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class CommonUtils_Sleep {
+    public static void sleepTimeUnit ( TimeUnit timeUnit , long timeout ) { 
+    try { 
+    timeUnit . sleep ( timeout ) ; 
+    } catch ( InterruptedException e ) { 
+    ignore ( e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class CommonUtils_SleepTest {
+    @Test
+     public void testSleepTimeUnit ( ) {
+         long started = System . nanoTime ( ) ; 
+         sleepTimeUnit ( MILLISECONDS , 1 ) ; 
+         long duration = NANOSECONDS . toMillis ( System . nanoTime ( ) - started ) ; 
+         long durationLimit = SECONDS . toMillis ( 3 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(duration >= 1, "Sleep duration should be at least 1 millisecond");
+assertTrue(duration < durationLimit, "Sleep duration should be less than 3 seconds");
+assertTrue(duration <= 2, "Sleep duration should not exceed 2 milliseconds");
+assertTrue(duration >= 0, "Sleep duration should not be negative");
+assertTrue(duration <= 1, "Sleep duration should not exceed 1 millisecond");
+assertTrue(duration > 0, "Sleep duration should be greater than 0 milliseconds");
+assertTrue(duration % 1 == 0, "Sleep duration should be a whole number of milliseconds");
+assertTrue(duration >= 1 && duration <= 2, "Sleep duration should be between 1 and 2 milliseconds");
+assertEquals(1, duration, "Sleep duration should be exactly 1 millisecond");
+assertTrue(duration <= 1, "Sleep duration should not exceed 1 millisecond");
+assertTrue(duration != 0, "Sleep duration should not be zero");
+assertTrue(duration < 2, "Sleep duration should be less than 2 milliseconds");
+assertTrue(duration >= 1 && duration < durationLimit, "Sleep duration should be at least 1 millisecond and less than 3 seconds");
+assertTrue(duration <= durationLimit, "Sleep duration should not exceed 3 seconds");
+assertTrue(duration % 2 == 0 || duration % 2 == 1, "Sleep duration should be an integer");
+assertTrue(duration >= 1 && duration <= 1, "Sleep duration should be equal to 1 millisecond");
+assertTrue(duration < durationLimit - 1, "Sleep duration should be less than 2 seconds");
+assertTrue(duration >= 1 && duration <= durationLimit, "Sleep duration should be between 1 millisecond and 3 seconds");
+assertTrue(duration <= 3, "Sleep duration should not exceed 3 milliseconds");
+assertTrue(duration > 0 && duration < durationLimit, "Sleep duration should be greater than 0 and less than 3 seconds");
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(format("STR",duration),duration>0); ===
+0.586 - assertTrue(duration != 0, "Sleep duration should not be zero")
+0.523 - assertTrue(duration <= 1, "Sleep duration should not exceed 1 millisecond")
+0.523 - assertTrue(duration <= 1, "Sleep duration should not exceed 1 millisecond")
+0.518 - assertTrue(duration <= 2, "Sleep duration should not exceed 2 milliseconds")
+0.518 - assertTrue(duration < 2, "Sleep duration should be less than 2 milliseconds")
+0.518 - assertTrue(duration <= 3, "Sleep duration should not exceed 3 milliseconds")
+0.483 - assertTrue(duration % 1 == 0, "Sleep duration should be a whole number of milliseconds")
+0.482 - assertEquals(1, duration, "Sleep duration should be exactly 1 millisecond")
+0.475 - assertTrue(duration % 2 == 0 || duration % 2 == 1, "Sleep duration should be an integer")
+0.471 - assertTrue(duration < durationLimit, "Sleep duration should be less than 3 seconds")
+0.471 - assertTrue(duration <= durationLimit, "Sleep duration should not exceed 3 seconds")
+0.463 - assertTrue(duration < durationLimit - 1, "Sleep duration should be less than 2 seconds")
+0.427 - assertTrue(duration >= 0, "Sleep duration should not be negative")
+0.383 - assertTrue(duration > 0, "Sleep duration should be greater than 0 milliseconds")
+0.353 - ```java
+assertTrue(duration >= 1, "Sleep duration should be at least 1 millisecond")
+0.339 - assertTrue(duration >= 1 && duration <= 1, "Sleep duration should be equal to 1 millisecond")
+0.326 - assertTrue(duration >= 1 && duration <= 2, "Sleep duration should be between 1 and 2 milliseconds")
+0.301 - assertTrue(duration > 0 && duration < durationLimit, "Sleep duration should be greater than 0 and less than 3 seconds")
+0.286 - assertTrue(duration >= 1 && duration <= durationLimit, "Sleep duration should be between 1 millisecond and 3 seconds")
+0.273 - assertTrue(duration >= 1 && duration < durationLimit, "Sleep duration should be at least 1 millisecond and less than 3 seconds")
+0.000 - ```

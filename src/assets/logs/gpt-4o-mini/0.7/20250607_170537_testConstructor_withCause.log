@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( Throwable cause ) { 
+    super ( cause ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withCause ( ) {
+         RuntimeException cause = new RuntimeException ( ) ; 
+         TestException exception = new TestException ( cause ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(exception);
+assertEquals(cause, exception.getCause());
+assertTrue(exception instanceof TestException);
+assertFalse(exception instanceof RuntimeException);
+assertTrue(exception.getMessage() == null);
+assertEquals("Expected cause is not equal", cause, exception.getCause());
+assertNotSame(cause, exception);
+assertEquals(0, exception.getSuppressed().length);
+assertSame(cause.getClass(), exception.getCause().getClass());
+assertTrue(exception.toString().contains("TestException"));
+assertTrue(exception.toString().contains("RuntimeException"));
+assertEquals(TestException.class, exception.getClass());
+assertEquals(cause.getMessage(), exception.getCause().getMessage());
+assertFalse(exception.equals(null));
+assertFalse(exception.equals(new Object()));
+assertTrue(exception.equals(exception));
+assertTrue(exception.hashCode() != 0);
+assertNotEquals(exception.hashCode(), new TestException(new RuntimeException()).hashCode());
+assertThrows(NullPointerException.class, () -> new TestException(null));
+assertNotNull(exception.getStackTrace());
+assertTrue(exception.getStackTrace().length > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(cause,exception.getCause()); ===
+1.000 - assertEquals(cause, exception.getCause())
+0.766 - assertEquals(TestException.class, exception.getClass())
+0.755 - assertEquals("Expected cause is not equal", cause, exception.getCause())
+0.755 - assertEquals(cause.getMessage(), exception.getCause().getMessage())
+0.750 - assertEquals(0, exception.getSuppressed().length)
+0.700 - assertSame(cause.getClass(), exception.getCause().getClass())
+0.686 - assertNotSame(cause, exception)
+0.675 - assertNotNull(exception.getStackTrace())
+0.667 - assertFalse(exception.equals(null))
+0.650 - assertTrue(exception.getMessage() == null)
+0.613 - assertTrue(exception.hashCode() != 0)
+0.610 - assertFalse(exception.equals(new Object()))
+0.605 - assertTrue(exception.getStackTrace().length > 0)
+0.557 - assertTrue(exception.equals(exception))
+0.528 - ```java
+assertNotNull(exception)
+0.523 - assertFalse(exception instanceof RuntimeException)
+0.500 - assertTrue(exception instanceof TestException)
+0.469 - assertNotEquals(exception.hashCode(), new TestException(new RuntimeException()).hashCode())
+0.449 - assertTrue(exception.toString().contains("TestException"))
+0.449 - assertThrows(NullPointerException.class, () -> new TestException(null))
+0.436 - assertTrue(exception.toString().contains("RuntimeException"))
+0.000 - ```

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStep {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CheckClassTypeStepTest {\n@Test\npublic void shouldCheckSubclasses ( ) {\nOBasicCommandContext context = new OBasicCommandContext ( ) ;\ncontext . setDatabase ( database ) ;\nOClass parentClass = createClassInstance ( ) ;\nOClass childClass = createChildClassInstance ( parentClass ) ;\nCheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ;\nOResultSet result = step . syncPull ( context , 20 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(20, result.getTotalRecords());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"className\").equals(childClass.getName())));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"parentClassName\").equals(parentClass.getName())));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"isSubclass\") == true));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"isSubclass\") == false));\nassertEquals(childClass.getName(), result.stream().findFirst().get().getProperty(\"className\"));\nassertEquals(parentClass.getName(), result.stream().findFirst().get().getProperty(\"parentClassName\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"valid\") == true));\nassertEquals(0, result.stream().filter(r -> r.getProperty(\"valid\") == false).count());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"createdAt\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"updatedAt\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"status\").equals(\"active\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"visibility\").equals(\"public\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"description\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"ownerId\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"permissions\").contains(\"read\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"permissions\").contains(\"write\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"permissions\").contains(\"execute\")));\n```\n====================\n\n",
+    "scores": [
+        0.725,
+        0.655,
+        0.627,
+        0.539,
+        0.537,
+        0.536,
+        0.531,
+        0.53,
+        0.527,
+        0.518,
+        0.509,
+        0.504,
+        0.5,
+        0.496,
+        0.492,
+        0.484,
+        0.484,
+        0.471,
+        0.459,
+        0.437,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,result.stream().count());"
+}

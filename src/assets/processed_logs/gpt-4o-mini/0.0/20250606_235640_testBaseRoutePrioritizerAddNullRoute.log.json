@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class Nanolets {\n@Override\npublic Collection < UriResource > getPrioritizedRoutes ( ) {\nreturn Collections . unmodifiableCollection ( mappings ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.nanolets;\n\npublic class TestNanolets {\n@Test\npublic void testBaseRoutePrioritizerAddNullRoute ( ) {\nDefaultRoutePrioritizer routePrioritizer = new DefaultRoutePrioritizer ( ) ;\nroutePrioritizer . addRoute ( null , 100 , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(routePrioritizer.getRoutes());\nassertEquals(0, routePrioritizer.getRoutes().size());\nassertTrue(routePrioritizer.getRoutes().isEmpty());\nassertFalse(routePrioritizer.getRoutes().contains(null));\nassertFalse(routePrioritizer.getRoutes().iterator().hasNext());\nassertEquals(0, routePrioritizer.getPrioritizedRoutes().size());\nassertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());\nassertFalse(routePrioritizer.getPrioritizedRoutes().contains(null));\nassertNull(routePrioritizer.getRoute(100));\nassertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(null, 100, null));\nassertThrows(NullPointerException.class, () -> routePrioritizer.addRoute(null, 100, new Object()));\nassertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), -1, null));\nassertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), 100, null));\nassertEquals(0, routePrioritizer.getRouteCount());\nassertTrue(routePrioritizer.getAllRoutes().isEmpty());\nassertFalse(routePrioritizer.hasRoute(null));\nassertFalse(routePrioritizer.hasRoute(new Object()));\nassertEquals(0, routePrioritizer.getRoutePriority(new Object()));\nassertFalse(routePrioritizer.isRoutePrioritized(new Object()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.903,
+        0.846,
+        0.837,
+        0.782,
+        0.758,
+        0.732,
+        0.729,
+        0.713,
+        0.712,
+        0.71,
+        0.699,
+        0.691,
+        0.66,
+        0.655,
+        0.481,
+        0.477,
+        0.471,
+        0.468,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size());"
+}

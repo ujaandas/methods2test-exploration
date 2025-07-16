@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocument {\npublic boolean isDirty ( ) {\nreturn _dirty ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTest {\n@Test\npublic void testNoDirtySameBytes ( ) {\nODocument doc = new ODocument ( ) ;\nbyte [ ] bytes = new byte [ ] {\n0 , 1 , 2 , 3 , 4 , 5 } ;\ndoc . field ( \"STR\" , bytes ) ;\nODocumentInternal . clearTrackData ( doc ) ;\nORecordInternal . unsetDirty ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\n1. assertFalse(doc.isDirty());\n2. assertNotNull(doc.field(\"STR\"));\n3. assertArrayEquals(bytes, doc.field(\"STR\"));\n4. assertEquals(6, doc.field(\"STR\").length);\n5. assertNull(doc.field(\"NEW\"));\n6. assertFalse(doc.isTrackingChanges());\n7. assertNotEquals(0, doc.getVersion());\n8. assertTrue(doc.isTrackingModifications());\n9. assertFalse(doc.isTrackingVersions());\n10. assertNull(doc.getSchemaClass());\n11. assertTrue(doc.isNew());\n12. assertEquals(0, doc.getIdentity().getClusterId());\n13. assertTrue(doc.isEmbedded());\n14. assertFalse(doc.isPinned());\n15. assertFalse(doc.isEdge());\n16. assertTrue(doc.isDocument());\n17. assertEquals(0, doc.getRecordVersion());\n18. assertFalse(doc.isBlob());\n19. assertNotNull(doc.toString());\n20. assertEquals(0, doc.getDatabase().getClusterIdByName(\"default\"));\n====================\n\n",
+    "scores": [
+        0.786,
+        0.778,
+        0.778,
+        0.776,
+        0.708,
+        0.688,
+        0.667,
+        0.654,
+        0.596,
+        0.571,
+        0.571,
+        0.552,
+        0.551,
+        0.542,
+        0.537,
+        0.525,
+        0.522,
+        0.519,
+        0.507,
+        0.391
+    ],
+    "ground_truth": "assertFalse(doc.isDirty());"
+}

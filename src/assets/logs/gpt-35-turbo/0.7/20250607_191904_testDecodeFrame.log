@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtension {
+    @Override
+     public ByteBuffer getPayloadData ( ) { 
+     return unmaskedpayload ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtensionTest {
+    @Test
+     public void testDecodeFrame ( ) throws InvalidDataException {
+         PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ; 
+         String str = "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         byte [ ] message = str . getBytes ( ) ; 
+         TextFrame frame = new TextFrame ( ) ; 
+         frame . setPayload ( ByteBuffer . wrap ( message ) ) ; 
+         deflateExtension . encodeFrame ( frame ) ; 
+         deflateExtension . decodeFrame ( frame ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(frame.getPayloadData(), ByteBuffer.wrap("STRSTRSTRSTRSTR".getBytes()));
+Assert.assertEquals(frame.getOpcode(), Opcode.TEXT);
+Assert.assertEquals(frame.isFin(), true);
+Assert.assertEquals(frame.isRSV1(), false);
+Assert.assertEquals(frame.isRSV2(), false);
+Assert.assertEquals(frame.isRSV3(), false);
+Assert.assertEquals(frame.getTransfereMasked(), false);
+Assert.assertEquals(frame.getPayloadLength(), 20);
+Assert.assertEquals(frame.isRSV1(), false);
+Assert.assertEquals(frame.isRSV2(), false);
+Assert.assertEquals(frame.isRSV3(), false);
+Assert.assertEquals(frame.getPayloadData().array(), message);
+Assert.assertEquals(frame.getMask(), null);
+Assert.assertEquals(frame.getMaskedPayload(), ByteBuffer.wrap("STRSTRSTRSTRSTR".getBytes()));
+Assert.assertEquals(frame.getOpcode(), Opcode.TEXT);
+Assert.assertEquals(frame.isFin(), true);
+Assert.assertEquals(frame.isRSV1(), false);
+Assert.assertEquals(frame.isRSV2(), false);
+Assert.assertEquals(frame.isRSV3(), false);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(message,frame.getPayloadData().array()); ===
+0.807 - Assert.assertEquals(frame.getPayloadData().array(), message)
+0.673 - Assert.assertEquals(frame.getPayloadLength(), 20)
+0.604 - Assert.assertEquals(frame.getPayloadData(), ByteBuffer.wrap("STRSTRSTRSTRSTR".getBytes()))
+0.571 - Assert.assertEquals(frame.getMask(), null)
+0.563 - Assert.assertEquals(frame.getTransfereMasked(), false)
+0.560 - Assert.assertEquals(frame.getOpcode(), Opcode.TEXT)
+0.560 - Assert.assertEquals(frame.getOpcode(), Opcode.TEXT)
+0.539 - Assert.assertEquals(frame.getMaskedPayload(), ByteBuffer.wrap("STRSTRSTRSTRSTR".getBytes()))
+0.517 - Assert.assertEquals(frame.isFin(), true)
+0.517 - Assert.assertEquals(frame.isFin(), true)
+0.505 - Assert.assertEquals(frame.isRSV1(), false)
+0.505 - Assert.assertEquals(frame.isRSV2(), false)
+0.505 - Assert.assertEquals(frame.isRSV3(), false)
+0.505 - Assert.assertEquals(frame.isRSV1(), false)
+0.505 - Assert.assertEquals(frame.isRSV2(), false)
+0.505 - Assert.assertEquals(frame.isRSV3(), false)
+0.505 - Assert.assertEquals(frame.isRSV1(), false)
+0.505 - Assert.assertEquals(frame.isRSV2(), false)
+0.505 - Assert.assertEquals(frame.isRSV3(), false)

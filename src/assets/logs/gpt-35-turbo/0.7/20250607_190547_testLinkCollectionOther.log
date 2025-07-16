@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManager {
+    public boolean isSame ( ODirtyManager other ) { 
+    return this . getReal ( ) == other . getReal ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODirtyManagerTest {
+    @Test
+     public void testLinkCollectionOther ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , "STR" ) ; 
+         List < ODocument > lst = new ArrayList < ODocument > ( ) ; 
+         ODocument doc1 = new ODocument ( ) ; 
+         lst . add ( doc1 ) ; 
+         doc . field ( "STR" , lst ) ; 
+         Set < ODocument > set = new HashSet < ODocument > ( ) ; 
+         ODocument doc2 = new ODocument ( ) ; 
+         set . add ( doc2 ) ; 
+         doc . field ( "STR" , set ) ; 
+         ODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ; 
+         ODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ; 
+         ODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertTrue(manager.isSame(manager));
+assertTrue(manager2.isSame(manager2));
+assertFalse(manager.isSame(manager2));
+assertFalse(manager2.isSame(manager));
+assertNotNull(doc.field("STR"));
+assertNotNull(doc1.field("STR"));
+assertNotNull(doc2.field("STR"));
+assertTrue(doc.field("STR") instanceof List);
+assertTrue(doc.field("STR") instanceof Set);
+assertEquals(1, ((List) doc.field("STR")).size());
+assertEquals(1, ((Set) doc.field("STR")).size());
+assertTrue(((List) doc.field("STR")).contains(doc1));
+assertTrue(((Set) doc.field("STR")).contains(doc2));
+assertFalse(((List) doc.field("STR")).contains(doc2));
+assertFalse(((Set) doc.field("STR")).contains(doc1));
+assertTrue(ODocumentInternal.convertAllMultiValuesToTrackedVersions(doc) instanceof ODocument);
+assertTrue(ODirtyManager.isSame(manager, ORecordInternal.getDirtyManager(doc1)));
+assertTrue(ODirtyManager.isSame(manager2, ORecordInternal.getDirtyManager(doc2)));
+assertFalse(ODirtyManager.isSame(manager, manager2));
+assertFalse(ODirtyManager.isSame(manager2, manager));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(manager2.isSame(manager)); ===
+0.986 - assertTrue(manager2.isSame(manager2))
+0.904 - assertFalse(manager2.isSame(manager))
+0.877 - assertFalse(manager.isSame(manager2))
+0.833 - Assertions:
+
+assertTrue(manager.isSame(manager))
+0.713 - assertFalse(ODirtyManager.isSame(manager, manager2))
+0.713 - assertFalse(ODirtyManager.isSame(manager2, manager))
+0.591 - assertTrue(ODirtyManager.isSame(manager, ORecordInternal.getDirtyManager(doc1)))
+0.586 - assertTrue(ODirtyManager.isSame(manager2, ORecordInternal.getDirtyManager(doc2)))
+0.442 - assertTrue(doc.field("STR") instanceof Set)
+0.436 - assertTrue(doc.field("STR") instanceof List)
+0.412 - assertNotNull(doc2.field("STR"))
+0.395 - assertTrue(((Set) doc.field("STR")).contains(doc2))
+0.368 - assertTrue(((List) doc.field("STR")).contains(doc1))
+0.322 - assertFalse(((Set) doc.field("STR")).contains(doc1))
+0.297 - assertTrue(ODocumentInternal.convertAllMultiValuesToTrackedVersions(doc) instanceof ODocument)
+0.295 - assertFalse(((List) doc.field("STR")).contains(doc2))
+0.269 - assertNotNull(doc.field("STR"))
+0.268 - assertEquals(1, ((Set) doc.field("STR")).size())
+0.265 - assertEquals(1, ((List) doc.field("STR")).size())
+0.265 - assertNotNull(doc1.field("STR"))

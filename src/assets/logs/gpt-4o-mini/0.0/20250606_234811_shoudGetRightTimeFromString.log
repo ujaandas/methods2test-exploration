@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtils {
+    public static Date getTodayWithTime ( final String iTime ) throws ParseException { 
+    final SimpleDateFormat df = new SimpleDateFormat ( "STR" ) ; 
+    Calendar calParsed = Calendar . getInstance ( ) ; 
+    calParsed . setTime ( df . parse ( iTime ) ) ; 
+    Calendar cal = Calendar . getInstance ( ) ; 
+    cal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ; 
+    cal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ; 
+    cal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ; 
+    cal . set ( Calendar . MILLISECOND , 0 ) ; 
+    return cal . getTime ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtilsTest {
+    @Test
+     public void shoudGetRightTimeFromString ( ) throws ParseException {
+         Calendar calendar = Calendar . getInstance ( ) ; 
+         calendar . set ( Calendar . HOUR_OF_DAY , 5 ) ; 
+         calendar . set ( Calendar . MINUTE , 10 ) ; 
+         calendar . set ( Calendar . SECOND , 0 ) ; 
+         calendar . set ( Calendar . MILLISECOND , 0 ) ; 
+         Date d = OIOUtils . getTodayWithTime ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(d);
+assertEquals(5, d.getHours());
+assertEquals(10, d.getMinutes());
+assertEquals(0, d.getSeconds());
+assertEquals(0, d.getTime() % 1000);
+assertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR));
+assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH));
+assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+assertTrue(d.after(new Date(System.currentTimeMillis() - 1000))); // d should be after now - 1 second
+assertTrue(d.before(new Date(System.currentTimeMillis() + 1000))); // d should be before now + 1 second
+assertEquals(calendar.getTimeInMillis(), d.getTime(), 1000); // Allow for slight differences
+assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());
+assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());
+assertEquals(calendar.get(Calendar.SECOND), d.getSeconds());
+assertEquals(0, d.getTime() % 1000);
+assertTrue(d instanceof Date);
+assertFalse(d.equals(new Date(0))); // d should not equal epoch
+assertNotEquals(d, new Date(System.currentTimeMillis())); // d should not equal current time
+assertEquals(calendar.get(Calendar.MILLISECOND), 0);
+assertEquals(calendar.getTimeZone(), TimeZone.getDefault());
+assertTrue(d.toString().contains("GMT")); // Check if the string representation contains GMT
+assertEquals(calendar.get(Calendar.DAY_OF_WEEK), Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+assertEquals(calendar.get(Calendar.WEEK_OF_YEAR), Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(calendar.getTime(),d); ===
+0.758 - assertEquals(0, d.getTime() % 1000)
+0.758 - assertEquals(0, d.getTime() % 1000)
+0.717 - assertEquals(calendar.getTimeZone(), TimeZone.getDefault())
+0.708 - assertEquals(10, d.getMinutes())
+0.688 - assertEquals(0, d.getSeconds())
+0.677 - assertEquals(5, d.getHours())
+0.652 - assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes())
+0.652 - assertEquals(calendar.get(Calendar.SECOND), d.getSeconds())
+0.567 - // d should be before now + 1 second
+assertEquals(calendar.getTimeInMillis(), d.getTime(), 1000)
+0.537 - assertFalse(d.equals(new Date(0)))
+0.521 - assertEquals(calendar.get(Calendar.MONTH), Calendar.getInstance().get(Calendar.MONTH))
+0.513 - // d should not equal current time
+assertEquals(calendar.get(Calendar.MILLISECOND), 0)
+0.513 - assertEquals(calendar.get(Calendar.YEAR), Calendar.getInstance().get(Calendar.YEAR))
+0.488 - // Allow for slight differences
+assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours())
+0.466 - assertEquals(calendar.get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+0.451 - assertEquals(calendar.get(Calendar.WEEK_OF_YEAR), Calendar.getInstance().get(Calendar.WEEK_OF_YEAR))
+0.432 - // d should not equal epoch
+assertNotEquals(d, new Date(System.currentTimeMillis()))
+0.421 - assertTrue(d.after(new Date(System.currentTimeMillis() - 1000)))
+0.379 - ```java
+assertNotNull(d)
+0.351 - assertTrue(d.toString().contains("GMT"))
+0.343 - // Check if the string representation contains GMT
+assertEquals(calendar.get(Calendar.DAY_OF_WEEK), Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
+0.328 - assertTrue(d instanceof Date)
+0.323 - // d should be after now - 1 second
+assertTrue(d.before(new Date(System.currentTimeMillis() + 1000)))
+0.000 - ```

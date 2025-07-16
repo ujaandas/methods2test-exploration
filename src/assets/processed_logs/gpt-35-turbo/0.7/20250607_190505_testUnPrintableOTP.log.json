@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic static boolean isValidOTPFormat ( String otp ) {\nif ( otp == null ) {\nreturn false ;\n} int len = otp . length ( ) ;\nfor ( char c : otp . toCharArray ( ) ) {\nif ( c < 0x20 || c > 0x7E ) {\nreturn false ;\n} } return OTP_MIN_LEN <= len && len <= OTP_MAX_LEN ;\n}\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testUnPrintableOTP ( ) {\nString otp = new String ( new byte [ ] {\n0x01 , 0x02 , 0x03 , 0x04 , 0x05 , 0x06 } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertFalse(YubicoClient.isValidOTPFormat(otp));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"abcdef\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdef\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(null));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdef!@#\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"1\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"\u00e4bcdef\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdef!@#$%^&*()\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF!@#\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF!@#\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF!@#\"));\nAssert.assertTrue(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF\"));\nAssert.assertFalse(YubicoClient.isValidOTPFormat(\"123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF123456abcdefABCDEF!@#\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.946,
+        0.926,
+        0.889,
+        0.86,
+        0.816,
+        0.816,
+        0.815,
+        0.769,
+        0.765,
+        0.727,
+        0.667,
+        0.625,
+        0.587,
+        0.548,
+        0.524,
+        0.488,
+        0.473,
+        0.44
+    ],
+    "ground_truth": "assertFalse(YubicoClient.isValidOTPFormat(otp));"
+}

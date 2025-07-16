@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic List < Method > findAll ( ) {\nList < Method > methods = findAllDeclaredMethods ( clazz ) ;\nfor ( Method method : methods ) {\nverifyPublic ( method ) ;\nverifyNotStatic ( method ) ;\nverifyReturnType ( method ) ;\nverifyArgs ( method ) ;\nmethod . setAccessible ( true ) ;\n} return methods ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testSubClass_methodFoundInSuper ( ) {\nList < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(methodList);\nassertFalse(methodList.isEmpty());\nassertEquals(1, methodList.size());\nassertEquals(\"expectedMethodName\", methodList.get(0).getName());\nassertTrue(methodList.get(0).getReturnType().equals(Void.TYPE));\nassertFalse(methodList.get(0).getDeclaringClass().isInterface());\nassertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));\nassertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));\nassertArrayEquals(new Class<?>[0], methodList.get(0).getParameterTypes());\nassertTrue(methodList.get(0).isAccessible());\nassertNotNull(methodList.get(0).getAnnotations());\nassertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));\nassertEquals(Subclass.class, methodList.get(0).getDeclaringClass());\nassertNotNull(methodList.get(0).getGenericReturnType());\nassertTrue(methodList.get(0).getGenericParameterTypes().length == 0);\nassertEquals(0, methodList.get(0).getParameterCount());\nassertTrue(methodList.get(0).getModifiers() & Modifier.PUBLIC != 0);\nassertFalse(methodList.get(0).isSynthetic());\nassertTrue(methodList.get(0).getExceptionTypes().length == 0);\nassertEquals(\"void\", methodList.get(0).getReturnType().getName());\nassertNotNull(methodList.get(0).toString());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.758,
+        0.675,
+        0.674,
+        0.649,
+        0.632,
+        0.611,
+        0.606,
+        0.598,
+        0.586,
+        0.585,
+        0.568,
+        0.558,
+        0.557,
+        0.515,
+        0.51,
+        0.5,
+        0.5,
+        0.479,
+        0.479,
+        0.465,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,methodList.size());"
+}

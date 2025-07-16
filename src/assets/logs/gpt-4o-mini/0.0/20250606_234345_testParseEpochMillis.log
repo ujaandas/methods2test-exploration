@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParser {
+    public Date parse ( final String timestamp ) throws ProcessingException { 
+    if ( StringUtils . isBlank ( timestamp ) ) { 
+    return null ; 
+    } try { 
+    return parser . parse ( timestamp ) ; 
+    } catch ( Exception ex ) { 
+    throw new ProcessingException ( "STR" + timestamp + "STR" , ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class TimestampParserTest {
+    @Test
+     public void testParseEpochMillis ( ) throws Exception {
+         String format = TimestampParser . EPOCH_MILLIS ; 
+         long time = System . currentTimeMillis ( ) ; 
+         Date parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(parsed);
+assertTrue(parsed instanceof Date);
+assertEquals(time, parsed.getTime());
+assertTrue(parsed.before(new Date()));
+assertTrue(parsed.after(new Date(time - 1000)));
+assertTrue(parsed.after(new Date(time - 5000)));
+assertTrue(parsed.before(new Date(time + 1000)));
+assertTrue(parsed.before(new Date(time + 5000)));
+assertEquals(0, parsed.compareTo(new Date(time)));
+assertEquals(time, parsed.getTime());
+assertTrue(parsed.getTime() >= 0);
+assertTrue(parsed.getTime() <= System.currentTimeMillis());
+assertNotEquals(new Date(0), parsed);
+assertTrue(parsed.toString().contains("GMT"));
+assertTrue(parsed.toString().contains("UTC"));
+assertTrue(parsed.toString().length() > 0);
+assertFalse(parsed.toString().isEmpty());
+assertTrue(parsed.getTime() % 1000 == 0);
+assertTrue(parsed.getTime() >= 0);
+assertTrue(parsed.getTime() <= System.currentTimeMillis());
+assertEquals("Expected timestamp format", format, TimestampParser.EPOCH_MILLIS);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(time,parsed.getTime()); ===
+1.000 - assertEquals(time, parsed.getTime())
+1.000 - assertEquals(time, parsed.getTime())
+0.758 - assertTrue(parsed.getTime() >= 0)
+0.758 - assertTrue(parsed.getTime() >= 0)
+0.704 - assertTrue(parsed.getTime() % 1000 == 0)
+0.683 - assertEquals(0, parsed.compareTo(new Date(time)))
+0.667 - assertNotEquals(new Date(0), parsed)
+0.592 - assertTrue(parsed.before(new Date()))
+0.587 - assertFalse(parsed.toString().isEmpty())
+0.557 - assertTrue(parsed.after(new Date(time - 1000)))
+0.557 - assertTrue(parsed.after(new Date(time - 5000)))
+0.550 - assertTrue(parsed.before(new Date(time + 1000)))
+0.550 - assertTrue(parsed.before(new Date(time + 5000)))
+0.549 - assertTrue(parsed.getTime() <= System.currentTimeMillis())
+0.549 - assertTrue(parsed.getTime() <= System.currentTimeMillis())
+0.537 - assertTrue(parsed instanceof Date)
+0.507 - assertTrue(parsed.toString().length() > 0)
+0.500 - ```java
+assertNotNull(parsed)
+0.475 - assertTrue(parsed.toString().contains("GMT"))
+0.475 - assertTrue(parsed.toString().contains("UTC"))
+0.455 - assertEquals("Expected timestamp format", format, TimestampParser.EPOCH_MILLIS)
+0.000 - ```

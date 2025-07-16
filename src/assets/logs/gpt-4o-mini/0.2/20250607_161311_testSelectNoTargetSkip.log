@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecution {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecutionTest {
+    @Test
+     public void testSelectNoTargetSkip ( ) {
+         OResultSet result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(0, result.getTotalRecords());
+assertEquals("Expected Result", result.next().getProperty("fieldName"));
+assertFalse(result.hasNext());
+assertEquals(1, result.getFetchedRecords());
+assertTrue(result.isEmpty());
+assertEquals("Another Expected Result", result.next().getProperty("anotherFieldName"));
+assertNotEquals("Unexpected Result", result.next().getProperty("fieldName"));
+assertTrue(result.getProperty("fieldName").contains("Expected Value"));
+assertFalse(result.getProperty("fieldName").isEmpty());
+assertEquals("Expected Type", result.getProperty("fieldName").getClass().getSimpleName());
+assertNotNull(result.getProperty("fieldName"));
+assertTrue(result.getProperty("fieldName").toString().startsWith("Prefix"));
+assertEquals(200, result.getTotalRecords());
+assertTrue(result.getFetchedRecords() <= result.getTotalRecords());
+assertFalse(result.hasNext());
+assertTrue(result.getProperty("fieldName").equals("Expected Value"));
+assertEquals(0, result.getSkippedRecords());
+assertTrue(result.getProperty("fieldName").length() > 0);
+assertNotNull(result.getProperty("anotherFieldName"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertFalse(result.hasNext()); ===
+1.000 - assertFalse(result.hasNext())
+1.000 - assertFalse(result.hasNext())
+0.877 - assertTrue(result.hasNext())
+0.702 - assertTrue(result.isEmpty())
+0.638 - assertEquals(0, result.getTotalRecords())
+0.620 - assertEquals(1, result.getFetchedRecords())
+0.620 - assertEquals(200, result.getTotalRecords())
+0.602 - assertFalse(result.getProperty("fieldName").isEmpty())
+0.592 - assertEquals(0, result.getSkippedRecords())
+0.517 - ```java
+assertNotNull(result)
+0.507 - assertNotNull(result.getProperty("fieldName"))
+0.488 - assertNotNull(result.getProperty("anotherFieldName"))
+0.469 - assertEquals("Expected Result", result.next().getProperty("fieldName"))
+0.458 - assertTrue(result.getProperty("fieldName").length() > 0)
+0.452 - assertTrue(result.getFetchedRecords() <= result.getTotalRecords())
+0.447 - assertNotEquals("Unexpected Result", result.next().getProperty("fieldName"))
+0.438 - assertTrue(result.getProperty("fieldName").equals("Expected Value"))
+0.429 - assertTrue(result.getProperty("fieldName").contains("Expected Value"))
+0.414 - assertEquals("Expected Type", result.getProperty("fieldName").getClass().getSimpleName())
+0.411 - assertEquals("Another Expected Result", result.next().getProperty("anotherFieldName"))
+0.404 - assertTrue(result.getProperty("fieldName").toString().startsWith("Prefix"))
+0.000 - ```

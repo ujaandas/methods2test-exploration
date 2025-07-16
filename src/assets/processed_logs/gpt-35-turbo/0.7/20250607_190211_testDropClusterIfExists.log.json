@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecutionTest {\n@Test\npublic void testDropClusterIfExists ( ) {\nString cluster = \"STR\" ;\n( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, ((ODatabaseDocumentTx) db).getStorage().getClusterIdByName(cluster));\nassertFalse(((ODatabaseDocumentTx) db).getStorage().addCluster(cluster));\nassertEquals(1, ((ODatabaseDocumentTx) db).getStorage().getClusterIdByName(cluster));\nassertTrue(((ODatabaseDocumentTx) db).getStorage().dropCluster(cluster));\nassertEquals(-1, ((ODatabaseDocumentTx) db).getStorage().getClusterIdByName(cluster));\nassertNotNull(((ODatabaseDocumentTx) db).getStorage().getClusterByName(cluster));\nassertFalse(((ODatabaseDocumentTx) db).getStorage().addCluster(cluster));\nassertTrue(((ODatabaseDocumentTx) db).getStorage().dropCluster(cluster));\nassertEquals(-1, ((ODatabaseDocumentTx) db).getStorage().getClusterIdByName(cluster));\nassertNull(((ODatabaseDocumentTx) db).getStorage().getClusterByName(cluster));\nassertFalse(((ODatabaseDocumentTx) db).getStorage().addCluster(cluster));\nassertTrue(((ODatabaseDocumentTx) db).getStorage().dropCluster(cluster));\nassertNull(((ODatabaseDocumentTx) db).getStorage().getClusterByName(cluster));\nassertEquals(-1, ((ODatabaseDocumentTx) db).getStorage().getClusterIdByName(cluster));\nassertFalse(((ODatabaseDocumentTx) db).getStorage().addCluster(cluster));\nassertTrue(((ODatabaseDocumentTx) db).getStorage().dropCluster(cluster));\nassertNull(((ODatabaseDocumentTx) db).getStorage().getClusterByName(cluster));\n====================\n\n",
+    "scores": [
+        0.619,
+        0.619,
+        0.617,
+        0.617,
+        0.617,
+        0.614,
+        0.614,
+        0.614,
+        0.602,
+        0.591,
+        0.591,
+        0.591,
+        0.591,
+        0.539,
+        0.539,
+        0.539,
+        0.539
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(cluster)>0);"
+}

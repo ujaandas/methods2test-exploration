@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLogger {\npublic void set ( String key , String value ) {\nsetIn ( normalize ( key ) , RealValue . fromString ( value ) ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class SystemLoggerTest {\n@Test\npublic void ignores_log_level_case ( ) {\nConfig config = createConfig ( ) ;\nconfig . set ( Keys . CUCUMBERPRO_LOGGING , \"STR\" ) ;\nLogger . SystemLogger logger = new Logger . SystemLogger ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(logger);\nassertEquals(\"STR\", logger.get(Keys.CUCUMBERPRO_LOGGING));\nassertTrue(logger.isLogLevelIgnored(\"str\"));\nassertFalse(logger.isLogLevelIgnored(\"DEBUG\"));\nassertFalse(logger.isLogLevelIgnored(\"INFO\"));\nassertTrue(logger.isLogLevelIgnored(\"Str\"));\nassertTrue(logger.isLogLevelIgnored(\"sTr\"));\nassertEquals(\"STR\", logger.getNormalizedLogLevel());\nassertTrue(logger.isLogLevelValid(\"STR\"));\nassertFalse(logger.isLogLevelValid(\"INVALID_LEVEL\"));\nassertEquals(\"STR\", logger.getLogLevel());\nassertTrue(logger.isLogLevelSet());\nassertFalse(logger.isLogLevelSet(\"DEBUG\"));\nassertTrue(logger.isLogLevelSet(\"STR\"));\nassertEquals(1, logger.getLogLevelCount());\nassertTrue(logger.hasLogLevel(\"STR\"));\nassertFalse(logger.hasLogLevel(\"ERROR\"));\nassertEquals(\"STR\", logger.getEffectiveLogLevel());\nassertTrue(logger.isLogLevelConfigured());\nassertFalse(logger.isLogLevelConfigured(\"ERROR\"));\nassertTrue(logger.isLogLevelConfigured(\"STR\"));\nassertEquals(\"STR\", logger.getCurrentLogLevel());\n```\n====================\n\n",
+    "scores": [
+        0.612,
+        0.605,
+        0.568,
+        0.565,
+        0.553,
+        0.518,
+        0.506,
+        0.506,
+        0.489,
+        0.488,
+        0.484,
+        0.476,
+        0.475,
+        0.468,
+        0.465,
+        0.465,
+        0.455,
+        0.455,
+        0.455,
+        0.454,
+        0.44,
+        0.432,
+        0.0
+    ],
+    "ground_truth": "assertEquals(Logger.Level.DEBUG,logger.level);"
+}

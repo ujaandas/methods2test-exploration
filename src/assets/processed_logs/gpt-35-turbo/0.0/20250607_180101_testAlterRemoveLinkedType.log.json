@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAny {\n@Deprecated\n< RET extends List < ? > > RET query ( final OQuery < ? > iCommand , final Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class SaveLinkedTypeAnyTest {\n@Test\npublic void testAlterRemoveLinkedType ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . EMBEDDEDLIST , OType . ANY ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nList < ODocument > result = db . query ( new OSQLSynchQuery < ODocument > ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(result);\nAssert.assertEquals(2, result.size());\nAssert.assertTrue(result.get(0) instanceof ODocument);\nAssert.assertTrue(result.get(1) instanceof ODocument);\nAssert.assertEquals(\"STR\", result.get(0).field(\"STR\"));\nAssert.assertEquals(\"STR\", result.get(1).field(\"STR\"));\nAssert.assertEquals(OType.EMBEDDEDLIST, prop.getType());\nAssert.assertEquals(OType.ANY, prop.getLinkedType());\nAssert.assertEquals(\"STR\", classA.getName());\nAssert.assertTrue(schema.existsClass(\"STR\"));\nAssert.assertTrue(schema.existsProperty(\"STR\"));\nAssert.assertTrue(schema.getClass(\"STR\").existsProperty(\"STR\"));\nAssert.assertTrue(schema.getClass(\"STR\").getProperty(\"STR\").getType().equals(OType.EMBEDDEDLIST));\nAssert.assertTrue(schema.getClass(\"STR\").getProperty(\"STR\").getLinkedType().equals(OType.ANY));\nAssert.assertTrue(db.getMetadata().getSchema().existsClass(\"STR\"));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"STR\").existsProperty(\"STR\"));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"STR\").getProperty(\"STR\").getType().equals(OType.EMBEDDEDLIST));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"STR\").getProperty(\"STR\").getLinkedType().equals(OType.ANY));\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"STR\").getProperty(\"STR\").getOwnerClass().getName().equals(\"STR\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.64,
+        0.478,
+        0.478,
+        0.462,
+        0.462,
+        0.351,
+        0.345,
+        0.338,
+        0.328,
+        0.294,
+        0.26,
+        0.25,
+        0.234,
+        0.202,
+        0.195,
+        0.191,
+        0.148,
+        0.123
+    ],
+    "ground_truth": "Assert.assertNotNull(result);"
+}

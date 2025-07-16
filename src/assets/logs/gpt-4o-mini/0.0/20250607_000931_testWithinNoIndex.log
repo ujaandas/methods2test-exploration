@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithin {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithinTest {
+    @Test
+     public void testWithinNoIndex ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" + "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(next);
+assertTrue(next instanceof ODocument);
+assertEquals("ExpectedFieldName", next.field("FieldName"));
+assertEquals("ExpectedValue", next.field("FieldName"));
+assertTrue(next.containsField("FieldName"));
+assertFalse(next.containsField("NonExistentField"));
+assertEquals(2, next.field("SomeCollection").size());
+assertTrue(next.field("SomeCollection").contains("ExpectedItem"));
+assertFalse(next.field("SomeCollection").contains("UnexpectedItem"));
+assertNotNull(next.field("NestedDocument"));
+assertEquals("NestedValue", next.field("NestedDocument").field("NestedField"));
+assertTrue(next.field("BooleanField"));
+assertFalse(next.field("AnotherBooleanField"));
+assertEquals(123, next.field("IntegerField"));
+assertEquals(45.67, next.field("DoubleField"), 0.01);
+assertEquals("ExpectedString", next.field("StringField"));
+assertNotNull(next.field("DateField"));
+assertTrue(next.field("DateField") instanceof Date);
+assertEquals("ExpectedGeoPoint", next.field("GeoPointField"));
+assertEquals(3, next.field("AnotherCollection").size());
+assertTrue(next.field("AnotherCollection").contains("AnotherExpectedItem"));
+assertFalse(next.field("AnotherCollection").contains("AnotherUnexpectedItem"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.700 - assertEquals(123, next.field("IntegerField"))
+0.690 - assertEquals(2, next.field("SomeCollection").size())
+0.674 - assertEquals(45.67, next.field("DoubleField"), 0.01)
+0.649 - assertNotNull(next.field("DateField"))
+0.644 - assertEquals(3, next.field("AnotherCollection").size())
+0.630 - assertEquals("ExpectedString", next.field("StringField"))
+0.629 - assertEquals("ExpectedValue", next.field("FieldName"))
+0.622 - assertTrue(next.field("BooleanField"))
+0.610 - assertFalse(next.field("AnotherBooleanField"))
+0.608 - assertNotNull(next.field("NestedDocument"))
+0.602 - assertEquals("ExpectedFieldName", next.field("FieldName"))
+0.588 - assertTrue(next.field("DateField") instanceof Date)
+0.583 - assertEquals("ExpectedGeoPoint", next.field("GeoPointField"))
+0.557 - assertTrue(next.containsField("FieldName"))
+0.552 - assertFalse(next.containsField("NonExistentField"))
+0.538 - assertFalse(next.field("SomeCollection").contains("UnexpectedItem"))
+0.531 - assertEquals("NestedValue", next.field("NestedDocument").field("NestedField"))
+0.515 - assertTrue(next.field("SomeCollection").contains("ExpectedItem"))
+0.491 - assertFalse(next.field("AnotherCollection").contains("AnotherUnexpectedItem"))
+0.468 - assertTrue(next.field("AnotherCollection").contains("AnotherExpectedItem"))
+0.444 - ```java
+assertNotNull(next)
+0.423 - assertTrue(next instanceof ODocument)
+0.000 - ```

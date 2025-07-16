@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupport {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupportTest {\n@Test\npublic void testQueryEmbeddedMap ( ) {\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . setProperty ( \"STR\" , \"STR\" ) ;\nODocument emb = new ODocument ( ) ;\nemb . setProperty ( \"STR\" , \"STR\" ) ;\nMap < String , ODocument > map = new HashMap < > ( ) ;\nmap . put ( \"STR\" , emb ) ;\ndoc . setProperty ( \"STR\" , map , OType . EMBEDDEDMAP ) ;\nsession . save ( doc ) ;\nOResultSet res = session . query ( \"STR\" ) ;\nOResult item = res . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", item.getProperty(\"STR\"));\nAssert.assertTrue(item.getProperty(\"STR\") instanceof Map);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof HashMap);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof ODocument);\nAssert.assertEquals(\"STR\", ((ODocument) item.getProperty(\"STR\")).getProperty(\"STR\"));\nAssert.assertTrue(((ODocument) item.getProperty(\"STR\")).getProperty(\"STR\") instanceof String);\nAssert.assertEquals(\"STR\", ((ODocument) ((Map<String, ODocument>) item.getProperty(\"STR\")).get(\"STR\")).getProperty(\"STR\"));\nAssert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty(\"STR\")).get(\"STR\")).getProperty(\"STR\") instanceof String);\nAssert.assertEquals(doc.getIdentity(), item.getIdentity());\nAssert.assertTrue(item.getProperty(\"STR\") instanceof Map);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof HashMap);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof ODocument);\nAssert.assertEquals(1, ((Map<String, ODocument>) item.getProperty(\"STR\")).size());\nAssert.assertEquals(1, ((ODocument) ((Map<String, ODocument>) item.getProperty(\"STR\")).get(\"STR\")).getIdentity().toString());\nAssert.assertTrue(((ODocument) ((Map<String, ODocument>) item.getProperty(\"STR\")).get(\"STR\")).getIdentity() instanceof ORecordId);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof Map);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof HashMap);\nAssert.assertTrue(item.getProperty(\"STR\") instanceof ODocument);\nAssert.assertEquals(\"STR\", ((Map<String, ODocument>) item.getProperty(\"STR\")).get(\"STR\").getProperty(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.815,
+        0.744,
+        0.744,
+        0.744,
+        0.711,
+        0.711,
+        0.711,
+        0.696,
+        0.696,
+        0.696,
+        0.587,
+        0.566,
+        0.529,
+        0.523,
+        0.471,
+        0.443,
+        0.437,
+        0.426,
+        0.42
+    ],
+    "ground_truth": "assertNotNull(item.getProperty(\"STR\"));"
+}

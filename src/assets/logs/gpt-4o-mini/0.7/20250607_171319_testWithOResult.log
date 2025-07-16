@@ -1,0 +1,92 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeys {
+    @Override
+     public Object execute ( Object iThis , OIdentifiable iCurrentRecord , OCommandContext iContext , Object ioResult , Object [ ] iParams ) { 
+     if ( ioResult instanceof Map ) { 
+     return ( ( Map < ? , ? > ) ioResult ) . keySet ( ) ; 
+     } if ( ioResult instanceof ODocument ) { 
+     return Arrays . asList ( ( ( ODocument ) ioResult ) . fieldNames ( ) ) ; 
+     } if ( ioResult instanceof OResult ) { 
+     OResult res = ( OResult ) ioResult ; 
+     return res . getPropertyNames ( ) ; 
+     } if ( ioResult instanceof Collection ) { 
+     List result = new ArrayList ( ) ; 
+     for ( Object o : ( Collection ) ioResult ) { 
+     result . addAll ( ( Collection ) execute ( iThis , iCurrentRecord , iContext , o , iParams ) ) ; 
+     } return result ; 
+     } return null ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLMethodKeysTest {
+    @Test
+     public void testWithOResult ( ) {
+         OResultInternal resultInternal = new OResultInternal ( ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         resultInternal . setProperty ( "STR" , "STR" ) ; 
+         Object result = function . execute ( null , null , null , resultInternal , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertEquals(1, ((List<?>) result).size());
+assertTrue(((List<?>) result).contains("STR"));
+assertFalse(((List<?>) result).contains("NON_EXISTENT_PROPERTY"));
+assertEquals("STR", ((List<?>) result).get(0));
+assertTrue(((List<?>) result).get(0) instanceof String);
+assertEquals(1, ((List<?>) result).stream().distinct().count());
+assertFalse(((List<?>) result).isEmpty());
+assertTrue(((List<?>) result).toString().contains("STR"));
+assertEquals("[STR]", result.toString());
+assertEquals("STR", ((List<?>) result).get(0));
+assertNotSame(result, new ArrayList<>());
+assertTrue(result instanceof Collection);
+assertTrue(result.stream().allMatch(item -> item instanceof String));
+assertDoesNotThrow(() -> { ((List<?>) result).forEach(System.out::println); });
+assertEquals(1, ((List<?>) result).indexOf("STR"));
+assertTrue(((List<?>) result).containsAll(Arrays.asList("STR")));
+assertEquals(result.hashCode(), Arrays.asList("STR").hashCode());
+assertEquals(result.size(), 1);
+assertTrue(result.getClass().isAssignableFrom(ArrayList.class));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newLinkedHashSet(Arrays.asList("STR","STR")),result); ===
+0.625 - assertEquals(result.hashCode(), Arrays.asList("STR").hashCode())
+0.562 - assertTrue(((List<?>) result).containsAll(Arrays.asList("STR")))
+0.500 - assertEquals("[STR]", result.toString())
+0.495 - assertEquals("STR", ((List<?>) result).get(0))
+0.495 - assertEquals("STR", ((List<?>) result).get(0))
+0.495 - assertEquals(1, ((List<?>) result).size())
+0.460 - assertEquals(1, ((List<?>) result).indexOf("STR"))
+0.438 - assertFalse(((List<?>) result).isEmpty())
+0.426 - assertEquals(result.size(), 1)
+0.413 - assertEquals(1, ((List<?>) result).stream().distinct().count())
+0.382 - assertTrue(((List<?>) result).contains("STR"))
+0.375 - assertTrue(result.getClass().isAssignableFrom(ArrayList.class))
+0.359 - assertTrue(((List<?>) result).get(0) instanceof String)
+0.357 - assertFalse(((List<?>) result).contains("NON_EXISTENT_PROPERTY"))
+0.347 - assertTrue(((List<?>) result).toString().contains("STR"))
+0.340 - ```java
+assertNotNull(result)
+0.311 - assertDoesNotThrow(() -> { ((List<?>) result).forEach(System.out::println)
+0.309 - assertTrue(result instanceof List)
+0.291 - assertNotSame(result, new ArrayList<>())
+0.291 - assertTrue(result instanceof Collection)
+0.233 - assertTrue(result.stream().allMatch(item -> item instanceof String))
+0.030 - })
+0.000 - ```

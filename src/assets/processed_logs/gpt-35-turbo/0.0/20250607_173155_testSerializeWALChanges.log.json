@@ -1,0 +1,23 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializer {\n@Override\npublic int getObjectSize ( String object , Object ... hints ) {\nfinal byte [ ] encoded = object . getBytes ( StandardCharsets . UTF_8 ) ;\nreturn OShortSerializer . SHORT_SIZE + encoded . length ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializerTest {\n@Test\npublic void testSerializeWALChanges ( ) {\nfinal int serializationOffset = 5 ;\nfinal ByteBuffer buffer = ByteBuffer . allocateDirect ( stringSerializer . getObjectSize ( OBJECT ) + serializationOffset ) . order ( ByteOrder . nativeOrder ( ) ) ;\nfinal byte [ ] data = new byte [ stringSerializer . getObjectSize ( OBJECT ) ] ;\nstringSerializer . serializeNativeObject ( OBJECT , data , 0 ) ;\nOWALChanges walChanges = new OWALChangesTree ( ) ;\nwalChanges . setBinaryValue ( buffer , data , serializationOffset ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(serializationOffset, buffer.position());\nassertEquals(OBJECT.length(), buffer.getInt(serializationOffset));\nassertEquals(OBJECT.getBytes(), Arrays.copyOfRange(data, serializationOffset, serializationOffset + OBJECT.length()));\nassertTrue(walChanges.getBinaryValue(buffer, serializationOffset).equals(data));\nassertEquals(OBJECT.length() + serializationOffset, buffer.position());\nassertEquals(OBJECT.length(), buffer.getInt(serializationOffset));\nassertEquals(OBJECT.getBytes(), Arrays.copyOfRange(data, serializationOffset, serializationOffset + OBJECT.length()));\nassertTrue(walChanges.getBinaryValue(buffer, serializationOffset).equals(data));\nassertEquals(OBJECT.length() + serializationOffset, buffer.position());\nassertEquals(OBJECT.length(), buffer.getInt(serializationOffset));\nassertEquals(OBJECT.getBytes(), Arrays.copyOfRange(data, serializationOffset, serializationOffset + OBJECT.length()));\nassertTrue(walChanges.getBinaryValue(buffer, serializationOffset).equals(data));\nassertEquals(OBJECT.length() + serializationOffset, buffer.position());\nassertEquals(OBJECT.length(), buffer.getInt(serializationOffset));\nassertEquals(OBJECT.getBytes(), Arrays.copyOfRange(data, serializationOffset, serializationOffset + OBJECT.length()));\nassertTrue(walChanges.getBinaryValue(buffer, serializationOffset).equals(data));\n====================\n\n",
+    "scores": [
+        0.528,
+        0.528,
+        0.528,
+        0.528,
+        0.465,
+        0.465,
+        0.465,
+        0.465,
+        0.448,
+        0.448,
+        0.448,
+        0.425,
+        0.425,
+        0.425,
+        0.425,
+        0.414
+    ],
+    "ground_truth": "Assert.assertEquals(stringSerializer.getObjectSizeInByteBuffer(buffer,walChanges,serializationOffset),stringSerializer.getObjectSize(OBJECT));"
+}

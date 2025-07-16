@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoader {\npublic String getString ( String key ) {\nreturn getIn ( normalize ( key ) , false ) . getString ( ) ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class YamlConfigLoaderTest {\n@Test\npublic void removes_underscores_from_keys ( ) {\nConfig config = new Config ( ) ;\nConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( \"STR\" + \"STR\" + \"STR\" ) ) ;\nconfigLoader . load ( config ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\"));\nassertEquals(\"Expected value for key STR2\", config.getString(\"STR2\"));\nassertEquals(\"Expected value for key STR3\", config.getString(\"STR3\"));\nassertNotNull(config.getString(\"STR1\"));\nassertNotNull(config.getString(\"STR2\"));\nassertNotNull(config.getString(\"STR3\"));\nassertTrue(config.getString(\"STR1\").length() > 0);\nassertTrue(config.getString(\"STR2\").length() > 0);\nassertTrue(config.getString(\"STR3\").length() > 0);\nassertEquals(\"Expected value for key str1\", config.getString(\"str1\"));\nassertEquals(\"Expected value for key str2\", config.getString(\"str2\"));\nassertEquals(\"Expected value for key str3\", config.getString(\"str3\"));\nassertThrows(IllegalArgumentException.class, () -> config.getString(\"INVALID_KEY\"));\nassertEquals(\"Expected value for key STR1\", config.getString(\"STR1\"));\nassertEquals(\"Expected value for key STR2\", config.getString(\"STR2\"));\nassertEquals(\"Expected value for key STR3\", config.getString(\"STR3\"));\nassertNotEquals(config.getString(\"STR1\"), config.getString(\"STR2\"));\nassertNotEquals(config.getString(\"STR2\"), config.getString(\"STR3\"));\nassertNotEquals(config.getString(\"STR1\"), config.getString(\"STR3\"));\nassertTrue(config.getString(\"STR1\").contains(\"Expected\"));\nassertTrue(config.getString(\"STR2\").contains(\"Expected\"));\nassertTrue(config.getString(\"STR3\").contains(\"Expected\"));\nassertEquals(\"Expected value for key str1\", config.getString(\"str1\"));\nassertEquals(\"Expected value for key str2\", config.getString(\"str2\"));\n```\n====================\n\n",
+    "scores": [
+        0.805,
+        0.805,
+        0.805,
+        0.804,
+        0.804,
+        0.804,
+        0.804,
+        0.804,
+        0.789,
+        0.789,
+        0.789,
+        0.748,
+        0.711,
+        0.711,
+        0.711,
+        0.692,
+        0.692,
+        0.692,
+        0.692,
+        0.692,
+        0.64,
+        0.64,
+        0.64,
+        0.504,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",config.getString(\"STR\"));"
+}

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testDontFixMangledQueryString ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ;\nURL testSourceUrl = new URL ( \"STR\" ) ;\nString testUrl = \"STR\" ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(normalizedUrl);\nassertEquals(expectedResult, normalizedUrl);\nassertTrue(normalizedUrl.startsWith(\"http\"));\nassertFalse(normalizedUrl.contains(\" \")); // Check for spaces\nassertTrue(normalizedUrl.contains(\"?\")); // Check for query string presence\nassertFalse(normalizedUrl.endsWith(\"&\")); // Check for trailing ampersand\nassertFalse(normalizedUrl.contains(\"&&\")); // Check for double ampersand\nassertEquals(expectedResult.length(), normalizedUrl.length());\nassertTrue(normalizedUrl.matches(\"https?://.*\")); // Check for valid URL format\nassertFalse(normalizedUrl.contains(\"#\")); // Check for fragment presence\nassertFalse(normalizedUrl.contains(\"javascript:\")); // Check for javascript injection\nassertFalse(normalizedUrl.contains(\"data:\")); // Check for data URI\nassertFalse(normalizedUrl.contains(\"mailto:\")); // Check for mailto links\nassertFalse(normalizedUrl.contains(\"ftp:\")); // Check for ftp links\nassertTrue(normalizedUrl.contains(\"param=value\")); // Check for specific query param\nassertEquals(expectedResult.toLowerCase(), normalizedUrl.toLowerCase()); // Check case insensitivity\nassertTrue(normalizedUrl.split(\"\\\\?\").length <= 2); // Check for single query string\nassertTrue(normalizedUrl.length() <= 2048); // Check for URL length\nassertTrue(normalizedUrl.indexOf(\"param1\") < normalizedUrl.indexOf(\"param2\")); // Check order of parameters\nassertEquals(new URL(\"http://example.com/\").getHost(), new URL(normalizedUrl).getHost()); // Check host consistency\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.627,
+        0.571,
+        0.552,
+        0.548,
+        0.478,
+        0.458,
+        0.456,
+        0.429,
+        0.425,
+        0.425,
+        0.423,
+        0.41,
+        0.407,
+        0.393,
+        0.384,
+        0.379,
+        0.379,
+        0.364,
+        0.308,
+        0.135
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtils {
+    public static Date getTodayWithTime ( final String iTime ) throws ParseException { 
+    final SimpleDateFormat df = new SimpleDateFormat ( "STR" ) ; 
+    Calendar calParsed = Calendar . getInstance ( ) ; 
+    calParsed . setTime ( df . parse ( iTime ) ) ; 
+    Calendar cal = Calendar . getInstance ( ) ; 
+    cal . set ( Calendar . HOUR_OF_DAY , calParsed . get ( Calendar . HOUR_OF_DAY ) ) ; 
+    cal . set ( Calendar . MINUTE , calParsed . get ( Calendar . MINUTE ) ) ; 
+    cal . set ( Calendar . SECOND , calParsed . get ( Calendar . SECOND ) ) ; 
+    cal . set ( Calendar . MILLISECOND , 0 ) ; 
+    return cal . getTime ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OIOUtilsTest {
+    @Test
+     public void shoudGetRightTimeFromString ( ) throws ParseException {
+         Calendar calendar = Calendar . getInstance ( ) ; 
+         calendar . set ( Calendar . HOUR_OF_DAY , 5 ) ; 
+         calendar . set ( Calendar . MINUTE , 10 ) ; 
+         calendar . set ( Calendar . SECOND , 0 ) ; 
+         calendar . set ( Calendar . MILLISECOND , 0 ) ; 
+         Date d = OIOUtils . getTodayWithTime ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours());
+assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes());
+assertEquals(calendar.get(Calendar.SECOND), d.getSeconds());
+assertEquals(calendar.get(Calendar.MILLISECOND), d.getMilliseconds());
+assertTrue(d.after(calendar.getTime()));
+assertTrue(d.before(calendar.getTime()));
+assertNotNull(d);
+assertNotNull(calendar);
+assertSame(calendar.getTime(), d);
+assertNotSame(calendar, d);
+assertTrue(d.getTime() > calendar.getTime().getTime());
+assertTrue(d.getTime() < calendar.getTime().getTime());
+assertTrue(d.toString().contains("5:10:00"));
+assertEquals(0, d.compareTo(calendar.getTime()));
+assertTrue(d.getTime() == calendar.getTime().getTime());
+assertFalse(d.equals(calendar.getTime()));
+assertTrue(d.toString().equals(calendar.getTime().toString()));
+assertTrue(d.hashCode() != calendar.getTime().hashCode());
+assertTrue(d.getTime() - calendar.getTime().getTime() >= 0);
+assertTrue(d.getTime() - calendar.getTime().getTime() <= 1000);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(calendar.getTime(),d); ===
+0.879 - assertSame(calendar.getTime(), d)
+0.827 - assertFalse(d.equals(calendar.getTime()))
+0.790 - assertEquals(0, d.compareTo(calendar.getTime()))
+0.767 - assertTrue(d.after(calendar.getTime()))
+0.730 - assertTrue(d.before(calendar.getTime()))
+0.674 - assertTrue(d.hashCode() != calendar.getTime().hashCode())
+0.652 - assertEquals(calendar.get(Calendar.MINUTE), d.getMinutes())
+0.652 - assertEquals(calendar.get(Calendar.SECOND), d.getSeconds())
+0.646 - assertTrue(d.toString().equals(calendar.getTime().toString()))
+0.644 - assertNotSame(calendar, d)
+0.632 - assertEquals(calendar.get(Calendar.HOUR_OF_DAY), d.getHours())
+0.632 - assertNotNull(calendar)
+0.628 - assertTrue(d.getTime() > calendar.getTime().getTime())
+0.628 - assertTrue(d.getTime() < calendar.getTime().getTime())
+0.621 - assertTrue(d.getTime() == calendar.getTime().getTime())
+0.607 - assertTrue(d.getTime() - calendar.getTime().getTime() >= 0)
+0.588 - assertEquals(calendar.get(Calendar.MILLISECOND), d.getMilliseconds())
+0.587 - assertTrue(d.getTime() - calendar.getTime().getTime() <= 1000)
+0.440 - assertNotNull(d)
+0.308 - assertTrue(d.toString().contains("5:10:00"))

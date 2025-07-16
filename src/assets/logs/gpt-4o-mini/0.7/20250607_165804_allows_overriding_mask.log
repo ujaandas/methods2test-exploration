@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilter {
+    public Map < String , String > filter ( Map < String , String > env ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    for ( Map . Entry < String , String > entry : env . entrySet ( ) ) { 
+    if ( ! maskPattern . matcher ( entry . getKey ( ) ) . matches ( ) ) result . put ( entry . getKey ( ) , entry . getValue ( ) ) ; 
+    } return result ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class EnvFilterTest {
+    @Test
+     public void allows_overriding_mask ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         Config config = createConfig ( ) ; 
+         new EnvironmentVariablesConfigLoader ( env ) . load ( config ) ; 
+         EnvFilter envFilter = new EnvFilter ( config ) ; 
+         Map < String , String > expectedEnv = new HashMap < String , String > ( ) { 
+     { 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     put ( "STR" , "STR" ) ; 
+     } } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected value for STR", "STR", expectedEnv.get("STR"));
+assertTrue("Expected env should contain STR", expectedEnv.containsKey("STR"));
+assertFalse("Expected env should not contain masked key", expectedEnv.containsKey("MASKED_KEY"));
+assertEquals("Size of expected env should be 5", 5, expectedEnv.size());
+assertNotNull("Expected env should not be null", expectedEnv);
+assertTrue("Expected env should be an instance of HashMap", expectedEnv instanceof HashMap);
+assertEquals("Value for STR should match", "STR", expectedEnv.get("STR"));
+assertEquals("Expected env should have unique keys", expectedEnv.keySet().size(), expectedEnv.size());
+assertTrue("Expected env should have value for STR", expectedEnv.get("STR").equals("STR"));
+assertFalse("Expected env should not contain empty entries", expectedEnv.containsValue(""));
+assertTrue("Expected env should include at least one key", expectedEnv.size() > 0);
+assertTrue("Expected env should not be equal to another empty map", !expectedEnv.equals(new HashMap<>()));
+assertEquals("Expected value for STR should match", "STR", expectedEnv.get("STR"));
+assertTrue("Expected env should not have null keys", !expectedEnv.containsKey(null));
+assertTrue("Expected env should not have null values", !expectedEnv.containsValue(null));
+assertTrue("Expected env should have specific keys", expectedEnv.keySet().containsAll(Arrays.asList("STR")));
+assertEquals("Expected env should have the same value for STR", "STR", expectedEnv.get("STR"));
+assertNotEquals("Expected env should not be equal to a different map", expectedEnv, new HashMap<String, String>() {{ put("DIFFERENT_KEY", "VALUE"); }});
+assertTrue("Expected env should be filtered correctly", expectedEnv.get("STR").equals("STR"));
+assertTrue("Expected env should contain STR key", expectedEnv.containsKey("STR"));
+assertFalse("Expected env should not contain masked keys", expectedEnv.containsKey("MASKED"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(expectedEnv,envFilter.filter(env)); ===
+0.509 - assertEquals("Size of expected env should be 5", 5, expectedEnv.size())
+0.509 - assertEquals("Value for STR should match", "STR", expectedEnv.get("STR"))
+0.487 - ```java
+assertEquals("Expected value for STR", "STR", expectedEnv.get("STR"))
+0.475 - assertEquals("Expected value for STR should match", "STR", expectedEnv.get("STR"))
+0.468 - assertEquals("Expected env should have unique keys", expectedEnv.keySet().size(), expectedEnv.size())
+0.452 - assertTrue("Expected env should not have null keys", !expectedEnv.containsKey(null))
+0.443 - assertEquals("Expected env should have the same value for STR", "STR", expectedEnv.get("STR"))
+0.438 - assertTrue("Expected env should not have null values", !expectedEnv.containsValue(null))
+0.437 - assertTrue("Expected env should include at least one key", expectedEnv.size() > 0)
+0.412 - assertNotNull("Expected env should not be null", expectedEnv)
+0.403 - assertTrue("Expected env should contain STR", expectedEnv.containsKey("STR"))
+0.400 - assertTrue("Expected env should have value for STR", expectedEnv.get("STR").equals("STR"))
+0.397 - assertTrue("Expected env should not be equal to another empty map", !expectedEnv.equals(new HashMap<>()))
+0.393 - assertTrue("Expected env should contain STR key", expectedEnv.containsKey("STR"))
+0.389 - assertTrue("Expected env should have specific keys", expectedEnv.keySet().containsAll(Arrays.asList("STR")))
+0.382 - assertFalse("Expected env should not contain empty entries", expectedEnv.containsValue(""))
+0.376 - assertFalse("Expected env should not contain masked keys", expectedEnv.containsKey("MASKED"))
+0.375 - assertTrue("Expected env should be an instance of HashMap", expectedEnv instanceof HashMap)
+0.373 - assertTrue("Expected env should be filtered correctly", expectedEnv.get("STR").equals("STR"))
+0.368 - assertFalse("Expected env should not contain masked key", expectedEnv.containsKey("MASKED_KEY"))
+0.328 - assertNotEquals("Expected env should not be equal to a different map", expectedEnv, new HashMap<String, String>() {{ put("DIFFERENT_KEY", "VALUE")
+0.040 - }})
+0.000 - ```

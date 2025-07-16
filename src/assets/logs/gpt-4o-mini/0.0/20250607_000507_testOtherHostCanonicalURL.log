@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testOtherHostCanonicalURL ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . canonicalMetadataParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertEquals(1, fields.size());
+assertTrue(fields.containsKey(AbstractIndexerBolt.urlFieldParamName));
+assertTrue(fields.containsKey(AbstractIndexerBolt.canonicalMetadataParamName));
+assertEquals("STR", fields.get(AbstractIndexerBolt.urlFieldParamName));
+assertEquals("STR", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));
+assertFalse(fields.isEmpty());
+assertNotEquals("DifferentValue", fields.get("STR"));
+assertNull(fields.get("NonExistentKey"));
+assertTrue(fields.keySet().containsAll(Arrays.asList("STR", AbstractIndexerBolt.urlFieldParamName, AbstractIndexerBolt.canonicalMetadataParamName)));
+assertEquals("STR", fields.get("STR"));
+assertNotSame("AnotherValue", fields.get("STR"));
+assertTrue(fields.values().stream().anyMatch(value -> value.equals("STR")));
+assertEquals(1, fields.values().stream().filter(value -> value.equals("STR")).count());
+assertTrue(fields.values().stream().allMatch(value -> value instanceof String));
+assertEquals("STR", fields.get(AbstractIndexerBolt.urlFieldParamName));
+assertEquals("STR", fields.get(AbstractIndexerBolt.canonicalMetadataParamName));
+assertTrue(fields.containsValue("STR"));
+assertFalse(fields.containsValue("DifferentValue"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.925 - assertEquals("STR", fields.get("STR"))
+0.723 - assertNotEquals("DifferentValue", fields.get("STR"))
+0.694 - assertEquals(1, fields.size())
+0.622 - assertNotSame("AnotherValue", fields.get("STR"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.585 - assertTrue(fields.containsValue("STR"))
+0.583 - assertFalse(fields.isEmpty())
+0.578 - assertNull(fields.get("NonExistentKey"))
+0.571 - assertEquals("STR", fields.get(AbstractIndexerBolt.urlFieldParamName))
+0.571 - assertEquals("STR", fields.get(AbstractIndexerBolt.urlFieldParamName))
+0.529 - assertEquals("STR", fields.get(AbstractIndexerBolt.canonicalMetadataParamName))
+0.529 - assertEquals("STR", fields.get(AbstractIndexerBolt.canonicalMetadataParamName))
+0.492 - assertEquals(1, fields.values().stream().filter(value -> value.equals("STR")).count())
+0.489 - assertFalse(fields.containsValue("DifferentValue"))
+0.444 - ```java
+assertNotNull(fields)
+0.339 - assertTrue(fields.containsKey(AbstractIndexerBolt.urlFieldParamName))
+0.328 - assertTrue(fields.values().stream().anyMatch(value -> value.equals("STR")))
+0.314 - assertTrue(fields.containsKey(AbstractIndexerBolt.canonicalMetadataParamName))
+0.305 - assertTrue(fields.values().stream().allMatch(value -> value instanceof String))
+0.286 - assertTrue(fields.keySet().containsAll(Arrays.asList("STR", AbstractIndexerBolt.urlFieldParamName, AbstractIndexerBolt.canonicalMetadataParamName)))
+0.000 - ```

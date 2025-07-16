@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class OBatchOperations {
+    public List < ORecordOperationRequest > getOperations ( ) { 
+    return operations ; 
+    }
+}
+
+package orientechnologies.orientdb.client;
+
+public class OBatchOperationsTest {
+    @Test
+     public void testBatchOperationsNoTx ( ) throws IOException {
+         List < ORecordOperation > operations = new ArrayList < > ( ) ; 
+         operations . add ( new ORecordOperation ( new ODocument ( ) , ORecordOperation . CREATED ) ) ; 
+         MockChannel channel = new MockChannel ( ) ; 
+         OBatchOperationsRequest request = new OBatchOperationsRequest ( - 1 , operations ) ; 
+         request . write ( channel , null ) ; 
+         channel . close ( ) ; 
+         request = new OBatchOperationsRequest ( ) ; 
+         request . read ( channel , 0 , ORecordSerializerNetworkFactory . INSTANCE . current ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(request);
+assertEquals(-1, request.getSessionId());
+assertEquals(1, request.getOperations().size());
+assertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType());
+assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument);
+assertNotNull(request.getOperations().get(0).getRecord());
+assertEquals(operations.get(0).getRecord(), request.getOperations().get(0).getRecord());
+assertEquals(operations.get(0).getType(), request.getOperations().get(0).getType());
+assertTrue(channel.isClosed());
+assertTrue(request.getOperations().get(0).isNew());
+assertFalse(request.getOperations().get(0).isDeleted());
+assertFalse(request.getOperations().get(0).isUpdated());
+assertTrue(request.getOperations().get(0).isCreated());
+assertNotNull(request.getOperations().get(0).getRecord().getIdentity());
+assertTrue(request.getOperations().get(0).getRecord().getIdentity().isNew());
+assertEquals(0, request.getOperations().get(0).getRecord().getVersion());
+assertNotNull(request.getOperations());
+assertEquals(1, request.getOperations().size());
+assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument);
+assertEquals(ODocument.class, request.getOperations().get(0).getRecord().getClass());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(request.getOperations().size(),1); ===
+0.957 - assertEquals(1, request.getOperations().size())
+0.957 - assertEquals(1, request.getOperations().size())
+0.786 - assertNotNull(request.getOperations())
+0.772 - assertFalse(request.getOperations().get(0).isDeleted())
+0.772 - assertFalse(request.getOperations().get(0).isUpdated())
+0.771 - assertTrue(request.getOperations().get(0).isNew())
+0.740 - assertTrue(request.getOperations().get(0).isCreated())
+0.729 - assertEquals(-1, request.getSessionId())
+0.718 - assertNotNull(request.getOperations().get(0).getRecord())
+0.718 - assertEquals(0, request.getOperations().get(0).getRecord().getVersion())
+0.656 - assertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType())
+0.641 - assertEquals(operations.get(0).getType(), request.getOperations().get(0).getType())
+0.636 - assertEquals(ODocument.class, request.getOperations().get(0).getRecord().getClass())
+0.632 - assertNotNull(request.getOperations().get(0).getRecord().getIdentity())
+0.621 - assertEquals(operations.get(0).getRecord(), request.getOperations().get(0).getRecord())
+0.605 - assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument)
+0.605 - assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument)
+0.590 - assertTrue(request.getOperations().get(0).getRecord().getIdentity().isNew())
+0.447 - ```java
+assertNotNull(request)
+0.368 - assertTrue(channel.isClosed())
+0.000 - ```

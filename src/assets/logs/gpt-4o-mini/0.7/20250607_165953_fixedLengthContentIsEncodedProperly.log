@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegration {
+    public static Response newFixedLengthResponse ( String msg ) { 
+    return newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.core;
+
+public class GZipIntegrationTest {
+    @Test
+     public void fixedLengthContentIsEncodedProperly ( ) throws IOException {
+         testServer . response = Response . newFixedLengthResponse ( "STR" ) ; 
+         HttpGet request = new HttpGet ( "STR" ) ; 
+         request . addHeader ( "STR" , "STR" ) ; 
+         HttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(response);
+Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+Assert.assertEquals("text/html", EntityUtils.getContentType(response));
+Assert.assertEquals("STR", EntityUtils.toString(response.getEntity()));
+Assert.assertTrue(EntityUtils.toString(response.getEntity()).contains("STR"));
+Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().equals("gzip"));
+Assert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0);
+Assert.assertTrue(response.getAllHeaders().length > 0);
+Assert.assertEquals("STR", response.getFirstHeader("STR").getValue());
+Assert.assertTrue(response.getFirstHeader("Content-Type").getValue().contains("html"));
+Assert.assertTrue(response.getEntity().getContentType().getValue().contains("text/html"));
+Assert.assertNotEquals(0, response.getEntity().getContentLength());
+Assert.assertFalse(EntityUtils.toString(response.getEntity()).isEmpty());
+Assert.assertTrue(response.getStatusLine().toString().contains("OK"));
+Assert.assertNotNull(response.getEntity());
+Assert.assertTrue(EntityUtils.toString(response.getEntity()).length() > 0);
+Assert.assertEquals("gzip", response.getFirstHeader("Content-Encoding").getValue());
+Assert.assertFalse(EntityUtils.toString(response.getEntity()).contains("error"));
+Assert.assertNotNull(response.getHeaders("Content-Encoding"));
+Assert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0);
+Assert.assertTrue(response.getEntity().isRepeatable());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",EntityUtils.toString(response.getEntity())); ===
+1.000 - Assert.assertEquals("STR", EntityUtils.toString(response.getEntity()))
+0.835 - Assert.assertFalse(EntityUtils.toString(response.getEntity()).isEmpty())
+0.803 - Assert.assertTrue(EntityUtils.toString(response.getEntity()).length() > 0)
+0.785 - Assert.assertFalse(EntityUtils.toString(response.getEntity()).contains("error"))
+0.773 - Assert.assertTrue(EntityUtils.toString(response.getEntity()).contains("STR"))
+0.734 - Assert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0)
+0.734 - Assert.assertTrue(EntityUtils.toByteArray(response.getEntity()).length > 0)
+0.694 - Assert.assertEquals("text/html", EntityUtils.getContentType(response))
+0.639 - Assert.assertNotNull(response.getEntity())
+0.600 - Assert.assertNotEquals(0, response.getEntity().getContentLength())
+0.585 - Assert.assertEquals("STR", response.getFirstHeader("STR").getValue())
+0.556 - Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode())
+0.550 - Assert.assertTrue(response.getEntity().isRepeatable())
+0.496 - Assert.assertEquals("gzip", response.getFirstHeader("Content-Encoding").getValue())
+0.466 - Assert.assertNotNull(response.getHeaders("Content-Encoding"))
+0.430 - Assert.assertTrue(response.getAllHeaders().length > 0)
+0.419 - Assert.assertTrue(response.getStatusLine().toString().contains("OK"))
+0.417 - Assert.assertTrue(response.getEntity().getContentType().getValue().contains("text/html"))
+0.409 - ```java
+Assert.assertNotNull(response)
+0.397 - Assert.assertTrue(response.getFirstHeader("Content-Type").getValue().contains("html"))
+0.378 - Assert.assertTrue(response.getFirstHeader("Content-Encoding").getValue().equals("gzip"))
+0.000 - ```

@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNull {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNullTest {\n@Test\npublic void testNotNullChangeToNullWithLists ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\ndb . begin ( ) ;\ndoc . field ( \"STR\" , new String [ ] {\n\"STR\" } ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\ndb . begin ( ) ;\ndoc . removeField ( \"STR\" ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNull(index);\nAssert.assertEquals(0, index.getSize());\nAssert.assertFalse(index.contains(\"STR\"));\nAssert.assertNull(doc.field(\"STR\"));\nAssert.assertNull(doc.field(\"STR\", String[].class));\nAssert.assertNull(doc.field(\"STR\", List.class));\nAssert.assertNull(doc.field(\"STR\", Set.class));\nAssert.assertNull(doc.field(\"STR\", Map.class));\nAssert.assertNull(doc.field(\"STR\", Collection.class));\nAssert.assertNull(doc.field(\"STR\", Object.class));\nAssert.assertNull(doc.field(\"STR\", Integer.class));\nAssert.assertNull(doc.field(\"STR\", Long.class));\nAssert.assertNull(doc.field(\"STR\", Double.class));\nAssert.assertNull(doc.field(\"STR\", Float.class));\nAssert.assertNull(doc.field(\"STR\", Boolean.class));\nAssert.assertNull(doc.field(\"STR\", Byte.class));\nAssert.assertNull(doc.field(\"STR\", Character.class));\nAssert.assertNull(doc.field(\"STR\", Short.class));\nAssert.assertNull(doc.field(\"STR\", BigDecimal.class));\nAssert.assertNull(doc.field(\"STR\", BigInteger.class));\n====================\n\n",
+    "scores": [
+        0.935,
+        0.625,
+        0.615,
+        0.475,
+        0.438,
+        0.435,
+        0.421,
+        0.378,
+        0.348,
+        0.338,
+        0.329,
+        0.32,
+        0.316,
+        0.314,
+        0.314,
+        0.314,
+        0.31,
+        0.306,
+        0.306,
+        0.289
+    ],
+    "ground_truth": "Assert.assertEquals(index.getSize(),1);"
+}

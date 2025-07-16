@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AList {\npublic static < T > AList < T > create ( Iterable < T > elements ) {\nif ( elements instanceof AList ) {\nreturn ( AList < T > ) elements ;\n} if ( elements instanceof List ) {\nreturn create ( ( List < T > ) elements ) ;\n} AList < T > result = nil ( ) ;\nfor ( T el : elements ) {\nresult = result . cons ( el ) ;\n} return result . reverse ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AListTest {\n@Test\npublic void testFromJavaUtil ( ) {\nfinal AList < String > l = AList . < String > nil ( ) . cons ( \"STR\" ) . cons ( \"STR\" ) . cons ( \"STR\" ) ;\nfinal AList < String > l2 = AList . create ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" ) ) ;\nfinal AList < String > l3 = AList . create ( ( Iterable < String > ) Arrays . asList ( \"STR\" , \"STR\" , \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(3, l.size());\nassertEquals(3, l2.size());\nassertEquals(3, l3.size());\nassertTrue(l.equals(l2));\nassertTrue(l.equals(l3));\nassertFalse(l.isEmpty());\nassertFalse(l2.isEmpty());\nassertFalse(l3.isEmpty());\nassertEquals(\"STR\", l.head());\nassertEquals(\"STR\", l2.head());\nassertEquals(\"STR\", l3.head());\nassertEquals(\"STR\", l.tail().head());\nassertEquals(\"STR\", l2.tail().head());\nassertEquals(\"STR\", l3.tail().head());\nassertEquals(2, l.tail().size());\nassertEquals(2, l2.tail().size());\nassertEquals(2, l3.tail().size());\nassertTrue(l.contains(\"STR\"));\nassertTrue(l2.contains(\"STR\"));\nassertTrue(l3.contains(\"STR\"));\nassertFalse(l.contains(\"NOT_STR\"));\nassertFalse(l2.contains(\"NOT_STR\"));\nassertFalse(l3.contains(\"NOT_STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.791,
+        0.744,
+        0.723,
+        0.714,
+        0.696,
+        0.681,
+        0.68,
+        0.667,
+        0.653,
+        0.64,
+        0.64,
+        0.63,
+        0.605,
+        0.604,
+        0.593,
+        0.571,
+        0.558,
+        0.491,
+        0.468,
+        0.462,
+        0.458,
+        0.458,
+        0.453,
+        0.0
+    ],
+    "ground_truth": "assertEquals(l,l2);"
+}

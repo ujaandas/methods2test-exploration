@@ -1,0 +1,146 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    public int compareTo ( final OCompositeKey otherKey ) { 
+    final Iterator < Object > inIter = keys . iterator ( ) ; 
+    final Iterator < Object > outIter = otherKey . keys . iterator ( ) ; 
+    while ( inIter . hasNext ( ) && outIter . hasNext ( ) ) { 
+    final Object inKey = inIter . next ( ) ; 
+    final Object outKey = outIter . next ( ) ; 
+    if ( outKey instanceof OAlwaysGreaterKey ) return - 1 ; 
+    if ( outKey instanceof OAlwaysLessKey ) return 1 ; 
+    if ( inKey instanceof OAlwaysGreaterKey ) return 1 ; 
+    if ( inKey instanceof OAlwaysLessKey ) return - 1 ; 
+    final int result = comparator . compare ( inKey , outKey ) ; 
+    if ( result != 0 ) return result ; 
+    } return 0 ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testCompareToLT ( ) {
+         final OCompositeKey compositeKey = new OCompositeKey ( ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         compositeKey . addKey ( "STR" ) ; 
+         final OCompositeKey anotherCompositeKey = new OCompositeKey ( ) ; 
+         anotherCompositeKey . addKey ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(0, compositeKey.compareTo(anotherCompositeKey));
+assertTrue(compositeKey.compareTo(anotherCompositeKey) == 0);
+assertFalse(compositeKey.compareTo(anotherCompositeKey) < 0);
+assertFalse(compositeKey.compareTo(anotherCompositeKey) > 0);
+
+anotherCompositeKey.addKey("STR2");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0);
+
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR");
+anotherCompositeKey.addKey("STR");
+assertEquals(0, compositeKey.compareTo(anotherCompositeKey));
+
+anotherCompositeKey.addKey("STR3");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0);
+
+compositeKey.addKey("STR2");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0);
+
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR2");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0);
+
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR");
+anotherCompositeKey.addKey("STR1");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0);
+
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR1");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0);
+
+compositeKey.addKey("STR3");
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR3");
+assertEquals(0, compositeKey.compareTo(anotherCompositeKey));
+
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR4");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0);
+
+compositeKey.addKey("STR4");
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR4");
+assertEquals(0, compositeKey.compareTo(anotherCompositeKey));
+
+compositeKey.addKey("STR5");
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR6");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0);
+
+compositeKey.addKey("STR6");
+anotherCompositeKey = new OCompositeKey();
+anotherCompositeKey.addKey("STR5");
+assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(compositeKey.compareTo(anotherCompositeKey),-1); ===
+0.958 - assertEquals(0, compositeKey.compareTo(anotherCompositeKey))
+0.958 - assertEquals(0, compositeKey.compareTo(anotherCompositeKey))
+0.958 - assertEquals(0, compositeKey.compareTo(anotherCompositeKey))
+0.915 - assertFalse(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.915 - assertFalse(compositeKey.compareTo(anotherCompositeKey) > 0)
+0.898 - ```java
+assertEquals(0, compositeKey.compareTo(anotherCompositeKey))
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) < 0)
+0.889 - assertTrue(compositeKey.compareTo(anotherCompositeKey) > 0)
+0.881 - assertTrue(compositeKey.compareTo(anotherCompositeKey) == 0)
+0.430 - anotherCompositeKey.addKey("STR")
+0.430 - anotherCompositeKey.addKey("STR")
+0.430 - anotherCompositeKey.addKey("STR")
+0.426 - anotherCompositeKey.addKey("STR2")
+0.426 - anotherCompositeKey.addKey("STR3")
+0.426 - anotherCompositeKey.addKey("STR2")
+0.426 - anotherCompositeKey.addKey("STR1")
+0.426 - anotherCompositeKey.addKey("STR1")
+0.426 - anotherCompositeKey.addKey("STR3")
+0.426 - anotherCompositeKey.addKey("STR4")
+0.426 - anotherCompositeKey.addKey("STR4")
+0.426 - anotherCompositeKey.addKey("STR6")
+0.426 - anotherCompositeKey.addKey("STR5")
+0.414 - compositeKey.addKey("STR2")
+0.414 - compositeKey.addKey("STR3")
+0.414 - compositeKey.addKey("STR4")
+0.414 - compositeKey.addKey("STR5")
+0.414 - compositeKey.addKey("STR6")
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.408 - anotherCompositeKey = new OCompositeKey()
+0.000 - ```

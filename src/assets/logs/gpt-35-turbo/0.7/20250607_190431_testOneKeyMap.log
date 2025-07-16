@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKey {
+    public OMultiKey ( final Collection < ? > keys ) { 
+    this . keys = new ArrayList < Object > ( keys ) ; 
+    hash = generateHashCode ( keys ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKeyTest {
+    @Test
+     public void testOneKeyMap ( ) {
+         final Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ; 
+         final OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         multiKeyMap . put ( multiKey , new Object ( ) ) ; 
+         final OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         final Object mapResult = multiKeyMap . get ( anotherMultiKey ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(mapResult, new Object());
+Assert.assertTrue(multiKey.equals(anotherMultiKey));
+Assert.assertEquals(multiKey.hashCode(), anotherMultiKey.hashCode());
+Assert.assertTrue(multiKeyMap.containsKey(anotherMultiKey));
+Assert.assertTrue(multiKeyMap.containsValue(new Object()));
+Assert.assertEquals(multiKeyMap.size(), 1);
+Assert.assertFalse(multiKeyMap.isEmpty());
+Assert.assertNotNull(multiKeyMap.get(anotherMultiKey));
+Assert.assertTrue(multiKeyMap.entrySet().contains(new AbstractMap.SimpleEntry<>(anotherMultiKey, new Object())));
+Assert.assertTrue(multiKeyMap.keySet().contains(anotherMultiKey));
+Assert.assertTrue(multiKeyMap.values().contains(new Object()));
+Assert.assertTrue(multiKeyMap.entrySet().stream().anyMatch(entry -> entry.getKey().equals(anotherMultiKey) && entry.getValue().equals(new Object())));
+Assert.assertTrue(multiKeyMap.keySet().stream().anyMatch(key -> key.equals(anotherMultiKey)));
+Assert.assertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(new Object())));
+Assert.assertEquals(multiKeyMap.get(anotherMultiKey), multiKeyMap.entrySet().iterator().next().getValue());
+Assert.assertTrue(multiKeyMap.keySet().iterator().hasNext());
+Assert.assertTrue(multiKeyMap.values().iterator().hasNext());
+Assert.assertEquals(1, multiKeyMap.entrySet().size());
+Assert.assertEquals(1, multiKeyMap.keySet().size());
+Assert.assertEquals(1, multiKeyMap.values().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(mapResult); ===
+0.644 - Assert.assertEquals(mapResult, new Object())
+0.535 - Assert.assertNotNull(multiKeyMap.get(anotherMultiKey))
+0.483 - Assert.assertEquals(multiKeyMap.size(), 1)
+0.448 - Assert.assertFalse(multiKeyMap.isEmpty())
+0.418 - Assert.assertEquals(1, multiKeyMap.keySet().size())
+0.418 - Assert.assertEquals(1, multiKeyMap.values().size())
+0.406 - Assert.assertEquals(1, multiKeyMap.entrySet().size())
+0.382 - Assert.assertTrue(multiKey.equals(anotherMultiKey))
+0.351 - Assert.assertTrue(multiKeyMap.containsValue(new Object()))
+0.342 - Assert.assertTrue(multiKeyMap.containsKey(anotherMultiKey))
+0.338 - Assert.assertTrue(multiKeyMap.keySet().iterator().hasNext())
+0.338 - Assert.assertTrue(multiKeyMap.values().iterator().hasNext())
+0.333 - Assert.assertEquals(multiKey.hashCode(), anotherMultiKey.hashCode())
+0.333 - Assert.assertTrue(multiKeyMap.values().contains(new Object()))
+0.317 - Assert.assertTrue(multiKeyMap.keySet().contains(anotherMultiKey))
+0.241 - Assert.assertTrue(multiKeyMap.keySet().stream().anyMatch(key -> key.equals(anotherMultiKey)))
+0.241 - Assert.assertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(new Object())))
+0.230 - Assert.assertEquals(multiKeyMap.get(anotherMultiKey), multiKeyMap.entrySet().iterator().next().getValue())
+0.206 - Assert.assertTrue(multiKeyMap.entrySet().contains(new AbstractMap.SimpleEntry<>(anotherMultiKey, new Object())))
+0.161 - Assert.assertTrue(multiKeyMap.entrySet().stream().anyMatch(entry -> entry.getKey().equals(anotherMultiKey) && entry.getValue().equals(new Object())))

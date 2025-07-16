@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtension {
+    @Override
+     public ByteBuffer getPayloadData ( ) { 
+     return unmaskedpayload ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class PerMessageDeflateExtensionTest {
+    @Test
+     public void testDecodeFrame ( ) throws InvalidDataException {
+         PerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ; 
+         String str = "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         byte [ ] message = str . getBytes ( ) ; 
+         TextFrame frame = new TextFrame ( ) ; 
+         frame . setPayload ( ByteBuffer . wrap ( message ) ) ; 
+         deflateExtension . encodeFrame ( frame ) ; 
+         deflateExtension . decodeFrame ( frame ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STRSTRSTRSTRSTR", frame.getPayloadData().array());
+assertEquals(5, frame.getPayloadData().array().length);
+assertTrue(frame.isFin());
+assertTrue(frame.isRSV1());
+assertFalse(frame.isRSV2());
+assertFalse(frame.isRSV3());
+assertFalse(frame.isMasked());
+assertEquals(OpCode.TEXT, frame.getOpcode());
+assertEquals(0, frame.getPayloadLength());
+assertEquals(0, frame.getMaskingKey().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+assertEquals(0, frame.getExtensionData().length);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(message,frame.getPayloadData().array()); ===
+0.818 - assertEquals(5, frame.getPayloadData().array().length)
+0.756 - assertEquals("STRSTRSTRSTRSTR", frame.getPayloadData().array())
+0.701 - assertEquals(0, frame.getPayloadLength())
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.615 - assertEquals(0, frame.getExtensionData().length)
+0.580 - assertEquals(OpCode.TEXT, frame.getOpcode())
+0.574 - assertEquals(0, frame.getMaskingKey().length)
+0.488 - assertFalse(frame.isMasked())
+0.452 - assertFalse(frame.isRSV2())
+0.452 - assertFalse(frame.isRSV3())
+0.439 - assertTrue(frame.isFin())
+0.434 - assertTrue(frame.isRSV1())

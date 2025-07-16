@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package basis-technology-corp.tcl-regex-java;
+
+public class Matcher {
+    boolean lookingAt ( ) ;
+}
+
+package basis-technology-corp.tcl-regex-java;
+
+public class MatcherTest {
+    @Test
+     public void lookingAtPrefix ( ) throws Exception {
+         RePattern pattern = HsrePattern . compile ( "STR" , PatternFlags . ADVANCED ) ; 
+         ReMatcher matcher = pattern . matcher ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(matcher.lookingAt());
+assertEquals(0, matcher.start());
+assertEquals(3, matcher.end());
+assertFalse(matcher.lookingAt("S"));
+assertFalse(matcher.lookingAt("STRINGS"));
+assertTrue(matcher.lookingAt("STR"));
+assertFalse(matcher.lookingAt("T"));
+assertFalse(matcher.lookingAt("STRTEST"));
+assertEquals("STR", matcher.group());
+assertTrue(matcher.lookingAt("STRING"));
+assertFalse(matcher.lookingAt("R"));
+assertEquals(0, matcher.start("STR"));
+assertEquals(3, matcher.end("STR"));
+assertTrue(matcher.lookingAt("STR"));
+assertFalse(matcher.lookingAt(""));
+assertTrue(matcher.lookingAt("STR "));
+assertFalse(matcher.lookingAt("ST"));
+assertTrue(matcher.lookingAt("STR123"));
+assertFalse(matcher.lookingAt("123STR"));
+assertEquals(0, matcher.start(0));
+assertEquals(3, matcher.end(0));
+assertTrue(matcher.lookingAt("STRabc"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(matcher.lookingAt()); ===
+0.925 - assertTrue(matcher.lookingAt("STR"))
+0.925 - assertTrue(matcher.lookingAt("STR"))
+0.925 - assertTrue(matcher.lookingAt("STR "))
+0.886 - ```java
+assertTrue(matcher.lookingAt())
+0.886 - assertTrue(matcher.lookingAt("STRING"))
+0.886 - assertTrue(matcher.lookingAt("STR123"))
+0.886 - assertTrue(matcher.lookingAt("STRabc"))
+0.862 - assertFalse(matcher.lookingAt(""))
+0.848 - assertFalse(matcher.lookingAt("S"))
+0.848 - assertFalse(matcher.lookingAt("T"))
+0.848 - assertFalse(matcher.lookingAt("R"))
+0.836 - assertFalse(matcher.lookingAt("ST"))
+0.789 - assertFalse(matcher.lookingAt("123STR"))
+0.778 - assertFalse(matcher.lookingAt("STRINGS"))
+0.778 - assertFalse(matcher.lookingAt("STRTEST"))
+0.667 - assertEquals(3, matcher.end())
+0.656 - assertEquals(3, matcher.end(0))
+0.645 - assertEquals(0, matcher.start())
+0.635 - assertEquals(0, matcher.start(0))
+0.615 - assertEquals(3, matcher.end("STR"))
+0.597 - assertEquals(0, matcher.start("STR"))
+0.576 - assertEquals("STR", matcher.group())
+0.000 - ```

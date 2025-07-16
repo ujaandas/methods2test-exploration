@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithin {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialWithinTest {\n@Test\npublic void testWithinNoIndex ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" + \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"value1\", next.field(\"fieldName1\"));\nAssert.assertTrue(next.field(\"fieldName2\") instanceof ORID);\nAssert.assertEquals(\"value3\", next.field(\"fieldName3\"));\nAssert.assertNotNull(next.field(\"fieldName4\"));\nAssert.assertNull(next.field(\"fieldName5\"));\nAssert.assertNotEquals(\"value6\", next.field(\"fieldName6\"));\nAssert.assertFalse(next.field(\"fieldName7\") instanceof ODocument);\nAssert.assertTrue(next.field(\"fieldName8\") instanceof String);\nAssert.assertEquals(\"value9\", next.field(\"fieldName9\"));\nAssert.assertNotEquals(\"value10\", next.field(\"fieldName10\"));\nAssert.assertTrue(next.field(\"fieldName11\") instanceof Integer);\nAssert.assertEquals(\"value12\", next.field(\"fieldName12\"));\nAssert.assertNull(next.field(\"fieldName13\"));\nAssert.assertFalse(next.field(\"fieldName14\") instanceof ORID);\nAssert.assertTrue(next.field(\"fieldName15\") instanceof Float);\nAssert.assertNotEquals(\"value16\", next.field(\"fieldName16\"));\nAssert.assertTrue(next.field(\"fieldName17\") instanceof Boolean);\nAssert.assertNotNull(next.field(\"fieldName18\"));\nAssert.assertEquals(\"value19\", next.field(\"fieldName19\"));\nAssert.assertNotEquals(\"value20\", next.field(\"fieldName20\"));\n====================\n\n",
+    "scores": [
+        0.675,
+        0.675,
+        0.675,
+        0.667,
+        0.659,
+        0.659,
+        0.658,
+        0.651,
+        0.64,
+        0.636,
+        0.636,
+        0.636,
+        0.632,
+        0.614,
+        0.609,
+        0.581,
+        0.568,
+        0.568,
+        0.556,
+        0.556
+    ],
+    "ground_truth": "Assert.assertEquals(next.field(\"STR\"),true);"
+}

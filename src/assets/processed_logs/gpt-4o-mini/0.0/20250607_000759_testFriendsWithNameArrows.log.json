@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsWithNameArrows ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"name\") != null));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"relationship\").equals(\"friend\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Alice\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Bob\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"Charlie\")));\nassertEquals(\"Alice\", qResult.get(0).field(\"name\"));\nassertEquals(\"Bob\", qResult.get(1).field(\"name\"));\nassertEquals(\"Charlie\", qResult.get(2).field(\"name\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"age\") > 0));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"age\") < 100));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"relationship\").equals(\"best friend\")));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"relationship\").equals(\"stranger\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertEquals(\"active\", qResult.get(0).field(\"status\"));\nassertEquals(\"active\", qResult.get(1).field(\"status\"));\nassertEquals(\"active\", qResult.get(2).field(\"status\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"location\").equals(\"New York\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"location\").equals(\"Los Angeles\")));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.692,
+        0.675,
+        0.659,
+        0.602,
+        0.602,
+        0.602,
+        0.567,
+        0.457,
+        0.447,
+        0.433,
+        0.4,
+        0.393,
+        0.385,
+        0.382,
+        0.372,
+        0.362,
+        0.362,
+        0.353,
+        0.35,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

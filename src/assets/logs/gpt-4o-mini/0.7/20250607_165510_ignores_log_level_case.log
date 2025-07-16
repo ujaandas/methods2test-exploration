@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLogger {
+    public void set ( String key , String value ) { 
+    setIn ( normalize ( key ) , RealValue . fromString ( value ) ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLoggerTest {
+    @Test
+     public void ignores_log_level_case ( ) {
+         Config config = createConfig ( ) ; 
+         config . set ( Keys . CUCUMBERPRO_LOGGING , "STR" ) ; 
+         Logger . SystemLogger logger = new Logger . SystemLogger ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(logger);
+assertEquals("Expected logger to have a non-null configuration", config, logger.getConfig());
+assertEquals("Expected logger's log level to be the normalized value", "str", logger.getLogLevel());
+assertTrue("Expected logger to ignore case for log level", logger.getLogLevel().equalsIgnoreCase("STR"));
+assertFalse("Expected logger to reject invalid log levels", logger.isLogLevelValid("INVALID"));
+assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("info"));
+assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("warn"));
+assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("error"));
+assertEquals("Expected logger's default log level to be 'info'", "info", logger.getDefaultLogLevel());
+assertEquals("Expected logger's log level to be 'str'", "str", logger.getLogLevel());
+assertNotEquals("Expected logger's log level to not be 'debug'", "debug", logger.getLogLevel());
+assertTrue("Expected logger to handle empty log level gracefully", logger.setLogLevel(""));
+assertEquals("Expected logger's log level to revert to default after setting empty", "info", logger.getLogLevel());
+assertThrows(IllegalArgumentException.class, () -> logger.setLogLevel("INVALID"));
+assertDoesNotThrow(() -> logger.setLogLevel("warn"));
+assertEquals("Expected logger's log level to be 'warn'", "warn", logger.getLogLevel());
+assertTrue("Expected logger to properly log messages at set log level", logger.log("This is a test message"));
+assertFalse("Expected logger to not log messages below the set log level", logger.log("This should not log"));
+assertTrue("Expected logger to log at 'str' level", logger.logAtLevel("str", "Logging at str level"));
+assertFalse("Expected logger to not log at 'debug' when set to 'str'", logger.logAtLevel("debug", "This should not log"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(Logger.Level.DEBUG,logger.level); ===
+0.579 - assertEquals("Expected logger's log level to be 'str'", "str", logger.getLogLevel())
+0.569 - assertEquals("Expected logger's log level to be 'warn'", "warn", logger.getLogLevel())
+0.534 - assertNotEquals("Expected logger's log level to not be 'debug'", "debug", logger.getLogLevel())
+0.526 - assertEquals("Expected logger's default log level to be 'info'", "info", logger.getDefaultLogLevel())
+0.522 - assertEquals("Expected logger's log level to be the normalized value", "str", logger.getLogLevel())
+0.485 - assertFalse("Expected logger to reject invalid log levels", logger.isLogLevelValid("INVALID"))
+0.481 - assertEquals("Expected logger to have a non-null configuration", config, logger.getConfig())
+0.476 - assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("info"))
+0.476 - assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("warn"))
+0.476 - assertEquals("Expected logger's log level to revert to default after setting empty", "info", logger.getLogLevel())
+0.472 - assertTrue("Expected logger to accept valid log levels", logger.isLogLevelValid("error"))
+0.472 - assertTrue("Expected logger to handle empty log level gracefully", logger.setLogLevel(""))
+0.459 - assertTrue("Expected logger to log at 'str' level", logger.logAtLevel("str", "Logging at str level"))
+0.432 - ```java
+assertNotNull(logger)
+0.429 - assertFalse("Expected logger to not log messages below the set log level", logger.log("This should not log"))
+0.426 - assertTrue("Expected logger to ignore case for log level", logger.getLogLevel().equalsIgnoreCase("STR"))
+0.421 - assertDoesNotThrow(() -> logger.setLogLevel("warn"))
+0.414 - assertTrue("Expected logger to properly log messages at set log level", logger.log("This is a test message"))
+0.411 - assertFalse("Expected logger to not log at 'debug' when set to 'str'", logger.logAtLevel("debug", "This should not log"))
+0.358 - assertThrows(IllegalArgumentException.class, () -> logger.setLogLevel("INVALID"))
+0.000 - ```

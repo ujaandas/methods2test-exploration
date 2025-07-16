@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawner {\npublic void awaitCompletion ( ) {\nfor ( Thread thread : threads ) {\ntry {\nthread . join ( ) ;\n} catch ( InterruptedException e ) {\nthrow rethrow ( e ) ;\n} } if ( caughtException != null ) {\nthrow rethrow ( caughtException ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawnerTest {\n@Test\npublic void testThreadSpawnerException_reportException ( ) {\nFile exceptionFile = new File ( getUserDir ( ) , \"STR\" ) ;\nThreadSpawner spawner = new ThreadSpawner ( \"STR\" ) ;\nspawner . spawn ( new Runnable ( ) {\n@Override\npublic void run ( ) {\nthrow new CommandLineExitException ( \"STR\" ) ;\n} } ) ;\nspawner . awaitCompletion ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(exceptionFile.exists());\nAssert.assertTrue(caughtException instanceof CommandLineExitException);\nAssert.assertEquals(\"STR\", caughtException.getMessage());\nAssert.assertEquals(1, threads.size());\nAssert.assertTrue(threads.get(0).isAlive());\nAssert.assertTrue(threads.get(0).getState() == Thread.State.WAITING);\nAssert.assertTrue(threads.get(0).getName().startsWith(\"STR\"));\nAssert.assertTrue(threads.get(0).getPriority() == Thread.NORM_PRIORITY);\nAssert.assertTrue(threads.get(0).getThreadGroup().getName().equals(\"main\"));\nAssert.assertTrue(threads.get(0).getId() > 0);\nAssert.assertTrue(threads.get(0).isDaemon());\nAssert.assertTrue(threads.get(0).isInterrupted());\nAssert.assertTrue(threads.get(0).getStackTrace().length > 0);\nAssert.assertTrue(threads.get(0).getContextClassLoader() != null);\nAssert.assertTrue(threads.get(0).getUncaughtExceptionHandler() == null);\nAssert.assertTrue(threads.get(0).getThreadGroup().getParent().getName().equals(\"system\"));\nAssert.assertTrue(threads.get(0).getThreadGroup().getParent().getParent() == null);\nAssert.assertTrue(threads.get(0).getThreadGroup().getParent().getMaxPriority() == Thread.MAX_PRIORITY);\nAssert.assertTrue(threads.get(0).getThreadGroup().getParent().getParent() == null);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.563,
+        0.561,
+        0.547,
+        0.543,
+        0.521,
+        0.5,
+        0.5,
+        0.438,
+        0.431,
+        0.424,
+        0.397,
+        0.378,
+        0.375,
+        0.366,
+        0.318,
+        0.318,
+        0.315
+    ],
+    "ground_truth": "assertTrue(exceptionFile.exists());"
+}

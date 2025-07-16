@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKey {
+    @Override
+     public boolean equals ( final Object o ) { 
+     if ( this == o ) return true ; 
+     if ( o == null || getClass ( ) != o . getClass ( ) ) return false ; 
+     final OCompositeKey that = ( OCompositeKey ) o ; 
+     return keys . equals ( that . keys ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeKeyTest {
+    @Test
+     public void testEqualNull ( ) {
+         final OCompositeKey compositeKey = new OCompositeKey ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(compositeKey.equals(null));
+assertFalse(compositeKey.equals(new Object()));
+assertTrue(compositeKey.equals(compositeKey));
+assertTrue(compositeKey.equals(new OCompositeKey()));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key1" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2", "key2" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })));
+assertTrue(compositeKey.equals(new OCompositeKey(new Object[] {})));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", null })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null, "key2" })));
+assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2", "key1" })));
+assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1" })));
+assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key1" })));
+assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(compositeKey.equals(null)); ===
+0.905 - ```java
+assertFalse(compositeKey.equals(null))
+0.843 - assertFalse(compositeKey.equals(new Object()))
+0.723 - assertTrue(compositeKey.equals(compositeKey))
+0.710 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null })))
+0.697 - assertTrue(compositeKey.equals(new OCompositeKey()))
+0.667 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", null })))
+0.667 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { null, "key2" })))
+0.642 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1" })))
+0.642 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2" })))
+0.608 - assertTrue(compositeKey.equals(new OCompositeKey(new Object[] {})))
+0.603 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2" })))
+0.603 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key1" })))
+0.603 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2", "key2" })))
+0.603 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key2", "key1" })))
+0.603 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key1" })))
+0.574 - assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1" })))
+0.569 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })))
+0.569 - assertFalse(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })))
+0.539 - assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2" })))
+0.508 - assertTrue(compositeKey.equals(new OCompositeKey(new Object[] { "key1", "key2", "key3" })))
+0.000 - ```

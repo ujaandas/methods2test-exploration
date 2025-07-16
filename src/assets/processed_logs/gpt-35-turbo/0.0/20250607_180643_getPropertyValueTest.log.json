@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class Configs {\npublic static String getSystemPropertyWithMavenPropertyAsFallback ( Properties properties , String key ) {\nString val = System . getProperty ( key ) ;\nif ( val == null && properties != null ) {\nval = properties . getProperty ( key ) ;\n} return val ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ConfigsTest {\n@Test\npublic void getPropertyValueTest ( ) {\nproperties . setProperty ( KEY_1 , value ) ;\nSystem . setProperty ( KEY_2 , value ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\n1. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\n2. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\n3. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n4. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n5. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));\n6. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));\n7. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"nonexistent_key\"));\n8. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));\n9. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\n10. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n11. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"nonexistent_key\"));\n12. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n13. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\n14. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));\n15. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));\n16. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"nonexistent_key\"));\n17. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\n18. assertNotNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n19. assertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"nonexistent_key\"));\n20. assertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\n====================\n\n",
+    "scores": [
+        0.934,
+        0.934,
+        0.929,
+        0.923,
+        0.918,
+        0.918,
+        0.899,
+        0.893,
+        0.888,
+        0.888,
+        0.847,
+        0.842,
+        0.841,
+        0.833,
+        0.821,
+        0.817,
+        0.817,
+        0.813,
+        0.813,
+        0.762
+    ],
+    "ground_truth": "assertEquals(\"STR\",Configs.getSystemPropertyWithMavenPropertyAsFallback(properties,KEY_1));"
+}

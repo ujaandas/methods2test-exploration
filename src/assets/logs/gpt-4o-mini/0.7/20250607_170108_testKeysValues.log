@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMap {
+    int size ( ) ;
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AListMapTest {
+    @Test
+     public void testKeysValues ( ) {
+         final AListMap < String , Integer > map = AListMap . < String , Integer > empty ( ) . updated ( "STR" , 1 ) . updated ( "STR" , 2 ) . updated ( "STR" , 3 ) . updated ( "STR" , 4 ) ; 
+         final ASet < String > keys = map . keys ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(4, map.size());
+assertTrue(keys.contains("STR"));
+assertEquals(1, map.get("STR", 1));
+assertEquals(2, map.get("STR", 2));
+assertEquals(3, map.get("STR", 3));
+assertEquals(4, map.get("STR", 4));
+assertFalse(keys.contains("NOT_EXISTING_KEY"));
+assertEquals(1, map.updated("STR", 1).size());
+assertEquals(1, map.updated("STR", 2).size());
+assertEquals(1, map.updated("STR", 3).size());
+assertEquals(1, map.updated("STR", 4).size());
+assertEquals(4, keys.size());
+assertTrue(keys.equals(new ASet<String>(Arrays.asList("STR"))));
+assertEquals(map.updated("STR", 5).get("STR", 5), 5);
+assertEquals(map.updated("STR", 6).size(), 5);
+assertNotNull(map.keys());
+assertNotNull(map.get("STR", 2));
+assertTrue(map.updated("STR", 3).keys().contains("STR"));
+assertThrows(UnsupportedOperationException.class, () -> map.updated("STR", 7).remove("STR"));
+assertTrue(map.updated("STR", 8).keys().contains("STR"));
+assertEquals(4, map.updated("STR", 9).size());
+assertEquals(1, map.updated("STR", 1).size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,keys.size()); ===
+1.000 - assertEquals(4, keys.size())
+0.754 - ```java
+assertEquals(4, map.size())
+0.686 - assertEquals(4, map.updated("STR", 9).size())
+0.657 - assertEquals(1, map.updated("STR", 1).size())
+0.657 - assertEquals(1, map.updated("STR", 2).size())
+0.657 - assertEquals(1, map.updated("STR", 3).size())
+0.657 - assertEquals(1, map.updated("STR", 1).size())
+0.644 - assertEquals(4, map.get("STR", 4))
+0.629 - assertEquals(1, map.updated("STR", 4).size())
+0.629 - assertEquals(map.updated("STR", 6).size(), 5)
+0.610 - assertEquals(1, map.get("STR", 1))
+0.610 - assertEquals(2, map.get("STR", 2))
+0.610 - assertEquals(3, map.get("STR", 3))
+0.577 - assertNotNull(map.keys())
+0.576 - assertTrue(keys.contains("STR"))
+0.521 - assertFalse(keys.contains("NOT_EXISTING_KEY"))
+0.474 - assertEquals(map.updated("STR", 5).get("STR", 5), 5)
+0.472 - assertTrue(keys.equals(new ASet<String>(Arrays.asList("STR"))))
+0.415 - assertTrue(map.updated("STR", 3).keys().contains("STR"))
+0.415 - assertTrue(map.updated("STR", 8).keys().contains("STR"))
+0.414 - assertNotNull(map.get("STR", 2))
+0.261 - assertThrows(UnsupportedOperationException.class, () -> map.updated("STR", 7).remove("STR"))
+0.000 - ```

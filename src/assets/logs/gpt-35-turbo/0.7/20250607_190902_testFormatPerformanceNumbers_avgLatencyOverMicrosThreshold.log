@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollector {
+    public String formatIntervalPerformanceNumbers ( String testId ) { 
+    PerformanceStats latest = get ( testId , false ) ; 
+    if ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) { 
+    return "STR" ; 
+    } String latencyUnit = "STR" ; 
+    long latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ; 
+    long latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ; 
+    long latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ; 
+    if ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) { 
+    latencyUnit = "STR" ; 
+    latencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ; 
+    latency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ; 
+    latencyMax = MICROSECONDS . toMillis ( latencyMax ) ; 
+    } return format ( "STR" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsCollectorTest {
+    @Test
+     public void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {
+         SimulatorAddress worker = workerAddress ( 3 , 1 ) ; 
+         Map < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ; 
+         performanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ; 
+         performanceStatsCollector . update ( worker , performanceStats ) ; 
+         String performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("800", performance.substring(0, 3));
+assertEquals("100.0", performance.substring(4, 8));
+assertEquals("2.4", performance.substring(9, 12));
+assertEquals("µs", performance.substring(13, 15));
+assertEquals("2.5", performance.substring(16, 19));
+assertEquals("µs", performance.substring(20, 22));
+assertEquals("99", performance.substring(23, 25));
+assertEquals("2.5", performance.substring(26, 29));
+assertEquals("µs", performance.substring(30, 32));
+assertEquals(32, performance.length());
+assertEquals("800", performance.substring(0, 3));
+assertEquals("100.0", performance.substring(4, 8));
+assertEquals("2.4", performance.substring(9, 12));
+assertEquals("µs", performance.substring(13, 15));
+assertEquals("2.5", performance.substring(16, 19));
+assertEquals("µs", performance.substring(20, 22));
+assertEquals("99", performance.substring(23, 25));
+assertEquals("2.5", performance.substring(26, 29));
+assertEquals("µs", performance.substring(30, 32));
+assertEquals(32, performance.length());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(performance.contains("STR")); ===
+0.658 - assertEquals(32, performance.length())
+0.658 - assertEquals(32, performance.length())
+0.612 - assertEquals("800", performance.substring(0, 3))
+0.612 - assertEquals("800", performance.substring(0, 3))
+0.605 - assertEquals("2.4", performance.substring(9, 12))
+0.605 - assertEquals("µs", performance.substring(13, 15))
+0.605 - assertEquals("µs", performance.substring(20, 22))
+0.605 - assertEquals("99", performance.substring(23, 25))
+0.605 - assertEquals("µs", performance.substring(30, 32))
+0.605 - assertEquals("2.4", performance.substring(9, 12))
+0.605 - assertEquals("µs", performance.substring(13, 15))
+0.605 - assertEquals("µs", performance.substring(20, 22))
+0.605 - assertEquals("99", performance.substring(23, 25))
+0.605 - assertEquals("µs", performance.substring(30, 32))
+0.598 - assertEquals("100.0", performance.substring(4, 8))
+0.598 - assertEquals("2.5", performance.substring(16, 19))
+0.598 - assertEquals("2.5", performance.substring(26, 29))
+0.598 - assertEquals("100.0", performance.substring(4, 8))
+0.598 - assertEquals("2.5", performance.substring(16, 19))
+0.598 - assertEquals("2.5", performance.substring(26, 29))

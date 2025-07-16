@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializer {\n@Override\npublic Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nreturn this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializerTest {\n@Test\npublic void testNormalCustomSerializer ( ) throws Exception {\nNormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ;\nNormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ;\nCustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ;\nCustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ;\nRequestBody body = new RequestBody ( 1 , \"STR\" ) ;\nString ret = ( String ) client . invokeSync ( addr , body , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, body.getId());\nassertEquals(\"STR\", body.getContent());\nassertNotNull(ret);\nassertTrue(ret instanceof String);\nassertEquals(\"Response\", ret);\nassertNotNull(s1);\nassertNotNull(s2);\nassertNotNull(CustomSerializerManager.getCustomSerializer(RequestBody.class.getName()));\nassertNotNull(CustomSerializerManager.getCustomSerializer(String.class.getName()));\nassertNotNull(client);\nassertNotNull(addr);\nassertEquals(1000, client.getTimeout());\nassertNotNull(client.invokeSync(addr, body, 1000));\nassertEquals(\"Response\", ret);\nassertEquals(1, body.getId());\nassertEquals(\"STR\", body.getContent());\nassertTrue(ret instanceof String);\nassertEquals(1000, client.getTimeout());\nassertNotNull(client.invokeSync(addr, body, 1000));\n====================\n\n",
+    "scores": [
+        0.494,
+        0.494,
+        0.449,
+        0.449,
+        0.449,
+        0.449,
+        0.384,
+        0.384,
+        0.351,
+        0.329,
+        0.293,
+        0.275,
+        0.261,
+        0.261,
+        0.256,
+        0.256,
+        0.252,
+        0.239,
+        0.239
+    ],
+    "ground_truth": "Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+\"STR\",ret);"
+}

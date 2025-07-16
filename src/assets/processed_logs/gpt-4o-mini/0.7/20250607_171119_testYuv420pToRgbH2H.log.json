@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Yuv420pToRgb {\npublic byte [ ] getPlaneData ( int plane ) {\nreturn data [ plane ] ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class Yuv420pToRgbTest {\n@Test\npublic void testYuv420pToRgbH2H ( ) {\nYuv420pToRgb transform = new Yuv420pToRgb ( ) ;\nPicture _in = Picture . createPictureHiBD ( 4 , 4 , new byte [ ] [ ] {\nyH , uH , vH } , new byte [ ] [ ] {\nyL , uL , vL } , ColorSpace . YUV420 , 2 ) ;\nPicture out = Picture . createCroppedHiBD ( 4 , 4 , 2 , ColorSpace . RGB , null ) ;\ntransform . transform ( _in , out ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(out);\nassertEquals(4, out.getWidth());\nassertEquals(4, out.getHeight());\nassertArrayEquals(expectedRgbData[0], out.getPlaneData(0));\nassertArrayEquals(expectedRgbData[1], out.getPlaneData(1));\nassertArrayEquals(expectedRgbData[2], out.getPlaneData(2));\nassertEquals(ColorSpace.RGB, out.getColorSpace());\nassertEquals(2, out.getBitDepth());\nassertTrue(out.getPlaneData(0).length > 0);\nassertTrue(out.getPlaneData(1).length > 0);\nassertTrue(out.getPlaneData(2).length > 0);\nassertEquals(expectedRgbData[0][0], out.getPlaneData(0)[0]);\nassertEquals(expectedRgbData[1][0], out.getPlaneData(1)[0]);\nassertEquals(expectedRgbData[2][0], out.getPlaneData(2)[0]);\nassertNotEquals(expectedRgbData[0][1], out.getPlaneData(0)[1]);\nassertNotEquals(expectedRgbData[1][1], out.getPlaneData(1)[1]);\nassertNotEquals(expectedRgbData[2][1], out.getPlaneData(2)[1]);\nassertEquals(expectedRgbData[0][3], out.getPlaneData(0)[3]);\nassertEquals(expectedRgbData[1][3], out.getPlaneData(1)[3]);\nassertEquals(expectedRgbData[2][3], out.getPlaneData(2)[3]);\nassertTrue(Arrays.equals(expectedRgbData[0], out.getPlaneData(0)));\nassertTrue(Arrays.equals(expectedRgbData[1], out.getPlaneData(1)));\nassertTrue(Arrays.equals(expectedRgbData[2], out.getPlaneData(2)));\n```\n====================\n\n",
+    "scores": [
+        0.82,
+        0.8,
+        0.8,
+        0.741,
+        0.722,
+        0.722,
+        0.713,
+        0.713,
+        0.703,
+        0.699,
+        0.693,
+        0.693,
+        0.693,
+        0.693,
+        0.692,
+        0.685,
+        0.684,
+        0.675,
+        0.675,
+        0.673,
+        0.673,
+        0.615,
+        0.377,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(rgbH,out.getPlaneData(0));"
+}

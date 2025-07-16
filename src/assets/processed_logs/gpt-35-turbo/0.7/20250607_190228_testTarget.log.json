@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptions {\npublic List < String > getOptions ( ) {\nList < String > options = new ArrayList < String > ( ) ;\nif ( ! showWarnings ) {\noptions . add ( \"STR\" ) ;\n} addStringOption ( options , \"STR\" , source ) ;\naddStringOption ( options , \"STR\" , target ) ;\naddStringOption ( options , \"STR\" , release ) ;\nreturn options ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class JavaCompilerOptionsTest {\n@Test\npublic void testTarget ( ) throws Exception {\nJavaCompilerOptions jco = new JavaCompilerOptions ( ) ;\njco . setTarget ( \"STR\" ) ;\nList < String > result = jco . getOptions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(result.contains(\"STR\"));\nAssert.assertTrue(result.contains(\"source=STR\"));\nAssert.assertTrue(result.contains(\"target=STR\"));\nAssert.assertTrue(result.contains(\"release=STR\"));\nAssert.assertEquals(4, result.size());\n\nAssert.assertFalse(result.contains(\"IGNORE\"));\nAssert.assertNotEquals(5, result.size());\n\nAssert.assertNotNull(result);\nAssert.assertNotEquals(0, result.size());\n\nAssert.assertTrue(result.get(0).equals(\"STR\"));\nAssert.assertTrue(result.get(1).equals(\"source=STR\"));\nAssert.assertTrue(result.get(2).equals(\"target=STR\"));\nAssert.assertTrue(result.get(3).equals(\"release=STR\"));\n\nAssert.assertNotEquals(\"invalid\", result.get(0));\nAssert.assertNotEquals(\"invalid\", result.get(1));\nAssert.assertNotEquals(\"invalid\", result.get(2));\nAssert.assertNotEquals(\"invalid\", result.get(3));\n====================\n\n",
+    "scores": [
+        0.966,
+        0.918,
+        0.918,
+        0.725,
+        0.725,
+        0.725,
+        0.725,
+        0.64,
+        0.627,
+        0.603,
+        0.559,
+        0.543,
+        0.543,
+        0.535,
+        0.507,
+        0.507,
+        0.5
+    ],
+    "ground_truth": "assertEquals(3,result.size());"
+}

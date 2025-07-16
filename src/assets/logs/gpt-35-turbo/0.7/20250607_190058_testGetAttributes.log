@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtil {
+    public static Map < String , Method > getAttributes ( Object mbeanLocation ) { 
+    Map < String , Method > result = new TreeMap < String , Method > ( ) ; 
+    Method [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ; 
+    for ( Method oneMethod : methods ) { 
+    MBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ; 
+    if ( attribute != null ) { 
+    result . put ( attribute . name ( ) , oneMethod ) ; 
+    } } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtilTest {
+    @Test
+     public void testGetAttributes ( ) throws Exception {
+         Map < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(atts);
+assertTrue(atts.size() == 1);
+assertTrue(atts.containsKey("testAttribute"));
+assertEquals("getTestAttribute", atts.get("testAttribute").getName());
+assertFalse(atts.containsKey("invalidAttribute"));
+assertNull(atts.get("invalidAttribute"));
+assertTrue(atts.get("testAttribute").getReturnType().equals(String.class));
+assertFalse(atts.get("testAttribute").getReturnType().equals(Integer.class));
+assertTrue(atts.get("testAttribute").getParameterCount() == 0);
+assertFalse(atts.get("testAttribute").isVarArgs());
+assertTrue(atts.get("testAttribute").getModifiers() == Modifier.PUBLIC);
+assertFalse(atts.get("testAttribute").isAnnotationPresent(Deprecated.class));
+assertTrue(atts.get("testAttribute").getAnnotation(MBeanAttribute.class) != null);
+assertFalse(atts.get("testAttribute").getAnnotation(NotNull.class) != null);
+assertTrue(atts.get("testAttribute").getDeclaringClass().equals(TestClass.class));
+assertFalse(atts.get("testAttribute").isSynthetic());
+assertTrue(atts.get("testAttribute").canAccess(this));
+assertFalse(atts.get("testAttribute").isBridge());
+assertTrue(atts.get("testAttribute").getGenericReturnType().equals(String.class));
+assertFalse(atts.get("testAttribute").getGenericReturnType().equals(Integer.class));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,atts.size()); ===
+0.755 - assertTrue(atts.size() == 1)
+0.609 - assertNotNull(atts)
+0.553 - assertFalse(atts.get("testAttribute").isBridge())
+0.545 - assertFalse(atts.get("testAttribute").isVarArgs())
+0.537 - assertNull(atts.get("invalidAttribute"))
+0.532 - assertFalse(atts.get("testAttribute").isSynthetic())
+0.526 - assertEquals("getTestAttribute", atts.get("testAttribute").getName())
+0.526 - assertFalse(atts.containsKey("invalidAttribute"))
+0.500 - assertTrue(atts.containsKey("testAttribute"))
+0.475 - assertTrue(atts.get("testAttribute").canAccess(this))
+0.437 - assertTrue(atts.get("testAttribute").getParameterCount() == 0)
+0.420 - assertFalse(atts.get("testAttribute").getAnnotation(NotNull.class) != null)
+0.408 - assertFalse(atts.get("testAttribute").isAnnotationPresent(Deprecated.class))
+0.396 - assertTrue(atts.get("testAttribute").getModifiers() == Modifier.PUBLIC)
+0.358 - assertTrue(atts.get("testAttribute").getAnnotation(MBeanAttribute.class) != null)
+0.337 - assertTrue(atts.get("testAttribute").getReturnType().equals(String.class))
+0.333 - assertTrue(atts.get("testAttribute").getDeclaringClass().equals(TestClass.class))
+0.330 - assertFalse(atts.get("testAttribute").getReturnType().equals(Integer.class))
+0.315 - assertTrue(atts.get("testAttribute").getGenericReturnType().equals(String.class))
+0.309 - assertFalse(atts.get("testAttribute").getGenericReturnType().equals(Integer.class))

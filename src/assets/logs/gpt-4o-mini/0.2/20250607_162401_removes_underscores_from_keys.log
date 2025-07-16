@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String getString ( String key ) { 
+    return getIn ( normalize ( key ) , false ) . getString ( ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void removes_underscores_from_keys ( ) {
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( "STR" + "STR" + "STR" ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected value for key STR1", config.getString("STR1"));
+assertEquals("Expected value for key STR2", config.getString("STR2"));
+assertEquals("Expected value for key STR3", config.getString("STR3"));
+assertNotNull(config.getString("STR1"));
+assertNotNull(config.getString("STR2"));
+assertNotNull(config.getString("STR3"));
+assertTrue(config.getString("STR1").length() > 0);
+assertTrue(config.getString("STR2").length() > 0);
+assertTrue(config.getString("STR3").length() > 0);
+assertEquals("Expected value for key str1", config.getString("str1"));
+assertEquals("Expected value for key str2", config.getString("str2"));
+assertEquals("Expected value for key str3", config.getString("str3"));
+assertThrows(IllegalArgumentException.class, () -> config.getString("INVALID_KEY"));
+assertEquals("Expected value for key STR1", config.getString("STR1"));
+assertEquals("Expected value for key STR2", config.getString("STR2"));
+assertEquals("Expected value for key STR3", config.getString("STR3"));
+assertNotEquals(config.getString("STR1"), config.getString("STR2"));
+assertNotEquals(config.getString("STR2"), config.getString("STR3"));
+assertNotEquals(config.getString("STR1"), config.getString("STR3"));
+assertTrue(config.getString("STR1").contains("Expected"));
+assertTrue(config.getString("STR2").contains("Expected"));
+assertTrue(config.getString("STR3").contains("Expected"));
+assertEquals("Expected value for key str1", config.getString("str1"));
+assertEquals("Expected value for key str2", config.getString("str2"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",config.getString("STR")); ===
+0.805 - assertNotNull(config.getString("STR1"))
+0.805 - assertNotNull(config.getString("STR2"))
+0.805 - assertNotNull(config.getString("STR3"))
+0.804 - assertEquals("Expected value for key STR2", config.getString("STR2"))
+0.804 - assertEquals("Expected value for key STR3", config.getString("STR3"))
+0.804 - assertEquals("Expected value for key STR1", config.getString("STR1"))
+0.804 - assertEquals("Expected value for key STR2", config.getString("STR2"))
+0.804 - assertEquals("Expected value for key STR3", config.getString("STR3"))
+0.789 - assertNotEquals(config.getString("STR1"), config.getString("STR2"))
+0.789 - assertNotEquals(config.getString("STR2"), config.getString("STR3"))
+0.789 - assertNotEquals(config.getString("STR1"), config.getString("STR3"))
+0.748 - ```java
+assertEquals("Expected value for key STR1", config.getString("STR1"))
+0.711 - assertTrue(config.getString("STR1").length() > 0)
+0.711 - assertTrue(config.getString("STR2").length() > 0)
+0.711 - assertTrue(config.getString("STR3").length() > 0)
+0.692 - assertEquals("Expected value for key str1", config.getString("str1"))
+0.692 - assertEquals("Expected value for key str2", config.getString("str2"))
+0.692 - assertEquals("Expected value for key str3", config.getString("str3"))
+0.692 - assertEquals("Expected value for key str1", config.getString("str1"))
+0.692 - assertEquals("Expected value for key str2", config.getString("str2"))
+0.640 - assertTrue(config.getString("STR1").contains("Expected"))
+0.640 - assertTrue(config.getString("STR2").contains("Expected"))
+0.640 - assertTrue(config.getString("STR3").contains("Expected"))
+0.504 - assertThrows(IllegalArgumentException.class, () -> config.getString("INVALID_KEY"))
+0.000 - ```

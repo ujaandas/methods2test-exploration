@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithin {
+    @Override
+     public < RET > RET field ( final String iFieldName ) { 
+     RET value = this . rawField ( iFieldName ) ; 
+     if ( ! iFieldName . startsWith ( "STR" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) { 
+     RET newValue = getDatabase ( ) . load ( ( ORID ) value ) ; 
+     if ( newValue != null ) { 
+     unTrack ( ( ORID ) value ) ; 
+     track ( ( OIdentifiable ) newValue ) ; 
+     value = newValue ; 
+     if ( this . isTrackingChanges ( ) ) { 
+     ORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ; 
+     } if ( ! iFieldName . contains ( "STR" ) ) { 
+     ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+     removeCollectionChangeListener ( entry , entry . value ) ; 
+     entry . value = value ; 
+     addCollectionChangeListener ( entry ) ; 
+     } } } return value ; 
+     }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialWithinTest {
+    @Test
+     public void testWithinNoIndex ( ) {
+         List < ODocument > execute = db . command ( new OCommandSQL ( "STR" + "STR" ) ) . execute ( ) ; 
+         ODocument next = execute . iterator ( ) . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(next);
+Assert.assertTrue(next.field("fieldName") instanceof String);
+Assert.assertEquals(5, next.field("intField"));
+Assert.assertNotEquals("value", next.field("otherField"));
+Assert.assertTrue(next.field("booleanField"));
+Assert.assertFalse(next.field("falseField"));
+Assert.assertNull(next.field("nullField"));
+Assert.assertNotSame("value", next.field("differentField"));
+Assert.assertTrue(next.field("collectionField") instanceof Collection);
+Assert.assertTrue(next.field("mapField") instanceof Map);
+Assert.assertTrue(next.field("arrayField") instanceof Object[]);
+Assert.assertTrue(next.field("objectField") instanceof CustomObject);
+Assert.assertTrue(next.field("nestedField") instanceof ODocument);
+Assert.assertTrue(next.field("linkedField") instanceof ORID);
+Assert.assertTrue(next.field("dateField") instanceof Date);
+Assert.assertTrue(next.field("decimalField") instanceof BigDecimal);
+Assert.assertTrue(next.field("longField") instanceof Long);
+Assert.assertTrue(next.field("floatField") instanceof Float);
+Assert.assertTrue(next.field("doubleField") instanceof Double);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(next.field("STR"),true); ===
+0.757 - Assert.assertEquals(5, next.field("intField"))
+0.685 - Assert.assertFalse(next.field("falseField"))
+0.676 - Assert.assertNull(next.field("nullField"))
+0.659 - Assert.assertNotEquals("value", next.field("otherField"))
+0.622 - Assert.assertTrue(next.field("booleanField"))
+0.602 - Assert.assertTrue(next.field("mapField") instanceof Map)
+0.588 - Assert.assertTrue(next.field("dateField") instanceof Date)
+0.588 - Assert.assertTrue(next.field("longField") instanceof Long)
+0.584 - Assert.assertTrue(next.field("doubleField") instanceof Double)
+0.575 - Assert.assertTrue(next.field("fieldName") instanceof String)
+0.575 - Assert.assertTrue(next.field("linkedField") instanceof ORID)
+0.575 - Assert.assertTrue(next.field("floatField") instanceof Float)
+0.565 - Assert.assertTrue(next.field("nestedField") instanceof ODocument)
+0.556 - Assert.assertTrue(next.field("arrayField") instanceof Object[])
+0.547 - Assert.assertTrue(next.field("objectField") instanceof CustomObject)
+0.532 - Assert.assertTrue(next.field("decimalField") instanceof BigDecimal)
+0.529 - Assert.assertNotSame("value", next.field("differentField"))
+0.515 - Assert.assertTrue(next.field("collectionField") instanceof Collection)
+0.509 - Assert.assertNotNull(next)

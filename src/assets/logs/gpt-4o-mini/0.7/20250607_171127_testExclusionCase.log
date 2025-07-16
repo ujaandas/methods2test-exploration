@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractor {
+    public String text ( Element element ) { 
+    if ( noText ) return "STR" ; 
+    if ( inclusionPatterns . size ( ) == 0 && excludedTags . size ( ) == 0 ) { 
+    return _text ( element ) ; 
+    } Elements matches = new Elements ( ) ; 
+    for ( String pattern : inclusionPatterns ) { 
+    matches = element . select ( pattern ) ; 
+    if ( ! matches . isEmpty ( ) ) break ; 
+    } if ( matches . isEmpty ( ) ) { 
+    matches . add ( element ) ; 
+    } final StringBuilder accum = new StringBuilder ( ) ; 
+    for ( Element node : matches ) { 
+    accum . append ( _text ( node ) ) . append ( "STR" ) ; 
+    } return accum . toString ( ) . trim ( ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class TextExtractorTest {
+    @Test
+     public void testExclusionCase ( ) throws IOException {
+         Config conf = new Config ( ) ; 
+         conf . put ( TextExtractor . EXCLUDE_PARAM_NAME , "STR" ) ; 
+         TextExtractor extractor = new TextExtractor ( conf ) ; 
+         String content = "STR" ; 
+         Document jsoupDoc = Parser . htmlParser ( ) . parseInput ( content , "STR" ) ; 
+         String text = extractor . text ( jsoupDoc . body ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("", text);
+assertTrue(text.isEmpty());
+assertNotNull(text);
+assertFalse(text.contains("STR"));
+assertNotEquals("STR", text);
+assertEquals("Expected empty string when exclusion pattern matches", "", text);
+assertTrue("Text should not contain excluded text", !text.contains("STR"));
+assertFalse("Text should not match exclusion pattern", text.matches(".*STR.*"));
+assertThat(text, isEmptyOrNullString());
+assertEquals("Length of text should be 0", 0, text.length());
+assertTrue("Text should be trimmed", text.trim().isEmpty());
+assertFalse("Text should not have leading or trailing spaces", text.startsWith(" ") || text.endsWith(" "));
+assertNotSame("Text should not be equal to excluded content", "STR", text);
+assertThat("Text must not contain exclusion string", text, not(containsString("STR")));
+assertEquals("Text extraction should return empty string", "", text);
+assertFalse("Text should not contain any exclusion pattern", text.contains("STR"));
+assertTrue("Text should be empty after exclusion", text.equals(""));
+assertThat("Final text should be empty", text, is(""));
+assertEquals("Extracted text should be empty", "", text);
+assertTrue("No text should have been extracted", text.length() == 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",text); ===
+0.941 - assertNotEquals("STR", text)
+0.792 - ```java
+assertEquals("", text)
+0.651 - assertNotNull(text)
+0.568 - assertEquals("Extracted text should be empty", "", text)
+0.561 - assertFalse(text.contains("STR"))
+0.545 - assertEquals("Length of text should be 0", 0, text.length())
+0.520 - assertTrue(text.isEmpty())
+0.518 - assertEquals("Text extraction should return empty string", "", text)
+0.472 - assertNotSame("Text should not be equal to excluded content", "STR", text)
+0.447 - assertEquals("Expected empty string when exclusion pattern matches", "", text)
+0.444 - assertThat("Final text should be empty", text, is(""))
+0.430 - assertTrue("Text should be trimmed", text.trim().isEmpty())
+0.419 - assertThat(text, isEmptyOrNullString())
+0.392 - assertFalse("Text should not match exclusion pattern", text.matches(".*STR.*"))
+0.381 - assertTrue("No text should have been extracted", text.length() == 0)
+0.370 - assertTrue("Text should not contain excluded text", !text.contains("STR"))
+0.353 - assertTrue("Text should be empty after exclusion", text.equals(""))
+0.330 - assertThat("Text must not contain exclusion string", text, not(containsString("STR")))
+0.323 - assertFalse("Text should not contain any exclusion pattern", text.contains("STR"))
+0.322 - assertFalse("Text should not have leading or trailing spaces", text.startsWith(" ") || text.endsWith(" "))
+0.000 - ```

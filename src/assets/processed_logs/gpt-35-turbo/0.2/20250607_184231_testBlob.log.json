@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecutionTest {\n@Test\npublic void testBlob ( ) {\nString clusterName = \"STR\" ;\nOResultSet result = db . command ( \"STR\" + clusterName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(result);\nAssert.assertTrue(result.hasNext());\nAssert.assertEquals(1, result.stream().count());\nAssert.assertTrue(result.next().getProperty(\"clusterName\") instanceof String);\nAssert.assertEquals(clusterName, result.next().getProperty(\"clusterName\"));\nAssert.assertFalse(result.hasNext());\nAssert.assertThrows(NoSuchElementException.class, result::next);\nAssert.assertThrows(UnsupportedOperationException.class, () -> result.remove());\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\") instanceof String));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").equals(clusterName)));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").length() == 3));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").matches(\"[A-Z]+\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").startsWith(\"S\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").endsWith(\"R\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").contains(\"T\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").equalsIgnoreCase(\"str\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").toLowerCase().equals(\"str\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").toUpperCase().equals(\"STR\")));\nAssert.assertTrue(result.stream().allMatch(item -> item.getProperty(\"clusterName\").compareToIgnoreCase(\"str\") == 0));\n====================\n\n",
+    "scores": [
+        0.552,
+        0.545,
+        0.474,
+        0.467,
+        0.467,
+        0.46,
+        0.46,
+        0.46,
+        0.454,
+        0.447,
+        0.435,
+        0.431,
+        0.424,
+        0.424,
+        0.404,
+        0.364,
+        0.35,
+        0.29,
+        0.222
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(clusterName)>0);"
+}

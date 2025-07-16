@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class SimulatorProperties {
+    public String get ( String name ) { 
+    return get ( name , null ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class SimulatorPropertiesTest {
+    @Test
+     public void testLoad_justKey ( ) {
+         File workingDirFile = new File ( simulatorHome , "STR" ) ; 
+         appendText ( "STR" , workingDirFile ) ; 
+         simulatorProperties . load ( workingDirFile ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(simulatorProperties);
+assertEquals("expectedValue1", simulatorProperties.get("key1"));
+assertEquals("expectedValue2", simulatorProperties.get("key2"));
+assertEquals("expectedValue3", simulatorProperties.get("key3"));
+assertNull(simulatorProperties.get("nonExistentKey"));
+assertTrue(simulatorProperties.get("key4").contains("substring"));
+assertFalse(simulatorProperties.get("key5").isEmpty());
+assertEquals(10, simulatorProperties.get("key6").length());
+assertTrue(simulatorProperties.get("key7").startsWith("prefix"));
+assertEquals("valueForKey8", simulatorProperties.get("key8"));
+assertNotEquals("unexpectedValue", simulatorProperties.get("key9"));
+assertSame(simulatorProperties.get("key10"), simulatorProperties.get("key10"));
+assertTrue(simulatorProperties.get("key11").matches("regexPattern"));
+assertFalse(simulatorProperties.get("key12").equals("wrongValue"));
+assertNull(simulatorProperties.get("key13"));
+assertNotNull(simulatorProperties.get("key14"));
+assertEquals("valueForKey15", simulatorProperties.get("key15"));
+assertTrue(simulatorProperties.get("key16").length() > 5);
+assertEquals("expectedValue17", simulatorProperties.get("key17"));
+assertThrows(IllegalArgumentException.class, () -> {
+    simulatorProperties.get("invalidKey");
+});
+assertTrue(simulatorProperties.get("key18").contains("expectedSubstring"));
+assertSame("expectedReference", simulatorProperties.get("key19"));
+assertNotSame("anotherReference", simulatorProperties.get("key20"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(simulatorProperties.get("STR").isEmpty()); ===
+0.868 - assertFalse(simulatorProperties.get("key5").isEmpty())
+0.804 - assertTrue(simulatorProperties.get("key16").length() > 5)
+0.752 - assertTrue(simulatorProperties.get("key4").contains("substring"))
+0.750 - assertNull(simulatorProperties.get("key13"))
+0.741 - assertTrue(simulatorProperties.get("key7").startsWith("prefix"))
+0.734 - assertEquals(10, simulatorProperties.get("key6").length())
+0.727 - assertNotNull(simulatorProperties.get("key14"))
+0.717 - assertTrue(simulatorProperties.get("key11").matches("regexPattern"))
+0.714 - assertTrue(simulatorProperties.get("key18").contains("expectedSubstring"))
+0.686 - assertNull(simulatorProperties.get("nonExistentKey"))
+0.678 - assertFalse(simulatorProperties.get("key12").equals("wrongValue"))
+0.643 - assertEquals("valueForKey8", simulatorProperties.get("key8"))
+0.632 - assertEquals("expectedValue1", simulatorProperties.get("key1"))
+0.632 - assertEquals("expectedValue2", simulatorProperties.get("key2"))
+0.632 - assertEquals("expectedValue3", simulatorProperties.get("key3"))
+0.632 - assertEquals("valueForKey15", simulatorProperties.get("key15"))
+0.621 - assertEquals("expectedValue17", simulatorProperties.get("key17"))
+0.621 - assertSame("expectedReference", simulatorProperties.get("key19"))
+0.620 - assertSame(simulatorProperties.get("key10"), simulatorProperties.get("key10"))
+0.610 - assertNotEquals("unexpectedValue", simulatorProperties.get("key9"))
+0.610 - assertNotSame("anotherReference", simulatorProperties.get("key20"))
+0.596 - ```java
+assertNotNull(simulatorProperties)
+0.547 - assertThrows(IllegalArgumentException.class, () -> {
+    simulatorProperties.get("invalidKey")
+0.037 - })
+0.000 - ```

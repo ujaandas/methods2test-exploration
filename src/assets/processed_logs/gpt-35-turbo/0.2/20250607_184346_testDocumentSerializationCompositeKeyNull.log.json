@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKey {\n@Override\npublic void fromDocument ( ODocument document ) {\ndocument . setLazyLoad ( false ) ;\nfinal String [ ] fieldNames = document . fieldNames ( ) ;\nfinal SortedMap < Integer , Object > keyMap = new TreeMap < Integer , Object > ( ) ;\nfor ( String fieldName : fieldNames ) {\nif ( fieldName . startsWith ( \"STR\" ) ) {\nfinal String keyIndex = fieldName . substring ( 3 ) ;\nkeyMap . put ( Integer . valueOf ( keyIndex ) , document . field ( fieldName ) ) ;\n} } keys . clear ( ) ;\nfor ( Object value : keyMap . values ( ) ) keys . add ( value ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCompositeKeyTest {\n@Test\npublic void testDocumentSerializationCompositeKeyNull ( ) {\nfinal OCompositeKey compositeKeyOne = new OCompositeKey ( ) ;\ncompositeKeyOne . addKey ( 1 ) ;\ncompositeKeyOne . addKey ( null ) ;\ncompositeKeyOne . addKey ( 2 ) ;\nODocument document = compositeKeyOne . toDocument ( ) ;\nfinal OCompositeKey compositeKeyTwo = new OCompositeKey ( ) ;\ncompositeKeyTwo . fromDocument ( document ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(3, compositeKeyTwo.getKeys().size());\nassertNull(compositeKeyTwo.getKeys().get(0));\nassertNull(compositeKeyTwo.getKeys().get(1));\nassertNull(compositeKeyTwo.getKeys().get(2));\nassertTrue(compositeKeyTwo.getKeys().contains(null));\nassertFalse(compositeKeyTwo.getKeys().contains(1));\nassertFalse(compositeKeyTwo.getKeys().contains(2));\nassertFalse(compositeKeyTwo.getKeys().contains(\"test\"));\nassertTrue(compositeKeyTwo.getKeys().get(0) == null);\nassertTrue(compositeKeyTwo.getKeys().get(1) == null);\nassertTrue(compositeKeyTwo.getKeys().get(2) == null);\nassertNotNull(compositeKeyTwo.getKeys());\nassertNotNull(compositeKeyTwo.getKeys().get(0));\nassertNotNull(compositeKeyTwo.getKeys().get(1));\nassertNotNull(compositeKeyTwo.getKeys().get(2));\nassertEquals(null, compositeKeyTwo.getKeys().get(0));\nassertEquals(null, compositeKeyTwo.getKeys().get(1));\nassertEquals(null, compositeKeyTwo.getKeys().get(2));\nassertNotEquals(1, compositeKeyTwo.getKeys().size());\nassertNotEquals(2, compositeKeyTwo.getKeys().size());\n====================\n\n",
+    "scores": [
+        0.646,
+        0.646,
+        0.646,
+        0.645,
+        0.625,
+        0.625,
+        0.588,
+        0.562,
+        0.562,
+        0.562,
+        0.547,
+        0.547,
+        0.543,
+        0.543,
+        0.543,
+        0.52,
+        0.505,
+        0.505,
+        0.505,
+        0.495
+    ],
+    "ground_truth": "assertEquals(compositeKeyOne,compositeKeyTwo);"
+}

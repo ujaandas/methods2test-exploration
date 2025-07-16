@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jribble.Java-Websockify;\n\npublic class FlashPolicyHandler {\npublic FlashPolicyHandler ( ChannelBuffer policyResponse ) {\nsuper ( ) ;\nthis . policyResponse = policyResponse ;\n}\n}\n\npackage jribble.Java-Websockify;\n\npublic class FlashPolicyHandlerTest {\n@Test\npublic void testDecodeCustomResponse ( ) {\nString XML = \"STR\" ;\nChannelBuffer policyResponse = ChannelBuffers . copiedBuffer ( XML , CharsetUtil . UTF_8 ) ;\nembedder = new DecoderEmbedder < FlashPolicyRequest > ( new FlashPolicyHandler ( policyResponse ) ) ;\nString request = \"STR\" ;\nbyte [ ] b = request . getBytes ( ) ;\nChannelBuffer buf = wrappedBuffer ( b ) ;\nembedder . offer ( buf ) ;\nObject first = embedder . poll ( ) ;\nChannelBuffer response = ( ChannelBuffer ) first ;\nString resp = new String ( response . array ( ) , 0 , response . readableBytes ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(first);\nassertTrue(first instanceof ChannelBuffer);\nassertEquals(policyResponse, response);\nassertEquals(policyResponse.readableBytes(), response.readableBytes());\nassertArrayEquals(policyResponse.array(), response.array());\nassertTrue(response.isReadable());\nassertFalse(response.isWritable());\nassertEquals(CharsetUtil.UTF_8.name(), response.toString(CharsetUtil.UTF_8).charset().name());\nassertTrue(resp.contains(\"STR\"));\nassertEquals(\"STR\", response.toString(CharsetUtil.UTF_8));\nassertNotEquals(\"\", resp);\nassertTrue(resp.length() > 0);\nassertTrue(resp.startsWith(\"S\"));\nassertTrue(resp.endsWith(\"R\"));\nassertTrue(response.readerIndex() == 0);\nassertTrue(response.writerIndex() == response.readableBytes());\nassertTrue(response.capacity() >= response.readableBytes());\nassertTrue(response.isDirect());\nassertTrue(response.toString(CharsetUtil.UTF_8).contains(\"STR\"));\nassertFalse(resp.isEmpty());\nassertEquals(resp.length(), response.readableBytes());\n```\n====================\n\n",
+    "scores": [
+        0.654,
+        0.618,
+        0.586,
+        0.582,
+        0.576,
+        0.567,
+        0.567,
+        0.557,
+        0.523,
+        0.523,
+        0.516,
+        0.45,
+        0.442,
+        0.441,
+        0.429,
+        0.4,
+        0.386,
+        0.371,
+        0.37,
+        0.321,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "assertTrue(XML.equals(resp));"
+}

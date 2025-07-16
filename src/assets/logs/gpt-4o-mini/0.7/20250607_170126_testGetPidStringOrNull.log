@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtils {
+    static Integer getPidFromBeanString ( String name ) { 
+    int indexOf = name . indexOf ( '@' ) ; 
+    if ( indexOf == - 1 ) { 
+    return null ; 
+    } String pidString = name . substring ( 0 , indexOf ) ; 
+    try { 
+    return Integer . parseInt ( pidString ) ; 
+    } catch ( NumberFormatException e ) { 
+    LOGGER . warn ( e ) ; 
+    return null ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class NativeUtilsTest {
+    @Test
+     public void testGetPidStringOrNull ( ) {
+         Integer pid = getPidFromBeanString ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(pid);
+assertEquals(null, pid);
+assertTrue(pid == null);
+assertFalse(pid != null);
+assertSame(null, pid);
+assertThat(pid, is(nullValue()));
+assertThat(pid, equalTo(null));
+assertThat(pid, isNull());
+assertThat(pid, not(is(notNullValue())));
+assertThat(pid, is(nullValue()));
+assertThat(pid, not(equalTo(0)));
+assertNotEquals(Integer.valueOf(0), pid);
+assertTrue(pid == null);
+assertFalse(pid instanceof Integer);
+assertThat(pid, is(null));
+assertThat(pid, sameInstance(null));
+assertNotNull(pid, "PID should be null");
+assertThat(pid, isA(Integer.class));
+assertThat(pid, Matchers.nullValue());
+assertThat(pid, is(not(3)));
+assertThat(pid, is(not(equalTo(1))));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(pid); ===
+0.732 - ```java
+assertNull(pid)
+0.684 - assertSame(null, pid)
+0.667 - assertNotNull(pid, "PID should be null")
+0.650 - assertEquals(null, pid)
+0.619 - assertThat(pid, isNull())
+0.615 - assertTrue(pid == null)
+0.615 - assertTrue(pid == null)
+0.600 - assertFalse(pid != null)
+0.596 - assertNotEquals(Integer.valueOf(0), pid)
+0.571 - assertThat(pid, is(null))
+0.545 - assertThat(pid, is(not(3)))
+0.511 - assertThat(pid, equalTo(null))
+0.491 - assertThat(pid, not(is(notNullValue())))
+0.490 - assertThat(pid, is(nullValue()))
+0.490 - assertThat(pid, is(nullValue()))
+0.490 - assertThat(pid, not(equalTo(0)))
+0.471 - assertFalse(pid instanceof Integer)
+0.462 - assertThat(pid, sameInstance(null))
+0.462 - assertThat(pid, isA(Integer.class))
+0.453 - assertThat(pid, is(not(equalTo(1))))
+0.444 - assertThat(pid, Matchers.nullValue())
+0.000 - ```

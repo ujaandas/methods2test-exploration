@@ -1,0 +1,19 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormat {\npublic static String getDigestSha1 ( byte [ ] bytes1 , byte [ ] bytes2 ) {\nMessageDigest sha1 = DigestUtils . getSha1Digest ( ) ;\nsha1 . update ( bytes1 ) ;\nreturn \"STR\" + base32 . encodeAsString ( sha1 . digest ( bytes2 ) ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.external/warc;\n\npublic class WARCRecordFormatTest {\n@Test\npublic void testGetDigestSha1TwoByteArrays ( ) {\nbyte [ ] content1 = {\n'a' , 'b' , 'c' } ;\nbyte [ ] content2 = {\n'd' , 'e' , 'f' } ;\nString sha1str = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals( \"STRc4xg6eZ7uq4xO7uq4xO7uq4xO7uq4xO7uq4xO7uq4=\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotEquals( \"STRc4xg6eZ7uq4xO7uq4xO7uq4xO7uq4xO7uq4xO7uq4=\" , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) ) ;\nassertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotNull( WARCRecordFormat . getDigestSha1 ( content2 , content1 ) ) ;\nassertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( \"STR\" ) ) ;\nassertFalse( WARCRecordFormat . getDigestSha1 ( content2 , content1 ) . startsWith ( \"STR\" ) ) ;\nassertEquals( 44 , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . length ( ) ) ;\nassertEquals( 44 , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) . length ( ) ) ;\nassertNotEquals( \"STRc4xg6eZ7uq4xO7uq4xO7uq4xO7uq4xO7uq4xO7uq4=\" , WARCRecordFormat . getDigestSha1 ( content1 , content1 ) ) ;\nassertNotEquals( \"STRc4xg6eZ7uq4xO7uq4xO7uq4xO7uq4xO7uq4xO7uq4=\" , WARCRecordFormat . getDigestSha1 ( content2 , content2 ) ) ;\nassertNotEquals( \"STRc4xg6eZ7uq4xO7uq4xO7uq4xO7uq4xO7uq4xO7uq4=\" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ;\nassertNotEquals(\n====================\n\n",
+    "scores": [
+        0.842,
+        0.837,
+        0.816,
+        0.809,
+        0.744,
+        0.739,
+        0.734,
+        0.723,
+        0.712,
+        0.712,
+        0.702,
+        0.28
+    ],
+    "ground_truth": "assertEquals(\"STR\",sha1str,WARCRecordFormat.getDigestSha1(content1,content2));"
+}

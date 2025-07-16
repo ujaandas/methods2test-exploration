@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testSimpleLimit ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedValue1, qResult.get(0).field(\"fieldName1\"));\nassertEquals(expectedValue2, qResult.get(1).field(\"fieldName2\"));\nassertEquals(expectedValue3, qResult.get(2).field(\"fieldName3\"));\nassertNotEquals(unexpectedValue, qResult.get(3).field(\"fieldName4\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"fieldName5\") != null));\nassertEquals(expectedFieldCount, qResult.get(0).fields().size());\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"fieldName6\").equals(expectedValue4)));\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"fieldName7\").equals(unexpectedValue2)));\nassertEquals(expectedValue5, qResult.get(expectedIndex).field(\"fieldName8\"));\nassertTrue(qResult.get(0).containsField(\"fieldName9\"));\nassertEquals(expectedValue6, qResult.get(0).field(\"fieldName10\"));\nassertNotNull(qResult.get(0).field(\"fieldName11\"));\nassertTrue(qResult.get(0).field(\"fieldName12\") instanceof SomeExpectedType);\nassertEquals(expectedValue7, qResult.get(0).field(\"fieldName13\"));\nassertTrue(qResult.size() <= maxExpectedSize);\nassertEquals(expectedValue8, qResult.get(0).field(\"fieldName14\"));\nassertFalse(qResult.get(0).field(\"fieldName15\").isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.63,
+        0.624,
+        0.602,
+        0.581,
+        0.581,
+        0.574,
+        0.574,
+        0.574,
+        0.567,
+        0.557,
+        0.55,
+        0.524,
+        0.514,
+        0.507,
+        0.5,
+        0.408,
+        0.374,
+        0.369,
+        0.35,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

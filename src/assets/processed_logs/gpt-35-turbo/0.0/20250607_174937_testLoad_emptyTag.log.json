@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFile {\npublic int agentCount ( ) {\nreturn agents . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFileTest {\n@Test\npublic void testLoad_emptyTag ( ) {\nwriteText ( \"STR\" , agentsFile ) ;\nregistry = load ( agentsFile ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, registry.agentCount());\nassertNotNull(registry.getAgent(\"STR\"));\nassertNull(registry.getAgent(\"ABC\"));\nassertTrue(registry.getAgents().isEmpty());\nassertFalse(registry.getAgents().contains(\"XYZ\"));\nassertEquals(1, registry.getAgents().size());\nassertTrue(registry.getAgents().contains(\"STR\"));\nassertFalse(registry.getAgents().contains(\"ABC\"));\nassertEquals(\"STR\", registry.getAgent(\"STR\"));\nassertNotEquals(\"ABC\", registry.getAgent(\"STR\"));\nassertTrue(registry.getAgent(\"STR\").isActive());\nassertFalse(registry.getAgent(\"STR\").isInactive());\nassertTrue(registry.getAgent(\"STR\").isAvailable());\nassertFalse(registry.getAgent(\"STR\").isBusy());\nassertEquals(0, registry.getAgent(\"STR\").getTasks());\nassertNotNull(registry.getAgent(\"STR\").getDetails());\nassertNull(registry.getAgent(\"STR\").getTasksList());\nassertTrue(registry.getAgent(\"STR\").getDetails().containsKey(\"key\"));\nassertFalse(registry.getAgent(\"STR\").getDetails().containsKey(\"invalidKey\"));\n====================\n\n",
+    "scores": [
+        0.973,
+        0.775,
+        0.741,
+        0.714,
+        0.705,
+        0.685,
+        0.674,
+        0.674,
+        0.658,
+        0.651,
+        0.644,
+        0.635,
+        0.633,
+        0.595,
+        0.591,
+        0.584,
+        0.552,
+        0.514,
+        0.513
+    ],
+    "ground_truth": "assertEquals(1,registry.agentCount());"
+}

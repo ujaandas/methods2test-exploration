@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class SubStatement {
+    public ArrayList < Attachment > getAttachments ( ) { 
+    return attachments ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class SubStatementTest {
+    @Test
+     public void testSetAttachments ( ) throws URISyntaxException , NoSuchAlgorithmException , IOException {
+         ArrayList < Attachment > expected = attachments ; 
+         expected . remove ( 0 ) ; 
+         Attachment att = new Attachment ( ) ; 
+         HashMap < String , String > attDisplay = new HashMap < String , String > ( ) ; 
+         attDisplay . put ( "STR" , "STR" ) ; 
+         att . setDisplay ( attDisplay ) ; 
+         HashMap < String , String > description = new HashMap < String , String > ( ) ; 
+         description . put ( "STR" , "STR" ) ; 
+         att . setDescription ( description ) ; 
+         URI usageType = new URI ( "STR" ) ; 
+         att . setUsageType ( usageType ) ; 
+         String attach = "STR" ; 
+         String contentType = "STR" ; 
+         att . addAttachment ( attach , contentType ) ; 
+         expected . add ( att ) ; 
+         ArrayList < Attachment > actual = substatement . getAttachments ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.containsAll(expected));
+assertTrue(expected.containsAll(actual));
+assertEquals(expected.get(0).getDisplay(), actual.get(0).getDisplay());
+assertEquals(expected.get(0).getDescription(), actual.get(0).getDescription());
+assertEquals(expected.get(0).getUsageType(), actual.get(0).getUsageType());
+assertEquals(expected.get(0).getAttachments().size(), actual.get(0).getAttachments().size());
+assertEquals(expected.get(0).getAttachments().get(0).getContentType(), actual.get(0).getAttachments().get(0).getContentType());
+assertEquals(expected.get(0).getAttachments().get(0).getAttach(), actual.get(0).getAttachments().get(0).getAttach());
+assertNotSame(expected, actual);
+assertNotEquals(expected.get(0), actual.get(0));
+assertTrue(actual.isEmpty() || !actual.get(0).getDisplay().isEmpty());
+assertTrue(actual.get(0).getDescription().containsKey("STR"));
+assertTrue(actual.get(0).getUsageType().toString().contains("STR"));
+assertFalse(actual.isEmpty());
+assertEquals("STR", actual.get(0).getDisplay().get("STR"));
+assertEquals("STR", actual.get(0).getDescription().get("STR"));
+assertNotNull(actual.get(0).getAttachments());
+assertTrue(actual.get(0).getAttachments().size() > 0);
+assertEquals(expected.get(1).getDisplay(), actual.get(1).getDisplay());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.636 - assertNotNull(actual.get(0).getAttachments())
+0.600 - assertFalse(actual.isEmpty())
+0.590 - assertTrue(expected.containsAll(actual))
+0.567 - assertNotEquals(expected.get(0), actual.get(0))
+0.492 - assertTrue(actual.containsAll(expected))
+0.469 - assertEquals(expected.size(), actual.size())
+0.417 - assertTrue(actual.get(0).getAttachments().size() > 0)
+0.410 - assertEquals("STR", actual.get(0).getDisplay().get("STR"))
+0.390 - assertEquals("STR", actual.get(0).getDescription().get("STR"))
+0.366 - assertTrue(actual.get(0).getDescription().containsKey("STR"))
+0.356 - assertEquals(expected.get(0).getDisplay(), actual.get(0).getDisplay())
+0.356 - assertEquals(expected.get(1).getDisplay(), actual.get(1).getDisplay())
+0.341 - assertTrue(actual.isEmpty() || !actual.get(0).getDisplay().isEmpty())
+0.341 - assertTrue(actual.get(0).getUsageType().toString().contains("STR"))
+0.319 - assertEquals(expected.get(0).getUsageType(), actual.get(0).getUsageType())
+0.306 - assertEquals(expected.get(0).getDescription(), actual.get(0).getDescription())
+0.268 - assertEquals(expected.get(0).getAttachments().size(), actual.get(0).getAttachments().size())
+0.221 - assertEquals(expected.get(0).getAttachments().get(0).getAttach(), actual.get(0).getAttachments().get(0).getAttach())
+0.219 - assertEquals(expected.get(0).getAttachments().get(0).getContentType(), actual.get(0).getAttachments().get(0).getContentType())
+0.000 - ```

@@ -1,0 +1,94 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecution {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSelectStatementExecutionTest {
+    @Test
+     public void testFetchFromSingleRid ( ) {
+         OResultSet result = db . query ( "STR" ) ; 
+         printExecutionPlan ( result ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(1, result.getTotalRecords());
+assertEquals("expectedValue1", result.next().getProperty("propertyName1"));
+assertEquals("expectedValue2", result.next().getProperty("propertyName2"));
+assertFalse(result.hasNext());
+result.close();
+
+OResultSet result2 = db.query("ANOTHER_QUERY");
+assertNotNull(result2);
+assertTrue(result2.hasNext());
+assertEquals(2, result2.getTotalRecords());
+assertEquals("expectedValue3", result2.next().getProperty("propertyName3"));
+assertEquals("expectedValue4", result2.next().getProperty("propertyName4"));
+assertFalse(result2.hasNext());
+result2.close();
+
+OResultSet result3 = db.query("YET_ANOTHER_QUERY");
+assertNotNull(result3);
+assertTrue(result3.hasNext());
+assertEquals(3, result3.getTotalRecords());
+assertEquals("expectedValue5", result3.next().getProperty("propertyName5"));
+assertTrue(result3.hasNext());
+assertEquals("expectedValue6", result3.next().getProperty("propertyName6"));
+assertFalse(result3.hasNext());
+result3.close();
+
+OResultSet emptyResult = db.query("EMPTY_QUERY");
+assertNotNull(emptyResult);
+assertFalse(emptyResult.hasNext());
+assertEquals(0, emptyResult.getTotalRecords());
+emptyResult.close();
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.982 - assertTrue(result2.hasNext())
+0.982 - assertTrue(result3.hasNext())
+0.982 - assertTrue(result3.hasNext())
+0.877 - assertFalse(result.hasNext())
+0.862 - assertFalse(result2.hasNext())
+0.862 - assertFalse(result3.hasNext())
+0.774 - assertFalse(emptyResult.hasNext())
+0.600 - assertNotNull(result2)
+0.600 - assertNotNull(result3)
+0.588 - assertEquals(1, result.getTotalRecords())
+0.580 - assertEquals(2, result2.getTotalRecords())
+0.580 - assertEquals(3, result3.getTotalRecords())
+0.526 - ```java
+assertNotNull(result)
+0.524 - result.close()
+0.521 - assertEquals(0, emptyResult.getTotalRecords())
+0.519 - assertNotNull(emptyResult)
+0.512 - result2.close()
+0.512 - result3.close()
+0.511 - emptyResult.close()
+0.416 - assertEquals("expectedValue1", result.next().getProperty("propertyName1"))
+0.416 - assertEquals("expectedValue2", result.next().getProperty("propertyName2"))
+0.412 - assertEquals("expectedValue3", result2.next().getProperty("propertyName3"))
+0.412 - assertEquals("expectedValue4", result2.next().getProperty("propertyName4"))
+0.412 - assertEquals("expectedValue5", result3.next().getProperty("propertyName5"))
+0.412 - assertEquals("expectedValue6", result3.next().getProperty("propertyName6"))
+0.338 - OResultSet result2 = db.query("ANOTHER_QUERY")
+0.320 - OResultSet result3 = db.query("YET_ANOTHER_QUERY")
+0.247 - OResultSet emptyResult = db.query("EMPTY_QUERY")
+0.000 - ```

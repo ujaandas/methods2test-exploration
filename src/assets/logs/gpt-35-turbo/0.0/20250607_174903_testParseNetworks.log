@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected static String [ ] parseNetworks ( String dockerResult ) { 
+    if ( ! dockerResult . matches ( "STR" ) ) { 
+    return null ; 
+    } String networkMap = dockerResult . substring ( dockerResult . indexOf ( "STR" ) + 1 , dockerResult . indexOf ( "STR" ) ) ; 
+    String [ ] networkHex = networkMap . split ( "STR" ) ; 
+    String [ ] networks = new String [ networkHex . length ] ; 
+    for ( int i = 0 ; 
+    i < networkHex . length ; 
+    i ++ ) { 
+    networks [ i ] = networkHex [ i ] . split ( "STR" ) [ 0 ] ; 
+    } return networks ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testParseNetworks ( ) {
+         String [ ] networkArray = new String [ ] { 
+     "STR" } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNull(DevUtil.parseNetworks(null));
+assertNull(DevUtil.parseNetworks(""));
+assertNull(DevUtil.parseNetworks("abc"));
+assertNull(DevUtil.parseNetworks("STR"));
+assertArrayEquals(new String[]{}, DevUtil.parseNetworks("STRSTR"));
+assertArrayEquals(new String[]{"abc"}, DevUtil.parseNetworks("STRabcSTR"));
+assertArrayEquals(new String[]{"abc", "def"}, DevUtil.parseNetworks("STRabcSTRdefSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTRyzSTR"));
+assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz", "123"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTRyz
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(networkArray,DevUtil.parseNetworks("STR")); ===
+0.839 - assertArrayEquals(new String[]{}, DevUtil.parseNetworks("STRSTR"))
+0.803 - assertArrayEquals(new String[]{"abc"}, DevUtil.parseNetworks("STRabcSTR"))
+0.760 - assertNull(DevUtil.parseNetworks("STR"))
+0.736 - assertArrayEquals(new String[]{"abc", "def"}, DevUtil.parseNetworks("STRabcSTRdefSTR"))
+0.722 - assertNull(DevUtil.parseNetworks(""))
+0.700 - assertNull(DevUtil.parseNetworks("abc"))
+0.679 - assertArrayEquals(new String[]{"abc", "def", "ghi"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTR"))
+0.667 - assertNull(DevUtil.parseNetworks(null))
+0.631 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTR"))
+0.578 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTR"))
+0.552 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTR"))
+0.520 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTR"))
+0.481 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTR"))
+0.469 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTRyzSTR"))
+0.442 - assertArrayEquals(new String[]{"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz", "123"}, DevUtil.parseNetworks("STRabcSTRdefSTRghiSTRjklSTRmnoSTRpqrSTRstuSTRvwxSTRyz

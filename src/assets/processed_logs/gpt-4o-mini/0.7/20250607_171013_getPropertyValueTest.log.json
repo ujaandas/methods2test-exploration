@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class Configs {\npublic static String getSystemPropertyWithMavenPropertyAsFallback ( Properties properties , String key ) {\nString val = System . getProperty ( key ) ;\nif ( val == null && properties != null ) {\nval = properties . getProperty ( key ) ;\n} return val ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ConfigsTest {\n@Test\npublic void getPropertyValueTest ( ) {\nproperties . setProperty ( KEY_1 , value ) ;\nSystem . setProperty ( KEY_2 , value ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\nassertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"NON_EXISTENT_KEY\"));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_1));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, KEY_2));\nassertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"ANOTHER_NON_EXISTENT_KEY\"));\nproperties.setProperty(KEY_1, null);\nassertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\nproperties.setProperty(KEY_2, null);\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nassertNull(Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"MISSING_KEY\"));\nSystem.clearProperty(KEY_2);\nassertEquals(value, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nSystem.setProperty(KEY_2, \"DIFFERENT_VALUE\");\nassertEquals(\"DIFFERENT_VALUE\", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_2));\nproperties.setProperty(KEY_1, \"ANOTHER_VALUE\");\nassertEquals(\"ANOTHER_VALUE\", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, KEY_1));\nproperties.setProperty(\"UNUSED_KEY\", \"UNUSED_VALUE\");\nassertEquals(\"UNUSED_VALUE\", Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"UNUSED_KEY\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(properties, \"RANDOM_KEY\"));\nassertEquals(null, Configs.getSystemPropertyWithMavenPropertyAsFallback(null, \"ANY_KEY\"));\n```\n====================\n\n",
+    "scores": [
+        0.944,
+        0.944,
+        0.937,
+        0.933,
+        0.933,
+        0.93,
+        0.906,
+        0.904,
+        0.892,
+        0.878,
+        0.867,
+        0.862,
+        0.851,
+        0.843,
+        0.825,
+        0.808,
+        0.342,
+        0.301,
+        0.258,
+        0.242,
+        0.237,
+        0.213,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",Configs.getSystemPropertyWithMavenPropertyAsFallback(properties,KEY_1));"
+}

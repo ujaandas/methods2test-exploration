@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testSimpleLimit ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.get(0) instanceof ODocument);\nassertEquals(expectedFieldValue, qResult.get(0).field(\"fieldName\"));\nassertEquals(expectedFieldValue2, qResult.get(1).field(\"fieldName2\"));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertEquals(expectedId, qResult.get(0).getIdentity());\nassertNotEquals(unexpectedId, qResult.get(1).getIdentity());\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"name\").equals(\"John Doe\")));\nassertEquals(expectedType, qResult.get(0).getSchemaType());\nassertTrue(qResult.size() <= maxExpectedSize);\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"deleted\").equals(true)));\nassertEquals(expectedCount, qResult.stream().filter(doc -> doc.field(\"category\").equals(\"A\")).count());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"createdAt\") != null));\nassertEquals(expectedFieldValue3, qResult.get(2).field(\"fieldName3\"));\nassertNotNull(qResult.get(0).field(\"nestedField\"));\nassertEquals(expectedNestedFieldValue, qResult.get(0).field(\"nestedField\").field(\"subField\"));\nassertTrue(qResult.stream().map(doc -> doc.field(\"score\")).allMatch(score -> score >= 0));\nassertEquals(expectedString, qResult.get(0).field(\"description\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"email\").equals(\"test@example.com\")));\nassertEquals(expectedFieldValue4, qResult.get(qResult.size() - 1).field(\"fieldName4\"));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.63,
+        0.627,
+        0.598,
+        0.591,
+        0.567,
+        0.562,
+        0.553,
+        0.551,
+        0.551,
+        0.55,
+        0.513,
+        0.507,
+        0.459,
+        0.434,
+        0.426,
+        0.412,
+        0.385,
+        0.382,
+        0.372,
+        0.353,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

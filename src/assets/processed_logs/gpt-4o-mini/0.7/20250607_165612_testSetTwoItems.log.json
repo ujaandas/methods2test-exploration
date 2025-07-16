@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class CASObjectArray {\npublic int add ( T value ) {\nObjects . requireNonNull ( value ) ;\nwhile ( true ) {\nfinal int newIndex = size . get ( ) ;\nfinal int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ;\nfinal int containerSize = 1 << containerIndex ;\nfinal int indexInsideContainer = newIndex + 1 - containerSize ;\nAtomicReferenceArray < T > container = containers . get ( containerIndex ) ;\nif ( container == null ) {\ncontainer = new AtomicReferenceArray < > ( containerSize ) ;\nif ( ! containers . compareAndSet ( containerIndex , null , container ) ) {\ncontainer = containers . get ( containerIndex ) ;\n} } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) {\nsize . incrementAndGet ( ) ;\nreturn newIndex ;\n} } }\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class CASObjectArrayTest {\n@Test\npublic void testSetTwoItems ( ) {\nfinal CASObjectArray < Integer > array = new CASObjectArray < > ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\narray.add(1);\narray.add(2);\nassertEquals(0, array.add(1));\nassertEquals(1, array.add(2));\nassertEquals(2, array.size().get());\nassertEquals(1, array.get(0));\nassertEquals(2, array.get(1));\nassertNull(array.get(2));\nassertThrows(IndexOutOfBoundsException.class, () -> array.get(2));\nassertEquals(2, array.size().get());\nassertEquals(0, array.add(3));\nassertEquals(3, array.size().get());\nassertEquals(3, array.get(2));\nassertEquals(2, array.add(4));\nassertEquals(4, array.size().get());\nassertEquals(4, array.get(3));\nassertEquals(1, array.add(5));\nassertEquals(5, array.size().get());\nassertEquals(5, array.get(4));\nassertTrue(array.add(null) >= 0);\nassertFalse(array.add(null) >= 0);\nassertEquals(5, array.size().get());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.964,
+        0.929,
+        0.929,
+        0.929,
+        0.857,
+        0.821,
+        0.821,
+        0.821,
+        0.821,
+        0.746,
+        0.742,
+        0.742,
+        0.742,
+        0.742,
+        0.742,
+        0.742,
+        0.692,
+        0.69,
+        0.583,
+        0.55,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,array.add(1));"
+}

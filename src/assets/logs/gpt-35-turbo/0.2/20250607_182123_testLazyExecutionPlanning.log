@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OScriptExecution {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OScriptExecutionTest {
+    @Test
+     public void testLazyExecutionPlanning ( ) {
+         String script = "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         OResultSet result = db . execute ( "STR" , script ) ; 
+         OResult item = result . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(result);
+Assert.assertTrue(result.hasNext());
+Assert.assertEquals("expectedValue", item.getProperty("propertyName"));
+Assert.assertNotEquals("unexpectedValue", item.getProperty("propertyName"));
+Assert.assertTrue(item.getProperty("propertyName") instanceof String);
+Assert.assertFalse(result.isEmpty());
+Assert.assertNotEquals(0, result.size());
+Assert.assertTrue(result.stream().allMatch(Objects::nonNull));
+Assert.assertTrue(result.stream().allMatch(e -> e instanceof OResult));
+Assert.assertTrue(result.stream().anyMatch(e -> e.getProperty("propertyName").equals("expectedValue")));
+Assert.assertFalse(result.stream().anyMatch(e -> e.getProperty("propertyName").equals("unexpectedValue")));
+Assert.assertEquals(7, result.stream().count());
+Assert.assertTrue(result.stream().noneMatch(e -> e.getProperty("propertyName").equals("unexpectedValue")));
+Assert.assertEquals("expectedValue", result.stream().findFirst().get().getProperty("propertyName"));
+Assert.assertEquals("expectedValue", result.stream().skip(3).findFirst().get().getProperty("propertyName"));
+Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName") != null));
+Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName") instanceof String));
+Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName").equals("expectedValue")));
+Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName").equals("expectedValue")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",item.getProperty("STR")); ===
+0.705 - Assert.assertEquals("expectedValue", item.getProperty("propertyName"))
+0.673 - Assert.assertNotEquals("unexpectedValue", item.getProperty("propertyName"))
+0.563 - Assert.assertTrue(item.getProperty("propertyName") instanceof String)
+0.537 - Assert.assertEquals("expectedValue", result.stream().findFirst().get().getProperty("propertyName"))
+0.537 - Assert.assertEquals(7, result.stream().count())
+0.507 - Assert.assertEquals("expectedValue", result.stream().skip(3).findFirst().get().getProperty("propertyName"))
+0.507 - Assert.assertNotEquals(0, result.size())
+0.500 - Assert.assertFalse(result.isEmpty())
+0.471 - Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName") != null))
+0.434 - Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName") instanceof String))
+0.429 - Assert.assertFalse(result.stream().anyMatch(e -> e.getProperty("propertyName").equals("unexpectedValue")))
+0.409 - Assert.assertTrue(result.stream().anyMatch(e -> e.getProperty("propertyName").equals("expectedValue")))
+0.409 - Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName").equals("expectedValue")))
+0.409 - Assert.assertTrue(result.stream().allMatch(e -> e.getProperty("propertyName").equals("expectedValue")))
+0.400 - Assert.assertTrue(result.stream().noneMatch(e -> e.getProperty("propertyName").equals("unexpectedValue")))
+0.344 - Assert.assertNotNull(result)
+0.338 - Assert.assertTrue(result.hasNext())
+0.275 - Assert.assertTrue(result.stream().allMatch(e -> e instanceof OResult))
+0.268 - Assert.assertTrue(result.stream().allMatch(Objects::nonNull))

@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParser {\npublic Date parse ( final String timestamp ) throws ProcessingException {\nif ( StringUtils . isBlank ( timestamp ) ) {\nreturn null ;\n} try {\nreturn parser . parse ( timestamp ) ;\n} catch ( Exception ex ) {\nthrow new ProcessingException ( \"STR\" + timestamp + \"STR\" , ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class TimestampParserTest {\n@Test\npublic void testParseEpochMillis ( ) throws Exception {\nString format = TimestampParser . EPOCH_MILLIS ;\nlong time = System . currentTimeMillis ( ) ;\nDate parsed = new TimestampParser ( format ) . parse ( String . valueOf ( time ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(parsed);\nAssert.assertTrue(parsed instanceof Date);\nAssert.assertEquals(time, parsed.getTime(), 100); // Allowing a small margin of error\nAssert.assertTrue(parsed.after(new Date(0))); // Ensure parsed date is after epoch\nAssert.assertTrue(parsed.before(new Date(Long.MAX_VALUE))); // Ensure parsed date is before max date\nAssert.assertEquals(\"Parsed date does not match expected\", time, parsed.getTime());\nAssert.assertTrue(\"Parsed date should be within 1 second of current time\", Math.abs(parsed.getTime() - time) < 1000);\nAssert.assertTrue(\"Parsed date should not be in the future\", parsed.before(new Date()));\nAssert.assertFalse(\"Parsed date should not be null\", parsed == null);\nAssert.assertEquals(\"Parsed date should be equal to expected date\", parsed, new Date(time));\nAssert.assertNotEquals(\"Parsed date should not be equal to a future date\", parsed, new Date(time + 10000));\nAssert.assertNotEquals(\"Parsed date should not be equal to a past date\", parsed, new Date(time - 10000));\nAssert.assertTrue(\"Parsed date should represent a valid timestamp\", parsed.getTime() > 0);\nAssert.assertTrue(\"Parsed date should be of type Date\", parsed instanceof Date);\nAssert.assertEquals(\"Parsed date's milliseconds should match\", time % 1000, parsed.getTime() % 1000);\nAssert.assertTrue(\"Parsed date should be greater than a specific past date\", parsed.after(new Date(time - 100000)));\nAssert.assertTrue(\"Parsed date should be less than a specific future date\", parsed.before(new Date(time + 100000)));\nAssert.assertNotSame(\"Parsed date should be a new instance\", parsed, new Date(time));\nAssert.assertEquals(\"Parsed date should match the expected format\", format, TimestampParser.format(parsed));\nAssert.assertTrue(\"Parsed date should not be equal to a string representation of a different timestamp\", parsed.toString().equals(new Date(time + 100000).toString()));\n```\n====================\n\n",
+    "scores": [
+        0.946,
+        0.593,
+        0.574,
+        0.537,
+        0.532,
+        0.511,
+        0.5,
+        0.492,
+        0.492,
+        0.491,
+        0.483,
+        0.455,
+        0.449,
+        0.447,
+        0.431,
+        0.416,
+        0.415,
+        0.394,
+        0.362,
+        0.345,
+        0.0
+    ],
+    "ground_truth": "assertEquals(time,parsed.getTime());"
+}

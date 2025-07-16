@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.object;
+
+public class ObjectWithDeletedLink {
+    < RET extends T > RET reload ( final T iObject , String iFetchPlan , boolean iIgnoreCache ) ;
+}
+
+package orientechnologies.orientdb.object;
+
+public class TestObjectWithDeletedLink {
+    @Test
+     public void testDeletedLink ( ) {
+         db . activateOnCurrentThread ( ) ; 
+         SimpleSelfRef ob1 = new SimpleSelfRef ( ) ; 
+         ob1 . setName ( "STR" ) ; 
+         SimpleSelfRef ob2 = new SimpleSelfRef ( ) ; 
+         ob2 . setName ( "STR" ) ; 
+         ob1 . setFriend ( ob2 ) ; 
+         ob1 = db . save ( ob1 ) ; 
+         ob1 = db . reload ( ob1 , "STR" , true ) ; 
+         ob2 = ob1 . getFriend ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(ob1);
+assertNotNull(ob2);
+assertEquals("STR", ob1.getName());
+assertEquals("STR", ob2.getName());
+assertSame(ob2, ob1.getFriend());
+assertNotSame(ob1, ob2);
+assertTrue(ob1.getFriend() instanceof SimpleSelfRef);
+assertFalse(ob1.getFriend() == null);
+assertEquals(ob1.getFriend().getName(), ob2.getName());
+assertNotSame(ob1, db.reload(ob1, "STR", true));
+assertNotSame(ob2, db.reload(ob2, "STR", true));
+assertTrue(db.exists(ob1.getIdentity()));
+assertTrue(db.exists(ob2.getIdentity()));
+assertEquals(ob1.getIdentity(), db.reload(ob1, "STR", true).getIdentity());
+assertEquals(ob2.getIdentity(), db.reload(ob2, "STR", true).getIdentity());
+assertNotNull(ob1.getFriend().getIdentity());
+assertNotNull(ob2.getIdentity());
+assertTrue(ob1.getFriend().getIdentity().isValid());
+assertTrue(ob2.getIdentity().isValid());
+assertEquals(ob1.getFriend().getIdentity(), ob2.getIdentity());
+assertNotEquals(ob1.getIdentity(), ob2.getIdentity());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(ob1.getFriend()); ===
+0.811 - assertNotNull(ob1.getFriend().getIdentity())
+0.806 - assertNotNull(ob2.getIdentity())
+0.754 - assertSame(ob2, ob1.getFriend())
+0.750 - assertFalse(ob1.getFriend() == null)
+0.708 - assertNotNull(ob2)
+0.643 - ```java
+assertNotNull(ob1)
+0.635 - assertEquals("STR", ob1.getName())
+0.610 - assertNotEquals(ob1.getIdentity(), ob2.getIdentity())
+0.603 - assertEquals("STR", ob2.getName())
+0.602 - assertEquals(ob1.getFriend().getName(), ob2.getName())
+0.600 - assertTrue(ob1.getFriend() instanceof SimpleSelfRef)
+0.593 - assertTrue(ob1.getFriend().getIdentity().isValid())
+0.580 - assertTrue(ob2.getIdentity().isValid())
+0.571 - assertTrue(db.exists(ob1.getIdentity()))
+0.549 - assertEquals(ob1.getFriend().getIdentity(), ob2.getIdentity())
+0.543 - assertTrue(db.exists(ob2.getIdentity()))
+0.538 - assertNotSame(ob1, ob2)
+0.514 - assertNotSame(ob1, db.reload(ob1, "STR", true))
+0.486 - assertNotSame(ob2, db.reload(ob2, "STR", true))
+0.436 - assertEquals(ob1.getIdentity(), db.reload(ob1, "STR", true).getIdentity())
+0.416 - assertEquals(ob2.getIdentity(), db.reload(ob2, "STR", true).getIdentity())
+0.000 - ```

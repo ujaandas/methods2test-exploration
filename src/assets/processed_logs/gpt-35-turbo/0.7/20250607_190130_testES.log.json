@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class MPEGES {\npublic static byte [ ] toArray ( ByteBuffer buffer ) {\nbyte [ ] result = new byte [ buffer . remaining ( ) ] ;\nbuffer . duplicate ( ) . get ( result ) ;\nreturn result ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class MPEGESTest {\n@Test\npublic void testES ( ) throws IOException {\nbyte [ ] mpeg = MPEGTestConst . mpeg ( ) ;\nbyte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ;\nbyte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] {\nMPEGTestConst . _mpegFrame } ) ;\nMPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ;\nByteBuffer buf = ByteBuffer . allocate ( 1024 ) ;\nPacket f1 = mpeges . frame ( buf ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(32, f1.getData().remaining());\nassertEquals(frame1.length, f1.getData().remaining());\nassertFalse(Arrays.equals(frame2, f1.getData().array()));\nassertEquals(0, f1.getData().position());\nassertEquals(32, f1.getPts());\nassertNotNull(f1.getData());\nassertEquals(32, f1.getSize());\nassertEquals(32, f1.getData().capacity());\nassertEquals(32, f1.getDuration());\nassertEquals(32, f1.getFrameNo());\nassertTrue(Arrays.equals(frame1, f1.getData().array()));\nassertEquals(32, f1.getTimescale());\nassertEquals(32, f1.getPos());\nassertEquals(32, f1.getFlags());\nassertEquals(32, f1.getDuration());\nassertEquals(32, f1.getSize());\nassertEquals(32, f1.getPts());\nassertEquals(32, f1.getFrameNo());\nassertEquals(32, f1.getTimescale());\nassertEquals(32, f1.getPos());\n====================\n\n",
+    "scores": [
+        0.691,
+        0.667,
+        0.63,
+        0.589,
+        0.584,
+        0.584,
+        0.583,
+        0.577,
+        0.571,
+        0.571,
+        0.558,
+        0.554,
+        0.548,
+        0.548,
+        0.545,
+        0.545,
+        0.541,
+        0.541,
+        0.533,
+        0.533
+    ],
+    "ground_truth": "assertArrayEquals(frame1,NIOUtils.toArray(f1.getData()));"
+}

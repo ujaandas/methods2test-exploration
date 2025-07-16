@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetup {
+    protected final String getProperty ( final String name ) { 
+    return env . get ( name ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AbstractServiceSetupTest {
+    @Test
+     public void testGetProperty ( ) {
+         Map < String , String > env = new HashMap < String , String > ( ) ; 
+         env . put ( "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", getProperty("STR"));
+Assert.assertNull(getProperty("NULL"));
+Assert.assertNotEquals("DIFFERENT", getProperty("STR"));
+Assert.assertTrue(env.containsKey("STR"));
+Assert.assertFalse(env.containsKey("NOT_IN_MAP"));
+Assert.assertNotNull(getProperty("STR"));
+Assert.assertTrue(getProperty("STR").contains("S"));
+Assert.assertFalse(getProperty("STR").isEmpty());
+Assert.assertTrue(getProperty("STR").startsWith("S"));
+Assert.assertTrue(getProperty("STR").endsWith("R"));
+Assert.assertEquals(3, getProperty("STR").length());
+Assert.assertTrue(env.containsValue("STR"));
+Assert.assertEquals("DEFAULT", getPropertyOrDefault("DEFAULT", "KEY_NOT_FOUND"));
+Assert.assertNotSame("STR", getProperty("STR"));
+Assert.assertTrue(env.size() == 1);
+Assert.assertTrue(env.isEmpty() == false);
+Assert.assertSame("STR", getProperty("STR"));
+Assert.assertFalse(env.isEmpty());
+Assert.assertNotNull(env.get("STR"));
+Assert.assertNotEquals("DIFFERENT", getProperty("NOT_IN_MAP"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",create(env).getProperty("STR")); ===
+0.864 - Assert.assertEquals("STR", getProperty("STR"))
+0.767 - Assert.assertSame("STR", getProperty("STR"))
+0.742 - Assert.assertNotEquals("DIFFERENT", getProperty("STR"))
+0.742 - Assert.assertNotSame("STR", getProperty("STR"))
+0.710 - Assert.assertEquals(3, getProperty("STR").length())
+0.675 - Assert.assertNotNull(getProperty("STR"))
+0.659 - Assert.assertFalse(getProperty("STR").isEmpty())
+0.654 - Assert.assertNotEquals("DIFFERENT", getProperty("NOT_IN_MAP"))
+0.617 - Assert.assertNull(getProperty("NULL"))
+0.608 - Assert.assertNotNull(env.get("STR"))
+0.596 - Assert.assertTrue(getProperty("STR").contains("S"))
+0.596 - Assert.assertTrue(getProperty("STR").endsWith("R"))
+0.583 - Assert.assertTrue(getProperty("STR").startsWith("S"))
+0.562 - Assert.assertEquals("DEFAULT", getPropertyOrDefault("DEFAULT", "KEY_NOT_FOUND"))
+0.553 - Assert.assertFalse(env.isEmpty())
+0.548 - Assert.assertTrue(env.containsKey("STR"))
+0.512 - Assert.assertTrue(env.containsValue("STR"))
+0.500 - Assert.assertFalse(env.containsKey("NOT_IN_MAP"))
+0.463 - Assert.assertTrue(env.isEmpty() == false)
+0.373 - Assert.assertTrue(env.size() == 1)

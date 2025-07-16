@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNull {\nlong getSize ( ) ;\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneNullTest {\n@Test\npublic void testNotNullChangeToNullWithLists ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\ndb . begin ( ) ;\ndoc . field ( \"STR\" , new String [ ] {\n\"STR\" } ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\ndb . begin ( ) ;\ndoc . removeField ( \"STR\" ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\nOIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(index.getInternal().size() == 0);\nAssert.assertTrue(index.getInternal().getFirstKey() == null);\nAssert.assertTrue(index.getInternal().getLastKey() == null);\nAssert.assertTrue(index.getInternal().getKeySize() == 0);\nAssert.assertTrue(index.getInternal().getValuesSize() == 0);\nAssert.assertTrue(index.getInternal().getKeysSize() == 0);\nAssert.assertTrue(index.getInternal().getFirstValue() == null);\nAssert.assertTrue(index.getInternal().getLastValue() == null);\nAssert.assertTrue(index.getInternal().getValues().isEmpty());\nAssert.assertTrue(index.getInternal().getValues(\"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getValues(\"STR\").size() == 0);\nAssert.assertTrue(index.getInternal().get(\"STR\") == null);\nAssert.assertTrue(index.getInternal().getEntriesBetween(null, null).isEmpty());\nAssert.assertTrue(index.getInternal().getEntriesBetween(\"STR\", \"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getEntriesMajor(\"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getEntriesMajorEquals(\"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getEntriesMinor(\"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getEntriesMinorEquals(\"STR\").isEmpty());\nAssert.assertTrue(index.getInternal().getEntries(\"STR\", \"STR\").isEmpty());\n====================\n\n",
+    "scores": [
+        0.639,
+        0.615,
+        0.608,
+        0.593,
+        0.539,
+        0.532,
+        0.524,
+        0.519,
+        0.512,
+        0.506,
+        0.5,
+        0.472,
+        0.458,
+        0.442,
+        0.442,
+        0.436,
+        0.427,
+        0.416,
+        0.416
+    ],
+    "ground_truth": "Assert.assertEquals(index.getSize(),1);"
+}

@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPush {
+    @Override
+     public OBinaryPushResponse execute ( ORemotePushHandler remote ) { 
+     remote . executeLiveQueryPush ( this ) ; 
+     return null ; 
+     }
+}
+
+package orientechnologies.orientdb.client;
+
+public class ORemoteLiveQueryPushTest {
+    @Test
+     public void testLiveEvents ( ) {
+         MockLiveListener mock = new MockLiveListener ( ) ; 
+         storage . registerLiveListener ( 10 , new OLiveQueryClientListener ( database , mock ) ) ; 
+         List < OLiveQueryResult > events = new ArrayList < > ( ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . CREATE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . UPDATE_EVENT , new OResultInternal ( ) , new OResultInternal ( ) ) ) ; 
+         events . add ( new OLiveQueryResult ( OLiveQueryResult . DELETE_EVENT , new OResultInternal ( ) , null ) ) ; 
+         OLiveQueryPushRequest request = new OLiveQueryPushRequest ( 10 , OLiveQueryPushRequest . END , events ) ; 
+         request . execute ( storage ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(3, mock.getEventCount());
+assertTrue(mock.hasEvent(OLiveQueryResult.CREATE_EVENT));
+assertTrue(mock.hasEvent(OLiveQueryResult.UPDATE_EVENT));
+assertTrue(mock.hasEvent(OLiveQueryResult.DELETE_EVENT));
+assertEquals(OLiveQueryResult.CREATE_EVENT, mock.getEvent(0).getType());
+assertEquals(OLiveQueryResult.UPDATE_EVENT, mock.getEvent(1).getType());
+assertEquals(OLiveQueryResult.DELETE_EVENT, mock.getEvent(2).getType());
+assertNotNull(mock.getEvent(0).getResult());
+assertNotNull(mock.getEvent(1).getResult());
+assertNull(mock.getEvent(2).getResult());
+assertNull(mock.getEvent(0).getPreviousResult());
+assertNotNull(mock.getEvent(1).getPreviousResult());
+assertNull(mock.getEvent(2).getPreviousResult());
+assertEquals(10, request.getId());
+assertEquals(OLiveQueryPushRequest.END, request.getType());
+assertEquals(3, request.getEvents().size());
+assertSame(events.get(0), request.getEvents().get(0));
+assertSame(events.get(1), request.getEvents().get(1));
+assertSame(events.get(2), request.getEvents().get(2));
+assertTrue(storage.isLiveListenerRegistered(10));
+assertFalse(storage.isLiveListenerRegistered(20));
+assertEquals(database, mock.getDatabase());
+assertEquals(mock.getListenerCount(), 1);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(mock.countCreate,1); ===
+0.704 - assertEquals(mock.getListenerCount(), 1)
+0.630 - assertEquals(database, mock.getDatabase())
+0.605 - ```java
+assertEquals(3, mock.getEventCount())
+0.562 - assertEquals(10, request.getId())
+0.556 - assertNull(mock.getEvent(2).getResult())
+0.533 - assertNotNull(mock.getEvent(0).getResult())
+0.486 - assertEquals(3, request.getEvents().size())
+0.480 - assertNotNull(mock.getEvent(1).getResult())
+0.471 - assertEquals(OLiveQueryResult.CREATE_EVENT, mock.getEvent(0).getType())
+0.471 - assertEquals(OLiveQueryResult.DELETE_EVENT, mock.getEvent(2).getType())
+0.450 - assertNull(mock.getEvent(0).getPreviousResult())
+0.450 - assertNull(mock.getEvent(2).getPreviousResult())
+0.434 - assertNotNull(mock.getEvent(1).getPreviousResult())
+0.432 - assertTrue(mock.hasEvent(OLiveQueryResult.UPDATE_EVENT))
+0.432 - assertTrue(mock.hasEvent(OLiveQueryResult.DELETE_EVENT))
+0.431 - assertEquals(OLiveQueryResult.UPDATE_EVENT, mock.getEvent(1).getType())
+0.427 - assertEquals(OLiveQueryPushRequest.END, request.getType())
+0.420 - assertFalse(storage.isLiveListenerRegistered(20))
+0.386 - assertTrue(mock.hasEvent(OLiveQueryResult.CREATE_EVENT))
+0.375 - assertTrue(storage.isLiveListenerRegistered(10))
+0.333 - assertSame(events.get(1), request.getEvents().get(1))
+0.310 - assertSame(events.get(0), request.getEvents().get(0))
+0.310 - assertSame(events.get(2), request.getEvents().get(2))
+0.000 - ```

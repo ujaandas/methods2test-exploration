@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class UrlUtils {
+    public static URI toUri ( final URL url ) { 
+    try { 
+    return url . toURI ( ) ; 
+    } catch ( URISyntaxException ex ) { 
+    throw new IllegalArgumentException ( ex ) ; 
+    } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class UrlUtilsTest {
+    @Test
+     public void testValidUrlToUri ( ) throws Exception {
+         URI uri = UrlUtils . toUri ( new URL ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(uri);
+assertEquals("STR", uri.toString());
+assertEquals("http", uri.getScheme());
+assertEquals("www.example.com", uri.getHost());
+assertEquals(80, uri.getPort());
+assertEquals("/path", uri.getPath());
+assertEquals("query", uri.getQuery());
+assertEquals("fragment", uri.getFragment());
+assertEquals("username", uri.getUserInfo());
+assertTrue(uri.isAbsolute());
+assertFalse(uri.isOpaque());
+assertEquals("STR", uri.toASCIIString());
+assertEquals("STR", uri.toString());
+assertTrue(uri.toString().startsWith("http"));
+assertFalse(uri.toString().isEmpty());
+assertEquals("www.example.com", uri.getAuthority());
+assertEquals(0, uri.getQuery().length());
+assertTrue(uri.getPath().isEmpty());
+assertEquals("http://www.example.com", uri.toString());
+assertTrue(uri.getSchemeSpecificPart().length() > 0);
+assertTrue(uri.getRawPath().isEmpty());
+assertEquals("username:password@www.example.com:80/path?query#fragment", uri.toString());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newURI("STR"),uri); ===
+0.708 - assertEquals("STR", uri.toString())
+0.708 - assertEquals("STR", uri.toString())
+0.657 - assertEquals("STR", uri.toASCIIString())
+0.606 - assertEquals("/path", uri.getPath())
+0.597 - assertEquals("http", uri.getScheme())
+0.597 - assertEquals("query", uri.getQuery())
+0.590 - assertEquals(80, uri.getPort())
+0.575 - assertEquals("username", uri.getUserInfo())
+0.548 - assertEquals("fragment", uri.getFragment())
+0.526 - assertEquals("www.example.com", uri.getHost())
+0.514 - assertEquals(0, uri.getQuery().length())
+0.494 - assertEquals("www.example.com", uri.getAuthority())
+0.483 - assertFalse(uri.isOpaque())
+0.476 - assertEquals("http://www.example.com", uri.toString())
+0.456 - ```java
+assertNotNull(uri)
+0.412 - assertFalse(uri.toString().isEmpty())
+0.407 - assertTrue(uri.isAbsolute())
+0.373 - assertEquals("username:password@www.example.com:80/path?query#fragment", uri.toString())
+0.364 - assertTrue(uri.getPath().isEmpty())
+0.348 - assertTrue(uri.getRawPath().isEmpty())
+0.316 - assertTrue(uri.toString().startsWith("http"))
+0.296 - assertTrue(uri.getSchemeSpecificPart().length() > 0)
+0.000 - ```

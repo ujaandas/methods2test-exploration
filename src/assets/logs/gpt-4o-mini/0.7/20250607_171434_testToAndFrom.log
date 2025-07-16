@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class Picture {
+    public int [ ] getPlaneData ( int plane ) { 
+    return data [ plane ] ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class PictureTest {
+    @Test
+     public void testToAndFrom ( ) throws Exception {
+         int [ ] Y = randomIntArray ( 4096 , 4 , 1019 ) ; 
+         int [ ] U = randomIntArray ( 2048 , 4 , 1019 ) ; 
+         int [ ] V = randomIntArray ( 2048 , 4 , 1019 ) ; 
+         PictureHiBD pictureHbd = PictureHiBD . createPictureWithDepth ( 64 , 64 , new int [ ] [ ] { 
+     Y , U , V } , ColorSpace . YUV422 , 10 ) ; 
+         Picture picture = Picture . fromPictureHiBD ( pictureHbd ) ; 
+         PictureHiBD resultHbd = picture . toPictureHiBD ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertArrayEquals(Y, resultHbd.getPlaneData(0));
+assertArrayEquals(U, resultHbd.getPlaneData(1));
+assertArrayEquals(V, resultHbd.getPlaneData(2));
+assertEquals(64, resultHbd.getWidth());
+assertEquals(64, resultHbd.getHeight());
+assertEquals(10, resultHbd.getBitDepth());
+assertEquals(ColorSpace.YUV422, resultHbd.getColorSpace());
+assertEquals(3, resultHbd.getNumPlanes());
+assertTrue(resultHbd.getPlaneData(0).length >= Y.length);
+assertTrue(resultHbd.getPlaneData(1).length >= U.length);
+assertTrue(resultHbd.getPlaneData(2).length >= V.length);
+assertNotNull(resultHbd.getPlaneData(0));
+assertNotNull(resultHbd.getPlaneData(1));
+assertNotNull(resultHbd.getPlaneData(2));
+assertEquals(pictureHbd.getBitDepth(), resultHbd.getBitDepth());
+assertEquals(pictureHbd.getColorSpace(), resultHbd.getColorSpace());
+assertNotSame(pictureHbd, resultHbd);
+assertTrue(Arrays.equals(pictureHbd.getPlaneData(0), resultHbd.getPlaneData(0)));
+assertTrue(Arrays.equals(pictureHbd.getPlaneData(1), resultHbd.getPlaneData(1)));
+assertTrue(Arrays.equals(pictureHbd.getPlaneData(2), resultHbd.getPlaneData(2)));
+assertEquals(pictureHbd.getWidth(), resultHbd.getWidth());
+assertEquals(pictureHbd.getHeight(), resultHbd.getHeight());
+assertNotNull(pictureHbd);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertArrayEquals(Y,resultHbd.getPlaneData(0)); ===
+0.957 - assertArrayEquals(U, resultHbd.getPlaneData(1))
+0.957 - assertArrayEquals(V, resultHbd.getPlaneData(2))
+0.920 - ```java
+assertArrayEquals(Y, resultHbd.getPlaneData(0))
+0.814 - assertEquals(3, resultHbd.getNumPlanes())
+0.814 - assertNotNull(resultHbd.getPlaneData(0))
+0.791 - assertNotNull(resultHbd.getPlaneData(1))
+0.791 - assertNotNull(resultHbd.getPlaneData(2))
+0.762 - assertEquals(64, resultHbd.getHeight())
+0.747 - assertEquals(64, resultHbd.getWidth())
+0.744 - assertEquals(10, resultHbd.getBitDepth())
+0.704 - assertTrue(Arrays.equals(pictureHbd.getPlaneData(0), resultHbd.getPlaneData(0)))
+0.700 - assertTrue(resultHbd.getPlaneData(0).length >= Y.length)
+0.688 - assertTrue(Arrays.equals(pictureHbd.getPlaneData(1), resultHbd.getPlaneData(1)))
+0.688 - assertTrue(Arrays.equals(pictureHbd.getPlaneData(2), resultHbd.getPlaneData(2)))
+0.680 - assertTrue(resultHbd.getPlaneData(1).length >= U.length)
+0.680 - assertTrue(resultHbd.getPlaneData(2).length >= V.length)
+0.660 - assertEquals(ColorSpace.YUV422, resultHbd.getColorSpace())
+0.615 - assertEquals(pictureHbd.getHeight(), resultHbd.getHeight())
+0.608 - assertEquals(pictureHbd.getWidth(), resultHbd.getWidth())
+0.593 - assertEquals(pictureHbd.getBitDepth(), resultHbd.getBitDepth())
+0.589 - assertEquals(pictureHbd.getColorSpace(), resultHbd.getColorSpace())
+0.444 - assertNotSame(pictureHbd, resultHbd)
+0.423 - assertNotNull(pictureHbd)
+0.000 - ```

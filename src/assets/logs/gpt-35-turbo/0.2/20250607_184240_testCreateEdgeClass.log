@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    default OClass createEdgeClass ( String className ) { 
+    return createClass ( className , "STR" ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testCreateEdgeClass ( ) {
+         OClass clazz = db . createEdgeClass ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(clazz);
+assertEquals("STR", clazz.getName());
+assertTrue(clazz.isEdgeType());
+assertFalse(clazz.isVertexType());
+assertTrue(clazz.getSuperClass().isSubClassOf("E"));
+assertEquals(1, clazz.propertiesSize());
+assertEquals(0, clazz.getIndexes().size());
+assertFalse(clazz.existsProperty("name"));
+assertFalse(clazz.existsProperty("age"));
+assertNotNull(clazz.getProperty("in"));
+assertNotNull(clazz.getProperty("out"));
+assertEquals("in", clazz.getProperty("in").getName());
+assertEquals("out", clazz.getProperty("out").getName());
+assertEquals("LINK", clazz.getProperty("in").getType().toString());
+assertEquals("LINK", clazz.getProperty("out").getType().toString());
+assertTrue(clazz.getProperty("in").isMandatory());
+assertTrue(clazz.getProperty("out").isMandatory());
+assertFalse(clazz.getProperty("in").isNotNull());
+assertFalse(clazz.getProperty("out").isNotNull());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNotNull(clazz); ===
+1.000 - assertNotNull(clazz)
+0.690 - assertNotNull(clazz.getProperty("in"))
+0.678 - assertNotNull(clazz.getProperty("out"))
+0.560 - assertTrue(clazz.isEdgeType())
+0.545 - assertEquals("STR", clazz.getName())
+0.528 - assertFalse(clazz.isVertexType())
+0.517 - assertEquals(1, clazz.propertiesSize())
+0.492 - assertEquals(0, clazz.getIndexes().size())
+0.467 - assertFalse(clazz.existsProperty("age"))
+0.459 - assertFalse(clazz.existsProperty("name"))
+0.441 - assertFalse(clazz.getProperty("in").isNotNull())
+0.435 - assertFalse(clazz.getProperty("out").isNotNull())
+0.417 - assertEquals("in", clazz.getProperty("in").getName())
+0.406 - assertTrue(clazz.getProperty("in").isMandatory())
+0.400 - assertTrue(clazz.getProperty("out").isMandatory())
+0.394 - assertTrue(clazz.getSuperClass().isSubClassOf("E"))
+0.378 - assertEquals("out", clazz.getProperty("out").getName())
+0.306 - assertEquals("LINK", clazz.getProperty("in").getType().toString())
+0.302 - assertEquals("LINK", clazz.getProperty("out").getType().toString())

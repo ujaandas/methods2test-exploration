@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\nprotected File getFileFromConfigDirectory ( String file ) {\nFile f = new File ( configDirectory , file ) ;\nif ( configDirectory != null && f . exists ( ) ) {\nreturn f ;\n} return null ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testGetFileFromConfigDirectory ( ) throws Exception {\nDevUtil util = new DevTestUtil ( null , null , null , this . configDirectory , null , false , false ) ;\nFile tempTextFile = new File ( configDirectory , \"STR\" ) ;\nFiles . write ( tempTextFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nFile configFile = util . getFileFromConfigDirectory ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(configFile);\nassertTrue(configFile.exists());\nassertEquals(tempTextFile.getName(), configFile.getName());\nassertEquals(tempTextFile.length(), configFile.length());\nassertArrayEquals(Files.readAllBytes(tempTextFile.toPath()), Files.readAllBytes(configFile.toPath()));\nassertTrue(configFile.isFile());\nassertFalse(configFile.isDirectory());\nassertEquals(tempTextFile.getAbsolutePath(), configFile.getAbsolutePath());\nassertEquals(tempTextFile.getParent(), configFile.getParent());\nassertTrue(configFile.canRead());\nassertFalse(configFile.canWrite());\nassertFalse(configFile.canExecute());\nassertNotEquals(tempTextFile.getPath(), \"nonexistent.txt\");\nassertNotEquals(configFile.getPath(), \"nonexistent.txt\");\nassertTrue(configFile.getName().endsWith(\"STR\"));\nassertTrue(configFile.getPath().contains(configDirectory));\nassertNotNull(Files.getLastModifiedTime(configFile.toPath()));\nassertTrue(configFile.length() > 0);\nassertEquals(\"STR\", new String(Files.readAllBytes(configFile.toPath())));\nassertTrue(configFile.lastModified() > 0);\nassertTrue(configFile.getAbsolutePath().startsWith(configDirectory));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.871,
+        0.844,
+        0.825,
+        0.771,
+        0.735,
+        0.716,
+        0.708,
+        0.684,
+        0.629,
+        0.594,
+        0.586,
+        0.581,
+        0.581,
+        0.568,
+        0.565,
+        0.522,
+        0.519,
+        0.495,
+        0.432,
+        0.382,
+        0.0
+    ],
+    "ground_truth": "assertTrue(configFile.exists());"
+}

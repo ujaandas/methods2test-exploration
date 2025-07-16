@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQuery {\npublic List < WorkerData > execute ( List < WorkerData > input ) {\nswitch ( targetType ) {\ncase ALL : return select ( input , null ) ;\ncase MEMBER : return select ( input , true ) ;\ncase CLIENT : return select ( input , false ) ;\ncase PREFER_CLIENT : List < WorkerData > result = select ( input , false ) ;\nreturn ! result . isEmpty ( ) ? result : select ( input , true ) ;\ndefault : throw new IllegalStateException ( \"STR\" + targetType ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class WorkerQueryTest {\n@Test\npublic void noFilters ( ) {\nlist . add ( new WorkerData ( newParameters ( agent1 , 1 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 2 , \"STR\" , \"STR\" ) ) ) ;\nlist . add ( new WorkerData ( newParameters ( agent1 , 3 , \"STR\" , \"STR\" ) ) ) ;\nList < WorkerData > result = new WorkerQuery ( ) . execute ( list ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(3, result.size());\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 1, \"STR\", \"STR\"))));\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 2, \"STR\", \"STR\"))));\nassertTrue(result.contains(new WorkerData(newParameters(agent1, 3, \"STR\", \"STR\"))));\nassertFalse(result.isEmpty());\nassertEquals(\"Expected first element\", new WorkerData(newParameters(agent1, 1, \"STR\", \"STR\")), result.get(0));\nassertEquals(\"Expected second element\", new WorkerData(newParameters(agent1, 2, \"STR\", \"STR\")), result.get(1));\nassertEquals(\"Expected third element\", new WorkerData(newParameters(agent1, 3, \"STR\", \"STR\")), result.get(2));\nassertTrue(result.stream().allMatch(data -> data.getAgent().equals(agent1)));\nassertTrue(result.stream().allMatch(data -> data.getType().equals(\"STR\")));\nassertTrue(result.stream().allMatch(data -> data.getStatus().equals(\"STR\")));\nassertFalse(result.stream().anyMatch(data -> data.getId() < 1));\nassertFalse(result.stream().anyMatch(data -> data.getId() > 3));\nassertEquals(result.get(0).getId(), 1);\nassertEquals(result.get(1).getId(), 2);\nassertEquals(result.get(2).getId(), 3);\nassertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).containsAll(Arrays.asList(1, 2, 3)));\nassertTrue(result.stream().map(WorkerData::getId).collect(Collectors.toSet()).size() == 3);\nassertTrue(result.stream().allMatch(data -> data.getParameters().equals(newParameters(agent1, data.getId(), \"STR\", \"STR\"))));\nassertEquals(result.get(0).getParameters(), newParameters(agent1, 1, \"STR\", \"STR\"));\nassertEquals(result.get(1).getParameters(), newParameters(agent1, 2, \"STR\", \"STR\"));\nassertEquals(result.get(2).getParameters(), newParameters(agent1, 3, \"STR\", \"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.778,
+        0.645,
+        0.645,
+        0.645,
+        0.63,
+        0.593,
+        0.405,
+        0.405,
+        0.385,
+        0.385,
+        0.385,
+        0.381,
+        0.381,
+        0.378,
+        0.288,
+        0.288,
+        0.288,
+        0.283,
+        0.268,
+        0.265,
+        0.263,
+        0.25,
+        0.219,
+        0.0
+    ],
+    "ground_truth": "assertEquals(list,result);"
+}

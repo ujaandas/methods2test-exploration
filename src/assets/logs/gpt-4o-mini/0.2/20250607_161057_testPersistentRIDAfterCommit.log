@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class Blueprints {
+    boolean isPersistent ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class BlueprintsTest {
+    @Test
+     public void testPersistentRIDAfterCommit ( ) {
+         Vertex v = graph . addVertex ( null ) ; 
+         v . setProperty ( "STR" , "STR" ) ; 
+         graph . commit ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(graph.isPersistent());
+assertNotNull(v);
+assertEquals("STR", v.getProperty("STR"));
+assertTrue(v.getId().isPersistent());
+assertEquals(1, graph.getVertexCount());
+assertTrue(graph.getVertices().contains(v));
+assertFalse(v.getId().isNew());
+assertTrue(v.getId().isValid());
+assertEquals("STR", v.getProperty("STR"));
+assertNotNull(v.getId());
+assertEquals("STR", v.getProperty("STR"));
+assertTrue(graph.getEdges().isEmpty());
+assertFalse(v.getPropertyKeys().isEmpty());
+assertEquals(1, v.getPropertyKeys().size());
+assertTrue(v.getPropertyKeys().contains("STR"));
+assertEquals("STR", v.getProperty("STR"));
+assertTrue(graph.getVertices().iterator().hasNext());
+assertSame(v, graph.getVertices().iterator().next());
+assertEquals(1, graph.getEdges().size());
+assertTrue(graph.getEdges().isEmpty());
+assertFalse(graph.getVertices().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(((ORID)v.getId()).isPersistent()); ===
+0.900 - assertTrue(v.getId().isPersistent())
+0.720 - assertTrue(v.getId().isValid())
+0.667 - ```java
+assertTrue(graph.isPersistent())
+0.649 - assertFalse(v.getId().isNew())
+0.610 - assertTrue(graph.getEdges().isEmpty())
+0.610 - assertTrue(graph.getEdges().isEmpty())
+0.562 - assertTrue(graph.getVertices().iterator().hasNext())
+0.529 - assertNotNull(v.getId())
+0.529 - assertTrue(graph.getVertices().contains(v))
+0.527 - assertTrue(v.getPropertyKeys().contains("STR"))
+0.526 - assertSame(v, graph.getVertices().iterator().next())
+0.512 - assertFalse(v.getPropertyKeys().isEmpty())
+0.488 - assertFalse(graph.getVertices().isEmpty())
+0.488 - assertEquals(1, graph.getVertexCount())
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.381 - assertEquals("STR", v.getProperty("STR"))
+0.372 - assertEquals(1, v.getPropertyKeys().size())
+0.361 - assertEquals(1, graph.getEdges().size())
+0.300 - assertNotNull(v)
+0.000 - ```

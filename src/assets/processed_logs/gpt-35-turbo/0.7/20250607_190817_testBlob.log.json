@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCreateClusterStatementExecutionTest {\n@Test\npublic void testBlob ( ) {\nString clusterName = \"STR\" ;\nOResultSet result = db . command ( \"STR\" + clusterName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(\"STR\", result.getProperty(\"clusterName\"));\nassertFalse(result.getProperty(\"clusterName\").isEmpty());\nassertInstanceOf(OResultSet.class, result);\nassertNotEquals(0, result.size());\nassertNotNull(result.iterator());\nassertTrue(result.iterator().hasNext());\nassertEquals(1, result.stream().count());\nassertTrue(result.stream().anyMatch(x -> x.getProperty(\"clusterName\").equals(\"STR\")));\nassertEquals(\"STR\", result.stream().findFirst().get().getProperty(\"clusterName\"));\nassertTrue(result.stream().allMatch(x -> x.getProperty(\"clusterName\").equals(\"STR\")));\nassertFalse(result.stream().noneMatch(x -> x.getProperty(\"clusterName\").equals(\"STR\")));\nassertEquals(1, result.stream().filter(x -> x.getProperty(\"clusterName\").equals(\"STR\")).count());\nassertTrue(result.stream().map(x -> x.getProperty(\"clusterName\")).anyMatch(\"STR\"::equals));\nassertFalse(result.stream().map(x -> x.getProperty(\"clusterName\")).allMatch(\"STR\"::equals);\nassertEquals(\"STR\", result.stream().map(x -> x.getProperty(\"clusterName\")).findFirst().get());\nassertTrue(result.stream().map(x -> x.getProperty(\"clusterName\")).noneMatch(\"STR\"::equals);\nassertEquals(1, result.stream().map(x -> x.getProperty(\"clusterName\")).filter(\"STR\"::equals).count());\nassertTrue(result.stream().map(x -> x.getProperty(\"clusterName\")).distinct().count() == 1);\n====================\n\n",
+    "scores": [
+        0.594,
+        0.558,
+        0.531,
+        0.489,
+        0.489,
+        0.478,
+        0.471,
+        0.471,
+        0.464,
+        0.46,
+        0.46,
+        0.447,
+        0.44,
+        0.436,
+        0.426,
+        0.425,
+        0.4,
+        0.315,
+        0.3,
+        0.29
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(clusterName)>0);"
+}

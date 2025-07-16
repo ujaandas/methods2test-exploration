@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class GoTimeUtil {
+    public static Integer durationSeconds ( String duration ) { 
+    BigDecimal ns = durationNs ( duration ) ; 
+    if ( ns == null ) { 
+    return null ; 
+    } BigDecimal sec = ns . divide ( new BigDecimal ( 1_000_000_000 ) ) ; 
+    if ( sec . compareTo ( new BigDecimal ( Integer . MAX_VALUE ) ) > 0 ) { 
+    throw new IllegalArgumentException ( "STR" ) ; 
+    } return sec . intValue ( ) ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class GoTimeUtilTest {
+    @Test
+     public void testConversion ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, GoTimeUtil.durationSeconds("0s"));
+assertEquals(1, GoTimeUtil.durationSeconds("1s"));
+assertEquals(60, GoTimeUtil.durationSeconds("1m"));
+assertEquals(3600, GoTimeUtil.durationSeconds("1h"));
+assertEquals(86400, GoTimeUtil.durationSeconds("1d"));
+assertEquals(2592000, GoTimeUtil.durationSeconds("1M"));
+assertEquals(31536000, GoTimeUtil.durationSeconds("1y"));
+assertEquals(123456, GoTimeUtil.durationSeconds("2h3m56s"));
+assertEquals(3600, GoTimeUtil.durationSeconds("1h0m0s"));
+assertEquals(3600, GoTimeUtil.durationSeconds("1h0s"));
+assertEquals(3600, GoTimeUtil.durationSeconds("1h0"));
+assertEquals(3600, GoTimeUtil.durationSeconds("1h"));
+assertEquals(60, GoTimeUtil.durationSeconds("1m0s"));
+assertEquals(60, GoTimeUtil.durationSeconds("1m0"));
+assertEquals(60, GoTimeUtil.durationSeconds("1m"));
+assertEquals(1, GoTimeUtil.durationSeconds("1"));
+assertEquals(null, GoTimeUtil.durationSeconds(""));
+assertEquals(null, GoTimeUtil.durationSeconds(null));
+assertEquals(null, GoTimeUtil.durationSeconds("abc"));
+assertEquals(null, GoTimeUtil.durationSeconds("1abc"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(newInteger(23),durationSeconds("STR")); ===
+0.720 - assertEquals(null, GoTimeUtil.durationSeconds(""))
+0.714 - assertEquals(1, GoTimeUtil.durationSeconds("1"))
+0.707 - assertEquals(0, GoTimeUtil.durationSeconds("0s"))
+0.707 - assertEquals(1, GoTimeUtil.durationSeconds("1s"))
+0.700 - assertEquals(60, GoTimeUtil.durationSeconds("1m"))
+0.700 - assertEquals(60, GoTimeUtil.durationSeconds("1m"))
+0.699 - assertEquals(null, GoTimeUtil.durationSeconds("abc"))
+0.693 - assertEquals(60, GoTimeUtil.durationSeconds("1m0"))
+0.692 - assertEquals(null, GoTimeUtil.durationSeconds("1abc"))
+0.686 - assertEquals(3600, GoTimeUtil.durationSeconds("1h"))
+0.686 - assertEquals(3600, GoTimeUtil.durationSeconds("1h"))
+0.686 - assertEquals(60, GoTimeUtil.durationSeconds("1m0s"))
+0.680 - assertEquals(86400, GoTimeUtil.durationSeconds("1d"))
+0.680 - assertEquals(3600, GoTimeUtil.durationSeconds("1h0"))
+0.673 - assertEquals(3600, GoTimeUtil.durationSeconds("1h0s"))
+0.667 - assertEquals(2592000, GoTimeUtil.durationSeconds("1M"))
+0.667 - assertEquals(null, GoTimeUtil.durationSeconds(null))
+0.661 - assertEquals(123456, GoTimeUtil.durationSeconds("2h3m56s"))
+0.660 - assertEquals(31536000, GoTimeUtil.durationSeconds("1y"))
+0.660 - assertEquals(3600, GoTimeUtil.durationSeconds("1h0m0s"))

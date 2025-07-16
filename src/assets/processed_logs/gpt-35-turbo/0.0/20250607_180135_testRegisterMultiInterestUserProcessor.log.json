@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class UserProcessorRegisterHelper {\npublic static void registerUserProcessor ( UserProcessor < ? > processor , ConcurrentHashMap < String , UserProcessor < ? > > userProcessors ) {\nif ( null == processor ) {\nthrow new RuntimeException ( \"STR\" ) ;\n} if ( processor instanceof MultiInterestUserProcessor ) {\nregisterUserProcessor ( ( MultiInterestUserProcessor ) processor , userProcessors ) ;\n} else {\nif ( StringUtils . isBlank ( processor . interest ( ) ) ) {\nthrow new RuntimeException ( \"STR\" ) ;\n} UserProcessor < ? > preProcessor = userProcessors . putIfAbsent ( processor . interest ( ) , processor ) ;\nif ( preProcessor != null ) {\nString errMsg = \"STR\" + processor . interest ( ) + \"STR\" ;\nthrow new RuntimeException ( errMsg ) ;\n} } }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class UserProcessorRegisterHelperTest {\n@Test\npublic void testRegisterMultiInterestUserProcessor ( ) {\nUserProcessor multiInterestUserProcessor = new SimpleServerMultiInterestUserProcessor ( ) ;\nUserProcessorRegisterHelper . registerUserProcessor ( multiInterestUserProcessor , userProcessors ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(userProcessors);\nAssert.assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()));\nAssert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()));\nAssert.assertTrue(userProcessors.size() == 1);\nAssert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors));\nAssert.assertEquals(multiInterestUserProcessor, userProcessors.putIfAbsent(multiInterestUserProcessor.interest(), multiInterestUserProcessor));\nAssert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()));\nAssert.assertNotEquals(userProcessors.putIfAbsent(multiInterestUserProcessor.interest(), multiInterestUserProcessor), multiInterestUserProcessor);\nAssert.assertEquals(\"STR\" + multiInterestUserProcessor.interest() + \"STR\", assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors)).getMessage());\nAssert.assertEquals(1, userProcessors.size());\nAssert.assertTrue(userProcessors.containsValue(multiInterestUserProcessor));\nAssert.assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()));\nAssert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()));\nAssert.assertNull(userProcessors.put(multiInterestUserProcessor.interest(), multiInterestUserProcessor));\nAssert.assertEquals(multiInterestUserProcessor, userProcessors.putIfAbsent(multiInterestUserProcessor.interest(), multiInterestUserProcessor));\nAssert.assertEquals(1, userProcessors.size());\nAssert.assertTrue(userProcessors.containsValue(multiInterestUserProcessor));\nAssert.assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()));\nAssert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()));\n====================\n\n",
+    "scores": [
+        0.73,
+        0.601,
+        0.593,
+        0.588,
+        0.588,
+        0.588,
+        0.546,
+        0.542,
+        0.542,
+        0.542,
+        0.523,
+        0.523,
+        0.503,
+        0.503,
+        0.439,
+        0.439,
+        0.38,
+        0.321,
+        0.101
+    ],
+    "ground_truth": "Assert.assertEquals(((SimpleServerMultiInterestUserProcessor)multiInterestUserProcessor).multiInterest().size(),userProcessors.size());"
+}

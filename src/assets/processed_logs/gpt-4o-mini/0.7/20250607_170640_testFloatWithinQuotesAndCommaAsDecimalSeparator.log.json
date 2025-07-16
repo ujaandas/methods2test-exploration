@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testFloatWithinQuotesAndCommaAsDecimalSeparator ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(1, res.size());\nassertEquals(\"ExpectedValue1\", res.get(0).field(\"field1\"));\nassertEquals(\"ExpectedValue2\", res.get(0).field(\"field2\"));\nassertEquals(10.5f, res.get(0).field(\"floatField\"), 0.01);\nassertEquals(\"ExpectedValue3\", res.get(0).field(\"field3\"));\nassertTrue(res.get(0).field(\"field4\") instanceof String);\nassertEquals(\"ExpectedValue5\", res.get(0).field(\"field5\"));\nassertTrue(res.get(0).field(\"booleanField\"));\nassertEquals(12345, res.get(0).field(\"intField\"));\nassertNotEquals(\"UnexpectedValue\", res.get(0).field(\"field6\"));\nassertEquals(3.14, res.get(0).field(\"decimalField\"), 0.01);\nassertTrue(res.get(0).field(\"dateField\") instanceof Date);\nassertEquals(\"ExpectedValue7\", res.get(0).field(\"field7\"));\nassertNull(res.get(0).field(\"nonExistentField\"));\nassertEquals(2, res.get(0).field(\"listField\").size());\nassertTrue(res.get(0).field(\"listField\").contains(\"Item1\"));\nassertTrue(res.get(0).field(\"listField\").contains(\"Item2\"));\nassertEquals(\"ExpectedValue8\", res.get(0).field(\"nestedField\").field(\"subField1\"));\nassertEquals(\"ExpectedValue9\", res.get(0).field(\"nestedField\").field(\"subField2\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.692,
+        0.513,
+        0.486,
+        0.462,
+        0.459,
+        0.457,
+        0.444,
+        0.439,
+        0.434,
+        0.434,
+        0.434,
+        0.434,
+        0.434,
+        0.414,
+        0.4,
+        0.4,
+        0.4,
+        0.395,
+        0.374,
+        0.374,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

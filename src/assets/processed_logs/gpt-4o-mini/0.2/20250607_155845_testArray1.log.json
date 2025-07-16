@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void endArray ( ) throws IOException {\ncheckInArray ( ) ;\nstate . pop ( ) ;\nout . write ( \"STR\" ) ;\nafterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testArray1 ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . startArray ( ) ;\nser . writeBooleanLiteral ( true ) ;\nser . endArray ( ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(\"[\", result.substring(0, 1));\nassertEquals(\"]\", result.substring(result.length() - 1));\nassertTrue(result.contains(\"true\"));\nassertEquals(3, result.length());\nassertTrue(result.startsWith(\"[\"));\nassertTrue(result.endsWith(\"]\"));\nassertFalse(result.contains(\"false\"));\nassertFalse(result.contains(\"null\"));\nassertEquals(1, result.split(\",\").length);\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.contains(\" \"));\nassertEquals(1, result.replaceAll(\"[^,]\", \"\").length());\nassertTrue(result.indexOf(\"true\") > 0);\nassertTrue(result.indexOf(\"[\") < result.indexOf(\"true\"));\nassertTrue(result.indexOf(\"true\") < result.indexOf(\"]\"));\nassertEquals(1, result.chars().filter(ch -> ch == 't').count());\nassertEquals(1, result.chars().filter(ch -> ch == 'r').count());\nassertEquals(1, result.chars().filter(ch -> ch == 'u').count());\nassertEquals(1, result.chars().filter(ch -> ch == 'e').count());\nassertEquals(0, result.chars().filter(ch -> ch == 'f').count());\nassertEquals(0, result.chars().filter(ch -> ch == 'n').count());\n```\n====================\n\n",
+    "scores": [
+        0.737,
+        0.708,
+        0.636,
+        0.586,
+        0.582,
+        0.582,
+        0.548,
+        0.54,
+        0.533,
+        0.532,
+        0.517,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.492,
+        0.484,
+        0.375,
+        0.375,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

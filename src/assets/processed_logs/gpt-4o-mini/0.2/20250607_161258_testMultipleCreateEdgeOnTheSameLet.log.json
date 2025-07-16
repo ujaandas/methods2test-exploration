@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutor {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSqlScriptExecutorTest {\n@Test\npublic void testMultipleCreateEdgeOnTheSameLet ( ) {\nOrientDB factory = new OrientDB ( \"STR\" , \"STR\" , \"STR\" , OrientDBConfig . defaultConfig ( ) ) ;\nString dbName = getClass ( ) . getSimpleName ( ) + \"STR\" ;\nfactory . create ( dbName , ODatabaseType . MEMORY ) ;\nODatabaseDocument db = factory . open ( dbName , \"STR\" , \"STR\" ) ;\nString script = \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nscript += \"STR\" ;\nOResultSet result = db . execute ( \"STR\" , script ) ;\nresult . close ( ) ;\nresult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedCount, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"propertyName\") != null));\nassertEquals(expectedValue, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"anotherProperty\").equals(expectedAnotherValue)));\nassertFalse(result.stream().noneMatch(r -> r.getProperty(\"someProperty\").equals(someValue)));\nassertEquals(expectedType, result.stream().findFirst().get().getProperty(\"type\"));\nassertTrue(result.stream().map(r -> r.getProperty(\"status\")).allMatch(status -> status.equals(\"active\")));\nassertEquals(expectedEdgeCount, result.stream().filter(r -> r.getProperty(\"edgeType\").equals(\"specificType\")).count());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"createdAt\").isAfter(someDate)));\nassertEquals(expectedString, result.stream().map(r -> r.getProperty(\"name\")).collect(Collectors.joining(\",\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"isValid\") == true));\nassertEquals(expectedId, result.stream().findFirst().get().getIdentity());\nassertTrue(result.stream().map(r -> r.getProperty(\"relatedId\")).distinct().count() > 1);\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"error\") != null));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"score\") >= minimumScore));\nassertEquals(expectedMaxValue, result.stream().mapToInt(r -> r.getProperty(\"value\")).max().orElse(0));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"category\").equals(\"desiredCategory\")));\nassertEquals(expectedAverage, result.stream().mapToDouble(r -> r.getProperty(\"rating\")).average().orElse(0.0), delta);\n```\n====================\n\n",
+    "scores": [
+        0.844,
+        0.631,
+        0.627,
+        0.588,
+        0.569,
+        0.547,
+        0.527,
+        0.526,
+        0.525,
+        0.504,
+        0.5,
+        0.496,
+        0.494,
+        0.493,
+        0.484,
+        0.474,
+        0.471,
+        0.458,
+        0.44,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(2,result.stream().count());"
+}

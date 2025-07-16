@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoader {\n@Override\npublic Source load ( final String sourceFile ) throws IOException {\nInputStream stream = locate ( sourceFile ) ;\nif ( stream != null ) {\ntry ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ;\nInputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) {\nString source = IOUtil . toString ( reader ) ;\nreturn new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ;\n} catch ( NoSuchAlgorithmException ex ) {\nthrow new IOException ( \"STR\" , ex ) ;\n} } else {\nreturn null ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class DirectorySourceLoaderTest {\n@Test\npublic void testMissingSourceFileFromDirectory ( ) throws Exception {\nDirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNull(sourceLoader.load(\"missingFile.java\"));\nassertNull(sourceLoader.load(\"nonexistentFile.java\"));\nassertNull(sourceLoader.load(\"invalidFile.txt\"));\nassertNull(sourceLoader.load(\"emptyFile.java\"));\nassertNull(sourceLoader.load(\"fileWithoutExtension\"));\nassertNull(sourceLoader.load(\"fileWithInvalidExtension.pdf\"));\nassertNull(sourceLoader.load(\"fileWithNoContent.java\"));\nassertNull(sourceLoader.load(\"fileWithSpecialCharacters.java\"));\nassertNull(sourceLoader.load(\"fileWithSpaces in name.java\"));\nassertNull(sourceLoader.load(\"fileWithTabs\\tin name.java\"));\nassertNull(sourceLoader.load(\"fileWithNewLines\\nin name.java\"));\nassertNull(sourceLoader.load(\"fileWithLeadingWhitespace.java\"));\nassertNull(sourceLoader.load(\"fileWithTrailingWhitespace.java\"));\nassertNull(sourceLoader.load(\"fileWithUnicodeCharacters_\u6f22\u5b57.java\"));\nassertNull(sourceLoader.load(\"fileWithLongNameThatExceedsLimit.java\"));\nassertNull(sourceLoader.load(\"fileWithRestrictedCharacters$&*.java\"));\nassertNull(sourceLoader.load(\"fileWithRestrictedPath/characters.java\"));\nassertNull(sourceLoader.load(\"fileWithRestrictedPath\\\\characters.java\"));\nassertNull(sourceLoader.load(\"fileWithRestrictedPath:characters.java\"));\nassertNull(sourceLoader.load(\"fileWithRestrictedPath/characters:and:more.java\"));\n====================\n\n",
+    "scores": [
+        0.795,
+        0.786,
+        0.776,
+        0.742,
+        0.742,
+        0.725,
+        0.723,
+        0.723,
+        0.687,
+        0.68,
+        0.68,
+        0.673,
+        0.667,
+        0.648,
+        0.647,
+        0.642,
+        0.636,
+        0.636,
+        0.63,
+        0.586
+    ],
+    "ground_truth": "assertNull(sourceLoader.load(\"STR\"));"
+}

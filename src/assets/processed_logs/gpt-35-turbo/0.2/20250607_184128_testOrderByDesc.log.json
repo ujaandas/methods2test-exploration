@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testOrderByDesc ( ) {\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nString query = \"STR\" ;\nOResultSet result = db . query ( query ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(5, result.stream().count());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"name\").toString().startsWith(\"A\")));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"age\") == null));\nassertEquals(3, result.stream().filter(r -> r.getProperty(\"gender\").equals(\"Male\")).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"city\").equals(\"London\")));\nassertEquals(2, result.stream().filter(r -> r.getProperty(\"status\").equals(\"Active\")).count());\nassertFalse(result.stream().allMatch(r -> r.getProperty(\"role\").equals(\"Admin\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"department\").equals(\"IT\")));\nassertEquals(4, result.stream().filter(r -> r.getProperty(\"salary\") > 50000).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"title\").equals(\"Manager\")));\nassertEquals(1, result.stream().filter(r -> r.getProperty(\"location\").equals(\"New York\")).count());\nassertFalse(result.stream().allMatch(r -> r.getProperty(\"team\").equals(\"Sales\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"manager\").equals(\"John\")));\nassertEquals(2, result.stream().filter(r -> r.getProperty(\"experience\") >= 5).count());\nassertTrue(result.stream().noneMatch(r -> r.getProperty(\"department\").equals(\"HR\")));\nassertEquals(3, result.stream().filter(r -> r.getProperty(\"rating\") >= 4.0).count());\nassertFalse(result.stream().allMatch(r -> r.getProperty(\"status\").equals(\"Inactive\")));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"location\").equals(\"London\")));\nassertEquals(4, result.stream().filter(r -> r.getProperty(\"role\").equals(\"Developer\")).count());\nassertFalse(result.stream().noneMatch(r -> r.getProperty(\"title\").equals(\"Engineer\")));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"team\").equals(\"Engineering\")));\n====================\n\n",
+    "scores": [
+        0.597,
+        0.407,
+        0.407,
+        0.404,
+        0.404,
+        0.4,
+        0.4,
+        0.396,
+        0.396,
+        0.393,
+        0.393,
+        0.389,
+        0.377,
+        0.376,
+        0.376,
+        0.37,
+        0.367,
+        0.355,
+        0.355,
+        0.339,
+        0.339
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( List < ? > params ) { 
+     if ( ! ( params . get ( 0 ) instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ; 
+     final List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     result . add ( createSingleValue ( mapParam ) ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueWrongParameter ( ) {
+         final Object result = propertyIndexByKey . createValue ( Collections . singletonList ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNull(result);
+assertTrue(result instanceof List);
+assertEquals(0, ((List) result).size());
+assertFalse(result instanceof Map);
+assertNotEquals("STRING", result);
+assertNotNull(result);
+assertTrue(result instanceof Collection);
+assertNotSame(Collections.emptyList(), result);
+assertNotSame(Collections.emptyMap(), result);
+assertTrue(((Collection) result).isEmpty());
+assertEquals(Collections.emptyList(), result);
+assertNotEquals(1, ((Collection) result).size());
+assertNotEquals("STRING", result.toString());
+assertEquals(0, result.hashCode());
+assertArrayEquals(new Object[0], ((Collection) result).toArray());
+assertNotSame(new ArrayList<>(), result);
+assertSame(Collections.emptyList(), result);
+assertFalse(((Collection) result).contains("STRING"));
+assertEquals(0, ((Collection) result).hashCode());
+assertNotEquals(Collections.emptyList(), result);
+assertSame(new ArrayList<>(), result);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertNull(result); ===
+1.000 - assertNull(result)
+0.923 - assertNotNull(result)
+0.680 - assertNotEquals("STRING", result)
+0.627 - assertEquals(0, result.hashCode())
+0.600 - assertTrue(result instanceof List)
+0.600 - assertFalse(result instanceof Map)
+0.582 - assertEquals(0, ((List) result).size())
+0.557 - assertNotEquals("STRING", result.toString())
+0.554 - assertNotEquals(Collections.emptyList(), result)
+0.548 - assertNotSame(Collections.emptyMap(), result)
+0.548 - assertEquals(Collections.emptyList(), result)
+0.540 - assertNotSame(Collections.emptyList(), result)
+0.536 - assertTrue(result instanceof Collection)
+0.536 - assertNotSame(new ArrayList<>(), result)
+0.533 - assertTrue(((Collection) result).isEmpty())
+0.533 - assertSame(Collections.emptyList(), result)
+0.531 - assertNotEquals(1, ((Collection) result).size())
+0.528 - assertSame(new ArrayList<>(), result)
+0.492 - assertEquals(0, ((Collection) result).hashCode())
+0.429 - assertFalse(((Collection) result).contains("STRING"))
+0.400 - assertArrayEquals(new Object[0], ((Collection) result).toArray())

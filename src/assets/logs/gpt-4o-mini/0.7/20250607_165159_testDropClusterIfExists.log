@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecutionTest {
+    @Test
+     public void testDropClusterIfExists ( ) {
+         String cluster = "STR" ; 
+         ( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(db.getStorage().getClusterById(0));
+Assert.assertEquals(0, odropClusterStatementExecution.getClusterIdByName("STR"));
+Assert.assertTrue(db.getStorage().getClusterById(0).getName().equals("STR"));
+Assert.assertTrue(db.getStorage().getClusters().size() > 0);
+Assert.assertTrue(db.getStorage().clusterExists("STR"));
+Assert.assertEquals("STR", db.getStorage().getClusterById(0).getName());
+Assert.assertTrue(db.getStorage().getClusterById(0).isActive());
+Assert.assertNotEquals(-1, odropClusterStatementExecution.getClusterIdByName("STR"));
+Assert.assertTrue(db.getStorage().getClusterById(0).isTemporary());
+Assert.assertNotNull(db.getStorage().getClusterById(0).getRecords());
+Assert.assertEquals(1, db.getStorage().getClusterIds().length);
+Assert.assertTrue(Arrays.asList(db.getStorage().getClusterNames()).contains("STR"));
+Assert.assertEquals("STR", db.getStorage().getClusterById(0).getClusterName());
+Assert.assertEquals(1, db.getStorage().getClusterCount());
+Assert.assertTrue(db.getStorage().getClusterNames().length > 0);
+Assert.assertTrue(db.getStorage().getClusterIds().length > 0);
+Assert.assertFalse(db.getStorage().getClusterNames().isEmpty());
+Assert.assertSame(db.getStorage().getCluster("STR"), db.getStorage().getClusterById(0));
+Assert.assertFalse(db.getStorage().getClusterNames().contains("INVALID_CLUSTER"));
+Assert.assertNull(db.getStorage().getClusterById(-1));
+Assert.assertTrue(db.getStorage().getClusterNames().contains("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(cluster)>0); ===
+0.694 - Assert.assertTrue(db.getStorage().getClusterNames().length > 0)
+0.674 - Assert.assertTrue(db.getStorage().clusterExists("STR"))
+0.646 - Assert.assertTrue(db.getStorage().getClusterIds().length > 0)
+0.638 - Assert.assertTrue(db.getStorage().getClusters().size() > 0)
+0.629 - Assert.assertTrue(db.getStorage().getClusterNames().contains("STR"))
+0.619 - Assert.assertTrue(db.getStorage().getClusterById(0).getName().equals("STR"))
+0.600 - Assert.assertTrue(db.getStorage().getClusterById(0).isActive())
+0.600 - Assert.assertFalse(db.getStorage().getClusterNames().isEmpty())
+0.578 - Assert.assertNull(db.getStorage().getClusterById(-1))
+0.563 - Assert.assertTrue(db.getStorage().getClusterById(0).isTemporary())
+0.561 - Assert.assertEquals("STR", db.getStorage().getClusterById(0).getClusterName())
+0.561 - Assert.assertEquals("STR", db.getStorage().getClusterById(0).getName())
+0.550 - Assert.assertTrue(Arrays.asList(db.getStorage().getClusterNames()).contains("STR"))
+0.537 - Assert.assertSame(db.getStorage().getCluster("STR"), db.getStorage().getClusterById(0))
+0.534 - Assert.assertEquals(0, odropClusterStatementExecution.getClusterIdByName("STR"))
+0.520 - ```java
+Assert.assertNotNull(db.getStorage().getClusterById(0))
+0.517 - Assert.assertNotEquals(-1, odropClusterStatementExecution.getClusterIdByName("STR"))
+0.510 - Assert.assertEquals(1, db.getStorage().getClusterIds().length)
+0.508 - Assert.assertFalse(db.getStorage().getClusterNames().contains("INVALID_CLUSTER"))
+0.495 - Assert.assertNotNull(db.getStorage().getClusterById(0).getRecords())
+0.495 - Assert.assertEquals(1, db.getStorage().getClusterCount())
+0.000 - ```

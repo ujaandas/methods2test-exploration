@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic List < Method > findAll ( ) {\nList < Method > methods = findAllDeclaredMethods ( clazz ) ;\nfor ( Method method : methods ) {\nverifyPublic ( method ) ;\nverifyNotStatic ( method ) ;\nverifyReturnType ( method ) ;\nverifyArgs ( method ) ;\nmethod . setAccessible ( true ) ;\n} return methods ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testSubClass_methodFoundInSuper ( ) {\nList < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, methodList.size());\nassertTrue(methodList.contains(Subclass.class.getMethod(\"methodFoundInSuper\")));\nassertFalse(methodList.contains(Subclass.class.getMethod(\"methodNotFound\")));\nassertTrue(methodList.get(0).getReturnType().equals(void.class));\nassertTrue(methodList.get(0).getParameterCount() == 0);\nassertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));\nassertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));\nassertTrue(methodList.get(0).isAccessible());\nassertTrue(methodList.get(0).isAnnotationPresent(Teardown.class));\nassertFalse(methodList.get(0).isAnnotationPresent(Setup.class));\nassertTrue(methodList.get(0).getAnnotations().length == 1);\nassertTrue(methodList.get(0).getAnnotations()[0].annotationType().equals(Teardown.class));\nassertFalse(methodList.get(0).getAnnotations()[0].annotationType().equals(Setup.class));\nassertTrue(methodList.get(0).getDeclaringClass().equals(Subclass.class));\nassertFalse(methodList.get(0).getDeclaringClass().equals(Superclass.class));\nassertTrue(methodList.get(0).getName().equals(\"methodFoundInSuper\"));\nassertFalse(methodList.get(0).getName().equals(\"methodNotFound\"));\nassertTrue(methodList.get(0).getReturnType().equals(void.class));\nassertFalse(methodList.get(0).getReturnType().equals(int.class));\nassertTrue(methodList.get(0).getParameterCount() == 0);\nassertFalse(methodList.get(0).getParameterCount() == 1);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.649,
+        0.581,
+        0.562,
+        0.541,
+        0.541,
+        0.517,
+        0.515,
+        0.515,
+        0.51,
+        0.51,
+        0.5,
+        0.477,
+        0.474,
+        0.474,
+        0.463,
+        0.455,
+        0.45,
+        0.438,
+        0.429,
+        0.41
+    ],
+    "ground_truth": "assertEquals(1,methodList.size());"
+}

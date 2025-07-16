@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class UserProcessorRegisterHelper {
+    public static void registerUserProcessor ( UserProcessor < ? > processor , ConcurrentHashMap < String , UserProcessor < ? > > userProcessors ) { 
+    if ( null == processor ) { 
+    throw new RuntimeException ( "STR" ) ; 
+    } if ( processor instanceof MultiInterestUserProcessor ) { 
+    registerUserProcessor ( ( MultiInterestUserProcessor ) processor , userProcessors ) ; 
+    } else { 
+    if ( StringUtils . isBlank ( processor . interest ( ) ) ) { 
+    throw new RuntimeException ( "STR" ) ; 
+    } UserProcessor < ? > preProcessor = userProcessors . putIfAbsent ( processor . interest ( ) , processor ) ; 
+    if ( preProcessor != null ) { 
+    String errMsg = "STR" + processor . interest ( ) + "STR" ; 
+    throw new RuntimeException ( errMsg ) ; 
+    } } }
+}
+
+package sofastack.sofa-bolt;
+
+public class UserProcessorRegisterHelperTest {
+    @Test
+     public void testRegisterMultiInterestUserProcessor ( ) {
+         UserProcessor multiInterestUserProcessor = new SimpleServerMultiInterestUserProcessor ( ) ; 
+         UserProcessorRegisterHelper . registerUserProcessor ( multiInterestUserProcessor , userProcessors ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(preProcessor);
+Assert.assertEquals(multiInterestUserProcessor, preProcessor);
+Assert.assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()));
+Assert.assertEquals(1, userProcessors.size());
+Assert.assertEquals("STR", errMsg);
+Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors));
+Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(null, userProcessors));
+Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, null));
+Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(null, null));
+Assert.assertEquals(1, userProcessors.size());
+Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()));
+Assert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()));
+Assert.assertNull(userProcessors.putIfAbsent(multiInterestUserProcessor.interest(), multiInterestUserProcessor));
+Assert.assertEquals(1, userProcessors.size());
+Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()));
+Assert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()));
+Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors));
+Assert.assertEquals(1, userProcessors.size());
+Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(((SimpleServerMultiInterestUserProcessor)multiInterestUserProcessor).multiInterest().size(),userProcessors.size()); ===
+0.593 - Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()))
+0.593 - Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()))
+0.593 - Assert.assertNotNull(userProcessors.get(multiInterestUserProcessor.interest()))
+0.588 - Assert.assertTrue(userProcessors.containsKey(multiInterestUserProcessor.interest()))
+0.580 - Assert.assertNull(userProcessors.putIfAbsent(multiInterestUserProcessor.interest(), multiInterestUserProcessor))
+0.567 - Assert.assertEquals(multiInterestUserProcessor, preProcessor)
+0.563 - Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(null, userProcessors))
+0.546 - Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors))
+0.546 - Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, userProcessors))
+0.542 - Assert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()))
+0.542 - Assert.assertEquals(multiInterestUserProcessor, userProcessors.get(multiInterestUserProcessor.interest()))
+0.474 - Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(null, null))
+0.464 - Assert.assertThrows(RuntimeException.class, () -> UserProcessorRegisterHelper.registerUserProcessor(multiInterestUserProcessor, null))
+0.439 - Assert.assertEquals(1, userProcessors.size())
+0.439 - Assert.assertEquals(1, userProcessors.size())
+0.439 - Assert.assertEquals(1, userProcessors.size())
+0.439 - Assert.assertEquals(1, userProcessors.size())
+0.261 - Assert.assertEquals("STR", errMsg)
+0.260 - Assert.assertNotNull(preProcessor)

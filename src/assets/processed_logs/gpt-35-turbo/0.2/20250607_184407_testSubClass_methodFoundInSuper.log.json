@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetriever {\npublic List < Method > findAll ( ) {\nList < Method > methods = findAllDeclaredMethods ( clazz ) ;\nfor ( Method method : methods ) {\nverifyPublic ( method ) ;\nverifyNotStatic ( method ) ;\nverifyReturnType ( method ) ;\nverifyArgs ( method ) ;\nmethod . setAccessible ( true ) ;\n} return methods ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AnnotatedMethodRetrieverTest {\n@Test\npublic void testSubClass_methodFoundInSuper ( ) {\nList < Method > methodList = new AnnotatedMethodRetriever ( Subclass . class , Teardown . class ) . withFilter ( new AnnotationFilter . TeardownFilter ( false ) ) . withVoidReturnType ( ) . withoutArgs ( ) . findAll ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(1, methodList.size());\nAssert.assertTrue(methodList.contains(Subclass.class.getMethod(\"methodFoundInSuper\")));\nAssert.assertFalse(methodList.contains(Subclass.class.getMethod(\"methodNotFound\")));\nAssert.assertTrue(methodList.get(0).getReturnType().equals(void.class));\nAssert.assertTrue(methodList.get(0).getParameterCount() == 0);\nAssert.assertTrue(Modifier.isPublic(methodList.get(0).getModifiers()));\nAssert.assertFalse(Modifier.isStatic(methodList.get(0).getModifiers()));\nAssert.assertTrue(methodList.get(0).isAccessible());\nAssert.assertTrue(methodList.get(0).getAnnotation(Teardown.class) != null);\nAssert.assertTrue(methodList.get(0).getAnnotation(Setup.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(Before.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(After.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(TestMethod.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(AnnotationFilter.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(AnnotatedMethodRetriever.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(AnnotatedMethodRetrieverTest.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(Test.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(BeforeClass.class) == null);\nAssert.assertTrue(methodList.get(0).getAnnotation(AfterClass.class) == null);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.649,
+        0.541,
+        0.515,
+        0.5,
+        0.477,
+        0.474,
+        0.468,
+        0.463,
+        0.463,
+        0.46,
+        0.458,
+        0.449,
+        0.44,
+        0.436,
+        0.429,
+        0.415,
+        0.386,
+        0.373
+    ],
+    "ground_truth": "assertEquals(1,methodList.size());"
+}

@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    public void copyFile ( File fileChanged , File srcDir , File targetDir , String targetFileName ) throws IOException { 
+    File targetResource = getTargetFile ( fileChanged , srcDir , targetDir , targetFileName ) ; 
+    try { 
+    FileUtils . copyFile ( fileChanged , targetResource ) ; 
+    info ( "STR" + fileChanged . getCanonicalPath ( ) + "STR" + targetResource . getCanonicalPath ( ) ) ; 
+    } catch ( FileNotFoundException ex ) { 
+    debug ( "STR" + fileChanged . getCanonicalPath ( ) ) ; 
+    } catch ( Exception ex ) { 
+    debug ( ex ) ; 
+    } }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testCopyFile ( ) throws Exception {
+         File configFile = new File ( srcDir , "STR" ) ; 
+         Files . write ( configFile . toPath ( ) , "STR" . getBytes ( ) ) ; 
+         util . copyFile ( configFile , srcDir , targetDir , "STR" ) ; 
+         File targetFile = new File ( targetDir , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(targetFile.exists());
+assertEquals("STR", new String(Files.readAllBytes(targetFile.toPath())));
+assertTrue(targetFile.length() > 0);
+assertTrue(Files.isRegularFile(targetFile.toPath()));
+assertTrue(Files.isReadable(targetFile.toPath()));
+assertFalse(Files.isDirectory(targetFile.toPath()));
+assertTrue(Files.size(targetFile.toPath()) > 0);
+assertTrue(Files.getLastModifiedTime(targetFile.toPath()).toMillis() > 0);
+assertNotNull(Files.readAttributes(targetFile.toPath(), "*"));
+assertTrue(Files.probeContentType(targetFile.toPath()).equals("text/plain"));
+assertEquals(targetFile.getName(), "STR");
+assertTrue(Files.isWritable(targetFile.toPath()));
+assertTrue(Files.isExecutable(targetFile.toPath()) == false);
+assertTrue(Files.getOwner(targetFile.toPath()).getName().length() > 0);
+assertTrue(Files.readAllLines(targetFile.toPath()).size() > 0);
+assertTrue(Files.readAllLines(targetFile.toPath()).get(0).equals("STR"));
+assertTrue(Files.getAttribute(targetFile.toPath(), "size").equals(Files.size(targetFile.toPath())));
+assertTrue(Files.getAttribute(targetFile.toPath(), "creationTime") != null);
+assertTrue(Files.getAttribute(targetFile.toPath(), "lastModifiedTime") != null);
+assertTrue(Files.getAttribute(targetFile.toPath(), "lastAccessTime") != null);
+assertTrue(Files.getAttribute(targetFile.toPath(), "basic:lastModifiedTime") != null);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(targetFile.exists()); ===
+0.886 - ```java
+assertTrue(targetFile.exists())
+0.844 - assertTrue(targetFile.length() > 0)
+0.684 - assertTrue(Files.size(targetFile.toPath()) > 0)
+0.676 - assertEquals(targetFile.getName(), "STR")
+0.650 - assertTrue(Files.isReadable(targetFile.toPath()))
+0.650 - assertTrue(Files.isWritable(targetFile.toPath()))
+0.627 - assertTrue(Files.isRegularFile(targetFile.toPath()))
+0.585 - assertFalse(Files.isDirectory(targetFile.toPath()))
+0.584 - assertTrue(Files.isExecutable(targetFile.toPath()) == false)
+0.571 - assertTrue(Files.readAllLines(targetFile.toPath()).size() > 0)
+0.549 - assertNotNull(Files.readAttributes(targetFile.toPath(), "*"))
+0.529 - assertTrue(Files.getLastModifiedTime(targetFile.toPath()).toMillis() > 0)
+0.525 - assertTrue(Files.getOwner(targetFile.toPath()).getName().length() > 0)
+0.514 - assertTrue(Files.getAttribute(targetFile.toPath(), "lastAccessTime") != null)
+0.505 - assertTrue(Files.readAllLines(targetFile.toPath()).get(0).equals("STR"))
+0.505 - assertTrue(Files.getAttribute(targetFile.toPath(), "creationTime") != null)
+0.495 - assertEquals("STR", new String(Files.readAllBytes(targetFile.toPath())))
+0.486 - assertTrue(Files.probeContentType(targetFile.toPath()).equals("text/plain"))
+0.486 - assertTrue(Files.getAttribute(targetFile.toPath(), "lastModifiedTime") != null)
+0.478 - assertTrue(Files.getAttribute(targetFile.toPath(), "basic:lastModifiedTime") != null)
+0.450 - assertTrue(Files.getAttribute(targetFile.toPath(), "size").equals(Files.size(targetFile.toPath())))
+0.000 - ```

@@ -1,0 +1,136 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Appveyor {
+    @Override
+     public String getBuildUrl ( ) { 
+     return "STR" + getProperty ( APPVEYOR_REPO_NAME ) + "STR" + getProperty ( APPVEYOR_BUILD_NUMBER ) ; 
+     }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class AppveyorTest {
+    @Test
+     public void testGetBuildUrl ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Appveyor appveyor = new Appveyor();
+System.setProperty("APPVEYOR_REPO_NAME", "myRepo");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "123");
+
+String expectedUrl = "STRmyRepoSTR123";
+String actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "testRepo");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "456");
+
+expectedUrl = "STRtestRepoSTR456";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "anotherRepo");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "789");
+
+expectedUrl = "STRanotherRepoSTR789";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "101");
+
+expectedUrl = "STRSTR101";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "emptyName");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "");
+
+expectedUrl = "STRemptyNameSTR";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "nullRepo");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "null");
+
+expectedUrl = "STRnullRepoSTRnull";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "repoWithSpecialChars!@#");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "999");
+
+expectedUrl = "STRrepoWithSpecialChars!@#STR999";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "repoWithSpaces");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "1001");
+
+expectedUrl = "STRrepoWithSpacesSTR1001";
+actualUrl = appveyor.getBuildUrl();
+assertEquals(expectedUrl, actualUrl);
+
+System.setProperty("APPVEYOR_REPO_NAME", "repo_with_underscore");
+System.setProperty("APPVEYOR_BUILD_NUMBER", "1002");
+
+expectedUrl = "STRrepo_with_underscore
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",newAppveyor(env()).getBuildUrl()); ===
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.619 - actualUrl = appveyor.getBuildUrl()
+0.578 - String actualUrl = appveyor.getBuildUrl()
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.506 - assertEquals(expectedUrl, actualUrl)
+0.378 - ```java
+Appveyor appveyor = new Appveyor()
+0.291 - System.setProperty("APPVEYOR_REPO_NAME", "nullRepo")
+0.283 - System.setProperty("APPVEYOR_REPO_NAME", "anotherRepo")
+0.278 - System.setProperty("APPVEYOR_REPO_NAME", "repo_with_underscore")
+0.277 - System.setProperty("APPVEYOR_REPO_NAME", "myRepo")
+0.275 - System.setProperty("APPVEYOR_REPO_NAME", "repoWithSpaces")
+0.273 - expectedUrl = "STRrepo_with_underscore
+0.272 - System.setProperty("APPVEYOR_REPO_NAME", "testRepo")
+0.269 - System.setProperty("APPVEYOR_REPO_NAME", "emptyName")
+0.235 - System.setProperty("APPVEYOR_BUILD_NUMBER", "null")
+0.232 - System.setProperty("APPVEYOR_REPO_NAME", "")
+0.224 - System.setProperty("APPVEYOR_BUILD_NUMBER", "")
+0.218 - System.setProperty("APPVEYOR_BUILD_NUMBER", "123")
+0.218 - System.setProperty("APPVEYOR_BUILD_NUMBER", "456")
+0.218 - System.setProperty("APPVEYOR_BUILD_NUMBER", "789")
+0.218 - System.setProperty("APPVEYOR_BUILD_NUMBER", "101")
+0.218 - System.setProperty("APPVEYOR_BUILD_NUMBER", "999")
+0.216 - System.setProperty("APPVEYOR_BUILD_NUMBER", "1001")
+0.216 - System.setProperty("APPVEYOR_BUILD_NUMBER", "1002")
+0.213 - expectedUrl = "STRSTR101"
+0.198 - expectedUrl = "STRemptyNameSTR"
+0.193 - expectedUrl = "STRtestRepoSTR456"
+0.190 - expectedUrl = "STRnullRepoSTRnull"
+0.186 - System.setProperty("APPVEYOR_REPO_NAME", "repoWithSpecialChars!@#")
+0.186 - expectedUrl = "STRanotherRepoSTR789"
+0.184 - String expectedUrl = "STRmyRepoSTR123"
+0.178 - expectedUrl = "STRrepoWithSpacesSTR1001"
+0.163 - expectedUrl = "STRrepoWithSpecialChars!@#STR999"

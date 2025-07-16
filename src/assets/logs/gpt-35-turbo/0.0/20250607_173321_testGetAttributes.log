@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtil {
+    public static Map < String , Method > getAttributes ( Object mbeanLocation ) { 
+    Map < String , Method > result = new TreeMap < String , Method > ( ) ; 
+    Method [ ] methods = mbeanLocation . getClass ( ) . getMethods ( ) ; 
+    for ( Method oneMethod : methods ) { 
+    MBeanAttribute attribute = oneMethod . getAnnotation ( MBeanAttribute . class ) ; 
+    if ( attribute != null ) { 
+    result . put ( attribute . name ( ) , oneMethod ) ; 
+    } } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class MBeanAnnotationUtilTest {
+    @Test
+     public void testGetAttributes ( ) throws Exception {
+         Map < String , Method > atts = MBeanAnnotationUtil . getAttributes ( this . testAnnotation1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(atts);
+assertEquals(3, atts.size());
+assertTrue(atts.containsKey("attribute1"));
+assertTrue(atts.containsKey("attribute2"));
+assertTrue(atts.containsKey("attribute3"));
+assertFalse(atts.containsKey("attribute4"));
+assertTrue(atts.containsValue(method1));
+assertTrue(atts.containsValue(method2));
+assertTrue(atts.containsValue(method3));
+assertFalse(atts.containsValue(method4));
+assertTrue(atts.get("attribute1").equals(method1));
+assertTrue(atts.get("attribute2").equals(method2));
+assertTrue(atts.get("attribute3").equals(method3));
+assertNull(atts.get("attribute4"));
+assertTrue(atts.keySet().containsAll(Arrays.asList("attribute1", "attribute2", "attribute3")));
+assertTrue(atts.values().containsAll(Arrays.asList(method1, method2, method3)));
+assertFalse(atts.values().contains(method4));
+assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute1", method1)));
+assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute2", method2)));
+assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute3", method3)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(2,atts.size()); ===
+0.963 - assertEquals(3, atts.size())
+0.609 - assertNotNull(atts)
+0.597 - assertFalse(atts.containsValue(method4))
+0.590 - assertNull(atts.get("attribute4"))
+0.571 - assertFalse(atts.containsKey("attribute4"))
+0.545 - assertTrue(atts.containsValue(method1))
+0.545 - assertTrue(atts.containsValue(method2))
+0.545 - assertTrue(atts.containsValue(method3))
+0.535 - assertFalse(atts.values().contains(method4))
+0.522 - assertTrue(atts.containsKey("attribute1"))
+0.522 - assertTrue(atts.containsKey("attribute2"))
+0.522 - assertTrue(atts.containsKey("attribute3"))
+0.390 - assertTrue(atts.get("attribute1").equals(method1))
+0.390 - assertTrue(atts.get("attribute2").equals(method2))
+0.390 - assertTrue(atts.get("attribute3").equals(method3))
+0.327 - assertTrue(atts.values().containsAll(Arrays.asList(method1, method2, method3)))
+0.296 - assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute1", method1)))
+0.296 - assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute2", method2)))
+0.296 - assertTrue(atts.entrySet().contains(new AbstractMap.SimpleEntry<>("attribute3", method3)))
+0.286 - assertTrue(atts.keySet().containsAll(Arrays.asList("attribute1", "attribute2", "attribute3")))

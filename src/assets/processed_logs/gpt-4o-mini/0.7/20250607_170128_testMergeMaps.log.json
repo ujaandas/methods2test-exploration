@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtil {\npublic static < K , V > Map < K , V > mergeMaps ( Map < K , V > map1 , Map < K , V > map2 ) {\nMap < K , V > answer = new HashMap < > ( ) ;\nif ( map2 != null ) {\nanswer . putAll ( map2 ) ;\n} if ( map1 != null ) {\nanswer . putAll ( map1 ) ;\n} return answer ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class MapUtilTest {\n@Test\npublic void testMergeMaps ( ) {\nMap < String , String > mapA = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > mapB = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > expectedA = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\nMap < String , String > expectedB = createMap ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(expectedA, MapUtil.mergeMaps(mapA, mapB));\nassertEquals(expectedB, MapUtil.mergeMaps(mapB, mapA));\nassertNotNull(MapUtil.mergeMaps(mapA, mapB));\nassertNotNull(MapUtil.mergeMaps(mapB, mapA));\nassertTrue(MapUtil.mergeMaps(mapA, mapB).containsKey(\"STR\"));\nassertTrue(MapUtil.mergeMaps(mapA, mapB).containsValue(\"STR\"));\nassertEquals(2, MapUtil.mergeMaps(mapA, mapB).size());\nassertEquals(2, MapUtil.mergeMaps(mapB, mapA).size());\nassertEquals(0, MapUtil.mergeMaps(null, null).size());\nassertEquals(mapA, MapUtil.mergeMaps(mapA, null));\nassertEquals(mapB, MapUtil.mergeMaps(null, mapB));\nassertEquals(mapA.size(), MapUtil.mergeMaps(mapA, mapB).size());\nassertEquals(mapB.size(), MapUtil.mergeMaps(mapA, mapB).size());\nassertNotSame(mapA, MapUtil.mergeMaps(mapA, mapB));\nassertNotSame(mapB, MapUtil.mergeMaps(mapB, mapA));\nassertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapA.keySet()));\nassertTrue(MapUtil.mergeMaps(mapA, mapB).keySet().containsAll(mapB.keySet()));\nassertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapA.keySet()));\nassertTrue(MapUtil.mergeMaps(mapB, mapA).keySet().containsAll(mapB.keySet()));\nassertTrue(MapUtil.mergeMaps(null, mapB).keySet().containsAll(mapB.keySet()));\nassertTrue(MapUtil.mergeMaps(mapA, null).keySet().containsAll(mapA.keySet()));\n```\n====================\n\n",
+    "scores": [
+        0.942,
+        0.929,
+        0.835,
+        0.828,
+        0.808,
+        0.8,
+        0.8,
+        0.796,
+        0.779,
+        0.779,
+        0.758,
+        0.74,
+        0.68,
+        0.667,
+        0.655,
+        0.578,
+        0.578,
+        0.562,
+        0.562,
+        0.547,
+        0.516,
+        0.0
+    ],
+    "ground_truth": "assertEquals(expectedA,MapUtil.mergeMaps(mapA,mapB));"
+}

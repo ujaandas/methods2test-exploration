@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Platform {\npublic static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) {\ntry {\nfor ( Method method : cls . getDeclaredMethods ( ) ) {\nif ( method . getName ( ) . equals ( methodName ) ) {\nreturn ( T ) method . invoke ( null , params ) ;\n} } throw new NoSuchMethodException ( cls + \"STR\" + methodName ) ;\n} catch ( Exception e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage jcodec.jcodec;\n\npublic class PlatformTest {\n@Test\npublic void testInvokeStatic2 ( ) {\nint parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , \"STR\" , new Object [ ] {\nByteBuffer . wrap ( \"STR\" . getBytes ( ) ) } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(parseBuf);\nassertTrue(parseBuf instanceof Integer);\nassertEquals(0, parseBuf);\nassertEquals(1, parseBuf + 1);\nassertNotEquals(-1, parseBuf);\nassertTrue(parseBuf >= 0);\nassertFalse(parseBuf < 0);\nassertEquals(Integer.valueOf(parseBuf), Integer.valueOf(0));\nassertSame(parseBuf, parseBuf);\nassertNotSame(parseBuf, new Integer(1));\nassertTrue(parseBuf == 0);\nassertFalse(parseBuf != 0);\nassertEquals(\"Expected value\", 0, parseBuf);\nassertArrayEquals(new int[]{0}, new int[]{parseBuf});\nassertTrue(parseBuf <= 1);\nassertFalse(parseBuf > 1);\nassertEquals(\"Buffer should be empty\", 0, parseBuf);\nassertNotEquals(\"Buffer should not be negative\", -1, parseBuf);\nassertTrue(\"Buffer should be non-negative\", parseBuf >= 0);\nassertEquals(\"Buffer value check\", 0, parseBuf);\nassertTrue(\"Buffer is not null\", parseBuf != null);\nassertFalse(\"Buffer is not equal to 1\", parseBuf == 1);\n```\n====================\n\n",
+    "scores": [
+        0.939,
+        0.902,
+        0.868,
+        0.792,
+        0.792,
+        0.776,
+        0.708,
+        0.708,
+        0.708,
+        0.708,
+        0.676,
+        0.648,
+        0.643,
+        0.63,
+        0.622,
+        0.568,
+        0.563,
+        0.548,
+        0.548,
+        0.53,
+        0.522,
+        0.468,
+        0.0
+    ],
+    "ground_truth": "assertEquals(42,parseBuf);"
+}

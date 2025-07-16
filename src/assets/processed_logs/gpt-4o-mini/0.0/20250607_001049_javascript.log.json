@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutor {\npublic void execute ( final ExecuteScriptOperation operation , final Promise promise ) {\nif ( operation . isFireAndForget ( ) ) {\npromise . answer ( \"STR\" ) ;\n} String fullCommand = operation . getCommand ( ) ;\nint indexColon = fullCommand . indexOf ( \"STR\" ) ;\nString extension = fullCommand . substring ( 0 , indexColon ) ;\nfinal String command = fullCommand . substring ( indexColon + 1 ) ;\nfinal Callable < String > task ;\nif ( extension . equals ( \"STR\" ) ) {\ntask = newBashScriptCallable ( command ) ;\n} else {\ntask = newGenericScriptCallable ( extension , command ) ;\n} new Thread ( ( ) -> {\ntry {\nString result = task . call ( ) ;\npromise . answer ( result ) ;\n} catch ( Exception e ) {\nLOGGER . warn ( \"STR\" + command , e ) ;\npromise . answer ( e ) ;\n} } ) . start ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutorTest {\n@Test\npublic void javascript ( ) {\nExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( \"STR\" , false ) ;\nStubPromise promise = new StubPromise ( ) ;\nscriptExecutor . execute ( scriptOperation , promise ) ;\npromise . assertCompletesEventually ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected result for STR command\", promise.getResult());\nassertTrue(promise.isCompleted());\nassertFalse(promise.isFailed());\nassertNotNull(promise.getResult());\nassertTrue(promise.getResult() instanceof String);\nassertEquals(\"Expected output\", promise.getResult());\nassertNotEquals(\"Unexpected output\", promise.getResult());\nassertTrue(promise.getExecutionTime() >= 0);\nassertFalse(promise.getExecutionTime() > 1000); // Assuming the command should complete quickly\nassertNull(promise.getError());\nassertTrue(promise.getResult().contains(\"Expected substring\"));\nassertFalse(promise.getResult().contains(\"Unexpected substring\"));\nassertEquals(\"STR\", scriptOperation.getCommand().substring(0, 3));\nassertTrue(promise.getResult().length() > 0);\nassertTrue(promise.getResult().startsWith(\"Expected prefix\"));\nassertTrue(promise.getResult().endsWith(\"Expected suffix\"));\nassertNotSame(\"Different object\", promise.getResult());\nassertTrue(promise.getResult().matches(\"Expected regex pattern\"));\nassertEquals(\"Expected length\", promise.getResult().length());\nassertTrue(promise.getResult().toLowerCase().contains(\"expected\"));\nassertFalse(promise.getResult().toUpperCase().contains(\"UNEXPECTED\"));\n```\n====================\n\n",
+    "scores": [
+        0.894,
+        0.667,
+        0.652,
+        0.625,
+        0.617,
+        0.614,
+        0.602,
+        0.595,
+        0.571,
+        0.568,
+        0.527,
+        0.513,
+        0.491,
+        0.491,
+        0.483,
+        0.474,
+        0.465,
+        0.455,
+        0.451,
+        0.387,
+        0.373,
+        0.0
+    ],
+    "ground_truth": "assertTrue(promise.getAnswer()instanceofString);"
+}

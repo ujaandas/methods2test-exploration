@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManager {\n@Override\npublic Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nurl . setConnectTimeout ( connectTimeout ) ;\nreturn this . connectionManager . getAndCreateIfAbsent ( url ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManagerTest {\n@Test\npublic void testCancelReConnection ( ) throws InterruptedException , RemotingException {\ndoInit ( false , true ) ;\nclient . enableReconnectSwitch ( ) ;\nString addr = \"STR\" ;\nUrl url = addressParser . parse ( addr ) ;\nclient . getConnection ( url , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(client);\nAssert.assertTrue(client.isReconnectSwitchEnabled());\nAssert.assertEquals(\"STR\", addr);\nAssert.assertNotNull(url);\nAssert.assertEquals(1000, url.getConnectTimeout());\nAssert.assertNotNull(client.getConnection(url, 1000));\nAssert.assertTrue(client.getConnection(url, 1000) instanceof Connection);\nAssert.assertEquals(1, client.getConnections().size());\nAssert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)));\nAssert.assertEquals(1, client.getConnections().size());\nAssert.assertTrue(client.getConnections().contains(client.getConnection(url, 1000)));\nAssert.assertNotNull(client.getConnection(url, 1000).getChannel());\nAssert.assertTrue(client.getConnection(url, 1000).isFine());\nAssert.assertTrue(client.getConnection(url, 1000).isConnected());\nAssert.assertTrue(client.getConnection(url, 1000).isActive());\nAssert.assertTrue(client.getConnection(url, 1000).isWritable());\nAssert.assertTrue(client.getConnection(url, 1000).isAvailable());\nAssert.assertTrue(client.getConnection(url, 1000).isClosed());\nAssert.assertTrue(client.getConnection(url, 1000).isReconnect());\nAssert.assertTrue(client.getConnection(url, 1000).isServerSide());\n====================\n\n",
+    "scores": [
+        0.654,
+        0.63,
+        0.63,
+        0.576,
+        0.567,
+        0.565,
+        0.565,
+        0.557,
+        0.548,
+        0.539,
+        0.531,
+        0.523,
+        0.521,
+        0.505,
+        0.496,
+        0.492,
+        0.458,
+        0.386,
+        0.372,
+        0.275
+    ],
+    "ground_truth": "Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes());"
+}

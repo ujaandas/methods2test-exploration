@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalProperty {\nString getName ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSchemaSharedGlobalPropertyTest {\n@Test\npublic void testGlobalPropertyCreate ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nschema . createGlobalProperty ( \"STR\" , OType . SHORT , 100 ) ;\nOGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", prop.getName());\nassertEquals(OType.SHORT, prop.getType());\nassertEquals(100, prop.getId());\nassertNotNull(prop);\nassertTrue(schema.existsGlobalProperty(\"STR\"));\nassertFalse(schema.existsGlobalProperty(\"INT\"));\nassertEquals(1, schema.countGlobalProperties());\nassertNotNull(schema.getGlobalProperties());\nassertTrue(schema.getGlobalProperties().contains(prop));\nassertFalse(schema.getGlobalProperties().isEmpty());\nassertEquals(prop, schema.getGlobalProperty(\"STR\"));\nassertNull(schema.getGlobalProperty(\"INT\"));\nassertTrue(schema.removeGlobalProperty(\"STR\"));\nassertFalse(schema.existsGlobalProperty(\"STR\"));\nassertEquals(0, schema.countGlobalProperties());\nassertTrue(schema.getGlobalProperties().isEmpty());\nassertNull(schema.getGlobalProperty(\"STR\"));\nassertFalse(schema.removeGlobalProperty(\"STR\"));\n====================\n\n",
+    "scores": [
+        0.824,
+        0.75,
+        0.714,
+        0.676,
+        0.55,
+        0.55,
+        0.545,
+        0.543,
+        0.543,
+        0.528,
+        0.525,
+        0.525,
+        0.469,
+        0.447,
+        0.442,
+        0.416,
+        0.405,
+        0.382
+    ],
+    "ground_truth": "assertEquals(prop.getName(),\"STR\");"
+}

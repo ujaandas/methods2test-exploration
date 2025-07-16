@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Activity {
+    public JsonElement serialize ( ) { 
+    JsonObject obj = new JsonObject ( ) ; 
+    if ( this . id != null ) { 
+    obj . addProperty ( "STR" , this . id ) ; 
+    } if ( this . definition != null ) { 
+    obj . add ( "STR" , this . definition . serialize ( ) ) ; 
+    } return obj ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ActivityTest {
+    @Test
+     public void testSerialize ( ) {
+         String expected = "STR" ; 
+         JsonElement actual = activity . serialize ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertTrue(actual.isJsonObject());
+assertTrue(actual.getAsJsonObject().has("STR"));
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertTrue(actual.getAsJsonObject().entrySet().size() >= 1);
+assertTrue(actual.getAsJsonObject().has("definition"));
+assertNull(actual.getAsJsonObject().get("definition"));
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertNotNull(actual.getAsJsonObject().get("STR"));
+assertTrue(actual.getAsJsonObject().get("STR").isJsonPrimitive());
+assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().isString());
+assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString().length() > 0);
+assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString().contains("STR"));
+assertNotEquals("UnexpectedValue", actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString());
+assertTrue(actual.getAsJsonObject().has("definition"));
+assertTrue(actual.getAsJsonObject().get("definition").isJsonObject());
+assertEquals("ExpectedValue", actual.getAsJsonObject().get("definition").getAsJsonObject().get("ExpectedKey").getAsString());
+assertFalse(actual.getAsJsonObject().has("InvalidKey"));
+assertEquals(1, actual.getAsJsonObject().entrySet().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.592 - assertNotNull(actual.getAsJsonObject().get("STR"))
+0.556 - assertTrue(actual.isJsonObject())
+0.480 - assertNull(actual.getAsJsonObject().get("definition"))
+0.441 - assertTrue(actual.getAsJsonObject().has("STR"))
+0.405 - assertEquals(1, actual.getAsJsonObject().entrySet().size())
+0.400 - assertTrue(actual.getAsJsonObject().has("definition"))
+0.400 - assertTrue(actual.getAsJsonObject().has("definition"))
+0.395 - assertFalse(actual.getAsJsonObject().has("InvalidKey"))
+0.385 - assertTrue(actual.getAsJsonObject().entrySet().size() >= 1)
+0.349 - assertTrue(actual.getAsJsonObject().get("STR").isJsonPrimitive())
+0.333 - assertTrue(actual.getAsJsonObject().get("definition").isJsonObject())
+0.302 - assertNotEquals("UnexpectedValue", actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString())
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.300 - assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().isString())
+0.263 - assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString().length() > 0)
+0.252 - assertTrue(actual.getAsJsonObject().get("STR").getAsJsonPrimitive().getAsString().contains("STR"))
+0.208 - assertEquals("ExpectedValue", actual.getAsJsonObject().get("definition").getAsJsonObject().get("ExpectedKey").getAsString())
+0.000 - ```

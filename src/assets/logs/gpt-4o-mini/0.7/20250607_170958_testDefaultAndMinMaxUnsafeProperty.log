@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLCreateProperty {
+    public String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLCreatePropertyTest {
+    @Test
+     public void testDefaultAndMinMaxUnsafeProperty ( ) throws Exception {
+         final ODatabaseDocumentTx db = new ODatabaseDocumentTx ( "STR" + System . nanoTime ( ) ) ; 
+         db . create ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         OClass companyClass = db . getMetadata ( ) . getSchema ( ) . getClass ( "STR" ) ; 
+         OProperty idProperty = companyClass . getProperty ( PROP_ID ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(idProperty);
+assertEquals(PROP_ID, idProperty.getName());
+assertEquals(OType.INTEGER, idProperty.getType());
+assertTrue(idProperty.isMandatory());
+assertFalse(idProperty.isReadonly());
+assertFalse(idProperty.isNotNull());
+assertTrue(idProperty.getMin() >= 0);
+assertTrue(idProperty.getMax() <= 100);
+assertEquals(1, idProperty.getDefaultValue());
+assertEquals(0, idProperty.getMin());
+assertEquals(100, idProperty.getMax());
+assertTrue(companyClass.getProperties().contains(idProperty));
+assertNotNull(companyClass.getProperty("name"));
+assertTrue(companyClass.getProperty("name").isMandatory());
+assertEquals(OType.STRING, companyClass.getProperty("name").getType());
+assertFalse(companyClass.getProperty("age").isReadonly());
+assertNotNull(companyClass.getProperty("age").getDefaultValue());
+assertTrue(companyClass.getProperty("salary").getMin() >= 0);
+assertTrue(companyClass.getProperty("salary").getMax() >= 0);
+assertFalse(companyClass.getProperty("salary").isNotNull());
+assertEquals(4, companyClass.getProperty("id").getSize());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(idProperty.getName(),PROP_ID); ===
+0.810 - assertEquals(PROP_ID, idProperty.getName())
+0.785 - assertEquals(100, idProperty.getMax())
+0.779 - assertEquals(0, idProperty.getMin())
+0.744 - assertEquals(1, idProperty.getDefaultValue())
+0.689 - assertEquals(OType.INTEGER, idProperty.getType())
+0.675 - assertFalse(idProperty.isNotNull())
+0.667 - assertFalse(idProperty.isReadonly())
+0.667 - assertTrue(idProperty.getMax() <= 100)
+0.658 - assertTrue(idProperty.getMin() >= 0)
+0.592 - assertEquals(4, companyClass.getProperty("id").getSize())
+0.590 - assertTrue(idProperty.isMandatory())
+0.533 - ```java
+assertNotNull(idProperty)
+0.523 - assertEquals(OType.STRING, companyClass.getProperty("name").getType())
+0.520 - assertTrue(companyClass.getProperty("salary").getMax() >= 0)
+0.517 - assertNotNull(companyClass.getProperty("name"))
+0.509 - assertNotNull(companyClass.getProperty("age").getDefaultValue())
+0.500 - assertTrue(companyClass.getProperty("salary").getMin() >= 0)
+0.485 - assertFalse(companyClass.getProperty("age").isReadonly())
+0.480 - assertTrue(companyClass.getProperty("name").isMandatory())
+0.475 - assertFalse(companyClass.getProperty("salary").isNotNull())
+0.447 - assertTrue(companyClass.getProperties().contains(idProperty))
+0.000 - ```

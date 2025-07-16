@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializer {\n@Override\npublic int getObjectSize ( String object , Object ... hints ) {\nfinal byte [ ] encoded = object . getBytes ( StandardCharsets . UTF_8 ) ;\nreturn OShortSerializer . SHORT_SIZE + encoded . length ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OUTFSerializerTest {\n@Test\npublic void testSerializeWALChanges ( ) {\nfinal int serializationOffset = 5 ;\nfinal ByteBuffer buffer = ByteBuffer . allocateDirect ( stringSerializer . getObjectSize ( OBJECT ) + serializationOffset ) . order ( ByteOrder . nativeOrder ( ) ) ;\nfinal byte [ ] data = new byte [ stringSerializer . getObjectSize ( OBJECT ) ] ;\nstringSerializer . serializeNativeObject ( OBJECT , data , 0 ) ;\nOWALChanges walChanges = new OWALChangesTree ( ) ;\nwalChanges . setBinaryValue ( buffer , data , serializationOffset ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(walChanges);\nAssert.assertTrue(walChanges instanceof OWALChangesTree);\nAssert.assertEquals(0, walChanges.getStartOffset());\nAssert.assertEquals(data.length, walChanges.getBinaryValueLength());\nAssert.assertEquals(serializationOffset, walChanges.getSerializationOffset());\nAssert.assertArrayEquals(data, walChanges.getBinaryValue());\nAssert.assertTrue(buffer.hasRemaining());\nAssert.assertEquals(buffer.capacity(), stringSerializer.getObjectSize(OBJECT) + serializationOffset);\nAssert.assertEquals(ByteOrder.nativeOrder(), buffer.order());\nAssert.assertTrue(buffer.isDirect());\nAssert.assertEquals(OBJECT.length(), walChanges.getOriginalObjectSize());\nAssert.assertNotEquals(-1, walChanges.getBinaryValue().hashCode());\nAssert.assertSame(data, walChanges.getBinaryValue());\nAssert.assertNotEquals(0, walChanges.getBinaryValue().length);\nAssert.assertTrue(walChanges.getBinaryValue().length > 0);\nAssert.assertTrue(walChanges.getBinaryValue().length <= stringSerializer.getObjectSize(OBJECT));\nAssert.assertEquals(serializationOffset + data.length, walChanges.getEndOffset());\nAssert.assertTrue(walChanges.isSerialized());\nAssert.assertFalse(walChanges.isEmpty());\nAssert.assertTrue(walChanges.validateBinaryValue());\nAssert.assertEquals(0, walChanges.getErrorCount());\n```\n====================\n\n",
+    "scores": [
+        0.571,
+        0.564,
+        0.473,
+        0.468,
+        0.455,
+        0.407,
+        0.383,
+        0.378,
+        0.371,
+        0.364,
+        0.363,
+        0.354,
+        0.353,
+        0.337,
+        0.333,
+        0.32,
+        0.299,
+        0.297,
+        0.287,
+        0.282,
+        0.24,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(stringSerializer.getObjectSizeInByteBuffer(buffer,walChanges,serializationOffset),stringSerializer.getObjectSize(OBJECT));"
+}

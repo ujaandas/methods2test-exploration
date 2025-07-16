@@ -1,0 +1,123 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoader {
+    @Override
+     public Source load ( final String sourceFile ) throws IOException { 
+     InputStream stream = locate ( sourceFile ) ; 
+     if ( stream != null ) { 
+     try ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ; 
+     InputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) { 
+     String source = IOUtil . toString ( reader ) ; 
+     return new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ; 
+     } catch ( NoSuchAlgorithmException ex ) { 
+     throw new IOException ( "STR" , ex ) ; 
+     } } else { 
+     return null ; 
+     } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoaderTest {
+    @Test
+     public void testMissingSourceFileFromDirectory ( ) throws Exception {
+         DirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+File missingFile = new File(folder.getRoot(), "missingFile.txt");
+Source result = sourceLoader.load(missingFile.getPath());
+assertNull(result);
+
+File existingFile = new File(folder.getRoot(), "existingFile.txt");
+FileUtils.writeStringToFile(existingFile, "Sample content", StandardCharsets.UTF_8);
+Source resultExisting = sourceLoader.load(existingFile.getPath());
+assertNotNull(resultExisting);
+assertEquals("existingFile.txt", resultExisting.getFileName());
+assertEquals("Sample content", resultExisting.getSource());
+assertNotNull(resultExisting.getDigestHex());
+
+File emptyFile = new File(folder.getRoot(), "emptyFile.txt");
+FileUtils.writeStringToFile(emptyFile, "", StandardCharsets.UTF_8);
+Source resultEmpty = sourceLoader.load(emptyFile.getPath());
+assertNotNull(resultEmpty);
+assertEquals("emptyFile.txt", resultEmpty.getFileName());
+assertEquals("", resultEmpty.getSource());
+assertNotNull(resultEmpty.getDigestHex());
+
+File nonReadableFile = new File(folder.getRoot(), "nonReadableFile.txt");
+nonReadableFile.setReadable(false);
+Source resultNonReadable = sourceLoader.load(nonReadableFile.getPath());
+assertNull(resultNonReadable);
+
+File validFile = new File(folder.getRoot(), "validFile.txt");
+FileUtils.writeStringToFile(validFile, "Valid content", StandardCharsets.UTF_8);
+Source resultValid = sourceLoader.load(validFile.getPath());
+assertNotNull(resultValid);
+assertEquals("validFile.txt", resultValid.getFileName());
+assertEquals("Valid content", resultValid.getSource());
+assertNotNull(resultValid.getDigestHex());
+
+File specialCharFile = new File(folder.getRoot(), "spécial_char_file.txt");
+FileUtils.writeStringToFile(specialCharFile, "Content with special characters: ñ, é, ü", StandardCharsets.UTF_8);
+Source resultSpecialChar = sourceLoader.load(specialCharFile.getPath());
+assertNotNull(resultSpecialChar);
+assertEquals("spécial_char_file.txt", resultSpecialChar.getFileName());
+assertEquals("Content with special characters: ñ, é, ü", resultSpecialChar.getSource());
+assertNotNull(resultSpecialChar.getDigestHex());
+
+File longFileName = new File(folder.getRoot(), "a_very_long_file_name_that_exceeds_normal_length.txt");
+FileUtils.writeStringToFile(longFileName, "Content for long file name", StandardCharsets.UTF_8);
+Source resultLongFileName = sourceLoader
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(sourceLoader.load("STR")); ===
+0.556 - assertNull(result)
+0.554 - assertNull(resultNonReadable)
+0.543 - Source resultValid = sourceLoader.load(validFile.getPath())
+0.539 - Source result = sourceLoader.load(missingFile.getPath())
+0.522 - Source resultEmpty = sourceLoader.load(emptyFile.getPath())
+0.516 - assertNotNull(resultValid)
+0.500 - Source resultNonReadable = sourceLoader.load(nonReadableFile.getPath())
+0.490 - Source resultExisting = sourceLoader.load(existingFile.getPath())
+0.484 - assertNotNull(resultEmpty)
+0.482 - assertNotNull(resultSpecialChar.getDigestHex())
+0.481 - Source resultSpecialChar = sourceLoader.load(specialCharFile.getPath())
+0.468 - assertNotNull(resultEmpty.getDigestHex())
+0.468 - assertNotNull(resultValid.getDigestHex())
+0.466 - Source resultLongFileName = sourceLoader
+0.462 - assertNotNull(resultExisting)
+0.450 - assertNotNull(resultExisting.getDigestHex())
+0.441 - assertNotNull(resultSpecialChar)
+0.421 - assertEquals("", resultEmpty.getSource())
+0.386 - assertEquals("Valid content", resultValid.getSource())
+0.370 - assertEquals("Sample content", resultExisting.getSource())
+0.324 - assertEquals("spécial_char_file.txt", resultSpecialChar.getFileName())
+0.293 - assertEquals("Content with special characters: ñ, é, ü", resultSpecialChar.getSource())
+0.291 - File nonReadableFile = new File(folder.getRoot(), "nonReadableFile.txt")
+0.286 - File emptyFile = new File(folder.getRoot(), "emptyFile.txt")
+0.286 - nonReadableFile.setReadable(false)
+0.264 - assertEquals("emptyFile.txt", resultEmpty.getFileName())
+0.264 - File validFile = new File(folder.getRoot(), "validFile.txt")
+0.264 - assertEquals("validFile.txt", resultValid.getFileName())
+0.252 - ```java
+File missingFile = new File(folder.getRoot(), "missingFile.txt")
+0.247 - assertEquals("existingFile.txt", resultExisting.getFileName())
+0.229 - File specialCharFile = new File(folder.getRoot(), "spécial_char_file.txt")
+0.227 - File existingFile = new File(folder.getRoot(), "existingFile.txt")
+0.211 - File longFileName = new File(folder.getRoot(), "a_very_long_file_name_that_exceeds_normal_length.txt")
+0.160 - FileUtils.writeStringToFile(emptyFile, "", StandardCharsets.UTF_8)
+0.143 - FileUtils.writeStringToFile(validFile, "Valid content", StandardCharsets.UTF_8)
+0.138 - FileUtils.writeStringToFile(existingFile, "Sample content", StandardCharsets.UTF_8)
+0.129 - FileUtils.writeStringToFile(specialCharFile, "Content with special characters: ñ, é, ü", StandardCharsets.UTF_8)
+0.128 - FileUtils.writeStringToFile(longFileName, "Content for long file name", StandardCharsets.UTF_8)

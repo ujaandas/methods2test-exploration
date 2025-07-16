@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455 {\n@Override\npublic List < Framedata > createFrames ( String text , boolean mask ) {\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ;\ncurframe . setTransferemasked ( mask ) ;\ntry {\ncurframe . isValid ( ) ;\n} catch ( InvalidDataException e ) {\nthrow new NotSendableException ( e ) ;\n} return Collections . singletonList ( ( Framedata ) curframe ) ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455Test {\n@Test\npublic void createFramesText ( ) throws Exception {\nDraft_6455 draft_6455 = new Draft_6455 ( ) ;\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( \"STR\" ) ) ) ;\ncurframe . setTransferemasked ( false ) ;\nList < Framedata > createdFrame = draft_6455 . createFrames ( \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(createdFrame.size(), 1);\nAssert.assertTrue(createdFrame.get(0) instanceof TextFrame);\nAssert.assertEquals(((TextFrame) createdFrame.get(0)).getPayloadData().toString(), \"STR\");\nAssert.assertEquals(((TextFrame) createdFrame.get(0)).isTransferMasked(), false);\nAssert.assertTrue(((TextFrame) createdFrame.get(0)).isValid());\nAssert.assertTrue(createdFrame.get(0).getOpcode() == Opcode.TEXT);\nAssert.assertTrue(createdFrame.get(0).getFin());\nAssert.assertTrue(createdFrame.get(0).getRsv1() == false);\nAssert.assertTrue(createdFrame.get(0).getRsv2() == false);\nAssert.assertTrue(createdFrame.get(0).getRsv3() == false);\nAssert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3);\nAssert.assertTrue(createdFrame.get(0).getPayloadData().array()[0] == (byte) 'S');\nAssert.assertTrue(createdFrame.get(0).getPayloadData().array()[1] == (byte) 'T');\nAssert.assertTrue(createdFrame.get(0).getPayloadData().array()[2] == (byte) 'R');\nAssert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3);\nAssert.assertTrue(createdFrame.get(0).getPayloadData().get(0) == (byte) 'S');\nAssert.assertTrue(createdFrame.get(0).getPayloadData().get(1) == (byte) 'T');\nAssert.assertTrue(createdFrame.get(0).getPayloadData().get(2) == (byte) 'R');\nAssert.assertEquals(createdFrame.get(0).getPayloadData().length(), 3);\n====================\n\n",
+    "scores": [
+        0.943,
+        0.667,
+        0.625,
+        0.602,
+        0.602,
+        0.602,
+        0.585,
+        0.584,
+        0.565,
+        0.549,
+        0.522,
+        0.495,
+        0.495,
+        0.495,
+        0.495,
+        0.495,
+        0.476,
+        0.476,
+        0.476
+    ],
+    "ground_truth": "assertEquals(1,createdFrame.size());"
+}

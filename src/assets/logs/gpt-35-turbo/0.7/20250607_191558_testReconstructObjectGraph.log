@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedProperties {
+    public static Set < String > bindAll ( Object instance , TestCase testCase ) { 
+    Set < String > usedProperties = new HashSet < > ( ) ; 
+    for ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) { 
+    String fullPropertyPath = entry . getKey ( ) . trim ( ) ; 
+    String value = entry . getValue ( ) . trim ( ) ; 
+    if ( bind0 ( instance , fullPropertyPath , value ) ) { 
+    usedProperties . add ( fullPropertyPath ) ; 
+    } } return usedProperties ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_nestedPropertiesTest {
+    @Test
+     public void testReconstructObjectGraph ( ) {
+         TestCase testCase = new TestCase ( "STR" ) . setProperty ( "STR" , 10 ) ; 
+         Person person = new Person ( ) ; 
+         Set < String > usedProperties = bindAll ( person , testCase ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", person.getName());
+assertEquals(10, person.getAge());
+assertFalse(usedProperties.isEmpty());
+assertTrue(usedProperties.contains("STR"));
+assertTrue(usedProperties.size() == 1);
+assertNotNull(person);
+assertNotNull(usedProperties);
+assertTrue(person instanceof Person);
+assertTrue(usedProperties instanceof Set);
+assertTrue(person.getName() instanceof String);
+assertTrue(person.getAge() instanceof Integer);
+assertTrue(person.getName().equals("STR"));
+assertTrue(person.getAge() == 10);
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("AGE"));
+assertEquals(1, usedProperties.size());
+assertTrue(usedProperties.size() == 1);
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("AGE"));
+assertTrue(usedProperties.size() == 1);
+assertTrue(usedProperties.contains("STR"));
+assertFalse(usedProperties.contains("AGE"));
+assertTrue(usedProperties.size() == 1);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(person.nullArm); ===
+0.840 - assertNotNull(person)
+0.655 - assertNotNull(usedProperties)
+0.590 - assertEquals(10, person.getAge())
+0.567 - assertTrue(person.getAge() == 10)
+0.554 - assertEquals("STR", person.getName())
+0.540 - assertTrue(person instanceof Person)
+0.507 - assertTrue(person.getName().equals("STR"))
+0.493 - assertTrue(person.getName() instanceof String)
+0.493 - assertTrue(person.getAge() instanceof Integer)
+0.444 - assertFalse(usedProperties.contains("AGE"))
+0.444 - assertFalse(usedProperties.contains("AGE"))
+0.444 - assertFalse(usedProperties.contains("AGE"))
+0.424 - assertFalse(usedProperties.isEmpty())
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.423 - assertTrue(usedProperties.contains("STR"))
+0.400 - assertTrue(usedProperties.size() == 1)
+0.400 - assertTrue(usedProperties.size() == 1)
+0.400 - assertTrue(usedProperties.size() == 1)
+0.400 - assertTrue(usedProperties.size() == 1)
+0.394 - assertEquals(1, usedProperties.size())
+0.382 - assertTrue(usedProperties instanceof Set)

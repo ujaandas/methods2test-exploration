@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testAnchorFilterFalse ( ) throws MalformedURLException {
+         URLFilter allAllowed = createFilter ( false , false ) ; 
+         URL url = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( url , metadata , url . toExternalForm ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(filterResult);
+assertEquals("Expected URL after filtering", "expectedUrl", filterResult);
+assertTrue("Filter result should not be empty", !filterResult.isEmpty());
+assertFalse("Filter result should not contain unwanted characters", filterResult.contains("unwantedCharacter"));
+assertTrue("Filter result should start with expected prefix", filterResult.startsWith("expectedPrefix"));
+assertTrue("Filter result should end with expected suffix", filterResult.endsWith("expectedSuffix"));
+assertEquals("Filter result should match expected pattern", "expectedPattern", filterResult);
+assertNotEquals("Filter result should not match disallowed pattern", "disallowedPattern", filterResult);
+assertTrue("Filter result should contain expected substring", filterResult.contains("expectedSubstring"));
+assertFalse("Filter result should not contain disallowed substring", filterResult.contains("disallowedSubstring"));
+assertTrue("Filter result should be a valid URL", isValidURL(filterResult));
+assertTrue("Filter result should not exceed maximum length", filterResult.length() <= MAX_LENGTH);
+assertTrue("Filter result should be normalized", isNormalized(filterResult));
+assertFalse("Filter result should not be a duplicate", isDuplicate(filterResult));
+assertTrue("Filter result should be in allowed domains", isInAllowedDomains(filterResult));
+assertFalse("Filter result should not be in disallowed domains", isInDisallowedDomains(filterResult));
+assertTrue("Filter result should not contain fragment", !filterResult.contains("#"));
+assertTrue("Filter result should not contain query parameters", !filterResult.contains("?"));
+assertTrue("Filter result should be encoded properly", isProperlyEncoded(filterResult));
+assertEquals("Filter result should have expected scheme", "http", getScheme(filterResult));
+assertTrue("Filter result should have expected port", getPort(filterResult) == expectedPort);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(url.toExternalForm(),filterResult); ===
+0.591 - assertEquals("Expected URL after filtering", "expectedUrl", filterResult)
+0.576 - assertEquals("Filter result should match expected pattern", "expectedPattern", filterResult)
+0.549 - assertNotEquals("Filter result should not match disallowed pattern", "disallowedPattern", filterResult)
+0.537 - ```java
+assertNotNull(filterResult)
+0.512 - assertFalse("Filter result should not be a duplicate", isDuplicate(filterResult))
+0.508 - assertEquals("Filter result should have expected scheme", "http", getScheme(filterResult))
+0.496 - assertTrue("Filter result should not be empty", !filterResult.isEmpty())
+0.492 - assertTrue("Filter result should be normalized", isNormalized(filterResult))
+0.471 - assertFalse("Filter result should not be in disallowed domains", isInDisallowedDomains(filterResult))
+0.470 - assertTrue("Filter result should be a valid URL", isValidURL(filterResult))
+0.464 - assertTrue("Filter result should not contain fragment", !filterResult.contains("#"))
+0.462 - assertTrue("Filter result should be in allowed domains", isInAllowedDomains(filterResult))
+0.453 - assertTrue("Filter result should be encoded properly", isProperlyEncoded(filterResult))
+0.439 - assertTrue("Filter result should not contain query parameters", !filterResult.contains("?"))
+0.429 - assertFalse("Filter result should not contain disallowed substring", filterResult.contains("disallowedSubstring"))
+0.427 - assertTrue("Filter result should have expected port", getPort(filterResult) == expectedPort)
+0.415 - assertTrue("Filter result should not exceed maximum length", filterResult.length() <= MAX_LENGTH)
+0.411 - assertFalse("Filter result should not contain unwanted characters", filterResult.contains("unwantedCharacter"))
+0.384 - assertTrue("Filter result should contain expected substring", filterResult.contains("expectedSubstring"))
+0.375 - assertTrue("Filter result should start with expected prefix", filterResult.startsWith("expectedPrefix"))
+0.371 - assertTrue("Filter result should end with expected suffix", filterResult.endsWith("expectedSuffix"))
+0.000 - ```

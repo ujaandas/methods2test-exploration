@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package ExpediaGroup.beeju;
+
+public class BeejuCore {
+    public Path warehouseDir ( ) { 
+    return warehouseDir ; 
+    }
+}
+
+package ExpediaGroup.beeju;
+
+public class BeejuCoreTest {
+    @Test
+     public void deleteDirectory ( ) throws IOException {
+         BeejuCore testCore = new BeejuCore ( ) ; 
+         testCore . cleanUp ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+import static org.junit.Assert.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+Path warehousePath = testCore.warehouseDir();
+
+assertTrue(Files.notExists(warehousePath));
+assertTrue(Files.isDirectory(warehousePath));
+assertEquals(0, Files.list(warehousePath).count());
+assertTrue(Files.isReadable(warehousePath));
+assertTrue(Files.isWritable(warehousePath));
+assertTrue(Files.isExecutable(warehousePath));
+assertFalse(Files.exists(warehousePath.resolve("someFile.txt")));
+assertTrue(Files.exists(warehousePath.resolve("subDirectory")));
+assertEquals(0, Files.list(warehousePath.resolve("subDirectory")).count());
+assertTrue(Files.isDirectory(warehousePath.resolve("subDirectory")));
+assertTrue(Files.isEmpty(warehousePath.resolve("subDirectory")));
+assertFalse(Files.exists(warehousePath.resolve("nonExistentFile.txt")));
+assertTrue(Files.getLastModifiedTime(warehousePath).toMillis() < System.currentTimeMillis());
+assertTrue(Files.size(warehousePath) >= 0);
+assertTrue(Files.getOwner(warehousePath).getName().equals("expectedOwner"));
+assertTrue(Files.isHidden(warehousePath.resolve("hiddenFile.txt")));
+assertFalse(Files.isHidden(warehousePath));
+assertTrue(Files.isSymbolicLink(warehousePath.resolve("linkToFile.txt")));
+assertTrue(Files.isRegularFile(warehousePath.resolve("regularFile.txt")));
+assertTrue(Files.isSameFile(warehousePath.resolve("file1.txt"), warehousePath.resolve("file2.txt")));
+assertTrue(Files.readAttributes(warehousePath, "*").size() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Files.exists(testCore.warehouseDir())); ===
+0.696 - assertFalse(Files.isHidden(warehousePath))
+0.674 - assertTrue(Files.notExists(warehousePath))
+0.667 - assertFalse(Files.exists(warehousePath.resolve("someFile.txt")))
+0.646 - assertEquals(0, Files.list(warehousePath).count())
+0.638 - assertTrue(Files.isDirectory(warehousePath))
+0.637 - assertTrue(Files.exists(warehousePath.resolve("subDirectory")))
+0.628 - assertFalse(Files.exists(warehousePath.resolve("nonExistentFile.txt")))
+0.624 - assertTrue(Files.isWritable(warehousePath))
+0.611 - assertTrue(Files.isExecutable(warehousePath))
+0.602 - assertTrue(Files.isReadable(warehousePath))
+0.600 - assertTrue(Files.size(warehousePath) >= 0)
+0.593 - Path warehousePath = testCore.warehouseDir()
+0.582 - assertTrue(Files.readAttributes(warehousePath, "*").size() > 0)
+0.579 - assertTrue(Files.isEmpty(warehousePath.resolve("subDirectory")))
+0.576 - assertTrue(Files.isDirectory(warehousePath.resolve("subDirectory")))
+0.569 - assertEquals(0, Files.list(warehousePath.resolve("subDirectory")).count())
+0.513 - assertTrue(Files.isHidden(warehousePath.resolve("hiddenFile.txt")))
+0.488 - assertTrue(Files.isSymbolicLink(warehousePath.resolve("linkToFile.txt")))
+0.488 - assertTrue(Files.isRegularFile(warehousePath.resolve("regularFile.txt")))
+0.480 - assertTrue(Files.getOwner(warehousePath).getName().equals("expectedOwner"))
+0.457 - assertTrue(Files.getLastModifiedTime(warehousePath).toMillis() < System.currentTimeMillis())
+0.430 - assertTrue(Files.isSameFile(warehousePath.resolve("file1.txt"), warehousePath.resolve("file2.txt")))
+0.272 - ```java
+import static org.junit.Assert.*
+0.267 - import java.nio.file.Files
+0.243 - import java.nio.file.Path
+0.000 - ```

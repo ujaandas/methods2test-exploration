@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic List < Connection > getAll ( String poolKey ) {\nConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nreturn null == pool ? new ArrayList < Connection > ( ) : pool . getAll ( ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testGetAllWithPoolKey ( ) {\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n1. assertNotNull(cm.getAll(\"poolKey\"));\n2. assertEquals(3, cm.getAll(\"poolKey\").size());\n3. assertTrue(cm.getAll(\"poolKey\").contains(conn1));\n4. assertTrue(cm.getAll(\"poolKey\").contains(conn2));\n5. assertTrue(cm.getAll(\"poolKey\").contains(conn3));\n6. assertFalse(cm.getAll(\"poolKey\").isEmpty());\n7. assertNotEquals(0, cm.getAll(\"poolKey\").size());\n8. assertNotNull(cm.getAll(\"invalidPoolKey\"));\n9. assertEquals(0, cm.getAll(\"invalidPoolKey\").size());\n10. assertNotEquals(4, cm.getAll(\"poolKey\").size());\n11. assertFalse(cm.getAll(\"poolKey\").contains(conn4));\n12. assertNotNull(cm.getAll(\"poolKey\").get(0));\n13. assertTrue(cm.getAll(\"poolKey\").get(0) instanceof Connection);\n14. assertSame(conn1, cm.getAll(\"poolKey\").get(0));\n15. assertNotSame(conn2, cm.getAll(\"poolKey\").get(1));\n16. assertArrayEquals(new Connection[]{conn1, conn2, conn3}, cm.getAll(\"poolKey\").toArray());\n17. assertNotEquals(null, cm.getAll(\"poolKey\"));\n18. assertTrue(cm.getAll(\"poolKey\").size() > 0);\n19. assertFalse(cm.getAll(\"poolKey\").size() == 0);\n20. assertEquals(3, cm.getAll(\"poolKey\").stream().filter(conn -> conn.isActive()).count());\n====================\n\n",
+    "scores": [
+        0.953,
+        0.899,
+        0.889,
+        0.839,
+        0.828,
+        0.8,
+        0.767,
+        0.767,
+        0.744,
+        0.719,
+        0.71,
+        0.696,
+        0.681,
+        0.681,
+        0.681,
+        0.635,
+        0.63,
+        0.622,
+        0.583,
+        0.578
+    ],
+    "ground_truth": "Assert.assertEquals(3,cm.getAll(poolKey).size());"
+}

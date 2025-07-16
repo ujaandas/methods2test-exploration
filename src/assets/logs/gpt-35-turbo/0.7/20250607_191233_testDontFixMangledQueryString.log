@@ -1,0 +1,71 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizer {
+    public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicURLNormalizerTest {
+    @Test
+     public void testDontFixMangledQueryString ( ) throws MalformedURLException {
+         URLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ; 
+         URL testSourceUrl = new URL ( "STR" ) ; 
+         String testUrl = "STR" ; 
+         String expectedResult = "STR" ; 
+         String normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(expectedResult, normalizedUrl);
+Assert.assertNotNull(normalizedUrl);
+Assert.assertTrue(normalizedUrl.startsWith("http://"));
+Assert.assertTrue(normalizedUrl.endsWith("/"));
+Assert.assertTrue(normalizedUrl.contains("example.com"));
+Assert.assertNotEquals("STR", normalizedUrl);
+Assert.assertNotEquals("testUrl", normalizedUrl);
+Assert.assertFalse(normalizedUrl.isEmpty());
+Assert.assertNotEquals(testSourceUrl, normalizedUrl);
+Assert.assertTrue(normalizedUrl.matches("^https?://[a-zA-Z0-9.-]+/.+$"));
+Assert.assertNotEquals("STR", testUrl);
+Assert.assertTrue(normalizedUrl.contains("http://"));
+Assert.assertTrue(normalizedUrl.contains("www."));
+Assert.assertTrue(normalizedUrl.contains(".com"));
+Assert.assertNotEquals(testUrl, normalizedUrl);
+Assert.assertFalse(normalizedUrl.equals("STR"));
+Assert.assertTrue(normalizedUrl.matches("^https?://[a-zA-Z0-9.-]+/.+$"));
+Assert.assertNotEquals("testUrl", normalizedUrl);
+Assert.assertTrue(normalizedUrl.contains("http://www."));
+Assert.assertTrue(normalizedUrl.contains(".com"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",expectedResult,normalizedUrl); ===
+0.933 - Assert.assertEquals(expectedResult, normalizedUrl)
+0.786 - Assert.assertNotEquals("STR", normalizedUrl)
+0.750 - Assert.assertNotEquals("testUrl", normalizedUrl)
+0.750 - Assert.assertNotEquals("testUrl", normalizedUrl)
+0.744 - Assert.assertNotEquals(testUrl, normalizedUrl)
+0.696 - Assert.assertNotEquals(testSourceUrl, normalizedUrl)
+0.692 - Assert.assertNotEquals("STR", testUrl)
+0.605 - Assert.assertNotNull(normalizedUrl)
+0.571 - Assert.assertFalse(normalizedUrl.isEmpty())
+0.545 - Assert.assertFalse(normalizedUrl.equals("STR"))
+0.506 - Assert.assertTrue(normalizedUrl.endsWith("/"))
+0.489 - Assert.assertTrue(normalizedUrl.contains("www."))
+0.489 - Assert.assertTrue(normalizedUrl.contains(".com"))
+0.489 - Assert.assertTrue(normalizedUrl.contains(".com"))
+0.473 - Assert.assertTrue(normalizedUrl.contains("http://"))
+0.463 - Assert.assertTrue(normalizedUrl.startsWith("http://"))
+0.454 - Assert.assertTrue(normalizedUrl.contains("example.com"))
+0.454 - Assert.assertTrue(normalizedUrl.contains("http://www."))
+0.389 - Assert.assertTrue(normalizedUrl.matches("^https?://[a-zA-Z0-9.-]+/.+$"))
+0.389 - Assert.assertTrue(normalizedUrl.matches("^https?://[a-zA-Z0-9.-]+/.+$"))

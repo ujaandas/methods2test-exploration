@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package OpenLiberty.ci.common;
+
+public class DevUtil {
+    protected static String [ ] parseNetworks ( String dockerResult ) { 
+    if ( ! dockerResult . matches ( "STR" ) ) { 
+    return null ; 
+    } String networkMap = dockerResult . substring ( dockerResult . indexOf ( "STR" ) + 1 , dockerResult . indexOf ( "STR" ) ) ; 
+    String [ ] networkHex = networkMap . split ( "STR" ) ; 
+    String [ ] networks = new String [ networkHex . length ] ; 
+    for ( int i = 0 ; 
+    i < networkHex . length ; 
+    i ++ ) { 
+    networks [ i ] = networkHex [ i ] . split ( "STR" ) [ 0 ] ; 
+    } return networks ; 
+    }
+}
+
+package OpenLiberty.ci.common;
+
+public class DevUtilTest {
+    @Test
+     public void testParseNetworks ( ) {
+         String [ ] networkArray = new String [ ] { 
+     "STR" } ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(networkArray);
+assertEquals(1, networkArray.length);
+assertEquals("ExpectedValue1", networkArray[0]);
+assertNull(DevUtil.parseNetworks("InvalidInput"));
+assertArrayEquals(new String[]{"ExpectedValue1"}, DevUtil.parseNetworks("ValidInputWithSTR"));
+assertTrue(Arrays.asList(networkArray).contains("ExpectedValue1"));
+assertFalse(Arrays.asList(networkArray).contains("UnexpectedValue"));
+assertEquals("ExpectedValue2", DevUtil.parseNetworks("AnotherValidInputWithSTR")[1]);
+assertNotEquals("UnexpectedValue", networkArray[0]);
+assertTrue(DevUtil.parseNetworks("InputWithMultipleSTR").length > 1);
+assertFalse(DevUtil.parseNetworks("EmptyInput").length > 0);
+assertNull(DevUtil.parseNetworks(""));
+assertEquals(3, DevUtil.parseNetworks("ValidInputWithThreeSTR").length);
+assertArrayEquals(new String[]{"Value1", "Value2", "Value3"}, DevUtil.parseNetworks("InputWithValue1STRValue2STRValue3"));
+assertNotSame(networkArray, DevUtil.parseNetworks("DifferentInput"));
+assertThrows(NullPointerException.class, () -> DevUtil.parseNetworks(null));
+assertEquals("AnotherExpectedValue", DevUtil.parseNetworks("SomeInputSTRAnotherExpectedValue"));
+assertTrue(networkArray[0].startsWith("ExpectedPrefix"));
+assertFalse(networkArray[0].endsWith("UnexpectedSuffix"));
+assertEquals("FinalExpectedValue", DevUtil.parseNetworks("FinalInputSTRFinalExpectedValue")[0]);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(networkArray,DevUtil.parseNetworks("STR")); ===
+0.740 - assertNotSame(networkArray, DevUtil.parseNetworks("DifferentInput"))
+0.722 - assertNull(DevUtil.parseNetworks(""))
+0.702 - assertArrayEquals(new String[]{"ExpectedValue1"}, DevUtil.parseNetworks("ValidInputWithSTR"))
+0.662 - assertEquals(3, DevUtil.parseNetworks("ValidInputWithThreeSTR").length)
+0.643 - assertEquals("ExpectedValue2", DevUtil.parseNetworks("AnotherValidInputWithSTR")[1])
+0.642 - assertNull(DevUtil.parseNetworks("InvalidInput"))
+0.615 - assertFalse(DevUtil.parseNetworks("EmptyInput").length > 0)
+0.610 - assertEquals("AnotherExpectedValue", DevUtil.parseNetworks("SomeInputSTRAnotherExpectedValue"))
+0.610 - assertEquals("FinalExpectedValue", DevUtil.parseNetworks("FinalInputSTRFinalExpectedValue")[0])
+0.603 - assertTrue(DevUtil.parseNetworks("InputWithMultipleSTR").length > 1)
+0.599 - assertArrayEquals(new String[]{"Value1", "Value2", "Value3"}, DevUtil.parseNetworks("InputWithValue1STRValue2STRValue3"))
+0.591 - assertThrows(NullPointerException.class, () -> DevUtil.parseNetworks(null))
+0.589 - assertEquals(1, networkArray.length)
+0.540 - assertTrue(Arrays.asList(networkArray).contains("ExpectedValue1"))
+0.534 - assertTrue(networkArray[0].startsWith("ExpectedPrefix"))
+0.531 - assertFalse(Arrays.asList(networkArray).contains("UnexpectedValue"))
+0.513 - assertFalse(networkArray[0].endsWith("UnexpectedSuffix"))
+0.491 - assertEquals("ExpectedValue1", networkArray[0])
+0.473 - assertNotEquals("UnexpectedValue", networkArray[0])
+0.463 - ```java
+assertNotNull(networkArray)
+0.000 - ```

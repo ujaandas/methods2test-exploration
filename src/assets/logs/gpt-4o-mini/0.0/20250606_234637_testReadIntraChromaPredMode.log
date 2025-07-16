@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class CABAC {
+    public int readIntraChromaPredMode ( MDecoder decoder , int mbX , MBType left , MBType top , boolean leftAvailable , boolean topAvailable ) { 
+    int ctx = 64 ; 
+    ctx += ! leftAvailable || left == null || ! left . isIntra ( ) || chromaPredModeLeft == 0 ? 0 : 1 ; 
+    ctx += ! topAvailable || top == null || ! top . isIntra ( ) || chromaPredModeTop [ mbX ] == 0 ? 0 : 1 ; 
+    int mode ; 
+    if ( decoder . decodeBin ( ctx ) == 0 ) mode = 0 ; 
+    else if ( decoder . decodeBin ( 67 ) == 0 ) mode = 1 ; 
+    else if ( decoder . decodeBin ( 67 ) == 0 ) mode = 2 ; 
+    else mode = 3 ; 
+    chromaPredModeLeft = chromaPredModeTop [ mbX ] = mode ; 
+    return mode ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class CABACTest {
+    @Test
+     public void testReadIntraChromaPredMode ( ) {
+         MockMDecoder m = new MockMDecoder ( new int [ ] { 
+     0 } , new int [ ] { 
+     64 } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(0, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));
+assertEquals(1, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));
+assertEquals(2, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));
+assertEquals(3, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));
+assertTrue(m.chromaPredModeLeft >= 0 && m.chromaPredModeLeft <= 3);
+assertTrue(m.chromaPredModeTop[mbX] >= 0 && m.chromaPredModeTop[mbX] <= 3);
+assertNotNull(m);
+assertNotNull(decoder);
+assertNotNull(left);
+assertNotNull(top);
+assertTrue(leftAvailable);
+assertTrue(topAvailable);
+assertEquals(64, m.decodeBinCalls[0]);
+assertEquals(67, m.decodeBinCalls[1]);
+assertEquals(67, m.decodeBinCalls[2]);
+assertTrue(m.decodeBinCalls.length <= 3);
+assertEquals(0, m.decodeBin(0));
+assertEquals(1, m.decodeBin(1));
+assertEquals(2, m.decodeBin(2));
+assertEquals(3, m.decodeBin(3));
+assertEquals(0, m.chromaPredModeLeft);
+assertEquals(0, m.chromaPredModeTop[mbX]);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,newCABAC(1).readIntraChromaPredMode(m,0,null,null,false,false)); ===
+0.619 - assertEquals(1, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable))
+0.619 - assertEquals(2, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable))
+0.619 - assertEquals(3, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable))
+0.602 - ```java
+assertEquals(0, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable))
+0.544 - assertEquals(0, m.chromaPredModeLeft)
+0.525 - assertEquals(0, m.chromaPredModeTop[mbX])
+0.426 - assertEquals(0, m.decodeBin(0))
+0.404 - assertEquals(64, m.decodeBinCalls[0])
+0.404 - assertEquals(67, m.decodeBinCalls[1])
+0.404 - assertEquals(67, m.decodeBinCalls[2])
+0.389 - assertEquals(2, m.decodeBin(2))
+0.389 - assertEquals(3, m.decodeBin(3))
+0.384 - assertTrue(m.chromaPredModeTop[mbX] >= 0 && m.chromaPredModeTop[mbX] <= 3)
+0.362 - assertTrue(m.chromaPredModeLeft >= 0 && m.chromaPredModeLeft <= 3)
+0.352 - assertEquals(1, m.decodeBin(1))
+0.293 - assertTrue(m.decodeBinCalls.length <= 3)
+0.280 - assertNotNull(decoder)
+0.272 - assertTrue(leftAvailable)
+0.268 - assertNotNull(left)
+0.255 - assertTrue(topAvailable)
+0.234 - assertNotNull(m)
+0.229 - assertNotNull(top)
+0.000 - ```

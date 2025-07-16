@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtils {
+    static File getFileFromUrl ( URL url , String className ) { 
+    String extURL = url . toExternalForm ( ) ; 
+    if ( extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( 0 , extURL . lastIndexOf ( '/' ) ) ; 
+    } else { 
+    String suffix = "STR" + className . replace ( "STR" , "STR" ) + "STR" ; 
+    extURL = extURL . replace ( suffix , "STR" ) ; 
+    if ( extURL . startsWith ( "STR" ) && extURL . endsWith ( "STR" ) ) { 
+    extURL = extURL . substring ( FILE_EXTENSION_LENGTH , extURL . lastIndexOf ( '/' ) ) ; 
+    } } try { 
+    url = new URL ( extURL ) ; 
+    } catch ( MalformedURLException e ) { 
+    EmptyStatement . ignore ( e ) ; 
+    } try { 
+    return new File ( url . toURI ( ) ) ; 
+    } catch ( Exception ignored ) { 
+    return new File ( url . getPath ( ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class WizardUtilsTest {
+    @Test
+     public void testGetFileFromUrl_fromJarFile ( ) throws Exception {
+         URL url = new URL ( "STR" ) ; 
+         File file = WizardUtils . getFileFromUrl ( url , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(file.exists());
+Assert.assertTrue(file.isFile());
+Assert.assertTrue(file.canRead());
+Assert.assertTrue(file.canWrite());
+Assert.assertFalse(file.isDirectory());
+Assert.assertEquals("expectedFileName", file.getName());
+Assert.assertTrue(file.getAbsolutePath().contains("expectedPath"));
+Assert.assertTrue(file.length() > 0);
+Assert.assertNotNull(file.getParentFile());
+Assert.assertEquals("expectedParentDirectoryName", file.getParentFile().getName());
+Assert.assertTrue(file.lastModified() > 0);
+Assert.assertTrue(file.getPath().contains("expectedPath"));
+Assert.assertTrue(file.toURI().toString().contains("expectedURI"));
+Assert.assertTrue(file.toPath().toString().contains("expectedPath"));
+Assert.assertTrue(file.toURI().getPath().contains("expectedPath"));
+Assert.assertTrue(file.toPath().toAbsolutePath().toString().contains("expectedPath"));
+Assert.assertTrue(file.toPath().toRealPath().toString().contains("expectedPath"));
+Assert.assertTrue(file.toPath().toFile().exists());
+Assert.assertTrue(file.toPath().toFile().isFile());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(file); ===
+0.704 - Assert.assertNotNull(file.getParentFile())
+0.591 - Assert.assertTrue(file.exists())
+0.591 - Assert.assertTrue(file.isFile())
+0.578 - Assert.assertTrue(file.canRead())
+0.565 - Assert.assertTrue(file.canWrite())
+0.565 - Assert.assertTrue(file.length() > 0)
+0.520 - Assert.assertFalse(file.isDirectory())
+0.500 - Assert.assertTrue(file.lastModified() > 0)
+0.419 - Assert.assertTrue(file.toPath().toFile().exists())
+0.419 - Assert.assertTrue(file.toPath().toFile().isFile())
+0.371 - Assert.assertTrue(file.getPath().contains("expectedPath"))
+0.364 - Assert.assertEquals("expectedFileName", file.getName())
+0.333 - Assert.assertTrue(file.getAbsolutePath().contains("expectedPath"))
+0.333 - Assert.assertTrue(file.toURI().toString().contains("expectedURI"))
+0.333 - Assert.assertTrue(file.toURI().getPath().contains("expectedPath"))
+0.325 - Assert.assertTrue(file.toPath().toString().contains("expectedPath"))
+0.280 - Assert.assertTrue(file.toPath().toRealPath().toString().contains("expectedPath"))
+0.268 - Assert.assertTrue(file.toPath().toAbsolutePath().toString().contains("expectedPath"))
+0.258 - Assert.assertEquals("expectedParentDirectoryName", file.getParentFile().getName())

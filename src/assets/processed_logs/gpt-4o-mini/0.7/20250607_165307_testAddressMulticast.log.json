@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fluenda.ParCEFone;\n\npublic class MacAddress {\npublic boolean isMulticast ( ) {\nreturn ( address [ 0 ] & MUTLTICAST_FLAG ) == MUTLTICAST_FLAG ;\n}\n}\n\npackage fluenda.ParCEFone;\n\npublic class MacAddressTest {\n@Test\npublic void testAddressMulticast ( ) {\nfinal MacAddress macAddress = new MacAddress ( MULTICAST_ADDRESS ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(macAddress.isMulticast());\nassertFalse(new MacAddress(UNICAST_ADDRESS).isMulticast());\nassertFalse(new MacAddress(RESERVED_ADDRESS).isMulticast());\nassertFalse(new MacAddress(BROADCAST_ADDRESS).isMulticast());\nassertTrue(new MacAddress(SECOND_MULTICAST_ADDRESS).isMulticast());\nassertTrue(new MacAddress(MULTICAST_ADDRESS).isMulticast());\nassertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x00).isMulticast());\nassertFalse(new MacAddress(0x00, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());\nassertFalse(new MacAddress(0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF).isMulticast());\nassertTrue(new MacAddress(0x01, 0x80, 0xC2, 0x00, 0x00, 0x00).isMulticast());\nassertFalse(new MacAddress(0x02, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());\nassertTrue(new MacAddress(0x33, 0x33, 0x00, 0x00, 0x00, 0x01).isMulticast());\nassertTrue(new MacAddress(0x01, 0x00, 0x00, 0x00, 0x00, 0x00).isMulticast());\nassertFalse(new MacAddress(0xAC, 0xDE, 0x48, 0x00, 0x00, 0x00).isMulticast());\nassertTrue(new MacAddress(0x01, 0x00, 0x5E, 0x00, 0x00, 0x01).isMulticast());\nassertFalse(new MacAddress(0xC0, 0xA8, 0x01, 0x01, 0x00, 0x00).isMulticast());\nassertTrue(new MacAddress(0x01, 0x00, 0x5E\n====================\n\n",
+    "scores": [
+        0.9,
+        0.745,
+        0.693,
+        0.688,
+        0.681,
+        0.674,
+        0.66,
+        0.66,
+        0.66,
+        0.66,
+        0.66,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.598,
+        0.56
+    ],
+    "ground_truth": "assertTrue(macAddress.isMulticast());"
+}

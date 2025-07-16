@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testQuotedEmptyString ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(expectedSize, res.size());
+assertTrue(res.stream().allMatch(doc -> doc.containsField("fieldName")));
+assertEquals(expectedValue, res.get(0).field("fieldName"));
+assertTrue(res.get(0).field("fieldName").isEmpty());
+assertEquals(expectedType, res.get(0).field("fieldName").getClass());
+assertTrue(res.stream().allMatch(doc -> doc.field("anotherField") != null));
+assertEquals(expectedAnotherValue, res.get(0).field("anotherField"));
+assertTrue(res.stream().allMatch(doc -> doc.field("dateField") instanceof Date));
+assertEquals(expectedDateValue, res.get(0).field("dateField"));
+assertTrue(res.stream().allMatch(doc -> doc.field("numericField") instanceof Number));
+assertEquals(expectedNumericValue, res.get(0).field("numericField"));
+assertTrue(res.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean));
+assertTrue(res.stream().allMatch(doc -> doc.field("booleanField")));
+assertEquals(expectedListSize, res.get(0).field("listField").size());
+assertTrue(res.stream().allMatch(doc -> doc.field("listField").contains(expectedListItem)));
+assertEquals(expectedMapSize, res.get(0).field("mapField").size());
+assertTrue(res.stream().allMatch(doc -> doc.field("mapField").containsKey(expectedMapKey)));
+assertEquals(expectedMapValue, res.get(0).field("mapField").get(expectedMapKey));
+assertTrue(res.stream().allMatch(doc -> doc.field("nestedField").containsField("nestedKey")));
+assertEquals(expectedNestedValue, res.get(0).field("nestedField").field("nestedKey"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.571 - assertEquals(expectedSize, res.size())
+0.571 - assertTrue(res.get(0).field("fieldName").isEmpty())
+0.462 - ```java
+assertNotNull(res)
+0.434 - assertEquals(expectedValue, res.get(0).field("fieldName"))
+0.430 - assertEquals(expectedListSize, res.get(0).field("listField").size())
+0.418 - assertEquals(expectedMapSize, res.get(0).field("mapField").size())
+0.414 - assertEquals(expectedDateValue, res.get(0).field("dateField"))
+0.409 - assertEquals(expectedType, res.get(0).field("fieldName").getClass())
+0.400 - assertEquals(expectedMapValue, res.get(0).field("mapField").get(expectedMapKey))
+0.387 - assertEquals(expectedAnotherValue, res.get(0).field("anotherField"))
+0.387 - assertEquals(expectedNumericValue, res.get(0).field("numericField"))
+0.374 - assertTrue(res.stream().allMatch(doc -> doc.field("booleanField")))
+0.364 - assertEquals(expectedNestedValue, res.get(0).field("nestedField").field("nestedKey"))
+0.354 - assertTrue(res.stream().allMatch(doc -> doc.containsField("fieldName")))
+0.351 - assertTrue(res.stream().allMatch(doc -> doc.field("anotherField") != null))
+0.333 - assertTrue(res.stream().allMatch(doc -> doc.field("dateField") instanceof Date))
+0.318 - assertTrue(res.stream().allMatch(doc -> doc.field("numericField") instanceof Number))
+0.315 - assertTrue(res.stream().allMatch(doc -> doc.field("booleanField") instanceof Boolean))
+0.313 - assertTrue(res.stream().allMatch(doc -> doc.field("mapField").containsKey(expectedMapKey)))
+0.296 - assertTrue(res.stream().allMatch(doc -> doc.field("listField").contains(expectedListItem)))
+0.291 - assertTrue(res.stream().allMatch(doc -> doc.field("nestedField").containsField("nestedKey")))
+0.000 - ```

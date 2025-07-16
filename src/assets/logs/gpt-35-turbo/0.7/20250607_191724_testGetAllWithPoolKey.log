@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public List < Connection > getAll ( String poolKey ) { 
+     ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     return null == pool ? new ArrayList < Connection > ( ) : pool . getAll ( ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testGetAllWithPoolKey ( ) {
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         cm . add ( getAConn ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+1. assertNotNull(cm.getAll("poolKey"));
+2. assertEquals(3, cm.getAll("poolKey").size());
+3. assertTrue(cm.getAll("poolKey").contains(conn1));
+4. assertTrue(cm.getAll("poolKey").contains(conn2));
+5. assertTrue(cm.getAll("poolKey").contains(conn3));
+6. assertFalse(cm.getAll("poolKey").isEmpty());
+7. assertNotEquals(0, cm.getAll("poolKey").size());
+8. assertNotNull(cm.getAll("invalidPoolKey"));
+9. assertEquals(0, cm.getAll("invalidPoolKey").size());
+10. assertNotEquals(4, cm.getAll("poolKey").size());
+11. assertFalse(cm.getAll("poolKey").contains(conn4));
+12. assertNotNull(cm.getAll("poolKey").get(0));
+13. assertTrue(cm.getAll("poolKey").get(0) instanceof Connection);
+14. assertSame(conn1, cm.getAll("poolKey").get(0));
+15. assertNotSame(conn2, cm.getAll("poolKey").get(1));
+16. assertArrayEquals(new Connection[]{conn1, conn2, conn3}, cm.getAll("poolKey").toArray());
+17. assertNotEquals(null, cm.getAll("poolKey"));
+18. assertTrue(cm.getAll("poolKey").size() > 0);
+19. assertFalse(cm.getAll("poolKey").size() == 0);
+20. assertEquals(3, cm.getAll("poolKey").stream().filter(conn -> conn.isActive()).count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,cm.getAll(poolKey).size()); ===
+0.953 - 2. assertEquals(3, cm.getAll("poolKey").size())
+0.899 - 7. assertNotEquals(0, cm.getAll("poolKey").size())
+0.889 - 10. assertNotEquals(4, cm.getAll("poolKey").size())
+0.839 - 9. assertEquals(0, cm.getAll("invalidPoolKey").size())
+0.828 - 19. assertFalse(cm.getAll("poolKey").size() == 0)
+0.800 - 18. assertTrue(cm.getAll("poolKey").size() > 0)
+0.767 - 6. assertFalse(cm.getAll("poolKey").isEmpty())
+0.767 - 17. assertNotEquals(null, cm.getAll("poolKey"))
+0.744 - 12. assertNotNull(cm.getAll("poolKey").get(0))
+0.719 - 14. assertSame(conn1, cm.getAll("poolKey").get(0))
+0.710 - 11. assertFalse(cm.getAll("poolKey").contains(conn4))
+0.696 - 15. assertNotSame(conn2, cm.getAll("poolKey").get(1))
+0.681 - 3. assertTrue(cm.getAll("poolKey").contains(conn1))
+0.681 - 4. assertTrue(cm.getAll("poolKey").contains(conn2))
+0.681 - 5. assertTrue(cm.getAll("poolKey").contains(conn3))
+0.635 - 8. assertNotNull(cm.getAll("invalidPoolKey"))
+0.630 - 20. assertEquals(3, cm.getAll("poolKey").stream().filter(conn -> conn.isActive()).count())
+0.622 - Assertions:
+1. assertNotNull(cm.getAll("poolKey"))
+0.583 - 13. assertTrue(cm.getAll("poolKey").get(0) instanceof Connection)
+0.578 - 16. assertArrayEquals(new Connection[]{conn1, conn2, conn3}, cm.getAll("poolKey").toArray())

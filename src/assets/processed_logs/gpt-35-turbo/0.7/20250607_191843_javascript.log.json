@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutor {\npublic void execute ( final ExecuteScriptOperation operation , final Promise promise ) {\nif ( operation . isFireAndForget ( ) ) {\npromise . answer ( \"STR\" ) ;\n} String fullCommand = operation . getCommand ( ) ;\nint indexColon = fullCommand . indexOf ( \"STR\" ) ;\nString extension = fullCommand . substring ( 0 , indexColon ) ;\nfinal String command = fullCommand . substring ( indexColon + 1 ) ;\nfinal Callable < String > task ;\nif ( extension . equals ( \"STR\" ) ) {\ntask = newBashScriptCallable ( command ) ;\n} else {\ntask = newGenericScriptCallable ( extension , command ) ;\n} new Thread ( ( ) -> {\ntry {\nString result = task . call ( ) ;\npromise . answer ( result ) ;\n} catch ( Exception e ) {\nLOGGER . warn ( \"STR\" + command , e ) ;\npromise . answer ( e ) ;\n} } ) . start ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutorTest {\n@Test\npublic void javascript ( ) {\nExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( \"STR\" , false ) ;\nStubPromise promise = new StubPromise ( ) ;\nscriptExecutor . execute ( scriptOperation , promise ) ;\npromise . assertCompletesEventually ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", promise.getResult());\nassertFalse(promise.isFailed());\nassertTrue(promise.isCompleted());\nassertNotNull(promise.getStartTime());\nassertNotNull(promise.getEndTime());\nassertNotNull(promise.getResult());\nassertEquals(\"STR\", promise.getResult());\nassertFalse(promise.isFailed());\nassertTrue(promise.isCompleted());\nassertNotNull(promise.getStartTime());\nassertNotNull(promise.getEndTime());\nassertNotNull(promise.getResult());\nassertEquals(\"STR\", promise.getResult());\nassertFalse(promise.isFailed());\nassertTrue(promise.isCompleted());\nassertNotNull(promise.getStartTime());\nassertNotNull(promise.getEndTime());\nassertNotNull(promise.getResult());\nassertEquals(\"STR\", promise.getResult());\nassertFalse(promise.isFailed());\nassertTrue(promise.isCompleted());\nassertNotNull(promise.getStartTime());\nassertNotNull(promise.getEndTime());\n====================\n\n",
+    "scores": [
+        0.625,
+        0.625,
+        0.625,
+        0.625,
+        0.585,
+        0.585,
+        0.585,
+        0.585,
+        0.568,
+        0.568,
+        0.568,
+        0.548,
+        0.548,
+        0.548,
+        0.548,
+        0.513,
+        0.513,
+        0.513,
+        0.513,
+        0.512,
+        0.512,
+        0.512,
+        0.512
+    ],
+    "ground_truth": "assertTrue(promise.getAnswer()instanceofString);"
+}

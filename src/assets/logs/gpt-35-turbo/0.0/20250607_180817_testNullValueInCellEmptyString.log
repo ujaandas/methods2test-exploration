@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testNullValueInCellEmptyString ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, res.size());
+assertNotNull(res);
+assertTrue(res.isEmpty());
+assertEquals(0, res.stream().filter(Objects::isNull).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().isEmpty()).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains(null)).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("null")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NULL")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("nil")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NIL")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("none")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NONE")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("na")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NA")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("n/a")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("N/A")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("missing")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("MISSING")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("undefined")).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("UNDEFINED")).count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+0.863 - assertTrue(res.isEmpty())
+0.692 - assertEquals(0, res.size())
+0.545 - assertNotNull(res)
+0.471 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().isEmpty()).count())
+0.465 - assertEquals(0, res.stream().filter(Objects::isNull).count())
+0.385 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NONE")).count())
+0.381 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("")).count())
+0.374 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains(null)).count())
+0.374 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("na")).count())
+0.374 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NA")).count())
+0.370 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("nil")).count())
+0.370 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NIL")).count())
+0.370 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("n/a")).count())
+0.370 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("N/A")).count())
+0.368 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("UNDEFINED")).count())
+0.367 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("null")).count())
+0.367 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("NULL")).count())
+0.367 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("none")).count())
+0.357 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("missing")).count())
+0.357 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("MISSING")).count())
+0.351 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().contains("undefined")).count())

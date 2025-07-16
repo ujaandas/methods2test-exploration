@@ -1,0 +1,63 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormat {
+    public static String getDigestSha1 ( byte [ ] bytes1 , byte [ ] bytes2 ) { 
+    MessageDigest sha1 = DigestUtils . getSha1Digest ( ) ; 
+    sha1 . update ( bytes1 ) ; 
+    return "STR" + base32 . encodeAsString ( sha1 . digest ( bytes2 ) ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormatTest {
+    @Test
+     public void testGetDigestSha1TwoByteArrays ( ) {
+         byte [ ] content1 = { 
+     'a' , 'b' , 'c' } ; 
+         byte [ ] content2 = { 
+     'd' , 'e' , 'f' } ; 
+         String sha1str = "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals( "STRd7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertEquals( "STR" + "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotEquals( "STR" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( "STR" ) ) ; 
+assertFalse( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . isEmpty ( ) ) ; 
+assertSame( sha1str + "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotSame( sha1str , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertArrayEquals( sha1str . toCharArray ( ) , "STR" . toCharArray ( ) ) ; 
+assertThrows( NullPointerException . class , ( ) -> WARCRecordFormat . getDigestSha1 ( null , null ) ) ; 
+assertTimeoutPreemptively( Duration . ofSeconds ( 1 ) , ( ) -> WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertLinesMatch( Arrays . asList ( "STR" , "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" ) , Arrays . asList ( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . split ( "" ) ) ) ; 
+assertAll( 
+     ( ) -> assertNotNull ( WARCRecordFormat . getDigestSha1 ( content1 , content2 )
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sha1str,WARCRecordFormat.getDigestSha1(content1,content2)); ===
+0.926 - assertNotEquals( "STR" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.886 - assertNotSame( sha1str , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.837 - assertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.805 - assertFalse( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . isEmpty ( ) )
+0.748 - assertAll( 
+     ( ) -> assertNotNull ( WARCRecordFormat . getDigestSha1 ( content1 , content2 )
+0.746 - assertEquals( "STRd7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.744 - assertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( "STR" ) )
+0.734 - assertEquals( "STR" + "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.702 - assertSame( sha1str + "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.682 - assertTimeoutPreemptively( Duration . ofSeconds ( 1 ) , ( ) -> WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.595 - assertLinesMatch( Arrays . asList ( "STR" , "d7A9A3F4BEF4D7DAA2F2F4F9D54405ADAB5E4D7" ) , Arrays . asList ( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . split ( "" ) ) )
+0.540 - assertThrows( NullPointerException . class , ( ) -> WARCRecordFormat . getDigestSha1 ( null , null ) )
+0.394 - assertArrayEquals( sha1str . toCharArray ( ) , "STR" . toCharArray ( ) )

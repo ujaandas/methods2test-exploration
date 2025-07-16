@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testParamWithMatches ( ) {\nMap < String , Object > params = new HashMap < String , Object > ( ) ;\nparams . put ( \"STR\" , \"STR\" ) ;\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql , params ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(1, results.size());\nassertTrue(results.get(0).field(\"STR\").equals(\"STR\"));\nassertTrue(results.get(0).field(\"STR\") instanceof String);\nassertEquals(\"STR\", results.get(0).field(\"STR\"));\nassertNotNull(results.get(0).field(\"id\"));\nassertTrue(results.get(0).field(\"id\") instanceof String);\nassertTrue(results.get(0).field(\"createdAt\") instanceof Date);\nassertNotNull(results.get(0).field(\"updatedAt\"));\nassertTrue(results.get(0).field(\"updatedAt\") instanceof Date);\nassertTrue(results.get(0).field(\"name\") instanceof String);\nassertEquals(\"ExpectedName\", results.get(0).field(\"name\"));\nassertTrue(results.get(0).field(\"active\") instanceof Boolean);\nassertTrue(results.get(0).field(\"active\"));\nassertNotNull(results.get(0).field(\"tags\"));\nassertTrue(results.get(0).field(\"tags\") instanceof List);\nassertEquals(3, ((List) results.get(0).field(\"tags\")).size());\nassertTrue(((List) results.get(0).field(\"tags\")).contains(\"tag1\"));\nassertTrue(((List) results.get(0).field(\"tags\")).contains(\"tag2\"));\nassertTrue(((List) results.get(0).field(\"tags\")).contains(\"tag3\"));\nassertEquals(\"ExpectedDescription\", results.get(0).field(\"description\"));\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.733,
+        0.675,
+        0.629,
+        0.62,
+        0.598,
+        0.583,
+        0.567,
+        0.564,
+        0.548,
+        0.495,
+        0.482,
+        0.476,
+        0.452,
+        0.447,
+        0.442,
+        0.442,
+        0.442,
+        0.442,
+        0.427,
+        0.427,
+        0.427,
+        0.0
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

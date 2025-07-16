@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompiler {
+    public Class < ? > compile ( String className , String sourceCode ) throws Exception { 
+    return addSource ( className , sourceCode ) . compileAll ( ) . get ( className ) ; 
+    }
+}
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompilerTest {
+    @Test
+     public void compile_WhenIgnoreWarnings ( ) throws Exception {
+         StringBuffer sourceCode = new StringBuffer ( ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         Class < ? > helloClass = InMemoryJavaCompiler . newInstance ( ) . ignoreWarnings ( ) . compile ( "STR" , sourceCode . toString ( ) ) ; 
+         List < ? > res = ( List < ? > ) helloClass . getMethod ( "STR" ) . invoke ( helloClass . newInstance ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(res);
+Assert.assertTrue(res.size() > 0);
+Assert.assertEquals("String1", res.get(0));
+Assert.assertNotEquals("String2", res.get(1));
+Assert.assertTrue(res.contains("String3"));
+Assert.assertFalse(res.isEmpty());
+Assert.assertNotSame("String4", res.get(2));
+Assert.assertTrue(res.indexOf("String5") >= 0);
+Assert.assertNull(res.get(3));
+Assert.assertTrue(res.size() < 10);
+Assert.assertNotEquals("String6", res.get(4));
+Assert.assertTrue(res.size() == 4);
+Assert.assertFalse(res.contains("String7"));
+Assert.assertTrue(res.indexOf("String8") < 5);
+Assert.assertTrue(res.contains("String9"));
+Assert.assertNotSame("String10", res.get(5));
+Assert.assertTrue(res.size() <= 5);
+Assert.assertNotEquals("String11", res.get(6));
+Assert.assertTrue(res.size() == 4);
+Assert.assertFalse(res.contains("String12"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,res.size()); ===
+0.760 - Assert.assertTrue(res.size() > 0)
+0.745 - Assert.assertTrue(res.size() < 10)
+0.745 - Assert.assertTrue(res.size() == 4)
+0.745 - Assert.assertTrue(res.size() <= 5)
+0.745 - Assert.assertTrue(res.size() == 4)
+0.733 - Assert.assertEquals("String1", res.get(0))
+0.708 - Assert.assertNull(res.get(3))
+0.698 - Assert.assertNotEquals("String2", res.get(1))
+0.698 - Assert.assertNotEquals("String6", res.get(4))
+0.692 - Assert.assertFalse(res.isEmpty())
+0.688 - Assert.assertNotEquals("String11", res.get(6))
+0.591 - Assert.assertNotNull(res)
+0.581 - Assert.assertFalse(res.contains("String7"))
+0.581 - Assert.assertNotSame("String10", res.get(5))
+0.571 - Assert.assertFalse(res.contains("String12"))
+0.557 - Assert.assertNotSame("String4", res.get(2))
+0.548 - Assert.assertTrue(res.indexOf("String8") < 5)
+0.540 - Assert.assertTrue(res.indexOf("String5") >= 0)
+0.525 - Assert.assertTrue(res.contains("String3"))
+0.525 - Assert.assertTrue(res.contains("String9"))

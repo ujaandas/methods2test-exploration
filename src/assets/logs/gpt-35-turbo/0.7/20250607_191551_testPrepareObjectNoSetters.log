@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparer {
+    public ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException { 
+    ObjectQueryInfo result ; 
+    String onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ; 
+    if ( onamePattern != null ) { 
+    Map < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ; 
+    if ( attributeSetters . size ( ) > 0 ) { 
+    String onameString ; 
+    if ( obj instanceof MBeanLocationParameterSource ) { 
+    onameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ; 
+    } else { 
+    onameString = onamePattern ; 
+    } ObjectName oname = new ObjectName ( onameString ) ; 
+    result = new ObjectQueryInfo ( obj , oname , attributeSetters ) ; 
+    } else { 
+    this . logNoAttributeThrottle . warn ( log , "STR" , onamePattern ) ; 
+    result = null ; 
+    } } else { 
+    log . warn ( "STR" ) ; 
+    result = null ; 
+    } return result ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryPreparerTest {
+    @Test
+     public void testPrepareObjectNoSetters ( ) throws Exception {
+         this . initPreparer ( ) ; 
+         ObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNull(result);
+assertFalse(result.hasAttributeSetters());
+assertEquals(this.testTarget003, result.getObject());
+assertEquals(new ObjectName("testPattern"), result.getObjectName());
+assertEquals(0, result.getAttributeSetters().size());
+assertNull(result.getAttributeSetters());
+assertNotNull(result);
+assertTrue(result.hasAttributeSetters());
+assertNotEquals(this.testTarget003, result.getObject());
+assertNotEquals(new ObjectName("testPattern"), result.getObjectName());
+assertNotEquals(0, result.getAttributeSetters().size());
+assertNotNull(result.getAttributeSetters());
+assertSame(this.testTarget003, result.getObject());
+assertSame(new ObjectName("testPattern"), result.getObjectName());
+assertSame(0, result.getAttributeSetters().size());
+assertNotSame(this.testTarget003, result.getObject());
+assertNotSame(new ObjectName("testPattern"), result.getObjectName());
+assertNotSame(0, result.getAttributeSetters().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+1.000 - assertNull(result)
+0.923 - assertNotNull(result)
+0.621 - assertNull(result.getAttributeSetters())
+0.590 - assertNotNull(result.getAttributeSetters())
+0.517 - assertTrue(result.hasAttributeSetters())
+0.508 - assertFalse(result.hasAttributeSetters())
+0.472 - assertNotEquals(this.testTarget003, result.getObject())
+0.472 - assertNotEquals(0, result.getAttributeSetters().size())
+0.464 - assertEquals(this.testTarget003, result.getObject())
+0.464 - assertEquals(0, result.getAttributeSetters().size())
+0.429 - assertNotSame(this.testTarget003, result.getObject())
+0.429 - assertNotSame(0, result.getAttributeSetters().size())
+0.418 - assertSame(this.testTarget003, result.getObject())
+0.418 - assertSame(0, result.getAttributeSetters().size())
+0.395 - assertNotEquals(new ObjectName("testPattern"), result.getObjectName())
+0.370 - assertSame(new ObjectName("testPattern"), result.getObjectName())
+0.361 - assertEquals(new ObjectName("testPattern"), result.getObjectName())
+0.357 - assertNotSame(new ObjectName("testPattern"), result.getObjectName())

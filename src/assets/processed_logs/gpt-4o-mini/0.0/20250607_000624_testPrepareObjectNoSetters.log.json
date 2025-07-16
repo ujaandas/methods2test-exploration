@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryPreparer {\npublic ObjectQueryInfo prepareObjectQuery ( Object obj ) throws MalformedObjectNameException {\nObjectQueryInfo result ;\nString onamePattern = MBeanAnnotationUtil . getLocationONamePattern ( obj ) ;\nif ( onamePattern != null ) {\nMap < String , Method > attributeSetters = MBeanAnnotationUtil . getAttributes ( obj ) ;\nif ( attributeSetters . size ( ) > 0 ) {\nString onameString ;\nif ( obj instanceof MBeanLocationParameterSource ) {\nonameString = this . parameterReplacer . replaceObjectNameParameters ( onamePattern , ( MBeanLocationParameterSource ) obj ) ;\n} else {\nonameString = onamePattern ;\n} ObjectName oname = new ObjectName ( onameString ) ;\nresult = new ObjectQueryInfo ( obj , oname , attributeSetters ) ;\n} else {\nthis . logNoAttributeThrottle . warn ( log , \"STR\" , onamePattern ) ;\nresult = null ;\n} } else {\nlog . warn ( \"STR\" ) ;\nresult = null ;\n} return result ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class ObjectQueryPreparerTest {\n@Test\npublic void testPrepareObjectNoSetters ( ) throws Exception {\nthis . initPreparer ( ) ;\nObjectQueryInfo result = this . preparer . prepareObjectQuery ( this . testTarget003 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNull(result);\nassertEquals(null, result);\nassertNotNull(result);\nassertTrue(result instanceof ObjectQueryInfo);\nassertEquals(this.testTarget003, result.getObject());\nassertEquals(0, result.getAttributeSetters().size());\nassertNotNull(result.getObjectName());\nassertEquals(\"expectedObjectNamePattern\", result.getObjectName().getCanonicalName());\nassertTrue(result.getAttributeSetters().isEmpty());\nassertFalse(result.getAttributeSetters().containsKey(\"someAttribute\"));\nassertEquals(\"expectedObjectNamePattern\", MBeanAnnotationUtil.getLocationONamePattern(this.testTarget003));\nassertTrue(this.logNoAttributeThrottle.isWarnEnabled());\nassertTrue(log.isWarnEnabled());\nassertEquals(\"STR\", log.getLastWarnMessage());\nassertEquals(\"STR\", this.logNoAttributeThrottle.getLastWarnMessage());\nassertNotNull(this.preparer);\nassertNotNull(this.testTarget003);\nassertTrue(this.preparer instanceof ObjectQueryPreparer);\nassertTrue(this.testTarget003 instanceof MBeanLocationParameterSource);\nassertEquals(0, this.preparer.getAttributes(this.testTarget003).size());\nassertTrue(this.preparer.prepareObjectQuery(this.testTarget003) instanceof ObjectQueryInfo);\nassertNotSame(result, new ObjectQueryInfo(this.testTarget003, new ObjectName(\"differentObjectName\"), new HashMap<>()));\n```\n====================\n\n",
+    "scores": [
+        0.923,
+        0.818,
+        0.744,
+        0.655,
+        0.609,
+        0.588,
+        0.492,
+        0.464,
+        0.464,
+        0.449,
+        0.441,
+        0.419,
+        0.361,
+        0.341,
+        0.329,
+        0.318,
+        0.302,
+        0.279,
+        0.277,
+        0.243,
+        0.231,
+        0.211,
+        0.0
+    ],
+    "ground_truth": "assertNull(result);"
+}

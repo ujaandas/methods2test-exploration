@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class InitContainerHandler {\npublic boolean hasInitContainer ( PodTemplateSpecBuilder builder , String name ) {\nreturn getInitContainer ( builder , name ) != null ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.enricher/api;\n\npublic class InitContainerHandlerTest {\n@Test\npublic void simple ( ) {\nPodTemplateSpecBuilder builder = getPodTemplateBuilder ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nInitContainerHandler handler = new InitContainerHandler();\n\n// Test case 1: Check if hasInitContainer returns false for a non-existing init container\nassertFalse(handler.hasInitContainer(builder, \"nonExistingInitContainer\"));\n\n// Test case 2: Add an init container and check if hasInitContainer returns true\nbuilder.addInitContainer(\"existingInitContainer\");\nassertTrue(handler.hasInitContainer(builder, \"existingInitContainer\"));\n\n// Test case 3: Check if hasInitContainer returns false for an empty name\nassertFalse(handler.hasInitContainer(builder, \"\"));\n\n// Test case 4: Check if hasInitContainer returns false for null name\nassertFalse(handler.hasInitContainer(builder, null));\n\n// Test case 5: Check if hasInitContainer returns true for an init container with special characters\nbuilder.addInitContainer(\"init-container-1\");\nassertTrue(handler.hasInitContainer(builder, \"init-container-1\"));\n\n// Test case 6: Check if hasInitContainer returns false for a name with only spaces\nassertFalse(handler.hasInitContainer(builder, \"   \"));\n\n// Test case 7: Check if hasInitContainer returns true for an init container with numeric name\nbuilder.addInitContainer(\"123initContainer\");\nassertTrue(handler.hasInitContainer(builder, \"123initContainer\"));\n\n// Test case 8: Check if hasInitContainer returns false for a name that is a substring of an existing name\nassertFalse(handler.hasInitContainer(builder, \"init\"));\n\n// Test case 9: Check if hasInitContainer returns true for an init container with mixed case\nbuilder.addInitContainer(\"MixedCaseInitContainer\");\nassertTrue(handler.hasInitContainer(builder, \"MixedCaseInitContainer\"));\n\n// Test case 10: Check if hasInitContainer returns false for a name that is a prefix of an existing name\nassertFalse(handler.hasInitContainer(builder, \"Mixed\"));\n\n// Test case 11: Check if hasInitContainer returns true for an init container with underscores\nbuilder.addInitContainer(\"init_container_1\");\nassertTrue(handler.hasInitContainer(builder, \"init_container_1\"));\n\n// Test case 12: Check if hasInitContainer returns false for a name that is a suffix of an existing name\nassertFalse(handler.hasInitContainer(builder, \"container_1\"));\n\n// Test case 13: Check if hasInitContainer returns true for an init container with hyphens\nbuilder.addInitContainer(\"init-container-2\");\nassertTrue(handler.hasInitContainer(builder, \"init\n====================\n\n",
+    "scores": [
+        0.832,
+        0.776,
+        0.776,
+        0.776,
+        0.744,
+        0.738,
+        0.601,
+        0.58,
+        0.573,
+        0.51,
+        0.508,
+        0.495,
+        0.485,
+        0.402,
+        0.347,
+        0.341,
+        0.339,
+        0.336,
+        0.333,
+        0.33
+    ],
+    "ground_truth": "assertFalse(handler.hasInitContainer(builder,\"STR\"));"
+}

@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( Throwable cause ) { 
+    super ( cause ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withCause ( ) {
+         RuntimeException cause = new RuntimeException ( ) ; 
+         TestException exception = new TestException ( cause ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(exception);
+assertEquals(cause, exception.getCause());
+assertTrue(exception instanceof TestException);
+assertTrue(exception.getCause() instanceof RuntimeException);
+assertEquals("java.lang.RuntimeException", exception.getCause().getClass().getName());
+assertEquals("TestException", exception.getClass().getSimpleName());
+assertNotEquals(exception, cause);
+assertNotEquals(exception, null);
+assertNotEquals(exception, new TestException(new RuntimeException()));
+assertTrue(exception.toString().contains("TestException"));
+assertTrue(exception.toString().contains("java.lang.RuntimeException"));
+assertEquals(0, exception.getStackTrace().length);
+assertTrue(exception.getMessage() == null);
+assertFalse(exception.getMessage() != null);
+assertEquals(exception.getClass().getName(), "hazelcast.hazelcast-simulator.simulator.TestException");
+assertNotNull(exception.getStackTrace());
+assertTrue(exception.getStackTrace().length > 0);
+assertEquals(exception.getStackTrace()[0].getClassName(), "hazelcast.hazelcast-simulator.simulator.TestException");
+assertEquals(exception.getStackTrace()[0].getMethodName(), "<init>");
+assertEquals(exception.getStackTrace()[0].getLineNumber(), 1); // Adjust line number based on actual line
+assertTrue(exception.getCause() instanceof Throwable);
+assertFalse(exception.getCause() instanceof Exception);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(cause,exception.getCause()); ===
+1.000 - assertEquals(cause, exception.getCause())
+0.750 - assertNotEquals(exception, cause)
+0.727 - assertEquals(0, exception.getStackTrace().length)
+0.691 - assertFalse(exception.getMessage() != null)
+0.679 - assertEquals("TestException", exception.getClass().getSimpleName())
+0.676 - assertNotEquals(exception, null)
+0.675 - assertNotNull(exception.getStackTrace())
+0.674 - assertFalse(exception.getCause() instanceof Exception)
+0.650 - assertTrue(exception.getMessage() == null)
+0.620 - assertEquals(exception.getStackTrace()[0].getLineNumber(), 1)
+0.605 - assertTrue(exception.getStackTrace().length > 0)
+0.597 - assertEquals("java.lang.RuntimeException", exception.getCause().getClass().getName())
+0.592 - assertTrue(exception.getCause() instanceof RuntimeException)
+0.579 - assertEquals(exception.getStackTrace()[0].getMethodName(), "<init>")
+0.547 - assertNotEquals(exception, new TestException(new RuntimeException()))
+0.528 - ```java
+assertNotNull(exception)
+0.500 - assertTrue(exception instanceof TestException)
+0.471 - assertEquals(exception.getClass().getName(), "hazelcast.hazelcast-simulator.simulator.TestException")
+0.457 - // Adjust line number based on actual line
+assertTrue(exception.getCause() instanceof Throwable)
+0.449 - assertTrue(exception.toString().contains("TestException"))
+0.405 - assertEquals(exception.getStackTrace()[0].getClassName(), "hazelcast.hazelcast-simulator.simulator.TestException")
+0.396 - assertTrue(exception.toString().contains("java.lang.RuntimeException"))
+0.000 - ```

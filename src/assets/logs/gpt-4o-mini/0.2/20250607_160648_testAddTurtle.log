@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class MultiTurtlePanel {
+    public int getTurtleCount ( ) { 
+    return this . turtles . size ( ) ; 
+    }
+}
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class MultiTurtlePanelTest {
+    @Test
+     public void testAddTurtle ( ) throws Exception {
+         JUnitUtils . assumeNotHeadless ( ) ; 
+         MultiTurtleWindow panel = new MultiTurtleWindow ( ) ; 
+         panel . addTurtle ( new Turtle ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(1, panel.getTurtleCount());
+assertTrue(panel.getTurtles().contains(turtle));
+assertNotNull(panel.getTurtles());
+assertFalse(panel.getTurtles().isEmpty());
+assertSame(turtle, panel.getTurtles().get(0));
+assertEquals("Expected turtle at index 0", turtle, panel.getTurtles().get(0));
+assertTrue(panel.getTurtles().size() > 0);
+assertTrue(panel.getTurtles().size() <= 1);
+assertFalse(panel.getTurtles().contains(new Turtle()));
+assertEquals("Turtle count should be 1 after adding one turtle", 1, panel.getTurtleCount());
+assertNotEquals(0, panel.getTurtleCount());
+assertTrue(panel.getTurtles().stream().allMatch(t -> t instanceof Turtle));
+assertEquals("Turtle count should be 1", 1, panel.getTurtleCount());
+assertSame("First turtle should be the one added", turtle, panel.getTurtles().get(0));
+assertTrue(panel.getTurtles().toString().contains(turtle.toString()));
+assertFalse(panel.getTurtles().isEmpty());
+assertEquals("Turtle count should be 1", 1, panel.getTurtleCount());
+assertTrue(panel.getTurtles().size() >= 1);
+assertTrue(panel.getTurtles().size() <= 1);
+assertNotNull("Turtle list should not be null", panel.getTurtles());
+assertTrue("Turtle list should contain the added turtle", panel.getTurtles().contains(turtle));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,panel.getTurtleCount()); ===
+0.937 - assertNotEquals(0, panel.getTurtleCount())
+0.905 - ```java
+assertEquals(1, panel.getTurtleCount())
+0.768 - assertEquals("Turtle count should be 1", 1, panel.getTurtleCount())
+0.768 - assertEquals("Turtle count should be 1", 1, panel.getTurtleCount())
+0.761 - assertNotNull(panel.getTurtles())
+0.734 - assertFalse(panel.getTurtles().isEmpty())
+0.734 - assertFalse(panel.getTurtles().isEmpty())
+0.683 - assertSame(turtle, panel.getTurtles().get(0))
+0.682 - assertTrue(panel.getTurtles().contains(turtle))
+0.681 - assertFalse(panel.getTurtles().contains(new Turtle()))
+0.675 - assertTrue(panel.getTurtles().size() > 0)
+0.667 - assertTrue(panel.getTurtles().size() <= 1)
+0.667 - assertTrue(panel.getTurtles().size() >= 1)
+0.667 - assertTrue(panel.getTurtles().size() <= 1)
+0.639 - assertEquals("Turtle count should be 1 after adding one turtle", 1, panel.getTurtleCount())
+0.606 - assertEquals("Expected turtle at index 0", turtle, panel.getTurtles().get(0))
+0.566 - assertNotNull("Turtle list should not be null", panel.getTurtles())
+0.542 - assertTrue(panel.getTurtles().toString().contains(turtle.toString()))
+0.504 - assertSame("First turtle should be the one added", turtle, panel.getTurtles().get(0))
+0.496 - assertTrue("Turtle list should contain the added turtle", panel.getTurtles().contains(turtle))
+0.481 - assertTrue(panel.getTurtles().stream().allMatch(t -> t instanceof Turtle))
+0.000 - ```

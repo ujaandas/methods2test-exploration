@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OFilterOptimizer {\n@Override\npublic String toString ( ) {\nStringBuilder buffer = new StringBuilder ( 128 ) ;\nbuffer . append ( '(' ) ;\nbuffer . append ( left ) ;\nif ( operator != null ) {\nbuffer . append ( ' ' ) ;\nbuffer . append ( operator ) ;\nbuffer . append ( ' ' ) ;\nif ( right instanceof String ) {\nbuffer . append ( '\\'' ) ;\n} buffer . append ( right ) ;\nif ( right instanceof String ) {\nbuffer . append ( '\\'' ) ;\n} buffer . append ( ')' ) ;\n} return buffer . toString ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OFilterOptimizerTest {\n@Test\npublic void testOptimizePartialOptimizationMethod ( ) throws Exception {\nfinal OSQLFilter filter = OSQLEngine . getInstance ( ) . parseCondition ( \"STR\" , null , \"STR\" ) ;\nfinal OSQLFilterCondition condition = filter . getRootCondition ( ) ;\nfinal OIndexSearchResult searchResult = new OIndexSearchResult ( ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getOperator ( ) , ( ( OSQLFilterItemField ) ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getLeft ( ) ) . getFieldChain ( ) , 3 ) ;\noptimizer . optimize ( filter , searchResult ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(condition);\nAssert.assertEquals(\"ExpectedOperator\", condition.getOperator());\nAssert.assertTrue(condition.getLeft() instanceof OSQLFilterCondition);\nAssert.assertEquals(\"ExpectedFieldChain\", ((OSQLFilterItemField) condition.getLeft().getLeft()).getFieldChain());\nAssert.assertEquals(3, searchResult.getSomeValue());\nAssert.assertTrue(searchResult.isValid());\nAssert.assertEquals(\"ExpectedOptimizedCondition\", optimizer.optimize(filter, searchResult).toString());\nAssert.assertNotNull(optimizer.getSomeProperty());\nAssert.assertTrue(optimizer.hasOptimizations());\nAssert.assertFalse(optimizer.isEmpty());\nAssert.assertEquals(\"ExpectedResultType\", optimizer.getResultType());\nAssert.assertSame(filter, optimizer.getFilter());\nAssert.assertNotSame(new OSQLFilter(), filter);\nAssert.assertTrue(optimizer.isOptimized());\nAssert.assertEquals(\"ExpectedStringRepresentation\", optimizer.toString());\nAssert.assertNotEquals(\"UnexpectedValue\", optimizer.getAnotherProperty());\nAssert.assertTrue(optimizer.applyOptimizations());\nAssert.assertFalse(optimizer.hasErrors());\nAssert.assertThrows(SomeException.class, () -> {\noptimizer.optimize(null, searchResult);\n});\nAssert.assertArrayEquals(new String[]{\"ExpectedValue1\", \"ExpectedValue2\"}, optimizer.getValues());\nAssert.assertThat(optimizer.getSomeList(), contains(\"ExpectedItem\"));\n```\n====================\n\n",
+    "scores": [
+        0.579,
+        0.523,
+        0.518,
+        0.465,
+        0.465,
+        0.458,
+        0.449,
+        0.448,
+        0.446,
+        0.438,
+        0.429,
+        0.414,
+        0.409,
+        0.4,
+        0.397,
+        0.396,
+        0.386,
+        0.35,
+        0.344,
+        0.311,
+        0.303,
+        0.034,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(filter.getRootCondition().toString(),\"STR\");"
+}

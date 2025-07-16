@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public OCompositeKey ( final Object ... keys ) { 
+    this . keys = new ArrayList < Object > ( keys . length ) ; 
+    this . comparator = ODefaultComparator . INSTANCE ; 
+    for ( final Object key : keys ) addKey ( key ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         document . field ( "STR" , Collections . emptyList ( ) ) ; 
+         document . field ( "STR" , 12 ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . setNullValuesIgnored ( false ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(result);
+Assert.assertTrue(result instanceof List);
+Assert.assertEquals(2, ((List<?>) result).size());
+Assert.assertTrue(((List<?>) result).contains(12));
+Assert.assertTrue(((List<?>) result).contains(Collections.emptyList()));
+Assert.assertFalse(((List<?>) result).contains(null));
+Assert.assertEquals(12, ((List<?>) result).get(0));
+Assert.assertEquals(Collections.emptyList(), ((List<?>) result).get(1));
+Assert.assertTrue(((List<?>) result).get(1) instanceof List);
+Assert.assertTrue(((List<?>) result).get(1).isEmpty());
+Assert.assertEquals(OType.INTEGER, compositeIndexDefinition.getIndexType("STR"));
+Assert.assertEquals("STR", compositeIndexDefinition.getIndexFieldName(0));
+Assert.assertEquals("STR", compositeIndexDefinition.getIndexFieldName(1));
+Assert.assertFalse(compositeIndexDefinition.isNullValuesIgnored());
+Assert.assertEquals(2, compositeIndexDefinition.getIndexCount());
+Assert.assertTrue(compositeIndexDefinition.hasIndex("STR"));
+Assert.assertFalse(compositeIndexDefinition.hasIndex("NON_EXISTENT_INDEX"));
+Assert.assertEquals(1, compositeIndexDefinition.getCompositeKey().size());
+Assert.assertEquals("STR", compositeIndexDefinition.getCompositeKey().get(0));
+Assert.assertTrue(compositeIndexDefinition.getCompositeKey().contains("STR"));
+Assert.assertNotEquals(Collections.emptyList(), compositeIndexDefinition.getCompositeKey());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12))); ===
+0.542 - Assert.assertNotEquals(Collections.emptyList(), compositeIndexDefinition.getCompositeKey())
+0.515 - Assert.assertEquals(2, ((List<?>) result).size())
+0.508 - Assert.assertEquals(1, compositeIndexDefinition.getCompositeKey().size())
+0.492 - Assert.assertEquals("STR", compositeIndexDefinition.getCompositeKey().get(0))
+0.472 - Assert.assertFalse(((List<?>) result).contains(null))
+0.471 - Assert.assertEquals(12, ((List<?>) result).get(0))
+0.449 - Assert.assertTrue(((List<?>) result).get(1).isEmpty())
+0.444 - Assert.assertEquals(2, compositeIndexDefinition.getIndexCount())
+0.430 - Assert.assertTrue(result instanceof List)
+0.429 - Assert.assertEquals("STR", compositeIndexDefinition.getIndexFieldName(1))
+0.427 - Assert.assertTrue(compositeIndexDefinition.getCompositeKey().contains("STR"))
+0.421 - Assert.assertEquals(OType.INTEGER, compositeIndexDefinition.getIndexType("STR"))
+0.417 - Assert.assertFalse(compositeIndexDefinition.isNullValuesIgnored())
+0.413 - Assert.assertEquals("STR", compositeIndexDefinition.getIndexFieldName(0))
+0.408 - Assert.assertTrue(((List<?>) result).contains(12))
+0.407 - Assert.assertEquals(Collections.emptyList(), ((List<?>) result).get(1))
+0.403 - Assert.assertTrue(((List<?>) result).contains(Collections.emptyList()))
+0.360 - Assert.assertTrue(((List<?>) result).get(1) instanceof List)
+0.356 - ```java
+Assert.assertNotNull(result)
+0.354 - Assert.assertTrue(compositeIndexDefinition.hasIndex("STR"))
+0.341 - Assert.assertFalse(compositeIndexDefinition.hasIndex("NON_EXISTENT_INDEX"))
+0.000 - ```

@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    public abstract VerificationResponse verify ( String otp ) throws YubicoVerificationException , YubicoValidationFailure ;
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testSignature ( ) throws YubicoVerificationException , YubicoValidationFailure {
+         String otp = "STR" ; 
+         client . setKey ( this . apiKey ) ; 
+         VerificationResponse response = client . verify ( otp ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(response.getStatus(), "OK");
+assertEquals(response.getTimestamp(), "2022-01-01T12:00:00Z");
+assertTrue(response.isSignatureVerified());
+assertFalse(response.isReplayed());
+assertNotNull(response.getNonce());
+assertEquals(response.getNonce().length(), 16);
+assertTrue(response.getNonce().matches("[0-9A-F]+"));
+assertEquals(response.getOtp(), otp);
+assertEquals(response.getPublicId(), "1234567890");
+assertEquals(response.getDeviceId(), "device123");
+assertEquals(response.getSignature(), "signature123");
+assertEquals(response.getSl(), 25);
+assertEquals(response.getTtl(), 30);
+assertEquals(response.getUseCounter(), 5);
+assertEquals(response.getSessionCounter(), 10);
+assertEquals(response.getSyncCounter(), 15);
+assertEquals(response.getOtpCounter(), 20);
+assertEquals(response.getOtpUseCounter(), 25);
+assertEquals(response.getOtpSessionCounter(), 30);
+assertEquals(response.getOtpSyncCounter(), 35);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(response); ===
+0.807 - assertNotNull(response.getNonce())
+0.643 - assertEquals(response.getSl(), 25)
+0.632 - assertEquals(response.getTtl(), 30)
+0.621 - assertEquals(response.getOtp(), otp)
+0.596 - assertFalse(response.isReplayed())
+0.581 - assertEquals(response.getStatus(), "OK")
+0.571 - assertEquals(response.getUseCounter(), 5)
+0.562 - assertEquals(response.getOtpCounter(), 20)
+0.554 - assertEquals(response.getSyncCounter(), 15)
+0.537 - assertEquals(response.getOtpUseCounter(), 25)
+0.529 - assertEquals(response.getNonce().length(), 16)
+0.529 - assertEquals(response.getSessionCounter(), 10)
+0.529 - assertEquals(response.getOtpSyncCounter(), 35)
+0.523 - assertTrue(response.isSignatureVerified())
+0.507 - assertEquals(response.getDeviceId(), "device123")
+0.507 - assertEquals(response.getOtpSessionCounter(), 30)
+0.500 - assertEquals(response.getPublicId(), "1234567890")
+0.480 - assertEquals(response.getSignature(), "signature123")
+0.453 - assertTrue(response.getNonce().matches("[0-9A-F]+"))
+0.434 - assertEquals(response.getTimestamp(), "2022-01-01T12:00:00Z")

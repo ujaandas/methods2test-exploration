@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void riebties ( ) {
+         locītājs . enableGuessing = true ; 
+         Word riebties = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(riebties);
+assertTrue(riebties.isRecognized());
+assertFalse(riebties.getWordforms().isEmpty());
+assertEquals("expectedForm1", riebties.getWordforms().get(0));
+assertEquals("expectedForm2", riebties.getWordforms().get(1));
+assertEquals(2, riebties.getWordforms().size());
+assertTrue(riebties.getWordforms().contains("expectedForm1"));
+assertTrue(riebties.getWordforms().contains("expectedForm2"));
+assertFalse(riebties.getWordforms().contains("unexpectedForm"));
+assertEquals("expectedAnalysis", riebties.getAnalysis());
+assertTrue(riebties.hasMultipleForms());
+assertNotEquals("unexpectedAnalysis", riebties.getAnalysis());
+assertEquals("baseForm", riebties.getBaseForm());
+assertTrue(locītājs.isGuessingEnabled());
+assertEquals("anotherExpectedForm", riebties.getWordforms().get(2));
+assertTrue(riebties.getWordforms().stream().allMatch(form -> form.startsWith("expectedPrefix")));
+assertFalse(riebties.getWordforms().stream().anyMatch(form -> form.contains("unexpectedSubstring")));
+assertEquals(3, riebties.getWordforms().stream().filter(form -> form.endsWith("expectedSuffix")).count());
+assertTrue(riebties.isValid());
+assertFalse(riebties.isAmbiguous());
+assertEquals("expectedType", riebties.getType());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(riebties.isRecognized()); ===
+1.000 - assertTrue(riebties.isRecognized())
+0.831 - assertTrue(riebties.isValid())
+0.676 - assertTrue(riebties.hasMultipleForms())
+0.657 - assertFalse(riebties.isAmbiguous())
+0.640 - assertTrue(locītājs.isGuessingEnabled())
+0.593 - assertEquals(2, riebties.getWordforms().size())
+0.583 - assertTrue(riebties.getWordforms().contains("expectedForm1"))
+0.583 - assertTrue(riebties.getWordforms().contains("expectedForm2"))
+0.543 - assertFalse(riebties.getWordforms().isEmpty())
+0.537 - assertEquals("baseForm", riebties.getBaseForm())
+0.537 - assertEquals("expectedType", riebties.getType())
+0.515 - ```java
+assertNotNull(riebties)
+0.510 - assertFalse(riebties.getWordforms().contains("unexpectedForm"))
+0.489 - assertEquals("expectedAnalysis", riebties.getAnalysis())
+0.463 - assertNotEquals("unexpectedAnalysis", riebties.getAnalysis())
+0.421 - assertEquals("expectedForm1", riebties.getWordforms().get(0))
+0.421 - assertEquals("expectedForm2", riebties.getWordforms().get(1))
+0.419 - assertTrue(riebties.getWordforms().stream().allMatch(form -> form.startsWith("expectedPrefix")))
+0.416 - assertEquals("anotherExpectedForm", riebties.getWordforms().get(2))
+0.380 - assertEquals(3, riebties.getWordforms().stream().filter(form -> form.endsWith("expectedSuffix")).count())
+0.376 - assertFalse(riebties.getWordforms().stream().anyMatch(form -> form.contains("unexpectedSubstring")))
+0.000 - ```

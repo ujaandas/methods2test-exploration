@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class OBatchOperations {\npublic List < ORecordOperationRequest > getOperations ( ) {\nreturn operations ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class OBatchOperationsTest {\n@Test\npublic void testBatchOperationsNoTx ( ) throws IOException {\nList < ORecordOperation > operations = new ArrayList < > ( ) ;\noperations . add ( new ORecordOperation ( new ODocument ( ) , ORecordOperation . CREATED ) ) ;\nMockChannel channel = new MockChannel ( ) ;\nOBatchOperationsRequest request = new OBatchOperationsRequest ( - 1 , operations ) ;\nrequest . write ( channel , null ) ;\nchannel . close ( ) ;\nrequest = new OBatchOperationsRequest ( ) ;\nrequest . read ( channel , 0 , ORecordSerializerNetworkFactory . INSTANCE . current ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(request);\nAssert.assertEquals(-1, request.getTransactionId());\nAssert.assertEquals(1, request.getOperations().size());\nAssert.assertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType());\nAssert.assertTrue(request.getOperations().get(0).getRecord() instanceof ODocument);\nAssert.assertNotNull(channel.getOut());\nAssert.assertTrue(channel.isClosed());\nAssert.assertTrue(request.isIdempotent());\nAssert.assertFalse(request.isIdempotent());\nAssert.assertNotNull(request.toString());\nAssert.assertEquals(0, request.getMode());\nAssert.assertEquals(channel.getIn().available(), channel.getOut().size());\nAssert.assertTrue(request.getOperations().get(0).isValid());\nAssert.assertEquals(ORecordSerializerNetworkFactory.INSTANCE.current(), request.getSerializer());\nAssert.assertTrue(request.getOperations().get(0).isContentChanged());\nAssert.assertTrue(request.getOperations().get(0).isChanged());\nAssert.assertTrue(request.getOperations().get(0).isCreated());\nAssert.assertFalse(request.getOperations().get(0).isUpdated());\nAssert.assertFalse(request.getOperations().get(0).isDeleted());\n====================\n\n",
+    "scores": [
+        0.957,
+        0.772,
+        0.772,
+        0.755,
+        0.742,
+        0.74,
+        0.74,
+        0.734,
+        0.692,
+        0.656,
+        0.617,
+        0.605,
+        0.577,
+        0.575,
+        0.532,
+        0.5,
+        0.493,
+        0.468,
+        0.368
+    ],
+    "ground_truth": "assertEquals(request.getOperations().size(),1);"
+}

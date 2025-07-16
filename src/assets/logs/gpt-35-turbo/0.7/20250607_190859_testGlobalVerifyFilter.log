@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilter {
+    public Method find ( ) { 
+    List < Method > methods = findAll ( ) ; 
+    switch ( methods . size ( ) ) { 
+    case 0 : return null ; 
+    case 1 : return methods . iterator ( ) . next ( ) ; 
+    default : throw new ReflectionException ( format ( "STR" , clazz . getName ( ) , annotationClazz . getName ( ) ) ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class AnnotationFilterTest {
+    @Test
+     public void testGlobalVerifyFilter ( ) {
+         Method method = new AnnotatedMethodRetriever ( AnnotationTestClass . class , Verify . class ) . withVoidReturnType ( ) . withFilter ( new VerifyFilter ( true ) ) . find ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(method);
+Assert.assertEquals("AnnotationTestClass", method.getDeclaringClass().getSimpleName());
+Assert.assertTrue(method.getAnnotation(Verify.class) != null);
+Assert.assertTrue(method.getReturnType().equals(void.class));
+Assert.assertTrue(method.isAnnotationPresent(Verify.class));
+Assert.assertTrue(method.getName().startsWith("test"));
+Assert.assertFalse(method.isSynthetic());
+Assert.assertFalse(method.isBridge());
+Assert.assertFalse(Modifier.isStatic(method.getModifiers()));
+Assert.assertFalse(Modifier.isAbstract(method.getModifiers()));
+Assert.assertFalse(Modifier.isNative(method.getModifiers()));
+Assert.assertFalse(Modifier.isStrict(method.getModifiers()));
+Assert.assertFalse(Modifier.isSynchronized(method.getModifiers()));
+Assert.assertFalse(Modifier.isFinal(method.getModifiers()));
+Assert.assertFalse(Modifier.isInterface(method.getModifiers()));
+Assert.assertFalse(Modifier.isPrivate(method.getModifiers()));
+Assert.assertFalse(Modifier.isProtected(method.getModifiers()));
+Assert.assertFalse(Modifier.isPublic(method.getModifiers()));
+Assert.assertFalse(Modifier.isVolatile(method.getModifiers()));
+Assert.assertFalse(Modifier.isTransient(method.getModifiers()));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",method.getName()); ===
+0.667 - Assert.assertFalse(method.isBridge())
+0.638 - Assert.assertFalse(method.isSynthetic())
+0.602 - Assert.assertTrue(method.getName().startsWith("test"))
+0.596 - Assert.assertEquals("AnnotationTestClass", method.getDeclaringClass().getSimpleName())
+0.562 - Assert.assertFalse(Modifier.isStatic(method.getModifiers()))
+0.562 - Assert.assertFalse(Modifier.isStrict(method.getModifiers()))
+0.561 - Assert.assertNotNull(method)
+0.545 - Assert.assertFalse(Modifier.isFinal(method.getModifiers()))
+0.543 - Assert.assertFalse(Modifier.isTransient(method.getModifiers()))
+0.539 - Assert.assertFalse(Modifier.isNative(method.getModifiers()))
+0.539 - Assert.assertFalse(Modifier.isPublic(method.getModifiers()))
+0.533 - Assert.assertFalse(Modifier.isPrivate(method.getModifiers()))
+0.527 - Assert.assertFalse(Modifier.isAbstract(method.getModifiers()))
+0.527 - Assert.assertFalse(Modifier.isVolatile(method.getModifiers()))
+0.526 - Assert.assertFalse(Modifier.isSynchronized(method.getModifiers()))
+0.522 - Assert.assertFalse(Modifier.isInterface(method.getModifiers()))
+0.522 - Assert.assertFalse(Modifier.isProtected(method.getModifiers()))
+0.500 - Assert.assertTrue(method.getAnnotation(Verify.class) != null)
+0.494 - Assert.assertTrue(method.getReturnType().equals(void.class))
+0.455 - Assert.assertTrue(method.isAnnotationPresent(Verify.class))

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializer {\n@Override\npublic Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nreturn this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ClassCustomSerializerTest {\n@Test\npublic void testNormalCustomSerializer ( ) throws Exception {\nNormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ;\nNormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ;\nCustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ;\nCustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ;\nRequestBody body = new RequestBody ( 1 , \"STR\" ) ;\nString ret = ( String ) client . invokeSync ( addr , body , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(ret);\nAssert.assertTrue(ret instanceof String);\nAssert.assertEquals(\"ExpectedStringValue\", ret);\nAssert.assertFalse(ret.isEmpty());\nAssert.assertEquals(12, ret.length());\nAssert.assertTrue(ret.contains(\"STR\"));\nAssert.assertFalse(ret.contains(\"ERROR\"));\nAssert.assertEquals(\"ExpectedPrefix\", ret.substring(0, 14));\nAssert.assertEquals(\"ExpectedSuffix\", ret.substring(ret.length() - 14));\nAssert.assertTrue(ret.matches(\"ExpectedRegexPattern\"));\nAssert.assertNotEquals(\"UnexpectedValue\", ret);\nAssert.assertTrue(ret.startsWith(\"ExpectedStart\"));\nAssert.assertTrue(ret.endsWith(\"ExpectedEnd\"));\nAssert.assertEquals(\"SomeSpecificValue\", parseValueFromResponse(ret));\nAssert.assertNull(parseErrorFromResponse(ret));\nAssert.assertTrue(validateResponseStructure(ret));\nAssert.assertTrue(validateResponseContent(ret));\nAssert.assertEquals(\"ExpectedKey\", getValueFromJsonResponse(ret, \"key\"));\nAssert.assertTrue(isValidResponseFormat(ret));\nAssert.assertTrue(containsExpectedField(ret, \"expectedField\"));\nAssert.assertFalse(hasUnexpectedField(ret, \"unexpectedField\"));\n```\n====================\n\n",
+    "scores": [
+        0.444,
+        0.44,
+        0.4,
+        0.396,
+        0.348,
+        0.344,
+        0.343,
+        0.337,
+        0.33,
+        0.33,
+        0.328,
+        0.323,
+        0.322,
+        0.299,
+        0.295,
+        0.28,
+        0.278,
+        0.261,
+        0.24,
+        0.231,
+        0.222,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+\"STR\",ret);"
+}

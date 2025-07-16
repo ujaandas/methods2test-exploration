@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLCreateProperty {
+    public String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLCreatePropertyTest {
+    @Test
+     public void testDefaultAndMinMaxUnsafeProperty ( ) throws Exception {
+         final ODatabaseDocumentTx db = new ODatabaseDocumentTx ( "STR" + System . nanoTime ( ) ) ; 
+         db . create ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         OClass companyClass = db . getMetadata ( ) . getSchema ( ) . getClass ( "STR" ) ; 
+         OProperty idProperty = companyClass . getProperty ( PROP_ID ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(idProperty);
+assertEquals(PROP_ID, idProperty.getName());
+assertEquals(OType.STRING, idProperty.getType());
+assertTrue(idProperty.isMandatory());
+assertFalse(idProperty.isReadonly());
+assertFalse(idProperty.isNotNull());
+assertTrue(idProperty.isIndexed());
+assertEquals(1, idProperty.getMin());
+assertEquals(255, idProperty.getMax());
+assertEquals("default_value", idProperty.getDefaultValue());
+assertEquals(0, idProperty.getLinkedClass());
+assertTrue(companyClass.getProperties().contains(idProperty));
+assertEquals(1, companyClass.getPropertyCount());
+assertTrue(companyClass.getSuperClass() == null);
+assertFalse(companyClass.isAbstract());
+assertTrue(companyClass.isSubClassOf("V"));
+assertEquals("STR", companyClass.getName());
+assertNotNull(companyClass.getClusterIds());
+assertEquals(1, companyClass.getClusterIds().length);
+assertTrue(companyClass.getClusterIds()[0] >= 0);
+assertFalse(companyClass.isEmbedded());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(idProperty.getName(),PROP_ID); ===
+0.810 - assertEquals(PROP_ID, idProperty.getName())
+0.785 - assertEquals(255, idProperty.getMax())
+0.779 - assertEquals(1, idProperty.getMin())
+0.729 - assertEquals(0, idProperty.getLinkedClass())
+0.697 - assertEquals(OType.STRING, idProperty.getType())
+0.675 - assertFalse(idProperty.isNotNull())
+0.667 - assertFalse(idProperty.isReadonly())
+0.643 - assertEquals("STR", companyClass.getName())
+0.640 - assertEquals("default_value", idProperty.getDefaultValue())
+0.632 - assertTrue(idProperty.isIndexed())
+0.590 - assertTrue(idProperty.isMandatory())
+0.562 - assertEquals(1, companyClass.getPropertyCount())
+0.533 - ```java
+assertNotNull(idProperty)
+0.516 - assertEquals(1, companyClass.getClusterIds().length)
+0.447 - assertTrue(companyClass.getProperties().contains(idProperty))
+0.424 - assertNotNull(companyClass.getClusterIds())
+0.409 - assertTrue(companyClass.getSuperClass() == null)
+0.409 - assertTrue(companyClass.getClusterIds()[0] >= 0)
+0.325 - assertFalse(companyClass.isAbstract())
+0.325 - assertFalse(companyClass.isEmbedded())
+0.262 - assertTrue(companyClass.isSubClassOf("V"))
+0.000 - ```

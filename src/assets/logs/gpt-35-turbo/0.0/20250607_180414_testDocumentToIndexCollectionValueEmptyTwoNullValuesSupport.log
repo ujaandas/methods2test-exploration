@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinition {
+    public OCompositeKey ( final Object ... keys ) { 
+    this . keys = new ArrayList < Object > ( keys . length ) ; 
+    this . comparator = ODefaultComparator . INSTANCE ; 
+    for ( final Object key : keys ) addKey ( key ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCompositeIndexDefinitionTest {
+    @Test
+     public void testDocumentToIndexCollectionValueEmptyTwoNullValuesSupport ( ) {
+         final ODocument document = new ODocument ( ) ; 
+         document . field ( "STR" , Collections . emptyList ( ) ) ; 
+         document . field ( "STR" , 12 ) ; 
+         final OCompositeIndexDefinition compositeIndexDefinition = new OCompositeIndexDefinition ( "STR" ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyListIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . addIndex ( new OPropertyIndexDefinition ( "STR" , "STR" , OType . INTEGER ) ) ; 
+         compositeIndexDefinition . setNullValuesIgnored ( false ) ; 
+         final Object result = compositeIndexDefinition . getDocumentValueToIndex ( document ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(2, result);
+assertNotNull(result);
+assertTrue(result instanceof List);
+assertFalse(result instanceof Map);
+assertEquals(Collections.singletonList(12), result);
+assertNotEquals(Collections.singletonList(0), result);
+assertTrue(((List) result).contains(12));
+assertFalse(((List) result).contains(0));
+assertEquals(1, ((List) result).size());
+assertNotEquals(0, ((List) result).size());
+assertTrue(((List) result).get(0) instanceof Integer);
+assertFalse(((List) result).get(0) instanceof String);
+assertEquals(12, ((List) result).get(0));
+assertNotEquals(0, ((List) result).get(0));
+assertTrue(((List) result).isEmpty());
+assertFalse(((List) result).isEmpty());
+assertEquals(0, ((List) result).indexOf(12));
+assertNotEquals(-1, ((List) result).indexOf(12));
+assertTrue(((List) result).containsAll(Collections.singletonList(12)));
+assertFalse(((List) result).containsAll(Collections.singletonList(0)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,Arrays.asList(newOCompositeKey(null,12))); ===
+0.531 - assertEquals(1, ((List) result).size())
+0.531 - assertFalse(((List) result).isEmpty())
+0.516 - assertFalse(result instanceof Map)
+0.515 - assertNotEquals(0, ((List) result).size())
+0.505 - assertEquals(0, ((List) result).indexOf(12))
+0.495 - assertTrue(((List) result).isEmpty())
+0.486 - assertNotEquals(-1, ((List) result).indexOf(12))
+0.485 - assertEquals(12, ((List) result).get(0))
+0.482 - assertEquals(2, result)
+0.475 - assertNotEquals(0, ((List) result).get(0))
+0.468 - assertFalse(((List) result).get(0) instanceof String)
+0.450 - assertTrue(((List) result).get(0) instanceof Integer)
+0.431 - assertTrue(((List) result).containsAll(Collections.singletonList(12)))
+0.431 - assertFalse(((List) result).containsAll(Collections.singletonList(0)))
+0.430 - assertTrue(result instanceof List)
+0.420 - assertTrue(((List) result).contains(12))
+0.420 - assertFalse(((List) result).contains(0))
+0.390 - assertNotNull(result)
+0.360 - assertEquals(Collections.singletonList(12), result)
+0.354 - assertNotEquals(Collections.singletonList(0), result)

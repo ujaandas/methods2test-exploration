@@ -1,0 +1,64 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecution {
+    int getClusterIdByName ( String iClusterName ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODropClusterStatementExecutionTest {
+    @Test
+     public void testDropClusterIfExists ( ) {
+         String cluster = "STR" ; 
+         ( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(db.getStorage().getClusterNames().contains(cluster));
+Assert.assertEquals(1, db.getStorage().getClusterNames().size());
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null);
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster));
+Assert.assertTrue(db.getStorage().removeCluster(cluster));
+Assert.assertEquals(0, db.getStorage().getClusterNames().size());
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null);
+Assert.assertFalse(db.getStorage().getClusterNames().contains(cluster));
+Assert.assertFalse(db.getStorage().removeCluster(cluster));
+Assert.assertTrue(db.getStorage().addCluster(cluster));
+Assert.assertEquals(1, db.getStorage().getClusterNames().size());
+Assert.assertTrue(db.getStorage().getClusterNames().contains(cluster));
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null);
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster));
+Assert.assertTrue(db.getStorage().removeCluster(cluster));
+Assert.assertEquals(0, db.getStorage().getClusterNames().size());
+Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null);
+Assert.assertFalse(db.getStorage().getClusterNames().contains(cluster));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(db.getClusterIdByName(cluster)>0); ===
+0.747 - Assert.assertTrue(db.getStorage().addCluster(cluster))
+0.723 - Assert.assertTrue(db.getStorage().removeCluster(cluster))
+0.723 - Assert.assertTrue(db.getStorage().removeCluster(cluster))
+0.710 - Assert.assertTrue(db.getStorage().getClusterNames().contains(cluster))
+0.710 - Assert.assertTrue(db.getStorage().getClusterNames().contains(cluster))
+0.653 - Assert.assertFalse(db.getStorage().removeCluster(cluster))
+0.648 - Assert.assertFalse(db.getStorage().getClusterNames().contains(cluster))
+0.648 - Assert.assertFalse(db.getStorage().getClusterNames().contains(cluster))
+0.613 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null)
+0.613 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null)
+0.613 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) != null)
+0.613 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)) == null)
+0.580 - Assert.assertEquals(1, db.getStorage().getClusterNames().size())
+0.580 - Assert.assertEquals(0, db.getStorage().getClusterNames().size())
+0.580 - Assert.assertEquals(1, db.getStorage().getClusterNames().size())
+0.580 - Assert.assertEquals(0, db.getStorage().getClusterNames().size())
+0.535 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster))
+0.535 - Assert.assertTrue(db.getStorage().getClusterById(db.getStorage().getClusterIdByName(cluster)).getName().equals(cluster))

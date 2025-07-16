@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class JsonWriter {\npublic final File getCoverallsFile ( ) {\nreturn coverallsFile ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class JsonWriterTest {\n@Test\npublic void testSubDirectoryCreation ( ) throws Exception {\nFile f = new File ( new File ( folder . getRoot ( ) , \"STR\" ) , \"STR\" ) ;\nJob job = job ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(f);\nAssert.assertTrue(f.exists());\nAssert.assertTrue(f.isDirectory());\nAssert.assertEquals(\"STR\", f.getName());\nAssert.assertNotNull(job);\nAssert.assertEquals(\"expectedValue\", job.getExpectedValue());\nAssert.assertFalse(job.isCompleted());\nAssert.assertTrue(job.getCreationTime() > 0);\nAssert.assertNotNull(job.getOwner());\nAssert.assertEquals(\"John Doe\", job.getOwner().getName());\nAssert.assertEquals(12345, job.getOwner().getId());\nAssert.assertEquals(\"email@example.com\", job.getOwner().getEmail());\nAssert.assertTrue(job.getTasks().isEmpty());\nAssert.assertTrue(job.getResults().isEmpty());\nAssert.assertNull(job.getErrorMessage());\nAssert.assertNull(job.getCompletionTime());\nAssert.assertNotEquals(0, job.hashCode());\nAssert.assertTrue(job.equals(job));\nAssert.assertEquals(\"Job{owner=Owner{name='John Doe', id=12345, email='email@example.com', tasks=[], results=[], errorMessage='null', completionTime=null, creationTime=0}, expectedValue='expectedValue', completed=false}\", job.toString());\n====================\n\n",
+    "scores": [
+        0.521,
+        0.513,
+        0.5,
+        0.443,
+        0.434,
+        0.431,
+        0.423,
+        0.397,
+        0.386,
+        0.364,
+        0.352,
+        0.35,
+        0.342,
+        0.331,
+        0.321,
+        0.316,
+        0.242,
+        0.206,
+        0.1
+    ],
+    "ground_truth": "assertTrue(newJsonWriter(job,f).getCoverallsFile().getParentFile().isDirectory());"
+}

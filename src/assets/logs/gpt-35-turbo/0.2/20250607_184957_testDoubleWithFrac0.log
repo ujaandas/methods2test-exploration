@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( double value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    out . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testDoubleWithFrac0 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 1.23 , 0 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("1", result);
+assertTrue(result.contains("1"));
+assertFalse(result.contains("2"));
+assertFalse(result.contains("3"));
+assertFalse(result.contains("."));
+assertFalse(result.contains(","));
+assertFalse(result.contains(" "));
+assertFalse(result.contains("\n"));
+assertFalse(result.contains("\t"));
+assertFalse(result.contains("\r"));
+assertFalse(result.contains("{"));
+assertFalse(result.contains("}"));
+assertFalse(result.contains("["));
+assertFalse(result.contains("]"));
+assertFalse(result.contains(":"));
+assertFalse(result.contains(";"));
+assertFalse(result.contains("("));
+assertFalse(result.contains(")"));
+assertFalse(result.contains("<"));
+assertFalse(result.contains(">"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.920 - assertEquals("1", result)
+0.586 - assertFalse(result.contains(" "))
+0.582 - assertFalse(result.contains("
+0.576 - assertFalse(result.contains("2"))
+0.576 - assertFalse(result.contains("3"))
+0.576 - assertFalse(result.contains("."))
+0.576 - assertFalse(result.contains(","))
+0.576 - assertFalse(result.contains("{"))
+0.576 - assertFalse(result.contains("}"))
+0.576 - assertFalse(result.contains("["))
+0.576 - assertFalse(result.contains("]"))
+0.576 - assertFalse(result.contains(":"))
+0.576 - assertFalse(result.contains("("))
+0.576 - assertFalse(result.contains(")"))
+0.576 - assertFalse(result.contains("<"))
+0.576 - assertFalse(result.contains(">"))
+0.567 - assertFalse(result.contains("\n"))
+0.567 - assertFalse(result.contains("\t"))
+0.567 - assertFalse(result.contains("\r"))
+0.517 - assertTrue(result.contains("1"))
+0.138 - "))

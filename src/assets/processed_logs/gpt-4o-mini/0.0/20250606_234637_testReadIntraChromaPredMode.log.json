@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class CABAC {\npublic int readIntraChromaPredMode ( MDecoder decoder , int mbX , MBType left , MBType top , boolean leftAvailable , boolean topAvailable ) {\nint ctx = 64 ;\nctx += ! leftAvailable || left == null || ! left . isIntra ( ) || chromaPredModeLeft == 0 ? 0 : 1 ;\nctx += ! topAvailable || top == null || ! top . isIntra ( ) || chromaPredModeTop [ mbX ] == 0 ? 0 : 1 ;\nint mode ;\nif ( decoder . decodeBin ( ctx ) == 0 ) mode = 0 ;\nelse if ( decoder . decodeBin ( 67 ) == 0 ) mode = 1 ;\nelse if ( decoder . decodeBin ( 67 ) == 0 ) mode = 2 ;\nelse mode = 3 ;\nchromaPredModeLeft = chromaPredModeTop [ mbX ] = mode ;\nreturn mode ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class CABACTest {\n@Test\npublic void testReadIntraChromaPredMode ( ) {\nMockMDecoder m = new MockMDecoder ( new int [ ] {\n0 } , new int [ ] {\n64 } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(0, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));\nassertEquals(1, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));\nassertEquals(2, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));\nassertEquals(3, m.readIntraChromaPredMode(decoder, mbX, left, top, leftAvailable, topAvailable));\nassertTrue(m.chromaPredModeLeft >= 0 && m.chromaPredModeLeft <= 3);\nassertTrue(m.chromaPredModeTop[mbX] >= 0 && m.chromaPredModeTop[mbX] <= 3);\nassertNotNull(m);\nassertNotNull(decoder);\nassertNotNull(left);\nassertNotNull(top);\nassertTrue(leftAvailable);\nassertTrue(topAvailable);\nassertEquals(64, m.decodeBinCalls[0]);\nassertEquals(67, m.decodeBinCalls[1]);\nassertEquals(67, m.decodeBinCalls[2]);\nassertTrue(m.decodeBinCalls.length <= 3);\nassertEquals(0, m.decodeBin(0));\nassertEquals(1, m.decodeBin(1));\nassertEquals(2, m.decodeBin(2));\nassertEquals(3, m.decodeBin(3));\nassertEquals(0, m.chromaPredModeLeft);\nassertEquals(0, m.chromaPredModeTop[mbX]);\n```\n====================\n\n",
+    "scores": [
+        0.619,
+        0.619,
+        0.619,
+        0.602,
+        0.544,
+        0.525,
+        0.426,
+        0.404,
+        0.404,
+        0.404,
+        0.389,
+        0.389,
+        0.384,
+        0.362,
+        0.352,
+        0.293,
+        0.28,
+        0.272,
+        0.268,
+        0.255,
+        0.234,
+        0.229,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,newCABAC(1).readIntraChromaPredMode(m,0,null,null,false,false));"
+}

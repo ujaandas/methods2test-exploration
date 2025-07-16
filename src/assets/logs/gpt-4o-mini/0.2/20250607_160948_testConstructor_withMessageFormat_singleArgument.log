@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( String message , Object ... args ) { 
+    super ( format ( message , args ) ) ; 
+    Object lastArg = args [ args . length - 1 ] ; 
+    if ( lastArg instanceof Throwable ) { 
+    initCause ( ( Throwable ) lastArg ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withMessageFormat_singleArgument ( ) {
+         TestException exception = new TestException ( "STR" , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(exception);
+assertEquals("STR", exception.getMessage());
+assertTrue(exception.getMessage().contains("STR"));
+assertFalse(exception.getMessage().isEmpty());
+assertEquals(1, exception.getArgs().length);
+assertEquals(1, exception.getArgs()[0]);
+assertNull(exception.getCause());
+assertTrue(exception instanceof TestException);
+assertTrue(exception.getMessage().startsWith("S"));
+assertTrue(exception.getMessage().endsWith("R"));
+assertEquals("STR", exception.toString());
+assertEquals("STR", exception.getLocalizedMessage());
+assertEquals(1, exception.getArgs()[0]);
+assertNotEquals("Different Message", exception.getMessage());
+assertEquals("STR", exception.getMessage());
+assertTrue(exception.getMessage().matches(".*STR.*"));
+assertFalse(exception.getMessage().matches(".*ERROR.*"));
+assertEquals("STR", exception.getMessage());
+assertNotEquals("Another Message", exception.getMessage());
+assertTrue(exception.getMessage().length() > 0);
+assertTrue(exception.getMessage().contains("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",exception.getMessage()); ===
+1.000 - assertEquals("STR", exception.getMessage())
+1.000 - assertEquals("STR", exception.getMessage())
+1.000 - assertEquals("STR", exception.getMessage())
+0.903 - assertEquals("STR", exception.getLocalizedMessage())
+0.805 - assertEquals("STR", exception.toString())
+0.796 - assertNotEquals("Another Message", exception.getMessage())
+0.780 - assertNotEquals("Different Message", exception.getMessage())
+0.775 - assertEquals(1, exception.getArgs()[0])
+0.775 - assertEquals(1, exception.getArgs()[0])
+0.759 - assertFalse(exception.getMessage().isEmpty())
+0.738 - assertEquals(1, exception.getArgs().length)
+0.730 - assertNull(exception.getCause())
+0.713 - assertTrue(exception.getMessage().length() > 0)
+0.689 - assertTrue(exception.getMessage().endsWith("R"))
+0.674 - assertTrue(exception.getMessage().contains("STR"))
+0.674 - assertTrue(exception.getMessage().startsWith("S"))
+0.674 - assertTrue(exception.getMessage().contains("STR"))
+0.673 - assertFalse(exception.getMessage().matches(".*ERROR.*"))
+0.653 - assertTrue(exception.getMessage().matches(".*STR.*"))
+0.514 - ```java
+assertNotNull(exception)
+0.512 - assertTrue(exception instanceof TestException)
+0.000 - ```

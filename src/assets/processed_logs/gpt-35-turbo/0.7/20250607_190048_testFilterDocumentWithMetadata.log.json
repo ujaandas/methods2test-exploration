@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterDocumentWithMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadataFilterParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", fields.get(\"STR\"));\nassertEquals(1, fields.size());\nassertTrue(fields.containsKey(\"STR\"));\nassertFalse(fields.containsKey(\"OTHER_KEY\"));\nassertNotNull(fields.get(\"STR\"));\nassertNull(fields.get(\"OTHER_KEY\"));\nassertEquals(\"STR\", md.get(\"STR\")[0]);\nassertArrayEquals(new String[]{\"STR\"}, md.get(\"STR\"));\nassertTrue(md.containsKey(\"STR\"));\nassertFalse(md.containsKey(\"OTHER_KEY\"));\nassertNotNull(md.get(\"STR\"));\nassertNull(md.get(\"OTHER_KEY\"));\nassertEquals(\"STR\", metadata.getValue(\"STR\"));\nassertTrue(metadata.containsKey(\"STR\"));\nassertFalse(metadata.containsKey(\"OTHER_KEY\"));\nassertNotNull(metadata.getValue(\"STR\"));\nassertNull(metadata.getValue(\"OTHER_KEY\"));\nassertEquals(1, metadata.size());\nassertTrue(metadata.containsValue(\"STR\"));\nassertFalse(metadata.containsValue(\"OTHER_VALUE\"));\n====================\n\n",
+    "scores": [
+        0.925,
+        0.81,
+        0.759,
+        0.72,
+        0.694,
+        0.681,
+        0.667,
+        0.62,
+        0.6,
+        0.575,
+        0.568,
+        0.514,
+        0.512,
+        0.474,
+        0.471,
+        0.439,
+        0.429,
+        0.386,
+        0.36,
+        0.344
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

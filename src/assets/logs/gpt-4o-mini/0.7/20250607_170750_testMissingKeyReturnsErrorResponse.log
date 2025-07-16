@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.websocket;
+
+public class WebSocketResponseHandler {
+    public IStatus getStatus ( ) { 
+    return this . status ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.websocket;
+
+public class WebSocketResponseHandlerTest {
+    @Test
+     public void testMissingKeyReturnsErrorResponse ( ) {
+         this . headers . remove ( "STR" ) ; 
+         Response handshakeResponse = this . nanoWebSocketServer . handle ( this . session ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(handshakeResponse);
+assertEquals(Response.Status.ERROR, handshakeResponse.getStatus());
+assertTrue(handshakeResponse.getHeaders().containsKey("Error"));
+assertEquals("Missing Key", handshakeResponse.getHeaders().get("Error"));
+assertTrue(handshakeResponse.getBody().contains("Missing Key"));
+assertEquals(400, handshakeResponse.getStatusCode());
+assertTrue(handshakeResponse.isError());
+assertFalse(handshakeResponse.isSuccessful());
+assertNotNull(handshakeResponse.getErrorMessage());
+assertTrue(handshakeResponse.getErrorMessage().length() > 0);
+assertEquals("Invalid request", handshakeResponse.getErrorMessage());
+assertTrue(handshakeResponse.getHeaders().containsKey("Content-Type"));
+assertEquals("application/json", handshakeResponse.getHeaders().get("Content-Type"));
+assertTrue(handshakeResponse.getBody().startsWith("{"));
+assertTrue(handshakeResponse.getBody().endsWith("}"));
+assertNotNull(handshakeResponse.getSession());
+assertEquals(this.session, handshakeResponse.getSession());
+assertFalse(handshakeResponse.getHeaders().containsKey("STR"));
+assertEquals("Error", handshakeResponse.getResponseType());
+assertTrue(handshakeResponse.isClosed());
+assertNotNull(handshakeResponse.getTimestamp());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(handshakeResponse); ===
+0.889 - ```java
+assertNotNull(handshakeResponse)
+0.831 - assertNotNull(handshakeResponse.getSession())
+0.810 - assertNotNull(handshakeResponse.getTimestamp())
+0.780 - assertNotNull(handshakeResponse.getErrorMessage())
+0.732 - assertTrue(handshakeResponse.isError())
+0.722 - assertTrue(handshakeResponse.isClosed())
+0.675 - assertFalse(handshakeResponse.isSuccessful())
+0.651 - assertEquals(400, handshakeResponse.getStatusCode())
+0.612 - assertTrue(handshakeResponse.getBody().endsWith("}"))
+0.598 - assertTrue(handshakeResponse.getBody().startsWith("{"))
+0.578 - assertTrue(handshakeResponse.getErrorMessage().length() > 0)
+0.562 - assertEquals(this.session, handshakeResponse.getSession())
+0.562 - assertEquals("Error", handshakeResponse.getResponseType())
+0.557 - assertEquals(Response.Status.ERROR, handshakeResponse.getStatus())
+0.553 - assertTrue(handshakeResponse.getBody().contains("Missing Key"))
+0.553 - assertFalse(handshakeResponse.getHeaders().containsKey("STR"))
+0.547 - assertTrue(handshakeResponse.getHeaders().containsKey("Error"))
+0.529 - assertEquals("Missing Key", handshakeResponse.getHeaders().get("Error"))
+0.510 - assertEquals("Invalid request", handshakeResponse.getErrorMessage())
+0.510 - assertTrue(handshakeResponse.getHeaders().containsKey("Content-Type"))
+0.435 - assertEquals("application/json", handshakeResponse.getHeaders().get("Content-Type"))
+0.000 - ```

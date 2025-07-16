@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testIndexedEdgeArrows ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedSize, result.size());
+assertTrue(result.stream().allMatch(r -> r instanceof OResult));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("propertyName").equals(expectedValue)));
+assertFalse(result.isEmpty());
+assertEquals(expectedFirstValue, result.next().getProperty("propertyName"));
+assertEquals(expectedSecondValue, result.next().getProperty("propertyName"));
+assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next();
+    }
+});
+assertTrue(result.stream().allMatch(r -> r.getProperty("anotherProperty") != null));
+assertEquals(expectedType, result.next().getType());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("edgeProperty").equals(expectedEdgeValue)));
+assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("filterProperty").equals(filterValue)).count());
+assertNotEquals(unexpectedValue, result.next().getProperty("propertyName"));
+assertTrue(result.stream().map(r -> r.getProperty("mappedProperty")).collect(Collectors.toSet()).containsAll(expectedSet));
+assertEquals(expectedString, result.stream().map(r -> r.getProperty("stringProperty")).collect(Collectors.joining(",")));
+assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0));
+assertEquals(expectedDistinctCount, result.stream().map(r -> r.getProperty("distinctProperty")).distinct().count());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("booleanProperty") == true));
+assertEquals(expectedDate, result.next().getProperty("dateProperty"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("listProperty") instanceof List));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.702 - assertFalse(result.isEmpty())
+0.588 - assertEquals(expectedSize, result.size())
+0.538 - assertEquals(expectedType, result.next().getType())
+0.526 - ```java
+assertNotNull(result)
+0.506 - assertTrue(result.stream().allMatch(r -> r instanceof OResult))
+0.438 - assertEquals(expectedDate, result.next().getProperty("dateProperty"))
+0.433 - assertTrue(result.stream().anyMatch(r -> r.getProperty("propertyName").equals(expectedValue)))
+0.431 - assertEquals(expectedFirstValue, result.next().getProperty("propertyName"))
+0.431 - assertThrows(NoSuchElementException.class, () -> {
+    while (true) {
+        result.next()
+0.427 - assertTrue(result.stream().allMatch(r -> r.getProperty("numericProperty") > 0))
+0.419 - assertTrue(result.stream().anyMatch(r -> r.getProperty("edgeProperty").equals(expectedEdgeValue)))
+0.412 - assertNotEquals(unexpectedValue, result.next().getProperty("propertyName"))
+0.411 - assertTrue(result.stream().allMatch(r -> r.getProperty("anotherProperty") != null))
+0.411 - assertTrue(result.stream().anyMatch(r -> r.getProperty("booleanProperty") == true))
+0.408 - assertEquals(expectedSecondValue, result.next().getProperty("propertyName"))
+0.393 - assertTrue(result.stream().allMatch(r -> r.getProperty("listProperty") instanceof List))
+0.338 - assertTrue(result.stream().map(r -> r.getProperty("mappedProperty")).collect(Collectors.toSet()).containsAll(expectedSet))
+0.314 - assertEquals(expectedDistinctCount, result.stream().map(r -> r.getProperty("distinctProperty")).distinct().count())
+0.310 - assertEquals(expectedCount, result.stream().filter(r -> r.getProperty("filterProperty").equals(filterValue)).count())
+0.290 - assertEquals(expectedString, result.stream().map(r -> r.getProperty("stringProperty")).collect(Collectors.joining(",")))
+0.062 - }
+})
+0.000 - ```

@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLogger {
+    public void set ( String key , String value ) { 
+    setIn ( normalize ( key ) , RealValue . fromString ( value ) ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLoggerTest {
+    @Test
+     public void ignores_log_level_case ( ) {
+         Config config = createConfig ( ) ; 
+         config . set ( Keys . CUCUMBERPRO_LOGGING , "STR" ) ; 
+         Logger . SystemLogger logger = new Logger . SystemLogger ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", config.get(Keys.CUCUMBERPRO_LOGGING));
+Assert.assertNotEquals("str", config.get(Keys.CUCUMBERPRO_LOGGING));
+Assert.assertTrue(config.get(Keys.CUCUMBERPRO_LOGGING) instanceof String);
+Assert.assertNotNull(config.get(Keys.CUCUMBERPRO_LOGGING));
+Assert.assertTrue(config.get(Keys.CUCUMBERPRO_LOGGING).length() > 0);
+Assert.assertFalse(config.get(Keys.CUCUMBERPRO_LOGGING).isEmpty());
+Assert.assertEquals(3, config.get(Keys.CUCUMBERPRO_LOGGING).length());
+Assert.assertNotEquals(null, logger);
+Assert.assertEquals(config, logger.getConfig());
+Assert.assertTrue(logger instanceof Logger.SystemLogger);
+Assert.assertNotEquals(null, logger.normalize("key"));
+Assert.assertTrue(logger.normalize("key") instanceof String);
+Assert.assertNotNull(RealValue.fromString("value"));
+Assert.assertTrue(RealValue.fromString("value") instanceof RealValue);
+Assert.assertEquals("value", RealValue.fromString("value").getValue());
+Assert.assertNotEquals(null, logger);
+Assert.assertEquals("value", logger.normalize("key"));
+Assert.assertTrue(logger.normalize("key") instanceof String);
+Assert.assertEquals("value", logger.normalize("key"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(Logger.Level.DEBUG,logger.level); ===
+0.603 - Assert.assertNotEquals(null, logger)
+0.603 - Assert.assertNotEquals(null, logger)
+0.595 - Assert.assertEquals(config, logger.getConfig())
+0.578 - Assert.assertNotEquals(null, logger.normalize("key"))
+0.578 - Assert.assertEquals("value", logger.normalize("key"))
+0.578 - Assert.assertEquals("value", logger.normalize("key"))
+0.478 - Assert.assertTrue(logger instanceof Logger.SystemLogger)
+0.453 - Assert.assertEquals(3, config.get(Keys.CUCUMBERPRO_LOGGING).length())
+0.416 - Assert.assertEquals("STR", config.get(Keys.CUCUMBERPRO_LOGGING))
+0.404 - Assert.assertNotEquals("str", config.get(Keys.CUCUMBERPRO_LOGGING))
+0.396 - Assert.assertTrue(logger.normalize("key") instanceof String)
+0.396 - Assert.assertTrue(logger.normalize("key") instanceof String)
+0.365 - Assert.assertTrue(config.get(Keys.CUCUMBERPRO_LOGGING).length() > 0)
+0.365 - Assert.assertFalse(config.get(Keys.CUCUMBERPRO_LOGGING).isEmpty())
+0.355 - Assert.assertEquals("value", RealValue.fromString("value").getValue())
+0.354 - Assert.assertNotNull(config.get(Keys.CUCUMBERPRO_LOGGING))
+0.275 - Assert.assertTrue(config.get(Keys.CUCUMBERPRO_LOGGING) instanceof String)
+0.270 - Assert.assertNotNull(RealValue.fromString("value"))
+0.267 - Assert.assertTrue(RealValue.fromString("value") instanceof RealValue)

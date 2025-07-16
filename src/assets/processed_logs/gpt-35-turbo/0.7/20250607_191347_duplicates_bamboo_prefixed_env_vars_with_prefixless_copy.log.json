@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class BambooEnvironmentVariables {\npublic Map < String , String > convert ( Map < String , String > env ) {\nMap < String , String > result = new HashMap < > ( ) ;\nfor ( String key : env . keySet ( ) ) {\nMatcher matcher = BAMBOO_PATTERN . matcher ( key ) ;\nif ( matcher . lookingAt ( ) ) {\nString value = env . get ( key ) ;\nString strippedVar = matcher . group ( 1 ) ;\nresult . put ( strippedVar , value ) ;\n} } result . putAll ( env ) ;\nreturn result ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class BambooEnvironmentVariablesTest {\n@Test\npublic void duplicates_bamboo_prefixed_env_vars_with_prefixless_copy ( ) {\nHashMap < String , String > env = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\n} } ;\nMap < String , String > convertedEnv = new BambooEnvironmentVariables ( ) . convert ( env ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", convertedEnv.get(\"STR\"));\nassertNull(convertedEnv.get(\"BAMBOO_STR\"));\nassertNotNull(convertedEnv.get(\"STR\"));\nassertEquals(1, convertedEnv.size());\nassertFalse(convertedEnv.containsKey(\"BAMBOO_STR\"));\nassertTrue(convertedEnv.containsKey(\"STR\"));\nassertTrue(convertedEnv.containsValue(\"STR\"));\nassertNotEquals(\"STR\", convertedEnv.get(\"BAMBOO_STR\"));\nassertEquals(env.get(\"STR\"), convertedEnv.get(\"STR\"));\nassertNotSame(env.get(\"STR\"), convertedEnv.get(\"STR\"));\nassertTrue(convertedEnv.containsKey(\"STR\"));\nassertFalse(convertedEnv.isEmpty());\nassertNotNull(convertedEnv);\nassertNotNull(convertedEnv.get(\"STR\"));\nassertNotNull(convertedEnv.keySet());\nassertEquals(env.size(), convertedEnv.size());\nassertTrue(convertedEnv.containsValue(\"STR\"));\nassertFalse(convertedEnv.containsValue(\"BAMBOO_STR\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.905,
+        0.896,
+        0.815,
+        0.815,
+        0.795,
+        0.792,
+        0.776,
+        0.713,
+        0.698,
+        0.698,
+        0.692,
+        0.684,
+        0.682,
+        0.682,
+        0.681,
+        0.667,
+        0.629
+    ],
+    "ground_truth": "assertEquals(\"STR\",convertedEnv.get(\"STR\"));"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtension {\n@Override\npublic ByteBuffer getPayloadData ( ) {\nreturn unmaskedpayload ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtensionTest {\n@Test\npublic void testDecodeFrame ( ) throws InvalidDataException {\nPerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ;\nString str = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\nbyte [ ] message = str . getBytes ( ) ;\nTextFrame frame = new TextFrame ( ) ;\nframe . setPayload ( ByteBuffer . wrap ( message ) ) ;\ndeflateExtension . encodeFrame ( frame ) ;\ndeflateExtension . decodeFrame ( frame ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(deflateExtension);\nassertNotNull(frame);\nassertEquals(\"STRSTRSTRSTRSTR\", new String(frame.getPayloadData().array()));\nassertTrue(frame.getPayloadData().hasRemaining());\nassertEquals(15, frame.getPayloadData().remaining());\nassertTrue(frame.getPayloadData().isDirect());\nassertFalse(frame.getPayloadData().isReadOnly());\nassertEquals(0, frame.getPayloadData().position());\nassertEquals(15, frame.getPayloadData().limit());\nassertEquals(15, frame.getPayloadData().capacity());\nassertArrayEquals(message, frame.getPayloadData().array());\nassertTrue(frame.getPayloadData().equals(ByteBuffer.wrap(message)));\nassertFalse(frame.getPayloadData().equals(ByteBuffer.wrap(\"DifferentString\".getBytes())));\nassertTrue(frame.getPayloadData().equals(ByteBuffer.wrap(\"STRSTRSTRSTRSTRSTR\".getBytes())));\nassertEquals(15, frame.getPayloadData().get());\nframe.getPayloadData().flip();\nassertEquals(0, frame.getPayloadData().position());\nassertEquals(15, frame.getPayloadData().limit());\nassertEquals(15, frame.getPayloadData().capacity());\nassertTrue(frame.getPayloadData().hasArray());\nassertEquals(\"STRSTRSTRSTRSTR\", new String(frame.getPayloadData().array(), frame.getPayloadData().position(), frame.getPayloadData().remaining()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.804,
+        0.804,
+        0.784,
+        0.784,
+        0.769,
+        0.769,
+        0.759,
+        0.755,
+        0.755,
+        0.724,
+        0.708,
+        0.706,
+        0.698,
+        0.629,
+        0.581,
+        0.562,
+        0.541,
+        0.462,
+        0.39,
+        0.312,
+        0.0
+    ],
+    "ground_truth": "assertArrayEquals(message,frame.getPayloadData().array());"
+}

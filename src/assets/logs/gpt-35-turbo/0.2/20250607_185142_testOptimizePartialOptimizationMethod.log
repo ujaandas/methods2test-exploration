@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OFilterOptimizer {
+    @Override
+     public String toString ( ) { 
+     StringBuilder buffer = new StringBuilder ( 128 ) ; 
+     buffer . append ( '(' ) ; 
+     buffer . append ( left ) ; 
+     if ( operator != null ) { 
+     buffer . append ( ' ' ) ; 
+     buffer . append ( operator ) ; 
+     buffer . append ( ' ' ) ; 
+     if ( right instanceof String ) { 
+     buffer . append ( '\'' ) ; 
+     } buffer . append ( right ) ; 
+     if ( right instanceof String ) { 
+     buffer . append ( '\'' ) ; 
+     } buffer . append ( ')' ) ; 
+     } return buffer . toString ( ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OFilterOptimizerTest {
+    @Test
+     public void testOptimizePartialOptimizationMethod ( ) throws Exception {
+         final OSQLFilter filter = OSQLEngine . getInstance ( ) . parseCondition ( "STR" , null , "STR" ) ; 
+         final OSQLFilterCondition condition = filter . getRootCondition ( ) ; 
+         final OIndexSearchResult searchResult = new OIndexSearchResult ( ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getOperator ( ) , ( ( OSQLFilterItemField ) ( ( OSQLFilterCondition ) condition . getLeft ( ) ) . getLeft ( ) ) . getFieldChain ( ) , 3 ) ; 
+         optimizer . optimize ( filter , searchResult ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(optimizer);
+Assert.assertNotNull(filter);
+Assert.assertNotNull(condition);
+Assert.assertNotNull(condition.getLeft());
+Assert.assertNotNull(condition.getRight());
+Assert.assertNotNull(condition.getOperator());
+Assert.assertNotNull(((OSQLFilterCondition) condition.getLeft()).getOperator());
+Assert.assertNotNull(((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain());
+Assert.assertEquals(3, searchResult.getResultCount());
+Assert.assertEquals("STR", ((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain());
+Assert.assertEquals("STR", condition.getRight());
+Assert.assertEquals("STR", filter.getRootCondition().getRight());
+Assert.assertEquals("STR", filter.getRootCondition().getLeft().toString());
+Assert.assertEquals("STR", ((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain());
+Assert.assertEquals("STR", ((OSQLFilterCondition) condition.getLeft()).getOperator());
+Assert.assertEquals("STR", condition.getOperator());
+Assert.assertEquals("STR", filter.getRootCondition().getOperator());
+Assert.assertEquals("STR", optimizer.toString());
+Assert.assertEquals("STR", filter.toString());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(filter.getRootCondition().toString(),"STR"); ===
+0.820 - Assert.assertEquals("STR", filter.getRootCondition().getLeft().toString())
+0.786 - Assert.assertEquals("STR", filter.getRootCondition().getRight())
+0.783 - Assert.assertEquals("STR", filter.getRootCondition().getOperator())
+0.667 - Assert.assertEquals("STR", filter.toString())
+0.583 - Assert.assertEquals("STR", optimizer.toString())
+0.554 - Assert.assertEquals(3, searchResult.getResultCount())
+0.545 - Assert.assertEquals("STR", ((OSQLFilterCondition) condition.getLeft()).getOperator())
+0.521 - Assert.assertEquals("STR", condition.getRight())
+0.505 - Assert.assertEquals("STR", condition.getOperator())
+0.504 - Assert.assertNotNull(((OSQLFilterCondition) condition.getLeft()).getOperator())
+0.467 - Assert.assertEquals("STR", ((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain())
+0.467 - Assert.assertEquals("STR", ((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain())
+0.432 - Assert.assertNotNull(((OSQLFilterItemField) ((OSQLFilterCondition) condition.getLeft()).getLeft()).getFieldChain())
+0.425 - Assert.assertNotNull(condition)
+0.422 - Assert.assertNotNull(condition.getLeft())
+0.418 - Assert.assertNotNull(condition.getRight())
+0.416 - Assert.assertNotNull(filter)
+0.404 - Assert.assertNotNull(condition.getOperator())
+0.325 - Assert.assertNotNull(optimizer)

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class GitInfo {\nstatic Properties loadGitProperties ( String fileName ) {\nProperties properties = new Properties ( ) ;\nInputStream inputStream = GitInfo . class . getClassLoader ( ) . getResourceAsStream ( fileName ) ;\ntry {\nproperties . load ( inputStream ) ;\nreturn properties ;\n} catch ( NullPointerException e ) {\nLOGGER . trace ( \"STR\" + fileName , e ) ;\n} catch ( Exception e ) {\nLOGGER . warn ( \"STR\" + fileName , e ) ;\n} finally {\ncloseQuietly ( inputStream ) ;\n} return new UnknownGitProperties ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class GitInfoTest {\n@Test\npublic void testLoadProperties ( ) {\nProperties properties = GitInfo . loadGitProperties ( GitInfo . GIT_INFO_FILE ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(properties);\nassertTrue(properties.size() > 0);\nassertTrue(properties.containsKey(\"git.branch\"));\nassertTrue(properties.containsKey(\"git.commit.id\"));\nassertTrue(properties.containsKey(\"git.commit.time\"));\nassertTrue(properties.containsKey(\"git.build.version\"));\nassertEquals(\"main\", properties.getProperty(\"git.branch\"));\nassertEquals(\"1234567\", properties.getProperty(\"git.commit.id\"));\nassertNotNull(properties.getProperty(\"git.commit.time\"));\nassertNotNull(properties.getProperty(\"git.build.version\"));\nassertTrue(properties.getProperty(\"git.build.version\").matches(\"\\\\d+\\\\.\\\\d+\\\\.\\\\d+\"));\nassertTrue(properties.getProperty(\"git.commit.time\").matches(\"\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}Z\"));\nassertFalse(properties.containsKey(\"non.existent.key\"));\nassertEquals(\"unknown\", properties.getProperty(\"git.tag\", \"unknown\"));\nassertTrue(properties.getProperty(\"git.build.user\").length() > 0);\nassertTrue(properties.getProperty(\"git.build.host\").length() > 0);\nassertTrue(properties.getProperty(\"git.build.time\").length() > 0);\nassertTrue(properties.getProperty(\"git.remote.origin.url\").length() > 0);\nassertTrue(properties.getProperty(\"git.commit.message.short\").length() > 0);\nassertTrue(properties.getProperty(\"git.commit.user.name\").length() > 0);\nassertTrue(properties.getProperty(\"git.commit.user.email\").length() > 0);\n```\n====================\n\n",
+    "scores": [
+        0.862,
+        0.679,
+        0.617,
+        0.602,
+        0.521,
+        0.5,
+        0.488,
+        0.487,
+        0.475,
+        0.475,
+        0.455,
+        0.432,
+        0.432,
+        0.432,
+        0.404,
+        0.4,
+        0.4,
+        0.391,
+        0.388,
+        0.345,
+        0.288,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(properties);"
+}

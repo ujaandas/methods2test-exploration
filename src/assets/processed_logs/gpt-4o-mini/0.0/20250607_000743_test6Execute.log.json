@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAstar {\npublic long countEdges ( final String iClassName ) {\nmakeActive ( ) ;\nif ( isUseLightweightEdges ( ) ) throw new UnsupportedOperationException ( \"STR\" ) ;\nreturn getRawGraph ( ) . countClass ( iClassName ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAstarTest {\n@Test\npublic void test6Execute ( ) throws Exception {\nMap < String , Object > options = new HashMap < String , Object > ( ) ;\noptions . put ( OSQLFunctionAstar . PARAM_DIRECTION , \"STR\" ) ;\noptions . put ( OSQLFunctionAstar . PARAM_PARALLEL , true ) ;\noptions . put ( OSQLFunctionAstar . PARAM_EDGE_TYPE_NAMES , new String [ ] {\n\"STR\" } ) ;\noptions . put ( OSQLFunctionAstar . PARAM_VERTEX_AXIS_NAMES , new String [ ] {\n\"STR\" , \"STR\" } ) ;\nfinal List < OrientVertex > result = functionAstar . execute ( null , null , null , new Object [ ] {\nv6 , v1 , \"STR\" , options } , new OBasicCommandContext ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertEquals(2, result.size());\nassertTrue(result.get(0) instanceof OrientVertex);\nassertTrue(result.get(1) instanceof OrientVertex);\nassertEquals(\"ExpectedVertexId1\", result.get(0).getId().toString());\nassertEquals(\"ExpectedVertexId2\", result.get(1).getId().toString());\nassertEquals(\"ExpectedPropertyValue1\", result.get(0).getProperty(\"propertyName1\"));\nassertEquals(\"ExpectedPropertyValue2\", result.get(1).getProperty(\"propertyName2\"));\nassertEquals(\"ExpectedEdgeType\", result.get(0).getEdges(Direction.OUT, \"STR\").iterator().next().getLabel());\nassertEquals(\"ExpectedEdgeType\", result.get(1).getEdges(Direction.OUT, \"STR\").iterator().next().getLabel());\nassertTrue(result.get(0).getEdges(Direction.OUT).hasNext());\nassertTrue(result.get(1).getEdges(Direction.OUT).hasNext());\nassertEquals(1, result.get(0).getEdges(Direction.OUT).next().getProperty(\"weight\"));\nassertEquals(1, result.get(1).getEdges(Direction.OUT).next().getProperty(\"weight\"));\nassertNotNull(result.get(0).getProperty(\"propertyName1\"));\nassertNotNull(result.get(1).getProperty(\"propertyName2\"));\nassertTrue(result.get(0).getProperty(\"propertyName1\").toString().contains(\"ExpectedSubstring\"));\nassertTrue(result.get(1).getProperty(\"propertyName2\").toString().contains(\"ExpectedSubstring\"));\nassertEquals(\"ExpectedVertexLabel1\", result.get(0).getLabel());\nassertEquals(\"ExpectedVertexLabel2\", result.get(1).getLabel());\nassertNotEquals(result.get(0).getId(), result.get(1).getId());\n```\n====================\n\n",
+    "scores": [
+        0.58,
+        0.464,
+        0.459,
+        0.459,
+        0.436,
+        0.434,
+        0.424,
+        0.42,
+        0.416,
+        0.415,
+        0.414,
+        0.404,
+        0.4,
+        0.397,
+        0.392,
+        0.38,
+        0.377,
+        0.37,
+        0.351,
+        0.345,
+        0.311,
+        0.299,
+        0.0
+    ],
+    "ground_truth": "assertEquals(16,graph.countEdges(\"STR\"));"
+}

@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Morphology {
+    public boolean isRecognized ( ) { 
+    return ! wordforms . isEmpty ( ) ; 
+    }
+}
+
+package PeterisP.morphology;
+
+public class MorphologyTest {
+    @Test
+     public void vairāki ( ) {
+         Word vairāki = locītājs . analyze ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(vairāki.isRecognized());
+assertFalse(vairāki.getWordforms().isEmpty());
+assertEquals("ExpectedWordform1", vairāki.getWordforms().get(0));
+assertEquals("ExpectedWordform2", vairāki.getWordforms().get(1));
+assertTrue(vairāki.getWordforms().contains("ExpectedWordform1"));
+assertTrue(vairāki.getWordforms().contains("ExpectedWordform2"));
+assertEquals(2, vairāki.getWordforms().size());
+assertNotNull(vairāki.getWordforms());
+assertTrue(vairāki.getWordforms().stream().allMatch(wordform -> wordform instanceof String));
+assertFalse(vairāki.getWordforms().contains("UnexpectedWordform"));
+assertTrue(vairāki.getWordforms().stream().anyMatch(wordform -> wordform.startsWith("Expected")));
+assertEquals("ExpectedWordform1", vairāki.getWordforms().get(0));
+assertNotEquals("UnexpectedWordform", vairāki.getWordforms().get(1));
+assertTrue(vairāki.getWordforms().stream().anyMatch(wordform -> wordform.length() > 3));
+assertFalse(vairāki.getWordforms().isEmpty());
+assertTrue(vairāki.getWordforms().size() > 0);
+assertTrue(vairāki.getWordforms().containsAll(Arrays.asList("ExpectedWordform1", "ExpectedWordform2")));
+assertEquals("ExpectedWordform1", vairāki.getFirstWordform());
+assertEquals("ExpectedWordform2", vairāki.getLastWordform());
+assertTrue(vairāki.getWordforms().stream().allMatch(wordform -> wordform.length() < 10));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(vairāki.isRecognized()); ===
+0.895 - ```java
+assertTrue(vairāki.isRecognized())
+0.675 - assertTrue(vairāki.getWordforms().size() > 0)
+0.582 - assertEquals(2, vairāki.getWordforms().size())
+0.563 - assertNotNull(vairāki.getWordforms())
+0.551 - assertTrue(vairāki.getWordforms().contains("ExpectedWordform1"))
+0.551 - assertTrue(vairāki.getWordforms().contains("ExpectedWordform2"))
+0.532 - assertFalse(vairāki.getWordforms().isEmpty())
+0.532 - assertFalse(vairāki.getWordforms().isEmpty())
+0.480 - assertFalse(vairāki.getWordforms().contains("UnexpectedWordform"))
+0.468 - assertEquals("ExpectedWordform1", vairāki.getFirstWordform())
+0.452 - assertEquals("ExpectedWordform2", vairāki.getLastWordform())
+0.403 - assertTrue(vairāki.getWordforms().stream().anyMatch(wordform -> wordform.startsWith("Expected")))
+0.397 - assertTrue(vairāki.getWordforms().containsAll(Arrays.asList("ExpectedWordform1", "ExpectedWordform2")))
+0.393 - assertTrue(vairāki.getWordforms().stream().anyMatch(wordform -> wordform.length() > 3))
+0.392 - assertEquals("ExpectedWordform1", vairāki.getWordforms().get(0))
+0.392 - assertEquals("ExpectedWordform2", vairāki.getWordforms().get(1))
+0.392 - assertEquals("ExpectedWordform1", vairāki.getWordforms().get(0))
+0.390 - assertTrue(vairāki.getWordforms().stream().allMatch(wordform -> wordform.length() < 10))
+0.377 - assertTrue(vairāki.getWordforms().stream().allMatch(wordform -> wordform instanceof String))
+0.376 - assertNotEquals("UnexpectedWordform", vairāki.getWordforms().get(1))
+0.000 - ```

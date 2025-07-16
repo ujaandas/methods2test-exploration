@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb completed ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testCompleted ( ) {
+         Verb actual = Verbs . completed ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(actual);
+Assert.assertEquals("STR", actual.getId());
+Assert.assertEquals("completed", actual.getDisplay().get("en-US").get("name"));
+Assert.assertEquals("Completed an activity", actual.getDescription().get("en-US"));
+Assert.assertTrue(actual.isCompleted());
+Assert.assertFalse(actual.isNotCompleted());
+Assert.assertEquals("Verb", actual.getType());
+Assert.assertTrue(actual.getObjectType().contains("Activity"));
+Assert.assertEquals("completed", actual.getVerbId());
+Assert.assertEquals("http://adlnet.gov/expapi/verbs/completed", actual.getId());
+Assert.assertNotEquals("", actual.getId());
+Assert.assertTrue(actual.getExtensions().isEmpty());
+Assert.assertNotNull(actual.getDisplay());
+Assert.assertTrue(actual.getDescription().containsKey("en-US"));
+Assert.assertNotNull(actual.getObjectType());
+Assert.assertNotNull(actual.getType());
+Assert.assertEquals("Verb", actual.getType());
+Assert.assertTrue(actual.getObjectType().contains("Activity"));
+Assert.assertEquals(1, actual.getDisplay().size());
+Assert.assertEquals("Completed an activity", actual.getDescription().get("en-US"));
+Assert.assertFalse(actual.getExtensions().containsKey("unknown"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+Assert.assertNotNull(actual)
+0.808 - Assert.assertNotNull(actual.getType())
+0.764 - Assert.assertNotNull(actual.getDisplay())
+0.724 - Assert.assertNotNull(actual.getObjectType())
+0.691 - Assert.assertNotEquals("", actual.getId())
+0.582 - Assert.assertEquals("STR", actual.getId())
+0.566 - Assert.assertTrue(actual.isCompleted())
+0.552 - Assert.assertEquals("Verb", actual.getType())
+0.552 - Assert.assertEquals("Verb", actual.getType())
+0.526 - Assert.assertFalse(actual.isNotCompleted())
+0.508 - Assert.assertEquals(1, actual.getDisplay().size())
+0.462 - Assert.assertEquals("completed", actual.getVerbId())
+0.462 - Assert.assertTrue(actual.getExtensions().isEmpty())
+0.395 - Assert.assertTrue(actual.getObjectType().contains("Activity"))
+0.395 - Assert.assertTrue(actual.getObjectType().contains("Activity"))
+0.390 - Assert.assertTrue(actual.getDescription().containsKey("en-US"))
+0.380 - Assert.assertFalse(actual.getExtensions().containsKey("unknown"))
+0.330 - Assert.assertEquals("completed", actual.getDisplay().get("en-US").get("name"))
+0.326 - Assert.assertEquals("http://adlnet.gov/expapi/verbs/completed", actual.getId())
+0.323 - Assert.assertEquals("Completed an activity", actual.getDescription().get("en-US"))
+0.323 - Assert.assertEquals("Completed an activity", actual.getDescription().get("en-US"))
+0.000 - ```

@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemote {
+    < RET extends ORecord > RET save ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OLiveQueryRemoteTest {
+    @Test
+     public void testRidSelect ( ) throws InterruptedException {
+         MyLiveQueryListener listener = new MyLiveQueryListener ( new CountDownLatch ( 1 ) ) ; 
+         OVertex item = database . newVertex ( ) ; 
+         item . save ( ) ; 
+         OLiveQueryMonitor live = database . live ( "STR" + item . getIdentity ( ) , listener ) ; 
+         item . setProperty ( "STR" , "STR" ) ; 
+         item . save ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals("STR", item.getProperty("STR"));
+Assert.assertTrue(item.getIdentity() != null);
+Assert.assertEquals(1, listener.getResults().size());
+Assert.assertEquals(item, listener.getResults().get(0));
+Assert.assertNotNull(live);
+Assert.assertTrue(live.isSubscribed(item));
+Assert.assertEquals("STR" + item.getIdentity(), live.getQuery());
+Assert.assertTrue(listener.getCountDownLatch().getCount() == 0);
+Assert.assertTrue(item.getIdentity().toString().startsWith("#"));
+Assert.assertTrue(item.getProperty("STR").equals("STR"));
+Assert.assertTrue(item.getRecord().getIdentity().isValid());
+Assert.assertTrue(item.getRecord().getIdentity().isPersistent());
+Assert.assertTrue(item.getRecord().getIdentity().isTemporary());
+Assert.assertTrue(item.getRecord().getIdentity().isValid());
+Assert.assertTrue(item.getRecord().getIdentity().isPersistent());
+Assert.assertTrue(item.getRecord().getIdentity().isTemporary());
+Assert.assertTrue(item.getRecord().getIdentity().isValid());
+Assert.assertTrue(item.getRecord().getIdentity().isPersistent());
+Assert.assertTrue(item.getRecord().getIdentity().isTemporary());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(listener.latch.await(10,TimeUnit.SECONDS)); ===
+0.542 - Assert.assertTrue(listener.getCountDownLatch().getCount() == 0)
+0.500 - Assert.assertEquals(item, listener.getResults().get(0))
+0.495 - Assert.assertEquals(1, listener.getResults().size())
+0.472 - Assert.assertTrue(item.getIdentity() != null)
+0.432 - Assert.assertTrue(live.isSubscribed(item))
+0.431 - Assert.assertTrue(item.getProperty("STR").equals("STR"))
+0.382 - Assert.assertTrue(item.getIdentity().toString().startsWith("#"))
+0.364 - Assert.assertTrue(item.getRecord().getIdentity().isPersistent())
+0.364 - Assert.assertTrue(item.getRecord().getIdentity().isPersistent())
+0.364 - Assert.assertTrue(item.getRecord().getIdentity().isPersistent())
+0.354 - Assert.assertEquals("STR", item.getProperty("STR"))
+0.349 - Assert.assertTrue(item.getRecord().getIdentity().isTemporary())
+0.349 - Assert.assertTrue(item.getRecord().getIdentity().isTemporary())
+0.349 - Assert.assertTrue(item.getRecord().getIdentity().isTemporary())
+0.333 - Assert.assertNotNull(live)
+0.305 - Assert.assertTrue(item.getRecord().getIdentity().isValid())
+0.305 - Assert.assertTrue(item.getRecord().getIdentity().isValid())
+0.305 - Assert.assertTrue(item.getRecord().getIdentity().isValid())
+0.224 - Assert.assertEquals("STR" + item.getIdentity(), live.getQuery())

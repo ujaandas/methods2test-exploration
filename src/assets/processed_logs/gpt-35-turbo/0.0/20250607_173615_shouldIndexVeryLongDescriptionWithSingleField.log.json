@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSort {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSortTest {\n@Test\npublic void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {\ndb . save ( new ODocument ( \"STR\" ) . field ( \"STR\" , DESCRIPTION ) ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nlong count = db . query ( \"STR\" ) . stream ( ) . count ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, count);\nassertTrue(count > 0);\nassertFalse(count == 0);\nassertNotNull(db.query(\"STR\").stream().findFirst().orElse(null));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").equals(DESCRIPTION)).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").equals(DESCRIPTION)));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().contains(\"long\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().contains(\"long\")));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().length() > 10).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().length() > 10));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().startsWith(\"V\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().startsWith(\"V\")));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().endsWith(\"eld\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().endsWith(\"eld\")));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().matches(\"[a-zA-Z]+\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().matches(\"[a-zA-Z]+\")));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().equalsIgnoreCase(DESCRIPTION)).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().equalsIgnoreCase(DESCRIPTION)));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().toLowerCase().contains(\"single\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().toLowerCase().contains(\"single\")));\nassertEquals(1, db.query(\"STR\").stream().filter(doc -> doc.field(\"STR\").toString().toUpperCase().contains(\"FIELD\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(doc -> doc.field(\"STR\").toString().toUpperCase().contains(\"FIELD\")));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.762,
+        0.7,
+        0.353,
+        0.344,
+        0.333,
+        0.333,
+        0.331,
+        0.329,
+        0.321,
+        0.3,
+        0.296,
+        0.294,
+        0.256,
+        0.239,
+        0.232,
+        0.224,
+        0.224,
+        0.215,
+        0.211,
+        0.2,
+        0.197
+    ],
+    "ground_truth": "Assert.assertEquals(1,count);"
+}

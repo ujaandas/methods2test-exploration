@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecution {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionTest {\n@Test\npublic void testFriendsOfFriends ( ) throws Exception {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"friend\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.containsField(\"friendOfFriend\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friend\").equals(expectedFriend)));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friendOfFriend\").equals(expectedFriendOfFriend)));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friend\").getClass() == ODocument.class));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"friendOfFriend\").getClass() == ODocument.class));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friend\").equals(anotherExpectedFriend)));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"friendOfFriend\").equals(anotherExpectedFriendOfFriend)));\nassertEquals(expectedValue, qResult.get(0).field(\"someField\"));\nassertNotEquals(unexpectedValue, qResult.get(1).field(\"someField\"));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"friend\").equals(unrelatedFriend)));\nassertTrue(qResult.stream().noneMatch(doc -> doc.field(\"friendOfFriend\").equals(unrelatedFriendOfFriend)));\nassertEquals(expectedDocumentId, qResult.get(0).getIdentity().toString());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"relationship\").equals(\"friend\")));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"relationship\").equals(\"friendOfFriend\")));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"createdAt\").after(expectedDate)));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"updatedAt\").before(currentDate)));\n```\n====================\n\n",
+    "scores": [
+        0.817,
+        0.733,
+        0.593,
+        0.567,
+        0.562,
+        0.51,
+        0.416,
+        0.385,
+        0.382,
+        0.379,
+        0.362,
+        0.362,
+        0.362,
+        0.356,
+        0.347,
+        0.341,
+        0.339,
+        0.326,
+        0.318,
+        0.313,
+        0.302,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,qResult.size());"
+}

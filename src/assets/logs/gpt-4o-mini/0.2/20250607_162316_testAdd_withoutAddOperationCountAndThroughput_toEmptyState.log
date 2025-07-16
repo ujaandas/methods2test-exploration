@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStats {
+    public long getOperationCount ( ) { 
+    return operationCount ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PerformanceStatsTest {
+    @Test
+     public void testAdd_withoutAddOperationCountAndThroughput_toEmptyState ( ) {
+         PerformanceStats addState = new PerformanceStats ( ) ; 
+         addState . add ( new PerformanceStats ( 100 , 5.0 , 10.0 , 450.0d , 400 , 500 ) , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(100, addState.getOperationCount());
+assertEquals(5.0, addState.getAverageLatency(), 0.01);
+assertEquals(10.0, addState.getMaxLatency(), 0.01);
+assertEquals(450.0, addState.getMinLatency(), 0.01);
+assertEquals(400, addState.getThroughput());
+assertEquals(500, addState.getTotalOperations());
+assertTrue(addState.getOperationCount() > 0);
+assertTrue(addState.getAverageLatency() >= 0);
+assertTrue(addState.getMaxLatency() >= addState.getMinLatency());
+assertTrue(addState.getThroughput() > 0);
+assertTrue(addState.getTotalOperations() >= addState.getOperationCount());
+assertNotNull(addState);
+assertNotEquals(0, addState.getOperationCount());
+assertTrue(addState.getAverageLatency() <= addState.getMaxLatency());
+assertTrue(addState.getMinLatency() <= addState.getAverageLatency());
+assertTrue(addState.getThroughput() <= addState.getTotalOperations());
+assertTrue(addState.getTotalOperations() >= addState.getOperationCount());
+assertTrue(addState.getMaxLatency() >= 0);
+assertTrue(addState.getMinLatency() >= 0);
+assertTrue(addState.getAverageLatency() >= 0);
+assertTrue(addState.getThroughput() >= 0);
+assertTrue(addState.getOperationCount() <= addState.getTotalOperations());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(100,addState.getOperationCount()); ===
+0.946 - assertNotEquals(0, addState.getOperationCount())
+0.920 - ```java
+assertEquals(100, addState.getOperationCount())
+0.860 - assertEquals(500, addState.getTotalOperations())
+0.841 - assertTrue(addState.getOperationCount() > 0)
+0.795 - assertEquals(400, addState.getThroughput())
+0.745 - assertEquals(10.0, addState.getMaxLatency(), 0.01)
+0.722 - assertEquals(5.0, addState.getAverageLatency(), 0.01)
+0.716 - assertEquals(450.0, addState.getMinLatency(), 0.01)
+0.684 - assertTrue(addState.getTotalOperations() >= addState.getOperationCount())
+0.684 - assertTrue(addState.getTotalOperations() >= addState.getOperationCount())
+0.643 - assertTrue(addState.getThroughput() > 0)
+0.635 - assertTrue(addState.getThroughput() >= 0)
+0.632 - assertTrue(addState.getOperationCount() <= addState.getTotalOperations())
+0.629 - assertTrue(addState.getAverageLatency() >= 0)
+0.629 - assertTrue(addState.getAverageLatency() >= 0)
+0.612 - assertTrue(addState.getMaxLatency() >= 0)
+0.612 - assertTrue(addState.getMinLatency() >= 0)
+0.566 - assertTrue(addState.getThroughput() <= addState.getTotalOperations())
+0.522 - assertNotNull(addState)
+0.519 - assertTrue(addState.getMaxLatency() >= addState.getMinLatency())
+0.518 - assertTrue(addState.getAverageLatency() <= addState.getMaxLatency())
+0.500 - assertTrue(addState.getMinLatency() <= addState.getAverageLatency())
+0.000 - ```

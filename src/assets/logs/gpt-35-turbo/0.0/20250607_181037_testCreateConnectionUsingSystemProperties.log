@@ -1,0 +1,91 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    @Override
+     public MBeanAccessConnection createConnection ( ) throws IOException { 
+     JMXMBeanConnection result = null ; 
+     try { 
+     VirtualMachine vm = this . attacher . attach ( jvmId ) ; 
+     String url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     if ( url == null ) { 
+     String javaHome = vm . getSystemProperties ( ) . getProperty ( "STR" ) ; 
+     String agent = javaHome + File . separator + "STR" + File . separator + "STR" ; 
+     vm . loadAgent ( agent ) ; 
+     url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     } if ( url != null ) { 
+     JMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ; 
+     JMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ; 
+     result = this . jmxmBeanConnectionFactory . create ( connector ) ; 
+     } else { 
+     log . warn ( "STR" , this . jvmId ) ; 
+     } } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) { 
+     log . warn ( "STR" , this . jvmId , exc ) ; 
+     } return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testCreateConnectionUsingSystemProperties ( ) throws Exception {
+         this . initFactory ( ) ; 
+         Mockito . when ( this . mockAttacher . attach ( "STR" ) ) . thenReturn ( this . mockVirtualMachine ) ; 
+         Mockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ; 
+         Mockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ; 
+         Mockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) . thenReturn ( "STR" ) ; 
+         Mockito . when ( this . mockSystemProperties . getProperty ( "STR" ) ) . thenReturn ( "STR" ) ; 
+         MBeanAccessConnection result = this . factory . createConnection ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(result);
+Assert.assertTrue(result instanceof JMXMBeanConnection);
+Assert.assertEquals("expectedValue", result.getSomeValue());
+Assert.assertNotEquals("unexpectedValue", result.getSomeOtherValue());
+Assert.assertTrue(result.isConnected());
+Assert.assertFalse(result.isClosed());
+Assert.assertEquals(5, result.getList().size());
+Assert.assertTrue(result.getMap().containsKey("key"));
+Assert.assertFalse(result.getMap().isEmpty());
+Assert.assertTrue(result.getSet().contains("element"));
+Assert.assertEquals(100, result.getIntValue());
+Assert.assertNotEquals(0, result.getLongValue());
+Assert.assertTrue(result.getBooleanValue());
+Assert.assertEquals("string", result.getStringValue());
+Assert.assertTrue(result.getDoubleValue() > 0);
+Assert.assertNotNull(result.getDate());
+Assert.assertTrue(result.getDate().before(new Date()));
+Assert.assertTrue(result.getDate().after(new Date(System.currentTimeMillis() - 1000)));
+Assert.assertTrue(result.getDate().getTime() > 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertSame(result,this.mockJmxMbeanConnection); ===
+0.696 - Assert.assertTrue(result instanceof JMXMBeanConnection)
+0.615 - Assert.assertTrue(result.isConnected())
+0.526 - Assert.assertFalse(result.isClosed())
+0.512 - Assert.assertTrue(result.getBooleanValue())
+0.506 - Assert.assertTrue(result.getDoubleValue() > 0)
+0.500 - Assert.assertFalse(result.getMap().isEmpty())
+0.500 - Assert.assertTrue(result.getDate().before(new Date()))
+0.495 - Assert.assertTrue(result.getSet().contains("element"))
+0.478 - Assert.assertTrue(result.getMap().containsKey("key"))
+0.471 - Assert.assertEquals(5, result.getList().size())
+0.442 - Assert.assertNotEquals(0, result.getLongValue())
+0.442 - Assert.assertTrue(result.getDate().getTime() > 0)
+0.418 - Assert.assertNotNull(result)
+0.416 - Assert.assertNotNull(result.getDate())
+0.412 - Assert.assertEquals("expectedValue", result.getSomeValue())
+0.405 - Assert.assertEquals(100, result.getIntValue())
+0.391 - Assert.assertEquals("string", result.getStringValue())
+0.374 - Assert.assertNotEquals("unexpectedValue", result.getSomeOtherValue())
+0.295 - Assert.assertTrue(result.getDate().after(new Date(System.currentTimeMillis() - 1000)))

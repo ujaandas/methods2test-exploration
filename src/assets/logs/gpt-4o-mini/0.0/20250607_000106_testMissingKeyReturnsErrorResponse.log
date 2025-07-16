@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.websocket;
+
+public class WebSocketResponseHandler {
+    public IStatus getStatus ( ) { 
+    return this . status ; 
+    }
+}
+
+package NanoHttpd.nanohttpd.websocket;
+
+public class WebSocketResponseHandlerTest {
+    @Test
+     public void testMissingKeyReturnsErrorResponse ( ) {
+         this . headers . remove ( "STR" ) ; 
+         Response handshakeResponse = this . nanoWebSocketServer . handle ( this . session ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(handshakeResponse);
+assertEquals(Response.Status.ERROR, handshakeResponse.getStatus());
+assertTrue(handshakeResponse.getHeaders().containsKey("Error"));
+assertEquals("Missing key", handshakeResponse.getHeaders().get("Error"));
+assertTrue(handshakeResponse.getBody().contains("Error: Missing key"));
+assertEquals(400, handshakeResponse.getStatusCode());
+assertTrue(handshakeResponse.isError());
+assertFalse(handshakeResponse.isSuccessful());
+assertNotEquals(Response.Status.SUCCESS, handshakeResponse.getStatus());
+assertTrue(handshakeResponse.getHeaders().containsKey("Content-Type"));
+assertEquals("application/json", handshakeResponse.getHeaders().get("Content-Type"));
+assertTrue(handshakeResponse.getBody().length() > 0);
+assertTrue(handshakeResponse.getHeaders().containsKey("Connection"));
+assertEquals("close", handshakeResponse.getHeaders().get("Connection"));
+assertNotNull(handshakeResponse.getSessionId());
+assertTrue(handshakeResponse.getSessionId().length() > 0);
+assertTrue(handshakeResponse.getHeaders().containsKey("Date"));
+assertNotNull(handshakeResponse.getHeaders().get("Date"));
+assertTrue(handshakeResponse.getHeaders().containsKey("Server"));
+assertEquals("NanoHttpd", handshakeResponse.getHeaders().get("Server"));
+assertTrue(handshakeResponse.getBody().contains("Please provide the required key."));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(handshakeResponse); ===
+0.889 - ```java
+assertNotNull(handshakeResponse)
+0.810 - assertNotNull(handshakeResponse.getSessionId())
+0.732 - assertTrue(handshakeResponse.isError())
+0.719 - assertNotNull(handshakeResponse.getHeaders().get("Date"))
+0.675 - assertFalse(handshakeResponse.isSuccessful())
+0.651 - assertEquals(400, handshakeResponse.getStatusCode())
+0.634 - assertTrue(handshakeResponse.getBody().length() > 0)
+0.598 - assertTrue(handshakeResponse.getSessionId().length() > 0)
+0.588 - assertNotEquals(Response.Status.SUCCESS, handshakeResponse.getStatus())
+0.557 - assertEquals(Response.Status.ERROR, handshakeResponse.getStatus())
+0.553 - assertTrue(handshakeResponse.getHeaders().containsKey("Date"))
+0.547 - assertTrue(handshakeResponse.getHeaders().containsKey("Error"))
+0.542 - assertTrue(handshakeResponse.getHeaders().containsKey("Server"))
+0.529 - assertEquals("Missing key", handshakeResponse.getHeaders().get("Error"))
+0.529 - assertEquals("NanoHttpd", handshakeResponse.getHeaders().get("Server"))
+0.520 - assertTrue(handshakeResponse.getBody().contains("Error: Missing key"))
+0.520 - assertTrue(handshakeResponse.getHeaders().containsKey("Connection"))
+0.510 - assertTrue(handshakeResponse.getHeaders().containsKey("Content-Type"))
+0.490 - assertEquals("close", handshakeResponse.getHeaders().get("Connection"))
+0.464 - assertTrue(handshakeResponse.getBody().contains("Please provide the required key."))
+0.435 - assertEquals("application/json", handshakeResponse.getHeaders().get("Content-Type"))
+0.000 - ```

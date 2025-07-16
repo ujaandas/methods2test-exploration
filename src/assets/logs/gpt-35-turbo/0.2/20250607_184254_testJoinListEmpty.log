@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class Seq {
+    public static String join ( Collection < ? > list , String delimiter ) { 
+    if ( list == null || list . isEmpty ( ) ) { 
+    return "STR" ; 
+    } if ( delimiter == null ) { 
+    delimiter = "STR" ; 
+    } StringBuilder s = new StringBuilder ( ) ; 
+    boolean first = true ; 
+    for ( Object e : list ) { 
+    if ( first ) { 
+    first = false ; 
+    } else { 
+    s . append ( delimiter ) ; 
+    } s . append ( e ) ; 
+    } return s . toString ( ) ; 
+    }
+}
+
+package redraiment.jactiverecord;
+
+public class SeqTest {
+    @Test
+     public void testJoinListEmpty ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("", Seq.join(new ArrayList<>(), ","));
+
+assertEquals("1", Seq.join(Collections.singletonList(1), ","));
+
+assertEquals("1,2", Seq.join(Arrays.asList(1, 2), ","));
+
+assertEquals("a,b,c", Seq.join(Arrays.asList("a", "b", "c"), ","));
+
+assertEquals("true,false,true", Seq.join(Arrays.asList(true, false, true), ","));
+
+assertEquals("apple,banana,orange", Seq.join(Arrays.asList("apple", "banana", "orange"), ","));
+
+assertEquals("1.5,2.5,3.5", Seq.join(Arrays.asList(1.5, 2.5, 3.5), ","));
+
+assertEquals("1,2,3,4,5", Seq.join(Arrays.asList(1, 2, 3, 4, 5), ","));
+
+assertEquals("hello,world", Seq.join(Arrays.asList("hello", "world"), ","));
+
+assertEquals("1,2,3,4,5,6,7,8,9,10", Seq.join(IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList()), ","));
+
+assertEquals("red,green,blue", Seq.join(Arrays.asList("red", "green", "blue"), ","));
+
+assertEquals("1.0,2.0,3.0", Seq.join(Arrays.asList(1.0, 2.0, 3.0), ","));
+
+assertEquals("true,true,true,true,true", Seq.join(Collections.nCopies(5, true), ","));
+
+assertEquals("apple,apple,apple,apple,apple", Seq.join(Collections.nCopies(5, "apple"), ","));
+
+assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", Seq.join(IntStream.rangeClosed(1, 15).boxed().collect(Collectors.toList()), ","));
+
+assertEquals("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z", Seq.join(IntStream.rangeClosed('a', 'z').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList()), ","));
+
+assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", Seq.join(IntStream.rangeClosed(1, 20
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",Seq.join(Collections.EMPTY_LIST,"STR")); ===
+0.729 - assertEquals("1", Seq.join(Collections.singletonList(1), ","))
+0.610 - assertEquals("", Seq.join(new ArrayList<>(), ","))
+0.600 - assertEquals("1,2", Seq.join(Arrays.asList(1, 2), ","))
+0.600 - assertEquals("true,true,true,true,true", Seq.join(Collections.nCopies(5, true), ","))
+0.568 - assertEquals("apple,apple,apple,apple,apple", Seq.join(Collections.nCopies(5, "apple"), ","))
+0.550 - assertEquals("a,b,c", Seq.join(Arrays.asList("a", "b", "c"), ","))
+0.541 - assertEquals("1,2,3,4,5", Seq.join(Arrays.asList(1, 2, 3, 4, 5), ","))
+0.524 - assertEquals("1.5,2.5,3.5", Seq.join(Arrays.asList(1.5, 2.5, 3.5), ","))
+0.524 - assertEquals("1.0,2.0,3.0", Seq.join(Arrays.asList(1.0, 2.0, 3.0), ","))
+0.508 - assertEquals("hello,world", Seq.join(Arrays.asList("hello", "world"), ","))
+0.493 - assertEquals("true,false,true", Seq.join(Arrays.asList(true, false, true), ","))
+0.478 - assertEquals("red,green,blue", Seq.join(Arrays.asList("red", "green", "blue"), ","))
+0.474 - assertEquals("1,2,3,4,5,6,7,8,9,10", Seq.join(IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList()), ","))
+0.436 - assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", Seq.join(IntStream.rangeClosed(1, 15).boxed().collect(Collectors.toList()), ","))
+0.432 - assertEquals("apple,banana,orange", Seq.join(Arrays.asList("apple", "banana", "orange"), ","))
+0.365 - assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20", Seq.join(IntStream.rangeClosed(1, 20
+0.347 - assertEquals("a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z", Seq.join(IntStream.rangeClosed('a', 'z').mapToObj(c -> String.valueOf((char) c)).collect(Collectors.toList()), ","))

@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fluenda.ParCEFone;
+
+public class MacAddress {
+    public boolean isMulticast ( ) { 
+    return ( address [ 0 ] & MUTLTICAST_FLAG ) == MUTLTICAST_FLAG ; 
+    }
+}
+
+package fluenda.ParCEFone;
+
+public class MacAddressTest {
+    @Test
+     public void testAddressMulticast ( ) {
+         final MacAddress macAddress = new MacAddress ( MULTICAST_ADDRESS ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(macAddress.isMulticast());
+assertFalse(macAddress.isUnicast());
+assertEquals(MULTICAST_ADDRESS, macAddress.getAddress());
+assertNotNull(macAddress);
+assertTrue(macAddress.isValid());
+assertFalse(macAddress.isReserved());
+assertEquals(6, macAddress.getLength());
+assertTrue(macAddress.startsWith("01:"));
+assertTrue(macAddress.endsWith("ff:ff:ff"));
+assertTrue(macAddress.toString().matches("^[0-9A-Fa-f:]{17}$"));
+assertArrayEquals(new byte[]{0x01, 0x00, 0x5E, 0x00, 0x00, 0x00}, macAddress.getBytes());
+assertTrue(macAddress.isInRange("01:00:5E:00:00:00", "01:00:5E:7F:FF:FF"));
+assertFalse(macAddress.isInRange("02:00:00:00:00:00", "02:00:00:00:00:FF"));
+assertTrue(macAddress.isEqualTo(MULTICAST_ADDRESS));
+assertFalse(macAddress.isEqualTo("00:00:00:00:00:00"));
+assertTrue(macAddress.isBroadcast());
+assertFalse(macAddress.isLocal());
+assertTrue(macAddress.isLinkLocal());
+assertFalse(macAddress.isGlobal());
+assertTrue(macAddress.isPrivate());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(macAddress.isMulticast()); ===
+0.900 - ```java
+assertTrue(macAddress.isMulticast())
+0.861 - assertTrue(macAddress.isBroadcast())
+0.853 - assertTrue(macAddress.isValid())
+0.833 - assertTrue(macAddress.isLinkLocal())
+0.817 - assertFalse(macAddress.isUnicast())
+0.800 - assertTrue(macAddress.isPrivate())
+0.754 - assertFalse(macAddress.isLocal())
+0.743 - assertFalse(macAddress.isGlobal())
+0.711 - assertTrue(macAddress.startsWith("01:"))
+0.694 - assertFalse(macAddress.isReserved())
+0.684 - assertTrue(macAddress.endsWith("ff:ff:ff"))
+0.649 - assertEquals(6, macAddress.getLength())
+0.623 - assertNotNull(macAddress)
+0.621 - assertTrue(macAddress.isEqualTo(MULTICAST_ADDRESS))
+0.578 - assertFalse(macAddress.isEqualTo("00:00:00:00:00:00"))
+0.525 - assertTrue(macAddress.toString().matches("^[0-9A-Fa-f:]{17}$"))
+0.514 - assertTrue(macAddress.isInRange("01:00:5E:00:00:00", "01:00:5E:7F:FF:FF"))
+0.505 - assertEquals(MULTICAST_ADDRESS, macAddress.getAddress())
+0.455 - assertFalse(macAddress.isInRange("02:00:00:00:00:00", "02:00:00:00:00:FF"))
+0.410 - assertArrayEquals(new byte[]{0x01, 0x00, 0x5E, 0x00, 0x00, 0x00}, macAddress.getBytes())
+0.000 - ```

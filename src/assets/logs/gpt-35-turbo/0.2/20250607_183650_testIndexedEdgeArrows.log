@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testIndexedEdgeArrows ( ) {
+         StringBuilder query = new StringBuilder ( ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         query . append ( "STR" ) ; 
+         OResultSet result = db . query ( query . toString ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(4, result.size());
+assertTrue(result.hasNext());
+assertEquals("value1", result.getProperty("key1"));
+assertEquals("value2", result.getProperty("key2"));
+assertEquals("value3", result.getProperty("key3"));
+assertEquals("value4", result.getProperty("key4"));
+assertFalse(result.isEmpty());
+assertNotNull(result);
+assertEquals(0, result.getWarnings().size());
+assertEquals(1, result.getErrors().size());
+assertTrue(result.getPropertyNames().contains("key1"));
+assertFalse(result.getPropertyNames().contains("key5"));
+assertEquals(2, result.getColumnNames().size());
+assertTrue(result.getColumnNames().contains("col1"));
+assertFalse(result.getColumnNames().contains("col3"));
+assertEquals(3, result.getExecutionPlan().size());
+assertTrue(result.getExecutionPlan().contains("step1"));
+assertFalse(result.getExecutionPlan().contains("step4"));
+assertEquals(5, result.getExecutionTime());
+assertTrue(result.getExecutionTime() > 0);
+assertFalse(result.isExhausted());
+assertTrue(result.isExhausted() == false);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(result.hasNext()); ===
+1.000 - assertTrue(result.hasNext())
+0.746 - assertTrue(result.isExhausted() == false)
+0.721 - assertFalse(result.isExhausted())
+0.716 - assertTrue(result.getExecutionTime() > 0)
+0.702 - assertEquals(4, result.size())
+0.702 - assertFalse(result.isEmpty())
+0.612 - assertNotNull(result)
+0.609 - assertEquals(5, result.getExecutionTime())
+0.592 - assertEquals(0, result.getWarnings().size())
+0.580 - assertEquals(1, result.getErrors().size())
+0.575 - assertTrue(result.getColumnNames().contains("col1"))
+0.568 - assertEquals(2, result.getColumnNames().size())
+0.561 - assertTrue(result.getPropertyNames().contains("key1"))
+0.553 - assertEquals(3, result.getExecutionPlan().size())
+0.530 - assertTrue(result.getExecutionPlan().contains("step1"))
+0.519 - assertEquals("value1", result.getProperty("key1"))
+0.519 - assertEquals("value2", result.getProperty("key2"))
+0.519 - assertEquals("value3", result.getProperty("key3"))
+0.519 - assertEquals("value4", result.getProperty("key4"))
+0.494 - assertFalse(result.getColumnNames().contains("col3"))
+0.482 - assertFalse(result.getPropertyNames().contains("key5"))
+0.452 - assertFalse(result.getExecutionPlan().contains("step4"))

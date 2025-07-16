@@ -1,0 +1,24 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue27Attributes ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions.assertEquals(1, schemas.size());\nAssertions.assertTrue(schemas.get(0).getAttributes().size() > 0);\n\nAssertions.assertEquals(2, schemas.get(0).getElements().size());\nAssertions.assertEquals(\"element1\", schemas.get(0).getElements().get(0).getName());\nAssertions.assertEquals(\"element2\", schemas.get(0).getElements().get(1).getName());\n\nAssertions.assertEquals(1, schemas.get(0).getComplexTypes().size());\nAssertions.assertEquals(\"complexType1\", schemas.get(0).getComplexTypes().get(0).getName());\n\nAssertions.assertEquals(1, schemas.get(0).getSimpleTypes().size());\nAssertions.assertEquals(\"simpleType1\", schemas.get(0).getSimpleTypes().get(0).getName());\n\nAssertions.assertEquals(1, schemas.get(0).getGroups().size());\nAssertions.assertEquals(\"group1\", schemas.get(0).getGroups().get(0).getName());\n\nAssertions.assertEquals(1, schemas.get(0).getNotations().size());\nAssertions.assertEquals(\"notation1\", schemas.get(0).getNotations().get(0).getName());\n\nAssertions.assertEquals(1, schemas.get(0).getIncludes().size());\nAssertions.assertEquals(\"include1\", schemas.get(0).getIncludes().get(0).getSchemaLocation());\n\nAssertions.assertEquals(1, schemas.get(0).getImports().size());\nAssertions.assertEquals(\"import1\", schemas.get(0).getImports().get(0).getNamespace());\n====================\n\n",
+    "scores": [
+        0.845,
+        0.667,
+        0.659,
+        0.652,
+        0.645,
+        0.632,
+        0.63,
+        0.625,
+        0.523,
+        0.505,
+        0.5,
+        0.496,
+        0.491,
+        0.486,
+        0.479,
+        0.471,
+        0.463
+    ],
+    "ground_truth": "Assert.assertEquals(1,schemas.size());"
+}

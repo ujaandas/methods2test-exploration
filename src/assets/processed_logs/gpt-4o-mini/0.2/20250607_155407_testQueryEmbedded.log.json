@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupport {\n< T > T getProperty ( String name ) ;\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class RemoteQuerySupportTest {\n@Test\npublic void testQueryEmbedded ( ) {\nODocument doc = new ODocument ( \"STR\" ) ;\ndoc . setProperty ( \"STR\" , \"STR\" ) ;\nODocument emb = new ODocument ( ) ;\nemb . setProperty ( \"STR\" , \"STR\" ) ;\ndoc . setProperty ( \"STR\" , emb , OType . EMBEDDED ) ;\nsession . save ( doc ) ;\nOResultSet res = session . query ( \"STR\" ) ;\nOResult item = res . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(item);\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item instanceof ODocument);\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item.containsKey(\"STR\"));\nassertEquals(1, item.size());\nassertTrue(item.getProperty(\"STR\") instanceof ODocument);\nODocument embeddedDoc = (ODocument) item.getProperty(\"STR\");\nassertNotNull(embeddedDoc);\nassertEquals(\"STR\", embeddedDoc.getProperty(\"STR\"));\nassertTrue(embeddedDoc.containsKey(\"STR\"));\nassertEquals(1, embeddedDoc.size());\nassertEquals(\"STR\", embeddedDoc.getProperty(\"STR\"));\nassertTrue(embeddedDoc instanceof ODocument);\nassertNotNull(item.getProperty(\"STR\"));\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertNotNull(item.getProperty(\"STR\"));\nassertEquals(embeddedDoc, item.getProperty(\"STR\"));\nassertTrue(item.getProperty(\"STR\") instanceof ODocument);\nassertEquals(\"STR\", embeddedDoc.getProperty(\"STR\"));\nassertEquals(\"STR\", item.getProperty(\"STR\"));\nassertTrue(item.containsKey(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.815,
+        0.815,
+        0.815,
+        0.815,
+        0.713,
+        0.705,
+        0.705,
+        0.705,
+        0.696,
+        0.696,
+        0.63,
+        0.63,
+        0.594,
+        0.585,
+        0.581,
+        0.554,
+        0.525,
+        0.444,
+        0.411,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(item.getProperty(\"STR\"));"
+}

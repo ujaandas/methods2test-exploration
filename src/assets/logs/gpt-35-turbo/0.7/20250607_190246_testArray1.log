@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void endArray ( ) throws IOException { 
+    checkInArray ( ) ; 
+    state . pop ( ) ; 
+    out . write ( "STR" ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testArray1 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . startArray ( ) ; 
+         ser . writeBooleanLiteral ( true ) ; 
+         ser . endArray ( ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("[true]", result);
+assertTrue(result.contains("true"));
+assertFalse(result.contains("false"));
+assertNotNull(result);
+assertEquals(1, result.length());
+assertEquals("[true]".length(), result.length());
+assertTrue(result.startsWith("["));
+assertTrue(result.endsWith("]"));
+assertTrue(result.contains("[")); 
+assertTrue(result.contains("]"));
+assertEquals(7, result.length());
+assertNotEquals("", result);
+assertEquals("[true]".charAt(0), result.charAt(0));
+assertEquals("[true]".charAt(6), result.charAt(6));
+assertEquals("[true]".charAt(1), result.charAt(1));
+assertEquals("[true]".charAt(5), result.charAt(5));
+assertEquals("[true]".charAt(2), result.charAt(2));
+assertEquals("[true]".charAt(4), result.charAt(4));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.885 - assertNotEquals("", result)
+0.836 - assertEquals("[true]", result)
+0.737 - assertEquals(1, result.length())
+0.737 - assertEquals(7, result.length())
+0.681 - assertNotNull(result)
+0.630 - assertEquals("[true]".length(), result.length())
+0.613 - assertEquals("[true]".charAt(0), result.charAt(0))
+0.613 - assertEquals("[true]".charAt(6), result.charAt(6))
+0.613 - assertEquals("[true]".charAt(1), result.charAt(1))
+0.613 - assertEquals("[true]".charAt(5), result.charAt(5))
+0.613 - assertEquals("[true]".charAt(2), result.charAt(2))
+0.613 - assertEquals("[true]".charAt(4), result.charAt(4))
+0.540 - assertFalse(result.contains("false"))
+0.517 - assertTrue(result.endsWith("]"))
+0.517 - assertTrue(result.contains("["))
+0.517 - assertTrue(result.contains("]"))
+0.500 - assertTrue(result.startsWith("["))
+0.492 - assertTrue(result.contains("true"))

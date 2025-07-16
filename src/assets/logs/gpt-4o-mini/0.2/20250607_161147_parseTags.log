@@ -1,0 +1,132 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TagUtils {
+    public static Map < String , String > parseTags ( String s ) { 
+    Map < String , String > result = new HashMap < > ( ) ; 
+    if ( "STR" . equals ( s ) ) { 
+    return result ; 
+    } for ( String keyValue : s . split ( "STR" ) ) { 
+    if ( keyValue . contains ( "STR" ) ) { 
+    String [ ] array = keyValue . split ( "STR" ) ; 
+    result . put ( array [ 0 ] , array [ 1 ] ) ; 
+    } else { 
+    result . put ( keyValue , "STR" ) ; 
+    } } return result ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TagUtilsTest {
+    @Test
+     public void parseTags ( ) {
+         Map < String , String > result = TagUtils . parseTags ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.isEmpty());
+
+result = TagUtils.parseTags("key1STRvalue1");
+assertEquals(1, result.size());
+assertEquals("value1", result.get("key1"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2");
+assertEquals(2, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("value2", result.get("key2"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2");
+assertEquals(2, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("STR", result.get("key2"));
+
+result = TagUtils.parseTags("key1");
+assertEquals(1, result.size());
+assertEquals("STR", result.get("key1"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STR");
+assertEquals(3, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("STR", result.get("key2"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2");
+assertEquals(3, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("value2", result.get("key2"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3");
+assertEquals(4, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("value2", result.get("key2"));
+assertEquals("STR", result.get("key3"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3STRvalue3");
+assertEquals(4, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("value2", result.get("key2"));
+assertEquals("value3", result.get("key3"));
+
+result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3STRvalue3STR");
+assertEquals(5, result.size());
+assertEquals("value1", result.get("key1"));
+assertEquals("value2", result.get("key2"));
+assertEquals("value3", result.get("key3"));
+assertEquals("STR", result.get("STR"));
+
+result = TagUtils.parseTags("key1STRvalue1STR
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(toMap("STR","STR","STR","STR","STR","STR"),result); ===
+0.520 - assertEquals("STR", result.get("STR"))
+0.515 - assertEquals("STR", result.get("key2"))
+0.515 - assertEquals("STR", result.get("key1"))
+0.515 - assertEquals("STR", result.get("key2"))
+0.515 - assertEquals("STR", result.get("key3"))
+0.457 - assertEquals(1, result.size())
+0.457 - assertEquals(2, result.size())
+0.457 - assertEquals(2, result.size())
+0.457 - assertEquals(1, result.size())
+0.457 - assertEquals(3, result.size())
+0.457 - assertEquals(3, result.size())
+0.457 - assertEquals(4, result.size())
+0.457 - assertEquals(4, result.size())
+0.457 - assertEquals(5, result.size())
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value2", result.get("key2"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value2", result.get("key2"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value2", result.get("key2"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value2", result.get("key2"))
+0.442 - assertEquals("value3", result.get("key3"))
+0.442 - assertEquals("value1", result.get("key1"))
+0.442 - assertEquals("value2", result.get("key2"))
+0.442 - assertEquals("value3", result.get("key3"))
+0.348 - ```java
+assertNotNull(result)
+0.330 - assertTrue(result.isEmpty())
+0.146 - result = TagUtils.parseTags("key1")
+0.133 - result = TagUtils.parseTags("key1STRvalue1")
+0.125 - result = TagUtils.parseTags("key1STRvalue1STRkey2")
+0.122 - result = TagUtils.parseTags("key1STRvalue1STRkey2STR")
+0.116 - result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2")
+0.116 - result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2")
+0.113 - result = TagUtils.parseTags("key1STRvalue1STR
+0.109 - result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3")
+0.102 - result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3STRvalue3")
+0.100 - result = TagUtils.parseTags("key1STRvalue1STRkey2STRvalue2STRkey3STRvalue3STR")

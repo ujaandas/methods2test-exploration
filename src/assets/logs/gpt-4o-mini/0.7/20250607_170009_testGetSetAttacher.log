@@ -1,0 +1,100 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    public VirtualMachineAttacher getAttacher ( ) { 
+    return attacher ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testGetSetAttacher ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+VirtualMachineAttacher attacher = new VirtualMachineAttacher();
+JMXJvmIdConnectionFactory factory = new JMXJvmIdConnectionFactory();
+factory.setAttacher(attacher);
+
+assertNotNull(factory.getAttacher());
+assertEquals(attacher, factory.getAttacher());
+assertTrue(factory.getAttacher() instanceof VirtualMachineAttacher);
+assertSame(attacher, factory.getAttacher());
+
+VirtualMachineAttacher anotherAttacher = new VirtualMachineAttacher();
+factory.setAttacher(anotherAttacher);
+assertNotEquals(attacher, factory.getAttacher());
+assertEquals(anotherAttacher, factory.getAttacher());
+
+factory.setAttacher(null);
+assertNull(factory.getAttacher());
+
+factory.setAttacher(attacher);
+assertNotNull(factory.getAttacher());
+assertTrue(factory.getAttacher() != null);
+
+assertThrows(IllegalArgumentException.class, () -> {
+    factory.setAttacher(null);
+});
+
+factory.setAttacher(attacher);
+assertFalse(factory.getAttacher() == null);
+
+assertThat(factory.getAttacher(), is(attacher));
+assertThat(factory.getAttacher(), is(notNullValue()));
+
+VirtualMachineAttacher thirdAttacher = new VirtualMachineAttacher();
+factory.setAttacher(thirdAttacher);
+assertThat(factory.getAttacher(), is(equalTo(thirdAttacher)));
+
+assertNotSame(attacher, thirdAttacher);
+assertTrue(factory.getAttacher() instanceof VirtualMachineAttacher);
+
+assertDoesNotThrow(() -> factory.getAttacher());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(this.factory.getAttacher()instanceofDefaultVirtualMachineAttacher); ===
+0.915 - assertTrue(factory.getAttacher() instanceof VirtualMachineAttacher)
+0.915 - assertTrue(factory.getAttacher() instanceof VirtualMachineAttacher)
+0.672 - assertThat(factory.getAttacher(), is(equalTo(thirdAttacher)))
+0.650 - assertThat(factory.getAttacher(), is(attacher))
+0.638 - assertTrue(factory.getAttacher() != null)
+0.605 - assertThat(factory.getAttacher(), is(notNullValue()))
+0.581 - assertFalse(factory.getAttacher() == null)
+0.566 - factory.setAttacher(anotherAttacher)
+0.559 - factory.setAttacher(thirdAttacher)
+0.545 - assertNull(factory.getAttacher())
+0.538 - assertSame(attacher, factory.getAttacher())
+0.531 - assertNotNull(factory.getAttacher())
+0.531 - assertNotNull(factory.getAttacher())
+0.528 - factory.setAttacher(attacher)
+0.528 - factory.setAttacher(attacher)
+0.528 - factory.setAttacher(attacher)
+0.508 - assertDoesNotThrow(() -> factory.getAttacher())
+0.500 - assertEquals(anotherAttacher, factory.getAttacher())
+0.491 - assertNotSame(attacher, thirdAttacher)
+0.479 - assertEquals(attacher, factory.getAttacher())
+0.471 - factory.setAttacher(null)
+0.468 - assertNotEquals(attacher, factory.getAttacher())
+0.461 - assertThrows(IllegalArgumentException.class, () -> {
+    factory.setAttacher(null)
+0.350 - ```java
+VirtualMachineAttacher attacher = new VirtualMachineAttacher()
+0.329 - VirtualMachineAttacher thirdAttacher = new VirtualMachineAttacher()
+0.324 - VirtualMachineAttacher anotherAttacher = new VirtualMachineAttacher()
+0.229 - JMXJvmIdConnectionFactory factory = new JMXJvmIdConnectionFactory()
+0.025 - })
+0.000 - ```

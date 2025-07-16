@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTx {\ndefault OClass createEdgeClass ( String className ) {\nreturn createClass ( className , \"STR\" ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTxTest {\n@Test\npublic void testCreateEdgeClass ( ) {\nOClass clazz = db . createEdgeClass ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(clazz);\nassertEquals(\"STR\", clazz.getName());\nassertTrue(clazz.isEdgeType());\nassertFalse(clazz.isVertexType());\nassertTrue(clazz.getSuperClass().isSubClassOf(\"E\"));\nassertEquals(1, clazz.propertiesSize());\nassertEquals(0, clazz.getIndexes().size());\nassertFalse(clazz.existsProperty(\"name\"));\nassertFalse(clazz.existsProperty(\"age\"));\nassertNotNull(clazz.getProperty(\"in\"));\nassertNotNull(clazz.getProperty(\"out\"));\nassertEquals(\"in\", clazz.getProperty(\"in\").getName());\nassertEquals(\"out\", clazz.getProperty(\"out\").getName());\nassertEquals(\"LINK\", clazz.getProperty(\"in\").getType().toString());\nassertEquals(\"LINK\", clazz.getProperty(\"out\").getType().toString());\nassertTrue(clazz.getProperty(\"in\").isMandatory());\nassertTrue(clazz.getProperty(\"out\").isMandatory());\nassertFalse(clazz.getProperty(\"in\").isNotNull());\nassertFalse(clazz.getProperty(\"out\").isNotNull());\n====================\n\n",
+    "scores": [
+        1.0,
+        0.69,
+        0.678,
+        0.56,
+        0.545,
+        0.528,
+        0.517,
+        0.492,
+        0.467,
+        0.459,
+        0.441,
+        0.435,
+        0.417,
+        0.406,
+        0.4,
+        0.394,
+        0.378,
+        0.306,
+        0.302
+    ],
+    "ground_truth": "Assert.assertNotNull(clazz);"
+}

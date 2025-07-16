@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFile {\npublic int agentCount ( ) {\nreturn agents . size ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class AgentsFileTest {\n@Test\npublic void testLoad_emptyTag ( ) {\nwriteText ( \"STR\" , agentsFile ) ;\nregistry = load ( agentsFile ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(registry);\nassertTrue(registry.isEmpty());\nassertEquals(0, agentsFile.agentCount());\nassertFalse(registry.contains(\"STR\"));\nassertTrue(registry.getAgents().isEmpty());\nassertEquals(\"Expected empty registry\", 0, registry.size());\nassertNull(registry.get(\"STR\"));\nassertFalse(registry.hasAgent(\"STR\"));\nassertTrue(registry.getAllAgents().isEmpty());\nassertEquals(\"Registry should not contain any agents\", 0, registry.getAgentCount());\nassertTrue(registry.getAgentNames().isEmpty());\nassertFalse(registry.agentExists(\"STR\"));\nassertEquals(\"Agent count should be zero\", 0, agentsFile.agentCount());\nassertTrue(registry.getAgentList().isEmpty());\nassertFalse(registry.containsKey(\"STR\"));\nassertEquals(\"No agents should be loaded\", 0, registry.getLoadedAgentCount());\nassertNotEquals(\"Registry should not be null\", null, registry);\nassertTrue(\"Registry should be initialized\", registry.isInitialized());\nassertFalse(\"Registry should not have any active agents\", registry.hasActiveAgents());\nassertEquals(\"Should return an empty set of agents\", Collections.emptySet(), registry.getActiveAgents());\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.73,
+        0.727,
+        0.706,
+        0.676,
+        0.667,
+        0.649,
+        0.633,
+        0.627,
+        0.619,
+        0.61,
+        0.61,
+        0.602,
+        0.594,
+        0.587,
+        0.529,
+        0.495,
+        0.487,
+        0.466,
+        0.451,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,registry.agentCount());"
+}

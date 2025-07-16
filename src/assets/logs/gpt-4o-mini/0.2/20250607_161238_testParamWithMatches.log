@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testParamWithMatches ( ) {
+         Map < String , Object > params = new HashMap < String , Object > ( ) ; 
+         params . put ( "STR" , "STR" ) ; 
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql , params ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(results);
+assertFalse(results.isEmpty());
+assertEquals(1, results.size());
+assertTrue(results.get(0) instanceof ODocument);
+assertEquals("STR", results.get(0).field("STR"));
+assertEquals("ExpectedValue1", results.get(0).field("Field1"));
+assertEquals("ExpectedValue2", results.get(0).field("Field2"));
+assertNotNull(results.get(0).field("Field3"));
+assertTrue(results.get(0).field("Field4") instanceof SomeExpectedType);
+assertEquals(123, results.get(0).field("Field5"));
+assertTrue(results.get(0).field("Field6").toString().contains("ExpectedSubstring"));
+assertEquals(3.14, results.get(0).field("Field7"));
+assertNotEquals("UnexpectedValue", results.get(0).field("Field8"));
+assertTrue(results.get(0).field("Field9").isEmpty());
+assertFalse(results.get(0).field("Field10").isEmpty());
+assertEquals("ExpectedValue3", results.get(0).field("Field11"));
+assertTrue(results.get(0).field("Field12") instanceof List);
+assertEquals(2, ((List) results.get(0).field("Field12")).size());
+assertTrue(((List) results.get(0).field("Field12")).contains("ExpectedItem"));
+assertNotNull(results.get(0).field("Field13"));
+assertTrue(results.get(0).field("Field14") instanceof Map);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(1, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.675 - assertEquals("STR", results.get(0).field("STR"))
+0.667 - assertEquals(123, results.get(0).field("Field5"))
+0.658 - assertEquals(3.14, results.get(0).field("Field7"))
+0.609 - assertEquals(2, ((List) results.get(0).field("Field12")).size())
+0.587 - assertNotNull(results.get(0).field("Field3"))
+0.579 - assertNotNull(results.get(0).field("Field13"))
+0.571 - assertEquals("ExpectedValue1", results.get(0).field("Field1"))
+0.571 - assertEquals("ExpectedValue2", results.get(0).field("Field2"))
+0.567 - ```java
+assertNotNull(results)
+0.565 - assertEquals("ExpectedValue3", results.get(0).field("Field11"))
+0.547 - assertNotEquals("UnexpectedValue", results.get(0).field("Field8"))
+0.524 - assertFalse(results.get(0).field("Field10").isEmpty())
+0.507 - assertTrue(results.get(0) instanceof ODocument)
+0.488 - assertTrue(results.get(0).field("Field9").isEmpty())
+0.442 - assertTrue(results.get(0).field("Field14") instanceof Map)
+0.437 - assertTrue(results.get(0).field("Field12") instanceof List)
+0.388 - assertTrue(results.get(0).field("Field4") instanceof SomeExpectedType)
+0.377 - assertTrue(((List) results.get(0).field("Field12")).contains("ExpectedItem"))
+0.372 - assertTrue(results.get(0).field("Field6").toString().contains("ExpectedSubstring"))
+0.000 - ```

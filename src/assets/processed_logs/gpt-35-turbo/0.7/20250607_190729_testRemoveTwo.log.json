@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class TrackedMap {\npublic boolean isDirty ( ) {\nreturn _dirty ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class TrackedMapTest {\n@Test\npublic void testRemoveTwo ( ) {\nfinal ODocument doc = new ODocument ( ) ;\nfinal OTrackedMap < String > map = new OTrackedMap < String > ( doc ) ;\nmap . put ( \"STR\" , \"STR\" ) ;\nORecordInternal . unsetDirty ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertTrue(map.containsKey(\"STR\"));\nassertTrue(map.containsValue(\"STR\"));\nassertEquals(1, map.size());\nassertFalse(map.isEmpty());\nassertEquals(\"STR\", map.get(\"STR\"));\nassertTrue(map.containsKey(\"STR\") && map.containsValue(\"STR\"));\nmap.remove(\"STR\");\nassertTrue(map.isEmpty());\nassertFalse(map.containsKey(\"STR\"));\nassertNull(map.get(\"STR\"));\nmap.clear();\nassertTrue(map.isEmpty());\nassertEquals(0, map.size());\nassertTrue(map.entrySet().isEmpty());\nassertFalse(map.containsKey(\"KEY\"));\nassertFalse(map.containsValue(\"VALUE\"));\nmap.put(\"KEY\", \"VALUE\");\nassertTrue(map.containsKey(\"KEY\"));\nassertEquals(\"VALUE\", map.get(\"KEY\"));\nmap.put(\"KEY\", \"NEW VALUE\");\nassertEquals(\"NEW VALUE\", map.get(\"KEY\"));\nmap.clear();\nassertFalse(map.containsKey(\"KEY\"));\n====================\n\n",
+    "scores": [
+        0.769,
+        0.627,
+        0.627,
+        0.623,
+        0.623,
+        0.623,
+        0.554,
+        0.516,
+        0.5,
+        0.5,
+        0.5,
+        0.433,
+        0.423,
+        0.419,
+        0.411,
+        0.4,
+        0.387,
+        0.279,
+        0.27,
+        0.27,
+        0.233,
+        0.167,
+        0.157
+    ],
+    "ground_truth": "Assert.assertFalse(doc.isDirty());"
+}

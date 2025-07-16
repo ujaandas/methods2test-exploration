@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ThreadLocalArriveTimeHolder {\npublic static long getAndClear ( Channel channel , Integer key ) {\nMap < Integer , Long > map = getArriveTimeMap ( channel ) ;\nLong result = map . remove ( key ) ;\nif ( result == null ) {\nreturn - 1 ;\n} return result ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ThreadLocalArriveTimeHolderTest {\n@Test\npublic void testMultiThread ( ) throws InterruptedException {\nfinal EmbeddedChannel channel = new EmbeddedChannel ( ) ;\nfinal CountDownLatch countDownLatch = new CountDownLatch ( 1 ) ;\nlong start = System . nanoTime ( ) ;\nThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ;\nlong end = System . nanoTime ( ) ;\nThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ;\nlong time = ThreadLocalArriveTimeHolder . getAndClear ( channel , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\nassertEquals(1, time);\nassertTrue(time >= start && time <= end);\nassertNotEquals(-1, time);\nThreadLocalArriveTimeHolder.arrive(channel, 2);\nThreadLocalArriveTimeHolder.arrive(channel, 3);\nThreadLocalArriveTimeHolder.arrive(channel, 4);\nThreadLocalArriveTimeHolder.arrive(channel, 5);\nThreadLocalArriveTimeHolder.arrive(channel, 6);\nThreadLocalArriveTimeHolder.arrive(channel, 7);\nThreadLocalArriveTimeHolder.arrive(channel, 8);\nThreadLocalArriveTimeHolder.arrive(channel, 9);\nThreadLocalArriveTimeHolder.arrive(channel, 10);\nThreadLocalArriveTimeHolder.arrive(channel, 11);\nThreadLocalArriveTimeHolder.arrive(channel, 12);\nThreadLocalArriveTimeHolder.arrive(channel, 13);\nThreadLocalArriveTimeHolder.arrive(channel, 14);\nThreadLocalArriveTimeHolder.arrive(channel, 15);\nThreadLocalArriveTimeHolder.arrive(channel, 16);\nThreadLocalArriveTimeHolder.arrive(channel, 17);\nThreadLocalArriveTimeHolder.arrive(channel, 18);\nThreadLocalArriveTimeHolder.arrive(channel, 19);\nThreadLocalArriveTimeHolder.arrive(channel, 20);\n====================\n\n",
+    "scores": [
+        0.807,
+        0.553,
+        0.464,
+        0.265,
+        0.265,
+        0.265,
+        0.265,
+        0.265,
+        0.265,
+        0.265,
+        0.265,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261,
+        0.261
+    ],
+    "ground_truth": "Assert.assertTrue(time>=start);"
+}

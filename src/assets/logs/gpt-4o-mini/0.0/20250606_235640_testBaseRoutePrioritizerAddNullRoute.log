@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    @Override
+     public Collection < UriResource > getPrioritizedRoutes ( ) { 
+     return Collections . unmodifiableCollection ( mappings ) ; 
+     }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testBaseRoutePrioritizerAddNullRoute ( ) {
+         DefaultRoutePrioritizer routePrioritizer = new DefaultRoutePrioritizer ( ) ; 
+         routePrioritizer . addRoute ( null , 100 , null ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNull(routePrioritizer.getRoutes());
+assertEquals(0, routePrioritizer.getRoutes().size());
+assertTrue(routePrioritizer.getRoutes().isEmpty());
+assertFalse(routePrioritizer.getRoutes().contains(null));
+assertFalse(routePrioritizer.getRoutes().iterator().hasNext());
+assertEquals(0, routePrioritizer.getPrioritizedRoutes().size());
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+assertFalse(routePrioritizer.getPrioritizedRoutes().contains(null));
+assertNull(routePrioritizer.getRoute(100));
+assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(null, 100, null));
+assertThrows(NullPointerException.class, () -> routePrioritizer.addRoute(null, 100, new Object()));
+assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), -1, null));
+assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), 100, null));
+assertEquals(0, routePrioritizer.getRouteCount());
+assertTrue(routePrioritizer.getAllRoutes().isEmpty());
+assertFalse(routePrioritizer.hasRoute(null));
+assertFalse(routePrioritizer.hasRoute(new Object()));
+assertEquals(0, routePrioritizer.getRoutePriority(new Object()));
+assertFalse(routePrioritizer.isRoutePrioritized(new Object()));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size()); ===
+1.000 - assertEquals(0, routePrioritizer.getPrioritizedRoutes().size())
+0.903 - assertEquals(0, routePrioritizer.getRoutes().size())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.837 - assertFalse(routePrioritizer.getPrioritizedRoutes().contains(null))
+0.782 - assertEquals(0, routePrioritizer.getRouteCount())
+0.758 - assertEquals(0, routePrioritizer.getRoutePriority(new Object()))
+0.732 - assertTrue(routePrioritizer.getRoutes().isEmpty())
+0.729 - assertFalse(routePrioritizer.getRoutes().contains(null))
+0.713 - assertTrue(routePrioritizer.getAllRoutes().isEmpty())
+0.712 - assertNull(routePrioritizer.getRoute(100))
+0.710 - assertFalse(routePrioritizer.getRoutes().iterator().hasNext())
+0.699 - assertFalse(routePrioritizer.isRoutePrioritized(new Object()))
+0.691 - ```java
+assertNull(routePrioritizer.getRoutes())
+0.660 - assertFalse(routePrioritizer.hasRoute(null))
+0.655 - assertFalse(routePrioritizer.hasRoute(new Object()))
+0.481 - assertThrows(NullPointerException.class, () -> routePrioritizer.addRoute(null, 100, new Object()))
+0.477 - assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(null, 100, null))
+0.471 - assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), -1, null))
+0.468 - assertThrows(IllegalArgumentException.class, () -> routePrioritizer.addRoute(new Object(), 100, null))
+0.000 - ```

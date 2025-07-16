@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class Wildcards {
+    public static boolean matches ( final String text , final String wildcard ) { 
+    String pattern = wildcard . replace ( "STR" , "STR" ) . replace ( "STR" , "STR" ) ; 
+    return ( text != null && text . matches ( pattern ) ) ; 
+    }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class WildcardsTest {
+    @Test
+     public void testMatchesAgainstNull ( ) throws Exception {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertTrue(Wildcards.matches(null, "*"));
+assertFalse(Wildcards.matches("test", null));
+assertTrue(Wildcards.matches("test", "test"));
+assertFalse(Wildcards.matches("test", "TEST"));
+assertTrue(Wildcards.matches("test", "*est"));
+assertTrue(Wildcards.matches("test", "t*"));
+assertTrue(Wildcards.matches("test", "*t"));
+assertFalse(Wildcards.matches("test", "tes"));
+assertFalse(Wildcards.matches("test", "tes*"));
+assertTrue(Wildcards.matches("test", "te*t"));
+assertTrue(Wildcards.matches("test", "*e*t"));
+assertFalse(Wildcards.matches("test", "*e*t*"));
+assertTrue(Wildcards.matches("test", "t*t"));
+assertFalse(Wildcards.matches("test", "t*t*"));
+assertTrue(Wildcards.matches("test", "*t*"));
+assertFalse(Wildcards.matches("test", "*t**"));
+assertTrue(Wildcards.matches("test", "*e*"));
+assertFalse(Wildcards.matches("test", "*e**"));
+assertTrue(Wildcards.matches("test", "*"));
+assertFalse(Wildcards.matches("", "*"));
+assertFalse(Wildcards.matches("", ""));
+assertTrue(Wildcards.matches("test", "t?st"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(Wildcards.matches(null,"STR")); ===
+0.886 - assertFalse(Wildcards.matches("", ""))
+0.875 - assertFalse(Wildcards.matches("", "*"))
+0.851 - assertFalse(Wildcards.matches("test", "TEST"))
+0.847 - assertFalse(Wildcards.matches("test", null))
+0.814 - assertFalse(Wildcards.matches("test", "tes"))
+0.805 - assertFalse(Wildcards.matches("test", "tes*"))
+0.805 - assertFalse(Wildcards.matches("test", "t*t*"))
+0.805 - assertFalse(Wildcards.matches("test", "*t**"))
+0.805 - assertFalse(Wildcards.matches("test", "*e**"))
+0.795 - assertFalse(Wildcards.matches("test", "*e*t*"))
+0.747 - assertTrue(Wildcards.matches("test", "*"))
+0.745 - Assertions:
+
+assertTrue(Wildcards.matches(null, "*"))
+0.738 - assertTrue(Wildcards.matches("test", "t*"))
+0.738 - assertTrue(Wildcards.matches("test", "*t"))
+0.729 - assertTrue(Wildcards.matches("test", "t*t"))
+0.729 - assertTrue(Wildcards.matches("test", "*t*"))
+0.729 - assertTrue(Wildcards.matches("test", "*e*"))
+0.721 - assertTrue(Wildcards.matches("test", "test"))
+0.721 - assertTrue(Wildcards.matches("test", "*est"))
+0.721 - assertTrue(Wildcards.matches("test", "te*t"))
+0.721 - assertTrue(Wildcards.matches("test", "*e*t"))
+0.721 - assertTrue(Wildcards.matches("test", "t?st"))

@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompiler {
+    public Class < ? > compile ( String className , String sourceCode ) throws Exception { 
+    return addSource ( className , sourceCode ) . compileAll ( ) . get ( className ) ; 
+    }
+}
+
+package trung.InMemoryJavaCompiler;
+
+public class InMemoryJavaCompilerTest {
+    @Test
+     public void compile_WhenIgnoreWarnings ( ) throws Exception {
+         StringBuffer sourceCode = new StringBuffer ( ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         sourceCode . append ( "STR" ) ; 
+         Class < ? > helloClass = InMemoryJavaCompiler . newInstance ( ) . ignoreWarnings ( ) . compile ( "STR" , sourceCode . toString ( ) ) ; 
+         List < ? > res = ( List < ? > ) helloClass . getMethod ( "STR" ) . invoke ( helloClass . newInstance ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertTrue(res instanceof List);
+assertEquals(4, res.size());
+assertEquals("ExpectedValue1", res.get(0));
+assertEquals("ExpectedValue2", res.get(1));
+assertEquals("ExpectedValue3", res.get(2));
+assertEquals("ExpectedValue4", res.get(3));
+assertTrue(res.contains("ExpectedValue1"));
+assertTrue(res.contains("ExpectedValue2"));
+assertTrue(res.contains("ExpectedValue3"));
+assertTrue(res.contains("ExpectedValue4"));
+assertFalse(res.contains("UnexpectedValue"));
+assertEquals("ExpectedValue1", res.get(0));
+assertNotEquals("UnexpectedValue", res.get(1));
+assertTrue(res.stream().allMatch(item -> item instanceof String));
+assertFalse(res.isEmpty());
+assertEquals(4, res.stream().distinct().count());
+assertTrue(res.stream().anyMatch(item -> item.equals("ExpectedValue1")));
+assertTrue(res.stream().noneMatch(item -> item.equals("NonExistentValue")));
+assertEquals("ExpectedValue1", res.get(0));
+assertEquals("ExpectedValue2", res.get(1));
+assertEquals("ExpectedValue3", res.get(2));
+assertEquals("ExpectedValue4", res.get(3));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,res.size()); ===
+0.962 - assertEquals(4, res.size())
+0.692 - assertFalse(res.isEmpty())
+0.657 - assertEquals("ExpectedValue1", res.get(0))
+0.657 - assertEquals("ExpectedValue2", res.get(1))
+0.657 - assertEquals("ExpectedValue3", res.get(2))
+0.657 - assertEquals("ExpectedValue4", res.get(3))
+0.657 - assertEquals("ExpectedValue1", res.get(0))
+0.657 - assertEquals("ExpectedValue1", res.get(0))
+0.657 - assertEquals("ExpectedValue2", res.get(1))
+0.657 - assertEquals("ExpectedValue3", res.get(2))
+0.657 - assertEquals("ExpectedValue4", res.get(3))
+0.630 - assertEquals(4, res.stream().distinct().count())
+0.620 - assertNotEquals("UnexpectedValue", res.get(1))
+0.514 - assertFalse(res.contains("UnexpectedValue"))
+0.509 - assertTrue(res instanceof List)
+0.500 - ```java
+assertNotNull(res)
+0.471 - assertTrue(res.contains("ExpectedValue1"))
+0.471 - assertTrue(res.contains("ExpectedValue2"))
+0.471 - assertTrue(res.contains("ExpectedValue3"))
+0.471 - assertTrue(res.contains("ExpectedValue4"))
+0.391 - assertTrue(res.stream().allMatch(item -> item instanceof String))
+0.333 - assertTrue(res.stream().anyMatch(item -> item.equals("ExpectedValue1")))
+0.323 - assertTrue(res.stream().noneMatch(item -> item.equals("NonExistentValue")))
+0.000 - ```

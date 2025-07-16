@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Verbs {
+    public static Verb attended ( ) { 
+    return createVerb ( "STR" ) ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class VerbsTest {
+    @Test
+     public void testAttended ( ) {
+         Verb actual = Verbs . attended ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals("STR", actual.getId());
+assertEquals("attended", actual.getDisplay().get("en-US").get("verb"));
+assertTrue(actual.getObjectType().equals("Activity"));
+assertEquals("http://adlnet.gov/expapi/verbs/attended", actual.getId());
+assertTrue(actual.getResult().isEmpty());
+assertTrue(actual.getContext().isEmpty());
+assertTrue(actual.getTimestamp() != null);
+assertEquals("http://example.com/activities/attended", actual.getObject().getId());
+assertEquals("Activity", actual.getObject().getObjectType());
+assertEquals("en-US", actual.getDisplay().keySet().iterator().next());
+assertTrue(actual.getActor().getName().length() > 0);
+assertTrue(actual.getActor().getMbox().startsWith("mailto:"));
+assertNotNull(actual.getContext().getRegistration());
+assertTrue(actual.getResult().getScore().getRaw() >= 0);
+assertEquals("http://example.com/verbs/attended", actual.getId());
+assertTrue(actual.getObject().getObjectType().equals("Activity"));
+assertNotNull(actual.getActor().getAccount());
+assertEquals("http://example.com/accounts/12345", actual.getActor().getAccount().getHomePage());
+assertEquals("12345", actual.getActor().getAccount().getName());
+assertTrue(actual.getResult().getDuration().length() > 0);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.636 - assertNotNull(actual.getActor().getAccount())
+0.582 - assertEquals("STR", actual.getId())
+0.575 - assertNotNull(actual.getContext().getRegistration())
+0.500 - assertTrue(actual.getTimestamp() != null)
+0.492 - assertTrue(actual.getResult().isEmpty())
+0.484 - assertTrue(actual.getContext().isEmpty())
+0.423 - assertTrue(actual.getActor().getName().length() > 0)
+0.405 - assertTrue(actual.getObjectType().equals("Activity"))
+0.405 - assertTrue(actual.getResult().getScore().getRaw() >= 0)
+0.395 - assertTrue(actual.getResult().getDuration().length() > 0)
+0.386 - assertEquals("12345", actual.getActor().getAccount().getName())
+0.366 - assertTrue(actual.getActor().getMbox().startsWith("mailto:"))
+0.360 - assertEquals("en-US", actual.getDisplay().keySet().iterator().next())
+0.353 - assertEquals("http://example.com/verbs/attended", actual.getId())
+0.350 - assertEquals("Activity", actual.getObject().getObjectType())
+0.349 - assertTrue(actual.getObject().getObjectType().equals("Activity"))
+0.330 - assertEquals("http://adlnet.gov/expapi/verbs/attended", actual.getId())
+0.311 - assertEquals("attended", actual.getDisplay().get("en-US").get("verb"))
+0.294 - assertEquals("http://example.com/activities/attended", actual.getObject().getId())
+0.261 - assertEquals("http://example.com/accounts/12345", actual.getActor().getAccount().getHomePage())
+0.000 - ```

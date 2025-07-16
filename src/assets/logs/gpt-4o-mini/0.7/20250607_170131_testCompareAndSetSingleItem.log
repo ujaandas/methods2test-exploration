@@ -1,0 +1,155 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArray {
+    public int add ( T value ) { 
+    Objects . requireNonNull ( value ) ; 
+    while ( true ) { 
+    final int newIndex = size . get ( ) ; 
+    final int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ; 
+    final int containerSize = 1 << containerIndex ; 
+    final int indexInsideContainer = newIndex + 1 - containerSize ; 
+    AtomicReferenceArray < T > container = containers . get ( containerIndex ) ; 
+    if ( container == null ) { 
+    container = new AtomicReferenceArray < > ( containerSize ) ; 
+    if ( ! containers . compareAndSet ( containerIndex , null , container ) ) { 
+    container = containers . get ( containerIndex ) ; 
+    } } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) { 
+    size . incrementAndGet ( ) ; 
+    return newIndex ; 
+    } } }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArrayTest {
+    @Test
+     public void testCompareAndSetSingleItem ( ) {
+         final CASObjectArray < Integer > array = new CASObjectArray < > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        // Initial size should be 0
+        assertEquals(0, array.size.get());
+
+        // Add first element
+        int index1 = array.add(1);
+        assertEquals(0, index1);
+        assertEquals(1, array.size.get());
+
+        // Add second element
+        int index2 = array.add(2);
+        assertEquals(1, index2);
+        assertEquals(2, array.size.get());
+
+        // Add third element
+        int index3 = array.add(3);
+        assertEquals(2, index3);
+        assertEquals(3, array.size.get());
+
+        // Add null element (should throw NullPointerException)
+        assertThrows(NullPointerException.class, () -> array.add(null));
+
+        // Size should remain the same after attempting to add null
+        assertEquals(3, array.size.get());
+
+        // Add fourth element
+        int index4 = array.add(4);
+        assertEquals(3, index4);
+        assertEquals(4, array.size.get());
+
+        // Add fifth element
+        int index5 = array.add(5);
+        assertEquals(4, index5);
+        assertEquals(5, array.size.get());
+
+        // Verify that elements are added correctly
+        assertEquals(1, array.containers.get(0).get(0));
+        assertEquals(2, array.containers.get(0).get(1));
+        assertEquals(3, array.containers.get(0).get(2));
+        assertEquals(4, array.containers.get(1).get(0));
+        assertEquals(5, array.containers.get(1).get(1));
+
+        // Test concurrent add
+        Runnable task = () -> {
+            for (int i = 6; i <= 10; i++) {
+                array.add(i);
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
+        thread.join();
+
+        // Final size should be 10
+        assertEquals(10, array.size.get());
+
+        // Check last few elements added by the thread
+        assertEquals(6, array.containers.get(1).get(2));
+        assertEquals(7, array.containers.get(1).get(3));
+        assertEquals(8, array.containers.get(1).get(4));
+        assertEquals(9, array.containers.get(1).get(5));
+        assertEquals(10,
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,array.add(1)); ===
+0.767 - assertEquals(1, array.size.get())
+0.767 - assertEquals(2, array.size.get())
+0.767 - assertEquals(3, array.size.get())
+0.767 - assertEquals(4, array.size.get())
+0.767 - assertEquals(5, array.size.get())
+0.720 - assertEquals(0, index1)
+0.682 - assertEquals(10,
+0.676 - assertEquals(2, array.containers.get(0).get(1))
+0.676 - assertEquals(4, array.containers.get(1).get(0))
+0.676 - assertEquals(5, array.containers.get(1).get(1))
+0.676 - assertEquals(7, array.containers.get(1).get(3))
+0.676 - assertEquals(8, array.containers.get(1).get(4))
+0.676 - assertEquals(9, array.containers.get(1).get(5))
+0.649 - assertEquals(3, array.containers.get(0).get(2))
+0.640 - assertEquals(1, index2)
+0.640 - assertEquals(2, index3)
+0.640 - assertEquals(3, index4)
+0.640 - assertEquals(4, index5)
+0.578 - // Final size should be 10
+        assertEquals(10, array.size.get())
+0.527 - ```java
+        // Initial size should be 0
+        assertEquals(0, array.size.get())
+0.478 - i++) {
+                array.add(i)
+0.442 - // Check last few elements added by the thread
+        assertEquals(6, array.containers.get(1).get(2))
+0.441 - // Add first element
+        int index1 = array.add(1)
+0.429 - // Verify that elements are added correctly
+        assertEquals(1, array.containers.get(0).get(0))
+0.418 - // Size should remain the same after attempting to add null
+        assertEquals(3, array.size.get())
+0.406 - // Add second element
+        int index2 = array.add(2)
+0.406 - // Add fourth element
+        int index4 = array.add(4)
+0.382 - // Add third element
+        int index3 = array.add(3)
+0.382 - // Add fifth element
+        int index5 = array.add(5)
+0.304 - // Add null element (should throw NullPointerException)
+        assertThrows(NullPointerException.class, () -> array.add(null))
+0.286 - thread.start()
+0.260 - // Test concurrent add
+        Runnable task = () -> {
+            for (int i = 6
+0.244 - thread.join()
+0.107 - Thread thread = new Thread(task)
+0.061 - i <= 10
+0.000 - }
+        }

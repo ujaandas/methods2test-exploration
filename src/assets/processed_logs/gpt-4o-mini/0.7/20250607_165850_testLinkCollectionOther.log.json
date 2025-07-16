@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODirtyManager {\npublic boolean isSame ( ODirtyManager other ) {\nreturn this . getReal ( ) == other . getReal ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODirtyManagerTest {\n@Test\npublic void testLinkCollectionOther ( ) {\nODocument doc = new ODocument ( ) ;\ndoc . field ( \"STR\" , \"STR\" ) ;\nList < ODocument > lst = new ArrayList < ODocument > ( ) ;\nODocument doc1 = new ODocument ( ) ;\nlst . add ( doc1 ) ;\ndoc . field ( \"STR\" , lst ) ;\nSet < ODocument > set = new HashSet < ODocument > ( ) ;\nODocument doc2 = new ODocument ( ) ;\nset . add ( doc2 ) ;\ndoc . field ( \"STR\" , set ) ;\nODocumentInternal . convertAllMultiValuesToTrackedVersions ( doc ) ;\nODirtyManager manager = ORecordInternal . getDirtyManager ( doc1 ) ;\nODirtyManager manager2 = ORecordInternal . getDirtyManager ( doc2 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(manager);\nAssert.assertNotNull(manager2);\nAssert.assertFalse(manager.isSame(manager2));\nAssert.assertNotSame(manager, manager2);\nAssert.assertTrue(manager.isSame(manager));\nAssert.assertTrue(manager2.isSame(manager2));\nAssert.assertTrue(manager.isSame(manager));\nAssert.assertNotEquals(manager.hashCode(), manager2.hashCode());\nAssert.assertNotEquals(manager.toString(), manager2.toString());\nAssert.assertFalse(manager.equals(manager2));\nAssert.assertTrue(manager.equals(manager));\nAssert.assertTrue(manager2.equals(manager2));\nAssert.assertNotNull(doc.getField(\"STR\"));\nAssert.assertTrue(doc.getField(\"STR\") instanceof List);\nAssert.assertTrue(doc.getField(\"STR\") instanceof Set);\nAssert.assertTrue(lst.contains(doc1));\nAssert.assertTrue(set.contains(doc2));\nAssert.assertFalse(lst.contains(doc2));\nAssert.assertFalse(set.contains(doc1));\nAssert.assertEquals(1, lst.size());\nAssert.assertEquals(1, set.size());\n```\n====================\n\n",
+    "scores": [
+        0.986,
+        0.986,
+        0.986,
+        0.877,
+        0.849,
+        0.845,
+        0.74,
+        0.576,
+        0.567,
+        0.515,
+        0.505,
+        0.485,
+        0.485,
+        0.462,
+        0.425,
+        0.42,
+        0.418,
+        0.4,
+        0.388,
+        0.355,
+        0.355,
+        0.0
+    ],
+    "ground_truth": "assertTrue(manager2.isSame(manager));"
+}

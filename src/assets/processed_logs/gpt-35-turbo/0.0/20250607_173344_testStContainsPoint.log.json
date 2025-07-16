@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctions {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctionsTest {\n@Test\npublic void testStContainsPoint ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(next.field(\"fieldName\") instanceof String);\nAssert.assertEquals(123, next.field(\"fieldName\"));\nAssert.assertNotNull(next.field(\"fieldName\"));\nAssert.assertNotEquals(\"value\", next.field(\"fieldName\"));\nAssert.assertTrue(next.field(\"fieldName\") instanceof Integer);\nAssert.assertFalse(next.field(\"fieldName\") instanceof Double);\nAssert.assertNull(next.field(\"fieldName\"));\nAssert.assertTrue(next.field(\"fieldName\") instanceof List);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Map);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Date);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Boolean);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Float);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Long);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Short);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Byte);\nAssert.assertTrue(next.field(\"fieldName\") instanceof Character);\nAssert.assertTrue(next.field(\"fieldName\") instanceof BigDecimal);\nAssert.assertTrue(next.field(\"fieldName\") instanceof BigInteger);\nAssert.assertTrue(next.field(\"fieldName\") instanceof UUID);\n====================\n\n",
+    "scores": [
+        0.753,
+        0.738,
+        0.676,
+        0.649,
+        0.571,
+        0.568,
+        0.565,
+        0.565,
+        0.565,
+        0.565,
+        0.565,
+        0.558,
+        0.558,
+        0.552,
+        0.545,
+        0.545,
+        0.533,
+        0.527,
+        0.527
+    ],
+    "ground_truth": "Assert.assertEquals(true,next.field(\"STR\"));"
+}

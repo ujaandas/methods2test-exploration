@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterProperty {\npublic OClass getLinkedClass ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class AlterPropertyTest {\n@Test\npublic void testRemoveLinkedClass ( ) {\nOSchema schema = db . getMetadata ( ) . getSchema ( ) ;\nOClass classA = schema . createClass ( \"STR\" ) ;\nOClass classLinked = schema . createClass ( \"STR\" ) ;\nOProperty prop = classA . createProperty ( \"STR\" , OType . LINK , classLinked ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.LINK, prop.getType());\nAssert.assertEquals(classLinked, prop.getLinkedClass());\nAssert.assertTrue(classA.getProperties().contains(prop));\nAssert.assertEquals(1, classA.getProperties().size());\nAssert.assertEquals(0, classLinked.getProperties().size());\nAssert.assertTrue(schema.getClasses().contains(classA));\nAssert.assertTrue(schema.getClasses().contains(classLinked));\nAssert.assertEquals(\"STR\", classA.getName());\nAssert.assertEquals(\"STR\", classLinked.getName());\nAssert.assertNotNull(schema.getClass(\"STR\"));\nAssert.assertNotNull(schema.getClass(\"STR\"));\nAssert.assertTrue(schema.getClass(\"STR\").isSubClassOf(classA));\nAssert.assertFalse(schema.getClass(\"STR\").isSubClassOf(classLinked));\nAssert.assertEquals(1, schema.getClasses().size());\nAssert.assertTrue(schema.getClasses().stream().anyMatch(c -> c.getName().equals(\"STR\")));\nAssert.assertEquals(0, classA.getSuperClasses().size());\nAssert.assertEquals(0, classLinked.getSuperClasses().size());\nAssert.assertTrue(classA.getProperties().stream().anyMatch(p -> p.getName().equals(\"STR\")));\nAssert.assertEquals(classLinked, prop.getLinkedClass());\n```\n====================\n\n",
+    "scores": [
+        0.747,
+        0.747,
+        0.712,
+        0.712,
+        0.603,
+        0.6,
+        0.538,
+        0.53,
+        0.523,
+        0.507,
+        0.494,
+        0.476,
+        0.472,
+        0.469,
+        0.449,
+        0.442,
+        0.44,
+        0.412,
+        0.356,
+        0.353,
+        0.348,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(prop.getLinkedClass());"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testSkipOrdered ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(expectedSize, results.size());\nassertTrue(results.get(0) instanceof ODocument);\nassertTrue(results.get(1) instanceof ODocument);\nassertEquals(expectedValue1, results.get(0).field(\"fieldName1\"));\nassertEquals(expectedValue2, results.get(1).field(\"fieldName2\"));\nassertEquals(\"Expected Document ID\", results.get(0).getIdentity().toString());\nassertEquals(\"Expected Document Class\", results.get(0).getClassName());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"fieldName3\") != null));\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"fieldName4\") == null));\nassertEquals(\"Expected Field Value\", results.get(2).field(\"fieldName5\"));\nassertEquals(\"Expected Field Value\", results.get(3).field(\"fieldName6\"));\nassertNotEquals(\"Unexpected Value\", results.get(4).field(\"fieldName7\"));\nassertTrue(results.size() > 5);\nassertTrue(results.contains(expectedDocument));\nassertEquals(expectedFieldValue, results.get(5).field(\"fieldName8\"));\nassertNotSame(results.get(0), results.get(1));\nassertTrue(results.get(0).field(\"fieldName9\").toString().startsWith(\"Prefix\"));\nassertTrue(results.get(1).field(\"fieldName10\").toString().endsWith(\"Suffix\"));\nassertFalse(results.stream().anyMatch(doc -> doc.field(\"fieldName11\").equals(\"InvalidValue\")));\nassertEquals(\"Expected Value\", results.stream().filter(doc -> doc.field(\"fieldName12\").equals(\"ValueToMatch\")).findFirst().orElse(null).field(\"fieldName12\"));\n```\n====================\n\n",
+    "scores": [
+        0.806,
+        0.78,
+        0.721,
+        0.613,
+        0.596,
+        0.574,
+        0.557,
+        0.551,
+        0.551,
+        0.54,
+        0.54,
+        0.54,
+        0.519,
+        0.5,
+        0.5,
+        0.495,
+        0.404,
+        0.4,
+        0.389,
+        0.385,
+        0.374,
+        0.304,
+        0.0
+    ],
+    "ground_truth": "assertEquals(19,results.size());"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage rockagen.commons-lib;\n\npublic class CommUtil {\npublic static String hexdump ( final byte [ ] bytes ) {\nif ( bytes == null || bytes . length < 1 ) return \"STR\" ;\nint length = bytes . length ;\nint temp ;\nchar [ ] hex = new char [ length * 2 ] ;\nfor ( int i = 0 ;\ni < length ;\ni ++ ) {\ntemp = bytes [ i ] & 0xFF ;\nhex [ i * 2 ] = HEXARRAY [ temp > > > 4 ] ;\nhex [ i * 2 + 1 ] = HEXARRAY [ temp & 0x0F ] ;\n} return new String ( hex ) ;\n}\n}\n\npackage rockagen.commons-lib;\n\npublic class CommUtilTest {\n@Test\npublic void testBitValue ( ) {\nString bs = \"STR\" ;\nBitSet b = CommUtil . bitSet ( bs . getBytes ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(8, b.length());\nassertTrue(b.get(0));\nassertFalse(b.get(1));\nassertFalse(b.get(2));\nassertFalse(b.get(3));\nassertFalse(b.get(4));\nassertFalse(b.get(5));\nassertFalse(b.get(6));\nassertFalse(b.get(7));\nassertEquals(\"01010011\", CommUtil.hexdump(bs.getBytes()));\nassertNotNull(b);\nassertNotNull(CommUtil.hexdump(bs.getBytes()));\nassertEquals(\"0000 0001\", CommUtil.hexdump(bs.getBytes()));\nassertNotEquals(0, b.hashCode());\nassertTrue(CommUtil.hexdump(bs.getBytes()).contains(\"53\"));\nassertFalse(CommUtil.hexdump(bs.getBytes()).isEmpty());\nassertNotNull(b.toString());\nassertEquals(64, b.size());\nassertTrue(b.isEmpty());\nassertFalse(CommUtil.hexdump(bs.getBytes()).equals(\"01001101\"));\nassertEquals(CommUtil.hexdump(bs.getBytes()), CommUtil.hexdump(bs.getBytes()));\nassertFalse(b.isEmpty());\nassertFalse(CommUtil.hexdump(bs.getBytes()).equals(\"01010000\"));\n====================\n\n",
+    "scores": [
+        0.702,
+        0.702,
+        0.635,
+        0.607,
+        0.563,
+        0.562,
+        0.562,
+        0.552,
+        0.472,
+        0.458,
+        0.452,
+        0.354,
+        0.354,
+        0.354,
+        0.354,
+        0.354,
+        0.354,
+        0.354,
+        0.341,
+        0.333,
+        0.324,
+        0.321,
+        0.306
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",CommUtil.hexdump(CommUtil.bitValue(b)));"
+}

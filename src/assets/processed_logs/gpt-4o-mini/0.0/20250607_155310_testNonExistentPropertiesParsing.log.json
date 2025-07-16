@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtil {\nprotected static Properties getPropertiesResource ( URL resource ) {\nProperties answer = new Properties ( ) ;\nif ( resource != null ) {\ntry ( InputStream stream = resource . openStream ( ) ) {\nanswer . load ( stream ) ;\n} catch ( IOException e ) {\nthrow new IllegalStateException ( \"STR\" + resource , e ) ;\n} } return answer ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class SpringBootUtilTest {\n@Test\npublic void testNonExistentPropertiesParsing ( ) {\nProperties props = SpringBootUtil . getPropertiesResource ( SpringBootUtilTest . class . getResource ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(props);\nassertTrue(props.isEmpty());\nassertFalse(props.containsKey(\"someKey\"));\nassertFalse(props.containsValue(\"someValue\"));\nassertEquals(0, props.size());\nassertNull(props.getProperty(\"nonExistentKey\"));\nassertFalse(props.containsKey(\"anotherKey\"));\nassertFalse(props.containsValue(\"anotherValue\"));\nassertEquals(\"defaultValue\", props.getProperty(\"defaultKey\", \"defaultValue\"));\nassertTrue(props.keySet().isEmpty());\nassertTrue(props.values().isEmpty());\nassertTrue(props.entrySet().isEmpty());\nassertThrows(IllegalStateException.class, () -> {\nSpringBootUtil.getPropertiesResource(null);\n});\nassertEquals(\"defaultValue\", props.getProperty(\"missingKey\", \"defaultValue\"));\nassertFalse(props.containsKey(\"keyThatShouldNotExist\"));\nassertFalse(props.containsValue(\"valueThatShouldNotExist\"));\nassertEquals(0, props.size());\nassertNotEquals(1, props.size());\nassertNotEquals(\"someValue\", props.getProperty(\"someKey\"));\nassertTrue(props.getProperty(\"key\", \"default\").equals(\"default\"));\nassertTrue(props.getProperty(\"anotherKey\", \"fallback\").equals(\"fallback\"));\n```\n====================\n\n",
+    "scores": [
+        0.833,
+        0.706,
+        0.625,
+        0.625,
+        0.596,
+        0.507,
+        0.5,
+        0.5,
+        0.483,
+        0.468,
+        0.459,
+        0.438,
+        0.431,
+        0.412,
+        0.373,
+        0.354,
+        0.333,
+        0.316,
+        0.316,
+        0.301,
+        0.22,
+        0.091,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(props);"
+}

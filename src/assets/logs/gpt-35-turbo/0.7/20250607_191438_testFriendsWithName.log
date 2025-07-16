@@ -1,0 +1,69 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testFriendsWithName ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(qResult);
+assertEquals(5, qResult.size());
+assertTrue(qResult.get(0).containsField("name"));
+assertEquals("John", qResult.get(0).field("name"));
+assertFalse(qResult.isEmpty());
+assertNotEquals(0, qResult.size());
+assertTrue(qResult.get(0).field("age") instanceof Integer);
+assertTrue(qResult.get(0).field("isFriend") instanceof Boolean);
+assertNull(qResult.get(0).field("address"));
+assertTrue(qResult.get(0).containsField("city"));
+assertEquals("New York", qResult.get(0).field("city"));
+assertTrue(qResult.get(0).containsField("country"));
+assertEquals("USA", qResult.get(0).field("country"));
+assertFalse(qResult.get(0).containsField("email"));
+assertTrue(qResult.get(0).containsField("phoneNumber"));
+assertEquals("555-1234", qResult.get(0).field("phoneNumber"));
+assertEquals("Jane", qResult.get(1).field("name"));
+assertEquals("Alice", qResult.get(2).field("name"));
+assertEquals("Bob", qResult.get(3).field("name"));
+assertTrue(qResult.get(4).containsField("name"));
+assertEquals("Mike", qResult.get(4).field("name"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.967 - assertEquals(5, qResult.size())
+0.921 - assertNotEquals(0, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.692 - assertEquals("Bob", qResult.get(3).field("name"))
+0.684 - assertEquals("John", qResult.get(0).field("name"))
+0.684 - assertEquals("Jane", qResult.get(1).field("name"))
+0.684 - assertEquals("Mike", qResult.get(4).field("name"))
+0.675 - assertEquals("Alice", qResult.get(2).field("name"))
+0.667 - assertEquals("USA", qResult.get(0).field("country"))
+0.659 - assertEquals("New York", qResult.get(0).field("city"))
+0.654 - assertNotNull(qResult)
+0.622 - assertEquals("555-1234", qResult.get(0).field("phoneNumber"))
+0.600 - assertFalse(qResult.get(0).containsField("email"))
+0.564 - assertTrue(qResult.get(0).containsField("name"))
+0.564 - assertTrue(qResult.get(0).containsField("city"))
+0.564 - assertTrue(qResult.get(4).containsField("name"))
+0.548 - assertNull(qResult.get(0).field("address"))
+0.543 - assertTrue(qResult.get(0).containsField("country"))
+0.518 - assertTrue(qResult.get(0).containsField("phoneNumber"))
+0.462 - assertTrue(qResult.get(0).field("isFriend") instanceof Boolean)
+0.442 - assertTrue(qResult.get(0).field("age") instanceof Integer)

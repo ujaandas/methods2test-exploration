@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.websocket;\n\npublic class WebSocketResponseHandler {\npublic IStatus getStatus ( ) {\nreturn this . status ;\n}\n}\n\npackage NanoHttpd.nanohttpd.websocket;\n\npublic class WebSocketResponseHandlerTest {\n@Test\npublic void testMissingKeyReturnsErrorResponse ( ) {\nthis . headers . remove ( \"STR\" ) ;\nResponse handshakeResponse = this . nanoWebSocketServer . handle ( this . session ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(handshakeResponse);\nassertEquals(Response.Status.ERROR, handshakeResponse.getStatus());\nassertTrue(handshakeResponse.getHeaders().containsKey(\"Error\"));\nassertEquals(\"Missing key\", handshakeResponse.getHeaders().get(\"Error\"));\nassertTrue(handshakeResponse.getBody().contains(\"Error: Missing key\"));\nassertEquals(400, handshakeResponse.getStatusCode());\nassertTrue(handshakeResponse.isError());\nassertFalse(handshakeResponse.isSuccessful());\nassertNotEquals(Response.Status.SUCCESS, handshakeResponse.getStatus());\nassertTrue(handshakeResponse.getHeaders().containsKey(\"Content-Type\"));\nassertEquals(\"application/json\", handshakeResponse.getHeaders().get(\"Content-Type\"));\nassertTrue(handshakeResponse.getBody().length() > 0);\nassertTrue(handshakeResponse.getHeaders().containsKey(\"Connection\"));\nassertEquals(\"close\", handshakeResponse.getHeaders().get(\"Connection\"));\nassertNotNull(handshakeResponse.getSessionId());\nassertTrue(handshakeResponse.getSessionId().length() > 0);\nassertTrue(handshakeResponse.getHeaders().containsKey(\"Date\"));\nassertNotNull(handshakeResponse.getHeaders().get(\"Date\"));\nassertTrue(handshakeResponse.getHeaders().containsKey(\"Server\"));\nassertEquals(\"NanoHttpd\", handshakeResponse.getHeaders().get(\"Server\"));\nassertTrue(handshakeResponse.getBody().contains(\"Please provide the required key.\"));\n```\n====================\n\n",
+    "scores": [
+        0.889,
+        0.81,
+        0.732,
+        0.719,
+        0.675,
+        0.651,
+        0.634,
+        0.598,
+        0.588,
+        0.557,
+        0.553,
+        0.547,
+        0.542,
+        0.529,
+        0.529,
+        0.52,
+        0.52,
+        0.51,
+        0.49,
+        0.464,
+        0.435,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(handshakeResponse);"
+}

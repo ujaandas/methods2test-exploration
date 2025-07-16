@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctions {\n@Override\npublic < RET > RET field ( final String iFieldName ) {\nRET value = this . rawField ( iFieldName ) ;\nif ( ! iFieldName . startsWith ( \"STR\" ) && _lazyLoad && value instanceof ORID && ( ( ( ORID ) value ) . isPersistent ( ) || ( ( ORID ) value ) . isNew ( ) ) && ODatabaseRecordThreadLocal . instance ( ) . isDefined ( ) ) {\nRET newValue = getDatabase ( ) . load ( ( ORID ) value ) ;\nif ( newValue != null ) {\nunTrack ( ( ORID ) value ) ;\ntrack ( ( OIdentifiable ) newValue ) ;\nvalue = newValue ;\nif ( this . isTrackingChanges ( ) ) {\nORecordInternal . setDirtyManager ( ( ORecord ) value , this . getDirtyManager ( ) ) ;\n} if ( ! iFieldName . contains ( \"STR\" ) ) {\nODocumentEntry entry = _fields . get ( iFieldName ) ;\nremoveCollectionChangeListener ( entry , entry . value ) ;\nentry . value = value ;\naddCollectionChangeListener ( entry ) ;\n} } } return value ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSpatialMiscFunctionsTest {\n@Test\npublic void testStContainsPoint ( ) {\nList < ODocument > execute = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nODocument next = execute . iterator ( ) . next ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"value1\", next.field(\"field1\"));\nassertEquals(\"value2\", next.field(\"field2\"));\nassertEquals(\"value3\", next.field(\"field3\"));\nassertEquals(\"value4\", next.field(\"field4\"));\nassertEquals(\"value5\", next.field(\"field5\"));\nassertEquals(\"value6\", next.field(\"field6\"));\nassertEquals(\"value7\", next.field(\"field7\"));\nassertEquals(\"value8\", next.field(\"field8\"));\nassertEquals(\"value9\", next.field(\"field9\"));\nassertEquals(\"value10\", next.field(\"field10\"));\nassertEquals(\"value11\", next.field(\"field11\"));\nassertEquals(\"value12\", next.field(\"field12\"));\nassertEquals(\"value13\", next.field(\"field13\"));\nassertEquals(\"value14\", next.field(\"field14\"));\nassertEquals(\"value15\", next.field(\"field15\"));\nassertEquals(\"value16\", next.field(\"field16\"));\nassertEquals(\"value17\", next.field(\"field17\"));\nassertEquals(\"value18\", next.field(\"field18\"));\nassertEquals(\"value19\", next.field(\"field19\"));\nassertEquals(\"value20\", next.field(\"field20\"));\n====================\n\n",
+    "scores": [
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.785,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765,
+        0.765
+    ],
+    "ground_truth": "Assert.assertEquals(true,next.field(\"STR\"));"
+}

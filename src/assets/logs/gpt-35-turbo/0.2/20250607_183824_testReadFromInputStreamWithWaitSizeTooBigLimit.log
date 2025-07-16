@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytes {
+    int fromInputStream ( final InputStream in , final int maxSize ) throws IOException ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class ORecordBytesTest {
+    @Test
+     public void testReadFromInputStreamWithWaitSizeTooBigLimit ( ) throws Exception {
+         final byte [ ] data = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 } ; 
+         final InputStream is = new NotFullyAvailableAtTheTimeInputStream ( data , 5 ) ; 
+         final int result = testedInstance . fromInputStream ( is , 15 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(5, result);
+assertEquals(0, data[0]);
+assertEquals(1, data[1]);
+assertEquals(2, data[2]);
+assertEquals(3, data[3]);
+assertEquals(4, data[4]);
+assertEquals(5, data[5]);
+assertEquals(6, data[6]);
+assertEquals(7, data[7]);
+assertEquals(8, data[8]);
+assertEquals(9, data[9]);
+assertTrue(is instanceof NotFullyAvailableAtTheTimeInputStream);
+assertTrue(result <= 15);
+assertTrue(result >= 0);
+assertTrue(result <= data.length);
+assertTrue(result <= maxSize);
+assertTrue(result <= is.available());
+assertTrue(result <= is.read());
+assertTrue(result <= is.skip(5));
+assertTrue(result <= is.markSupported());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result,data.length); ===
+0.825 - assertTrue(result <= data.length)
+0.741 - assertEquals(5, result)
+0.691 - assertEquals(0, data[0])
+0.691 - assertEquals(1, data[1])
+0.691 - assertEquals(2, data[2])
+0.691 - assertEquals(3, data[3])
+0.691 - assertEquals(4, data[4])
+0.691 - assertEquals(5, data[5])
+0.691 - assertEquals(6, data[6])
+0.691 - assertEquals(7, data[7])
+0.691 - assertEquals(8, data[8])
+0.691 - assertEquals(9, data[9])
+0.576 - assertTrue(result <= maxSize)
+0.576 - assertTrue(result <= is.available())
+0.566 - assertTrue(result >= 0)
+0.556 - assertTrue(result <= 15)
+0.525 - assertTrue(result <= is.read())
+0.516 - assertTrue(result <= is.skip(5))
+0.457 - assertTrue(result <= is.markSupported())
+0.280 - assertTrue(is instanceof NotFullyAvailableAtTheTimeInputStream)

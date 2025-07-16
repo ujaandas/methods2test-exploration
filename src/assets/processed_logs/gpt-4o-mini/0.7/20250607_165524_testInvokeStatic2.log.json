@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Platform {\npublic static < T > T invokeStaticMethod ( Class < ? > cls , String methodName , Object [ ] params ) {\ntry {\nfor ( Method method : cls . getDeclaredMethods ( ) ) {\nif ( method . getName ( ) . equals ( methodName ) ) {\nreturn ( T ) method . invoke ( null , params ) ;\n} } throw new NoSuchMethodException ( cls + \"STR\" + methodName ) ;\n} catch ( Exception e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage jcodec.jcodec;\n\npublic class PlatformTest {\n@Test\npublic void testInvokeStatic2 ( ) {\nint parseBuf = Platform . invokeStaticMethod ( PlatformTest . class , \"STR\" , new Object [ ] {\nByteBuffer . wrap ( \"STR\" . getBytes ( ) ) } ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(parseBuf);\nassertEquals(0, parseBuf);\nassertTrue(parseBuf instanceof Integer);\nassertEquals(Integer.valueOf(0), Integer.valueOf(parseBuf));\nassertNotEquals(-1, parseBuf);\nassertTrue(parseBuf >= 0);\nassertFalse(parseBuf < 0);\nassertEquals(parseBuf, 0);\nassertSame(parseBuf, 0);\nassertThrows(RuntimeException.class, () -> Platform.invokeStaticMethod(PlatformTest.class, \"nonExistentMethod\", new Object[]{}));\nassertDoesNotThrow(() -> Platform.invokeStaticMethod(PlatformTest.class, \"STR\", new Object[]{}));\nassertTrue(parseBuf >= 0 && parseBuf < 100);\nassertEquals(\"string representation\", String.valueOf(parseBuf));\nassertNotEquals(\"unexpected value\", parseBuf);\nassertArrayEquals(new int[]{0}, new int[]{parseBuf});\nassertTrue(parseBuf > -1);\nassertFalse(parseBuf > 10);\nassertNotEquals(parseBuf, 10);\nassertTrue(parseBuf <= 0);\nassertEquals(Arrays.asList(0), Arrays.asList(parseBuf));\nassertNotSame(new Integer(0), parseBuf);\n```\n====================\n\n",
+    "scores": [
+        0.939,
+        0.898,
+        0.868,
+        0.83,
+        0.792,
+        0.776,
+        0.723,
+        0.708,
+        0.708,
+        0.708,
+        0.676,
+        0.643,
+        0.622,
+        0.582,
+        0.581,
+        0.554,
+        0.548,
+        0.548,
+        0.535,
+        0.207,
+        0.19,
+        0.0
+    ],
+    "ground_truth": "assertEquals(42,parseBuf);"
+}

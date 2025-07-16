@@ -1,0 +1,65 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testMatches ( ) {
+         List < ? > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, result.size());
+assertTrue(result.isEmpty());
+assertNotNull(result);
+assertEquals(1, result.size());
+assertFalse(result.isEmpty());
+assertTrue(result.contains("test"));
+assertFalse(result.contains("invalid"));
+assertEquals("expectedValue", result.get(0));
+assertNotEquals("unexpectedValue", result.get(0));
+assertTrue(result.size() > 0);
+assertFalse(result.size() == 0);
+assertNotNull(result.get(0));
+assertEquals(10, result.size());
+assertTrue(result.containsAll(expectedList));
+assertFalse(result.containsAll(unexpectedList));
+assertTrue(result.get(0) instanceof String);
+assertFalse(result.get(0) instanceof Integer);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(result.size(),1); ===
+0.931 - assertEquals(0, result.size())
+0.931 - assertEquals(1, result.size())
+0.915 - assertEquals(10, result.size())
+0.828 - assertFalse(result.size() == 0)
+0.786 - assertTrue(result.size() > 0)
+0.724 - assertFalse(result.isEmpty())
+0.702 - assertNotNull(result.get(0))
+0.667 - assertTrue(result.isEmpty())
+0.667 - assertEquals("expectedValue", result.get(0))
+0.640 - assertNotNull(result)
+0.623 - assertNotEquals("unexpectedValue", result.get(0))
+0.618 - assertFalse(result.contains("invalid"))
+0.594 - assertTrue(result.contains("test"))
+0.556 - assertFalse(result.get(0) instanceof Integer)
+0.553 - assertFalse(result.containsAll(unexpectedList))
+0.521 - assertTrue(result.containsAll(expectedList))
+0.514 - assertTrue(result.get(0) instanceof String)

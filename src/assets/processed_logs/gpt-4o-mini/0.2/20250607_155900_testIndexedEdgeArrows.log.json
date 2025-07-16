@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testIndexedEdgeArrows ( ) {\nStringBuilder query = new StringBuilder ( ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nquery . append ( \"STR\" ) ;\nOResultSet result = db . query ( query . toString ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedSize, result.size());\nassertTrue(result.stream().allMatch(r -> r instanceof OResult));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"propertyName\") != null));\nassertEquals(expectedValue, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertFalse(result.isEmpty());\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"anotherProperty\") instanceof String));\nassertEquals(expectedEdgeCount, result.stream().filter(r -> r.getProperty(\"edgeProperty\") != null).count());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"edgeProperty\").equals(expectedEdgeValue)));\nassertNotEquals(unexpectedValue, result.stream().findFirst().get().getProperty(\"propertyName\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"numericProperty\") instanceof Number));\nassertEquals(expectedNumericValue, result.stream().findFirst().get().getProperty(\"numericProperty\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"booleanProperty\") == true));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"booleanProperty\") == false));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"listProperty\") instanceof List));\nassertEquals(expectedListSize, result.stream().findFirst().get().getProperty(\"listProperty\").size());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"mapProperty\") instanceof Map));\nassertEquals(expectedMapValue, result.stream().findFirst().get().getProperty(\"mapProperty\").get(\"key\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"dateProperty\") instanceof Date));\nassertEquals(expectedDate, result.stream().findFirst().get().getProperty(\"dateProperty\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.702,
+        0.588,
+        0.526,
+        0.506,
+        0.423,
+        0.419,
+        0.411,
+        0.4,
+        0.393,
+        0.393,
+        0.376,
+        0.376,
+        0.362,
+        0.359,
+        0.349,
+        0.346,
+        0.344,
+        0.331,
+        0.323,
+        0.323,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

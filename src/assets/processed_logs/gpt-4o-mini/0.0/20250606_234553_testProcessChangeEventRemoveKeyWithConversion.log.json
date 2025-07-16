@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\npublic void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) {\nfinal boolean result ;\nif ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nelse result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nif ( ! result ) throw new IllegalArgumentException ( \"STR\" + changeEvent . getChangeType ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testProcessChangeEventRemoveKeyWithConversion ( ) {\nfinal Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ;\nfinal Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ;\nfinal OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . REMOVE , \"STR\" , \"STR\" ) ;\npropertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ;\nfinal Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ;\nfinal Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ;\nremovedKeys . put ( 12 , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(1, keysToRemove.size());\nassertTrue(keysToRemove.containsKey(12));\nassertEquals(Integer.valueOf(1), keysToRemove.get(12));\nassertEquals(0, keysToAdd.size());\nassertFalse(keysToAdd.containsKey(12));\nassertFalse(keysToAdd.containsKey(1));\nassertFalse(keysToAdd.containsKey(0));\nassertFalse(keysToRemove.containsKey(0));\nassertFalse(keysToRemove.containsKey(1));\nassertTrue(keysToRemove.containsKey(12));\nassertNotNull(multiValueChangeEvent);\nassertEquals(OMultiValueChangeEvent.OChangeType.REMOVE, multiValueChangeEvent.getChangeType());\nassertEquals(\"STR\", multiValueChangeEvent.getOldValue());\nassertEquals(\"STR\", multiValueChangeEvent.getNewValue());\nassertNotNull(propertyIndexByIntegerKey);\nassertDoesNotThrow(() -> propertyIndexByIntegerKey.processChangeEvent(multiValueChangeEvent, keysToAdd, keysToRemove));\nassertThrows(IllegalArgumentException.class, () -> {\npropertyIndexByIntegerKey.processChangeEvent(new OMultiValueChangeEvent<>(OMultiValueChangeEvent.OChangeType.ADD, \"STR\", \"STR\"), keysToAdd, keysToRemove);\n});\nassertTrue(keysToRemove.isEmpty() || keysToRemove.size() == 1);\nassertTrue(keysToAdd.isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.738,
+        0.686,
+        0.686,
+        0.676,
+        0.605,
+        0.594,
+        0.575,
+        0.575,
+        0.521,
+        0.521,
+        0.512,
+        0.466,
+        0.418,
+        0.409,
+        0.409,
+        0.406,
+        0.327,
+        0.286,
+        0.208,
+        0.057,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(keysToAdd,addedKeys);"
+}

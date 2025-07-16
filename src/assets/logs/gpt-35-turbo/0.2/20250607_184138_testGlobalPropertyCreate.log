@@ -1,0 +1,67 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalProperty {
+    String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalPropertyTest {
+    @Test
+     public void testGlobalPropertyCreate ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         schema . createGlobalProperty ( "STR" , OType . SHORT , 100 ) ; 
+         OGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.SHORT, prop.getType());
+Assert.assertEquals(100, prop.getId());
+Assert.assertTrue(schema.existsGlobalProperty("STR"));
+Assert.assertEquals(prop, schema.getGlobalProperty("STR"));
+Assert.assertTrue(schema.existsGlobalProperty(100));
+Assert.assertEquals(prop, schema.getGlobalPropertyById(100));
+Assert.assertTrue(schema.getGlobalProperties().contains(prop));
+Assert.assertTrue(schema.getGlobalProperties().size() > 0);
+Assert.assertTrue(schema.getGlobalProperties().containsKey("STR"));
+Assert.assertTrue(schema.getGlobalProperties().containsValue(prop));
+Assert.assertTrue(schema.getGlobalProperties().containsValue(new OGlobalProperty("STR", OType.SHORT, 100)));
+Assert.assertTrue(schema.getGlobalProperties().values().contains(prop));
+Assert.assertTrue(schema.getGlobalProperties().keySet().contains("STR"));
+Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>("STR", prop)));
+Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>(100, prop)));
+Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>("STR", new OGlobalProperty("STR", OType.SHORT, 100))));
+Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>(100, new OGlobalProperty("STR", OType.SHORT, 100))));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(prop.getName(),"STR"); ===
+0.824 - Assert.assertEquals("STR", prop.getName())
+0.750 - Assert.assertEquals(100, prop.getId())
+0.714 - Assert.assertEquals(prop, schema.getGlobalProperty("STR"))
+0.676 - Assert.assertEquals(OType.SHORT, prop.getType())
+0.605 - Assert.assertEquals(prop, schema.getGlobalPropertyById(100))
+0.528 - Assert.assertNotNull(prop)
+0.525 - Assert.assertTrue(schema.existsGlobalProperty("STR"))
+0.473 - Assert.assertTrue(schema.getGlobalProperties().containsKey("STR"))
+0.444 - Assert.assertTrue(schema.getGlobalProperties().keySet().contains("STR"))
+0.436 - Assert.assertTrue(schema.existsGlobalProperty(100))
+0.410 - Assert.assertTrue(schema.getGlobalProperties().size() > 0)
+0.382 - Assert.assertTrue(schema.getGlobalProperties().contains(prop))
+0.362 - Assert.assertTrue(schema.getGlobalProperties().containsValue(prop))
+0.347 - Assert.assertTrue(schema.getGlobalProperties().values().contains(prop))
+0.324 - Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>("STR", prop)))
+0.321 - Assert.assertTrue(schema.getGlobalProperties().containsValue(new OGlobalProperty("STR", OType.SHORT, 100)))
+0.269 - Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>(100, new OGlobalProperty("STR", OType.SHORT, 100))))
+0.254 - Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>("STR", new OGlobalProperty("STR", OType.SHORT, 100))))
+0.254 - Assert.assertTrue(schema.getGlobalProperties().entrySet().contains(new AbstractMap.SimpleEntry<>(100, prop)))

@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutor {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSqlScriptExecutorTest {
+    @Test
+     public void testMultipleCreateEdgeOnTheSameLet ( ) {
+         OrientDB factory = new OrientDB ( "STR" , "STR" , "STR" , OrientDBConfig . defaultConfig ( ) ) ; 
+         String dbName = getClass ( ) . getSimpleName ( ) + "STR" ; 
+         factory . create ( dbName , ODatabaseType . MEMORY ) ; 
+         ODatabaseDocument db = factory . open ( dbName , "STR" , "STR" ) ; 
+         String script = "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         script += "STR" ; 
+         OResultSet result = db . execute ( "STR" , script ) ; 
+         result . close ( ) ; 
+         result = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result.hasNext());
+assertEquals(expectedCount, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("propertyName") != null));
+assertEquals(expectedValue, result.stream().findFirst().get().getProperty("propertyName"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("anotherProperty").equals(expectedAnotherValue)));
+assertFalse(result.isClosed());
+assertEquals(expectedType, result.stream().findFirst().get().getType());
+assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")));
+assertEquals(expectedId, result.stream().findFirst().get().getIdentity());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("createdAt").isAfter(expectedDate)));
+assertEquals(expectedSize, result.stream().collect(Collectors.toList()).size());
+assertTrue(result.stream().allMatch(r -> r.getProperty("category").equals(expectedCategory)));
+assertNotEquals(unexpectedValue, result.stream().findFirst().get().getProperty("propertyName"));
+assertTrue(result.stream().anyMatch(r -> r.getProperty("isValid") == true));
+assertEquals(expectedString, result.stream().findFirst().get().getProperty("description"));
+assertTrue(result.stream().allMatch(r -> r.getProperty("count") > 0));
+assertFalse(result.stream().noneMatch(r -> r.getProperty("isActive") == true));
+assertEquals(expectedDate, result.stream().findFirst().get().getProperty("createdAt").toLocalDate());
+assertTrue(result.stream().anyMatch(r -> r.getProperty("type").equals("exampleType")));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(2,result.stream().count()); ===
+0.844 - assertEquals(expectedCount, result.stream().count())
+0.642 - assertEquals(expectedType, result.stream().findFirst().get().getType())
+0.638 - assertFalse(result.isClosed())
+0.631 - assertEquals(expectedId, result.stream().findFirst().get().getIdentity())
+0.627 - assertTrue(result.hasNext())
+0.615 - assertEquals(expectedSize, result.stream().collect(Collectors.toList()).size())
+0.596 - assertTrue(result.stream().allMatch(r -> r.getProperty("count") > 0))
+0.549 - assertFalse(result.stream().noneMatch(r -> r.getProperty("isActive") == true))
+0.547 - assertEquals(expectedValue, result.stream().findFirst().get().getProperty("propertyName"))
+0.547 - assertEquals(expectedString, result.stream().findFirst().get().getProperty("description"))
+0.527 - assertTrue(result.stream().anyMatch(r -> r.getProperty("isValid") == true))
+0.526 - assertNotEquals(unexpectedValue, result.stream().findFirst().get().getProperty("propertyName"))
+0.507 - assertEquals(expectedDate, result.stream().findFirst().get().getProperty("createdAt").toLocalDate())
+0.504 - assertTrue(result.stream().allMatch(r -> r.getProperty("propertyName") != null))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("status").equals("active")))
+0.488 - assertTrue(result.stream().anyMatch(r -> r.getProperty("type").equals("exampleType")))
+0.471 - ```java
+assertNotNull(result)
+0.469 - assertTrue(result.stream().anyMatch(r -> r.getProperty("createdAt").isAfter(expectedDate)))
+0.462 - assertTrue(result.stream().allMatch(r -> r.getProperty("category").equals(expectedCategory)))
+0.440 - assertTrue(result.stream().anyMatch(r -> r.getProperty("anotherProperty").equals(expectedAnotherValue)))
+0.000 - ```

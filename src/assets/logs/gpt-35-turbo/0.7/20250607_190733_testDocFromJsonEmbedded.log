@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTx {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODatabaseDocumentTxTest {
+    @Test
+     public void testDocFromJsonEmbedded ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass c0 = schema . createClass ( "STR" ) ; 
+         OClass c1 = schema . createClass ( "STR" ) ; 
+         c1 . createProperty ( "STR" , OType . STRING ) ; 
+         c1 . createProperty ( "STR" , OType . EMBEDDED , c0 ) ; 
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . fromJSON ( "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" ) ; 
+         db . save ( doc ) ; 
+         List < ODocument > result = db . query ( new OSQLSynchQuery < Object > ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(1, result.size());
+Assert.assertEquals("STR", result.get(0).field("STR"));
+Assert.assertNull(result.get(0).field("EMBEDDED"));
+Assert.assertTrue(result.get(0).field("STR") instanceof String);
+Assert.assertTrue(result.get(0).field("EMBEDDED") instanceof ODocument);
+Assert.assertEquals(11, result.get(0).field("STR").toString().length());
+Assert.assertEquals(1, ((List<?>) result.get(0).field("EMBEDDED")).size());
+Assert.assertEquals("STR", ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR"));
+Assert.assertEquals(11, ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR").toString().length());
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertEquals("STRSTRSTRSTRSTRSTRSTRSTRSTRSTRSTR", ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR"));
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertEquals(11, ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR").toString().length());
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(result.size(),0); ===
+0.931 - Assert.assertEquals(1, result.size())
+0.640 - Assert.assertEquals("STR", result.get(0).field("STR"))
+0.574 - Assert.assertEquals(1, ((List<?>) result.get(0).field("EMBEDDED")).size())
+0.556 - Assert.assertNull(result.get(0).field("EMBEDDED"))
+0.543 - Assert.assertEquals(11, result.get(0).field("STR").toString().length())
+0.458 - Assert.assertTrue(result.get(0).field("STR") instanceof String)
+0.432 - Assert.assertEquals("STR", ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR"))
+0.418 - Assert.assertTrue(result.get(0).field("EMBEDDED") instanceof ODocument)
+0.391 - Assert.assertEquals(11, ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR").toString().length())
+0.391 - Assert.assertEquals(11, ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR").toString().length())
+0.340 - Assert.assertEquals("STRSTRSTRSTRSTRSTRSTRSTRSTRSTRSTR", ((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR"))
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)
+0.319 - Assert.assertTrue(((List<?>) result.get(0).field("EMBEDDED")).get(0).field("STR") instanceof String)

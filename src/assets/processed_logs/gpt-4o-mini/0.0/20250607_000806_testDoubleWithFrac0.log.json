@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void writeNumberLiteral ( double value , int numFracDigits ) throws IOException {\ncheckAcceptsValueAndPrefixComma ( ) ;\nout . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ;\nafterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testDoubleWithFrac0 ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . writeNumberLiteral ( 1.23 , 0 ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"1\", result);\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertTrue(result.length() > 0);\nassertTrue(result.contains(\"1\"));\nassertFalse(result.contains(\"2\"));\nassertFalse(result.contains(\"3\"));\nassertEquals(1, result.length());\nassertTrue(result.matches(\"\\\\d+\"));\nassertFalse(result.matches(\"\\\\d+\\\\.\\\\d+\"));\nassertTrue(result.equals(\"1\"));\nassertFalse(result.equals(\"1.0\"));\nassertFalse(result.equals(\"1.23\"));\nassertTrue(result.startsWith(\"1\"));\nassertTrue(result.endsWith(\"1\"));\nassertEquals(1, result.charAt(0) - '0');\nassertTrue(result.indexOf('1') == 0);\nassertTrue(result.indexOf('2') == -1);\nassertTrue(result.indexOf('3') == -1);\nassertTrue(result.indexOf('.') == -1);\nassertTrue(result.matches(\"[0-9]+\"));\nassertEquals(\"1\", result.trim());\n```\n====================\n\n",
+    "scores": [
+        0.807,
+        0.793,
+        0.737,
+        0.681,
+        0.677,
+        0.618,
+        0.576,
+        0.576,
+        0.545,
+        0.536,
+        0.517,
+        0.517,
+        0.508,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.492,
+        0.492,
+        0.492,
+        0.484,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

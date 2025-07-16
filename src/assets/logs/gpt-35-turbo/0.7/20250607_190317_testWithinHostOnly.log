@@ -1,0 +1,95 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilter {
+    @Override
+     public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) { 
+     if ( sourceUrl == null || ( ! ignoreOutsideHost && ! ignoreOutsideDomain ) ) { 
+     return urlToFilter ; 
+     } URL tURL ; 
+     try { 
+     tURL = new URL ( urlToFilter ) ; 
+     } catch ( MalformedURLException e1 ) { 
+     return null ; 
+     } String fromHost ; 
+     String fromDomain = null ; 
+     if ( sourceUrl == previousSourceUrl ) { 
+     fromHost = previousSourceHost ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = previousSourceDomain ; 
+     } } else { 
+     fromHost = sourceUrl . getHost ( ) ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = PaidLevelDomain . getPLD ( fromHost ) ; 
+     } previousSourceHost = fromHost ; 
+     previousSourceDomain = fromDomain ; 
+     previousSourceUrl = sourceUrl ; 
+     } String toHost = tURL . getHost ( ) ; 
+     if ( ignoreOutsideHost ) { 
+     if ( toHost == null || ! toHost . equalsIgnoreCase ( fromHost ) ) { 
+     return null ; 
+     } } if ( ignoreOutsideDomain ) { 
+     String toDomain = PaidLevelDomain . getPLD ( toHost ) ; 
+     if ( toDomain == null || ! toDomain . equals ( fromDomain ) ) { 
+     return null ; 
+     } } return urlToFilter ; 
+     }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilterTest {
+    @Test
+     public void testWithinHostOnly ( ) throws MalformedURLException {
+         HostURLFilter allAllowed = createFilter ( true , false ) ; 
+         URL sourceURL = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( sourceURL , metadata , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("STR", filterResult);
+assertNull(allAllowed.filter(null, metadata, "STR"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "STR"));
+assertNull(allAllowed.filter(sourceURL, metadata, "DIFFERENT"));
+assertNull(allAllowed.filter(sourceURL, metadata, null));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "http://example.com"));
+assertNull(allAllowed.filter(sourceURL, metadata, "http://different.com"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "http://example.com/page"));
+assertNull(allAllowed.filter(sourceURL, metadata, "http://different.com/page"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "https://www.example.com"));
+assertNull(allAllowed.filter(sourceURL, metadata, "https://www.different.com"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "https://www.example.com/page"));
+assertNull(allAllowed.filter(sourceURL, metadata, "https://www.different.com/page"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "ftp://example.com"));
+assertNull(allAllowed.filter(sourceURL, metadata, "ftp://different.com"));
+assertEquals("STR", allAllowed.filter(sourceURL, metadata, "ftp://example.com/page"));
+assertNull(allAllowed.filter(sourceURL, metadata, "ftp://different.com/page"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",filterResult); ===
+1.000 - assertEquals("STR", filterResult)
+0.611 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "STR"))
+0.532 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "ftp://example.com"))
+0.527 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "http://example.com"))
+0.522 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "https://www.example.com"))
+0.509 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "ftp://example.com/page"))
+0.504 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "http://example.com/page"))
+0.500 - assertEquals("STR", allAllowed.filter(sourceURL, metadata, "https://www.example.com/page"))
+0.465 - assertNull(allAllowed.filter(sourceURL, metadata, null))
+0.463 - assertNull(allAllowed.filter(null, metadata, "STR"))
+0.409 - assertNull(allAllowed.filter(sourceURL, metadata, "DIFFERENT"))
+0.369 - assertNull(allAllowed.filter(sourceURL, metadata, "ftp://different.com"))
+0.367 - assertNull(allAllowed.filter(sourceURL, metadata, "https://www.different.com"))
+0.365 - assertNull(allAllowed.filter(sourceURL, metadata, "http://different.com"))
+0.352 - assertNull(allAllowed.filter(sourceURL, metadata, "ftp://different.com/page"))
+0.351 - assertNull(allAllowed.filter(sourceURL, metadata, "https://www.different.com/page"))
+0.349 - assertNull(allAllowed.filter(sourceURL, metadata, "http://different.com/page"))

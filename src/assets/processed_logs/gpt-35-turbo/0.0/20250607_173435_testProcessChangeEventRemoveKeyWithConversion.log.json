@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\npublic void processChangeEvent ( final OMultiValueChangeEvent < ? , ? > changeEvent , final Map < Object , Integer > keysToAdd , final Map < Object , Integer > keysToRemove ) {\nfinal boolean result ;\nif ( indexBy . equals ( INDEX_BY . KEY ) ) result = processKeyChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nelse result = processValueChangeEvent ( changeEvent , keysToAdd , keysToRemove ) ;\nif ( ! result ) throw new IllegalArgumentException ( \"STR\" + changeEvent . getChangeType ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testProcessChangeEventRemoveKeyWithConversion ( ) {\nfinal Map < Object , Integer > keysToAdd = new HashMap < Object , Integer > ( ) ;\nfinal Map < Object , Integer > keysToRemove = new HashMap < Object , Integer > ( ) ;\nfinal OMultiValueChangeEvent < String , String > multiValueChangeEvent = new OMultiValueChangeEvent < String , String > ( OMultiValueChangeEvent . OChangeType . REMOVE , \"STR\" , \"STR\" ) ;\npropertyIndexByIntegerKey . processChangeEvent ( multiValueChangeEvent , keysToAdd , keysToRemove ) ;\nfinal Map < Object , Integer > addedKeys = new HashMap < Object , Integer > ( ) ;\nfinal Map < Object , Integer > removedKeys = new HashMap < Object , Integer > ( ) ;\nremovedKeys . put ( 12 , 1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertTrue(keysToAdd.isEmpty());\nAssert.assertFalse(keysToRemove.isEmpty());\nAssert.assertEquals(1, keysToRemove.size());\nAssert.assertTrue(keysToRemove.containsKey(12));\nAssert.assertEquals(1, keysToRemove.get(12).intValue());\nAssert.assertTrue(addedKeys.isEmpty());\nAssert.assertTrue(removedKeys.isEmpty());\nAssert.assertNotEquals(0, keysToRemove.size());\nAssert.assertNotEquals(0, keysToAdd.size());\nAssert.assertTrue(keysToRemove.containsKey(12));\nAssert.assertEquals(1, keysToRemove.get(12).intValue());\nAssert.assertFalse(addedKeys.containsKey(12));\nAssert.assertFalse(removedKeys.containsKey(12));\nAssert.assertTrue(keysToRemove.containsKey(12));\nAssert.assertEquals(1, keysToRemove.get(12).intValue());\nAssert.assertTrue(keysToRemove.containsKey(12));\nAssert.assertEquals(1, keysToRemove.get(12).intValue());\nAssert.assertTrue(keysToRemove.containsKey(12));\nAssert.assertEquals(1, keysToRemove.get(12).intValue());\n====================\n\n",
+    "scores": [
+        0.706,
+        0.676,
+        0.648,
+        0.594,
+        0.588,
+        0.563,
+        0.562,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.55,
+        0.521,
+        0.521,
+        0.521,
+        0.521,
+        0.521,
+        0.521,
+        0.515
+    ],
+    "ground_truth": "Assert.assertEquals(keysToAdd,addedKeys);"
+}

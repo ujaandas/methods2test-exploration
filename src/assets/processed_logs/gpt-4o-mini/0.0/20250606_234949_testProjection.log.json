@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testProjection ( ) {\nlong idxUsagesBefore = indexUsages ( db ) ;\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertFalse(qResult.isEmpty());\nassertEquals(expectedSize, qResult.size());\nassertTrue(qResult.stream().allMatch(doc -> doc instanceof ODocument));\nassertEquals(expectedFieldValue, qResult.get(0).field(\"expectedField\"));\nassertEquals(expectedFieldValue, qResult.get(1).field(\"expectedField\"));\nassertTrue(qResult.get(0).field(\"anotherField\") instanceof String);\nassertTrue(qResult.get(1).field(\"anotherField\") instanceof String);\nassertEquals(expectedFieldCount, qResult.get(0).fieldNames().size());\nassertEquals(expectedFieldCount, qResult.get(1).fieldNames().size());\nassertNotEquals(unexpectedValue, qResult.get(0).field(\"unexpectedField\"));\nassertNotEquals(unexpectedValue, qResult.get(1).field(\"unexpectedField\"));\nassertTrue(qResult.stream().anyMatch(doc -> doc.field(\"searchField\").equals(searchValue)));\nassertFalse(qResult.stream().anyMatch(doc -> doc.field(\"searchField\").equals(nonExistentValue)));\nassertEquals(expectedType, qResult.get(0).getClass());\nassertEquals(expectedType, qResult.get(1).getClass());\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"numericField\") instanceof Number));\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"booleanField\") instanceof Boolean));\nassertEquals(expectedSum, qResult.stream().mapToDouble(doc -> doc.field(\"numericField\")).sum(), delta);\nassertEquals(expectedAverage, qResult.stream().mapToDouble(doc -> doc.field(\"numericField\")).average().orElse(0), delta);\nassertTrue(qResult.stream().allMatch(doc -> doc.field(\"dateField\").after(startDate) && doc.field(\"dateField\").before(endDate)));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.61,
+        0.61,
+        0.577,
+        0.577,
+        0.567,
+        0.52,
+        0.51,
+        0.5,
+        0.49,
+        0.438,
+        0.438,
+        0.426,
+        0.404,
+        0.384,
+        0.371,
+        0.365,
+        0.362,
+        0.356,
+        0.288,
+        0.0
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

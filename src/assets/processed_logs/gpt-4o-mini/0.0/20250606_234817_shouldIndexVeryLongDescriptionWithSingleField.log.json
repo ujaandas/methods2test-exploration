@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSort {\ndefault Stream < OResult > stream ( ) {\nreturn StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ;\n}\n}\n\npackage orientechnologies.orientdb.lucene;\n\npublic class LuceneSortTest {\n@Test\npublic void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {\ndb . save ( new ODocument ( \"STR\" ) . field ( \"STR\" , DESCRIPTION ) ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nlong count = db . query ( \"STR\" ) . stream ( ) . count ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(count > 0);\nassertEquals(expectedCount, count);\nassertNotNull(db.query(\"STR\"));\nassertFalse(db.query(\"STR\").isEmpty());\nassertTrue(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").equals(DESCRIPTION)));\nassertEquals(DESCRIPTION, db.query(\"STR\").stream().findFirst().get().getProperty(\"STR\"));\nassertTrue(db.query(\"STR\").stream().allMatch(result -> result.getProperty(\"STR\").length() <= MAX_LENGTH));\nassertEquals(expectedFieldValue, db.query(\"STR\").stream().findFirst().get().getProperty(\"expectedField\"));\nassertTrue(db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).collect(Collectors.toSet()).contains(DESCRIPTION));\nassertEquals(expectedDocumentCount, db.query(\"STR\").stream().count());\nassertNotEquals(0, db.query(\"STR\").stream().filter(result -> result.getProperty(\"STR\").contains(\"keyword\")).count());\nassertTrue(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").startsWith(\"prefix\")));\nassertFalse(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").isEmpty()));\nassertTrue(db.query(\"STR\").stream().allMatch(result -> result.getProperty(\"STR\").length() > MIN_LENGTH));\nassertEquals(expectedUniqueCount, db.query(\"STR\").stream().map(result -> result.getProperty(\"STR\")).distinct().count());\nassertTrue(db.query(\"STR\").stream().anyMatch(result -> result.getProperty(\"STR\").endsWith(\"suffix\")));\nassertNotNull(db.query(\"STR\").stream().findFirst().orElse(null));\nassertTrue(db.query(\"STR\").stream().filter(result -> result.getProperty(\"STR\").contains(\"substring\")).count() > 1);\nassertEquals(expectedMaxLength, db.query(\"STR\").stream().mapToInt(result -> result.getProperty(\"STR\").length()).max().orElse(0));\nassertTrue(db.query(\"STR\").stream().allMatch(result -> result.getProperty(\"STR\").matches(\"regexPattern\")));\n```\n====================\n\n",
+    "scores": [
+        0.741,
+        0.583,
+        0.449,
+        0.441,
+        0.392,
+        0.329,
+        0.315,
+        0.299,
+        0.292,
+        0.275,
+        0.272,
+        0.25,
+        0.248,
+        0.247,
+        0.246,
+        0.233,
+        0.23,
+        0.224,
+        0.215,
+        0.178,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(1,count);"
+}

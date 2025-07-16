@@ -1,0 +1,70 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Exception {
+    public TestException ( Throwable cause ) { 
+    super ( cause ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class TestExceptionTest {
+    @Test
+     public void testConstructor_withCause ( ) {
+         RuntimeException cause = new RuntimeException ( ) ; 
+         TestException exception = new TestException ( cause ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(exception);
+Assert.assertEquals(cause, exception.getCause());
+Assert.assertTrue(exception.getMessage() == null);
+Assert.assertTrue(exception.toString().contains("TestException"));
+Assert.assertTrue(exception.toString().contains("RuntimeException"));
+Assert.assertTrue(exception.toString().contains("Caused by:"));
+Assert.assertTrue(exception.toString().contains("java.lang.RuntimeException"));
+Assert.assertTrue(exception.toString().contains("at hazelcast.hazelcast-simulator.simulator.TestExceptionTest.testConstructor_withCause"));
+Assert.assertTrue(exception.toString().contains("Suppressed:"));
+Assert.assertTrue(exception.getSuppressed().length == 0);
+Assert.assertTrue(exception.getClass().getSimpleName().equals("TestException"));
+Assert.assertTrue(exception.getClass().getSuperclass().getSimpleName().equals("Exception"));
+Assert.assertTrue(exception.hashCode() != 0);
+Assert.assertTrue(exception.equals(exception));
+Assert.assertFalse(exception.equals(null));
+Assert.assertFalse(exception.equals(new Object()));
+Assert.assertTrue(exception.equals(new TestException(cause)));
+Assert.assertTrue(exception.equals(exception));
+Assert.assertTrue(exception.hashCode() == new TestException(cause).hashCode());
+Assert.assertTrue(exception.hashCode() == exception.hashCode());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(cause,exception.getCause()); ===
+1.000 - Assert.assertEquals(cause, exception.getCause())
+0.667 - Assert.assertFalse(exception.equals(null))
+0.650 - Assert.assertTrue(exception.getMessage() == null)
+0.621 - Assert.assertTrue(exception.getSuppressed().length == 0)
+0.613 - Assert.assertTrue(exception.hashCode() != 0)
+0.610 - Assert.assertFalse(exception.equals(new Object()))
+0.594 - Assert.assertNotNull(exception)
+0.574 - Assert.assertTrue(exception.toString().contains("Caused by:"))
+0.559 - Assert.assertTrue(exception.equals(new TestException(cause)))
+0.557 - Assert.assertTrue(exception.equals(exception))
+0.557 - Assert.assertTrue(exception.equals(exception))
+0.532 - Assert.assertTrue(exception.hashCode() == exception.hashCode())
+0.500 - Assert.assertTrue(exception.toString().contains("Suppressed:"))
+0.500 - Assert.assertTrue(exception.getClass().getSimpleName().equals("TestException"))
+0.500 - Assert.assertTrue(exception.hashCode() == new TestException(cause).hashCode())
+0.468 - Assert.assertTrue(exception.getClass().getSuperclass().getSimpleName().equals("Exception"))
+0.449 - Assert.assertTrue(exception.toString().contains("TestException"))
+0.436 - Assert.assertTrue(exception.toString().contains("RuntimeException"))
+0.396 - Assert.assertTrue(exception.toString().contains("java.lang.RuntimeException"))
+0.329 - Assert.assertTrue(exception.toString().contains("at hazelcast.hazelcast-simulator.simulator.TestExceptionTest.testConstructor_withCause"))

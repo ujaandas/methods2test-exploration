@@ -1,0 +1,98 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactory {
+    @Override
+     public MBeanAccessConnection createConnection ( ) throws IOException { 
+     JMXMBeanConnection result = null ; 
+     try { 
+     VirtualMachine vm = this . attacher . attach ( jvmId ) ; 
+     String url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     if ( url == null ) { 
+     String javaHome = vm . getSystemProperties ( ) . getProperty ( "STR" ) ; 
+     String agent = javaHome + File . separator + "STR" + File . separator + "STR" ; 
+     vm . loadAgent ( agent ) ; 
+     url = vm . getAgentProperties ( ) . getProperty ( COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ; 
+     } if ( url != null ) { 
+     JMXServiceURL jmxUrl = this . jmxServiceUrlFactory . createJMXServiceUrl ( url ) ; 
+     JMXConnector connector = this . jmxConnectorFactoryDelegate . connect ( jmxUrl ) ; 
+     result = this . jmxmBeanConnectionFactory . create ( connector ) ; 
+     } else { 
+     log . warn ( "STR" , this . jvmId ) ; 
+     } } catch ( AgentInitializationException | AgentLoadException | AttachNotSupportedException exc ) { 
+     log . warn ( "STR" , this . jvmId , exc ) ; 
+     } return result ; 
+     }
+}
+
+package amlinv.stat-collection-utils;
+
+public class JMXJvmIdConnectionFactoryTest {
+    @Test
+     public void testCreateConnectionFailedToGetUrl ( ) throws Exception {
+         this . initFactory ( ) ; 
+         Mockito . when ( this . mockAttacher . attach ( "STR" ) ) . thenReturn ( this . mockVirtualMachine ) ; 
+         Mockito . when ( this . mockVirtualMachine . getAgentProperties ( ) ) . thenReturn ( this . mockAgentProperties ) ; 
+         Mockito . when ( this . mockVirtualMachine . getSystemProperties ( ) ) . thenReturn ( this . mockSystemProperties ) ; 
+         Mockito . when ( this . mockAgentProperties . getProperty ( JMXJvmIdConnectionFactory . COM_SUN_LOCAL_CONNECTOR_ADDRESS_PROPERTY ) ) . thenReturn ( null ) ; 
+         MBeanAccessConnection result = this . factory . createConnection ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof MBeanAccessConnection);
+assertEquals(expectedValue, result.getSomeProperty());
+assertFalse(result.isConnected());
+assertNull(result.getConnectionDetails());
+assertThrows(SomeExpectedException.class, () -> result.someMethodThatThrows());
+assertTrue(logContains("STR", jvmId));
+assertEquals("Expected message", log.getLastWarningMessage());
+assertNotEquals(unexpectedValue, result.getAnotherProperty());
+assertTrue(result.isInitialized());
+assertFalse(result.isClosed());
+assertNull(result.getMBeanServerConnection());
+assertEquals(expectedState, result.getState());
+assertTrue(result.getAttributes().isEmpty());
+assertFalse(result.hasActiveSessions());
+assertEquals(expectedTimeout, result.getTimeout());
+assertNotNull(result.getServiceUrl());
+assertTrue(result.getServiceUrl().startsWith("jmx"));
+assertFalse(result.isValid());
+assertEquals(expectedErrorCode, result.getErrorCode());
+assertTrue(result.getErrorMessages().isEmpty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(result); ===
+0.766 - ```java
+assertNotNull(result)
+0.655 - assertNotNull(result.getServiceUrl())
+0.638 - assertFalse(result.isValid())
+0.625 - assertFalse(result.isClosed())
+0.610 - assertNull(result.getConnectionDetails())
+0.588 - assertFalse(result.isConnected())
+0.577 - assertTrue(result.isInitialized())
+0.571 - assertNull(result.getMBeanServerConnection())
+0.526 - assertFalse(result.hasActiveSessions())
+0.508 - assertEquals(expectedState, result.getState())
+0.484 - assertTrue(result.getAttributes().isEmpty())
+0.478 - assertEquals(expectedTimeout, result.getTimeout())
+0.462 - assertTrue(result.getErrorMessages().isEmpty())
+0.457 - assertEquals(expectedValue, result.getSomeProperty())
+0.451 - assertEquals(expectedErrorCode, result.getErrorCode())
+0.448 - assertTrue(result instanceof MBeanAccessConnection)
+0.436 - assertNotEquals(unexpectedValue, result.getAnotherProperty())
+0.429 - assertTrue(result.getServiceUrl().startsWith("jmx"))
+0.370 - assertTrue(logContains("STR", jvmId))
+0.364 - assertEquals("Expected message", log.getLastWarningMessage())
+0.323 - assertThrows(SomeExpectedException.class, () -> result.someMethodThatThrows())
+0.000 - ```

@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNew {
+    @Override
+     boolean hasNext ( ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionNewTest {
+    @Test
+     public void testFriendsOfFriendsArrows ( ) throws Exception {
+         OResultSet qResult = db . query ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(qResult);
+assertTrue(qResult.hasNext());
+assertEquals(10, qResult.stream().count());
+assertFalse(qResult.getProperty("name").isEmpty());
+assertTrue(qResult.getProperty("age") instanceof Integer);
+assertNotNull(qResult.getProperty("address"));
+assertTrue(qResult.getProperty("address") instanceof String);
+assertEquals(2, qResult.getPropertyNames().size());
+assertFalse(qResult.getPropertyNames().contains("email"));
+assertTrue(qResult.getPropertyNames().contains("phone"));
+assertEquals(5, qResult.getColumnNames().size());
+assertFalse(qResult.getColumnNames().contains("salary"));
+assertTrue(qResult.getColumnNames().contains("city"));
+assertEquals(3, qResult.getMetadata().size());
+assertTrue(qResult.getExecutionPlan() instanceof String);
+assertNotNull(qResult.getQueryText());
+assertFalse(qResult.getWarnings().isEmpty());
+assertTrue(qResult.getWarnings().contains("Warning: large result set"));
+assertNotEquals(0, qResult.stream().mapToInt(row -> row.getProperty("age")).sum());
+assertEquals(1, qResult.stream().filter(row -> row.getProperty("city").equals("New York")).count());
+assertTrue(qResult.stream().anyMatch(row -> row.getProperty("name").equals("Alice")));
+assertFalse(qResult.stream().allMatch(row -> row.getProperty("age").equals(30)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(qResult.hasNext()); ===
+1.000 - assertTrue(qResult.hasNext())
+0.667 - assertNotNull(qResult.getQueryText())
+0.627 - assertNotNull(qResult)
+0.603 - assertEquals(3, qResult.getMetadata().size())
+0.603 - assertFalse(qResult.getWarnings().isEmpty())
+0.600 - assertEquals(10, qResult.stream().count())
+0.585 - assertTrue(qResult.getColumnNames().contains("city"))
+0.579 - assertEquals(5, qResult.getColumnNames().size())
+0.571 - assertTrue(qResult.getProperty("age") instanceof Integer)
+0.565 - assertTrue(qResult.getPropertyNames().contains("phone"))
+0.564 - assertEquals(2, qResult.getPropertyNames().size())
+0.557 - assertFalse(qResult.getProperty("name").isEmpty())
+0.554 - assertTrue(qResult.getExecutionPlan() instanceof String)
+0.552 - assertTrue(qResult.getProperty("address") instanceof String)
+0.541 - assertNotNull(qResult.getProperty("address"))
+0.495 - assertTrue(qResult.getWarnings().contains("Warning: large result set"))
+0.494 - assertFalse(qResult.getColumnNames().contains("salary"))
+0.488 - assertFalse(qResult.getPropertyNames().contains("email"))
+0.411 - assertTrue(qResult.stream().anyMatch(row -> row.getProperty("name").equals("Alice")))
+0.389 - assertNotEquals(0, qResult.stream().mapToInt(row -> row.getProperty("age")).sum())
+0.387 - assertEquals(1, qResult.stream().filter(row -> row.getProperty("city").equals("New York")).count())
+0.374 - assertFalse(qResult.stream().allMatch(row -> row.getProperty("age").equals(30)))

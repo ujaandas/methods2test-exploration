@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class CommonUtils_Sleep {
+    public static void sleepTimeUnit ( TimeUnit timeUnit , long timeout ) { 
+    try { 
+    timeUnit . sleep ( timeout ) ; 
+    } catch ( InterruptedException e ) { 
+    ignore ( e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class CommonUtils_SleepTest {
+    @Test
+     public void testSleepTimeUnit ( ) {
+         long started = System . nanoTime ( ) ; 
+         sleepTimeUnit ( MILLISECONDS , 1 ) ; 
+         long duration = NANOSECONDS . toMillis ( System . nanoTime ( ) - started ) ; 
+         long durationLimit = SECONDS . toMillis ( 3 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(duration >= 1);
+Assert.assertTrue(duration <= 2);
+Assert.assertTrue(duration <= durationLimit);
+Assert.assertFalse(duration > durationLimit);
+Assert.assertNotEquals(duration, 0);
+Assert.assertNotEquals(duration, durationLimit);
+Assert.assertNotEquals(duration, 100);
+Assert.assertNotEquals(durationLimit, 0);
+Assert.assertNotEquals(durationLimit, 100);
+Assert.assertTrue(duration > 0);
+Assert.assertTrue(durationLimit > 0);
+Assert.assertTrue(durationLimit < 100);
+Assert.assertNotEquals(durationLimit, 500);
+Assert.assertNotEquals(duration, 500);
+Assert.assertNotEquals(duration, 1000);
+Assert.assertNotEquals(durationLimit, 1000);
+Assert.assertTrue(durationLimit < 10000);
+Assert.assertTrue(duration < 10000);
+Assert.assertTrue(durationLimit > 999);
+Assert.assertTrue(duration > 999);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(format("STR",duration),duration>0); ===
+0.700 - Assert.assertTrue(duration <= durationLimit)
+0.657 - Assert.assertTrue(duration > 0)
+0.639 - Assert.assertTrue(durationLimit > 0)
+0.618 - Assert.assertTrue(duration >= 1)
+0.609 - Assert.assertTrue(duration > 999)
+0.595 - Assert.assertTrue(durationLimit < 100)
+0.592 - Assert.assertTrue(duration < 10000)
+0.588 - Assert.assertTrue(duration <= 2)
+0.579 - Assert.assertTrue(durationLimit < 10000)
+0.541 - Assert.assertTrue(durationLimit > 999)
+0.528 - Assert.assertNotEquals(duration, 0)
+0.514 - Assert.assertNotEquals(duration, 100)
+0.514 - Assert.assertNotEquals(duration, 500)
+0.507 - Assert.assertNotEquals(duration, 1000)
+0.494 - Assert.assertNotEquals(durationLimit, 0)
+0.481 - Assert.assertNotEquals(durationLimit, 100)
+0.481 - Assert.assertNotEquals(durationLimit, 500)
+0.475 - Assert.assertNotEquals(durationLimit, 1000)
+0.452 - Assert.assertNotEquals(duration, durationLimit)
+0.450 - Assert.assertFalse(duration > durationLimit)

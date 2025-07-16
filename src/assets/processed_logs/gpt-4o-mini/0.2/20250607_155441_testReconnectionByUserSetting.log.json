@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManager {\n@Override\npublic Connection getConnection ( Url url , int connectTimeout ) throws RemotingException , InterruptedException {\nensureStarted ( ) ;\nurl . setConnectTimeout ( connectTimeout ) ;\nreturn this . connectionManager . getAndCreateIfAbsent ( url ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class ReconnectManagerTest {\n@Test\npublic void testReconnectionByUserSetting ( ) throws InterruptedException , RemotingException {\ndoInit ( false , true ) ;\nclient . enableReconnectSwitch ( ) ;\nString addr = \"STR\" ;\nUrl url = addressParser . parse ( addr ) ;\nConnection connection = client . getConnection ( url , 1000 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(connection);\nassertTrue(connection.isActive());\nassertEquals(1000, connection.getConnectTimeout());\nassertEquals(addr, connection.getUrl().getAddress());\nassertTrue(client.isReconnectEnabled());\nassertEquals(1, connectionManager.getConnectionCount(url));\nassertTrue(connectionManager.hasConnection(url));\nassertFalse(connectionManager.isConnectionClosed(url));\nassertNotNull(connection.getLastUsedTime());\nassertTrue(connection.getLastUsedTime() > 0);\nassertEquals(0, connection.getRetryCount());\nassertTrue(client.getReconnectAttempts() >= 0);\nassertTrue(connectionManager.getConnections().contains(connection));\nassertEquals(\"ExpectedProtocol\", connection.getProtocol());\nassertTrue(connectionManager.isConnectionEstablished(url));\nassertNotNull(connection.getCreationTime());\nassertTrue(connection.getCreationTime() <= System.currentTimeMillis());\nassertTrue(client.getReconnectDelay() >= 0);\nassertFalse(client.isReconnectInProgress());\nassertEquals(\"ExpectedClientId\", client.getClientId());\nassertTrue(client.getActiveConnections().contains(connection));\n```\n====================\n\n",
+    "scores": [
+        0.739,
+        0.654,
+        0.629,
+        0.59,
+        0.571,
+        0.558,
+        0.555,
+        0.549,
+        0.548,
+        0.547,
+        0.522,
+        0.521,
+        0.515,
+        0.508,
+        0.5,
+        0.491,
+        0.466,
+        0.45,
+        0.45,
+        0.421,
+        0.418,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,clientDisConnectProcessor.getDisConnectTimes());"
+}

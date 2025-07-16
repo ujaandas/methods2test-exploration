@@ -1,0 +1,68 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testAggregations ( ) {
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, results.size());
+assertNotNull(results);
+assertTrue(results.isEmpty());
+assertFalse(results.contains(null));
+assertTrue(results.containsAll(Collections.emptyList()));
+assertEquals(0, results.stream().count());
+assertTrue(results.stream().allMatch(Objects::isNull));
+assertFalse(results.stream().anyMatch(Objects::nonNull));
+assertTrue(results.stream().noneMatch(Objects::nonNull));
+assertEquals(0, results.stream().filter(Objects::nonNull).count());
+assertTrue(results.stream().map(Object::toString).allMatch(String::isEmpty));
+assertFalse(results.stream().map(Object::toString).anyMatch(String::isEmpty));
+assertTrue(results.stream().map(Object::toString).noneMatch(String::isEmpty));
+assertEquals(0, results.stream().map(Object::toString).filter(s -> !s.isEmpty()).count());
+assertTrue(results.stream().map(Object::toString).allMatch(s -> s.equals("")));
+assertFalse(results.stream().map(Object::toString).anyMatch(s -> s.equals("")));
+assertTrue(results.stream().map(Object::toString).noneMatch(s -> s.equals("")));
+assertEquals(0, results.stream().map(Object::toString).filter(s -> !s.equals("")).count());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,results.size()); ===
+0.967 - assertEquals(0, results.size())
+0.771 - assertEquals(0, results.stream().count())
+0.678 - assertTrue(results.isEmpty())
+0.677 - assertFalse(results.contains(null))
+0.654 - assertNotNull(results)
+0.589 - assertEquals(0, results.stream().filter(Objects::nonNull).count())
+0.535 - assertFalse(results.stream().anyMatch(Objects::nonNull))
+0.512 - assertTrue(results.containsAll(Collections.emptyList()))
+0.500 - assertTrue(results.stream().allMatch(Objects::isNull))
+0.488 - assertTrue(results.stream().noneMatch(Objects::nonNull))
+0.483 - assertEquals(0, results.stream().map(Object::toString).filter(s -> !s.isEmpty()).count())
+0.479 - assertEquals(0, results.stream().map(Object::toString).filter(s -> !s.equals("")).count())
+0.430 - assertFalse(results.stream().map(Object::toString).anyMatch(String::isEmpty))
+0.430 - assertFalse(results.stream().map(Object::toString).anyMatch(s -> s.equals("")))
+0.396 - assertTrue(results.stream().map(Object::toString).allMatch(String::isEmpty))
+0.396 - assertTrue(results.stream().map(Object::toString).allMatch(s -> s.equals("")))
+0.393 - assertTrue(results.stream().map(Object::toString).noneMatch(String::isEmpty))
+0.393 - assertTrue(results.stream().map(Object::toString).noneMatch(s -> s.equals("")))

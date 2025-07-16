@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilter {\n@Override\npublic FilterReply decide ( ILoggingEvent event ) {\nif ( event . getLoggerName ( ) . startsWith ( \"STR\" ) ) {\nreturn FilterReply . DENY ;\n} else {\nreturn FilterReply . NEUTRAL ;\n} }\n}\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilterTest {\n@Test\npublic void verifyFilterAllowsNonSentryLoggers ( ) {\nfinal DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ;\nfilter . start ( ) ;\nfinal LoggingEvent evt = new LoggingEvent ( ) ;\nevt . setLoggerName ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\n====================\n\n",
+    "scores": [
+        0.972,
+        0.972,
+        0.972,
+        0.972,
+        0.972,
+        0.972,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.911,
+        0.887,
+        0.887,
+        0.887,
+        0.887,
+        0.887,
+        0.887,
+        0.887
+    ],
+    "ground_truth": "assertEquals(FilterReply.NEUTRAL,filter.decide(evt));"
+}

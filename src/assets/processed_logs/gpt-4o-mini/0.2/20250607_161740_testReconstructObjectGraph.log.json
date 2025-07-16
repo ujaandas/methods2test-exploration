@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedProperties {\npublic static Set < String > bindAll ( Object instance , TestCase testCase ) {\nSet < String > usedProperties = new HashSet < > ( ) ;\nfor ( Map . Entry < String , String > entry : testCase . getProperties ( ) . entrySet ( ) ) {\nString fullPropertyPath = entry . getKey ( ) . trim ( ) ;\nString value = entry . getValue ( ) . trim ( ) ;\nif ( bind0 ( instance , fullPropertyPath , value ) ) {\nusedProperties . add ( fullPropertyPath ) ;\n} } return usedProperties ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PropertyBindingSupport_nestedPropertiesTest {\n@Test\npublic void testReconstructObjectGraph ( ) {\nTestCase testCase = new TestCase ( \"STR\" ) . setProperty ( \"STR\" , 10 ) ;\nPerson person = new Person ( ) ;\nSet < String > usedProperties = bindAll ( person , testCase ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(person);\nassertEquals(10, person.getStr());\nassertTrue(usedProperties.contains(\"STR\"));\nassertEquals(1, usedProperties.size());\nassertTrue(usedProperties.isEmpty() == false);\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"NON_EXISTENT_PROPERTY\"));\nassertEquals(\"STR\", usedProperties.iterator().next());\nassertNotEquals(0, usedProperties.size());\nassertTrue(usedProperties.stream().allMatch(prop -> prop.startsWith(\"STR\")));\nassertTrue(usedProperties.stream().noneMatch(prop -> prop.startsWith(\"INVALID\")));\nassertEquals(\"STR\", usedProperties.stream().findFirst().orElse(null));\nassertTrue(usedProperties.stream().anyMatch(prop -> prop.equals(\"STR\")));\nassertFalse(usedProperties.isEmpty());\nassertEquals(1, usedProperties.size());\nassertTrue(usedProperties.contains(\"STR\"));\nassertFalse(usedProperties.contains(\"INVALID_PROPERTY\"));\nassertTrue(usedProperties.stream().allMatch(prop -> prop.trim().equals(\"STR\")));\nassertNotNull(testCase.getProperties());\nassertEquals(1, testCase.getProperties().size());\nassertTrue(testCase.getProperties().containsKey(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.724,
+        0.59,
+        0.559,
+        0.522,
+        0.424,
+        0.423,
+        0.423,
+        0.423,
+        0.394,
+        0.394,
+        0.389,
+        0.376,
+        0.37,
+        0.357,
+        0.351,
+        0.342,
+        0.333,
+        0.323,
+        0.321,
+        0.311,
+        0.296,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(person.nullArm);"
+}

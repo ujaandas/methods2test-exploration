@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecution {\nOSequence getSequence ( String iName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropSequenceStatementExecutionTest {\n@Test\npublic void testPlain ( ) {\nString name = \"STR\" ;\ndb . getMetadata ( ) . getSequenceLibrary ( ) . createSequence ( name , OSequence . SEQUENCE_TYPE . CACHED , new OSequence . CreateParams ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));\nassertEquals(name, db.getMetadata().getSequenceLibrary().getSequence(name).getName());\nassertEquals(OSequence.SEQUENCE_TYPE.CACHED, db.getMetadata().getSequenceLibrary().getSequence(name).getType());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCreatedOn() != null);\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getIncrement());\nassertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getStart());\nassertEquals(1, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize());\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isOrdered());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMaxValue() > 0);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getMinValue() < 0);\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCurrentValue());\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isCycle());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getUpdatedOn() != null);\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getSequenceId() > 0);\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isDropped());\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheHit());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCacheSize() > 0);\nassertEquals(0, db.getMetadata().getSequenceLibrary().getSequence(name).getCacheHitRatio());\nassertFalse(db.getMetadata().getSequenceLibrary().getSequence(name).isRecyclable());\nassertTrue(db.getMetadata().getSequenceLibrary().getSequence(name).getCacheMaxSize() > 0);\n====================\n\n",
+    "scores": [
+        1.0,
+        0.865,
+        0.855,
+        0.853,
+        0.853,
+        0.844,
+        0.839,
+        0.837,
+        0.837,
+        0.837,
+        0.833,
+        0.833,
+        0.831,
+        0.826,
+        0.818,
+        0.815,
+        0.812,
+        0.81,
+        0.81,
+        0.7
+    ],
+    "ground_truth": "Assert.assertNotNull(db.getMetadata().getSequenceLibrary().getSequence(name));"
+}

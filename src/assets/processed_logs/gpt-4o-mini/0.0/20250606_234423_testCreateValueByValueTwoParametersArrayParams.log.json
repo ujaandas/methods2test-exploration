@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( Object ... params ) {\nif ( ! ( params [ 0 ] instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ;\nfinal List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nObject val = createSingleValue ( mapParam ) ;\nresult . add ( val ) ;\n} if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) {\nreturn result . get ( 0 ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueByValueTwoParametersArrayParams ( ) {\nfinal Object result = propertyIndexByValue . createValue ( mapToTest , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof List);\nassertEquals(1, ((List<?>) result).size());\nassertTrue(((List<?>) result).get(0) instanceof ExpectedType); // Replace ExpectedType with the actual expected type\nassertEquals(expectedValue, ((List<?>) result).get(0)); // Replace expectedValue with the actual expected value\nassertEquals(expectedSize, ((List<?>) result).size()); // Replace expectedSize with the actual expected size\nassertTrue(propertyIndexByValue.createValue(mapToTest) instanceof List);\nassertNull(propertyIndexByValue.createValue(\"InvalidParam\"));\nassertEquals(0, propertyIndexByValue.createValue(new HashMap<>()).size());\nassertTrue(propertyIndexByValue.createValue(new HashMap<>()).isEmpty());\nassertNotEquals(result, propertyIndexByValue.createValue(new HashMap<>()));\nassertTrue(result.equals(propertyIndexByValue.createValue(mapToTest, \"STR\")));\nassertFalse(result.equals(propertyIndexByValue.createValue(null)));\nassertTrue(result.contains(expectedValue)); // Replace expectedValue with the actual expected value\nassertFalse(result.contains(unexpectedValue)); // Replace unexpectedValue with a value that should not be present\nassertEquals(expectedType, result.getClass()); // Replace expectedType with the actual expected type\nassertTrue(result instanceof List<?>);\nassertNotSame(result, propertyIndexByValue.createValue(mapToTest, \"DifferentParam\"));\nassertEquals(expectedHashCode, result.hashCode()); // Replace expectedHashCode with the actual expected hash code\nassertTrue(result.stream().allMatch(item -> item instanceof ExpectedType)); // Replace ExpectedType with the actual expected type\nassertEquals(expectedStringRepresentation, result.toString()); // Replace expectedStringRepresentation with the actual expected string representation\n```\n====================\n\n",
+    "scores": [
+        0.829,
+        0.646,
+        0.625,
+        0.483,
+        0.448,
+        0.442,
+        0.436,
+        0.404,
+        0.38,
+        0.368,
+        0.351,
+        0.348,
+        0.327,
+        0.317,
+        0.296,
+        0.275,
+        0.265,
+        0.261,
+        0.248,
+        0.234,
+        0.233,
+        0.23
+    ],
+    "ground_truth": "Assert.assertTrue(resultinstanceofCollection);"
+}

@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_Numerical {
+    static boolean bind0 ( Object object , String property , String value ) { 
+    value = value . trim ( ) ; 
+    String [ ] path = property . split ( "STR" ) ; 
+    object = findTargetObject ( object , property , path ) ; 
+    if ( object == null ) { 
+    return false ; 
+    } Field field = findField ( object . getClass ( ) , path [ path . length - 1 ] ) ; 
+    if ( field == null || isProbeField ( field ) ) { 
+    return false ; 
+    } try { 
+    setField ( field , object , value ) ; 
+    return true ; 
+    } catch ( Exception e ) { 
+    throw new BindException ( format ( "STR" , value , object . getClass ( ) . getName ( ) , property , field . getType ( ) ) , e ) ; 
+    } }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class PropertyBindingSupport_bind0_NumericalTest {
+    @Test
+     public void bind_short_whitespace ( ) {
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "value"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(null, "property", "value"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "probeField", "value"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "invalidProperty", "value"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", null));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", ""));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", " "));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "invalidValue"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "123abc"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "12.34"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "true"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "false"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "12345678901234567890"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "-12345678901234567890"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0.12345678901234567890"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0.0"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "-1"));
+Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "1.0"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(bind0(testObject,"STR","STR")); ===
+0.484 - Assert.assertTrue(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "value"))
+0.450 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", ""))
+0.450 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", " "))
+0.446 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0"))
+0.443 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "-1"))
+0.439 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0.0"))
+0.439 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "1.0"))
+0.435 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "true"))
+0.432 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "12.34"))
+0.432 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "false"))
+0.429 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "123abc"))
+0.425 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "probeField", "value"))
+0.410 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", null))
+0.409 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "invalidProperty", "value"))
+0.409 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "invalidValue"))
+0.386 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "12345678901234567890"))
+0.383 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "-12345678901234567890"))
+0.380 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(object, "property", "0.12345678901234567890"))
+0.358 - Assert.assertFalse(PropertyBindingSupport_bind0_Numerical.bind0(null, "property", "value"))

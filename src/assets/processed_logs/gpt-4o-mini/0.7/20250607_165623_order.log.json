@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ProcessorConfig {\npublic < T extends Named > List < T > prepareProcessors ( List < T > namedList , String type ) {\nList < T > ret = new ArrayList < > ( ) ;\nMap < String , T > lookup = new HashMap < > ( ) ;\nfor ( T named : namedList ) {\nlookup . put ( named . getName ( ) , named ) ;\n} for ( String inc : includes ) {\nif ( use ( inc ) ) {\nT named = lookup . get ( inc ) ;\nif ( named == null ) {\nList < String > keys = new ArrayList < > ( lookup . keySet ( ) ) ;\nCollections . sort ( keys ) ;\nthrow new IllegalArgumentException ( \"STR\" + type + \"STR\" + inc + \"STR\" + \"STR\" + type + \"STR\" + StringUtils . join ( keys , \"STR\" ) ) ;\n} ret . add ( named ) ;\n} } return ret ;\n}\n}\n\npackage fabric8io.fabric8-maven-plugin.core;\n\npublic class ProcessorConfigTest {\n@Test\npublic void order ( ) {\nList < TestNamed > data = Arrays . asList ( new TestNamed ( \"STR\" ) , new TestNamed ( \"STR\" ) , new TestNamed ( \"STR\" ) , new TestNamed ( \"STR\" ) ) ;\nList < String > inc = Arrays . asList ( \"STR\" , \"STR\" ) ;\nProcessorConfig pConfig = new ProcessorConfig ( inc , null , null ) ;\nList < TestNamed > result = pConfig . prepareProcessors ( data , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertEquals(2, result.size());\nassertTrue(result.contains(new TestNamed(\"STR\")));\nassertFalse(result.contains(new TestNamed(\"NON_EXISTENT\")));\nassertEquals(\"STR\", result.get(0).getName());\nassertEquals(\"STR\", result.get(1).getName());\nassertTrue(result.stream().allMatch(named -> named.getName().equals(\"STR\")));\nassertEquals(\"STR\", result.get(0).getName());\nassertEquals(\"STR\", result.get(1).getName());\nassertNotSame(result.get(0), result.get(1));\nassertTrue(result.stream().distinct().count() <= result.size());\nassertTrue(result.stream().map(TestNamed::getName).allMatch(name -> name.equals(\"STR\")));\nassertNotNull(result.get(0).getName());\nassertNotNull(result.get(1).getName());\nassertDoesNotThrow(() -> pConfig.prepareProcessors(data, \"STR\"));\nassertThrows(IllegalArgumentException.class, () -> pConfig.prepareProcessors(data, \"NON_EXISTENT\"));\nassertEquals(\"STR\", result.stream().findFirst().get().getName());\nassertTrue(result.stream().anyMatch(named -> \"STR\".equals(named.getName())));\nassertEquals(\"STR\", result.get(0).getName());\nassertEquals(\"STR\", result.get(1).getName());\nassertEquals(Arrays.asList(\"STR\", \"STR\"), result.stream().map(TestNamed::getName).collect(Collectors.toList()));\nassertEquals(result.get(0), result.get(1));\nassertTrue(result.size() <= data.size());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.714,
+        0.694,
+        0.694,
+        0.694,
+        0.694,
+        0.694,
+        0.694,
+        0.657,
+        0.597,
+        0.597,
+        0.592,
+        0.587,
+        0.552,
+        0.533,
+        0.519,
+        0.506,
+        0.388,
+        0.388,
+        0.377,
+        0.348,
+        0.267,
+        0.21,
+        0.0
+    ],
+    "ground_truth": "assertEquals(2,result.size());"
+}

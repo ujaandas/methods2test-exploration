@@ -1,0 +1,31 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage jcodec.jcodec;\n\npublic class Picture {\npublic int [ ] getPlaneData ( int plane ) {\nreturn data [ plane ] ;\n}\n}\n\npackage jcodec.jcodec;\n\npublic class PictureTest {\n@Test\npublic void testToAndFrom ( ) throws Exception {\nint [ ] Y = randomIntArray ( 4096 , 4 , 1019 ) ;\nint [ ] U = randomIntArray ( 2048 , 4 , 1019 ) ;\nint [ ] V = randomIntArray ( 2048 , 4 , 1019 ) ;\nPictureHiBD pictureHbd = PictureHiBD . createPictureWithDepth ( 64 , 64 , new int [ ] [ ] {\nY , U , V } , ColorSpace . YUV422 , 10 ) ;\nPicture picture = Picture . fromPictureHiBD ( pictureHbd ) ;\nPictureHiBD resultHbd = picture . toPictureHiBD ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertArrayEquals(Y, resultHbd.getPlaneData(0));\nassertArrayEquals(U, resultHbd.getPlaneData(1));\nassertArrayEquals(V, resultHbd.getPlaneData(2));\nassertEquals(64, resultHbd.getWidth());\nassertEquals(64, resultHbd.getHeight());\nassertEquals(10, resultHbd.getBitDepth());\nassertEquals(ColorSpace.YUV422, resultHbd.getColorSpace());\nassertEquals(3, resultHbd.getNumPlanes());\nassertTrue(resultHbd.getPlaneData(0).length >= Y.length);\nassertTrue(resultHbd.getPlaneData(1).length >= U.length);\nassertTrue(resultHbd.getPlaneData(2).length >= V.length);\nassertNotNull(resultHbd.getPlaneData(0));\nassertNotNull(resultHbd.getPlaneData(1));\nassertNotNull(resultHbd.getPlaneData(2));\nassertEquals(pictureHbd.getBitDepth(), resultHbd.getBitDepth());\nassertEquals(pictureHbd.getColorSpace(), resultHbd.getColorSpace());\nassertNotSame(pictureHbd, resultHbd);\nassertTrue(Arrays.equals(pictureHbd.getPlaneData(0), resultHbd.getPlaneData(0)));\nassertTrue(Arrays.equals(pictureHbd.getPlaneData(1), resultHbd.getPlaneData(1)));\nassertTrue(Arrays.equals(pictureHbd.getPlaneData(2), resultHbd.getPlaneData(2)));\nassertEquals(pictureHbd.getWidth(), resultHbd.getWidth());\nassertEquals(pictureHbd.getHeight(), resultHbd.getHeight());\nassertNotNull(pictureHbd);\n```\n====================\n\n",
+    "scores": [
+        0.957,
+        0.957,
+        0.92,
+        0.814,
+        0.814,
+        0.791,
+        0.791,
+        0.762,
+        0.747,
+        0.744,
+        0.704,
+        0.7,
+        0.688,
+        0.688,
+        0.68,
+        0.68,
+        0.66,
+        0.615,
+        0.608,
+        0.593,
+        0.589,
+        0.444,
+        0.423,
+        0.0
+    ],
+    "ground_truth": "Assert.assertArrayEquals(Y,resultHbd.getPlaneData(0));"
+}

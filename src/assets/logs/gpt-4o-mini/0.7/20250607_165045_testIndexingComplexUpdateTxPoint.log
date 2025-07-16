@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPoint {
+    long getSize ( ) ;
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSpatialTxPointTest {
+    @Test
+     public void testIndexingComplexUpdateTxPoint ( ) {
+         ODocument rome = newCity ( "STR" , 12.5 , 41.9 ) ; 
+         ODocument london = newCity ( "STR" , - 0.1275 , 51.507222 ) ; 
+         rome = db . save ( rome ) ; 
+         london = db . save ( london ) ; 
+         db . begin ( ) ; 
+         rome . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( - 0.1275 , 51.507222 ) ) ; 
+         london . field ( "STR" , newPoint ( 12.5 , 41.9 ) ) ; 
+         db . save ( rome ) ; 
+         db . save ( london ) ; 
+         db . commit ( ) ; 
+         OIndex < ? > index = db . getMetadata ( ) . getIndexManager ( ) . getIndex ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(index);
+Assert.assertEquals(2, index.getSize());
+Assert.assertTrue(index.contains(rome));
+Assert.assertTrue(index.contains(london));
+Assert.assertTrue(index.get(rome.getIdentity()).equals(newPoint(12.5, 41.9)));
+Assert.assertTrue(index.get(london.getIdentity()).equals(newPoint(-0.1275, 51.507222)));
+Assert.assertTrue(index.get(london.getIdentity()).equals(newPoint(12.5, 41.9)));
+Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getKey().equals(rome.getIdentity())).count());
+Assert.assertEquals(2, index.getEntries().stream().filter(entry -> entry.getKey().equals(london.getIdentity())).count());
+Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(rome.getIdentity()) && entry.getValue().equals(newPoint(12.5, 41.9))));
+Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(-0.1275, 51.507222))));
+Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(12.5, 41.9))));
+Assert.assertFalse(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(0, 0))));
+Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(12.5, 41.9))).count());
+Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(-0.1275, 51.507222))).count());
+Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(12.5, 41.9))).count());
+Assert.assertEquals(2, index.getEntries().size());
+Assert.assertTrue(index.getEntries().stream().allMatch(entry -> entry.getValue() instanceof LuceneSpatialTxPoint));
+Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getValue().equals(newPoint(12.5, 41.9))));
+Assert.assertTrue(index.getEntries().stream
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,index.getSize()); ===
+0.968 - Assert.assertEquals(2, index.getSize())
+0.806 - Assert.assertEquals(2, index.getEntries().size())
+0.627 - Assert.assertTrue(index.getEntries().stream
+0.585 - Assert.assertTrue(index.contains(london))
+0.540 - Assert.assertTrue(index.contains(rome))
+0.508 - ```java
+Assert.assertNotNull(index)
+0.420 - Assert.assertTrue(index.get(rome.getIdentity()).equals(newPoint(12.5, 41.9)))
+0.412 - Assert.assertTrue(index.get(london.getIdentity()).equals(newPoint(12.5, 41.9)))
+0.403 - Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getKey().equals(rome.getIdentity())).count())
+0.397 - Assert.assertEquals(2, index.getEntries().stream().filter(entry -> entry.getKey().equals(london.getIdentity())).count())
+0.394 - Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(12.5, 41.9))).count())
+0.394 - Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(12.5, 41.9))).count())
+0.382 - Assert.assertTrue(index.get(london.getIdentity()).equals(newPoint(-0.1275, 51.507222)))
+0.373 - Assert.assertEquals(1, index.getEntries().stream().filter(entry -> entry.getValue().equals(newPoint(-0.1275, 51.507222))).count())
+0.333 - Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getValue().equals(newPoint(12.5, 41.9))))
+0.328 - Assert.assertTrue(index.getEntries().stream().allMatch(entry -> entry.getValue() instanceof LuceneSpatialTxPoint))
+0.279 - Assert.assertFalse(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(0, 0))))
+0.251 - Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(rome.getIdentity()) && entry.getValue().equals(newPoint(12.5, 41.9))))
+0.249 - Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(12.5, 41.9))))
+0.238 - Assert.assertTrue(index.getEntries().stream().anyMatch(entry -> entry.getKey().equals(london.getIdentity()) && entry.getValue().equals(newPoint(-0.1275, 51.507222))))

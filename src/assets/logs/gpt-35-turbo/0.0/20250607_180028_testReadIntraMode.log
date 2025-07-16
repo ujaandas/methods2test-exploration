@@ -1,0 +1,107 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class ModeInfo {
+    public int readKfIntraMode ( int miCol , int miRow , int blSz , VPXBooleanDecoder decoder , DecodingContext c ) { 
+    boolean availAbove = miRow > 0 ; 
+    boolean availLeft = miCol > c . getMiTileStartCol ( ) ; 
+    int [ ] aboveIntraModes = c . getAboveModes ( ) ; 
+    int [ ] leftIntraModes = c . getLeftModes ( ) ; 
+    int aboveMode ; 
+    int leftMode ; 
+    aboveMode = availAbove ? aboveIntraModes [ miCol ] : DC_PRED ; 
+    leftMode = availLeft ? leftIntraModes [ miRow % 8 ] : DC_PRED ; 
+    short [ ] [ ] [ ] probs = c . getKfYModeProbs ( ) ; 
+    int intraMode = decoder . readTree ( TREE_INTRA_MODE , probs [ aboveMode ] [ leftMode ] ) ; 
+    aboveIntraModes [ miCol ] = intraMode ; 
+    leftIntraModes [ miRow % 8 ] = intraMode ; 
+    return intraMode ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class ModeInfoTest {
+    @Test
+     public void testReadIntraMode ( ) {
+         MockVPXBooleanDecoder decoder = new MockVPXBooleanDecoder ( new int [ ] { 
+     91 , 30 , 32 , 116 , 93 } , new int [ ] { 
+     1 , 1 , 1 , 1 , 0 } ) ; 
+         DecodingContext c = new DecodingContext ( ) ; 
+         int miCol = 2 ; 
+         int miRow = 0 ; 
+         int blSz = 3 ; 
+         c . miTileStartCol = 0 ; 
+         c . aboveModes = new int [ 16 ] ; 
+         c . leftModes = new int [ 16 ] ; 
+         c . leftModes [ 0 ] = 3 ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(3, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(3, c.aboveModes[miCol]);
+Assert.assertEquals(3, c.leftModes[miRow % 8]);
+miCol = 4;
+miRow = 1;
+Assert.assertEquals(1, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(1, c.aboveModes[miCol]);
+Assert.assertEquals(1, c.leftModes[miRow % 8]);
+miCol = 6;
+miRow = 2;
+Assert.assertEquals(0, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(0, c.aboveModes[miCol]);
+Assert.assertEquals(0, c.leftModes[miRow % 8]);
+miCol = 8;
+miRow = 3;
+Assert.assertEquals(2, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(2, c.aboveModes[miCol]);
+Assert.assertEquals(2, c.leftModes[miRow % 8]);
+miCol = 10;
+miRow = 4;
+Assert.assertEquals(3, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(3, c.aboveModes[miCol]);
+Assert.assertEquals(3, c.leftModes[miRow % 8]);
+miCol = 12;
+miRow = 5;
+Assert.assertEquals(1, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c));
+Assert.assertEquals(1, c.aboveModes[miCol]);
+Assert.assertEquals(1, c.leftModes[miRow % 8]);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(3,newModeInfo().readKfIntraMode(miCol,miRow,blSz,decoder,c)); ===
+0.950 - Assert.assertEquals(3, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.950 - Assert.assertEquals(3, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.936 - Assert.assertEquals(1, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.936 - Assert.assertEquals(0, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.936 - Assert.assertEquals(2, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.936 - Assert.assertEquals(1, modeInfo.readKfIntraMode(miCol, miRow, blSz, decoder, c))
+0.481 - Assert.assertEquals(3, c.aboveModes[miCol])
+0.481 - Assert.assertEquals(3, c.aboveModes[miCol])
+0.477 - Assert.assertEquals(3, c.leftModes[miRow % 8])
+0.477 - Assert.assertEquals(3, c.leftModes[miRow % 8])
+0.463 - Assert.assertEquals(1, c.aboveModes[miCol])
+0.463 - Assert.assertEquals(0, c.aboveModes[miCol])
+0.463 - Assert.assertEquals(2, c.aboveModes[miCol])
+0.463 - Assert.assertEquals(1, c.aboveModes[miCol])
+0.459 - Assert.assertEquals(1, c.leftModes[miRow % 8])
+0.459 - Assert.assertEquals(0, c.leftModes[miRow % 8])
+0.459 - Assert.assertEquals(2, c.leftModes[miRow % 8])
+0.459 - Assert.assertEquals(1, c.leftModes[miRow % 8])
+0.125 - miCol = 4
+0.125 - miRow = 1
+0.125 - miCol = 6
+0.125 - miRow = 2
+0.125 - miCol = 8
+0.125 - miRow = 3
+0.125 - miRow = 4
+0.125 - miRow = 5
+0.123 - miCol = 10
+0.123 - miCol = 12

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic int count ( String poolKey ) {\nif ( StringUtils . isBlank ( poolKey ) ) {\nreturn 0 ;\n} ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nif ( null != pool ) {\nreturn pool . size ( ) ;\n} else {\nreturn 0 ;\n} }\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testRemoveConnWithSpecifiedPoolkey ( ) {\nConnection conn1 = getAConn ( ) ;\nconn1 . addPoolKey ( \"STR\" ) ;\nConnection conn2 = getAConn ( ) ;\nconn2 . addPoolKey ( \"STR\" ) ;\ncm . add ( conn1 ) ;\ncm . add ( conn2 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(2, cm.count(\"STR\"));\nassertEquals(0, cm.count(\"NON_EXISTENT_POOL\"));\nassertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).contains(conn1));\nassertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).contains(conn2));\nassertFalse(cm.getConnectionPool(cm.connTasks.get(\"STR\")).isEmpty());\nassertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).size() > 0);\nassertEquals(2, cm.getConnectionPool(cm.connTasks.get(\"STR\")).size());\nassertNotNull(cm.connTasks.get(\"STR\"));\nassertNotNull(cm.getConnectionPool(cm.connTasks.get(\"STR\")));\nassertEquals(\"STR\", conn1.getPoolKey());\nassertEquals(\"STR\", conn2.getPoolKey());\nassertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).remove(conn1));\nassertEquals(1, cm.count(\"STR\"));\nassertTrue(cm.getConnectionPool(cm.connTasks.get(\"STR\")).remove(conn2));\nassertEquals(0, cm.count(\"STR\"));\nassertNull(cm.getConnectionPool(cm.connTasks.get(\"STR\")).get(conn1));\nassertNull(cm.getConnectionPool(cm.connTasks.get(\"STR\")).get(conn2));\nassertEquals(0, cm.getConnectionPool(cm.connTasks.get(\"STR\")).size());\nassertThrows(IllegalArgumentException.class, () -> cm.add(null));\nassertThrows(IllegalArgumentException.class, () -> cm.count(null));\nassertThrows(IllegalArgumentException.class, () -> conn1.addPoolKey(null));\nassertThrows(IllegalArgumentException.class, () -> conn2.addPoolKey(\"\"));\n```\n====================\n\n",
+    "scores": [
+        0.781,
+        0.781,
+        0.722,
+        0.704,
+        0.704,
+        0.641,
+        0.535,
+        0.535,
+        0.475,
+        0.458,
+        0.412,
+        0.409,
+        0.404,
+        0.396,
+        0.384,
+        0.377,
+        0.377,
+        0.376,
+        0.376,
+        0.365,
+        0.365,
+        0.362,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(2,cm.count(poolKey));"
+}

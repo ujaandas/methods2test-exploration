@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKey {
+    public OMultiKey ( final Collection < ? > keys ) { 
+    this . keys = new ArrayList < Object > ( keys ) ; 
+    hash = generateHashCode ( keys ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKeyTest {
+    @Test
+     public void testOneKeyMap ( ) {
+         final Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ; 
+         final OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         multiKeyMap . put ( multiKey , new Object ( ) ) ; 
+         final OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         final Object mapResult = multiKeyMap . get ( anotherMultiKey ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(new Object(), mapResult);
+Assert.assertTrue(multiKey.equals(anotherMultiKey));
+Assert.assertTrue(multiKey.hashCode() == anotherMultiKey.hashCode());
+Assert.assertTrue(multiKeyMap.containsKey(anotherMultiKey));
+Assert.assertTrue(multiKeyMap.containsValue(new Object()));
+Assert.assertTrue(multiKeyMap.size() == 1);
+Assert.assertNotNull(mapResult);
+Assert.assertNotEquals(multiKey, new Object());
+Assert.assertNotEquals(multiKey, null);
+Assert.assertNotEquals(multiKey, "STR");
+Assert.assertNotEquals(multiKey, Collections.singletonList("STR"));
+Assert.assertNotEquals(multiKey, new OMultiKey(Collections.singletonList("STR")));
+Assert.assertNotEquals(multiKey.hashCode(), new Object().hashCode());
+Assert.assertNotEquals(multiKey.hashCode(), "STR".hashCode());
+Assert.assertNotEquals(multiKey.hashCode(), Collections.singletonList("STR").hashCode());
+Assert.assertNotEquals(multiKey.hashCode(), new OMultiKey(Collections.singletonList("STR")).hashCode());
+Assert.assertNotEquals(multiKey.hashCode(), anotherMultiKey.hashCode());
+Assert.assertNotEquals(multiKeyMap.get(multiKey), mapResult);
+Assert.assertNotEquals(multiKeyMap.get(anotherMultiKey), new Object());
+Assert.assertNotEquals(multiKeyMap.get(anotherMultiKey), null);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(mapResult); ===
+1.000 - Assert.assertNotNull(mapResult)
+0.618 - Assert.assertNotEquals(multiKey, "STR")
+0.610 - Assert.assertEquals(new Object(), mapResult)
+0.579 - Assert.assertNotEquals(multiKeyMap.get(multiKey), mapResult)
+0.557 - Assert.assertNotEquals(multiKey, new Object())
+0.481 - Assert.assertNotEquals(multiKey, null)
+0.456 - Assert.assertTrue(multiKeyMap.size() == 1)
+0.442 - Assert.assertNotEquals(multiKey.hashCode(), "STR".hashCode())
+0.415 - Assert.assertNotEquals(multiKey, Collections.singletonList("STR"))
+0.410 - Assert.assertNotEquals(multiKey.hashCode(), new Object().hashCode())
+0.400 - Assert.assertNotEquals(multiKeyMap.get(anotherMultiKey), new Object())
+0.391 - Assert.assertNotEquals(multiKey.hashCode(), anotherMultiKey.hashCode())
+0.382 - Assert.assertTrue(multiKey.equals(anotherMultiKey))
+0.354 - Assert.assertNotEquals(multiKey, new OMultiKey(Collections.singletonList("STR")))
+0.351 - Assert.assertTrue(multiKeyMap.containsValue(new Object()))
+0.342 - Assert.assertTrue(multiKeyMap.containsKey(anotherMultiKey))
+0.333 - Assert.assertNotEquals(multiKeyMap.get(anotherMultiKey), null)
+0.327 - Assert.assertNotEquals(multiKey.hashCode(), Collections.singletonList("STR").hashCode())
+0.313 - Assert.assertTrue(multiKey.hashCode() == anotherMultiKey.hashCode())
+0.288 - Assert.assertNotEquals(multiKey.hashCode(), new OMultiKey(Collections.singletonList("STR")).hashCode())

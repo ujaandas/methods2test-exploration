@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class Config {\npublic String toYaml ( String rootKey ) {\ntry {\nStringBuilder out = new StringBuilder ( ) ;\nthis . print ( 0 , rootKey , out ) ;\nreturn out . toString ( ) ;\n} catch ( IOException e ) {\nthrow new RuntimeException ( e ) ;\n} }\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class ConfigTest {\n@Test\npublic void has_yaml_representation ( ) {\nConfig config = new Config ( ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nconfig . set ( \"STR\" , \"STR\" ) ;\nString expected = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected YAML representation does not match.\", expected, config.toYaml(\"rootKey\"));\nassertTrue(\"YAML representation should contain 'STR'.\", config.toYaml(\"rootKey\").contains(\"STR\"));\nassertTrue(\"YAML representation should start with 'STR'.\", config.toYaml(\"rootKey\").startsWith(\"STR\"));\nassertTrue(\"YAML representation should end with 'STR'.\", config.toYaml(\"rootKey\").endsWith(\"STR\"));\nassertEquals(\"YAML representation should have the correct length.\", expected.length(), config.toYaml(\"rootKey\").length());\nassertTrue(\"YAML representation should not be empty.\", !config.toYaml(\"rootKey\").isEmpty());\nassertFalse(\"YAML representation should not contain 'INVALID'.\", config.toYaml(\"rootKey\").contains(\"INVALID\"));\nassertEquals(\"YAML representation should contain 'STR' exactly 10 times.\", 10, countOccurrences(config.toYaml(\"rootKey\"), \"STR\"));\nassertTrue(\"YAML representation should contain 'rootKey'.\", config.toYaml(\"rootKey\").contains(\"rootKey\"));\nassertTrue(\"YAML representation should not contain null characters.\", !config.toYaml(\"rootKey\").contains(\"\\0\"));\nassertFalse(\"YAML representation should not be null.\", config.toYaml(\"rootKey\") == null);\nassertNotEquals(\"YAML representation should not be equal to an empty string.\", \"\", config.toYaml(\"rootKey\"));\nassertNotEquals(\"YAML representation should not be equal to 'INVALID'.\", \"INVALID\", config.toYaml(\"rootKey\"));\nassertTrue(\"YAML representation should contain at least one newline.\", config.toYaml(\"rootKey\").contains(\"\\n\"));\nassertTrue(\"YAML representation should be formatted properly.\", config.toYaml(\"rootKey\").matches(\".*STR.*\"));\nassertTrue(\"YAML representation should not contain any extra spaces.\", config.toYaml(\"rootKey\").trim().equals(config.toYaml(\"rootKey\")));\nassertEquals(\"YAML representation should include the correct root key.\", \"rootKey: \", config.toYaml(\"rootKey\").substring(0, 10));\nassertTrue(\"YAML representation should be valid YAML format.\", isValidYaml(config.toYaml(\"rootKey\")));\nassertNotNull(\"YAML representation should not be null.\", config.toYaml(\"rootKey\"));\nassertTrue(\"YAML representation should be a valid string.\", config.toYaml(\"rootKey\") instanceof String);\n```\n====================\n\n",
+    "scores": [
+        0.571,
+        0.553,
+        0.529,
+        0.517,
+        0.513,
+        0.494,
+        0.489,
+        0.489,
+        0.487,
+        0.484,
+        0.483,
+        0.475,
+        0.475,
+        0.463,
+        0.438,
+        0.438,
+        0.423,
+        0.422,
+        0.406,
+        0.374,
+        0.0
+    ],
+    "ground_truth": "assertEquals(expected,config.toYaml(\"STR\"));"
+}

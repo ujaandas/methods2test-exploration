@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoader {
+    public String toYaml ( String rootKey ) { 
+    try { 
+    StringBuilder out = new StringBuilder ( ) ; 
+    this . print ( 0 , rootKey , out ) ; 
+    return out . toString ( ) ; 
+    } catch ( IOException e ) { 
+    throw new RuntimeException ( e ) ; 
+    } }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class YamlConfigLoaderTest {
+    @Test
+     public void roundtrips ( ) {
+         String yaml = "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" + "STR" ; 
+         Config config = new Config ( ) ; 
+         ConfigLoader configLoader = new YamlConfigLoader ( new StringReader ( yaml ) ) ; 
+         configLoader . load ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(config);
+assertEquals("expectedValue1", config.getProperty("key1"));
+assertEquals("expectedValue2", config.getProperty("key2"));
+assertTrue(config.hasProperty("key3"));
+assertFalse(config.hasProperty("key4"));
+assertEquals(10, config.getIntProperty("key5"));
+assertEquals(3.14, config.getDoubleProperty("key6"), 0.01);
+assertEquals("expectedString", config.getStringProperty("key7"));
+assertArrayEquals(new String[]{"value1", "value2"}, config.getStringArrayProperty("key8"));
+assertEquals("default", config.getStringProperty("key9", "default"));
+assertThrows(IllegalArgumentException.class, () -> config.getIntProperty("invalidKey"));
+assertNotNull(config.getNestedConfig("nestedKey"));
+assertEquals(5, config.getNestedConfig("nestedKey").getIntProperty("innerKey"));
+assertEquals("value", config.getListProperty("key10").get(0));
+assertEquals("secondValue", config.getListProperty("key10").get(1));
+assertTrue(config.getBooleanProperty("key11"));
+assertEquals("someValue", config.getMapProperty("key12").get("subKey"));
+assertNotNull(config.getDateProperty("dateKey"));
+assertEquals("expectedText", config.getTextProperty("textKey"));
+assertEquals(42, config.getLongProperty("longKey"));
+assertNull(config.getProperty("nonExistentKey"));
+assertEquals("expectedValue", config.getProperty("key13"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(yaml,config.toYaml("STR")); ===
+0.659 - assertEquals(10, config.getIntProperty("key5"))
+0.629 - assertEquals(42, config.getLongProperty("longKey"))
+0.625 - assertEquals("expectedValue1", config.getProperty("key1"))
+0.625 - assertEquals("expectedValue2", config.getProperty("key2"))
+0.625 - assertEquals("expectedValue", config.getProperty("key13"))
+0.611 - assertEquals(3.14, config.getDoubleProperty("key6"), 0.01)
+0.606 - assertEquals("value", config.getListProperty("key10").get(0))
+0.590 - assertFalse(config.hasProperty("key4"))
+0.571 - assertEquals("default", config.getStringProperty("key9", "default"))
+0.571 - assertEquals("secondValue", config.getListProperty("key10").get(1))
+0.554 - assertEquals("expectedText", config.getTextProperty("textKey"))
+0.550 - assertEquals("someValue", config.getMapProperty("key12").get("subKey"))
+0.549 - assertEquals("expectedString", config.getStringProperty("key7"))
+0.545 - assertTrue(config.hasProperty("key3"))
+0.541 - assertTrue(config.getBooleanProperty("key11"))
+0.529 - assertNotNull(config.getDateProperty("dateKey"))
+0.529 - assertNull(config.getProperty("nonExistentKey"))
+0.517 - assertNotNull(config.getNestedConfig("nestedKey"))
+0.479 - assertEquals(5, config.getNestedConfig("nestedKey").getIntProperty("innerKey"))
+0.476 - assertArrayEquals(new String[]{"value1", "value2"}, config.getStringArrayProperty("key8"))
+0.471 - ```java
+assertNotNull(config)
+0.390 - assertThrows(IllegalArgumentException.class, () -> config.getIntProperty("invalidKey"))
+0.000 - ```

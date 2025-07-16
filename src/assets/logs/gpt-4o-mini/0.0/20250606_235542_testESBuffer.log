@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MPEGES {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MPEGESTest {
+    @Test
+     public void testESBuffer ( ) throws IOException {
+         byte [ ] mpeg = MPEGTestConst . mpeg ( ) ; 
+         byte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ; 
+         byte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegFrame } ) ; 
+         MPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ; 
+         Packet f1 = mpeges . getFrame ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(f1);
+assertEquals(frame1.length, f1.getData().length);
+assertArrayEquals(frame1, f1.getData());
+assertTrue(f1.getTimestamp() >= 0);
+assertEquals(MPEGTestConst._mpegHeader.length, f1.getHeader().length);
+assertArrayEquals(MPEGTestConst._mpegHeader, f1.getHeader());
+assertTrue(f1.getDuration() > 0);
+assertEquals(32, f1.getSize());
+assertTrue(f1.isKeyFrame());
+assertNotNull(f1.getMetadata());
+assertEquals("audio/mpeg", f1.getFormat());
+assertTrue(f1.getData().length > 0);
+assertTrue(f1.getPresentationTime() >= 0);
+assertEquals(1, f1.getTrackId());
+assertNotNull(f1.getCodec());
+assertTrue(f1.getSampleRate() > 0);
+assertEquals(2, f1.getChannels());
+assertTrue(f1.getBitrate() > 0);
+assertNotNull(f1.getFilePosition());
+assertTrue(f1.getFilePosition() >= 0);
+assertEquals(0, f1.getFlags());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(frame1,NIOUtils.toArray(f1.getData())); ===
+0.809 - assertArrayEquals(frame1, f1.getData())
+0.641 - assertEquals(frame1.length, f1.getData().length)
+0.577 - assertEquals("audio/mpeg", f1.getFormat())
+0.575 - assertEquals(1, f1.getTrackId())
+0.565 - assertEquals(0, f1.getFlags())
+0.545 - assertEquals(2, f1.getChannels())
+0.541 - assertEquals(32, f1.getSize())
+0.522 - assertArrayEquals(MPEGTestConst._mpegHeader, f1.getHeader())
+0.517 - assertTrue(f1.getData().length > 0)
+0.512 - assertTrue(f1.getDuration() > 0)
+0.506 - assertNotNull(f1.getMetadata())
+0.494 - assertTrue(f1.getBitrate() > 0)
+0.477 - assertTrue(f1.getTimestamp() >= 0)
+0.477 - assertTrue(f1.getSampleRate() > 0)
+0.452 - assertNotNull(f1.getCodec())
+0.442 - assertTrue(f1.getPresentationTime() >= 0)
+0.440 - assertNotNull(f1.getFilePosition())
+0.440 - assertTrue(f1.getFilePosition() >= 0)
+0.419 - assertEquals(MPEGTestConst._mpegHeader.length, f1.getHeader().length)
+0.410 - assertTrue(f1.isKeyFrame())
+0.321 - ```java
+assertNotNull(f1)
+0.000 - ```

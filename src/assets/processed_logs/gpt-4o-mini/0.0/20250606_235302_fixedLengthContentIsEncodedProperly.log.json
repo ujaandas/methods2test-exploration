@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegration {\npublic static Response newFixedLengthResponse ( String msg ) {\nreturn newFixedLengthResponse ( Status . OK , NanoHTTPD . MIME_HTML , msg ) ;\n}\n}\n\npackage NanoHttpd.nanohttpd.core;\n\npublic class GZipIntegrationTest {\n@Test\npublic void fixedLengthContentIsEncodedProperly ( ) throws IOException {\ntestServer . response = Response . newFixedLengthResponse ( \"STR\" ) ;\nHttpGet request = new HttpGet ( \"STR\" ) ;\nrequest . addHeader ( \"STR\" , \"STR\" ) ;\nHttpResponse response = new DecompressingHttpClient ( httpclient ) . execute ( request ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(response);\nassertEquals(200, response.getStatusLine().getStatusCode());\nassertEquals(\"text/html\", EntityUtils.getContentType(response.getEntity()).getValue());\nassertEquals(\"STR\", EntityUtils.toString(response.getEntity()));\nassertTrue(EntityUtils.toString(response.getEntity()).contains(\"STR\"));\nassertFalse(EntityUtils.toString(response.getEntity()).isEmpty());\nassertTrue(response.getHeaders(\"STR\").length > 0);\nassertEquals(\"STR\", response.getFirstHeader(\"STR\").getValue());\nassertNotNull(response.getEntity());\nassertTrue(response.getEntity().isRepeatable());\nassertTrue(response.getEntity().getContentLength() > 0);\nassertEquals(\"gzip\", response.getFirstHeader(\"Content-Encoding\").getValue());\nassertTrue(response.getFirstHeader(\"Content-Type\").getValue().contains(\"text/html\"));\nassertTrue(response.getFirstHeader(\"Content-Length\").getValue().matches(\"\\\\d+\"));\nassertNotNull(response.getFirstHeader(\"Date\"));\nassertNotNull(response.getFirstHeader(\"Server\"));\nassertTrue(response.getFirstHeader(\"Connection\").getValue().equalsIgnoreCase(\"keep-alive\"));\nassertEquals(\"STR\", response.getFirstHeader(\"STR\").getValue());\nassertTrue(EntityUtils.toString(response.getEntity()).length() > 0);\nassertNotNull(response.getEntity().getContent());\nassertTrue(response.getEntity().getContent().available() > 0);\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.835,
+        0.803,
+        0.773,
+        0.748,
+        0.639,
+        0.585,
+        0.585,
+        0.582,
+        0.55,
+        0.533,
+        0.522,
+        0.496,
+        0.496,
+        0.481,
+        0.473,
+        0.422,
+        0.409,
+        0.384,
+        0.38,
+        0.366,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",EntityUtils.toString(response.getEntity()));"
+}

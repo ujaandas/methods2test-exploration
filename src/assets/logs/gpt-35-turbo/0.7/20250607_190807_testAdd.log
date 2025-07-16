@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManager {
+    @Override
+     public int count ( String poolKey ) { 
+     if ( StringUtils . isBlank ( poolKey ) ) { 
+     return 0 ; 
+     } ConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ; 
+     if ( null != pool ) { 
+     return pool . size ( ) ; 
+     } else { 
+     return 0 ; 
+     } }
+}
+
+package sofastack.sofa-bolt;
+
+public class RpcConnectionManagerTest {
+    @Test
+     public void testAdd ( ) {
+         Connection conn = getAConn ( ) ; 
+         cm . add ( conn ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(1, cm.count(poolKey));
+Assert.assertNotNull(cm.getConnectionPool(connTasks.get(poolKey)));
+Assert.assertTrue(cm.count(poolKey) > 0);
+Assert.assertNotEquals(0, cm.count(poolKey));
+Assert.assertTrue(cm.count(poolKey) >= 0);
+Assert.assertEquals(0, cm.count("invalidPoolKey"));
+Assert.assertNotEquals(0, cm.count(poolKey));
+Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size());
+Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size());
+Assert.assertFalse(cm.count(poolKey) < 0);
+Assert.assertTrue(cm.count(poolKey) >= 0);
+Assert.assertNotEquals(2, cm.count(poolKey));
+Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size());
+Assert.assertTrue(cm.count(poolKey) == 0);
+Assert.assertEquals(0, cm.count(poolKey));
+Assert.assertNotEquals(1, cm.count("invalidPoolKey"));
+Assert.assertTrue(cm.count("invalidPoolKey") == 0);
+Assert.assertTrue(cm.count("invalidPoolKey") == cm.getConnectionPool(connTasks.get("invalidPoolKey")).size());
+Assert.assertNotEquals(0, cm.count("invalidPoolKey"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,cm.count(poolKey)); ===
+1.000 - Assert.assertEquals(1, cm.count(poolKey))
+0.970 - Assert.assertEquals(0, cm.count(poolKey))
+0.928 - Assert.assertNotEquals(0, cm.count(poolKey))
+0.928 - Assert.assertNotEquals(0, cm.count(poolKey))
+0.928 - Assert.assertNotEquals(2, cm.count(poolKey))
+0.862 - Assert.assertFalse(cm.count(poolKey) < 0)
+0.827 - Assert.assertEquals(0, cm.count("invalidPoolKey"))
+0.821 - Assert.assertNotEquals(1, cm.count("invalidPoolKey"))
+0.812 - Assert.assertTrue(cm.count(poolKey) > 0)
+0.800 - Assert.assertTrue(cm.count(poolKey) >= 0)
+0.800 - Assert.assertTrue(cm.count(poolKey) >= 0)
+0.800 - Assert.assertTrue(cm.count(poolKey) == 0)
+0.795 - Assert.assertNotEquals(0, cm.count("invalidPoolKey"))
+0.676 - Assert.assertTrue(cm.count("invalidPoolKey") == 0)
+0.565 - Assert.assertNotNull(cm.getConnectionPool(connTasks.get(poolKey)))
+0.452 - Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size())
+0.452 - Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size())
+0.452 - Assert.assertTrue(cm.count(poolKey) == cm.getConnectionPool(connTasks.get(poolKey)).size())
+0.376 - Assert.assertTrue(cm.count("invalidPoolKey") == cm.getConnectionPool(connTasks.get("invalidPoolKey")).size())

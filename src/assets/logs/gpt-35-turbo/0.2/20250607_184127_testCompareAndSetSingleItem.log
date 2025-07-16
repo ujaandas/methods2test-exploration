@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArray {
+    public int add ( T value ) { 
+    Objects . requireNonNull ( value ) ; 
+    while ( true ) { 
+    final int newIndex = size . get ( ) ; 
+    final int containerIndex = 31 - Integer . numberOfLeadingZeros ( newIndex + 1 ) ; 
+    final int containerSize = 1 << containerIndex ; 
+    final int indexInsideContainer = newIndex + 1 - containerSize ; 
+    AtomicReferenceArray < T > container = containers . get ( containerIndex ) ; 
+    if ( container == null ) { 
+    container = new AtomicReferenceArray < > ( containerSize ) ; 
+    if ( ! containers . compareAndSet ( containerIndex , null , container ) ) { 
+    container = containers . get ( containerIndex ) ; 
+    } } if ( container . compareAndSet ( indexInsideContainer , null , value ) ) { 
+    size . incrementAndGet ( ) ; 
+    return newIndex ; 
+    } } }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CASObjectArrayTest {
+    @Test
+     public void testCompareAndSetSingleItem ( ) {
+         final CASObjectArray < Integer > array = new CASObjectArray < > ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(array);
+assertEquals(0, array.add(5));
+assertEquals(1, array.add(10));
+assertEquals(2, array.add(15));
+assertEquals(3, array.add(20));
+assertEquals(4, array.add(25));
+assertEquals(5, array.add(30));
+assertEquals(6, array.add(35));
+assertEquals(7, array.add(40));
+assertEquals(8, array.add(45));
+assertEquals(9, array.add(50));
+assertEquals(10, array.add(55));
+assertEquals(11, array.add(60));
+assertEquals(12, array.add(65));
+assertEquals(13, array.add(70));
+assertEquals(14, array.add(75));
+assertEquals(15, array.add(80));
+assertEquals(16, array.add(85));
+assertEquals(17, array.add(90));
+assertEquals(18, array.add(95));
+assertEquals(19, array.add(100));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,array.add(1)); ===
+0.964 - assertEquals(0, array.add(5))
+0.947 - assertEquals(1, array.add(10))
+0.947 - assertEquals(2, array.add(15))
+0.931 - assertEquals(10, array.add(55))
+0.915 - assertEquals(19, array.add(100))
+0.912 - assertEquals(3, array.add(20))
+0.912 - assertEquals(4, array.add(25))
+0.912 - assertEquals(5, array.add(30))
+0.912 - assertEquals(6, array.add(35))
+0.912 - assertEquals(7, array.add(40))
+0.912 - assertEquals(8, array.add(45))
+0.912 - assertEquals(9, array.add(50))
+0.897 - assertEquals(11, array.add(60))
+0.897 - assertEquals(12, array.add(65))
+0.897 - assertEquals(13, array.add(70))
+0.897 - assertEquals(14, array.add(75))
+0.897 - assertEquals(15, array.add(80))
+0.897 - assertEquals(16, array.add(85))
+0.897 - assertEquals(17, array.add(90))
+0.897 - assertEquals(18, array.add(95))
+0.625 - assertNotNull(array)

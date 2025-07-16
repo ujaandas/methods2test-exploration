@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecution {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSelectStatementExecutionTest {\n@Test\npublic void testFetchFromSingleRid ( ) {\nOResultSet result = db . query ( \"STR\" ) ;\nprintExecutionPlan ( result ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result.hasNext());\nassertEquals(expectedSize, result.size());\nassertTrue(result.getProperty(\"propertyName\") instanceof ExpectedType);\nassertEquals(expectedValue, result.next().getProperty(\"propertyName\"));\nassertFalse(result.isEmpty());\nassertTrue(result.stream().count() > 0);\nassertEquals(expectedFirstValue, result.next().getProperty(\"firstProperty\"));\nassertNotEquals(unexpectedValue, result.next().getProperty(\"anotherProperty\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"filterProperty\").equals(expectedFilterValue)));\nassertEquals(expectedType, result.next().getProperty(\"typeProperty\").getClass());\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"searchProperty\").equals(searchValue)));\nassertEquals(expectedCount, result.stream().filter(r -> r.getProperty(\"countProperty\").equals(countValue)).count());\nassertNotNull(result.next().getProperty(\"nestedProperty\"));\nassertTrue(result.stream().map(r -> r.getProperty(\"mapProperty\")).collect(Collectors.toSet()).contains(expectedMapValue));\nassertEquals(expectedString, result.next().getProperty(\"stringProperty\"));\nassertTrue(result.stream().allMatch(r -> r.getProperty(\"booleanProperty\") == true));\nassertFalse(result.stream().anyMatch(r -> r.getProperty(\"invalidProperty\") == null));\nassertEquals(expectedDate, result.next().getProperty(\"dateProperty\"));\nassertTrue(result.stream().anyMatch(r -> r.getProperty(\"uniqueProperty\").equals(uniqueValue)));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.708,
+        0.702,
+        0.588,
+        0.526,
+        0.5,
+        0.488,
+        0.438,
+        0.433,
+        0.427,
+        0.411,
+        0.406,
+        0.4,
+        0.4,
+        0.393,
+        0.367,
+        0.367,
+        0.352,
+        0.34,
+        0.314,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(result.hasNext());"
+}

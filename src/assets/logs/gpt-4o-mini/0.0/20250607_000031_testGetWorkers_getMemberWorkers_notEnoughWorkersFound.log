@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals(4, registry.workerCount());
+assertTrue(registry.getWorkers().size() >= 4);
+assertFalse(registry.getWorkers().isEmpty());
+assertNotNull(registry.getWorkers());
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)));
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")));
+assertEquals("STR", registry.getWorkers().get(0).getType());
+assertEquals("STR", registry.getWorkers().get(1).getType());
+assertEquals("STR", registry.getWorkers().get(2).getType());
+assertEquals("STR", registry.getWorkers().get(3).getType());
+assertNotSame(registry.getWorkers().get(0), registry.getWorkers().get(1));
+assertNotSame(registry.getWorkers().get(1), registry.getWorkers().get(2));
+assertNotSame(registry.getWorkers().get(2), registry.getWorkers().get(3));
+assertTrue(registry.getWorkers().stream().map(Worker::getId).distinct().count() == 4);
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getStatus().equals("ACTIVE")));
+assertThrows(IllegalStateException.class, () -> registry.addWorkers(newWorkerParametersList(agentAddress, 1, "STR")));
+assertEquals(4, registry.workerCount());
+assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 1));
+assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 2));
+assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 3));
+assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 4));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,registry.workerCount()); ===
+1.000 - assertEquals(4, registry.workerCount())
+0.905 - ```java
+assertEquals(4, registry.workerCount())
+0.703 - assertNotNull(registry.getWorkers())
+0.683 - assertFalse(registry.getWorkers().isEmpty())
+0.667 - assertEquals("STR", registry.getWorkers().get(0).getType())
+0.667 - assertEquals("STR", registry.getWorkers().get(1).getType())
+0.667 - assertEquals("STR", registry.getWorkers().get(2).getType())
+0.667 - assertEquals("STR", registry.getWorkers().get(3).getType())
+0.617 - assertTrue(registry.getWorkers().size() >= 4)
+0.509 - assertNotSame(registry.getWorkers().get(0), registry.getWorkers().get(1))
+0.509 - assertNotSame(registry.getWorkers().get(1), registry.getWorkers().get(2))
+0.509 - assertNotSame(registry.getWorkers().get(2), registry.getWorkers().get(3))
+0.483 - assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 1))
+0.483 - assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 2))
+0.483 - assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 3))
+0.483 - assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getId() == 4))
+0.479 - assertTrue(registry.getWorkers().stream().map(Worker::getId).distinct().count() == 4)
+0.434 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getType().equals("STR")))
+0.418 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getStatus().equals("ACTIVE")))
+0.403 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)))
+0.387 - assertThrows(IllegalStateException.class, () -> registry.addWorkers(newWorkerParametersList(agentAddress, 1, "STR")))
+0.000 - ```

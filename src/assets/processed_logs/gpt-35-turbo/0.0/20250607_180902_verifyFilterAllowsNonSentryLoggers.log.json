@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilter {\n@Override\npublic FilterReply decide ( ILoggingEvent event ) {\nif ( event . getLoggerName ( ) . startsWith ( \"STR\" ) ) {\nreturn FilterReply . DENY ;\n} else {\nreturn FilterReply . NEUTRAL ;\n} }\n}\n\npackage tradier.dropwizard-raven;\n\npublic class DroppingRavenLoggingFilterTest {\n@Test\npublic void verifyFilterAllowsNonSentryLoggers ( ) {\nfinal DroppingRavenLoggingFilter filter = new DroppingRavenLoggingFilter ( ) ;\nfilter . start ( ) ;\nfinal LoggingEvent evt = new LoggingEvent ( ) ;\nevt . setLoggerName ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertNotEquals(FilterReply.NEUTRAL, filter.decide(evt));\nAssert.assertTrue(filter.decide(evt) == FilterReply.DENY);\nAssert.assertFalse(filter.decide(evt) == FilterReply.ACCEPT);\nAssert.assertNotNull(filter.decide(evt));\nAssert.assertNull(null);\nAssert.assertSame(FilterReply.DENY, filter.decide(evt));\nAssert.assertNotSame(FilterReply.ACCEPT, filter.decide(evt));\nAssert.assertTrue(filter.decide(evt) != FilterReply.ACCEPT);\nAssert.assertFalse(filter.decide(evt) == FilterReply.NEUTRAL);\nAssert.assertTrue(filter.decide(evt) instanceof FilterReply);\nAssert.assertFalse(filter.decide(evt) instanceof LoggingEvent);\nAssert.assertTrue(filter.decide(evt) != null);\nAssert.assertFalse(filter.decide(evt) == null);\nAssert.assertTrue(filter.decide(evt).equals(FilterReply.DENY));\nAssert.assertFalse(filter.decide(evt).equals(FilterReply.ACCEPT);\nAssert.assertTrue(filter.decide(evt).hashCode() == FilterReply.DENY.hashCode());\nAssert.assertFalse(filter.decide(evt).hashCode() == FilterReply.ACCEPT.hashCode());\n====================\n\n",
+    "scores": [
+        0.972,
+        0.911,
+        0.887,
+        0.828,
+        0.808,
+        0.659,
+        0.652,
+        0.614,
+        0.577,
+        0.563,
+        0.552,
+        0.54,
+        0.529,
+        0.524,
+        0.505,
+        0.495,
+        0.464,
+        0.443,
+        0.353
+    ],
+    "ground_truth": "assertEquals(FilterReply.NEUTRAL,filter.decide(evt));"
+}

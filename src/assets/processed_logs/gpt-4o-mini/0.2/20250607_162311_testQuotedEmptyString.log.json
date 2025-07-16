@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testQuotedEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(expectedSize, res.size());\nassertTrue(res.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertEquals(expectedValue, res.get(0).field(\"fieldName\"));\nassertTrue(res.get(0).field(\"fieldName\").isEmpty());\nassertEquals(expectedType, res.get(0).field(\"fieldName\").getClass());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"anotherField\") != null));\nassertEquals(expectedAnotherValue, res.get(0).field(\"anotherField\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"dateField\") instanceof Date));\nassertEquals(expectedDateValue, res.get(0).field(\"dateField\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"numericField\") instanceof Number));\nassertEquals(expectedNumericValue, res.get(0).field(\"numericField\"));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"booleanField\") instanceof Boolean));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"booleanField\")));\nassertEquals(expectedListSize, res.get(0).field(\"listField\").size());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"listField\").contains(expectedListItem)));\nassertEquals(expectedMapSize, res.get(0).field(\"mapField\").size());\nassertTrue(res.stream().allMatch(doc -> doc.field(\"mapField\").containsKey(expectedMapKey)));\nassertEquals(expectedMapValue, res.get(0).field(\"mapField\").get(expectedMapKey));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"nestedField\").containsField(\"nestedKey\")));\nassertEquals(expectedNestedValue, res.get(0).field(\"nestedField\").field(\"nestedKey\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.571,
+        0.462,
+        0.434,
+        0.43,
+        0.418,
+        0.414,
+        0.409,
+        0.4,
+        0.387,
+        0.387,
+        0.374,
+        0.364,
+        0.354,
+        0.351,
+        0.333,
+        0.318,
+        0.315,
+        0.313,
+        0.296,
+        0.291,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

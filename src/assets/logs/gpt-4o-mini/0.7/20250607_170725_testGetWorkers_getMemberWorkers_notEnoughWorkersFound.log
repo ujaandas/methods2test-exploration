@@ -1,0 +1,90 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class Registry {
+    public int workerCount ( ) { 
+    return workers . size ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class RegistryTest {
+    @ Test ( expected = IllegalStateException . class ) public void testGetWorkers_getMemberWorkers_notEnoughWorkersFound ( ) {
+         SimulatorAddress agentAddress = addAgent ( ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         registry . addWorkers ( newWorkerParametersList ( agentAddress , 2 , "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(registry);
+assertEquals(4, registry.workerCount());
+assertThrows(IllegalStateException.class, () -> {
+    registry.getWorkers();
+});
+assertTrue(registry.getWorkers().isEmpty());
+assertTrue(registry.getWorkers().size() <= 4);
+assertFalse(registry.getWorkers().contains(null));
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker instanceof Worker));
+assertFalse(registry.getWorkers().stream().anyMatch(worker -> worker.getStatus() == WorkerStatus.FAILED));
+assertNotEquals(0, registry.workerCount());
+assertEquals(2, registry.getWorkers().stream().filter(worker -> worker.getType().equals("STR")).count());
+assertThrows(IllegalStateException.class, () -> {
+    registry.removeWorkers();
+});
+assertDoesNotThrow(() -> {
+    registry.addWorkers(newWorkerParametersList(agentAddress, 1, "STR"));
+});
+assertEquals(5, registry.workerCount());
+assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)));
+assertFalse(registry.getWorkers().contains(new Worker("nonexistent")));
+assertNotEquals(3, registry.workerCount());
+assertThrows(IllegalArgumentException.class, () -> {
+    registry.addWorkers(null);
+});
+assertFalse(registry.getWorkers().isEmpty());
+assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getType().equals("STR")));
+assertEquals(4, registry.getWorkers().size());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(4,registry.workerCount()); ===
+1.000 - assertEquals(4, registry.workerCount())
+0.974 - assertEquals(5, registry.workerCount())
+0.937 - assertNotEquals(0, registry.workerCount())
+0.937 - assertNotEquals(3, registry.workerCount())
+0.780 - assertEquals(4, registry.getWorkers().size())
+0.690 - assertFalse(registry.getWorkers().contains(null))
+0.683 - assertFalse(registry.getWorkers().isEmpty())
+0.642 - assertTrue(registry.getWorkers().isEmpty())
+0.617 - assertTrue(registry.getWorkers().size() <= 4)
+0.561 - assertFalse(registry.getWorkers().contains(new Worker("nonexistent")))
+0.522 - ```java
+assertNotNull(registry)
+0.518 - assertEquals(2, registry.getWorkers().stream().filter(worker -> worker.getType().equals("STR")).count())
+0.491 - assertThrows(IllegalStateException.class, () -> {
+    registry.getWorkers()
+0.477 - assertThrows(IllegalStateException.class, () -> {
+    registry.removeWorkers()
+0.463 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker instanceof Worker))
+0.460 - assertThrows(IllegalArgumentException.class, () -> {
+    registry.addWorkers(null)
+0.434 - assertTrue(registry.getWorkers().stream().anyMatch(worker -> worker.getType().equals("STR")))
+0.432 - assertFalse(registry.getWorkers().stream().anyMatch(worker -> worker.getStatus() == WorkerStatus.FAILED))
+0.419 - assertDoesNotThrow(() -> {
+    registry.addWorkers(newWorkerParametersList(agentAddress, 1, "STR"))
+0.403 - assertTrue(registry.getWorkers().stream().allMatch(worker -> worker.getAgentAddress().equals(agentAddress)))
+0.050 - })
+0.050 - })
+0.050 - })
+0.050 - })
+0.000 - ```

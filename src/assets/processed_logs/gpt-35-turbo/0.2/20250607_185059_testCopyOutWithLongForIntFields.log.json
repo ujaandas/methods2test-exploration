@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjector {\npublic void copyOutAttributes ( Object target , List < Attribute > jmxAttributeValues , Map < String , Method > attributeSetters , ObjectName objectName ) {\nthis . copyOutAttributes ( target , jmxAttributeValues , attributeSetters , \"STR\" , objectName ) ;\n}\n}\n\npackage amlinv.stat-collection-utils;\n\npublic class AttributeInjectorTest {\n@Test\npublic void testCopyOutWithLongForIntFields ( ) throws Exception {\nthis . attributeList . clear ( ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 17L ) ) ;\nthis . attributeList . add ( new Attribute ( \"STR\" , 22L ) ) ;\nthis . injector . copyOutAttributes ( this . target , this . attributeList , this . attributeSetters , this . objectName ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(17L, target.getStr());\nassertEquals(22L, target.getStr());\nverify(attributeSetters.get(\"STR\")).invoke(target, 17L);\nverify(attributeSetters.get(\"STR\")).invoke(target, 22L);\nassertEquals(2, attributeList.size());\nverify(objectName).getCanonicalName();\nverifyNoMoreInteractions(target, attributeSetters, objectName);\nassertNotNull(target.getStr());\nassertNotNull(attributeSetters.get(\"STR\"));\nassertNotNull(objectName);\nassertTrue(attributeList.contains(new Attribute(\"STR\", 17L)));\nassertTrue(attributeList.contains(new Attribute(\"STR\", 22L)));\nassertFalse(attributeList.isEmpty());\nassertNotEquals(0, attributeList.size());\nassertSame(target, attributeSetters.get(\"STR\"));\nassertSame(target, objectName);\nassertNotSame(attributeList, attributeSetters);\nassertNotSame(attributeList, objectName);\n====================\n\n",
+    "scores": [
+        0.714,
+        0.657,
+        0.603,
+        0.579,
+        0.545,
+        0.537,
+        0.493,
+        0.439,
+        0.41,
+        0.405,
+        0.368,
+        0.351,
+        0.351,
+        0.323,
+        0.308,
+        0.308,
+        0.271,
+        0.25
+    ],
+    "ground_truth": "assertEquals(17,this.target.intValue);"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizer {\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) ;\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicURLNormalizerTest {\n@Test\npublic void testDontFixMangledQueryString ( ) throws MalformedURLException {\nURLFilter urlFilter = createFilter ( true , false , queryParamsToFilter ) ;\nURL testSourceUrl = new URL ( \"STR\" ) ;\nString testUrl = \"STR\" ;\nString expectedResult = \"STR\" ;\nString normalizedUrl = urlFilter . filter ( testSourceUrl , new Metadata ( ) , testUrl ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(normalizedUrl);\nassertEquals(expectedResult, normalizedUrl);\nassertTrue(normalizedUrl.startsWith(\"http\"));\nassertFalse(normalizedUrl.contains(\" \"));\nassertFalse(normalizedUrl.contains(\"%20\"));\nassertTrue(normalizedUrl.endsWith(\".com\") || normalizedUrl.endsWith(\".org\") || normalizedUrl.endsWith(\".net\"));\nassertTrue(normalizedUrl.length() <= 2048);\nassertFalse(normalizedUrl.contains(\"..\"));\nassertFalse(normalizedUrl.contains(\"//\"));\nassertTrue(normalizedUrl.matches(\"^(http|https)://.*\"));\nassertFalse(normalizedUrl.contains(\"mailto:\"));\nassertFalse(normalizedUrl.contains(\"javascript:\"));\nassertFalse(normalizedUrl.contains(\"data:\"));\nassertFalse(normalizedUrl.contains(\"ftp:\"));\nassertFalse(normalizedUrl.contains(\"file:\"));\nassertTrue(normalizedUrl.equals(expectedResult) || normalizedUrl.equals(testUrl));\nassertFalse(normalizedUrl.contains(\" \"));\nassertTrue(normalizedUrl.indexOf(\"#\") == -1 || normalizedUrl.indexOf(\"#\") > normalizedUrl.indexOf(\"?\"));\nassertTrue(normalizedUrl.indexOf(\"?\") == -1 || normalizedUrl.indexOf(\"?\") > normalizedUrl.indexOf(\"/\"));\nassertTrue(normalizedUrl.contains(\"://\"));\nassertFalse(normalizedUrl.contains(\"undefined\"));\nassertFalse(normalizedUrl.contains(\"null\"));\n```\n====================\n\n",
+    "scores": [
+        0.933,
+        0.63,
+        0.552,
+        0.552,
+        0.548,
+        0.539,
+        0.539,
+        0.533,
+        0.527,
+        0.527,
+        0.522,
+        0.522,
+        0.511,
+        0.5,
+        0.5,
+        0.494,
+        0.49,
+        0.478,
+        0.427,
+        0.303,
+        0.303,
+        0.286,
+        0.0
+    ],
+    "ground_truth": "assertEquals(\"STR\",expectedResult,normalizedUrl);"
+}

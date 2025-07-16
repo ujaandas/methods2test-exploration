@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryInfo {
+    public Object getTarget ( ) { 
+    return target ; 
+    }
+}
+
+package amlinv.stat-collection-utils;
+
+public class ObjectQueryInfoTest {
+    @Test
+     public void testImmutableQueryInfo ( ) throws Exception {
+         Map < String , Method > setters = new HashMap < > ( ) ; 
+         setters . put ( "STR" , null ) ; 
+         setters . put ( "STR" , null ) ; 
+         Object target = new Object ( ) ; 
+         ObjectName oname = new ObjectName ( "STR" ) ; 
+         ObjectQueryInfo objectQueryInfo = new ObjectQueryInfo ( target , oname , setters ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(objectQueryInfo);
+assertEquals(target, objectQueryInfo.getTarget());
+assertEquals(oname, objectQueryInfo.getObjectName());
+assertEquals(setters.size(), objectQueryInfo.getSetters().size());
+assertTrue(objectQueryInfo.getSetters().containsKey("STR"));
+assertNull(objectQueryInfo.getSetters().get("STR"));
+assertFalse(objectQueryInfo.getSetters().containsKey("NON_EXISTENT_KEY"));
+assertEquals(0, objectQueryInfo.getOtherProperties().size());
+assertTrue(objectQueryInfo.isImmutable());
+assertNotEquals(new Object(), objectQueryInfo);
+assertNotSame(objectQueryInfo, new ObjectQueryInfo(target, oname, setters));
+assertTrue(objectQueryInfo.toString().contains("ObjectQueryInfo"));
+assertEquals(objectQueryInfo.hashCode(), objectQueryInfo.hashCode());
+assertNotEquals(objectQueryInfo.hashCode(), new ObjectQueryInfo(new Object(), oname, setters).hashCode());
+assertSame(objectQueryInfo.getClass(), ObjectQueryInfo.class);
+assertTrue(objectQueryInfo.getTarget() instanceof Object);
+assertEquals(objectQueryInfo.getObjectName().getName(), "STR");
+assertThrows(UnsupportedOperationException.class, () -> objectQueryInfo.getSetters().put("NEW_KEY", null));
+assertFalse(objectQueryInfo.getSetters().isEmpty());
+assertTrue(objectQueryInfo.getSetters().keySet().contains("STR"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertSame(target,objectQueryInfo.getTarget()); ===
+0.915 - assertEquals(target, objectQueryInfo.getTarget())
+0.713 - assertTrue(objectQueryInfo.getTarget() instanceof Object)
+0.701 - assertEquals(oname, objectQueryInfo.getObjectName())
+0.680 - assertNull(objectQueryInfo.getSetters().get("STR"))
+0.680 - assertFalse(objectQueryInfo.getSetters().isEmpty())
+0.648 - assertEquals(0, objectQueryInfo.getOtherProperties().size())
+0.644 - assertTrue(objectQueryInfo.isImmutable())
+0.642 - assertSame(objectQueryInfo.getClass(), ObjectQueryInfo.class)
+0.636 - assertEquals(objectQueryInfo.getObjectName().getName(), "STR")
+0.618 - assertEquals(setters.size(), objectQueryInfo.getSetters().size())
+0.610 - assertTrue(objectQueryInfo.getSetters().containsKey("STR"))
+0.598 - assertNotSame(objectQueryInfo, new ObjectQueryInfo(target, oname, setters))
+0.595 - assertTrue(objectQueryInfo.getSetters().keySet().contains("STR"))
+0.578 - assertNotEquals(new Object(), objectQueryInfo)
+0.555 - assertFalse(objectQueryInfo.getSetters().containsKey("NON_EXISTENT_KEY"))
+0.548 - ```java
+assertNotNull(objectQueryInfo)
+0.531 - assertEquals(objectQueryInfo.hashCode(), objectQueryInfo.hashCode())
+0.500 - assertTrue(objectQueryInfo.toString().contains("ObjectQueryInfo"))
+0.446 - assertThrows(UnsupportedOperationException.class, () -> objectQueryInfo.getSetters().put("NEW_KEY", null))
+0.438 - assertNotEquals(objectQueryInfo.hashCode(), new ObjectQueryInfo(new Object(), oname, setters).hashCode())
+0.000 - ```

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class Circle {\n@Override\npublic Properties getEnvironment ( ) {\nProperties environment = new Properties ( ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_BUILD_NUMBER ) ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_BRANCH ) ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_COMMIT ) ) ;\nreturn environment ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class CircleTest {\n@Test\npublic void testGetEnvironment ( ) {\nProperties properties = new Circle ( env ( ) ) . getEnvironment ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(properties);\nassertTrue(properties.containsKey(\"STR\"));\nassertEquals(\"expected_build_number\", properties.getProperty(\"STR\"));\nassertEquals(\"expected_branch\", properties.getProperty(\"STR\"));\nassertEquals(\"expected_commit\", properties.getProperty(\"STR\"));\nassertEquals(3, properties.size());\nassertTrue(properties.getProperty(\"STR\").matches(\"expected_pattern\"));\nassertFalse(properties.getProperty(\"STR\").isEmpty());\nassertEquals(\"expected_build_number\", properties.getProperty(CIRCLE_BUILD_NUMBER));\nassertEquals(\"expected_branch\", properties.getProperty(CIRCLE_BRANCH));\nassertEquals(\"expected_commit\", properties.getProperty(CIRCLE_COMMIT));\nassertTrue(properties.getProperty(CIRCLE_BUILD_NUMBER).length() > 0);\nassertTrue(properties.getProperty(CIRCLE_BRANCH).length() > 0);\nassertTrue(properties.getProperty(CIRCLE_COMMIT).length() > 0);\nassertNotEquals(\"unexpected_value\", properties.getProperty(\"STR\"));\nassertTrue(properties.getProperty(\"STR\").contains(\"expected_substring\"));\nassertFalse(properties.getProperty(\"STR\").contains(\"unexpected_substring\"));\nassertTrue(properties.keySet().containsAll(Set.of(CIRCLE_BUILD_NUMBER, CIRCLE_BRANCH, CIRCLE_COMMIT)));\nassertTrue(properties.values().stream().allMatch(value -> value instanceof String));\nassertEquals(\"expected_value\", properties.getProperty(\"STR\", \"default_value\"));\nassertNotEquals(\"default_value\", properties.getProperty(\"STR\"));\nassertThrows(NullPointerException.class, () -> properties.getProperty(null));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.649,
+        0.617,
+        0.617,
+        0.611,
+        0.606,
+        0.592,
+        0.588,
+        0.58,
+        0.569,
+        0.569,
+        0.532,
+        0.509,
+        0.495,
+        0.495,
+        0.465,
+        0.463,
+        0.453,
+        0.451,
+        0.438,
+        0.411,
+        0.346,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,properties.size());"
+}

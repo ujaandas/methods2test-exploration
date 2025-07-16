@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManager {\n@Override\npublic List < Connection > getAll ( String poolKey ) {\nConnectionPool pool = this . getConnectionPool ( this . connTasks . get ( poolKey ) ) ;\nreturn null == pool ? new ArrayList < Connection > ( ) : pool . getAll ( ) ;\n}\n}\n\npackage sofastack.sofa-bolt;\n\npublic class RpcConnectionManagerTest {\n@Test\npublic void testGetAllWithPoolKey ( ) {\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\ncm . add ( getAConn ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nList<Connection> connections = cm.getAll(\"testPoolKey\");\nassertNotNull(connections);\nassertEquals(3, connections.size());\nassertTrue(connections.contains(getAConn()));\nassertTrue(connections.contains(getAConn()));\nassertTrue(connections.contains(getAConn()));\nassertFalse(connections.contains(null));\nassertEquals(getAConn(), connections.get(0));\nassertEquals(getAConn(), connections.get(1));\nassertEquals(getAConn(), connections.get(2));\nassertTrue(connections.stream().allMatch(conn -> conn instanceof Connection));\nassertTrue(connections.stream().distinct().count() <= connections.size());\nassertFalse(connections.isEmpty());\nassertSame(connections.get(0), connections.get(0));\nassertNotSame(connections.get(0), connections.get(1));\nassertNotSame(connections.get(1), connections.get(2));\nassertEquals(\"ExpectedConnectionId\", connections.get(0).getId());\nassertEquals(\"ExpectedConnectionId\", connections.get(1).getId());\nassertEquals(\"ExpectedConnectionId\", connections.get(2).getId());\nassertTrue(connections.stream().map(Connection::getId).collect(Collectors.toSet()).size() <= 3);\nassertNotEquals(connections.get(0), connections.get(1));\nassertNotEquals(connections.get(1), connections.get(2));\nassertNotEquals(connections.get(0), connections.get(2));\nassertTrue(connections.stream().allMatch(conn -> conn.isActive()));\n```\n====================\n\n",
+    "scores": [
+        0.72,
+        0.526,
+        0.526,
+        0.526,
+        0.524,
+        0.524,
+        0.524,
+        0.5,
+        0.5,
+        0.5,
+        0.453,
+        0.425,
+        0.424,
+        0.424,
+        0.424,
+        0.422,
+        0.418,
+        0.409,
+        0.409,
+        0.396,
+        0.393,
+        0.388,
+        0.324,
+        0.281,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(3,cm.getAll(poolKey).size());"
+}

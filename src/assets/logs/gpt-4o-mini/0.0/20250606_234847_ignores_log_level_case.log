@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLogger {
+    public void set ( String key , String value ) { 
+    setIn ( normalize ( key ) , RealValue . fromString ( value ) ) ; 
+    }
+}
+
+package cucumber-ltd.cucumber-pro-plugin-jvm;
+
+public class SystemLoggerTest {
+    @Test
+     public void ignores_log_level_case ( ) {
+         Config config = createConfig ( ) ; 
+         config . set ( Keys . CUCUMBERPRO_LOGGING , "STR" ) ; 
+         Logger . SystemLogger logger = new Logger . SystemLogger ( config ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(logger);
+assertEquals("STR", logger.get(Keys.CUCUMBERPRO_LOGGING));
+assertTrue(logger.isLogLevelIgnored("str"));
+assertFalse(logger.isLogLevelIgnored("DEBUG"));
+assertFalse(logger.isLogLevelIgnored("INFO"));
+assertTrue(logger.isLogLevelIgnored("Str"));
+assertTrue(logger.isLogLevelIgnored("sTr"));
+assertEquals("STR", logger.getNormalizedLogLevel());
+assertTrue(logger.isLogLevelValid("STR"));
+assertFalse(logger.isLogLevelValid("INVALID_LEVEL"));
+assertEquals("STR", logger.getLogLevel());
+assertTrue(logger.isLogLevelSet());
+assertFalse(logger.isLogLevelSet("DEBUG"));
+assertTrue(logger.isLogLevelSet("STR"));
+assertEquals(1, logger.getLogLevelCount());
+assertTrue(logger.hasLogLevel("STR"));
+assertFalse(logger.hasLogLevel("ERROR"));
+assertEquals("STR", logger.getEffectiveLogLevel());
+assertTrue(logger.isLogLevelConfigured());
+assertFalse(logger.isLogLevelConfigured("ERROR"));
+assertTrue(logger.isLogLevelConfigured("STR"));
+assertEquals("STR", logger.getCurrentLogLevel());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(Logger.Level.DEBUG,logger.level); ===
+0.612 - assertEquals("STR", logger.getLogLevel())
+0.605 - assertEquals(1, logger.getLogLevelCount())
+0.568 - assertEquals("STR", logger.getNormalizedLogLevel())
+0.565 - assertEquals("STR", logger.getCurrentLogLevel())
+0.553 - assertEquals("STR", logger.getEffectiveLogLevel())
+0.518 - assertFalse(logger.hasLogLevel("ERROR"))
+0.506 - assertTrue(logger.isLogLevelSet())
+0.506 - assertFalse(logger.isLogLevelSet("DEBUG"))
+0.489 - assertFalse(logger.isLogLevelIgnored("INFO"))
+0.488 - assertTrue(logger.hasLogLevel("STR"))
+0.484 - assertFalse(logger.isLogLevelIgnored("DEBUG"))
+0.476 - assertTrue(logger.isLogLevelSet("STR"))
+0.475 - assertEquals("STR", logger.get(Keys.CUCUMBERPRO_LOGGING))
+0.468 - assertFalse(logger.isLogLevelConfigured("ERROR"))
+0.465 - assertTrue(logger.isLogLevelValid("STR"))
+0.465 - assertTrue(logger.isLogLevelConfigured())
+0.455 - assertTrue(logger.isLogLevelIgnored("str"))
+0.455 - assertTrue(logger.isLogLevelIgnored("Str"))
+0.455 - assertTrue(logger.isLogLevelIgnored("sTr"))
+0.454 - assertFalse(logger.isLogLevelValid("INVALID_LEVEL"))
+0.440 - assertTrue(logger.isLogLevelConfigured("STR"))
+0.432 - ```java
+assertNotNull(logger)
+0.000 - ```

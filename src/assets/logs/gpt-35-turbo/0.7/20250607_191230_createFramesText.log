@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455 {
+    @Override
+     public List < Framedata > createFrames ( String text , boolean mask ) { 
+     TextFrame curframe = new TextFrame ( ) ; 
+     curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ; 
+     curframe . setTransferemasked ( mask ) ; 
+     try { 
+     curframe . isValid ( ) ; 
+     } catch ( InvalidDataException e ) { 
+     throw new NotSendableException ( e ) ; 
+     } return Collections . singletonList ( ( Framedata ) curframe ) ; 
+     }
+}
+
+package TooTallNate.Java-WebSocket;
+
+public class Draft_6455Test {
+    @Test
+     public void createFramesText ( ) throws Exception {
+         Draft_6455 draft_6455 = new Draft_6455 ( ) ; 
+         TextFrame curframe = new TextFrame ( ) ; 
+         curframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( "STR" ) ) ) ; 
+         curframe . setTransferemasked ( false ) ; 
+         List < Framedata > createdFrame = draft_6455 . createFrames ( "STR" , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(createdFrame.size(), 1);
+Assert.assertTrue(createdFrame.get(0) instanceof TextFrame);
+Assert.assertEquals(((TextFrame) createdFrame.get(0)).getPayloadData().toString(), "STR");
+Assert.assertEquals(((TextFrame) createdFrame.get(0)).isTransferMasked(), false);
+Assert.assertTrue(((TextFrame) createdFrame.get(0)).isValid());
+Assert.assertTrue(createdFrame.get(0).getOpcode() == Opcode.TEXT);
+Assert.assertTrue(createdFrame.get(0).getFin());
+Assert.assertTrue(createdFrame.get(0).getRsv1() == false);
+Assert.assertTrue(createdFrame.get(0).getRsv2() == false);
+Assert.assertTrue(createdFrame.get(0).getRsv3() == false);
+Assert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3);
+Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[0] == (byte) 'S');
+Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[1] == (byte) 'T');
+Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[2] == (byte) 'R');
+Assert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3);
+Assert.assertTrue(createdFrame.get(0).getPayloadData().get(0) == (byte) 'S');
+Assert.assertTrue(createdFrame.get(0).getPayloadData().get(1) == (byte) 'T');
+Assert.assertTrue(createdFrame.get(0).getPayloadData().get(2) == (byte) 'R');
+Assert.assertEquals(createdFrame.get(0).getPayloadData().length(), 3);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,createdFrame.size()); ===
+0.943 - Assert.assertEquals(createdFrame.size(), 1)
+0.667 - Assert.assertTrue(createdFrame.get(0).getFin())
+0.625 - Assert.assertEquals(createdFrame.get(0).getPayloadData().length(), 3)
+0.602 - Assert.assertTrue(createdFrame.get(0).getRsv1() == false)
+0.602 - Assert.assertTrue(createdFrame.get(0).getRsv2() == false)
+0.602 - Assert.assertTrue(createdFrame.get(0).getRsv3() == false)
+0.585 - Assert.assertEquals(((TextFrame) createdFrame.get(0)).isTransferMasked(), false)
+0.584 - Assert.assertTrue(((TextFrame) createdFrame.get(0)).isValid())
+0.565 - Assert.assertTrue(createdFrame.get(0) instanceof TextFrame)
+0.549 - Assert.assertTrue(createdFrame.get(0).getOpcode() == Opcode.TEXT)
+0.522 - Assert.assertEquals(((TextFrame) createdFrame.get(0)).getPayloadData().toString(), "STR")
+0.495 - Assert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3)
+0.495 - Assert.assertTrue(createdFrame.get(0).getPayloadData().array().length == 3)
+0.495 - Assert.assertTrue(createdFrame.get(0).getPayloadData().get(0) == (byte) 'S')
+0.495 - Assert.assertTrue(createdFrame.get(0).getPayloadData().get(1) == (byte) 'T')
+0.495 - Assert.assertTrue(createdFrame.get(0).getPayloadData().get(2) == (byte) 'R')
+0.476 - Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[0] == (byte) 'S')
+0.476 - Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[1] == (byte) 'T')
+0.476 - Assert.assertTrue(createdFrame.get(0).getPayloadData().array()[2] == (byte) 'R')

@@ -1,0 +1,72 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class AlterProperty {
+    public OClass getLinkedClass ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class AlterPropertyTest {
+    @Test
+     public void testRemoveLinkedClass ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         OClass classA = schema . createClass ( "STR" ) ; 
+         OClass classLinked = schema . createClass ( "STR" ) ; 
+         OProperty prop = classA . createProperty ( "STR" , OType . LINK , classLinked ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(prop);
+Assert.assertEquals("STR", prop.getName());
+Assert.assertEquals(OType.LINK, prop.getType());
+Assert.assertEquals(classLinked, prop.getLinkedClass());
+Assert.assertTrue(classA.existsProperty("STR"));
+Assert.assertEquals(1, classA.properties().size());
+Assert.assertEquals(1, classLinked.properties().size());
+Assert.assertTrue(classLinked.existsProperty("STR"));
+Assert.assertTrue(classA.getIndexedProperties().isEmpty());
+Assert.assertTrue(classLinked.getIndexedProperties().isEmpty());
+Assert.assertFalse(prop.isMandatory());
+Assert.assertFalse(prop.isReadOnly());
+Assert.assertFalse(prop.isNotNull());
+Assert.assertFalse(prop.isNotNull());
+Assert.assertFalse(prop.isCollateCaseInsensitive());
+Assert.assertFalse(prop.isMin("0"));
+Assert.assertFalse(prop.isMax("255"));
+Assert.assertFalse(prop.isRegexp("\\d+"));
+Assert.assertFalse(prop.isFullText());
+Assert.assertFalse(prop.isComposite());
+Assert.assertFalse(prop.isEncrypted());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(prop.getLinkedClass()); ===
+0.747 - Assert.assertEquals(classLinked, prop.getLinkedClass())
+0.691 - Assert.assertNotNull(prop)
+0.600 - Assert.assertEquals("STR", prop.getName())
+0.576 - Assert.assertFalse(prop.isReadOnly())
+0.567 - Assert.assertFalse(prop.isEncrypted())
+0.562 - Assert.assertFalse(prop.isMin("0"))
+0.550 - Assert.assertFalse(prop.isCollateCaseInsensitive())
+0.545 - Assert.assertFalse(prop.isMax("255"))
+0.545 - Assert.assertFalse(prop.isFullText())
+0.538 - Assert.assertEquals(1, classA.properties().size())
+0.514 - Assert.assertFalse(prop.isRegexp("\\d+"))
+0.507 - Assert.assertFalse(prop.isMandatory())
+0.507 - Assert.assertFalse(prop.isComposite())
+0.507 - Assert.assertEquals(OType.LINK, prop.getType())
+0.492 - Assert.assertFalse(prop.isNotNull())
+0.492 - Assert.assertFalse(prop.isNotNull())
+0.469 - Assert.assertTrue(classLinked.existsProperty("STR"))
+0.458 - Assert.assertEquals(1, classLinked.properties().size())
+0.437 - Assert.assertTrue(classA.getIndexedProperties().isEmpty())
+0.395 - Assert.assertTrue(classA.existsProperty("STR"))
+0.391 - Assert.assertTrue(classLinked.getIndexedProperties().isEmpty())

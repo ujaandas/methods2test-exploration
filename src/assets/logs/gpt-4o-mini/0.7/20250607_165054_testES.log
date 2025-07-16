@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MPEGES {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MPEGESTest {
+    @Test
+     public void testES ( ) throws IOException {
+         byte [ ] mpeg = MPEGTestConst . mpeg ( ) ; 
+         byte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ; 
+         byte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegFrame } ) ; 
+         MPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ; 
+         ByteBuffer buf = ByteBuffer . allocate ( 1024 ) ; 
+         Packet f1 = mpeges . frame ( buf ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(f1);
+assertTrue(f1.size() > 0);
+assertArrayEquals(frame1, f1.getData());
+assertEquals(MPEGTestConst._mpegHeader.length + MPEGTestConst._mpegFrame.length, f1.size());
+assertTrue(f1.isComplete());
+assertTrue(f1.getTimestamp() >= 0);
+assertEquals(1, f1.getIndex());
+assertNotNull(f1.getDataBuffer());
+assertEquals(1024, buf.capacity());
+assertTrue(buf.position() >= 0);
+assertTrue(buf.remaining() <= buf.capacity());
+assertArrayEquals(new byte[]{0x00, 0x00}, Arrays.copyOfRange(f1.getData(), 0, 2));
+assertArrayEquals(new byte[]{0x01, 0xB3}, Arrays.copyOfRange(f1.getData(), 3, 5));
+assertEquals(f1.getFormat(), "MPEG");
+assertNotNull(f1.getHeader());
+assertTrue(f1.getHeader().length > 0);
+assertEquals(f1.getDuration(), MPEGTestConst.expectedDuration);
+assertTrue(f1.getTimestamp() < System.currentTimeMillis());
+assertTrue(f1.getData().length <= 1024);
+assertFalse(f1.isError());
+assertNull(f1.getError());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(frame1,NIOUtils.toArray(f1.getData())); ===
+0.809 - assertArrayEquals(frame1, f1.getData())
+0.621 - assertArrayEquals(new byte[]{0x01, 0xB3}, Arrays.copyOfRange(f1.getData(), 3, 5))
+0.606 - assertArrayEquals(new byte[]{0x00, 0x00}, Arrays.copyOfRange(f1.getData(), 0, 2))
+0.565 - assertEquals(1, f1.getIndex())
+0.527 - assertEquals(f1.getFormat(), "MPEG")
+0.517 - assertNotNull(f1.getDataBuffer())
+0.495 - assertTrue(f1.getData().length <= 1024)
+0.477 - assertTrue(f1.getTimestamp() >= 0)
+0.471 - assertNotNull(f1.getHeader())
+0.469 - assertNull(f1.getError())
+0.449 - assertEquals(1024, buf.capacity())
+0.440 - assertTrue(f1.getHeader().length > 0)
+0.434 - assertTrue(f1.isComplete())
+0.430 - assertTrue(f1.size() > 0)
+0.427 - assertEquals(f1.getDuration(), MPEGTestConst.expectedDuration)
+0.420 - assertFalse(f1.isError())
+0.375 - assertTrue(f1.getTimestamp() < System.currentTimeMillis())
+0.353 - assertTrue(buf.position() >= 0)
+0.347 - assertEquals(MPEGTestConst._mpegHeader.length + MPEGTestConst._mpegFrame.length, f1.size())
+0.321 - ```java
+assertNotNull(f1)
+0.263 - assertTrue(buf.remaining() <= buf.capacity())
+0.000 - ```

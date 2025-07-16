@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalProperty {
+    String getName ( ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSchemaSharedGlobalPropertyTest {
+    @Test
+     public void testGlobalPropertyCreate ( ) {
+         OSchema schema = db . getMetadata ( ) . getSchema ( ) ; 
+         schema . createGlobalProperty ( "STR" , OType . SHORT , 100 ) ; 
+         OGlobalProperty prop = schema . getGlobalPropertyById ( 100 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(prop);
+assertEquals("STR", prop.getName());
+assertEquals(OType.SHORT, prop.getType());
+assertEquals(100, prop.getId());
+assertTrue(schema.getGlobalProperties().contains(prop));
+assertEquals(1, schema.getGlobalProperties().size());
+assertTrue(schema.getGlobalPropertyById(100).isPresent());
+assertFalse(schema.getGlobalPropertyById(101).isPresent());
+assertEquals("STR", schema.getGlobalPropertyById(100).get().getName());
+assertEquals(OType.SHORT, schema.getGlobalPropertyById(100).get().getType());
+assertEquals(100, schema.getGlobalPropertyById(100).get().getId());
+assertNotEquals(200, schema.getGlobalPropertyById(100).get().getId());
+assertNotEquals(OType.INTEGER, schema.getGlobalPropertyById(100).get().getType());
+assertTrue(schema.getGlobalProperties().stream().anyMatch(p -> p.getId() == 100));
+assertEquals(100, schema.getGlobalProperties().stream().filter(p -> p.getName().equals("STR")).findFirst().get().getId());
+assertEquals(1, schema.getGlobalProperties().stream().filter(p -> p.getType() == OType.SHORT).count());
+assertTrue(schema.getGlobalProperties().stream().anyMatch(p -> p.getName().equals("STR") && p.getType() == OType.SHORT));
+assertNotNull(schema.getGlobalProperties().stream().filter(p -> p.getId() == 100).findFirst().orElse(null));
+assertThrows(NoSuchElementException.class, () -> schema.getGlobalPropertyById(101).get());
+assertEquals(100, schema.getGlobalProperties().stream().mapToInt(OGlobalProperty::getId).max().orElse(-1));
+assertEquals(1, schema.getGlobalProperties().stream().filter(p -> p.getId() == 100).count());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(prop.getName(),"STR"); ===
+0.824 - assertEquals("STR", prop.getName())
+0.750 - assertEquals(100, prop.getId())
+0.676 - assertEquals(OType.SHORT, prop.getType())
+0.524 - assertEquals("STR", schema.getGlobalPropertyById(100).get().getName())
+0.518 - assertEquals(1, schema.getGlobalProperties().size())
+0.459 - ```java
+assertNotNull(prop)
+0.444 - assertEquals(100, schema.getGlobalPropertyById(100).get().getId())
+0.431 - assertNotEquals(200, schema.getGlobalPropertyById(100).get().getId())
+0.422 - assertEquals(OType.SHORT, schema.getGlobalPropertyById(100).get().getType())
+0.421 - assertEquals(100, schema.getGlobalProperties().stream().filter(p -> p.getName().equals("STR")).findFirst().get().getId())
+0.413 - assertFalse(schema.getGlobalPropertyById(101).isPresent())
+0.404 - assertNotEquals(OType.INTEGER, schema.getGlobalPropertyById(100).get().getType())
+0.397 - assertEquals(1, schema.getGlobalProperties().stream().filter(p -> p.getType() == OType.SHORT).count())
+0.392 - assertTrue(schema.getGlobalProperties().stream().anyMatch(p -> p.getName().equals("STR") && p.getType() == OType.SHORT))
+0.382 - assertTrue(schema.getGlobalProperties().contains(prop))
+0.380 - assertEquals(1, schema.getGlobalProperties().stream().filter(p -> p.getId() == 100).count())
+0.374 - assertTrue(schema.getGlobalPropertyById(100).isPresent())
+0.360 - assertTrue(schema.getGlobalProperties().stream().anyMatch(p -> p.getId() == 100))
+0.331 - assertEquals(100, schema.getGlobalProperties().stream().mapToInt(OGlobalProperty::getId).max().orElse(-1))
+0.317 - assertThrows(NoSuchElementException.class, () -> schema.getGlobalPropertyById(101).get())
+0.307 - assertNotNull(schema.getGlobalProperties().stream().filter(p -> p.getId() == 100).findFirst().orElse(null))
+0.000 - ```

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAstar {\npublic long countEdges ( final String iClassName ) {\nmakeActive ( ) ;\nif ( isUseLightweightEdges ( ) ) throw new UnsupportedOperationException ( \"STR\" ) ;\nreturn getRawGraph ( ) . countClass ( iClassName ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAstarTest {\n@Test\npublic void test6Execute ( ) throws Exception {\nMap < String , Object > options = new HashMap < String , Object > ( ) ;\noptions . put ( OSQLFunctionAstar . PARAM_DIRECTION , \"STR\" ) ;\noptions . put ( OSQLFunctionAstar . PARAM_PARALLEL , true ) ;\noptions . put ( OSQLFunctionAstar . PARAM_EDGE_TYPE_NAMES , new String [ ] {\n\"STR\" } ) ;\noptions . put ( OSQLFunctionAstar . PARAM_VERTEX_AXIS_NAMES , new String [ ] {\n\"STR\" , \"STR\" } ) ;\nfinal List < OrientVertex > result = functionAstar . execute ( null , null , null , new Object [ ] {\nv6 , v1 , \"STR\" , options } , new OBasicCommandContext ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertFalse(result.isEmpty());\nassertEquals(2, result.size());\nassertTrue(result.get(0) instanceof OrientVertex);\nassertTrue(result.get(1) instanceof OrientVertex);\nassertEquals(\"ExpectedVertexId1\", result.get(0).getId().toString());\nassertEquals(\"ExpectedVertexId2\", result.get(1).getId().toString());\nassertEquals(\"ExpectedPropertyValue1\", result.get(0).getProperty(\"propertyKey1\"));\nassertEquals(\"ExpectedPropertyValue2\", result.get(1).getProperty(\"propertyKey2\"));\nassertNotEquals(result.get(0).getId(), result.get(1).getId());\nassertTrue(result.stream().anyMatch(vertex -> vertex.getProperty(\"propertyKey1\").equals(\"ExpectedPropertyValue1\")));\nassertTrue(result.stream().anyMatch(vertex -> vertex.getProperty(\"propertyKey2\").equals(\"ExpectedPropertyValue2\")));\nassertEquals(\"ExpectedEdgeType\", result.get(0).getEdges(Direction.OUT).iterator().next().getLabel());\nassertEquals(\"ExpectedEdgeType\", result.get(1).getEdges(Direction.OUT).iterator().next().getLabel());\nassertEquals(2, functionAstar.countEdges(\"ExpectedEdgeClassName\"));\nassertThrows(UnsupportedOperationException.class, () -> functionAstar.countEdges(\"UnsupportedClassName\"));\nassertDoesNotThrow(() -> functionAstar.countEdges(\"SupportedClassName\"));\nassertEquals(5, functionAstar.countEdges(\"AnotherClassName\"));\nassertTrue(result.stream().allMatch(vertex -> vertex.hasProperty(\"propertyKey1\")));\nassertTrue(result.stream().allMatch(vertex -> vertex.hasProperty(\"propertyKey2\")));\nassertNotEquals(result.get(0), result.get(1));\n```\n====================\n\n",
+    "scores": [
+        0.62,
+        0.59,
+        0.58,
+        0.5,
+        0.473,
+        0.464,
+        0.434,
+        0.42,
+        0.415,
+        0.4,
+        0.383,
+        0.38,
+        0.377,
+        0.374,
+        0.36,
+        0.345,
+        0.3,
+        0.3,
+        0.299,
+        0.248,
+        0.209,
+        0.0
+    ],
+    "ground_truth": "assertEquals(16,graph.countEdges(\"STR\"));"
+}

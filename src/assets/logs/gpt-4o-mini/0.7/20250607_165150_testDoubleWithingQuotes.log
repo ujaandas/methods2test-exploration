@@ -1,0 +1,96 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testDoubleWithingQuotes ( ) {
+         Double minDouble = 540282346638528870000000000000000000000.0d ; 
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+        assertNotNull(res);
+        assertFalse(res.isEmpty());
+        assertEquals(1, res.size());
+        ODocument document = res.get(0);
+        assertTrue(document.containsField("doubleField"));
+        assertEquals(minDouble, document.field("doubleField"));
+        assertTrue(document.containsField("stringField"));
+        assertEquals("expectedStringValue", document.field("stringField"));
+        assertTrue(document.containsField("intField"));
+        assertEquals(123, document.field("intField"));
+        assertTrue(document.containsField("booleanField"));
+        assertEquals(true, document.field("booleanField"));
+        assertTrue(document.containsField("dateField"));
+        assertNotNull(document.field("dateField"));
+        assertTrue(document.containsField("listField"));
+        assertTrue(document.field("listField") instanceof List);
+        assertEquals(3, ((List<?>) document.field("listField")).size());
+        assertTrue(document.containsField("nestedDocumentField"));
+        assertNotNull(document.field("nestedDocumentField"));
+        ODocument nestedDocument = document.field("nestedDocumentField");
+        assertTrue(nestedDocument.containsField("nestedField1"));
+        assertEquals("nestedValue1", nestedDocument.field("nestedField1"));
+        assertTrue(nestedDocument.containsField("nestedField2"));
+        assertEquals(456, nestedDocument.field("nestedField2"));
+        assertTrue(document.containsField("nullField"));
+        assertNull(document.field("nullField"));
+        assertTrue(document.containsField("doubleAsStringField"));
+        assertEquals("540282346638528870000000000000000000000.0", document.field("doubleAsStringField"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.692 - assertEquals(1, res.size())
+0.462 - ```java
+        assertNotNull(res)
+0.450 - assertEquals(456, nestedDocument.field("nestedField2"))
+0.411 - assertTrue(document.containsField("listField"))
+0.400 - assertEquals(123, document.field("intField"))
+0.400 - assertEquals(true, document.field("booleanField"))
+0.396 - assertEquals("nestedValue1", nestedDocument.field("nestedField1"))
+0.391 - assertEquals(3, ((List<?>) document.field("listField")).size())
+0.390 - assertTrue(nestedDocument.containsField("nestedField1"))
+0.390 - assertTrue(nestedDocument.containsField("nestedField2"))
+0.389 - assertTrue(document.containsField("intField"))
+0.384 - assertTrue(document.containsField("dateField"))
+0.384 - assertTrue(document.containsField("nullField"))
+0.380 - assertEquals(minDouble, document.field("doubleField"))
+0.380 - assertTrue(document.field("listField") instanceof List)
+0.373 - assertTrue(document.containsField("doubleField"))
+0.370 - ODocument document = res.get(0)
+0.368 - assertTrue(document.containsField("booleanField"))
+0.359 - assertNotNull(document.field("nestedDocumentField"))
+0.330 - assertEquals("expectedStringValue", document.field("stringField"))
+0.320 - assertTrue(document.containsField("stringField"))
+0.313 - assertTrue(document.containsField("nestedDocumentField"))
+0.308 - assertNull(document.field("nullField"))
+0.294 - assertNotNull(document.field("dateField"))
+0.289 - assertTrue(document.containsField("doubleAsStringField"))
+0.248 - assertEquals("540282346638528870000000000000000000000.0", document.field("doubleAsStringField"))
+0.161 - ODocument nestedDocument = document.field("nestedDocumentField")
+0.000 - ```

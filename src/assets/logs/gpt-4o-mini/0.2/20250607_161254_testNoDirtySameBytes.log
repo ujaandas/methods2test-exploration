@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testNoDirtySameBytes ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         byte [ ] bytes = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 } ; 
+         doc . field ( "STR" , bytes ) ; 
+         ODocumentInternal . clearTrackData ( doc ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertFalse(doc.isDirty());
+Assert.assertNotNull(doc);
+Assert.assertEquals(1, doc.fieldNames().size());
+Assert.assertTrue(doc.fieldNames().contains("STR"));
+Assert.assertArrayEquals(bytes, (byte[]) doc.field("STR"));
+Assert.assertEquals(6, ((byte[]) doc.field("STR")).length);
+Assert.assertArrayEquals(new byte[] {0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"));
+Assert.assertTrue(doc.field("STR") instanceof byte[]);
+Assert.assertNotEquals(new byte[] {1, 2, 3, 4, 5, 6}, (byte[]) doc.field("STR"));
+Assert.assertNull(doc.field("NON_EXISTENT_FIELD"));
+Assert.assertEquals(0, doc.getVersion());
+Assert.assertFalse(doc.isNew());
+Assert.assertFalse(doc.isEmbedded());
+Assert.assertFalse(doc.isDirty());
+Assert.assertTrue(doc.getIdentity().isValid());
+Assert.assertEquals("ODocument", doc.getClass().getSimpleName());
+Assert.assertTrue(doc.toString().contains("ODocument"));
+Assert.assertEquals(0, doc.getFieldCount());
+Assert.assertTrue(doc.getSchemaType() == null);
+Assert.assertFalse(doc.isDeleted());
+Assert.assertFalse(doc.isDirty());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(doc.isDirty()); ===
+1.000 - Assert.assertFalse(doc.isDirty())
+1.000 - Assert.assertFalse(doc.isDirty())
+0.867 - ```java
+Assert.assertFalse(doc.isDirty())
+0.852 - Assert.assertFalse(doc.isDeleted())
+0.840 - Assert.assertFalse(doc.isNew())
+0.764 - Assert.assertFalse(doc.isEmbedded())
+0.623 - Assert.assertEquals(0, doc.getFieldCount())
+0.621 - Assert.assertEquals(0, doc.getVersion())
+0.615 - Assert.assertEquals(1, doc.fieldNames().size())
+0.554 - Assert.assertTrue(doc.getIdentity().isValid())
+0.545 - Assert.assertNotNull(doc)
+0.540 - Assert.assertTrue(doc.getSchemaType() == null)
+0.507 - Assert.assertArrayEquals(bytes, (byte[]) doc.field("STR"))
+0.486 - Assert.assertTrue(doc.fieldNames().contains("STR"))
+0.486 - Assert.assertTrue(doc.field("STR") instanceof byte[])
+0.480 - Assert.assertEquals(6, ((byte[]) doc.field("STR")).length)
+0.464 - Assert.assertNull(doc.field("NON_EXISTENT_FIELD"))
+0.439 - Assert.assertEquals("ODocument", doc.getClass().getSimpleName())
+0.432 - Assert.assertTrue(doc.toString().contains("ODocument"))
+0.422 - Assert.assertNotEquals(new byte[] {1, 2, 3, 4, 5, 6}, (byte[]) doc.field("STR"))
+0.413 - Assert.assertArrayEquals(new byte[] {0, 1, 2, 3, 4, 5}, (byte[]) doc.field("STR"))
+0.000 - ```

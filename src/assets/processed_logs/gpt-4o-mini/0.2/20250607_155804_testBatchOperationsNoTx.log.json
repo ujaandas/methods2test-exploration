@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.client;\n\npublic class OBatchOperations {\npublic List < ORecordOperationRequest > getOperations ( ) {\nreturn operations ;\n}\n}\n\npackage orientechnologies.orientdb.client;\n\npublic class OBatchOperationsTest {\n@Test\npublic void testBatchOperationsNoTx ( ) throws IOException {\nList < ORecordOperation > operations = new ArrayList < > ( ) ;\noperations . add ( new ORecordOperation ( new ODocument ( ) , ORecordOperation . CREATED ) ) ;\nMockChannel channel = new MockChannel ( ) ;\nOBatchOperationsRequest request = new OBatchOperationsRequest ( - 1 , operations ) ;\nrequest . write ( channel , null ) ;\nchannel . close ( ) ;\nrequest = new OBatchOperationsRequest ( ) ;\nrequest . read ( channel , 0 , ORecordSerializerNetworkFactory . INSTANCE . current ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(request);\nassertEquals(-1, request.getId());\nassertEquals(1, request.getOperations().size());\nassertEquals(ORecordOperation.CREATED, request.getOperations().get(0).getType());\nassertTrue(request.getOperations().get(0).getRecord() instanceof ODocument);\nassertTrue(channel.isClosed());\nassertEquals(0, channel.getWrittenBytes().length);\nassertNotNull(request.getOperations().get(0).getRecord().getIdentity());\nassertEquals(ODocument.class, request.getOperations().get(0).getRecord().getClass());\nassertTrue(request.getOperations().get(0).isNew());\nassertEquals(1, request.getOperations().size());\nassertNotNull(request.getOperations().get(0).getRecord().getSchemaClass());\nassertEquals(\"default\", request.getOperations().get(0).getRecord().getClassName());\nassertNotNull(request.getOperations().get(0).getRecord().getProperties());\nassertTrue(request.getOperations().get(0).getRecord().getProperties().isEmpty());\nassertEquals(0, request.getOperations().get(0).getRecord().getVersion());\nassertFalse(request.getOperations().get(0).isDeleted());\nassertFalse(request.getOperations().get(0).isModified());\nassertEquals(0, request.getOperations().get(0).getRecord().getFieldNames().size());\nassertNotNull(request.getOperations().get(0).getRecord().getDatabase());\nassertEquals(0, request.getOperations().get(0).getRecord().getIdentity().getClusterId());\n```\n====================\n\n",
+    "scores": [
+        0.957,
+        0.957,
+        0.784,
+        0.772,
+        0.771,
+        0.718,
+        0.693,
+        0.692,
+        0.661,
+        0.656,
+        0.65,
+        0.636,
+        0.632,
+        0.622,
+        0.617,
+        0.617,
+        0.605,
+        0.571,
+        0.553,
+        0.447,
+        0.368,
+        0.0
+    ],
+    "ground_truth": "assertEquals(request.getOperations().size(),1);"
+}

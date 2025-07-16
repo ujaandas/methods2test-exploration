@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamService {
+    public TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) { 
+    Date tag1Date = extractDate ( tag1 ) ; 
+    Date tag2Date = extractDate ( tag2 ) ; 
+    if ( tag1Date == null ) { 
+    return tag2 ; 
+    } if ( tag2Date == null ) { 
+    return tag1 ; 
+    } return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamServiceTest {
+    @Test
+     public void should_return_newer_tag ( ) throws Exception {
+         ImageStreamService service = new ImageStreamService ( client , log ) ; 
+         TagEvent oldTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent latestTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(resultedTag);
+assertEquals(latestTag, resultedTag);
+assertEquals("STR", resultedTag.getName());
+assertNull(resultedTag.getImage());
+assertNull(resultedTag.getReference());
+assertNull(resultedTag.getGeneration());
+assertTrue(resultedTag instanceof TagEvent);
+assertSame(latestTag, resultedTag);
+assertNotSame(oldTag, resultedTag);
+assertTrue(resultedTag.equals(latestTag));
+assertFalse(resultedTag.equals(oldTag));
+assertTrue(resultedTag.hashCode() == latestTag.hashCode());
+assertFalse(resultedTag.hashCode() == oldTag.hashCode());
+assertTrue(resultedTag.toString().contains("STR"));
+assertTrue(resultedTag.toString().contains("TagEvent"));
+assertEquals(1, service.newerTag(oldTag, latestTag).hashCode());
+assertNotEquals(oldTag.hashCode(), latestTag.hashCode());
+assertTrue(resultedTag.getName().length() > 0);
+assertTrue(resultedTag.getImage() == null);
+assertTrue(resultedTag.getReference() == null);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(latestTag,resultedTag); ===
+1.000 - assertEquals(latestTag, resultedTag)
+0.882 - assertSame(latestTag, resultedTag)
+0.711 - assertEquals("STR", resultedTag.getName())
+0.706 - assertNotSame(oldTag, resultedTag)
+0.609 - ```java
+assertNotNull(resultedTag)
+0.609 - assertNull(resultedTag.getImage())
+0.595 - assertFalse(resultedTag.equals(oldTag))
+0.579 - assertTrue(resultedTag.equals(latestTag))
+0.575 - assertNull(resultedTag.getReference())
+0.568 - assertNull(resultedTag.getGeneration())
+0.533 - assertNotEquals(oldTag.hashCode(), latestTag.hashCode())
+0.533 - assertTrue(resultedTag.getImage() == null)
+0.526 - assertTrue(resultedTag instanceof TagEvent)
+0.506 - assertTrue(resultedTag.getName().length() > 0)
+0.506 - assertTrue(resultedTag.getReference() == null)
+0.500 - assertEquals(1, service.newerTag(oldTag, latestTag).hashCode())
+0.494 - assertFalse(resultedTag.hashCode() == oldTag.hashCode())
+0.471 - assertTrue(resultedTag.toString().contains("STR"))
+0.444 - assertTrue(resultedTag.toString().contains("TagEvent"))
+0.440 - assertTrue(resultedTag.hashCode() == latestTag.hashCode())
+0.000 - ```

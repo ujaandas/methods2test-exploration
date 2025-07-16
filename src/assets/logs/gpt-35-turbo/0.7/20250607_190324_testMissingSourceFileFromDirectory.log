@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoader {
+    @Override
+     public Source load ( final String sourceFile ) throws IOException { 
+     InputStream stream = locate ( sourceFile ) ; 
+     if ( stream != null ) { 
+     try ( Md5DigestInputStream ds = new Md5DigestInputStream ( stream ) ; 
+     InputStreamReader reader = new InputStreamReader ( ds , getSourceEncoding ( ) ) ) { 
+     String source = IOUtil . toString ( reader ) ; 
+     return new Source ( getFileName ( sourceFile ) , source , ds . getDigestHex ( ) ) ; 
+     } catch ( NoSuchAlgorithmException ex ) { 
+     throw new IOException ( "STR" , ex ) ; 
+     } } else { 
+     return null ; 
+     } }
+}
+
+package trautonen.coveralls-maven-plugin;
+
+public class DirectorySourceLoaderTest {
+    @Test
+     public void testMissingSourceFileFromDirectory ( ) throws Exception {
+         DirectorySourceLoader sourceLoader = new DirectorySourceLoader ( folder . getRoot ( ) , folder . getRoot ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(null, sourceLoader.load("missingFile1"));
+assertNull(sourceLoader.load("missingFile2"));
+assertNull(sourceLoader.load("missingFile3"));
+assertNull(sourceLoader.load("missingFile4"));
+assertNull(sourceLoader.load("missingFile5"));
+assertEquals(null, sourceLoader.load("missingFile6"));
+assertNull(sourceLoader.load("missingFile7"));
+assertNull(sourceLoader.load("missingFile8"));
+assertNull(sourceLoader.load("missingFile9"));
+assertNull(sourceLoader.load("missingFile10"));
+assertEquals(null, sourceLoader.load("missingFile11"));
+assertNull(sourceLoader.load("missingFile12"));
+assertNull(sourceLoader.load("missingFile13"));
+assertNull(sourceLoader.load("missingFile14"));
+assertNull(sourceLoader.load("missingFile15"));
+assertEquals(null, sourceLoader.load("missingFile16"));
+assertNull(sourceLoader.load("missingFile17"));
+assertNull(sourceLoader.load("missingFile18"));
+assertNull(sourceLoader.load("missingFile19"));
+assertNull(sourceLoader.load("missingFile20"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNull(sourceLoader.load("STR")); ===
+0.815 - assertNull(sourceLoader.load("missingFile2"))
+0.815 - assertNull(sourceLoader.load("missingFile3"))
+0.815 - assertNull(sourceLoader.load("missingFile4"))
+0.815 - assertNull(sourceLoader.load("missingFile5"))
+0.815 - assertNull(sourceLoader.load("missingFile7"))
+0.815 - assertNull(sourceLoader.load("missingFile8"))
+0.815 - assertNull(sourceLoader.load("missingFile9"))
+0.805 - assertNull(sourceLoader.load("missingFile10"))
+0.805 - assertNull(sourceLoader.load("missingFile12"))
+0.805 - assertNull(sourceLoader.load("missingFile13"))
+0.805 - assertNull(sourceLoader.load("missingFile14"))
+0.805 - assertNull(sourceLoader.load("missingFile15"))
+0.805 - assertNull(sourceLoader.load("missingFile17"))
+0.805 - assertNull(sourceLoader.load("missingFile18"))
+0.805 - assertNull(sourceLoader.load("missingFile19"))
+0.805 - assertNull(sourceLoader.load("missingFile20"))
+0.705 - assertEquals(null, sourceLoader.load("missingFile1"))
+0.705 - assertEquals(null, sourceLoader.load("missingFile6"))
+0.697 - assertEquals(null, sourceLoader.load("missingFile11"))
+0.697 - assertEquals(null, sourceLoader.load("missingFile16"))

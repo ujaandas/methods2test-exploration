@@ -1,0 +1,80 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKey {
+    public OMultiKey ( final Collection < ? > keys ) { 
+    this . keys = new ArrayList < Object > ( keys ) ; 
+    hash = generateHashCode ( keys ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OMultiKeyTest {
+    @Test
+     public void testOneKeyMap ( ) {
+         final Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ; 
+         final OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         multiKeyMap . put ( multiKey , new Object ( ) ) ; 
+         final OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( "STR" ) ) ; 
+         final Object mapResult = multiKeyMap . get ( anotherMultiKey ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(mapResult);
+assertTrue(mapResult instanceof Object);
+assertEquals(1, multiKeyMap.size());
+assertSame(mapResult, multiKeyMap.get(multiKey));
+assertNotSame(mapResult, new Object());
+assertEquals(multiKey, anotherMultiKey);
+assertTrue(multiKeyMap.containsKey(anotherMultiKey));
+assertFalse(multiKeyMap.containsKey(new OMultiKey(Collections.singletonList("DIFF"))));
+assertNotEquals(multiKey.hashCode(), new OMultiKey(Collections.singletonList("DIFF")).hashCode());
+assertEquals(multiKey.hashCode(), anotherMultiKey.hashCode());
+assertTrue(multiKeyMap.keySet().contains(multiKey));
+assertTrue(multiKeyMap.values().contains(mapResult));
+assertEquals(multiKeyMap.get(multiKey), multiKeyMap.get(anotherMultiKey));
+assertFalse(multiKeyMap.isEmpty());
+assertFalse(multiKeyMap.containsValue(new Object()));
+assertNotNull(multiKeyMap.entrySet());
+assertTrue(multiKeyMap.entrySet().size() > 0);
+assertEquals("Expected value for multiKey", mapResult.toString());
+assertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(mapResult)));
+assertThrows(NullPointerException.class, () -> multiKeyMap.put(null, new Object()));
+assertThrows(NullPointerException.class, () -> multiKeyMap.put(multiKey, null));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(mapResult); ===
+0.857 - ```java
+assertNotNull(mapResult)
+0.667 - assertNotSame(mapResult, new Object())
+0.623 - assertNotNull(multiKeyMap.entrySet())
+0.590 - assertTrue(mapResult instanceof Object)
+0.526 - assertTrue(multiKeyMap.values().contains(mapResult))
+0.483 - assertEquals(1, multiKeyMap.size())
+0.479 - assertSame(mapResult, multiKeyMap.get(multiKey))
+0.452 - assertEquals(multiKey, anotherMultiKey)
+0.448 - assertFalse(multiKeyMap.isEmpty())
+0.447 - assertEquals("Expected value for multiKey", mapResult.toString())
+0.388 - assertTrue(multiKeyMap.entrySet().size() > 0)
+0.377 - assertTrue(multiKeyMap.values().stream().anyMatch(value -> value.equals(mapResult)))
+0.347 - assertTrue(multiKeyMap.keySet().contains(multiKey))
+0.347 - assertFalse(multiKeyMap.containsValue(new Object()))
+0.343 - assertThrows(NullPointerException.class, () -> multiKeyMap.put(multiKey, null))
+0.342 - assertTrue(multiKeyMap.containsKey(anotherMultiKey))
+0.333 - assertEquals(multiKey.hashCode(), anotherMultiKey.hashCode())
+0.333 - assertThrows(NullPointerException.class, () -> multiKeyMap.put(null, new Object()))
+0.292 - assertEquals(multiKeyMap.get(multiKey), multiKeyMap.get(anotherMultiKey))
+0.286 - assertNotEquals(multiKey.hashCode(), new OMultiKey(Collections.singletonList("DIFF")).hashCode())
+0.239 - assertFalse(multiKeyMap.containsKey(new OMultiKey(Collections.singletonList("DIFF"))))
+0.000 - ```

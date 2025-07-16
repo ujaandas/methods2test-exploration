@@ -1,0 +1,99 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilter {
+    @Override
+     public String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) { 
+     if ( sourceUrl == null || ( ! ignoreOutsideHost && ! ignoreOutsideDomain ) ) { 
+     return urlToFilter ; 
+     } URL tURL ; 
+     try { 
+     tURL = new URL ( urlToFilter ) ; 
+     } catch ( MalformedURLException e1 ) { 
+     return null ; 
+     } String fromHost ; 
+     String fromDomain = null ; 
+     if ( sourceUrl == previousSourceUrl ) { 
+     fromHost = previousSourceHost ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = previousSourceDomain ; 
+     } } else { 
+     fromHost = sourceUrl . getHost ( ) ; 
+     if ( ignoreOutsideDomain ) { 
+     fromDomain = PaidLevelDomain . getPLD ( fromHost ) ; 
+     } previousSourceHost = fromHost ; 
+     previousSourceDomain = fromDomain ; 
+     previousSourceUrl = sourceUrl ; 
+     } String toHost = tURL . getHost ( ) ; 
+     if ( ignoreOutsideHost ) { 
+     if ( toHost == null || ! toHost . equalsIgnoreCase ( fromHost ) ) { 
+     return null ; 
+     } } if ( ignoreOutsideDomain ) { 
+     String toDomain = PaidLevelDomain . getPLD ( toHost ) ; 
+     if ( toDomain == null || ! toDomain . equals ( fromDomain ) ) { 
+     return null ; 
+     } } return urlToFilter ; 
+     }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class HostURLFilterTest {
+    @Test
+     public void testAllForbidden ( ) throws MalformedURLException {
+         HostURLFilter allAllowed = createFilter ( true , true ) ; 
+         URL sourceURL = new URL ( "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         String filterResult = allAllowed . filter ( sourceURL , metadata , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(filterResult);
+assertEquals("STR", filterResult);
+assertEquals(sourceURL, previousSourceUrl);
+assertEquals(sourceURL.getHost(), previousSourceHost);
+assertEquals(null, previousSourceDomain);
+assertEquals(sourceURL.getHost(), fromHost);
+assertEquals(null, fromDomain);
+assertEquals(sourceURL.getHost(), previousSourceHost);
+assertEquals(null, previousSourceDomain);
+assertEquals(sourceURL, previousSourceUrl);
+assertEquals(tURL.getHost(), toHost);
+assertEquals(fromHost, tURL.getHost());
+assertNull(fromDomain);
+assertNull(toHost);
+assertNull(toDomain);
+assertEquals("STR", filterResult);
+assertEquals(null, filterResult);
+assertEquals("STR", filterResult);
+assertNull(filterResult);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR",filterResult); ===
+1.000 - assertEquals("STR", filterResult)
+1.000 - assertEquals("STR", filterResult)
+1.000 - assertEquals("STR", filterResult)
+0.857 - assertEquals(null, filterResult)
+0.786 - assertNull(filterResult)
+0.746 - assertNotNull(filterResult)
+0.567 - assertEquals(tURL.getHost(), toHost)
+0.557 - assertEquals(null, fromDomain)
+0.541 - assertEquals(sourceURL.getHost(), fromHost)
+0.522 - assertEquals(fromHost, tURL.getHost())
+0.451 - assertEquals(null, previousSourceDomain)
+0.451 - assertEquals(null, previousSourceDomain)
+0.438 - assertEquals(sourceURL, previousSourceUrl)
+0.438 - assertEquals(sourceURL, previousSourceUrl)
+0.429 - assertEquals(sourceURL.getHost(), previousSourceHost)
+0.429 - assertEquals(sourceURL.getHost(), previousSourceHost)
+0.400 - assertNull(toHost)
+0.385 - assertNull(toDomain)
+0.333 - assertNull(fromDomain)

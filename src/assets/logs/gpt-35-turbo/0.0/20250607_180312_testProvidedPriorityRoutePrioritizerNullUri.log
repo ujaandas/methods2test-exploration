@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class Nanolets {
+    @Override
+     public Collection < UriResource > getPrioritizedRoutes ( ) { 
+     return Collections . unmodifiableCollection ( mappings ) ; 
+     }
+}
+
+package NanoHttpd.nanohttpd.nanolets;
+
+public class TestNanolets {
+    @Test
+     public void testProvidedPriorityRoutePrioritizerNullUri ( ) {
+         ProvidedPriorityRoutePrioritizer routePrioritizer = new ProvidedPriorityRoutePrioritizer ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(routePrioritizer);
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+routePrioritizer.addRoute(new UriResource("GET", "/test", null));
+assertFalse(routePrioritizer.getPrioritizedRoutes().isEmpty());
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+routePrioritizer.addRoute(new UriResource("POST", "/test2", null));
+assertEquals(2, routePrioritizer.getPrioritizedRoutes().size());
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("GET", "/test", null)));
+assertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("POST", "/test2", null)));
+routePrioritizer.removeRoute(new UriResource("GET", "/test", null));
+assertFalse(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("GET", "/test", null)));
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+routePrioritizer.clearRoutes();
+assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty());
+routePrioritizer.addRoute(new UriResource("GET", "/test", null));
+routePrioritizer.addRoute(new UriResource("GET", "/test", null));
+assertEquals(1, routePrioritizer.getPrioritizedRoutes().size());
+routePrioritizer.clearRoutes();
+assertEquals(0, routePrioritizer.getPrioritizedRoutes().size());
+routePrioritizer.addRoute(new UriResource("GET", "/test", null));
+routePrioritizer.addRoute(new UriResource("POST", "/test2", null));
+routePrioritizer.addRoute(new UriResource("PUT", "/test3", null));
+assertEquals(3, routePrioritizer.getPrioritizedRoutes().size());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,routePrioritizer.getPrioritizedRoutes().size()); ===
+1.000 - assertEquals(0, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(2, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(1, routePrioritizer.getPrioritizedRoutes().size())
+0.984 - assertEquals(3, routePrioritizer.getPrioritizedRoutes().size())
+0.871 - assertFalse(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.846 - assertTrue(routePrioritizer.getPrioritizedRoutes().isEmpty())
+0.704 - assertFalse(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("GET", "/test", null)))
+0.684 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("GET", "/test", null)))
+0.675 - assertTrue(routePrioritizer.getPrioritizedRoutes().contains(new UriResource("POST", "/test2", null)))
+0.587 - routePrioritizer.clearRoutes()
+0.587 - routePrioritizer.clearRoutes()
+0.559 - assertNotNull(routePrioritizer)
+0.476 - routePrioritizer.removeRoute(new UriResource("GET", "/test", null))
+0.455 - routePrioritizer.addRoute(new UriResource("GET", "/test", null))
+0.455 - routePrioritizer.addRoute(new UriResource("GET", "/test", null))
+0.455 - routePrioritizer.addRoute(new UriResource("GET", "/test", null))
+0.455 - routePrioritizer.addRoute(new UriResource("GET", "/test", null))
+0.452 - routePrioritizer.addRoute(new UriResource("PUT", "/test3", null))
+0.448 - routePrioritizer.addRoute(new UriResource("POST", "/test2", null))
+0.448 - routePrioritizer.addRoute(new UriResource("POST", "/test2", null))

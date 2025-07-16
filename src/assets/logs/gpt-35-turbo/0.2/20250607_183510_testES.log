@@ -1,0 +1,82 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package jcodec.jcodec;
+
+public class MPEGES {
+    public static byte [ ] toArray ( ByteBuffer buffer ) { 
+    byte [ ] result = new byte [ buffer . remaining ( ) ] ; 
+    buffer . duplicate ( ) . get ( result ) ; 
+    return result ; 
+    }
+}
+
+package jcodec.jcodec;
+
+public class MPEGESTest {
+    @Test
+     public void testES ( ) throws IOException {
+         byte [ ] mpeg = MPEGTestConst . mpeg ( ) ; 
+         byte [ ] frame1 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegHeader , MPEGTestConst . _mpegFrame } ) ; 
+         byte [ ] frame2 = MPEGTestConst . toBB ( new int [ ] [ ] { 
+     MPEGTestConst . _mpegFrame } ) ; 
+         MPEGES mpeges = new MPEGES ( Channels . newChannel ( new ByteArrayInputStream ( mpeg ) ) , 32 ) ; 
+         ByteBuffer buf = ByteBuffer . allocate ( 1024 ) ; 
+         Packet f1 = mpeges . frame ( buf ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertNotNull(f1);
+2. assertEquals(frame1.length, f1.getData().length);
+3. assertArrayEquals(frame1, f1.getData());
+4. assertEquals(0, f1.getOffset());
+5. assertEquals(frame1.length, f1.getSize());
+6. assertEquals(0, f1.getDuration());
+7. assertEquals(32, f1.getPts());
+8. assertEquals(0, f1.getDts());
+9. assertFalse(f1.isKeyFrame());
+10. assertFalse(f1.isComplete());
+11. assertEquals(0, f1.getFrameNo());
+12. assertNotNull(f1.getFlags());
+13. assertEquals(0, f1.getFlags().size());
+14. assertEquals(0, f1.getFrameType());
+15. assertEquals(0, f1.getFrameType());
+16. assertEquals(0, f1.getFrameType());
+17. assertEquals(0, f1.getFrameType());
+18. assertEquals(0, f1.getFrameType());
+19. assertEquals(0, f1.getFrameType());
+20. assertEquals(0, f1.getFrameType());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertArrayEquals(frame1,NIOUtils.toArray(f1.getData())); ===
+0.792 - 3. assertArrayEquals(frame1, f1.getData())
+0.629 - 2. assertEquals(frame1.length, f1.getData().length)
+0.592 - 5. assertEquals(frame1.length, f1.getSize())
+0.588 - 8. assertEquals(0, f1.getDts())
+0.578 - 6. assertEquals(0, f1.getDuration())
+0.558 - 7. assertEquals(32, f1.getPts())
+0.545 - 4. assertEquals(0, f1.getOffset())
+0.533 - 11. assertEquals(0, f1.getFrameNo())
+0.522 - 14. assertEquals(0, f1.getFrameType())
+0.522 - 15. assertEquals(0, f1.getFrameType())
+0.522 - 16. assertEquals(0, f1.getFrameType())
+0.522 - 17. assertEquals(0, f1.getFrameType())
+0.522 - 18. assertEquals(0, f1.getFrameType())
+0.522 - 19. assertEquals(0, f1.getFrameType())
+0.522 - 20. assertEquals(0, f1.getFrameType())
+0.505 - 13. assertEquals(0, f1.getFlags().size())
+0.460 - 12. assertNotNull(f1.getFlags())
+0.437 - 10. assertFalse(f1.isComplete())
+0.419 - 9. assertFalse(f1.isKeyFrame())
+0.295 - Assertions:
+
+1. assertNotNull(f1)

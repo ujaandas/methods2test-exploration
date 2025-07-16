@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testNoDirtySameBytes ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         byte [ ] bytes = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 } ; 
+         doc . field ( "STR" , bytes ) ; 
+         ODocumentInternal . clearTrackData ( doc ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+1. assertFalse(doc.isDirty());
+2. assertNotNull(doc.field("STR"));
+3. assertArrayEquals(bytes, doc.field("STR"));
+4. assertEquals(6, doc.field("STR").length);
+5. assertNull(doc.field("NEW"));
+6. assertFalse(doc.isTrackingChanges());
+7. assertNotEquals(0, doc.getVersion());
+8. assertTrue(doc.isTrackingModifications());
+9. assertFalse(doc.isTrackingVersions());
+10. assertNull(doc.getSchemaClass());
+11. assertTrue(doc.isNew());
+12. assertEquals(0, doc.getIdentity().getClusterId());
+13. assertTrue(doc.isEmbedded());
+14. assertFalse(doc.isPinned());
+15. assertFalse(doc.isEdge());
+16. assertTrue(doc.isDocument());
+17. assertEquals(0, doc.getRecordVersion());
+18. assertFalse(doc.isBlob());
+19. assertNotNull(doc.toString());
+20. assertEquals(0, doc.getDatabase().getClusterIdByName("default"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(doc.isDirty()); ===
+0.786 - 14. assertFalse(doc.isPinned())
+0.778 - 15. assertFalse(doc.isEdge())
+0.778 - 18. assertFalse(doc.isBlob())
+0.776 - Assertions:
+
+1. assertFalse(doc.isDirty())
+0.708 - 9. assertFalse(doc.isTrackingVersions())
+0.688 - 6. assertFalse(doc.isTrackingChanges())
+0.667 - 16. assertTrue(doc.isDocument())
+0.654 - 11. assertTrue(doc.isNew())
+0.596 - 13. assertTrue(doc.isEmbedded())
+0.571 - 5. assertNull(doc.field("NEW"))
+0.571 - 7. assertNotEquals(0, doc.getVersion())
+0.552 - 19. assertNotNull(doc.toString())
+0.551 - 8. assertTrue(doc.isTrackingModifications())
+0.542 - 2. assertNotNull(doc.field("STR"))
+0.537 - 17. assertEquals(0, doc.getRecordVersion())
+0.525 - 10. assertNull(doc.getSchemaClass())
+0.522 - 3. assertArrayEquals(bytes, doc.field("STR"))
+0.519 - 12. assertEquals(0, doc.getIdentity().getClusterId())
+0.507 - 4. assertEquals(6, doc.field("STR").length)
+0.391 - 20. assertEquals(0, doc.getDatabase().getClusterIdByName("default"))

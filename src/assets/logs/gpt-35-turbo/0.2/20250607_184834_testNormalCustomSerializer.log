@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializer {
+    @Override
+     public Object invokeSync ( final String address , final Object request , final int timeoutMillis ) throws RemotingException , InterruptedException { 
+     ensureStarted ( ) ; 
+     return this . rpcRemoting . invokeSync ( address , request , null , timeoutMillis ) ; 
+     }
+}
+
+package sofastack.sofa-bolt;
+
+public class ClassCustomSerializerTest {
+    @Test
+     public void testNormalCustomSerializer ( ) throws Exception {
+         NormalRequestBodyCustomSerializer s1 = new NormalRequestBodyCustomSerializer ( ) ; 
+         NormalStringCustomSerializer s2 = new NormalStringCustomSerializer ( ) ; 
+         CustomSerializerManager . registerCustomSerializer ( RequestBody . class . getName ( ) , s1 ) ; 
+         CustomSerializerManager . registerCustomSerializer ( String . class . getName ( ) , s2 ) ; 
+         RequestBody body = new RequestBody ( 1 , "STR" ) ; 
+         String ret = ( String ) client . invokeSync ( addr , body , 1000 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, body.getId());
+assertEquals("STR", body.getContent());
+assertNotNull(ret);
+assertTrue(ret instanceof String);
+assertEquals("Response", ret);
+assertNotEquals(0, ret.length());
+assertTrue(ret.contains("S"));
+assertFalse(ret.isEmpty());
+assertEquals(3, ret.length());
+assertNotEquals("ABC", ret);
+assertNull(null);
+assertTrue(ret.startsWith("S"));
+assertFalse(ret.endsWith("X"));
+assertTrue(ret.equals("STR"));
+assertNotSame(body, ret);
+assertTrue(ret.matches("[A-Z]+"));
+assertEquals("STR", ret.toUpperCase());
+assertEquals("str", ret.toLowerCase());
+assertTrue(ret.compareTo("STR") == 0);
+assertFalse(ret.equalsIgnoreCase("str"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(RequestBody.DEFAULT_SERVER_RETURN_STR+"STR",ret); ===
+0.494 - assertEquals("Response", ret)
+0.469 - assertEquals("STR", ret.toUpperCase())
+0.460 - assertNotEquals("ABC", ret)
+0.449 - assertEquals(1, body.getId())
+0.449 - assertEquals("STR", body.getContent())
+0.429 - assertEquals("str", ret.toLowerCase())
+0.404 - assertEquals(3, ret.length())
+0.400 - assertTrue(ret.equals("STR"))
+0.391 - assertNotEquals(0, ret.length())
+0.381 - assertNotSame(body, ret)
+0.354 - assertTrue(ret.compareTo("STR") == 0)
+0.329 - assertNotNull(ret)
+0.322 - assertFalse(ret.isEmpty())
+0.317 - assertFalse(ret.equalsIgnoreCase("str"))
+0.308 - assertFalse(ret.endsWith("X"))
+0.286 - assertNull(null)
+0.267 - assertTrue(ret.contains("S"))
+0.261 - assertTrue(ret instanceof String)
+0.261 - assertTrue(ret.startsWith("S"))
+0.255 - assertTrue(ret.matches("[A-Z]+"))

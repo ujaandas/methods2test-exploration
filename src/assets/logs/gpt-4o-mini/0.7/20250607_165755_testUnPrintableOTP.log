@@ -1,0 +1,113 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClient {
+    public static boolean isValidOTPFormat ( String otp ) { 
+    if ( otp == null ) { 
+    return false ; 
+    } int len = otp . length ( ) ; 
+    for ( char c : otp . toCharArray ( ) ) { 
+    if ( c < 0x20 || c > 0x7E ) { 
+    return false ; 
+    } } return OTP_MIN_LEN <= len && len <= OTP_MAX_LEN ; 
+    }
+}
+
+package Yubico.yubico-java-client.v2client;
+
+public class YubicoClientTest {
+    @Test
+     public void testUnPrintableOTP ( ) {
+         String otp = new String ( new byte [ ] { 
+     0x01 , 0x02 , 0x03 , 0x04 , 0x05 , 0x06 } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otp));
+Assert.assertFalse(YubicoClient.isValidOTPFormat(null));
+Assert.assertFalse(YubicoClient.isValidOTPFormat(""));
+Assert.assertFalse(YubicoClient.isValidOTPFormat(" "));
+
+String otpTooShort = "A"; // Assuming OTP_MIN_LEN > 1
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpTooShort));
+
+String otpTooLong = "A".repeat(65); // Assuming OTP_MAX_LEN < 64
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpTooLong));
+
+String otpValid = "ValidOTP123"; // Assuming this is valid
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpValid));
+
+String otpWithNonPrintableChar = "Valid" + new String(new byte[]{0x01}) + "OTP";
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithNonPrintableChar));
+
+String otpWithHighValueChar = "Valid" + new String(new byte[]{0x80}) + "OTP";
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithHighValueChar));
+
+String otpWithLowerBoundaryChar = new String(new byte[]{0x20}) + "ValidOTP";
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithLowerBoundaryChar));
+
+String otpWithUpperBoundaryChar = new String(new byte[]{0x7E}) + "ValidOTP";
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithUpperBoundaryChar));
+
+String otpWithMixedCharacters = "Valid123!@#";
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithMixedCharacters));
+
+String otpWithAllPrintable = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithAllPrintable));
+
+String otpWithSpaces = "Valid OTP 123";
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithSpaces));
+
+String otpWithControlChars = "Valid" + new String(new byte[]{0x0A}) + "OTP";
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithControlChars));
+
+String otpWithInvalidLengthShort = "A";
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithInvalidLengthShort));
+
+String otpWithInvalidLengthLong = "A".repeat(100); // Assuming this
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(YubicoClient.isValidOTPFormat(otp)); ===
+0.946 - Assert.assertFalse(YubicoClient.isValidOTPFormat(""))
+0.946 - Assert.assertFalse(YubicoClient.isValidOTPFormat(" "))
+0.926 - Assert.assertFalse(YubicoClient.isValidOTPFormat(null))
+0.922 - ```java
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otp))
+0.855 - Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithControlChars))
+0.847 - Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithHighValueChar))
+0.835 - Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithSpaces))
+0.825 - Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithNonPrintableChar))
+0.810 - Assert.assertFalse(YubicoClient.isValidOTPFormat(otpWithInvalidLengthShort))
+0.789 - Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithAllPrintable))
+0.768 - Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithMixedCharacters))
+0.754 - Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithLowerBoundaryChar))
+0.754 - Assert.assertTrue(YubicoClient.isValidOTPFormat(otpWithUpperBoundaryChar))
+0.746 - // Assuming OTP_MIN_LEN > 1
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpTooShort))
+0.746 - // Assuming OTP_MAX_LEN < 64
+Assert.assertFalse(YubicoClient.isValidOTPFormat(otpTooLong))
+0.717 - // Assuming this is valid
+Assert.assertTrue(YubicoClient.isValidOTPFormat(otpValid))
+0.347 - String otpValid = "ValidOTP123"
+0.301 - String otpWithInvalidLengthLong = "A".repeat(100)
+0.268 - String otpWithInvalidLengthShort = "A"
+0.265 - String otpWithControlChars = "Valid" + new String(new byte[]{0x0A}) + "OTP"
+0.256 - String otpWithNonPrintableChar = "Valid" + new String(new byte[]{0x01}) + "OTP"
+0.250 - String otpWithSpaces = "Valid OTP 123"
+0.246 - String otpWithHighValueChar = "Valid" + new String(new byte[]{0x80}) + "OTP"
+0.243 - String otpWithLowerBoundaryChar = new String(new byte[]{0x20}) + "ValidOTP"
+0.243 - String otpWithUpperBoundaryChar = new String(new byte[]{0x7E}) + "ValidOTP"
+0.202 - String otpWithMixedCharacters = "Valid123!@#"
+0.176 - String otpTooShort = "A"
+0.164 - // Assuming this
+0.154 - String otpTooLong = "A".repeat(65)
+0.095 - String otpWithAllPrintable = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"

@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class DuplicateDictionaryIndexChangesTx {\nT get ( Object iKey ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class DuplicateDictionaryIndexChangesTxTest {\n@Test\npublic void testDuplicateNullsOnCreate ( ) {\ndb . begin ( ) ;\nfinal ODocument person1 = db . newInstance ( \"STR\" ) . save ( ) ;\nfinal ODocument person2 = db . newInstance ( \"STR\" ) . save ( ) ;\nfinal ODocument person3 = db . newInstance ( \"STR\" ) . save ( ) ;\nperson1 . field ( \"STR\" , \"STR\" ) . save ( ) ;\nperson2 . field ( \"STR\" , \"STR\" ) . save ( ) ;\ndb . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"STR\", person1.field(\"STR\"));\nAssert.assertEquals(\"STR\", person2.field(\"STR\"));\nAssert.assertEquals(\"STR\", person3.field(\"STR\"));\nAssert.assertEquals(person1, db.get(\"STR\", \"STR\"));\nAssert.assertEquals(person2, db.get(\"STR\", \"STR\"));\nAssert.assertEquals(person3, db.get(\"STR\", \"STR\"));\nAssert.assertEquals(3, db.count(\"STR\", \"STR\"));\nAssert.assertTrue(person1.getIdentity().isValid());\nAssert.assertTrue(person2.getIdentity().isValid());\nAssert.assertTrue(person3.getIdentity().isValid());\nAssert.assertTrue(person1.getVersion() > 0);\nAssert.assertTrue(person2.getVersion() > 0);\nAssert.assertTrue(person3.getVersion() > 0);\nAssert.assertTrue(person1.getIdentity() != person2.getIdentity());\nAssert.assertTrue(person1.getIdentity() != person3.getIdentity());\nAssert.assertTrue(person2.getIdentity() != person3.getIdentity());\nAssert.assertTrue(person1.getVersion() != person2.getVersion());\nAssert.assertTrue(person1.getVersion() != person3.getVersion());\nAssert.assertTrue(person2.getVersion() != person3.getVersion());\n====================\n\n",
+    "scores": [
+        0.861,
+        0.835,
+        0.835,
+        0.769,
+        0.744,
+        0.744,
+        0.64,
+        0.611,
+        0.583,
+        0.583,
+        0.543,
+        0.519,
+        0.519,
+        0.478,
+        0.468,
+        0.457,
+        0.457,
+        0.447,
+        0.447
+    ],
+    "ground_truth": "Assert.assertEquals(person2,index.get(\"STR\"));"
+}

@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testMatchesWithQuotes3 ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(results);\nassertFalse(results.isEmpty());\nassertEquals(expectedSize, results.size());\nassertTrue(results.stream().allMatch(doc -> doc instanceof ODocument));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"name\").equals(\"expectedName\")));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"status\").equals(\"active\")));\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"status\").equals(\"inactive\")));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"age\") > 18));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"createdDate\") != null));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"tags\") instanceof List));\nassertTrue(results.stream().allMatch(doc -> ((List) doc.field(\"tags\")).contains(\"expectedTag\")));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"score\") >= 0));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"score\") <= 100));\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"email\").contains(\"@\")));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"isVerified\") instanceof Boolean));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"lastLogin\") instanceof Date));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"profile\") != null));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"location\") instanceof ODocument));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"preferences\") instanceof Map));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"preferences\").containsKey(\"language\")));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"preferences\").get(\"language\").equals(\"English\")));\n```\n====================\n\n",
+    "scores": [
+        0.789,
+        0.733,
+        0.567,
+        0.473,
+        0.454,
+        0.442,
+        0.438,
+        0.42,
+        0.404,
+        0.4,
+        0.396,
+        0.382,
+        0.382,
+        0.378,
+        0.372,
+        0.368,
+        0.368,
+        0.368,
+        0.344,
+        0.341,
+        0.318,
+        0.0
+    ],
+    "ground_truth": "assertEquals(results.size(),1);"
+}

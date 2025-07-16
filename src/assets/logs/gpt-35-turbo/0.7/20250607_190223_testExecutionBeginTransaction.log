@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransaction {
+    boolean isActive ( ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class OConnectionExecutorTransactionTest {
+    @Test
+     public void testExecutionBeginTransaction ( ) {
+         OConnectionBinaryExecutor executor = new OConnectionBinaryExecutor ( connection , server ) ; 
+         List < ORecordOperation > operations = new ArrayList < > ( ) ; 
+         ODocument rec = new ODocument ( ) ; 
+         ORecordInternal . setIdentity ( rec , new ORecordId ( 3 , - 2 ) ) ; 
+         operations . add ( new ORecordOperation ( rec , ORecordOperation . CREATED ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions to be inserted in place of <ASSERTIONS HERE>:
+
+1. assertEquals(0, operations.size());
+2. assertNotNull(executor.getConnection());
+3. assertNotNull(executor.getServer());
+4. assertTrue(executor.isActive());
+5. assertFalse(executor.isInactive());
+6. assertTrue(operations.isEmpty());
+7. assertNotNull(rec);
+8. assertNotNull(rec.getIdentity());
+9. assertEquals(3, rec.getIdentity().getClusterId());
+10. assertEquals(-2, rec.getIdentity().getClusterPosition());
+11. assertNotNull(rec.getRecordType());
+12. assertEquals(ORecordType.DOCUMENT, rec.getRecordType());
+13. assertTrue(operations.get(0).type == ORecordOperation.CREATED);
+14. assertNotNull(operations.get(0).record);
+15. assertEquals(rec, operations.get(0).record);
+16. assertNotNull(operations.get(0).record.getId());
+17. assertEquals(rec.getIdentity(), operations.get(0).record.getId());
+18. assertNotNull(operations.get(0).record.toStream());
+19. assertNotNull(operations.get(0).record.toStream());
+20. assertTrue(operations.get(0).record.toStream().length > 0);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(database.getTransaction().isActive()); ===
+0.588 - 5. assertFalse(executor.isInactive())
+0.537 - 4. assertTrue(executor.isActive())
+0.530 - 6. assertTrue(operations.isEmpty())
+0.525 - 9. assertEquals(3, rec.getIdentity().getClusterId())
+0.489 - 2. assertNotNull(executor.getConnection())
+0.483 - 17. assertEquals(rec.getIdentity(), operations.get(0).record.getId())
+0.471 - 18. assertNotNull(operations.get(0).record.toStream())
+0.471 - 19. assertNotNull(operations.get(0).record.toStream())
+0.468 - 15. assertEquals(rec, operations.get(0).record)
+0.465 - 16. assertNotNull(operations.get(0).record.getId())
+0.458 - 8. assertNotNull(rec.getIdentity())
+0.442 - 3. assertNotNull(executor.getServer())
+0.440 - 14. assertNotNull(operations.get(0).record)
+0.430 - 10. assertEquals(-2, rec.getIdentity().getClusterPosition())
+0.407 - 20. assertTrue(operations.get(0).record.toStream().length > 0)
+0.396 - 12. assertEquals(ORecordType.DOCUMENT, rec.getRecordType())
+0.395 - 11. assertNotNull(rec.getRecordType())
+0.393 - 13. assertTrue(operations.get(0).type == ORecordOperation.CREATED)
+0.328 - Assertions to be inserted in place of <ASSERTIONS HERE>:
+
+1. assertEquals(0, operations.size())
+0.290 - 7. assertNotNull(rec)

@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecutionTest {\n@Test\npublic void testDropClusterIfExists ( ) {\nString cluster = \"STR\" ;\n( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nint clusterId = ((ODropClusterStatementExecution) db).getClusterIdByName(cluster);\nassertNotNull(clusterId);\nassertTrue(clusterId >= 0);\nassertEquals(\"Cluster ID should match the expected value\", expectedClusterId, clusterId);\nassertEquals(\"Cluster name should be STR\", \"STR\", db.getStorage().getClusterNameById(clusterId));\nassertTrue(\"Cluster should exist after addition\", db.getStorage().existsCluster(cluster));\nassertFalse(\"Cluster should not be empty\", db.getStorage().getClusterSize(clusterId) == 0);\nassertEquals(\"Cluster size should be 0 after drop\", 0, db.getStorage().getClusterSize(clusterId));\nassertThrows(ClusterNotFoundException.class, () -> {\n((ODropClusterStatementExecution) db).getClusterIdByName(\"NON_EXISTENT_CLUSTER\");\n});\nassertTrue(\"Cluster ID should be valid\", clusterId >= 0);\nassertNotEquals(\"Cluster ID should not be -1\", -1, clusterId);\nassertEquals(\"Cluster name should be STR\", \"STR\", db.getStorage().getClusterNameById(clusterId));\nassertTrue(\"Cluster should be removable\", db.getStorage().removeCluster(clusterId));\nassertFalse(\"Cluster should not exist after removal\", db.getStorage().existsCluster(cluster));\nassertThrows(IllegalArgumentException.class, () -> {\n((ODropClusterStatementExecution) db).getClusterIdByName(null);\n});\nassertThrows(IllegalArgumentException.class, () -> {\n((ODropClusterStatementExecution) db).getClusterIdByName(\"\");\n});\nassertEquals(\"Cluster ID should be the same after multiple calls\", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName(cluster));\nassertNotEquals(\"Cluster ID should change after dropping\", clusterId, ((ODropClusterStatementExecution) db).getClusterIdByName(\"ANOTHER_CLUSTER\"));\nassertTrue(\"Cluster should be empty after drop\", db.getStorage().getClusterSize(clusterId) == 0);\nassertEquals(\"Cluster count should decrease after drop\", initialClusterCount - 1, db.getStorage().getClusterCount());\nassertTrue(\"Cluster should be dropped successfully\", db.getStorage().removeCluster(clusterId));\n```\n====================\n\n",
+    "scores": [
+        0.667,
+        0.647,
+        0.574,
+        0.545,
+        0.531,
+        0.522,
+        0.522,
+        0.52,
+        0.5,
+        0.484,
+        0.481,
+        0.455,
+        0.452,
+        0.444,
+        0.443,
+        0.441,
+        0.435,
+        0.421,
+        0.393,
+        0.374,
+        0.318,
+        0.043,
+        0.043,
+        0.043,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(cluster)>0);"
+}

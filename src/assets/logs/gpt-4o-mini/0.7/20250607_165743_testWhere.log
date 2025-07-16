@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilder {
+    @Override
+     public String toString ( ) ;
+}
+
+package redraiment.jactiverecord;
+
+public class TSqlBuilderTest {
+    @Test
+     public void testWhere ( ) {
+         sql . select ( ) . from ( "STR" ) . where ( "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(sql);
+Assert.assertEquals("SELECT * FROM STR WHERE STR", sql.toString());
+Assert.assertTrue(sql.toString().contains("SELECT"));
+Assert.assertTrue(sql.toString().contains("FROM"));
+Assert.assertTrue(sql.toString().contains("WHERE"));
+Assert.assertTrue(sql.toString().contains("STR"));
+Assert.assertTrue(sql.toString().startsWith("SELECT"));
+Assert.assertTrue(sql.toString().endsWith("WHERE STR"));
+Assert.assertEquals(1, sql.getSelectCount());
+Assert.assertEquals(1, sql.getFromCount());
+Assert.assertEquals(1, sql.getWhereCount());
+Assert.assertTrue(sql.getTables().contains("STR"));
+Assert.assertTrue(sql.getConditions().contains("STR"));
+Assert.assertFalse(sql.getConditions().isEmpty());
+Assert.assertFalse(sql.getTables().isEmpty());
+Assert.assertFalse(sql.getSelects().isEmpty());
+Assert.assertNotEquals("", sql.toString());
+Assert.assertNotEquals("SELECT * FROM", sql.toString());
+Assert.assertNotEquals("SELECT", sql.toString());
+Assert.assertNotEquals("FROM STR", sql.toString());
+Assert.assertNotEquals("WHERE STR", sql.toString());
+Assert.assertEquals("SELECT * FROM STR WHERE STR", sql.toString().trim());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sql.toString()); ===
+0.912 - Assert.assertNotEquals("", sql.toString())
+0.907 - Assert.assertNotEquals("FROM STR", sql.toString())
+0.895 - Assert.assertNotEquals("WHERE STR", sql.toString())
+0.892 - Assert.assertNotEquals("SELECT", sql.toString())
+0.861 - Assert.assertNotEquals("SELECT * FROM", sql.toString())
+0.782 - Assert.assertEquals("SELECT * FROM STR WHERE STR", sql.toString())
+0.723 - Assert.assertEquals("SELECT * FROM STR WHERE STR", sql.toString().trim())
+0.706 - Assert.assertEquals(1, sql.getFromCount())
+0.696 - Assert.assertEquals(1, sql.getWhereCount())
+0.686 - Assert.assertEquals(1, sql.getSelectCount())
+0.605 - Assert.assertTrue(sql.toString().contains("STR"))
+0.597 - Assert.assertTrue(sql.toString().contains("FROM"))
+0.590 - Assert.assertTrue(sql.toString().contains("WHERE"))
+0.582 - Assert.assertTrue(sql.toString().contains("SELECT"))
+0.579 - Assert.assertFalse(sql.getConditions().isEmpty())
+0.575 - Assert.assertFalse(sql.getSelects().isEmpty())
+0.568 - Assert.assertTrue(sql.toString().startsWith("SELECT"))
+0.568 - Assert.assertTrue(sql.toString().endsWith("WHERE STR"))
+0.528 - Assert.assertFalse(sql.getTables().isEmpty())
+0.468 - Assert.assertTrue(sql.getTables().contains("STR"))
+0.433 - ```java
+Assert.assertNotNull(sql)
+0.420 - Assert.assertTrue(sql.getConditions().contains("STR"))
+0.000 - ```

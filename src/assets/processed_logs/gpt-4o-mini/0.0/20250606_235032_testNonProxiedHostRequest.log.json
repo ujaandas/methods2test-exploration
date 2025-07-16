@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class HttpClientFactory {\npublic HttpClient create ( ) {\nreturn hcb . setDefaultRequestConfig ( rcb . build ( ) ) . build ( ) ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class HttpClientFactoryTest {\n@Test\npublic void testNonProxiedHostRequest ( ) throws Exception {\ntargetServer . stubFor ( get ( urlMatching ( \"STR\" ) ) . willReturn ( aResponse ( ) . withBody ( \"STR\" ) ) ) ;\nproxyServer . stubFor ( get ( urlMatching ( \"STR\" ) ) . willReturn ( aResponse ( ) . withBody ( \"STR\" ) ) ) ;\nProxy proxy = new Proxy ( ) ;\nproxy . setHost ( \"STR\" ) ;\nproxy . setPort ( PROXY_PORT ) ;\nproxy . setProtocol ( \"STR\" ) ;\nproxy . setNonProxyHosts ( \"STR\" ) ;\nHttpClient client = new HttpClientFactory ( TARGET_URL ) . proxy ( proxy ) . create ( ) ;\nString body = EntityUtils . toString ( client . execute ( new HttpGet ( TARGET_URL ) ) . getEntity ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(body);\nassertEquals(\"STR\", body);\nassertTrue(body.contains(\"STR\"));\nassertFalse(body.isEmpty());\nassertTrue(body.length() > 0);\nassertTrue(body.startsWith(\"S\"));\nassertTrue(body.endsWith(\"R\"));\nassertEquals(3, body.split(\"S\").length - 1);\nassertTrue(body.matches(\".*STR.*\"));\nassertFalse(body.matches(\".*INVALID.*\"));\nassertNotEquals(\"INVALID\", body);\nassertTrue(body.equalsIgnoreCase(\"str\"));\nassertTrue(body.contains(\"T\"));\nassertTrue(body.indexOf(\"R\") > 0);\nassertTrue(body.lastIndexOf(\"S\") < body.length());\nassertTrue(body.substring(0, 3).equals(\"STR\"));\nassertTrue(body.substring(body.length() - 3).equals(\"STR\"));\nassertTrue(body.split(\"STR\").length > 1);\nassertTrue(body.replace(\"STR\", \"\").length() < body.length());\nassertTrue(body.toLowerCase().contains(\"str\"));\nassertTrue(body.toUpperCase().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.764,
+        0.594,
+        0.588,
+        0.571,
+        0.549,
+        0.522,
+        0.51,
+        0.494,
+        0.484,
+        0.481,
+        0.481,
+        0.473,
+        0.469,
+        0.469,
+        0.464,
+        0.457,
+        0.444,
+        0.441,
+        0.371,
+        0.366,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",body);"
+}

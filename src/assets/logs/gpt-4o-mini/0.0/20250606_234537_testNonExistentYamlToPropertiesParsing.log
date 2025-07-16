@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtil {
+    protected static Properties getPropertiesFromYamlResource ( URL resource ) { 
+    return getPropertiesFromYamlResource ( null , resource ) ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class SpringBootUtilTest {
+    @Test
+     public void testNonExistentYamlToPropertiesParsing ( ) {
+         Properties props = YamlUtil . getPropertiesFromYamlResource ( SpringBootUtilTest . class . getResource ( "STR" ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(props);
+assertTrue(props.isEmpty());
+assertFalse(props.containsKey("someKey"));
+assertEquals(0, props.size());
+assertNull(props.getProperty("nonExistentKey"));
+assertFalse(props.containsKey("anotherKey"));
+assertTrue(props.keySet().isEmpty());
+assertFalse(props.containsValue("someValue"));
+assertEquals("defaultValue", props.getProperty("defaultKey", "defaultValue"));
+assertTrue(props.stringPropertyNames().isEmpty());
+assertThrows(IllegalArgumentException.class, () -> {
+    props.put(null, "value");
+});
+assertThrows(IllegalArgumentException.class, () -> {
+    props.put("key", null);
+});
+assertEquals("default", props.getProperty("missingKey", "default"));
+assertFalse(props.containsKey("keyThatShouldNotExist"));
+assertEquals(0, props.size());
+assertTrue(props.isEmpty());
+assertNull(props.getProperty("key"));
+assertFalse(props.keySet().iterator().hasNext());
+assertFalse(props.values().iterator().hasNext());
+assertFalse(props.entrySet().iterator().hasNext());
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(props); ===
+0.833 - ```java
+assertNotNull(props)
+0.625 - assertEquals(0, props.size())
+0.625 - assertEquals(0, props.size())
+0.607 - assertNull(props.getProperty("key"))
+0.596 - assertTrue(props.isEmpty())
+0.596 - assertTrue(props.isEmpty())
+0.507 - assertNull(props.getProperty("nonExistentKey"))
+0.500 - assertTrue(props.keySet().isEmpty())
+0.459 - assertFalse(props.containsKey("someKey"))
+0.438 - assertFalse(props.containsKey("anotherKey"))
+0.431 - assertFalse(props.containsValue("someValue"))
+0.412 - assertFalse(props.keySet().iterator().hasNext())
+0.412 - assertFalse(props.values().iterator().hasNext())
+0.406 - assertTrue(props.stringPropertyNames().isEmpty())
+0.400 - assertFalse(props.entrySet().iterator().hasNext())
+0.373 - assertFalse(props.containsKey("keyThatShouldNotExist"))
+0.352 - assertThrows(IllegalArgumentException.class, () -> {
+    props.put("key", null)
+0.344 - assertThrows(IllegalArgumentException.class, () -> {
+    props.put(null, "value")
+0.329 - assertEquals("default", props.getProperty("missingKey", "default"))
+0.316 - assertEquals("defaultValue", props.getProperty("defaultKey", "defaultValue"))
+0.091 - })
+0.091 - })
+0.000 - ```

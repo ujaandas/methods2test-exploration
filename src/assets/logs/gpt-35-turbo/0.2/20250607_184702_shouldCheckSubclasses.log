@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStep {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class CheckClassTypeStepTest {
+    @Test
+     public void shouldCheckSubclasses ( ) {
+         OBasicCommandContext context = new OBasicCommandContext ( ) ; 
+         context . setDatabase ( database ) ; 
+         OClass parentClass = createClassInstance ( ) ; 
+         OClass childClass = createChildClassInstance ( parentClass ) ; 
+         CheckClassTypeStep step = new CheckClassTypeStep ( childClass . getName ( ) , parentClass . getName ( ) , context , false ) ; 
+         OResultSet result = step . syncPull ( context , 20 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(20, result.stream().count());
+assertTrue(result.stream().allMatch(r -> r.getProperty("parentClass").equals(parentClass.getName())));
+assertTrue(result.stream().allMatch(r -> r.getProperty("childClass").equals(childClass.getName())));
+assertTrue(result.stream().allMatch(r -> r.getProperty("context").equals(context)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isChild").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isParent").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclass").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClass").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFrom").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isInstance").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclassOf").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclassOf").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClassAs").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFromTo").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isInstanceOf").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclassOfTo").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclassOfTo").equals(true)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClassAsTo").equals(false)));
+assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFromToTo").equals(true)));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(0,result.stream().count()); ===
+0.848 - Assertions:
+
+assertEquals(20, result.stream().count())
+0.525 - assertTrue(result.stream().allMatch(r -> r.getProperty("isParent").equals(true)))
+0.517 - assertTrue(result.stream().allMatch(r -> r.getProperty("context").equals(context)))
+0.508 - assertTrue(result.stream().allMatch(r -> r.getProperty("isChild").equals(false)))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclass").equals(true)))
+0.500 - assertTrue(result.stream().allMatch(r -> r.getProperty("isInstance").equals(true)))
+0.492 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClass").equals(false)))
+0.492 - assertTrue(result.stream().allMatch(r -> r.getProperty("isInstanceOf").equals(true)))
+0.488 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclass").equals(false)))
+0.488 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclassOf").equals(false)))
+0.484 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclassOf").equals(true)))
+0.484 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClassAs").equals(false)))
+0.480 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSubclassOfTo").equals(false)))
+0.476 - assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFrom").equals(true)))
+0.476 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSuperclassOfTo").equals(true)))
+0.476 - assertTrue(result.stream().allMatch(r -> r.getProperty("isSameClassAsTo").equals(false)))
+0.469 - assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFromTo").equals(true)))
+0.462 - assertTrue(result.stream().allMatch(r -> r.getProperty("isAssignableFromToTo").equals(true)))
+0.456 - assertTrue(result.stream().allMatch(r -> r.getProperty("childClass").equals(childClass.getName())))
+0.449 - assertTrue(result.stream().allMatch(r -> r.getProperty("parentClass").equals(parentClass.getName())))

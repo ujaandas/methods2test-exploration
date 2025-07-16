@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OClassImpl {\npublic Integer getId ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OClassImplTest {\n@Test\npublic void testCreatePropertyIdKeep ( ) {\nfinal OSchema oSchema = db . getMetadata ( ) . getSchema ( ) ;\nOClass oClass = oSchema . createClass ( \"STR\" ) ;\nOProperty prop = oClass . createProperty ( \"STR\" , OType . STRING ) ;\nInteger id = prop . getId ( ) ;\noClass . dropProperty ( \"STR\" ) ;\nprop = oClass . createProperty ( \"STR\" , OType . STRING ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(id, prop.getId());\nAssert.assertNotNull(prop);\nAssert.assertEquals(\"STR\", prop.getName());\nAssert.assertEquals(OType.STRING, prop.getType());\nAssert.assertTrue(oClass.properties().contains(prop));\nAssert.assertTrue(oClass.existsProperty(\"STR\"));\nAssert.assertEquals(1, oClass.properties().size());\nAssert.assertTrue(oClass.dropProperty(\"STR\"));\nAssert.assertEquals(0, oClass.properties().size());\nAssert.assertNull(oClass.getProperty(\"STR\"));\nAssert.assertEquals(\"STR\", oClass.getProperty(\"STR\").getName());\nAssert.assertEquals(OType.STRING, oClass.getProperty(\"STR\").getType());\nAssert.assertTrue(oClass.existsProperty(\"STR\"));\nAssert.assertTrue(oClass.properties().contains(oClass.getProperty(\"STR\")));\nAssert.assertTrue(oClass.dropProperty(\"STR\"));\nAssert.assertEquals(0, oClass.properties().size());\nAssert.assertNull(oClass.getProperty(\"STR\"));\nAssert.assertFalse(oClass.existsProperty(\"STR\"));\nAssert.assertFalse(oClass.properties().contains(oClass.getProperty(\"STR\")));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.794,
+        0.714,
+        0.648,
+        0.648,
+        0.648,
+        0.583,
+        0.543,
+        0.537,
+        0.537,
+        0.524,
+        0.522,
+        0.522,
+        0.485,
+        0.485,
+        0.484,
+        0.48,
+        0.433,
+        0.417
+    ],
+    "ground_truth": "assertEquals(id,prop.getId());"
+}

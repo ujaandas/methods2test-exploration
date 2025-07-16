@@ -1,0 +1,85 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraph {
+    public boolean hasCycles ( ) { 
+    return ! minimalCycles ( ) . isEmpty ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class ADiGraphTest {
+    @Test
+     public void testTree ( ) {
+         final ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( edge ( "STR" , "STR" ) , edge ( "STR" , "STR" ) ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("STR", "STR"));
+assertEquals(true, graph.hasCycles());
+graph.removeEdge(edge("STR", "STR"));
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("STR", "NEW"));
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("NEW", "STR"));
+assertEquals(true, graph.hasCycles());
+graph.removeEdge(edge("NEW", "STR"));
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("NEW", "NEW"));
+assertEquals(false, graph.hasCycles());
+graph.removeEdge(edge("NEW", "NEW"));
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("STR", "STR"));
+graph.addEdge(edge("STR", "NEW"));
+assertEquals(true, graph.hasCycles());
+graph.clear();
+assertEquals(false, graph.hasCycles());
+graph.addEdge(edge("A", "B"));
+graph.addEdge(edge("B", "C"));
+graph.addEdge(edge("C", "A"));
+assertEquals(true, graph.hasCycles());
+graph.clear();
+assertEquals(false, graph.hasCycles());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(graph.hasCycles()); ===
+0.848 - assertEquals(true, graph.hasCycles())
+0.848 - assertEquals(true, graph.hasCycles())
+0.848 - assertEquals(true, graph.hasCycles())
+0.848 - assertEquals(true, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.836 - assertEquals(false, graph.hasCycles())
+0.700 - Assertions:
+
+assertEquals(false, graph.hasCycles())
+0.512 - graph.clear()
+0.512 - graph.clear()
+0.379 - graph.addEdge(edge("A", "B"))
+0.355 - graph.addEdge(edge("STR", "STR"))
+0.355 - graph.addEdge(edge("STR", "NEW"))
+0.355 - graph.addEdge(edge("NEW", "STR"))
+0.355 - graph.addEdge(edge("NEW", "NEW"))
+0.355 - graph.addEdge(edge("STR", "STR"))
+0.355 - graph.addEdge(edge("STR", "NEW"))
+0.345 - graph.addEdge(edge("B", "C"))
+0.345 - graph.addEdge(edge("C", "A"))
+0.308 - graph.removeEdge(edge("STR", "STR"))
+0.308 - graph.removeEdge(edge("NEW", "STR"))
+0.308 - graph.removeEdge(edge("NEW", "NEW"))

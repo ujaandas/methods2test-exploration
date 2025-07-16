@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class HostURLFilter {\n@Override\npublic String filter ( URL sourceUrl , Metadata sourceMetadata , String urlToFilter ) {\nif ( sourceUrl == null || ( ! ignoreOutsideHost && ! ignoreOutsideDomain ) ) {\nreturn urlToFilter ;\n} URL tURL ;\ntry {\ntURL = new URL ( urlToFilter ) ;\n} catch ( MalformedURLException e1 ) {\nreturn null ;\n} String fromHost ;\nString fromDomain = null ;\nif ( sourceUrl == previousSourceUrl ) {\nfromHost = previousSourceHost ;\nif ( ignoreOutsideDomain ) {\nfromDomain = previousSourceDomain ;\n} } else {\nfromHost = sourceUrl . getHost ( ) ;\nif ( ignoreOutsideDomain ) {\nfromDomain = PaidLevelDomain . getPLD ( fromHost ) ;\n} previousSourceHost = fromHost ;\npreviousSourceDomain = fromDomain ;\npreviousSourceUrl = sourceUrl ;\n} String toHost = tURL . getHost ( ) ;\nif ( ignoreOutsideHost ) {\nif ( toHost == null || ! toHost . equalsIgnoreCase ( fromHost ) ) {\nreturn null ;\n} } if ( ignoreOutsideDomain ) {\nString toDomain = PaidLevelDomain . getPLD ( toHost ) ;\nif ( toDomain == null || ! toDomain . equals ( fromDomain ) ) {\nreturn null ;\n} } return urlToFilter ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class HostURLFilterTest {\n@Test\npublic void testWithinDomain ( ) throws MalformedURLException {\nHostURLFilter allAllowed = createFilter ( false , true ) ;\nURL sourceURL = new URL ( \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nString filterResult = allAllowed . filter ( sourceURL , metadata , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", filterResult);\nassertNull(allAllowed.filter(null, metadata, \"STR\"));\nassertNull(allAllowed.filter(sourceURL, metadata, null));\nassertEquals(\"http://example.com/page\", allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example2.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com/page2\"));\nassertEquals(\"http://example.com/page\", allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\nassertEquals(\"http://sub.example.com/page\", allAllowed.filter(sourceURL, metadata, \"http://sub.example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://sub2.example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://sub.example2.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"ftp://example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com:8080/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com/page?param=value\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com/page#section\"));\nassertEquals(\"http://example.com/page\", allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\nassertEquals(\"http://example.com/page\", allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\nassertNull(allAllowed.filter(sourceURL, metadata, \"http://example.com/page\"));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.465,
+        0.463,
+        0.392,
+        0.385,
+        0.385,
+        0.385,
+        0.385,
+        0.375,
+        0.375,
+        0.358,
+        0.355,
+        0.355,
+        0.352,
+        0.352,
+        0.348,
+        0.339,
+        0.319
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",filterResult);"
+}

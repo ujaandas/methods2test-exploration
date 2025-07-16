@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAbsoluteValue {\n@Override\npublic Object getResult ( ) {\nreturn result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OSQLFunctionAbsoluteValueTest {\n@Test\npublic void testNegativeDouble ( ) {\nfunction . execute ( null , null , null , new Object [ ] {\n- 10.5D } , null ) ;\nObject result = function . getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(result);\nassertTrue(result instanceof Double);\nassertEquals(10.5D, result);\nassertEquals(10.5D, result, 0.0);\nassertFalse(((Double) result).isNaN());\nassertFalse(((Double) result).isInfinite());\nassertTrue(((Double) result) > 0);\nassertEquals(10.5D, (Double) result, 0.001);\nassertNotEquals(-10.5D, result);\nassertTrue(((Double) result) >= 0);\nassertTrue(((Double) result) <= 10.5D);\nassertEquals(10.5D, Math.abs(-10.5D), 0.0);\nassertSame(result, function.getResult());\nassertNotSame(-10.5D, result);\nassertTrue(result.toString().equals(\"10.5\"));\nassertTrue(result instanceof Number);\nassertEquals(10.5D, ((Number) result).doubleValue(), 0.0);\nassertTrue(result instanceof Double);\nassertFalse(result instanceof Integer);\nassertTrue(result instanceof Comparable);\nassertEquals(0, Double.compare((Double) result, 10.5D));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        1.0,
+        0.912,
+        0.889,
+        0.743,
+        0.562,
+        0.554,
+        0.548,
+        0.538,
+        0.522,
+        0.5,
+        0.484,
+        0.476,
+        0.469,
+        0.469,
+        0.432,
+        0.423,
+        0.405,
+        0.395,
+        0.372,
+        0.297,
+        0.0
+    ],
+    "ground_truth": "assertTrue(resultinstanceofDouble);"
+}

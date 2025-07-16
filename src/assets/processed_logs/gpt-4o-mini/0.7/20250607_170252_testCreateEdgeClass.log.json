@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTx {\ndefault OClass createEdgeClass ( String className ) {\nreturn createClass ( className , \"STR\" ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODatabaseDocumentTxTest {\n@Test\npublic void testCreateEdgeClass ( ) {\nOClass clazz = db . createEdgeClass ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(clazz);\nassertEquals(\"STR\", clazz.getName());\nassertTrue(clazz instanceof OClass);\nassertTrue(clazz.isEdgeClass());\nassertFalse(clazz.isAbstract());\nassertEquals(\"EDGE\", clazz.getType());\nassertEquals(1, clazz.getProperties().size());\nassertEquals(\"default\", clazz.getDefaultCluster());\nassertTrue(clazz.getSuperClass() == null);\nassertEquals(0, clazz.getSubClasses().size());\nassertNotNull(clazz.getSchema());\nassertTrue(clazz.getSchema().getClasses().contains(clazz));\nassertEquals(0, clazz.getIndices().size());\nassertFalse(clazz.isPolymorphic());\nassertEquals(1, db.getEdgeClasses().size());\nassertTrue(db.getEdgeClasses().contains(clazz));\nassertNotNull(clazz.getClusterIds());\nassertFalse(clazz.getClusterIds().isEmpty());\nassertEquals(1, clazz.getClusterIds().size());\nassertEquals(clazz.getClusterIds().get(0), clazz.getDefaultClusterId());\nassertEquals(0, clazz.getMethods().size());\nassertEquals(0, clazz.getEvents().size());\n```\n====================\n\n",
+    "scores": [
+        0.833,
+        0.769,
+        0.714,
+        0.549,
+        0.549,
+        0.545,
+        0.536,
+        0.528,
+        0.519,
+        0.5,
+        0.492,
+        0.492,
+        0.475,
+        0.469,
+        0.469,
+        0.469,
+        0.448,
+        0.438,
+        0.406,
+        0.385,
+        0.355,
+        0.333,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(clazz);"
+}

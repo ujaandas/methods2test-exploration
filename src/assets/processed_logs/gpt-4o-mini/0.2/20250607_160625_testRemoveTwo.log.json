@@ -1,0 +1,32 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class TrackedMap {\npublic boolean isDirty ( ) {\nreturn _dirty ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class TrackedMapTest {\n@Test\npublic void testRemoveTwo ( ) {\nfinal ODocument doc = new ODocument ( ) ;\nfinal OTrackedMap < String > map = new OTrackedMap < String > ( doc ) ;\nmap . put ( \"STR\" , \"STR\" ) ;\nORecordInternal . unsetDirty ( doc ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertFalse(map.isDirty());\nassertEquals(1, map.size());\nassertTrue(map.containsKey(\"STR\"));\nassertEquals(\"STR\", map.get(\"STR\"));\nassertFalse(map.isEmpty());\nmap.remove(\"STR\");\nassertTrue(map.isEmpty());\nassertFalse(map.containsKey(\"STR\"));\nassertNull(map.get(\"STR\"));\nassertEquals(0, map.size());\nassertTrue(map.isDirty());\nmap.put(\"NEW_STR\", \"NEW_STR\");\nassertTrue(map.containsKey(\"NEW_STR\"));\nassertEquals(\"NEW_STR\", map.get(\"NEW_STR\"));\nassertFalse(map.isEmpty());\nassertEquals(1, map.size());\nmap.clear();\nassertTrue(map.isEmpty());\nassertEquals(0, map.size());\nassertFalse(map.isDirty());\nmap.put(\"ANOTHER_STR\", \"ANOTHER_STR\");\nassertTrue(map.isDirty());\nassertEquals(\"ANOTHER_STR\", map.get(\"ANOTHER_STR\"));\nassertFalse(map.isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.885,
+        0.769,
+        0.769,
+        0.769,
+        0.767,
+        0.745,
+        0.745,
+        0.627,
+        0.627,
+        0.623,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.469,
+        0.433,
+        0.423,
+        0.382,
+        0.342,
+        0.27,
+        0.233,
+        0.148,
+        0.129,
+        0.0
+    ],
+    "ground_truth": "Assert.assertFalse(doc.isDirty());"
+}

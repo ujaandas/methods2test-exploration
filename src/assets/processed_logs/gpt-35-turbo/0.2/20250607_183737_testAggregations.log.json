@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n@Override\npublic < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) {\ncheckOpenness ( ) ;\nreturn internal . query ( iCommand , iArgs ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testAggregations ( ) {\nOSQLSynchQuery sql = new OSQLSynchQuery ( \"STR\" ) ;\nList < ODocument > results = db . query ( sql ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(0, results.size());\nassertNotNull(results);\nassertTrue(results.isEmpty());\nassertFalse(results.contains(null));\nassertTrue(results.stream().allMatch(doc -> doc.field(\"name\") != null));\nassertEquals(0, results.stream().filter(doc -> doc.field(\"age\") < 18).count());\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"gender\").equals(\"Male\")));\nassertFalse(results.stream().allMatch(doc -> doc.field(\"city\").equals(\"New York\")));\nassertEquals(1, results.stream().filter(doc -> doc.field(\"status\").equals(\"active\")).count());\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"salary\") == null));\nassertEquals(2, results.size());\nassertTrue(results.stream().allMatch(doc -> doc.field(\"country\").equals(\"USA\")));\nassertFalse(results.stream().anyMatch(doc -> doc.field(\"role\").equals(\"admin\")));\nassertEquals(0, results.stream().filter(doc -> doc.field(\"department\").equals(\"HR\")).count());\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"email\").isEmpty());\nassertFalse(results.stream().allMatch(doc -> doc.field(\"phone\").startsWith(\"1-\")));\nassertEquals(3, results.size());\nassertTrue(results.stream().anyMatch(doc -> doc.field(\"position\").equals(\"Manager\")));\nassertFalse(results.stream().allMatch(doc -> doc.field(\"team\").equals(\"Marketing\")));\nassertEquals(0, results.stream().filter(doc -> doc.field(\"location\").equals(\"London\")).count());\nassertTrue(results.stream().noneMatch(doc -> doc.field(\"project\").equals(\"Alpha\")));\n====================\n\n",
+    "scores": [
+        0.967,
+        0.967,
+        0.967,
+        0.678,
+        0.677,
+        0.654,
+        0.544,
+        0.483,
+        0.467,
+        0.459,
+        0.433,
+        0.431,
+        0.426,
+        0.42,
+        0.418,
+        0.418,
+        0.411,
+        0.389,
+        0.389,
+        0.378,
+        0.372
+    ],
+    "ground_truth": "assertEquals(1,results.size());"
+}

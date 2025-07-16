@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class BambooEnvironmentVariables {\npublic Map < String , String > convert ( Map < String , String > env ) {\nMap < String , String > result = new HashMap < > ( ) ;\nfor ( String key : env . keySet ( ) ) {\nMatcher matcher = BAMBOO_PATTERN . matcher ( key ) ;\nif ( matcher . lookingAt ( ) ) {\nString value = env . get ( key ) ;\nString strippedVar = matcher . group ( 1 ) ;\nresult . put ( strippedVar , value ) ;\n} } result . putAll ( env ) ;\nreturn result ;\n}\n}\n\npackage cucumber-ltd.cucumber-pro-plugin-jvm;\n\npublic class BambooEnvironmentVariablesTest {\n@Test\npublic void duplicates_bamboo_prefixed_env_vars_with_prefixless_copy ( ) {\nHashMap < String , String > env = new HashMap < String , String > ( ) {\n{\nput ( \"STR\" , \"STR\" ) ;\n} } ;\nMap < String , String > convertedEnv = new BambooEnvironmentVariables ( ) . convert ( env ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", convertedEnv.get(\"STR\"));\nassertTrue(convertedEnv.containsKey(\"STR\"));\nassertEquals(1, convertedEnv.size());\nassertNotNull(convertedEnv);\nassertNotEquals(env, convertedEnv);\nassertTrue(env.containsKey(\"STR\"));\nassertTrue(env.containsValue(\"STR\"));\nassertTrue(convertedEnv.containsValue(\"STR\"));\nassertFalse(convertedEnv.isEmpty());\nassertTrue(convertedEnv.keySet().contains(\"STR\"));\nassertTrue(convertedEnv.values().contains(\"STR\"));\nassertTrue(convertedEnv.entrySet().contains(new AbstractMap.SimpleEntry<>(\"STR\", \"STR\")));\nassertEquals(env.get(\"STR\"), convertedEnv.get(\"STR\"));\nassertNotSame(env, convertedEnv);\nassertTrue(convertedEnv.keySet().containsAll(env.keySet()));\nassertTrue(convertedEnv.values().containsAll(env.values()));\nassertTrue(convertedEnv.entrySet().containsAll(env.entrySet()));\nassertEquals(env.entrySet(), convertedEnv.entrySet());\nassertTrue(convertedEnv.keySet().containsAll(Arrays.asList(\"STR\")));\nassertTrue(convertedEnv.values().containsAll(Arrays.asList(\"STR\")));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.905,
+        0.795,
+        0.711,
+        0.698,
+        0.695,
+        0.692,
+        0.682,
+        0.674,
+        0.674,
+        0.629,
+        0.595,
+        0.564,
+        0.564,
+        0.529,
+        0.519,
+        0.51,
+        0.509,
+        0.506,
+        0.477
+    ],
+    "ground_truth": "assertEquals(\"STR\",convertedEnv.get(\"STR\"));"
+}

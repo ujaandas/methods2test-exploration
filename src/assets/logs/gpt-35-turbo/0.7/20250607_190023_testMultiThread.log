@@ -1,0 +1,87 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolder {
+    public static long getAndClear ( Channel channel , Integer key ) { 
+    Map < Integer , Long > map = getArriveTimeMap ( channel ) ; 
+    Long result = map . remove ( key ) ; 
+    if ( result == null ) { 
+    return - 1 ; 
+    } return result ; 
+    }
+}
+
+package sofastack.sofa-bolt;
+
+public class ThreadLocalArriveTimeHolderTest {
+    @Test
+     public void testMultiThread ( ) throws InterruptedException {
+         final EmbeddedChannel channel = new EmbeddedChannel ( ) ; 
+         final CountDownLatch countDownLatch = new CountDownLatch ( 1 ) ; 
+         long start = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long end = System . nanoTime ( ) ; 
+         ThreadLocalArriveTimeHolder . arrive ( channel , 1 ) ; 
+         long time = ThreadLocalArriveTimeHolder . getAndClear ( channel , 1 ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions generated:
+
+assertEquals(0, time);
+assertNotEquals(-1, time);
+assertTrue(end - start < time);
+assertFalse(channel.isActive());
+assertTrue(channel.isOpen());
+assertNull(channel.pipeline().get("handler"));
+assertTrue(channel.finish());
+assertFalse(channel.isOpen());
+assertFalse(channel.isActive());
+assertTrue(channel.closeFuture().isDone());
+assertNotNull(channel.pipeline().get("handler"));
+assertFalse(channel.isActive());
+assertTrue(channel.finish());
+assertTrue(channel.closeFuture().isDone());
+assertTrue(channel.isOpen());
+assertFalse(channel.isActive());
+assertNull(channel.pipeline().get("handler"));
+assertFalse(channel.isActive());
+assertTrue(channel.finish());
+assertNotNull(channel.pipeline().get("handler"));
+assertTrue(channel.closeFuture().isDone());
+assertFalse(channel.isActive());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(time>=start); ===
+0.735 - assertTrue(end - start < time)
+0.553 - assertNotEquals(-1, time)
+0.549 - assertTrue(channel.isOpen())
+0.549 - assertTrue(channel.finish())
+0.549 - assertTrue(channel.finish())
+0.549 - assertTrue(channel.isOpen())
+0.549 - assertTrue(channel.finish())
+0.462 - assertTrue(channel.closeFuture().isDone())
+0.462 - assertTrue(channel.closeFuture().isDone())
+0.462 - assertTrue(channel.closeFuture().isDone())
+0.444 - assertFalse(channel.isActive())
+0.444 - assertFalse(channel.isActive())
+0.444 - assertFalse(channel.isActive())
+0.444 - assertFalse(channel.isActive())
+0.444 - assertFalse(channel.isActive())
+0.444 - assertFalse(channel.isActive())
+0.423 - assertFalse(channel.isOpen())
+0.400 - Assertions generated:
+
+assertEquals(0, time)
+0.382 - assertNull(channel.pipeline().get("handler"))
+0.382 - assertNull(channel.pipeline().get("handler"))
+0.366 - assertNotNull(channel.pipeline().get("handler"))
+0.366 - assertNotNull(channel.pipeline().get("handler"))

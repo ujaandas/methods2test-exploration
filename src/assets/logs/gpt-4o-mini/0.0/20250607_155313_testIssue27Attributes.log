@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package xmlet.XsdParser;
+
+public class Issues {
+    public Stream < XsdSchema > getResultXsdSchemas ( ) { 
+    return parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ; 
+    }
+}
+
+package xmlet.XsdParser;
+
+public class IssuesTest {
+    @Test
+     public void testIssue27Attributes ( ) {
+         XsdParser parser = new XsdParser ( getFilePath ( "STR" ) ) ; 
+         List < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(schemas);
+assertFalse(schemas.isEmpty());
+assertEquals(3, schemas.size()); // Assuming there are 3 schemas expected
+assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));
+assertEquals("ExpectedSchemaName1", schemas.get(0).getName());
+assertEquals("ExpectedSchemaName2", schemas.get(1).getName());
+assertEquals("ExpectedSchemaName3", schemas.get(2).getName());
+assertTrue(schemas.get(0).getElements().size() > 0);
+assertTrue(schemas.get(1).getElements().size() > 0);
+assertTrue(schemas.get(2).getElements().size() > 0);
+assertNotNull(schemas.get(0).getTargetNamespace());
+assertNotNull(schemas.get(1).getTargetNamespace());
+assertNotNull(schemas.get(2).getTargetNamespace());
+assertEquals("http://example.com/schema1", schemas.get(0).getTargetNamespace());
+assertEquals("http://example.com/schema2", schemas.get(1).getTargetNamespace());
+assertEquals("http://example.com/schema3", schemas.get(2).getTargetNamespace());
+assertTrue(schemas.get(0).getAttributes().isEmpty());
+assertTrue(schemas.get(1).getAttributes().size() > 0);
+assertTrue(schemas.get(2).getAttributes().size() > 0);
+assertEquals("ExpectedAttributeName", schemas.get(1).getAttributes().get(0).getName());
+assertEquals("ExpectedAttributeType", schemas.get(1).getAttributes().get(0).getType());
+assertTrue(schemas.get(2).getElements().stream().anyMatch(element -> "ExpectedElementName".equals(element.getName())));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,schemas.size()); ===
+0.967 - assertEquals(3, schemas.size())
+0.733 - assertFalse(schemas.isEmpty())
+0.600 - assertEquals("ExpectedSchemaName1", schemas.get(0).getName())
+0.582 - assertTrue(schemas.get(0).getElements().size() > 0)
+0.582 - assertTrue(schemas.get(1).getElements().size() > 0)
+0.582 - assertTrue(schemas.get(2).getElements().size() > 0)
+0.578 - assertEquals("ExpectedSchemaName2", schemas.get(1).getName())
+0.578 - assertEquals("ExpectedSchemaName3", schemas.get(2).getName())
+0.568 - assertTrue(schemas.get(1).getAttributes().size() > 0)
+0.568 - assertTrue(schemas.get(2).getAttributes().size() > 0)
+0.567 - ```java
+assertNotNull(schemas)
+0.550 - assertNotNull(schemas.get(0).getTargetNamespace())
+0.550 - assertNotNull(schemas.get(1).getTargetNamespace())
+0.550 - assertNotNull(schemas.get(2).getTargetNamespace())
+0.519 - assertEquals("http://example.com/schema1", schemas.get(0).getTargetNamespace())
+0.512 - assertTrue(schemas.get(0).getAttributes().isEmpty())
+0.500 - assertEquals("http://example.com/schema2", schemas.get(1).getTargetNamespace())
+0.500 - assertEquals("http://example.com/schema3", schemas.get(2).getTargetNamespace())
+0.470 - assertEquals("ExpectedAttributeName", schemas.get(1).getAttributes().get(0).getName())
+0.470 - assertEquals("ExpectedAttributeType", schemas.get(1).getAttributes().get(0).getType())
+0.307 - // Assuming there are 3 schemas expected
+assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema))
+0.288 - assertTrue(schemas.get(2).getElements().stream().anyMatch(element -> "ExpectedElementName".equals(element.getName())))
+0.000 - ```

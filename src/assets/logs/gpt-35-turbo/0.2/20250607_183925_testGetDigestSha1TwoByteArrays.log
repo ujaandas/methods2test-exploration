@@ -1,0 +1,61 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormat {
+    public static String getDigestSha1 ( byte [ ] bytes1 , byte [ ] bytes2 ) { 
+    MessageDigest sha1 = DigestUtils . getSha1Digest ( ) ; 
+    sha1 . update ( bytes1 ) ; 
+    return "STR" + base32 . encodeAsString ( sha1 . digest ( bytes2 ) ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.external/warc;
+
+public class WARCRecordFormatTest {
+    @Test
+     public void testGetDigestSha1TwoByteArrays ( ) {
+         byte [ ] content1 = { 
+     'a' , 'b' , 'c' } ; 
+         byte [ ] content2 = { 
+     'd' , 'e' , 'f' } ; 
+         String sha1str = "STR" ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) ) ; 
+assertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( "STR" ) ) ; 
+assertFalse( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . isEmpty ( ) ) ; 
+assertNotEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content1 , content1 ) ) ; 
+assertEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content1 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) ) ; 
+assertEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content1 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content1 ) ) ; 
+assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) ) ; 
+assertNotNull( WARCRecordFormat . getDigestSha1 ( content2 , content1 ) ) ; 
+assertTrue( WARCRecordFormat . getDigestSha1 ( content2
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",sha1str,WARCRecordFormat.getDigestSha1(content1,content2)); ===
+0.837 - assertNotNull( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.809 - assertNotNull( WARCRecordFormat . getDigestSha1 ( content2 , content1 ) )
+0.805 - assertFalse( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . isEmpty ( ) )
+0.775 - assertEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.751 - assertNotEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content1 , content1 ) )
+0.744 - assertTrue( WARCRecordFormat . getDigestSha1 ( content1 , content2 ) . startsWith ( "STR" ) )
+0.740 - assertNotEquals( "STRc4e7b9d348b07c050b732b560d4d482b" , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) )
+0.740 - assertTrue( WARCRecordFormat . getDigestSha1 ( content2
+0.701 - assertEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.692 - assertEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content1 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content1 ) )
+0.691 - assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content1 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.691 - assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content1 , content2 ) )
+0.673 - assertNotEquals( "STR" + base32 . encodeAsString ( DigestUtils . getSha1Digest ( ) . digest ( content2 ) ) , WARCRecordFormat . getDigestSha1 ( content2 , content1 ) )

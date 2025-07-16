@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinition {\n@Override\npublic Object createValue ( List < ? > params ) {\nif ( ! ( params . get ( 0 ) instanceof Map ) ) return null ;\nfinal Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params . get ( 0 ) ) ;\nfinal List < Object > result = new ArrayList < Object > ( mapParams . size ( ) ) ;\nfor ( final Object mapParam : mapParams ) {\nresult . add ( createSingleValue ( mapParam ) ) ;\n} return result ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OPropertyMapIndexDefinitionTest {\n@Test\npublic void testCreateValueWrongParameter ( ) {\nfinal Object result = propertyIndexByKey . createValue ( Collections . singletonList ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNull(result);\nAssert.assertTrue(result instanceof List);\nAssert.assertEquals(0, ((List) result).size());\nAssert.assertTrue(((List) result).isEmpty());\nAssert.assertNotEquals(1, ((List) result).size());\nAssert.assertNotEquals(\"test\", result);\nAssert.assertNotEquals(Collections.emptyList(), result);\nAssert.assertNotEquals(Collections.singletonList(\"STR\"), result);\nAssert.assertNotEquals(Collections.singletonList(\"STR\").get(0), result);\nAssert.assertNotEquals(Collections.singletonList(\"STR\").size(), ((List) result).size());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").getClass(), result.getClass());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").getClass(), ((List) result).getClass());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").hashCode(), result.hashCode());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").hashCode(), ((List) result).hashCode());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").toString(), result.toString());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").toString(), ((List) result).toString());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").isEmpty(), ((List) result).isEmpty());\nAssert.assertNotEquals(Collections.singletonList(\"STR\").contains(\"STR\"), ((List) result).contains(\"STR\"));\nAssert.assertNotEquals(Collections.singletonList(\"STR\").containsAll(Collections.singletonList(\"STR\")), ((List) result).containsAll(Collections.singletonList(\"STR\")));\nAssert.assertNotEquals(Collections.singletonList(\"STR\").equals(result), ((List) result).equals(Collections.singletonList(\"STR\")));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.708,
+        0.6,
+        0.586,
+        0.582,
+        0.556,
+        0.554,
+        0.486,
+        0.444,
+        0.375,
+        0.375,
+        0.375,
+        0.375,
+        0.353,
+        0.346,
+        0.346,
+        0.346,
+        0.316,
+        0.261,
+        0.207
+    ],
+    "ground_truth": "Assert.assertNull(result);"
+}

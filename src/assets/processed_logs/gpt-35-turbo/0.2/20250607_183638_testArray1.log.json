@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelper {\npublic void endArray ( ) throws IOException {\ncheckInArray ( ) ;\nstate . pop ( ) ;\nout . write ( \"STR\" ) ;\nafterValueWritten ( ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class AJsonSerHelperTest {\n@Test\npublic void testArray1 ( ) throws IOException {\nfinal ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ;\nfinal AJsonSerHelper ser = new AJsonSerHelper ( baos ) ;\nser . startArray ( ) ;\nser . writeBooleanLiteral ( true ) ;\nser . endArray ( ) ;\nfinal String result = new String ( baos . toByteArray ( ) , \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"[true]\", result);\nassertTrue(result.contains(\"true\"));\nassertFalse(result.contains(\"false\"));\nassertTrue(result.startsWith(\"[\"));\nassertTrue(result.endsWith(\"]\"));\nassertEquals(1, result.split(\",\").length);\nassertTrue(result.contains(\"STR\"));\nassertFalse(result.isEmpty());\nassertEquals(9, result.length());\nassertNotNull(result);\nassertNotEquals(\"\", result);\nassertTrue(result.matches(\"\\\\[true\\\\]\"));\nassertFalse(result.contains(\"null\"));\nassertTrue(result.contains(\"[\"));\nassertTrue(result.contains(\"]\"));\nassertTrue(result.contains(\"true\"));\nassertFalse(result.contains(\"false\"));\nassertFalse(result.contains(\"null\"));\nassertTrue(result.contains(\"STR\"));\nassertEquals(1, result.split(\",\").length);\nassertFalse(result.isEmpty());\n====================\n\n",
+    "scores": [
+        0.885,
+        0.836,
+        0.737,
+        0.681,
+        0.636,
+        0.636,
+        0.618,
+        0.618,
+        0.548,
+        0.548,
+        0.54,
+        0.54,
+        0.533,
+        0.533,
+        0.517,
+        0.517,
+        0.517,
+        0.5,
+        0.492,
+        0.492,
+        0.455
+    ],
+    "ground_truth": "assertEquals(\"STR\",result);"
+}

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trung.InMemoryJavaCompiler;\n\npublic class InMemoryJavaCompiler {\npublic Class < ? > compile ( String className , String sourceCode ) throws Exception {\nreturn addSource ( className , sourceCode ) . compileAll ( ) . get ( className ) ;\n}\n}\n\npackage trung.InMemoryJavaCompiler;\n\npublic class InMemoryJavaCompilerTest {\n@Test\npublic void compile_WhenIgnoreWarnings ( ) throws Exception {\nStringBuffer sourceCode = new StringBuffer ( ) ;\nsourceCode . append ( \"STR\" ) ;\nsourceCode . append ( \"STR\" ) ;\nsourceCode . append ( \"STR\" ) ;\nsourceCode . append ( \"STR\" ) ;\nClass < ? > helloClass = InMemoryJavaCompiler . newInstance ( ) . ignoreWarnings ( ) . compile ( \"STR\" , sourceCode . toString ( ) ) ;\nList < ? > res = ( List < ? > ) helloClass . getMethod ( \"STR\" ) . invoke ( helloClass . newInstance ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertTrue(res instanceof List);\nassertEquals(4, res.size());\nassertEquals(\"ExpectedValue1\", res.get(0));\nassertEquals(\"ExpectedValue2\", res.get(1));\nassertEquals(\"ExpectedValue3\", res.get(2));\nassertEquals(\"ExpectedValue4\", res.get(3));\nassertTrue(res.contains(\"ExpectedValue1\"));\nassertTrue(res.contains(\"ExpectedValue2\"));\nassertTrue(res.contains(\"ExpectedValue3\"));\nassertTrue(res.contains(\"ExpectedValue4\"));\nassertFalse(res.contains(\"UnexpectedValue\"));\nassertEquals(\"ExpectedType\", res.get(0).getClass().getSimpleName());\nassertEquals(\"ExpectedType\", res.get(1).getClass().getSimpleName());\nassertEquals(\"ExpectedType\", res.get(2).getClass().getSimpleName());\nassertEquals(\"ExpectedType\", res.get(3).getClass().getSimpleName());\nassertTrue(res.stream().allMatch(item -> item instanceof ExpectedType));\nassertEquals(\"ExpectedString\", ((ExpectedType) res.get(0)).getSomeProperty());\nassertNotEquals(\"UnexpectedString\", ((ExpectedType) res.get(1)).getSomeProperty());\nassertTrue(res.size() > 0);\nassertFalse(res.isEmpty());\nassertSame(res.get(0), res.get(0));\n```\n====================\n\n",
+    "scores": [
+        0.962,
+        0.76,
+        0.692,
+        0.657,
+        0.657,
+        0.657,
+        0.657,
+        0.644,
+        0.522,
+        0.522,
+        0.522,
+        0.522,
+        0.514,
+        0.509,
+        0.5,
+        0.471,
+        0.471,
+        0.471,
+        0.471,
+        0.436,
+        0.415,
+        0.366,
+        0.0
+    ],
+    "ground_truth": "Assert.assertEquals(0,res.size());"
+}

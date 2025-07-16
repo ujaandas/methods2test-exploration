@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupport {
+    < T > T getProperty ( String name ) ;
+}
+
+package orientechnologies.orientdb.server;
+
+public class RemoteQuerySupportTest {
+    @Test
+     public void testQueryEmbedded ( ) {
+         ODocument doc = new ODocument ( "STR" ) ; 
+         doc . setProperty ( "STR" , "STR" ) ; 
+         ODocument emb = new ODocument ( ) ; 
+         emb . setProperty ( "STR" , "STR" ) ; 
+         doc . setProperty ( "STR" , emb , OType . EMBEDDED ) ; 
+         session . save ( doc ) ; 
+         OResultSet res = session . query ( "STR" ) ; 
+         OResult item = res . next ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+1. assertNotNull(item)
+2. assertEquals("STR", item.getProperty("STR"))
+3. assertTrue(item.getProperty("STR") instanceof ODocument)
+4. assertEquals("STR", ((ODocument)item.getProperty("STR")).getProperty("STR"))
+5. assertEquals(1, res.stream().count())
+6. assertTrue(res.hasNext())
+7. assertFalse(res.isEmpty())
+8. assertNotNull(res.getExecutionPlan())
+9. assertNotNull(res.getExecutionPlan().getMetadata())
+10. assertEquals(1, res.getExecutionPlan().getMetadata().getResultCount())
+11. assertNotNull(res.getExecutionPlan().getMetadata().getExecutionTime())
+12. assertNotNull(res.getExecutionPlan().getMetadata().getFetchTime())
+13. assertNotNull(res.getExecutionPlan().getMetadata().getTotalTime())
+14. assertNotNull(res.getExecutionPlan().getMetadata().getPlan())
+15. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps())
+16. assertEquals(1, res.getExecutionPlan().getMetadata().getPlan().getSteps().size())
+17. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0))
+18. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getOperation())
+19. assertEquals("QueryExecutionStep", res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getOperation())
+20. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getDescription())
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(item.getProperty("STR")); ===
+0.035 - Assertions:
+1. assertNotNull(item)
+2. assertEquals("STR", item.getProperty("STR"))
+3. assertTrue(item.getProperty("STR") instanceof ODocument)
+4. assertEquals("STR", ((ODocument)item.getProperty("STR")).getProperty("STR"))
+5. assertEquals(1, res.stream().count())
+6. assertTrue(res.hasNext())
+7. assertFalse(res.isEmpty())
+8. assertNotNull(res.getExecutionPlan())
+9. assertNotNull(res.getExecutionPlan().getMetadata())
+10. assertEquals(1, res.getExecutionPlan().getMetadata().getResultCount())
+11. assertNotNull(res.getExecutionPlan().getMetadata().getExecutionTime())
+12. assertNotNull(res.getExecutionPlan().getMetadata().getFetchTime())
+13. assertNotNull(res.getExecutionPlan().getMetadata().getTotalTime())
+14. assertNotNull(res.getExecutionPlan().getMetadata().getPlan())
+15. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps())
+16. assertEquals(1, res.getExecutionPlan().getMetadata().getPlan().getSteps().size())
+17. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0))
+18. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getOperation())
+19. assertEquals("QueryExecutionStep", res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getOperation())
+20. assertNotNull(res.getExecutionPlan().getMetadata().getPlan().getSteps().get(0).getDescription())

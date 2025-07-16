@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraph {\npublic Collection < E > edges ( ) {\nreturn new ArrayIterable < > ( edges ) ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ADiGraphTest {\n@Test\npublic void testNodesWithoutEdges ( ) {\nfinal ADiGraph < String , ASimpleEdge < String > > graph = ADiGraph . create ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" ) , Arrays . asList ( edge ( \"STR\" , \"STR\" ) ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(graph);\nassertEquals(3, graph.nodes().size());\nassertTrue(graph.nodes().contains(\"STR\"));\nassertFalse(graph.edges().iterator().hasNext());\nassertEquals(0, graph.inDegree(\"STR\"));\nassertEquals(0, graph.outDegree(\"STR\"));\nassertTrue(graph.isEmpty());\nassertFalse(graph.containsEdge(\"STR\", \"STR\"));\nassertFalse(graph.containsNode(\"NON_EXISTENT\"));\nassertEquals(0, graph.numberOfEdges());\nassertEquals(3, graph.numberOfNodes());\nassertTrue(graph.edges().isEmpty());\nassertTrue(graph.nodes().stream().allMatch(node -> graph.inDegree(node) == 0));\nassertTrue(graph.nodes().stream().allMatch(node -> graph.outDegree(node) == 0));\nassertFalse(graph.hasPath(\"STR\", \"STR\"));\nassertFalse(graph.hasCycle());\nassertTrue(graph.getAdjacentNodes(\"STR\").isEmpty());\nassertTrue(graph.getIncomingEdges(\"STR\").isEmpty());\nassertTrue(graph.getOutgoingEdges(\"STR\").isEmpty());\nassertEquals(0, graph.getEdgeCount(\"STR\", \"STR\"));\nassertEquals(0, graph.getNodeCount());\nassertTrue(graph.getEdges().isEmpty());\n```\n====================\n\n",
+    "scores": [
+        0.681,
+        0.66,
+        0.659,
+        0.652,
+        0.635,
+        0.614,
+        0.598,
+        0.594,
+        0.594,
+        0.591,
+        0.554,
+        0.545,
+        0.536,
+        0.535,
+        0.506,
+        0.495,
+        0.483,
+        0.468,
+        0.464,
+        0.456,
+        0.442,
+        0.359,
+        0.0
+    ],
+    "ground_truth": "assertTrue(eqSet(graph.edges(),edge(\"STR\",\"STR\")));"
+}

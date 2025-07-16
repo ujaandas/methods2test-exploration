@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage xmlet.XsdParser;\n\npublic class Issues {\npublic Stream < XsdSchema > getResultXsdSchemas ( ) {\nreturn parseElements . values ( ) . stream ( ) . flatMap ( List :: stream ) . filter ( element -> element . getElement ( ) instanceof XsdSchema ) . map ( element -> ( XsdSchema ) element . getElement ( ) ) ;\n}\n}\n\npackage xmlet.XsdParser;\n\npublic class IssuesTest {\n@Test\npublic void testIssue23 ( ) {\nXsdParser parser = new XsdParser ( getFilePath ( \"STR\" ) ) ;\nList < XsdSchema > schemas = parser . getResultXsdSchemas ( ) . collect ( Collectors . toList ( ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assertions:\n\n1. assertNotNull(schemas);\n2. assertFalse(schemas.isEmpty());\n3. assertEquals(3, schemas.size());\n4. assertTrue(schemas.stream().allMatch(schema -> schema instanceof XsdSchema));\n5. assertTrue(schemas.stream().allMatch(schema -> schema.getNamespace().equals(\"http://www.w3.org/2001/XMLSchema\")));\n6. assertTrue(schemas.stream().allMatch(schema -> schema.getElements().size() > 0));\n7. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributes().size() > 0));\n8. assertTrue(schemas.stream().allMatch(schema -> schema.getComplexTypes().size() > 0));\n9. assertTrue(schemas.stream().allMatch(schema -> schema.getSimpleTypes().size() > 0));\n10. assertTrue(schemas.stream().allMatch(schema -> schema.getImports().size() == 0));\n11. assertTrue(schemas.stream().allMatch(schema -> schema.getIncludes().size() == 0));\n12. assertTrue(schemas.stream().allMatch(schema -> schema.getRedefines().size() == 0));\n13. assertTrue(schemas.stream().allMatch(schema -> schema.getAnnotations().size() == 0));\n14. assertTrue(schemas.stream().allMatch(schema -> schema.getNotations().size() == 0));\n15. assertTrue(schemas.stream().allMatch(schema -> schema.getGroups().size() == 0));\n16. assertTrue(schemas.stream().allMatch(schema -> schema.getAttributesGroups().size() == 0));\n17. assertTrue(schemas.stream().allMatch(schema -> schema.getAny().size() == 0));\n18. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherAttributes().size() == 0));\n19. assertTrue(schemas.stream().allMatch(schema -> schema.getOtherElements().size() == 0));\n20. assertTrue(schemas.stream().allMatch(schema -> schema.getDocumentation().isEmpty());\n====================\n\n",
+    "scores": [
+        0.417,
+        0.417,
+        0.34,
+        0.34,
+        0.333,
+        0.333,
+        0.333,
+        0.33,
+        0.32,
+        0.319,
+        0.316,
+        0.311,
+        0.309,
+        0.309,
+        0.309,
+        0.308,
+        0.306,
+        0.303,
+        0.297,
+        0.248
+    ],
+    "ground_truth": "Assert.assertTrue(true);"
+}

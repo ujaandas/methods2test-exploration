@@ -1,0 +1,77 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class StatementResult {
+    public ArrayList < Statement > getStatements ( ) { 
+    return statements ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class StatementResultTest {
+    @Test
+     public void testSetStatements ( ) {
+         ArrayList < Statement > expected = statements ; 
+         Statement s = new Statement ( ) ; 
+         expected . add ( s ) ; 
+         statementResult . setStatements ( expected ) ; 
+         ArrayList < Statement > actual = statementResult . getStatements ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(actual);
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.containsAll(expected));
+assertTrue(expected.containsAll(actual));
+assertEquals(expected.get(0), actual.get(0));
+assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1));
+assertSame(expected.get(0), actual.get(0));
+assertSame(expected.get(expected.size() - 1), actual.get(actual.size() - 1));
+assertEquals(expected, actual);
+assertNotSame(expected, actual);
+assertTrue(actual.isEmpty() == false);
+assertFalse(actual.isEmpty());
+assertEquals(expected.get(1), actual.get(1));
+assertTrue(actual.indexOf(expected.get(0)) >= 0);
+assertTrue(actual.indexOf(expected.get(expected.size() - 1)) >= 0);
+assertNotEquals(expected.get(0), new Statement());
+assertEquals(expected.size(), actual.size());
+assertTrue(actual.size() > 0);
+assertTrue(expected.size() > 0);
+assertTrue(actual.contains(s));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+0.840 - ```java
+assertNotNull(actual)
+0.667 - assertNotSame(expected, actual)
+0.625 - assertTrue(actual.size() > 0)
+0.600 - assertFalse(actual.isEmpty())
+0.590 - assertTrue(expected.containsAll(actual))
+0.588 - assertTrue(actual.contains(s))
+0.560 - assertEquals(expected, actual)
+0.536 - assertTrue(actual.isEmpty() == false)
+0.492 - assertTrue(actual.containsAll(expected))
+0.484 - assertSame(expected.get(0), actual.get(0))
+0.469 - assertEquals(expected.size(), actual.size())
+0.469 - assertEquals(expected.get(0), actual.get(0))
+0.469 - assertEquals(expected.get(1), actual.get(1))
+0.469 - assertEquals(expected.size(), actual.size())
+0.448 - assertTrue(actual.indexOf(expected.get(0)) >= 0)
+0.440 - assertTrue(expected.size() > 0)
+0.382 - assertNotEquals(expected.get(0), new Statement())
+0.370 - assertSame(expected.get(expected.size() - 1), actual.get(actual.size() - 1))
+0.362 - assertEquals(expected.get(expected.size() - 1), actual.get(actual.size() - 1))
+0.361 - assertTrue(actual.indexOf(expected.get(expected.size() - 1)) >= 0)
+0.000 - ```

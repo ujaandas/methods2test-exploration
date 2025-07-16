@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawner {\npublic void awaitCompletion ( ) {\nfor ( Thread thread : threads ) {\ntry {\nthread . join ( ) ;\n} catch ( InterruptedException e ) {\nthrow rethrow ( e ) ;\n} } if ( caughtException != null ) {\nthrow rethrow ( caughtException ) ;\n} }\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ThreadSpawnerTest {\n@Test\npublic void testThreadSpawnerException_reportException ( ) {\nFile exceptionFile = new File ( getUserDir ( ) , \"STR\" ) ;\nThreadSpawner spawner = new ThreadSpawner ( \"STR\" ) ;\nspawner . spawn ( new Runnable ( ) {\n@Override\npublic void run ( ) {\nthrow new CommandLineExitException ( \"STR\" ) ;\n} } ) ;\nspawner . awaitCompletion ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(spawner);\nassertEquals(1, spawner.getThreadCount());\nassertTrue(spawner.hasCaughtException());\nassertTrue(spawner.getCaughtException() instanceof CommandLineExitException);\nassertEquals(\"STR\", spawner.getCaughtException().getMessage());\nassertTrue(spawner.isCompleted());\nassertFalse(spawner.isRunning());\nassertTrue(spawner.getThreads().isEmpty());\nassertEquals(\"STR\", spawner.getName());\nassertNotEquals(0, spawner.getExecutionTime());\nassertTrue(spawner.getExecutionTime() > 0);\nassertFalse(spawner.isInterrupted());\nassertTrue(spawner.getSpawnedThreads().contains(spawner.getThreads().get(0)));\nassertTrue(spawner.getThreads().get(0).isAlive());\nassertFalse(spawner.getThreads().get(0).isInterrupted());\nassertEquals(Thread.State.TERMINATED, spawner.getThreads().get(0).getState());\nassertNotNull(spawner.getThreadGroup());\nassertEquals(\"ThreadSpawnerGroup\", spawner.getThreadGroup().getName());\nassertTrue(spawner.getThreadGroup().activeCount() > 0);\nassertTrue(spawner.getThreadGroup().activeCount() <= spawner.getThreadCount());\nassertFalse(spawner.getThreadGroup().isDestroyed());\n```\n====================\n\n",
+    "scores": [
+        0.622,
+        0.622,
+        0.567,
+        0.505,
+        0.5,
+        0.5,
+        0.488,
+        0.458,
+        0.455,
+        0.436,
+        0.43,
+        0.424,
+        0.4,
+        0.378,
+        0.366,
+        0.356,
+        0.356,
+        0.351,
+        0.327,
+        0.311,
+        0.25,
+        0.0
+    ],
+    "ground_truth": "assertTrue(exceptionFile.exists());"
+}

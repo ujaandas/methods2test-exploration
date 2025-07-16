@@ -1,0 +1,73 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecution {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class OMatchStatementExecutionTest {
+    @Test
+     public void testOptional3 ( ) throws Exception {
+         List < ODocument > qResult = db . command ( new OCommandSQL ( "STR" + "STR" + "STR" + "STR" + "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(qResult);
+assertFalse(qResult.isEmpty());
+assertEquals(expectedSize, qResult.size());
+assertTrue(qResult.get(0) instanceof ODocument);
+assertEquals(expectedValue1, qResult.get(0).field("fieldName1"));
+assertEquals(expectedValue2, qResult.get(1).field("fieldName2"));
+assertEquals(expectedValue3, qResult.get(2).field("fieldName3"));
+assertNotEquals(unexpectedValue, qResult.get(3).field("fieldName4"));
+assertTrue(qResult.stream().allMatch(doc -> doc.field("fieldName5") != null));
+assertEquals(expectedFieldCount, qResult.get(0).fields().size());
+assertTrue(qResult.stream().anyMatch(doc -> doc.field("fieldName6").equals(expectedValue6)));
+assertFalse(qResult.stream().anyMatch(doc -> doc.field("fieldName7").equals(unexpectedValue7)));
+assertEquals(expectedType, qResult.get(0).getClass());
+assertNotNull(qResult.get(0).getIdentity());
+assertTrue(qResult.get(0).getIdentity().isValid());
+assertEquals(expectedString, qResult.get(0).field("fieldName8").toString());
+assertTrue(qResult.get(0).field("fieldName9") instanceof List);
+assertEquals(expectedListSize, ((List<?>) qResult.get(0).field("fieldName9")).size());
+assertTrue(qResult.get(0).field("fieldName10").toString().contains(expectedSubstring));
+assertEquals(expectedDate, qResult.get(0).field("fieldName11"));
+assertNotNull(qResult.get(0).field("fieldName12"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,qResult.size()); ===
+0.817 - assertEquals(expectedSize, qResult.size())
+0.733 - assertFalse(qResult.isEmpty())
+0.634 - assertEquals(expectedType, qResult.get(0).getClass())
+0.624 - assertEquals(expectedFieldCount, qResult.get(0).fields().size())
+0.602 - assertEquals(expectedValue1, qResult.get(0).field("fieldName1"))
+0.587 - assertEquals(expectedDate, qResult.get(0).field("fieldName11"))
+0.581 - assertEquals(expectedValue2, qResult.get(1).field("fieldName2"))
+0.581 - assertEquals(expectedValue3, qResult.get(2).field("fieldName3"))
+0.575 - assertNotNull(qResult.get(0).getIdentity())
+0.567 - ```java
+assertNotNull(qResult)
+0.557 - assertNotEquals(unexpectedValue, qResult.get(3).field("fieldName4"))
+0.550 - assertNotNull(qResult.get(0).field("fieldName12"))
+0.525 - assertTrue(qResult.get(0).getIdentity().isValid())
+0.519 - assertEquals(expectedString, qResult.get(0).field("fieldName8").toString())
+0.513 - assertEquals(expectedListSize, ((List<?>) qResult.get(0).field("fieldName9")).size())
+0.507 - assertTrue(qResult.get(0) instanceof ODocument)
+0.422 - assertTrue(qResult.get(0).field("fieldName9") instanceof List)
+0.408 - assertTrue(qResult.stream().allMatch(doc -> doc.field("fieldName5") != null))
+0.374 - assertFalse(qResult.stream().anyMatch(doc -> doc.field("fieldName7").equals(unexpectedValue7)))
+0.362 - assertTrue(qResult.get(0).field("fieldName10").toString().contains(expectedSubstring))
+0.350 - assertTrue(qResult.stream().anyMatch(doc -> doc.field("fieldName6").equals(expectedValue6)))
+0.000 - ```

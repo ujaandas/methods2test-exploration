@@ -1,0 +1,33 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollections {\npublic List < OMultiValueChangeEvent < K , V > > getMultiValueChangeEvents ( ) {\nreturn Collections . unmodifiableList ( multiValueChangeEvents ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODocumentTrackingNestedCollectionsTest {\n@Test\npublic void testChangesValuesNestedTrackingSet ( ) {\nODocument document = new ODocument ( ) ;\nSet objects = new HashSet ( ) ;\ndocument . field ( \"STR\" , objects ) ;\nSet subObjects = new HashSet ( ) ;\nobjects . add ( subObjects ) ;\nODocument nestedDoc = new ODocument ( ) ;\nsubObjects . add ( nestedDoc ) ;\ndocument . save ( db . getClusterNameById ( db . getDefaultClusterId ( ) ) ) ;\nobjects = document . field ( \"STR\" ) ;\nsubObjects = ( Set ) objects . iterator ( ) . next ( ) ;\nsubObjects . add ( \"STR\" ) ;\nOMultiValueChangeTimeLine < Object , Object > timeLine = document . getCollectionTimeLine ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(1, timeLine.size());\nassertTrue(timeLine.getFirst().isAdded());\nassertFalse(timeLine.getFirst().isRemoved());\nassertFalse(timeLine.getFirst().isUpdated());\nassertEquals(1, timeLine.getFirst().getChanges().size());\nassertEquals(\"STR\", timeLine.getFirst().getChanges().get(0).getValue());\nassertEquals(0, timeLine.getSecond().getChanges().size());\nassertTrue(timeLine.getSecond().isAdded());\nassertFalse(timeLine.getSecond().isRemoved());\nassertFalse(timeLine.getSecond().isUpdated());\nassertTrue(timeLine.getThird().isAdded());\nassertFalse(timeLine.getThird().isRemoved());\nassertFalse(timeLine.getThird().isUpdated());\nassertEquals(1, timeLine.getThird().getChanges().size());\nassertEquals(\"STR\", timeLine.getThird().getChanges().get(0).getValue());\nassertNotNull(timeLine.getFourth());\nassertFalse(timeLine.getFourth().isAdded());\nassertTrue(timeLine.getFourth().isRemoved());\nassertFalse(timeLine.getFourth().isUpdated());\nassertEquals(1, timeLine.getFourth().getChanges().size());\nassertEquals(\"STR\", timeLine.getFourth().getChanges().get(0).getValue());\nassertTrue(timeLine.getFifth().isAdded());\nassertFalse(timeLine.getFifth().isRemoved());\nassertFalse(timeLine.getFifth().isUpdated());\nassertEquals(1, timeLine.getFifth().getChanges().size());\nassertEquals(\"STR\", timeLine.getFifth().getChanges().get(0).getValue());\n====================\n\n",
+    "scores": [
+        0.817,
+        0.807,
+        0.807,
+        0.789,
+        0.765,
+        0.689,
+        0.662,
+        0.651,
+        0.651,
+        0.647,
+        0.636,
+        0.635,
+        0.621,
+        0.621,
+        0.615,
+        0.615,
+        0.602,
+        0.602,
+        0.602,
+        0.602,
+        0.602,
+        0.6,
+        0.594,
+        0.58,
+        0.58,
+        0.574
+    ],
+    "ground_truth": "assertEquals(1,timeLine.getMultiValueChangeEvents().size());"
+}

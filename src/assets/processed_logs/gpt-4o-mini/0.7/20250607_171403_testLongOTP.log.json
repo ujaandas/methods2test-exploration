@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic static boolean isValidOTPFormat ( String otp ) {\nif ( otp == null ) {\nreturn false ;\n} int len = otp . length ( ) ;\nfor ( char c : otp . toCharArray ( ) ) {\nif ( c < 0x20 || c > 0x7E ) {\nreturn false ;\n} } return OTP_MIN_LEN <= len && len <= OTP_MAX_LEN ;\n}\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testLongOTP ( ) {\nString otp = \"STR\" ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertTrue(YubicoClient.isValidOTPFormat(otp));\nassertFalse(YubicoClient.isValidOTPFormat(null));\nassertFalse(YubicoClient.isValidOTPFormat(\"\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"   \"));\nassertFalse(YubicoClient.isValidOTPFormat(\"invalid@otp\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"12345678901234567890\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"123456789012345678901\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"validOTP123\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"short\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"!@#$%^&*()_+\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"longinvalidotpwithspecialcharacters!@#\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"A1B2C3D4E5F6G7H8I9J0\"));\nassertFalse(YubicoClient.isValidOTPFormat(\" \"));\nassertFalse(YubicoClient.isValidOTPFormat(\"too_long_otp_exceeding_max_length_1234567890\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"1234567890-=\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"OTP123456\"));\nassertFalse(YubicoClient.isValidOTPFormat(\"abcde\\x00fg\"));\nassertTrue(YubicoClient.isValidOTPFormat(\"OTP_Valid123\"));\n```\n====================\n\n",
+    "scores": [
+        0.946,
+        0.946,
+        0.946,
+        0.939,
+        0.926,
+        0.904,
+        0.851,
+        0.846,
+        0.838,
+        0.838,
+        0.792,
+        0.777,
+        0.772,
+        0.769,
+        0.718,
+        0.714,
+        0.714,
+        0.686,
+        0.583,
+        0.0
+    ],
+    "ground_truth": "assertFalse(YubicoClient.isValidOTPFormat(otp));"
+}

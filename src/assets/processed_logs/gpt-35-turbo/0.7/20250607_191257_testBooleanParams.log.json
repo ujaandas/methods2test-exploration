@@ -1,0 +1,25 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelect {\n< RET > RET execute ( Object ... iArgs ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLSelectTest {\n@Test\npublic void testBooleanParams ( ) {\nList < ODocument > qResult = db . command ( new OCommandSQL ( \"STR\" ) ) . execute ( \"STR\" , true ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(\"Expected query result size to be 1\", 1, qResult.size());\nAssert.assertTrue(\"Expected query result to contain at least one document\", qResult.size() >= 1);\nAssert.assertTrue(\"Expected document to be of type ODocument\", qResult.get(0) instanceof ODocument);\nAssert.assertTrue(\"Expected document to have a property 'STR'\", qResult.get(0).containsField(\"STR\"));\nAssert.assertEquals(\"Expected value of 'STR' property to be 'STR'\", \"STR\", qResult.get(0).field(\"STR\"));\nAssert.assertTrue(\"Expected document to have a property 'booleanParam'\", qResult.get(0).containsField(\"booleanParam\"));\nAssert.assertEquals(\"Expected value of 'booleanParam' property to be true\", true, qResult.get(0).field(\"booleanParam\"));\nAssert.assertTrue(\"Expected query result to not be empty\", !qResult.isEmpty());\nAssert.assertNotNull(\"Expected query result to not be null\", qResult);\nAssert.assertEquals(\"Expected query result size to be greater than 0\", true, qResult.size() > 0);\nAssert.assertTrue(\"Expected query result to contain at least one element\", qResult.size() >= 1);\nAssert.assertTrue(\"Expected document to have properties 'STR' and 'booleanParam'\", qResult.get(0).containsField(\"STR\") && qResult.get(0).containsField(\"booleanParam\"));\nAssert.assertTrue(\"Expected document to have properties 'STR' and 'booleanParam'\", qResult.get(0).containsFields(\"STR\", \"booleanParam\"));\nAssert.assertTrue(\"Expected document to have properties 'STR' and 'booleanParam'\", qResult.get(0).containsAllFields(Arrays.asList(\"STR\", \"booleanParam\")));\nAssert.assertTrue(\"Expected query result to contain exactly one document\", qResult.size() == 1);\nAssert.assertTrue(\"Expected query result to contain only ODocument objects\", qResult.stream().allMatch(doc -> doc instanceof ODocument));\nAssert.assertTrue(\"Expected document to have properties 'STR' and 'booleanParam'\", qResult.get(0).containsAllFields(Arrays.asList(\"STR\", \"booleanParam\")));\nAssert.assertEquals(\"Expected value of 'booleanParam' property to be true\", true, qResult.get(0).field(\"booleanParam\"));\n====================\n\n",
+    "scores": [
+        0.615,
+        0.523,
+        0.523,
+        0.519,
+        0.5,
+        0.468,
+        0.444,
+        0.424,
+        0.397,
+        0.391,
+        0.391,
+        0.358,
+        0.34,
+        0.336,
+        0.32,
+        0.286,
+        0.286,
+        0.267
+    ],
+    "ground_truth": "assertEquals(qResult.size(),1);"
+}

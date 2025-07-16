@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public OType fieldType ( final String iFieldName ) { 
+    checkForLoading ( ) ; 
+    checkForFields ( iFieldName ) ; 
+    ODocumentEntry entry = _fields . get ( iFieldName ) ; 
+    if ( entry != null ) return entry . type ; 
+    return null ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testKeepFieldTypeSerialization ( ) throws Exception {
+         ODocument doc = new ODocument ( ) ; 
+         doc . field ( "STR" , 10 , OType . INTEGER ) ; 
+         doc . field ( "STR" , new ORecordId ( 1 , 2 ) , OType . LINK ) ; 
+         doc . field ( "STR" , 20 , OType . STRING ) ; 
+         doc . field ( "STR" , new byte [ ] { 
+     30 } , OType . BINARY ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"));
+Assert.assertEquals(OType.LINK, doc.fieldType("STR"));
+Assert.assertEquals(OType.STRING, doc.fieldType("STR"));
+Assert.assertEquals(OType.BINARY, doc.fieldType("STR"));
+
+Assert.assertNull(doc.fieldType("NON_EXISTENT_FIELD"));
+
+doc.field("NUM", 100, OType.INTEGER);
+Assert.assertEquals(OType.INTEGER, doc.fieldType("NUM"));
+
+doc.removeField("STR");
+Assert.assertNull(doc.fieldType("STR"));
+
+doc.field("BOOL", true, OType.BOOLEAN);
+Assert.assertEquals(OType.BOOLEAN, doc.fieldType("BOOL"));
+
+doc.field("DECIMAL", 10.5, OType.DECIMAL);
+Assert.assertEquals(OType.DECIMAL, doc.fieldType("DECIMAL"));
+
+doc.field("DATE", new Date(), OType.DATE);
+Assert.assertEquals(OType.DATE, doc.fieldType("DATE"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(doc.fieldType("STR"),OType.INTEGER); ===
+0.750 - Assert.assertNull(doc.fieldType("STR"))
+0.731 - Assert.assertEquals(OType.LINK, doc.fieldType("STR"))
+0.716 - Assert.assertEquals(OType.STRING, doc.fieldType("STR"))
+0.716 - Assert.assertEquals(OType.BINARY, doc.fieldType("STR"))
+0.708 - Assert.assertEquals(OType.INTEGER, doc.fieldType("STR"))
+0.681 - Assert.assertEquals(OType.DATE, doc.fieldType("DATE"))
+0.659 - doc.field("NUM", 100, OType.INTEGER)
+0.646 - Assert.assertEquals(OType.INTEGER, doc.fieldType("NUM"))
+0.639 - Assert.assertEquals(OType.BOOLEAN, doc.fieldType("BOOL"))
+0.620 - Assert.assertEquals(OType.DECIMAL, doc.fieldType("DECIMAL"))
+0.611 - Assert.assertNull(doc.fieldType("NON_EXISTENT_FIELD"))
+0.535 - doc.field("DATE", new Date(), OType.DATE)
+0.500 - doc.field("BOOL", true, OType.BOOLEAN)
+0.483 - doc.field("DECIMAL", 10.5, OType.DECIMAL)
+0.429 - doc.removeField("STR")

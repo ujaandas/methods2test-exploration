@@ -1,0 +1,74 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelect {
+    @Override
+     public < RET extends List < ? > > RET query ( OQuery < ? > iCommand , Object ... iArgs ) { 
+     checkOpenness ( ) ; 
+     return internal . query ( iCommand , iArgs ) ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLSelectTest {
+    @Test
+     public void testParamWithMatches ( ) {
+         Map < String , Object > params = new HashMap < String , Object > ( ) ; 
+         params . put ( "STR" , "STR" ) ; 
+         OSQLSynchQuery sql = new OSQLSynchQuery ( "STR" ) ; 
+         List < ODocument > results = db . query ( sql , params ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(1, results.size());
+assertTrue(results.get(0).field("name").equals("John Doe"));
+assertFalse(results.isEmpty());
+assertNotNull(results.get(0));
+assertEquals("STR", params.get("STR"));
+assertTrue(results.get(0).field("age") > 18);
+assertEquals(0, results.get(0).field("status"));
+assertNotNull(results);
+assertTrue(results.get(0).field("city").equals("New York"));
+assertEquals(1, results.get(0).field("id"));
+assertTrue(results.get(0).field("gender").equals("Male"));
+assertFalse(results.isEmpty());
+assertNotNull(params);
+assertEquals("STR", results.get(0).field("name"));
+assertTrue(results.get(0).field("address").equals("123 Main St"));
+assertEquals(0, results.get(0).field("score"));
+assertTrue(results.get(0).field("email").equals("john.doe@example.com"));
+assertFalse(params.isEmpty());
+assertEquals("STR", results.get(0).field("type"));
+assertTrue(results.get(0).field("phone").equals("555-1234"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(results.size(),1); ===
+0.933 - assertEquals(1, results.size())
+0.733 - assertFalse(results.isEmpty())
+0.733 - assertFalse(results.isEmpty())
+0.722 - assertEquals(1, results.get(0).field("id"))
+0.712 - assertNotNull(results.get(0))
+0.667 - assertEquals("STR", results.get(0).field("name"))
+0.667 - assertEquals(0, results.get(0).field("score"))
+0.667 - assertEquals("STR", results.get(0).field("type"))
+0.654 - assertNotNull(results)
+0.632 - assertEquals(0, results.get(0).field("status"))
+0.611 - assertTrue(results.get(0).field("age") > 18)
+0.597 - assertEquals("STR", params.get("STR"))
+0.576 - assertFalse(params.isEmpty())
+0.460 - assertTrue(results.get(0).field("gender").equals("Male"))
+0.455 - assertTrue(results.get(0).field("name").equals("John Doe"))
+0.455 - assertTrue(results.get(0).field("city").equals("New York"))
+0.444 - assertTrue(results.get(0).field("phone").equals("555-1234"))
+0.430 - assertTrue(results.get(0).field("address").equals("123 Main St"))
+0.392 - assertNotNull(params)
+0.392 - assertTrue(results.get(0).field("email").equals("john.doe@example.com"))

@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class PuzzleState {
+    public PuzzleState ( Puzzle puzzle ) { 
+    this ( puzzle , new Stack < Direction > ( ) ) ; 
+    }
+}
+
+package TeachingKidsProgramming.TeachingKidsProgramming.Source.Java;
+
+public class PuzzleStateTest {
+    @Test
+     public void equal_even_with_different_history ( ) {
+         Stack < PuzzleState . Direction > history = new Stack < > ( ) ; 
+         history . add ( PuzzleState . Direction . Right ) ; 
+         PuzzleState a = new PuzzleState ( getPuzzle ( 3 ) , history ) ; 
+         PuzzleState b = new PuzzleState ( getPuzzle ( 3 ) ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(a);
+assertNotNull(b);
+assertNotSame(a, b);
+assertEquals(a.getPuzzle(), b.getPuzzle());
+assertEquals(a.getHistory().size(), b.getHistory().size());
+assertTrue(a.getHistory().contains(PuzzleState.Direction.Right));
+assertFalse(b.getHistory().contains(PuzzleState.Direction.Right));
+assertEquals(a.getHistory().peek(), PuzzleState.Direction.Right);
+assertTrue(a.equals(b));
+assertTrue(b.equals(a));
+assertEquals(a.hashCode(), b.hashCode());
+assertNotEquals(a.toString(), b.toString());
+assertTrue(a.getPuzzle().isEqual(b.getPuzzle()));
+assertFalse(a.getPuzzle().isEqual(new Puzzle()));
+assertTrue(a.getHistory().isEmpty() || b.getHistory().isEmpty());
+assertSame(a.getClass(), b.getClass());
+assertTrue(a instanceof PuzzleState);
+assertTrue(b instanceof PuzzleState);
+assertEquals(a.getHistory().getClass(), b.getHistory().getClass());
+assertNotEquals(a, null);
+assertNotEquals(b, null);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(a,b); ===
+0.800 - assertNotEquals(a, null)
+0.750 - assertNotEquals(b, null)
+0.700 - assertTrue(a.equals(b))
+0.700 - assertTrue(b.equals(a))
+0.686 - assertNotSame(a, b)
+0.667 - assertNotNull(b)
+0.607 - assertEquals(a.hashCode(), b.hashCode())
+0.586 - assertEquals(a.getPuzzle(), b.getPuzzle())
+0.576 - assertNotEquals(a.toString(), b.toString())
+0.537 - ```java
+assertNotNull(a)
+0.481 - assertSame(a.getClass(), b.getClass())
+0.459 - assertEquals(a.getHistory().size(), b.getHistory().size())
+0.431 - assertTrue(b instanceof PuzzleState)
+0.431 - assertTrue(a.getPuzzle().isEqual(b.getPuzzle()))
+0.415 - assertEquals(a.getHistory().getClass(), b.getHistory().getClass())
+0.406 - assertFalse(a.getPuzzle().isEqual(new Puzzle()))
+0.400 - assertEquals(a.getHistory().peek(), PuzzleState.Direction.Right)
+0.392 - assertTrue(a instanceof PuzzleState)
+0.296 - assertTrue(a.getHistory().contains(PuzzleState.Direction.Right))
+0.293 - assertFalse(b.getHistory().contains(PuzzleState.Direction.Right))
+0.278 - assertTrue(a.getHistory().isEmpty() || b.getHistory().isEmpty())
+0.000 - ```

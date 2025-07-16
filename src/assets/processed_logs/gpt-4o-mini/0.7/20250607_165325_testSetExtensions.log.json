@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage adlnet.jxapi;\n\npublic class About {\npublic JsonObject getExtensions ( ) {\nreturn extensions ;\n}\n}\n\npackage adlnet.jxapi;\n\npublic class AboutTest {\n@Test\npublic void testSetExtensions ( ) {\nJsonObject expected = new JsonObject ( ) ;\nexpected . addProperty ( \"STR\" , UUID . randomUUID ( ) . toString ( ) ) ;\nabout . setExtensions ( expected ) ;\nJsonObject actual = about . getExtensions ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(actual);\nAssert.assertEquals(expected.size(), actual.size());\nAssert.assertTrue(actual.has(\"STR\"));\nAssert.assertEquals(expected.get(\"STR\").getAsString(), actual.get(\"STR\").getAsString());\nAssert.assertTrue(actual.isJsonObject());\nAssert.assertFalse(actual.isJsonArray());\nAssert.assertFalse(actual.isJsonPrimitive());\nAssert.assertFalse(actual.isJsonNull());\nAssert.assertEquals(expected, actual);\nAssert.assertNotSame(expected, actual);\nAssert.assertEquals(expected.entrySet().size(), actual.entrySet().size());\nAssert.assertTrue(actual.entrySet().containsAll(expected.entrySet()));\nAssert.assertFalse(actual.entrySet().isEmpty());\nAssert.assertTrue(actual.getAsJsonPrimitive(\"STR\").isString());\nAssert.assertTrue(actual.get(\"STR\").isJsonPrimitive());\nAssert.assertNull(actual.get(\"NON_EXISTENT_KEY\"));\nAssert.assertNotEquals(\"INVALID\", actual.get(\"STR\").getAsString());\nAssert.assertTrue(actual.get(\"STR\").getAsString().length() > 0);\nAssert.assertEquals(expected.get(\"STR\").getAsString(), actual.get(\"STR\").getAsString());\nAssert.assertTrue(actual.get(\"STR\").getAsString().matches(\"[0-9a-fA-F-]+\"));\nAssert.assertArrayEquals(new String[] { \"STR\" }, actual.keySet().toArray());\nAssert.assertTrue(actual.toString().contains(\"STR\"));\n```\n====================\n\n",
+    "scores": [
+        0.84,
+        0.667,
+        0.6,
+        0.571,
+        0.566,
+        0.56,
+        0.556,
+        0.556,
+        0.517,
+        0.492,
+        0.469,
+        0.455,
+        0.441,
+        0.43,
+        0.4,
+        0.395,
+        0.361,
+        0.349,
+        0.337,
+        0.333,
+        0.3,
+        0.3,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(actual);"
+}

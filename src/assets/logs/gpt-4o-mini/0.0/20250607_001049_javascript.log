@@ -1,0 +1,97 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutor {
+    public void execute ( final ExecuteScriptOperation operation , final Promise promise ) { 
+    if ( operation . isFireAndForget ( ) ) { 
+    promise . answer ( "STR" ) ; 
+    } String fullCommand = operation . getCommand ( ) ; 
+    int indexColon = fullCommand . indexOf ( "STR" ) ; 
+    String extension = fullCommand . substring ( 0 , indexColon ) ; 
+    final String command = fullCommand . substring ( indexColon + 1 ) ; 
+    final Callable < String > task ; 
+    if ( extension . equals ( "STR" ) ) { 
+    task = newBashScriptCallable ( command ) ; 
+    } else { 
+    task = newGenericScriptCallable ( extension , command ) ; 
+    } new Thread ( ( ) -> { 
+    try { 
+    String result = task . call ( ) ; 
+    promise . answer ( result ) ; 
+    } catch ( Exception e ) { 
+    LOGGER . warn ( "STR" + command , e ) ; 
+    promise . answer ( e ) ; 
+    } } ) . start ( ) ; 
+    }
+}
+
+package hazelcast.hazelcast-simulator.simulator;
+
+public class ScriptExecutorTest {
+    @Test
+     public void javascript ( ) {
+         ExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( "STR" , false ) ; 
+         StubPromise promise = new StubPromise ( ) ; 
+         scriptExecutor . execute ( scriptOperation , promise ) ; 
+         promise . assertCompletesEventually ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertEquals("Expected result for STR command", promise.getResult());
+assertTrue(promise.isCompleted());
+assertFalse(promise.isFailed());
+assertNotNull(promise.getResult());
+assertTrue(promise.getResult() instanceof String);
+assertEquals("Expected output", promise.getResult());
+assertNotEquals("Unexpected output", promise.getResult());
+assertTrue(promise.getExecutionTime() >= 0);
+assertFalse(promise.getExecutionTime() > 1000); // Assuming the command should complete quickly
+assertNull(promise.getError());
+assertTrue(promise.getResult().contains("Expected substring"));
+assertFalse(promise.getResult().contains("Unexpected substring"));
+assertEquals("STR", scriptOperation.getCommand().substring(0, 3));
+assertTrue(promise.getResult().length() > 0);
+assertTrue(promise.getResult().startsWith("Expected prefix"));
+assertTrue(promise.getResult().endsWith("Expected suffix"));
+assertNotSame("Different object", promise.getResult());
+assertTrue(promise.getResult().matches("Expected regex pattern"));
+assertEquals("Expected length", promise.getResult().length());
+assertTrue(promise.getResult().toLowerCase().contains("expected"));
+assertFalse(promise.getResult().toUpperCase().contains("UNEXPECTED"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(promise.getAnswer()instanceofString); ===
+0.894 - assertTrue(promise.getResult() instanceof String)
+0.667 - assertTrue(promise.getResult().contains("Expected substring"))
+0.652 - assertTrue(promise.getResult().length() > 0)
+0.625 - assertTrue(promise.isCompleted())
+0.617 - assertTrue(promise.getResult().startsWith("Expected prefix"))
+0.614 - assertTrue(promise.getExecutionTime() >= 0)
+0.602 - assertTrue(promise.getResult().toLowerCase().contains("expected"))
+0.595 - assertFalse(promise.getResult().contains("Unexpected substring"))
+0.571 - assertTrue(promise.getResult().endsWith("Expected suffix"))
+0.568 - assertNotNull(promise.getResult())
+0.527 - assertFalse(promise.getExecutionTime() > 1000)
+0.513 - assertFalse(promise.isFailed())
+0.491 - assertTrue(promise.getResult().matches("Expected regex pattern"))
+0.491 - assertEquals("Expected length", promise.getResult().length())
+0.483 - assertFalse(promise.getResult().toUpperCase().contains("UNEXPECTED"))
+0.474 - assertEquals("Expected output", promise.getResult())
+0.465 - assertNotSame("Different object", promise.getResult())
+0.455 - assertEquals("STR", scriptOperation.getCommand().substring(0, 3))
+0.451 - assertNotEquals("Unexpected output", promise.getResult())
+0.387 - // Assuming the command should complete quickly
+assertNull(promise.getError())
+0.373 - ```java
+assertEquals("Expected result for STR command", promise.getResult())
+0.000 - ```

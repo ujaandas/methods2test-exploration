@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.object;\n\npublic class OObjectBinaryDataStorage {\npublic < RET > RET load ( final ORID recordId ) {\nreturn ( RET ) load ( recordId , null ) ;\n}\n}\n\npackage orientechnologies.orientdb.object;\n\npublic class OObjectBinaryDataStorageTest {\n@Test\npublic void testSaveAndLoad_BinaryFieldsSimpleRecordMapping ( ) throws IOException {\nthis . createDb ( ODocumentFieldHandlingStrategyFactory . SIMPLE ) ;\nDriver hunt = new Driver ( ) ;\nhunt . setName ( \"STR\" ) ;\nbyte [ ] huntUglyPicture = randomBytes ( 1024 * 32 ) ;\nhunt . setImageData ( huntUglyPicture ) ;\nDriver savedHunt = this . databaseTx . save ( hunt ) ;\nDriver loadedHunt = this . databaseTx . load ( new ORecordId ( savedHunt . getId ( ) ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(loadedHunt);\nassertEquals(savedHunt.getId(), loadedHunt.getId());\nassertEquals(savedHunt.getName(), loadedHunt.getName());\nassertArrayEquals(savedHunt.getImageData(), loadedHunt.getImageData());\nassertEquals(savedHunt.getSomeOtherField(), loadedHunt.getSomeOtherField());\nassertNotSame(savedHunt, loadedHunt);\nassertTrue(loadedHunt instanceof Driver);\nassertEquals(savedHunt.getAnotherField(), loadedHunt.getAnotherField());\nassertNotNull(loadedHunt.getCreatedAt());\nassertNotNull(loadedHunt.getUpdatedAt());\nassertEquals(savedHunt.getStatus(), loadedHunt.getStatus());\nassertTrue(Arrays.equals(savedHunt.getImageData(), loadedHunt.getImageData()));\nassertEquals(savedHunt.getDescription(), loadedHunt.getDescription());\nassertEquals(savedHunt.getCategory(), loadedHunt.getCategory());\nassertNotNull(loadedHunt.getId());\nassertTrue(loadedHunt.isActive());\nassertEquals(savedHunt.getTags().size(), loadedHunt.getTags().size());\nassertTrue(loadedHunt.getTags().containsAll(savedHunt.getTags()));\nassertEquals(savedHunt.getLocation(), loadedHunt.getLocation());\nassertEquals(savedHunt.getPriority(), loadedHunt.getPriority());\nassertEquals(savedHunt.getRating(), loadedHunt.getRating(), 0.01);\n```\n====================\n\n",
+    "scores": [
+        0.772,
+        0.772,
+        0.688,
+        0.688,
+        0.678,
+        0.526,
+        0.514,
+        0.487,
+        0.484,
+        0.472,
+        0.463,
+        0.442,
+        0.442,
+        0.442,
+        0.437,
+        0.413,
+        0.413,
+        0.409,
+        0.404,
+        0.388,
+        0.376,
+        0.0
+    ],
+    "ground_truth": "Assert.assertNotNull(savedHunt);"
+}

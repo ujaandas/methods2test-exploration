@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLCreateVertexAndEdge {
+    public String getClassName ( ) { 
+    if ( _className == null ) fetchClassName ( ) ; 
+    return _className ; 
+    }
+}
+
+package orientechnologies.orientdb.graphdb;
+
+public class SQLCreateVertexAndEdgeTest {
+    @Test
+     public void testNewParser ( ) {
+         ODocument v1 = database . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(v1);
+assertEquals("ExpectedVertexClass", v1.getClassName());
+assertTrue(v1.containsField("field1"));
+assertEquals("expectedValue1", v1.field("field1"));
+assertTrue(v1.containsField("field2"));
+assertEquals("expectedValue2", v1.field("field2"));
+assertFalse(v1.containsField("nonExistentField"));
+assertEquals("ExpectedVertexId", v1.getIdentity().toString());
+assertTrue(v1.isNew());
+assertNotNull(v1.getVersion());
+assertEquals(database.getClusterIdByName("ExpectedClusterName"), v1.getIdentity().getClusterId());
+assertTrue(v1.getMetadata().getSchemaType() instanceof OVertexType);
+assertNotNull(v1.getCreationDate());
+assertNotNull(v1.getLastModified());
+assertTrue(v1.getProperties().size() > 0);
+assertEquals(1, v1.getProperties().keySet().size());
+assertNotNull(v1.getProperty("field1"));
+assertTrue(v1.getProperty("field1").equals("expectedValue1"));
+assertEquals("ExpectedLabel", v1.getLabel());
+assertFalse(v1.isDeleted());
+assertTrue(v1.getClassName().equals("ExpectedVertexClass"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(v1.getClassName(),OrientVertexType.CLASS_NAME); ===
+0.593 - assertTrue(v1.getClassName().equals("ExpectedVertexClass"))
+0.554 - assertEquals("ExpectedVertexClass", v1.getClassName())
+0.516 - assertTrue(v1.getMetadata().getSchemaType() instanceof OVertexType)
+0.468 - assertNotNull(v1.getCreationDate())
+0.459 - assertEquals(1, v1.getProperties().keySet().size())
+0.451 - assertEquals("ExpectedLabel", v1.getLabel())
+0.447 - assertNotNull(v1.getLastModified())
+0.442 - assertFalse(v1.isDeleted())
+0.429 - assertNotNull(v1.getProperty("field1"))
+0.427 - assertNotNull(v1.getVersion())
+0.420 - assertTrue(v1.isNew())
+0.408 - assertTrue(v1.getProperties().size() > 0)
+0.403 - assertEquals("ExpectedVertexId", v1.getIdentity().toString())
+0.383 - assertTrue(v1.getProperty("field1").equals("expectedValue1"))
+0.371 - assertTrue(v1.containsField("field1"))
+0.371 - assertTrue(v1.containsField("field2"))
+0.370 - assertEquals("expectedValue1", v1.field("field1"))
+0.370 - assertEquals("expectedValue2", v1.field("field2"))
+0.370 - assertFalse(v1.containsField("nonExistentField"))
+0.323 - assertEquals(database.getClusterIdByName("ExpectedClusterName"), v1.getIdentity().getClusterId())
+0.286 - ```java
+assertNotNull(v1)
+0.000 - ```

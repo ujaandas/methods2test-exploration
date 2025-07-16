@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtil {\npublic String readFile ( File file ) throws IOException {\nreturn FileUtils . readFileToString ( file , StandardCharsets . UTF_8 ) ;\n}\n}\n\npackage OpenLiberty.ci.common;\n\npublic class DevUtilTest {\n@Test\npublic void testReadFileToString ( ) throws Exception {\nFile tempFile = new File ( serverDirectory , \"STR\" ) ;\nFiles . write ( tempFile . toPath ( ) , \"STR\" . getBytes ( ) ) ;\nString fileString = util . readFile ( tempFile ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(fileString);\nassertEquals(\"STR\", fileString);\nassertTrue(fileString.length() > 0);\nassertFalse(fileString.isEmpty());\nassertEquals(3, fileString.length());\nassertTrue(fileString.contains(\"S\"));\nassertTrue(fileString.contains(\"T\"));\nassertTrue(fileString.contains(\"R\"));\nassertEquals('S', fileString.charAt(0));\nassertEquals('T', fileString.charAt(1));\nassertEquals('R', fileString.charAt(2));\nassertEquals(\"STR\".getBytes(StandardCharsets.UTF_8).length, fileString.getBytes(StandardCharsets.UTF_8).length);\nassertEquals(\"STR\", new String(fileString.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8));\nassertNotEquals(\"DifferentString\", fileString);\nassertTrue(fileString.equals(\"STR\"));\nassertFalse(fileString.equals(\"str\"));\nassertTrue(fileString.equalsIgnoreCase(\"str\"));\nassertSame(\"STR\", fileString.trim());\nassertNotSame(\"DifferentString\", fileString.trim());\nassertTrue(fileString.startsWith(\"S\"));\nassertTrue(fileString.endsWith(\"R\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.833,
+        0.833,
+        0.833,
+        0.833,
+        0.822,
+        0.811,
+        0.805,
+        0.754,
+        0.667,
+        0.648,
+        0.622,
+        0.622,
+        0.62,
+        0.595,
+        0.551,
+        0.545,
+        0.512,
+        0.469,
+        0.406,
+        0.37,
+        0.0
+    ],
+    "ground_truth": "assertTrue(fileString.equals(\"STR\"));"
+}

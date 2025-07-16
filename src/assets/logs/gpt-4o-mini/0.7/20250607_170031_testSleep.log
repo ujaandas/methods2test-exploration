@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLScript {
+    < RET > RET execute ( Object ... iArgs ) ;
+}
+
+package orientechnologies.orientdb.core;
+
+public class OCommandExecutorSQLScriptTest {
+    @Test
+     public void testSleep ( ) throws Exception {
+         long begin = System . currentTimeMillis ( ) ; 
+         StringBuilder script = new StringBuilder ( ) ; 
+         script . append ( "STR" ) ; 
+         db . command ( new OCommandScript ( "STR" , script . toString ( ) ) ) . execute ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+Assert.assertNotNull(db);
+Assert.assertTrue(db.isActive());
+Assert.assertEquals("ExpectedValue", db.getValue("Key"));
+Assert.assertTrue(db.getCommandCount() > 0);
+Assert.assertTrue(db.getExecutionTime() < 1000);
+Assert.assertEquals("ExpectedResult", db.getLastResult());
+Assert.assertFalse(db.hasErrors());
+Assert.assertTrue(db.getErrorCount() == 0);
+Assert.assertNotNull(db.getCurrentTransaction());
+Assert.assertTrue(db.getCurrentTransaction().isActive());
+Assert.assertEquals("ExpectedTransactionState", db.getCurrentTransaction().getState());
+Assert.assertTrue(db.getUserCount() > 0);
+Assert.assertFalse(db.isReadOnly());
+Assert.assertEquals("ExpectedScriptOutput", db.getLastScriptOutput());
+Assert.assertTrue(db.getScriptExecutionCount() > 0);
+Assert.assertNotNull(db.getLastExecutedCommand());
+Assert.assertNull(db.getLastError());
+Assert.assertTrue(db.getCommandHistory().size() > 0);
+Assert.assertEquals("ExpectedConfigValue", db.getConfig("ConfigKey"));
+Assert.assertTrue(db.getActiveConnections() > 0);
+Assert.assertNotEquals("UnexpectedValue", db.getSomeValue("AnotherKey"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(System.currentTimeMillis()-begin>=500); ===
+0.575 - Assert.assertTrue(db.getExecutionTime() < 1000)
+0.525 - Assert.assertTrue(db.getUserCount() > 0)
+0.512 - Assert.assertTrue(db.getErrorCount() == 0)
+0.510 - Assert.assertTrue(db.getCurrentTransaction().isActive())
+0.506 - Assert.assertTrue(db.getCommandCount() > 0)
+0.505 - Assert.assertTrue(db.getScriptExecutionCount() > 0)
+0.477 - Assert.assertTrue(db.getActiveConnections() > 0)
+0.459 - Assert.assertTrue(db.isActive())
+0.444 - Assert.assertNotNull(db.getCurrentTransaction())
+0.435 - Assert.assertTrue(db.getCommandHistory().size() > 0)
+0.396 - Assert.assertNotNull(db.getLastExecutedCommand())
+0.395 - Assert.assertFalse(db.hasErrors())
+0.385 - Assert.assertNull(db.getLastError())
+0.378 - Assert.assertEquals("ExpectedTransactionState", db.getCurrentTransaction().getState())
+0.364 - Assert.assertFalse(db.isReadOnly())
+0.327 - Assert.assertEquals("ExpectedResult", db.getLastResult())
+0.309 - Assert.assertEquals("ExpectedScriptOutput", db.getLastScriptOutput())
+0.297 - ```java
+Assert.assertNotNull(db)
+0.247 - Assert.assertEquals("ExpectedValue", db.getValue("Key"))
+0.218 - Assert.assertEquals("ExpectedConfigValue", db.getConfig("ConfigKey"))
+0.212 - Assert.assertNotEquals("UnexpectedValue", db.getSomeValue("AnotherKey"))
+0.000 - ```

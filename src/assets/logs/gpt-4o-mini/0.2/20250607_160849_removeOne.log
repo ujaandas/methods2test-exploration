@@ -1,0 +1,115 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class InitContainerHandler {
+    public boolean hasInitContainer ( PodTemplateSpecBuilder builder , String name ) { 
+    return getInitContainer ( builder , name ) != null ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.enricher/api;
+
+public class InitContainerHandlerTest {
+    @Test
+     public void removeOne ( ) {
+         PodTemplateSpecBuilder builder = getPodTemplateBuilder ( "STR" , "STR" , "STR" , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+InitContainerHandler handler = new InitContainerHandler();
+
+// Test case 1: Check if init container exists
+assertTrue(handler.hasInitContainer(builder, "init-container-1"));
+
+// Test case 2: Check if non-existing init container returns false
+assertFalse(handler.hasInitContainer(builder, "non-existing-container"));
+
+// Test case 3: Check if init container with a different name returns false
+assertFalse(handler.hasInitContainer(builder, "different-container"));
+
+// Test case 4: Check if init container with special characters exists
+assertTrue(handler.hasInitContainer(builder, "init-container-special-!@#"));
+
+// Test case 5: Check if init container with numeric name exists
+assertTrue(handler.hasInitContainer(builder, "init-container-123"));
+
+// Test case 6: Check if init container with empty name returns false
+assertFalse(handler.hasInitContainer(builder, ""));
+
+// Test case 7: Check if init container with null name returns false
+assertFalse(handler.hasInitContainer(builder, null));
+
+// Test case 8: Check if init container with leading/trailing spaces returns false
+assertFalse(handler.hasInitContainer(builder, "  init-container-1  "));
+
+// Test case 9: Check if init container exists in a different namespace
+assertFalse(handler.hasInitContainer(builder, "init-container-in-different-namespace"));
+
+// Test case 10: Check if init container exists when multiple init containers are present
+assertTrue(handler.hasInitContainer(builder, "init-container-2"));
+
+// Test case 11: Check if init container is case-sensitive
+assertFalse(handler.hasInitContainer(builder, "Init-Container-1"));
+
+// Test case 12: Check if init container with similar name but different suffix exists
+assertFalse(handler.hasInitContainer(builder, "init-container-1-suffix"));
+
+// Test case 13: Check if init container with a very long name exists
+assertTrue(handler.hasInitContainer(builder, "init-container-with-a-very-long-name-that-exceeds-normal-length"));
+
+// Test case 14: Check if init container is found when using a substring
+assertFalse(handler.hasInitContainer(builder, "container-1"));
+
+// Test case 15: Check if init container exists when the builder is empty
+PodTemplateSpecBuilder emptyBuilder = new PodTemplateSpecBuilder();
+assertFalse(handler.hasInitContainer(emptyBuilder, "init-container-1"));
+
+// Test case 16: Check if init container exists when builder is null
+assert
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(handler.hasInitContainer(builder,"STR")); ===
+0.727 - assertFalse(handler.hasInitContainer(emptyBuilder, "init-container-1"))
+0.623 - // Test case 1: Check if init container exists
+assertTrue(handler.hasInitContainer(builder, "init-container-1"))
+0.570 - // Test case 6: Check if init container with empty name returns false
+assertFalse(handler.hasInitContainer(builder, ""))
+0.561 - // Test case 5: Check if init container with numeric name exists
+assertTrue(handler.hasInitContainer(builder, "init-container-123"))
+0.542 - // Test case 11: Check if init container is case-sensitive
+assertFalse(handler.hasInitContainer(builder, "Init-Container-1"))
+0.541 - // Test case 7: Check if init container with null name returns false
+assertFalse(handler.hasInitContainer(builder, null))
+0.526 - // Test case 14: Check if init container is found when using a substring
+assertFalse(handler.hasInitContainer(builder, "container-1"))
+0.519 - // Test case 4: Check if init container with special characters exists
+assertTrue(handler.hasInitContainer(builder, "init-container-special-!@#"))
+0.503 - // Test case 2: Check if non-existing init container returns false
+assertFalse(handler.hasInitContainer(builder, "non-existing-container"))
+0.503 - // Test case 10: Check if init container exists when multiple init containers are present
+assertTrue(handler.hasInitContainer(builder, "init-container-2"))
+0.495 - // Test case 3: Check if init container with a different name returns false
+assertFalse(handler.hasInitContainer(builder, "different-container"))
+0.481 - // Test case 8: Check if init container with leading/trailing spaces returns false
+assertFalse(handler.hasInitContainer(builder, "  init-container-1  "))
+0.459 - // Test case 12: Check if init container with similar name but different suffix exists
+assertFalse(handler.hasInitContainer(builder, "init-container-1-suffix"))
+0.457 - // Test case 9: Check if init container exists in a different namespace
+assertFalse(handler.hasInitContainer(builder, "init-container-in-different-namespace"))
+0.438 - // Test case 13: Check if init container with a very long name exists
+assertTrue(handler.hasInitContainer(builder, "init-container-with-a-very-long-name-that-exceeds-normal-length"))
+0.386 - // Test case 16: Check if init container exists when builder is null
+assert
+0.339 - ```java
+InitContainerHandler handler = new InitContainerHandler()
+0.287 - // Test case 15: Check if init container exists when the builder is empty
+PodTemplateSpecBuilder emptyBuilder = new PodTemplateSpecBuilder()

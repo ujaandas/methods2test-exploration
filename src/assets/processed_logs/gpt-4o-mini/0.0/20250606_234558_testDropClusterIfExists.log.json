@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecution {\nint getClusterIdByName ( String iClusterName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class ODropClusterStatementExecutionTest {\n@Test\npublic void testDropClusterIfExists ( ) {\nString cluster = \"STR\" ;\n( ( ODatabaseDocumentTx ) db ) . getStorage ( ) . addCluster ( cluster ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nint clusterId = ((ODropClusterStatementExecution) db).getClusterIdByName(cluster);\nassertNotNull(clusterId);\nassertTrue(clusterId >= 0);\nassertEquals(\"Cluster ID should match the expected value\", expectedClusterId, clusterId);\nassertEquals(\"Cluster name should be STR\", \"STR\", db.getStorage().getClusterNameById(clusterId));\nassertTrue(\"Cluster should exist after addition\", db.getStorage().existsCluster(cluster));\nassertFalse(\"Cluster should not be empty\", db.getStorage().getClusterSize(clusterId) == 0);\nassertEquals(\"Cluster size should be 0 after dropping\", 0, db.getStorage().getClusterSize(clusterId));\nassertTrue(\"Cluster should be removable\", db.getStorage().removeCluster(clusterId));\nassertFalse(\"Cluster should not exist after removal\", db.getStorage().existsCluster(cluster));\nassertThrows(ClusterNotFoundException.class, () -> {\n((ODropClusterStatementExecution) db).getClusterIdByName(cluster);\n});\nassertNotEquals(\"Cluster ID should not be -1\", -1, clusterId);\nassertTrue(\"Cluster ID should be less than total clusters\", clusterId < db.getStorage().getClusterCount());\nassertEquals(\"Cluster name should be retrievable\", cluster, db.getStorage().getClusterNameById(clusterId));\nassertTrue(\"Cluster should be marked for deletion\", db.getStorage().isClusterMarkedForDeletion(clusterId));\nassertEquals(\"Cluster should have the correct type\", expectedClusterType, db.getStorage().getClusterType(clusterId));\nassertNotEquals(\"Cluster ID should not be equal to another cluster's ID\", anotherClusterId, clusterId);\nassertTrue(\"Cluster should be accessible before dropping\", db.getStorage().existsCluster(cluster));\nassertFalse(\"Cluster should not be accessible after dropping\", db.getStorage().existsCluster(cluster));\nassertEquals(\"Cluster should have the correct properties\", expectedProperties, db.getStorage().getClusterProperties(clusterId));\nassertTrue(\"Cluster should be part of the database\", db.getStorage().isClusterInDatabase(clusterId));\n```\n====================\n\n",
+    "scores": [
+        0.647,
+        0.574,
+        0.54,
+        0.531,
+        0.522,
+        0.52,
+        0.519,
+        0.5,
+        0.486,
+        0.484,
+        0.467,
+        0.456,
+        0.455,
+        0.443,
+        0.435,
+        0.431,
+        0.415,
+        0.403,
+        0.39,
+        0.389,
+        0.386,
+        0.043,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(db.getClusterIdByName(cluster)>0);"
+}

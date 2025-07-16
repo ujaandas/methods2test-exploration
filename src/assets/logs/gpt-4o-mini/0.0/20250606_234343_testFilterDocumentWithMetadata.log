@@ -1,0 +1,84 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexing {
+    public void setValue ( String key , String value ) { 
+    checkLockException ( ) ; 
+    md . put ( key , new String [ ] { 
+    value } ) ; 
+    }
+}
+
+package DigitalPebble.storm-crawler.core;
+
+public class BasicIndexingTest {
+    @Test
+     public void testFilterDocumentWithMetadata ( ) throws Exception {
+         Map config = new HashMap ( ) ; 
+         config . put ( AbstractIndexerBolt . urlFieldParamName , "STR" ) ; 
+         config . put ( AbstractIndexerBolt . metadataFilterParamName , "STR" ) ; 
+         Metadata metadata = new Metadata ( ) ; 
+         metadata . setValue ( "STR" , "STR" ) ; 
+         prepareIndexerBolt ( config ) ; 
+         index ( URL , metadata ) ; 
+         Map < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(fields);
+assertTrue(fields.containsKey("STR"));
+assertEquals("STR", fields.get("STR"));
+assertEquals(1, fields.size());
+assertTrue(fields.containsKey("url"));
+assertEquals("http://example.com", fields.get("url"));
+assertTrue(fields.containsKey("metadata"));
+assertEquals("STR", fields.get("metadata"));
+assertFalse(fields.containsKey("nonexistentKey"));
+assertTrue(fields.get("STR").length() > 0);
+assertEquals("ExpectedValue", fields.get("expectedField"));
+assertNotEquals("UnexpectedValue", fields.get("unexpectedField"));
+assertTrue(fields.keySet().containsAll(Arrays.asList("STR", "url", "metadata")));
+assertFalse(fields.isEmpty());
+assertEquals("application/json", fields.get("contentType"));
+assertTrue(fields.get("timestamp") instanceof Long);
+assertNotNull(fields.get("documentId"));
+assertTrue(fields.get("documentId").toString().matches("^[a-f0-9]{24}$"));
+assertEquals("http://example.com", fields.get("url"));
+assertTrue(fields.get("status").equals("success"));
+assertEquals("text/html", fields.get("mimeType"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals("STR","STR",fields.get("STR")); ===
+0.925 - assertEquals("STR", fields.get("STR"))
+0.800 - assertEquals("STR", fields.get("metadata"))
+0.703 - assertEquals("text/html", fields.get("mimeType"))
+0.694 - assertEquals(1, fields.size())
+0.653 - assertEquals("http://example.com", fields.get("url"))
+0.653 - assertEquals("http://example.com", fields.get("url"))
+0.634 - assertEquals("application/json", fields.get("contentType"))
+0.627 - assertTrue(fields.get("STR").length() > 0)
+0.620 - assertEquals("ExpectedValue", fields.get("expectedField"))
+0.600 - assertTrue(fields.containsKey("STR"))
+0.585 - assertNotNull(fields.get("documentId"))
+0.583 - assertFalse(fields.isEmpty())
+0.579 - assertNotEquals("UnexpectedValue", fields.get("unexpectedField"))
+0.525 - assertTrue(fields.containsKey("url"))
+0.500 - assertFalse(fields.containsKey("nonexistentKey"))
+0.500 - assertTrue(fields.get("timestamp") instanceof Long)
+0.495 - assertTrue(fields.get("status").equals("success"))
+0.471 - assertTrue(fields.containsKey("metadata"))
+0.444 - ```java
+assertNotNull(fields)
+0.414 - assertTrue(fields.get("documentId").toString().matches("^[a-f0-9]{24}$"))
+0.413 - assertTrue(fields.keySet().containsAll(Arrays.asList("STR", "url", "metadata")))
+0.000 - ```

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455 {\n@Override\npublic List < Framedata > createFrames ( String text , boolean mask ) {\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( text ) ) ) ;\ncurframe . setTransferemasked ( mask ) ;\ntry {\ncurframe . isValid ( ) ;\n} catch ( InvalidDataException e ) {\nthrow new NotSendableException ( e ) ;\n} return Collections . singletonList ( ( Framedata ) curframe ) ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class Draft_6455Test {\n@Test\npublic void createFramesText ( ) throws Exception {\nDraft_6455 draft_6455 = new Draft_6455 ( ) ;\nTextFrame curframe = new TextFrame ( ) ;\ncurframe . setPayload ( ByteBuffer . wrap ( Charsetfunctions . utf8Bytes ( \"STR\" ) ) ) ;\ncurframe . setTransferemasked ( false ) ;\nList < Framedata > createdFrame = draft_6455 . createFrames ( \"STR\" , false ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(createdFrame);\nassertEquals(1, createdFrame.size());\nassertTrue(createdFrame.get(0) instanceof TextFrame);\nTextFrame createdTextFrame = (TextFrame) createdFrame.get(0);\nassertArrayEquals(ByteBuffer.wrap(Charsetfunctions.utf8Bytes(\"STR\")).array(), createdTextFrame.getPayload().array());\nassertFalse(createdTextFrame.getTransferemasked());\nassertTrue(createdTextFrame.isValid());\nassertEquals(\"STR\", Charsetfunctions.utf8String(createdTextFrame.getPayload().array()));\nassertNotSame(curframe, createdTextFrame);\nassertEquals(curframe.getPayload().capacity(), createdTextFrame.getPayload().capacity());\nassertEquals(curframe.getTransferemasked(), createdTextFrame.getTransferemasked());\nassertNotNull(createdTextFrame.getPayload());\nassertTrue(createdTextFrame.getPayload().hasRemaining());\nassertEquals(3, createdTextFrame.getPayload().remaining());\nassertEquals(0, createdTextFrame.getPayload().position());\nassertEquals(3, createdTextFrame.getPayload().limit());\nassertEquals(3, createdTextFrame.getPayload().capacity());\nassertTrue(createdFrame.get(0).isFin());\nassertFalse(createdFrame.get(0).isRSV1());\nassertFalse(createdFrame.get(0).isRSV2());\nassertFalse(createdFrame.get(0).isRSV3());\nassertEquals(0, createdFrame.get(0).getOpcode());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.756,
+        0.712,
+        0.711,
+        0.711,
+        0.711,
+        0.705,
+        0.703,
+        0.703,
+        0.681,
+        0.674,
+        0.659,
+        0.658,
+        0.629,
+        0.587,
+        0.571,
+        0.565,
+        0.552,
+        0.512,
+        0.508,
+        0.484,
+        0.413,
+        0.0
+    ],
+    "ground_truth": "assertEquals(1,createdFrame.size());"
+}

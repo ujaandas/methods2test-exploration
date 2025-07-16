@@ -1,0 +1,79 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerialization {
+    public int fields ( ) { 
+    checkForLoading ( ) ; 
+    checkForFields ( ) ; 
+    return _fieldSize ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerializationTest {
+    @Test
+     public void testSimpleEmbeddedDoc ( ) {
+         ODatabaseRecordThreadLocal . instance ( ) . remove ( ) ; 
+         ODocument document = new ODocument ( ) ; 
+         ODocument embedded = new ODocument ( ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         document . field ( "STR" , embedded , OType . EMBEDDED ) ; 
+         byte [ ] res = serializer . toStream ( document , false ) ; 
+         ODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] { 
+     } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(extr);
+Assert.assertTrue(extr instanceof ODocument);
+Assert.assertEquals(document.field("STR", "STR"), extr.field("STR"));
+Assert.assertNotNull(extr.field("STR"));
+Assert.assertTrue(extr.field("STR") instanceof ODocument);
+Assert.assertEquals(embedded.field("STR"), extr.field("STR").field("STR"));
+Assert.assertNotNull(extr.field("STR").field("STR"));
+Assert.assertEquals(OType.EMBEDDED, extr.field("STR").getType());
+Assert.assertEquals(2, document.fields());
+Assert.assertEquals(2, embedded.fields());
+Assert.assertEquals(1, extr.fields());
+Assert.assertTrue(Arrays.equals(res, serializer.toStream(extr, false)));
+Assert.assertEquals(document.getClassName(), extr.getClassName());
+Assert.assertFalse(document.equals(extr));
+Assert.assertTrue(document.hashCode() != extr.hashCode());
+Assert.assertEquals(document.size(), extr.size());
+Assert.assertEquals(document.getVersion(), extr.getVersion());
+Assert.assertEquals(document.getRecord(), extr.getRecord());
+Assert.assertTrue(document.equals(extr) || document.toString().equals(extr.toString()));
+Assert.assertEquals(document.hashCode(), extr.hashCode());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(document.fields(),extr.fields()); ===
+0.860 - Assert.assertEquals(document.size(), extr.size())
+0.827 - Assert.assertEquals(document.field("STR", "STR"), extr.field("STR"))
+0.795 - Assert.assertEquals(2, document.fields())
+0.771 - Assert.assertEquals(document.getRecord(), extr.getRecord())
+0.765 - Assert.assertEquals(document.getClassName(), extr.getClassName())
+0.757 - Assert.assertEquals(1, extr.fields())
+0.745 - Assert.assertEquals(document.hashCode(), extr.hashCode())
+0.734 - Assert.assertFalse(document.equals(extr))
+0.714 - Assert.assertEquals(document.getVersion(), extr.getVersion())
+0.667 - Assert.assertEquals(embedded.field("STR"), extr.field("STR").field("STR"))
+0.641 - Assert.assertEquals(2, embedded.fields())
+0.624 - Assert.assertTrue(document.hashCode() != extr.hashCode())
+0.574 - Assert.assertEquals(OType.EMBEDDED, extr.field("STR").getType())
+0.571 - Assert.assertNotNull(extr.field("STR"))
+0.504 - Assert.assertTrue(document.equals(extr) || document.toString().equals(extr.toString()))
+0.489 - Assert.assertNotNull(extr.field("STR").field("STR"))
+0.438 - Assert.assertNotNull(extr)
+0.430 - Assert.assertTrue(extr.field("STR") instanceof ODocument)
+0.430 - Assert.assertTrue(Arrays.equals(res, serializer.toStream(extr, false)))
+0.400 - Assert.assertTrue(extr instanceof ODocument)

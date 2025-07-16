@@ -1,0 +1,66 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJava {
+    public KoreanPosJava getPos ( ) { 
+    return pos ; 
+    }
+}
+
+package open-korean-text.open-korean-text;
+
+public class OpenKoreanProcessorJavaTest {
+    @Test
+     public void testAddWordsToDictionary ( ) {
+         String text = "STR" ; 
+         Seq < KoreanTokenizer . KoreanToken > tokens = OpenKoreanTextProcessorJava . tokenize ( text ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(3, tokens.size());
+assertTrue(tokens.contains(new KoreanTokenizer.KoreanToken("STR", KoreanPosJava.Noun)));
+assertFalse(tokens.isEmpty());
+assertNotNull(tokens.get(0));
+assertTrue(tokens.get(0).getText().equals("STR"));
+assertFalse(tokens.get(0).getPos().equals(KoreanPosJava.Verb));
+assertTrue(tokens.get(1).getPos().equals(KoreanPosJava.Noun));
+assertTrue(tokens.get(1).getStem().equals("STR"));
+assertFalse(tokens.get(2).getPos().equals(KoreanPosJava.Adjective));
+assertFalse(tokens.get(2).getText().equals("STR"));
+assertEquals(KoreanPosJava.Noun, tokens.get(2).getPos());
+assertTrue(tokens.get(2).getPos().equals(KoreanPosJava.Noun));
+assertEquals(1, tokens.stream().filter(token -> token.getPos().equals(KoreanPosJava.Noun)).count());
+assertTrue(tokens.stream().allMatch(token -> token.getText().startsWith("S")));
+assertFalse(tokens.stream().anyMatch(token -> token.getText().length() > 3));
+assertTrue(tokens.stream().noneMatch(token -> token.getPos().equals(KoreanPosJava.Adverb)));
+assertEquals(2, tokens.stream().filter(token -> token.getPos().equals(KoreanPosJava.Noun)).count());
+assertTrue(tokens.stream().anyMatch(token -> token.getText().equals("STR")));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",OpenKoreanTextProcessorJava.tokensToJavaStringList(tokens).toString()); ===
+0.597 - assertEquals(KoreanPosJava.Noun, tokens.get(2).getPos())
+0.424 - assertEquals(3, tokens.size())
+0.411 - assertEquals(1, tokens.stream().filter(token -> token.getPos().equals(KoreanPosJava.Noun)).count())
+0.411 - assertEquals(2, tokens.stream().filter(token -> token.getPos().equals(KoreanPosJava.Noun)).count())
+0.391 - assertTrue(tokens.contains(new KoreanTokenizer.KoreanToken("STR", KoreanPosJava.Noun)))
+0.373 - assertFalse(tokens.isEmpty())
+0.342 - assertNotNull(tokens.get(0))
+0.335 - assertFalse(tokens.stream().anyMatch(token -> token.getText().length() > 3))
+0.318 - assertFalse(tokens.get(0).getPos().equals(KoreanPosJava.Verb))
+0.308 - assertFalse(tokens.get(2).getPos().equals(KoreanPosJava.Adjective))
+0.303 - assertTrue(tokens.stream().allMatch(token -> token.getText().startsWith("S")))
+0.293 - assertTrue(tokens.get(1).getPos().equals(KoreanPosJava.Noun))
+0.293 - assertTrue(tokens.get(2).getPos().equals(KoreanPosJava.Noun))
+0.281 - assertTrue(tokens.stream().noneMatch(token -> token.getPos().equals(KoreanPosJava.Adverb)))
+0.275 - assertTrue(tokens.get(0).getText().equals("STR"))
+0.275 - assertTrue(tokens.get(1).getStem().equals("STR"))
+0.273 - assertFalse(tokens.get(2).getText().equals("STR"))
+0.233 - assertTrue(tokens.stream().anyMatch(token -> token.getText().equals("STR")))

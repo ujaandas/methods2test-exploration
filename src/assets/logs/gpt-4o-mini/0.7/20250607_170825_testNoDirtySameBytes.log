@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocument {
+    public boolean isDirty ( ) { 
+    return _dirty ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentTest {
+    @Test
+     public void testNoDirtySameBytes ( ) {
+         ODocument doc = new ODocument ( ) ; 
+         byte [ ] bytes = new byte [ ] { 
+     0 , 1 , 2 , 3 , 4 , 5 } ; 
+         doc . field ( "STR" , bytes ) ; 
+         ODocumentInternal . clearTrackData ( doc ) ; 
+         ORecordInternal . unsetDirty ( doc ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertFalse(doc.isDirty());
+assertNull(doc.field("NON_EXISTENT_FIELD"));
+assertNotNull(doc.field("STR"));
+assertArrayEquals(bytes, (byte[]) doc.field("STR"));
+assertTrue(Arrays.equals(bytes, (byte[]) doc.field("STR")));
+assertEquals(1, doc.field("STR").length);
+assertTrue(doc.field("STR") instanceof byte[]);
+assertEquals(6, ((byte[]) doc.field("STR")).length);
+assertEquals(0, ((byte[]) doc.field("STR"))[0]);
+assertEquals(1, ((byte[]) doc.field("STR"))[1]);
+assertEquals(2, ((byte[]) doc.field("STR"))[2]);
+assertEquals(3, ((byte[]) doc.field("STR"))[3]);
+assertEquals(4, ((byte[]) doc.field("STR"))[4]);
+assertEquals(5, ((byte[]) doc.field("STR"))[5]);
+assertFalse(doc.isDirty());
+assertTrue(doc.field("STR") != null);
+assertNotSame(bytes, doc.field("STR"));
+assertTrue(doc.field("STR").getClass().isArray());
+assertFalse(doc.isDirty());
+assertTrue(doc.field("STR") instanceof byte[]);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(doc.isDirty()); ===
+1.000 - assertFalse(doc.isDirty())
+1.000 - assertFalse(doc.isDirty())
+0.867 - ```java
+assertFalse(doc.isDirty())
+0.561 - assertNotNull(doc.field("STR"))
+0.540 - assertNotSame(bytes, doc.field("STR"))
+0.533 - assertTrue(doc.field("STR") != null)
+0.523 - assertEquals(1, doc.field("STR").length)
+0.507 - assertEquals(0, ((byte[]) doc.field("STR"))[0])
+0.507 - assertEquals(1, ((byte[]) doc.field("STR"))[1])
+0.507 - assertEquals(2, ((byte[]) doc.field("STR"))[2])
+0.507 - assertEquals(3, ((byte[]) doc.field("STR"))[3])
+0.507 - assertEquals(4, ((byte[]) doc.field("STR"))[4])
+0.507 - assertEquals(5, ((byte[]) doc.field("STR"))[5])
+0.507 - assertArrayEquals(bytes, (byte[]) doc.field("STR"))
+0.507 - assertTrue(doc.field("STR").getClass().isArray())
+0.486 - assertTrue(doc.field("STR") instanceof byte[])
+0.486 - assertTrue(doc.field("STR") instanceof byte[])
+0.480 - assertEquals(6, ((byte[]) doc.field("STR")).length)
+0.464 - assertNull(doc.field("NON_EXISTENT_FIELD"))
+0.458 - assertTrue(Arrays.equals(bytes, (byte[]) doc.field("STR")))
+0.000 - ```

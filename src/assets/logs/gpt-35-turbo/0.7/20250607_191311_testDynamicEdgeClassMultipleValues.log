@@ -1,0 +1,88 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformer {
+    long countClass ( String iClassName ) ;
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLEdgeTransformerTest {
+    @Test
+     public void testDynamicEdgeClassMultipleValues ( ) {
+         configure ( "STR" + "STR" + "STR" + name . getMethodName ( ) + "STR" ) ; 
+         OETLLoader loader = proc . getLoader ( ) ; 
+         ODatabasePool pool = loader . getPool ( ) ; 
+         ODatabaseDocument db = pool . acquire ( ) ; 
+         createClasses ( db ) ; 
+         OVertex vertex = db . newVertex ( "STR" ) ; 
+         vertex . setProperty ( "STR" , "STR" ) ; 
+         db . save ( vertex ) ; 
+         db . commit ( ) ; 
+         db . close ( ) ; 
+         proc . execute ( ) ; 
+         db = pool . acquire ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertNotNull(vertex);
+assertEquals("STR", vertex.getProperty("STR"));
+OEdge edge = vertex.addEdge("STR", vertex);
+assertNotNull(edge);
+edge.setProperty("STR", "STR");
+db.save(edge);
+db.commit();
+assertEquals(1, db.countClass("STR"));
+OVertex newVertex = db.newVertex("STR");
+newVertex.setProperty("STR", "STR");
+db.save(newVertex);
+db.commit();
+assertEquals(2, db.countClass("STR"));
+db.close();
+proc.execute();
+db = pool.acquire();
+OVertex retrievedVertex = db.getVertex(vertex.getIdentity());
+assertNotNull(retrievedVertex);
+assertEquals("STR", retrievedVertex.getProperty("STR"));
+OEdge retrievedEdge = db.getEdge(edge.getIdentity());
+assertNotNull(retrievedEdge);
+assertEquals("STR", retrievedEdge.getProperty("STR"));
+assertEquals(1, db.countClass("STR"));
+assertEquals(2, db.countClass("STR"));
+db.close();
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(1,db.countClass("STR")); ===
+1.000 - assertEquals(1, db.countClass("STR"))
+1.000 - assertEquals(1, db.countClass("STR"))
+0.972 - assertEquals(2, db.countClass("STR"))
+0.972 - assertEquals(2, db.countClass("STR"))
+0.617 - assertEquals("STR", vertex.getProperty("STR"))
+0.591 - assertEquals("STR", retrievedEdge.getProperty("STR"))
+0.578 - assertEquals("STR", retrievedVertex.getProperty("STR"))
+0.417 - OVertex newVertex = db.newVertex("STR")
+0.400 - assertNotNull(edge)
+0.386 - assertNotNull(vertex)
+0.371 - newVertex.setProperty("STR", "STR")
+0.364 - assertNotNull(retrievedVertex)
+0.348 - db.close()
+0.348 - db.close()
+0.340 - db.commit()
+0.340 - db.commit()
+0.338 - edge.setProperty("STR", "STR")
+0.324 - OEdge edge = vertex.addEdge("STR", vertex)
+0.282 - OEdge retrievedEdge = db.getEdge(edge.getIdentity())
+0.281 - assertNotNull(retrievedEdge)
+0.245 - db.save(edge)
+0.237 - OVertex retrievedVertex = db.getVertex(vertex.getIdentity())
+0.189 - db = pool.acquire()
+0.185 - db.save(newVertex)
+0.160 - proc.execute()

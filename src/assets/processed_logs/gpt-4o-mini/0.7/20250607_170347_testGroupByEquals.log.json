@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelper {\npublic static < T , X , E extends Throwable > Map < X , List < T > > groupBy ( List < T > coll , AFunction1 < ? super T , ? extends X , E > f ) throws E {\nfinal Map < X , List < T > > result = new HashMap < > ( ) ;\nfor ( T o : coll ) {\nfinal X key = f . apply ( o ) ;\nList < T > perKey = result . get ( key ) ;\nif ( perKey == null ) {\nperKey = createEmptyListOfType ( coll , false ) ;\nresult . put ( key , perKey ) ;\n} perKey . add ( o ) ;\n} return result ;\n}\n}\n\npackage arnohaase.a-foundation.a-foundation;\n\npublic class ACollectionHelperTest {\n@Test\npublic void testGroupByEquals ( ) {\nfinal AFunction1NoThrow < String , Integer > len = new AFunction1NoThrow < String , Integer > ( ) {\n@Override\npublic Integer apply ( String param ) {\nreturn param . length ( ) ;\n} } ;\nfinal Map < Integer , List < String > > grouped = ACollectionHelper . groupBy ( Arrays . asList ( \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" , \"STR\" ) , len ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(grouped);\nassertEquals(1, grouped.size());\nassertTrue(grouped.containsKey(3));\nassertEquals(6, grouped.get(3).size());\nassertEquals(\"STR\", grouped.get(3).get(0));\nassertEquals(\"STR\", grouped.get(3).get(1));\nassertEquals(\"STR\", grouped.get(3).get(2));\nassertEquals(\"STR\", grouped.get(3).get(3));\nassertEquals(\"STR\", grouped.get(3).get(4));\nassertEquals(\"STR\", grouped.get(3).get(5));\nassertEquals(Arrays.asList(\"STR\", \"STR\", \"STR\", \"STR\", \"STR\", \"STR\"), grouped.get(3));\nassertEquals(3, grouped.keySet().iterator().next().intValue());\nassertTrue(grouped.get(3).stream().allMatch(s -> s.length() == 3));\nassertFalse(grouped.containsKey(2));\nassertFalse(grouped.containsKey(4));\nassertFalse(grouped.containsKey(1));\nassertFalse(grouped.containsKey(0));\nassertFalse(grouped.containsKey(5));\nassertTrue(grouped.get(3).stream().distinct().count() == 1);\nassertEquals(3, grouped.entrySet().iterator().next().getKey().intValue());\nassertEquals(6, grouped.entrySet().iterator().next().getValue().size());\n```\n====================\n\n",
+    "scores": [
+        0.967,
+        0.866,
+        0.732,
+        0.732,
+        0.732,
+        0.732,
+        0.732,
+        0.732,
+        0.708,
+        0.708,
+        0.708,
+        0.708,
+        0.708,
+        0.656,
+        0.615,
+        0.58,
+        0.567,
+        0.549,
+        0.483,
+        0.477,
+        0.457,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,grouped.size());"
+}

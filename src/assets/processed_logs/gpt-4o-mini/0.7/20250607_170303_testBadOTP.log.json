@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClient {\npublic abstract VerificationResponse verify ( String otp ) throws YubicoVerificationException , YubicoValidationFailure ;\n}\n\npackage Yubico.yubico-java-client.v2client;\n\npublic class YubicoClientTest {\n@Test\npublic void testBadOTP ( ) throws YubicoVerificationException , YubicoValidationFailure {\nString otp = \"STR\" ;\nVerificationResponse response = client . verify ( otp ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(response);\nassertFalse(response.isValid());\nassertEquals(\"invalid\", response.getStatus());\nassertEquals(\"bad_otp\", response.getError());\nassertEquals(\"The OTP provided is not valid\", response.getMessage());\nassertTrue(response.getTimestamp() <= System.currentTimeMillis());\nassertEquals(0, response.getRetryCount());\nassertNull(response.getSessionToken());\nassertNull(response.getUserId());\nassertNull(response.getPublicId());\nassertNull(response.getNonce());\nassertNull(response.getSignature());\nassertTrue(response.getResponseTime() >= 0);\nassertTrue(response.getResponseTime() < 5000);\nassertTrue(response.getOtp().equals(otp));\nassertFalse(response.getUser().isPresent());\nassertFalse(response.getSession().isPresent());\nassertTrue(response.getAdditionalData().isEmpty());\nassertTrue(response.getErrorDetails().isEmpty());\nassertNotEquals(\"success\", response.getStatus());\nassertThrows(YubicoVerificationException.class, () -> {\nclient.verify(\"INVALID_OTP\");\n});\n```\n====================\n\n",
+    "scores": [
+        0.852,
+        0.741,
+        0.727,
+        0.702,
+        0.69,
+        0.656,
+        0.63,
+        0.6,
+        0.571,
+        0.537,
+        0.531,
+        0.531,
+        0.515,
+        0.515,
+        0.515,
+        0.493,
+        0.479,
+        0.466,
+        0.424,
+        0.395,
+        0.25,
+        0.08,
+        0.0
+    ],
+    "ground_truth": "assertNotNull(response);"
+}

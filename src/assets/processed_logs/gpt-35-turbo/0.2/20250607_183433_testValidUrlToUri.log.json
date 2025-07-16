@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtils {\npublic static URI toUri ( final URL url ) {\ntry {\nreturn url . toURI ( ) ;\n} catch ( URISyntaxException ex ) {\nthrow new IllegalArgumentException ( ex ) ;\n} }\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class UrlUtilsTest {\n@Test\npublic void testValidUrlToUri ( ) throws Exception {\nURI uri = UrlUtils . toUri ( new URL ( \"STR\" ) ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertNotNull(uri);\nAssert.assertEquals(new URI(\"STR\"), uri);\nAssert.assertTrue(uri.isAbsolute());\nAssert.assertFalse(uri.isOpaque());\nAssert.assertEquals(\"http\", uri.getScheme());\nAssert.assertEquals(-1, uri.getPort());\nAssert.assertEquals(\"/path\", uri.getPath());\nAssert.assertEquals(\"query\", uri.getQuery());\nAssert.assertEquals(\"fragment\", uri.getFragment());\nAssert.assertEquals(\"user:pass\", uri.getUserInfo());\nAssert.assertEquals(\"host\", uri.getHost());\nAssert.assertEquals(\"http://host/path?query#fragment\", uri.toString());\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.normalize());\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(\"\"));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(\"#\"));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(\"?\"));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(\"/\"));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(\"relative\"));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.resolve(new URI(\"relative\")));\nAssert.assertEquals(new URI(\"http://host/path?query#fragment\"), uri.relativize(new URI(\"http://host/path?query#fragment\")));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.615,
+        0.606,
+        0.597,
+        0.597,
+        0.59,
+        0.549,
+        0.549,
+        0.548,
+        0.544,
+        0.544,
+        0.544,
+        0.541,
+        0.531,
+        0.509,
+        0.483,
+        0.475,
+        0.43,
+        0.407,
+        0.389
+    ],
+    "ground_truth": "assertEquals(newURI(\"STR\"),uri);"
+}

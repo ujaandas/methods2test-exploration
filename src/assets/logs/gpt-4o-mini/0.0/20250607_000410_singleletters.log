@@ -1,0 +1,86 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package PeterisP.morphology;
+
+public class Tokenize {
+    public static LinkedList < Word > tokenize ( Analyzer morphoAnalyzer , String chunk , boolean bruteSplit ) { 
+    if ( bruteSplit ) { 
+    LinkedList < Word > tokens = new LinkedList < Word > ( ) ; 
+    if ( chunk == null ) return tokens ; 
+    String [ ] parts_of_string = chunk . trim ( ) . split ( "STR" ) ; 
+    for ( String part : parts_of_string ) { 
+    if ( part . length ( ) > 0 ) tokens . add ( ( morphoAnalyzer == null ) ? new Word ( part ) : morphoAnalyzer . analyze ( part ) ) ; 
+    } return tokens ; 
+    } else { 
+    return tokenize ( morphoAnalyzer , chunk ) ; 
+    } }
+}
+
+package PeterisP.morphology;
+
+public class TokenizeTest {
+    @Test
+     public void singleletters ( ) {
+         LinkedList < Word > tokens ; 
+         tokens = Splitting . tokenize ( locītājs , "STR" , false ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(tokens);
+assertEquals(1, tokens.size());
+assertEquals("l", tokens.get(0).getText());
+assertEquals("l", tokens.get(0).getText());
+assertTrue(tokens.get(0) instanceof Word);
+assertEquals("l", tokens.get(0).toString());
+assertEquals("l", tokens.get(0).getLemma());
+assertEquals("NOUN", tokens.get(0).getPartOfSpeech());
+assertEquals(1, tokens.get(0).getFrequency());
+assertTrue(tokens.get(0).isValid());
+assertEquals("l", tokens.get(0).getRoot());
+assertEquals(1, tokens.get(0).getSyllableCount());
+assertFalse(tokens.get(0).isCompound());
+assertTrue(tokens.get(0).isSingular());
+assertFalse(tokens.get(0).isPlural());
+assertEquals("NOMINATIVE", tokens.get(0).getCase());
+assertEquals("SINGULAR", tokens.get(0).getNumber());
+assertEquals("l", tokens.get(0).getInflection());
+assertEquals("l", tokens.get(0).getMorphologicalFeatures());
+assertEquals("l", tokens.get(0).getSemanticRole());
+assertEquals("l", tokens.get(0).getPronunciation());
+assertEquals("l", tokens.get(0).getSynonyms().get(0));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(3,tokens.size()); ===
+0.966 - assertEquals(1, tokens.size())
+0.714 - assertEquals("l", tokens.get(0).getText())
+0.714 - assertEquals("l", tokens.get(0).getText())
+0.714 - assertEquals("l", tokens.get(0).getRoot())
+0.704 - assertEquals("l", tokens.get(0).toString())
+0.704 - assertEquals("l", tokens.get(0).getLemma())
+0.685 - assertEquals(1, tokens.get(0).getFrequency())
+0.667 - assertEquals("l", tokens.get(0).getSemanticRole())
+0.658 - assertEquals("NOMINATIVE", tokens.get(0).getCase())
+0.658 - assertEquals("l", tokens.get(0).getInflection())
+0.649 - assertEquals(1, tokens.get(0).getSyllableCount())
+0.636 - assertFalse(tokens.get(0).isPlural())
+0.633 - assertEquals("SINGULAR", tokens.get(0).getNumber())
+0.633 - assertEquals("l", tokens.get(0).getPronunciation())
+0.625 - assertTrue(tokens.get(0).isValid())
+0.618 - assertFalse(tokens.get(0).isCompound())
+0.617 - assertEquals("NOUN", tokens.get(0).getPartOfSpeech())
+0.617 - assertEquals("l", tokens.get(0).getSynonyms().get(0))
+0.597 - assertTrue(tokens.get(0).isSingular())
+0.575 - assertEquals("l", tokens.get(0).getMorphologicalFeatures())
+0.552 - ```java
+assertNotNull(tokens)
+0.529 - assertTrue(tokens.get(0) instanceof Word)
+0.000 - ```

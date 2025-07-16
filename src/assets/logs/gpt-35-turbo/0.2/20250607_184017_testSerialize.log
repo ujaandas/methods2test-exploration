@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package adlnet.jxapi;
+
+public class Activity {
+    public JsonElement serialize ( ) { 
+    JsonObject obj = new JsonObject ( ) ; 
+    if ( this . id != null ) { 
+    obj . addProperty ( "STR" , this . id ) ; 
+    } if ( this . definition != null ) { 
+    obj . add ( "STR" , this . definition . serialize ( ) ) ; 
+    } return obj ; 
+    }
+}
+
+package adlnet.jxapi;
+
+public class ActivityTest {
+    @Test
+     public void testSerialize ( ) {
+         String expected = "STR" ; 
+         JsonElement actual = activity . serialize ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString());
+assertNotNull(actual.getAsJsonObject().get("STR"));
+assertTrue(actual.getAsJsonObject().has("STR"));
+assertFalse(actual.getAsJsonObject().has("OTHER"));
+assertEquals(1, actual.getAsJsonObject().entrySet().size());
+assertNotNull(actual.getAsJsonObject().get("definition"));
+assertTrue(actual.getAsJsonObject().get("definition").isJsonObject());
+assertFalse(actual.getAsJsonObject().get("definition").isJsonArray());
+assertNotNull(actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR"));
+assertEquals("STR", actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR").getAsString());
+assertTrue(actual.getAsJsonObject().get("definition").getAsJsonObject().has("STR"));
+assertFalse(actual.getAsJsonObject().get("definition").getAsJsonObject().has("OTHER"));
+assertEquals(1, actual.getAsJsonObject().get("definition").getAsJsonObject().entrySet().size());
+assertNotEquals("OTHER", actual.getAsJsonObject().get("STR").getAsString());
+assertNotEquals("OTHER", actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR").getAsString());
+assertNotEquals("STR", actual.getAsJsonObject().get("OTHER"));
+assertNotEquals("STR", actual.getAsJsonObject().get("definition").getAsJsonObject().get("OTHER"));
+assertNotNull(actual);
+assertTrue(actual.isJsonObject());
+assertFalse(actual.isJsonArray());
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertNotNull(actual); ===
+1.000 - assertNotNull(actual)
+0.592 - assertNotNull(actual.getAsJsonObject().get("STR"))
+0.556 - assertTrue(actual.isJsonObject())
+0.556 - assertFalse(actual.isJsonArray())
+0.538 - assertNotNull(actual.getAsJsonObject().get("definition"))
+0.469 - assertNotEquals("STR", actual.getAsJsonObject().get("OTHER"))
+0.441 - assertTrue(actual.getAsJsonObject().has("STR"))
+0.423 - assertFalse(actual.getAsJsonObject().has("OTHER"))
+0.405 - assertEquals(1, actual.getAsJsonObject().entrySet().size())
+0.400 - assertNotEquals("OTHER", actual.getAsJsonObject().get("STR").getAsString())
+0.393 - assertNotNull(actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR"))
+0.333 - assertTrue(actual.getAsJsonObject().get("definition").isJsonObject())
+0.333 - assertFalse(actual.getAsJsonObject().get("definition").isJsonArray())
+0.325 - assertNotEquals("STR", actual.getAsJsonObject().get("definition").getAsJsonObject().get("OTHER"))
+0.301 - assertEquals(expected, actual.getAsJsonObject().get("STR").getAsString())
+0.290 - assertNotEquals("OTHER", actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR").getAsString())
+0.288 - assertTrue(actual.getAsJsonObject().get("definition").getAsJsonObject().has("STR"))
+0.280 - assertFalse(actual.getAsJsonObject().get("definition").getAsJsonObject().has("OTHER"))
+0.278 - assertEquals(1, actual.getAsJsonObject().get("definition").getAsJsonObject().entrySet().size())
+0.254 - assertEquals("STR", actual.getAsJsonObject().get("definition").getAsJsonObject().get("STR").getAsString())

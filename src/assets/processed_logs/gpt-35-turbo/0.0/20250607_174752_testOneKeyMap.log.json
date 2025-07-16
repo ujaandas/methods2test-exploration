@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKey {\npublic OMultiKey ( final Collection < ? > keys ) {\nthis . keys = new ArrayList < Object > ( keys ) ;\nhash = generateHashCode ( keys ) ;\n}\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OMultiKeyTest {\n@Test\npublic void testOneKeyMap ( ) {\nfinal Map < OMultiKey , Object > multiKeyMap = new HashMap < OMultiKey , Object > ( ) ;\nfinal OMultiKey multiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nmultiKeyMap . put ( multiKey , new Object ( ) ) ;\nfinal OMultiKey anotherMultiKey = new OMultiKey ( Collections . singletonList ( \"STR\" ) ) ;\nfinal Object mapResult = multiKeyMap . get ( anotherMultiKey ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "Assert.assertEquals(new Object(), mapResult);\nAssert.assertNotNull(mapResult);\nAssert.assertTrue(multiKeyMap.containsKey(anotherMultiKey));\nAssert.assertFalse(multiKeyMap.isEmpty());\nAssert.assertEquals(1, multiKeyMap.size());\nAssert.assertSame(multiKeyMap.get(multiKey), multiKeyMap.get(anotherMultiKey));\nAssert.assertNotSame(multiKey, anotherMultiKey);\nAssert.assertTrue(multiKey.equals(anotherMultiKey));\nAssert.assertTrue(multiKey.hashCode() == anotherMultiKey.hashCode());\nAssert.assertTrue(multiKey.equals(multiKey));\nAssert.assertFalse(multiKey.equals(null));\nAssert.assertFalse(multiKey.equals(new Object()));\nAssert.assertTrue(multiKey.toString().contains(\"OMultiKey\"));\nAssert.assertTrue(multiKeyMap.containsValue(new Object()));\nAssert.assertTrue(multiKeyMap.containsValue(mapResult));\nAssert.assertTrue(multiKeyMap.keySet().contains(multiKey));\nAssert.assertTrue(multiKeyMap.values().contains(mapResult));\nAssert.assertTrue(multiKeyMap.entrySet().contains(new AbstractMap.SimpleEntry<>(multiKey, mapResult)));\nAssert.assertTrue(multiKeyMap.entrySet().contains(new AbstractMap.SimpleEntry<>(anotherMultiKey, mapResult)));\n====================\n\n",
+    "scores": [
+        1.0,
+        0.61,
+        0.556,
+        0.526,
+        0.483,
+        0.476,
+        0.448,
+        0.426,
+        0.4,
+        0.382,
+        0.379,
+        0.351,
+        0.347,
+        0.342,
+        0.342,
+        0.338,
+        0.323,
+        0.313,
+        0.255
+    ],
+    "ground_truth": "assertNotNull(mapResult);"
+}

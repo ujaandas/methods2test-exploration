@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class Circle {\n@Override\npublic Properties getEnvironment ( ) {\nProperties environment = new Properties ( ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_BUILD_NUMBER ) ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_BRANCH ) ) ;\naddProperty ( environment , \"STR\" , getProperty ( CIRCLE_COMMIT ) ) ;\nreturn environment ;\n}\n}\n\npackage trautonen.coveralls-maven-plugin;\n\npublic class CircleTest {\n@Test\npublic void testGetEnvironment ( ) {\nProperties properties = new Circle ( env ( ) ) . getEnvironment ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(properties);\nassertTrue(properties.containsKey(\"STR\"));\nassertEquals(\"expected_build_number\", properties.getProperty(\"STR\", \"CIRCLE_BUILD_NUMBER\"));\nassertEquals(\"expected_branch_name\", properties.getProperty(\"STR\", \"CIRCLE_BRANCH\"));\nassertEquals(\"expected_commit_hash\", properties.getProperty(\"STR\", \"CIRCLE_COMMIT\"));\nassertEquals(3, properties.size());\nassertTrue(properties.getProperty(\"STR\").contains(\"expected_build_number\"));\nassertTrue(properties.getProperty(\"STR\").contains(\"expected_branch_name\"));\nassertTrue(properties.getProperty(\"STR\").contains(\"expected_commit_hash\"));\nassertFalse(properties.isEmpty());\nassertNotEquals(\"unexpected_value\", properties.getProperty(\"STR\"));\nassertTrue(properties.keySet().stream().anyMatch(key -> key.equals(\"STR\")));\nassertTrue(properties.values().stream().anyMatch(value -> value.equals(\"expected_build_number\")));\nassertTrue(properties.values().stream().anyMatch(value -> value.equals(\"expected_branch_name\")));\nassertTrue(properties.values().stream().anyMatch(value -> value.equals(\"expected_commit_hash\")));\nassertEquals(\"expected_build_number\", properties.getProperty(\"CIRCLE_BUILD_NUMBER\"));\nassertEquals(\"expected_branch_name\", properties.getProperty(\"CIRCLE_BRANCH\"));\nassertEquals(\"expected_commit_hash\", properties.getProperty(\"CIRCLE_COMMIT\"));\nassertTrue(properties.containsKey(\"CIRCLE_BUILD_NUMBER\"));\nassertTrue(properties.containsKey(\"CIRCLE_BRANCH\"));\nassertTrue(properties.containsKey(\"CIRCLE_COMMIT\"));\nassertFalse(properties.containsKey(\"NON_EXISTENT_KEY\"));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.758,
+        0.649,
+        0.606,
+        0.592,
+        0.591,
+        0.571,
+        0.571,
+        0.533,
+        0.532,
+        0.532,
+        0.504,
+        0.504,
+        0.5,
+        0.475,
+        0.444,
+        0.434,
+        0.43,
+        0.43,
+        0.362,
+        0.362,
+        0.359,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,properties.size());"
+}

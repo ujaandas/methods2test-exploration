@@ -1,0 +1,28 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNew {\n@Override\nboolean hasNext ( ) ;\n}\n\npackage orientechnologies.orientdb.graphdb;\n\npublic class OMatchStatementExecutionNewTest {\n@Test\npublic void testFriendsOfFriendsArrows ( ) throws Exception {\nOResultSet qResult = db . query ( \"STR\" ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(qResult);\nassertTrue(qResult.hasNext());\nassertEquals(expectedSize, qResult.size());\n\nOResult firstResult = qResult.next();\nassertNotNull(firstResult);\nassertTrue(firstResult.getProperty(\"name\") instanceof String);\nassertTrue(firstResult.getProperty(\"friendCount\") instanceof Integer);\n\nwhile (qResult.hasNext()) {\nOResult result = qResult.next();\nassertNotNull(result);\nassertTrue(result.getProperty(\"name\") instanceof String);\nassertTrue(result.getProperty(\"friendCount\") >= 0);\n}\n\nqResult.close();\n\nOResultSet qResult2 = db.query(\"ANOTHER_STR\");\nassertNotNull(qResult2);\nassertNotEquals(qResult.size(), qResult2.size());\n\nOResult resultAtIndex = qResult.get(0);\nassertEquals(expectedName, resultAtIndex.getProperty(\"name\"));\n\nassertThrows(NoSuchElementException.class, () -> {\nqResult.next();\n});\n\nassertTrue(qResult.isEmpty());\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.828,
+        0.615,
+        0.6,
+        0.579,
+        0.571,
+        0.548,
+        0.542,
+        0.53,
+        0.527,
+        0.523,
+        0.52,
+        0.511,
+        0.509,
+        0.482,
+        0.469,
+        0.458,
+        0.404,
+        0.366,
+        0.065,
+        0.0
+    ],
+    "ground_truth": "Assert.assertTrue(qResult.hasNext());"
+}

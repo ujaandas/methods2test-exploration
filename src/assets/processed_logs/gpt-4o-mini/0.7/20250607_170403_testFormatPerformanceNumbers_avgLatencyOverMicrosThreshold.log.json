@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollector {\npublic String formatIntervalPerformanceNumbers ( String testId ) {\nPerformanceStats latest = get ( testId , false ) ;\nif ( latest . isEmpty ( ) || latest . getOperationCount ( ) < 1 ) {\nreturn \"STR\" ;\n} String latencyUnit = \"STR\" ;\nlong latencyAvg = NANOSECONDS . toMicros ( round ( latest . getIntervalLatencyAvgNanos ( ) ) ) ;\nlong latency999Percentile = NANOSECONDS . toMicros ( latest . getIntervalLatency999PercentileNanos ( ) ) ;\nlong latencyMax = NANOSECONDS . toMicros ( latest . getIntervalLatencyMaxNanos ( ) ) ;\nif ( latencyAvg > DISPLAY_LATENCY_AS_MICROS_MAX_VALUE ) {\nlatencyUnit = \"STR\" ;\nlatencyAvg = MICROSECONDS . toMillis ( latencyAvg ) ;\nlatency999Percentile = MICROSECONDS . toMillis ( latency999Percentile ) ;\nlatencyMax = MICROSECONDS . toMillis ( latencyMax ) ;\n} return format ( \"STR\" , formatLong ( latest . getOperationCount ( ) , OPERATION_COUNT_FORMAT_LENGTH ) , formatDouble ( latest . getIntervalThroughput ( ) , THROUGHPUT_FORMAT_LENGTH ) , formatLong ( latencyAvg , LATENCY_FORMAT_LENGTH ) , latencyUnit , formatLong ( latency999Percentile , LATENCY_FORMAT_LENGTH ) , latencyUnit , INTERVAL_LATENCY_PERCENTILE , formatLong ( latencyMax , LATENCY_FORMAT_LENGTH ) , latencyUnit ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class PerformanceStatsCollectorTest {\n@Test\npublic void testFormatPerformanceNumbers_avgLatencyOverMicrosThreshold ( ) throws Exception {\nSimulatorAddress worker = workerAddress ( 3 , 1 ) ;\nMap < String , PerformanceStats > performanceStats = new HashMap < String , PerformanceStats > ( ) ;\nperformanceStats . put ( TEST_CASE_ID_1 , new PerformanceStats ( 800 , 100 , 300 , SECONDS . toNanos ( 3 ) , MICROSECONDS . toNanos ( 2400 ) , MICROSECONDS . toNanos ( 2500 ) ) ) ;\nperformanceStatsCollector . update ( worker , performanceStats ) ;\nString performance = performanceStatsCollector . formatIntervalPerformanceNumbers ( TEST_CASE_ID_1 ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(performance);\nassertFalse(performance.isEmpty());\nassertTrue(performance.contains(\"800\")); // operation count\nassertTrue(performance.contains(\"0.04\")); // throughput (example value)\nassertTrue(performance.contains(\"2\")); // avg latency in ms\nassertTrue(performance.contains(\"2\")); // 99.9 percentile latency in ms\nassertTrue(performance.contains(\"2\")); // max latency in ms\nassertTrue(performance.contains(\"ms\")); // check for latency unit\nassertTrue(performance.contains(\"STR\")); // check for STR in case of empty stats\nassertTrue(performance.indexOf(\"300\") < performance.indexOf(\"800\")); // operation count is before latency\nassertTrue(performance.indexOf(\"100\") < performance.indexOf(\"300\")); // throughput is before avg latency\nassertTrue(performance.indexOf(\"2\") < performance.indexOf(\"300\")); // avg latency is before 99.9 percentile\nassertTrue(performance.indexOf(\"2\") < performance.indexOf(\"2\")); // 99.9 percentile is before max latency\nassertTrue(performance.indexOf(\"ms\") < performance.indexOf(\"2\")); // check latency unit position\nassertTrue(performance.matches(\".*\\\\d{1,}.*\")); // contains at least one digit\nassertTrue(performance.split(\" \").length > 5); // ensure it's not too short\nassertTrue(performance.startsWith(\"STR\")); // check format starts with STR\nassertTrue(performance.contains(\"LATENCY_PERCENTILE\")); // check if percentile is included\nassertTrue(performance.indexOf(\"2\") > performance.indexOf(\"0\")); // avg latency is a positive number\nassertTrue(performance.contains(\"2000\")); // expected latency avg in micros\nassertTrue(performance.contains(\"2500\")); // expected max latency in micros\n```\n====================\n\n",
+    "scores": [
+        0.923,
+        0.78,
+        0.774,
+        0.766,
+        0.75,
+        0.699,
+        0.692,
+        0.667,
+        0.661,
+        0.658,
+        0.654,
+        0.633,
+        0.548,
+        0.542,
+        0.536,
+        0.462,
+        0.451,
+        0.444,
+        0.441,
+        0.441,
+        0.441,
+        0.282
+    ],
+    "ground_truth": "assertTrue(performance.contains(\"STR\"));"
+}

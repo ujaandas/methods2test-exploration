@@ -1,0 +1,93 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelper {
+    public void writeNumberLiteral ( double value , int numFracDigits ) throws IOException { 
+    checkAcceptsValueAndPrefixComma ( ) ; 
+    out . write ( new DecimalFormat ( PATTERNS [ numFracDigits ] , DECIMAL_FORMAT_SYMBOLS ) . format ( value ) ) ; 
+    afterValueWritten ( ) ; 
+    }
+}
+
+package arnohaase.a-foundation.a-foundation;
+
+public class AJsonSerHelperTest {
+    @Test
+     public void testDoubleWithFrac1 ( ) throws IOException {
+         final ByteArrayOutputStream baos = new ByteArrayOutputStream ( ) ; 
+         final AJsonSerHelper ser = new AJsonSerHelper ( baos ) ; 
+         ser . writeNumberLiteral ( 1.23 , 1 ) ; 
+         final String result = new String ( baos . toByteArray ( ) , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals("1.2", result.trim());
+
+assertTrue(result.contains("1.2"));
+
+assertFalse(result.contains("1.23"));
+
+assertNotNull(result);
+
+assertEquals(5, result.length());
+
+assertFalse(result.isEmpty());
+
+assertTrue(result.startsWith("1"));
+
+assertFalse(result.endsWith("3"));
+
+assertFalse(result.equals("1.23"));
+
+assertTrue(result.contains("."));
+
+assertFalse(result.contains(","));
+
+assertTrue(result.matches("\\d+\\.\\d"));
+
+assertTrue(result.matches("[0-9]+\\.[0-9]"));
+
+assertTrue(result.matches("\\d+\\.\\d{1}"));
+
+assertFalse(result.matches("\\d+\\.\\d{2}"));
+
+assertTrue(result.matches("\\d+\\.\\d{1}"));
+
+assertFalse(result.matches("\\d+\\.\\d{3}"));
+
+assertTrue(result.matches("\\d+\\.\\d{1}"));
+
+assertFalse(result.matches("\\d+\\.\\d{4}"));
+
+assertTrue(result.matches("\\d+\\.\\d{1}"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals("STR",result); ===
+0.780 - assertEquals("1.2", result.trim())
+0.737 - assertEquals(5, result.length())
+0.681 - assertNotNull(result)
+0.618 - assertFalse(result.isEmpty())
+0.576 - assertFalse(result.endsWith("3"))
+0.576 - assertFalse(result.contains(","))
+0.548 - assertFalse(result.contains("1.23"))
+0.517 - assertTrue(result.contains("."))
+0.500 - assertTrue(result.contains("1.2"))
+0.500 - assertTrue(result.startsWith("1"))
+0.500 - assertFalse(result.equals("1.23"))
+0.486 - assertFalse(result.matches("\\d+\\.\\d{2}"))
+0.486 - assertFalse(result.matches("\\d+\\.\\d{3}"))
+0.486 - assertFalse(result.matches("\\d+\\.\\d{4}"))
+0.455 - assertTrue(result.matches("\\d+\\.\\d"))
+0.435 - assertTrue(result.matches("\\d+\\.\\d{1}"))
+0.435 - assertTrue(result.matches("\\d+\\.\\d{1}"))
+0.435 - assertTrue(result.matches("\\d+\\.\\d{1}"))
+0.435 - assertTrue(result.matches("\\d+\\.\\d{1}"))
+0.429 - assertTrue(result.matches("[0-9]+\\.[0-9]"))

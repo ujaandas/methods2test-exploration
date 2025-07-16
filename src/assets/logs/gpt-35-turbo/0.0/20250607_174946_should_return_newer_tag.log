@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamService {
+    public TagEvent newerTag ( TagEvent tag1 , TagEvent tag2 ) { 
+    Date tag1Date = extractDate ( tag1 ) ; 
+    Date tag2Date = extractDate ( tag2 ) ; 
+    if ( tag1Date == null ) { 
+    return tag2 ; 
+    } if ( tag2Date == null ) { 
+    return tag1 ; 
+    } return tag1Date . compareTo ( tag2Date ) > 0 ? tag1 : tag2 ; 
+    }
+}
+
+package fabric8io.fabric8-maven-plugin.core;
+
+public class ImageStreamServiceTest {
+    @Test
+     public void should_return_newer_tag ( ) throws Exception {
+         ImageStreamService service = new ImageStreamService ( client , log ) ; 
+         TagEvent oldTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent latestTag = new TagEvent ( "STR" , null , null , null ) ; 
+         TagEvent resultedTag = service . newerTag ( oldTag , latestTag ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertEquals(latestTag, resultedTag);
+Assert.assertNotEquals(oldTag, resultedTag);
+Assert.assertTrue(resultedTag.getDate() != null);
+Assert.assertTrue(resultedTag.getName().equals("STR"));
+Assert.assertTrue(resultedTag.getMetadata() == null);
+Assert.assertTrue(resultedTag.getLabels() == null);
+Assert.assertTrue(resultedTag.getAnnotations() == null);
+Assert.assertTrue(resultedTag.getDigest() == null);
+Assert.assertTrue(resultedTag.getImage() == null);
+Assert.assertTrue(resultedTag.getGeneration() == null);
+Assert.assertTrue(resultedTag.getCreationTimestamp() == null);
+Assert.assertTrue(resultedTag.getDeletionTimestamp() == null);
+Assert.assertTrue(resultedTag.getDeletionGracePeriodSeconds() == null);
+Assert.assertTrue(resultedTag.getUid() == null);
+Assert.assertTrue(resultedTag.getSelfLink() == null);
+Assert.assertTrue(resultedTag.getResourceVersion() == null);
+Assert.assertTrue(resultedTag.getNamespace() == null);
+Assert.assertTrue(resultedTag.getClusterName() == null);
+Assert.assertTrue(resultedTag.getManagedFields() == null);
+Assert.assertTrue(resultedTag.getOwnerReferences() == null);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(latestTag,resultedTag); ===
+1.000 - Assert.assertEquals(latestTag, resultedTag)
+0.857 - Assert.assertNotEquals(oldTag, resultedTag)
+0.548 - Assert.assertTrue(resultedTag.getUid() == null)
+0.541 - Assert.assertTrue(resultedTag.getDate() != null)
+0.533 - Assert.assertTrue(resultedTag.getImage() == null)
+0.526 - Assert.assertTrue(resultedTag.getLabels() == null)
+0.526 - Assert.assertTrue(resultedTag.getDigest() == null)
+0.513 - Assert.assertTrue(resultedTag.getMetadata() == null)
+0.513 - Assert.assertTrue(resultedTag.getSelfLink() == null)
+0.506 - Assert.assertTrue(resultedTag.getNamespace() == null)
+0.500 - Assert.assertTrue(resultedTag.getGeneration() == null)
+0.494 - Assert.assertTrue(resultedTag.getAnnotations() == null)
+0.494 - Assert.assertTrue(resultedTag.getClusterName() == null)
+0.488 - Assert.assertTrue(resultedTag.getName().equals("STR"))
+0.482 - Assert.assertTrue(resultedTag.getManagedFields() == null)
+0.471 - Assert.assertTrue(resultedTag.getResourceVersion() == null)
+0.471 - Assert.assertTrue(resultedTag.getOwnerReferences() == null)
+0.460 - Assert.assertTrue(resultedTag.getCreationTimestamp() == null)
+0.460 - Assert.assertTrue(resultedTag.getDeletionTimestamp() == null)
+0.417 - Assert.assertTrue(resultedTag.getDeletionGracePeriodSeconds() == null)

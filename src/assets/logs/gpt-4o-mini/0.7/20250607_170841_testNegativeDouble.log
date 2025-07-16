@@ -1,0 +1,78 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OSQLFunctionAbsoluteValue {
+    @Override
+     public Object getResult ( ) { 
+     return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OSQLFunctionAbsoluteValueTest {
+    @Test
+     public void testNegativeDouble ( ) {
+         function . execute ( null , null , null , new Object [ ] { 
+     - 10.5D } , null ) ; 
+         Object result = function . getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(result);
+assertTrue(result instanceof Double);
+assertEquals(10.5D, result);
+assertEquals(10.5D, result, 0.00001);
+assertFalse(((Double) result).isNaN());
+assertFalse(((Double) result).isInfinite());
+assertEquals(10.5D, ((Double) result).doubleValue(), 0.00001);
+assertTrue(((Double) result) > 0);
+assertFalse(((Double) result) < 0);
+assertTrue(((Double) result) >= 0);
+assertTrue(((Double) result) <= 10.5D);
+assertNotEquals(-10.5D, result);
+assertTrue(result.toString().equals("10.5"));
+assertTrue(Math.abs((Double) result) == 10.5D);
+assertTrue(Double.compare((Double) result, 10.5D) == 0);
+assertTrue(((Double) result).compareTo(10.5D) == 0);
+assertFalse(result.equals(-10.5D));
+assertTrue(result instanceof Number);
+assertTrue(((Double) result).doubleValue() == Math.abs(-10.5D));
+assertEquals(10.5D, new OSQLFunctionAbsoluteValue().getResult());
+assertTrue(result.getClass() == Double.class);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertTrue(resultinstanceofDouble); ===
+1.000 - assertTrue(result instanceof Double)
+0.912 - assertTrue(result instanceof Number)
+0.649 - assertTrue(result.getClass() == Double.class)
+0.562 - assertTrue(((Double) result) > 0)
+0.554 - assertTrue(((Double) result) >= 0)
+0.538 - assertTrue(result.toString().equals("10.5"))
+0.522 - assertTrue(((Double) result) <= 10.5D)
+0.500 - assertEquals(10.5D, result)
+0.500 - assertFalse(result.equals(-10.5D))
+0.494 - assertTrue(Math.abs((Double) result) == 10.5D)
+0.476 - ```java
+assertNotNull(result)
+0.471 - assertTrue(Double.compare((Double) result, 10.5D) == 0)
+0.469 - assertNotEquals(-10.5D, result)
+0.462 - assertFalse(((Double) result) < 0)
+0.441 - assertEquals(10.5D, result, 0.00001)
+0.439 - assertTrue(((Double) result).compareTo(10.5D) == 0)
+0.423 - assertFalse(((Double) result).isNaN())
+0.395 - assertFalse(((Double) result).isInfinite())
+0.383 - assertTrue(((Double) result).doubleValue() == Math.abs(-10.5D))
+0.326 - assertEquals(10.5D, ((Double) result).doubleValue(), 0.00001)
+0.312 - assertEquals(10.5D, new OSQLFunctionAbsoluteValue().getResult())
+0.000 - ```

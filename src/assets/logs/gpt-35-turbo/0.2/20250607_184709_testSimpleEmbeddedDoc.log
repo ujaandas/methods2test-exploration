@@ -1,0 +1,83 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerialization {
+    public int fields ( ) { 
+    checkForLoading ( ) ; 
+    checkForFields ( ) ; 
+    return _fieldSize ; 
+    }
+}
+
+package orientechnologies.orientdb.core;
+
+public class ODocumentSchemalessBinarySerializationTest {
+    @Test
+     public void testSimpleEmbeddedDoc ( ) {
+         ODatabaseRecordThreadLocal . instance ( ) . remove ( ) ; 
+         ODocument document = new ODocument ( ) ; 
+         ODocument embedded = new ODocument ( ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         embedded . field ( "STR" , "STR" ) ; 
+         document . field ( "STR" , embedded , OType . EMBEDDED ) ; 
+         byte [ ] res = serializer . toStream ( document , false ) ; 
+         ODocument extr = ( ODocument ) serializer . fromStream ( res , new ODocument ( ) , new String [ ] { 
+     } ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assertions:
+
+assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"));
+assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"));
+assertNotNull(extr.field("STR", OType.EMBEDDED));
+assertTrue(extr.field("STR", OType.EMBEDDED) instanceof ODocument);
+assertTrue(extr.field("STR", OType.EMBEDDED) instanceof ODocument);
+assertEquals(2, extr.field("STR", OType.EMBEDDED).fieldNames().size());
+assertTrue(extr.field("STR", OType.EMBEDDED).containsField("STR"));
+assertTrue(extr.field("STR", OType.EMBEDDED).containsField("STR"));
+assertEquals(2, extr.field("STR", OType.EMBEDDED).field("STR").toString().length());
+assertEquals(2, extr.field("STR", OType.EMBEDDED).field("STR").toString().length());
+assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"));
+assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"));
+assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String);
+assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String);
+assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"));
+assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"));
+assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"));
+assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"));
+assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String);
+assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String);
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertEquals(document.fields(),extr.fields()); ===
+0.496 - assertEquals(2, extr.field("STR", OType.EMBEDDED).fieldNames().size())
+0.491 - assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"))
+0.491 - assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"))
+0.491 - assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"))
+0.478 - assertNotNull(extr.field("STR", OType.EMBEDDED))
+0.439 - Assertions:
+
+assertEquals("STR", extr.field("STR", OType.EMBEDDED).field("STR"))
+0.429 - assertEquals(2, extr.field("STR", OType.EMBEDDED).field("STR").toString().length())
+0.429 - assertEquals(2, extr.field("STR", OType.EMBEDDED).field("STR").toString().length())
+0.419 - assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"))
+0.419 - assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"))
+0.419 - assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"))
+0.419 - assertNotNull(extr.field("STR", OType.EMBEDDED).field("STR"))
+0.400 - assertTrue(extr.field("STR", OType.EMBEDDED).containsField("STR"))
+0.400 - assertTrue(extr.field("STR", OType.EMBEDDED).containsField("STR"))
+0.370 - assertTrue(extr.field("STR", OType.EMBEDDED) instanceof ODocument)
+0.370 - assertTrue(extr.field("STR", OType.EMBEDDED) instanceof ODocument)
+0.339 - assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String)
+0.339 - assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String)
+0.339 - assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String)
+0.339 - assertTrue(extr.field("STR", OType.EMBEDDED).field("STR") instanceof String)

@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class RecursiveLinkedSave {\nlong countClass ( String iClassName ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class RecursiveLinkedSaveTest {\n@Test\npublic void testTxLinked ( ) {\ndb . getMetadata ( ) . getSchema ( ) . createClass ( \"STR\" ) ;\ndb . begin ( ) ;\nODocument doc = new ODocument ( \"STR\" ) ;\nODocument doc1 = new ODocument ( \"STR\" ) ;\ndoc . field ( \"STR\" , doc1 ) ;\nODocument doc2 = new ODocument ( \"STR\" ) ;\ndoc1 . field ( \"STR\" , doc2 ) ;\ndoc2 . field ( \"STR\" , doc ) ;\ndb . save ( doc ) ;\ndb . commit ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nAssert.assertNotNull(db.getMetadata().getSchema().getClass(\"STR\"));\nAssert.assertEquals(3, countDocumentsInClass(\"STR\"));\nAssert.assertNotNull(db.load(doc.getIdentity()));\nAssert.assertNotNull(db.load(doc1.getIdentity()));\nAssert.assertNotNull(db.load(doc2.getIdentity()));\nAssert.assertEquals(doc.getIdentity(), doc1.field(\"STR\").getIdentity());\nAssert.assertEquals(doc1.getIdentity(), doc2.field(\"STR\").getIdentity());\nAssert.assertEquals(doc2.getIdentity(), doc.field(\"STR\").getIdentity());\nAssert.assertTrue(doc.field(\"STR\") instanceof ODocument);\nAssert.assertTrue(doc1.field(\"STR\") instanceof ODocument);\nAssert.assertTrue(doc2.field(\"STR\") instanceof ODocument);\nAssert.assertEquals(\"STR\", doc.getClassName());\nAssert.assertEquals(\"STR\", doc1.getClassName());\nAssert.assertEquals(\"STR\", doc2.getClassName());\nAssert.assertNotSame(doc, doc1);\nAssert.assertNotSame(doc1, doc2);\nAssert.assertNotSame(doc, doc2);\nAssert.assertTrue(db.getMetadata().getSchema().getClass(\"STR\").getProperties().containsKey(\"STR\"));\nAssert.assertTrue(doc.field(\"STR\").equals(doc1));\nAssert.assertTrue(doc1.field(\"STR\").equals(doc2));\nAssert.assertTrue(doc2.field(\"STR\").equals(doc));\nAssert.assertEquals(1, db.getMetadata().getSchema().getClass(\"STR\").getProperties().size());\n```\n====================\n\n",
+    "scores": [
+        0.825,
+        0.676,
+        0.667,
+        0.667,
+        0.538,
+        0.524,
+        0.505,
+        0.505,
+        0.5,
+        0.468,
+        0.462,
+        0.462,
+        0.442,
+        0.442,
+        0.436,
+        0.41,
+        0.409,
+        0.407,
+        0.407,
+        0.405,
+        0.405,
+        0.4,
+        0.0
+    ],
+    "ground_truth": "assertEquals(3,db.countClass(\"STR\"));"
+}

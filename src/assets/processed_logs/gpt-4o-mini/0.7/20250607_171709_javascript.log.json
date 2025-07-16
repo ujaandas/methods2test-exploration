@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutor {\npublic void execute ( final ExecuteScriptOperation operation , final Promise promise ) {\nif ( operation . isFireAndForget ( ) ) {\npromise . answer ( \"STR\" ) ;\n} String fullCommand = operation . getCommand ( ) ;\nint indexColon = fullCommand . indexOf ( \"STR\" ) ;\nString extension = fullCommand . substring ( 0 , indexColon ) ;\nfinal String command = fullCommand . substring ( indexColon + 1 ) ;\nfinal Callable < String > task ;\nif ( extension . equals ( \"STR\" ) ) {\ntask = newBashScriptCallable ( command ) ;\n} else {\ntask = newGenericScriptCallable ( extension , command ) ;\n} new Thread ( ( ) -> {\ntry {\nString result = task . call ( ) ;\npromise . answer ( result ) ;\n} catch ( Exception e ) {\nLOGGER . warn ( \"STR\" + command , e ) ;\npromise . answer ( e ) ;\n} } ) . start ( ) ;\n}\n}\n\npackage hazelcast.hazelcast-simulator.simulator;\n\npublic class ScriptExecutorTest {\n@Test\npublic void javascript ( ) {\nExecuteScriptOperation scriptOperation = new ExecuteScriptOperation ( \"STR\" , false ) ;\nStubPromise promise = new StubPromise ( ) ;\nscriptExecutor . execute ( scriptOperation , promise ) ;\npromise . assertCompletesEventually ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertEquals(\"Expected result from the script\", promise.getResult());\nassertNotNull(\"Promise result should not be null\", promise.getResult());\nassertTrue(\"Promise should be completed\", promise.isCompleted());\nassertFalse(\"Promise should not have failed\", promise.hasFailed());\nassertEquals(\"Expected return value\", promise.getResult(), \"Expected result from the script\");\nassertTrue(\"Result should be of type String\", promise.getResult() instanceof String);\nassertFalse(\"Promise should not have been completed before execution\", promise.isCompletedBeforeExecution());\nassertTrue(\"Promise should complete successfully with correct result\", promise.getResult().contains(\"Expected\"));\nassertEquals(\"Check if the command executed correctly\", \"Expected command output\", promise.getResult());\nassertNotEquals(\"Promise result should not be an error message\", \"Error occurred\", promise.getResult());\nassertSame(\"Promise result should be the same object\", promise.getResult(), \"Expected result from the script\");\nassertThat(\"Promise result should match the pattern\", promise.getResult(), matchesPattern(\"Expected.*\"));\nassertDoesNotThrow(\"Execution should not throw an exception\", promise::getResult);\nassertTimeout(Duration.ofSeconds(5), () -> {\npromise.assertCompletesEventually();\n});\nassertTrue(\"Promise should have been called\", promise.isCalled());\nassertFalse(\"Promise should not have been cancelled\", promise.isCancelled());\nassertEquals(\"Check the exact output\", \"Expected result from the script\", promise.getResult());\nassertTrue(\"Result should contain specific string\", promise.getResult().contains(\"specific string\"));\nassertNotSame(\"Result should not be an empty string\", \"\", promise.getResult());\nassertTrue(\"Result should start with expected prefix\", promise.getResult().startsWith(\"Expected\"));\nassertTrue(\"Promise should provide the correct type\", promise.getResult() instanceof String);\n```\n====================\n\n",
+    "scores": [
+        0.683,
+        0.641,
+        0.511,
+        0.467,
+        0.446,
+        0.439,
+        0.43,
+        0.429,
+        0.408,
+        0.407,
+        0.393,
+        0.386,
+        0.376,
+        0.375,
+        0.371,
+        0.37,
+        0.364,
+        0.361,
+        0.343,
+        0.326,
+        0.299,
+        0.041,
+        0.0
+    ],
+    "ground_truth": "assertTrue(promise.getAnswer()instanceofString);"
+}

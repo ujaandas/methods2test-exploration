@@ -1,0 +1,81 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testFloatWithinQuotesAndCommaAsDecimalSeparator ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertNotNull(res);
+assertFalse(res.isEmpty());
+assertEquals(1, res.size());
+assertEquals("ExpectedValue1", res.get(0).field("field1"));
+assertEquals("ExpectedValue2", res.get(0).field("field2"));
+assertEquals(10.5f, res.get(0).field("floatField"), 0.01);
+assertEquals("ExpectedValue3", res.get(0).field("field3"));
+assertTrue(res.get(0).field("field4") instanceof String);
+assertEquals("ExpectedValue5", res.get(0).field("field5"));
+assertTrue(res.get(0).field("booleanField"));
+assertEquals(12345, res.get(0).field("intField"));
+assertNotEquals("UnexpectedValue", res.get(0).field("field6"));
+assertEquals(3.14, res.get(0).field("decimalField"), 0.01);
+assertTrue(res.get(0).field("dateField") instanceof Date);
+assertEquals("ExpectedValue7", res.get(0).field("field7"));
+assertNull(res.get(0).field("nonExistentField"));
+assertEquals(2, res.get(0).field("listField").size());
+assertTrue(res.get(0).field("listField").contains("Item1"));
+assertTrue(res.get(0).field("listField").contains("Item2"));
+assertEquals("ExpectedValue8", res.get(0).field("nestedField").field("subField1"));
+assertEquals("ExpectedValue9", res.get(0).field("nestedField").field("subField2"));
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+1.000 - assertFalse(res.isEmpty())
+0.692 - assertEquals(1, res.size())
+0.513 - assertEquals(2, res.get(0).field("listField").size())
+0.486 - assertEquals(12345, res.get(0).field("intField"))
+0.462 - ```java
+assertNotNull(res)
+0.459 - assertNull(res.get(0).field("nonExistentField"))
+0.457 - assertTrue(res.get(0).field("booleanField"))
+0.444 - assertEquals(10.5f, res.get(0).field("floatField"), 0.01)
+0.439 - assertEquals(3.14, res.get(0).field("decimalField"), 0.01)
+0.434 - assertEquals("ExpectedValue1", res.get(0).field("field1"))
+0.434 - assertEquals("ExpectedValue2", res.get(0).field("field2"))
+0.434 - assertEquals("ExpectedValue3", res.get(0).field("field3"))
+0.434 - assertEquals("ExpectedValue5", res.get(0).field("field5"))
+0.434 - assertEquals("ExpectedValue7", res.get(0).field("field7"))
+0.414 - assertNotEquals("UnexpectedValue", res.get(0).field("field6"))
+0.400 - assertTrue(res.get(0).field("field4") instanceof String)
+0.400 - assertTrue(res.get(0).field("listField").contains("Item1"))
+0.400 - assertTrue(res.get(0).field("listField").contains("Item2"))
+0.395 - assertTrue(res.get(0).field("dateField") instanceof Date)
+0.374 - assertEquals("ExpectedValue8", res.get(0).field("nestedField").field("subField1"))
+0.374 - assertEquals("ExpectedValue9", res.get(0).field("nestedField").field("subField2"))
+0.000 - ```

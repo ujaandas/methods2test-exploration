@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.server;\n\npublic class OClientConnection {\npublic Boolean getTokenBased ( ) {\nreturn tokenBased ;\n}\n}\n\npackage orientechnologies.orientdb.server;\n\npublic class OClientConnectionTest {\n@Test\npublic void testValidToken ( ) throws IOException {\nOClientConnection conn = new OClientConnection ( 1 , protocol ) ;\nOTokenHandler handler = new OTokenHandlerImpl ( server ) ;\nbyte [ ] tokenBytes = handler . getSignedBinaryToken ( db , db . getUser ( ) , conn . getData ( ) ) ;\nconn . validateSession ( tokenBytes , handler , null ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(conn);\nassertTrue(conn.getTokenBased());\nassertEquals(1, conn.getSessionId());\nassertNotNull(handler);\nassertNotNull(tokenBytes);\nassertTrue(tokenBytes.length > 0);\nassertTrue(handler.isTokenValid(tokenBytes));\nassertNotNull(db);\nassertNotNull(db.getUser());\nassertEquals(db.getUser().getName(), \"expectedUserName\"); // Replace with actual expected username\nassertNotNull(conn.getData());\nassertTrue(conn.getData().isValid());\nassertEquals(conn.getData().getSessionId(), conn.getSessionId());\nassertTrue(conn.isSessionValid());\nassertNotNull(conn.getUser());\nassertEquals(conn.getUser().getRole(), \"expectedRole\"); // Replace with actual expected role\nassertTrue(conn.getUser().hasPermission(\"expectedPermission\")); // Replace with actual expected permission\nassertTrue(conn.getTokenBased());\nassertFalse(conn.isSessionExpired());\nassertEquals(handler.getTokenExpirationTime(tokenBytes), expectedExpirationTime); // Replace with actual expected expiration time\nassertNotNull(handler.getSessionData(tokenBytes));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.738,
+        0.735,
+        0.689,
+        0.657,
+        0.635,
+        0.627,
+        0.618,
+        0.605,
+        0.576,
+        0.561,
+        0.494,
+        0.484,
+        0.441,
+        0.413,
+        0.412,
+        0.408,
+        0.391,
+        0.378,
+        0.309,
+        0.296,
+        0.0
+    ],
+    "ground_truth": "assertTrue(conn.getTokenBased());"
+}

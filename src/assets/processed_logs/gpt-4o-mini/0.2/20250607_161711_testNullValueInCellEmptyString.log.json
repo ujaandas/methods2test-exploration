@@ -1,0 +1,29 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractor {\npublic void execute ( ) {\nconfigure ( ) ;\nbegin ( ) ;\nrunExtractorAndPipeline ( ) ;\nend ( ) ;\n}\n}\n\npackage orientechnologies.orientdb.etl;\n\npublic class OETLCSVExtractorTest {\n@Test\npublic void testNullValueInCellEmptyString ( ) {\nString cfgJson = \"STR\" ;\nconfigure ( cfgJson ) ;\nproc . execute ( ) ;\nList < ODocument > res = getResult ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(res);\nassertFalse(res.isEmpty());\nassertEquals(expectedSize, res.size());\nassertTrue(res.stream().allMatch(doc -> doc.containsField(\"fieldName\")));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"fieldName\") instanceof String));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"fieldName\").equals(\"\")));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"anotherFieldName\") != null));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"anotherFieldName\").equals(expectedValue)));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"fieldName\") == null));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"fieldName\").equals(\"null\")));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"numericField\") instanceof Number));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"numericField\").intValue() >= 0));\nassertTrue(res.stream().anyMatch(doc -> doc.field(\"booleanField\") instanceof Boolean));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"booleanField\") == false));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"dateField\") instanceof Date));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"dateField\").before(new Date())));\nassertTrue(res.stream().noneMatch(doc -> doc.field(\"errorField\") != null));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"listField\") instanceof List));\nassertTrue(res.stream().allMatch(doc -> ((List<?>) doc.field(\"listField\")).isEmpty()));\nassertTrue(res.stream().allMatch(doc -> doc.field(\"mapField\") instanceof Map));\nassertTrue(res.stream().allMatch(doc -> ((Map<?, ?>) doc.field(\"mapField\")).isEmpty()));\n```\n====================\n\n",
+    "scores": [
+        1.0,
+        0.571,
+        0.462,
+        0.404,
+        0.404,
+        0.358,
+        0.354,
+        0.354,
+        0.347,
+        0.343,
+        0.34,
+        0.337,
+        0.333,
+        0.333,
+        0.327,
+        0.327,
+        0.324,
+        0.321,
+        0.318,
+        0.315,
+        0.291,
+        0.0
+    ],
+    "ground_truth": "assertFalse(res.isEmpty());"
+}

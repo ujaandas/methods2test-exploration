@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSort {
+    default Stream < OResult > stream ( ) { 
+    return StreamSupport . stream ( this , false ) . onClose ( ( ) -> this . close ( ) ) ; 
+    }
+}
+
+package orientechnologies.orientdb.lucene;
+
+public class LuceneSortTest {
+    @Test
+     public void shouldIndexVeryLongDescriptionWithSingleField ( ) throws Exception {
+         db . save ( new ODocument ( "STR" ) . field ( "STR" , DESCRIPTION ) ) ; 
+         db . command ( new OCommandSQL ( "STR" ) ) . execute ( ) ; 
+         long count = db . query ( "STR" ) . stream ( ) . count ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+```java
+assertTrue(count > 0);
+assertEquals(expectedCount, count);
+assertNotNull(db.query("STR").stream().findFirst().orElse(null));
+assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").equals(DESCRIPTION)));
+assertFalse(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").equals(DESCRIPTION)));
+assertEquals(expectedDescription, db.query("STR").stream().findFirst().get().getProperty("STR"));
+assertFalse(db.query("STR").stream().filter(result -> result.getProperty("STR").isEmpty()).findAny().isPresent());
+assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").length() > 0));
+assertEquals(expectedCount, db.query("STR").stream().mapToLong(result -> result.getProperty("STR").length()).sum());
+assertTrue(count <= db.countClass("STR"));
+assertEquals(expectedCount, db.query("STR").stream().filter(result -> result.getProperty("STR").contains("keyword")).count());
+assertFalse(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").contains("invalid")));
+assertTrue(count > thresholdCount);
+assertNotEquals(0, db.query("STR").stream().count());
+assertTrue(db.query("STR").stream().map(result -> result.getProperty("STR")).distinct().count() > 1);
+assertEquals(expectedFirstResult, db.query("STR").stream().findFirst().get().getProperty("STR"));
+assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").startsWith("prefix")));
+assertFalse(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").endsWith("suffix")));
+assertTrue(count >= minExpectedCount);
+assertEquals(expectedAverageLength, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).average().orElse(0.0), delta);
+```
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertEquals(1,count); ===
+0.741 - assertEquals(expectedCount, count)
+0.583 - ```java
+assertTrue(count > 0)
+0.556 - assertNotEquals(0, db.query("STR").stream().count())
+0.528 - assertTrue(count > thresholdCount)
+0.500 - assertTrue(count >= minExpectedCount)
+0.467 - assertTrue(count <= db.countClass("STR"))
+0.329 - assertNotNull(db.query("STR").stream().findFirst().orElse(null))
+0.308 - assertTrue(db.query("STR").stream().map(result -> result.getProperty("STR")).distinct().count() > 1)
+0.293 - assertEquals(expectedDescription, db.query("STR").stream().findFirst().get().getProperty("STR"))
+0.293 - assertEquals(expectedFirstResult, db.query("STR").stream().findFirst().get().getProperty("STR"))
+0.286 - assertEquals(expectedCount, db.query("STR").stream().mapToLong(result -> result.getProperty("STR").length()).sum())
+0.280 - assertEquals(expectedCount, db.query("STR").stream().filter(result -> result.getProperty("STR").contains("keyword")).count())
+0.268 - assertTrue(db.query("STR").stream().allMatch(result -> result.getProperty("STR").length() > 0))
+0.246 - assertFalse(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").contains("invalid")))
+0.231 - assertFalse(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").endsWith("suffix")))
+0.230 - assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").startsWith("prefix")))
+0.222 - assertEquals(expectedAverageLength, db.query("STR").stream().mapToInt(result -> result.getProperty("STR").length()).average().orElse(0.0), delta)
+0.215 - assertTrue(db.query("STR").stream().anyMatch(result -> result.getProperty("STR").equals(DESCRIPTION)))
+0.212 - assertFalse(db.query("STR").stream().filter(result -> result.getProperty("STR").isEmpty()).findAny().isPresent())
+0.211 - assertFalse(db.query("STR").stream().noneMatch(result -> result.getProperty("STR").equals(DESCRIPTION)))
+0.000 - ```

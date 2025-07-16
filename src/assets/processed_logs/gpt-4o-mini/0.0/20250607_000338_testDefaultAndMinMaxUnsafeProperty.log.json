@@ -1,0 +1,30 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLCreateProperty {\npublic String getName ( ) ;\n}\n\npackage orientechnologies.orientdb.core;\n\npublic class OCommandExecutorSQLCreatePropertyTest {\n@Test\npublic void testDefaultAndMinMaxUnsafeProperty ( ) throws Exception {\nfinal ODatabaseDocumentTx db = new ODatabaseDocumentTx ( \"STR\" + System . nanoTime ( ) ) ;\ndb . create ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\ndb . command ( new OCommandSQL ( \"STR\" ) ) . execute ( ) ;\nOClass companyClass = db . getMetadata ( ) . getSchema ( ) . getClass ( \"STR\" ) ;\nOProperty idProperty = companyClass . getProperty ( PROP_ID ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "```java\nassertNotNull(idProperty);\nassertEquals(\"PROP_ID\", idProperty.getName());\nassertEquals(OType.STRING, idProperty.getType());\nassertTrue(idProperty.isMandatory());\nassertFalse(idProperty.isReadonly());\nassertFalse(idProperty.isTransient());\nassertTrue(idProperty.isNotNull());\nassertEquals(1, idProperty.getMin());\nassertEquals(255, idProperty.getMax());\nassertEquals(0, idProperty.getDefaultValue());\nassertEquals(\"default_value\", idProperty.getDefaultValue());\nassertTrue(companyClass.getProperties().contains(idProperty));\nassertEquals(1, companyClass.getProperties().size());\nassertTrue(companyClass.getSuperClass() == null);\nassertEquals(\"STR\", companyClass.getName());\nassertNotNull(companyClass.getClusterIds());\nassertTrue(companyClass.getClusterIds().length > 0);\nassertEquals(1, companyClass.getClusterIds()[0]);\nassertNotNull(companyClass.getMetadata());\nassertEquals(0, companyClass.getPropertyCount());\nassertFalse(companyClass.isAbstract());\nassertTrue(companyClass.isSubClassOf(\"BaseClass\"));\n```\n====================\n\n",
+    "scores": [
+        0.791,
+        0.785,
+        0.779,
+        0.744,
+        0.697,
+        0.667,
+        0.658,
+        0.643,
+        0.64,
+        0.632,
+        0.59,
+        0.562,
+        0.539,
+        0.538,
+        0.533,
+        0.447,
+        0.434,
+        0.424,
+        0.409,
+        0.396,
+        0.325,
+        0.239,
+        0.0
+    ],
+    "ground_truth": "assertEquals(idProperty.getName(),PROP_ID);"
+}

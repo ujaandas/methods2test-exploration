@@ -1,0 +1,26 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtension {\n@Override\npublic ByteBuffer getPayloadData ( ) {\nreturn unmaskedpayload ;\n}\n}\n\npackage TooTallNate.Java-WebSocket;\n\npublic class PerMessageDeflateExtensionTest {\n@Test\npublic void testDecodeFrame ( ) throws InvalidDataException {\nPerMessageDeflateExtension deflateExtension = new PerMessageDeflateExtension ( ) ;\nString str = \"STR\" + \"STR\" + \"STR\" + \"STR\" + \"STR\" ;\nbyte [ ] message = str . getBytes ( ) ;\nTextFrame frame = new TextFrame ( ) ;\nframe . setPayload ( ByteBuffer . wrap ( message ) ) ;\ndeflateExtension . encodeFrame ( frame ) ;\ndeflateExtension . decodeFrame ( frame ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STRSTRSTRSTRSTR\", frame.getPayloadData().array());\nassertEquals(5, frame.getPayloadData().array().length);\nassertTrue(frame.isFin());\nassertTrue(frame.isRSV1());\nassertFalse(frame.isRSV2());\nassertFalse(frame.isRSV3());\nassertFalse(frame.isMasked());\nassertEquals(OpCode.TEXT, frame.getOpcode());\nassertEquals(0, frame.getPayloadLength());\nassertEquals(0, frame.getMaskingKey().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\nassertEquals(0, frame.getExtensionData().length);\n====================\n\n",
+    "scores": [
+        0.818,
+        0.756,
+        0.701,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.615,
+        0.58,
+        0.574,
+        0.488,
+        0.452,
+        0.452,
+        0.439,
+        0.434
+    ],
+    "ground_truth": "assertArrayEquals(message,frame.getPayloadData().array());"
+}

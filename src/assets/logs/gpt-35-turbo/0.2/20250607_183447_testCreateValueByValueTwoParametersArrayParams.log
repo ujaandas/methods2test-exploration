@@ -1,0 +1,76 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinition {
+    @Override
+     public Object createValue ( Object ... params ) { 
+     if ( ! ( params [ 0 ] instanceof Map ) ) return null ; 
+     final Collection < ? > mapParams = extractMapParams ( ( Map < ? , ? > ) params [ 0 ] ) ; 
+     final List < Object > result = new ArrayList < > ( mapParams . size ( ) ) ; 
+     for ( final Object mapParam : mapParams ) { 
+     Object val = createSingleValue ( mapParam ) ; 
+     result . add ( val ) ; 
+     } if ( getFieldsToIndex ( ) . size ( ) == 1 && result . size ( ) == 1 ) { 
+     return result . get ( 0 ) ; 
+     } return result ; 
+     }
+}
+
+package orientechnologies.orientdb.core;
+
+public class OPropertyMapIndexDefinitionTest {
+    @Test
+     public void testCreateValueByValueTwoParametersArrayParams ( ) {
+         final Object result = propertyIndexByValue . createValue ( mapToTest , "STR" ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+Assert.assertNotNull(result);
+Assert.assertTrue(result instanceof List);
+Assert.assertEquals(2, ((List) result).size());
+Assert.assertEquals("STR", ((List) result).get(1));
+Assert.assertTrue(((List) result).get(0) instanceof List);
+Assert.assertEquals(2, ((List) ((List) result).get(0)).size());
+Assert.assertEquals("key1", ((List) ((List) result).get(0)).get(0));
+Assert.assertEquals("value1", ((List) ((List) result).get(0)).get(1));
+Assert.assertTrue(((List) result).get(1) instanceof String);
+Assert.assertEquals("STR", ((List) result).get(1));
+Assert.assertTrue(propertyIndexByValue.getFieldsToIndex().size() == 1);
+Assert.assertTrue(mapToTest instanceof Map);
+Assert.assertEquals(2, mapToTest.size());
+Assert.assertTrue(mapToTest.containsKey("key1"));
+Assert.assertTrue(mapToTest.containsValue("value1"));
+Assert.assertTrue(mapToTest.containsKey("key2"));
+Assert.assertTrue(mapToTest.containsValue("value2"));
+Assert.assertEquals("value2", mapToTest.get("key2"));
+Assert.assertEquals("value1", mapToTest.get("key1"));
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: Assert.assertTrue(resultinstanceofCollection); ===
+0.829 - Assert.assertTrue(result instanceof List)
+0.713 - Assert.assertTrue(((List) result).get(1) instanceof String)
+0.694 - Assert.assertTrue(mapToTest instanceof Map)
+0.682 - Assert.assertTrue(((List) result).get(0) instanceof List)
+0.530 - Assert.assertTrue(mapToTest.containsValue("value1"))
+0.530 - Assert.assertTrue(mapToTest.containsValue("value2"))
+0.508 - Assert.assertNotNull(result)
+0.506 - Assert.assertTrue(mapToTest.containsKey("key1"))
+0.506 - Assert.assertTrue(mapToTest.containsKey("key2"))
+0.453 - Assert.assertEquals(2, ((List) result).size())
+0.405 - Assert.assertEquals("STR", ((List) result).get(1))
+0.405 - Assert.assertEquals("STR", ((List) result).get(1))
+0.400 - Assert.assertEquals("key1", ((List) ((List) result).get(0)).get(0))
+0.392 - Assert.assertEquals("value1", ((List) ((List) result).get(0)).get(1))
+0.378 - Assert.assertEquals(2, ((List) ((List) result).get(0)).size())
+0.343 - Assert.assertTrue(propertyIndexByValue.getFieldsToIndex().size() == 1)
+0.341 - Assert.assertEquals("value2", mapToTest.get("key2"))
+0.341 - Assert.assertEquals("value1", mapToTest.get("key1"))
+0.286 - Assert.assertEquals(2, mapToTest.size())

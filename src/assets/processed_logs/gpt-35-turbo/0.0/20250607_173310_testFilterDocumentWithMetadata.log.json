@@ -1,0 +1,27 @@
+{
+    "prompt": "Below is the focal class and test class for reference:\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexing {\npublic void setValue ( String key , String value ) {\ncheckLockException ( ) ;\nmd . put ( key , new String [ ] {\nvalue } ) ;\n}\n}\n\npackage DigitalPebble.storm-crawler.core;\n\npublic class BasicIndexingTest {\n@Test\npublic void testFilterDocumentWithMetadata ( ) throws Exception {\nMap config = new HashMap ( ) ;\nconfig . put ( AbstractIndexerBolt . urlFieldParamName , \"STR\" ) ;\nconfig . put ( AbstractIndexerBolt . metadataFilterParamName , \"STR\" ) ;\nMetadata metadata = new Metadata ( ) ;\nmetadata . setValue ( \"STR\" , \"STR\" ) ;\nprepareIndexerBolt ( config ) ;\nindex ( URL , metadata ) ;\nMap < String , String > fields = ( ( DummyIndexer ) bolt ) . returnFields ( ) ;\n<ASSERTIONS HERE>\n}\n}\n\nPlease generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).\n========================\n\n",
+    "response": "assertEquals(\"STR\", fields.get(\"STR\"));\nassertNotNull(fields.get(\"STR\"));\nassertTrue(fields.containsKey(\"STR\"));\nassertFalse(fields.isEmpty());\nassertEquals(1, fields.size());\nassertNull(fields.get(\"OTHER_KEY\"));\nassertNotEquals(\"DIFFERENT_VALUE\", fields.get(\"STR\"));\nassertTrue(fields.containsValue(\"STR\"));\nassertTrue(fields.keySet().contains(\"STR\"));\nassertTrue(fields.values().contains(\"STR\"));\nassertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>(\"STR\", \"STR\")));\nassertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>(\"STR\", \"DIFFERENT_VALUE\")));\nassertTrue(fields.entrySet().contains(new AbstractMap.SimpleEntry<>(\"OTHER_KEY\", \"STR\")));\nassertFalse(fields.entrySet().contains(new AbstractMap.SimpleEntry<>(\"OTHER_KEY\", \"DIFFERENT_VALUE\")));\nassertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getKey().equals(\"STR\")));\nassertTrue(fields.entrySet().stream().anyMatch(entry -> entry.getValue().equals(\"STR\")));\nassertTrue(fields.entrySet().stream().allMatch(entry -> entry.getKey().equals(\"STR\")));\nassertTrue(fields.entrySet().stream().allMatch(entry -> entry.getValue().equals(\"STR\")));\nassertEquals(\"STR\", fields.entrySet().stream().filter(entry -> entry.getKey().equals(\"STR\")).findFirst().get().getValue());\nassertEquals(\"STR\", fields.entrySet().stream().filter(entry -> entry.getValue().equals(\"STR\")).findFirst().get().getKey());\n====================\n\n",
+    "scores": [
+        0.925,
+        0.737,
+        0.72,
+        0.694,
+        0.667,
+        0.6,
+        0.585,
+        0.583,
+        0.581,
+        0.581,
+        0.457,
+        0.457,
+        0.364,
+        0.339,
+        0.338,
+        0.299,
+        0.299,
+        0.295,
+        0.295,
+        0.279
+    ],
+    "ground_truth": "Assert.assertEquals(\"STR\",\"STR\",fields.get(\"STR\"));"
+}

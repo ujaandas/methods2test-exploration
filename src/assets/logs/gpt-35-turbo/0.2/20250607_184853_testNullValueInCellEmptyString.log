@@ -1,0 +1,75 @@
+=== Generated Prompt ===
+Below is the focal class and test class for reference:
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractor {
+    public void execute ( ) { 
+    configure ( ) ; 
+    begin ( ) ; 
+    runExtractorAndPipeline ( ) ; 
+    end ( ) ; 
+    }
+}
+
+package orientechnologies.orientdb.etl;
+
+public class OETLCSVExtractorTest {
+    @Test
+     public void testNullValueInCellEmptyString ( ) {
+         String cfgJson = "STR" ; 
+         configure ( cfgJson ) ; 
+         proc . execute ( ) ; 
+         List < ODocument > res = getResult ( ) ; 
+         <ASSERTIONS HERE>
+    }
+}
+
+Please generate 20 assertions to be inserted in place of <ASSERTIONS HERE> in the test method. Only generate code (no comments or explanations).
+========================
+
+=== GPT Response ===
+assertEquals(0, res.size());
+assertNotNull(res);
+assertTrue(res.isEmpty());
+assertEquals(0, res.stream().filter(Objects::isNull).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().isEmpty()).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName) == null)).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(""))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("null"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NULL"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("nil"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NIL"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("none"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NONE"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("undefined"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("UNDEFINED"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("na"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NA"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("n/a"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("N/A"))).count());
+assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName
+====================
+
+=== Collecting and Comparing Assertions ===
+=== Ground Oracle Truth: assertFalse(res.isEmpty()); ===
+0.863 - assertTrue(res.isEmpty())
+0.692 - assertEquals(0, res.size())
+0.545 - assertNotNull(res)
+0.471 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().isEmpty()).count())
+0.465 - assertEquals(0, res.stream().filter(Objects::isNull).count())
+0.345 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName
+0.282 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName) == null)).count())
+0.273 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals(""))).count())
+0.269 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("na"))).count())
+0.269 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NA"))).count())
+0.268 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("nil"))).count())
+0.268 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NIL"))).count())
+0.268 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("n/a"))).count())
+0.268 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("N/A"))).count())
+0.266 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("null"))).count())
+0.266 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NULL"))).count())
+0.266 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("none"))).count())
+0.266 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("NONE"))).count())
+0.258 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("undefined"))).count())
+0.258 - assertEquals(0, res.stream().filter(doc -> doc.fieldNames().stream().allMatch(fieldName -> doc.field(fieldName).equals("UNDEFINED"))).count())
